@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <style>
+        #input {
+            width: 500px;
+            height: 200px;
+        }
+
+        #output {
+            width: 1000px;
+            height: 200px;
+        }
+
+        .area {
+            display: inline-block;
+            padding: 10px;
+        }
+
+        .area label {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="area">
+        <label>Input:</label>
+        <textarea id="input"></textarea>
+    </div>
+    <div class="area">
+        <label>Output:</label>
+        <textarea id="output"></textarea>
+    </div>
+    <div>
+        <input type="checkbox" id="lowercase" checked><label>Lower case</label>
+        <!-- <input type="checkbox" id="litte" checked><label>Little endian</label> -->
+        <input type="radio" name="kind" value=".byte" checked><label>.byte</label>
+        <input type="radio" name="kind" value=".2byte"><label>.2byte</label>
+        <input type="radio" name="kind" value=".4byte"><label>.4byte</label>
+    </div>
+    <div>
+        <button onclick="convert()">Convert</button>
+    </div>
+</body>
+<script>
+
+    function convert() {
+        var data = document.getElementById("input").value;
+        var kind = ".byte";
+        for (const radio of document.getElementsByName("kind")) {
+            if (radio.checked) {
+                kind = radio.value;
+            }
+        }
+
+        data = data.split(" ");
+        switch (kind) {
+            case ".byte": convert1byte(data); break;
+            case ".2byte": convert2byte(data); break;
+            case ".4byte": convert4byte(data); break;
+            default: convert1byte(data); break;
+        }
+    }
+
+    function convert1byte(data) {
+        var output = document.getElementById("output");
+        var lowercase = document.getElementById("lowercase").checked;
+        output.innerHTML = "";
+        var counter = 0;
+        data.forEach(byte => {
+            if (counter === 0) output.innerHTML += "    .byte ";
+            var str = byte;
+            if (lowercase) str = str.toLowerCase();
+            if (counter < 15)
+                output.innerHTML += "0x" + str + ", ";
+            else
+                output.innerHTML += "0x" + str + "\n";
+            counter++;
+            if (counter > 15) counter = 0;
+        });
+    }
+
+    function convert2byte(data) {
+        var output = document.getElementById("output");
+        output.innerHTML = "";
+        var counter = 0;
+
+        for (let i = 0; i < data.length; i += 2) {
+
+            if (counter === 0) output.innerHTML += "    .2byte ";
+
+            var str = data[1 + i] + data[i];
+            if (lowercase) str = str.toLowerCase();
+            if (counter < 7)
+                output.innerHTML += "0x" + str + ", ";
+            else
+                output.innerHTML += "0x" + str + "\n";
+
+            counter++;
+            if (counter > 7) counter = 0;
+        }
+    }
+
+    function convert4byte(data) {
+        var output = document.getElementById("output");
+        output.innerHTML = "";
+        var counter = 0;
+
+        for (let i = 0; i < data.length; i += 4) {
+
+            if (counter === 0) output.innerHTML += "    .4byte ";
+
+            var str = data[3 + i] + data[2 + i] + data[1 + i] + data[i];
+            if (lowercase) str = str.toLowerCase();
+            if (counter < 3)
+                output.innerHTML += "0x" + str + ", ";
+            else
+                output.innerHTML += "0x" + str + "\n";
+
+            counter++;
+            if (counter > 3) counter = 0;
+        }
+    }
+
+</script>
+
+</html>
