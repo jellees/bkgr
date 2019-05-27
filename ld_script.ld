@@ -33,6 +33,7 @@ SECTIONS
 		asm/chunk2.o(.text);
 		src/main.o(.text);
 		asm/main.o(.text);
+		asm/player.o(.text);
 		asm/chunk3.o(.text);
 		asm/data_paletteBytes.o(.text);
 		asm/data_debugText.o(.text);

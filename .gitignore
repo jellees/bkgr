@@ -4,6 +4,7 @@
 
 *.elf
 *.gba
+*.map
 
 /emulator
 /forlater

@@ -40,7 +40,7 @@ CC1			:= tools/agbcc/bin/agbcc.exe
 CFLAGS 		:= -O2 -mthumb-interwork -fhex-asm
 CPPFLAGS 	:= -iquote include -Wno-trigraphs
 
-LDFLAGS = -Map ../../$(MAP)
+LDFLAGS = -Map ../$(MAP)
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 FIX := tools/gbafix/gbafix$(EXE)
