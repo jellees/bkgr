@@ -26,15 +26,27 @@ SECTIONS
 
 	.text :
 	{
+		/* code */
 		asm/crt0.o(.text);
 		asm/chunk0.o(.text);
 		asm/chunk1.o(.text);
 		asm/audio.o(.text);
-		asm/chunk2.o(.text);
+		asm/collision.o(.text);
 		src/main.o(.text);
 		asm/main.o(.text);
 		asm/player.o(.text);
 		asm/chunk3.o(.text);
+		asm/savefile.o(.text);
+		asm/chunk4.o(.text);
+		asm/palette_effects.o(.text);
+		asm/debug.o(.text);
+		asm/chunk5.o(.text);
+		asm/alloc.o(.text);
+		asm/chunk6.o(.text);
+		asm/menu.o(.text);
+		asm/chunk7.o(.text);
+
+		/* data */
 		asm/data_paletteBytes.o(.text);
 		asm/data_debugText.o(.text);
 		asm/data_playerBehavior.o(.text);
