@@ -6,33 +6,33 @@
 	.bss 
 
 @ 0x030043A8
-.lcomm audio_buff_tog, 4
-.lcomm audio_cur_tune, 4
-.lcomm audio_new_tune, 4
+// .lcomm audio_buff_tog, 4
+// .lcomm audio_cur_tune, 4
+// .lcomm audio_new_tune, 4
 @ randomly makes this occupy 0x84 bytes for no reason, so therefore the - 4
-.lcomm audio_delta_time, 8 * 16 - 4 @ struct
-.lcomm audio_delta_time_dec, 4
-.lcomm audio_ppqn, 4
-.lcomm audio_tempo, 4
-audio_buffers: @ struct
-	.lcomm audio_buff0_dat, 0xE0
-	.lcomm audio_noise0_dat, 0xE0
-	.lcomm audio_buff1_dat, 0xE0
-	.lcomm audio_noise1_dat, 0xE0
-.lcomm audio_precalc_buff, 0x1C0
-.lcomm audio_pitchbend, 4 * 16
-.lcomm audio_modulation, 8 * 16 @ struct
-.lcomm audio_chan_vols, 16
-.lcomm audio_monophonic_op, 16
-.lcomm audio_chan_notes, 0x28 * 16 * 6 @ struct
-.lcomm audio_chan_fx, 0x28 * 4 @ struct
-.lcomm audio_chan_dly, 4 * 4 @ struct
-.lcomm audio_chan_id, 4 * 4 @ struct
-.lcomm audio_3005A20, 4 * 4 @ struct
-.lcomm audio_num_tracks, 4
-.lcomm audio_vmap_ptr, 4
-.lcomm audio_voices, 4 * 16
-.lcomm audio_samp_list, 4
+// .lcomm audio_delta_time, 8 * 16 - 4 @ struct
+// .lcomm audio_delta_time_dec, 4
+// .lcomm audio_ppqn, 4
+// .lcomm audio_tempo, 4
+// audio_buffers: @ struct
+// 	.lcomm audio_buff0_dat, 0xE0
+// 	.lcomm audio_noise0_dat, 0xE0
+// 	.lcomm audio_buff1_dat, 0xE0
+// 	.lcomm audio_noise1_dat, 0xE0
+// .lcomm audio_precalc_buff, 0x1C0
+// .lcomm audio_pitchbend, 4 * 16
+// .lcomm audio_modulation, 8 * 16 @ struct
+// .lcomm audio_chan_vols, 16
+// .lcomm audio_monophonic_op, 16
+// .lcomm audio_chan_notes, 0x28 * 16 * 6 @ struct
+// .lcomm audio_chan_fx, 0x28 * 4 @ struct
+// .lcomm audio_chan_dly, 4 * 4 @ struct
+// .lcomm audio_chan_id, 4 * 4 @ struct
+// .lcomm audio_3005A20, 4 * 4 @ struct
+// .lcomm audio_num_tracks, 4
+// .lcomm audio_vmap_ptr, 4
+// .lcomm audio_voices, 4 * 16
+// .lcomm audio_samp_list, 4
 @ .lcomm audio_midi_tracks, 4 * 16
 
 	.text
@@ -696,9 +696,9 @@ _08004454: .4byte 0x080AF594
 _08004458: .4byte audio_voices
 _0800445C: .4byte 0x030043B4
 _08004460: .4byte audio_delta_time_dec
-_08004464: .4byte 0x03005A7C
+_08004464: .4byte audio_midi_tracks
 _08004468: .4byte 0x030043B8
-_0800446C: .4byte 0x03005A7C
+_0800446C: .4byte audio_midi_tracks
 _08004470: .4byte audio_num_tracks
 _08004474: .4byte audio_cur_tune
 
@@ -1534,7 +1534,7 @@ _08004E70: .4byte 0x030043B4
 _08004E74: .4byte 0x0203F4CC
 _08004E78: .4byte audio_num_tracks
 _08004E7C: .4byte audio_ppqn
-_08004E80: .4byte 0x03005A7C
+_08004E80: .4byte audio_midi_tracks
 _08004E84: .4byte audio_vmap_ptr
 _08004E88: .4byte audio_samp_list
 _08004E8C: .4byte 0x030043B4
