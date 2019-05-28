@@ -36,8 +36,8 @@ sub_800A740: @ 0x0800A740
 	.align 2, 0
 _0800A778: .4byte 0x0203DFC4
 _0800A77C: .4byte 0x0203DFE6
-_0800A780: .4byte 0x020020BE
-_0800A784: .4byte 0x02002092
+_0800A780: .4byte gPlayerStateSettings
+_0800A784: .4byte gPlayerState
 _0800A788:
 	ldrh r1, [r2, #0x1e]
 	ldr r0, _0800A7BC
@@ -112,8 +112,8 @@ _0800A80A:
 	b _0800A89E
 	.align 2, 0
 _0800A810: .4byte 0x0203DFE6
-_0800A814: .4byte 0x020020BE
-_0800A818: .4byte 0x02002092
+_0800A814: .4byte gPlayerStateSettings
+_0800A818: .4byte gPlayerState
 _0800A81C: .4byte 0x02000F74
 _0800A820:
 	ldr r0, _0800A838
@@ -245,8 +245,8 @@ _0800A916:
 _0800A91C: .4byte 0x02001044
 _0800A920: .4byte 0x030028FC
 _0800A924: .4byte 0x03002950
-_0800A928: .4byte 0x020020BE
-_0800A92C: .4byte 0x02002092
+_0800A928: .4byte gPlayerStateSettings
+_0800A92C: .4byte gPlayerState
 _0800A930:
 	ldrb r0, [r3, #5]
 	subs r0, #1
@@ -272,8 +272,8 @@ _0800A93C:
 	bl sub_8017A54
 	b _0800A916
 	.align 2, 0
-_0800A964: .4byte 0x020020BE
-_0800A968: .4byte 0x02002092
+_0800A964: .4byte gPlayerStateSettings
+_0800A968: .4byte gPlayerState
 _0800A96C:
 	movs r0, #0
 _0800A96E:
@@ -340,8 +340,8 @@ _0800A9E2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800A9E8: .4byte 0x020020BE
-_0800A9EC: .4byte 0x02002092
+_0800A9E8: .4byte gPlayerStateSettings
+_0800A9EC: .4byte gPlayerState
 
     .thumb
 sub_800A9F0: @ 0x0800A9F0
@@ -465,8 +465,8 @@ _0800AAD0:
 _0800AAE4: .4byte 0x02000FC8
 _0800AAE8: .4byte 0x030032D0
 _0800AAEC: .4byte 0x030032DC
-_0800AAF0: .4byte 0x020020BE
-_0800AAF4: .4byte 0x02002092
+_0800AAF0: .4byte gPlayerStateSettings
+_0800AAF4: .4byte gPlayerState
 _0800AAF8: .4byte 0x02001088
 _0800AAFC:
 	ldr r0, [r3, #4]
@@ -563,8 +563,8 @@ sub_800AB54: @ 0x0800AB54
 	movs r0, #1
 	b _0800ABCA
 	.align 2, 0
-_0800ABB0: .4byte 0x020020BE
-_0800ABB4: .4byte 0x02002092
+_0800ABB0: .4byte gPlayerStateSettings
+_0800ABB4: .4byte gPlayerState
 _0800ABB8: .4byte 0x03002950
 _0800ABBC: .4byte 0x030032D0
 _0800ABC0: .4byte 0x030032DC
@@ -671,8 +671,8 @@ _0800AC86:
 	.align 2, 0
 _0800AC8C: .4byte 0x0200108E
 _0800AC90: .4byte 0x020020B1
-_0800AC94: .4byte 0x020020BE
-_0800AC98: .4byte 0x02002092
+_0800AC94: .4byte gPlayerStateSettings
+_0800AC98: .4byte gPlayerState
 _0800AC9C: .4byte 0x02001092
 _0800ACA0: .4byte 0x0200108D
 _0800ACA4: .4byte 0x02001090
@@ -1050,8 +1050,8 @@ _0800AF94:
 	.align 2, 0
 _0800AFA8: .4byte 0x0203DFC4
 _0800AFAC: .4byte 0x03002950
-_0800AFB0: .4byte 0x020020BE
-_0800AFB4: .4byte 0x02002092
+_0800AFB0: .4byte gPlayerStateSettings
+_0800AFB4: .4byte gPlayerState
 _0800AFB8: .4byte 0x030028FC
 _0800AFBC: .4byte 0x0300331C
 _0800AFC0:
@@ -1313,8 +1313,8 @@ _0800B1DE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800B1EC: .4byte 0x020020BE
-_0800B1F0: .4byte 0x02002092
+_0800B1EC: .4byte gPlayerStateSettings
+_0800B1F0: .4byte gPlayerState
 _0800B1F4: .4byte 0x03003328
 _0800B1F8: .4byte 0x03003334
 _0800B1FC: .4byte 0x030032DC
@@ -1401,8 +1401,8 @@ _0800B2A0:
 _0800B2A4: .4byte 0x0300331C
 _0800B2A8: .4byte 0x03003308
 _0800B2AC: .4byte 0x03003328
-_0800B2B0: .4byte 0x020020BE
-_0800B2B4: .4byte 0x02002092
+_0800B2B0: .4byte gPlayerStateSettings
+_0800B2B4: .4byte gPlayerState
 _0800B2B8: .4byte 0x03003334
 _0800B2BC:
 	ldr r5, _0800B314
@@ -1520,8 +1520,8 @@ _0800B39E:
 	b _0800B3DC
 	.align 2, 0
 _0800B3A8: .4byte 0x030028FC
-_0800B3AC: .4byte 0x020020BE
-_0800B3B0: .4byte 0x02002092
+_0800B3AC: .4byte gPlayerStateSettings
+_0800B3B0: .4byte gPlayerState
 _0800B3B4: .4byte 0x03002950
 _0800B3B8: .4byte 0x030029A4
 _0800B3BC: .4byte 0x020011FC
@@ -1617,8 +1617,8 @@ _0800B440:
 _0800B470: .4byte 0x020011FC
 _0800B474: .4byte 0x03003328
 _0800B478: .4byte 0x03003334
-_0800B47C: .4byte 0x020020BE
-_0800B480: .4byte 0x02002092
+_0800B47C: .4byte gPlayerStateSettings
+_0800B480: .4byte gPlayerState
 _0800B484: .4byte 0x030029A4
 _0800B488: .4byte 0x030032D0
 _0800B48C: .4byte 0x030032DC
@@ -1760,8 +1760,8 @@ _0800B592:
 _0800B5A0: .4byte 0x030029A4
 _0800B5A4: .4byte 0x03003328
 _0800B5A8: .4byte 0x03003334
-_0800B5AC: .4byte 0x020020BE
-_0800B5B0: .4byte 0x02002092
+_0800B5AC: .4byte gPlayerStateSettings
+_0800B5B0: .4byte gPlayerState
 _0800B5B4: .4byte 0x030032D0
 _0800B5B8: .4byte 0x030032DC
 _0800B5BC: .4byte 0x030029F8

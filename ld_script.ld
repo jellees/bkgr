@@ -5,8 +5,17 @@ SECTIONS
 	ewram (NOLOAD) :
     ALIGN(0)
 	{
-		. = 0x1201;
+		. = 0x00001201;
 		gMainFrameCounter = .; . += 1;
+		gDebugFPS = .; . += 1;
+		gDebugESN = .; . += 1;
+		gDebugESV = .; . += 1;
+
+		. = 0x00002092;
+		gPlayerState = .; . += 2;
+
+		. = 0x000020BE;
+		gPlayerStateSettings = .; . += 2 * 128;
 	}
 
 	. = 0x3000000;
@@ -14,11 +23,17 @@ SECTIONS
 	.bss (NOLOAD) :
     ALIGN(0)
 	{
-		. = 0x2AAC;
-		/* 0x03002AAC */
+		. = 0x00002AAC;
 		gNullsub_5 = .; . += 4;
-		. += 0x18F8;
-		/* 0x030043A8 - audio ram */
+
+		. = 0x000032C4;
+		gPreviousKeys = .; . += 2;
+		gKeysPressed = .; . += 2;
+		gKeysDown = .; . += 2;
+		gKeyInput = .; . += 2;
+
+		. = 0x000043A8;
+		/* audio ram */
 		audio_buff_tog = .; . += 4;
 		audio_cur_tune = .; . += 4;
 		audio_new_tune = .; . += 4;
@@ -47,9 +62,6 @@ SECTIONS
 		audio_voices = .; . += 4 * 16;
 		audio_samp_list = .; . += 4;
 		audio_midi_tracks = .; . += 4 * 16;
-		/* 0x03005ABC - end audio ram */
-
-		asm/audio.o(.bss);
 	}
 
 	. = 0x8000000;
