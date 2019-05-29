@@ -53698,7 +53698,7 @@ _0805FF34:
 	bne _0805FF50
 	b _0805FF54
 	.align 2, 0
-_0805FF3C: .4byte 0x02007884
+_0805FF3C: .4byte gIsPaletteEffectsActive
 _0805FF40:
 	movs r0, #0
 	bl sub_0804207C
@@ -54240,7 +54240,7 @@ _080603EC: .4byte gKeysDown
 _080603F0: .4byte gKeysPressed
 _080603F4: .4byte gPreviousKeys
 _080603F8: .4byte 0x02000F55
-_080603FC: .4byte 0x02007884
+_080603FC: .4byte gIsPaletteEffectsActive
 _08060400: .4byte 0x0300398C
 _08060404: .4byte 0x03003D8C
 _08060408: .4byte 0x03003D90
@@ -54729,7 +54729,7 @@ _08060848: .4byte 0x00000FFF
 _0806084C: .4byte gKeysDown
 _08060850: .4byte gKeysPressed
 _08060854: .4byte gPreviousKeys
-_08060858: .4byte 0x02007884
+_08060858: .4byte gIsPaletteEffectsActive
 _0806085C:
 	movs r6, #1
 	rsbs r6, r6, #0
@@ -54968,7 +54968,7 @@ _08060A94: .4byte 0x03003D98
 _08060A98: .4byte gKeysPressed
 _08060A9C: .4byte gKeysDown
 _08060AA0: .4byte gPreviousKeys
-_08060AA4: .4byte 0x02007884
+_08060AA4: .4byte gIsPaletteEffectsActive
 _08060AA8:
 	subs r6, #1
 _08060AAA:

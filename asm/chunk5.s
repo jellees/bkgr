@@ -39101,7 +39101,7 @@ _08024FC6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08024FE0: .4byte 0x02007884
+_08024FE0: .4byte gIsPaletteEffectsActive
 _08024FE4: .4byte 0x03003D8C
 _08024FE8: .4byte 0x03003D90
 _08024FEC: .4byte 0x03003D94
@@ -41930,7 +41930,7 @@ sub_80266B4: @ 0x080266B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080266C4: .4byte 0x02007884
+_080266C4: .4byte gIsPaletteEffectsActive
 
     .thumb
 	.global sub_80266C8
@@ -42882,7 +42882,7 @@ _08026E34: .4byte 0x0200DCD0
 _08026E38: .4byte 0x0200DCD4
 _08026E3C: .4byte 0x0203EA8A
 _08026E40: .4byte 0x080CEB5C
-_08026E44: .4byte 0x02007884
+_08026E44: .4byte gIsPaletteEffectsActive
 
     .thumb
     .global sub_8026E48
@@ -43010,7 +43010,7 @@ _08026F48: .4byte 0x0200C490
 _08026F4C: .4byte 0x04000050
 _08026F50: .4byte 0x02000336
 _08026F54: .4byte 0x04000054
-_08026F58: .4byte 0x02007884
+_08026F58: .4byte gIsPaletteEffectsActive
 _08026F5C: .4byte 0x080CEB5C
 _08026F60:
 	ldr r0, _08026F74
@@ -43156,7 +43156,7 @@ _08027080: .4byte 0x0200C490
 _08027084: .4byte 0x04000050
 _08027088: .4byte 0x02000336
 _0802708C: .4byte 0x04000054
-_08027090: .4byte 0x02007884
+_08027090: .4byte gIsPaletteEffectsActive
 _08027094: .4byte 0x080CEB5C
 _08027098:
 	ldr r0, _080270A8

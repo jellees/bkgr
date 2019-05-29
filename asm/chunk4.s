@@ -421,7 +421,7 @@ _0800ED40:
 	bx r0
 	.align 2, 0
 _0800ED48: .4byte 0x020010B1
-_0800ED4C: .4byte 0x02007884
+_0800ED4C: .4byte gIsPaletteEffectsActive
 _0800ED50: .4byte 0x02001150
 _0800ED54: .4byte 0x030032D0
 _0800ED58: .4byte 0x0200114C

@@ -102,7 +102,7 @@ _0800F8EA:
 	beq _0800F940
 	b _0800FA0A
 	.align 2, 0
-_0800F8F0: .4byte 0x02007884
+_0800F8F0: .4byte gIsPaletteEffectsActive
 _0800F8F4: .4byte 0x020011CC
 _0800F8F8:
 	ldr r4, _0800F934
