@@ -4159,9 +4159,9 @@ sub_800DEE4: @ 0x0800DEE4
 	.align 2, 0
 _0800DF0C: .4byte 0x02001080
 _0800DF10: .4byte byte_20020B1
-_0800DF14: .4byte 0x020011F0
+_0800DF14: .4byte gPoisonEffectEnabled
 _0800DF18: .4byte 0x020011F8
-_0800DF1C: .4byte 0x020011F4
+_0800DF1C: .4byte gPoisonHitTimer
 _0800DF20:
 	ldr r1, _0800DF30
 	ldr r0, [r1]
@@ -4174,7 +4174,7 @@ _0800DF2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800DF30: .4byte 0x020011F0
+_0800DF30: .4byte gPoisonEffectEnabled
 
     .thumb
     .global sub_800DF34
@@ -4206,10 +4206,10 @@ sub_800DF34: @ 0x0800DF34
 	bl sub_80192D4
 	b _0800DF84
 	.align 2, 0
-_0800DF6C: .4byte 0x020011F0
+_0800DF6C: .4byte gPoisonEffectEnabled
 _0800DF70: .4byte byte_203F99C
 _0800DF74: .4byte gGameStatus
-_0800DF78: .4byte 0x020011F4
+_0800DF78: .4byte gPoisonHitTimer
 _0800DF7C: .4byte 0x020011F8
 _0800DF80:
 	subs r0, #1

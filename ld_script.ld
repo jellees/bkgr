@@ -36,6 +36,19 @@ SECTIONS
 		. = 0x0000110C;
 		byte_200110C = .; . += 1;
 
+		. = 0x000011CC;
+		gPaletteEffects = .; . += 4;
+		gPaletteEffectsSave = .; . += 4;
+		gLavaPaletteIndex = .; . += 4;
+		gLavaTimer = .; . += 4;
+		gThunderPalette = .; . += 4;
+		gBackupBGPalette = .; . += 4;
+		gThunderTimer = .; . += 4;
+		gThunderActive = .; . += 4;
+		gThunderSfxTimer = .; . += 4;
+		gPoisonEffectEnabled = .; . += 4;
+		gPoisonHitTimer = .; . += 4;
+
 		. = 0x00001201;
 		gMainFrameCounter = .; . += 1;
 		gDebugFPS = .; . += 1;

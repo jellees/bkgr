@@ -21,7 +21,7 @@ InitPaletteEffects: @ 0x0800F830
 	beq _0800F85C
 	b _0800F8A8
 	.align 2, 0
-_0800F84C: .4byte 0x020011CC
+_0800F84C: .4byte gPaletteEffects
 _0800F850: .4byte 0x02001080
 _0800F854:
 	cmp r0, #0x15
@@ -39,8 +39,8 @@ _0800F85C:
 	movs r1, #0x18
 	b _0800F8A2
 	.align 2, 0
-_0800F870: .4byte 0x020011D4
-_0800F874: .4byte 0x020011D8
+_0800F870: .4byte gLavaPaletteIndex
+_0800F874: .4byte gLavaTimer
 _0800F878:
 	movs r0, #2
 	str r0, [r1]
@@ -70,13 +70,13 @@ _0800F8A8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F8B0: .4byte 0x020011DC
+_0800F8B0: .4byte gThunderPalette
 _0800F8B4: .4byte 0x083FCD14
-_0800F8B8: .4byte 0x020011E0
+_0800F8B8: .4byte gBackupBGPalette
 _0800F8BC: .4byte 0x03003344
-_0800F8C0: .4byte 0x020011E4
-_0800F8C4: .4byte 0x020011E8
-_0800F8C8: .4byte 0x020011EC
+_0800F8C0: .4byte gThunderTimer
+_0800F8C4: .4byte gThunderActive
+_0800F8C8: .4byte gThunderSfxTimer
 
     .thumb
     .global HandlePaletteEffects
@@ -103,7 +103,7 @@ _0800F8EA:
 	b _0800FA0A
 	.align 2, 0
 _0800F8F0: .4byte gIsPaletteEffectsActive
-_0800F8F4: .4byte 0x020011CC
+_0800F8F4: .4byte gPaletteEffects
 _0800F8F8:
 	ldr r4, _0800F934
 	ldr r0, [r4]
@@ -134,9 +134,9 @@ _0800F906:
 	str r5, [r4]
 	b _0800FA0A
 	.align 2, 0
-_0800F934: .4byte 0x020011D8
+_0800F934: .4byte gLavaTimer
 _0800F938: .4byte 0x086AD23C
-_0800F93C: .4byte 0x020011D4
+_0800F93C: .4byte gLavaPaletteIndex
 _0800F940:
 	ldr r4, _0800F96C
 	ldr r0, [r4]
@@ -159,9 +159,9 @@ _0800F940:
 	movs r1, #5
 	b _0800F98A
 	.align 2, 0
-_0800F96C: .4byte 0x020011E4
-_0800F970: .4byte 0x020011E8
-_0800F974: .4byte 0x020011DC
+_0800F96C: .4byte gThunderTimer
+_0800F970: .4byte gThunderActive
+_0800F974: .4byte gThunderPalette
 _0800F978:
 	str r1, [r2]
 	ldr r0, _0800FA14
@@ -238,8 +238,8 @@ _0800FA0A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800FA14: .4byte 0x020011E0
-_0800FA18: .4byte 0x020011EC
+_0800FA14: .4byte gBackupBGPalette
+_0800FA18: .4byte gThunderSfxTimer
 _0800FA1C: .4byte byte_203EA89
 _0800FA20: .4byte 0x080CE440
 _0800FA24: .4byte 0x0806483C
@@ -256,8 +256,8 @@ RemovePaletteEffect: @ 0x0800FA2C
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_0800FA3C: .4byte 0x020011D0
-_0800FA40: .4byte 0x020011CC
+_0800FA3C: .4byte gPaletteEffectsSave
+_0800FA40: .4byte gPaletteEffects
 
     .thumb
     .global RestorePaletteEffect
@@ -268,5 +268,5 @@ RestorePaletteEffect: @ 0x0800FA44
 	str r1, [r0]
 	bx lr
 	.align 2, 0
-_0800FA50: .4byte 0x020011CC
-_0800FA54: .4byte 0x020011D0
+_0800FA50: .4byte gPaletteEffects
+_0800FA54: .4byte gPaletteEffectsSave
