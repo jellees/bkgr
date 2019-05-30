@@ -34,7 +34,7 @@ sub_800A740: @ 0x0800A740
 	str r0, [r4, #4]
 	b _0800A7CE
 	.align 2, 0
-_0800A778: .4byte 0x0203DFC4
+_0800A778: .4byte dword_203DFC4
 _0800A77C: .4byte 0x0203DFE6
 _0800A780: .4byte gPlayerStateSettings
 _0800A784: .4byte gPlayerState
@@ -114,7 +114,7 @@ _0800A80A:
 _0800A810: .4byte 0x0203DFE6
 _0800A814: .4byte gPlayerStateSettings
 _0800A818: .4byte gPlayerState
-_0800A81C: .4byte 0x02000F74
+_0800A81C: .4byte gPlayerSprite
 _0800A820:
 	ldr r0, _0800A838
 	ldr r1, [r4, #4]
@@ -128,9 +128,9 @@ _0800A820:
 	bl sub_800388C
 	b _0800A80A
 	.align 2, 0
-_0800A838: .4byte 0x030032D0
-_0800A83C: .4byte 0x030032DC
-_0800A840: .4byte 0x02000FC8
+_0800A838: .4byte gPlayerPos
+_0800A83C: .4byte dword_30032DC
+_0800A840: .4byte dword_2000FC8
 _0800A844:
 	ldr r0, _0800A864
 	ldrb r0, [r0]
@@ -151,8 +151,8 @@ _0800A85C:
 	b _0800A80A
 	.align 2, 0
 _0800A864: .4byte 0x030029A4
-_0800A868: .4byte 0x030032D0
-_0800A86C: .4byte 0x030032DC
+_0800A868: .4byte gPlayerPos
+_0800A86C: .4byte dword_30032DC
 _0800A870:
 	ldr r0, _0800A8A4
 	ldrb r0, [r0]
@@ -184,9 +184,9 @@ _0800A89E:
 	bx r1
 	.align 2, 0
 _0800A8A4: .4byte 0x0203DFE7
-_0800A8A8: .4byte 0x030032DC
+_0800A8A8: .4byte dword_30032DC
 _0800A8AC: .4byte 0x030029A4
-_0800A8B0: .4byte 0x030032D0
+_0800A8B0: .4byte gPlayerPos
 
     .thumb
 sub_0800A8B4: @ 0x0800A8B4
@@ -242,9 +242,9 @@ _0800A916:
 	movs r0, #1
 	b _0800A96E
 	.align 2, 0
-_0800A91C: .4byte 0x02001044
+_0800A91C: .4byte gGameStatus
 _0800A920: .4byte 0x030028FC
-_0800A924: .4byte 0x03002950
+_0800A924: .4byte byte_3002950
 _0800A928: .4byte gPlayerStateSettings
 _0800A92C: .4byte gPlayerState
 _0800A930:
@@ -291,7 +291,7 @@ sub_800A974: @ 0x0800A974
 	movs r0, #0
 	b _0800A9E2
 	.align 2, 0
-_0800A984: .4byte 0x02001044
+_0800A984: .4byte gGameStatus
 _0800A988:
 	ldr r0, _0800A9B4
 	ldrb r0, [r0, #2]
@@ -316,8 +316,8 @@ _0800A988:
 	b _0800A9E2
 	.align 2, 0
 _0800A9B4: .4byte 0x030028FC
-_0800A9B8: .4byte 0x03002950
-_0800A9BC: .4byte 0x020020B1
+_0800A9B8: .4byte byte_3002950
+_0800A9BC: .4byte byte_20020B1
 _0800A9C0:
 	bl sub_8017C50
 	b _0800A9E0
@@ -373,7 +373,7 @@ _0800AA1E:
 	b _0800AA58
 	.align 2, 0
 _0800AA28: .4byte 0x03003588
-_0800AA2C: .4byte 0x02000FC8
+_0800AA2C: .4byte dword_2000FC8
 _0800AA30: .4byte 0x080CC7EC
 _0800AA34: .4byte 0x030028FC
 _0800AA38:
@@ -396,7 +396,7 @@ _0800AA58:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800AA60: .4byte 0x02000FC8
+_0800AA60: .4byte dword_2000FC8
 _0800AA64: .4byte 0x080CC818
 _0800AA68: .4byte 0x030028FC
 
@@ -462,9 +462,9 @@ _0800AAD0:
 	adds r0, r0, r1
 	b _0800AB0C
 	.align 2, 0
-_0800AAE4: .4byte 0x02000FC8
-_0800AAE8: .4byte 0x030032D0
-_0800AAEC: .4byte 0x030032DC
+_0800AAE4: .4byte dword_2000FC8
+_0800AAE8: .4byte gPlayerPos
+_0800AAEC: .4byte dword_30032DC
 _0800AAF0: .4byte gPlayerStateSettings
 _0800AAF4: .4byte gPlayerState
 _0800AAF8: .4byte 0x02001088
@@ -514,7 +514,7 @@ _0800AB22:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800AB50: .4byte 0x030032D0
+_0800AB50: .4byte gPlayerPos
 
     .thumb
 sub_800AB54: @ 0x0800AB54
@@ -565,9 +565,9 @@ sub_800AB54: @ 0x0800AB54
 	.align 2, 0
 _0800ABB0: .4byte gPlayerStateSettings
 _0800ABB4: .4byte gPlayerState
-_0800ABB8: .4byte 0x03002950
-_0800ABBC: .4byte 0x030032D0
-_0800ABC0: .4byte 0x030032DC
+_0800ABB8: .4byte byte_3002950
+_0800ABBC: .4byte gPlayerPos
+_0800ABC0: .4byte dword_30032DC
 _0800ABC4:
 	bl sub_8017F14
 _0800ABC8:
@@ -615,9 +615,9 @@ sub_800ABD4: @ 0x0800ABD4
 	b _0800AC86
 	.align 2, 0
 _0800AC18: .4byte 0x030028FC
-_0800AC1C: .4byte 0x020020B1
-_0800AC20: .4byte 0x02001044
-_0800AC24: .4byte 0x020020BC
+_0800AC1C: .4byte byte_20020B1
+_0800AC20: .4byte gGameStatus
+_0800AC24: .4byte byte_20020BC
 _0800AC28:
 	adds r2, r4, #0
 	adds r2, #0x4e
@@ -670,13 +670,13 @@ _0800AC86:
 	b _0800AD5A
 	.align 2, 0
 _0800AC8C: .4byte 0x0200108E
-_0800AC90: .4byte 0x020020B1
+_0800AC90: .4byte byte_20020B1
 _0800AC94: .4byte gPlayerStateSettings
 _0800AC98: .4byte gPlayerState
 _0800AC9C: .4byte 0x02001092
 _0800ACA0: .4byte 0x0200108D
 _0800ACA4: .4byte 0x02001090
-_0800ACA8: .4byte 0x02000F74
+_0800ACA8: .4byte gPlayerSprite
 _0800ACAC:
 	ldr r1, _0800AD30
 	ldrb r0, [r1]
@@ -742,14 +742,14 @@ _0800AD12:
 	.align 2, 0
 _0800AD30: .4byte 0x030029A4
 _0800AD34: .4byte 0x0200209A
-_0800AD38: .4byte 0x020020B1
-_0800AD3C: .4byte 0x02001044
-_0800AD40: .4byte 0x02000F74
-_0800AD44: .4byte 0x020020B4
-_0800AD48: .4byte 0x0203EA89
-_0800AD4C: .4byte 0x030032D0
-_0800AD50: .4byte 0x030032DC
-_0800AD54: .4byte 0x03002950
+_0800AD38: .4byte byte_20020B1
+_0800AD3C: .4byte gGameStatus
+_0800AD40: .4byte gPlayerSprite
+_0800AD44: .4byte dword_20020B4
+_0800AD48: .4byte byte_203EA89
+_0800AD4C: .4byte gPlayerPos
+_0800AD50: .4byte dword_30032DC
+_0800AD54: .4byte byte_3002950
 _0800AD58:
 	movs r0, #1
 _0800AD5A:
@@ -781,9 +781,9 @@ _0800AD7C:
 	bl sub_800388C
 	b _0800ADA4
 	.align 2, 0
-_0800AD8C: .4byte 0x03002950
+_0800AD8C: .4byte byte_3002950
 _0800AD90: .4byte 0x030028FC
-_0800AD94: .4byte 0x02000FC8
+_0800AD94: .4byte dword_2000FC8
 _0800AD98:
 	ldr r0, _0800ADA8
 	ldr r0, [r0]
@@ -794,7 +794,7 @@ _0800ADA4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800ADA8: .4byte 0x02000FC8
+_0800ADA8: .4byte dword_2000FC8
 
     .thumb
 sub_800ADAC: @ 0x0800ADAC
@@ -837,7 +837,7 @@ _0800ADD2:
 	str r0, [r5, #4]
 	b _0800AE7A
 	.align 2, 0
-_0800ADFC: .4byte 0x03002950
+_0800ADFC: .4byte byte_3002950
 _0800AE00: .4byte 0x030028FC
 _0800AE04: .4byte 0x0004FFFF
 _0800AE08:
@@ -941,9 +941,9 @@ _0800AEBE:
 	bl sub_80181B8
 	b _0800AEEC
 	.align 2, 0
-_0800AED8: .4byte 0x030032D0
-_0800AEDC: .4byte 0x030032DC
-_0800AEE0: .4byte 0x02000FC8
+_0800AED8: .4byte gPlayerPos
+_0800AEDC: .4byte dword_30032DC
+_0800AEE0: .4byte dword_2000FC8
 _0800AEE4: .4byte 0x080CC818
 _0800AEE8:
 	ldr r0, [r7, #4]
@@ -1048,8 +1048,8 @@ _0800AF94:
 	str r5, [r4, #4]
 	b _0800B034
 	.align 2, 0
-_0800AFA8: .4byte 0x0203DFC4
-_0800AFAC: .4byte 0x03002950
+_0800AFA8: .4byte dword_203DFC4
+_0800AFAC: .4byte byte_3002950
 _0800AFB0: .4byte gPlayerStateSettings
 _0800AFB4: .4byte gPlayerState
 _0800AFB8: .4byte 0x030028FC
@@ -1066,7 +1066,7 @@ _0800AFC0:
 	ldr r0, [r6, #4]
 	b _0800AFEE
 	.align 2, 0
-_0800AFD8: .4byte 0x02000F74
+_0800AFD8: .4byte gPlayerSprite
 _0800AFDC:
 	ldr r5, _0800AFF4
 	ldr r0, [r4, #4]
@@ -1080,7 +1080,7 @@ _0800AFEE:
 	str r0, [r4, #4]
 	b _0800B006
 	.align 2, 0
-_0800AFF4: .4byte 0x030032DC
+_0800AFF4: .4byte dword_30032DC
 _0800AFF8:
 	ldr r1, [r4, #4]
 	ldr r0, [r6, #4]
@@ -1093,7 +1093,7 @@ _0800B006:
 	bl sub_800A974
 	b _0800B034
 	.align 2, 0
-_0800B010: .4byte 0x02000F74
+_0800B010: .4byte gPlayerSprite
 _0800B014:
 	ldr r5, _0800B040
 	ldr r0, [r5]
@@ -1116,9 +1116,9 @@ _0800B034:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800B040: .4byte 0x02000FC8
+_0800B040: .4byte dword_2000FC8
 _0800B044: .4byte 0x080CC7EC
-_0800B048: .4byte 0x03002950
+_0800B048: .4byte byte_3002950
 
     .thumb
 sub_0800B04C: @ 0x0800B04C
@@ -1274,8 +1274,8 @@ _0800B190:
 	b _0800B1DE
 	.align 2, 0
 _0800B194: .4byte 0x0000FFFF
-_0800B198: .4byte 0x02000FC8
-_0800B19C: .4byte 0x030032D0
+_0800B198: .4byte dword_2000FC8
+_0800B19C: .4byte gPlayerPos
 _0800B1A0: .4byte 0x0300331C
 _0800B1A4: .4byte 0x030029A4
 _0800B1A8: .4byte 0x030028FC
@@ -1317,7 +1317,7 @@ _0800B1EC: .4byte gPlayerStateSettings
 _0800B1F0: .4byte gPlayerState
 _0800B1F4: .4byte 0x03003328
 _0800B1F8: .4byte 0x03003334
-_0800B1FC: .4byte 0x030032DC
+_0800B1FC: .4byte dword_30032DC
 
     .thumb
     .global update_player
@@ -1356,7 +1356,7 @@ _0800B22A:
 	.align 2, 0
 _0800B244: .4byte 0x03003328
 _0800B248: .4byte 0x03003334
-_0800B24C: .4byte 0x020020B1
+_0800B24C: .4byte byte_20020B1
 _0800B250: .4byte 0x0300331C
 _0800B254:
 	ldr r1, _0800B2A4
@@ -1446,8 +1446,8 @@ _0800B2E6:
 	bl sub_8007434
 	b _0800B334
 	.align 2, 0
-_0800B314: .4byte 0x03002950
-_0800B318: .4byte 0x02000FC8
+_0800B314: .4byte byte_3002950
+_0800B318: .4byte dword_2000FC8
 _0800B31C: .4byte 0x030028FC
 _0800B320:
 	ldr r0, _0800B328
@@ -1522,7 +1522,7 @@ _0800B39E:
 _0800B3A8: .4byte 0x030028FC
 _0800B3AC: .4byte gPlayerStateSettings
 _0800B3B0: .4byte gPlayerState
-_0800B3B4: .4byte 0x03002950
+_0800B3B4: .4byte byte_3002950
 _0800B3B8: .4byte 0x030029A4
 _0800B3BC: .4byte 0x020011FC
 _0800B3C0:
@@ -1537,7 +1537,7 @@ _0800B3C0:
 _0800B3D0:
 	b _0800B3DE
 	.align 2, 0
-_0800B3D4: .4byte 0x0203DFC4
+_0800B3D4: .4byte dword_203DFC4
 _0800B3D8:
 	ldr r1, _0800B470
 	movs r0, #1
@@ -1620,8 +1620,8 @@ _0800B478: .4byte 0x03003334
 _0800B47C: .4byte gPlayerStateSettings
 _0800B480: .4byte gPlayerState
 _0800B484: .4byte 0x030029A4
-_0800B488: .4byte 0x030032D0
-_0800B48C: .4byte 0x030032DC
+_0800B488: .4byte gPlayerPos
+_0800B48C: .4byte dword_30032DC
 _0800B490:
 	bl sub_0800A8B4
 	cmp r0, #0
@@ -1762,11 +1762,11 @@ _0800B5A4: .4byte 0x03003328
 _0800B5A8: .4byte 0x03003334
 _0800B5AC: .4byte gPlayerStateSettings
 _0800B5B0: .4byte gPlayerState
-_0800B5B4: .4byte 0x030032D0
-_0800B5B8: .4byte 0x030032DC
+_0800B5B4: .4byte gPlayerPos
+_0800B5B8: .4byte dword_30032DC
 _0800B5BC: .4byte 0x030029F8
-_0800B5C0: .4byte 0x02000FC8
-_0800B5C4: .4byte 0x030032A9
+_0800B5C0: .4byte dword_2000FC8
+_0800B5C4: .4byte gIsSlideMiniGame
 _0800B5C8: .4byte 0x030032E8
 _0800B5CC: .4byte 0x03003300
 _0800B5D0: .4byte 0x03003304
@@ -1886,14 +1886,14 @@ _0800B6B4:
 	bl UpdateMapLeft
 	b _0800B6FA
 	.align 2, 0
-_0800B6C4: .4byte 0x02000F74
+_0800B6C4: .4byte gPlayerSprite
 _0800B6C8: .4byte 0x03003314
 _0800B6CC: .4byte 0x0300330C
 _0800B6D0: .4byte 0x03003318
 _0800B6D4: .4byte 0x03003310
-_0800B6D8: .4byte 0x02000F90
-_0800B6DC: .4byte 0x030032D0
-_0800B6E0: .4byte 0x030032DC
+_0800B6D8: .4byte gPlayerShadowSprite
+_0800B6DC: .4byte gPlayerPos
+_0800B6E0: .4byte dword_30032DC
 _0800B6E4: .4byte 0x020010AF
 _0800B6E8: .4byte 0x02000FAC
 _0800B6EC:

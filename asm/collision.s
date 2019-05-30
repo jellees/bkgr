@@ -243,8 +243,8 @@ _08006780: .4byte 0x020010A4
 _08006784: .4byte 0x020010A5
 _08006788: .4byte 0x020010A6
 _0800678C: .4byte 0x020010A7
-_08006790: .4byte 0x030032D0
-_08006794: .4byte 0x030032DC
+_08006790: .4byte gPlayerPos
+_08006794: .4byte dword_30032DC
 
     .thumb
 	.global setup_collision_xyz
@@ -312,8 +312,8 @@ _08006818: .4byte 0x030028E4
 _0800681C: .4byte 0x030028E8
 _08006820: .4byte 0x02001088
 _08006824: .4byte 0xFFA00000
-_08006828: .4byte 0x030032D0
-_0800682C: .4byte 0x030032DC
+_08006828: .4byte gPlayerPos
+_0800682C: .4byte dword_30032DC
 
     .thumb
 set_camera_position: @ 0x08006830
@@ -357,8 +357,8 @@ set_camera_position: @ 0x08006830
 	.align 2, 0
 _0800687C: .4byte 0x02001464
 _08006880: .4byte 0x02001466
-_08006884: .4byte 0x02001468
-_08006888: .4byte 0x0200146A
+_08006884: .4byte gCameraPixelX
+_08006888: .4byte gCameraPixelY
 _0800688C: .4byte 0x03003576
 _08006890:
 	mov r2, sb

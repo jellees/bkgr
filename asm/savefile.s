@@ -244,7 +244,7 @@ _0800E994:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800E9B4: .4byte 0x02001044
+_0800E9B4: .4byte gGameStatus
 _0800E9B8: .4byte 0x02001064
 _0800E9BC: .4byte 0x0203EAD6
 _0800E9C0: .4byte 0x02000335

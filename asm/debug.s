@@ -23,7 +23,7 @@ sub_800FA58: @ 0x0800FA58
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800FA7C: .4byte 0x02001044
+_0800FA7C: .4byte gGameStatus
 _0800FA80: .4byte 0x080CC8C4
 
     .thumb

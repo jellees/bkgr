@@ -2038,28 +2038,28 @@ _08002A5C:
 	.align 2, 0
 _08002A64: .4byte 0x02000F54
 _08002A68: .4byte 0x02000360
-_08002A6C: .4byte 0x03003D94
-_08002A70: .4byte 0x03003D8C
-_08002A74: .4byte 0x03003D98
-_08002A78: .4byte 0x03003D90
+_08002A6C: .4byte gOBJTileFramePtr
+_08002A70: .4byte gOAMBufferFramePtr
+_08002A74: .4byte gOBJTileCount
+_08002A78: .4byte gOAMBufferEnd
 _08002A7C: .4byte 0x02000F54
 _08002A80: .4byte 0x02000360
-_08002A84: .4byte 0x03003D94
-_08002A88: .4byte 0x03003D8C
-_08002A8C: .4byte 0x03003D98
-_08002A90: .4byte 0x03003D90
+_08002A84: .4byte gOBJTileFramePtr
+_08002A88: .4byte gOAMBufferFramePtr
+_08002A8C: .4byte gOBJTileCount
+_08002A90: .4byte gOAMBufferEnd
 _08002A94: .4byte 0x02000F54
 _08002A98: .4byte 0x02000360
-_08002A9C: .4byte 0x03003D94
-_08002AA0: .4byte 0x03003D8C
-_08002AA4: .4byte 0x03003D98
-_08002AA8: .4byte 0x03003D90
+_08002A9C: .4byte gOBJTileFramePtr
+_08002AA0: .4byte gOAMBufferFramePtr
+_08002AA4: .4byte gOBJTileCount
+_08002AA8: .4byte gOAMBufferEnd
 _08002AAC: .4byte 0x03002A64
 _08002AB0: .4byte 0x03002A68
-_08002AB4: .4byte 0x030032B4
-_08002AB8: .4byte 0x030032BC
-_08002ABC: .4byte 0x030032B4
-_08002AC0: .4byte 0x030032BC
+_08002AB4: .4byte dword_30032B4
+_08002AB8: .4byte dword_30032BC
+_08002ABC: .4byte dword_30032B4
+_08002AC0: .4byte dword_30032BC
 
     .thumb
 	.global UpdateBackgrounds
@@ -3473,14 +3473,14 @@ _08003520:
 	.align 2, 0
 _08003560: .4byte 0x086AD304
 _08003564: .4byte 0x086AD304
-_08003568: .4byte 0x03003D8C
-_0800356C: .4byte 0x03003D8C
-_08003570: .4byte 0x03003D8C
-_08003574: .4byte 0x03003D8C
-_08003578: .4byte 0x03003D8C
-_0800357C: .4byte 0x03003D8C
-_08003580: .4byte 0x03003D8C
-_08003584: .4byte 0x03003D8C
+_08003568: .4byte gOAMBufferFramePtr
+_0800356C: .4byte gOAMBufferFramePtr
+_08003570: .4byte gOAMBufferFramePtr
+_08003574: .4byte gOAMBufferFramePtr
+_08003578: .4byte gOAMBufferFramePtr
+_0800357C: .4byte gOAMBufferFramePtr
+_08003580: .4byte gOAMBufferFramePtr
+_08003584: .4byte gOAMBufferFramePtr
 
     .thumb
 	.global RenderSprite
@@ -3884,10 +3884,10 @@ _08003828:
 	.align 2, 0
 _08003838: .4byte 0x02000F54
 _0800383C: .4byte 0x02000360
-_08003840: .4byte 0x03003D94
-_08003844: .4byte 0x03003D8C
-_08003848: .4byte 0x03003D90
-_0800384C: .4byte 0x03003D98
+_08003840: .4byte gOBJTileFramePtr
+_08003844: .4byte gOAMBufferFramePtr
+_08003848: .4byte gOAMBufferEnd
+_0800384C: .4byte gOBJTileCount
 _08003850: .4byte 0x000001FF
 
     .thumb
