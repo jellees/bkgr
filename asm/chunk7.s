@@ -1719,7 +1719,7 @@ _0804564C: .4byte 0x04000052
 _08045650: .4byte 0x00000907
 _08045654: .4byte gColorSpecEffectsSel
 _08045658: .4byte gIsSlideMiniGame
-_0804565C: .4byte 0x02001080
+_0804565C: .4byte gLoadedRoomIndex
 _08045660: .4byte 0x0203F4D8
 
     .thumb
@@ -2540,7 +2540,7 @@ _08045D58: .4byte gPlayerState
 _08045D5C: .4byte gOAMBuffer1
 _08045D60: .4byte 0x04000050
 _08045D64: .4byte 0x00000907
-_08045D68: .4byte 0x02001082
+_08045D68: .4byte gLoadedRoomLevel
 _08045D6C: .4byte gKeysDown
 _08045D70: .4byte gKeysPressed
 _08045D74: .4byte gPreviousKeys
@@ -4035,7 +4035,7 @@ _08046A56:
 	b _08046AF2
 	.align 2, 0
 _08046A64: .4byte 0x02000320
-_08046A68: .4byte 0x02001082
+_08046A68: .4byte gLoadedRoomLevel
 _08046A6C:
 	.2byte 0xEE00, 0xEE00
 	b _08046AF2
@@ -4451,7 +4451,7 @@ _08046D8C:
 	mov pc, r0
 	.align 2, 0
 _08046DEC: .4byte gPlayerState
-_08046DF0: .4byte 0x02001082
+_08046DF0: .4byte gLoadedRoomLevel
 _08046DF4: .4byte 0x0203F578
 _08046DF8: .4byte 0x080B01B8
 _08046DFC: .4byte 0x0203F594
@@ -4981,8 +4981,8 @@ _080472E8:
 	.align 2, 0
 _08047300: .4byte 0x00000FFF
 _08047304: .4byte 0x0203EA88
-_08047308: .4byte 0x02001084
-_0804730C: .4byte 0x03003344
+_08047308: .4byte gLoadedRoomBgm
+_0804730C: .4byte gRoomHeader
 _08047310: .4byte 0x05000200
 _08047314: .4byte 0x02000F56
 _08047318:
@@ -6188,8 +6188,8 @@ sub_8047D70: @ 0x08047D70
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047DA0: .4byte 0x03003344
-_08047DA4: .4byte 0x03003576
+_08047DA0: .4byte gRoomHeader
+_08047DA4: .4byte gMapPixelSizeY
 
     .thumb
 sub_08047DA8: @ 0x08047DA8
@@ -6224,7 +6224,7 @@ _08047DD6:
 	mov pc, r0
 	.align 2, 0
 _08047DE0: .4byte 0x0203F8BC
-_08047DE4: .4byte 0x02001082
+_08047DE4: .4byte gLoadedRoomLevel
 _08047DE8: .4byte 0x08047DEC
 _08047DEC: @ jump table
 	.4byte _08047F40 @ case 0
@@ -6303,7 +6303,7 @@ _08047E04:
 	adds r3, r4, #0
 	b _080481BE
 	.align 2, 0
-_08047E90: .4byte 0x03003576
+_08047E90: .4byte gMapPixelSizeY
 _08047E94: .4byte 0xFFFFFAEC
 _08047E98:
 	mov r4, sl
@@ -6502,7 +6502,7 @@ _08047F68:
 	mov r3, r8
 	b _080481BE
 	.align 2, 0
-_08048020: .4byte 0x03003576
+_08048020: .4byte gMapPixelSizeY
 _08048024: .4byte 0xFFFFFE41
 _08048028: .4byte 0xFFFFFE17
 _0804802C:
@@ -6596,7 +6596,7 @@ _0804802C:
 	mov r3, sb
 	b _080481BE
 	.align 2, 0
-_080480E4: .4byte 0x03003576
+_080480E4: .4byte gMapPixelSizeY
 _080480E8: .4byte 0xFFFFFE41
 _080480EC: .4byte 0xFFFFFE17
 _080480F0:
@@ -6689,7 +6689,7 @@ _080480F0:
 	mov r3, r8
 	b _080481BE
 	.align 2, 0
-_080481A4: .4byte 0x03003576
+_080481A4: .4byte gMapPixelSizeY
 _080481A8: .4byte 0xFFFFFEEB
 _080481AC:
 	.2byte 0xEE00, 0xEE00
@@ -7133,14 +7133,14 @@ _0804858C: .4byte 0x080B0FDA
 _08048590: .4byte 0x087DFA9C
 _08048594: .4byte 0x080B100C
 _08048598: .4byte 0x080CC844
-_0804859C: .4byte 0x03003344
+_0804859C: .4byte gRoomHeader
 _080485A0: .4byte 0x080CC818
 _080485A4: .4byte 0x030028FC
 _080485A8: .4byte 0x0203F8C0
 _080485AC: .4byte 0x0203F8C4
 _080485B0: .4byte gCameraPixelX
 _080485B4: .4byte gCameraPixelY
-_080485B8: .4byte 0x03003576
+_080485B8: .4byte gMapPixelSizeY
 _080485BC: .4byte 0x080CEBC4
 _080485C0: .4byte 0x080CEB84
 _080485C4:
@@ -7680,7 +7680,7 @@ _08048A4C: .4byte 0x080B0FDA
 _08048A50: .4byte 0x087DFA9C
 _08048A54: .4byte gCameraPixelX
 _08048A58: .4byte gCameraPixelY
-_08048A5C: .4byte 0x03003576
+_08048A5C: .4byte gMapPixelSizeY
 _08048A60: .4byte 0x080CEBC4
 _08048A64: .4byte 0x080CEB84
 _08048A68:
@@ -7881,7 +7881,7 @@ _08048BEC:
 	movs r6, #1
 	b _08048C00
 	.align 2, 0
-_08048BF0: .4byte 0x03003576
+_08048BF0: .4byte gMapPixelSizeY
 _08048BF4: .4byte 0x0203DFE4
 _08048BF8:
 	adds r1, r5, #0
@@ -7912,7 +7912,7 @@ _08048C00:
 	strb r0, [r1]
 	b _08048C3A
 	.align 2, 0
-_08048C30: .4byte 0x03003576
+_08048C30: .4byte gMapPixelSizeY
 _08048C34:
 	adds r0, r5, #0
 	adds r0, #0xcf
@@ -8263,8 +8263,8 @@ _08048EC4:
 	beq _08048F34
 	b _08048F54
 	.align 2, 0
-_08048EE0: .4byte 0x03003574
-_08048EE4: .4byte 0x03003576
+_08048EE0: .4byte gMapPixelSizeX
+_08048EE4: .4byte gMapPixelSizeY
 _08048EE8:
 	movs r1, #0x32
 	ldrsh r0, [r4, r1]
@@ -8379,7 +8379,7 @@ sub_08048F5C: @ 0x08048F5C
 	.2byte 0xEE00, 0xEE00
 	b _08049002
 	.align 2, 0
-_08048FC4: .4byte 0x03003344
+_08048FC4: .4byte gRoomHeader
 _08048FC8:
 	ldrb r0, [r4]
 	b _08048FEA
@@ -10737,7 +10737,7 @@ _0804A1EC:
 	strb r0, [r1]
 	b _0804A234
 	.align 2, 0
-_0804A22C: .4byte 0x03003576
+_0804A22C: .4byte gMapPixelSizeY
 _0804A230:
 	.2byte 0xEE00, 0xEE00
 _0804A234:
@@ -11079,7 +11079,7 @@ _0804A4C2:
 	ldrb r0, [r1]
 	b _0804A52A
 	.align 2, 0
-_0804A518: .4byte 0x03003576
+_0804A518: .4byte gMapPixelSizeY
 _0804A51C: .4byte 0x080CEBC4
 _0804A520: .4byte 0x080CEB84
 _0804A524:
@@ -11282,7 +11282,7 @@ _0804A6AE:
 	.align 2, 0
 _0804A6C8: .4byte dword_30032DC
 _0804A6CC: .4byte 0x080B12D0
-_0804A6D0: .4byte 0x03003576
+_0804A6D0: .4byte gMapPixelSizeY
 _0804A6D4: .4byte 0x080CEBC4
 _0804A6D8: .4byte 0x080CEB84
 _0804A6DC:
@@ -11394,7 +11394,7 @@ _0804A770:
 	ldrb r0, [r1]
 	b _0804A7DA
 	.align 2, 0
-_0804A7C8: .4byte 0x03003576
+_0804A7C8: .4byte gMapPixelSizeY
 _0804A7CC: .4byte 0x080CEBC4
 _0804A7D0: .4byte 0x080CEB84
 _0804A7D4:
@@ -11937,7 +11937,7 @@ _0804AC5C:
 	ldrb r0, [r1]
 	b _0804AC86
 	.align 2, 0
-_0804AC74: .4byte 0x03003576
+_0804AC74: .4byte gMapPixelSizeY
 _0804AC78: .4byte 0x080CEBC4
 _0804AC7C: .4byte 0x080CEB84
 _0804AC80:
@@ -12061,7 +12061,7 @@ _0804AD62:
 	ldrb r0, [r1]
 	b _0804AD8E
 	.align 2, 0
-_0804AD7C: .4byte 0x03003576
+_0804AD7C: .4byte gMapPixelSizeY
 _0804AD80: .4byte 0x080CEBC4
 _0804AD84: .4byte 0x080CEB84
 _0804AD88:
@@ -12727,7 +12727,7 @@ _0804B2CE:
 	ldrb r0, [r1]
 	b _0804B336
 	.align 2, 0
-_0804B324: .4byte 0x03003576
+_0804B324: .4byte gMapPixelSizeY
 _0804B328: .4byte 0x080CEBC4
 _0804B32C: .4byte 0x080CEB84
 _0804B330:
@@ -12926,7 +12926,7 @@ _0804B4B2:
 	.align 2, 0
 _0804B4CC: .4byte dword_30032DC
 _0804B4D0: .4byte 0x080B1350
-_0804B4D4: .4byte 0x03003576
+_0804B4D4: .4byte gMapPixelSizeY
 _0804B4D8: .4byte 0x080CEBC4
 _0804B4DC: .4byte 0x080CEB84
 _0804B4E0:
@@ -13039,7 +13039,7 @@ _0804B574:
 	ldrb r0, [r1]
 	b _0804B5DE
 	.align 2, 0
-_0804B5CC: .4byte 0x03003576
+_0804B5CC: .4byte gMapPixelSizeY
 _0804B5D0: .4byte 0x080CEBC4
 _0804B5D4: .4byte 0x080CEB84
 _0804B5D8:
@@ -13447,7 +13447,7 @@ _0804B914:
 	bl sub_08047958
 	b _0804B948
 	.align 2, 0
-_0804B940: .4byte 0x03003576
+_0804B940: .4byte gMapPixelSizeY
 _0804B944:
 	.2byte 0xEE00, 0xEE00
 _0804B948:
@@ -13763,7 +13763,7 @@ _0804BBF0:
 	strh r0, [r3, #4]
 	b _0804BCE6
 	.align 2, 0
-_0804BC0C: .4byte 0x03003576
+_0804BC0C: .4byte gMapPixelSizeY
 _0804BC10:
 	adds r1, r7, #0
 	adds r1, #0x5e
@@ -14416,7 +14416,7 @@ _0804C190:
 	strh r0, [r3]
 	b _0804C1A4
 	.align 2, 0
-_0804C19C: .4byte 0x03003576
+_0804C19C: .4byte gMapPixelSizeY
 _0804C1A0:
 	.2byte 0xEE00, 0xEE00
 _0804C1A4:
@@ -14756,7 +14756,7 @@ _0804C422:
 	ldrb r0, [r1]
 	b _0804C496
 	.align 2, 0
-_0804C484: .4byte 0x03003576
+_0804C484: .4byte gMapPixelSizeY
 _0804C488: .4byte 0x080CEBC4
 _0804C48C: .4byte 0x080CEB84
 _0804C490:
@@ -15051,7 +15051,7 @@ _0804C6E8:
 	ldrb r0, [r1]
 	b _0804C71A
 	.align 2, 0
-_0804C708: .4byte 0x03003576
+_0804C708: .4byte gMapPixelSizeY
 _0804C70C: .4byte 0x080CEBC4
 _0804C710: .4byte 0x080CEB84
 _0804C714:
@@ -15253,7 +15253,7 @@ _0804C842:
 	ldrb r0, [r1]
 	b _0804C8BA
 	.align 2, 0
-_0804C8A8: .4byte 0x03003576
+_0804C8A8: .4byte gMapPixelSizeY
 _0804C8AC: .4byte 0x080CEBC4
 _0804C8B0: .4byte 0x080CEB84
 _0804C8B4:
@@ -15891,7 +15891,7 @@ _0804CDC4:
 	bl sub_08047958
 	b _0804CDF8
 	.align 2, 0
-_0804CDF0: .4byte 0x03003576
+_0804CDF0: .4byte gMapPixelSizeY
 _0804CDF4:
 	.2byte 0xEE00, 0xEE00
 _0804CDF8:
@@ -16544,7 +16544,7 @@ _0804D358:
 	strh r0, [r4]
 	b _0804D52C
 	.align 2, 0
-_0804D38C: .4byte 0x03003576
+_0804D38C: .4byte gMapPixelSizeY
 _0804D390:
 	ldr r0, [r6, #0x2c]
 	add r1, sp, #0xc
@@ -16734,7 +16734,7 @@ _0804D51C:
 	strh r0, [r5]
 	b _0804D52C
 	.align 2, 0
-_0804D524: .4byte 0x03003576
+_0804D524: .4byte gMapPixelSizeY
 _0804D528:
 	.2byte 0xEE00, 0xEE00
 _0804D52C:
@@ -17450,7 +17450,7 @@ _0804DB10:
 	strh r0, [r4]
 	b _0804DD10
 	.align 2, 0
-_0804DB44: .4byte 0x03003576
+_0804DB44: .4byte gMapPixelSizeY
 _0804DB48:
 	movs r0, #0x65
 	adds r0, r0, r5
@@ -17657,7 +17657,7 @@ _0804DCFE:
 	strh r0, [r2]
 	b _0804DD10
 	.align 2, 0
-_0804DD08: .4byte 0x03003576
+_0804DD08: .4byte gMapPixelSizeY
 _0804DD0C:
 	.2byte 0xEE00, 0xEE00
 _0804DD10:
@@ -18365,7 +18365,7 @@ _0804E2DC:
 	strh r0, [r1]
 	b _0804E774
 	.align 2, 0
-_0804E310: .4byte 0x03003576
+_0804E310: .4byte gMapPixelSizeY
 _0804E314:
 	adds r4, r6, #0
 	adds r4, #0x65
@@ -18496,7 +18496,7 @@ _0804E41A:
 	strh r0, [r4]
 	b _0804E774
 	.align 2, 0
-_0804E424: .4byte 0x03003576
+_0804E424: .4byte gMapPixelSizeY
 _0804E428:
 	movs r0, #0xc
 	movs r5, #0x65
@@ -18657,7 +18657,7 @@ _0804E510:
 	bl sub_08047958
 	b _0804E774
 	.align 2, 0
-_0804E584: .4byte 0x03003576
+_0804E584: .4byte gMapPixelSizeY
 _0804E588:
 	movs r0, #9
 	adds r5, r6, #0
@@ -19548,7 +19548,7 @@ _0804ECCC:
 	strh r0, [r4]
 	b _0804F120
 	.align 2, 0
-_0804ED00: .4byte 0x03003576
+_0804ED00: .4byte gMapPixelSizeY
 _0804ED04:
 	adds r4, r6, #0
 	adds r4, #0x65
@@ -19679,7 +19679,7 @@ _0804EE0A:
 	strh r0, [r2]
 	b _0804F120
 	.align 2, 0
-_0804EE14: .4byte 0x03003576
+_0804EE14: .4byte gMapPixelSizeY
 _0804EE18:
 	movs r0, #0xc
 	movs r3, #0x65
@@ -19841,7 +19841,7 @@ _0804EF00:
 	bl sub_08047958
 	b _0804F120
 	.align 2, 0
-_0804EF74: .4byte 0x03003576
+_0804EF74: .4byte gMapPixelSizeY
 _0804EF78:
 	movs r4, #0
 	adds r5, r6, #0
@@ -20145,7 +20145,7 @@ _0804F1B2:
 	.align 2, 0
 _0804F1DC: .4byte 0x0203F8B4
 _0804F1E0: .4byte 0x0203DFE4
-_0804F1E4: .4byte 0x03003576
+_0804F1E4: .4byte gMapPixelSizeY
 
     .thumb
 sub_804F1E8: @ 0x0804F1E8
@@ -20835,7 +20835,7 @@ _0804F768:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804F774: .4byte 0x03003576
+_0804F774: .4byte gMapPixelSizeY
 
     .thumb
 sub_804F778: @ 0x0804F778
@@ -20932,7 +20932,7 @@ _0804F828:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804F834: .4byte 0x03003576
+_0804F834: .4byte gMapPixelSizeY
 
     .thumb
 sub_804F838: @ 0x0804F838
@@ -21045,7 +21045,7 @@ _0804F908:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804F914: .4byte 0x03003576
+_0804F914: .4byte gMapPixelSizeY
 
     .thumb
 sub_804F918: @ 0x0804F918
@@ -21157,7 +21157,7 @@ sub_804F950: @ 0x0804F950
 	.align 2, 0
 _0804F9F4: .4byte dword_30032DC
 _0804F9F8: .4byte 0x03006EF1
-_0804F9FC: .4byte 0x03003576
+_0804F9FC: .4byte gMapPixelSizeY
 _0804FA00:
 	adds r0, r4, #0
 	mov r1, r8
@@ -21351,7 +21351,7 @@ _0804FB7E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804FB8C: .4byte 0x03003576
+_0804FB8C: .4byte gMapPixelSizeY
 
 	.thumb
 nullsub_9: @ 0x0804FB90
@@ -22140,7 +22140,7 @@ _080500AA:
 	bl sub_8049810
 	b _080501F4
 	.align 2, 0
-_08050158: .4byte 0x03003576
+_08050158: .4byte gMapPixelSizeY
 _0805015C:
 	ldr r0, [r5, #0x2c]
 	movs r1, #0
@@ -22398,7 +22398,7 @@ sub_80502F4: @ 0x080502F4
 	adds r0, r0, r1
 	b _0805036C
 	.align 2, 0
-_0805035C: .4byte 0x03003576
+_0805035C: .4byte gMapPixelSizeY
 _08050360: .4byte 0x080CEBC4
 _08050364: .4byte 0x080CEB84
 _08050368:
@@ -22499,7 +22499,7 @@ sub_80503C8: @ 0x080503C8
 	adds r0, r0, r1
 	b _08050440
 	.align 2, 0
-_08050430: .4byte 0x03003576
+_08050430: .4byte gMapPixelSizeY
 _08050434: .4byte 0x080CEBC4
 _08050438: .4byte 0x080CEB84
 _0805043C:
@@ -22641,7 +22641,7 @@ _08050510:
 	adds r0, r0, r1
 	b _08050568
 	.align 2, 0
-_08050558: .4byte 0x03003576
+_08050558: .4byte gMapPixelSizeY
 _0805055C: .4byte 0x080CEBC4
 _08050560: .4byte 0x080CEB84
 _08050564:
@@ -22787,7 +22787,7 @@ sub_805062C: @ 0x0805062C
 	adds r0, r0, r1
 	b _08050694
 	.align 2, 0
-_08050684: .4byte 0x03003576
+_08050684: .4byte gMapPixelSizeY
 _08050688: .4byte 0x080CEBC4
 _0805068C: .4byte 0x080CEB84
 _08050690:
@@ -23043,7 +23043,7 @@ sub_8050804: @ 0x08050804
 	b _080508AA
 	.align 2, 0
 _0805088C: .4byte dword_30032DC
-_08050890: .4byte 0x03003576
+_08050890: .4byte gMapPixelSizeY
 _08050894:
 	ldr r0, [r7, #0x10]
 	str r0, [r7, #4]
@@ -23152,7 +23152,7 @@ _0805095E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805096C: .4byte 0x03003576
+_0805096C: .4byte gMapPixelSizeY
 
     .thumb
 sub_8050970: @ 0x08050970
@@ -23319,7 +23319,7 @@ _08050AB0:
 	b _08050ADC
 	.align 2, 0
 _08050AC8: .4byte 0x002FFFFF
-_08050ACC: .4byte 0x03003576
+_08050ACC: .4byte gMapPixelSizeY
 _08050AD0: .4byte 0x080CEBC4
 _08050AD4: .4byte 0x080CEB84
 _08050AD8:
@@ -23454,7 +23454,7 @@ _08050BAC:
 	b _08050BEC
 	.align 2, 0
 _08050BDC: .4byte 0x080CEB84
-_08050BE0: .4byte 0x03003576
+_08050BE0: .4byte gMapPixelSizeY
 _08050BE4: .4byte 0x080CEBC4
 _08050BE8:
 	ldr r0, _08050C08
@@ -23703,7 +23703,7 @@ sub_8050D38: @ 0x08050D38
 	.align 2, 0
 _08050DE0: .4byte byte_203F99C
 _08050DE4: .4byte gPlayerPos
-_08050DE8: .4byte 0x03003576
+_08050DE8: .4byte gMapPixelSizeY
 _08050DEC:
 	movs r0, #1
 	mov sb, r0
@@ -23890,7 +23890,7 @@ _08050F56:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050F64: .4byte 0x03003576
+_08050F64: .4byte gMapPixelSizeY
 
 	.thumb
 sub_8050F68: @ 0x08050F68
@@ -24068,7 +24068,7 @@ _080510C8: .4byte 0x080CC6B0
 _080510CC: .4byte gPlayerPos
 _080510D0: .4byte 0xFFFF0000
 _080510D4: .4byte gPlayerSprite
-_080510D8: .4byte 0x03003576
+_080510D8: .4byte gMapPixelSizeY
 _080510DC: .4byte gGameStatus
 _080510E0: .4byte byte_203F99C
 
@@ -24369,7 +24369,7 @@ _080512D0:
 	bl sub_8049810
 	b _0805138A
 	.align 2, 0
-_08051354: .4byte 0x03003576
+_08051354: .4byte gMapPixelSizeY
 _08051358:
 	ldr r0, [r6, #0x2c]
 	movs r1, #0
@@ -24680,7 +24680,7 @@ _0805157C:
 	b _080515CA
 	.align 2, 0
 _080515B8: .4byte gGameStatus
-_080515BC: .4byte 0x03003576
+_080515BC: .4byte gMapPixelSizeY
 _080515C0:
 	adds r0, r4, #0
 	bl sub_08048F5C
@@ -24720,7 +24720,7 @@ _080515FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051608: .4byte 0x03003576
+_08051608: .4byte gMapPixelSizeY
 
 	.thumb
 sub_805160C: @ 0x0805160C
@@ -24769,7 +24769,7 @@ _08051666:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805166C: .4byte 0x03003344
+_0805166C: .4byte gRoomHeader
 
 	.thumb
 sub_8051670: @ 0x08051670
@@ -25157,7 +25157,7 @@ sub_80518E8: @ 0x080518E8
 _0805197C: .4byte 0x0203F8D9
 _08051980: .4byte 0x0203F8B4
 _08051984: .4byte 0xFFFF0000
-_08051988: .4byte 0x03003576
+_08051988: .4byte gMapPixelSizeY
 _0805198C: .4byte 0x0203DFE4
 _08051990:
 	adds r1, r6, #0
@@ -25265,7 +25265,7 @@ _08051A5C: .4byte 0x03006EF2
 _08051A60: .4byte 0x030032E8
 _08051A64: .4byte 0x030032F4
 _08051A68: .4byte 0x080CC6B0
-_08051A6C: .4byte 0x03003576
+_08051A6C: .4byte gMapPixelSizeY
 
 	.thumb
 sub_8051A70: @ 0x08051A70
@@ -25437,7 +25437,7 @@ _08051BC2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051BCC: .4byte 0x03003576
+_08051BCC: .4byte gMapPixelSizeY
 
 	.thumb
 sub_8051BD0: @ 0x08051BD0
@@ -25495,7 +25495,7 @@ _08051C3C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051C44: .4byte 0x03003576
+_08051C44: .4byte gMapPixelSizeY
 
 	.thumb
 nullsub_13: @ 0x08051C48
@@ -25609,7 +25609,7 @@ sub_8051CAC: @ 0x08051CAC
 	bl sub_8049810
 	b _08051D32
 	.align 2, 0
-_08051D24: .4byte 0x03003576
+_08051D24: .4byte gMapPixelSizeY
 _08051D28:
 	adds r0, r5, #0
 	movs r1, #1
@@ -25786,7 +25786,7 @@ _08051E76:
 	bx r0
 	.align 2, 0
 _08051E7C: .4byte 0x0203DFE4
-_08051E80: .4byte 0x03003576
+_08051E80: .4byte gMapPixelSizeY
 
     .thumb
 sub_8051E84: @ 0x08051E84
@@ -25979,7 +25979,7 @@ _08051FB6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052008: .4byte 0x03003576
+_08052008: .4byte gMapPixelSizeY
 
 	.thumb
 sub_805200C: @ 0x0805200C
@@ -26115,7 +26115,7 @@ _080520BC:
 	b _08052120
 	.align 2, 0
 _0805210C: .4byte 0x0203DFE4
-_08052110: .4byte 0x03003576
+_08052110: .4byte gMapPixelSizeY
 _08052114: .4byte 0x080CEBC4
 _08052118: .4byte 0x080CEB84
 _0805211C:
@@ -48717,8 +48717,8 @@ _0805D82E:
 	b _0805D894
 	.align 2, 0
 _0805D84C: .4byte 0x0203FA18
-_0805D850: .4byte 0x03003574
-_0805D854: .4byte 0x03003576
+_0805D850: .4byte gMapPixelSizeX
+_0805D854: .4byte gMapPixelSizeY
 _0805D858: .4byte 0x0203FA1C
 _0805D85C: .4byte 0x0203FA20
 _0805D860: .4byte 0x0203FA14
@@ -49704,7 +49704,7 @@ _0805DFDE:
 _0805E024: .4byte 0x0203F99E
 _0805E028: .4byte 0x0203F9A4
 _0805E02C: .4byte 0x0203FA16
-_0805E030: .4byte 0x03003576
+_0805E030: .4byte gMapPixelSizeY
 _0805E034:
 	ldr r3, [r6]
 	ldrb r2, [r4, #4]
@@ -49751,7 +49751,7 @@ _0805E074:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E084: .4byte 0x03003576
+_0805E084: .4byte gMapPixelSizeY
 
     .thumb
     .global sub_805E088
@@ -50367,7 +50367,7 @@ sub_805E4E0: @ 0x0805E4E0
 	b _0805E538
 	.align 2, 0
 _0805E520: .4byte 0x0203F9F4
-_0805E524: .4byte 0x02001080
+_0805E524: .4byte gLoadedRoomIndex
 _0805E528: .4byte gPlayerPos
 _0805E52C: .4byte 0x00000FFF
 _0805E530:
@@ -50685,7 +50685,7 @@ _0805E7E8:
 	.align 2, 0
 _0805E7F4: .4byte 0x0203FA15
 _0805E7F8: .4byte 0x0203F9F4
-_0805E7FC: .4byte 0x02001084
+_0805E7FC: .4byte gLoadedRoomBgm
 _0805E800: .4byte 0x080CF4EC
 _0805E804: .4byte 0x0203E137
 _0805E808: .4byte 0x00000FFF
@@ -51598,7 +51598,7 @@ sub_805EEBC: @ 0x0805EEBC
 	bx r1
 	.align 2, 0
 _0805EF04: .4byte gPlayerPos
-_0805EF08: .4byte 0x03003576
+_0805EF08: .4byte gMapPixelSizeY
 
     .thumb
 sub_805EF0C: @ 0x0805EF0C
@@ -51635,7 +51635,7 @@ sub_805EF0C: @ 0x0805EF0C
 	bx r1
 	.align 2, 0
 _0805EF54: .4byte dword_30032DC
-_0805EF58: .4byte 0x03003576
+_0805EF58: .4byte gMapPixelSizeY
 
     .thumb
 sub_805EF5C: @ 0x0805EF5C
@@ -52438,7 +52438,7 @@ _0805F572:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805F578: .4byte 0x02001084
+_0805F578: .4byte gLoadedRoomBgm
 _0805F57C: .4byte 0x0203EA88
 
     .thumb
@@ -52985,8 +52985,8 @@ _0805F9A4: .4byte 0x0203FA15
 _0805F9A8: .4byte 0x0203FA18
 _0805F9AC: .4byte 0x080CC844
 _0805F9B0: .4byte 0x080CC7EC
-_0805F9B4: .4byte 0x03003574
-_0805F9B8: .4byte 0x03003576
+_0805F9B4: .4byte gMapPixelSizeX
+_0805F9B8: .4byte gMapPixelSizeY
 _0805F9BC:
 	ldr r0, _0805FA68
 	ldrh r0, [r0]
@@ -53074,8 +53074,8 @@ _0805FA1C:
 	bl sub_8003884
 	b _0805FAA0
 	.align 2, 0
-_0805FA68: .4byte 0x03003574
-_0805FA6C: .4byte 0x03003576
+_0805FA68: .4byte gMapPixelSizeX
+_0805FA6C: .4byte gMapPixelSizeY
 _0805FA70: .4byte 0x0203FA18
 _0805FA74: .4byte 0x0203FA1C
 _0805FA78: .4byte 0x0203FA20
@@ -53404,7 +53404,7 @@ sub_805FCB0: @ 0x0805FCB0
 	.align 2, 0
 _0805FCD4: .4byte 0x0203F9F8
 _0805FCD8: .4byte 0x0203F9FC
-_0805FCDC: .4byte 0x03003576
+_0805FCDC: .4byte gMapPixelSizeY
 _0805FCE0: .4byte byte_203F9A1
 _0805FCE4: .4byte gKeyInput
 _0805FCE8: .4byte 0x000003FF
@@ -53429,7 +53429,7 @@ sub_805FCEC: @ 0x0805FCEC
 	adds r1, r6, #0
 	b _0805FD1C
 	.align 2, 0
-_0805FD10: .4byte 0x03003576
+_0805FD10: .4byte gMapPixelSizeY
 _0805FD14: .4byte dword_30032DC
 _0805FD18:
 	adds r0, r4, #0
@@ -55061,7 +55061,7 @@ _08060B74: .4byte 0x0200033A
 _08060B78: .4byte 0x0200033C
 _08060B7C: .4byte 0x0200033E
 _08060B80: .4byte 0x02000340
-_08060B84: .4byte 0x02001084
+_08060B84: .4byte gLoadedRoomBgm
 _08060B88: .4byte 0x0203EA88
 _08060B8C: .4byte 0x083FC514
 
@@ -55122,7 +55122,7 @@ sub_8060BC4: @ 0x08060BC4
 _08060BF8: .4byte 0x0203F994
 _08060BFC: .4byte gPlayerPos
 _08060C00: .4byte 0x0203F996
-_08060C04: .4byte 0x03003576
+_08060C04: .4byte gMapPixelSizeY
 _08060C08: .4byte 0x0203F99D
 _08060C0C: .4byte gPlayerSprite
 
@@ -55305,7 +55305,7 @@ _08060D52:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08060D64: .4byte 0x03003576
+_08060D64: .4byte gMapPixelSizeY
 _08060D68: .4byte gPlayerPos
 _08060D6C: .4byte 0x002FFFFF
 _08060D70: .4byte 0x080B21D4
@@ -57097,9 +57097,9 @@ _08061C0C: .4byte 0x080B1AE4
 _08061C10: .4byte 0x0203FA38
 _08061C14: .4byte 0x000004BE
 _08061C18: .4byte 0x0203FA4F
-_08061C1C: .4byte 0x03003341
+_08061C1C: .4byte gBGOffsetHorizontal
 _08061C20: .4byte 0x0203FA50
-_08061C24: .4byte 0x03003342
+_08061C24: .4byte gBGOffsetVertical
 _08061C28: .4byte gPlayerShadowSprite
 _08061C2C: .4byte 0x0203FA3C
 _08061C30: .4byte 0x0203FA4A
@@ -57398,9 +57398,9 @@ _08061EB4: .4byte 0x0203FA51
 _08061EB8: .4byte 0x0203FA38
 _08061EBC: .4byte 0x0203FA48
 _08061EC0: .4byte byte_203F99C
-_08061EC4: .4byte 0x03003341
+_08061EC4: .4byte gBGOffsetHorizontal
 _08061EC8: .4byte 0x0203FA4F
-_08061ECC: .4byte 0x03003342
+_08061ECC: .4byte gBGOffsetVertical
 _08061ED0: .4byte 0x0203FA50
 _08061ED4: .4byte 0x04000008
 _08061ED8: .4byte 0x04000050
@@ -57683,7 +57683,7 @@ sub_80620C0: @ 0x080620C0
 	movs r6, #1
 	b _0806214E
 	.align 2, 0
-_08062124: .4byte 0x03003576
+_08062124: .4byte gMapPixelSizeY
 _08062128: .4byte 0x0203DFC0
 _0806212C: .4byte 0x0203DFBC
 _08062130: .4byte 0x0203DFE5
@@ -57752,7 +57752,7 @@ _08062184:
 	.align 2, 0
 _080621AC: .4byte 0x0203DFC0
 _080621B0: .4byte 0x0203DFBC
-_080621B4: .4byte 0x03003576
+_080621B4: .4byte gMapPixelSizeY
 _080621B8: .4byte 0x0203DFE5
 _080621BC:
 	adds r0, r5, #0
@@ -58036,10 +58036,10 @@ _080623CC:
 	.align 2, 0
 _080623E8: .4byte 0x0203FA5C
 _080623EC: .4byte 0x080CC844
-_080623F0: .4byte 0x03003344
+_080623F0: .4byte gRoomHeader
 _080623F4: .4byte 0x080CC818
 _080623F8: .4byte 0x030028FC
-_080623FC: .4byte 0x03003576
+_080623FC: .4byte gMapPixelSizeY
 _08062400: .4byte 0x0203FA60
 _08062404: .4byte 0x0203FA64
 _08062408: .4byte gCameraPixelX
@@ -58347,8 +58347,8 @@ _080625F8:
 	movs r0, #0
 	b _080626AC
 	.align 2, 0
-_08062674: .4byte 0x03003344
-_08062678: .4byte 0x03003576
+_08062674: .4byte gRoomHeader
+_08062678: .4byte gMapPixelSizeY
 _0806267C:
 	ldr r5, [r6, #4]
 	mov r4, sl
@@ -58446,7 +58446,7 @@ _0806272A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062738: .4byte 0x03003344
+_08062738: .4byte gRoomHeader
 
     .thumb
 sub_806273C: @ 0x0806273C
@@ -58704,7 +58704,7 @@ _080628C4:
 	adds r0, r0, r1
 	b _08062940
 	.align 2, 0
-_08062930: .4byte 0x03003576
+_08062930: .4byte gMapPixelSizeY
 _08062934: .4byte 0x080CEBC4
 _08062938: .4byte 0x080CEB84
 _0806293C:
@@ -59044,7 +59044,7 @@ _08062C2E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062C3C: .4byte 0x02001082
+_08062C3C: .4byte gLoadedRoomLevel
 _08062C40: .4byte byte_20020B3
 _08062C44: .4byte 0x02001104
 _08062C48: .4byte 0x02001108
@@ -59117,7 +59117,7 @@ _08062CEC: .4byte 0x087E0240
 _08062CF0: .4byte 0x083FC114
 _08062CF4: .4byte 0x083FD254
 _08062CF8: .4byte 0x05000200
-_08062CFC: .4byte 0x02001084
+_08062CFC: .4byte gLoadedRoomBgm
 _08062D00: .4byte 0x0203EA88
 
     .thumb
@@ -60969,7 +60969,7 @@ _08063C6E:
 	movs r0, #3
 	b _08064228
 	.align 2, 0
-_08063C90: .4byte 0x02001080
+_08063C90: .4byte gLoadedRoomIndex
 _08063C94: .4byte 0x0203FB20
 _08063C98: .4byte 0x0203FACC
 _08063C9C: .4byte 0x0203FB10
@@ -61674,7 +61674,7 @@ _080642A4:
 	blt _080642A4
 	b _0806436E
 	.align 2, 0
-_080642B8: .4byte 0x02001080
+_080642B8: .4byte gLoadedRoomIndex
 _080642BC: .4byte 0x0203FA9A
 _080642C0: .4byte 0x0203FB14
 _080642C4:
@@ -61701,7 +61701,7 @@ _080642DC:
 	blt _080642DC
 	b _0806436E
 	.align 2, 0
-_080642F0: .4byte 0x02001080
+_080642F0: .4byte gLoadedRoomIndex
 _080642F4: .4byte 0x0203FA9A
 _080642F8: .4byte 0x0203FB14
 _080642FC:
@@ -61734,7 +61734,7 @@ _08064320:
 	blt _08064320
 	b _0806436E
 	.align 2, 0
-_08064334: .4byte 0x02001080
+_08064334: .4byte gLoadedRoomIndex
 _08064338: .4byte 0x0203F99E
 _0806433C: .4byte 0x0203FA9A
 _08064340: .4byte 0x0203FB14
@@ -61765,7 +61765,7 @@ _0806436E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064374: .4byte 0x02001080
+_08064374: .4byte gLoadedRoomIndex
 _08064378: .4byte 0x0203FA9A
 _0806437C: .4byte 0x0203FB14
 

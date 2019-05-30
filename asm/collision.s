@@ -359,7 +359,7 @@ _0800687C: .4byte 0x02001464
 _08006880: .4byte 0x02001466
 _08006884: .4byte gCameraPixelX
 _08006888: .4byte gCameraPixelY
-_0800688C: .4byte 0x03003576
+_0800688C: .4byte gMapPixelSizeY
 _08006890:
 	mov r2, sb
 	movs r3, #0
@@ -391,7 +391,7 @@ _080068B0:
 	movs r0, #0
 	b _080068EC
 	.align 2, 0
-_080068C8: .4byte 0x03003574
+_080068C8: .4byte gMapPixelSizeX
 _080068CC:
 	movs r3, #0
 	ldrsh r0, [r6, r3]

@@ -804,7 +804,7 @@ _08028304:
 	.align 2, 0
 _08028344: .4byte dword_2000FC8
 _08028348: .4byte 0x080CC844
-_0802834C: .4byte 0x03003344
+_0802834C: .4byte gRoomHeader
 _08028350: .4byte 0x080CC7EC
 _08028354:
 	ldr r0, _08028670
@@ -1247,7 +1247,7 @@ _080286F4: .4byte 0x02000333
 _080286F8: .4byte 0x02000334
 _080286FC: .4byte dword_2000FC8
 _08028700: .4byte 0x080CC844
-_08028704: .4byte 0x03003344
+_08028704: .4byte gRoomHeader
 _08028708: .4byte 0x080CC7EC
 _0802870C:
 	ldr r4, _080287FC
@@ -1722,7 +1722,7 @@ _08028AB8:
 	b _08028DDE
 	.align 2, 0
 _08028AC0: .4byte 0x080CC938
-_08028AC4: .4byte 0x03003576
+_08028AC4: .4byte gMapPixelSizeY
 _08028AC8: .4byte 0x0203E00D
 _08028ACC:
 	ldr r1, _08028B2C
@@ -2152,7 +2152,7 @@ _08028E0E:
 	bx r0
 	.align 2, 0
 _08028E20: .4byte 0x080CC938
-_08028E24: .4byte 0x03003576
+_08028E24: .4byte gMapPixelSizeY
 _08028E28: .4byte 0x0203E00E
 _08028E2C: .4byte 0x0203DFB0
 
@@ -2492,7 +2492,7 @@ _08029086:
 	adds r0, r4, #0
 	b _08029288
 	.align 2, 0
-_080290D0: .4byte 0x03003576
+_080290D0: .4byte gMapPixelSizeY
 _080290D4: .4byte 0x080CC2B0
 _080290D8: .4byte 0x080CC938
 _080290DC:
@@ -2871,7 +2871,7 @@ _080293A2:
 	bx r0
 	.align 2, 0
 _080293B4: .4byte 0x00000221
-_080293B8: .4byte 0x03003576
+_080293B8: .4byte gMapPixelSizeY
 _080293BC: .4byte 0x0203DFB0
 
     .thumb
@@ -3150,7 +3150,7 @@ sub_80293C0: @ 0x080293C0
 	bx r0
 	.align 2, 0
 _080295E0: .4byte 0x080CCFFC
-_080295E4: .4byte 0x03003576
+_080295E4: .4byte gMapPixelSizeY
 
     .thumb
     .global s_load_object
@@ -3215,8 +3215,8 @@ _08029648:
 	b _080296B6
 	.align 2, 0
 _08029658: .4byte 0x0203DFB0
-_0802965C: .4byte 0x03003574
-_08029660: .4byte 0x03003576
+_0802965C: .4byte gMapPixelSizeX
+_08029660: .4byte gMapPixelSizeY
 _08029664:
 	adds r3, r1, #0
 	adds r3, #0xa0
@@ -3379,8 +3379,8 @@ _08029766:
 	ldrh r0, [r1]
 	b _080297B8
 	.align 2, 0
-_08029794: .4byte 0x03003576
-_08029798: .4byte 0x03003574
+_08029794: .4byte gMapPixelSizeY
+_08029798: .4byte gMapPixelSizeX
 _0802979C: .4byte 0x0203DFB0
 _080297A0: .4byte 0x080CC2B0
 _080297A4: .4byte 0x0203E010
@@ -5154,7 +5154,7 @@ _0802A540:
 	strb r0, [r1]
 	b _0802A582
 	.align 2, 0
-_0802A578: .4byte 0x03003576
+_0802A578: .4byte gMapPixelSizeY
 _0802A57C:
 	adds r0, r5, #0
 	adds r0, #0xb3
@@ -5450,7 +5450,7 @@ _0802A7B4: .4byte gCameraPixelX
 _0802A7B8: .4byte 0x030043A4
 _0802A7BC: .4byte gCameraPixelY
 _0802A7C0: .4byte 0x030043A5
-_0802A7C4: .4byte 0x03003576
+_0802A7C4: .4byte gMapPixelSizeY
 _0802A7C8:
 	adds r1, r5, #0
 	adds r1, #0xcf
@@ -5545,7 +5545,7 @@ _0802A844:
 	b _0802A88A
 	.align 2, 0
 _0802A87C: .4byte 0x3FFFF000
-_0802A880: .4byte 0x03003576
+_0802A880: .4byte gMapPixelSizeY
 _0802A884:
 	adds r1, r5, #0
 	adds r1, #0xb3
@@ -9417,7 +9417,7 @@ _0802C55C:
 	b _0802C7C4
 	.align 2, 0
 _0802C798: .4byte 0x080CCFFC
-_0802C79C: .4byte 0x03003576
+_0802C79C: .4byte gMapPixelSizeY
 _0802C7A0: .4byte 0x080CC78C
 _0802C7A4:
 	ldr r2, _0802C808
@@ -9470,7 +9470,7 @@ _0802C7C4:
 	.align 2, 0
 _0802C808: .4byte 0x080CC78C
 _0802C80C: .4byte 0x080CC844
-_0802C810: .4byte 0x03003344
+_0802C810: .4byte gRoomHeader
 _0802C814: .4byte 0x080CC818
 _0802C818:
 	ldr r0, [sp, #0x1c]
@@ -9630,7 +9630,7 @@ _0802C94E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802C960: .4byte 0x03003576
+_0802C960: .4byte gMapPixelSizeY
 _0802C964: .4byte 0x00000221
 
     .thumb
@@ -10252,7 +10252,7 @@ _0802CE22:
 	.align 2, 0
 _0802CE2C: .4byte 0x080CC290
 _0802CE30: .4byte 0x0203DFD3
-_0802CE34: .4byte 0x03003576
+_0802CE34: .4byte gMapPixelSizeY
 _0802CE38: .4byte 0x080CCFFC
 _0802CE3C: .4byte gCameraPixelX
 _0802CE40: .4byte gCameraPixelY
@@ -10292,7 +10292,7 @@ _0802CE4C:
 	strb r0, [r1]
 	b _0802CE92
 	.align 2, 0
-_0802CE88: .4byte 0x03003576
+_0802CE88: .4byte gMapPixelSizeY
 _0802CE8C:
 	adds r0, r7, #0
 	adds r0, #0xb3
@@ -11482,10 +11482,10 @@ _0802D80A:
 _0802D814: .4byte gPlayerSprite
 _0802D818: .4byte 0x080CC78C
 _0802D81C: .4byte 0x00000105
-_0802D820: .4byte 0x03003576
+_0802D820: .4byte gMapPixelSizeY
 _0802D824: .4byte 0x0000FFFF
 _0802D828: .4byte 0x080CC844
-_0802D82C: .4byte 0x03003344
+_0802D82C: .4byte gRoomHeader
 _0802D830: .4byte 0x080CC818
 _0802D834: .4byte 0x080CC290
 _0802D838: .4byte gCameraPixelX
@@ -11718,7 +11718,7 @@ _0802D984:
 	.align 2, 0
 _0802D9F4: .4byte 0x080CB964
 _0802D9F8: .4byte 0x080CC844
-_0802D9FC: .4byte 0x03003344
+_0802D9FC: .4byte gRoomHeader
 _0802DA00: .4byte 0x080CC818
 _0802DA04:
 	movs r0, #0x74
@@ -11776,7 +11776,7 @@ _0802DA04:
 	.align 2, 0
 _0802DA74: .4byte 0x080CB964
 _0802DA78: .4byte 0x080CC844
-_0802DA7C: .4byte 0x03003344
+_0802DA7C: .4byte gRoomHeader
 _0802DA80: .4byte 0x080CC818
 _0802DA84:
 	movs r0, #0x75
@@ -11839,7 +11839,7 @@ _0802DAF0:
 	.align 2, 0
 _0802DAFC: .4byte 0x080CB964
 _0802DB00: .4byte 0x080CC844
-_0802DB04: .4byte 0x03003344
+_0802DB04: .4byte gRoomHeader
 _0802DB08: .4byte 0x080CC818
 _0802DB0C:
 	.2byte 0xEE00, 0xEE00
@@ -11943,7 +11943,7 @@ _0802DB10:
 	b _0802DBF2
 	.align 2, 0
 _0802DBD8: .4byte 0x00000105
-_0802DBDC: .4byte 0x03003576
+_0802DBDC: .4byte gMapPixelSizeY
 _0802DBE0: .4byte 0x0000FFFF
 _0802DBE4: .4byte gCameraPixelX
 _0802DBE8: .4byte gCameraPixelY
@@ -12401,7 +12401,7 @@ _0802DF68:
 	strb r0, [r1]
 	b _0802DF86
 	.align 2, 0
-_0802DF74: .4byte 0x03003576
+_0802DF74: .4byte gMapPixelSizeY
 _0802DF78: .4byte gCameraPixelX
 _0802DF7C: .4byte gCameraPixelY
 _0802DF80:
@@ -14620,7 +14620,7 @@ _0802F53C: .4byte gGameStatus
 _0802F540: .4byte 0x00000115
 _0802F544: .4byte 0x02002E4E
 _0802F548: .4byte 0x080CF378
-_0802F54C: .4byte 0x02001082
+_0802F54C: .4byte gLoadedRoomLevel
 _0802F550:
 	ldr r1, _0802F560
 	movs r0, #1
@@ -14889,7 +14889,7 @@ _0802F780:
 _0802F7AC: .4byte 0x02002E4E
 _0802F7B0: .4byte 0x020021BE
 _0802F7B4: .4byte 0x080CEDC3
-_0802F7B8: .4byte 0x02001082
+_0802F7B8: .4byte gLoadedRoomLevel
 _0802F7BC:
 	ldr r1, _0802F7F4
 	ldr r0, _0802F7F8
@@ -14920,7 +14920,7 @@ _0802F7EA:
 	b _0802FD94
 	.align 2, 0
 _0802F7F4: .4byte 0x080CF3D0
-_0802F7F8: .4byte 0x02001082
+_0802F7F8: .4byte gLoadedRoomLevel
 _0802F7FC: .4byte 0x0203E110
 _0802F800:
 	ldr r5, _0802F824
@@ -14942,7 +14942,7 @@ _0802F800:
 	b _0802FDA8
 	.align 2, 0
 _0802F824: .4byte 0x0203E110
-_0802F828: .4byte 0x02001082
+_0802F828: .4byte gLoadedRoomLevel
 _0802F82C: .4byte 0x02002E4E
 _0802F830: .4byte 0x080CEDC9
 _0802F834:
@@ -15329,7 +15329,7 @@ _0802FB6C: .4byte 0x0203DFDA
 _0802FB70: .4byte 0x02002E4E
 _0802FB74: .4byte 0x02002E4F
 _0802FB78: .4byte 0x080CEF8C
-_0802FB7C: .4byte 0x02001082
+_0802FB7C: .4byte gLoadedRoomLevel
 _0802FB80:
 	ldr r5, _0802FB9C
 	ldr r0, [r5]
@@ -15532,7 +15532,7 @@ _0802FD2C: .4byte 0x080CEC50
 _0802FD30: .4byte 0x02002E4E
 _0802FD34: .4byte 0x02002E50
 _0802FD38: .4byte 0x080CEC64
-_0802FD3C: .4byte 0x02001082
+_0802FD3C: .4byte gLoadedRoomLevel
 _0802FD40:
 	ldr r0, _0802FD6C
 	ldrh r2, [r0, #0xc]
@@ -16228,7 +16228,7 @@ _08030392:
 	b _080308EC
 	.align 2, 0
 _080303C8: .4byte 0x080CEDFC
-_080303CC: .4byte 0x02001082
+_080303CC: .4byte gLoadedRoomLevel
 _080303D0: .4byte 0x080CEDED
 _080303D4:
 	ldr r1, [r6]
@@ -21985,7 +21985,7 @@ _08033244:
 	b _080333E8
 	.align 2, 0
 _08033260: .4byte 0x0203E440
-_08033264: .4byte 0x02001082
+_08033264: .4byte gLoadedRoomLevel
 _08033268:
 	ldr r3, _08033284
 	ldr r0, _08033288
@@ -22002,7 +22002,7 @@ _08033268:
 	b _080333E8
 	.align 2, 0
 _08033284: .4byte 0x0203E440
-_08033288: .4byte 0x02001082
+_08033288: .4byte gLoadedRoomLevel
 _0803328C:
 	ldr r3, _080332A8
 	ldr r0, _080332AC
@@ -22019,7 +22019,7 @@ _0803328C:
 	b _080333E8
 	.align 2, 0
 _080332A8: .4byte 0x0203E440
-_080332AC: .4byte 0x02001082
+_080332AC: .4byte gLoadedRoomLevel
 _080332B0:
 	ldr r3, _080332CC
 	ldr r0, _080332D0
@@ -22036,7 +22036,7 @@ _080332B0:
 	b _080333E8
 	.align 2, 0
 _080332CC: .4byte 0x0203E440
-_080332D0: .4byte 0x02001082
+_080332D0: .4byte gLoadedRoomLevel
 _080332D4:
 	ldr r3, _080332F0
 	ldr r0, _080332F4
@@ -22053,7 +22053,7 @@ _080332D4:
 	b _080333E8
 	.align 2, 0
 _080332F0: .4byte 0x0203E440
-_080332F4: .4byte 0x02001082
+_080332F4: .4byte gLoadedRoomLevel
 _080332F8:
 	ldr r3, _08033314
 	ldr r0, _08033318
@@ -22070,7 +22070,7 @@ _080332F8:
 	b _080333E8
 	.align 2, 0
 _08033314: .4byte 0x0203E440
-_08033318: .4byte 0x02001082
+_08033318: .4byte gLoadedRoomLevel
 _0803331C:
 	ldr r3, _08033338
 	ldr r0, _0803333C
@@ -22087,7 +22087,7 @@ _0803331C:
 	b _080333E8
 	.align 2, 0
 _08033338: .4byte 0x0203E440
-_0803333C: .4byte 0x02001082
+_0803333C: .4byte gLoadedRoomLevel
 _08033340:
 	ldr r3, _0803335C
 	ldr r0, _08033360
@@ -22104,7 +22104,7 @@ _08033340:
 	b _080333E8
 	.align 2, 0
 _0803335C: .4byte 0x0203E440
-_08033360: .4byte 0x02001082
+_08033360: .4byte gLoadedRoomLevel
 _08033364:
 	ldr r3, _08033380
 	ldr r0, _08033384
@@ -22121,7 +22121,7 @@ _08033364:
 	b _080333E8
 	.align 2, 0
 _08033380: .4byte 0x0203E440
-_08033384: .4byte 0x02001082
+_08033384: .4byte gLoadedRoomLevel
 _08033388:
 	ldr r3, _080333A4
 	ldr r0, _080333A8
@@ -22138,7 +22138,7 @@ _08033388:
 	b _080333E8
 	.align 2, 0
 _080333A4: .4byte 0x0203E440
-_080333A8: .4byte 0x02001082
+_080333A8: .4byte gLoadedRoomLevel
 _080333AC:
 	ldr r3, _080333C8
 	ldr r0, _080333CC
@@ -22155,7 +22155,7 @@ _080333AC:
 	b _080333E8
 	.align 2, 0
 _080333C8: .4byte 0x0203E440
-_080333CC: .4byte 0x02001082
+_080333CC: .4byte gLoadedRoomLevel
 _080333D0:
 	ldr r3, _080333FC
 	ldr r0, _08033400
@@ -22181,7 +22181,7 @@ _080333E8:
 	b _08033406
 	.align 2, 0
 _080333FC: .4byte 0x0203E440
-_08033400: .4byte 0x02001082
+_08033400: .4byte gLoadedRoomLevel
 _08033404:
 	movs r0, #0
 _08033406:
@@ -22221,7 +22221,7 @@ _08033432:
 	b _0803351C
 	.align 2, 0
 _08033444: .4byte 0x0203E440
-_08033448: .4byte 0x02001082
+_08033448: .4byte gLoadedRoomLevel
 _0803344C:
 	strb r0, [r4, #4]
 _0803344E:
@@ -22338,7 +22338,7 @@ _0803351E:
 	bx r1
 	.align 2, 0
 _08033524: .4byte 0x087E0228
-_08033528: .4byte 0x02001082
+_08033528: .4byte gLoadedRoomLevel
 
     .thumb
 sub_803352C: @ 0x0803352C
@@ -22363,7 +22363,7 @@ sub_803352C: @ 0x0803352C
 	b _0803357C
 	.align 2, 0
 _08033554: .4byte 0x087E0228
-_08033558: .4byte 0x02001082
+_08033558: .4byte gLoadedRoomLevel
 _0803355C: .4byte 0x0203E440
 _08033560:
 	ldr r1, _0803358C
@@ -22390,7 +22390,7 @@ _0803357C:
 	bx r1
 	.align 2, 0
 _0803358C: .4byte 0x087E0228
-_08033590: .4byte 0x02001082
+_08033590: .4byte gLoadedRoomLevel
 _08033594: .4byte 0x0203E440
 
     .thumb
@@ -22421,7 +22421,7 @@ _080335BC:
 	mov pc, r0
 	.align 2, 0
 _080335C8: .4byte 0x0203E440
-_080335CC: .4byte 0x02001082
+_080335CC: .4byte gLoadedRoomLevel
 _080335D0: .4byte 0x080335D4
 _080335D4: @ jump table
 	.4byte _08033750 @ case 0
@@ -22696,7 +22696,7 @@ _0803384C:
 	mov pc, r0
 	.align 2, 0
 _08033858: .4byte 0x0203E440
-_0803385C: .4byte 0x02001082
+_0803385C: .4byte gLoadedRoomLevel
 _08033860: .4byte 0x08033864
 _08033864: @ jump table
 	.4byte _08033A3A @ case 0
@@ -23041,7 +23041,7 @@ _08033B6C: .4byte 0x080CE440
 _08033B70: .4byte 0x0203EA8C
 _08033B74: .4byte 0x0203E138
 _08033B78: .4byte 0x0203E13C
-_08033B7C: .4byte 0x02001082
+_08033B7C: .4byte gLoadedRoomLevel
 _08033B80: .4byte 0x0203E998
 _08033B84: .4byte 0x0000FFFF
 _08033B88: .4byte 0x087E0228
@@ -23187,7 +23187,7 @@ _08033CA4: .4byte 0x0203E99C
 _08033CA8: .4byte 0x0203E998
 _08033CAC: .4byte 0x0203E138
 _08033CB0: .4byte 0x0203E13C
-_08033CB4: .4byte 0x02001082
+_08033CB4: .4byte gLoadedRoomLevel
 _08033CB8: .4byte 0x087E0228
 _08033CBC:
 	.2byte 0xEE00, 0xEE00
@@ -23518,7 +23518,7 @@ _08033F46:
 	b _08033F94
 	.align 2, 0
 _08033F80: .4byte 0x0203E11C
-_08033F84: .4byte 0x02001082
+_08033F84: .4byte gLoadedRoomLevel
 _08033F88: .4byte 0x0203E116
 _08033F8C: .4byte 0x080CC84C
 _08033F90:
@@ -24536,7 +24536,7 @@ _0803473C:
 	.align 2, 0
 _0803477C: .4byte 0x0200209A
 _08034780: .4byte 0x02000FCC
-_08034784: .4byte 0x02001082
+_08034784: .4byte gLoadedRoomLevel
 _08034788: .4byte gGameStatus
 _0803478C: .4byte 0x00000189
 _08034790: .4byte 0x0203E12C
@@ -24757,7 +24757,7 @@ _0803494E:
 	.align 2, 0
 _08034954: .4byte 0x0203E12C
 _08034958: .4byte 0x02000FCC
-_0803495C: .4byte 0x02001082
+_0803495C: .4byte gLoadedRoomLevel
 _08034960: .4byte gGameStatus
 _08034964: .4byte byte_203EA89
 _08034968: .4byte 0x080CE440
@@ -34009,7 +34009,7 @@ _08039374:
 	bx r0
 	.align 2, 0
 _08039380: .4byte 0x0203E170
-_08039384: .4byte 0x02001082
+_08039384: .4byte gLoadedRoomLevel
 _08039388: .4byte 0x0203E440
 
     .thumb
@@ -34170,7 +34170,7 @@ _080394A0:
 _080394AC: .4byte 0x0203E961
 _080394B0: .4byte 0x0203E976
 _080394B4: .4byte 0x0203E440
-_080394B8: .4byte 0x02001082
+_080394B8: .4byte gLoadedRoomLevel
 _080394BC: .4byte 0x0203E975
 
 	.thumb
@@ -34362,7 +34362,7 @@ _080395F0:
 	b _0803964A
 	.align 2, 0
 _08039628: .4byte 0x0203E440
-_0803962C: .4byte 0x02001082
+_0803962C: .4byte gLoadedRoomLevel
 _08039630: .4byte 0x0203E976
 _08039634: .4byte 0x0203E977
 _08039638: .4byte 0x0203E978
@@ -34392,7 +34392,7 @@ sub_8039650: @ 0x08039650
 	bx lr
 	.align 2, 0
 _08039668: .4byte 0x0203E170
-_0803966C: .4byte 0x02001082
+_0803966C: .4byte gLoadedRoomLevel
 _08039670: .4byte 0x0203E97D
 	.2byte 0xEE00, 0xEE00
 
@@ -34426,7 +34426,7 @@ sub_8039688: @ 0x08039688
 	bx lr
 	.align 2, 0
 _0803969C: .4byte 0x0203E170
-_080396A0: .4byte 0x02001082
+_080396A0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_80396A4: @ 0x080396A4
@@ -34560,7 +34560,7 @@ _08039776:
 	b _08039794
 	.align 2, 0
 _08039784: .4byte 0x0203E170
-_08039788: .4byte 0x02001082
+_08039788: .4byte gLoadedRoomLevel
 _0803978C:
 	adds r2, #1
 	cmp r2, r1
@@ -34601,7 +34601,7 @@ _080397BE:
 	b _080397DC
 	.align 2, 0
 _080397CC: .4byte 0x0203E170
-_080397D0: .4byte 0x02001082
+_080397D0: .4byte gLoadedRoomLevel
 _080397D4:
 	adds r2, #1
 	cmp r2, r1
@@ -34640,7 +34640,7 @@ _08039802:
 	b _08039820
 	.align 2, 0
 _08039810: .4byte 0x0203E440
-_08039814: .4byte 0x02001082
+_08039814: .4byte gLoadedRoomLevel
 _08039818:
 	adds r2, #1
 	cmp r2, r3
@@ -34766,7 +34766,7 @@ sub_80398E0: @ 0x080398E0
 	ldr r0, _080398F4
 	b _08039902
 	.align 2, 0
-_080398F0: .4byte 0x02001082
+_080398F0: .4byte gLoadedRoomLevel
 _080398F4: .4byte 0x0203E972
 _080398F8:
 	cmp r0, #5
@@ -34809,7 +34809,7 @@ _0803992A:
 	b _08039948
 	.align 2, 0
 _08039938: .4byte 0x0203E440
-_0803993C: .4byte 0x02001082
+_0803993C: .4byte gLoadedRoomLevel
 _08039940:
 	adds r2, #1
 	cmp r2, r3
@@ -34848,7 +34848,7 @@ _0803996E:
 	b _0803998C
 	.align 2, 0
 _0803997C: .4byte 0x0203E440
-_08039980: .4byte 0x02001082
+_08039980: .4byte gLoadedRoomLevel
 _08039984:
 	adds r2, #1
 	cmp r2, r3
@@ -34887,7 +34887,7 @@ _080399B2:
 	b _080399D0
 	.align 2, 0
 _080399C0: .4byte 0x0203E440
-_080399C4: .4byte 0x02001082
+_080399C4: .4byte gLoadedRoomLevel
 _080399C8:
 	adds r2, #1
 	cmp r2, r3
@@ -34926,7 +34926,7 @@ _080399F6:
 	b _08039A14
 	.align 2, 0
 _08039A04: .4byte 0x0203E440
-_08039A08: .4byte 0x02001082
+_08039A08: .4byte gLoadedRoomLevel
 _08039A0C:
 	adds r2, #1
 	cmp r2, r3
@@ -34965,7 +34965,7 @@ _08039A3A:
 	b _08039A58
 	.align 2, 0
 _08039A48: .4byte 0x0203E440
-_08039A4C: .4byte 0x02001082
+_08039A4C: .4byte gLoadedRoomLevel
 _08039A50:
 	adds r2, #1
 	cmp r2, r3
@@ -35004,7 +35004,7 @@ _08039A7E:
 	b _08039A9C
 	.align 2, 0
 _08039A8C: .4byte 0x0203E440
-_08039A90: .4byte 0x02001082
+_08039A90: .4byte gLoadedRoomLevel
 _08039A94:
 	adds r2, #1
 	cmp r2, r3
@@ -35053,7 +35053,7 @@ _08039AD2:
 	b _08039AF0
 	.align 2, 0
 _08039AE0: .4byte 0x0203E170
-_08039AE4: .4byte 0x02001082
+_08039AE4: .4byte gLoadedRoomLevel
 _08039AE8:
 	adds r2, #1
 	cmp r2, r1
@@ -35116,7 +35116,7 @@ _08039B3A:
 	b _08039B58
 	.align 2, 0
 _08039B48: .4byte 0x0203E440
-_08039B4C: .4byte 0x02001082
+_08039B4C: .4byte gLoadedRoomLevel
 _08039B50:
 	adds r2, #1
 	cmp r2, r3
@@ -35155,7 +35155,7 @@ _08039B7E:
 	b _08039B9C
 	.align 2, 0
 _08039B8C: .4byte 0x0203E8D8
-_08039B90: .4byte 0x02001082
+_08039B90: .4byte gLoadedRoomLevel
 _08039B94:
 	adds r1, #1
 	cmp r1, r2
@@ -35202,7 +35202,7 @@ _08039BCE:
 	b _08039BEC
 	.align 2, 0
 _08039BDC: .4byte 0x0203E440
-_08039BE0: .4byte 0x02001082
+_08039BE0: .4byte gLoadedRoomLevel
 _08039BE4:
 	adds r2, #1
 	cmp r2, r3
@@ -35241,7 +35241,7 @@ _08039C12:
 	b _08039C30
 	.align 2, 0
 _08039C20: .4byte 0x0203E440
-_08039C24: .4byte 0x02001082
+_08039C24: .4byte gLoadedRoomLevel
 _08039C28:
 	adds r2, #1
 	cmp r2, r3
@@ -36983,7 +36983,7 @@ _0803A8FA:
 	b _0803A918
 	.align 2, 0
 _0803A908: .4byte 0x0203E440
-_0803A90C: .4byte 0x02001082
+_0803A90C: .4byte gLoadedRoomLevel
 _0803A910:
 	adds r2, #1
 	cmp r2, r3
@@ -37467,7 +37467,7 @@ _0803AC08:
 	b _0803AC24
 	.align 2, 0
 _0803AC14: .4byte 0x0203E440
-_0803AC18: .4byte 0x02001082
+_0803AC18: .4byte gLoadedRoomLevel
 _0803AC1C:
 	adds r2, #1
 	cmp r2, r3
@@ -37507,7 +37507,7 @@ _0803AC4C:
 	b _0803AC68
 	.align 2, 0
 _0803AC58: .4byte 0x0203E440
-_0803AC5C: .4byte 0x02001082
+_0803AC5C: .4byte gLoadedRoomLevel
 _0803AC60:
 	adds r2, #1
 	cmp r2, r3
@@ -37625,7 +37625,7 @@ _0803AD02:
 	b _0803AD20
 	.align 2, 0
 _0803AD10: .4byte 0x0203E170
-_0803AD14: .4byte 0x02001082
+_0803AD14: .4byte gLoadedRoomLevel
 _0803AD18:
 	adds r2, #1
 	cmp r2, r1
@@ -37664,7 +37664,7 @@ _0803AD46:
 	b _0803AD64
 	.align 2, 0
 _0803AD54: .4byte 0x0203E440
-_0803AD58: .4byte 0x02001082
+_0803AD58: .4byte gLoadedRoomLevel
 _0803AD5C:
 	adds r2, #1
 	cmp r2, r3
@@ -37729,7 +37729,7 @@ _0803ADB2:
 	b _0803ADD0
 	.align 2, 0
 _0803ADC0: .4byte 0x0203E170
-_0803ADC4: .4byte 0x02001082
+_0803ADC4: .4byte gLoadedRoomLevel
 _0803ADC8:
 	adds r2, #1
 	cmp r2, r1
@@ -37789,7 +37789,7 @@ sub_803AE08: @ 0x0803AE08
 	bx lr
 	.align 2, 0
 _0803AE20: .4byte 0x0203E440
-_0803AE24: .4byte 0x02001082
+_0803AE24: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803AE28: @ 0x0803AE28
@@ -37806,7 +37806,7 @@ sub_803AE28: @ 0x0803AE28
 	bx lr
 	.align 2, 0
 _0803AE40: .4byte 0x0203E440
-_0803AE44: .4byte 0x02001082
+_0803AE44: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803AE48: @ 0x0803AE48
@@ -37821,7 +37821,7 @@ sub_803AE48: @ 0x0803AE48
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0803AE5C: .4byte 0x02001082
+_0803AE5C: .4byte gLoadedRoomLevel
 _0803AE60: .4byte 0x0803AE64
 _0803AE64: @ jump table
 	.4byte _0803AEB8 @ case 0
@@ -37894,7 +37894,7 @@ sub_803AED0: @ 0x0803AED0
 	bx lr
 	.align 2, 0
 _0803AEE4: .4byte 0x0203E170
-_0803AEE8: .4byte 0x02001082
+_0803AEE8: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803AEEC: @ 0x0803AEEC
@@ -37911,7 +37911,7 @@ sub_803AEEC: @ 0x0803AEEC
 	bx lr
 	.align 2, 0
 _0803AF04: .4byte 0x0203E440
-_0803AF08: .4byte 0x02001082
+_0803AF08: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803AF0C: @ 0x0803AF0C
@@ -37928,7 +37928,7 @@ sub_803AF0C: @ 0x0803AF0C
 	bx lr
 	.align 2, 0
 _0803AF24: .4byte 0x0203E440
-_0803AF28: .4byte 0x02001082
+_0803AF28: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803AF2C: @ 0x0803AF2C
@@ -37945,7 +37945,7 @@ sub_803AF2C: @ 0x0803AF2C
 	bx lr
 	.align 2, 0
 _0803AF44: .4byte 0x0203E440
-_0803AF48: .4byte 0x02001082
+_0803AF48: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803AF4C: @ 0x0803AF4C
@@ -37962,7 +37962,7 @@ sub_803AF4C: @ 0x0803AF4C
 	bx lr
 	.align 2, 0
 _0803AF64: .4byte 0x0203E440
-_0803AF68: .4byte 0x02001082
+_0803AF68: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803AF6C: @ 0x0803AF6C
@@ -38011,7 +38011,7 @@ sub_803AF9C: @ 0x0803AF9C
 	bx lr
 	.align 2, 0
 _0803AFB4: .4byte 0x0203E440
-_0803AFB8: .4byte 0x02001082
+_0803AFB8: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803AFBC: @ 0x0803AFBC
@@ -38108,7 +38108,7 @@ sub_803B034: @ 0x0803B034
 	bx lr
 	.align 2, 0
 _0803B04C: .4byte 0x0203E440
-_0803B050: .4byte 0x02001082
+_0803B050: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B054: @ 0x0803B054
@@ -38162,7 +38162,7 @@ _0803B09A:
 	b _0803B0B8
 	.align 2, 0
 _0803B0A8: .4byte 0x0203E170
-_0803B0AC: .4byte 0x02001082
+_0803B0AC: .4byte gLoadedRoomLevel
 _0803B0B0:
 	adds r2, #1
 	cmp r2, r1
@@ -38191,7 +38191,7 @@ sub_803B0C0: @ 0x0803B0C0
 	bx lr
 	.align 2, 0
 _0803B0D8: .4byte 0x0203E170
-_0803B0DC: .4byte 0x02001082
+_0803B0DC: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B0E0: @ 0x0803B0E0
@@ -38208,7 +38208,7 @@ sub_803B0E0: @ 0x0803B0E0
 	bx lr
 	.align 2, 0
 _0803B0F8: .4byte 0x0203E440
-_0803B0FC: .4byte 0x02001082
+_0803B0FC: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B100: @ 0x0803B100
@@ -38225,7 +38225,7 @@ sub_803B100: @ 0x0803B100
 	bx lr
 	.align 2, 0
 _0803B118: .4byte 0x0203E440
-_0803B11C: .4byte 0x02001082
+_0803B11C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B120: @ 0x0803B120
@@ -38249,7 +38249,7 @@ sub_803B12C: @ 0x0803B12C
 	bx lr
 	.align 2, 0
 _0803B140: .4byte 0x0203E8D8
-_0803B144: .4byte 0x02001082
+_0803B144: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B148: @ 0x0803B148
@@ -38265,7 +38265,7 @@ sub_803B148: @ 0x0803B148
 	bx lr
 	.align 2, 0
 _0803B15C: .4byte 0x0203E8D8
-_0803B160: .4byte 0x02001082
+_0803B160: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B164: @ 0x0803B164
@@ -38282,7 +38282,7 @@ sub_803B164: @ 0x0803B164
 	bx lr
 	.align 2, 0
 _0803B17C: .4byte 0x0203E440
-_0803B180: .4byte 0x02001082
+_0803B180: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B184: @ 0x0803B184
@@ -38299,7 +38299,7 @@ sub_803B184: @ 0x0803B184
 	bx lr
 	.align 2, 0
 _0803B19C: .4byte 0x0203E440
-_0803B1A0: .4byte 0x02001082
+_0803B1A0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B1A4: @ 0x0803B1A4
@@ -38316,7 +38316,7 @@ sub_803B1A4: @ 0x0803B1A4
 	bx lr
 	.align 2, 0
 _0803B1BC: .4byte 0x0203E440
-_0803B1C0: .4byte 0x02001082
+_0803B1C0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B1C4: @ 0x0803B1C4
@@ -38333,7 +38333,7 @@ sub_803B1C4: @ 0x0803B1C4
 	bx lr
 	.align 2, 0
 _0803B1DC: .4byte 0x0203E440
-_0803B1E0: .4byte 0x02001082
+_0803B1E0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B1E4: @ 0x0803B1E4
@@ -38350,7 +38350,7 @@ sub_803B1E4: @ 0x0803B1E4
 	bx lr
 	.align 2, 0
 _0803B1FC: .4byte 0x0203E440
-_0803B200: .4byte 0x02001082
+_0803B200: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B204: @ 0x0803B204
@@ -38367,7 +38367,7 @@ sub_803B204: @ 0x0803B204
 	bx lr
 	.align 2, 0
 _0803B21C: .4byte 0x0203E440
-_0803B220: .4byte 0x02001082
+_0803B220: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B224: @ 0x0803B224
@@ -38384,7 +38384,7 @@ sub_803B224: @ 0x0803B224
 	bx lr
 	.align 2, 0
 _0803B23C: .4byte 0x0203E440
-_0803B240: .4byte 0x02001082
+_0803B240: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B244: @ 0x0803B244
@@ -38401,7 +38401,7 @@ sub_803B244: @ 0x0803B244
 	bx lr
 	.align 2, 0
 _0803B25C: .4byte 0x0203E440
-_0803B260: .4byte 0x02001082
+_0803B260: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B264: @ 0x0803B264
@@ -38418,7 +38418,7 @@ sub_803B264: @ 0x0803B264
 	bx lr
 	.align 2, 0
 _0803B27C: .4byte 0x0203E440
-_0803B280: .4byte 0x02001082
+_0803B280: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B284: @ 0x0803B284
@@ -38436,7 +38436,7 @@ sub_803B284: @ 0x0803B284
 	bx lr
 	.align 2, 0
 _0803B29C: .4byte 0x0203E170
-_0803B2A0: .4byte 0x02001082
+_0803B2A0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B2A4: @ 0x0803B2A4
@@ -38482,7 +38482,7 @@ _0803B2DE:
 	b _0803B2FC
 	.align 2, 0
 _0803B2EC: .4byte 0x0203E170
-_0803B2F0: .4byte 0x02001082
+_0803B2F0: .4byte gLoadedRoomLevel
 _0803B2F4:
 	adds r2, #1
 	cmp r2, r1
@@ -38511,7 +38511,7 @@ sub_803B304: @ 0x0803B304
 	bx lr
 	.align 2, 0
 _0803B31C: .4byte 0x0203E170
-_0803B320: .4byte 0x02001082
+_0803B320: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B324: @ 0x0803B324
@@ -38584,7 +38584,7 @@ sub_803B378: @ 0x0803B378
 	bx lr
 	.align 2, 0
 _0803B390: .4byte 0x0203E440
-_0803B394: .4byte 0x02001082
+_0803B394: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B398: @ 0x0803B398
@@ -38689,7 +38689,7 @@ sub_803B41C: @ 0x0803B41C
 	bx lr
 	.align 2, 0
 _0803B434: .4byte 0x0203E440
-_0803B438: .4byte 0x02001082
+_0803B438: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B43C: @ 0x0803B43C
@@ -38735,7 +38735,7 @@ _0803B476:
 	b _0803B494
 	.align 2, 0
 _0803B484: .4byte 0x0203E170
-_0803B488: .4byte 0x02001082
+_0803B488: .4byte gLoadedRoomLevel
 _0803B48C:
 	adds r2, #1
 	cmp r2, r1
@@ -39081,7 +39081,7 @@ _0803B6EA:
 	b _0803B708
 	.align 2, 0
 _0803B6F8: .4byte 0x0203E440
-_0803B6FC: .4byte 0x02001082
+_0803B6FC: .4byte gLoadedRoomLevel
 _0803B700:
 	adds r2, #1
 	cmp r2, r3
@@ -39122,7 +39122,7 @@ _0803B732:
 	b _0803B750
 	.align 2, 0
 _0803B740: .4byte 0x0203E170
-_0803B744: .4byte 0x02001082
+_0803B744: .4byte gLoadedRoomLevel
 _0803B748:
 	adds r2, #1
 	cmp r2, r1
@@ -39151,7 +39151,7 @@ sub_803B758: @ 0x0803B758
 	bx lr
 	.align 2, 0
 _0803B770: .4byte 0x0203E170
-_0803B774: .4byte 0x02001082
+_0803B774: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B778: @ 0x0803B778
@@ -39169,7 +39169,7 @@ sub_803B778: @ 0x0803B778
 	bx lr
 	.align 2, 0
 _0803B790: .4byte 0x0203E170
-_0803B794: .4byte 0x02001082
+_0803B794: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B798: @ 0x0803B798
@@ -39187,7 +39187,7 @@ sub_803B798: @ 0x0803B798
 	bx lr
 	.align 2, 0
 _0803B7B0: .4byte 0x0203E170
-_0803B7B4: .4byte 0x02001082
+_0803B7B4: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B7B8: @ 0x0803B7B8
@@ -39205,7 +39205,7 @@ sub_803B7B8: @ 0x0803B7B8
 	bx lr
 	.align 2, 0
 _0803B7D0: .4byte 0x0203E170
-_0803B7D4: .4byte 0x02001082
+_0803B7D4: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B7D8: @ 0x0803B7D8
@@ -39223,7 +39223,7 @@ sub_803B7D8: @ 0x0803B7D8
 	bx lr
 	.align 2, 0
 _0803B7F0: .4byte 0x0203E170
-_0803B7F4: .4byte 0x02001082
+_0803B7F4: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B7F8: @ 0x0803B7F8
@@ -39241,7 +39241,7 @@ sub_803B7F8: @ 0x0803B7F8
 	bx lr
 	.align 2, 0
 _0803B810: .4byte 0x0203E170
-_0803B814: .4byte 0x02001082
+_0803B814: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B818: @ 0x0803B818
@@ -39259,7 +39259,7 @@ sub_803B818: @ 0x0803B818
 	bx lr
 	.align 2, 0
 _0803B830: .4byte 0x0203E170
-_0803B834: .4byte 0x02001082
+_0803B834: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B838: @ 0x0803B838
@@ -39277,7 +39277,7 @@ sub_803B838: @ 0x0803B838
 	bx lr
 	.align 2, 0
 _0803B850: .4byte 0x0203E170
-_0803B854: .4byte 0x02001082
+_0803B854: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B858: @ 0x0803B858
@@ -39295,7 +39295,7 @@ sub_803B858: @ 0x0803B858
 	bx lr
 	.align 2, 0
 _0803B870: .4byte 0x0203E170
-_0803B874: .4byte 0x02001082
+_0803B874: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B878: @ 0x0803B878
@@ -39313,7 +39313,7 @@ sub_803B878: @ 0x0803B878
 	bx lr
 	.align 2, 0
 _0803B890: .4byte 0x0203E170
-_0803B894: .4byte 0x02001082
+_0803B894: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B898: @ 0x0803B898
@@ -39329,7 +39329,7 @@ sub_803B898: @ 0x0803B898
 	bx lr
 	.align 2, 0
 _0803B8AC: .4byte 0x0203E170
-_0803B8B0: .4byte 0x02001082
+_0803B8B0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B8B4: @ 0x0803B8B4
@@ -39345,7 +39345,7 @@ sub_803B8B4: @ 0x0803B8B4
 	bx lr
 	.align 2, 0
 _0803B8C8: .4byte 0x0203E170
-_0803B8CC: .4byte 0x02001082
+_0803B8CC: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B8D0: @ 0x0803B8D0
@@ -39361,7 +39361,7 @@ sub_803B8D0: @ 0x0803B8D0
 	bx lr
 	.align 2, 0
 _0803B8E4: .4byte 0x0203E170
-_0803B8E8: .4byte 0x02001082
+_0803B8E8: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B8EC: @ 0x0803B8EC
@@ -39377,7 +39377,7 @@ sub_803B8EC: @ 0x0803B8EC
 	bx lr
 	.align 2, 0
 _0803B900: .4byte 0x0203E170
-_0803B904: .4byte 0x02001082
+_0803B904: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B908: @ 0x0803B908
@@ -39393,7 +39393,7 @@ sub_803B908: @ 0x0803B908
 	bx lr
 	.align 2, 0
 _0803B91C: .4byte 0x0203E170
-_0803B920: .4byte 0x02001082
+_0803B920: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B924: @ 0x0803B924
@@ -39411,7 +39411,7 @@ sub_803B924: @ 0x0803B924
 	bx lr
 	.align 2, 0
 _0803B93C: .4byte 0x0203E170
-_0803B940: .4byte 0x02001082
+_0803B940: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B944: @ 0x0803B944
@@ -39429,7 +39429,7 @@ sub_803B944: @ 0x0803B944
 	bx lr
 	.align 2, 0
 _0803B95C: .4byte 0x0203E170
-_0803B960: .4byte 0x02001082
+_0803B960: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B964: @ 0x0803B964
@@ -39447,7 +39447,7 @@ sub_803B964: @ 0x0803B964
 	bx lr
 	.align 2, 0
 _0803B97C: .4byte 0x0203E170
-_0803B980: .4byte 0x02001082
+_0803B980: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B984: @ 0x0803B984
@@ -39465,7 +39465,7 @@ sub_803B984: @ 0x0803B984
 	bx lr
 	.align 2, 0
 _0803B99C: .4byte 0x0203E170
-_0803B9A0: .4byte 0x02001082
+_0803B9A0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B9A4: @ 0x0803B9A4
@@ -39483,7 +39483,7 @@ sub_803B9A4: @ 0x0803B9A4
 	bx lr
 	.align 2, 0
 _0803B9BC: .4byte 0x0203E170
-_0803B9C0: .4byte 0x02001082
+_0803B9C0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B9C4: @ 0x0803B9C4
@@ -39501,7 +39501,7 @@ sub_803B9C4: @ 0x0803B9C4
 	bx lr
 	.align 2, 0
 _0803B9DC: .4byte 0x0203E170
-_0803B9E0: .4byte 0x02001082
+_0803B9E0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803B9E4: @ 0x0803B9E4
@@ -39519,7 +39519,7 @@ sub_803B9E4: @ 0x0803B9E4
 	bx lr
 	.align 2, 0
 _0803B9FC: .4byte 0x0203E170
-_0803BA00: .4byte 0x02001082
+_0803BA00: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803BA04: @ 0x0803BA04
@@ -39537,7 +39537,7 @@ sub_803BA04: @ 0x0803BA04
 	bx lr
 	.align 2, 0
 _0803BA1C: .4byte 0x0203E170
-_0803BA20: .4byte 0x02001082
+_0803BA20: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803BA24: @ 0x0803BA24
@@ -39554,7 +39554,7 @@ sub_803BA24: @ 0x0803BA24
 	bx lr
 	.align 2, 0
 _0803BA3C: .4byte 0x0203E440
-_0803BA40: .4byte 0x02001082
+_0803BA40: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803BA44: @ 0x0803BA44
@@ -39571,7 +39571,7 @@ sub_803BA44: @ 0x0803BA44
 	bx lr
 	.align 2, 0
 _0803BA5C: .4byte 0x0203E440
-_0803BA60: .4byte 0x02001082
+_0803BA60: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803BA64: @ 0x0803BA64
@@ -39588,7 +39588,7 @@ sub_803BA64: @ 0x0803BA64
 	bx lr
 	.align 2, 0
 _0803BA7C: .4byte 0x0203E440
-_0803BA80: .4byte 0x02001082
+_0803BA80: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803BA84: @ 0x0803BA84
@@ -39604,7 +39604,7 @@ sub_803BA84: @ 0x0803BA84
 	bx lr
 	.align 2, 0
 _0803BA98: .4byte 0x0203E8D8
-_0803BA9C: .4byte 0x02001082
+_0803BA9C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803BAA0: @ 0x0803BAA0
@@ -39621,7 +39621,7 @@ sub_803BAA0: @ 0x0803BAA0
 	bx lr
 	.align 2, 0
 _0803BAB8: .4byte 0x0203E440
-_0803BABC: .4byte 0x02001082
+_0803BABC: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803BAC0: @ 0x0803BAC0
@@ -39694,7 +39694,7 @@ _0803BB22:
 	.align 2, 0
 _0803BB30: .4byte byte_3002950
 _0803BB34: .4byte 0x080CEE5C
-_0803BB38: .4byte 0x02001082
+_0803BB38: .4byte gLoadedRoomLevel
 _0803BB3C: .4byte 0x080CEE74
 _0803BB40: .4byte 0x0203F9A2
 _0803BB44: .4byte 0x0203DFC8
@@ -39730,7 +39730,7 @@ _0803BB74:
 	.align 2, 0
 _0803BB80: .4byte byte_3002950
 _0803BB84: .4byte 0x080CEE8C
-_0803BB88: .4byte 0x02001082
+_0803BB88: .4byte gLoadedRoomLevel
 _0803BB8C: .4byte 0x080CEEA4
 _0803BB90: .4byte 0x0203F9A2
 
@@ -40440,7 +40440,7 @@ _0803C0DA:
 	bx r0
 	.align 2, 0
 _0803C0E0: .4byte 0x080CEE2C
-_0803C0E4: .4byte 0x02001082
+_0803C0E4: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C0E8: @ 0x0803C0E8
@@ -40476,7 +40476,7 @@ sub_803C100: @ 0x0803C100
 	bx lr
 	.align 2, 0
 _0803C118: .4byte 0x0203E440
-_0803C11C: .4byte 0x02001082
+_0803C11C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C120: @ 0x0803C120
@@ -40494,7 +40494,7 @@ sub_803C120: @ 0x0803C120
 	bx lr
 	.align 2, 0
 _0803C138: .4byte 0x0203E440
-_0803C13C: .4byte 0x02001082
+_0803C13C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C140: @ 0x0803C140
@@ -40595,7 +40595,7 @@ _0803C1D2:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0803C1DC: .4byte 0x02001082
+_0803C1DC: .4byte gLoadedRoomLevel
 _0803C1E0: .4byte 0x0803C1E4
 _0803C1E4: @ jump table
 	.4byte _0803C2D8 @ case 0
@@ -40776,7 +40776,7 @@ sub_803C35C: @ 0x0803C35C
 	bx lr
 	.align 2, 0
 _0803C374: .4byte 0x0203E170
-_0803C378: .4byte 0x02001082
+_0803C378: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C37C: @ 0x0803C37C
@@ -40866,7 +40866,7 @@ _0803C41A:
 	bx r0
 	.align 2, 0
 _0803C424: .4byte 0x0203E440
-_0803C428: .4byte 0x02001082
+_0803C428: .4byte gLoadedRoomLevel
 _0803C42C: .4byte 0x0203E975
 _0803C430: .4byte 0x0803938D
 
@@ -40900,7 +40900,7 @@ _0803C462:
 	bx r0
 	.align 2, 0
 _0803C46C: .4byte 0x0203E440
-_0803C470: .4byte 0x02001082
+_0803C470: .4byte gLoadedRoomLevel
 _0803C474: .4byte 0x0203E975
 _0803C478: .4byte 0x0803938D
 
@@ -40934,7 +40934,7 @@ _0803C4AA:
 	bx r0
 	.align 2, 0
 _0803C4B4: .4byte 0x0203E440
-_0803C4B8: .4byte 0x02001082
+_0803C4B8: .4byte gLoadedRoomLevel
 _0803C4BC: .4byte 0x0203E975
 _0803C4C0: .4byte 0x0803938D
 
@@ -40968,7 +40968,7 @@ _0803C4F2:
 	bx r0
 	.align 2, 0
 _0803C4FC: .4byte 0x0203E440
-_0803C500: .4byte 0x02001082
+_0803C500: .4byte gLoadedRoomLevel
 _0803C504: .4byte 0x0203E975
 _0803C508: .4byte 0x0803938D
 
@@ -41024,7 +41024,7 @@ sub_803C53C: @ 0x0803C53C
 	bx lr
 	.align 2, 0
 _0803C554: .4byte 0x0203E440
-_0803C558: .4byte 0x02001082
+_0803C558: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C55C: @ 0x0803C55C
@@ -41091,7 +41091,7 @@ _0803C5D4: .4byte 0x080B21BC
 _0803C5D8: .4byte 0x0203F992
 _0803C5DC: .4byte 0x080B21C8
 _0803C5E0: .4byte 0x083FD654
-_0803C5E4: .4byte 0x02001084
+_0803C5E4: .4byte gLoadedRoomBgm
 _0803C5E8: .4byte 0x0203EA88
 
 	.thumb
@@ -41197,7 +41197,7 @@ sub_803C674: @ 0x0803C674
 	bx lr
 	.align 2, 0
 _0803C68C: .4byte 0x0203E440
-_0803C690: .4byte 0x02001082
+_0803C690: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C694: @ 0x0803C694
@@ -41312,7 +41312,7 @@ _0803C764:
 	.align 2, 0
 _0803C76C: .4byte 0x0203E12F
 _0803C770: .4byte 0x0203E440
-_0803C774: .4byte 0x02001082
+_0803C774: .4byte gLoadedRoomLevel
 _0803C778: .4byte 0x02000FCC
 _0803C77C: .4byte gGameStatus
 _0803C780: .4byte byte_203EA89
@@ -41426,7 +41426,7 @@ _0803C84A:
 	.align 2, 0
 _0803C850: .4byte 0x0203E133
 _0803C854: .4byte 0x0203E170
-_0803C858: .4byte 0x02001082
+_0803C858: .4byte gLoadedRoomLevel
 _0803C85C: .4byte 0x02000FCC
 _0803C860: .4byte gGameStatus
 _0803C864: .4byte byte_203EA89
@@ -41449,7 +41449,7 @@ sub_803C870: @ 0x0803C870
 	bx lr
 	.align 2, 0
 _0803C888: .4byte 0x0203E440
-_0803C88C: .4byte 0x02001082
+_0803C88C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C890: @ 0x0803C890
@@ -41525,7 +41525,7 @@ _0803C912:
 	bx r0
 	.align 2, 0
 _0803C918: .4byte 0x0203E440
-_0803C91C: .4byte 0x02001082
+_0803C91C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C920: @ 0x0803C920
@@ -41543,7 +41543,7 @@ sub_803C920: @ 0x0803C920
 	bx lr
 	.align 2, 0
 _0803C938: .4byte 0x0203E440
-_0803C93C: .4byte 0x02001082
+_0803C93C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C940: @ 0x0803C940
@@ -41619,7 +41619,7 @@ _0803C9C2:
 	bx r0
 	.align 2, 0
 _0803C9C8: .4byte 0x0203E440
-_0803C9CC: .4byte 0x02001082
+_0803C9CC: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803C9D0: @ 0x0803C9D0
@@ -41658,7 +41658,7 @@ sub_803C9F4: @ 0x0803C9F4
 	bx lr
 	.align 2, 0
 _0803CA0C: .4byte 0x0203E8D8
-_0803CA10: .4byte 0x02001082
+_0803CA10: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803CA14: @ 0x0803CA14
@@ -41675,7 +41675,7 @@ sub_803CA14: @ 0x0803CA14
 	bx lr
 	.align 2, 0
 _0803CA2C: .4byte 0x0203E8D8
-_0803CA30: .4byte 0x02001082
+_0803CA30: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803CA34: @ 0x0803CA34
@@ -41693,7 +41693,7 @@ sub_803CA34: @ 0x0803CA34
 	bx lr
 	.align 2, 0
 _0803CA4C: .4byte 0x0203E440
-_0803CA50: .4byte 0x02001082
+_0803CA50: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803CA54: @ 0x0803CA54
@@ -41711,7 +41711,7 @@ sub_803CA54: @ 0x0803CA54
 	bx lr
 	.align 2, 0
 _0803CA6C: .4byte 0x0203E440
-_0803CA70: .4byte 0x02001082
+_0803CA70: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803CA74: @ 0x0803CA74
@@ -41729,7 +41729,7 @@ sub_803CA74: @ 0x0803CA74
 	bx lr
 	.align 2, 0
 _0803CA8C: .4byte 0x0203E440
-_0803CA90: .4byte 0x02001082
+_0803CA90: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803CA94: @ 0x0803CA94
@@ -41753,7 +41753,7 @@ sub_803CA94: @ 0x0803CA94
 	bx r0
 	.align 2, 0
 _0803CABC: .4byte 0x0203E440
-_0803CAC0: .4byte 0x02001082
+_0803CAC0: .4byte gLoadedRoomLevel
 _0803CAC4: .4byte 0x083FD674
 
 	.thumb
@@ -41778,7 +41778,7 @@ sub_803CAC8: @ 0x0803CAC8
 	bx r0
 	.align 2, 0
 _0803CAF0: .4byte 0x0203E440
-_0803CAF4: .4byte 0x02001082
+_0803CAF4: .4byte gLoadedRoomLevel
 _0803CAF8: .4byte 0x083FD694
 
 	.thumb
@@ -41803,7 +41803,7 @@ sub_803CAFC: @ 0x0803CAFC
 	bx r0
 	.align 2, 0
 _0803CB24: .4byte 0x0203E440
-_0803CB28: .4byte 0x02001082
+_0803CB28: .4byte gLoadedRoomLevel
 _0803CB2C: .4byte 0x083FD6B4
 
 	.thumb
@@ -41828,7 +41828,7 @@ sub_803CB30: @ 0x0803CB30
 	bx r0
 	.align 2, 0
 _0803CB58: .4byte 0x0203E440
-_0803CB5C: .4byte 0x02001082
+_0803CB5C: .4byte gLoadedRoomLevel
 _0803CB60: .4byte 0x083FD6D4
 
 	.thumb
@@ -41874,11 +41874,11 @@ _0803CBB2:
 	bx r0
 	.align 2, 0
 _0803CBB8: .4byte 0x0203E440
-_0803CBBC: .4byte 0x02001082
+_0803CBBC: .4byte gLoadedRoomLevel
 _0803CBC0: .4byte 0x00000101
-_0803CBC4: .4byte 0x02001084
+_0803CBC4: .4byte gLoadedRoomBgm
 _0803CBC8: .4byte 0x080CF4EC
-_0803CBCC: .4byte 0x02001080
+_0803CBCC: .4byte gLoadedRoomIndex
 _0803CBD0: .4byte 0x0203EA88
 
 	.thumb
@@ -41953,7 +41953,7 @@ _0803CC4E:
 	bx r0
 	.align 2, 0
 _0803CC54: .4byte 0x0203E440
-_0803CC58: .4byte 0x02001082
+_0803CC58: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803CC5C: @ 0x0803CC5C
@@ -42048,7 +42048,7 @@ _0803CD02:
 	.align 2, 0
 _0803CD08: .4byte 0x0203E130
 _0803CD0C: .4byte 0x0203E170
-_0803CD10: .4byte 0x02001082
+_0803CD10: .4byte gLoadedRoomLevel
 _0803CD14: .4byte 0x02000FCC
 _0803CD18: .4byte gGameStatus
 _0803CD1C: .4byte byte_203EA89
@@ -42127,7 +42127,7 @@ _0803CDAE:
 	.align 2, 0
 _0803CDB4: .4byte 0x0203E12E
 _0803CDB8: .4byte 0x0203E170
-_0803CDBC: .4byte 0x02001082
+_0803CDBC: .4byte gLoadedRoomLevel
 _0803CDC0: .4byte 0x02000FCC
 _0803CDC4: .4byte gGameStatus
 _0803CDC8: .4byte byte_203EA89
@@ -42253,7 +42253,7 @@ _0803CEA6:
 	.align 2, 0
 _0803CEAC: .4byte 0x0203E12D
 _0803CEB0: .4byte 0x0203E170
-_0803CEB4: .4byte 0x02001082
+_0803CEB4: .4byte gLoadedRoomLevel
 _0803CEB8: .4byte 0x02000FCC
 _0803CEBC: .4byte gGameStatus
 _0803CEC0: .4byte byte_203EA89
@@ -42356,7 +42356,7 @@ _0803CF70:
 	.align 2, 0
 _0803CF78: .4byte 0x0203E131
 _0803CF7C: .4byte 0x0203E170
-_0803CF80: .4byte 0x02001082
+_0803CF80: .4byte gLoadedRoomLevel
 _0803CF84: .4byte 0x02000FCC
 _0803CF88: .4byte gGameStatus
 _0803CF8C: .4byte byte_203EA89
@@ -42517,7 +42517,7 @@ sub_803D034: @ 0x0803D034
 _0803D09C: .4byte 0x0203E941
 _0803D0A0: .4byte 0x0203E132
 _0803D0A4: .4byte 0x02000FCC
-_0803D0A8: .4byte 0x02001082
+_0803D0A8: .4byte gLoadedRoomLevel
 _0803D0AC: .4byte gGameStatus
 _0803D0B0: .4byte byte_203EA89
 _0803D0B4: .4byte 0x080CE440
@@ -42546,7 +42546,7 @@ sub_803D0C8: @ 0x0803D0C8
 	bx lr
 	.align 2, 0
 _0803D0E0: .4byte 0x0203E440
-_0803D0E4: .4byte 0x02001082
+_0803D0E4: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803D0E8: @ 0x0803D0E8
@@ -42624,7 +42624,7 @@ _0803D170:
 	bx r0
 	.align 2, 0
 _0803D178: .4byte 0x0203E440
-_0803D17C: .4byte 0x02001082
+_0803D17C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803D180: @ 0x0803D180
@@ -42714,7 +42714,7 @@ _0803D1EC:
 	.align 2, 0
 _0803D220: .4byte 0x0203E97D
 _0803D224: .4byte 0x0203E170
-_0803D228: .4byte 0x02001082
+_0803D228: .4byte gLoadedRoomLevel
 _0803D22C: .4byte byte_203EA89
 _0803D230: .4byte 0x080CE440
 _0803D234: .4byte 0x0203EA8C
@@ -42780,7 +42780,7 @@ sub_803D294: @ 0x0803D294
 	bx lr
 	.align 2, 0
 _0803D2AC: .4byte 0x0203E440
-_0803D2B0: .4byte 0x02001082
+_0803D2B0: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803D2B4: @ 0x0803D2B4
@@ -43030,7 +43030,7 @@ sub_803D480: @ 0x0803D480
 	bx lr
 	.align 2, 0
 _0803D498: .4byte 0x0203E8D8
-_0803D49C: .4byte 0x02001082
+_0803D49C: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803D4A0: @ 0x0803D4A0
@@ -43237,7 +43237,7 @@ _0803D62C:
 	bx r0
 	.align 2, 0
 _0803D634: .4byte 0x0203E440
-_0803D638: .4byte 0x02001082
+_0803D638: .4byte gLoadedRoomLevel
 _0803D63C: .4byte byte_203EA89
 _0803D640: .4byte 0x080CE440
 _0803D644: .4byte 0x0203EA8C
@@ -43285,7 +43285,7 @@ _0803D690:
 	bx r0
 	.align 2, 0
 _0803D698: .4byte 0x0203E440
-_0803D69C: .4byte 0x02001082
+_0803D69C: .4byte gLoadedRoomLevel
 _0803D6A0: .4byte byte_203EA89
 _0803D6A4: .4byte 0x080CE440
 _0803D6A8: .4byte 0x0203EA8C
@@ -43333,7 +43333,7 @@ _0803D6F4:
 	bx r0
 	.align 2, 0
 _0803D6FC: .4byte 0x0203E440
-_0803D700: .4byte 0x02001082
+_0803D700: .4byte gLoadedRoomLevel
 _0803D704: .4byte byte_203EA89
 _0803D708: .4byte 0x080CE440
 _0803D70C: .4byte 0x0203EA8C
@@ -43414,7 +43414,7 @@ _0803D78C:
 	.align 2, 0
 _0803D7A4: .4byte 0x0203E128
 _0803D7A8: .4byte 0x0203E170
-_0803D7AC: .4byte 0x02001082
+_0803D7AC: .4byte gLoadedRoomLevel
 _0803D7B0: .4byte 0x02000FCC
 _0803D7B4: .4byte gGameStatus
 _0803D7B8: .4byte byte_203EA89
@@ -43514,7 +43514,7 @@ _0803D86E:
 _0803D874: .4byte 0x0203E126
 _0803D878: .4byte 0x0203E968
 _0803D87C: .4byte 0x0203E134
-_0803D880: .4byte 0x02001082
+_0803D880: .4byte gLoadedRoomLevel
 _0803D884: .4byte 0x0203E170
 _0803D888: .4byte 0x02000FCC
 _0803D88C: .4byte gGameStatus
@@ -43607,7 +43607,7 @@ _0803D938:
 	.align 2, 0
 _0803D940: .4byte 0x0203E127
 _0803D944: .4byte 0x0203E170
-_0803D948: .4byte 0x02001082
+_0803D948: .4byte gLoadedRoomLevel
 _0803D94C: .4byte 0x02000FCC
 _0803D950: .4byte gGameStatus
 _0803D954: .4byte byte_203EA89
@@ -43701,7 +43701,7 @@ _0803DA04:
 	.align 2, 0
 _0803DA0C: .4byte 0x0203E127
 _0803DA10: .4byte 0x0203E170
-_0803DA14: .4byte 0x02001082
+_0803DA14: .4byte gLoadedRoomLevel
 _0803DA18: .4byte 0x02000FCC
 _0803DA1C: .4byte gGameStatus
 _0803DA20: .4byte byte_203EA89
@@ -43795,7 +43795,7 @@ _0803DAD0:
 	.align 2, 0
 _0803DAD8: .4byte 0x0203E127
 _0803DADC: .4byte 0x0203E170
-_0803DAE0: .4byte 0x02001082
+_0803DAE0: .4byte gLoadedRoomLevel
 _0803DAE4: .4byte 0x02000FCC
 _0803DAE8: .4byte gGameStatus
 _0803DAEC: .4byte byte_203EA89
@@ -43934,7 +43934,7 @@ _0803DBFA:
 _0803DC00: .4byte 0x0203E129
 _0803DC04: .4byte 0x0203E96B
 _0803DC08: .4byte 0x0203E134
-_0803DC0C: .4byte 0x02001082
+_0803DC0C: .4byte gLoadedRoomLevel
 _0803DC10: .4byte 0x0203E170
 _0803DC14: .4byte 0x02000FCC
 _0803DC18: .4byte gGameStatus
@@ -44079,7 +44079,7 @@ _0803DD3E:
 _0803DD44: .4byte 0x0203E129
 _0803DD48: .4byte 0x0203E96B
 _0803DD4C: .4byte 0x0203E134
-_0803DD50: .4byte 0x02001082
+_0803DD50: .4byte gLoadedRoomLevel
 _0803DD54: .4byte 0x0203E170
 _0803DD58: .4byte 0x02000FCC
 _0803DD5C: .4byte gGameStatus
@@ -44224,7 +44224,7 @@ _0803DE82:
 _0803DE88: .4byte 0x0203E129
 _0803DE8C: .4byte 0x0203E96B
 _0803DE90: .4byte 0x0203E134
-_0803DE94: .4byte 0x02001082
+_0803DE94: .4byte gLoadedRoomLevel
 _0803DE98: .4byte 0x0203E170
 _0803DE9C: .4byte 0x02000FCC
 _0803DEA0: .4byte gGameStatus
@@ -44369,7 +44369,7 @@ _0803DFC6:
 _0803DFCC: .4byte 0x0203E129
 _0803DFD0: .4byte 0x0203E96B
 _0803DFD4: .4byte 0x0203E134
-_0803DFD8: .4byte 0x02001082
+_0803DFD8: .4byte gLoadedRoomLevel
 _0803DFDC: .4byte 0x0203E170
 _0803DFE0: .4byte 0x02000FCC
 _0803DFE4: .4byte gGameStatus
@@ -44514,7 +44514,7 @@ _0803E10A:
 _0803E110: .4byte 0x0203E129
 _0803E114: .4byte 0x0203E96B
 _0803E118: .4byte 0x0203E134
-_0803E11C: .4byte 0x02001082
+_0803E11C: .4byte gLoadedRoomLevel
 _0803E120: .4byte 0x0203E170
 _0803E124: .4byte 0x02000FCC
 _0803E128: .4byte gGameStatus
@@ -44612,7 +44612,7 @@ _0803E1E4:
 _0803E1F0: .4byte 0x0203E12B
 _0803E1F4: .4byte 0x0203E96D
 _0803E1F8: .4byte 0x0203E134
-_0803E1FC: .4byte 0x02001082
+_0803E1FC: .4byte gLoadedRoomLevel
 _0803E200: .4byte 0x0203E170
 _0803E204: .4byte 0x02000FCC
 _0803E208: .4byte gGameStatus
@@ -44704,7 +44704,7 @@ _0803E2AC:
 _0803E2B8: .4byte 0x0203E12B
 _0803E2BC: .4byte 0x0203E96D
 _0803E2C0: .4byte 0x0203E134
-_0803E2C4: .4byte 0x02001082
+_0803E2C4: .4byte gLoadedRoomLevel
 _0803E2C8: .4byte 0x0203E170
 _0803E2CC: .4byte 0x02000FCC
 _0803E2D0: .4byte gGameStatus
@@ -44796,7 +44796,7 @@ _0803E374:
 _0803E380: .4byte 0x0203E12B
 _0803E384: .4byte 0x0203E96D
 _0803E388: .4byte 0x0203E134
-_0803E38C: .4byte 0x02001082
+_0803E38C: .4byte gLoadedRoomLevel
 _0803E390: .4byte 0x0203E170
 _0803E394: .4byte 0x02000FCC
 _0803E398: .4byte gGameStatus
@@ -44888,7 +44888,7 @@ _0803E43C:
 _0803E448: .4byte 0x0203E12B
 _0803E44C: .4byte 0x0203E96D
 _0803E450: .4byte 0x0203E134
-_0803E454: .4byte 0x02001082
+_0803E454: .4byte gLoadedRoomLevel
 _0803E458: .4byte 0x0203E170
 _0803E45C: .4byte 0x02000FCC
 _0803E460: .4byte gGameStatus
@@ -44965,7 +44965,7 @@ _0803E4EA:
 _0803E4F0: .4byte 0x0203E12A
 _0803E4F4: .4byte 0x0203E96C
 _0803E4F8: .4byte 0x0203E134
-_0803E4FC: .4byte 0x02001082
+_0803E4FC: .4byte gLoadedRoomLevel
 _0803E500: .4byte gGameStatus
 _0803E504: .4byte 0x080CC8C4
 _0803E508: .4byte byte_203EA89
@@ -45040,7 +45040,7 @@ _0803E58A:
 _0803E590: .4byte 0x0203E122
 _0803E594: .4byte 0x0203E96A
 _0803E598: .4byte 0x0203E134
-_0803E59C: .4byte 0x02001082
+_0803E59C: .4byte gLoadedRoomLevel
 _0803E5A0: .4byte gGameStatus
 _0803E5A4: .4byte 0x080CC8C4
 _0803E5A8: .4byte byte_203EA89
@@ -45115,7 +45115,7 @@ _0803E62A:
 _0803E630: .4byte 0x0203E123
 _0803E634: .4byte 0x0203E96A
 _0803E638: .4byte 0x0203E134
-_0803E63C: .4byte 0x02001082
+_0803E63C: .4byte gLoadedRoomLevel
 _0803E640: .4byte gGameStatus
 _0803E644: .4byte 0x080CC8C4
 _0803E648: .4byte byte_203EA89
@@ -45190,7 +45190,7 @@ _0803E6CA:
 _0803E6D0: .4byte 0x0203E125
 _0803E6D4: .4byte 0x0203E96A
 _0803E6D8: .4byte 0x0203E134
-_0803E6DC: .4byte 0x02001082
+_0803E6DC: .4byte gLoadedRoomLevel
 _0803E6E0: .4byte gGameStatus
 _0803E6E4: .4byte 0x080CC8C4
 _0803E6E8: .4byte byte_203EA89
@@ -45265,7 +45265,7 @@ _0803E76A:
 _0803E770: .4byte 0x0203E124
 _0803E774: .4byte 0x0203E96A
 _0803E778: .4byte 0x0203E134
-_0803E77C: .4byte 0x02001082
+_0803E77C: .4byte gLoadedRoomLevel
 _0803E780: .4byte gGameStatus
 _0803E784: .4byte 0x080CC8C4
 _0803E788: .4byte byte_203EA89
@@ -45357,7 +45357,7 @@ _0803E82A:
 _0803E830: .4byte 0x0203E12A
 _0803E834: .4byte 0x0203E96C
 _0803E838: .4byte 0x0203E134
-_0803E83C: .4byte 0x02001082
+_0803E83C: .4byte gLoadedRoomLevel
 _0803E840: .4byte 0x0203E170
 _0803E844: .4byte gGameStatus
 _0803E848: .4byte 0x080CC8C4
@@ -45450,7 +45450,7 @@ _0803E8EE:
 _0803E8F4: .4byte 0x0203E122
 _0803E8F8: .4byte 0x0203E96A
 _0803E8FC: .4byte 0x0203E134
-_0803E900: .4byte 0x02001082
+_0803E900: .4byte gLoadedRoomLevel
 _0803E904: .4byte 0x0203E170
 _0803E908: .4byte gGameStatus
 _0803E90C: .4byte 0x080CC8C4
@@ -45546,7 +45546,7 @@ _0803E986:
 _0803E9C0: .4byte gGameStatus
 _0803E9C4: .4byte 0x0203E969
 _0803E9C8: .4byte 0x0203E134
-_0803E9CC: .4byte 0x02001082
+_0803E9CC: .4byte gLoadedRoomLevel
 _0803E9D0: .4byte 0x03006EF3
 _0803E9D4: .4byte 0x0203E170
 _0803E9D8: .4byte byte_20020BC
@@ -45576,7 +45576,7 @@ _0803EA08:
 	bx r0
 	.align 2, 0
 _0803EA10: .4byte 0x0203E170
-_0803EA14: .4byte 0x02001082
+_0803EA14: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803EA18: @ 0x0803EA18
@@ -45640,7 +45640,7 @@ _0803EA66:
 _0803EA88: .4byte gGameStatus
 _0803EA8C: .4byte 0x0203E969
 _0803EA90: .4byte 0x0203E134
-_0803EA94: .4byte 0x02001082
+_0803EA94: .4byte gLoadedRoomLevel
 _0803EA98: .4byte 0x03006EF3
 _0803EA9C: .4byte 0x0203E170
 _0803EAA0: .4byte byte_20020BC
@@ -45701,7 +45701,7 @@ _0803EB0C:
 	bx r0
 	.align 2, 0
 _0803EB14: .4byte 0x0203E170
-_0803EB18: .4byte 0x02001082
+_0803EB18: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803EB1C: @ 0x0803EB1C
@@ -45738,7 +45738,7 @@ _0803EB4A:
 _0803EB58: .4byte gGameStatus
 _0803EB5C: .4byte 0x0203E969
 _0803EB60: .4byte 0x0203E134
-_0803EB64: .4byte 0x02001082
+_0803EB64: .4byte gLoadedRoomLevel
 _0803EB68: .4byte 0x03006EF3
 _0803EB6C: .4byte 0x0000015D
 _0803EB70:
@@ -45787,7 +45787,7 @@ _0803EB90:
 	b _0803EBFC
 	.align 2, 0
 _0803EBC8: .4byte 0x0203E170
-_0803EBCC: .4byte 0x02001082
+_0803EBCC: .4byte gLoadedRoomLevel
 _0803EBD0: .4byte byte_203EA89
 _0803EBD4: .4byte 0x080CE440
 _0803EBD8: .4byte 0x0203EA8C
@@ -45814,7 +45814,7 @@ _0803EBFC:
 	bx r0
 	.align 2, 0
 _0803EC04: .4byte 0x0203E170
-_0803EC08: .4byte 0x02001082
+_0803EC08: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803EC0C: @ 0x0803EC0C
@@ -45852,7 +45852,7 @@ _0803EC3A:
 _0803EC4C: .4byte gGameStatus
 _0803EC50: .4byte 0x0203E969
 _0803EC54: .4byte 0x0203E134
-_0803EC58: .4byte 0x02001082
+_0803EC58: .4byte gLoadedRoomLevel
 _0803EC5C: .4byte 0x03006EF3
 _0803EC60:
 	movs r0, #1
@@ -45900,7 +45900,7 @@ _0803EC80:
 	b _0803ECEC
 	.align 2, 0
 _0803ECB8: .4byte 0x0203E170
-_0803ECBC: .4byte 0x02001082
+_0803ECBC: .4byte gLoadedRoomLevel
 _0803ECC0: .4byte byte_203EA89
 _0803ECC4: .4byte 0x080CE440
 _0803ECC8: .4byte 0x0203EA8C
@@ -45927,7 +45927,7 @@ _0803ECEC:
 	bx r0
 	.align 2, 0
 _0803ECF4: .4byte 0x0203E170
-_0803ECF8: .4byte 0x02001082
+_0803ECF8: .4byte gLoadedRoomLevel
 
 	.thumb
 sub_803ECFC: @ 0x0803ECFC
@@ -45981,7 +45981,7 @@ _0803ED56:
 	bx r0
 	.align 2, 0
 _0803ED5C: .4byte 0x0203E170
-_0803ED60: .4byte 0x02001082
+_0803ED60: .4byte gLoadedRoomLevel
 _0803ED64: .4byte byte_203EA89
 _0803ED68: .4byte 0x080CE440
 _0803ED6C: .4byte 0x0203EA8C
@@ -46038,7 +46038,7 @@ _0803EDCA:
 	bx r0
 	.align 2, 0
 _0803EDD0: .4byte 0x0203E170
-_0803EDD4: .4byte 0x02001082
+_0803EDD4: .4byte gLoadedRoomLevel
 _0803EDD8: .4byte byte_203EA89
 _0803EDDC: .4byte 0x080CE440
 _0803EDE0: .4byte 0x0203EA8C
@@ -47997,7 +47997,7 @@ _0803FB88:
 	.align 2, 0
 _0803FB98: .4byte 0x080A8CF0
 _0803FB9C: .4byte 0x080CF330
-_0803FBA0: .4byte 0x02001082
+_0803FBA0: .4byte gLoadedRoomLevel
 _0803FBA4:
 	ldrh r1, [r5, #0x1a]
 	cmp r1, #0
@@ -48635,7 +48635,7 @@ _0804007C: .4byte 0x0203EA7C
 _08040080: .4byte 0x080CC8C4
 _08040084: .4byte gGameStatus
 _08040088: .4byte 0x080CC84C
-_0804008C: .4byte 0x02001082
+_0804008C: .4byte gLoadedRoomLevel
 _08040090: .4byte 0x02000FCC
 
     .thumb
@@ -48818,7 +48818,7 @@ sub_8040178: @ 0x08040178
 	.align 2, 0
 _080401F4: .4byte 0x0203EA7C
 _080401F8: .4byte 0x080CC84C
-_080401FC: .4byte 0x02001082
+_080401FC: .4byte gLoadedRoomLevel
 _08040200: .4byte 0x02000FCC
 
     .thumb
@@ -49444,7 +49444,7 @@ _08040710:
 	.align 2, 0
 _0804073C: .4byte 0x0203EA7C
 _08040740: .4byte 0x02000FCC
-_08040744: .4byte 0x02001082
+_08040744: .4byte gLoadedRoomLevel
 _08040748:
 	ldr r0, _08040758
 	ldr r0, [r0]

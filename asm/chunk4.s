@@ -166,7 +166,7 @@ _0800EB30:
 	bl sub_800ECB4
 	b _0800EB50
 	.align 2, 0
-_0800EB38: .4byte 0x02001080
+_0800EB38: .4byte gLoadedRoomIndex
 _0800EB3C: .4byte 0x020010B1
 _0800EB40:
 	ldr r1, _0800EB54
@@ -618,7 +618,7 @@ sub_800EECC: @ 0x0800EECC
 	mov pc, r0
 	.align 2, 0
 _0800EEEC: .4byte 0x03006EF3
-_0800EEF0: .4byte 0x02001082
+_0800EEF0: .4byte gLoadedRoomLevel
 _0800EEF4: .4byte 0x0800EEF8
 _0800EEF8: @ jump table
 	.4byte _0800EF10 @ case 0
@@ -660,7 +660,7 @@ _0800EF50:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800EF54: .4byte 0x02001080
+_0800EF54: .4byte gLoadedRoomIndex
 _0800EF58: .4byte 0x080CEE5C
 _0800EF5C: .4byte 0x083FD7B4
 _0800EF60: .4byte 0x083FD7D4
@@ -683,7 +683,7 @@ sub_800EF6C: @ 0x0800EF6C
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0800EF84: .4byte 0x02001082
+_0800EF84: .4byte gLoadedRoomLevel
 _0800EF88: .4byte 0x0800EF8C
 _0800EF8C: @ jump table
 	.4byte _0800EFA4 @ case 0
@@ -742,7 +742,7 @@ _0800F008:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F010: .4byte 0x02001080
+_0800F010: .4byte gLoadedRoomIndex
 _0800F014: .4byte 0x080CEE5C
 _0800F018: .4byte 0x080CEE74
 _0800F01C: .4byte 0x083FD7B4

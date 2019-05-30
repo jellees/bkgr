@@ -1834,7 +1834,7 @@ _0800B650: .4byte 0x0300330C
 _0800B654: .4byte 0x03003310
 _0800B658: .4byte 0x03003314
 _0800B65C: .4byte 0x03003318
-_0800B660: .4byte 0x03003576
+_0800B660: .4byte gMapPixelSizeY
 _0800B664:
 	movs r0, #4
 _0800B666:
@@ -1986,7 +1986,7 @@ _0800B780:
 	b _0800B7B0
 	.align 2, 0
 _0800B79C: .4byte 0x0300330C
-_0800B7A0: .4byte 0x03003574
+_0800B7A0: .4byte gMapPixelSizeX
 _0800B7A4:
 	adds r0, r2, #0
 	subs r0, #0x78
@@ -2060,7 +2060,7 @@ _0800B800:
 	b _0800B884
 	.align 2, 0
 _0800B838: .4byte 0x03003310
-_0800B83C: .4byte 0x03003576
+_0800B83C: .4byte gMapPixelSizeY
 _0800B840:
 	adds r0, r2, #0
 	subs r0, #0x50

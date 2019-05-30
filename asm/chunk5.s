@@ -462,7 +462,7 @@ _08010CC0:
 _08010CF4: .4byte 0x02001441
 _08010CF8: .4byte 0x0203DFD7
 _08010CFC: .4byte 0x0203DFDC
-_08010D00: .4byte 0x02001084
+_08010D00: .4byte gLoadedRoomBgm
 _08010D04: .4byte 0x0000FFFF
 _08010D08: .4byte 0x02001443
 _08010D0C: .4byte 0x02001444
@@ -551,10 +551,10 @@ _08010DD8: .4byte 0x00000907
 _08010DDC: .4byte gColorSpecEffectsSel
 _08010DE0: .4byte 0x0203EA8A
 _08010DE4: .4byte 0x080CEB5C
-_08010DE8: .4byte 0x03003344
+_08010DE8: .4byte gRoomHeader
 _08010DEC: .4byte 0x05000200
 _08010DF0: .4byte gIsSlideMiniGame
-_08010DF4: .4byte 0x02001080
+_08010DF4: .4byte gLoadedRoomIndex
 _08010DF8:
 	ldr r0, _08010E28
 	strb r4, [r0]
@@ -582,7 +582,7 @@ _08010E16:
 	.align 2, 0
 _08010E28: .4byte 0x0203DFD7
 _08010E2C: .4byte 0x0203DFDC
-_08010E30: .4byte 0x02001084
+_08010E30: .4byte gLoadedRoomBgm
 _08010E34: .4byte 0x0000FFFF
 _08010E38: .4byte 0x0200143F
 _08010E3C: .4byte 0x02001440
@@ -896,10 +896,10 @@ _08011104: .4byte gOBJTileCount
 _08011108: .4byte 0x020013B0
 _0801110C: .4byte 0x08064E9C
 _08011110: .4byte 0x086AD26C
-_08011114: .4byte 0x02001080
+_08011114: .4byte gLoadedRoomIndex
 _08011118: .4byte 0x02001400
 _0801111C: .4byte gPlayerPos
-_08011120: .4byte 0x03003576
+_08011120: .4byte gMapPixelSizeY
 _08011124: .4byte gKeysDown
 _08011128: .4byte gKeysPressed
 _0801112C: .4byte gPreviousKeys
@@ -910,7 +910,7 @@ _0801113C: .4byte 0x00000907
 _08011140: .4byte gColorSpecEffectsSel
 _08011144: .4byte 0x080CEB5C
 _08011148: .4byte 0x0203EA8A
-_0801114C: .4byte 0x03003344
+_0801114C: .4byte gRoomHeader
 _08011150: .4byte 0x05000200
 _08011154: .4byte gIsSlideMiniGame
 
@@ -1361,10 +1361,10 @@ _080114F8:
 _08011524: .4byte 0x08064EC0
 _08011528: .4byte 0x020013EC
 _0801152C: .4byte 0x086AD26C
-_08011530: .4byte 0x02001080
+_08011530: .4byte gLoadedRoomIndex
 _08011534: .4byte 0x02001400
 _08011538: .4byte gPlayerPos
-_0801153C: .4byte 0x03003576
+_0801153C: .4byte gMapPixelSizeY
 
 	.thumb
 sub_8011540: @ 0x08011540
@@ -2267,8 +2267,8 @@ _08011D28:
 	.align 2, 0
 _08011D40: .4byte 0x0200143E
 _08011D44: .4byte 0x0200143F
-_08011D48: .4byte 0x02001080
-_08011D4C: .4byte 0x02001082
+_08011D48: .4byte gLoadedRoomIndex
+_08011D4C: .4byte gLoadedRoomLevel
 _08011D50:
 	ldr r2, _08011D60
 	ldr r1, _08011D64
@@ -2372,8 +2372,8 @@ _08011E0C:
 	.align 2, 0
 _08011E24: .4byte 0x0200143E
 _08011E28: .4byte 0x0200143F
-_08011E2C: .4byte 0x02001080
-_08011E30: .4byte 0x02001082
+_08011E2C: .4byte gLoadedRoomIndex
+_08011E30: .4byte gLoadedRoomLevel
 _08011E34:
 	ldr r2, _08011E44
 	ldr r1, _08011E48
@@ -2470,8 +2470,8 @@ _08011EDC:
 	.align 2, 0
 _08011EF4: .4byte 0x0200143E
 _08011EF8: .4byte 0x0200143F
-_08011EFC: .4byte 0x02001080
-_08011F00: .4byte 0x02001082
+_08011EFC: .4byte gLoadedRoomIndex
+_08011F00: .4byte gLoadedRoomLevel
 _08011F04:
 	ldr r2, _08011F14
 	ldr r1, _08011F18
@@ -2571,8 +2571,8 @@ _08011FB4:
 	.align 2, 0
 _08011FCC: .4byte 0x0200143E
 _08011FD0: .4byte 0x0200143F
-_08011FD4: .4byte 0x02001080
-_08011FD8: .4byte 0x02001082
+_08011FD4: .4byte gLoadedRoomIndex
+_08011FD8: .4byte gLoadedRoomLevel
 _08011FDC:
 	ldr r2, _08011FF4
 	ldr r1, _08011FF8
@@ -2686,8 +2686,8 @@ _080120BA:
 	.align 2, 0
 _080120C4: .4byte 0x0200143E
 _080120C8: .4byte 0x0200143F
-_080120CC: .4byte 0x02001080
-_080120D0: .4byte 0x02001082
+_080120CC: .4byte gLoadedRoomIndex
+_080120D0: .4byte gLoadedRoomLevel
 _080120D4:
 	movs r0, #0
 sub_80120D6:
@@ -2720,7 +2720,7 @@ _08012104: .4byte 0x02001444
 _08012108: .4byte 0x02001448
 _0801210C: .4byte 0x0200144C
 _08012110: .4byte 0x02001443
-_08012114: .4byte 0x02001080
+_08012114: .4byte gLoadedRoomIndex
 
     .thumb
     .global Unused_InputFunction
@@ -3087,9 +3087,9 @@ _08012420: .4byte gOBJTileFramePtr
 _08012424: .4byte 0x06014000
 _08012428: .4byte gOBJTileCount
 _0801242C: .4byte 0x086AD26C
-_08012430: .4byte 0x02001080
+_08012430: .4byte gLoadedRoomIndex
 _08012434: .4byte gPlayerPos
-_08012438: .4byte 0x03003576
+_08012438: .4byte gMapPixelSizeY
 
 	.thumb
 sub_801243C: @ 0x0801243C
@@ -3237,7 +3237,7 @@ SetupBGOffsets: @ 0x08012538
 	ldr r2, _08012564
 	b _0801257A
 	.align 2, 0
-_08012558: .4byte 0x03003344
+_08012558: .4byte gRoomHeader
 _0801255C: .4byte 0x04000010
 _08012560: .4byte 0x02001460
 _08012564: .4byte 0x02001462
@@ -3331,8 +3331,8 @@ _08012608:
 	bx r0
 	.align 2, 0
 _08012618: .4byte 0x0400001C
-_0801261C: .4byte 0x03003341
-_08012620: .4byte 0x03003342
+_0801261C: .4byte gBGOffsetHorizontal
+_08012620: .4byte gBGOffsetVertical
 
 	.thumb
 sub_8012624: @ 0x08012624
@@ -3352,10 +3352,10 @@ sub_8012624: @ 0x08012624
 	strb r1, [r2]
 	bx lr
 	.align 2, 0
-_08012644: .4byte 0x03003341
-_08012648: .4byte 0x03003342
+_08012644: .4byte gBGOffsetHorizontal
+_08012648: .4byte gBGOffsetVertical
 _0801264C: .4byte 0x02002070
-_08012650: .4byte 0x03003340
+_08012650: .4byte gBGControlActions
 
 	.thumb
 sub_8012654: @ 0x08012654
@@ -3376,7 +3376,7 @@ sub_8012654: @ 0x08012654
 	strh r1, [r0]
 	b _08012684
 	.align 2, 0
-_08012674: .4byte 0x03003344
+_08012674: .4byte gRoomHeader
 _08012678: .4byte 0x04000010
 _0801267C:
 	ldr r0, _0801269C
@@ -3457,9 +3457,9 @@ _080126FC:
 	bx r0
 	.align 2, 0
 _08012714: .4byte 0x0400001C
-_08012718: .4byte 0x03003341
-_0801271C: .4byte 0x03003342
-_08012720: .4byte 0x03003340
+_08012718: .4byte gBGOffsetHorizontal
+_0801271C: .4byte gBGOffsetVertical
+_08012720: .4byte gBGControlActions
 _08012724: .4byte 0x02002070
 
 	.thumb
@@ -3478,7 +3478,7 @@ sub_8012728: @ 0x08012728
 	strh r0, [r1]
 	b _08012750
 	.align 2, 0
-_08012744: .4byte 0x03003344
+_08012744: .4byte gRoomHeader
 _08012748: .4byte 0x04000012
 _0801274C:
 	ldr r0, _08012764
@@ -3553,7 +3553,7 @@ sub_80127B8: @ 0x080127B8
 	strh r0, [r1]
 	b _080127E0
 	.align 2, 0
-_080127D4: .4byte 0x03003344
+_080127D4: .4byte gRoomHeader
 _080127D8: .4byte 0x04000010
 _080127DC:
 	ldr r0, _080127F4
@@ -3665,7 +3665,7 @@ _0801289C:
 	bx r0
 	.align 2, 0
 _080128A0: .4byte gColorSpecEffectsSel
-_080128A4: .4byte 0x03003344
+_080128A4: .4byte gRoomHeader
 
     .thumb
 	.global DisableBackgrounds
@@ -3723,7 +3723,7 @@ _08012904:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012908: .4byte 0x03003344
+_08012908: .4byte gRoomHeader
 _0801290C: .4byte 0x0000FEFF
 _08012910: .4byte 0x0000FDFF
 _08012914: .4byte 0x0000FBFF
@@ -3794,7 +3794,7 @@ _08012988:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012990: .4byte 0x03003344
+_08012990: .4byte gRoomHeader
 
     .thumb
     .global SetupRoom
@@ -3936,15 +3936,15 @@ _08012A8E:
 	.align 2, 0
 _08012AAC: .4byte 0x02002068
 _08012AB0: .4byte 0x030032A8
-_08012AB4: .4byte 0x02001080
-_08012AB8: .4byte 0x02001082
+_08012AB4: .4byte gLoadedRoomIndex
+_08012AB8: .4byte gLoadedRoomLevel
 _08012ABC: .4byte 0x080CF4EC
-_08012AC0: .4byte 0x02001084
+_08012AC0: .4byte gLoadedRoomBgm
 _08012AC4: .4byte 0x0203EA88
-_08012AC8: .4byte 0x03003344
-_08012ACC: .4byte 0x030033A8
-_08012AD0: .4byte 0x03003574
-_08012AD4: .4byte 0x03003576
+_08012AC8: .4byte gRoomHeader
+_08012ACC: .4byte gEnabledBGs
+_08012AD0: .4byte gMapPixelSizeX
+_08012AD4: .4byte gMapPixelSizeY
 _08012AD8: .4byte 0x0200208C
 _08012ADC: .4byte 0x0200208D
 _08012AE0: .4byte 0x0200208E
@@ -4038,7 +4038,7 @@ _08012B74:
 	beq _08012B9E
 	b _08012C2C
 	.align 2, 0
-_08012B94: .4byte 0x03003344
+_08012B94: .4byte gRoomHeader
 _08012B98:
 	cmp r0, #2
 	beq _08012BC0
@@ -4131,7 +4131,7 @@ _08012C2C:
 	b _08012E58
 	.align 2, 0
 _08012C4C: .4byte 0x06008000
-_08012C50: .4byte 0x03003344
+_08012C50: .4byte gRoomHeader
 _08012C54: .4byte 0x0200206C
 _08012C58:
 	cmp r0, #3
@@ -4158,7 +4158,7 @@ _08012C64:
 	.align 2, 0
 _08012C80: .4byte 0x04000008
 _08012C84: .4byte 0x0000FFF3
-_08012C88: .4byte 0x03003564
+_08012C88: .4byte gBG0TileSet
 _08012C8C:
 	ldrh r0, [r2]
 	movs r1, #8
@@ -4169,7 +4169,7 @@ _08012C8C:
 	str r0, [r1]
 	b _08012E5C
 	.align 2, 0
-_08012C9C: .4byte 0x03003564
+_08012C9C: .4byte gBG0TileSet
 _08012CA0:
 	movs r7, #3
 	ldr r3, _08012CC4
@@ -4192,7 +4192,7 @@ _08012CA0:
 _08012CC4: .4byte 0x04000008
 _08012CC8: .4byte 0x0000FFF3
 _08012CCC: .4byte 0x0400000A
-_08012CD0: .4byte 0x03003564
+_08012CD0: .4byte gBG0TileSet
 _08012CD4:
 	ldrh r0, [r3]
 	movs r1, #8
@@ -4210,7 +4210,7 @@ _08012CE0:
 	str r0, [r3, #4]
 	b _08012E5C
 	.align 2, 0
-_08012CF0: .4byte 0x03003564
+_08012CF0: .4byte gBG0TileSet
 _08012CF4:
 	ldr r2, _08012D04
 	ldrh r0, [r2]
@@ -4250,7 +4250,7 @@ _08012D34: .4byte 0x04000008
 _08012D38: .4byte 0x0000FFF3
 _08012D3C: .4byte 0x0400000A
 _08012D40: .4byte 0x0400000C
-_08012D44: .4byte 0x03003564
+_08012D44: .4byte gBG0TileSet
 _08012D48:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -4267,7 +4267,7 @@ _08012D54:
 	ldr r0, [r4, #0x20]
 	b _08012D74
 	.align 2, 0
-_08012D64: .4byte 0x03003564
+_08012D64: .4byte gBG0TileSet
 _08012D68:
 	ldr r2, _08012D84
 	ldrh r0, [r2]
@@ -4329,7 +4329,7 @@ _08012DD4: .4byte 0x04000008
 _08012DD8: .4byte 0x0000FFF3
 _08012DDC: .4byte 0x0400000A
 _08012DE0: .4byte 0x0400000E
-_08012DE4: .4byte 0x03003564
+_08012DE4: .4byte gBG0TileSet
 _08012DE8:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -4346,7 +4346,7 @@ _08012DF4:
 	ldr r0, [r4, #0x20]
 	b _08012E14
 	.align 2, 0
-_08012E04: .4byte 0x03003564
+_08012E04: .4byte gBG0TileSet
 _08012E08:
 	ldr r2, _08012E20
 	ldrh r0, [r2]
@@ -4416,7 +4416,7 @@ _08012E5C:
 	bx r0
 	.align 2, 0
 _08012E88: .4byte 0x0000F0FF
-_08012E8C: .4byte 0x03003340
+_08012E8C: .4byte gBGControlActions
 
     .thumb
 	.global sub_08012E90
@@ -4545,17 +4545,17 @@ _08012F6C:
 	.align 2, 0
 _08012F88: .4byte 0x02002068
 _08012F8C: .4byte 0x030032A8
-_08012F90: .4byte 0x02001080
-_08012F94: .4byte 0x02001082
+_08012F90: .4byte gLoadedRoomIndex
+_08012F94: .4byte gLoadedRoomLevel
 _08012F98: .4byte 0x080CF4EC
-_08012F9C: .4byte 0x02001084
+_08012F9C: .4byte gLoadedRoomBgm
 _08012FA0: .4byte 0x0203EA88
-_08012FA4: .4byte 0x03003344
-_08012FA8: .4byte 0x030033A8
+_08012FA4: .4byte gRoomHeader
+_08012FA8: .4byte gEnabledBGs
 _08012FAC: .4byte 0x0203DFB0
 _08012FB0: .4byte 0x05000200
-_08012FB4: .4byte 0x03003574
-_08012FB8: .4byte 0x03003576
+_08012FB4: .4byte gMapPixelSizeX
+_08012FB8: .4byte gMapPixelSizeY
 _08012FBC: .4byte 0x0200208C
 _08012FC0: .4byte 0x0200208D
 _08012FC4: .4byte 0x0200208E
@@ -4648,7 +4648,7 @@ _08013054:
 	beq _0801307E
 	b _0801310C
 	.align 2, 0
-_08013074: .4byte 0x03003344
+_08013074: .4byte gRoomHeader
 _08013078:
 	cmp r0, #2
 	beq _080130A0
@@ -4741,7 +4741,7 @@ _0801310C:
 	b _08013338
 	.align 2, 0
 _0801312C: .4byte 0x06008000
-_08013130: .4byte 0x03003344
+_08013130: .4byte gRoomHeader
 _08013134: .4byte 0x0200206C
 _08013138:
 	cmp r0, #3
@@ -4768,7 +4768,7 @@ _08013144:
 	.align 2, 0
 _08013160: .4byte 0x04000008
 _08013164: .4byte 0x0000FFF3
-_08013168: .4byte 0x03003564
+_08013168: .4byte gBG0TileSet
 _0801316C:
 	ldrh r0, [r2]
 	movs r1, #8
@@ -4779,7 +4779,7 @@ _0801316C:
 	str r0, [r1]
 	b _0801333C
 	.align 2, 0
-_0801317C: .4byte 0x03003564
+_0801317C: .4byte gBG0TileSet
 _08013180:
 	movs r6, #3
 	ldr r3, _080131A4
@@ -4802,7 +4802,7 @@ _08013180:
 _080131A4: .4byte 0x04000008
 _080131A8: .4byte 0x0000FFF3
 _080131AC: .4byte 0x0400000A
-_080131B0: .4byte 0x03003564
+_080131B0: .4byte gBG0TileSet
 _080131B4:
 	ldrh r0, [r3]
 	movs r1, #8
@@ -4820,7 +4820,7 @@ _080131C0:
 	str r0, [r3, #4]
 	b _0801333C
 	.align 2, 0
-_080131D0: .4byte 0x03003564
+_080131D0: .4byte gBG0TileSet
 _080131D4:
 	ldr r2, _080131E4
 	ldrh r0, [r2]
@@ -4860,7 +4860,7 @@ _08013214: .4byte 0x04000008
 _08013218: .4byte 0x0000FFF3
 _0801321C: .4byte 0x0400000A
 _08013220: .4byte 0x0400000C
-_08013224: .4byte 0x03003564
+_08013224: .4byte gBG0TileSet
 _08013228:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -4877,7 +4877,7 @@ _08013234:
 	ldr r0, [r4, #0x20]
 	b _08013254
 	.align 2, 0
-_08013244: .4byte 0x03003564
+_08013244: .4byte gBG0TileSet
 _08013248:
 	ldr r2, _08013264
 	ldrh r0, [r2]
@@ -4939,7 +4939,7 @@ _080132B4: .4byte 0x04000008
 _080132B8: .4byte 0x0000FFF3
 _080132BC: .4byte 0x0400000A
 _080132C0: .4byte 0x0400000E
-_080132C4: .4byte 0x03003564
+_080132C4: .4byte gBG0TileSet
 _080132C8:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -4956,7 +4956,7 @@ _080132D4:
 	ldr r0, [r4, #0x20]
 	b _080132F4
 	.align 2, 0
-_080132E4: .4byte 0x03003564
+_080132E4: .4byte gBG0TileSet
 _080132E8:
 	ldr r2, _08013300
 	ldrh r0, [r2]
@@ -5029,7 +5029,7 @@ _0801333C:
 _08013368: .4byte 0x0000F0FF
 _0801336C: .4byte 0x02001460
 _08013370: .4byte 0x02001462
-_08013374: .4byte 0x03003340
+_08013374: .4byte gBGControlActions
 
     .thumb
     .global sub_08013378
@@ -5171,15 +5171,15 @@ _08013472:
 	.align 2, 0
 _08013490: .4byte 0x02002068
 _08013494: .4byte 0x030032A8
-_08013498: .4byte 0x02001080
-_0801349C: .4byte 0x02001082
+_08013498: .4byte gLoadedRoomIndex
+_0801349C: .4byte gLoadedRoomLevel
 _080134A0: .4byte 0x080CF4EC
-_080134A4: .4byte 0x02001084
+_080134A4: .4byte gLoadedRoomBgm
 _080134A8: .4byte 0x0203EA88
-_080134AC: .4byte 0x03003344
-_080134B0: .4byte 0x030033A8
-_080134B4: .4byte 0x03003574
-_080134B8: .4byte 0x03003576
+_080134AC: .4byte gRoomHeader
+_080134B0: .4byte gEnabledBGs
+_080134B4: .4byte gMapPixelSizeX
+_080134B8: .4byte gMapPixelSizeY
 _080134BC: .4byte 0x0200208C
 _080134C0: .4byte 0x0200208D
 _080134C4: .4byte 0x0200208E
@@ -5273,7 +5273,7 @@ _08013558:
 	beq _08013582
 	b _08013610
 	.align 2, 0
-_08013578: .4byte 0x03003344
+_08013578: .4byte gRoomHeader
 _0801357C:
 	cmp r0, #2
 	beq _080135A4
@@ -5366,7 +5366,7 @@ _08013610:
 	b _0801383C
 	.align 2, 0
 _08013630: .4byte 0x06008000
-_08013634: .4byte 0x03003344
+_08013634: .4byte gRoomHeader
 _08013638: .4byte 0x0200206C
 _0801363C:
 	cmp r0, #3
@@ -5393,7 +5393,7 @@ _08013648:
 	.align 2, 0
 _08013664: .4byte 0x04000008
 _08013668: .4byte 0x0000FFF3
-_0801366C: .4byte 0x03003564
+_0801366C: .4byte gBG0TileSet
 _08013670:
 	ldrh r0, [r2]
 	movs r1, #8
@@ -5404,7 +5404,7 @@ _08013670:
 	str r0, [r1]
 	b _08013840
 	.align 2, 0
-_08013680: .4byte 0x03003564
+_08013680: .4byte gBG0TileSet
 _08013684:
 	movs r6, #3
 	ldr r3, _080136A8
@@ -5427,7 +5427,7 @@ _08013684:
 _080136A8: .4byte 0x04000008
 _080136AC: .4byte 0x0000FFF3
 _080136B0: .4byte 0x0400000A
-_080136B4: .4byte 0x03003564
+_080136B4: .4byte gBG0TileSet
 _080136B8:
 	ldrh r0, [r3]
 	movs r1, #8
@@ -5445,7 +5445,7 @@ _080136C4:
 	str r0, [r3, #4]
 	b _08013840
 	.align 2, 0
-_080136D4: .4byte 0x03003564
+_080136D4: .4byte gBG0TileSet
 _080136D8:
 	ldr r2, _080136E8
 	ldrh r0, [r2]
@@ -5485,7 +5485,7 @@ _08013718: .4byte 0x04000008
 _0801371C: .4byte 0x0000FFF3
 _08013720: .4byte 0x0400000A
 _08013724: .4byte 0x0400000C
-_08013728: .4byte 0x03003564
+_08013728: .4byte gBG0TileSet
 _0801372C:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -5502,7 +5502,7 @@ _08013738:
 	ldr r0, [r4, #0x20]
 	b _08013758
 	.align 2, 0
-_08013748: .4byte 0x03003564
+_08013748: .4byte gBG0TileSet
 _0801374C:
 	ldr r2, _08013768
 	ldrh r0, [r2]
@@ -5564,7 +5564,7 @@ _080137B8: .4byte 0x04000008
 _080137BC: .4byte 0x0000FFF3
 _080137C0: .4byte 0x0400000A
 _080137C4: .4byte 0x0400000E
-_080137C8: .4byte 0x03003564
+_080137C8: .4byte gBG0TileSet
 _080137CC:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -5581,7 +5581,7 @@ _080137D8:
 	ldr r0, [r4, #0x20]
 	b _080137F8
 	.align 2, 0
-_080137E8: .4byte 0x03003564
+_080137E8: .4byte gBG0TileSet
 _080137EC:
 	ldr r2, _08013804
 	ldrh r0, [r2]
@@ -5651,7 +5651,7 @@ _08013840:
 	bx r0
 	.align 2, 0
 _0801386C: .4byte 0x0000F0FF
-_08013870: .4byte 0x03003340
+_08013870: .4byte gBGControlActions
 
     .thumb
 SetupAnimationTiles: @ 0x08013874
@@ -5900,7 +5900,7 @@ sub_8013A10: @ 0x08013A10
 	movs r1, #0
 	b _08013A60
 	.align 2, 0
-_08013A4C: .4byte 0x03003344
+_08013A4C: .4byte gRoomHeader
 _08013A50: .4byte 0x0600E000
 _08013A54:
 	ldr r0, _08013B10
@@ -6005,8 +6005,8 @@ _08013AFA:
 	.align 2, 0
 _08013B10: .4byte 0x0600E000
 _08013B14: .4byte 0x0001FFC0
-_08013B18: .4byte 0x03003344
-_08013B1C: .4byte 0x03003564
+_08013B18: .4byte gRoomHeader
+_08013B1C: .4byte gBG0TileSet
 _08013B20: .4byte 0xFFFE003F
 _08013B24: .4byte 0xFFFE07FF
 _08013B28: .4byte 0x0600E800
@@ -6119,9 +6119,9 @@ _08013BDE:
 	.align 2, 0
 _08013BF4: .4byte 0x0600E800
 _08013BF8: .4byte 0x0001FFC0
-_08013BFC: .4byte 0x03003564
+_08013BFC: .4byte gBG0TileSet
 _08013C00: .4byte 0x0200206C
-_08013C04: .4byte 0x03003344
+_08013C04: .4byte gRoomHeader
 _08013C08: .4byte 0xFFFE003F
 _08013C0C: .4byte 0xFFFE07FF
 _08013C10: .4byte 0x0600F000
@@ -6232,9 +6232,9 @@ _08013CBC:
 	.align 2, 0
 _08013CD8: .4byte 0x0600F000
 _08013CDC: .4byte 0x0001FFC0
-_08013CE0: .4byte 0x03003564
+_08013CE0: .4byte gBG0TileSet
 _08013CE4: .4byte 0x0200206C
-_08013CE8: .4byte 0x03003344
+_08013CE8: .4byte gRoomHeader
 _08013CEC: .4byte 0xFFFE003F
 _08013CF0: .4byte 0xFFFE07FF
 _08013CF4: .4byte 0x0600F800
@@ -6342,9 +6342,9 @@ _08013DA6:
 	.align 2, 0
 _08013DB8: .4byte 0x0600F800
 _08013DBC: .4byte 0x0001FFC0
-_08013DC0: .4byte 0x03003564
+_08013DC0: .4byte gBG0TileSet
 _08013DC4: .4byte 0x0200206C
-_08013DC8: .4byte 0x03003344
+_08013DC8: .4byte gRoomHeader
 _08013DCC: .4byte 0xFFFE003F
 _08013DD0: .4byte 0xFFFE07FF
 
@@ -6372,7 +6372,7 @@ sub_8013DD4: @ 0x08013DD4
 	movs r1, #0
 	b _08013E76
 	.align 2, 0
-_08013DFC: .4byte 0x03003344
+_08013DFC: .4byte gRoomHeader
 _08013E00: .4byte 0x0600E000
 _08013E04:
 	ldr r4, _08014088
@@ -6717,8 +6717,8 @@ _08014078:
 	bx r0
 	.align 2, 0
 _08014088: .4byte 0x0001FFC0
-_0801408C: .4byte 0x03003344
-_08014090: .4byte 0x03003564
+_0801408C: .4byte gRoomHeader
+_08014090: .4byte gBG0TileSet
 _08014094: .4byte 0xFFFE003F
 _08014098: .4byte 0xFFFE07FF
 _0801409C: .4byte 0x0600E800
@@ -6764,7 +6764,7 @@ _080140E6:
 	adds r0, r1, #0
 	b _080140F8
 	.align 2, 0
-_080140EC: .4byte 0x03003576
+_080140EC: .4byte gMapPixelSizeY
 _080140F0: .4byte gCameraPixelY
 _080140F4:
 	ldr r0, _08014140
@@ -6807,11 +6807,11 @@ _080140F8:
 	b _08014162
 	.align 2, 0
 _08014140: .4byte gCameraPixelY
-_08014144: .4byte 0x03003342
+_08014144: .4byte gBGOffsetVertical
 _08014148: .4byte gCameraPixelX
-_0801414C: .4byte 0x0300355C
-_08014150: .4byte 0x03003341
-_08014154: .4byte 0x03003340
+_0801414C: .4byte gBGMapOffsetVertical
+_08014150: .4byte gBGOffsetHorizontal
+_08014154: .4byte gBGControlActions
 _08014158:
 	ldr r0, _08014168
 	ldrb r1, [r0]
@@ -6823,7 +6823,7 @@ _08014162:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08014168: .4byte 0x03003340
+_08014168: .4byte gBGControlActions
 
     .thumb
 	.global UpdateMapDown
@@ -6863,7 +6863,7 @@ _080141A6:
 	adds r2, r1, #0
 	b _080141BA
 	.align 2, 0
-_080141AC: .4byte 0x03003576
+_080141AC: .4byte gMapPixelSizeY
 _080141B0: .4byte gCameraPixelY
 _080141B4:
 	ldr r0, _08014218
@@ -6918,12 +6918,12 @@ _080141BA:
 	b _0801423E
 	.align 2, 0
 _08014218: .4byte gCameraPixelY
-_0801421C: .4byte 0x03003342
+_0801421C: .4byte gBGOffsetVertical
 _08014220: .4byte gCameraPixelX
-_08014224: .4byte 0x0300355C
-_08014228: .4byte 0x03003341
+_08014224: .4byte gBGMapOffsetVertical
+_08014228: .4byte gBGOffsetHorizontal
 _0801422C: .4byte 0xFFFE07FF
-_08014230: .4byte 0x03003340
+_08014230: .4byte gBGControlActions
 _08014234:
 	ldr r0, _08014244
 	ldrb r1, [r0]
@@ -6935,7 +6935,7 @@ _0801423E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08014244: .4byte 0x03003340
+_08014244: .4byte gBGControlActions
 
     .thumb
 	.global UpdateMapLeft
@@ -6975,7 +6975,7 @@ _08014282:
 	adds r0, r1, #0
 	b _08014294
 	.align 2, 0
-_08014288: .4byte 0x03003574
+_08014288: .4byte gMapPixelSizeX
 _0801428C: .4byte gCameraPixelX
 _08014290:
 	ldr r0, _080142DC
@@ -7018,11 +7018,11 @@ _08014294:
 	b _080142FE
 	.align 2, 0
 _080142DC: .4byte gCameraPixelX
-_080142E0: .4byte 0x03003341
+_080142E0: .4byte gBGOffsetHorizontal
 _080142E4: .4byte gCameraPixelY
-_080142E8: .4byte 0x03003560
-_080142EC: .4byte 0x03003342
-_080142F0: .4byte 0x03003340
+_080142E8: .4byte gBGMapOffsetHorizontal
+_080142EC: .4byte gBGOffsetVertical
+_080142F0: .4byte gBGControlActions
 _080142F4:
 	ldr r0, _08014304
 	ldrb r1, [r0]
@@ -7034,7 +7034,7 @@ _080142FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08014304: .4byte 0x03003340
+_08014304: .4byte gBGControlActions
 
     .thumb
 	.global UpdateMapRight
@@ -7074,7 +7074,7 @@ _08014342:
 	adds r2, r1, #0
 	b _08014356
 	.align 2, 0
-_08014348: .4byte 0x03003574
+_08014348: .4byte gMapPixelSizeX
 _0801434C: .4byte gCameraPixelX
 _08014350:
 	ldr r0, _080143B0
@@ -7126,13 +7126,13 @@ _08014356:
 	b _080143DA
 	.align 2, 0
 _080143B0: .4byte gCameraPixelX
-_080143B4: .4byte 0x03003341
+_080143B4: .4byte gBGOffsetHorizontal
 _080143B8: .4byte gCameraPixelY
-_080143BC: .4byte 0x03003560
-_080143C0: .4byte 0x03003342
+_080143BC: .4byte gBGMapOffsetHorizontal
+_080143C0: .4byte gBGOffsetVertical
 _080143C4: .4byte 0xFFFE003F
 _080143C8: .4byte 0x0001FFC0
-_080143CC: .4byte 0x03003340
+_080143CC: .4byte gBGControlActions
 _080143D0:
 	ldr r0, _080143E0
 	ldrb r1, [r0]
@@ -7144,7 +7144,7 @@ _080143DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080143E0: .4byte 0x03003340
+_080143E0: .4byte gBGControlActions
 
     .thumb
 BGFillBufferVertical: @ 0x080143E4
@@ -7658,10 +7658,10 @@ _0801476E:
 	ands r0, r6
 	b _080147F0
 	.align 2, 0
-_080147E0: .4byte 0x03003344
-_080147E4: .4byte 0x03003564
-_080147E8: .4byte 0x030033AA
-_080147EC: .4byte 0x030033EA
+_080147E0: .4byte gRoomHeader
+_080147E4: .4byte gBG0TileSet
+_080147E8: .4byte gBG0VerticalBuffer
+_080147EC: .4byte gBG1VerticalBuffer
 _080147F0:
 	lsls r0, r0, #1
 	lsls r1, r1, #5
@@ -8548,10 +8548,10 @@ _08014E3C:
 	strh r0, [r2, #8]
 	b _08014EE4
 	.align 2, 0
-_08014ED4: .4byte 0x03003564
-_08014ED8: .4byte 0x0300342A
-_08014EDC: .4byte 0x03003344
-_08014EE0: .4byte 0x0300346A
+_08014ED4: .4byte gBG0TileSet
+_08014ED8: .4byte gBG2VerticalBuffer
+_08014EDC: .4byte gRoomHeader
+_08014EE0: .4byte gBG3VerticalBuffer
 _08014EE4:
 	adds r3, #1
 	asrs r0, r3, #2
@@ -9424,10 +9424,10 @@ _08015486:
 	ldrh r0, [r3, #0xa]
 	b _080155B8
 	.align 2, 0
-_080155A8: .4byte 0x03003344
-_080155AC: .4byte 0x03003564
-_080155B0: .4byte 0x030034AA
-_080155B4: .4byte 0x030034D6
+_080155A8: .4byte gRoomHeader
+_080155AC: .4byte gBG0TileSet
+_080155B0: .4byte gBG0HorizontalBuffer
+_080155B4: .4byte gBG1HorizontalBuffer
 _080155B8:
 	muls r0, r1, r0
 	lsls r0, r0, #1
@@ -10138,9 +10138,9 @@ _080159FE:
 	ldrh r0, [r0]
 	b _08015B48
 	.align 2, 0
-_08015B3C: .4byte 0x03003564
-_08015B40: .4byte 0x03003502
-_08015B44: .4byte 0x0300352E
+_08015B3C: .4byte gBG0TileSet
+_08015B40: .4byte gBG2HorizontalBuffer
+_08015B44: .4byte gBG3HorizontalBuffer
 _08015B48:
 	strh r0, [r3, #0x12]
 	adds r4, #1
@@ -10356,7 +10356,7 @@ sub_08015CC0: @ 0x08015CC0
 	b _08015F48
 	.align 2, 0
 _08015CE8: .4byte 0x0200146C
-_08015CEC: .4byte 0x03003340
+_08015CEC: .4byte gBGControlActions
 _08015CF0:
 	cmp r2, #2
 	bne _08015CF6
@@ -10380,7 +10380,7 @@ _08015CFE:
 	.2byte 0xEE00, 0xEE00
 	b _08015D2E
 	.align 2, 0
-_08015D18: .4byte 0x03003344
+_08015D18: .4byte gRoomHeader
 _08015D1C: .4byte 0x02002080
 _08015D20:
 	ldr r1, _08015D70
@@ -10443,7 +10443,7 @@ _08015D90:
 	.2byte 0xEE00, 0xEE00
 	b _08015DBE
 	.align 2, 0
-_08015DA8: .4byte 0x03003344
+_08015DA8: .4byte gRoomHeader
 _08015DAC: .4byte 0x02002080
 _08015DB0:
 	ldr r1, _08015E00
@@ -10506,7 +10506,7 @@ _08015E20:
 	.2byte 0xEE00, 0xEE00
 	b _08015E4E
 	.align 2, 0
-_08015E38: .4byte 0x03003344
+_08015E38: .4byte gRoomHeader
 _08015E3C: .4byte 0x02002080
 _08015E40:
 	ldr r1, _08015E98
@@ -10575,7 +10575,7 @@ _08015EBC:
 	.2byte 0xEE00, 0xEE00
 	b _08015EEA
 	.align 2, 0
-_08015ED4: .4byte 0x03003344
+_08015ED4: .4byte gRoomHeader
 _08015ED8: .4byte 0x02002080
 _08015EDC:
 	ldr r1, _08015F28
@@ -10807,7 +10807,7 @@ _0801609A:
 	ldr r0, [r2, #0x38]
 	b _080160B4
 	.align 2, 0
-_080160A8: .4byte 0x03003344
+_080160A8: .4byte gRoomHeader
 _080160AC: .4byte 0x02002080
 _080160B0:
 	ldr r1, _080160C8
@@ -10837,7 +10837,7 @@ _080160D8:
 	ldr r0, [r2, #0x38]
 	b _080160F4
 	.align 2, 0
-_080160E8: .4byte 0x03003344
+_080160E8: .4byte gRoomHeader
 _080160EC: .4byte 0x02002080
 _080160F0:
 	ldr r1, _08016108
@@ -10867,7 +10867,7 @@ _08016118:
 	ldr r0, [r2, #0x38]
 	b _08016134
 	.align 2, 0
-_08016128: .4byte 0x03003344
+_08016128: .4byte gRoomHeader
 _0801612C: .4byte 0x02002080
 _08016130:
 	ldr r1, _08016148
@@ -10897,7 +10897,7 @@ _08016158:
 	ldr r0, [r2, #0x38]
 	b _08016174
 	.align 2, 0
-_08016168: .4byte 0x03003344
+_08016168: .4byte gRoomHeader
 _0801616C: .4byte 0x02002080
 _08016170:
 	ldr r1, _080161A4
@@ -10977,7 +10977,7 @@ _080161F6:
 	ldr r3, [r1, #0x38]
 	b _0801620A
 	.align 2, 0
-_08016204: .4byte 0x03003344
+_08016204: .4byte gRoomHeader
 _08016208:
 	ldr r3, [r1, #0x3c]
 _0801620A:
@@ -11004,7 +11004,7 @@ _0801620A:
 	b _08016254
 	.align 2, 0
 _08016238: .4byte 0x0600E380
-_0801623C: .4byte 0x03003344
+_0801623C: .4byte gRoomHeader
 _08016240: .4byte 0x04000010
 _08016244:
 	ldr r1, _08016268
@@ -11028,8 +11028,8 @@ _08016254:
 	b _0801636E
 	.align 2, 0
 _08016268: .4byte 0x04000010
-_0801626C: .4byte 0x03003341
-_08016270: .4byte 0x03003342
+_0801626C: .4byte gBGOffsetHorizontal
+_08016270: .4byte gBGOffsetVertical
 _08016274: .4byte 0x04000050
 _08016278: .4byte gColorSpecEffectsSel
 _0801627C:
@@ -11040,7 +11040,7 @@ _0801627C:
 	ldr r3, [r1, #0x38]
 	b _0801628E
 	.align 2, 0
-_08016288: .4byte 0x03003344
+_08016288: .4byte gRoomHeader
 _0801628C:
 	ldr r3, [r1, #0x3c]
 _0801628E:
@@ -11067,7 +11067,7 @@ _0801628E:
 	b _080162D8
 	.align 2, 0
 _080162BC: .4byte 0x0600EB80
-_080162C0: .4byte 0x03003344
+_080162C0: .4byte gRoomHeader
 _080162C4: .4byte 0x04000014
 _080162C8:
 	ldr r1, _080162EC
@@ -11091,8 +11091,8 @@ _080162D8:
 	b _0801636E
 	.align 2, 0
 _080162EC: .4byte 0x04000014
-_080162F0: .4byte 0x03003341
-_080162F4: .4byte 0x03003342
+_080162F0: .4byte gBGOffsetHorizontal
+_080162F4: .4byte gBGOffsetVertical
 _080162F8: .4byte 0x04000050
 _080162FC: .4byte gColorSpecEffectsSel
 _08016300:
@@ -11103,7 +11103,7 @@ _08016300:
 	ldr r3, [r1, #0x38]
 	b _08016312
 	.align 2, 0
-_0801630C: .4byte 0x03003344
+_0801630C: .4byte gRoomHeader
 _08016310:
 	ldr r3, [r1, #0x3c]
 _08016312:
@@ -11130,7 +11130,7 @@ _08016312:
 	b _0801635C
 	.align 2, 0
 _08016340: .4byte 0x0600F380
-_08016344: .4byte 0x03003344
+_08016344: .4byte gRoomHeader
 _08016348: .4byte 0x04000018
 _0801634C:
 	ldr r1, _08016374
@@ -11157,8 +11157,8 @@ _0801636E:
 	b _0801640C
 	.align 2, 0
 _08016374: .4byte 0x04000018
-_08016378: .4byte 0x03003341
-_0801637C: .4byte 0x03003342
+_08016378: .4byte gBGOffsetHorizontal
+_0801637C: .4byte gBGOffsetVertical
 _08016380: .4byte 0x04000050
 _08016384: .4byte gColorSpecEffectsSel
 _08016388:
@@ -11169,7 +11169,7 @@ _08016388:
 	ldr r3, [r1, #0x38]
 	b _0801639A
 	.align 2, 0
-_08016394: .4byte 0x03003344
+_08016394: .4byte gRoomHeader
 _08016398:
 	ldr r3, [r1, #0x3c]
 _0801639A:
@@ -11196,7 +11196,7 @@ _0801639A:
 	b _080163E4
 	.align 2, 0
 _080163C8: .4byte 0x0600FB80
-_080163CC: .4byte 0x03003344
+_080163CC: .4byte gRoomHeader
 _080163D0: .4byte 0x0400001C
 _080163D4:
 	ldr r1, _080163F4
@@ -11217,8 +11217,8 @@ _080163E4:
 	b _0801640C
 	.align 2, 0
 _080163F4: .4byte 0x0400001C
-_080163F8: .4byte 0x03003341
-_080163FC: .4byte 0x03003342
+_080163F8: .4byte gBGOffsetHorizontal
+_080163FC: .4byte gBGOffsetVertical
 _08016400: .4byte 0x04000050
 _08016404: .4byte gColorSpecEffectsSel
 _08016408:
@@ -15381,7 +15381,7 @@ _080187EC: .4byte dword_20020B4
 _080187F0: .4byte gPlayerStateSettings
 _080187F4: .4byte gPlayerState
 _080187F8: .4byte 0x02002090
-_080187FC: .4byte 0x03003340
+_080187FC: .4byte gBGControlActions
 _08018800: .4byte dword_2000FC8
 _08018804: .4byte 0x080CC290
 _08018808: .4byte gPlayerSprite
@@ -16061,7 +16061,7 @@ _08018E0A:
 	b _08018E58
 	.align 2, 0
 _08018E3C: .4byte gPlayerSprite
-_08018E40: .4byte 0x03003342
+_08018E40: .4byte gBGOffsetVertical
 _08018E44: .4byte dword_20020B4
 _08018E48: .4byte byte_203EA89
 _08018E4C: .4byte 0x080CE440

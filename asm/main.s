@@ -660,10 +660,10 @@ _0800A2F2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A304: .4byte 0x02001082
+_0800A304: .4byte gLoadedRoomLevel
 _0800A308: .4byte 0x020010A8
 _0800A30C: .4byte 0x020010A9
-_0800A310: .4byte 0x02001080
+_0800A310: .4byte gLoadedRoomIndex
 _0800A314: .4byte 0x020010AA
 _0800A318: .4byte gPlayerSprite
 _0800A31C: .4byte byte_3002950
@@ -1107,7 +1107,7 @@ _0800A6B8: .4byte word_20010AC
 _0800A6BC: .4byte 0x0200112A
 _0800A6C0: .4byte 0x020010B1
 _0800A6C4: .4byte gPaletteEffects
-_0800A6C8: .4byte 0x02001084
+_0800A6C8: .4byte gLoadedRoomBgm
 _0800A6CC: .4byte 0x0000FFFF
 _0800A6D0: .4byte 0x080CC8C4
 _0800A6D4: .4byte 0x0200108C
@@ -1147,5 +1147,5 @@ _0800A722:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A738: .4byte 0x02001082
+_0800A738: .4byte gLoadedRoomLevel
 _0800A73C: .4byte 0x020010AA

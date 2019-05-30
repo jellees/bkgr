@@ -22,7 +22,7 @@ InitPaletteEffects: @ 0x0800F830
 	b _0800F8A8
 	.align 2, 0
 _0800F84C: .4byte gPaletteEffects
-_0800F850: .4byte 0x02001080
+_0800F850: .4byte gLoadedRoomIndex
 _0800F854:
 	cmp r0, #0x15
 	beq _0800F85C
@@ -73,7 +73,7 @@ _0800F8A8:
 _0800F8B0: .4byte gThunderPalette
 _0800F8B4: .4byte 0x083FCD14
 _0800F8B8: .4byte gBackupBGPalette
-_0800F8BC: .4byte 0x03003344
+_0800F8BC: .4byte gRoomHeader
 _0800F8C0: .4byte gThunderTimer
 _0800F8C4: .4byte gThunderActive
 _0800F8C8: .4byte gThunderSfxTimer

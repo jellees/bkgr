@@ -30,6 +30,11 @@ SECTIONS
 		. = 0x00001044;
 		gGameStatus = .; . += 0x20;
 
+		. = 0x00001080;
+		gLoadedRoomIndex = .; . += 2;
+		gLoadedRoomLevel = .; . += 2;
+		gLoadedRoomBgm = .; . += 2;
+
 		. = 0x000010AC;
 		word_20010AC = .; . += 2;
 
@@ -140,6 +145,31 @@ SECTIONS
 		dword_30032CC = .; . += 4;
 		gPlayerPos = .; . += 0xC;
 		dword_30032DC = .; . += 0xC;
+
+		. = 0x00003340;
+		gBGControlActions = .; . += 1;
+		gBGOffsetHorizontal = .; . += 1;
+		gBGOffsetVertical = .; . += 1;
+		. += 1; /* padding */
+		gRoomHeader = .; . += 0x64;
+		gEnabledBGs = .; . += 2;
+		gBG0VerticalBuffer = .; . += 0x40;
+		gBG1VerticalBuffer = .; . += 0x40;
+		gBG2VerticalBuffer = .; . += 0x40;
+		gBG3VerticalBuffer = .; . += 0x40;
+		gBG0HorizontalBuffer = .; . += 0x2C;
+		gBG1HorizontalBuffer = .; . += 0x2C;
+		gBG2HorizontalBuffer = .; . += 0x2C;
+		gBG3HorizontalBuffer = .; . += 0x2C;
+		. += 2;
+		gBGMapOffsetVertical = .; . += 4;
+		gBGMapOffsetHorizontal = .; . += 4;
+		gBG0TileSet = .; . += 4;
+		gBG1TileSet = .; . += 4;
+		gBG2TileSet = .; . += 4;
+		gBG3TileSet = .; . += 4;
+		gMapPixelSizeX = .; . += 2;
+		gMapPixelSizeY = .; . += 2;
 
 		. = 0x0000358C;
 		gOAMBuffer2 = .; . += 0x400;
