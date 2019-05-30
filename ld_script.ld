@@ -232,6 +232,7 @@ SECTIONS
 		asm/chunk3.o(.text);
 		asm/savefile.o(.text);
 		asm/chunk4.o(.text);
+		src/palette_effects.o(.text);
 		asm/palette_effects.o(.text);
 		asm/debug.o(.text);
 		asm/chunk5.o(.text);

@@ -3,80 +3,80 @@
 
     .text
 
-    .thumb
-    .global InitPaletteEffects
-InitPaletteEffects: @ 0x0800F830
-	push {r4, r5, lr}
-	ldr r1, _0800F84C
-	movs r5, #0
-	str r5, [r1]
-	ldr r0, _0800F850
-	ldrh r0, [r0]
-	adds r2, r1, #0
-	cmp r0, #0x14
-	beq _0800F878
-	cmp r0, #0x14
-	bgt _0800F854
-	cmp r0, #0x11
-	beq _0800F85C
-	b _0800F8A8
-	.align 2, 0
-_0800F84C: .4byte gPaletteEffects
-_0800F850: .4byte gLoadedRoomIndex
-_0800F854:
-	cmp r0, #0x15
-	beq _0800F85C
-	cmp r0, #0x20
-	bne _0800F8A8
-_0800F85C:
-	movs r0, #1
-	str r0, [r2]
-	ldr r1, _0800F870
-	movs r0, #0
-	str r0, [r1]
-	ldr r4, _0800F874
-	movs r0, #8
-	movs r1, #0x18
-	b _0800F8A2
-	.align 2, 0
-_0800F870: .4byte gLavaPaletteIndex
-_0800F874: .4byte gLavaTimer
-_0800F878:
-	movs r0, #2
-	str r0, [r1]
-	ldr r1, _0800F8B0
-	ldr r0, _0800F8B4
-	str r0, [r1]
-	ldr r1, _0800F8B8
-	ldr r0, _0800F8BC
-	ldr r0, [r0, #0x18]
-	str r0, [r1]
-	ldr r4, _0800F8C0
-	movs r0, #5
-	movs r1, #0xf0
-	bl RandomMinMax
-	str r0, [r4]
-	ldr r0, _0800F8C4
-	str r5, [r0]
-	ldr r4, _0800F8C8
-	movs r1, #0x96
-	lsls r1, r1, #1
-	movs r0, #0xb4
-_0800F8A2:
-	bl RandomMinMax
-	str r0, [r4]
-_0800F8A8:
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800F8B0: .4byte gThunderPalette
-_0800F8B4: .4byte 0x083FCD14
-_0800F8B8: .4byte gBackupBGPalette
-_0800F8BC: .4byte gRoomHeader
-_0800F8C0: .4byte gThunderTimer
-_0800F8C4: .4byte gThunderActive
-_0800F8C8: .4byte gThunderSfxTimer
+//     .thumb
+//     .global InitPaletteEffects
+// InitPaletteEffects: @ 0x0800F830
+// 	push {r4, r5, lr}
+// 	ldr r1, _0800F84C
+// 	movs r5, #0
+// 	str r5, [r1]
+// 	ldr r0, _0800F850
+// 	ldrh r0, [r0]
+// 	adds r2, r1, #0
+// 	cmp r0, #0x14
+// 	beq _0800F878
+// 	cmp r0, #0x14
+// 	bgt _0800F854
+// 	cmp r0, #0x11
+// 	beq _0800F85C
+// 	b _0800F8A8
+// 	.align 2, 0
+// _0800F84C: .4byte gPaletteEffects
+// _0800F850: .4byte gLoadedRoomIndex
+// _0800F854:
+// 	cmp r0, #0x15
+// 	beq _0800F85C
+// 	cmp r0, #0x20
+// 	bne _0800F8A8
+// _0800F85C:
+// 	movs r0, #1
+// 	str r0, [r2]
+// 	ldr r1, _0800F870
+// 	movs r0, #0
+// 	str r0, [r1]
+// 	ldr r4, _0800F874
+// 	movs r0, #8
+// 	movs r1, #0x18
+// 	b _0800F8A2
+// 	.align 2, 0
+// _0800F870: .4byte gLavaPaletteIndex
+// _0800F874: .4byte gLavaTimer
+// _0800F878:
+// 	movs r0, #2
+// 	str r0, [r1]
+// 	ldr r1, _0800F8B0
+// 	ldr r0, _0800F8B4
+// 	str r0, [r1]
+// 	ldr r1, _0800F8B8
+// 	ldr r0, _0800F8BC
+// 	ldr r0, [r0, #0x18]
+// 	str r0, [r1]
+// 	ldr r4, _0800F8C0
+// 	movs r0, #5
+// 	movs r1, #0xf0
+// 	bl RandomMinMax
+// 	str r0, [r4]
+// 	ldr r0, _0800F8C4
+// 	str r5, [r0]
+// 	ldr r4, _0800F8C8
+// 	movs r1, #0x96
+// 	lsls r1, r1, #1
+// 	movs r0, #0xb4
+// _0800F8A2:
+// 	bl RandomMinMax
+// 	str r0, [r4]
+// _0800F8A8:
+// 	pop {r4, r5}
+// 	pop {r0}
+// 	bx r0
+// 	.align 2, 0
+// _0800F8B0: .4byte gThunderPalette
+// _0800F8B4: .4byte dThunderPalette
+// _0800F8B8: .4byte gBackupBGPalette
+// _0800F8BC: .4byte gRoomHeader
+// _0800F8C0: .4byte gThunderTimer
+// _0800F8C4: .4byte gThunderActive
+// _0800F8C8: .4byte gThunderSfxTimer
 
     .thumb
     .global HandlePaletteEffects
