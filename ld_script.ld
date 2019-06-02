@@ -100,6 +100,9 @@ SECTIONS
 
 		. = 0x0003EA89;
 		byte_203EA89 = .; . += 1;
+		gBgmVolumeIndex = .; . += 1;
+		gSfxVolumeIndex = .; . += 1;
+		byte_203EA8C = .; . += 1;
 
 		. = 0x0003F998;
 		word_203F998 = .; . += 2;
@@ -233,7 +236,6 @@ SECTIONS
 		asm/savefile.o(.text);
 		asm/chunk4.o(.text);
 		src/palette_effects.o(.text);
-		asm/palette_effects.o(.text);
 		asm/debug.o(.text);
 		asm/chunk5.o(.text);
 		asm/alloc.o(.text);

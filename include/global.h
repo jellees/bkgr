@@ -86,4 +86,11 @@ struct RoomHeader {
 	u8 isControllableBG3;
 };
 
+
+struct struct_80CE440 {
+    u16 field_0;
+    u8 field_2[2];
+    u32 field_4;
+};
+
 #endif
