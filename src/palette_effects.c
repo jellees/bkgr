@@ -1,41 +1,38 @@
 #include "global.h"
 
-extern s32 gPaletteEffects;
 extern u16 gLoadedRoomIndex;
-
-extern u32 gLavaPaletteIndex;
-extern u32 gLavaTimer;
-
-extern u16* gThunderPalette;
 extern u16 dThunderPalette[];
-extern u16* gBackupBGPalette;
 extern struct RoomHeader gRoomHeader;
-extern u32 gThunderTimer;
-extern u32 gThunderActive;
-extern u32 gThunderSfxTimer;
-extern s32 gPaletteEffectsSave;
-
 extern u8 gIsPaletteEffectsActive;
 extern void* dLavaPaletteAnims[];
-
 extern u8 byte_203EA89;
 extern struct struct_80CE440 word_80CE440[];
 extern u32 dword_806483C[];
 extern u8 byte_203EA8C;
+
+IWRAM_DATA s32 gPaletteEffects;
+IWRAM_DATA s32 gPaletteEffectsSave;
+IWRAM_DATA u32 gLavaPaletteIndex;
+IWRAM_DATA u32 gLavaTimer;
+IWRAM_DATA u16* gThunderPalette;
+IWRAM_DATA u16* gBackupBGPalette;
+IWRAM_DATA u32 gThunderTimer;
+IWRAM_DATA u32 gThunderActive;
+IWRAM_DATA u32 gThunderSfxTimer;
 
 void InitPaletteEffects()
 {
     gPaletteEffects = 0;
     switch (gLoadedRoomIndex)
     {
-        case 17:
-        case 21:
-        case 32:
+        case ROOM_FURNSECTION:
+        case ROOM_FURNSTORE:
+        case ROOM_POISONROOM:
             gPaletteEffects = 1;
             gLavaPaletteIndex = 0;
             gLavaTimer = RandomMinMax(8, 24);
             break;
-        case 20:
+        case ROOM_BOARDWALK:
             gPaletteEffects = 2;
             gThunderPalette = dThunderPalette;
             gBackupBGPalette = gRoomHeader.backgroundPalette;

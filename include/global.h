@@ -93,4 +93,43 @@ struct struct_80CE440 {
     u32 field_4;
 };
 
+#define ROOM_SPIRALBOTTOM   0
+#define ROOM_SPIRALMIDDLE   1
+#define ROOM_SPIRALTOP	    2
+#define ROOM_QUARRY		    3
+#define ROOM_LOWERFARM	    4
+#define ROOM_UPPERFARM	    5
+#define ROOM_MUMBOHUT	    6
+#define ROOM_HONEYB		    7
+#define ROOM_BEACHSTART	    8
+#define ROOM_UNDERCORAL	    9
+#define ROOM_OCTOSHOOT	    10
+#define ROOM_COWBOSS	    11
+#define ROOM_BEACHSLIDE	    12
+#define ROOM_BEACHTOP	    13
+#define ROOM_BEACHSHOOT	    14
+#define ROOM_FJORD		    15
+#define ROOM_SKIDOOS	    16
+#define ROOM_FURNSECTION    17
+#define ROOM_GRUNTY		    18
+#define ROOM_HOUSEROOMS	    19
+#define ROOM_BOARDWALK	    20
+#define ROOM_FURNSTORE	    21
+#define ROOM_HARBOUR	    22
+#define ROOM_CASTLEINNER    23
+#define ROOM_INSIDES	    24
+#define ROOM_OCTOPUS	    25
+#define ROOM_SANDAREA	    26
+#define ROOM_VILLAGE	    27
+#define ROOM_BOATFIGHT	    28
+#define ROOM_JIGGYTEMPLE    29
+#define ROOM_DIVESPOT	    30
+#define ROOM_CANDLEPUZ	    31
+#define ROOM_POISONROOM	    32
+#define ROOM_SWAMPGAS	    33
+#define ROOM_FRONTEND	    34
+#define ROOM_GRUNTYSHOOT    35
+#define ROOM_FJORDCAVERN    36
+#define ROOM_SHEEPDIP	    37
+
 #endif
