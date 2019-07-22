@@ -30,9 +30,9 @@ int AgbMain()
 
 //EWRAM
 extern u16 gColorSpecEffectsSel;
-extern u8 byte_2000F55;
-extern u8 byte_2000F57;
-extern u8 byte_2000F5D;
+extern u8 byte_2000F55; // possibly bool8
+extern u8 byte_2000F57; // possibly bool8
+extern bool8 byte_2000F5D;
 extern u8 gUnused_ExecUnusedInputFunc;
 
 extern u32 gPlayerSprite; //type may be wrong
@@ -41,7 +41,7 @@ extern u32 gPlayerShadowSprite; //type may be wrong
 extern u32 dword_2000FC8;
 extern struct GameStatus gGameStatus;
 extern u16 word_20010AC;
-extern u8 byte_200110C;
+extern u8 byte_200110C; // possibly bool8
 extern s16 gCameraPixelX;
 extern s16 gCameraPixelY;
 extern u32 dword_2001470;
@@ -49,17 +49,17 @@ extern u16 gPlayerState;
 extern u8 byte_20020B1;
 extern s32 dword_20020B4;
 extern s32 dword_20020B8;
-extern u8 byte_20020BC;
+extern u8 byte_20020BC; // possibily bool8
 extern u16 gPlayerStateSettings[];
 extern u8 byte_20021F0; // possibly bool8
-extern u8 byte_20021F8;
-extern u8 byte_2002E4A;
+extern u8 byte_20021F8; // possibily bool8
+extern bool8 byte_2002E4A;
 extern bool8 gIsPaletteEffectsActive;
 extern u32 dword_203DFC4;
-extern u8 byte_203EA89;
+extern u8 byte_203EA89; // possibily bool8
 extern s16 word_203F998;
-extern u8 byte_203F99C;
-extern u8 byte_203F99F;
+extern u8 byte_203F99C; // possibly bool8
+extern u8 byte_203F99F; // possibly bool8
 extern u8 byte_203F9A1; // possibly bool8
 extern u8 byte_203FA35; // possibly bool8
 
@@ -197,7 +197,6 @@ void UpdateGame(void)
                 //_08009A60
                 if (!byte_200110C)
                     UpdatePlayerBehavior(gKeysPressed, gKeysDown);
-                
             }
             else
             {
@@ -205,7 +204,7 @@ void UpdateGame(void)
                 if ((gPlayerStateSettings[gPlayerState] & 0x800) || (gPlayerStateSettings[gPlayerState] & 0x1000))
                     UpdatePlayerBehavior(gKeysPressed, gKeysDown);
             }
-        }    
+        }
         //_08009A92
         if (!gIsSlideMiniGame)
         {
@@ -262,14 +261,14 @@ void UpdateGame(void)
         {
             sub_8025948(0);
             if (gKeysDown & 1)
-                byte_2000F5D = 0;
+                byte_2000F5D = FALSE;
         }
         else //_08009C88
         {
             if (byte_2002E4A)
             {
-                byte_2002E4A = 0;
-                byte_2000F5D = 1;
+                byte_2002E4A = FALSE;
+                byte_2000F5D = TRUE;
             }
             sub_8025948(gKeysPressed & 1);
         }
