@@ -3,7 +3,7 @@
 extern u16 gLoadedRoomIndex;
 extern u16 dThunderPalette[];
 extern struct RoomHeader gRoomHeader;
-extern u8 gIsPaletteEffectsActive;
+extern bool8 gIsPaletteEffectsActive;
 extern void* dLavaPaletteAnims[];
 extern u8 byte_203EA89;
 extern struct struct_80CE440 word_80CE440[];
@@ -17,7 +17,7 @@ IWRAM_DATA u32 gLavaTimer;
 IWRAM_DATA u16* gThunderPalette;
 IWRAM_DATA u16* gBackupBGPalette;
 IWRAM_DATA u32 gThunderTimer;
-IWRAM_DATA u32 gThunderActive;
+IWRAM_DATA bool32 gThunderActive;
 IWRAM_DATA u32 gThunderSfxTimer;
 
 void InitPaletteEffects()
@@ -37,7 +37,7 @@ void InitPaletteEffects()
             gThunderPalette = dThunderPalette;
             gBackupBGPalette = gRoomHeader.backgroundPalette;
             gThunderTimer = RandomMinMax(5, 240);
-            gThunderActive = 0;
+            gThunderActive = FALSE;
             gThunderSfxTimer = RandomMinMax(180, 300);
     }
 }
@@ -63,16 +63,16 @@ void HandlePaletteEffects()
             {
                 if (!gThunderActive)
                 {
-                    gThunderActive = 1;
+                    gThunderActive = TRUE;
                     DmaTransferBGPalette(gThunderPalette, 0, 15);
                     gThunderTimer = RandomMinMax(2, 5);
                 }
                 else
                 {
-                    gThunderActive = 0;
+                    gThunderActive = FALSE;
                     DmaTransferBGPalette(gBackupBGPalette, 0, 15);
                     gThunderTimer = RandomMinMax(5, 240);
-                    
+
                 }
             }
             if (--gThunderSfxTimer == 0)
