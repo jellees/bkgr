@@ -1,7 +1,7 @@
 #include "global.h"
 
 extern u16 gLoadedRoomIndex;
-extern u16 dThunderPalette[];
+extern u16 dLightningPalette[];
 extern struct RoomHeader gRoomHeader;
 extern bool8 gIsPaletteEffectsActive;
 extern void* dLavaPaletteAnims[];
@@ -14,27 +14,31 @@ IWRAM_DATA s32 gPaletteEffects;
 IWRAM_DATA s32 gPaletteEffectsSave;
 IWRAM_DATA u32 gLavaPaletteIndex;
 IWRAM_DATA u32 gLavaTimer;
-IWRAM_DATA u16* gThunderPalette;
+IWRAM_DATA u16* gLightningPalette;
 IWRAM_DATA u16* gBackupBGPalette;
+IWRAM_DATA u32 gLightningTimer;
+IWRAM_DATA u32 gLightningActive;
 IWRAM_DATA u32 gThunderTimer;
 IWRAM_DATA bool32 gThunderActive;
 IWRAM_DATA u32 gThunderSfxTimer;
 
+enum { NONE, LAVA, THUNDER };
+
 void InitPaletteEffects()
 {
-    gPaletteEffects = 0;
+    gPaletteEffects = NONE;
     switch (gLoadedRoomIndex)
     {
         case ROOM_FURNSECTION:
         case ROOM_FURNSTORE:
         case ROOM_POISONROOM:
-            gPaletteEffects = 1;
+            gPaletteEffects = LAVA;
             gLavaPaletteIndex = 0;
             gLavaTimer = RandomMinMax(8, 24);
             break;
         case ROOM_BOARDWALK:
-            gPaletteEffects = 2;
-            gThunderPalette = dThunderPalette;
+            gPaletteEffects = THUNDER;
+            gLightningPalette = dLightningPalette;
             gBackupBGPalette = gRoomHeader.backgroundPalette;
             gThunderTimer = RandomMinMax(5, 240);
             gThunderActive = FALSE;
@@ -48,8 +52,8 @@ void HandlePaletteEffects()
     {
         switch (gPaletteEffects)
         {
-        case 0: break;
-        case 1:
+        case NONE: break;
+        case LAVA:
             if (--gLavaTimer == 0)
             {
                 gLavaTimer = RandomMinMax(8, 24);
@@ -58,10 +62,10 @@ void HandlePaletteEffects()
                     gLavaPaletteIndex = 0;
             }
             break;
-        case 2:
-            if (--gThunderTimer == 0)
+        case THUNDER:
+            if (--gLightningTimer == 0)
             {
-                if (!gThunderActive)
+                if (!gLightningActive)
                 {
                     gThunderActive = TRUE;
                     DmaTransferBGPalette(gThunderPalette, 0, 15);
@@ -75,9 +79,9 @@ void HandlePaletteEffects()
 
                 }
             }
-            if (--gThunderSfxTimer == 0)
+            if (--gThunderTimer == 0)
             {
-                gThunderSfxTimer = RandomMinMax(180, 300);
+                gThunderTimer = RandomMinMax(180, 300);
                 if(byte_203EA89)
                 {
                     u32 a = word_80CE440[dword_806483C[RandomMinMax(0, 2)]].field_0;
