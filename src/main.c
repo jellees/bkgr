@@ -51,23 +51,23 @@ extern s32 dword_20020B4;
 extern s32 dword_20020B8;
 extern u8 byte_20020BC;
 extern u16 gPlayerStateSettings[];
-extern u8 byte_20021F0;
+extern u8 byte_20021F0; // possibly bool8
 extern u8 byte_20021F8;
 extern u8 byte_2002E4A;
-extern u8 gIsPaletteEffectsActive;
+extern bool8 gIsPaletteEffectsActive;
 extern u32 dword_203DFC4;
 extern u8 byte_203EA89;
 extern s16 word_203F998;
 extern u8 byte_203F99C;
 extern u8 byte_203F99F;
-extern u8 byte_203F9A1;
-extern u8 byte_203FA35;
+extern u8 byte_203F9A1; // possibly bool8
+extern u8 byte_203FA35; // possibly bool8
 
 //IWRAM
 extern u8 byte_3002950[];
 extern u32 gNullsub_3;
 extern u32 gNullsub_4;
-extern u8 gIsSlideMiniGame;
+extern bool8 gIsSlideMiniGame;
 extern u32 dword_30032AC;
 extern u32 dword_30032B0;
 extern u32 dword_30032B4[];
