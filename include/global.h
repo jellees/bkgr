@@ -3,7 +3,6 @@
 
 #include "gba/gba.h"
 
-
 struct GameStatus {
 	u16 totalJiggies;
 	u8 field_2;
@@ -36,11 +35,9 @@ struct GameStatus {
 	u8 field_1F;
 };
 
-
 struct Vec3fx {
     u32 x, y, z;
 };
-
 
 struct RoomHeader {
 	u16 tileData1Count;
@@ -85,7 +82,6 @@ struct RoomHeader {
 	u8 isControllableBG2;
 	u8 isControllableBG3;
 };
-
 
 struct struct_80CE440 {
     u16 field_0;
