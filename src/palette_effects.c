@@ -17,12 +17,11 @@ IWRAM_DATA u32 gLavaTimer;
 IWRAM_DATA u16* gLightningPalette;
 IWRAM_DATA u16* gBackupBGPalette;
 IWRAM_DATA u32 gLightningTimer;
-IWRAM_DATA u32 gLightningActive;
+IWRAM_DATA bool32 gLightningActive;
 IWRAM_DATA u32 gThunderTimer;
-IWRAM_DATA bool32 gThunderActive;
-IWRAM_DATA u32 gThunderSfxTimer;
 
 enum { NONE, LAVA, THUNDER };
+
 
 void InitPaletteEffects()
 {
@@ -40,9 +39,9 @@ void InitPaletteEffects()
             gPaletteEffects = THUNDER;
             gLightningPalette = dLightningPalette;
             gBackupBGPalette = gRoomHeader.backgroundPalette;
-            gThunderTimer = RandomMinMax(5, 240);
-            gThunderActive = FALSE;
-            gThunderSfxTimer = RandomMinMax(180, 300);
+            gLightningTimer = RandomMinMax(5, 240);
+            gLightningActive = FALSE;
+            gThunderTimer = RandomMinMax(180, 300);
     }
 }
 
@@ -67,16 +66,15 @@ void HandlePaletteEffects()
             {
                 if (!gLightningActive)
                 {
-                    gThunderActive = TRUE;
-                    DmaTransferBGPalette(gThunderPalette, 0, 15);
-                    gThunderTimer = RandomMinMax(2, 5);
+                    gLightningActive = 1;
+                    DmaTransferBGPalette(gLightningPalette, 0, 15);
+                    gLightningTimer = RandomMinMax(2, 5);
                 }
                 else
                 {
-                    gThunderActive = FALSE;
+                    gLightningActive = FALSE;
                     DmaTransferBGPalette(gBackupBGPalette, 0, 15);
-                    gThunderTimer = RandomMinMax(5, 240);
-
+                    gLightningTimer = RandomMinMax(5, 240);
                 }
             }
             if (--gThunderTimer == 0)
