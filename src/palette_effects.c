@@ -3,7 +3,7 @@
 extern u16 gLoadedRoomIndex;
 extern u16 dLightningPalette[];
 extern struct RoomHeader gRoomHeader;
-extern u8 gIsPaletteEffectsActive;
+extern bool8 gIsPaletteEffectsActive;
 extern void* dLavaPaletteAnims[];
 extern u8 byte_203EA89;
 extern struct struct_80CE440 word_80CE440[];
@@ -17,7 +17,7 @@ IWRAM_DATA u32 gLavaTimer;
 IWRAM_DATA u16* gLightningPalette;
 IWRAM_DATA u16* gBackupBGPalette;
 IWRAM_DATA u32 gLightningTimer;
-IWRAM_DATA u32 gLightningActive;
+IWRAM_DATA bool32 gLightningActive;
 IWRAM_DATA u32 gThunderTimer;
 
 enum { NONE, LAVA, THUNDER };
@@ -40,7 +40,7 @@ void InitPaletteEffects()
             gLightningPalette = dLightningPalette;
             gBackupBGPalette = gRoomHeader.backgroundPalette;
             gLightningTimer = RandomMinMax(5, 240);
-            gLightningActive = 0;
+            gLightningActive = FALSE;
             gThunderTimer = RandomMinMax(180, 300);
     }
 }
@@ -72,10 +72,9 @@ void HandlePaletteEffects()
                 }
                 else
                 {
-                    gLightningActive = 0;
+                    gLightningActive = FALSE;
                     DmaTransferBGPalette(gBackupBGPalette, 0, 15);
                     gLightningTimer = RandomMinMax(5, 240);
-                    
                 }
             }
             if (--gThunderTimer == 0)
