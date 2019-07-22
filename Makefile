@@ -7,8 +7,10 @@ LD 				:= $(BIN_DIR)/$(PREFIX)ld
 AS 			    := $(BIN_DIR)/$(PREFIX)as
 
 ifeq ($(OS),Windows_NT)
+WINE :=
 EXE := .exe
 else
+WINE := wine
 EXE :=
 endif
 
@@ -36,7 +38,7 @@ DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 
 ASFLAGS 	:= -mcpu=arm7tdmi
 
-CC1			:= tools/agbcc/bin/agbcc.exe
+CC1			:= $(WINE) tools/agbcc/bin/agbcc.exe
 CFLAGS 		:= -O2 -mthumb-interwork -fhex-asm
 CPPFLAGS 	:= -iquote include -Wno-trigraphs
 
