@@ -4,22 +4,6 @@
     .text
 
     .thumb
-    .global InitAllHeaps
-InitAllHeaps: @ 0x08027620
-	push {r4, lr}
-	movs r4, #0
-_08027624:
-	adds r0, r4, #0
-	bl InitHeap
-	adds r4, #1
-	cmp r4, #5
-	ble _08027624
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-
-    .thumb
     .global InitHeap
 InitHeap: @ 0x08027638
 	push {r4, r5, lr}
