@@ -88,6 +88,9 @@ SECTIONS
 		. = 0x00007884;
 		gIsPaletteEffectsActive = .; . += 1;
 
+		. = 0x0000ED20;
+		gHeaps = .; . += 0x18 * 6;
+
 		. = 0x0003DFC4;
 		dword_203DFC4 = .; . += 4;
 
@@ -231,6 +234,7 @@ SECTIONS
 		src/palette_effects.o(.text);
 		asm/debug.o(.text);
 		asm/chunk5.o(.text);
+		src/alloc.o(.text);
 		asm/alloc.o(.text);
 		asm/chunk6.o(.text);
 		asm/menu.o(.text);

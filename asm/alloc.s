@@ -4,25 +4,6 @@
     .text
 
     .thumb
-sub_8027600: @ 0x08027600
-	push {lr}
-	ldr r2, _0802761C
-	lsls r1, r0, #1
-	adds r1, r1, r0
-	lsls r1, r1, #3
-	adds r2, #4
-	adds r1, r1, r2
-	ldr r1, [r1]
-_08027610:
-	ldr r1, [r1, #0xc]
-	cmp r1, #0
-	bne _08027610
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0802761C: .4byte 0x0200ED20
-
-    .thumb
     .global InitAllHeaps
 InitAllHeaps: @ 0x08027620
 	push {r4, lr}
