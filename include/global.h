@@ -3,6 +3,8 @@
 
 #include "gba/gba.h"
 
+#define HANG asm(".word 0xEE00EE00")
+
 struct GameStatus {
     u16 totalJiggies;
     u8 field_2;

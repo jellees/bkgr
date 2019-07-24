@@ -88,8 +88,14 @@ SECTIONS
 		. = 0x00007884;
 		gIsPaletteEffectsActive = .; . += 1;
 
-		. = 0x0000ED20;
+		. = 0x0000DCE0;
+		gHeap3 = .; . += 0x1040;
 		gHeaps = .; . += 0x18 * 6;
+		gHeap1 = .; . += 0xFA00;
+		gHeap2 = .; . += 0x15F90;
+		gHeap4 = .; . += 0x1000;
+		gHeap5 = .; . += 0x8070;
+		gHeap6 = .; . += 0x800;
 
 		. = 0x0003DFC4;
 		dword_203DFC4 = .; . += 4;
