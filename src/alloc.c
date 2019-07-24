@@ -9,10 +9,10 @@ extern u8 gHeap4[1];
 extern u8 gHeap5[1];
 extern u8 gHeap6[1];
 
-void InitHeap(int heap);
+void InitHeap(u32 heap);
 
 
-void sub_8027600(int heap)
+void sub_8027600(u32 heap)
 {
     struct MemoryBlock *block = gHeaps[heap].start;
     do
@@ -27,7 +27,7 @@ void InitAllHeaps()
         InitHeap(i);
 }
 
-void InitHeap(int heap)
+void InitHeap(u32 heap)
 {
     switch(heap)
     {
@@ -106,4 +106,15 @@ void InitHeap(int heap)
         default:
             HANG;
     }
+}
+
+void sub_80277D0(u32 heap, u32 a2)
+{
+    if(a2 > 1)
+        HANG;
+
+    if (heap > 5)
+        HANG;
+    
+    gHeaps[heap].field_14 = a2;
 }

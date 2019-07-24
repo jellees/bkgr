@@ -3,30 +3,30 @@
 
     .text
 
-    .thumb
-sub_80277D0: @ 0x080277D0
-	push {lr}
-	adds r2, r0, #0
-	adds r3, r1, #0
-	cmp r3, #1
-	bls _080277DE
-	.2byte 0xEE00, 0xEE00
-_080277DE:
-	cmp r2, #5
-	bls _080277E6
-	.2byte 0xEE00, 0xEE00
-_080277E6:
-	ldr r1, _080277F8
-	lsls r0, r2, #1
-	adds r0, r0, r2
-	lsls r0, r0, #3
-	adds r1, #0x14
-	adds r0, r0, r1
-	str r3, [r0]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080277F8: .4byte 0x0200ED20
+@     .thumb
+@ sub_80277D0: @ 0x080277D0
+@ 	push {lr}
+@ 	adds r2, r0, #0
+@ 	adds r3, r1, #0
+@ 	cmp r3, #1
+@ 	bls _080277DE
+@ 	.2byte 0xEE00, 0xEE00
+@ _080277DE:
+@ 	cmp r2, #5
+@ 	bls _080277E6
+@ 	.2byte 0xEE00, 0xEE00
+@ _080277E6:
+@ 	ldr r1, _080277F8
+@ 	lsls r0, r2, #1
+@ 	adds r0, r0, r2
+@ 	lsls r0, r0, #3
+@ 	adds r1, #0x14
+@ 	adds r0, r0, r1
+@ 	str r3, [r0]
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _080277F8: .4byte 0x0200ED20
 
     .thumb
     .global Alloc
