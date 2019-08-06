@@ -1,0 +1,1 @@
+asmdiff.sh 0x000277FC 0x0184 >> diff.txt

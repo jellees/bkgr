@@ -5,6 +5,11 @@
 
 #define HANG asm(".word 0xEE00EE00")
 
+// to help in decompiling
+#define asm_comment(x) asm volatile("@ -- " x " -- ")
+#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
+#define NAKED __attribute__((naked))
+
 struct GameStatus {
     u16 totalJiggies;
     u8 field_2;

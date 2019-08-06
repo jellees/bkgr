@@ -118,3 +118,345 @@ void sub_80277D0(u32 heap, u32 a2)
     
     gHeaps[heap].field_14 = a2;
 }
+
+#ifdef NONMATCHING
+void* Alloc(u32 size, u32 allocId, u32 heap)
+{
+    if (heap > 5)
+        HANG;
+    
+    if (size == 0)
+        HANG;
+    
+    if (allocId == 0)
+        HANG;
+
+    size = (size + 3) & -4;
+    if (size < 8)
+        size = 8;
+    size += 0x10;
+
+    switch(gHeaps[heap].field_14)
+    {
+        case 0:
+            {
+                struct MemoryBlock* start = gHeaps[heap].start;
+                do
+                {
+                    if (start->allocId == 0 && start->length >= size)
+                    {
+                        if (start->length - size >= 0x18)
+                        {
+                            struct MemoryBlock* v6 = start + ((size >> 2) << -2);
+                            if (start->next)
+                            {
+                                struct MemoryBlock* v9 = start->next;
+                                struct MemoryBlock* prev;
+                                start->next = v6;
+                                v6->next = v9;
+                                prev = v9->previous;
+                                start->next->next->previous = v6;
+                                start->next->previous = prev;
+                                start->next->allocId = start->allocId;
+                                start->next->length = start->length - size;
+                                start->allocId = allocId;
+                                start->length = size;
+                                return start->data;
+                            }
+                            else
+                            {
+                                start->next = v6;
+                                start->next->next = 0;
+                                start->next->previous = start;
+                                start->next->allocId = 0;
+                                start->next->length = start->length - size;
+                                start->allocId = allocId;
+                                start->length = size;
+                                gHeaps[heap].last = start->next;
+                                return start->data;
+                            }
+                        }
+                        start->allocId = allocId;
+                        return start->data;
+                    }
+                }
+                while(start = start->next);
+                HANG;
+                return 0;
+            }
+        case 1:
+            {
+                struct MemoryBlock* start = gHeaps[heap].start;
+                int v1 = -1;
+                struct MemoryBlock* v2 = 0;
+                do
+                {
+                    if (start->allocId == 0 && start->length >= size && start->length < v1)
+                    {
+                        v2 = start;
+                        v1 = start->length;
+                        if (v1 - size < 0x18)
+                        {
+                            v2->allocId = allocId;
+                            return v2->data;
+                        }
+                    }
+                }
+                while(start = start->next);
+                if (v2 == 0)
+                {
+                    HANG;
+                    return 0;
+                }
+                else
+                {
+                    struct MemoryBlock* v3 = v2 + ((size >> 2) << -2);
+                    if (v2->next)
+                    {
+                        struct MemoryBlock * v4 = v2->next;
+                        struct MemoryBlock* prev;
+                        v2->next = v3;
+                        v3->next = v4;
+                        prev = v4->previous;
+                        v2->next->next->previous = v3;
+                        v2->next->previous = prev;
+                        v2->next->allocId = 0;
+                        v2->next->length = v2->length - size;
+                        v2->allocId = allocId;
+                        v2->length = size;
+                        return v2->data;
+                    }
+                    else
+                    {
+                        v2->next = v3;
+                        v2->next->next = 0;
+                        v2->next->previous = v2;
+                        v2->next->allocId = 0;
+                        v2->next->length = v2->length - size;
+                        v2->allocId = allocId;
+                        v2->length = size;
+                        gHeaps[heap].last = v2->next;
+                        return v2->data;
+                    }
+                }
+            }
+        default:
+            HANG;
+            return 0;
+    }
+}
+#else 
+NAKED
+void* Alloc(u32 size, u32 allocId, u32 heap)
+{
+    asm_unified("               \n\
+	push {r4, r5, r6, r7, lr}   \n\
+	mov r7, r8                  \n\
+	push {r7}                   \n\
+	adds r5, r0, #0             \n\
+	adds r7, r1, #0             \n\
+	adds r4, r2, #0             \n\
+	cmp r4, #5                  \n\
+	bls _08027810               \n\
+	.2byte 0xEE00, 0xEE00       \n\
+_08027810:                      \n\
+	cmp r5, #0                  \n\
+	bne _08027818               \n\
+	.2byte 0xEE00, 0xEE00       \n\
+_08027818:                      \n\
+	cmp r7, #0                  \n\
+	bne _08027820               \n\
+	.2byte 0xEE00, 0xEE00       \n\
+_08027820:                      \n\
+	adds r5, #3                 \n\
+	movs r0, #4                 \n\
+	rsbs r0, r0, #0             \n\
+	ands r5, r0                 \n\
+	cmp r5, #7                  \n\
+	bhi _0802782E               \n\
+	movs r5, #8                 \n\
+_0802782E:                      \n\
+	adds r5, #0x10              \n\
+	ldr r1, _08027854           \n\
+	lsls r2, r4, #1             \n\
+	adds r0, r2, r4             \n\
+	lsls r3, r0, #3             \n\
+	adds r0, r1, #0             \n\
+	adds r0, #0x14              \n\
+	adds r0, r3, r0             \n\
+	ldr r0, [r0]                \n\
+	mov ip, r1                  \n\
+	mov r8, r2                  \n\
+	cmp r0, #0                  \n\
+	beq _08027858               \n\
+	cmp r0, #1                  \n\
+	beq _080278B8               \n\
+	.2byte 0xEE00, 0xEE00       \n\
+	movs r0, #0                 \n\
+	b _08027976                 \n\
+	.align 2, 0                 \n\
+_08027854: .4byte 0x0200ED20    \n\
+_08027858:                      \n\
+	mov r0, ip                  \n\
+	adds r0, #4                 \n\
+	adds r0, r3, r0             \n\
+	ldr r2, [r0]                \n\
+	lsrs r0, r5, #2             \n\
+	lsls r6, r0, #2             \n\
+	mov r0, ip                  \n\
+	adds r0, #8                 \n\
+	adds r3, r3, r0             \n\
+	mov ip, r3                  \n\
+_0802786C:                      \n\
+	ldr r4, [r2, #4]            \n\
+	cmp r4, #0                  \n\
+	bne _080278AA               \n\
+	ldr r0, [r2]                \n\
+	cmp r0, r5                  \n\
+	blo _080278AA               \n\
+	subs r0, r0, r5             \n\
+	cmp r0, #0x17               \n\
+	bls _080278A4               \n\
+	adds r3, r2, r6             \n\
+	ldr r0, [r2, #0xc]          \n\
+	cmp r0, #0                  \n\
+	bne _08027926               \n\
+	str r3, [r2, #0xc]          \n\
+	str r4, [r3, #0xc]          \n\
+	ldr r0, [r2, #0xc]          \n\
+	str r2, [r0, #8]            \n\
+	ldr r1, [r2, #0xc]          \n\
+	str r4, [r1, #4]            \n\
+	ldr r0, [r2]                \n\
+	subs r0, r0, r5             \n\
+	str r0, [r1]                \n\
+	str r7, [r2, #4]            \n\
+	str r5, [r2]                \n\
+	mov r0, ip                  \n\
+	str r1, [r0]                \n\
+	adds r0, r2, #0             \n\
+	b _08027974                 \n\
+_080278A4:                      \n\
+	str r7, [r2, #4]            \n\
+	adds r0, r2, #0             \n\
+	b _08027974                 \n\
+_080278AA:                      \n\
+	ldr r2, [r2, #0xc]          \n\
+	cmp r2, #0                  \n\
+	bne _0802786C               \n\
+	.2byte 0xEE00, 0xEE00       \n\
+	movs r0, #0                 \n\
+	b _08027976                 \n\
+_080278B8:                      \n\
+	mov r0, ip                  \n\
+	adds r0, #4                 \n\
+	adds r0, r3, r0             \n\
+	ldr r2, [r0]                \n\
+	movs r3, #1                 \n\
+	rsbs r3, r3, #0             \n\
+	movs r6, #0                 \n\
+_080278C6:                      \n\
+	ldr r0, [r2, #4]            \n\
+	cmp r0, #0                  \n\
+	bne _080278E0               \n\
+	ldr r0, [r2]                \n\
+	cmp r0, r5                  \n\
+	blo _080278E0               \n\
+	cmp r0, r3                  \n\
+	bhs _080278E0               \n\
+	adds r6, r2, #0             \n\
+	adds r3, r0, #0             \n\
+	subs r0, r3, r5             \n\
+	cmp r0, #0x17               \n\
+	bls _0802794A               \n\
+_080278E0:                      \n\
+	ldr r2, [r2, #0xc]          \n\
+	cmp r2, #0                  \n\
+	bne _080278C6               \n\
+	cmp r6, #0                  \n\
+	bne _080278F2               \n\
+	.2byte 0xEE00, 0xEE00       \n\
+	movs r0, #0                 \n\
+	b _08027976                 \n\
+_080278F2:                      \n\
+	adds r2, r6, #0             \n\
+	lsrs r0, r5, #2             \n\
+	lsls r0, r0, #2             \n\
+	adds r3, r6, r0             \n\
+	ldr r1, [r6, #0xc]          \n\
+	cmp r1, #0                  \n\
+	beq _0802794E               \n\
+	adds r6, r1, #0             \n\
+	str r3, [r2, #0xc]          \n\
+	str r6, [r3, #0xc]          \n\
+	ldr r6, [r6, #8]            \n\
+	ldr r0, [r2, #0xc]          \n\
+	ldr r0, [r0, #0xc]          \n\
+	str r3, [r0, #8]            \n\
+	ldr r0, [r2, #0xc]          \n\
+	str r6, [r0, #8]            \n\
+	ldr r1, [r2, #0xc]          \n\
+	movs r0, #0                 \n\
+	str r0, [r1, #4]            \n\
+	ldr r0, [r2]                \n\
+	subs r0, r0, r5             \n\
+	str r0, [r1]                \n\
+	str r7, [r2, #4]            \n\
+	str r5, [r2]                \n\
+	adds r0, r2, #0             \n\
+	b _08027974                 \n\
+_08027926:                      \n\
+	adds r6, r0, #0             \n\
+	str r3, [r2, #0xc]          \n\
+	str r6, [r3, #0xc]          \n\
+	ldr r6, [r6, #8]            \n\
+	ldr r0, [r2, #0xc]          \n\
+	ldr r0, [r0, #0xc]          \n\
+	str r3, [r0, #8]            \n\
+	ldr r0, [r2, #0xc]          \n\
+	str r6, [r0, #8]            \n\
+	ldr r1, [r2, #0xc]          \n\
+	str r4, [r1, #4]            \n\
+	ldr r0, [r2]                \n\
+	subs r0, r0, r5             \n\
+	str r0, [r1]                \n\
+	str r7, [r2, #4]            \n\
+	str r5, [r2]                \n\
+	adds r0, r2, #0             \n\
+	b _08027974                 \n\
+_0802794A:                      \n\
+	str r7, [r6, #4]            \n\
+	b _08027972                 \n\
+_0802794E:                      \n\
+	str r3, [r6, #0xc]          \n\
+	str r1, [r3, #0xc]          \n\
+	ldr r0, [r6, #0xc]          \n\
+	str r6, [r0, #8]            \n\
+	ldr r2, [r6, #0xc]          \n\
+	str r1, [r2, #4]            \n\
+	ldr r0, [r6]                \n\
+	subs r0, r0, r5             \n\
+	str r0, [r2]                \n\
+	str r7, [r6, #4]            \n\
+	str r5, [r6]                \n\
+	mov r1, r8                  \n\
+	adds r0, r1, r4             \n\
+	lsls r0, r0, #3             \n\
+	mov r1, ip                  \n\
+	adds r1, #8                 \n\
+	adds r0, r0, r1             \n\
+	str r2, [r0]                \n\
+_08027972:                      \n\
+	adds r0, r6, #0             \n\
+_08027974:                      \n\
+	adds r0, #0x10              \n\
+_08027976:                      \n\
+	pop {r3}                    \n\
+	mov r8, r3                  \n\
+	pop {r4, r5, r6, r7}        \n\
+	pop {r1}                    \n\
+	bx r1                       \n\
+    ");
+}
+
+#endif
