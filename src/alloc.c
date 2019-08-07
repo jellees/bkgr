@@ -140,61 +140,61 @@ void* Alloc(u32 size, u32 allocId, u32 heap)
     {
         case 0:
             {
-                struct MemoryBlock* start = gHeaps[heap].start;
+                struct MemoryBlock* node = gHeaps[heap].start;
                 do
                 {
-                    if (start->allocId == 0 && start->length >= size)
+                    if (node->allocId == 0 && node->length >= size)
                     {
-                        if (start->length - size >= 0x18)
+                        if (node->length - size >= 0x18)
                         {
-                            struct MemoryBlock* v6 = start + ((size >> 2) << -2);
-                            if (start->next)
+                            struct MemoryBlock* v6 = node + ((size >> 2) << -2);
+                            if (node->next)
                             {
-                                struct MemoryBlock* v9 = start->next;
+                                struct MemoryBlock* v9 = node->next;
                                 struct MemoryBlock* prev;
-                                start->next = v6;
+                                node->next = v6;
                                 v6->next = v9;
                                 prev = v9->previous;
-                                start->next->next->previous = v6;
-                                start->next->previous = prev;
-                                start->next->allocId = start->allocId;
-                                start->next->length = start->length - size;
-                                start->allocId = allocId;
-                                start->length = size;
-                                return start->data;
+                                node->next->next->previous = v6;
+                                node->next->previous = prev;
+                                node->next->allocId = node->allocId;
+                                node->next->length = node->length - size;
+                                node->allocId = allocId;
+                                node->length = size;
+                                return node->data;
                             }
                             else
                             {
-                                start->next = v6;
-                                start->next->next = 0;
-                                start->next->previous = start;
-                                start->next->allocId = 0;
-                                start->next->length = start->length - size;
-                                start->allocId = allocId;
-                                start->length = size;
-                                gHeaps[heap].last = start->next;
-                                return start->data;
+                                node->next = v6;
+                                node->next->next = 0;
+                                node->next->previous = node;
+                                node->next->allocId = 0;
+                                node->next->length = node->length - size;
+                                node->allocId = allocId;
+                                node->length = size;
+                                gHeaps[heap].last = node->next;
+                                return node->data;
                             }
                         }
-                        start->allocId = allocId;
-                        return start->data;
+                        node->allocId = allocId;
+                        return node->data;
                     }
                 }
-                while(start = start->next);
+                while(node = node->next);
                 HANG;
                 return 0;
             }
         case 1:
             {
-                struct MemoryBlock* start = gHeaps[heap].start;
+                struct MemoryBlock* node = gHeaps[heap].start;
                 int v1 = -1;
                 struct MemoryBlock* v2 = 0;
                 do
                 {
-                    if (start->allocId == 0 && start->length >= size && start->length < v1)
+                    if (node->allocId == 0 && node->length >= size && node->length < v1)
                     {
-                        v2 = start;
-                        v1 = start->length;
+                        v2 = node;
+                        v1 = node->length;
                         if (v1 - size < 0x18)
                         {
                             v2->allocId = allocId;
@@ -202,7 +202,7 @@ void* Alloc(u32 size, u32 allocId, u32 heap)
                         }
                     }
                 }
-                while(start = start->next);
+                while(node = node->next);
                 if (v2 == 0)
                 {
                     HANG;

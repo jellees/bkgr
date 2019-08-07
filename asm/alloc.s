@@ -214,7 +214,7 @@
 // 	bx r1
 
     .thumb
-    .global Free
+    .global FreeEx
 FreeEx: @ 0x08027980
 	push {lr}
 	adds r3, r0, #0
