@@ -213,42 +213,42 @@
 // 	pop {r1}
 // 	bx r1
 
-    .thumb
-    .global FreeEx
-FreeEx: @ 0x08027980
-	push {lr}
-	adds r3, r0, #0
-	movs r1, #0
-	ldr r0, _080279AC
-	mov ip, r0
-	movs r2, #0
-_0802798C:
-	mov r0, ip
-	adds r0, #0xc
-	adds r0, r2, r0
-	ldr r0, [r0]
-	cmp r3, r0
-	blo _080279B0
-	mov r0, ip
-	adds r0, #0x10
-	adds r0, r2, r0
-	ldr r0, [r0]
-	cmp r3, r0
-	bhi _080279B0
-	adds r0, r3, #0
-	bl Free
-	b _080279BC
-	.align 2, 0
-_080279AC: .4byte 0x0200ED20
-_080279B0:
-	adds r2, #0x18
-	adds r1, #1
-	cmp r1, #5
-	ble _0802798C
-	.2byte 0xEE00, 0xEE00
-_080279BC:
-	pop {r0}
-	bx r0
+@     .thumb
+@     .global FreeEx
+@ FreeEx: @ 0x08027980
+@ 	push {lr}
+@ 	adds r3, r0, #0
+@ 	movs r1, #0
+@ 	ldr r0, _080279AC
+@ 	mov ip, r0
+@ 	movs r2, #0
+@ _0802798C:
+@ 	mov r0, ip
+@ 	adds r0, #0xc
+@ 	adds r0, r2, r0
+@ 	ldr r0, [r0]
+@ 	cmp r3, r0
+@ 	blo _080279B0
+@ 	mov r0, ip
+@ 	adds r0, #0x10
+@ 	adds r0, r2, r0
+@ 	ldr r0, [r0]
+@ 	cmp r3, r0
+@ 	bhi _080279B0
+@ 	adds r0, r3, #0
+@ 	bl Free
+@ 	b _080279BC
+@ 	.align 2, 0
+@ _080279AC: .4byte 0x0200ED20
+@ _080279B0:
+@ 	adds r2, #0x18
+@ 	adds r1, #1
+@ 	cmp r1, #5
+@ 	ble _0802798C
+@ 	.2byte 0xEE00, 0xEE00
+@ _080279BC:
+@ 	pop {r0}
+@ 	bx r0
 
     .thumb
     .global Free

@@ -458,5 +458,43 @@ _08027976:                      \n\
 	bx r1                       \n\
     ");
 }
+#endif
 
+void Free(struct MemoryBlock* pointer);
+
+#ifdef NONMATCHING
+// Two registers are swapped.
+void FreeEx(struct MemoryBlock* pointer)
+{
+    int i;
+    for (i = 0; i < 6; i++)
+    {
+        i--;i++;
+        if (pointer >= gHeaps[i].first && pointer <= gHeaps[i].end)
+        {
+            
+            Free(pointer);
+            return;
+            
+        }
+    }
+    HANG;
+}
+#else
+void FreeEx(struct MemoryBlock* pointer)
+{
+    int i;
+    for (i = 0; i < 6; i++)
+    {
+        asm(""::"r"(i));
+        if (pointer >= gHeaps[i].first && pointer <= gHeaps[i].end)
+        {
+            
+            Free(pointer);
+            return;
+        }
+        asm(""::"r"(i));
+    }
+    HANG;
+}
 #endif
