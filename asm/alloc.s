@@ -250,81 +250,81 @@
 @ 	pop {r0}
 @ 	bx r0
 
-    .thumb
-    .global Free
-Free: @ 0x080279C0
-	push {r4, lr}
-	adds r4, r1, #0
-	adds r3, r0, #0
-	subs r3, #0x10
-	ldr r0, [r3, #4]
-	subs r0, #1
-	cmp r0, #0x18
-	bls _080279D4
-	.2byte 0xEE00, 0xEE00
-_080279D4:
-	movs r0, #0
-	str r0, [r3, #4]
-	ldr r1, [r3, #8]
-	cmp r1, #0
-	beq _080279FA
-	ldr r0, [r1, #4]
-	cmp r0, #0
-	bne _080279FA
-	ldr r0, [r3, #0xc]
-	str r0, [r1, #0xc]
-	ldr r1, [r3, #0xc]
-	ldr r0, [r3, #8]
-	str r0, [r1, #8]
-	ldr r2, [r3, #8]
-	ldr r0, [r2]
-	ldr r1, [r3]
-	adds r0, r0, r1
-	str r0, [r2]
-	adds r3, r2, #0
-_080279FA:
-	ldr r1, [r3, #0xc]
-	cmp r1, #0
-	beq _08027A34
-	ldr r0, [r1, #4]
-	cmp r0, #0
-	bne _08027A42
-	adds r3, r1, #0
-	ldr r1, [r3, #8]
-	ldr r0, [r3, #0xc]
-	str r0, [r1, #0xc]
-	ldr r1, [r3, #0xc]
-	ldr r0, [r3, #8]
-	str r0, [r1, #8]
-	ldr r2, [r3, #8]
-	ldr r0, [r2]
-	ldr r1, [r3]
-	adds r0, r0, r1
-	str r0, [r2]
-	ldr r1, _08027A30
-	lsls r0, r4, #1
-	adds r0, r0, r4
-	lsls r0, r0, #3
-	adds r1, #8
-	adds r0, r0, r1
-	str r2, [r0]
-	b _08027A42
-	.align 2, 0
-_08027A30: .4byte 0x0200ED20
-_08027A34:
-	ldr r1, _08027A48
-	lsls r0, r4, #1
-	adds r0, r0, r4
-	lsls r0, r0, #3
-	adds r1, #8
-	adds r0, r0, r1
-	str r3, [r0]
-_08027A42:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08027A48: .4byte 0x0200ED20
+//     .thumb
+//     .global Free
+// Free: @ 0x080279C0
+// 	push {r4, lr}
+// 	adds r4, r1, #0
+// 	adds r3, r0, #0
+// 	subs r3, #0x10
+// 	ldr r0, [r3, #4]
+// 	subs r0, #1
+// 	cmp r0, #0x18
+// 	bls _080279D4
+// 	.2byte 0xEE00, 0xEE00
+// _080279D4:
+// 	movs r0, #0
+// 	str r0, [r3, #4]
+// 	ldr r1, [r3, #8]
+// 	cmp r1, #0
+// 	beq _080279FA
+// 	ldr r0, [r1, #4]
+// 	cmp r0, #0
+// 	bne _080279FA
+// 	ldr r0, [r3, #0xc]
+// 	str r0, [r1, #0xc]
+// 	ldr r1, [r3, #0xc]
+// 	ldr r0, [r3, #8]
+// 	str r0, [r1, #8]
+// 	ldr r2, [r3, #8]
+// 	ldr r0, [r2]
+// 	ldr r1, [r3]
+// 	adds r0, r0, r1
+// 	str r0, [r2]
+// 	adds r3, r2, #0
+// _080279FA:
+// 	ldr r1, [r3, #0xc]
+// 	cmp r1, #0
+// 	beq _08027A34
+// 	ldr r0, [r1, #4]
+// 	cmp r0, #0
+// 	bne _08027A42
+// 	adds r3, r1, #0
+// 	ldr r1, [r3, #8]
+// 	ldr r0, [r3, #0xc]
+// 	str r0, [r1, #0xc]
+// 	ldr r1, [r3, #0xc]
+// 	ldr r0, [r3, #8]
+// 	str r0, [r1, #8]
+// 	ldr r2, [r3, #8]
+// 	ldr r0, [r2]
+// 	ldr r1, [r3]
+// 	adds r0, r0, r1
+// 	str r0, [r2]
+// 	ldr r1, _08027A30
+// 	lsls r0, r4, #1
+// 	adds r0, r0, r4
+// 	lsls r0, r0, #3
+// 	adds r1, #8
+// 	adds r0, r0, r1
+// 	str r2, [r0]
+// 	b _08027A42
+// 	.align 2, 0
+// _08027A30: .4byte 0x0200ED20
+// _08027A34:
+// 	ldr r1, _08027A48
+// 	lsls r0, r4, #1
+// 	adds r0, r0, r4
+// 	lsls r0, r0, #3
+// 	adds r1, #8
+// 	adds r0, r0, r1
+// 	str r3, [r0]
+// _08027A42:
+// 	pop {r4}
+// 	pop {r0}
+// 	bx r0
+// 	.align 2, 0
+// _08027A48: .4byte 0x0200ED20
 
     .thumb
     .global FreeById

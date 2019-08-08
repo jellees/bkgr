@@ -1,0 +1,448 @@
+--- baserom.dump	2019-08-08 21:58:12 +0000
++++ bkgr.dump	2019-08-08 21:58:12 +0000
+@@ -1,5 +1,5 @@
+ 
+-srcrom/bkgr.gba:     file format binary
++bkgr.gba:     file format binary
+ 
+ 
+ Disassembly of section .data:
+@@ -16,58 +16,58 @@
+    279d0:	ee00 ee00 	cdp	14, 0, cr14, cr0, cr0, {0}
+    279d4:	2000      	movs	r0, #0
+    279d6:	6058      	str	r0, [r3, #4]
+-   279d8:	6899      	ldr	r1, [r3, #8]
+-   279da:	2900      	cmp	r1, #0
+-   279dc:	d00d      	beq.n	0x279fa
+-   279de:	6848      	ldr	r0, [r1, #4]
+-   279e0:	2800      	cmp	r0, #0
+-   279e2:	d10a      	bne.n	0x279fa
+-   279e4:	68d8      	ldr	r0, [r3, #12]
+-   279e6:	60c8      	str	r0, [r1, #12]
++   279d8:	6898      	ldr	r0, [r3, #8]
++   279da:	68da      	ldr	r2, [r3, #12]
++   279dc:	2800      	cmp	r0, #0
++   279de:	d017      	beq.n	0x27a10
++   279e0:	6850      	ldr	r0, [r2, #4]
++   279e2:	2800      	cmp	r0, #0
++   279e4:	d014      	beq.n	0x27a10
++   279e6:	60d2      	str	r2, [r2, #12]
+    279e8:	68d9      	ldr	r1, [r3, #12]
+    279ea:	6898      	ldr	r0, [r3, #8]
+    279ec:	6088      	str	r0, [r1, #8]
+-   279ee:	689a      	ldr	r2, [r3, #8]
+-   279f0:	6810      	ldr	r0, [r2, #0]
+-   279f2:	6819      	ldr	r1, [r3, #0]
+-   279f4:	1840      	adds	r0, r0, r1
+-   279f6:	6010      	str	r0, [r2, #0]
+-   279f8:	1c13      	adds	r3, r2, #0
+-   279fa:	68d9      	ldr	r1, [r3, #12]
+-   279fc:	2900      	cmp	r1, #0
+-   279fe:	d019      	beq.n	0x27a34
+-   27a00:	6848      	ldr	r0, [r1, #4]
+-   27a02:	2800      	cmp	r0, #0
+-   27a04:	d11d      	bne.n	0x27a42
+-   27a06:	1c0b      	adds	r3, r1, #0
+-   27a08:	6899      	ldr	r1, [r3, #8]
+-   27a0a:	68d8      	ldr	r0, [r3, #12]
+-   27a0c:	60c8      	str	r0, [r1, #12]
+-   27a0e:	68d9      	ldr	r1, [r3, #12]
+-   27a10:	6898      	ldr	r0, [r3, #8]
+-   27a12:	6088      	str	r0, [r1, #8]
+-   27a14:	689a      	ldr	r2, [r3, #8]
+-   27a16:	6810      	ldr	r0, [r2, #0]
+-   27a18:	6819      	ldr	r1, [r3, #0]
+-   27a1a:	1840      	adds	r0, r0, r1
+-   27a1c:	6010      	str	r0, [r2, #0]
+-   27a1e:	4904      	ldr	r1, [pc, #16]	; (0x27a30)
+-   27a20:	0060      	lsls	r0, r4, #1
+-   27a22:	1900      	adds	r0, r0, r4
+-   27a24:	00c0      	lsls	r0, r0, #3
+-   27a26:	3108      	adds	r1, #8
+-   27a28:	1840      	adds	r0, r0, r1
+-   27a2a:	6002      	str	r2, [r0, #0]
+-   27a2c:	e009      	b.n	0x27a42
+-   27a2e:	0000      	movs	r0, r0
+-   27a30:	ed20 0200 	sfm	f0, 4, [r0, #-0]
++   279ee:	6898      	ldr	r0, [r3, #8]
++   279f0:	6800      	ldr	r0, [r0, #0]
++   279f2:	0100      	lsls	r0, r0, #4
++   279f4:	681a      	ldr	r2, [r3, #0]
++   279f6:	1812      	adds	r2, r2, r0
++   279f8:	609a      	str	r2, [r3, #8]
++   279fa:	4904      	ldr	r1, [pc, #16]	; (0x27a0c)
++   279fc:	0060      	lsls	r0, r4, #1
++   279fe:	1900      	adds	r0, r0, r4
++   27a00:	00c0      	lsls	r0, r0, #3
++   27a02:	3108      	adds	r1, #8
++   27a04:	1840      	adds	r0, r0, r1
++   27a06:	6002      	str	r2, [r0, #0]
++   27a08:	e027      	b.n	0x27a5a
++   27a0a:	0000      	movs	r0, r0
++   27a0c:	ed20 0200 	sfm	f0, 4, [r0, #-0]
++   27a10:	2a00      	cmp	r2, #0
++   27a12:	d01b      	beq.n	0x27a4c
++   27a14:	6850      	ldr	r0, [r2, #4]
++   27a16:	2800      	cmp	r0, #0
++   27a18:	d11f      	bne.n	0x27a5a
++   27a1a:	6891      	ldr	r1, [r2, #8]
++   27a1c:	68d0      	ldr	r0, [r2, #12]
++   27a1e:	60c8      	str	r0, [r1, #12]
++   27a20:	68d8      	ldr	r0, [r3, #12]
++   27a22:	6880      	ldr	r0, [r0, #8]
++   27a24:	6080      	str	r0, [r0, #8]
++   27a26:	68da      	ldr	r2, [r3, #12]
++   27a28:	6890      	ldr	r0, [r2, #8]
++   27a2a:	6811      	ldr	r1, [r2, #0]
++   27a2c:	0109      	lsls	r1, r1, #4
++   27a2e:	6800      	ldr	r0, [r0, #0]
++   27a30:	1840      	adds	r0, r0, r1
++   27a32:	6090      	str	r0, [r2, #8]
+    27a34:	4904      	ldr	r1, [pc, #16]	; (0x27a48)
+    27a36:	0060      	lsls	r0, r4, #1
+    27a38:	1900      	adds	r0, r0, r4
+    27a3a:	00c0      	lsls	r0, r0, #3
+    27a3c:	3108      	adds	r1, #8
+    27a3e:	1840      	adds	r0, r0, r1
+-   27a40:	6003      	str	r3, [r0, #0]
+-   27a42:	bc10      	pop	{r4}
+-   27a44:	bc01      	pop	{r0}
+-   27a46:	4700      	bx	r0
++   27a40:	68d9      	ldr	r1, [r3, #12]
++   27a42:	6889      	ldr	r1, [r1, #8]
++   27a44:	6001      	str	r1, [r0, #0]
++   27a46:	e008      	b.n	0x27a5a
+--- baserom.dump	2019-08-08 22:05:51 +0000
++++ bkgr.dump	2019-08-08 22:05:51 +0000
+@@ -1,5 +1,5 @@
+ 
+-srcrom/bkgr.gba:     file format binary
++bkgr.gba:     file format binary
+ 
+ 
+ Disassembly of section .data:
+@@ -18,56 +18,56 @@
+    279d6:	6058      	str	r0, [r3, #4]
+    279d8:	6899      	ldr	r1, [r3, #8]
+    279da:	2900      	cmp	r1, #0
+-   279dc:	d00d      	beq.n	0x279fa
++   279dc:	d018      	beq.n	0x27a10
+    279de:	6848      	ldr	r0, [r1, #4]
+    279e0:	2800      	cmp	r0, #0
+-   279e2:	d10a      	bne.n	0x279fa
++   279e2:	d015      	beq.n	0x27a10
+    279e4:	68d8      	ldr	r0, [r3, #12]
+    279e6:	60c8      	str	r0, [r1, #12]
+    279e8:	68d9      	ldr	r1, [r3, #12]
+    279ea:	6898      	ldr	r0, [r3, #8]
+    279ec:	6088      	str	r0, [r1, #8]
+-   279ee:	689a      	ldr	r2, [r3, #8]
+-   279f0:	6810      	ldr	r0, [r2, #0]
+-   279f2:	6819      	ldr	r1, [r3, #0]
+-   279f4:	1840      	adds	r0, r0, r1
+-   279f6:	6010      	str	r0, [r2, #0]
+-   279f8:	1c13      	adds	r3, r2, #0
+-   279fa:	68d9      	ldr	r1, [r3, #12]
+-   279fc:	2900      	cmp	r1, #0
+-   279fe:	d019      	beq.n	0x27a34
+-   27a00:	6848      	ldr	r0, [r1, #4]
+-   27a02:	2800      	cmp	r0, #0
+-   27a04:	d11d      	bne.n	0x27a42
+-   27a06:	1c0b      	adds	r3, r1, #0
+-   27a08:	6899      	ldr	r1, [r3, #8]
+-   27a0a:	68d8      	ldr	r0, [r3, #12]
+-   27a0c:	60c8      	str	r0, [r1, #12]
+-   27a0e:	68d9      	ldr	r1, [r3, #12]
+-   27a10:	6898      	ldr	r0, [r3, #8]
+-   27a12:	6088      	str	r0, [r1, #8]
+-   27a14:	689a      	ldr	r2, [r3, #8]
+-   27a16:	6810      	ldr	r0, [r2, #0]
+-   27a18:	6819      	ldr	r1, [r3, #0]
+-   27a1a:	1840      	adds	r0, r0, r1
+-   27a1c:	6010      	str	r0, [r2, #0]
+-   27a1e:	4904      	ldr	r1, [pc, #16]	; (0x27a30)
+-   27a20:	0060      	lsls	r0, r4, #1
+-   27a22:	1900      	adds	r0, r0, r4
+-   27a24:	00c0      	lsls	r0, r0, #3
+-   27a26:	3108      	adds	r1, #8
+-   27a28:	1840      	adds	r0, r0, r1
+-   27a2a:	6002      	str	r2, [r0, #0]
+-   27a2c:	e009      	b.n	0x27a42
+-   27a2e:	0000      	movs	r0, r0
+-   27a30:	ed20 0200 	sfm	f0, 4, [r0, #-0]
+-   27a34:	4904      	ldr	r1, [pc, #16]	; (0x27a48)
+-   27a36:	0060      	lsls	r0, r4, #1
+-   27a38:	1900      	adds	r0, r0, r4
+-   27a3a:	00c0      	lsls	r0, r0, #3
+-   27a3c:	3108      	adds	r1, #8
+-   27a3e:	1840      	adds	r0, r0, r1
+-   27a40:	6003      	str	r3, [r0, #0]
+-   27a42:	bc10      	pop	{r4}
+-   27a44:	bc01      	pop	{r0}
+-   27a46:	4700      	bx	r0
++   279ee:	6898      	ldr	r0, [r3, #8]
++   279f0:	6800      	ldr	r0, [r0, #0]
++   279f2:	0100      	lsls	r0, r0, #4
++   279f4:	681a      	ldr	r2, [r3, #0]
++   279f6:	1812      	adds	r2, r2, r0
++   279f8:	609a      	str	r2, [r3, #8]
++   279fa:	4904      	ldr	r1, [pc, #16]	; (0x27a0c)
++   279fc:	0060      	lsls	r0, r4, #1
++   279fe:	1900      	adds	r0, r0, r4
++   27a00:	00c0      	lsls	r0, r0, #3
++   27a02:	3108      	adds	r1, #8
++   27a04:	1840      	adds	r0, r0, r1
++   27a06:	6002      	str	r2, [r0, #0]
++   27a08:	e029      	b.n	0x27a5e
++   27a0a:	0000      	movs	r0, r0
++   27a0c:	ed20 0200 	sfm	f0, 4, [r0, #-0]
++   27a10:	68da      	ldr	r2, [r3, #12]
++   27a12:	2a00      	cmp	r2, #0
++   27a14:	d01c      	beq.n	0x27a50
++   27a16:	6850      	ldr	r0, [r2, #4]
++   27a18:	2800      	cmp	r0, #0
++   27a1a:	d120      	bne.n	0x27a5e
++   27a1c:	6891      	ldr	r1, [r2, #8]
++   27a1e:	68d0      	ldr	r0, [r2, #12]
++   27a20:	60c8      	str	r0, [r1, #12]
++   27a22:	68d8      	ldr	r0, [r3, #12]
++   27a24:	6880      	ldr	r0, [r0, #8]
++   27a26:	6080      	str	r0, [r0, #8]
++   27a28:	68da      	ldr	r2, [r3, #12]
++   27a2a:	6890      	ldr	r0, [r2, #8]
++   27a2c:	6811      	ldr	r1, [r2, #0]
++   27a2e:	0109      	lsls	r1, r1, #4
++   27a30:	6800      	ldr	r0, [r0, #0]
++   27a32:	1840      	adds	r0, r0, r1
++   27a34:	6090      	str	r0, [r2, #8]
++   27a36:	4905      	ldr	r1, [pc, #20]	; (0x27a4c)
++   27a38:	0060      	lsls	r0, r4, #1
++   27a3a:	1900      	adds	r0, r0, r4
++   27a3c:	00c0      	lsls	r0, r0, #3
++   27a3e:	3108      	adds	r1, #8
++   27a40:	1840      	adds	r0, r0, r1
++   27a42:	68d9      	ldr	r1, [r3, #12]
++   27a44:	6889      	ldr	r1, [r1, #8]
++   27a46:	6001      	str	r1, [r0, #0]
+--- baserom.dump	2019-08-08 22:08:04 +0000
++++ bkgr.dump	2019-08-08 22:08:04 +0000
+@@ -1,5 +1,5 @@
+ 
+-srcrom/bkgr.gba:     file format binary
++bkgr.gba:     file format binary
+ 
+ 
+ Disassembly of section .data:
+@@ -18,56 +18,55 @@
+    279d6:	6058      	str	r0, [r3, #4]
+    279d8:	6899      	ldr	r1, [r3, #8]
+    279da:	2900      	cmp	r1, #0
+-   279dc:	d00d      	beq.n	0x279fa
++   279dc:	d016      	beq.n	0x27a0c
+    279de:	6848      	ldr	r0, [r1, #4]
+    279e0:	2800      	cmp	r0, #0
+-   279e2:	d10a      	bne.n	0x279fa
++   279e2:	d013      	beq.n	0x27a0c
+    279e4:	68d8      	ldr	r0, [r3, #12]
+    279e6:	60c8      	str	r0, [r1, #12]
+    279e8:	68d9      	ldr	r1, [r3, #12]
+    279ea:	6898      	ldr	r0, [r3, #8]
+    279ec:	6088      	str	r0, [r1, #8]
+-   279ee:	689a      	ldr	r2, [r3, #8]
+-   279f0:	6810      	ldr	r0, [r2, #0]
+-   279f2:	6819      	ldr	r1, [r3, #0]
+-   279f4:	1840      	adds	r0, r0, r1
+-   279f6:	6010      	str	r0, [r2, #0]
+-   279f8:	1c13      	adds	r3, r2, #0
+-   279fa:	68d9      	ldr	r1, [r3, #12]
+-   279fc:	2900      	cmp	r1, #0
+-   279fe:	d019      	beq.n	0x27a34
+-   27a00:	6848      	ldr	r0, [r1, #4]
+-   27a02:	2800      	cmp	r0, #0
+-   27a04:	d11d      	bne.n	0x27a42
+-   27a06:	1c0b      	adds	r3, r1, #0
+-   27a08:	6899      	ldr	r1, [r3, #8]
+-   27a0a:	68d8      	ldr	r0, [r3, #12]
+-   27a0c:	60c8      	str	r0, [r1, #12]
+-   27a0e:	68d9      	ldr	r1, [r3, #12]
+-   27a10:	6898      	ldr	r0, [r3, #8]
+-   27a12:	6088      	str	r0, [r1, #8]
+-   27a14:	689a      	ldr	r2, [r3, #8]
+-   27a16:	6810      	ldr	r0, [r2, #0]
+-   27a18:	6819      	ldr	r1, [r3, #0]
+-   27a1a:	1840      	adds	r0, r0, r1
+-   27a1c:	6010      	str	r0, [r2, #0]
+-   27a1e:	4904      	ldr	r1, [pc, #16]	; (0x27a30)
+-   27a20:	0060      	lsls	r0, r4, #1
+-   27a22:	1900      	adds	r0, r0, r4
+-   27a24:	00c0      	lsls	r0, r0, #3
+-   27a26:	3108      	adds	r1, #8
+-   27a28:	1840      	adds	r0, r0, r1
+-   27a2a:	6002      	str	r2, [r0, #0]
+-   27a2c:	e009      	b.n	0x27a42
+-   27a2e:	0000      	movs	r0, r0
+-   27a30:	ed20 0200 	sfm	f0, 4, [r0, #-0]
+-   27a34:	4904      	ldr	r1, [pc, #16]	; (0x27a48)
+-   27a36:	0060      	lsls	r0, r4, #1
+-   27a38:	1900      	adds	r0, r0, r4
+-   27a3a:	00c0      	lsls	r0, r0, #3
+-   27a3c:	3108      	adds	r1, #8
+-   27a3e:	1840      	adds	r0, r0, r1
+-   27a40:	6003      	str	r3, [r0, #0]
+-   27a42:	bc10      	pop	{r4}
+-   27a44:	bc01      	pop	{r0}
+-   27a46:	4700      	bx	r0
++   279ee:	6898      	ldr	r0, [r3, #8]
++   279f0:	681a      	ldr	r2, [r3, #0]
++   279f2:	6800      	ldr	r0, [r0, #0]
++   279f4:	1812      	adds	r2, r2, r0
++   279f6:	609a      	str	r2, [r3, #8]
++   279f8:	4903      	ldr	r1, [pc, #12]	; (0x27a08)
++   279fa:	0060      	lsls	r0, r4, #1
++   279fc:	1900      	adds	r0, r0, r4
++   279fe:	00c0      	lsls	r0, r0, #3
++   27a00:	3108      	adds	r1, #8
++   27a02:	1840      	adds	r0, r0, r1
++   27a04:	6002      	str	r2, [r0, #0]
++   27a06:	e026      	b.n	0x27a56
++   27a08:	ed20 0200 	sfm	f0, 4, [r0, #-0]
++   27a0c:	68da      	ldr	r2, [r3, #12]
++   27a0e:	2a00      	cmp	r2, #0
++   27a10:	d01a      	beq.n	0x27a48
++   27a12:	6850      	ldr	r0, [r2, #4]
++   27a14:	2800      	cmp	r0, #0
++   27a16:	d11e      	bne.n	0x27a56
++   27a18:	6891      	ldr	r1, [r2, #8]
++   27a1a:	68d0      	ldr	r0, [r2, #12]
++   27a1c:	60c8      	str	r0, [r1, #12]
++   27a1e:	68d8      	ldr	r0, [r3, #12]
++   27a20:	6880      	ldr	r0, [r0, #8]
++   27a22:	6080      	str	r0, [r0, #8]
++   27a24:	68da      	ldr	r2, [r3, #12]
++   27a26:	6890      	ldr	r0, [r2, #8]
++   27a28:	6800      	ldr	r0, [r0, #0]
++   27a2a:	6811      	ldr	r1, [r2, #0]
++   27a2c:	1840      	adds	r0, r0, r1
++   27a2e:	6090      	str	r0, [r2, #8]
++   27a30:	4904      	ldr	r1, [pc, #16]	; (0x27a44)
++   27a32:	0060      	lsls	r0, r4, #1
++   27a34:	1900      	adds	r0, r0, r4
++   27a36:	00c0      	lsls	r0, r0, #3
++   27a38:	3108      	adds	r1, #8
++   27a3a:	1840      	adds	r0, r0, r1
++   27a3c:	68d9      	ldr	r1, [r3, #12]
++   27a3e:	6889      	ldr	r1, [r1, #8]
++   27a40:	6001      	str	r1, [r0, #0]
++   27a42:	e008      	b.n	0x27a56
++   27a44:	ed20 0200 	sfm	f0, 4, [r0, #-0]
+--- baserom.dump	2019-08-08 22:09:20 +0000
++++ bkgr.dump	2019-08-08 22:09:20 +0000
+@@ -1,5 +1,5 @@
+ 
+-srcrom/bkgr.gba:     file format binary
++bkgr.gba:     file format binary
+ 
+ 
+ Disassembly of section .data:
+@@ -18,56 +18,55 @@
+    279d6:	6058      	str	r0, [r3, #4]
+    279d8:	6899      	ldr	r1, [r3, #8]
+    279da:	2900      	cmp	r1, #0
+-   279dc:	d00d      	beq.n	0x279fa
++   279dc:	d016      	beq.n	0x27a0c
+    279de:	6848      	ldr	r0, [r1, #4]
+    279e0:	2800      	cmp	r0, #0
+-   279e2:	d10a      	bne.n	0x279fa
++   279e2:	d013      	beq.n	0x27a0c
+    279e4:	68d8      	ldr	r0, [r3, #12]
+    279e6:	60c8      	str	r0, [r1, #12]
+    279e8:	68d9      	ldr	r1, [r3, #12]
+    279ea:	6898      	ldr	r0, [r3, #8]
+    279ec:	6088      	str	r0, [r1, #8]
+-   279ee:	689a      	ldr	r2, [r3, #8]
+-   279f0:	6810      	ldr	r0, [r2, #0]
+-   279f2:	6819      	ldr	r1, [r3, #0]
+-   279f4:	1840      	adds	r0, r0, r1
+-   279f6:	6010      	str	r0, [r2, #0]
+-   279f8:	1c13      	adds	r3, r2, #0
+-   279fa:	68d9      	ldr	r1, [r3, #12]
+-   279fc:	2900      	cmp	r1, #0
+-   279fe:	d019      	beq.n	0x27a34
+-   27a00:	6848      	ldr	r0, [r1, #4]
+-   27a02:	2800      	cmp	r0, #0
+-   27a04:	d11d      	bne.n	0x27a42
+-   27a06:	1c0b      	adds	r3, r1, #0
+-   27a08:	6899      	ldr	r1, [r3, #8]
+-   27a0a:	68d8      	ldr	r0, [r3, #12]
+-   27a0c:	60c8      	str	r0, [r1, #12]
+-   27a0e:	68d9      	ldr	r1, [r3, #12]
+-   27a10:	6898      	ldr	r0, [r3, #8]
+-   27a12:	6088      	str	r0, [r1, #8]
+-   27a14:	689a      	ldr	r2, [r3, #8]
+-   27a16:	6810      	ldr	r0, [r2, #0]
+-   27a18:	6819      	ldr	r1, [r3, #0]
+-   27a1a:	1840      	adds	r0, r0, r1
+-   27a1c:	6010      	str	r0, [r2, #0]
+-   27a1e:	4904      	ldr	r1, [pc, #16]	; (0x27a30)
+-   27a20:	0060      	lsls	r0, r4, #1
+-   27a22:	1900      	adds	r0, r0, r4
+-   27a24:	00c0      	lsls	r0, r0, #3
+-   27a26:	3108      	adds	r1, #8
+-   27a28:	1840      	adds	r0, r0, r1
+-   27a2a:	6002      	str	r2, [r0, #0]
+-   27a2c:	e009      	b.n	0x27a42
+-   27a2e:	0000      	movs	r0, r0
+-   27a30:	ed20 0200 	sfm	f0, 4, [r0, #-0]
+-   27a34:	4904      	ldr	r1, [pc, #16]	; (0x27a48)
+-   27a36:	0060      	lsls	r0, r4, #1
+-   27a38:	1900      	adds	r0, r0, r4
+-   27a3a:	00c0      	lsls	r0, r0, #3
+-   27a3c:	3108      	adds	r1, #8
+-   27a3e:	1840      	adds	r0, r0, r1
+-   27a40:	6003      	str	r3, [r0, #0]
+-   27a42:	bc10      	pop	{r4}
+-   27a44:	bc01      	pop	{r0}
+-   27a46:	4700      	bx	r0
++   279ee:	6898      	ldr	r0, [r3, #8]
++   279f0:	681a      	ldr	r2, [r3, #0]
++   279f2:	6800      	ldr	r0, [r0, #0]
++   279f4:	1812      	adds	r2, r2, r0
++   279f6:	609a      	str	r2, [r3, #8]
++   279f8:	4903      	ldr	r1, [pc, #12]	; (0x27a08)
++   279fa:	0060      	lsls	r0, r4, #1
++   279fc:	1900      	adds	r0, r0, r4
++   279fe:	00c0      	lsls	r0, r0, #3
++   27a00:	3108      	adds	r1, #8
++   27a02:	1840      	adds	r0, r0, r1
++   27a04:	6002      	str	r2, [r0, #0]
++   27a06:	e026      	b.n	0x27a56
++   27a08:	ed20 0200 	sfm	f0, 4, [r0, #-0]
++   27a0c:	68da      	ldr	r2, [r3, #12]
++   27a0e:	2a00      	cmp	r2, #0
++   27a10:	d01a      	beq.n	0x27a48
++   27a12:	6850      	ldr	r0, [r2, #4]
++   27a14:	2800      	cmp	r0, #0
++   27a16:	d11e      	bne.n	0x27a56
++   27a18:	6891      	ldr	r1, [r2, #8]
++   27a1a:	68d0      	ldr	r0, [r2, #12]
++   27a1c:	60c8      	str	r0, [r1, #12]
++   27a1e:	68d8      	ldr	r0, [r3, #12]
++   27a20:	6880      	ldr	r0, [r0, #8]
++   27a22:	6080      	str	r0, [r0, #8]
++   27a24:	68da      	ldr	r2, [r3, #12]
++   27a26:	6890      	ldr	r0, [r2, #8]
++   27a28:	6800      	ldr	r0, [r0, #0]
++   27a2a:	6811      	ldr	r1, [r2, #0]
++   27a2c:	1840      	adds	r0, r0, r1
++   27a2e:	6090      	str	r0, [r2, #8]
++   27a30:	4904      	ldr	r1, [pc, #16]	; (0x27a44)
++   27a32:	0060      	lsls	r0, r4, #1
++   27a34:	1900      	adds	r0, r0, r4
++   27a36:	00c0      	lsls	r0, r0, #3
++   27a38:	3108      	adds	r1, #8
++   27a3a:	1840      	adds	r0, r0, r1
++   27a3c:	68d9      	ldr	r1, [r3, #12]
++   27a3e:	6889      	ldr	r1, [r1, #8]
++   27a40:	6001      	str	r1, [r0, #0]
++   27a42:	e008      	b.n	0x27a56
++   27a44:	ed20 0200 	sfm	f0, 4, [r0, #-0]

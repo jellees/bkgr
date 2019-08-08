@@ -460,41 +460,56 @@ _08027976:                      \n\
 }
 #endif
 
-void Free(struct MemoryBlock* pointer);
+void Free(void* pointer, u32 heap);
 
-#ifdef NONMATCHING
-// Two registers are swapped.
-void FreeEx(struct MemoryBlock* pointer)
+void FreeEx(void* pointer)
 {
     int i;
     for (i = 0; i < 6; i++)
     {
-        i--;i++;
-        if (pointer >= gHeaps[i].first && pointer <= gHeaps[i].end)
+        if (pointer >= (void*)gHeaps[i].first && pointer <= (void*)gHeaps[i].end)
         {
             
-            Free(pointer);
+            Free(pointer, i);
             return;
             
         }
     }
     HANG;
 }
-#else
-void FreeEx(struct MemoryBlock* pointer)
+
+void Free(void* pointer, u32 heap)
 {
-    int i;
-    for (i = 0; i < 6; i++)
+    struct MemoryBlock* block = (struct MemoryBlock*)(pointer - sizeof(struct MemoryBlock));
+
+    if(block->allocId - 1 > 0x18)
+        HANG;
+    
+    block->allocId = 0;
+
+    if (block->previous && block->previous->allocId != 0)
     {
-        asm(""::"r"(i));
-        if (pointer >= gHeaps[i].first && pointer <= gHeaps[i].end)
-        {
-            
-            Free(pointer);
-            return;
-        }
-        asm(""::"r"(i));
+        block->previous->next = block->next;
+        block->next->previous = block->previous;
+        block->previous = (struct MemoryBlock*)(block->length + block->previous->length);
+        gHeaps[heap].last = block->previous;
     }
-    HANG;
+    else
+    {
+        if(block->next)
+        {
+            if (block->next->allocId != 0)
+                return;
+            
+            block->next->previous->next = block->next->next;
+            block->next->previous->previous = block->next->previous;
+            block->next->previous = (struct MemoryBlock*)(block->next->previous->length + block->next->length);
+            gHeaps[heap].last = block->next->previous;
+        }
+        else
+        {
+            gHeaps[heap].last = block;
+        }
+    }
 }
-#endif
+
