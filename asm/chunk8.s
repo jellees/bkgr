@@ -258,8 +258,8 @@ _08046FC8: .4byte 0x083FD254
 _08046FCC: .4byte 0x05000200
 _08046FD0: .4byte 0x083FD974
 _08046FD4: .4byte 0x02000320
-_08046FD8: .4byte 0x0203EA90
-_08046FDC: .4byte 0x0203EA91
+_08046FD8: .4byte gMenuId
+_08046FDC: .4byte gMenuParentId
 _08046FE0: .4byte 0x0203F6AC
 _08046FE4: .4byte 0x02000F56
 _08046FE8: .4byte gKeysDown
@@ -340,8 +340,8 @@ _080470A0: .4byte 0x083FD254
 _080470A4: .4byte 0x05000200
 _080470A8: .4byte 0x083FD974
 _080470AC: .4byte 0x02000320
-_080470B0: .4byte 0x0203EA90
-_080470B4: .4byte 0x0203EA91
+_080470B0: .4byte gMenuId
+_080470B4: .4byte gMenuParentId
 _080470B8: .4byte 0x00000FFF
 _080470BC:
 	ldr r0, _080470F4
@@ -455,7 +455,7 @@ _080471A8: .4byte 0x0203F594
 _080471AC: .4byte 0x0203F590
 _080471B0: .4byte 0x0203F58C
 _080471B4: .4byte gKeysDown
-_080471B8: .4byte 0x0203EA90
+_080471B8: .4byte gMenuId
 _080471BC: .4byte 0x02000320
 _080471C0:
 	ldr r0, _080471D0
@@ -542,7 +542,7 @@ _08047268:
 	strb r0, [r4]
 	b _080473A2
 	.align 2, 0
-_08047288: .4byte 0x0203EA90
+_08047288: .4byte gMenuId
 _0804728C: .4byte 0x02000320
 _08047290:
 	ldr r5, _08047300
@@ -54528,8 +54528,8 @@ _08062AFC: .4byte 0x030032A8
 _08062B00: .4byte 0x0200108E
 _08062B04: .4byte 0x0203F4E0
 _08062B08: .4byte 0x02000320
-_08062B0C: .4byte 0x0203EA90
-_08062B10: .4byte 0x0203EA91
+_08062B0C: .4byte gMenuId
+_08062B10: .4byte gMenuParentId
 _08062B14: .4byte gOAMBuffer1
 _08062B18: .4byte gOAMBufferFramePtr
 _08062B1C: .4byte gOAMBufferEnd
@@ -54838,8 +54838,8 @@ _08062DD0: .4byte gOAMBuffer1
 _08062DD4: .4byte gKeysDown
 _08062DD8: .4byte gKeysPressed
 _08062DDC: .4byte gPreviousKeys
-_08062DE0: .4byte 0x0203EA91
-_08062DE4: .4byte 0x0203EA90
+_08062DE0: .4byte gMenuParentId
+_08062DE4: .4byte gMenuId
 _08062DE8:
 	movs r0, #0xff
 	strb r0, [r2]
@@ -54880,7 +54880,7 @@ _08062E26:
 	bl InitMenu
 	b _08062E62
 	.align 2, 0
-_08062E34: .4byte 0x0203EA90
+_08062E34: .4byte gMenuId
 _08062E38: .4byte 0x02000320
 _08062E3C:
 	movs r0, #1
@@ -55069,7 +55069,7 @@ sub_8062FC4: @ 0x08062FC4
 	beq _08063044
 	b _080630AC
 	.align 2, 0
-_08062FE0: .4byte 0x0203EA90
+_08062FE0: .4byte gMenuId
 _08062FE4:
 	bl GetCurrentMenuEntry
 	cmp r0, #0
@@ -55116,7 +55116,7 @@ _08062FF6:
 	strb r0, [r5, #0xd]
 	b _080630A0
 	.align 2, 0
-_0806303C: .4byte 0x0203EA91
+_0806303C: .4byte gMenuParentId
 _08063040: .4byte 0x02000320
 _08063044:
 	bl GetCurrentMenuEntry
@@ -55177,7 +55177,7 @@ _080630AE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080630B8: .4byte 0x0203EA91
+_080630B8: .4byte gMenuParentId
 _080630BC: .4byte 0x02000320
 
     .thumb

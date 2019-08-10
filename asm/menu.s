@@ -4,27 +4,6 @@
     .text
 
     .thumb
-    .global ResetMenuEx
-ResetMenuEx: @ 0x08042460
-	ldr r0, _0804247C
-	movs r1, #0xff
-	strb r1, [r0]
-	ldr r0, _08042480
-	strb r1, [r0]
-	ldr r1, _08042484
-	adds r2, r1, #0
-	adds r2, #0x3b
-	movs r0, #0
-	strb r0, [r2]
-	str r0, [r1, #0x34]
-	str r0, [r1, #0x3c]
-	bx lr
-	.align 2, 0
-_0804247C: .4byte 0x0203EA90
-_08042480: .4byte 0x0203EA91
-_08042484: .4byte 0x0203EA94
-
-    .thumb
     .global ResetMenu
 ResetMenu: @ 0x08042488
 	ldr r0, _080424A4
@@ -41,9 +20,9 @@ ResetMenu: @ 0x08042488
 	str r0, [r1, #0x3c]
 	bx lr
 	.align 2, 0
-_080424A4: .4byte 0x0203EA90
-_080424A8: .4byte 0x0203EA91
-_080424AC: .4byte 0x0203EA94
+_080424A4: .4byte gMenuId
+_080424A8: .4byte gMenuParentId
+_080424AC: .4byte gMenu
 
     .thumb
     .global InitMenu
@@ -88,7 +67,7 @@ _080424F4:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08042500: .4byte 0x0203EA94
+_08042500: .4byte gMenu
 _08042504: .4byte 0x08042508
 _08042508: @ jump table
 	.4byte _0804262C @ case 0
@@ -194,7 +173,7 @@ _08042578:
 	str r1, [r0, #0x10]
 	bl _08044614
 	.align 2, 0
-_08042610: .4byte 0x0203EA94
+_08042610: .4byte gMenu
 _08042614: .4byte 0x080B01B0
 _08042618: .4byte 0x08065220
 _0804261C: .4byte 0x0806522C
@@ -273,7 +252,7 @@ _0804262C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080426BC: .4byte 0x0203EA94
+_080426BC: .4byte gMenu
 _080426C0: .4byte 0x080B01B0
 _080426C4: .4byte 0x080426C8
 _080426C8: @ jump table
@@ -291,7 +270,7 @@ _080426DC:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_080426EC: .4byte 0x0203EA94
+_080426EC: .4byte gMenu
 _080426F0: .4byte 0x08068434
 _080426F4: .4byte 0x08068440
 _080426F8:
@@ -303,7 +282,7 @@ _080426F8:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042708: .4byte 0x0203EA94
+_08042708: .4byte gMenu
 _0804270C: .4byte 0x08068460
 _08042710: .4byte 0x08068474
 _08042714:
@@ -315,7 +294,7 @@ _08042714:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042724: .4byte 0x0203EA94
+_08042724: .4byte gMenu
 _08042728: .4byte 0x080684C4
 _0804272C: .4byte 0x080684D4
 _08042730:
@@ -327,7 +306,7 @@ _08042730:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042740: .4byte 0x0203EA94
+_08042740: .4byte gMenu
 _08042744: .4byte 0x080684F0
 _08042748: .4byte 0x08068500
 _0804274C:
@@ -339,7 +318,7 @@ _0804274C:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_0804275C: .4byte 0x0203EA94
+_0804275C: .4byte gMenu
 _08042760: .4byte 0x08068490
 _08042764: .4byte 0x080684A0
 _08042768:
@@ -417,7 +396,7 @@ _08042770:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08042800: .4byte 0x0203EA94
+_08042800: .4byte gMenu
 _08042804: .4byte 0x080B01B0
 _08042808: .4byte 0x0804280C
 _0804280C: @ jump table
@@ -437,7 +416,7 @@ _08042820:
 	str r0, [r1, #8]
 	bl _08044614
 	.align 2, 0
-_08042834: .4byte 0x0203EA94
+_08042834: .4byte gMenu
 _08042838: .4byte 0x08067D6C
 _0804283C: .4byte 0x08067D78
 _08042840: .4byte 0x08067D84
@@ -452,7 +431,7 @@ _08042844:
 	str r0, [r1, #8]
 	bl _08044614
 	.align 2, 0
-_08042858: .4byte 0x0203EA94
+_08042858: .4byte gMenu
 _0804285C: .4byte 0x08067DFC
 _08042860: .4byte 0x08067E0C
 _08042864: .4byte 0x08067E18
@@ -467,7 +446,7 @@ _08042868:
 	str r0, [r1, #8]
 	bl _08044614
 	.align 2, 0
-_0804287C: .4byte 0x0203EA94
+_0804287C: .4byte gMenu
 _08042880: .4byte 0x08067F44
 _08042884: .4byte 0x08067F58
 _08042888: .4byte 0x08067F70
@@ -482,7 +461,7 @@ _0804288C:
 	str r0, [r1, #8]
 	bl _08044614
 	.align 2, 0
-_080428A0: .4byte 0x0203EA94
+_080428A0: .4byte gMenu
 _080428A4: .4byte 0x08067FE4
 _080428A8: .4byte 0x08067FF4
 _080428AC: .4byte 0x08067FFC
@@ -497,7 +476,7 @@ _080428B0:
 	str r0, [r1, #8]
 	bl _08044614
 	.align 2, 0
-_080428C4: .4byte 0x0203EA94
+_080428C4: .4byte gMenu
 _080428C8: .4byte 0x08067E94
 _080428CC: .4byte 0x08067EAC
 _080428D0: .4byte 0x08067EC0
@@ -648,7 +627,7 @@ _080429F8:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08042A04: .4byte 0x0203EA94
+_08042A04: .4byte gMenu
 _08042A08: .4byte 0x080B01B0
 _08042A0C: .4byte 0x00000476
 _08042A10: .4byte 0x00000477
@@ -673,7 +652,7 @@ _08042A30:
 	str r0, [r1, #0xc]
 	bl _08044614
 	.align 2, 0
-_08042A48: .4byte 0x0203EA94
+_08042A48: .4byte gMenu
 _08042A4C: .4byte 0x08067D44
 _08042A50: .4byte 0x08067D50
 _08042A54: .4byte 0x08067D58
@@ -691,7 +670,7 @@ _08042A5C:
 	str r0, [r1, #0xc]
 	bl _08044614
 	.align 2, 0
-_08042A74: .4byte 0x0203EA94
+_08042A74: .4byte gMenu
 _08042A78: .4byte 0x08067DCC
 _08042A7C: .4byte 0x08067DD8
 _08042A80: .4byte 0x08067DE0
@@ -709,7 +688,7 @@ _08042A88:
 	str r0, [r1, #0xc]
 	bl _08044614
 	.align 2, 0
-_08042AA0: .4byte 0x0203EA94
+_08042AA0: .4byte gMenu
 _08042AA4: .4byte 0x08067F14
 _08042AA8: .4byte 0x08067F20
 _08042AAC: .4byte 0x08067F2C
@@ -727,7 +706,7 @@ _08042AB4:
 	str r0, [r1, #0xc]
 	bl _08044614
 	.align 2, 0
-_08042ACC: .4byte 0x0203EA94
+_08042ACC: .4byte gMenu
 _08042AD0: .4byte 0x08067FBC
 _08042AD4: .4byte 0x08067FC8
 _08042AD8: .4byte 0x08067FD0
@@ -745,7 +724,7 @@ _08042AE0:
 	str r0, [r1, #0xc]
 	bl _08044614
 	.align 2, 0
-_08042AF8: .4byte 0x0203EA94
+_08042AF8: .4byte gMenu
 _08042AFC: .4byte 0x08067E64
 _08042B00: .4byte 0x08067E70
 _08042B04: .4byte 0x08067E7C
@@ -859,7 +838,7 @@ _08042B14:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08042BEC: .4byte 0x0203EA94
+_08042BEC: .4byte gMenu
 _08042BF0: .4byte 0x080B01B0
 _08042BF4: .4byte 0x00000476
 _08042BF8: .4byte 0x00000477
@@ -879,7 +858,7 @@ _08042C14:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042C24: .4byte 0x0203EA94
+_08042C24: .4byte gMenu
 _08042C28: .4byte 0x08068058
 _08042C2C: .4byte 0x08068064
 _08042C30:
@@ -891,7 +870,7 @@ _08042C30:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042C40: .4byte 0x0203EA94
+_08042C40: .4byte gMenu
 _08042C44: .4byte 0x080680E8
 _08042C48: .4byte 0x080680FC
 _08042C4C:
@@ -903,7 +882,7 @@ _08042C4C:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042C5C: .4byte 0x0203EA94
+_08042C5C: .4byte gMenu
 _08042C60: .4byte 0x08068244
 _08042C64: .4byte 0x08068258
 _08042C68:
@@ -915,7 +894,7 @@ _08042C68:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042C78: .4byte 0x0203EA94
+_08042C78: .4byte gMenu
 _08042C7C: .4byte 0x080682E4
 _08042C80: .4byte 0x080682F4
 _08042C84:
@@ -927,7 +906,7 @@ _08042C84:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042C94: .4byte 0x0203EA94
+_08042C94: .4byte gMenu
 _08042C98: .4byte 0x08068190
 _08042C9C: .4byte 0x080681A4
 _08042CA0:
@@ -1039,7 +1018,7 @@ _08042CA8:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08042D80: .4byte 0x0203EA94
+_08042D80: .4byte gMenu
 _08042D84: .4byte 0x080B01B0
 _08042D88: .4byte 0x00000476
 _08042D8C: .4byte 0x00000477
@@ -1059,7 +1038,7 @@ _08042DA8:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042DB8: .4byte 0x0203EA94
+_08042DB8: .4byte gMenu
 _08042DBC: .4byte 0x08068370
 _08042DC0: .4byte 0x08068380
 _08042DC4:
@@ -1071,7 +1050,7 @@ _08042DC4:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042DD4: .4byte 0x0203EA94
+_08042DD4: .4byte gMenu
 _08042DD8: .4byte 0x08068388
 _08042DDC: .4byte 0x0806839C
 _08042DE0:
@@ -1083,7 +1062,7 @@ _08042DE0:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042DF0: .4byte 0x0203EA94
+_08042DF0: .4byte gMenu
 _08042DF4: .4byte 0x080683C4
 _08042DF8: .4byte 0x080683D8
 _08042DFC:
@@ -1095,7 +1074,7 @@ _08042DFC:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042E0C: .4byte 0x0203EA94
+_08042E0C: .4byte gMenu
 _08042E10: .4byte 0x080683E0
 _08042E14: .4byte 0x080683F4
 _08042E18:
@@ -1107,7 +1086,7 @@ _08042E18:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042E28: .4byte 0x0203EA94
+_08042E28: .4byte gMenu
 _08042E2C: .4byte 0x080683A4
 _08042E30: .4byte 0x080683B8
 _08042E34:
@@ -1219,7 +1198,7 @@ _08042E3C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08042F14: .4byte 0x0203EA94
+_08042F14: .4byte gMenu
 _08042F18: .4byte 0x080B01B0
 _08042F1C: .4byte 0x00000476
 _08042F20: .4byte 0x00000477
@@ -1239,7 +1218,7 @@ _08042F3C:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042F4C: .4byte 0x0203EA94
+_08042F4C: .4byte gMenu
 _08042F50: .4byte 0x080683FC
 _08042F54: .4byte 0x08068404
 _08042F58:
@@ -1251,7 +1230,7 @@ _08042F58:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042F68: .4byte 0x0203EA94
+_08042F68: .4byte gMenu
 _08042F6C: .4byte 0x08068408
 _08042F70: .4byte 0x08068410
 _08042F74:
@@ -1263,7 +1242,7 @@ _08042F74:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042F84: .4byte 0x0203EA94
+_08042F84: .4byte gMenu
 _08042F88: .4byte 0x08068424
 _08042F8C: .4byte 0x08068428
 _08042F90:
@@ -1275,7 +1254,7 @@ _08042F90:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042FA0: .4byte 0x0203EA94
+_08042FA0: .4byte gMenu
 _08042FA4: .4byte 0x0806842C
 _08042FA8: .4byte 0x08068430
 _08042FAC:
@@ -1287,7 +1266,7 @@ _08042FAC:
 	str r0, [r1, #4]
 	bl _08044614
 	.align 2, 0
-_08042FBC: .4byte 0x0203EA94
+_08042FBC: .4byte gMenu
 _08042FC0: .4byte 0x08068418
 _08042FC4: .4byte 0x0806841C
 _08042FC8:
@@ -1362,7 +1341,7 @@ _08042FD0:
 	str r1, [r0, #4]
 	bl _08044614
 	.align 2, 0
-_0804305C: .4byte 0x0203EA94
+_0804305C: .4byte gMenu
 _08043060: .4byte 0x080B01B0
 _08043064: .4byte 0x08065320
 _08043068: .4byte 0x08065328
@@ -1437,7 +1416,7 @@ _0804306C:
 	str r1, [r0, #8]
 	bl _08044614
 	.align 2, 0
-_080430FC: .4byte 0x0203EA94
+_080430FC: .4byte gMenu
 _08043100: .4byte 0x080B01B0
 _08043104: .4byte 0x020010B2
 _08043108: .4byte 0x020010CC
@@ -1567,7 +1546,7 @@ _08043110:
 	str r0, [r1, #8]
 	bl _08044614
 	.align 2, 0
-_08043214: .4byte 0x0203EA94
+_08043214: .4byte gMenu
 _08043218: .4byte 0x080B01B0
 _0804321C: .4byte 0x00000476
 _08043220: .4byte 0x00000477
@@ -1647,7 +1626,7 @@ _080432B4:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080432C0: .4byte 0x0203EA94
+_080432C0: .4byte gMenu
 _080432C4: .4byte 0x080B01B0
 _080432C8: .4byte 0x080432CC
 _080432CC: @ jump table
@@ -1672,7 +1651,7 @@ _080432E0:
 	.align 2, 0
 _080432F8: .4byte 0x0203E16C
 _080432FC: .4byte 0x080CF3B0
-_08043300: .4byte 0x0203EA94
+_08043300: .4byte gMenu
 _08043304: .4byte 0x0806570C
 _08043308:
 	ldr r2, _08043324
@@ -1691,7 +1670,7 @@ _0804330E:
 	ldr r0, _0804332C
 	b _08043338
 	.align 2, 0
-_08043324: .4byte 0x0203EA94
+_08043324: .4byte gMenu
 _08043328: .4byte 0x080657B0
 _0804332C: .4byte 0x0806571C
 _08043330:
@@ -1767,7 +1746,7 @@ _080433A4:
 	.align 2, 0
 _080433BC: .4byte 0x0203E16C
 _080433C0: .4byte 0x080CF3B0
-_080433C4: .4byte 0x0203EA94
+_080433C4: .4byte gMenu
 _080433C8: .4byte 0x08065850
 _080433CC:
 	ldr r2, _080433E8
@@ -1786,7 +1765,7 @@ _080433D2:
 	ldr r0, _080433F0
 	b _080433FC
 	.align 2, 0
-_080433E8: .4byte 0x0203EA94
+_080433E8: .4byte gMenu
 _080433EC: .4byte 0x08065928
 _080433F0: .4byte 0x08065868
 _080433F4:
@@ -1862,7 +1841,7 @@ _08043468:
 	.align 2, 0
 _08043480: .4byte 0x0203E16C
 _08043484: .4byte 0x080CF3B0
-_08043488: .4byte 0x0203EA94
+_08043488: .4byte gMenu
 _0804348C: .4byte 0x08065B1C
 _08043490:
 	ldr r2, _080434AC
@@ -1881,7 +1860,7 @@ _08043496:
 	ldr r0, _080434B4
 	b _080434C0
 	.align 2, 0
-_080434AC: .4byte 0x0203EA94
+_080434AC: .4byte gMenu
 _080434B0: .4byte 0x08065BE4
 _080434B4: .4byte 0x08065B2C
 _080434B8:
@@ -1957,7 +1936,7 @@ _0804352C:
 	.align 2, 0
 _08043544: .4byte 0x0203E16C
 _08043548: .4byte 0x080CF3B0
-_0804354C: .4byte 0x0203EA94
+_0804354C: .4byte gMenu
 _08043550: .4byte 0x08065C84
 _08043554:
 	ldr r2, _08043570
@@ -1976,7 +1955,7 @@ _0804355A:
 	ldr r0, _08043578
 	b _08043584
 	.align 2, 0
-_08043570: .4byte 0x0203EA94
+_08043570: .4byte gMenu
 _08043574: .4byte 0x08065D4C
 _08043578: .4byte 0x08065C98
 _0804357C:
@@ -2052,7 +2031,7 @@ _080435F0:
 	.align 2, 0
 _08043608: .4byte 0x0203E16C
 _0804360C: .4byte 0x080CF3B0
-_08043610: .4byte 0x0203EA94
+_08043610: .4byte gMenu
 _08043614: .4byte 0x080659C8
 _08043618:
 	ldr r2, _08043634
@@ -2071,7 +2050,7 @@ _0804361E:
 	ldr r0, _0804363C
 	b _08043648
 	.align 2, 0
-_08043634: .4byte 0x0203EA94
+_08043634: .4byte gMenu
 _08043638: .4byte 0x08065A7C
 _0804363C: .4byte 0x080659D4
 _08043640:
@@ -2207,7 +2186,7 @@ _08043740:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0804374C: .4byte 0x0203EA94
+_0804374C: .4byte gMenu
 _08043750: .4byte 0x080B01B0
 _08043754: .4byte 0x08043758
 _08043758: @ jump table
@@ -2232,7 +2211,7 @@ _0804376C:
 	.align 2, 0
 _08043784: .4byte 0x0203E16C
 _08043788: .4byte 0x080CF3B0
-_0804378C: .4byte 0x0203EA94
+_0804378C: .4byte gMenu
 _08043790: .4byte 0x08065748
 _08043794:
 	ldr r2, _080437B0
@@ -2251,7 +2230,7 @@ _0804379A:
 	ldr r0, _080437B8
 	b _080437C4
 	.align 2, 0
-_080437B0: .4byte 0x0203EA94
+_080437B0: .4byte gMenu
 _080437B4: .4byte 0x08065800
 _080437B8: .4byte 0x08065758
 _080437BC:
@@ -2327,7 +2306,7 @@ _08043830:
 	.align 2, 0
 _08043848: .4byte 0x0203E16C
 _0804384C: .4byte 0x080CF3B0
-_08043850: .4byte 0x0203EA94
+_08043850: .4byte gMenu
 _08043854: .4byte 0x080658AC
 _08043858:
 	ldr r2, _08043874
@@ -2346,7 +2325,7 @@ _0804385E:
 	ldr r0, _0804387C
 	b _08043888
 	.align 2, 0
-_08043874: .4byte 0x0203EA94
+_08043874: .4byte gMenu
 _08043878: .4byte 0x08065978
 _0804387C: .4byte 0x080658C0
 _08043880:
@@ -2422,7 +2401,7 @@ _080438F4:
 	.align 2, 0
 _0804390C: .4byte 0x0203E16C
 _08043910: .4byte 0x080CF3B0
-_08043914: .4byte 0x0203EA94
+_08043914: .4byte gMenu
 _08043918: .4byte 0x08065B68
 _0804391C:
 	ldr r2, _08043938
@@ -2441,7 +2420,7 @@ _08043922:
 	ldr r0, _08043940
 	b _0804394C
 	.align 2, 0
-_08043938: .4byte 0x0203EA94
+_08043938: .4byte gMenu
 _0804393C: .4byte 0x08065C34
 _08043940: .4byte 0x08065B7C
 _08043944:
@@ -2517,7 +2496,7 @@ _080439B8:
 	.align 2, 0
 _080439D0: .4byte 0x0203E16C
 _080439D4: .4byte 0x080CF3B0
-_080439D8: .4byte 0x0203EA94
+_080439D8: .4byte gMenu
 _080439DC: .4byte 0x08065CD4
 _080439E0:
 	ldr r2, _080439FC
@@ -2536,7 +2515,7 @@ _080439E6:
 	ldr r0, _08043A04
 	b _08043A10
 	.align 2, 0
-_080439FC: .4byte 0x0203EA94
+_080439FC: .4byte gMenu
 _08043A00: .4byte 0x08065D9C
 _08043A04: .4byte 0x08065CE8
 _08043A08:
@@ -2612,7 +2591,7 @@ _08043A7C:
 	.align 2, 0
 _08043A94: .4byte 0x0203E16C
 _08043A98: .4byte 0x080CF3B0
-_08043A9C: .4byte 0x0203EA94
+_08043A9C: .4byte gMenu
 _08043AA0: .4byte 0x080659FC
 _08043AA4:
 	ldr r2, _08043AC0
@@ -2631,7 +2610,7 @@ _08043AAA:
 	ldr r0, _08043AC8
 	b _08043AD4
 	.align 2, 0
-_08043AC0: .4byte 0x0203EA94
+_08043AC0: .4byte gMenu
 _08043AC4: .4byte 0x08065ACC
 _08043AC8: .4byte 0x08065A10
 _08043ACC:
@@ -2773,7 +2752,7 @@ _08043B48:
 	str r1, [r0, #0x18]
 	bl _08044614
 	.align 2, 0
-_08043BE8: .4byte 0x0203EA94
+_08043BE8: .4byte gMenu
 _08043BEC: .4byte 0x080B01A8
 _08043BF0: .4byte 0x08064A8C
 _08043BF4: .4byte 0x08064A98
@@ -2855,7 +2834,7 @@ _08043C0C:
 	str r1, [r0, #0xc]
 	bl _08044614
 	.align 2, 0
-_08043CA0: .4byte 0x0203EA94
+_08043CA0: .4byte gMenu
 _08043CA4: .4byte 0x080B01A8
 _08043CA8: .4byte 0x08064E30
 _08043CAC: .4byte 0x08064E40
@@ -2937,7 +2916,7 @@ _08043CB8:
 	str r1, [r0, #0x14]
 	bl _08044614
 	.align 2, 0
-_08043D50: .4byte 0x0203EA94
+_08043D50: .4byte gMenu
 _08043D54: .4byte 0x080B01A8
 _08043D58: .4byte 0x08064CBC
 _08043D5C: .4byte 0x08064CC4
@@ -3021,7 +3000,7 @@ _08043D70:
 	str r1, [r0, #0x14]
 	bl _08044614
 	.align 2, 0
-_08043E08: .4byte 0x0203EA94
+_08043E08: .4byte gMenu
 _08043E0C: .4byte 0x080B01A8
 _08043E10: .4byte 0x08064D18
 _08043E14: .4byte 0x08064D28
@@ -3105,7 +3084,7 @@ _08043E28:
 	str r1, [r0, #0x14]
 	b _08044614
 	.align 2, 0
-_08043EC0: .4byte 0x0203EA94
+_08043EC0: .4byte gMenu
 _08043EC4: .4byte 0x080B01A8
 _08043EC8: .4byte 0x08064D68
 _08043ECC: .4byte 0x08064D74
@@ -3189,7 +3168,7 @@ _08043EE0:
 	str r1, [r0, #0x14]
 	b _08044614
 	.align 2, 0
-_08043F78: .4byte 0x0203EA94
+_08043F78: .4byte gMenu
 _08043F7C: .4byte 0x080B01A8
 _08043F80: .4byte 0x08064DAC
 _08043F84: .4byte 0x08064DB8
@@ -3270,7 +3249,7 @@ _08043F98:
 	str r1, [r0, #0xc]
 	b _08044614
 	.align 2, 0
-_08044028: .4byte 0x0203EA94
+_08044028: .4byte gMenu
 _0804402C: .4byte 0x080B01A8
 _08044030: .4byte 0x08064DF4
 _08044034: .4byte 0x08064DFC
@@ -3344,7 +3323,7 @@ _08044040:
 	str r1, [r0, #4]
 	b _08044614
 	.align 2, 0
-_080440C8: .4byte 0x0203EA94
+_080440C8: .4byte gMenu
 _080440CC: .4byte 0x080B01A8
 _080440D0: .4byte 0x08064E1C
 _080440D4: .4byte 0x08064E24
@@ -3424,7 +3403,7 @@ _080440D8:
 	str r1, [r0, #0x14]
 	b _08044614
 	.align 2, 0
-_08044170: .4byte 0x0203EA94
+_08044170: .4byte gMenu
 _08044174: .4byte 0x080B01A8
 _08044178: .4byte 0x08064E64
 _0804417C: .4byte 0x08064E6C
@@ -3511,7 +3490,7 @@ _08044190:
 	str r1, [r0, #0x18]
 	b _08044614
 	.align 2, 0
-_0804422C: .4byte 0x0203EA94
+_0804422C: .4byte gMenu
 _08044230: .4byte 0x080B01A8
 _08044234: .4byte 0x08064ADC
 _08044238: .4byte 0x08064AE8
@@ -3599,7 +3578,7 @@ _08044250:
 	str r1, [r0, #0x18]
 	b _08044614
 	.align 2, 0
-_080442EC: .4byte 0x0203EA94
+_080442EC: .4byte gMenu
 _080442F0: .4byte 0x080B01A8
 _080442F4: .4byte 0x08064B34
 _080442F8: .4byte 0x08064B40
@@ -3687,7 +3666,7 @@ _08044310:
 	str r1, [r0, #0x18]
 	b _08044614
 	.align 2, 0
-_080443AC: .4byte 0x0203EA94
+_080443AC: .4byte gMenu
 _080443B0: .4byte 0x080B01A8
 _080443B4: .4byte 0x08064B84
 _080443B8: .4byte 0x08064B8C
@@ -3775,7 +3754,7 @@ _080443D0:
 	str r1, [r0, #0x18]
 	b _08044614
 	.align 2, 0
-_0804446C: .4byte 0x0203EA94
+_0804446C: .4byte gMenu
 _08044470: .4byte 0x080B01A8
 _08044474: .4byte 0x08064BD0
 _08044478: .4byte 0x08064BDC
@@ -3863,7 +3842,7 @@ _08044490:
 	str r1, [r0, #0x18]
 	b _08044614
 	.align 2, 0
-_0804452C: .4byte 0x0203EA94
+_0804452C: .4byte gMenu
 _08044530: .4byte 0x080B01A8
 _08044534: .4byte 0x08064C20
 _08044538: .4byte 0x08064C2C
@@ -3951,7 +3930,7 @@ _08044550:
 	str r1, [r0, #0x18]
 	b _08044614
 	.align 2, 0
-_080445EC: .4byte 0x0203EA94
+_080445EC: .4byte gMenu
 _080445F0: .4byte 0x080B01A8
 _080445F4: .4byte 0x08064C70
 _080445F8: .4byte 0x08064C78
@@ -4004,7 +3983,7 @@ _08044644:
 	movs r0, #0
 	b _08044662
 	.align 2, 0
-_0804465C: .4byte 0x0203EA94
+_0804465C: .4byte gMenu
 _08044660:
 	adds r0, r1, #1
 _08044662:
@@ -4028,7 +4007,7 @@ _08044680:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08044688: .4byte 0x0203EA94
+_08044688: .4byte gMenu
 
     .thumb
     .global AdvanceMenuEntryUp
@@ -4080,7 +4059,7 @@ _080446DE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080446E4: .4byte 0x0203EA94
+_080446E4: .4byte gMenu
 
     .thumb
     .global FlushMenuToTextBuffer
@@ -4115,7 +4094,7 @@ _080446F8:
 	bl AddStringToBuffer
 	b _0804474A
 	.align 2, 0
-_08044724: .4byte 0x0203EA94
+_08044724: .4byte gMenu
 _08044728:
 	ldrh r0, [r2, #6]
 	ldrh r1, [r2]
@@ -4145,7 +4124,7 @@ _08044756:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804475C: .4byte 0x0203EA94
+_0804475C: .4byte gMenu
 
     .thumb
     .global RenderMenuSprites
@@ -4177,7 +4156,7 @@ _0804478C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08044794: .4byte 0x0203EA94
+_08044794: .4byte gMenu
 
     .thumb
     .global GetCurrentMenuEntry
@@ -4186,7 +4165,7 @@ GetCurrentMenuEntry: @ 0x08044798
 	ldrh r0, [r0, #0x38]
 	bx lr
 	.align 2, 0
-_080447A0: .4byte 0x0203EA94
+_080447A0: .4byte gMenu
 
     .thumb
     .global SetMenuEntry
@@ -4206,4 +4185,4 @@ _080447B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080447C0: .4byte 0x0203EA94
+_080447C0: .4byte gMenu

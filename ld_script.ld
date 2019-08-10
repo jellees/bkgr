@@ -105,6 +105,11 @@ SECTIONS
 		gBgmVolumeIndex = .; . += 1;
 		gSfxVolumeIndex = .; . += 1;
 		byte_203EA8C = .; . += 1;
+		. += 3; /* padding */
+		gMenuId = .; . += 1;
+		gMenuParentId = .; . += 1;
+		. += 2; /* padding */
+		gMenu = .; . += 0x40;
 
 		. = 0x0003F998;
 		word_203F998 = .; . += 2;
@@ -243,6 +248,7 @@ SECTIONS
 		src/alloc.o(.text);
 		asm/alloc.o(.text);
 		asm/chunk6.o(.text);
+		src/menu.o(.text);
 		asm/menu.o(.text);
 		asm/chunk7.o(.text);
 		asm/pause_menu.o(.text);

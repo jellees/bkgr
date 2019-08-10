@@ -1034,8 +1034,8 @@ sub_8011158: @ 0x08011158
 	.align 2, 0
 _08011244: .4byte 0x083FD254
 _08011248: .4byte 0x05000200
-_0801124C: .4byte 0x0203EA90
-_08011250: .4byte 0x0203EA91
+_0801124C: .4byte gMenuId
+_08011250: .4byte gMenuParentId
 _08011254: .4byte 0x020013B0
 _08011258: .4byte 0x080B01A8
 _0801125C: .4byte 0x020013C4
@@ -1090,8 +1090,8 @@ _080112C0: .4byte 0x02001441
 _080112C4: .4byte gKeysPressed
 _080112C8: .4byte gKeysDown
 _080112CC: .4byte gPreviousKeys
-_080112D0: .4byte 0x0203EA91
-_080112D4: .4byte 0x0203EA90
+_080112D0: .4byte gMenuParentId
+_080112D4: .4byte gMenuId
 _080112D8: .4byte 0x080112DC
 _080112DC: @ jump table
 	.4byte _08011320 @ case 0
@@ -1382,7 +1382,7 @@ _08011550:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0801155C: .4byte 0x0203EA90
+_0801155C: .4byte gMenuId
 _08011560: .4byte 0x08011564
 _08011564: @ jump table
 	.4byte _080115A4 @ case 0
@@ -1432,8 +1432,8 @@ _080115DC:
 	movs r0, #0x16
 	bl _08011FEA
 	.align 2, 0
-_080115F0: .4byte 0x0203EA91
-_080115F4: .4byte 0x0203EA90
+_080115F0: .4byte gMenuParentId
+_080115F4: .4byte gMenuId
 _080115F8:
 	ldr r0, _0801160C
 	ldrb r0, [r0]
@@ -1457,8 +1457,8 @@ _08011614:
 	movs r0, #0xd
 	bl _08011FEA
 	.align 2, 0
-_08011628: .4byte 0x0203EA91
-_0801162C: .4byte 0x0203EA90
+_08011628: .4byte gMenuParentId
+_0801162C: .4byte gMenuId
 _08011630:
 	ldr r2, _08011644
 	ldr r1, _08011648
@@ -1469,8 +1469,8 @@ _08011630:
 	movs r0, #0x13
 	bl _08011FEA
 	.align 2, 0
-_08011644: .4byte 0x0203EA91
-_08011648: .4byte 0x0203EA90
+_08011644: .4byte gMenuParentId
+_08011648: .4byte gMenuId
 _0801164C:
 	ldr r2, _08011660
 	ldr r1, _08011664
@@ -1481,8 +1481,8 @@ _0801164C:
 	movs r0, #0x14
 	bl _08011FEA
 	.align 2, 0
-_08011660: .4byte 0x0203EA91
-_08011664: .4byte 0x0203EA90
+_08011660: .4byte gMenuParentId
+_08011664: .4byte gMenuId
 _08011668:
 	bl sub_8060FF8
 	movs r0, #1
@@ -1614,8 +1614,8 @@ _08011790:
 	movs r0, #0xe
 	bl _08011FEA
 	.align 2, 0
-_080117A4: .4byte 0x0203EA91
-_080117A8: .4byte 0x0203EA90
+_080117A4: .4byte gMenuParentId
+_080117A8: .4byte gMenuId
 _080117AC:
 	bl GetCurrentMenuEntry
 	cmp r0, #5
@@ -1792,8 +1792,8 @@ _0801194C:
 	movs r0, #0xf
 	b _08011FEA
 	.align 2, 0
-_0801195C: .4byte 0x0203EA91
-_08011960: .4byte 0x0203EA90
+_0801195C: .4byte gMenuParentId
+_08011960: .4byte gMenuId
 _08011964:
 	bl GetCurrentMenuEntry
 	cmp r0, #5
@@ -1854,8 +1854,8 @@ _080119D4:
 	movs r0, #0x10
 	b _08011FEA
 	.align 2, 0
-_080119E4: .4byte 0x0203EA91
-_080119E8: .4byte 0x0203EA90
+_080119E4: .4byte gMenuParentId
+_080119E8: .4byte gMenuId
 _080119EC:
 	bl GetCurrentMenuEntry
 	cmp r0, #5
@@ -2047,8 +2047,8 @@ _08011B64:
 	bl SetMenuEntry
 	b _080120D4
 	.align 2, 0
-_08011B6C: .4byte 0x0203EA91
-_08011B70: .4byte 0x0203EA90
+_08011B6C: .4byte gMenuParentId
+_08011B70: .4byte gMenuId
 _08011B74: .4byte 0x02001370
 _08011B78:
 	bl sub_800FA58
@@ -2184,8 +2184,8 @@ _08011C80:
 	movs r0, #0x17
 	b _08011FEA
 	.align 2, 0
-_08011C90: .4byte 0x0203EA91
-_08011C94: .4byte 0x0203EA90
+_08011C90: .4byte gMenuParentId
+_08011C94: .4byte gMenuId
 _08011C98:
 	bl GetCurrentMenuEntry
 	cmp r0, #6
@@ -2279,8 +2279,8 @@ _08011D50:
 	movs r0, #0x18
 	b _08011FEA
 	.align 2, 0
-_08011D60: .4byte 0x0203EA91
-_08011D64: .4byte 0x0203EA90
+_08011D60: .4byte gMenuParentId
+_08011D64: .4byte gMenuId
 _08011D68:
 	bl GetCurrentMenuEntry
 	cmp r0, #6
@@ -2384,8 +2384,8 @@ _08011E34:
 	movs r0, #0x19
 	b _08011FEA
 	.align 2, 0
-_08011E44: .4byte 0x0203EA91
-_08011E48: .4byte 0x0203EA90
+_08011E44: .4byte gMenuParentId
+_08011E48: .4byte gMenuId
 _08011E4C:
 	bl GetCurrentMenuEntry
 	cmp r0, #6
@@ -2482,8 +2482,8 @@ _08011F04:
 	movs r0, #0x1a
 	b _08011FEA
 	.align 2, 0
-_08011F14: .4byte 0x0203EA91
-_08011F18: .4byte 0x0203EA90
+_08011F14: .4byte gMenuParentId
+_08011F18: .4byte gMenuId
 _08011F1C:
 	bl GetCurrentMenuEntry
 	cmp r0, #6
@@ -2586,8 +2586,8 @@ _08011FEA:
 	bl InitMenu
 	b _080120D4
 	.align 2, 0
-_08011FF4: .4byte 0x0203EA91
-_08011FF8: .4byte 0x0203EA90
+_08011FF4: .4byte gMenuParentId
+_08011FF8: .4byte gMenuId
 _08011FFC:
 	bl GetCurrentMenuEntry
 	cmp r0, #6
@@ -37250,8 +37250,8 @@ _08023F88: .4byte gOBJTileFramePtr
 _08023F8C: .4byte 0x06010000
 _08023F90: .4byte gOBJTileCount
 _08023F94: .4byte 0x02000320
-_08023F98: .4byte 0x0203EA90
-_08023F9C: .4byte 0x0203EA91
+_08023F98: .4byte gMenuId
+_08023F9C: .4byte gMenuParentId
 _08023FA0: .4byte 0x020021F9
 _08023FA4: .4byte 0x04000050
 _08023FA8: .4byte 0x00003F52
@@ -37303,8 +37303,8 @@ _08024008: .4byte 0x00000664
 _0802400C: .4byte gKeysDown
 _08024010: .4byte gKeysPressed
 _08024014: .4byte gPreviousKeys
-_08024018: .4byte 0x0203EA91
-_0802401C: .4byte 0x0203EA90
+_08024018: .4byte gMenuParentId
+_0802401C: .4byte gMenuId
 _08024020:
 	.2byte 0xEE00, 0xEE00
 _08024024:
@@ -37525,7 +37525,7 @@ _0802420C:
 	beq _08024222
 	b _080243D0
 	.align 2, 0
-_08024218: .4byte 0x0203EA90
+_08024218: .4byte gMenuId
 _0802421C:
 	cmp r0, #7
 	beq _080242A8
@@ -37589,7 +37589,7 @@ _08024288:
 	b _080243D0
 	.align 2, 0
 _080242A0: .4byte 0x02000320
-_080242A4: .4byte 0x0203EA91
+_080242A4: .4byte gMenuParentId
 _080242A8:
 	bl GetCurrentMenuEntry
 	adds r5, r0, #0
@@ -38164,8 +38164,8 @@ _0802474E:
 	.align 2, 0
 _08024780: .4byte 0x080682D0
 _08024784: .4byte 0x02000320
-_08024788: .4byte 0x0203EA91
-_0802478C: .4byte 0x0203EA90
+_08024788: .4byte gMenuParentId
+_0802478C: .4byte gMenuId
 _08024790: .4byte 0x02001064
 _08024794:
 	ldrb r0, [r1, #0xf]
@@ -38523,8 +38523,8 @@ _08024AAC:
 	bl AdvanceMenuEntryUp
 	b _08024B2A
 	.align 2, 0
-_08024AB4: .4byte 0x0203EA90
-_08024AB8: .4byte 0x0203EA91
+_08024AB4: .4byte gMenuId
+_08024AB8: .4byte gMenuParentId
 _08024ABC: .4byte gOAMBuffer1
 _08024AC0: .4byte gOAMBufferFramePtr
 _08024AC4: .4byte gOAMBufferEnd
@@ -38727,8 +38727,8 @@ _08024C5E:
 	.align 2, 0
 _08024C88: .4byte 0x04000028
 _08024C8C: .4byte 0x080B01B0
-_08024C90: .4byte 0x0203EA90
-_08024C94: .4byte 0x0203EA91
+_08024C90: .4byte gMenuId
+_08024C94: .4byte gMenuParentId
 _08024C98: .4byte 0x080CE440
 _08024C9C: .4byte gKeysPressed
 _08024CA0: .4byte gKeysDown

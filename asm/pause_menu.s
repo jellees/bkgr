@@ -765,8 +765,8 @@ InitPauseMenu: @ 0x08045664
 _08045758: .4byte gPlayerStateSettings
 _0804575C: .4byte gPlayerState
 _08045760: .4byte 0x02000320
-_08045764: .4byte 0x0203EA90
-_08045768: .4byte 0x0203EA91
+_08045764: .4byte gMenuId
+_08045768: .4byte gMenuParentId
 _0804576C: .4byte 0x0203F4FC
 _08045770: .4byte 0x080B01B0
 _08045774: .4byte 0x0203F538
@@ -828,7 +828,7 @@ _080457E4:
 _080457EC: .4byte gPlayerStateSettings
 _080457F0: .4byte gPlayerState
 _080457F4: .4byte 0x080CE440
-_080457F8: .4byte 0x0203EA90
+_080457F8: .4byte gMenuId
 _080457FC: .4byte 0x0203F54C
 _08045800:
 	movs r0, #0
@@ -892,7 +892,7 @@ _08045870:
 	bl sub_8040E74
 	b _08045992
 	.align 2, 0
-_08045878: .4byte 0x0203EA91
+_08045878: .4byte gMenuParentId
 _0804587C:
 	ldr r0, _080458A0
 	strb r1, [r0]
@@ -912,7 +912,7 @@ _0804587C:
 	bl sub_8040B3C
 	b _080458A8
 	.align 2, 0
-_080458A0: .4byte 0x0203EA90
+_080458A0: .4byte gMenuId
 _080458A4:
 	.2byte 0xEE00, 0xEE00
 _080458A8:
@@ -923,7 +923,7 @@ _080458A8:
 	bl InitMenu
 	b _08045992
 	.align 2, 0
-_080458B8: .4byte 0x0203EA90
+_080458B8: .4byte gMenuId
 _080458BC: .4byte 0x02000320
 _080458C0:
 	movs r0, #1
@@ -960,7 +960,7 @@ _080458D8:
 	str r0, [sp, #4]
 	b _08045992
 	.align 2, 0
-_0804590C: .4byte 0x0203EA90
+_0804590C: .4byte gMenuId
 _08045910: .4byte 0x02000320
 _08045914:
 	movs r0, #0x40
@@ -1095,7 +1095,7 @@ _08045A38: .4byte byte_203EA89
 _08045A3C: .4byte byte_203EA8C
 _08045A40: .4byte 0x00000662
 _08045A44: .4byte 0x080CEAA4
-_08045A48: .4byte 0x0203EA90
+_08045A48: .4byte gMenuId
 _08045A4C: .4byte 0x02000320
 _08045A50: .4byte gOAMBuffer1
 _08045A54: .4byte gOAMBufferFramePtr
@@ -1173,7 +1173,7 @@ PauseMenuChooseEntry: @ 0x08045AD4
 	beq _08045B3C
 	b _08045B44
 	.align 2, 0
-_08045AF4: .4byte 0x0203EA90
+_08045AF4: .4byte gMenuId
 _08045AF8:
 	cmp r0, #2
 	beq _08045B0E
@@ -1196,7 +1196,7 @@ _08045B16:
 	str r4, [r5]
 	b _08045B44
 	.align 2, 0
-_08045B24: .4byte 0x0203EA91
+_08045B24: .4byte gMenuParentId
 _08045B28:
 	bl sub_8040E74
 	bl sub_08045F14
@@ -1210,7 +1210,7 @@ _08045B3C:
 	movs r0, #1
 	b _08045B46
 	.align 2, 0
-_08045B40: .4byte 0x0203EA91
+_08045B40: .4byte gMenuParentId
 _08045B44:
 	movs r0, #0
 _08045B46:
@@ -1864,8 +1864,8 @@ _080460F0: .4byte gOAMBuffer1
 _080460F4: .4byte 0x04000050
 _080460F8: .4byte 0x00000907
 _080460FC: .4byte 0x02000320
-_08046100: .4byte 0x0203EA91
-_08046104: .4byte 0x0203EA90
+_08046100: .4byte gMenuParentId
+_08046104: .4byte gMenuId
 _08046108: .4byte 0x0203F4DC
 _0804610C: .4byte gKeysPressed
 _08046110: .4byte gKeysDown
@@ -2767,8 +2767,8 @@ _080468D4: .4byte gPlayerState
 _080468D8: .4byte 0x04000050
 _080468DC: .4byte 0x00000907
 _080468E0: .4byte 0x02000320
-_080468E4: .4byte 0x0203EA91
-_080468E8: .4byte 0x0203EA90
+_080468E4: .4byte gMenuParentId
+_080468E8: .4byte gMenuId
 _080468EC: .4byte 0x080CEB5C
 _080468F0: .4byte 0x080CE440
 _080468F4: .4byte gKeysDown
