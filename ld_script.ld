@@ -245,6 +245,8 @@ SECTIONS
 		asm/chunk6.o(.text);
 		asm/menu.o(.text);
 		asm/chunk7.o(.text);
+		asm/pause_menu.o(.text);
+		asm/chunk8.o(.text);
 
 		/* data */
 		asm/data_paletteBytes.o(.text);
