@@ -38,6 +38,11 @@ SECTIONS
 		. = 0x000010AC;
 		word_20010AC = .; . += 2;
 
+		. = 0x000010B2;
+		file_string_1 = .; . += 0x1A;
+		file_string_2 = .; . += 0x1A;
+		file_string_3 = .; . += 0x1A;
+
 		. = 0x0000110C;
 		byte_200110C = .; . += 1;
 

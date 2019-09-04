@@ -3,6 +3,10 @@
 
 #include "gba/gba.h"
 
+struct Sprite_a {
+    u8 data[0x1C];
+};
+
 struct FontIndex {
     u16 letterIndex;
     u16 letterSize;
@@ -38,11 +42,11 @@ struct Menu {
     struct Font unselected;
     struct Font selected;
     u32 entryCount;
-    u8* texts;
+    u8** texts;
     u16 curEntry;
     u8 field_3A;
-    u8 useSpriteBuffer;
-    void* spriteBuffer;
+    bool8 useSpriteBuffer;
+    struct Sprite_a* spriteBuffer;
 };
 
 #endif

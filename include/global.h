@@ -5,6 +5,9 @@
 
 #define HANG asm(".word 0xEE00EE00")
 
+// Puts 0xFF after a string.
+#define FORMAT(s) s"\xff"
+
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")

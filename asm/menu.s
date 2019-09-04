@@ -4,27 +4,6 @@
     .text
 
     .thumb
-    .global ResetMenu
-ResetMenu: @ 0x08042488
-	ldr r0, _080424A4
-	movs r1, #0xff
-	strb r1, [r0]
-	ldr r0, _080424A8
-	strb r1, [r0]
-	ldr r1, _080424AC
-	adds r2, r1, #0
-	adds r2, #0x3b
-	movs r0, #0
-	strb r0, [r2]
-	str r0, [r1, #0x34]
-	str r0, [r1, #0x3c]
-	bx lr
-	.align 2, 0
-_080424A4: .4byte gMenuId
-_080424A8: .4byte gMenuParentId
-_080424AC: .4byte gMenu
-
-    .thumb
     .global InitMenu
 InitMenu: @ 0x080424B0
 	push {r4, r5, r6, r7, lr}
