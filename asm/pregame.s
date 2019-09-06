@@ -4,48 +4,6 @@
     .text
 
     .thumb
-init_flashscreen_vram: @ 0x08023DC0
-	push {lr}
-	ldr r1, _08023E08
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _08023E0C
-	movs r0, #0x80
-	lsls r0, r0, #9
-	str r0, [r1]
-	movs r1, #0x80
-	lsls r1, r1, #0x13
-	ldr r2, _08023E10
-	adds r0, r2, #0
-	strh r0, [r1]
-	adds r1, #0xc
-	movs r0, #0
-	strh r0, [r1]
-	movs r1, #0xc0
-	lsls r1, r1, #0x13
-	movs r2, #0xa0
-	lsls r2, r2, #7
-	movs r0, #0
-	bl DmaFill32
-	movs r1, #0xa0
-	lsls r1, r1, #0x13
-	movs r0, #0
-	movs r2, #0x80
-	bl DmaFill32
-	ldr r0, _08023E14
-	ldr r1, _08023E18
-	movs r2, #0x80
-	bl DmaTransfer32
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08023E08: .4byte byte_20021F0
-_08023E0C: .4byte 0x020021F4
-_08023E10: .4byte 0x00001444
-_08023E14: .4byte 0x083FD254
-_08023E18: .4byte 0x05000200
-
-    .thumb
     .global exec_pregame
 exec_pregame: @ 0x08023E1C
 	push {r4, r5, lr}
@@ -106,7 +64,7 @@ _08023E8E:
 	movs r0, #0
 	strb r0, [r1]
 _08023E9A:
-	bl init_flashscreen_vram
+	bl InitPregame
 	bl SetVolumeToDefault
 	bl exec_flashscreens
 	bl exec_press_start_screen
@@ -1610,7 +1568,7 @@ exec_erasedata_screen: @ 0x08024BC4
 	strh r1, [r0]
 	adds r0, #6
 	strh r1, [r0]
-	bl init_flashscreen_vram
+	bl InitPregame
 	mov r0, sp
 	movs r3, #0
 	mov sb, r3

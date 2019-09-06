@@ -83,6 +83,8 @@ SECTIONS
 
 		. = 0x000021F0;
 		byte_20021F0 = .; . += 1;
+		. += 3; /* padding */
+		dword_20021F4 = .; . += 4;
 
 		. = 0x000021F8;
 		byte_20021F8 = .; . += 1;
@@ -250,6 +252,7 @@ SECTIONS
 		src/palette_effects.o(.text);
 		asm/debug.o(.text);
 		asm/chunk5.o(.text);
+		src/pregame.o(.text);
 		asm/pregame.o(.text);
 		asm/chunk9.o(.text);
 		src/alloc.o(.text);
