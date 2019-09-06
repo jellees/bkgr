@@ -250,6 +250,8 @@ SECTIONS
 		src/palette_effects.o(.text);
 		asm/debug.o(.text);
 		asm/chunk5.o(.text);
+		asm/pregame.o(.text);
+		asm/chunk9.o(.text);
 		src/alloc.o(.text);
 		asm/alloc.o(.text);
 		asm/chunk6.o(.text);
