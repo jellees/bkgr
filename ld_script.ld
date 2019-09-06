@@ -5,7 +5,11 @@ SECTIONS
 	ewram (NOLOAD) :
     ALIGN(0)
 	{
-		. = 0x00000336;
+		. = 0x00000320;
+		gPauseMenuLanguage = .; . += 1;
+
+		. = 0x00000335;
+		byte_2000335 = .; . += 1;
 		gColorSpecEffectsSel = .; . += 2;
 
 		. = 0x00000F55;
@@ -29,6 +33,7 @@ SECTIONS
 
 		. = 0x00001044;
 		gGameStatus = .; . += 0x20;
+		gSaveFiles = .; . += 8 * 3;
 
 		. = 0x00001080;
 		gLoadedRoomIndex = .; . += 2;
@@ -85,9 +90,8 @@ SECTIONS
 		byte_20021F0 = .; . += 1;
 		. += 3; /* padding */
 		dword_20021F4 = .; . += 4;
-
-		. = 0x000021F8;
 		byte_20021F8 = .; . += 1;
+		byte_20021F9 = .; . += 1;
 
 		. = 0x00002E4A;
 		byte_2002E4A = .; . += 1;
@@ -117,6 +121,9 @@ SECTIONS
 		gMenuParentId = .; . += 1;
 		. += 2; /* padding */
 		gMenu = .; . += 0x40;
+
+		. = 0x0003F4DC;
+		dword_203F4DC = .; . += 4;
 
 		. = 0x0003F998;
 		word_203F998 = .; . += 2;

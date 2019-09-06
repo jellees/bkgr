@@ -1866,7 +1866,7 @@ _080460F8: .4byte 0x00000907
 _080460FC: .4byte 0x02000320
 _08046100: .4byte gMenuParentId
 _08046104: .4byte gMenuId
-_08046108: .4byte 0x0203F4DC
+_08046108: .4byte dword_203F4DC
 _0804610C: .4byte gKeysPressed
 _08046110: .4byte gKeysDown
 _08046114: .4byte gPreviousKeys
@@ -1948,7 +1948,7 @@ _080461A6:
 	b _0804624A
 	.align 2, 0
 _080461B0: .4byte 0x020010E6
-_080461B4: .4byte 0x0203F4DC
+_080461B4: .4byte dword_203F4DC
 _080461B8:
 	movs r2, #3
 	mov sl, r2
@@ -2205,7 +2205,7 @@ _080463BC:
 	bl AddStringToBuffer
 	b _0804643E
 	.align 2, 0
-_08046404: .4byte 0x02001064
+_08046404: .4byte gSaveFiles
 _08046408: .4byte 0x0203F5EC
 _0804640C: .4byte 0x0203F5D4
 _08046410: .4byte 0x0203F5BC
@@ -2444,9 +2444,9 @@ _080465E2:
 _08046604: .4byte 0x0203F5EC
 _08046608: .4byte 0x0203F5D4
 _0804660C: .4byte 0x0203F5BC
-_08046610: .4byte 0x02001064
+_08046610: .4byte gSaveFiles
 _08046614: .4byte gGameStatus
-_08046618: .4byte 0x02000335
+_08046618: .4byte byte_2000335
 _0804661C:
 	mov r3, r8
 	cmp r3, #2

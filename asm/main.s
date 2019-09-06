@@ -411,7 +411,7 @@ StartGame: @ 0x08009F74
 	beq _0800A086
 	bl exec_erasedata_screen
 _0800A086:
-	bl exec_pregame
+	bl ExecutePregame
 	movs r1, #0xe0
 	lsls r1, r1, #0x13
 	movs r0, #0xaa

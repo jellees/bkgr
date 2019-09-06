@@ -4,103 +4,7 @@
     .text
 
     .thumb
-    .global exec_pregame
-exec_pregame: @ 0x08023E1C
-	push {r4, r5, lr}
-	ldr r5, _08023E50
-	movs r0, #0
-	strb r0, [r5]
-	ldr r4, _08023E54
-	strb r0, [r4]
-	ldr r1, _08023E58
-	movs r0, #0
-	str r0, [r1]
-	bl sub_08044860
-	adds r1, r0, #0
-	cmp r1, #0
-	bne _08023E64
-	ldr r0, _08023E5C
-	strb r1, [r0]
-	movs r0, #1
-	strb r0, [r5]
-	strb r0, [r4]
-	ldr r0, _08023E60
-	strb r1, [r0]
-	bl reset_savefiles
-	bl MakeFileStrings
-	b _08023E9A
-	.align 2, 0
-_08023E50: .4byte 0x02000335
-_08023E54: .4byte 0x020021F9
-_08023E58: .4byte 0x0203F4DC
-_08023E5C: .4byte 0x02000320
-_08023E60: .4byte byte_20021F8
-_08023E64:
-	bl init_savefiles
-	bl MakeFileStrings
-	ldr r0, _08023EE8
-	movs r1, #1
-	strb r1, [r0]
-	ldr r1, _08023EEC
-	ldrb r0, [r1, #7]
-	cmp r0, #0
-	beq _08023E86
-	ldrb r0, [r1, #0xf]
-	cmp r0, #0
-	beq _08023E86
-	ldrb r0, [r1, #0x17]
-	cmp r0, #0
-	bne _08023E8E
-_08023E86:
-	ldr r0, _08023EF0
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _08023E9A
-_08023E8E:
-	ldr r1, _08023EF4
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _08023EE8
-	movs r0, #0
-	strb r0, [r1]
-_08023E9A:
-	bl InitPregame
-	bl SetVolumeToDefault
-	bl exec_flashscreens
-	bl exec_press_start_screen
-	bl exec_select_game
-	movs r0, #0
-	bl SetTextSpriteCount
-	ldr r0, _08023EF4
-	ldrb r0, [r0]
-	cmp r0, #0
-	bne _08023EC4
-	ldr r0, _08023EF8
-	movs r1, #1
-	bl sub_80270AC
-_08023EC4:
-	movs r0, #4
-	movs r1, #0xf
-	bl FreeById
-	bl ResetMenu
-	movs r0, #4
-	movs r1, #0xf
-	bl DoesMemBlockExistById
-	cmp r0, #0
-	beq _08023EE0
-	.2byte 0xEE00, 0xEE00
-_08023EE0:
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08023EE8: .4byte byte_20021F8
-_08023EEC: .4byte 0x02001064
-_08023EF0: .4byte 0x02000335
-_08023EF4: .4byte 0x020021F9
-_08023EF8: .4byte 0x00000FFF
-
-    .thumb
+	.global exec_select_game
 exec_select_game: @ 0x08023EFC
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
@@ -169,7 +73,7 @@ _08023F90: .4byte gOBJTileCount
 _08023F94: .4byte 0x02000320
 _08023F98: .4byte gMenuId
 _08023F9C: .4byte gMenuParentId
-_08023FA0: .4byte 0x020021F9
+_08023FA0: .4byte byte_20021F9
 _08023FA4: .4byte 0x04000050
 _08023FA8: .4byte 0x00003F52
 _08023FAC: .4byte 0x0400000A
@@ -333,7 +237,7 @@ _0802410C: .4byte 0x0400000A
 _08024110: .4byte 0x0000FFFC
 _08024114: .4byte gKeysDown
 _08024118: .4byte 0x0000030F
-_0802411C: .4byte 0x020021F9
+_0802411C: .4byte byte_20021F9
 _08024120: .4byte byte_203EA89
 _08024124: .4byte byte_203EA8C
 _08024128:
@@ -406,7 +310,7 @@ _080241B6:
 	mov sl, r3
 	b _08023FCC
 	.align 2, 0
-_080241C4: .4byte 0x020021F9
+_080241C4: .4byte byte_20021F9
 _080241C8: .4byte byte_203EA89
 _080241CC: .4byte byte_203EA8C
 _080241D0: .4byte 0x00000662
@@ -474,7 +378,7 @@ _08024230:
 	b _080243C8
 	.align 2, 0
 _0802425C: .4byte 0x0400000A
-_08024260: .4byte 0x020021F9
+_08024260: .4byte byte_20021F9
 _08024264:
 	movs r0, #2
 	movs r1, #2
@@ -539,9 +443,9 @@ _080242C2:
 	str r5, [r0]
 	b _08024280
 	.align 2, 0
-_080242E8: .4byte 0x020021F9
+_080242E8: .4byte byte_20021F9
 _080242EC: .4byte 0x020010AE
-_080242F0: .4byte 0x0203F4DC
+_080242F0: .4byte dword_203F4DC
 _080242F4:
 	.2byte 0xEE00, 0xEE00
 	b _08024280
@@ -563,9 +467,9 @@ _080242FA:
 	str r5, [r0]
 	b _08024280
 	.align 2, 0
-_08024320: .4byte 0x020021F9
+_08024320: .4byte byte_20021F9
 _08024324: .4byte 0x020010AE
-_08024328: .4byte 0x0203F4DC
+_08024328: .4byte dword_203F4DC
 _0802432C:
 	.2byte 0xEE00, 0xEE00
 	b _08024280
@@ -587,9 +491,9 @@ _08024332:
 	str r5, [r0]
 	b _08024280
 	.align 2, 0
-_08024358: .4byte 0x020021F9
+_08024358: .4byte byte_20021F9
 _0802435C: .4byte 0x020010AE
-_08024360: .4byte 0x0203F4DC
+_08024360: .4byte dword_203F4DC
 _08024364:
 	.2byte 0xEE00, 0xEE00
 	b _08024280
@@ -650,6 +554,7 @@ _080243D2:
 	bx r1
 
     .thumb
+	.global exec_press_start_screen
 exec_press_start_screen: @ 0x080243D8
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
@@ -1083,7 +988,7 @@ _08024780: .4byte 0x080682D0
 _08024784: .4byte 0x02000320
 _08024788: .4byte gMenuParentId
 _0802478C: .4byte gMenuId
-_08024790: .4byte 0x02001064
+_08024790: .4byte gSaveFiles
 _08024794:
 	ldrb r0, [r1, #0xf]
 	cmp r0, #0
@@ -1234,7 +1139,7 @@ _080248CC:
 _080248E0: .4byte 0x0000030F
 _080248E4: .4byte byte_203EA89
 _080248E8: .4byte byte_203EA8C
-_080248EC: .4byte 0x02001064
+_080248EC: .4byte gSaveFiles
 _080248F0:
 	movs r0, #0x80
 	ands r0, r1
@@ -1324,7 +1229,7 @@ _080249A0:
 _080249B0: .4byte byte_203EA89
 _080249B4: .4byte byte_203EA8C
 _080249B8: .4byte 0x00000662
-_080249BC: .4byte 0x02001064
+_080249BC: .4byte gSaveFiles
 _080249C0: .4byte gOAMBufferFramePtr
 _080249C4: .4byte gOAMBufferEnd
 _080249C8: .4byte gOBJTileFramePtr
@@ -1858,6 +1763,7 @@ _08024E64:
 	b _08024C5E
 
     .thumb
+	.global exec_flashscreens
 exec_flashscreens: @ 0x08024E6C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb

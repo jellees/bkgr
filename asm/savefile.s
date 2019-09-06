@@ -168,7 +168,7 @@ _0800E8A0:
 	bx r0
 	.align 2, 0
 _0800E90C: .4byte 0x020010B2
-_0800E910: .4byte 0x02001064
+_0800E910: .4byte gSaveFiles
 _0800E914: .4byte 0x020010CC
 _0800E918: .4byte 0x020010E6
 
@@ -245,9 +245,9 @@ _0800E994:
 	bx r0
 	.align 2, 0
 _0800E9B4: .4byte gGameStatus
-_0800E9B8: .4byte 0x02001064
+_0800E9B8: .4byte gSaveFiles
 _0800E9BC: .4byte 0x0203EAD6
-_0800E9C0: .4byte 0x02000335
+_0800E9C0: .4byte byte_2000335
 
     .thumb
     .global reset_savefiles
@@ -271,4 +271,4 @@ _0800E9CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800E9E8: .4byte 0x02001064
+_0800E9E8: .4byte gSaveFiles

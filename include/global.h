@@ -45,6 +45,15 @@ struct GameStatus {
     u8 field_1F;
 };
 
+struct SaveFile {
+    u16 jiggies;
+    u16 notes;
+    u8 hour;
+    u8 minute;
+    u8 second;
+    bool8 empty;
+};
+
 struct Vec3fx {
     u32 x, y, z;
 };
