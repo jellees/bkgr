@@ -30410,7 +30410,7 @@ _080567E0: .4byte 0x0203F974
 _080567E4: .4byte 0x000002C3
 _080567E8: .4byte 0x0203F933
 _080567EC: .4byte 0x0203F934
-_080567F0: .4byte 0x080CEB5C
+_080567F0: .4byte dVolumes
 _080567F4: .4byte byte_203EA89
 _080567F8: .4byte 0x080CE440
 _080567FC: .4byte byte_203EA8C
@@ -30693,7 +30693,7 @@ _08056960:
 	b _08056B24
 	.align 2, 0
 _08056A44: .4byte 0x0203F978
-_08056A48: .4byte 0x080CEB5C
+_08056A48: .4byte dVolumes
 _08056A4C: .4byte gBgmVolumeIndex
 _08056A50: .4byte 0x0203F97C
 _08056A54: .4byte 0x0203F933
@@ -48257,7 +48257,7 @@ audio_set_tune_volByIndex: @ 0x0805F6E4
 	bl audio_set_tune_vol
 	b _0805F714
 	.align 2, 0
-_0805F700: .4byte 0x080CEB5C
+_0805F700: .4byte dVolumes
 _0805F704: .4byte gBgmVolumeIndex
 _0805F708:
 	ldr r0, _0805F71C
@@ -48270,7 +48270,7 @@ _0805F714:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805F71C: .4byte 0x080CEB5C
+_0805F71C: .4byte dVolumes
 
     .thumb
 sub_805F720: @ 0x0805F720
@@ -48287,7 +48287,7 @@ sub_805F720: @ 0x0805F720
 	bl audio_set_tune_vol
 	b _0805F758
 	.align 2, 0
-_0805F73C: .4byte 0x080CEB5C
+_0805F73C: .4byte dVolumes
 _0805F740: .4byte gBgmVolumeIndex
 _0805F744:
 	ldr r0, _0805F760
@@ -48305,7 +48305,7 @@ _0805F758:
 	bx r1
 	.align 2, 0
 _0805F760: .4byte gBgmVolumeIndex
-_0805F764: .4byte 0x080CEB5C
+_0805F764: .4byte dVolumes
 
     .thumb
 sub_805F768: @ 0x0805F768
@@ -48322,7 +48322,7 @@ sub_805F768: @ 0x0805F768
 	bl audio_set_fx_vol
 	b _0805F798
 	.align 2, 0
-_0805F784: .4byte 0x080CEB5C
+_0805F784: .4byte dVolumes
 _0805F788: .4byte gSfxVolumeIndex
 _0805F78C:
 	ldr r0, _0805F7A0
@@ -48335,7 +48335,7 @@ _0805F798:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805F7A0: .4byte 0x080CEB5C
+_0805F7A0: .4byte dVolumes
 
     .thumb
 sub_805F7A4: @ 0x0805F7A4
@@ -48351,7 +48351,7 @@ sub_805F7A4: @ 0x0805F7A4
 	bl audio_set_tune_vol
 	b _0805F7CC
 	.align 2, 0
-_0805F7BC: .4byte 0x080CEB5C
+_0805F7BC: .4byte dVolumes
 _0805F7C0: .4byte gBgmVolumeIndex
 _0805F7C4:
 	ldr r0, _0805F7D4
@@ -48362,7 +48362,7 @@ _0805F7CC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805F7D4: .4byte 0x080CEB5C
+_0805F7D4: .4byte dVolumes
 
 	.thumb
 sub_805F7D8: @ 0x0805F7D8
@@ -52725,7 +52725,7 @@ _08061C44: .4byte 0x08061265
 _08061C48: .4byte 0x04000008
 _08061C4C: .4byte 0x0000FFFC
 _08061C50: .4byte 0x0203FA48
-_08061C54: .4byte 0x080CEB5C
+_08061C54: .4byte dVolumes
 _08061C58: .4byte byte_203EA89
 _08061C5C: .4byte 0x080CE440
 _08061C60: .4byte byte_203EA8C
@@ -52901,7 +52901,7 @@ _08061DA6:
 _08061DC8: .4byte 0x0203FA4E
 _08061DCC: .4byte 0x0203FA48
 _08061DD0: .4byte 0x04000054
-_08061DD4: .4byte 0x080CEB5C
+_08061DD4: .4byte dVolumes
 _08061DD8: .4byte gBgmVolumeIndex
 _08061DDC: .4byte 0x04000050
 _08061DE0: .4byte 0x00003F61

@@ -429,7 +429,7 @@ _08010CA4: .4byte gOBJTileCount
 _08010CA8: .4byte 0x083FD254
 _08010CAC: .4byte 0x05000200
 _08010CB0: .4byte gBgmVolumeIndex
-_08010CB4: .4byte 0x080CEB5C
+_08010CB4: .4byte dVolumes
 _08010CB8: .4byte 0x0200145A
 _08010CBC: .4byte 0x04000050
 _08010CC0:
@@ -550,7 +550,7 @@ _08010DD4: .4byte 0x04000052
 _08010DD8: .4byte 0x00000907
 _08010DDC: .4byte gColorSpecEffectsSel
 _08010DE0: .4byte gBgmVolumeIndex
-_08010DE4: .4byte 0x080CEB5C
+_08010DE4: .4byte dVolumes
 _08010DE8: .4byte gRoomHeader
 _08010DEC: .4byte 0x05000200
 _08010DF0: .4byte gIsSlideMiniGame
@@ -710,7 +710,7 @@ _08010F48: .4byte 0x06010000
 _08010F4C: .4byte gOBJTileCount
 _08010F50: .4byte 0x083FD254
 _08010F54: .4byte 0x05000200
-_08010F58: .4byte 0x080CEB5C
+_08010F58: .4byte dVolumes
 _08010F5C: .4byte gBgmVolumeIndex
 _08010F60: .4byte 0x020013B0
 _08010F64: .4byte 0x080B01A8
@@ -908,7 +908,7 @@ _08011134: .4byte 0x04000050
 _08011138: .4byte 0x04000052
 _0801113C: .4byte 0x00000907
 _08011140: .4byte gColorSpecEffectsSel
-_08011144: .4byte 0x080CEB5C
+_08011144: .4byte dVolumes
 _08011148: .4byte gBgmVolumeIndex
 _0801114C: .4byte gRoomHeader
 _08011150: .4byte 0x05000200

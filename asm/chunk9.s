@@ -597,7 +597,7 @@ _080254C4: .4byte 0x06010000
 _080254C8: .4byte gOBJTileCount
 _080254CC: .4byte dword_203F4DC
 _080254D0: .4byte byte_2000335
-_080254D4: .4byte 0x080CEB5C
+_080254D4: .4byte dVolumes
 _080254D8: .4byte 0x0203EAD4
 _080254DC: .4byte 0x00000FFF
 
@@ -3041,7 +3041,7 @@ _08026860: .4byte 0xFFFF0000
 _08026864: .4byte 0xFFFE0000
 _08026868: .4byte 0x04000054
 _0802686C: .4byte gBgmVolumeIndex
-_08026870: .4byte 0x080CEB5C
+_08026870: .4byte dVolumes
 _08026874: .4byte 0x04000050
 
 
@@ -3146,7 +3146,7 @@ _08026922:
 	.align 2, 0
 _0802693C: .4byte 0xFFFF0000
 _08026940: .4byte 0x04000054
-_08026944: .4byte 0x080CEB5C
+_08026944: .4byte dVolumes
 
 	.thumb
 sub_8026948: @ 0x08026948
@@ -3254,7 +3254,7 @@ _08026A14: .4byte 0xFFFF0000
 _08026A18: .4byte 0xFFFE0000
 _08026A1C: .4byte 0x04000054
 _08026A20: .4byte gBgmVolumeIndex
-_08026A24: .4byte 0x080CEB5C
+_08026A24: .4byte dVolumes
 _08026A28: .4byte 0x04000050
 
 
@@ -3358,7 +3358,7 @@ _08026AD6:
 	.align 2, 0
 _08026AF0: .4byte 0xFFFF0000
 _08026AF4: .4byte 0x04000054
-_08026AF8: .4byte 0x080CEB5C
+_08026AF8: .4byte dVolumes
 
     .thumb
 	.global SetAlphaBlending
@@ -3780,7 +3780,7 @@ _08026E30: .4byte 0x0200DCCC
 _08026E34: .4byte 0x0200DCD0
 _08026E38: .4byte 0x0200DCD4
 _08026E3C: .4byte gBgmVolumeIndex
-_08026E40: .4byte 0x080CEB5C
+_08026E40: .4byte dVolumes
 _08026E44: .4byte gIsPaletteEffectsActive
 
     .thumb
@@ -3910,7 +3910,7 @@ _08026F4C: .4byte 0x04000050
 _08026F50: .4byte gColorSpecEffectsSel
 _08026F54: .4byte 0x04000054
 _08026F58: .4byte gIsPaletteEffectsActive
-_08026F5C: .4byte 0x080CEB5C
+_08026F5C: .4byte dVolumes
 _08026F60:
 	ldr r0, _08026F74
 	mov r1, r8
@@ -4056,7 +4056,7 @@ _08027084: .4byte 0x04000050
 _08027088: .4byte gColorSpecEffectsSel
 _0802708C: .4byte 0x04000054
 _08027090: .4byte gIsPaletteEffectsActive
-_08027094: .4byte 0x080CEB5C
+_08027094: .4byte dVolumes
 _08027098:
 	ldr r0, _080270A8
 	strb r6, [r0]
@@ -4180,7 +4180,7 @@ _08027180: .4byte gBgmVolumeIndex
 _08027184: .4byte 0x0000FFFF
 _08027188: .4byte 0x0200AC90
 _0802718C: .4byte 0x0200C490
-_08027190: .4byte 0x080CEB5C
+_08027190: .4byte dVolumes
 _08027194: .4byte gColorSpecEffectsSel
 _08027198: .4byte 0x04000050
 _0802719C: .4byte 0x04000054
@@ -4298,7 +4298,7 @@ _0802727C: .4byte gBgmVolumeIndex
 _08027280: .4byte 0x0000FFFF
 _08027284: .4byte 0x0200AC90
 _08027288: .4byte 0x0200C490
-_0802728C: .4byte 0x080CEB5C
+_0802728C: .4byte dVolumes
 _08027290: .4byte gColorSpecEffectsSel
 _08027294: .4byte 0x04000050
 _08027298: .4byte 0x04000054

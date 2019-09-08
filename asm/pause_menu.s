@@ -2769,7 +2769,7 @@ _080468DC: .4byte 0x00000907
 _080468E0: .4byte 0x02000320
 _080468E4: .4byte gMenuParentId
 _080468E8: .4byte gMenuId
-_080468EC: .4byte 0x080CEB5C
+_080468EC: .4byte dVolumes
 _080468F0: .4byte 0x080CE440
 _080468F4: .4byte gKeysDown
 _080468F8: .4byte gKeysPressed

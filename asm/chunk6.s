@@ -53025,7 +53025,7 @@ _0804229A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080422A8: .4byte 0x080CEB58
+_080422A8: .4byte dword_80CEB58
 
     .thumb
     .global SetVolumeToDefault
@@ -53062,7 +53062,7 @@ _080422E8: .4byte byte_203EA89
 _080422EC: .4byte gBgmVolumeIndex
 _080422F0: .4byte gSfxVolumeIndex
 _080422F4: .4byte byte_203EA8C
-_080422F8: .4byte 0x080CEB5C
+_080422F8: .4byte dVolumes
 
 	.thumb
 sub_80422FC: @ 0x080422FC
@@ -53137,7 +53137,7 @@ _0804237C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042388: .4byte 0x080CEB5C
+_08042388: .4byte dVolumes
 
 	.thumb
 sub_804238C: @ 0x0804238C
@@ -53243,4 +53243,4 @@ _08042442:
 	.align 2, 0
 _08042454: .4byte gBgmVolumeIndex
 _08042458: .4byte gSfxVolumeIndex
-_0804245C: .4byte 0x080CEB5C
+_0804245C: .4byte dVolumes
