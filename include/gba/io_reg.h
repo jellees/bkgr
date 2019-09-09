@@ -545,6 +545,8 @@
 #define BGCNT_AFF512x512        0x8000
 #define BGCNT_AFF1024x1024      0xC000
 
+#define BGCNT_MASK_NO_PRIORITY  0xFFFC
+
 // WININ/OUT
 #define WININ_WIN0_BG0      (1 << 0)
 #define WININ_WIN0_BG1      (1 << 1)

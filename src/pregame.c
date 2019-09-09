@@ -32,10 +32,10 @@ void InitPregame()
 {
     byte_20021F0 = 0;
     dword_20021F4 = 0x10000;
-    REG_DISPCNT = 0x1444;
+    REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_4;
     REG_BG2CNT = 0;
-    DmaFill32(0, 0x6000000, 0x5000);
-    DmaFill32(0, 0x5000000, 128);
+    DmaFill32(0, VRAM, 0x5000);
+    DmaFill32(0, PLTT, 128);
     DmaTransfer32((void *)0x83FD254, OBJ_PLTT, 128);
 }
 
@@ -109,7 +109,7 @@ void ShowSelectGame(int a1)
     DmaFill32(170, gOAMBuffer1, 256);
     gOAMBufferFramePtr = gOAMBuffer1;
     gOAMBufferEnd = &gOAMBuffer1[0x100];
-    gOBJTileFramePtr = (u32 *)0x6010000;
+    gOBJTileFramePtr = (u32 *)OBJ_VRAM0;
     gOBJTileCount = 0;
 
     InitMenu(0, gPauseMenuLanguage);
@@ -126,8 +126,8 @@ void ShowSelectGame(int a1)
 
     if (a1)
     {
-        REG_BLDCNT = 0x3F52;
-        REG_BG1CNT &= 0xFFFCu;
+        REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG1;
+        REG_BG1CNT &= BGCNT_MASK_NO_PRIORITY;
         v2 = 2;
     }
     else
@@ -164,14 +164,14 @@ void ShowSelectGame(int a1)
             DmaFill32(170, gOAMBuffer1, 256);
             gOAMBufferFramePtr = gOAMBuffer1;
             gOAMBufferEnd = &gOAMBuffer1[0x100];
-            gOBJTileFramePtr = (u32 *)0x6010000;
+            gOBJTileFramePtr = (u32 *)OBJ_VRAM0;
             gOBJTileCount = 0;
             SyncVblank();
             UpdateVideo();
             SkipVblank();
             SetObjectsFullAlpha();
-            REG_BLDCNT = 0x3F52;
-            REG_BG1CNT &= 0xFFFC;
+            REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG1;
+            REG_BG1CNT &= BGCNT_MASK_NO_PRIORITY;
             v2 = 2;
             v3 = TRUE;
         }
@@ -210,7 +210,7 @@ void ShowSelectGame(int a1)
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (u32 *)0x6010000;
+        gOBJTileFramePtr = (u32 *)OBJ_VRAM0;
         gOBJTileCount = 0;
         FlushMenuToTextBuffer();
         RenderText();
@@ -220,7 +220,7 @@ void ShowSelectGame(int a1)
         UpdateVideo();
         SkipVblank();
 
-        if (!v3)
+        if (v3 == FALSE)
             continue;
 
         sub_08026BA8(2, v2);
