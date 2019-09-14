@@ -1,1 +1,1 @@
-asmdiff.sh 0x00023EFC 0x302 >> diff.txt
+asmdiff.sh 0x00024200 0x1D8 >> diff.txt

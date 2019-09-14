@@ -42,6 +42,7 @@ SECTIONS
 
 		. = 0x000010AC;
 		word_20010AC = .; . += 2;
+		gContinueGame = .; . += 1;
 
 		. = 0x000010B2;
 		file_string_1 = .; . += 0x1A;

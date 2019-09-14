@@ -230,3 +230,104 @@ void ShowSelectGame(int a1)
     SyncVblank();
     SkipVblank();
 }
+
+extern u8 gContinueGame;
+
+int sub_8024200()
+{
+    switch(gMenuId)
+    {
+        case 0:
+            switch(GetCurrentMenuEntry())
+            {
+                case 0:
+                    FadeOutObjects(2, 2);
+                    REG_BG1CNT |= 3;
+                    sub_80254E0();
+                    sub_8026D84();
+                    sub_805E1DC(2);
+                    SetTextSpriteCount(0);
+                    byte_20021F9 = 1;
+                    return 1;
+                case 1:
+                    {u32 v1;
+                    FadeOutObjects(2, 2);
+                    REG_BG1CNT |= 3;
+                    v1 = sub_80246C8();
+
+                    if(v1)
+                        return 1;
+
+                    InitMenu(0, gPauseMenuLanguage);
+                    gMenuId = v1;
+                    gMenuParentId = -1;
+                    AdvanceMenuEntryDown();
+                    break;}
+            }
+            return 0;
+        case 7:
+            switch(GetCurrentMenuEntry())
+            {
+                case 0:
+                    if (byte_20021F9)
+                        break;
+                    gContinueGame = sub_08044C00(0);
+                    if (gContinueGame)
+                    {
+                        sub_8038A34();
+                        sub_803FE78();
+                        dword_203F4DC = 0;
+                    }
+                    else
+                    {
+                        HANG;
+                    }
+                    return 1;
+                case 1:
+                    if (byte_20021F9)
+                        break;
+                    gContinueGame = sub_08044C00(1);
+                    if (gContinueGame)
+                    {
+                        sub_8038A34();
+                        sub_803FE78();
+                        dword_203F4DC = 1;
+                    }
+                    else
+                    {
+                        HANG;
+                    }
+                    return 1;
+                case 2:
+                    if (byte_20021F9)
+                        break;
+                    gContinueGame = sub_08044C00(2);
+                    if (gContinueGame)
+                    {
+                        sub_8038A34();
+                        sub_803FE78();
+                        dword_203F4DC = 2;
+                    }
+                    else
+                    {
+                        HANG;
+                    }
+                    return 1;
+                default:
+                    return 0;
+            }
+            return 1;
+        case 3:
+            switch(GetCurrentMenuEntry())
+            {
+                case 0: gPauseMenuLanguage = 0; return 1;
+                case 1: gPauseMenuLanguage = 1; return 1;
+                case 2: gPauseMenuLanguage = 2; return 1;
+                case 3: gPauseMenuLanguage = 3; return 1;
+                case 4: gPauseMenuLanguage = 4; return 1;
+                default: return 0;
+            }
+        default:
+            return 0;
+    }
+}
