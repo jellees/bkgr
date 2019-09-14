@@ -64,7 +64,12 @@ SECTIONS
 		gDebugESN = .; . += 1;
 		gDebugESV = .; . += 1;
 
-		. = 0x00001468;
+		. = 0x0000145C;
+		word_200145C = .; . += 2;
+		word_200145E = .; . += 2;
+		gBGInitOffsetHorizontal = .; . += 2;
+		gBGInitOffsetVertical = .; . += 2;
+		gPlayerInitPixelPos = .; . += 4;
 		gCameraPixelX = .; . += 2;
 		gCameraPixelY = .; . += 2;
 
