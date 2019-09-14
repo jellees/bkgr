@@ -1,4 +1,6 @@
 #include "global.h"
+#include "sprite.h"
+#include "menu.h"
 
 extern u8 byte_20021F0;
 extern u32 dword_20021F4;
@@ -88,9 +90,6 @@ extern u32 *gOAMBufferFramePtr;
 extern u32 *gOAMBufferEnd;
 extern u32 *gOBJTileFramePtr;
 extern u32 gOBJTileCount;
-
-extern u8 gMenuId;
-extern u8 gMenuParentId;
 
 extern u16 gPreviousKeys;
 extern u16 gKeysPressed;
@@ -333,30 +332,6 @@ int sub_8024200()
         return 0;
     }
 }
-
-struct FontData
-{
-    u8 field_0;
-    u8 tileDataIndex;
-    u8 field_2;
-    u8 field_3;
-    struct FontIndex *fontIndexes;
-};
-
-struct Font
-{
-    u16 xPosition;
-    u16 yPosition;
-    struct FontData *fontData;
-    u16 field_8;
-    u8 field_A;
-    u16 stringOffset;
-    u16 palette;
-    u8 letterSpacing;
-    u8 field_11;
-    u8 field_12;
-    u8 field_13;
-};
 
 extern u16 word_200145C;
 extern u16 word_200145E;

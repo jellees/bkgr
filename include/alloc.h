@@ -3,7 +3,6 @@
 
 #include "gba/gba.h"
 
-
 struct Heap {
     u32 length;
     struct MemoryBlock* start;
@@ -20,5 +19,8 @@ struct MemoryBlock {
     struct MemoryBlock* next;
     u8 data[0];
 };
+
+extern void Free(void*, u32);
+extern void* Alloc(u32 size, u32 allocId, u32 heap);
 
 #endif

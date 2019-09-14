@@ -11,6 +11,8 @@ IWRAM_DATA u32 gLightningTimer;
 IWRAM_DATA bool32 gLightningActive;
 IWRAM_DATA u32 gThunderTimer;
 
+enum { NONE, LAVA, THUNDER };
+
 void InitPaletteEffects()
 {
     gPaletteEffects = NONE;

@@ -1,13 +1,13 @@
 #include "global.h"
+#include "sprite.h"
+#include "alloc.h"
 #include "menu.h"
 
-extern void Free(void*, u32);
-void* Alloc(u32 size, u32 allocId, u32 heap);
-void SetSprite(struct Sprite_a *sprite, u16 index, u32 a3, u8 a4, u32 a5, u16 xPos, u16 yPos, u32 bank);
-
-extern u8 gMenuId;
+// Todo: define this here.
+/*extern u8 gMenuId;
 extern u8 gMenuParentId;
-extern struct Menu gMenu;
+extern struct Menu gMenu;*/
+
 extern char file_string_1[0x1A];
 extern char file_string_2[0x1A];
 extern char file_string_3[0x1A];
@@ -232,7 +232,7 @@ void InitMenu(u32 menu, u32 language)
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
-            gMenu.spriteBuffer = Alloc(sizeof(struct Sprite_a) * gMenu.entryCount, 15, 4);
+            gMenu.spriteBuffer = Alloc(sizeof(struct Sprite) * gMenu.entryCount, 15, 4);
             SetSprite(&gMenu.spriteBuffer[0], 1142u, 0, 0, 0, gMenu.xPosition, gMenu.yPosition, 2);
             SetSprite(&gMenu.spriteBuffer[1], 0x477u, 0, 0, 0, gMenu.xPosition, gMenu.yPosition + gMenu.lineHeight, 2);
             SetSprite(&gMenu.spriteBuffer[2], 0x478u, 0, 0, 0, gMenu.xPosition, 2 * gMenu.lineHeight + gMenu.yPosition, 2);
