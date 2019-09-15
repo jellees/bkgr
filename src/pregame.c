@@ -338,14 +338,14 @@ extern u16 word_200145E;
 extern u16 gBGInitOffsetHorizontal;
 extern u16 gBGInitOffsetVertical;
 
-extern struct FontData fontdata_80B01A8[3];
+extern struct Font fontdata_80B01A8[3];
 
 int ShowPressStart()
 {
     s32 v3;
     bool32 v4;
-    struct Font v2;
-    struct Font v1;
+    struct TextBox v2;
+    struct TextBox v1;
     u8 s1[27], s2[21], s3[21];
     u8 *string;
 
@@ -365,8 +365,8 @@ int ShowPressStart()
     sub_8026E48(0xFFF, 0, 0);
     init_function(10);
 
-    v1.fontData = &fontdata_80B01A8[0];
-    v1.field_8 = 0xF0;
+    v1.font = &fontdata_80B01A8[0];
+    v1.size = 0xF0;
     v1.field_A = 1;
     v1.palette = 0xA;
     v1.letterSpacing = 1;
@@ -449,11 +449,11 @@ int ShowPressStart()
     v2.letterSpacing = 0xFE;
     v2.field_12 = 0;
     v2.field_A = 2;
-    v2.field_8 = 0xF0;
+    v2.size = 0xF0;
     v2.palette = 1;
     v2.stringOffset = 0;
     v2.field_11 = 6;
-    v2.fontData = &fontdata_80B01A8[2];
+    v2.font = &fontdata_80B01A8[2];
 
     string = (u8 *)0x08065210;
     v3 = sub_8025870(string, &v2);

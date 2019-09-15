@@ -7,24 +7,24 @@ struct Sprite {
     u8 data[0x1C];
 };
 
-struct FontIndex {
-    u16 letterIndex;
-    u16 letterSize;
+struct Letter {
+    u16 index;
+    u16 size;
 };
 
-struct FontData {
+struct Font {
     u8 field_0;
     u8 tileDataIndex;
     u8 field_2;
     u8 field_3;
-    struct FontIndex* fontIndexes;
+    struct Letter* letters;
 };
 
-struct Font {
+struct TextBox {
     u16 xPosition;
     u16 yPosition;
-    struct FontData* fontData;
-    u16 field_8;
+    struct Font* font;
+    u16 size;
     u8 field_A;
     u16 stringOffset;
     u16 palette;

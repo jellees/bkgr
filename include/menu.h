@@ -8,8 +8,8 @@ struct Menu {
     u16 yPosition;
     u16 lineHeight;
     u16 horizontalPadding;
-    struct Font unselected;
-    struct Font selected;
+    struct TextBox unselected;
+    struct TextBox selected;
     u32 entryCount;
     u8** texts;
     u16 curEntry;
