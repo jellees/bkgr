@@ -2,17 +2,6 @@
 #include "sprite.h"
 #include "menu.h"
 
-extern u8 byte_20021F0;
-extern u32 dword_20021F4;
-
-extern u8 gPauseMenuLanguage;
-extern u8 byte_2000335;
-extern u8 byte_20021F8;
-extern u8 byte_20021F9;
-extern u32 dword_203F4DC;
-
-extern struct SaveFile gSaveFiles[3];
-
 extern u32 sub_08044860();
 extern void reset_savefiles();
 extern void MakeFileStrings();
@@ -29,6 +18,41 @@ extern void ResetMenu();
 extern u32 DoesMemBlockExistById(int, int);
 
 extern void DmaFill32(int, int, int);
+
+extern u8 byte_20021F0;
+extern u32 dword_20021F4;
+
+extern u8 gPauseMenuLanguage;
+extern u8 byte_2000335;
+extern u8 byte_20021F8;
+extern u8 byte_20021F9;
+extern u32 dword_203F4DC;
+
+extern struct SaveFile gSaveFiles[3];
+
+extern u32 gOAMBuffer1[];
+extern u32 *gOAMBufferFramePtr;
+extern u32 *gOAMBufferEnd;
+extern u32 *gOBJTileFramePtr;
+extern u32 gOBJTileCount;
+
+extern u16 gPreviousKeys;
+extern u16 gKeysPressed;
+extern u16 gKeysDown;
+
+extern struct struct_80CE440 word_80CE440[];
+
+extern u8 byte_203EA89;
+extern u8 byte_203EA8C;
+
+extern u8 gContinueGame;
+
+extern u16 word_200145C;
+extern u16 word_200145E;
+extern u16 gBGInitOffsetHorizontal;
+extern u16 gBGInitOffsetVertical;
+
+extern struct Font font_80B01A8[3];
 
 void InitPregame()
 {
@@ -84,21 +108,6 @@ void ExecutePregame()
     if (DoesMemBlockExistById(4, 15))
         HANG;
 }
-
-extern u32 gOAMBuffer1[];
-extern u32 *gOAMBufferFramePtr;
-extern u32 *gOAMBufferEnd;
-extern u32 *gOBJTileFramePtr;
-extern u32 gOBJTileCount;
-
-extern u16 gPreviousKeys;
-extern u16 gKeysPressed;
-extern u16 gKeysDown;
-
-extern struct struct_80CE440 word_80CE440[];
-
-extern u8 byte_203EA89;
-extern u8 byte_203EA8C;
 
 void ShowSelectGame(int a1)
 {
@@ -230,8 +239,6 @@ void ShowSelectGame(int a1)
     SkipVblank();
 }
 
-extern u8 gContinueGame;
-
 int sub_8024200()
 {
     switch (gMenuId)
@@ -333,13 +340,6 @@ int sub_8024200()
     }
 }
 
-extern u16 word_200145C;
-extern u16 word_200145E;
-extern u16 gBGInitOffsetHorizontal;
-extern u16 gBGInitOffsetVertical;
-
-extern struct Font fontdata_80B01A8[3];
-
 int ShowPressStart()
 {
     s32 v3;
@@ -365,7 +365,7 @@ int ShowPressStart()
     sub_8026E48(0xFFF, 0, 0);
     init_function(10);
 
-    v1.font = &fontdata_80B01A8[0];
+    v1.font = &font_80B01A8[0];
     v1.size = 0xF0;
     v1.field_A = 1;
     v1.palette = 0xA;
@@ -453,7 +453,7 @@ int ShowPressStart()
     v2.palette = 1;
     v2.stringOffset = 0;
     v2.field_11 = 6;
-    v2.font = &fontdata_80B01A8[2];
+    v2.font = &font_80B01A8[2];
 
     string = (u8 *)0x08065210;
     v3 = sub_8025870(string, &v2);
@@ -502,4 +502,142 @@ int ShowPressStart()
     SyncVblank();
     SkipVblank();
     return v4;
+}
+
+int sub_80246C8()
+{
+    u8* text;
+    struct TextBox textbox;
+    s32 v3;
+    bool32 v4;
+
+    textbox.letterSpacing = 0xFE;
+    textbox.field_12 = 0;
+    textbox.field_A = 1;
+    textbox.size = 240;
+    textbox.palette = 1;
+    textbox.stringOffset = 0;
+    textbox.field_11 = 6;
+    textbox.font = &font_80B01A8[2];
+
+    text = NULL;
+
+    switch (gPauseMenuLanguage)
+    {
+        case 0: text = (u8*)0x8068048; break;
+        case 1: text = (u8*)0x80680D4; break;
+        case 3: text = (u8*)0x806817C; break;
+        case 2: text = (u8*)0x8068238; break;
+        case 4: text = (u8*)0x80682D0; break;
+    }
+
+    v3 = sub_8025870(text, &textbox);
+
+    InitMenu(MENU_FILE_SELECT, gPauseMenuLanguage);
+    gMenuParentId = gMenuId;
+    gMenuId = MENU_FILE_SELECT;
+
+    if (!gSaveFiles[0].empty)
+    {
+        SetMenuEntry(0);
+    }
+    else if (!gSaveFiles[1].empty)
+    {
+        SetMenuEntry(1);
+    }
+    else if (!gSaveFiles[2].empty)
+    {
+        SetMenuEntry(2);
+    }
+    else
+    {
+        HANG;
+    }
+
+    SetTextSpriteCount(0);
+
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (void *)0x6010000;
+    gOBJTileCount = 0;
+    SetObjectsFullAlpha();
+
+    v4 = TRUE;
+
+    SyncVblank();
+    SkipVblank();
+
+    while (1)
+    {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+        if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON)
+        {
+            if (sub_8024200())
+            {
+                sub_80270AC(0xFFF, 0);
+                sub_805E1DC(2);
+                SetTextSpriteCount(0);
+                return 1;
+            }
+        }
+        else if (gKeysDown & B_BUTTON)
+        {
+            FadeOutObjects(2, 0);
+            SetTextSpriteCount(0);
+            return 0;
+        }
+
+        if (!(gKeysDown & JOY_EXCL_DPAD))
+        {
+            if (gKeysDown & DPAD_UP)
+            {
+                if (byte_203EA89)
+                {
+                    audio_new_fx(word_80CE440[204].field_0, word_80CE440[204].field_2[byte_203EA8C], word_80CE440[204].field_4 + 0x10000);
+                }
+
+                do
+                    AdvanceMenuEntryUp();
+                while (gSaveFiles[GetCurrentMenuEntry()].empty);
+            }
+            else if (gKeysDown & DPAD_DOWN)
+            {
+                if (byte_203EA89)
+                {
+                    audio_new_fx(word_80CE440[204].field_0, word_80CE440[204].field_2[byte_203EA8C], word_80CE440[204].field_4 + 0x10000);
+                }
+
+                do
+                    AdvanceMenuEntryDown();
+                while (gSaveFiles[GetCurrentMenuEntry()].empty);
+            }
+        }
+
+        call_functions();
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (void *)0x6010000;
+        gOBJTileCount = 0;
+        textbox.xPosition = (240 - v3) >> 1;
+        textbox.yPosition = 8;
+        textbox.stringOffset = 0;
+        AddStringToBuffer(&textbox, text);
+        FlushMenuToTextBuffer();
+        RenderText();
+        RenderMenuSprites();
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+
+        if (v4)
+        {
+            sub_08026BA8(2, 0);
+            v4 = FALSE;
+        }
+    }
 }
