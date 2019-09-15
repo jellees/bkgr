@@ -120,8 +120,8 @@ void ShowSelectGame(int a1)
     gOBJTileFramePtr = (u32 *)OBJ_VRAM0;
     gOBJTileCount = 0;
 
-    InitMenu(0, gPauseMenuLanguage);
-    gMenuId = 0;
+    InitMenu(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
+    gMenuId = MENU_GAME_OR_CONTINUE;
     gMenuParentId = -1;
 
     if (!byte_20021F9)
@@ -243,7 +243,7 @@ int sub_8024200()
 {
     switch (gMenuId)
     {
-    case 0:
+    case MENU_GAME_OR_CONTINUE:
         switch (GetCurrentMenuEntry())
         {
         case 0:
@@ -256,24 +256,18 @@ int sub_8024200()
             byte_20021F9 = 1;
             return 1;
         case 1:
-        {
-            u32 v1;
             FadeOutObjects(2, 2);
             REG_BG1CNT |= 3;
-            v1 = sub_80246C8();
-
-            if (v1)
+            if (sub_80246C8())
                 return 1;
-
-            InitMenu(0, gPauseMenuLanguage);
-            gMenuId = v1;
+            InitMenu(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
+            gMenuId = MENU_GAME_OR_CONTINUE;
             gMenuParentId = -1;
             AdvanceMenuEntryDown();
             break;
         }
-        }
         return 0;
-    case 7:
+    case MENU_FILE_SELECT:
         switch (GetCurrentMenuEntry())
         {
         case 0:
@@ -325,7 +319,7 @@ int sub_8024200()
             return 0;
         }
         return 1;
-    case 3:
+    case MENU_LANGUAGE:
         switch (GetCurrentMenuEntry())
         {
         case 0: gPauseMenuLanguage = 0; return 1;
@@ -356,7 +350,7 @@ int ShowPressStart()
     REG_BG2PC = 0;
     REG_BG2PA = 256;
     REG_BG2PD = 256;
-    SetupRoom(0x22, 0, 1, 0);
+    SetupRoom(ROOM_FRONTEND, 0, 1, 0);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
 
     EnableBGAlphaBlending();
