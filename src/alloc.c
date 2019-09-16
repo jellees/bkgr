@@ -478,7 +478,6 @@ void FreeEx(void* pointer)
     HANG;
 }
 
-#ifdef NONMATCHING
 void Free(void* pointer, u32 heap)
 {
     struct MemoryBlock* block = (struct MemoryBlock*)(pointer - sizeof(struct MemoryBlock));
@@ -500,16 +499,14 @@ void Free(void* pointer, u32 heap)
     {
         if (block->next->allocId != 0)
             return;
-        
-        block->next->previous->next = block->next->next;
-        block->next->next->previous = block->next->previous;
-        block->next->previous->length = block->next->previous->length + block->next->length;
-        gHeaps[heap].last = block->next->previous;
+        block = block->next;
+        block->previous->next = block->next;
+        block->next->previous = block->previous;
+        block->previous->length = block->previous->length + block->length;
+        gHeaps[heap].last = block->previous;
     }
     else
     {
         gHeaps[heap].last = block;
     }
 }
-#endif
-
