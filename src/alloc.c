@@ -482,9 +482,9 @@ void Free(void* pointer, u32 heap)
 {
     struct MemoryBlock* block = (struct MemoryBlock*)(pointer - sizeof(struct MemoryBlock));
 
-    if(block->allocId - 1 > 0x18)
+    if (block->allocId - 1 > 0x18)
         HANG;
-    
+
     block->allocId = 0;
 
     if (block->previous && block->previous->allocId == 0)
@@ -495,7 +495,7 @@ void Free(void* pointer, u32 heap)
         block = block->previous;
     }
 
-    if(block->next)
+    if (block->next)
     {
         if (block->next->allocId != 0)
             return;
@@ -509,4 +509,44 @@ void Free(void* pointer, u32 heap)
     {
         gHeaps[heap].last = block;
     }
+}
+
+void FreeById(u32 heap, u32 allocId)
+{
+    struct MemoryBlock* block = gHeaps[heap].start;
+    do
+    {
+        if (block->allocId == allocId)
+            Free(block->data, heap);
+    } while (block = block->next);
+}
+
+u32 CheckHeap(u32 heap)
+{
+    struct MemoryBlock* block = gHeaps[heap].start;
+    u32 allocatedLength = 0;
+    u32 unallocatedLength;
+    u32 freeMemory;
+
+    do
+    {
+        if (block->allocId)
+            allocatedLength += block->length;
+    } while (block = block->next);
+
+    block = gHeaps[heap].start;
+    unallocatedLength = 0;
+
+    do
+    {
+        if (!block->allocId)
+            unallocatedLength += block->length;
+    } while (block = block->next);
+
+    freeMemory = gHeaps[heap].length - allocatedLength;
+    
+    if (unallocatedLength != freeMemory)
+        HANG;
+
+    return freeMemory;
 }
