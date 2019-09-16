@@ -106,13 +106,7 @@ SECTIONS
 		gIsPaletteEffectsActive = .; . += 1;
 
 		. = 0x0000DCE0;
-		gHeap3 = .; . += 0x1040;
-		gHeaps = .; . += 0x18 * 6;
-		gHeap1 = .; . += 0xFA00;
-		gHeap2 = .; . += 0x15F90;
-		gHeap4 = .; . += 0x1000;
-		gHeap5 = .; . += 0x8070;
-		gHeap6 = .; . += 0x800;
+		src/alloc.o(.bss);
 
 		. = 0x0003DFC4;
 		dword_203DFC4 = .; . += 4;
@@ -269,7 +263,6 @@ SECTIONS
 		asm/pregame.o(.text);
 		asm/chunk9.o(.text);
 		src/alloc.o(.text);
-		asm/alloc.o(.text);
 		asm/chunk6.o(.text);
 		src/menu.o(.text);
 		asm/menu.o(.text);

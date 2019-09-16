@@ -1,16 +1,13 @@
 #include "global.h"
 #include "alloc.h"
 
-extern u8 gHeap3[1];
-extern struct Heap gHeaps[6];
-extern u8 gHeap1[1];
-extern u8 gHeap2[1];
-extern u8 gHeap4[1];
-extern u8 gHeap5[1];
-extern u8 gHeap6[1];
-
-void InitHeap(u32 heap);
-
+IWRAM_DATA u8 gHeap3[0x1040];
+IWRAM_DATA struct Heap gHeaps[6];
+IWRAM_DATA u8 gHeap1[64000];
+IWRAM_DATA u8 gHeap2[90000];
+IWRAM_DATA u8 gHeap4[0x1000];
+IWRAM_DATA u8 gHeap5[0x8070];
+IWRAM_DATA u8 gHeap6[0x800];
 
 void sub_8027600(u32 heap)
 {
@@ -460,8 +457,6 @@ _08027976:                      \n\
 }
 #endif
 
-void Free(void* pointer, u32 heap);
-
 void FreeEx(void* pointer)
 {
     int i;
@@ -549,4 +544,27 @@ u32 CheckHeap(u32 heap)
         HANG;
 
     return freeMemory;
+}
+
+bool32 DoesMemBlockExistById(u32 heap, u32 allocId)
+{
+    struct MemoryBlock* block = gHeaps[heap].start;
+    do
+    {
+        if (block->allocId == allocId)
+            return TRUE;
+    }
+    while(block = block->next);
+    return FALSE;
+}
+
+void ReplaceMemBlockId(u32 heap, u32 allocId, u32 newId)
+{
+    struct MemoryBlock* block = gHeaps[heap].start;
+    do
+    {
+        if (block->allocId == allocId)
+            block->allocId = newId;
+    }
+    while(block = block->next);
 }
