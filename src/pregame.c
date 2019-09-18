@@ -40,7 +40,7 @@ extern u16 gPreviousKeys;
 extern u16 gKeysPressed;
 extern u16 gKeysDown;
 
-extern struct struct_80CE440 word_80CE440[];
+extern struct SoundEffect dSoundEffects[];
 
 extern u8 byte_203EA89;
 extern u8 byte_203EA8C;
@@ -192,9 +192,9 @@ void ShowSelectGame(int a1)
                 {
                     if (byte_203EA89)
                     {
-                        u16 value0 = word_80CE440[204].field_0;
-                        u8 value1 = word_80CE440[204].field_2[byte_203EA8C];
-                        u32 value2 = word_80CE440[204].field_4 + 0x10000;
+                        u16 value0 = dSoundEffects[204].index;
+                        u8 value1 = dSoundEffects[204].volumes[byte_203EA8C];
+                        u32 value2 = dSoundEffects[204].pitch + 0x10000;
                         audio_new_fx(value0, value1, value2);
                     }
                     AdvanceMenuEntryUp();
@@ -204,9 +204,9 @@ void ShowSelectGame(int a1)
             {
                 if (byte_203EA89)
                 {
-                    u16 value0 = word_80CE440[204].field_0;
-                    u8 value1 = word_80CE440[204].field_2[byte_203EA8C];
-                    u32 value2 = word_80CE440[204].field_4 + 0x10000;
+                    u16 value0 = dSoundEffects[204].index;
+                    u8 value1 = dSoundEffects[204].volumes[byte_203EA8C];
+                    u32 value2 = dSoundEffects[204].pitch + 0x10000;
                     audio_new_fx(value0, value1, value2);
                 }
                 AdvanceMenuEntryDown();
@@ -589,7 +589,7 @@ int sub_80246C8()
             {
                 if (byte_203EA89)
                 {
-                    audio_new_fx(word_80CE440[204].field_0, word_80CE440[204].field_2[byte_203EA8C], word_80CE440[204].field_4 + 0x10000);
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C], dSoundEffects[204].pitch + 0x10000);
                 }
 
                 do
@@ -600,7 +600,7 @@ int sub_80246C8()
             {
                 if (byte_203EA89)
                 {
-                    audio_new_fx(word_80CE440[204].field_0, word_80CE440[204].field_2[byte_203EA8C], word_80CE440[204].field_4 + 0x10000);
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C], dSoundEffects[204].pitch + 0x10000);
                 }
 
                 do

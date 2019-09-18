@@ -72,9 +72,9 @@ void HandlePaletteEffects()
                 gThunderTimer = RandomMinMax(180, 300);
                 if(byte_203EA89)
                 {
-                    u32 a = word_80CE440[dword_806483C[RandomMinMax(0, 2)]].field_0;
-                    u32 b = word_80CE440[dword_806483C[RandomMinMax(0, 2)]].field_2[byte_203EA8C];
-                    u32 c = word_80CE440[dword_806483C[RandomMinMax(0, 2)]].field_4 + 0x10000;
+                    u32 a = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].index;
+                    u32 b = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].volumes[byte_203EA8C];
+                    u32 c = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].pitch + 0x10000;
                     audio_new_fx(a, b, c);
                 }
             }
