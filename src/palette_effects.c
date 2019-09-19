@@ -11,27 +11,32 @@ IWRAM_DATA u32 gLightningTimer;
 IWRAM_DATA bool32 gLightningActive;
 IWRAM_DATA u32 gThunderTimer;
 
-enum { NONE, LAVA, THUNDER };
+enum
+{
+    NONE,
+    LAVA,
+    THUNDER
+};
 
 void InitPaletteEffects()
 {
     gPaletteEffects = NONE;
     switch (gLoadedRoomIndex)
     {
-        case ROOM_FURNSECTION:
-        case ROOM_FURNSTORE:
-        case ROOM_POISONROOM:
-            gPaletteEffects = LAVA;
-            gLavaPaletteIndex = 0;
-            gLavaTimer = RandomMinMax(8, 24);
-            break;
-        case ROOM_BOARDWALK:
-            gPaletteEffects = THUNDER;
-            gLightningPalette = dLightningPalette;
-            gBackupBGPalette = gRoomHeader.backgroundPalette;
-            gLightningTimer = RandomMinMax(5, 240);
-            gLightningActive = FALSE;
-            gThunderTimer = RandomMinMax(180, 300);
+    case ROOM_FURNSECTION:
+    case ROOM_FURNSTORE:
+    case ROOM_POISONROOM:
+        gPaletteEffects = LAVA;
+        gLavaPaletteIndex = 0;
+        gLavaTimer = RandomMinMax(8, 24);
+        break;
+    case ROOM_BOARDWALK:
+        gPaletteEffects = THUNDER;
+        gLightningPalette = dLightningPalette;
+        gBackupBGPalette = gRoomHeader.backgroundPalette;
+        gLightningTimer = RandomMinMax(5, 240);
+        gLightningActive = FALSE;
+        gThunderTimer = RandomMinMax(180, 300);
     }
 }
 
@@ -70,7 +75,7 @@ void HandlePaletteEffects()
             if (--gThunderTimer == 0)
             {
                 gThunderTimer = RandomMinMax(180, 300);
-                if(byte_203EA89)
+                if (byte_203EA89)
                 {
                     u32 a = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].index;
                     u32 b = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].volumes[byte_203EA8C];

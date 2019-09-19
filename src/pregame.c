@@ -31,9 +31,9 @@ extern u32 dword_203F4DC;
 extern struct SaveFile gSaveFiles[3];
 
 extern u32 gOAMBuffer1[];
-extern u32 *gOAMBufferFramePtr;
-extern u32 *gOAMBufferEnd;
-extern u32 *gOBJTileFramePtr;
+extern u32* gOAMBufferFramePtr;
+extern u32* gOAMBufferEnd;
+extern u32* gOBJTileFramePtr;
 extern u32 gOBJTileCount;
 
 extern u16 gPreviousKeys;
@@ -62,7 +62,7 @@ void InitPregame()
     REG_BG2CNT = 0;
     DmaFill32(0, VRAM, 0x5000);
     DmaFill32(0, PLTT, 128);
-    DmaTransfer32((void *)0x83FD254, OBJ_PLTT, 128);
+    DmaTransfer32((void*)0x83FD254, OBJ_PLTT, 128);
 }
 
 void ExecutePregame()
@@ -117,7 +117,7 @@ void ShowSelectGame(int a1)
     DmaFill32(170, gOAMBuffer1, 256);
     gOAMBufferFramePtr = gOAMBuffer1;
     gOAMBufferEnd = &gOAMBuffer1[0x100];
-    gOBJTileFramePtr = (u32 *)OBJ_VRAM0;
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
 
     InitMenu(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
@@ -172,7 +172,7 @@ void ShowSelectGame(int a1)
             DmaFill32(170, gOAMBuffer1, 256);
             gOAMBufferFramePtr = gOAMBuffer1;
             gOAMBufferEnd = &gOAMBuffer1[0x100];
-            gOBJTileFramePtr = (u32 *)OBJ_VRAM0;
+            gOBJTileFramePtr = (u32*)OBJ_VRAM0;
             gOBJTileCount = 0;
             SyncVblank();
             UpdateVideo();
@@ -218,7 +218,7 @@ void ShowSelectGame(int a1)
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (u32 *)OBJ_VRAM0;
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
         FlushMenuToTextBuffer();
         RenderText();
@@ -315,8 +315,7 @@ int sub_8024200()
                 HANG;
             }
             return 1;
-        default:
-            return 0;
+        default: return 0;
         }
         return 1;
     case MENU_LANGUAGE:
@@ -329,8 +328,7 @@ int sub_8024200()
         case 4: gPauseMenuLanguage = 4; return 1;
         default: return 0;
         }
-    default:
-        return 0;
+    default: return 0;
     }
 }
 
@@ -341,7 +339,7 @@ int ShowPressStart()
     struct TextBox v2;
     struct TextBox v1;
     u8 s1[27], s2[21], s3[21];
-    u8 *string;
+    u8* string;
 
     EnableDisplay();
     REG_BG2X_L = 0;
@@ -449,7 +447,7 @@ int ShowPressStart()
     v2.field_11 = 6;
     v2.font = &font_80B01A8[2];
 
-    string = (u8 *)0x08065210;
+    string = (u8*)0x08065210;
     v3 = sub_8025870(string, &v2);
     v4 = FALSE;
 
@@ -480,7 +478,7 @@ int ShowPressStart()
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (void *)0x6010000;
+        gOBJTileFramePtr = (void*)0x6010000;
         gOBJTileCount = 0;
         v2.xPosition = (240 - v3) >> 1;
         v2.yPosition = 128;
@@ -518,11 +516,11 @@ int sub_80246C8()
 
     switch (gPauseMenuLanguage)
     {
-        case 0: text = (u8*)0x8068048; break;
-        case 1: text = (u8*)0x80680D4; break;
-        case 3: text = (u8*)0x806817C; break;
-        case 2: text = (u8*)0x8068238; break;
-        case 4: text = (u8*)0x80682D0; break;
+    case 0: text = (u8*)0x8068048; break;
+    case 1: text = (u8*)0x80680D4; break;
+    case 3: text = (u8*)0x806817C; break;
+    case 2: text = (u8*)0x8068238; break;
+    case 4: text = (u8*)0x80682D0; break;
     }
 
     v3 = sub_8025870(text, &textbox);
@@ -553,7 +551,7 @@ int sub_80246C8()
     DmaFill32(170, gOAMBuffer1, 256);
     gOAMBufferFramePtr = gOAMBuffer1;
     gOAMBufferEnd = &gOAMBuffer1[0x100];
-    gOBJTileFramePtr = (void *)0x6010000;
+    gOBJTileFramePtr = (void*)0x6010000;
     gOBJTileCount = 0;
     SetObjectsFullAlpha();
 
@@ -589,7 +587,8 @@ int sub_80246C8()
             {
                 if (byte_203EA89)
                 {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C], dSoundEffects[204].pitch + 0x10000);
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                 dSoundEffects[204].pitch + 0x10000);
                 }
 
                 do
@@ -600,7 +599,8 @@ int sub_80246C8()
             {
                 if (byte_203EA89)
                 {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C], dSoundEffects[204].pitch + 0x10000);
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                 dSoundEffects[204].pitch + 0x10000);
                 }
 
                 do
@@ -614,7 +614,7 @@ int sub_80246C8()
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (void *)0x6010000;
+        gOBJTileFramePtr = (void*)0x6010000;
         gOBJTileCount = 0;
         textbox.xPosition = (240 - v3) >> 1;
         textbox.yPosition = 8;
