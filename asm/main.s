@@ -409,7 +409,7 @@ StartGame: @ 0x08009F74
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _0800A086
-	bl exec_erasedata_screen
+	bl ShowEraseData
 _0800A086:
 	bl ExecutePregame
 	movs r1, #0xe0

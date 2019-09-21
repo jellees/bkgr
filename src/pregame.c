@@ -656,11 +656,11 @@ void ShowLanguageSelect()
 
     SyncVblank();
     SkipVblank();
-    
+
     while (1)
     {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
-        
+
         if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON)
         {
             if (sub_8024200())
@@ -711,4 +711,157 @@ void ShowLanguageSelect()
     SetTextSpriteCount(0);
     SyncVblank();
     SkipVblank();
+}
+
+void ShowEraseData()
+{
+    s32 action;
+    s32 v1;
+    bool32 renderMenu;
+    struct TextBox tb1;
+    struct TextBox tb2;
+    bool32 allowInput;
+    bool32 v7;
+
+    REG_BG2X_L = 0;
+    REG_BG2Y_L = 0;
+    REG_BG2PB = 0;
+    REG_BG2PC = 0;
+    REG_BG2PA = 256;
+    REG_BG2PD = 256;
+    InitPregame();
+
+    tb1.letterSpacing = 1;
+    tb1.field_12 = 0;
+    tb1.field_A = 5;
+    tb1.size = 240;
+    tb1.palette = 10;
+    tb1.stringOffset = 0;
+    tb1.field_11 = 6;
+    tb1.font = &font_80B01A8[1];
+
+    tb2.letterSpacing = 1;
+    tb2.field_12 = 0;
+    tb2.field_A = 5;
+    tb2.size = 208;
+    tb2.palette = 10;
+    tb2.stringOffset = 0;
+    tb2.field_11 = 6;
+    tb2.font = &font_80B01A8[1];
+
+    InitMenu(MENU_YES_NO_ENGLISH, 0);
+    gMenuId = MENU_YES_NO_ENGLISH;
+    gMenuParentId = -1;
+
+    action = -1;
+    allowInput = TRUE;
+    v1 = -1;
+    v7 = FALSE;
+    renderMenu = TRUE;
+
+    while (1)
+    {
+        if (allowInput)
+        {
+            ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+            if (gKeysDown & A_BUTTON)
+            {
+                switch (GetCurrentMenuEntry())
+                {
+                case 0:
+                    allowInput = FALSE;
+                    action = 1;
+                    v7 = TRUE;
+                    renderMenu = FALSE;
+                    break;
+                case 1:
+                    allowInput = FALSE;
+                    action = 3;
+                    v1 = 180;
+                    renderMenu = FALSE;
+                }
+            }
+
+            if (!(gKeysDown & JOY_EXCL_DPAD))
+            {
+                if (gKeysDown & DPAD_UP)
+                {
+                    if (byte_203EA89)
+                    {
+                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                     dSoundEffects[204].pitch + 0x10000);
+                    }
+                    AdvanceMenuEntryUp();
+                }
+                else if (gKeysDown & DPAD_DOWN)
+                {
+                    if (byte_203EA89)
+                    {
+                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                     dSoundEffects[204].pitch + 0x10000);
+                    }
+                    AdvanceMenuEntryDown();
+                }
+            }
+        }
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (void*)0x6014000;
+        gOBJTileCount = 512;
+
+        tb1.xPosition = 16;
+        tb1.yPosition = 16;
+        tb1.stringOffset = 0;
+        AddStringToBuffer(&tb1, 0x080652AC);
+
+        switch (action)
+        {
+        case 1:
+            tb2.xPosition = 16;
+            tb2.yPosition = 70;
+            tb2.stringOffset = 0;
+            AddStringToBuffer(&tb2, 0x080652C4);
+            break;
+        case 2:
+            tb2.xPosition = 16;
+            tb2.yPosition = 70;
+            tb2.stringOffset = 0;
+            AddStringToBuffer(&tb2, 0x080652F0);
+            break;
+        case 3:
+            tb2.xPosition = 16;
+            tb2.yPosition = 70;
+            tb2.stringOffset = 0;
+            AddStringToBuffer(&tb2, 0x08065304);
+        }
+
+        if (renderMenu)
+            FlushMenuToTextBuffer();
+
+        RenderText();
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+
+        if (v7)
+        {
+            sub_8044D30();
+            v1 = 180;
+            action = 2;
+            v7 = FALSE;
+        }
+
+        if (v1 != -1)
+        {
+            if (v1 == 0)
+                sub_800A594();
+            else
+                --v1;
+        }
+    }
 }
