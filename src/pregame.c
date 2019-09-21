@@ -17,7 +17,7 @@ extern void FreeById(int, int);
 extern void ResetMenu();
 extern u32 DoesMemBlockExistById(int, int);
 
-extern void DmaFill32(int, int, int);
+extern void DmaFill32(int, void*, int);
 
 extern u8 byte_20021F0;
 extern u32 dword_20021F4;
@@ -462,7 +462,7 @@ int ShowPressStart()
                 FadeOutObjects(2, 2);
                 REG_BG1CNT |= 3u;
                 SetTextSpriteCount(0);
-                exec_language_select_screen();
+                ShowLanguageSelect();
                 v4 = TRUE;
             }
             else
@@ -478,7 +478,7 @@ int ShowPressStart()
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (void*)0x6010000;
+        gOBJTileFramePtr = (void*)OBJ_VRAM0;
         gOBJTileCount = 0;
         v2.xPosition = (240 - v3) >> 1;
         v2.yPosition = 128;
@@ -551,7 +551,7 @@ int sub_80246C8()
     DmaFill32(170, gOAMBuffer1, 256);
     gOAMBufferFramePtr = gOAMBuffer1;
     gOAMBufferEnd = &gOAMBuffer1[0x100];
-    gOBJTileFramePtr = (void*)0x6010000;
+    gOBJTileFramePtr = (void*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SetObjectsFullAlpha();
 
@@ -614,7 +614,7 @@ int sub_80246C8()
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (void*)0x6010000;
+        gOBJTileFramePtr = (void*)OBJ_VRAM0;
         gOBJTileCount = 0;
         textbox.xPosition = (240 - v3) >> 1;
         textbox.yPosition = 8;
@@ -634,4 +634,81 @@ int sub_80246C8()
             v4 = FALSE;
         }
     }
+}
+
+void ShowLanguageSelect()
+{
+    bool32 v0;
+
+    InitMenu(MENU_LANGUAGE, 0);
+    gMenuId = MENU_LANGUAGE;
+    gMenuParentId = -1;
+
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (void*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SetObjectsFullAlpha();
+
+    v0 = TRUE;
+
+    SyncVblank();
+    SkipVblank();
+    
+    while (1)
+    {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+        
+        if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON)
+        {
+            if (sub_8024200())
+                break;
+        }
+
+        if (!(gKeysDown & JOY_EXCL_DPAD))
+        {
+            if (gKeysDown & DPAD_UP)
+            {
+                if (byte_203EA89)
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                 dSoundEffects[204].pitch + 0x10000);
+
+                AdvanceMenuEntryUp();
+            }
+            else if (gKeysDown & DPAD_DOWN)
+            {
+                if (byte_203EA89)
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                 dSoundEffects[204].pitch + 0x10000);
+
+                AdvanceMenuEntryDown();
+            }
+        }
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (void*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        FlushMenuToTextBuffer();
+        RenderText();
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+
+        if (v0)
+        {
+            sub_08026BA8(2, 0);
+            v0 = FALSE;
+        }
+    }
+
+    FadeOutObjects(2, 0);
+    SetTextSpriteCount(0);
+    SyncVblank();
+    SkipVblank();
 }
