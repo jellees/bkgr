@@ -931,7 +931,7 @@ sub_8025718: @ 0x08025718
 	bx r0
 	.align 2, 0
 _08025790: .4byte 0x080B1AE4
-_08025794: .4byte 0x02000324
+_08025794: .4byte gMatrices
 
     .thumb
     .global sub_8025798

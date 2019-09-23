@@ -7,8 +7,15 @@ SECTIONS
 	{
 		. = 0x00000320;
 		gPauseMenuLanguage = .; . += 1;
-
-		. = 0x00000335;
+		. += 3; /* padding */
+		gMatrices = .; . += 4;
+		gMatricesCount = .; . += 4;
+		dword_200032C = .; . += 4;
+		byte_2000330 = .; . += 1;
+		byte_2000331 = .; . += 1;
+		byte_2000332 = .; . += 1;
+		byte_2000333 = .; . += 1;
+		byte_2000334 = .; . += 1;
 		byte_2000335 = .; . += 1;
 		gColorSpecEffectsSel = .; . += 2;
 
@@ -129,6 +136,8 @@ SECTIONS
 		word_203F998 = .; . += 2;
 		word_203F99A = .; . += 2;
 		byte_203F99C = .; . += 1;
+		byte_203F99D = .; . += 1;
+		byte_203F99E = .; . += 1;
 
 		. = 0x0003F99F;
 		byte_203F99F = .; . += 1;

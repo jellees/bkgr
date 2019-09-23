@@ -513,8 +513,8 @@ _0800A168: .4byte 0x0203F4D8
 _0800A16C: .4byte byte_2000F55
 _0800A170: .4byte byte_2000F57
 _0800A174: .4byte 0x0203EAD4
-_0800A178: .4byte 0x02000328
-_0800A17C: .4byte 0x02000324
+_0800A178: .4byte gMatricesCount
+_0800A17C: .4byte gMatrices
 _0800A180: .4byte gOAMBuffer2
 _0800A184: .4byte gOAMBufferFramePtr
 _0800A188: .4byte gOBJTileFramePtr
@@ -695,12 +695,12 @@ sub_800A344: @ 0x0800A344
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_0800A364: .4byte 0x02000330
-_0800A368: .4byte 0x02000331
-_0800A36C: .4byte 0x02000332
-_0800A370: .4byte 0x02000333
-_0800A374: .4byte 0x02000334
-_0800A378: .4byte 0x0200032C
+_0800A364: .4byte byte_2000330
+_0800A368: .4byte byte_2000331
+_0800A36C: .4byte byte_2000332
+_0800A370: .4byte byte_2000333
+_0800A374: .4byte byte_2000334
+_0800A378: .4byte dword_200032C
 
     .thumb
 sub_800A37C: @ 0x0800A37C
@@ -902,8 +902,8 @@ _0800A506:
 	bx r0
 	.align 2, 0
 _0800A510: .4byte gOAMBuffer1
-_0800A514: .4byte 0x02000328
-_0800A518: .4byte 0x02000324
+_0800A514: .4byte gMatricesCount
+_0800A518: .4byte gMatrices
 _0800A51C: .4byte 0x0200146C
 _0800A520: .4byte 0x02000F54
 _0800A524: .4byte 0x02000360
