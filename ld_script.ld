@@ -269,7 +269,6 @@ SECTIONS
 		asm/debug.o(.text);
 		asm/chunk5.o(.text);
 		src/pregame.o(.text);
-		asm/pregame.o(.text);
 		asm/chunk9.o(.text);
 		src/alloc.o(.text);
 		asm/chunk6.o(.text);

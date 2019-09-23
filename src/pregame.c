@@ -8,7 +8,7 @@ extern void MakeFileStrings();
 extern void init_savefiles();
 extern void InitPregame();
 extern void SetVolumeToDefault();
-extern void exec_flashscreens();
+extern void ShowFlashscreens();
 extern int ShowPressStart();
 void ShowSelectGame(int);
 extern void SetTextSpriteCount(int);
@@ -54,6 +54,17 @@ extern u16 gBGInitOffsetVertical;
 
 extern struct Font font_80B01A8[3];
 
+extern u32 dword_200032C;
+extern u8 byte_2000330;
+extern u8 byte_2000331;
+extern u8 byte_2000332;
+extern u8 byte_2000333;
+extern u8 byte_2000334;
+
+extern bool8 byte_203F99E;
+
+extern bool8 gIsPaletteEffectsActive;
+
 void InitPregame()
 {
     byte_20021F0 = 0;
@@ -95,7 +106,7 @@ void ExecutePregame()
 
     InitPregame();
     SetVolumeToDefault();
-    exec_flashscreens();
+    ShowFlashscreens();
     ShowSelectGame(ShowPressStart());
     SetTextSpriteCount(0);
 
@@ -864,4 +875,82 @@ void ShowEraseData()
                 --v1;
         }
     }
+}
+
+void ShowFlashscreens()
+{
+    s32 minTime;
+    s32 maxTime;
+    bool32 canSkip;
+
+    sub_80270AC(4095, 0);
+    DmaTransfer32((void*)0x83FD454, OBJ_PLTT, 128);
+    sub_8026E48(4095, 0, 0);
+
+    dword_200032C = Alloc(0x460u, 11, 4);
+    DmaFill32(0, dword_200032C, 280);
+
+    byte_2000331 = 0;
+    byte_2000330 = 0;
+    byte_2000332 = 0;
+    byte_2000333 = 10;
+    byte_2000334 = 0;
+
+    init_function(7);
+
+    minTime = 388;
+    maxTime = 670;
+    canSkip = FALSE;
+
+    while (byte_203F99E)
+    {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+        if (canSkip && gKeysDown & START_BUTTON)
+        {
+            audio_halt_all_fx();
+            sub_805E1DC(2);
+            init_function(8);
+            canSkip = FALSE;
+        }
+
+        if (minTime == 0)
+        {
+            canSkip = TRUE;
+            minTime = -1;
+        }
+        else if (minTime > 0)
+        {
+            minTime--;
+        }
+
+        if (maxTime == 0)
+        {
+            canSkip = FALSE;
+        }
+        else
+        {
+            maxTime--;
+        }
+
+        if (gIsPaletteEffectsActive)
+            sub_8026DC0();
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (void*)0x6014000;
+        gOBJTileCount = 512;
+
+        call_functions();
+        sub_805E088();
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+    }
+
+    sub_80270AC(4095, 0);
+    SetTextSpriteCount(0);
 }
