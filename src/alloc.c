@@ -143,7 +143,7 @@ void* Alloc(u32 size, u32 allocId, u32 heap)
             {
                 if (node->length - size >= 0x18)
                 {
-                    struct MemoryBlock* v6 = node + ((size >> 2) << -2);
+                    struct MemoryBlock* v6 = (struct MemoryBlock*)(((u8*)node) + ((size >> 2) << 2));
                     if (node->next)
                     {
                         struct MemoryBlock* v9 = node->next;
@@ -204,7 +204,7 @@ void* Alloc(u32 size, u32 allocId, u32 heap)
         }
         else
         {
-            struct MemoryBlock* v3 = v2 + ((size >> 2) << -2);
+            struct MemoryBlock* v3 = (struct MemoryBlock*)(((u8*)v2) + ((size >> 2) << 2));
             if (v2->next)
             {
                 struct MemoryBlock* v4 = v2->next;
