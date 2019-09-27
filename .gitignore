@@ -1,15 +1,5 @@
 
 /build
-.vscode
-
 *.elf
 *.gba
 *.map
-
-/emulator
-/forlater
-/srcrom
-
-baserom.dump
-bkgr.dump
-diff.txt
