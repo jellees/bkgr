@@ -1077,7 +1077,7 @@ sub_8045044: @ 0x08045044
 	.global seq_update_p
 seq_update_p: @ 0x08045050
 	push {lr}
-	bl seq_update
+	bl audio_asmprocess
 	pop {r0}
 	bx r0
 	.align 2, 0

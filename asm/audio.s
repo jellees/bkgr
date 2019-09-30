@@ -1378,8 +1378,8 @@ _08004CC6:
 	bx r1
 
     .thumb
-    .global seq_update
-seq_update: @ 0x08004D00
+    .global audio_asmprocess
+audio_asmprocess: @ 0x08004D00
 	push {r4, r5, r6, r7, lr}
 	mov r3, r8
 	mov r4, sb
