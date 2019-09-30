@@ -42,7 +42,9 @@ CC1			:= $(WINE) tools/agbcc/bin/agbcc.exe
 CFLAGS 		:= -O2 -mthumb-interwork -fhex-asm
 CPPFLAGS 	:= -iquote include -Wno-trigraphs
 
-LDFLAGS = -Map ../$(MAP)
+LIBC   := tools/agbcc/lib/libc.a
+LIBGCC := tools/agbcc/lib/libgcc.a
+LDFLAGS = -L../tools/agbcc/lib -lgcc -lc
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 FIX := tools/gbafix/gbafix$(EXE)
@@ -97,7 +99,7 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 
 
 $(ELF): $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../ld_script.ld -o ../$@ $(OBJS_REL)
+	cd $(OBJ_DIR) && $(LD) -Map ../$(MAP) -T ../ld_script.ld -o ../$@ $(LDFLAGS) $(OBJS_REL)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@

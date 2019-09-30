@@ -15,7 +15,7 @@ int AgbMain()
         UpdateGame();
         Debug_SetAfterGameUpdate(REG_VCOUNT & 0xFF);
         SyncVblank();
-        thunk_r0(gNullsub_5);
+        _call_via_r0(gNullsub_5);
         UpdateVideo();
         Debug_SetAfterVideoUpdate(REG_VCOUNT & 0xFF);
         SkipVblank();
@@ -44,7 +44,7 @@ void UpdateGame(void)
     else
         ReadKeysEx(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
-    thunk_r0(gNullsub_3);
+    _call_via_r0(gNullsub_3);
     sub_806127C();
 
     if (word_203F998 == 12 && byte_20021F8 && !(gPlayerStateSettings[gPlayerState] & 0x800))
@@ -211,7 +211,7 @@ void UpdateGame(void)
     sub_8061F80();
     sub_8064234();
     sub_80473BC();
-    thunk_r0(gNullsub_4);
+    _call_via_r0(gNullsub_4);
     if (!gIsSlideMiniGame && gPlayerState != 101)
     {
         sub_8009D2C();

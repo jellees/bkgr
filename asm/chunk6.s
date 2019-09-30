@@ -23948,7 +23948,7 @@ _080342DE:
 	ldr r2, [r0]
 	adds r0, r3, #0
 	adds r1, r4, #0
-	bl thunk_r2
+	bl _call_via_r2
 _080342EE:
 	pop {r4}
 	pop {r1}
@@ -23964,7 +23964,7 @@ sub_80342F8: @ 0x080342F8
 	lsls r2, r0, #2
 	adds r2, r2, r3
 	ldr r2, [r2]
-	bl thunk_r2
+	bl _call_via_r2
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -24025,7 +24025,7 @@ _0803436C:
 	adds r0, r0, r1
 	ldr r1, [r0]
 	mov r0, sp
-	bl thunk_r1
+	bl _call_via_r1
 	add sp, #0x14
 	pop {r4}
 	pop {r1}
@@ -24079,7 +24079,7 @@ _080343D4:
 	adds r0, r0, r1
 	ldr r1, [r0]
 	mov r0, sp
-	bl thunk_r1
+	bl _call_via_r1
 	add sp, #0x14
 	pop {r4}
 	pop {r1}
@@ -24137,7 +24137,7 @@ _08034444:
 	adds r0, r0, r1
 	ldr r1, [r0]
 	mov r0, sp
-	bl thunk_r1
+	bl _call_via_r1
 	add sp, #0x14
 	pop {r4}
 	pop {r1}
@@ -49654,7 +49654,7 @@ _08040890:
 	adds r4, r4, r0
 	ldr r4, [r4]
 	adds r0, r5, #0
-	bl thunk_r4
+	bl _call_via_r4
 	cmp r0, #2
 	bne _080408CE
 	mov r0, sb

@@ -22,7 +22,7 @@ _0801A4A6:
 	ldr r2, [r1]
 	adds r0, r3, #0
 	adds r1, r4, #0
-	bl thunk_r2
+	bl _call_via_r2
 	pop {r4}
 	pop {r0}
 	bx r0

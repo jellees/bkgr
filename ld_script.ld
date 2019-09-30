@@ -278,6 +278,8 @@ SECTIONS
 		asm/chunk7.o(.text);
 		asm/pause_menu.o(.text);
 		asm/chunk8.o(.text);
+		*libgcc.a:*_call_via_rX*.o(.text*);
+		asm/chunk_end.o(.text);
 
 		/* data */
 		asm/data_paletteBytes.o(.text);

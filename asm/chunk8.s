@@ -3714,7 +3714,7 @@ _08048D5E:
 	ldr r2, [r0]
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl thunk_r2
+	bl _call_via_r2
 _08048DAA:
 	adds r1, r5, #0
 	adds r1, #0x68
@@ -3735,7 +3735,7 @@ _08048DAA:
 	ldr r2, [r0]
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl thunk_r2
+	bl _call_via_r2
 	b _08048DF8
 	.align 2, 0
 _08048DD8: .4byte 0x0203F8B0
@@ -5341,7 +5341,7 @@ sub_80499A8: @ 0x080499A8
 	ldr r1, [r0]
 	ldr r4, [r2]
 	adds r2, r5, #0
-	bl thunk_r4
+	bl _call_via_r4
 	pop {r4, r5}
 	pop {r0}
 	bx r0
@@ -5443,7 +5443,7 @@ sub_8049A68: @ 0x08049A68
 	lsls r2, r2, #4
 	adds r2, r2, r3
 	ldr r2, [r2]
-	bl thunk_r2
+	bl _call_via_r2
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -45072,7 +45072,7 @@ _0805DE00:
 	adds r1, r2, #0
 	adds r2, r3, #0
 	adds r3, r6, #0
-	bl thunk_r4
+	bl _call_via_r4
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _0805DE70
@@ -45178,7 +45178,7 @@ _0805DEEC:
 	adds r1, r2, #0
 	adds r2, r3, #0
 	adds r3, r6, #0
-	bl thunk_r4
+	bl _call_via_r4
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _0805DF40
@@ -55352,7 +55352,7 @@ _080631D2:
 	ldr r0, [r4, #0x10]
 	cmp r0, #0
 	beq _080631F2
-	bl thunk_r0
+	bl _call_via_r0
 	str r5, [r4, #0x10]
 _080631F2:
 	ldr r1, _08063210
@@ -57994,40 +57994,40 @@ _080647EE:
 	bx r1
 	.align 2, 0
 
-    .thumb
-    .global thunk_r0
-thunk_r0: @ 0x080647F8
-	bx r0
-	nop
+//     .thumb
+//     .global _call_via_r0
+// _call_via_r0: @ 0x080647F8
+// 	bx r0
+// 	nop
 
-    .thumb
-    .global thunk_r1
-thunk_r1: @ 0x080647FC
-	bx r1
-	nop
+//     .thumb
+//     .global _call_via_r1
+// _call_via_r1: @ 0x080647FC
+// 	bx r1
+// 	nop
 
-    .thumb
-    .global thunk_r2
-thunk_r2: @ 0x08064800
-	bx r2
+//     .thumb
+//     .global _call_via_r2
+// _call_via_r2: @ 0x08064800
+// 	bx r2
 
-#thunk_r3
-	.byte 0xC0, 0x46, 0x18, 0x47, 0xC0, 0x46
+// #thunk_r3
+// 	.byte 0xC0, 0x46, 0x18, 0x47, 0xC0, 0x46
 
-    .thumb
-    .global thunk_r4
-thunk_r4: @ 0x08064808
-	bx r4
+//     .thumb
+//     .global _call_via_r4
+// _call_via_r4: @ 0x08064808
+// 	bx r4
 	
-# all other thunks up to r14
-	.byte 0xC0, 0x46, 0x28, 0x47, 0xC0, 0x46
-	.byte 0x30, 0x47, 0xC0, 0x46, 0x38, 0x47, 0xC0, 0x46, 0x40, 0x47, 0xC0, 0x46, 0x48, 0x47, 0xC0, 0x46
-	.byte 0x50, 0x47, 0xC0, 0x46, 0x58, 0x47, 0xC0, 0x46, 0x60, 0x47, 0xC0, 0x46, 0x68, 0x47, 0xC0, 0x46
-	.byte 0x70, 0x47, 0xC0, 0x46
+// # all other thunks up to r14
+// 	.byte 0xC0, 0x46, 0x28, 0x47, 0xC0, 0x46
+// 	.byte 0x30, 0x47, 0xC0, 0x46, 0x38, 0x47, 0xC0, 0x46, 0x40, 0x47, 0xC0, 0x46, 0x48, 0x47, 0xC0, 0x46
+// 	.byte 0x50, 0x47, 0xC0, 0x46, 0x58, 0x47, 0xC0, 0x46, 0x60, 0x47, 0xC0, 0x46, 0x68, 0x47, 0xC0, 0x46
+// 	.byte 0x70, 0x47, 0xC0, 0x46
 
-    .thumb
-sub_8064834: @ 0x08064834
-	bx pc
-	nop 
-	.arm
-	b sub_800393C
+//     .thumb
+// sub_8064834: @ 0x08064834
+// 	bx pc
+// 	nop 
+// 	.arm
+// 	b sub_800393C
