@@ -3,32 +3,32 @@
 
     .text
 
-    .thumb
-    .global UpdatePlayerBehavior
-UpdatePlayerBehavior: @ 0x0801A494
-	push {r4, lr}
-	adds r3, r0, #0
-	adds r4, r1, #0
-	ldr r1, _0801A4C0
-	ldrh r0, [r1]
-	cmp r0, #0x7f
-	bls _0801A4A6
-	.2byte 0xEE00, 0xEE00
-_0801A4A6:
-	ldr r0, _0801A4C4
-	ldrh r1, [r1]
-	lsls r1, r1, #2
-	adds r1, r1, r0
-	ldr r2, [r1]
-	adds r0, r3, #0
-	adds r1, r4, #0
-	bl _call_via_r2
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801A4C0: .4byte gPlayerState
-_0801A4C4: .4byte 0x08064F04
+//     .thumb
+//     .global UpdatePlayerBehavior
+// UpdatePlayerBehavior: @ 0x0801A494
+// 	push {r4, lr}
+// 	adds r3, r0, #0
+// 	adds r4, r1, #0
+// 	ldr r1, _0801A4C0
+// 	ldrh r0, [r1]
+// 	cmp r0, #0x7f
+// 	bls _0801A4A6
+// 	.2byte 0xEE00, 0xEE00
+// _0801A4A6:
+// 	ldr r0, _0801A4C4
+// 	ldrh r1, [r1]
+// 	lsls r1, r1, #2
+// 	adds r1, r1, r0
+// 	ldr r2, [r1]
+// 	adds r0, r3, #0
+// 	adds r1, r4, #0
+// 	bl _call_via_r2
+// 	pop {r4}
+// 	pop {r0}
+// 	bx r0
+// 	.align 2, 0
+// _0801A4C0: .4byte gPlayerState
+// _0801A4C4: .4byte 0x08064F04
 
 	.thumb
 nullsub_16: @ 0x0801A4C8

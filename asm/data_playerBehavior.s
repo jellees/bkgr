@@ -3,6 +3,9 @@
 
     @ Pointers to player behavior functions (state machine).
     @ 08064F04
+
+    .global dPlayerBehaviors
+dPlayerBehaviors:
     .4byte 0x0801a929, 0x0801a4cd, 0x0801b1d1, 0x0801c8a1
     .4byte 0x0801abfd, 0x0801ca7d, 0x0801d811, 0x0801b08d
     .4byte 0x0801b0fd, 0x080207a9, 0x0801b4c9, 0x0801bc19
