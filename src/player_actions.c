@@ -10,3 +10,5 @@ void UpdatePlayerBehavior(u32 keyPressed, u32 keyDown)
 
     _call_via_r2(keyPressed, keyDown, dPlayerBehaviors[gPlayerState]);
 }
+
+void nullsub_16(u32 keyPressed, u32 keyDown) {}
