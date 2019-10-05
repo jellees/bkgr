@@ -31,13 +31,13 @@ _0801A700:
 	beq _0801A716
 	b _0801A71C
 _0801A70A:
-	bl sub_8017F74
+	bl DoFeatheryFlap
 	b _0801A8CA
 _0801A710:
-	bl sub_801801C
+	bl DoAirAttack
 	b _0801A8CA
 _0801A716:
-	bl sub_80180E0
+	bl DoBillDrill
 	b _0801A8CA
 _0801A71C:
 	ldr r1, [sp]
@@ -290,13 +290,13 @@ _0801A908:
 	beq _0801A91E
 	b _0801A922
 _0801A912:
-	bl sub_8017F74
+	bl DoFeatheryFlap
 	b _0801A922
 _0801A918:
-	bl sub_801801C
+	bl DoAirAttack
 	b _0801A922
 _0801A91E:
-	bl sub_80180E0
+	bl DoBillDrill
 _0801A922:
 	add sp, #8
 	pop {r0}
@@ -2584,7 +2584,7 @@ sub_801BC18: @ 0x0801BC18
 	ands r0, r1
 	cmp r0, #2
 	bne _0801BC44
-	bl sub_801801C
+	bl DoAirAttack
 	b _0801BDEE
 	.align 2, 0
 _0801BC40: .4byte 0x0000030F
@@ -2830,7 +2830,7 @@ sub_801BE04: @ 0x0801BE04
 	ands r0, r1
 	cmp r0, #2
 	bne _0801BE28
-	bl sub_801801C
+	bl DoAirAttack
 	b _0801BFD6
 	.align 2, 0
 _0801BE24: .4byte 0x0000030F
@@ -3187,7 +3187,7 @@ sub_801C0FC: @ 0x0801C0FC
 	ands r0, r1
 	cmp r0, #2
 	bne _0801C11A
-	bl sub_801801C
+	bl DoAirAttack
 _0801C11A:
 	add sp, #8
 	pop {r0}
@@ -3211,7 +3211,7 @@ sub_801C124: @ 0x0801C124
 	lsls r1, r1, #2
 	cmp r0, r1
 	bne _0801C14C
-	bl sub_80180E0
+	bl DoBillDrill
 	b _0801C172
 	.align 2, 0
 _0801C148: .4byte 0x0000030F
@@ -3259,7 +3259,7 @@ sub_801C188: @ 0x0801C188
 	lsls r1, r1, #2
 	cmp r0, r1
 	bne _0801C1B0
-	bl sub_80180E0
+	bl DoBillDrill
 	b _0801C354
 	.align 2, 0
 _0801C1AC: .4byte 0x0000030F
@@ -3510,7 +3510,7 @@ _0801C39C:
 	lsls r1, r1, #2
 	cmp r0, r1
 	bne _0801C3B4
-	bl sub_80180E0
+	bl DoBillDrill
 	b _0801C522
 	.align 2, 0
 _0801C3B0: .4byte 0x0000030F
@@ -5803,13 +5803,13 @@ _0801D63C:
 	beq _0801D652
 	b _0801D658
 _0801D646:
-	bl sub_8017F74
+	bl DoFeatheryFlap
 	b _0801D7FA
 _0801D64C:
-	bl sub_801801C
+	bl DoAirAttack
 	b _0801D7FA
 _0801D652:
-	bl sub_80180E0
+	bl DoBillDrill
 	b _0801D7FA
 _0801D658:
 	ldr r1, [sp]

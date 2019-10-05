@@ -3,7 +3,11 @@
 
 extern u16 gPlayerState;
 extern u32 dword_2000FC8;
+extern u16 word_2002090;
+extern struct Sprite gPlayerSprite;
+
 extern void (*dPlayerBehaviors[1])(u32, u32);
+extern u32 dword_80CC290[8];
 
 void UpdatePlayerBehavior(u32 keyPressed, u32 keyDown)
 {
@@ -15,11 +19,7 @@ void UpdatePlayerBehavior(u32 keyPressed, u32 keyDown)
 
 void nullsub_16(u32 keyPressed, u32 keyDown) {}
 
-extern u16 word_2002090;
-extern struct Sprite gPlayerSprite;
-extern u32 dword_80CC290[8];
-
-void sub_801A4CC(u32 keyPressed, u32 keyDown)
+static void Jump(u32 keyPressed, u32 keyDown)
 {
     s32 pressed = keyPressed;
     s32 down = keyDown;
@@ -29,9 +29,9 @@ void sub_801A4CC(u32 keyPressed, u32 keyDown)
 
     switch (down & JOY_EXCL_DPAD)
     {
-    case A_BUTTON: sub_8017F74(); return;
-    case B_BUTTON: sub_801801C(); return;
-    case L_BUTTON: sub_80180E0(); return;
+    case A_BUTTON: DoFeatheryFlap(); return;
+    case B_BUTTON: DoAirAttack(); return;
+    case L_BUTTON: DoBillDrill(); return;
     }
 
     if (sub_80038BC(dword_2000FC8) << 0x18)

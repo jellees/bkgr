@@ -14475,8 +14475,8 @@ _08017F6C: .4byte dword_2000FC8
 _08017F70: .4byte dword_80CC290
 
     .thumb
-	.global sub_8017F74
-sub_8017F74: @ 0x08017F74
+	.global DoFeatheryFlap
+DoFeatheryFlap: @ 0x08017F74
 	push {r4, r5, lr}
 	ldr r0, _08017FF4
 	ldrb r0, [r0, #0x13]
@@ -14552,8 +14552,8 @@ _08018014: .4byte 0x080CE440
 _08018018: .4byte byte_203EA8C
 
     .thumb
-	.global sub_801801C
-sub_801801C: @ 0x0801801C
+	.global DoAirAttack
+DoAirAttack: @ 0x0801801C
 	push {r4, r5, lr}
 	ldr r0, _08018094
 	ldrb r0, [r0, #3]
@@ -14641,8 +14641,8 @@ _080180D4:
 _080180DC: .4byte gPlayerSprite
 
     .thumb
-	.global sub_80180E0
-sub_80180E0: @ 0x080180E0
+	.global DoBillDrill
+DoBillDrill: @ 0x080180E0
 	push {r4, r5, r6, lr}
 	ldr r0, _0801816C
 	ldrb r0, [r0, #4]
