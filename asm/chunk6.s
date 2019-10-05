@@ -8670,7 +8670,7 @@ _0802C188: .4byte byte_203EA89
 _0802C18C: .4byte byte_203EA8C
 _0802C190: .4byte 0x00000632
 _0802C194: .4byte 0x080CEA74
-_0802C198: .4byte 0x080CC290
+_0802C198: .4byte dword_80CC290
 _0802C19C: .4byte gPlayerSprite
 _0802C1A0: .4byte 0x00000105
 _0802C1A4:
@@ -8853,7 +8853,7 @@ _0802C300: .4byte 0x03003308
 _0802C304: .4byte 0x0203DFD5
 _0802C308: .4byte 0x0203E004
 _0802C30C: .4byte 0x080CC938
-_0802C310: .4byte 0x080CC290
+_0802C310: .4byte dword_80CC290
 _0802C314: .4byte gPlayerSprite
 _0802C318: .4byte 0x00000105
 _0802C31C:
@@ -9495,7 +9495,7 @@ _0802C820:
 	bl sub_8003874
 	b _0802C870
 	.align 2, 0
-_0802C844: .4byte 0x080CC290
+_0802C844: .4byte dword_80CC290
 _0802C848:
 	ldrh r0, [r4]
 	movs r1, #0xc0
@@ -9509,7 +9509,7 @@ _0802C848:
 	bl sub_8003884
 	b _0802C870
 	.align 2, 0
-_0802C860: .4byte 0x080CC290
+_0802C860: .4byte dword_80CC290
 _0802C864:
 	ldrh r0, [r4]
 	movs r1, #0x80
@@ -9887,7 +9887,7 @@ _0802CAFE:
 	b _0802CC0C
 	.align 2, 0
 _0802CB54: .4byte 0x03002A4C
-_0802CB58: .4byte 0x080CC290
+_0802CB58: .4byte dword_80CC290
 _0802CB5C:
 	mov r0, sl
 	adds r0, #0xe4
@@ -10250,7 +10250,7 @@ _0802CE22:
 	strb r0, [r1]
 	b _0802CE4C
 	.align 2, 0
-_0802CE2C: .4byte 0x080CC290
+_0802CE2C: .4byte dword_80CC290
 _0802CE30: .4byte 0x0203DFD3
 _0802CE34: .4byte gMapPixelSizeY
 _0802CE38: .4byte 0x080CCFFC
@@ -11487,7 +11487,7 @@ _0802D824: .4byte 0x0000FFFF
 _0802D828: .4byte 0x080CC844
 _0802D82C: .4byte gRoomHeader
 _0802D830: .4byte 0x080CC818
-_0802D834: .4byte 0x080CC290
+_0802D834: .4byte dword_80CC290
 _0802D838: .4byte gCameraPixelX
 _0802D83C: .4byte gCameraPixelY
 _0802D840:
@@ -12292,7 +12292,7 @@ _0802DE10:
 	b _0802DF06
 	.align 2, 0
 _0802DE88: .4byte 0x080CC938
-_0802DE8C: .4byte 0x080CC290
+_0802DE8C: .4byte dword_80CC290
 _0802DE90: .4byte gPlayerSprite
 _0802DE94: .4byte byte_203EA89
 _0802DE98: .4byte 0x080CE440
@@ -40358,7 +40358,7 @@ sub_803C020: @ 0x0803C020
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803C038: .4byte 0x02002090
+_0803C038: .4byte word_2002090
 _0803C03C: .4byte gPlayerState
 
 	.thumb

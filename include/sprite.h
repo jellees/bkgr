@@ -4,7 +4,28 @@
 #include "gba/gba.h"
 
 struct Sprite {
-    u8 data[0x1C];
+    u16 index;
+    u8 curFrame;
+    u8 frameCount;
+    u8 priority;
+    u8 animSpeed;
+    u16 xPos;
+    u8 yPos;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    u16 attr2;
+    u8 field_E;
+    u8 field_F;
+    u8 field_10;
+    u8 field_11;
+    u8 field_12;
+    u8 field_13;
+    u8 bank;
+    u8 field_15;
+    u8 field_16;
+    u8 field_17;
+    u32* spriteFrames;
 };
 
 struct Letter {

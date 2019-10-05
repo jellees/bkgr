@@ -3,273 +3,6 @@
 
     .text
 
-    .thumb
-sub_801A4CC: @ 0x0801A4CC
-	push {r4, r5, lr}
-	sub sp, #8
-	str r0, [sp]
-	str r1, [sp, #4]
-	add r1, sp, #4
-	mov r0, sp
-	bl sub_8016710
-	ldr r0, [sp]
-	ldr r1, [sp, #4]
-	bl sub_8016624
-	ldr r1, [sp, #4]
-	ldr r0, _0801A4F8
-	ands r1, r0
-	cmp r1, #2
-	beq _0801A50C
-	cmp r1, #2
-	bgt _0801A4FC
-	cmp r1, #1
-	beq _0801A506
-	b _0801A518
-	.align 2, 0
-_0801A4F8: .4byte 0x0000030F
-_0801A4FC:
-	movs r0, #0x80
-	lsls r0, r0, #2
-	cmp r1, r0
-	beq _0801A512
-	b _0801A518
-_0801A506:
-	bl sub_8017F74
-	b _0801A6C2
-_0801A50C:
-	bl sub_801801C
-	b _0801A6C2
-_0801A512:
-	bl sub_80180E0
-	b _0801A6C2
-_0801A518:
-	ldr r5, _0801A560
-	ldr r0, [r5]
-	bl sub_80038BC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	beq _0801A53E
-	ldr r2, _0801A564
-	ldr r1, _0801A568
-	ldrh r0, [r1]
-	strh r0, [r2]
-	movs r0, #0x12
-	strh r0, [r1]
-	ldr r0, _0801A56C
-	movs r1, #0x11
-	movs r2, #0
-	movs r3, #0
-	bl sub_8003368
-_0801A53E:
-	ldr r1, [sp]
-	movs r0, #0xf0
-	ands r1, r0
-	cmp r1, #0x50
-	beq _0801A58E
-	cmp r1, #0x50
-	bgt _0801A576
-	cmp r1, #0x20
-	bne _0801A552
-	b _0801A63C
-_0801A552:
-	cmp r1, #0x20
-	bgt _0801A570
-	cmp r1, #0x10
-	bne _0801A55C
-	b _0801A658
-_0801A55C:
-	b _0801A69C
-	.align 2, 0
-_0801A560: .4byte dword_2000FC8
-_0801A564: .4byte 0x02002090
-_0801A568: .4byte gPlayerState
-_0801A56C: .4byte gPlayerSprite
-_0801A570:
-	cmp r1, #0x40
-	beq _0801A604
-	b _0801A69C
-_0801A576:
-	cmp r1, #0x80
-	beq _0801A620
-	cmp r1, #0x80
-	bgt _0801A584
-	cmp r1, #0x60
-	beq _0801A5E8
-	b _0801A69C
-_0801A584:
-	cmp r1, #0x90
-	beq _0801A5AC
-	cmp r1, #0xa0
-	beq _0801A5CC
-	b _0801A69C
-_0801A58E:
-	ldr r4, _0801A5A8
-	ldrb r0, [r4, #0xa]
-	cmp r0, #1
-	bne _0801A5A4
-	ldr r0, [r5]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	beq _0801A5A4
-	b _0801A6C2
-_0801A5A4:
-	movs r0, #1
-	b _0801A66E
-	.align 2, 0
-_0801A5A8: .4byte gPlayerSprite
-_0801A5AC:
-	ldr r4, _0801A5C8
-	ldrb r0, [r4, #0xa]
-	cmp r0, #3
-	bne _0801A5C2
-	ldr r0, [r5]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	beq _0801A5C2
-	b _0801A6C2
-_0801A5C2:
-	movs r0, #3
-	b _0801A66E
-	.align 2, 0
-_0801A5C8: .4byte gPlayerSprite
-_0801A5CC:
-	ldr r4, _0801A5E4
-	ldrb r0, [r4, #0xa]
-	cmp r0, #5
-	bne _0801A5E0
-	ldr r0, [r5]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bne _0801A6C2
-_0801A5E0:
-	movs r0, #5
-	b _0801A66E
-	.align 2, 0
-_0801A5E4: .4byte gPlayerSprite
-_0801A5E8:
-	ldr r4, _0801A600
-	ldrb r0, [r4, #0xa]
-	cmp r0, #7
-	bne _0801A5FC
-	ldr r0, [r5]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bne _0801A6C2
-_0801A5FC:
-	movs r0, #7
-	b _0801A66E
-	.align 2, 0
-_0801A600: .4byte gPlayerSprite
-_0801A604:
-	ldr r4, _0801A61C
-	ldrb r0, [r4, #0xa]
-	cmp r0, #0
-	bne _0801A618
-	ldr r0, [r5]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bne _0801A6C2
-_0801A618:
-	movs r0, #0
-	b _0801A66E
-	.align 2, 0
-_0801A61C: .4byte gPlayerSprite
-_0801A620:
-	ldr r4, _0801A638
-	ldrb r0, [r4, #0xa]
-	cmp r0, #4
-	bne _0801A634
-	ldr r0, [r5]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bne _0801A6C2
-_0801A634:
-	movs r0, #4
-	b _0801A66E
-	.align 2, 0
-_0801A638: .4byte gPlayerSprite
-_0801A63C:
-	ldr r4, _0801A654
-	ldrb r0, [r4, #0xa]
-	cmp r0, #6
-	bne _0801A650
-	ldr r0, [r5]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bne _0801A6C2
-_0801A650:
-	movs r0, #6
-	b _0801A66E
-	.align 2, 0
-_0801A654: .4byte gPlayerSprite
-_0801A658:
-	ldr r4, _0801A694
-	ldrb r0, [r4, #0xa]
-	cmp r0, #2
-	bne _0801A66C
-	ldr r0, [r5]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bne _0801A6C2
-_0801A66C:
-	movs r0, #2
-_0801A66E:
-	strb r0, [r4, #0xa]
-	adds r0, r4, #0
-	movs r1, #9
-	movs r2, #0
-	movs r3, #1
-	bl sub_8003368
-	ldr r0, [r5]
-	movs r1, #0x98
-	lsls r1, r1, #9
-	ldr r3, _0801A698
-	ldrb r2, [r4, #0xa]
-	lsls r2, r2, #2
-	adds r2, r2, r3
-	ldr r2, [r2]
-	movs r3, #0
-	bl sub_8003884
-	b _0801A6C2
-	.align 2, 0
-_0801A694: .4byte gPlayerSprite
-_0801A698: .4byte 0x080CC290
-_0801A69C:
-	ldr r4, _0801A6CC
-	ldr r0, [r4]
-	bl sub_80038AC
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	beq _0801A6C2
-	ldr r0, [r4]
-	movs r1, #0xc0
-	lsls r1, r1, #6
-	ldr r3, _0801A6D0
-	ldr r2, _0801A6D4
-	ldrb r2, [r2, #0xa]
-	lsls r2, r2, #2
-	adds r2, r2, r3
-	ldr r2, [r2]
-	movs r3, #0
-	bl sub_8003884
-_0801A6C2:
-	add sp, #8
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801A6CC: .4byte dword_2000FC8
-_0801A6D0: .4byte 0x080CC290
-_0801A6D4: .4byte gPlayerSprite
-
 	.thumb
 sub_801A6D8: @ 0x0801A6D8
 	push {r4, lr}
@@ -500,7 +233,7 @@ _0801A870:
 	.align 2, 0
 _0801A898: .4byte gPlayerSprite
 _0801A89C: .4byte dword_2000FC8
-_0801A8A0: .4byte 0x080CC290
+_0801A8A0: .4byte dword_80CC290
 _0801A8A4:
 	ldr r4, _0801A8D4
 	ldr r0, [r4]
@@ -526,7 +259,7 @@ _0801A8CA:
 	bx r0
 	.align 2, 0
 _0801A8D4: .4byte dword_2000FC8
-_0801A8D8: .4byte 0x080CC290
+_0801A8D8: .4byte dword_80CC290
 _0801A8DC: .4byte gPlayerSprite
 
 	.thumb
@@ -606,7 +339,7 @@ PB_Idle: @ 0x0801A928
 	b _0801AB8E
 	.align 2, 0
 _0801A970: .4byte 0x0000030F
-_0801A974: .4byte 0x02002090
+_0801A974: .4byte word_2002090
 _0801A978: .4byte gPlayerState
 _0801A97C: .4byte gPlayerSprite
 _0801A980:
@@ -692,7 +425,7 @@ _0801A9EA:
 	lsls r2, r2, #0xe
 	b _0801AB88
 	.align 2, 0
-_0801AA14: .4byte 0x02002090
+_0801AA14: .4byte word_2002090
 _0801AA18: .4byte gPlayerState
 _0801AA1C: .4byte gPlayerSprite
 _0801AA20: .4byte dword_2000FC8
@@ -718,7 +451,7 @@ _0801AA28:
 	ldr r2, _0801AA64
 	b _0801AB88
 	.align 2, 0
-_0801AA50: .4byte 0x02002090
+_0801AA50: .4byte word_2002090
 _0801AA54: .4byte gPlayerState
 _0801AA58: .4byte gPlayerSprite
 _0801AA5C: .4byte dword_2000FC8
@@ -746,7 +479,7 @@ _0801AA68:
 	lsls r2, r2, #0x10
 	b _0801AB88
 	.align 2, 0
-_0801AA94: .4byte 0x02002090
+_0801AA94: .4byte word_2002090
 _0801AA98: .4byte gPlayerState
 _0801AA9C: .4byte gPlayerSprite
 _0801AAA0: .4byte dword_2000FC8
@@ -773,7 +506,7 @@ _0801AAA8:
 	lsls r2, r2, #0x10
 	b _0801AB88
 	.align 2, 0
-_0801AAD4: .4byte 0x02002090
+_0801AAD4: .4byte word_2002090
 _0801AAD8: .4byte gPlayerState
 _0801AADC: .4byte gPlayerSprite
 _0801AAE0: .4byte dword_2000FC8
@@ -799,7 +532,7 @@ _0801AAE8:
 	lsls r2, r2, #0xf
 	b _0801AB88
 	.align 2, 0
-_0801AB10: .4byte 0x02002090
+_0801AB10: .4byte word_2002090
 _0801AB14: .4byte gPlayerState
 _0801AB18: .4byte gPlayerSprite
 _0801AB1C: .4byte dword_2000FC8
@@ -825,7 +558,7 @@ _0801AB24:
 	lsls r2, r2, #0x11
 	b _0801AB88
 	.align 2, 0
-_0801AB4C: .4byte 0x02002090
+_0801AB4C: .4byte word_2002090
 _0801AB50: .4byte gPlayerState
 _0801AB54: .4byte gPlayerSprite
 _0801AB58: .4byte dword_2000FC8
@@ -859,7 +592,7 @@ _0801AB8E:
 	bl sub_8016790
 	b _0801ABE0
 	.align 2, 0
-_0801AB98: .4byte 0x02002090
+_0801AB98: .4byte word_2002090
 _0801AB9C: .4byte gPlayerState
 _0801ABA0: .4byte gPlayerSprite
 _0801ABA4: .4byte dword_2000FC8
@@ -894,7 +627,7 @@ _0801ABE0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801ABE8: .4byte 0x02002090
+_0801ABE8: .4byte word_2002090
 _0801ABEC: .4byte gPlayerState
 _0801ABF0: .4byte gPlayerSprite
 _0801ABF4: .4byte dword_2000FC8
@@ -993,11 +726,11 @@ _0801ACA6:
 	b _0801AFD4
 	.align 2, 0
 _0801ACB0: .4byte 0x0200209A
-_0801ACB4: .4byte 0x02002090
+_0801ACB4: .4byte word_2002090
 _0801ACB8: .4byte gPlayerState
 _0801ACBC: .4byte gPlayerSprite
 _0801ACC0: .4byte dword_2000FC8
-_0801ACC4: .4byte 0x080CC290
+_0801ACC4: .4byte dword_80CC290
 _0801ACC8: .4byte byte_203EA89
 _0801ACCC: .4byte 0x080CE440
 _0801ACD0: .4byte byte_203EA8C
@@ -1029,11 +762,11 @@ _0801ACDA:
 	bl sub_8003884
 	b _0801AF7E
 	.align 2, 0
-_0801AD0C: .4byte 0x02002090
+_0801AD0C: .4byte word_2002090
 _0801AD10: .4byte gPlayerState
 _0801AD14: .4byte gPlayerSprite
 _0801AD18: .4byte dword_2000FC8
-_0801AD1C: .4byte 0x080CC290
+_0801AD1C: .4byte dword_80CC290
 _0801AD20:
 	ldr r1, [sp]
 	movs r0, #0xf0
@@ -1102,7 +835,7 @@ _0801AD78:
 	lsls r2, r2, #0xe
 	b _0801AF78
 	.align 2, 0
-_0801AD94: .4byte 0x02002090
+_0801AD94: .4byte word_2002090
 _0801AD98: .4byte gPlayerState
 _0801AD9C: .4byte gPlayerSprite
 _0801ADA0: .4byte dword_2000FC8
@@ -1133,7 +866,7 @@ _0801ADBE:
 	ldr r2, _0801ADEC
 	b _0801AF78
 	.align 2, 0
-_0801ADD8: .4byte 0x02002090
+_0801ADD8: .4byte word_2002090
 _0801ADDC: .4byte gPlayerState
 _0801ADE0: .4byte gPlayerSprite
 _0801ADE4: .4byte dword_2000FC8
@@ -1166,7 +899,7 @@ _0801AE06:
 	lsls r2, r2, #0x10
 	b _0801AF78
 	.align 2, 0
-_0801AE24: .4byte 0x02002090
+_0801AE24: .4byte word_2002090
 _0801AE28: .4byte gPlayerState
 _0801AE2C: .4byte gPlayerSprite
 _0801AE30: .4byte dword_2000FC8
@@ -1198,7 +931,7 @@ _0801AE4E:
 	lsls r2, r2, #0x10
 	b _0801AF78
 	.align 2, 0
-_0801AE6C: .4byte 0x02002090
+_0801AE6C: .4byte word_2002090
 _0801AE70: .4byte gPlayerState
 _0801AE74: .4byte gPlayerSprite
 _0801AE78: .4byte dword_2000FC8
@@ -1228,7 +961,7 @@ _0801AE80:
 	lsls r2, r2, #0xf
 	b _0801AF78
 	.align 2, 0
-_0801AEB0: .4byte 0x02002090
+_0801AEB0: .4byte word_2002090
 _0801AEB4: .4byte gPlayerState
 _0801AEB8: .4byte gPlayerSprite
 _0801AEBC: .4byte dword_2000FC8
@@ -1257,7 +990,7 @@ _0801AEC4:
 	lsls r2, r2, #0x11
 	b _0801AF78
 	.align 2, 0
-_0801AEF4: .4byte 0x02002090
+_0801AEF4: .4byte word_2002090
 _0801AEF8: .4byte gPlayerState
 _0801AEFC: .4byte gPlayerSprite
 _0801AF00: .4byte dword_2000FC8
@@ -1287,7 +1020,7 @@ _0801AF08:
 	lsls r2, r2, #0x10
 	b _0801AF78
 	.align 2, 0
-_0801AF38: .4byte 0x02002090
+_0801AF38: .4byte word_2002090
 _0801AF3C: .4byte gPlayerState
 _0801AF40: .4byte gPlayerSprite
 _0801AF44: .4byte dword_2000FC8
@@ -1323,7 +1056,7 @@ _0801AF7E:
 	bl sub_8016790
 	b _0801AFD4
 	.align 2, 0
-_0801AF88: .4byte 0x02002090
+_0801AF88: .4byte word_2002090
 _0801AF8C: .4byte gPlayerState
 _0801AF90: .4byte gPlayerSprite
 _0801AF94: .4byte dword_2000FC8
@@ -1360,11 +1093,11 @@ _0801AFD4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801AFDC: .4byte 0x02002090
+_0801AFDC: .4byte word_2002090
 _0801AFE0: .4byte gPlayerState
 _0801AFE4: .4byte gPlayerSprite
 _0801AFE8: .4byte dword_2000FC8
-_0801AFEC: .4byte 0x080CC290
+_0801AFEC: .4byte dword_80CC290
 
 	.thumb
 sub_801AFF0: @ 0x0801AFF0
@@ -1431,10 +1164,10 @@ _0801B06E:
 	bx r0
 	.align 2, 0
 _0801B078: .4byte gPlayerSprite
-_0801B07C: .4byte 0x02002090
+_0801B07C: .4byte word_2002090
 _0801B080: .4byte gPlayerState
 _0801B084: .4byte dword_2000FC8
-_0801B088: .4byte 0x080CC290
+_0801B088: .4byte dword_80CC290
 
 	.thumb
 sub_801B08C: @ 0x0801B08C
@@ -1481,10 +1214,10 @@ _0801B0E0:
 	bx r0
 	.align 2, 0
 _0801B0E8: .4byte gPlayerSprite
-_0801B0EC: .4byte 0x02002090
+_0801B0EC: .4byte word_2002090
 _0801B0F0: .4byte gPlayerState
 _0801B0F4: .4byte dword_2000FC8
-_0801B0F8: .4byte 0x080CC290
+_0801B0F8: .4byte dword_80CC290
 
 	.thumb
 sub_801B0FC: @ 0x0801B0FC
@@ -1541,7 +1274,7 @@ _0801B160:
 	bx r0
 	.align 2, 0
 _0801B168: .4byte gPlayerSprite
-_0801B16C: .4byte 0x02002090
+_0801B16C: .4byte word_2002090
 _0801B170: .4byte gPlayerState
 _0801B174: .4byte byte_203EA89
 _0801B178: .4byte 0x080CE440
@@ -1582,7 +1315,7 @@ _0801B1BC:
 	bx r0
 	.align 2, 0
 _0801B1C4: .4byte gPlayerSprite
-_0801B1C8: .4byte 0x02002090
+_0801B1C8: .4byte word_2002090
 _0801B1CC: .4byte gPlayerState
 
     .thumb
@@ -1722,7 +1455,7 @@ _0801B2C4:
 _0801B2D4: .4byte 0x0200209A
 _0801B2D8: .4byte 0x03003588
 _0801B2DC: .4byte 0x030028FC
-_0801B2E0: .4byte 0x02002090
+_0801B2E0: .4byte word_2002090
 _0801B2E4: .4byte gPlayerState
 _0801B2E8: .4byte gPlayerSprite
 _0801B2EC: .4byte dword_2000FC8
@@ -1772,7 +1505,7 @@ _0801B32C:
 	bl audio_new_fx
 	b _0801B486
 	.align 2, 0
-_0801B354: .4byte 0x02002090
+_0801B354: .4byte word_2002090
 _0801B358: .4byte gPlayerState
 _0801B35C: .4byte 0x00000109
 _0801B360: .4byte byte_203EA89
@@ -1824,7 +1557,7 @@ _0801B3BA:
 	b _0801B4B4
 	.align 2, 0
 _0801B3C4: .4byte 0x0200209A
-_0801B3C8: .4byte 0x02002090
+_0801B3C8: .4byte word_2002090
 _0801B3CC: .4byte gPlayerState
 _0801B3D0: .4byte byte_203EA89
 _0801B3D4: .4byte 0x080CE440
@@ -1947,7 +1680,7 @@ _0801B4B4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801B4BC: .4byte 0x02002090
+_0801B4BC: .4byte word_2002090
 _0801B4C0: .4byte gPlayerState
 _0801B4C4: .4byte gPlayerSprite
 
@@ -2039,10 +1772,10 @@ _0801B56A:
 	bl sub_8016790
 	b _0801B7F0
 	.align 2, 0
-_0801B578: .4byte 0x02002090
+_0801B578: .4byte word_2002090
 _0801B57C: .4byte gPlayerState
 _0801B580: .4byte dword_2000FC8
-_0801B584: .4byte 0x080CC290
+_0801B584: .4byte dword_80CC290
 _0801B588: .4byte dword_20020B8
 _0801B58C: .4byte byte_203EA89
 _0801B590: .4byte gPlayerSprite
@@ -2353,11 +2086,11 @@ _0801B7F0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801B7F8: .4byte 0x02002090
+_0801B7F8: .4byte word_2002090
 _0801B7FC: .4byte gPlayerState
 _0801B800: .4byte gPlayerSprite
 _0801B804: .4byte dword_2000FC8
-_0801B808: .4byte 0x080CC290
+_0801B808: .4byte dword_80CC290
 _0801B80C: .4byte dword_20020B8
 _0801B810: .4byte byte_203EA89
 
@@ -2458,10 +2191,10 @@ _0801B8CA:
 	bl sub_8016790
 	b _0801BBFA
 	.align 2, 0
-_0801B8D8: .4byte 0x02002090
+_0801B8D8: .4byte word_2002090
 _0801B8DC: .4byte gPlayerState
 _0801B8E0: .4byte dword_2000FC8
-_0801B8E4: .4byte 0x080CC290
+_0801B8E4: .4byte dword_80CC290
 _0801B8E8: .4byte dword_20020B8
 _0801B8EC: .4byte byte_203EA89
 _0801B8F0: .4byte gPlayerSprite
@@ -2542,7 +2275,7 @@ _0801B96C:
 _0801B978:
 	b _0801BBAC
 	.align 2, 0
-_0801B97C: .4byte 0x02002090
+_0801B97C: .4byte word_2002090
 _0801B980: .4byte gPlayerState
 _0801B984: .4byte dword_2000FC8
 _0801B988: .4byte dword_20020B8
@@ -2571,7 +2304,7 @@ _0801B990:
 	ldr r2, _0801B9CC
 	b _0801B958
 	.align 2, 0
-_0801B9C0: .4byte 0x02002090
+_0801B9C0: .4byte word_2002090
 _0801B9C4: .4byte gPlayerState
 _0801B9C8: .4byte dword_2000FC8
 _0801B9CC: .4byte 0x013B0000
@@ -2600,7 +2333,7 @@ _0801B9D0:
 	lsls r2, r2, #0x10
 	b _0801B958
 	.align 2, 0
-_0801BA04: .4byte 0x02002090
+_0801BA04: .4byte word_2002090
 _0801BA08: .4byte gPlayerState
 _0801BA0C: .4byte dword_2000FC8
 _0801BA10:
@@ -2628,7 +2361,7 @@ _0801BA10:
 	lsls r2, r2, #0x10
 	b _0801B958
 	.align 2, 0
-_0801BA44: .4byte 0x02002090
+_0801BA44: .4byte word_2002090
 _0801BA48: .4byte gPlayerState
 _0801BA4C: .4byte dword_2000FC8
 _0801BA50:
@@ -2657,7 +2390,7 @@ _0801BA50:
 	lsls r2, r2, #0xf
 	b _0801B958
 	.align 2, 0
-_0801BA84: .4byte 0x02002090
+_0801BA84: .4byte word_2002090
 _0801BA88: .4byte gPlayerState
 _0801BA8C: .4byte gPlayerSprite
 _0801BA90: .4byte dword_2000FC8
@@ -2686,7 +2419,7 @@ _0801BA94:
 	lsls r2, r2, #0x11
 	b _0801B958
 	.align 2, 0
-_0801BAC8: .4byte 0x02002090
+_0801BAC8: .4byte word_2002090
 _0801BACC: .4byte gPlayerState
 _0801BAD0: .4byte dword_2000FC8
 _0801BAD4:
@@ -2715,7 +2448,7 @@ _0801BAD4:
 	lsls r2, r2, #0x10
 	b _0801B958
 	.align 2, 0
-_0801BB08: .4byte 0x02002090
+_0801BB08: .4byte word_2002090
 _0801BB0C: .4byte gPlayerState
 _0801BB10: .4byte gPlayerSprite
 _0801BB14: .4byte dword_2000FC8
@@ -2775,7 +2508,7 @@ _0801BB64:
 	bl audio_new_fx
 	b _0801BBAE
 	.align 2, 0
-_0801BB8C: .4byte 0x02002090
+_0801BB8C: .4byte word_2002090
 _0801BB90: .4byte gPlayerState
 _0801BB94: .4byte gPlayerSprite
 _0801BB98: .4byte dword_2000FC8
@@ -2829,10 +2562,10 @@ _0801BBFA:
 	bx r0
 	.align 2, 0
 _0801BC04: .4byte gPlayerState
-_0801BC08: .4byte 0x02002090
+_0801BC08: .4byte word_2002090
 _0801BC0C: .4byte gPlayerSprite
 _0801BC10: .4byte dword_2000FC8
-_0801BC14: .4byte 0x080CC290
+_0801BC14: .4byte dword_80CC290
 
 	.thumb
 sub_801BC18: @ 0x0801BC18
@@ -2894,7 +2627,7 @@ _0801BC88:
 	b _0801BDC8
 	.align 2, 0
 _0801BC8C: .4byte dword_2000FC8
-_0801BC90: .4byte 0x02002090
+_0801BC90: .4byte word_2002090
 _0801BC94: .4byte gPlayerState
 _0801BC98: .4byte gPlayerSprite
 _0801BC9C:
@@ -3054,7 +2787,7 @@ _0801BD9A:
 	b _0801BDEE
 	.align 2, 0
 _0801BDC0: .4byte gPlayerSprite
-_0801BDC4: .4byte 0x080CC290
+_0801BDC4: .4byte dword_80CC290
 _0801BDC8:
 	ldr r4, _0801BDF8
 	ldr r0, [r4]
@@ -3080,7 +2813,7 @@ _0801BDEE:
 	bx r0
 	.align 2, 0
 _0801BDF8: .4byte dword_2000FC8
-_0801BDFC: .4byte 0x080CC290
+_0801BDFC: .4byte dword_80CC290
 _0801BE00: .4byte gPlayerSprite
 
 	.thumb
@@ -3295,7 +3028,7 @@ _0801BF7C:
 	.align 2, 0
 _0801BFA4: .4byte gPlayerSprite
 _0801BFA8: .4byte dword_2000FC8
-_0801BFAC: .4byte 0x080CC290
+_0801BFAC: .4byte dword_80CC290
 _0801BFB0:
 	ldr r4, _0801BFE0
 	ldr r0, [r4]
@@ -3321,7 +3054,7 @@ _0801BFD6:
 	bx r0
 	.align 2, 0
 _0801BFE0: .4byte dword_2000FC8
-_0801BFE4: .4byte 0x080CC290
+_0801BFE4: .4byte dword_80CC290
 _0801BFE8: .4byte gPlayerSprite
 
 	.thumb
@@ -3379,10 +3112,10 @@ sub_801BFEC: @ 0x0801BFEC
 _0801C05C: .4byte gPlayerSprite
 _0801C060: .4byte gGameStatus
 _0801C064: .4byte 0x02001370
-_0801C068: .4byte 0x02002090
+_0801C068: .4byte word_2002090
 _0801C06C: .4byte gPlayerState
 _0801C070: .4byte dword_2000FC8
-_0801C074: .4byte 0x080CC290
+_0801C074: .4byte dword_80CC290
 _0801C078:
 	ldr r4, _0801C09C
 	ldr r0, [r4]
@@ -3400,7 +3133,7 @@ _0801C078:
 	b _0801C0E2
 	.align 2, 0
 _0801C09C: .4byte dword_2000FC8
-_0801C0A0: .4byte 0x080CC290
+_0801C0A0: .4byte dword_80CC290
 _0801C0A4:
 	ldr r2, _0801C0EC
 	ldr r1, _0801C0F0
@@ -3435,10 +3168,10 @@ _0801C0E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801C0EC: .4byte 0x02002090
+_0801C0EC: .4byte word_2002090
 _0801C0F0: .4byte gPlayerState
 _0801C0F4: .4byte dword_2000FC8
-_0801C0F8: .4byte 0x080CC290
+_0801C0F8: .4byte dword_80CC290
 
 	.thumb
 sub_801C0FC: @ 0x0801C0FC
@@ -3506,7 +3239,7 @@ _0801C172:
 	bx r0
 	.align 2, 0
 _0801C178: .4byte dword_2000FC8
-_0801C17C: .4byte 0x02002090
+_0801C17C: .4byte word_2002090
 _0801C180: .4byte gPlayerState
 _0801C184: .4byte gPlayerSprite
 
@@ -3707,7 +3440,7 @@ _0801C2E0:
 _0801C308: .4byte gPlayerSprite
 _0801C30C: .4byte dword_2000FC8
 _0801C310: .4byte 0x00019999
-_0801C314: .4byte 0x080CC290
+_0801C314: .4byte dword_80CC290
 _0801C318:
 	ldr r4, _0801C35C
 	ldrb r0, [r4, #0xa]
@@ -3746,7 +3479,7 @@ _0801C354:
 _0801C35C: .4byte gPlayerSprite
 _0801C360: .4byte dword_2000FC8
 _0801C364: .4byte 0x00019999
-_0801C368: .4byte 0x080CC290
+_0801C368: .4byte dword_80CC290
 
 	.thumb
 sub_801C36C: @ 0x0801C36C
@@ -3942,7 +3675,7 @@ _0801C4B8:
 	.align 2, 0
 _0801C4DC: .4byte dword_2000FC8
 _0801C4E0: .4byte 0x00019999
-_0801C4E4: .4byte 0x080CC290
+_0801C4E4: .4byte dword_80CC290
 _0801C4E8:
 	ldrb r0, [r4, #0xa]
 	cmp r0, #2
@@ -3979,7 +3712,7 @@ _0801C522:
 	.align 2, 0
 _0801C52C: .4byte dword_2000FC8
 _0801C530: .4byte 0x00019999
-_0801C534: .4byte 0x080CC290
+_0801C534: .4byte dword_80CC290
 
 	.thumb
 sub_801C538: @ 0x0801C538
@@ -4203,7 +3936,7 @@ _0801C6C6:
 _0801C6EC: .4byte gPlayerSprite
 _0801C6F0: .4byte dword_2000FC8
 _0801C6F4: .4byte 0x00019999
-_0801C6F8: .4byte 0x080CC290
+_0801C6F8: .4byte dword_80CC290
 _0801C6FC:
 	ldr r4, _0801C734
 	ldrb r0, [r4, #0xa]
@@ -4235,7 +3968,7 @@ _0801C72A:
 _0801C734: .4byte gPlayerSprite
 _0801C738: .4byte dword_2000FC8
 _0801C73C: .4byte 0x00019999
-_0801C740: .4byte 0x080CC290
+_0801C740: .4byte dword_80CC290
 
 	.thumb
 sub_801C744: @ 0x0801C744
@@ -4277,7 +4010,7 @@ _0801C78C:
 	bx r0
 	.align 2, 0
 _0801C794: .4byte gPlayerSprite
-_0801C798: .4byte 0x02002090
+_0801C798: .4byte word_2002090
 _0801C79C: .4byte gPlayerState
 _0801C7A0: .4byte dword_2000FC8
 
@@ -4316,7 +4049,7 @@ _0801C7E0:
 	bx r0
 	.align 2, 0
 _0801C7E8: .4byte gPlayerSprite
-_0801C7EC: .4byte 0x02002090
+_0801C7EC: .4byte word_2002090
 _0801C7F0: .4byte gPlayerState
 
 	.thumb
@@ -4388,7 +4121,7 @@ _0801C872:
 _0801C878: .4byte gPlayerSprite
 _0801C87C: .4byte 0x02002EC2
 _0801C880: .4byte 0x02002EC0
-_0801C884: .4byte 0x02002090
+_0801C884: .4byte word_2002090
 _0801C888: .4byte gPlayerState
 _0801C88C: .4byte dword_20020B4
 _0801C890: .4byte byte_203EA89
@@ -4609,7 +4342,7 @@ _0801CA18:
 _0801CA38: .4byte gPlayerSprite
 _0801CA3C: .4byte dword_2000FC8
 _0801CA40: .4byte 0x00013333
-_0801CA44: .4byte 0x080CC290
+_0801CA44: .4byte dword_80CC290
 _0801CA48:
 	ldr r4, _0801CA70
 	adds r0, r4, #0
@@ -4632,7 +4365,7 @@ _0801CA66:
 	.align 2, 0
 _0801CA70: .4byte gPlayerSprite
 _0801CA74: .4byte dword_2000FC8
-_0801CA78: .4byte 0x080CC290
+_0801CA78: .4byte dword_80CC290
 
 	.thumb
 sub_801CA7C: @ 0x0801CA7C
@@ -4729,7 +4462,7 @@ _0801CB0A:
 	lsls r2, r2, #0xe
 	b _0801CD0C
 	.align 2, 0
-_0801CB28: .4byte 0x02002090
+_0801CB28: .4byte word_2002090
 _0801CB2C: .4byte gPlayerState
 _0801CB30: .4byte gPlayerSprite
 _0801CB34: .4byte dword_2000FC8
@@ -4760,7 +4493,7 @@ _0801CB52:
 	ldr r2, _0801CB80
 	b _0801CD0C
 	.align 2, 0
-_0801CB6C: .4byte 0x02002090
+_0801CB6C: .4byte word_2002090
 _0801CB70: .4byte gPlayerState
 _0801CB74: .4byte gPlayerSprite
 _0801CB78: .4byte dword_2000FC8
@@ -4792,7 +4525,7 @@ _0801CB9A:
 	lsls r2, r2, #0x10
 	b _0801CD0C
 	.align 2, 0
-_0801CBB4: .4byte 0x02002090
+_0801CBB4: .4byte word_2002090
 _0801CBB8: .4byte gPlayerState
 _0801CBBC: .4byte gPlayerSprite
 _0801CBC0: .4byte dword_2000FC8
@@ -4824,7 +4557,7 @@ _0801CBDE:
 	lsls r2, r2, #0x10
 	b _0801CD0C
 	.align 2, 0
-_0801CBFC: .4byte 0x02002090
+_0801CBFC: .4byte word_2002090
 _0801CC00: .4byte gPlayerState
 _0801CC04: .4byte gPlayerSprite
 _0801CC08: .4byte dword_2000FC8
@@ -4856,7 +4589,7 @@ _0801CC26:
 	lsls r2, r2, #0xf
 	b _0801CD0C
 	.align 2, 0
-_0801CC44: .4byte 0x02002090
+_0801CC44: .4byte word_2002090
 _0801CC48: .4byte gPlayerState
 _0801CC4C: .4byte gPlayerSprite
 _0801CC50: .4byte dword_2000FC8
@@ -4886,7 +4619,7 @@ _0801CC58:
 	lsls r2, r2, #0x11
 	b _0801CD0C
 	.align 2, 0
-_0801CC88: .4byte 0x02002090
+_0801CC88: .4byte word_2002090
 _0801CC8C: .4byte gPlayerState
 _0801CC90: .4byte gPlayerSprite
 _0801CC94: .4byte dword_2000FC8
@@ -4916,7 +4649,7 @@ _0801CC9C:
 	lsls r2, r2, #0x10
 	b _0801CD0C
 	.align 2, 0
-_0801CCCC: .4byte 0x02002090
+_0801CCCC: .4byte word_2002090
 _0801CCD0: .4byte gPlayerState
 _0801CCD4: .4byte gPlayerSprite
 _0801CCD8: .4byte dword_2000FC8
@@ -4948,7 +4681,7 @@ _0801CD0C:
 	bl sub_8003884
 	b _0801CD58
 	.align 2, 0
-_0801CD14: .4byte 0x02002090
+_0801CD14: .4byte word_2002090
 _0801CD18: .4byte gPlayerState
 _0801CD1C: .4byte gPlayerSprite
 _0801CD20: .4byte dword_2000FC8
@@ -4982,11 +4715,11 @@ _0801CD58:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801CD60: .4byte 0x02002090
+_0801CD60: .4byte word_2002090
 _0801CD64: .4byte gPlayerState
 _0801CD68: .4byte gPlayerSprite
 _0801CD6C: .4byte dword_2000FC8
-_0801CD70: .4byte 0x080CC290
+_0801CD70: .4byte dword_80CC290
 
 	.thumb
 sub_801CD74: @ 0x0801CD74
@@ -5102,7 +4835,7 @@ _0801CE18:
 	lsls r2, r2, #0xe
 	b _0801CFBC
 	.align 2, 0
-_0801CE44: .4byte 0x02002090
+_0801CE44: .4byte word_2002090
 _0801CE48: .4byte gPlayerState
 _0801CE4C: .4byte gPlayerSprite
 _0801CE50: .4byte dword_2000FC8
@@ -5128,7 +4861,7 @@ _0801CE58:
 	ldr r2, _0801CE94
 	b _0801CFBC
 	.align 2, 0
-_0801CE80: .4byte 0x02002090
+_0801CE80: .4byte word_2002090
 _0801CE84: .4byte gPlayerState
 _0801CE88: .4byte gPlayerSprite
 _0801CE8C: .4byte dword_2000FC8
@@ -5155,7 +4888,7 @@ _0801CE98:
 	lsls r2, r2, #0x10
 	b _0801CFBC
 	.align 2, 0
-_0801CEC0: .4byte 0x02002090
+_0801CEC0: .4byte word_2002090
 _0801CEC4: .4byte gPlayerState
 _0801CEC8: .4byte gPlayerSprite
 _0801CECC: .4byte dword_2000FC8
@@ -5182,7 +4915,7 @@ _0801CED4:
 	lsls r2, r2, #0x10
 	b _0801CFBC
 	.align 2, 0
-_0801CF00: .4byte 0x02002090
+_0801CF00: .4byte word_2002090
 _0801CF04: .4byte gPlayerState
 _0801CF08: .4byte gPlayerSprite
 _0801CF0C: .4byte dword_2000FC8
@@ -5209,7 +4942,7 @@ _0801CF14:
 	lsls r2, r2, #0xf
 	b _0801CFBC
 	.align 2, 0
-_0801CF40: .4byte 0x02002090
+_0801CF40: .4byte word_2002090
 _0801CF44: .4byte gPlayerState
 _0801CF48: .4byte gPlayerSprite
 _0801CF4C: .4byte dword_2000FC8
@@ -5236,7 +4969,7 @@ _0801CF54:
 	lsls r2, r2, #0x11
 	b _0801CFBC
 	.align 2, 0
-_0801CF80: .4byte 0x02002090
+_0801CF80: .4byte word_2002090
 _0801CF84: .4byte gPlayerState
 _0801CF88: .4byte gPlayerSprite
 _0801CF8C: .4byte dword_2000FC8
@@ -5269,7 +5002,7 @@ _0801CFBC:
 	bl sub_8016790
 	b _0801D014
 	.align 2, 0
-_0801CFCC: .4byte 0x02002090
+_0801CFCC: .4byte word_2002090
 _0801CFD0: .4byte gPlayerState
 _0801CFD4: .4byte gPlayerSprite
 _0801CFD8: .4byte dword_2000FC8
@@ -5304,7 +5037,7 @@ _0801D014:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801D01C: .4byte 0x02002090
+_0801D01C: .4byte word_2002090
 _0801D020: .4byte gPlayerState
 _0801D024: .4byte gPlayerSprite
 _0801D028: .4byte dword_2000FC8
@@ -5611,7 +5344,7 @@ _0801D26E:
 _0801D294: .4byte gGameStatus
 _0801D298: .4byte byte_20020B1
 _0801D29C: .4byte gPlayerStateSettings
-_0801D2A0: .4byte 0x02002090
+_0801D2A0: .4byte word_2002090
 _0801D2A4: .4byte gPlayerSprite
 _0801D2A8:
 	movs r0, #0x80
@@ -5734,7 +5467,7 @@ _0801D37C:
 	b _0801D3B6
 	.align 2, 0
 _0801D3A0: .4byte gPlayerStateSettings
-_0801D3A4: .4byte 0x02002090
+_0801D3A4: .4byte word_2002090
 _0801D3A8: .4byte gPlayerSprite
 _0801D3AC: .4byte 0x000001D9
 _0801D3B0:
@@ -5807,7 +5540,7 @@ _0801D436:
 	bx r0
 	.align 2, 0
 _0801D43C: .4byte gPlayerSprite
-_0801D440: .4byte 0x02002090
+_0801D440: .4byte word_2002090
 _0801D444: .4byte gPlayerState
 _0801D448: .4byte dword_2000FC8
 
@@ -5841,7 +5574,7 @@ sub_801D44C: @ 0x0801D44C
 	b _0801D602
 	.align 2, 0
 _0801D488: .4byte dword_2000FC8
-_0801D48C: .4byte 0x02002090
+_0801D48C: .4byte word_2002090
 _0801D490: .4byte gPlayerState
 _0801D494: .4byte gPlayerSprite
 _0801D498:
@@ -6004,7 +5737,7 @@ _0801D59C:
 	b _0801D602
 	.align 2, 0
 _0801D5C0: .4byte gPlayerSprite
-_0801D5C4: .4byte 0x080CC290
+_0801D5C4: .4byte dword_80CC290
 _0801D5C8:
 	ldr r4, _0801D60C
 	ldrb r0, [r4, #0xa]
@@ -6040,7 +5773,7 @@ _0801D602:
 	bx r0
 	.align 2, 0
 _0801D60C: .4byte gPlayerSprite
-_0801D610: .4byte 0x080CC290
+_0801D610: .4byte dword_80CC290
 
 	.thumb
 sub_801D614: @ 0x0801D614
@@ -6255,7 +5988,7 @@ _0801D788:
 	.align 2, 0
 _0801D7B0: .4byte gPlayerSprite
 _0801D7B4: .4byte dword_2000FC8
-_0801D7B8: .4byte 0x080CC290
+_0801D7B8: .4byte dword_80CC290
 _0801D7BC:
 	ldr r4, _0801D804
 	ldrb r0, [r4, #0xa]
@@ -6294,7 +6027,7 @@ _0801D7FA:
 	.align 2, 0
 _0801D804: .4byte gPlayerSprite
 _0801D808: .4byte dword_2000FC8
-_0801D80C: .4byte 0x080CC290
+_0801D80C: .4byte dword_80CC290
 
 	.thumb
 sub_801D810: @ 0x0801D810
@@ -6380,7 +6113,7 @@ _0801D8C0: .4byte 0x020010A5
 _0801D8C4: .4byte word_20010AC
 _0801D8C8: .4byte gKeysPressed
 _0801D8CC: .4byte 0x000003FF
-_0801D8D0: .4byte 0x02002090
+_0801D8D0: .4byte word_2002090
 _0801D8D4: .4byte gPlayerState
 _0801D8D8: .4byte gPlayerShadowSprite
 _0801D8DC: .4byte dword_2000FC8
@@ -6438,7 +6171,7 @@ _0801D948: .4byte dword_30032DC
 _0801D94C: .4byte dword_2000FC8
 _0801D950: .4byte 0x0000030F
 _0801D954: .4byte 0x030029F8
-_0801D958: .4byte 0x02002090
+_0801D958: .4byte word_2002090
 _0801D95C: .4byte gPlayerState
 _0801D960:
 	ldr r0, [sp, #4]
@@ -6464,7 +6197,7 @@ _0801D960:
 	b _0801D9E2
 	.align 2, 0
 _0801D98C: .4byte 0x0000030F
-_0801D990: .4byte 0x02002090
+_0801D990: .4byte word_2002090
 _0801D994: .4byte gPlayerState
 _0801D998: .4byte gPlayerSprite
 _0801D99C: .4byte dword_2000FC8
@@ -6511,7 +6244,7 @@ _0801D9E2:
 _0801D9F0: .4byte dword_2000FC8
 _0801D9F4: .4byte 0xFFFF4000
 _0801D9F8: .4byte gGameStatus
-_0801D9FC: .4byte 0x02002090
+_0801D9FC: .4byte word_2002090
 _0801DA00: .4byte gPlayerState
 _0801DA04: .4byte gPlayerSprite
 _0801DA08:
@@ -6899,7 +6632,7 @@ _0801DD08:
 	bx r0
 	.align 2, 0
 _0801DD10: .4byte dword_2000FC8
-_0801DD14: .4byte 0x080CC290
+_0801DD14: .4byte dword_80CC290
 _0801DD18: .4byte gPlayerSprite
 
 	.thumb
@@ -6994,7 +6727,7 @@ _0801DDB6:
 	b _0801E0E0
 	.align 2, 0
 _0801DDE0: .4byte 0x0000030F
-_0801DDE4: .4byte 0x02002090
+_0801DDE4: .4byte word_2002090
 _0801DDE8: .4byte gPlayerState
 _0801DDEC: .4byte gPlayerSprite
 _0801DDF0: .4byte dword_2000FC8
@@ -7023,7 +6756,7 @@ _0801DDF4:
 	b _0801E0E0
 	.align 2, 0
 _0801DE24: .4byte dword_2000FC8
-_0801DE28: .4byte 0x02002090
+_0801DE28: .4byte word_2002090
 _0801DE2C: .4byte gPlayerState
 _0801DE30:
 	ldr r0, _0801DE68
@@ -7376,7 +7109,7 @@ _0801E0E0:
 	bx r0
 	.align 2, 0
 _0801E0E8: .4byte dword_2000FC8
-_0801E0EC: .4byte 0x080CC290
+_0801E0EC: .4byte dword_80CC290
 _0801E0F0: .4byte gPlayerSprite
 
 	.thumb
@@ -7409,7 +7142,7 @@ sub_801E0F4: @ 0x0801E0F4
 	b _0801E1D0
 	.align 2, 0
 _0801E130: .4byte gGameStatus
-_0801E134: .4byte 0x02002090
+_0801E134: .4byte word_2002090
 _0801E138: .4byte gPlayerState
 _0801E13C: .4byte gPlayerSprite
 _0801E140: .4byte dword_2000FC8
@@ -7481,7 +7214,7 @@ _0801E1D0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801E1D8: .4byte 0x02002090
+_0801E1D8: .4byte word_2002090
 _0801E1DC: .4byte gPlayerState
 _0801E1E0: .4byte dword_2000FC8
 
@@ -7563,7 +7296,7 @@ _0801E27C:
 	bx r0
 	.align 2, 0
 _0801E284: .4byte gPlayerSprite
-_0801E288: .4byte 0x02002090
+_0801E288: .4byte word_2002090
 _0801E28C: .4byte gPlayerState
 _0801E290: .4byte 0x02001094
 _0801E294: .4byte 0x02001098
@@ -7622,10 +7355,10 @@ sub_801E2B8: @ 0x0801E2B8
 _0801E314: .4byte gPlayerSprite
 _0801E318: .4byte gGameStatus
 _0801E31C: .4byte 0x02001370
-_0801E320: .4byte 0x02002090
+_0801E320: .4byte word_2002090
 _0801E324: .4byte gPlayerState
 _0801E328: .4byte dword_2000FC8
-_0801E32C: .4byte 0x080CC290
+_0801E32C: .4byte dword_80CC290
 _0801E330:
 	bl sub_8016890
 	b _0801E36C
@@ -7659,10 +7392,10 @@ _0801E36C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801E374: .4byte 0x02002090
+_0801E374: .4byte word_2002090
 _0801E378: .4byte gPlayerState
 _0801E37C: .4byte dword_2000FC8
-_0801E380: .4byte 0x080CC290
+_0801E380: .4byte dword_80CC290
 
 	.thumb
 sub_801E384: @ 0x0801E384
@@ -7751,7 +7484,7 @@ _0801E400:
 	lsls r2, r2, #0xe
 	b _0801E616
 	.align 2, 0
-_0801E420: .4byte 0x02002090
+_0801E420: .4byte word_2002090
 _0801E424: .4byte gPlayerState
 _0801E428: .4byte gPlayerSprite
 _0801E42C: .4byte 0x00000149
@@ -7783,7 +7516,7 @@ _0801E44A:
 	ldr r2, _0801E47C
 	b _0801E616
 	.align 2, 0
-_0801E468: .4byte 0x02002090
+_0801E468: .4byte word_2002090
 _0801E46C: .4byte gPlayerState
 _0801E470: .4byte gPlayerSprite
 _0801E474: .4byte 0x00000149
@@ -7817,7 +7550,7 @@ _0801E496:
 	lsls r2, r2, #0x10
 	b _0801E616
 	.align 2, 0
-_0801E4B4: .4byte 0x02002090
+_0801E4B4: .4byte word_2002090
 _0801E4B8: .4byte gPlayerState
 _0801E4BC: .4byte gPlayerSprite
 _0801E4C0: .4byte 0x00000149
@@ -7850,7 +7583,7 @@ _0801E4DE:
 	lsls r2, r2, #0x10
 	b _0801E616
 	.align 2, 0
-_0801E4FC: .4byte 0x02002090
+_0801E4FC: .4byte word_2002090
 _0801E500: .4byte gPlayerState
 _0801E504: .4byte gPlayerSprite
 _0801E508: .4byte 0x00000149
@@ -7881,7 +7614,7 @@ _0801E510:
 	lsls r2, r2, #0xf
 	b _0801E616
 	.align 2, 0
-_0801E544: .4byte 0x02002090
+_0801E544: .4byte word_2002090
 _0801E548: .4byte gPlayerState
 _0801E54C: .4byte gPlayerSprite
 _0801E550: .4byte 0x00000149
@@ -7912,7 +7645,7 @@ _0801E558:
 	lsls r2, r2, #0x11
 	b _0801E616
 	.align 2, 0
-_0801E58C: .4byte 0x02002090
+_0801E58C: .4byte word_2002090
 _0801E590: .4byte gPlayerState
 _0801E594: .4byte gPlayerSprite
 _0801E598: .4byte 0x00000149
@@ -7943,7 +7676,7 @@ _0801E5A0:
 	lsls r2, r2, #0x10
 	b _0801E616
 	.align 2, 0
-_0801E5D4: .4byte 0x02002090
+_0801E5D4: .4byte word_2002090
 _0801E5D8: .4byte gPlayerState
 _0801E5DC: .4byte gPlayerSprite
 _0801E5E0: .4byte 0x00000149
@@ -7980,7 +7713,7 @@ _0801E61C:
 	bl sub_8016790
 	b _0801E674
 	.align 2, 0
-_0801E628: .4byte 0x02002090
+_0801E628: .4byte word_2002090
 _0801E62C: .4byte gPlayerState
 _0801E630: .4byte gPlayerSprite
 _0801E634: .4byte 0x00000149
@@ -8017,12 +7750,12 @@ _0801E674:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801E67C: .4byte 0x02002090
+_0801E67C: .4byte word_2002090
 _0801E680: .4byte gPlayerState
 _0801E684: .4byte gPlayerSprite
 _0801E688: .4byte 0x00000141
 _0801E68C: .4byte dword_2000FC8
-_0801E690: .4byte 0x080CC290
+_0801E690: .4byte dword_80CC290
 
 	.thumb
 sub_801E694: @ 0x0801E694
@@ -8105,7 +7838,7 @@ _0801E70E:
 	bl audio_new_fx
 	b _0801E99A
 	.align 2, 0
-_0801E738: .4byte 0x02002090
+_0801E738: .4byte word_2002090
 _0801E73C: .4byte gPlayerState
 _0801E740: .4byte gPlayerSprite
 _0801E744: .4byte 0x00000129
@@ -8171,7 +7904,7 @@ _0801E790:
 	lsls r2, r2, #0xe
 	b _0801E93E
 	.align 2, 0
-_0801E7BC: .4byte 0x02002090
+_0801E7BC: .4byte word_2002090
 _0801E7C0: .4byte gPlayerState
 _0801E7C4: .4byte gPlayerSprite
 _0801E7C8: .4byte 0x00000149
@@ -8198,7 +7931,7 @@ _0801E7D0:
 	ldr r2, _0801E810
 	b _0801E93E
 	.align 2, 0
-_0801E7FC: .4byte 0x02002090
+_0801E7FC: .4byte word_2002090
 _0801E800: .4byte gPlayerState
 _0801E804: .4byte gPlayerSprite
 _0801E808: .4byte 0x00000149
@@ -8227,7 +7960,7 @@ _0801E814:
 	lsls r2, r2, #0x10
 	b _0801E93E
 	.align 2, 0
-_0801E840: .4byte 0x02002090
+_0801E840: .4byte word_2002090
 _0801E844: .4byte gPlayerState
 _0801E848: .4byte gPlayerSprite
 _0801E84C: .4byte 0x00000149
@@ -8255,7 +7988,7 @@ _0801E854:
 	lsls r2, r2, #0x10
 	b _0801E93E
 	.align 2, 0
-_0801E880: .4byte 0x02002090
+_0801E880: .4byte word_2002090
 _0801E884: .4byte gPlayerState
 _0801E888: .4byte gPlayerSprite
 _0801E88C: .4byte 0x00000149
@@ -8283,7 +8016,7 @@ _0801E894:
 	lsls r2, r2, #0xf
 	b _0801E93E
 	.align 2, 0
-_0801E8C0: .4byte 0x02002090
+_0801E8C0: .4byte word_2002090
 _0801E8C4: .4byte gPlayerState
 _0801E8C8: .4byte gPlayerSprite
 _0801E8CC: .4byte 0x00000149
@@ -8311,7 +8044,7 @@ _0801E8D4:
 	lsls r2, r2, #0x11
 	b _0801E93E
 	.align 2, 0
-_0801E900: .4byte 0x02002090
+_0801E900: .4byte word_2002090
 _0801E904: .4byte gPlayerState
 _0801E908: .4byte gPlayerSprite
 _0801E90C: .4byte 0x00000149
@@ -8345,7 +8078,7 @@ _0801E93E:
 	bl sub_8016790
 	b _0801E99A
 	.align 2, 0
-_0801E950: .4byte 0x02002090
+_0801E950: .4byte word_2002090
 _0801E954: .4byte gPlayerState
 _0801E958: .4byte gPlayerSprite
 _0801E95C: .4byte 0x00000149
@@ -8381,7 +8114,7 @@ _0801E99A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801E9A4: .4byte 0x02002090
+_0801E9A4: .4byte word_2002090
 _0801E9A8: .4byte gPlayerState
 _0801E9AC: .4byte gPlayerSprite
 _0801E9B0: .4byte 0x00000149
@@ -8437,7 +8170,7 @@ _0801EA14:
 	b _0801EB5C
 	.align 2, 0
 _0801EA18: .4byte dword_2000FC8
-_0801EA1C: .4byte 0x02002090
+_0801EA1C: .4byte word_2002090
 _0801EA20: .4byte gPlayerState
 _0801EA24: .4byte gPlayerSprite
 _0801EA28: .4byte 0x00000139
@@ -8599,7 +8332,7 @@ _0801EB2A:
 	.align 2, 0
 _0801EB50: .4byte gPlayerSprite
 _0801EB54: .4byte 0x00000131
-_0801EB58: .4byte 0x080CC290
+_0801EB58: .4byte dword_80CC290
 _0801EB5C:
 	ldr r4, _0801EB8C
 	ldr r0, [r4]
@@ -8625,7 +8358,7 @@ _0801EB82:
 	bx r0
 	.align 2, 0
 _0801EB8C: .4byte dword_2000FC8
-_0801EB90: .4byte 0x080CC290
+_0801EB90: .4byte dword_80CC290
 _0801EB94: .4byte gPlayerSprite
 
 	.thumb
@@ -8834,7 +8567,7 @@ _0801ED04:
 _0801ED2C: .4byte gPlayerSprite
 _0801ED30: .4byte dword_2000FC8
 _0801ED34: .4byte 0x00000139
-_0801ED38: .4byte 0x080CC290
+_0801ED38: .4byte dword_80CC290
 _0801ED3C:
 	ldr r4, _0801ED6C
 	ldr r0, [r4]
@@ -8860,7 +8593,7 @@ _0801ED62:
 	bx r0
 	.align 2, 0
 _0801ED6C: .4byte dword_2000FC8
-_0801ED70: .4byte 0x080CC290
+_0801ED70: .4byte dword_80CC290
 _0801ED74: .4byte gPlayerSprite
 
 	.thumb
@@ -8912,7 +8645,7 @@ _0801EDCC:
 	bx r0
 	.align 2, 0
 _0801EDD4: .4byte gPlayerSprite
-_0801EDD8: .4byte 0x02002090
+_0801EDD8: .4byte word_2002090
 _0801EDDC: .4byte gPlayerState
 _0801EDE0: .4byte 0x00000141
 
@@ -9006,11 +8739,11 @@ _0801EE9A:
 	bx r0
 	.align 2, 0
 _0801EEA4: .4byte gPlayerSprite
-_0801EEA8: .4byte 0x02002090
+_0801EEA8: .4byte word_2002090
 _0801EEAC: .4byte gPlayerState
 _0801EEB0: .4byte 0x00000141
 _0801EEB4: .4byte dword_2000FC8
-_0801EEB8: .4byte 0x080CC290
+_0801EEB8: .4byte dword_80CC290
 
 	.thumb
 sub_801EEBC: @ 0x0801EEBC
@@ -9109,11 +8842,11 @@ _0801EF82:
 	bx r0
 	.align 2, 0
 _0801EF8C: .4byte gPlayerSprite
-_0801EF90: .4byte 0x02002090
+_0801EF90: .4byte word_2002090
 _0801EF94: .4byte gPlayerState
 _0801EF98: .4byte 0x00000179
 _0801EF9C: .4byte dword_2000FC8
-_0801EFA0: .4byte 0x080CC290
+_0801EFA0: .4byte dword_80CC290
 
 	.thumb
 sub_801EFA4: @ 0x0801EFA4
@@ -9167,11 +8900,11 @@ _0801F006:
 	bx r0
 	.align 2, 0
 _0801F010: .4byte gPlayerSprite
-_0801F014: .4byte 0x02002090
+_0801F014: .4byte word_2002090
 _0801F018: .4byte gPlayerState
 _0801F01C: .4byte 0x00000179
 _0801F020: .4byte dword_2000FC8
-_0801F024: .4byte 0x080CC290
+_0801F024: .4byte dword_80CC290
 
 	.thumb
 sub_801F028: @ 0x0801F028
@@ -9218,11 +8951,11 @@ _0801F07A:
 	bx r0
 	.align 2, 0
 _0801F084: .4byte gPlayerSprite
-_0801F088: .4byte 0x02002090
+_0801F088: .4byte word_2002090
 _0801F08C: .4byte gPlayerState
 _0801F090: .4byte 0x00000179
 _0801F094: .4byte dword_2000FC8
-_0801F098: .4byte 0x080CC290
+_0801F098: .4byte dword_80CC290
 
 	.thumb
 sub_801F09C: @ 0x0801F09C
@@ -9317,7 +9050,7 @@ _0801F126:
 	lsls r2, r2, #0xe
 	b _0801F348
 	.align 2, 0
-_0801F144: .4byte 0x02002090
+_0801F144: .4byte word_2002090
 _0801F148: .4byte gPlayerState
 _0801F14C: .4byte gPlayerSprite
 _0801F150: .4byte 0x00000171
@@ -9349,7 +9082,7 @@ _0801F172:
 	ldr r2, _0801F1A4
 	b _0801F348
 	.align 2, 0
-_0801F18C: .4byte 0x02002090
+_0801F18C: .4byte word_2002090
 _0801F190: .4byte gPlayerState
 _0801F194: .4byte gPlayerSprite
 _0801F198: .4byte 0x00000171
@@ -9383,7 +9116,7 @@ _0801F1BE:
 	lsls r2, r2, #0x10
 	b _0801F348
 	.align 2, 0
-_0801F1DC: .4byte 0x02002090
+_0801F1DC: .4byte word_2002090
 _0801F1E0: .4byte gPlayerState
 _0801F1E4: .4byte gPlayerSprite
 _0801F1E8: .4byte 0x00000171
@@ -9416,7 +9149,7 @@ _0801F20A:
 	lsls r2, r2, #0x10
 	b _0801F348
 	.align 2, 0
-_0801F228: .4byte 0x02002090
+_0801F228: .4byte word_2002090
 _0801F22C: .4byte gPlayerState
 _0801F230: .4byte gPlayerSprite
 _0801F234: .4byte 0x00000171
@@ -9449,7 +9182,7 @@ _0801F256:
 	lsls r2, r2, #0xf
 	b _0801F348
 	.align 2, 0
-_0801F274: .4byte 0x02002090
+_0801F274: .4byte word_2002090
 _0801F278: .4byte gPlayerState
 _0801F27C: .4byte gPlayerSprite
 _0801F280: .4byte 0x00000171
@@ -9480,7 +9213,7 @@ _0801F28C:
 	lsls r2, r2, #0x11
 	b _0801F348
 	.align 2, 0
-_0801F2BC: .4byte 0x02002090
+_0801F2BC: .4byte word_2002090
 _0801F2C0: .4byte gPlayerState
 _0801F2C4: .4byte gPlayerSprite
 _0801F2C8: .4byte 0x00000171
@@ -9511,7 +9244,7 @@ _0801F2D4:
 	lsls r2, r2, #0x10
 	b _0801F348
 	.align 2, 0
-_0801F304: .4byte 0x02002090
+_0801F304: .4byte word_2002090
 _0801F308: .4byte gPlayerState
 _0801F30C: .4byte gPlayerSprite
 _0801F310: .4byte 0x00000171
@@ -9548,7 +9281,7 @@ _0801F34E:
 	bl sub_8016790
 	b _0801F3A8
 	.align 2, 0
-_0801F358: .4byte 0x02002090
+_0801F358: .4byte word_2002090
 _0801F35C: .4byte gPlayerState
 _0801F360: .4byte gPlayerSprite
 _0801F364: .4byte 0x00000171
@@ -9586,12 +9319,12 @@ _0801F3A8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801F3B0: .4byte 0x02002090
+_0801F3B0: .4byte word_2002090
 _0801F3B4: .4byte gPlayerState
 _0801F3B8: .4byte gPlayerSprite
 _0801F3BC: .4byte 0x00000179
 _0801F3C0: .4byte dword_2000FC8
-_0801F3C4: .4byte 0x080CC290
+_0801F3C4: .4byte dword_80CC290
 
 	.thumb
 sub_801F3C8: @ 0x0801F3C8
@@ -9691,7 +9424,7 @@ _0801F450:
 	lsls r2, r2, #0xe
 	b _0801F610
 	.align 2, 0
-_0801F47C: .4byte 0x02002090
+_0801F47C: .4byte word_2002090
 _0801F480: .4byte gPlayerState
 _0801F484: .4byte gPlayerSprite
 _0801F488: .4byte 0x00000171
@@ -9718,7 +9451,7 @@ _0801F494:
 	ldr r2, _0801F4D4
 	b _0801F610
 	.align 2, 0
-_0801F4BC: .4byte 0x02002090
+_0801F4BC: .4byte word_2002090
 _0801F4C0: .4byte gPlayerState
 _0801F4C4: .4byte gPlayerSprite
 _0801F4C8: .4byte 0x00000171
@@ -9747,7 +9480,7 @@ _0801F4D8:
 	lsls r2, r2, #0x10
 	b _0801F610
 	.align 2, 0
-_0801F504: .4byte 0x02002090
+_0801F504: .4byte word_2002090
 _0801F508: .4byte gPlayerState
 _0801F50C: .4byte gPlayerSprite
 _0801F510: .4byte 0x00000171
@@ -9775,7 +9508,7 @@ _0801F51C:
 	lsls r2, r2, #0x10
 	b _0801F610
 	.align 2, 0
-_0801F548: .4byte 0x02002090
+_0801F548: .4byte word_2002090
 _0801F54C: .4byte gPlayerState
 _0801F550: .4byte gPlayerSprite
 _0801F554: .4byte 0x00000171
@@ -9803,7 +9536,7 @@ _0801F560:
 	lsls r2, r2, #0xf
 	b _0801F610
 	.align 2, 0
-_0801F58C: .4byte 0x02002090
+_0801F58C: .4byte word_2002090
 _0801F590: .4byte gPlayerState
 _0801F594: .4byte gPlayerSprite
 _0801F598: .4byte 0x00000171
@@ -9831,7 +9564,7 @@ _0801F5A4:
 	lsls r2, r2, #0x11
 	b _0801F610
 	.align 2, 0
-_0801F5D0: .4byte 0x02002090
+_0801F5D0: .4byte word_2002090
 _0801F5D4: .4byte gPlayerState
 _0801F5D8: .4byte gPlayerSprite
 _0801F5DC: .4byte 0x00000171
@@ -9865,7 +9598,7 @@ _0801F610:
 	bl sub_8016790
 	b _0801F66C
 	.align 2, 0
-_0801F620: .4byte 0x02002090
+_0801F620: .4byte word_2002090
 _0801F624: .4byte gPlayerState
 _0801F628: .4byte gPlayerSprite
 _0801F62C: .4byte 0x00000171
@@ -9901,7 +9634,7 @@ _0801F66C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801F674: .4byte 0x02002090
+_0801F674: .4byte word_2002090
 _0801F678: .4byte gPlayerState
 _0801F67C: .4byte gPlayerSprite
 _0801F680: .4byte 0x00000171
@@ -9966,7 +9699,7 @@ sub_801F68C: @ 0x0801F68C
 	b _0801F734
 	.align 2, 0
 _0801F704: .4byte 0x0000030F
-_0801F708: .4byte 0x02002090
+_0801F708: .4byte word_2002090
 _0801F70C: .4byte gPlayerState
 _0801F710: .4byte gPlayerSprite
 _0801F714: .4byte 0x00000161
@@ -10021,7 +9754,7 @@ _0801F77C:
 	b _0801F8C4
 	.align 2, 0
 _0801F780: .4byte dword_2000FC8
-_0801F784: .4byte 0x02002090
+_0801F784: .4byte word_2002090
 _0801F788: .4byte gPlayerState
 _0801F78C: .4byte gPlayerSprite
 _0801F790: .4byte 0x00000189
@@ -10183,7 +9916,7 @@ _0801F892:
 	.align 2, 0
 _0801F8B8: .4byte gPlayerSprite
 _0801F8BC: .4byte 0x00000181
-_0801F8C0: .4byte 0x080CC290
+_0801F8C0: .4byte dword_80CC290
 _0801F8C4:
 	ldr r4, _0801F8F4
 	ldr r0, [r4]
@@ -10209,7 +9942,7 @@ _0801F8EA:
 	bx r0
 	.align 2, 0
 _0801F8F4: .4byte dword_2000FC8
-_0801F8F8: .4byte 0x080CC290
+_0801F8F8: .4byte dword_80CC290
 _0801F8FC: .4byte gPlayerSprite
 
 	.thumb
@@ -10270,7 +10003,7 @@ sub_801F900: @ 0x0801F900
 	b _0801F9A8
 	.align 2, 0
 _0801F978: .4byte 0x0000030F
-_0801F97C: .4byte 0x02002090
+_0801F97C: .4byte word_2002090
 _0801F980: .4byte gPlayerState
 _0801F984: .4byte gPlayerSprite
 _0801F988: .4byte 0x00000161
@@ -10481,7 +10214,7 @@ _0801FB00:
 _0801FB28: .4byte gPlayerSprite
 _0801FB2C: .4byte dword_2000FC8
 _0801FB30: .4byte 0x00000189
-_0801FB34: .4byte 0x080CC290
+_0801FB34: .4byte dword_80CC290
 _0801FB38:
 	ldr r4, _0801FB68
 	ldr r0, [r4]
@@ -10507,7 +10240,7 @@ _0801FB5E:
 	bx r0
 	.align 2, 0
 _0801FB68: .4byte dword_2000FC8
-_0801FB6C: .4byte 0x080CC290
+_0801FB6C: .4byte dword_80CC290
 _0801FB70: .4byte gPlayerSprite
 
 	.thumb
@@ -10572,7 +10305,7 @@ _0801FBE2:
 	bx r0
 	.align 2, 0
 _0801FBEC: .4byte dword_2000FC8
-_0801FBF0: .4byte 0x02002090
+_0801FBF0: .4byte word_2002090
 _0801FBF4: .4byte gPlayerState
 _0801FBF8: .4byte gPlayerSprite
 _0801FBFC: .4byte 0x00000181
@@ -10612,7 +10345,7 @@ _0801FC3C:
 	bx r0
 	.align 2, 0
 _0801FC44: .4byte gPlayerSprite
-_0801FC48: .4byte 0x02002090
+_0801FC48: .4byte word_2002090
 _0801FC4C: .4byte gPlayerState
 _0801FC50: .4byte 0x00000189
 
@@ -10680,12 +10413,12 @@ _0801FC96:
 	bl sub_0804200C
 	b _0801FF44
 	.align 2, 0
-_0801FCD8: .4byte 0x02002090
+_0801FCD8: .4byte word_2002090
 _0801FCDC: .4byte gPlayerState
 _0801FCE0: .4byte gPlayerSprite
 _0801FCE4: .4byte 0x00000211
 _0801FCE8: .4byte dword_2000FC8
-_0801FCEC: .4byte 0x080CC290
+_0801FCEC: .4byte dword_80CC290
 _0801FCF0:
 	cmp r1, #0x50
 	bgt _0801FD0E
@@ -10744,7 +10477,7 @@ _0801FD28:
 	lsls r2, r2, #0xe
 	b _0801FEE8
 	.align 2, 0
-_0801FD54: .4byte 0x02002090
+_0801FD54: .4byte word_2002090
 _0801FD58: .4byte gPlayerState
 _0801FD5C: .4byte gPlayerSprite
 _0801FD60: .4byte 0x00000209
@@ -10771,7 +10504,7 @@ _0801FD6C:
 	ldr r2, _0801FDAC
 	b _0801FEE8
 	.align 2, 0
-_0801FD94: .4byte 0x02002090
+_0801FD94: .4byte word_2002090
 _0801FD98: .4byte gPlayerState
 _0801FD9C: .4byte gPlayerSprite
 _0801FDA0: .4byte 0x00000209
@@ -10800,7 +10533,7 @@ _0801FDB0:
 	lsls r2, r2, #0x10
 	b _0801FEE8
 	.align 2, 0
-_0801FDDC: .4byte 0x02002090
+_0801FDDC: .4byte word_2002090
 _0801FDE0: .4byte gPlayerState
 _0801FDE4: .4byte gPlayerSprite
 _0801FDE8: .4byte 0x00000209
@@ -10828,7 +10561,7 @@ _0801FDF4:
 	lsls r2, r2, #0x10
 	b _0801FEE8
 	.align 2, 0
-_0801FE20: .4byte 0x02002090
+_0801FE20: .4byte word_2002090
 _0801FE24: .4byte gPlayerState
 _0801FE28: .4byte gPlayerSprite
 _0801FE2C: .4byte 0x00000209
@@ -10856,7 +10589,7 @@ _0801FE38:
 	lsls r2, r2, #0xf
 	b _0801FEE8
 	.align 2, 0
-_0801FE64: .4byte 0x02002090
+_0801FE64: .4byte word_2002090
 _0801FE68: .4byte gPlayerState
 _0801FE6C: .4byte gPlayerSprite
 _0801FE70: .4byte 0x00000209
@@ -10884,7 +10617,7 @@ _0801FE7C:
 	lsls r2, r2, #0x11
 	b _0801FEE8
 	.align 2, 0
-_0801FEA8: .4byte 0x02002090
+_0801FEA8: .4byte word_2002090
 _0801FEAC: .4byte gPlayerState
 _0801FEB0: .4byte gPlayerSprite
 _0801FEB4: .4byte 0x00000209
@@ -10918,7 +10651,7 @@ _0801FEE8:
 	bl sub_8016790
 	b _0801FF44
 	.align 2, 0
-_0801FEF8: .4byte 0x02002090
+_0801FEF8: .4byte word_2002090
 _0801FEFC: .4byte gPlayerState
 _0801FF00: .4byte gPlayerSprite
 _0801FF04: .4byte 0x00000209
@@ -10954,7 +10687,7 @@ _0801FF44:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801FF4C: .4byte 0x02002090
+_0801FF4C: .4byte word_2002090
 _0801FF50: .4byte gPlayerState
 _0801FF54: .4byte gPlayerSprite
 _0801FF58: .4byte 0x00000209
@@ -11025,12 +10758,12 @@ _0801FFA6:
 	bl sub_0804200C
 	b _080202D0
 	.align 2, 0
-_0801FFE8: .4byte 0x02002090
+_0801FFE8: .4byte word_2002090
 _0801FFEC: .4byte gPlayerState
 _0801FFF0: .4byte gPlayerSprite
 _0801FFF4: .4byte 0x00000211
 _0801FFF8: .4byte dword_2000FC8
-_0801FFFC: .4byte 0x080CC290
+_0801FFFC: .4byte dword_80CC290
 _08020000:
 	cmp r1, #0x50
 	bgt _0802001E
@@ -11094,7 +10827,7 @@ _0802004E:
 	lsls r2, r2, #0xe
 	b _08020270
 	.align 2, 0
-_0802006C: .4byte 0x02002090
+_0802006C: .4byte word_2002090
 _08020070: .4byte gPlayerState
 _08020074: .4byte gPlayerSprite
 _08020078: .4byte 0x00000209
@@ -11126,7 +10859,7 @@ _0802009A:
 	ldr r2, _080200CC
 	b _08020270
 	.align 2, 0
-_080200B4: .4byte 0x02002090
+_080200B4: .4byte word_2002090
 _080200B8: .4byte gPlayerState
 _080200BC: .4byte gPlayerSprite
 _080200C0: .4byte 0x00000209
@@ -11160,7 +10893,7 @@ _080200E6:
 	lsls r2, r2, #0x10
 	b _08020270
 	.align 2, 0
-_08020104: .4byte 0x02002090
+_08020104: .4byte word_2002090
 _08020108: .4byte gPlayerState
 _0802010C: .4byte gPlayerSprite
 _08020110: .4byte 0x00000209
@@ -11193,7 +10926,7 @@ _08020132:
 	lsls r2, r2, #0x10
 	b _08020270
 	.align 2, 0
-_08020150: .4byte 0x02002090
+_08020150: .4byte word_2002090
 _08020154: .4byte gPlayerState
 _08020158: .4byte gPlayerSprite
 _0802015C: .4byte 0x00000209
@@ -11226,7 +10959,7 @@ _0802017E:
 	lsls r2, r2, #0xf
 	b _08020270
 	.align 2, 0
-_0802019C: .4byte 0x02002090
+_0802019C: .4byte word_2002090
 _080201A0: .4byte gPlayerState
 _080201A4: .4byte gPlayerSprite
 _080201A8: .4byte 0x00000209
@@ -11257,7 +10990,7 @@ _080201B4:
 	lsls r2, r2, #0x11
 	b _08020270
 	.align 2, 0
-_080201E4: .4byte 0x02002090
+_080201E4: .4byte word_2002090
 _080201E8: .4byte gPlayerState
 _080201EC: .4byte gPlayerSprite
 _080201F0: .4byte 0x00000209
@@ -11288,7 +11021,7 @@ _080201FC:
 	lsls r2, r2, #0x10
 	b _08020270
 	.align 2, 0
-_0802022C: .4byte 0x02002090
+_0802022C: .4byte word_2002090
 _08020230: .4byte gPlayerState
 _08020234: .4byte gPlayerSprite
 _08020238: .4byte 0x00000209
@@ -11325,7 +11058,7 @@ _08020276:
 	bl sub_8016790
 	b _080202D0
 	.align 2, 0
-_08020280: .4byte 0x02002090
+_08020280: .4byte word_2002090
 _08020284: .4byte gPlayerState
 _08020288: .4byte gPlayerSprite
 _0802028C: .4byte 0x00000209
@@ -11363,12 +11096,12 @@ _080202D0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080202D8: .4byte 0x02002090
+_080202D8: .4byte word_2002090
 _080202DC: .4byte gPlayerState
 _080202E0: .4byte gPlayerSprite
 _080202E4: .4byte 0x000001F9
 _080202E8: .4byte dword_2000FC8
-_080202EC: .4byte 0x080CC290
+_080202EC: .4byte dword_80CC290
 
 	.thumb
 sub_80202F0: @ 0x080202F0
@@ -11419,7 +11152,7 @@ _0802034A:
 	b _08020488
 	.align 2, 0
 _0802034C: .4byte dword_2000FC8
-_08020350: .4byte 0x02002090
+_08020350: .4byte word_2002090
 _08020354: .4byte gPlayerState
 _08020358:
 	cmp r1, #0x40
@@ -11580,7 +11313,7 @@ _08020458:
 	.align 2, 0
 _0802047C: .4byte gPlayerSprite
 _08020480: .4byte 0x00000201
-_08020484: .4byte 0x080CC290
+_08020484: .4byte dword_80CC290
 _08020488:
 	ldr r4, _080204B8
 	ldr r0, [r4]
@@ -11606,7 +11339,7 @@ _080204AE:
 	bx r0
 	.align 2, 0
 _080204B8: .4byte dword_2000FC8
-_080204BC: .4byte 0x080CC290
+_080204BC: .4byte dword_80CC290
 _080204C0: .4byte gPlayerSprite
 
 	.thumb
@@ -11819,7 +11552,7 @@ _08020636:
 _0802065C: .4byte gPlayerSprite
 _08020660: .4byte dword_2000FC8
 _08020664: .4byte 0x00000201
-_08020668: .4byte 0x080CC290
+_08020668: .4byte dword_80CC290
 _0802066C:
 	ldr r4, _0802069C
 	ldr r0, [r4]
@@ -11845,7 +11578,7 @@ _08020692:
 	bx r0
 	.align 2, 0
 _0802069C: .4byte dword_2000FC8
-_080206A0: .4byte 0x080CC290
+_080206A0: .4byte dword_80CC290
 _080206A4: .4byte gPlayerSprite
 
 	.thumb
@@ -11909,7 +11642,7 @@ _0802071A:
 	bx r0
 	.align 2, 0
 _08020724: .4byte gPlayerSprite
-_08020728: .4byte 0x02002090
+_08020728: .4byte word_2002090
 _0802072C: .4byte gPlayerState
 _08020730: .4byte 0x000001F9
 _08020734: .4byte gGameStatus
@@ -11959,10 +11692,10 @@ _0802078A:
 	bx r0
 	.align 2, 0
 _08020794: .4byte gPlayerSprite
-_08020798: .4byte 0x02002090
+_08020798: .4byte word_2002090
 _0802079C: .4byte gPlayerState
 _080207A0: .4byte dword_2000FC8
-_080207A4: .4byte 0x080CC290
+_080207A4: .4byte dword_80CC290
 
 	.thumb
 sub_80207A8: @ 0x080207A8
@@ -11999,7 +11732,7 @@ _080207E4:
 	bx r0
 	.align 2, 0
 _080207EC: .4byte gPlayerSprite
-_080207F0: .4byte 0x02002090
+_080207F0: .4byte word_2002090
 _080207F4: .4byte gPlayerState
 _080207F8: .4byte 0x00000101
 
@@ -12071,12 +11804,12 @@ _0802084E:
 	bl sub_8003884
 	b _08020AFE
 	.align 2, 0
-_08020880: .4byte 0x02002090
+_08020880: .4byte word_2002090
 _08020884: .4byte gPlayerState
 _08020888: .4byte gPlayerSprite
 _0802088C: .4byte 0x00000211
 _08020890: .4byte dword_2000FC8
-_08020894: .4byte 0x080CC290
+_08020894: .4byte dword_80CC290
 _08020898:
 	movs r0, #0
 	bl sub_800DAE4
@@ -12148,7 +11881,7 @@ _080208F6:
 	lsls r2, r2, #0xe
 	b _08020AF8
 	.align 2, 0
-_08020914: .4byte 0x02002090
+_08020914: .4byte word_2002090
 _08020918: .4byte gPlayerState
 _0802091C: .4byte gPlayerSprite
 _08020920: .4byte dword_2000FC8
@@ -12179,7 +11912,7 @@ _0802093E:
 	ldr r2, _0802096C
 	b _08020AF8
 	.align 2, 0
-_08020958: .4byte 0x02002090
+_08020958: .4byte word_2002090
 _0802095C: .4byte gPlayerState
 _08020960: .4byte gPlayerSprite
 _08020964: .4byte dword_2000FC8
@@ -12212,7 +11945,7 @@ _08020986:
 	lsls r2, r2, #0x10
 	b _08020AF8
 	.align 2, 0
-_080209A4: .4byte 0x02002090
+_080209A4: .4byte word_2002090
 _080209A8: .4byte gPlayerState
 _080209AC: .4byte gPlayerSprite
 _080209B0: .4byte dword_2000FC8
@@ -12244,7 +11977,7 @@ _080209CE:
 	lsls r2, r2, #0x10
 	b _08020AF8
 	.align 2, 0
-_080209EC: .4byte 0x02002090
+_080209EC: .4byte word_2002090
 _080209F0: .4byte gPlayerState
 _080209F4: .4byte gPlayerSprite
 _080209F8: .4byte dword_2000FC8
@@ -12274,7 +12007,7 @@ _08020A00:
 	lsls r2, r2, #0xf
 	b _08020AF8
 	.align 2, 0
-_08020A30: .4byte 0x02002090
+_08020A30: .4byte word_2002090
 _08020A34: .4byte gPlayerState
 _08020A38: .4byte gPlayerSprite
 _08020A3C: .4byte dword_2000FC8
@@ -12304,7 +12037,7 @@ _08020A44:
 	lsls r2, r2, #0x11
 	b _08020AF8
 	.align 2, 0
-_08020A74: .4byte 0x02002090
+_08020A74: .4byte word_2002090
 _08020A78: .4byte gPlayerState
 _08020A7C: .4byte gPlayerSprite
 _08020A80: .4byte dword_2000FC8
@@ -12334,7 +12067,7 @@ _08020A88:
 	lsls r2, r2, #0x10
 	b _08020AF8
 	.align 2, 0
-_08020AB8: .4byte 0x02002090
+_08020AB8: .4byte word_2002090
 _08020ABC: .4byte gPlayerState
 _08020AC0: .4byte gPlayerSprite
 _08020AC4: .4byte dword_2000FC8
@@ -12370,7 +12103,7 @@ _08020AFE:
 	bl sub_8016790
 	b _08020B54
 	.align 2, 0
-_08020B08: .4byte 0x02002090
+_08020B08: .4byte word_2002090
 _08020B0C: .4byte gPlayerState
 _08020B10: .4byte gPlayerSprite
 _08020B14: .4byte dword_2000FC8
@@ -12407,12 +12140,12 @@ _08020B54:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08020B5C: .4byte 0x02002090
+_08020B5C: .4byte word_2002090
 _08020B60: .4byte gPlayerState
 _08020B64: .4byte gPlayerSprite
 _08020B68: .4byte 0x00000101
 _08020B6C: .4byte dword_2000FC8
-_08020B70: .4byte 0x080CC290
+_08020B70: .4byte dword_80CC290
 
 	.thumb
 sub_8020B74: @ 0x08020B74
@@ -12483,7 +12216,7 @@ _08020BE0:
 	bl sub_8003368
 	b _08020E02
 	.align 2, 0
-_08020BFC: .4byte 0x02002090
+_08020BFC: .4byte word_2002090
 _08020C00: .4byte gPlayerState
 _08020C04: .4byte gPlayerSprite
 _08020C08: .4byte 0x00000211
@@ -12553,7 +12286,7 @@ _08020C54:
 	lsls r2, r2, #0xe
 	b _08020DFC
 	.align 2, 0
-_08020C80: .4byte 0x02002090
+_08020C80: .4byte word_2002090
 _08020C84: .4byte gPlayerState
 _08020C88: .4byte gPlayerSprite
 _08020C8C: .4byte dword_2000FC8
@@ -12579,7 +12312,7 @@ _08020C94:
 	ldr r2, _08020CD0
 	b _08020DFC
 	.align 2, 0
-_08020CBC: .4byte 0x02002090
+_08020CBC: .4byte word_2002090
 _08020CC0: .4byte gPlayerState
 _08020CC4: .4byte gPlayerSprite
 _08020CC8: .4byte dword_2000FC8
@@ -12607,7 +12340,7 @@ _08020CD4:
 	lsls r2, r2, #0x10
 	b _08020DFC
 	.align 2, 0
-_08020D00: .4byte 0x02002090
+_08020D00: .4byte word_2002090
 _08020D04: .4byte gPlayerState
 _08020D08: .4byte gPlayerSprite
 _08020D0C: .4byte dword_2000FC8
@@ -12634,7 +12367,7 @@ _08020D14:
 	lsls r2, r2, #0x10
 	b _08020DFC
 	.align 2, 0
-_08020D40: .4byte 0x02002090
+_08020D40: .4byte word_2002090
 _08020D44: .4byte gPlayerState
 _08020D48: .4byte gPlayerSprite
 _08020D4C: .4byte dword_2000FC8
@@ -12661,7 +12394,7 @@ _08020D54:
 	lsls r2, r2, #0xf
 	b _08020DFC
 	.align 2, 0
-_08020D80: .4byte 0x02002090
+_08020D80: .4byte word_2002090
 _08020D84: .4byte gPlayerState
 _08020D88: .4byte gPlayerSprite
 _08020D8C: .4byte dword_2000FC8
@@ -12688,7 +12421,7 @@ _08020D94:
 	lsls r2, r2, #0x11
 	b _08020DFC
 	.align 2, 0
-_08020DC0: .4byte 0x02002090
+_08020DC0: .4byte word_2002090
 _08020DC4: .4byte gPlayerState
 _08020DC8: .4byte gPlayerSprite
 _08020DCC: .4byte dword_2000FC8
@@ -12722,7 +12455,7 @@ _08020E02:
 	bl sub_8016790
 	b _08020E54
 	.align 2, 0
-_08020E0C: .4byte 0x02002090
+_08020E0C: .4byte word_2002090
 _08020E10: .4byte gPlayerState
 _08020E14: .4byte gPlayerSprite
 _08020E18: .4byte dword_2000FC8
@@ -12757,7 +12490,7 @@ _08020E54:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08020E5C: .4byte 0x02002090
+_08020E5C: .4byte word_2002090
 _08020E60: .4byte gPlayerState
 _08020E64: .4byte gPlayerSprite
 _08020E68: .4byte dword_2000FC8
@@ -12821,7 +12554,7 @@ sub_8020EA0: @ 0x08020EA0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08020EE0: .4byte 0x02002090
+_08020EE0: .4byte word_2002090
 _08020EE4: .4byte gPlayerState
 _08020EE8: .4byte gPlayerSprite
 
@@ -12867,7 +12600,7 @@ _08020F2A:
 	b _08020F66
 	.align 2, 0
 _08020F40: .4byte dword_2000FC8
-_08020F44: .4byte 0x02002090
+_08020F44: .4byte word_2002090
 _08020F48: .4byte gPlayerState
 _08020F4C: .4byte gPlayerSprite
 _08020F50: .4byte 0x00000119
@@ -13074,7 +12807,7 @@ _080210B8:
 _080210E0: .4byte gPlayerSprite
 _080210E4: .4byte dword_2000FC8
 _080210E8: .4byte 0x00000111
-_080210EC: .4byte 0x080CC290
+_080210EC: .4byte dword_80CC290
 _080210F0:
 	ldr r4, _08021120
 	ldr r0, [r4]
@@ -13100,7 +12833,7 @@ _08021116:
 	bx r0
 	.align 2, 0
 _08021120: .4byte dword_2000FC8
-_08021124: .4byte 0x080CC290
+_08021124: .4byte dword_80CC290
 _08021128: .4byte gPlayerSprite
 
 	.thumb
@@ -13326,7 +13059,7 @@ _080212B4:
 _080212DC: .4byte gPlayerSprite
 _080212E0: .4byte dword_2000FC8
 _080212E4: .4byte 0x00000119
-_080212E8: .4byte 0x080CC290
+_080212E8: .4byte dword_80CC290
 _080212EC:
 	ldr r4, _0802131C
 	ldr r0, [r4]
@@ -13352,7 +13085,7 @@ _08021312:
 	bx r0
 	.align 2, 0
 _0802131C: .4byte dword_2000FC8
-_08021320: .4byte 0x080CC290
+_08021320: .4byte dword_80CC290
 _08021324: .4byte gPlayerSprite
 
 	.thumb
@@ -13441,7 +13174,7 @@ _080213A4:
 	lsls r2, r2, #0xe
 	b _080215C4
 	.align 2, 0
-_080213C0: .4byte 0x02002090
+_080213C0: .4byte word_2002090
 _080213C4: .4byte gPlayerState
 _080213C8: .4byte gPlayerSprite
 _080213CC: .4byte 0x00000191
@@ -13473,7 +13206,7 @@ _080213EE:
 	ldr r2, _08021420
 	b _080215C4
 	.align 2, 0
-_08021408: .4byte 0x02002090
+_08021408: .4byte word_2002090
 _0802140C: .4byte gPlayerState
 _08021410: .4byte gPlayerSprite
 _08021414: .4byte 0x00000191
@@ -13507,7 +13240,7 @@ _0802143A:
 	lsls r2, r2, #0x10
 	b _080215C4
 	.align 2, 0
-_08021458: .4byte 0x02002090
+_08021458: .4byte word_2002090
 _0802145C: .4byte gPlayerState
 _08021460: .4byte gPlayerSprite
 _08021464: .4byte 0x00000191
@@ -13540,7 +13273,7 @@ _08021486:
 	lsls r2, r2, #0x10
 	b _080215C4
 	.align 2, 0
-_080214A4: .4byte 0x02002090
+_080214A4: .4byte word_2002090
 _080214A8: .4byte gPlayerState
 _080214AC: .4byte gPlayerSprite
 _080214B0: .4byte 0x00000191
@@ -13573,7 +13306,7 @@ _080214D2:
 	lsls r2, r2, #0xf
 	b _080215C4
 	.align 2, 0
-_080214F0: .4byte 0x02002090
+_080214F0: .4byte word_2002090
 _080214F4: .4byte gPlayerState
 _080214F8: .4byte gPlayerSprite
 _080214FC: .4byte 0x00000191
@@ -13604,7 +13337,7 @@ _08021508:
 	lsls r2, r2, #0x11
 	b _080215C4
 	.align 2, 0
-_08021538: .4byte 0x02002090
+_08021538: .4byte word_2002090
 _0802153C: .4byte gPlayerState
 _08021540: .4byte gPlayerSprite
 _08021544: .4byte 0x00000191
@@ -13635,7 +13368,7 @@ _08021550:
 	lsls r2, r2, #0x10
 	b _080215C4
 	.align 2, 0
-_08021580: .4byte 0x02002090
+_08021580: .4byte word_2002090
 _08021584: .4byte gPlayerState
 _08021588: .4byte gPlayerSprite
 _0802158C: .4byte 0x00000191
@@ -13672,7 +13405,7 @@ _080215CA:
 	bl sub_8016790
 	b _080216A6
 	.align 2, 0
-_080215D4: .4byte 0x02002090
+_080215D4: .4byte word_2002090
 _080215D8: .4byte gPlayerState
 _080215DC: .4byte gPlayerSprite
 _080215E0: .4byte 0x00000191
@@ -13741,12 +13474,12 @@ _0802163E:
 	bl audio_new_fx
 	b _080216A4
 	.align 2, 0
-_08021670: .4byte 0x02002090
+_08021670: .4byte word_2002090
 _08021674: .4byte gPlayerState
 _08021678: .4byte gPlayerSprite
 _0802167C: .4byte 0x000001A1
 _08021680: .4byte dword_2000FC8
-_08021684: .4byte 0x080CC290
+_08021684: .4byte dword_80CC290
 _08021688: .4byte 0x020021DC
 _0802168C: .4byte byte_203EA89
 _08021690: .4byte 0x080CE440
@@ -13916,7 +13649,7 @@ _080217B6:
 	ldr r3, _080217FC
 	b _08021CC0
 	.align 2, 0
-_080217D0: .4byte 0x02002090
+_080217D0: .4byte word_2002090
 _080217D4: .4byte gPlayerState
 _080217D8: .4byte gPlayerSprite
 _080217DC: .4byte 0x00000191
@@ -13985,7 +13718,7 @@ _0802185A:
 	ldr r3, _080218A4
 	b _08021CC0
 	.align 2, 0
-_08021874: .4byte 0x02002090
+_08021874: .4byte word_2002090
 _08021878: .4byte gPlayerState
 _0802187C: .4byte gPlayerSprite
 _08021880: .4byte 0x00000191
@@ -14056,7 +13789,7 @@ _08021904:
 	ldr r3, _0802194C
 	b _08021CC0
 	.align 2, 0
-_08021920: .4byte 0x02002090
+_08021920: .4byte word_2002090
 _08021924: .4byte gPlayerState
 _08021928: .4byte gPlayerSprite
 _0802192C: .4byte 0x00000191
@@ -14126,7 +13859,7 @@ _080219AC:
 	ldr r3, _080219F4
 	b _08021CC0
 	.align 2, 0
-_080219C8: .4byte 0x02002090
+_080219C8: .4byte word_2002090
 _080219CC: .4byte gPlayerState
 _080219D0: .4byte gPlayerSprite
 _080219D4: .4byte 0x00000191
@@ -14196,7 +13929,7 @@ _08021A54:
 	ldr r3, _08021A9C
 	b _08021CC0
 	.align 2, 0
-_08021A70: .4byte 0x02002090
+_08021A70: .4byte word_2002090
 _08021A74: .4byte gPlayerState
 _08021A78: .4byte gPlayerSprite
 _08021A7C: .4byte 0x00000191
@@ -14266,7 +13999,7 @@ _08021AFC:
 	ldr r3, _08021B44
 	b _08021CC0
 	.align 2, 0
-_08021B18: .4byte 0x02002090
+_08021B18: .4byte word_2002090
 _08021B1C: .4byte gPlayerState
 _08021B20: .4byte gPlayerSprite
 _08021B24: .4byte 0x00000191
@@ -14336,7 +14069,7 @@ _08021BA4:
 	ldr r3, _08021BEC
 	b _08021CC0
 	.align 2, 0
-_08021BC0: .4byte 0x02002090
+_08021BC0: .4byte word_2002090
 _08021BC4: .4byte gPlayerState
 _08021BC8: .4byte gPlayerSprite
 _08021BCC: .4byte 0x00000191
@@ -14403,7 +14136,7 @@ _08021C3E:
 	ldr r3, _08021C90
 	b _08021CC0
 	.align 2, 0
-_08021C64: .4byte 0x02002090
+_08021C64: .4byte word_2002090
 _08021C68: .4byte gPlayerState
 _08021C6C: .4byte gPlayerSprite
 _08021C70: .4byte 0x00000191
@@ -14599,11 +14332,11 @@ _08021DE0:
 	b _08021E48
 	.align 2, 0
 _08021E14: .4byte gPlayerSprite
-_08021E18: .4byte 0x02002090
+_08021E18: .4byte word_2002090
 _08021E1C: .4byte gPlayerState
 _08021E20: .4byte 0x000001A1
 _08021E24: .4byte dword_2000FC8
-_08021E28: .4byte 0x080CC290
+_08021E28: .4byte dword_80CC290
 _08021E2C: .4byte 0x020021DC
 _08021E30: .4byte byte_203EA89
 _08021E34: .4byte 0x080CE440
@@ -14720,7 +14453,7 @@ _08021EDC:
 	lsls r2, r2, #0xe
 	b _0802209C
 	.align 2, 0
-_08021F08: .4byte 0x02002090
+_08021F08: .4byte word_2002090
 _08021F0C: .4byte gPlayerState
 _08021F10: .4byte gPlayerSprite
 _08021F14: .4byte 0x000001A9
@@ -14747,7 +14480,7 @@ _08021F20:
 	ldr r2, _08021F60
 	b _0802209C
 	.align 2, 0
-_08021F48: .4byte 0x02002090
+_08021F48: .4byte word_2002090
 _08021F4C: .4byte gPlayerState
 _08021F50: .4byte gPlayerSprite
 _08021F54: .4byte 0x000001A9
@@ -14776,7 +14509,7 @@ _08021F64:
 	lsls r2, r2, #0x10
 	b _0802209C
 	.align 2, 0
-_08021F90: .4byte 0x02002090
+_08021F90: .4byte word_2002090
 _08021F94: .4byte gPlayerState
 _08021F98: .4byte gPlayerSprite
 _08021F9C: .4byte 0x000001A9
@@ -14804,7 +14537,7 @@ _08021FA8:
 	lsls r2, r2, #0x10
 	b _0802209C
 	.align 2, 0
-_08021FD4: .4byte 0x02002090
+_08021FD4: .4byte word_2002090
 _08021FD8: .4byte gPlayerState
 _08021FDC: .4byte gPlayerSprite
 _08021FE0: .4byte 0x000001A9
@@ -14832,7 +14565,7 @@ _08021FEC:
 	lsls r2, r2, #0xf
 	b _0802209C
 	.align 2, 0
-_08022018: .4byte 0x02002090
+_08022018: .4byte word_2002090
 _0802201C: .4byte gPlayerState
 _08022020: .4byte gPlayerSprite
 _08022024: .4byte 0x000001A9
@@ -14860,7 +14593,7 @@ _08022030:
 	lsls r2, r2, #0x11
 	b _0802209C
 	.align 2, 0
-_0802205C: .4byte 0x02002090
+_0802205C: .4byte word_2002090
 _08022060: .4byte gPlayerState
 _08022064: .4byte gPlayerSprite
 _08022068: .4byte 0x000001A9
@@ -14894,7 +14627,7 @@ _0802209C:
 	bl sub_8016790
 	b _080220F8
 	.align 2, 0
-_080220AC: .4byte 0x02002090
+_080220AC: .4byte word_2002090
 _080220B0: .4byte gPlayerState
 _080220B4: .4byte gPlayerSprite
 _080220B8: .4byte 0x000001A9
@@ -14930,7 +14663,7 @@ _080220F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08022100: .4byte 0x02002090
+_08022100: .4byte word_2002090
 _08022104: .4byte gPlayerState
 _08022108: .4byte gPlayerSprite
 _0802210C: .4byte 0x000001A9
@@ -15046,7 +14779,7 @@ _080221B4:
 	lsls r2, r2, #0xe
 	b _08022374
 	.align 2, 0
-_080221E0: .4byte 0x02002090
+_080221E0: .4byte word_2002090
 _080221E4: .4byte gPlayerState
 _080221E8: .4byte gPlayerSprite
 _080221EC: .4byte 0x000001C1
@@ -15073,7 +14806,7 @@ _080221F8:
 	ldr r2, _08022238
 	b _08022374
 	.align 2, 0
-_08022220: .4byte 0x02002090
+_08022220: .4byte word_2002090
 _08022224: .4byte gPlayerState
 _08022228: .4byte gPlayerSprite
 _0802222C: .4byte 0x000001C1
@@ -15102,7 +14835,7 @@ _0802223C:
 	lsls r2, r2, #0x10
 	b _08022374
 	.align 2, 0
-_08022268: .4byte 0x02002090
+_08022268: .4byte word_2002090
 _0802226C: .4byte gPlayerState
 _08022270: .4byte gPlayerSprite
 _08022274: .4byte 0x000001C1
@@ -15130,7 +14863,7 @@ _08022280:
 	lsls r2, r2, #0x10
 	b _08022374
 	.align 2, 0
-_080222AC: .4byte 0x02002090
+_080222AC: .4byte word_2002090
 _080222B0: .4byte gPlayerState
 _080222B4: .4byte gPlayerSprite
 _080222B8: .4byte 0x000001C1
@@ -15158,7 +14891,7 @@ _080222C4:
 	lsls r2, r2, #0xf
 	b _08022374
 	.align 2, 0
-_080222F0: .4byte 0x02002090
+_080222F0: .4byte word_2002090
 _080222F4: .4byte gPlayerState
 _080222F8: .4byte gPlayerSprite
 _080222FC: .4byte 0x000001C1
@@ -15186,7 +14919,7 @@ _08022308:
 	lsls r2, r2, #0x11
 	b _08022374
 	.align 2, 0
-_08022334: .4byte 0x02002090
+_08022334: .4byte word_2002090
 _08022338: .4byte gPlayerState
 _0802233C: .4byte gPlayerSprite
 _08022340: .4byte 0x000001C1
@@ -15220,7 +14953,7 @@ _08022374:
 	bl sub_8016790
 	b _080223D0
 	.align 2, 0
-_08022384: .4byte 0x02002090
+_08022384: .4byte word_2002090
 _08022388: .4byte gPlayerState
 _0802238C: .4byte gPlayerSprite
 _08022390: .4byte 0x000001C1
@@ -15256,7 +14989,7 @@ _080223D0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080223D8: .4byte 0x02002090
+_080223D8: .4byte word_2002090
 _080223DC: .4byte gPlayerState
 _080223E0: .4byte gPlayerSprite
 _080223E4: .4byte 0x000001C1
@@ -15356,7 +15089,7 @@ _0802247A:
 	lsls r2, r2, #0xe
 	b _0802269C
 	.align 2, 0
-_08022498: .4byte 0x02002090
+_08022498: .4byte word_2002090
 _0802249C: .4byte gPlayerState
 _080224A0: .4byte gPlayerSprite
 _080224A4: .4byte 0x000001A9
@@ -15388,7 +15121,7 @@ _080224C6:
 	ldr r2, _080224F8
 	b _0802269C
 	.align 2, 0
-_080224E0: .4byte 0x02002090
+_080224E0: .4byte word_2002090
 _080224E4: .4byte gPlayerState
 _080224E8: .4byte gPlayerSprite
 _080224EC: .4byte 0x000001A9
@@ -15422,7 +15155,7 @@ _08022512:
 	lsls r2, r2, #0x10
 	b _0802269C
 	.align 2, 0
-_08022530: .4byte 0x02002090
+_08022530: .4byte word_2002090
 _08022534: .4byte gPlayerState
 _08022538: .4byte gPlayerSprite
 _0802253C: .4byte 0x000001A9
@@ -15455,7 +15188,7 @@ _0802255E:
 	lsls r2, r2, #0x10
 	b _0802269C
 	.align 2, 0
-_0802257C: .4byte 0x02002090
+_0802257C: .4byte word_2002090
 _08022580: .4byte gPlayerState
 _08022584: .4byte gPlayerSprite
 _08022588: .4byte 0x000001A9
@@ -15488,7 +15221,7 @@ _080225AA:
 	lsls r2, r2, #0xf
 	b _0802269C
 	.align 2, 0
-_080225C8: .4byte 0x02002090
+_080225C8: .4byte word_2002090
 _080225CC: .4byte gPlayerState
 _080225D0: .4byte gPlayerSprite
 _080225D4: .4byte 0x000001A9
@@ -15519,7 +15252,7 @@ _080225E0:
 	lsls r2, r2, #0x11
 	b _0802269C
 	.align 2, 0
-_08022610: .4byte 0x02002090
+_08022610: .4byte word_2002090
 _08022614: .4byte gPlayerState
 _08022618: .4byte gPlayerSprite
 _0802261C: .4byte 0x000001A9
@@ -15550,7 +15283,7 @@ _08022628:
 	lsls r2, r2, #0x10
 	b _0802269C
 	.align 2, 0
-_08022658: .4byte 0x02002090
+_08022658: .4byte word_2002090
 _0802265C: .4byte gPlayerState
 _08022660: .4byte gPlayerSprite
 _08022664: .4byte 0x000001A9
@@ -15587,7 +15320,7 @@ _080226A2:
 	bl sub_8016790
 	b _080226FC
 	.align 2, 0
-_080226AC: .4byte 0x02002090
+_080226AC: .4byte word_2002090
 _080226B0: .4byte gPlayerState
 _080226B4: .4byte gPlayerSprite
 _080226B8: .4byte 0x000001A9
@@ -15625,12 +15358,12 @@ _080226FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08022704: .4byte 0x02002090
+_08022704: .4byte word_2002090
 _08022708: .4byte gPlayerState
 _0802270C: .4byte gPlayerSprite
 _08022710: .4byte 0x000001D1
 _08022714: .4byte dword_2000FC8
-_08022718: .4byte 0x080CC290
+_08022718: .4byte dword_80CC290
 
 	.thumb
 sub_802271C: @ 0x0802271C
@@ -15736,7 +15469,7 @@ _080227B8:
 	lsls r2, r2, #0xe
 	b _080229DC
 	.align 2, 0
-_080227D4: .4byte 0x02002090
+_080227D4: .4byte word_2002090
 _080227D8: .4byte gPlayerState
 _080227DC: .4byte gPlayerSprite
 _080227E0: .4byte 0x000001C1
@@ -15768,7 +15501,7 @@ _08022802:
 	ldr r2, _08022834
 	b _080229DC
 	.align 2, 0
-_0802281C: .4byte 0x02002090
+_0802281C: .4byte word_2002090
 _08022820: .4byte gPlayerState
 _08022824: .4byte gPlayerSprite
 _08022828: .4byte 0x000001C1
@@ -15802,7 +15535,7 @@ _0802284E:
 	lsls r2, r2, #0x10
 	b _080229DC
 	.align 2, 0
-_0802286C: .4byte 0x02002090
+_0802286C: .4byte word_2002090
 _08022870: .4byte gPlayerState
 _08022874: .4byte gPlayerSprite
 _08022878: .4byte 0x000001C1
@@ -15835,7 +15568,7 @@ _0802289A:
 	lsls r2, r2, #0x10
 	b _080229DC
 	.align 2, 0
-_080228B8: .4byte 0x02002090
+_080228B8: .4byte word_2002090
 _080228BC: .4byte gPlayerState
 _080228C0: .4byte gPlayerSprite
 _080228C4: .4byte 0x000001C1
@@ -15868,7 +15601,7 @@ _080228E6:
 	lsls r2, r2, #0xf
 	b _080229DC
 	.align 2, 0
-_08022904: .4byte 0x02002090
+_08022904: .4byte word_2002090
 _08022908: .4byte gPlayerState
 _0802290C: .4byte gPlayerSprite
 _08022910: .4byte 0x000001C1
@@ -15901,7 +15634,7 @@ _08022932:
 	lsls r2, r2, #0x11
 	b _080229DC
 	.align 2, 0
-_08022950: .4byte 0x02002090
+_08022950: .4byte word_2002090
 _08022954: .4byte gPlayerState
 _08022958: .4byte gPlayerSprite
 _0802295C: .4byte 0x000001C1
@@ -15932,7 +15665,7 @@ _08022968:
 	lsls r2, r2, #0x10
 	b _080229DC
 	.align 2, 0
-_08022998: .4byte 0x02002090
+_08022998: .4byte word_2002090
 _0802299C: .4byte gPlayerState
 _080229A0: .4byte gPlayerSprite
 _080229A4: .4byte 0x000001C1
@@ -15965,7 +15698,7 @@ _080229DC:
 	bl sub_8003884
 	b _08022A2C
 	.align 2, 0
-_080229E4: .4byte 0x02002090
+_080229E4: .4byte word_2002090
 _080229E8: .4byte gPlayerState
 _080229EC: .4byte gPlayerSprite
 _080229F0: .4byte 0x000001C1
@@ -16000,12 +15733,12 @@ _08022A2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08022A34: .4byte 0x02002090
+_08022A34: .4byte word_2002090
 _08022A38: .4byte gPlayerState
 _08022A3C: .4byte gPlayerSprite
 _08022A40: .4byte 0x000001D9
 _08022A44: .4byte dword_2000FC8
-_08022A48: .4byte 0x080CC290
+_08022A48: .4byte dword_80CC290
 
 	.thumb
 sub_8022A4C: @ 0x08022A4C
@@ -16057,7 +15790,7 @@ _08022AA8: .4byte dword_30032DC
 _08022AAC: .4byte dword_2000FC8
 _08022AB0: .4byte 0x0000030F
 _08022AB4: .4byte 0x030029F8
-_08022AB8: .4byte 0x02002090
+_08022AB8: .4byte word_2002090
 _08022ABC: .4byte gPlayerState
 _08022AC0:
 	ldr r1, [sp, #4]
@@ -16112,7 +15845,7 @@ _08022B06:
 	bl sub_8003874
 	b _08022DF4
 	.align 2, 0
-_08022B30: .4byte 0x02002090
+_08022B30: .4byte word_2002090
 _08022B34: .4byte gPlayerState
 _08022B38: .4byte gPlayerSprite
 _08022B3C: .4byte 0x000001C9
@@ -16461,7 +16194,7 @@ _08022DF4:
 	bx r0
 	.align 2, 0
 _08022DFC: .4byte dword_2000FC8
-_08022E00: .4byte 0x080CC290
+_08022E00: .4byte dword_80CC290
 _08022E04: .4byte gPlayerSprite
 
 	.thumb
@@ -16501,7 +16234,7 @@ sub_8022E08: @ 0x08022E08
 	b _08023174
 	.align 2, 0
 _08022E50: .4byte 0x0000030F
-_08022E54: .4byte 0x02002090
+_08022E54: .4byte word_2002090
 _08022E58: .4byte gPlayerState
 _08022E5C: .4byte dword_2000FC8
 _08022E60:
@@ -16528,7 +16261,7 @@ _08022E66:
 	bl sub_8003874
 	b _08023174
 	.align 2, 0
-_08022E90: .4byte 0x02002090
+_08022E90: .4byte word_2002090
 _08022E94: .4byte gPlayerState
 _08022E98: .4byte gPlayerSprite
 _08022E9C: .4byte 0x000001C9
@@ -16890,7 +16623,7 @@ _08023174:
 	bx r0
 	.align 2, 0
 _0802317C: .4byte dword_2000FC8
-_08023180: .4byte 0x080CC290
+_08023180: .4byte dword_80CC290
 _08023184: .4byte gPlayerSprite
 
 	.thumb
@@ -16936,7 +16669,7 @@ _080231D6:
 	bx r0
 	.align 2, 0
 _080231E0: .4byte gPlayerSprite
-_080231E4: .4byte 0x02002090
+_080231E4: .4byte word_2002090
 _080231E8: .4byte gPlayerState
 _080231EC: .4byte 0x02001094
 _080231F0: .4byte 0x02001098
@@ -17002,7 +16735,7 @@ _0802326A:
 	.align 2, 0
 _0802326C: .4byte 0x0000030F
 _08023270: .4byte dword_2000FC8
-_08023274: .4byte 0x02002090
+_08023274: .4byte word_2002090
 _08023278: .4byte gPlayerState
 _0802327C: .4byte gPlayerSprite
 _08023280: .4byte 0x000001B9
@@ -17164,7 +16897,7 @@ _08023382:
 	.align 2, 0
 _080233A8: .4byte gPlayerSprite
 _080233AC: .4byte 0x000001B1
-_080233B0: .4byte 0x080CC290
+_080233B0: .4byte dword_80CC290
 _080233B4:
 	ldr r4, _080233E4
 	ldr r0, [r4]
@@ -17190,7 +16923,7 @@ _080233DA:
 	bx r0
 	.align 2, 0
 _080233E4: .4byte dword_2000FC8
-_080233E8: .4byte 0x080CC290
+_080233E8: .4byte dword_80CC290
 _080233EC: .4byte gPlayerSprite
 
 	.thumb
@@ -17408,7 +17141,7 @@ _08023570:
 _08023598: .4byte gPlayerSprite
 _0802359C: .4byte dword_2000FC8
 _080235A0: .4byte 0x000001B9
-_080235A4: .4byte 0x080CC290
+_080235A4: .4byte dword_80CC290
 _080235A8:
 	ldr r4, _080235D8
 	ldr r0, [r4]
@@ -17434,7 +17167,7 @@ _080235CE:
 	bx r0
 	.align 2, 0
 _080235D8: .4byte dword_2000FC8
-_080235DC: .4byte 0x080CC290
+_080235DC: .4byte dword_80CC290
 _080235E0: .4byte gPlayerSprite
 
 	.thumb
@@ -17495,7 +17228,7 @@ _0802364E:
 	.align 2, 0
 _08023650: .4byte 0x0000030F
 _08023654: .4byte dword_2000FC8
-_08023658: .4byte 0x02002090
+_08023658: .4byte word_2002090
 _0802365C: .4byte gPlayerState
 _08023660: .4byte gPlayerSprite
 _08023664: .4byte 0x000001B9
@@ -17657,7 +17390,7 @@ _08023766:
 	.align 2, 0
 _0802378C: .4byte gPlayerSprite
 _08023790: .4byte 0x000001B1
-_08023794: .4byte 0x080CC290
+_08023794: .4byte dword_80CC290
 _08023798:
 	ldr r4, _080237C8
 	ldr r0, [r4]
@@ -17683,7 +17416,7 @@ _080237BE:
 	bx r0
 	.align 2, 0
 _080237C8: .4byte dword_2000FC8
-_080237CC: .4byte 0x080CC290
+_080237CC: .4byte dword_80CC290
 _080237D0: .4byte gPlayerSprite
 
 	.thumb
@@ -17898,7 +17631,7 @@ _0802394C:
 _08023974: .4byte gPlayerSprite
 _08023978: .4byte dword_2000FC8
 _0802397C: .4byte 0x000001B9
-_08023980: .4byte 0x080CC290
+_08023980: .4byte dword_80CC290
 _08023984:
 	ldr r4, _080239B4
 	ldr r0, [r4]
@@ -17924,7 +17657,7 @@ _080239AA:
 	bx r0
 	.align 2, 0
 _080239B4: .4byte dword_2000FC8
-_080239B8: .4byte 0x080CC290
+_080239B8: .4byte dword_80CC290
 _080239BC: .4byte gPlayerSprite
 
 	.thumb
@@ -17977,11 +17710,11 @@ _08023A1A:
 	.align 2, 0
 _08023A24: .4byte gPlayerSprite
 _08023A28: .4byte gGameStatus
-_08023A2C: .4byte 0x02002090
+_08023A2C: .4byte word_2002090
 _08023A30: .4byte gPlayerState
 _08023A34: .4byte 0x000001D1
 _08023A38: .4byte dword_2000FC8
-_08023A3C: .4byte 0x080CC290
+_08023A3C: .4byte dword_80CC290
 
 	.thumb
 sub_8023A40: @ 0x08023A40
@@ -18028,11 +17761,11 @@ _08023A92:
 	bx r0
 	.align 2, 0
 _08023A9C: .4byte gPlayerSprite
-_08023AA0: .4byte 0x02002090
+_08023AA0: .4byte word_2002090
 _08023AA4: .4byte gPlayerState
 _08023AA8: .4byte 0x000001D9
 _08023AAC: .4byte dword_2000FC8
-_08023AB0: .4byte 0x080CC290
+_08023AB0: .4byte dword_80CC290
 
 	.thumb
 sub_8023AB4: @ 0x08023AB4
@@ -18080,11 +17813,11 @@ sub_8023AB4: @ 0x08023AB4
 _08023B10: .4byte gPlayerSprite
 _08023B14: .4byte gGameStatus
 _08023B18: .4byte 0x02001370
-_08023B1C: .4byte 0x02002090
+_08023B1C: .4byte word_2002090
 _08023B20: .4byte gPlayerState
 _08023B24: .4byte 0x000001C9
 _08023B28: .4byte dword_2000FC8
-_08023B2C: .4byte 0x080CC290
+_08023B2C: .4byte dword_80CC290
 _08023B30:
 	bl sub_8016890
 	b _08023B6C
@@ -18118,11 +17851,11 @@ _08023B6C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08023B74: .4byte 0x02002090
+_08023B74: .4byte word_2002090
 _08023B78: .4byte gPlayerState
 _08023B7C: .4byte 0x000001C9
 _08023B80: .4byte dword_2000FC8
-_08023B84: .4byte 0x080CC290
+_08023B84: .4byte dword_80CC290
 
 	.thumb
 sub_8023B88: @ 0x08023B88
@@ -18240,7 +17973,7 @@ _08023C74: .4byte 0x020010A5
 _08023C78: .4byte word_20010AC
 _08023C7C: .4byte gKeysPressed
 _08023C80: .4byte 0x000003FF
-_08023C84: .4byte 0x02002090
+_08023C84: .4byte word_2002090
 _08023C88: .4byte gPlayerState
 _08023C8C: .4byte 0x000001C9
 _08023C90: .4byte dword_2000FC8
@@ -18391,7 +18124,7 @@ _08023DA6:
 	bx r0
 	.align 2, 0
 _08023DAC: .4byte gPlayerSprite
-_08023DB0: .4byte 0x02002090
+_08023DB0: .4byte word_2002090
 _08023DB4: .4byte gPlayerState
 _08023DB8: .4byte 0x00000101
 
