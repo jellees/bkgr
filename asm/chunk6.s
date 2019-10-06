@@ -381,7 +381,7 @@ _08027ECC: .4byte 0x0203DFE5
 _08027ED0: .4byte 0x0203DFE6
 _08027ED4: .4byte 0x0203DFE7
 _08027ED8: .4byte 0x0203E010
-_08027EDC: .4byte 0x0203DFD7
+_08027EDC: .4byte gInInteractionArea
 _08027EE0: .4byte 0x0203DFD8
 _08027EE4: .4byte 0x0203DFD9
 _08027EE8: .4byte 0x0203DFDA
@@ -584,7 +584,7 @@ _080280FC: .4byte 0x0203DFE9
 _08028100: .4byte 0x0203DFDA
 _08028104: .4byte 0x0203DFD9
 _08028108: .4byte 0x0203DFD8
-_0802810C: .4byte 0x0203DFD7
+_0802810C: .4byte gInInteractionArea
 _08028110: .4byte 0x0203E010
 _08028114: .4byte 0x0203DFE7
 _08028118: .4byte 0x0203DFE6
@@ -4051,7 +4051,7 @@ _08029CC4: .4byte 0x0203E009
 _08029CC8: .4byte 0x0203DFE0
 _08029CCC: .4byte 0x0203DFF4
 _08029CD0: .4byte 0x0203E010
-_08029CD4: .4byte 0x0203DFD7
+_08029CD4: .4byte gInInteractionArea
 _08029CD8: .4byte 0x0203DFDC
 _08029CDC:
 	adds r4, #1
@@ -4136,7 +4136,7 @@ _08029D74: .4byte 0x0203DFDC
 _08029D78: .4byte 0x0203DFE0
 _08029D7C: .4byte 0x0203DFF8
 _08029D80: .4byte 0x0203E010
-_08029D84: .4byte 0x0203DFD7
+_08029D84: .4byte gInInteractionArea
 _08029D88:
 	adds r4, #1
 _08029D8A:
@@ -4243,7 +4243,7 @@ _08029E48: .4byte 0x0203E009
 _08029E4C: .4byte 0x080CC2B0
 _08029E50: .4byte 0x0203DFF4
 _08029E54: .4byte 0x0203E010
-_08029E58: .4byte 0x0203DFD7
+_08029E58: .4byte gInInteractionArea
 _08029E5C: .4byte 0x0203DFDC
 _08029E60: .4byte 0x0203DFE0
 _08029E64:
@@ -4334,7 +4334,7 @@ _08029F04: .4byte 0x0203DFE0
 _08029F08: .4byte 0x080CC2B0
 _08029F0C: .4byte 0x0203DFF8
 _08029F10: .4byte 0x0203E010
-_08029F14: .4byte 0x0203DFD7
+_08029F14: .4byte gInInteractionArea
 _08029F18: .4byte 0x0203DFDC
 _08029F1C:
 	adds r4, #1
@@ -4464,7 +4464,7 @@ _08029FD6:
 	.align 2, 0
 _0802A00C: .4byte 0x0203DFD0
 _0802A010: .4byte 0x0203E010
-_0802A014: .4byte 0x0203DFD7
+_0802A014: .4byte gInInteractionArea
 _0802A018: .4byte 0x0203DFDC
 _0802A01C: .4byte 0x0203DFE0
 _0802A020:
@@ -4614,7 +4614,7 @@ _0802A106:
 	.align 2, 0
 _0802A13C: .4byte 0x0203DFD1
 _0802A140: .4byte 0x0203E010
-_0802A144: .4byte 0x0203DFD7
+_0802A144: .4byte gInInteractionArea
 _0802A148: .4byte 0x0203DFDC
 _0802A14C: .4byte 0x0203DFE0
 _0802A150:
@@ -4760,7 +4760,7 @@ _0802A22A:
 	.align 2, 0
 _0802A260: .4byte 0x0203DFD2
 _0802A264: .4byte 0x0203E010
-_0802A268: .4byte 0x0203DFD7
+_0802A268: .4byte gInInteractionArea
 _0802A26C: .4byte 0x0203DFDC
 _0802A270: .4byte 0x0203DFE0
 _0802A274:
@@ -7076,7 +7076,7 @@ _0802B49A:
 	.align 2, 0
 _0802B4D0: .4byte 0x0203DFDA
 _0802B4D4: .4byte 0x0203DFD9
-_0802B4D8: .4byte 0x0203DFD7
+_0802B4D8: .4byte gInInteractionArea
 _0802B4DC: .4byte 0x0203DFE0
 _0802B4E0: .4byte 0x0203DFDC
 _0802B4E4:
@@ -7126,7 +7126,7 @@ _0802B538:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0802B540: .4byte 0x0203DFD7
+_0802B540: .4byte gInInteractionArea
 _0802B544: .4byte 0x0203DFDC
 _0802B548: .4byte 0x0203DFE0
 
@@ -15713,7 +15713,7 @@ _0802FE74:
 _0802FEAC: .4byte 0x02002E50
 _0802FEB0: .4byte 0x02002E4F
 _0802FEB4: .4byte 0x00000237
-_0802FEB8: .4byte 0x0203DFD7
+_0802FEB8: .4byte gInInteractionArea
 _0802FEBC:
 	adds r0, r2, #0
 	adds r0, #0xa0
@@ -15731,7 +15731,7 @@ _0802FED0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0802FED8: .4byte 0x0203DFD7
+_0802FED8: .4byte gInInteractionArea
 
     .thumb
     .global sub_0802FEDC
@@ -15773,7 +15773,7 @@ _0802FF1E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0802FF28: .4byte 0x0203DFD7
+_0802FF28: .4byte gInInteractionArea
 _0802FF2C: .4byte 0x0203DFDC
 _0802FF30: .4byte 0x0203E01C
 _0802FF34: .4byte 0x02001118
@@ -16972,7 +16972,7 @@ sub_803091C: @ 0x0803091C
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_0803092C: .4byte 0x0203DFD7
+_0803092C: .4byte gInInteractionArea
 _08030930: .4byte 0x0203DFDC
 
     .thumb
@@ -40358,7 +40358,7 @@ sub_803C020: @ 0x0803C020
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803C038: .4byte word_2002090
+_0803C038: .4byte gPreviousPlayerState
 _0803C03C: .4byte gPlayerState
 
 	.thumb

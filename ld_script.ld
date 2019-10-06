@@ -84,7 +84,7 @@ SECTIONS
 		dword_2001470 = .; . += 4;
 
 		. = 0x00002090;
-		word_2002090 = .; . += 2;
+		gPreviousPlayerState = .; . += 2;
 		gPlayerState = .; . += 2;
 
 		. = 0x000020B0;
@@ -118,6 +118,9 @@ SECTIONS
 
 		. = 0x0003DFC4;
 		dword_203DFC4 = .; . += 4;
+
+		. = 0x0003DFD7;
+		gInInteractionArea = .; . += 1;
 
 		. = 0x0003EA89;
 		byte_203EA89 = .; . += 1;

@@ -747,7 +747,7 @@ _0800BF80:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800BF90: .4byte 0x0203DFD7
+_0800BF90: .4byte gInInteractionArea
 _0800BF94: .4byte 0x0203DFE0
 _0800BF98: .4byte 0x030028FC
 _0800BF9C: .4byte gPlayerSprite
@@ -991,7 +991,7 @@ _0800C1C8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800C1DC: .4byte 0x0203DFD7
+_0800C1DC: .4byte gInInteractionArea
 _0800C1E0: .4byte 0x0203DFE0
 _0800C1E4: .4byte gPlayerSprite
 
@@ -1170,7 +1170,7 @@ _0800C370: .4byte gPlayerSprite
 _0800C374: .4byte 0x02001464
 _0800C378: .4byte 0x02001466
 _0800C37C: .4byte gPlayerShadowSprite
-_0800C380: .4byte 0x0203DFD7
+_0800C380: .4byte gInInteractionArea
 _0800C384: .4byte 0x0203DFE0
 
 
@@ -1332,7 +1332,7 @@ _0800C4F4: .4byte 0x02001464
 _0800C4F8: .4byte 0x02001466
 _0800C4FC: .4byte gPlayerShadowSprite
 _0800C500: .4byte gLoadedRoomIndex
-_0800C504: .4byte 0x0203DFD7
+_0800C504: .4byte gInInteractionArea
 _0800C508: .4byte 0x0203DFE0
 
 
