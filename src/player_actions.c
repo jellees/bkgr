@@ -9,6 +9,38 @@ extern bool8 gInInteractionArea;
 
 extern void (*dPlayerBehaviors[1])(s32, s32);
 extern u32 dword_80CC290[8];
+extern u8 byte_203EA89;
+extern struct SoundEffect dSoundEffects[];
+extern u8 byte_203EA8C;
+
+struct struct_0
+{
+    u8 field_0;
+    u8 field_1;
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 field_8;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    u8 field_C;
+    u8 field_D;
+    u8 field_E;
+    u8 field_F;
+    u8 field_10;
+    u8 field_11;
+    u8 field_12;
+    u8 field_13;
+    u8 field_14;
+    u8 field_15;
+    u8 field_16;
+};
+
+extern struct struct_0 stru_200209A;
 
 void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown)
 {
@@ -301,5 +333,148 @@ static void Idle(s32 keyPressed, s32 keyDown)
         sub_8003884(dword_2000FC8, 0x19999, 0, 0);
         sub_8016790(0, gPlayerSprite.field_A);
         break;
+    }
+}
+
+static void Walk(s32 keyPressed, s32 keyDown)
+{
+    s32 pressed = keyPressed;
+    s32 down = keyDown;
+
+    sub_8016710(&pressed, &down);
+
+    switch (down & 0x30F)
+    {
+    case 1:
+        if (sub_08016EE0())
+            return;
+        DoJump();
+        return;
+    case 2:
+        if (stru_200209A.field_2)
+        {
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 13;
+            sub_8003368(&gPlayerSprite, 97, 0, 1);
+            sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (byte_203EA89)
+            {
+                audio_new_fx(dSoundEffects[7].index, dSoundEffects[7].volumes[byte_203EA8C],
+                             dSoundEffects[7].pitch + 0x10000);
+            }
+            sub_8016790(2, gPlayerSprite.field_A);
+        }
+        else
+        {
+            DoPackWack();
+        }
+        return;
+    case 0x100: return;
+    case 0x200:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 2;
+        sub_8003368(&gPlayerSprite, 0x21, 0, 1);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    }
+
+    switch (pressed & 0xF0)
+    {
+    case 0x50:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 4;
+        if (gPlayerSprite.field_A != 1)
+        {
+            gPlayerSprite.field_A = 1;
+            sub_8003368(&gPlayerSprite, 1, 0, 0);
+            sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
+        }
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    case 0x90:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 4;
+        if (gPlayerSprite.field_A != 3)
+        {
+            gPlayerSprite.field_A = 3;
+            sub_8003368(&gPlayerSprite, 1, 0, 0);
+            sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
+        }
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    case 0xA0:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 4;
+        if (gPlayerSprite.field_A != 5)
+        {
+            gPlayerSprite.field_A = 5;
+            sub_8003368(&gPlayerSprite, 1, 0, 0);
+            sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
+        }
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    case 0x60:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 4;
+        if (gPlayerSprite.field_A != 7)
+        {
+            gPlayerSprite.field_A = 7;
+            sub_8003368(&gPlayerSprite, 1, 0, 0);
+            sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
+        }
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    case 0x40:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 4;
+        if (gPlayerSprite.field_A != 0)
+        {
+            gPlayerSprite.field_A = 0;
+            sub_8003368(&gPlayerSprite, 1, 0, 0);
+            sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
+        }
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    case 0x80:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 4;
+        if (gPlayerSprite.field_A != 4)
+        {
+            gPlayerSprite.field_A = 4;
+            sub_8003368(&gPlayerSprite, 1, 0, 0);
+            sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
+        }
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    case 0x20:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 4;
+        if (gPlayerSprite.field_A != 6)
+        {
+            gPlayerSprite.field_A = 6;
+            sub_8003368(&gPlayerSprite, 1, 0, 0);
+            sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
+        }
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    case 0x10:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 4;
+        if (gPlayerSprite.field_A != 2)
+        {
+            gPlayerSprite.field_A = 2;
+            sub_8003368(&gPlayerSprite, 1, 0, 0);
+            sub_8003884(dword_2000FC8, 0x19999, 0, 0);
+        }
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    default:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 0;
+        sub_8003368(&gPlayerSprite, 0x19, 0, 0);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
     }
 }

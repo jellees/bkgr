@@ -87,8 +87,8 @@ SECTIONS
 		gPreviousPlayerState = .; . += 2;
 		gPlayerState = .; . += 2;
 
-		. = 0x000020B0;
-		byte_20020B0 = .; . += 1;
+		. = 0x0000209A;
+		stru_200209A = .; . += 0x17;
 		byte_20020B1 = .; . += 1;
 		byte_20020B2 = .; . += 1;
 		byte_20020B3 = .; . += 1;
