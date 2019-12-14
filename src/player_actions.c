@@ -478,3 +478,29 @@ static void Walk(s32 keyPressed, s32 keyDown)
         return;
     }
 }
+
+static void ForwardRoll(s32 keyPressed, s32 keyDown)
+{
+    s32 pressed = keyPressed;
+    s32 down = keyDown;
+
+    sub_8016710(&pressed, &down);
+
+    switch (down & 0x30F)
+    {
+    case 1:
+        if (!sub_08016EE0())
+            DoJump();
+        break;
+    default:
+        if (!sub_8003770(&gPlayerSprite))
+            return;
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 0;
+        sub_8003368(&gPlayerSprite, 25, 0, 0);
+        sub_800386C(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A]);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+        break;
+    }
+}
