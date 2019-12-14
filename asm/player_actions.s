@@ -4,56 +4,6 @@
     .text
 
 	.thumb
-sub_801B08C: @ 0x0801B08C
-	push {r4, r5, r6, lr}
-	ldr r6, _0801B0E8
-	adds r0, r6, #0
-	bl sub_8003770
-	cmp r0, #0
-	beq _0801B0E0
-	ldr r2, _0801B0EC
-	ldr r1, _0801B0F0
-	ldrh r0, [r1]
-	strh r0, [r2]
-	movs r0, #0
-	strh r0, [r1]
-	adds r0, r6, #0
-	movs r1, #0x19
-	movs r2, #0
-	movs r3, #0
-	bl sub_8003368
-	ldr r4, _0801B0F4
-	ldr r0, [r4]
-	ldr r5, _0801B0F8
-	ldrb r1, [r6, #0xa]
-	lsls r1, r1, #2
-	adds r1, r1, r5
-	ldr r2, [r1]
-	movs r1, #0
-	bl sub_800386C
-	ldr r0, [r4]
-	ldrb r1, [r6, #0xa]
-	lsls r1, r1, #2
-	adds r1, r1, r5
-	ldr r2, [r1]
-	movs r1, #0
-	movs r3, #0
-	bl sub_8003884
-	ldrb r1, [r6, #0xa]
-	movs r0, #0
-	bl sub_8016790
-_0801B0E0:
-	pop {r4, r5, r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801B0E8: .4byte gPlayerSprite
-_0801B0EC: .4byte gPreviousPlayerState
-_0801B0F0: .4byte gPlayerState
-_0801B0F4: .4byte dword_2000FC8
-_0801B0F8: .4byte dword_80CC290
-
-	.thumb
 sub_801B0FC: @ 0x0801B0FC
 	push {r4, lr}
 	sub sp, #8

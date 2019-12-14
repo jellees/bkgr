@@ -504,3 +504,16 @@ static void ForwardRoll(s32 keyPressed, s32 keyDown)
         break;
     }
 }
+
+static void sub_801B08C(s32 keyPressed, s32 keyDown)
+{
+    if (sub_8003770(&gPlayerSprite))
+    {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 0;
+        sub_8003368(&gPlayerSprite, 25, 0, 0);
+        sub_800386C(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A]);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
