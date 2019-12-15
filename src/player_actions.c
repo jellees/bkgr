@@ -536,3 +536,19 @@ static void PackWackStart(s32 keyPressed, s32 keyDown)
         sub_8016790(1, gPlayerSprite.field_A);
     }
 }
+
+static void PackWackEnd(s32 keyPressed, s32 keyDown)
+{
+    s32 pressed = keyPressed;
+    s32 down = keyDown;
+
+    sub_8016710(&pressed, &down);
+
+    if (sub_8003770(&gPlayerSprite))
+    {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 0;
+        sub_8003368(&gPlayerSprite, 25, 0, 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
