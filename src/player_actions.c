@@ -517,3 +517,22 @@ static void sub_801B08C(s32 keyPressed, s32 keyDown)
         sub_8016790(0, gPlayerSprite.field_A);
     }
 }
+
+static void PackWackStart(s32 keyPressed, s32 keyDown)
+{
+    s32 pressed = keyPressed;
+    s32 down = keyDown;
+
+    sub_8016710(&pressed, &down);
+
+    if (sub_8003770(&gPlayerSprite))
+    {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 28;
+        sub_8003368(&gPlayerSprite, 185, 0, 1);
+        if (byte_203EA89)
+            audio_new_fx(dSoundEffects[13].index, dSoundEffects[13].volumes[byte_203EA8C],
+                         dSoundEffects[13].pitch + 0x10000);
+        sub_8016790(1, gPlayerSprite.field_A);
+    }
+}
