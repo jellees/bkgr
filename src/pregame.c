@@ -954,3 +954,68 @@ void ShowFlashscreens()
     sub_80270AC(4095, 0);
     SetTextSpriteCount(0);
 }
+
+/**
+ * Finish this later.
+ */
+
+// extern char* dword_86AD314[115]; // array of strings
+// extern u32* dword_20021FC;
+// extern u32 dword_2002200;
+
+// extern void *Alloc(u32 size, u32 allocId, u32 heap);
+
+// void sub_8025000()
+// {
+//     int r4;
+//     int r1;
+//     int r7;
+//     char** buffer;
+
+//     if (byte_20021F0)
+//         return;
+
+//     r4 = 0;
+//     r1 = 0;
+//     r7 = 0;
+
+//     do
+//     {
+//         switch(*dword_86AD314[r7])
+//         {
+//             case 0xFF:
+//                 r4 = 1;
+//                 break;
+//             case 0xFE:
+//             case 0xFB:
+//                 r7++;
+//                 break;
+//             default:
+//                 r7++;
+//                 r1++;
+//                 break;
+//         }
+//     }
+//     while(r4 == 0);
+
+//     dword_2002200 = r1;
+//     dword_20021FC = Alloc(r1 * 40, 0x11, 4);
+    
+//     buffer = &dword_86AD314[0];
+
+//     if (dword_2002200 > 0)
+//     {
+//         u32 v1 = 0x24;
+
+//         if (**buffer == 0xFB)
+//         {
+//             buffer++;
+//         }
+
+//         // do
+//         // {
+            
+//         // }
+//         // while();
+//     }
+// }
