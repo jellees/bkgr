@@ -136,6 +136,9 @@ SECTIONS
 		. += 2; /* padding */
 		gMenu = .; . += 0x40;
 
+		. = 0x0003EAE4;
+		src/random.o(.bss);
+
 		. = 0x0003F4DC;
 		dword_203F4DC = .; . += 4;
 
@@ -284,6 +287,9 @@ SECTIONS
 		src/menu.o(.text);
 		asm/menu.o(.text);
 		asm/chunk7.o(.text);
+		src/random.o(.text);
+		asm/random.o(.text);
+		asm/chunk10.o(.text);
 		asm/pause_menu.o(.text);
 		asm/chunk8.o(.text);
 		*libgcc.a:*_call_via_rX*.o(.text*);
