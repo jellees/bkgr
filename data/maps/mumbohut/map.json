@@ -1,0 +1,288 @@
+{
+    "name": "MUMBOHUT",
+    "x_size": 8,
+    "y_size": 13,
+    "enabled_bgs": 4,
+    "unknown": 0,
+    "unused_path": "unused.bin",
+    "tiles_compression": "lz77",
+    "bg0_use_metatiles": 1,
+    "bg1_use_metatiles": 1,
+    "bg2_use_metatiles": 1,
+    "bg3_use_metatiles": 1,
+    "bg_palette_path": "bgplt.gbapal",
+    "sprite_palette_path": "spriteplt.gbapal",
+    "tiles1_count": 856,
+    "tiles2_count": 0,
+    "tiles1_path": "",
+    "tiles2_path": "",
+    "metatiles1_path": "metatiles1.bin",
+    "metatiles2_path": "metatiles2.bin",
+    "collision_path": "collision.bin",
+    "textbar1_path": "",
+    "textbar2_path": "textbar1.bin",
+    "bg0_path": "bg0.bin",
+    "bg1_path": "bg1.bin",
+    "bg2_path": "bg2.bin",
+    "bg3_path": "bg3.bin",
+    "bg0_is_static": true,
+    "bg1_is_static": false,
+    "bg2_is_static": false,
+    "bg3_is_static": false,
+    "bg0_is_controllable": true,
+    "bg1_is_controllable": false,
+    "bg2_is_controllable": false,
+    "bg3_is_controllable": false,
+    "anims1": [
+        {
+            "path": "anims1/0.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/1.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/2.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/3.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/4.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/5.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/6.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/7.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/8.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/9.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/10.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/11.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/12.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/13.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/14.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/15.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/16.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/17.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/18.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/19.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/20.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/21.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/22.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/23.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/24.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/25.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/26.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/27.4bpp",
+            "fps": 16
+        },
+        {
+            "path": "anims1/28.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/29.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/30.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/31.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/32.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/33.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/34.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/35.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/36.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/37.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/38.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/39.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/40.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/41.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/42.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/43.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/44.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/45.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/46.4bpp",
+            "fps": 3
+        },
+        {
+            "path": "anims1/47.4bpp",
+            "fps": 3
+        }
+    ],
+    "anims2": [],
+    "entities": {
+        "x_is_indexed": true,
+        "data": [
+            {
+                "x": 128,
+                "y": 192,
+                "id": 119,
+                "04": 16,
+                "06": 0,
+                "08": 0,
+                "0A": 1,
+                "height": 30,
+                "0C": 0,
+                "0D": 0,
+                "0E": 0,
+                "0F": 0,
+                "10": 7,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 1,
+                "16": 0,
+                "17": 0,
+                "18": 0,
+                "19": 0,
+                "1A": 0,
+                "1B": 0
+            },
+            {
+                "x": 128,
+                "y": 221,
+                "id": 15,
+                "04": 16,
+                "06": 0,
+                "08": 1,
+                "0A": 1,
+                "height": 0,
+                "0C": 0,
+                "0D": 0,
+                "0E": 0,
+                "0F": 3,
+                "10": 2,
+                "11": 34,
+                "12": 35,
+                "13": 37,
+                "14": 0,
+                "15": 1,
+                "16": 0,
+                "17": 0,
+                "18": 0,
+                "19": 0,
+                "1A": 0,
+                "1B": 0
+            }
+        ]
+    }
+}

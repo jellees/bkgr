@@ -1,0 +1,556 @@
+{
+    "name": "BEACHSHOOT",
+    "x_size": 8,
+    "y_size": 8,
+    "enabled_bgs": 4,
+    "unknown": 0,
+    "unused_path": "unused.bin",
+    "tiles_compression": "lz77",
+    "bg0_use_metatiles": 1,
+    "bg1_use_metatiles": 1,
+    "bg2_use_metatiles": 1,
+    "bg3_use_metatiles": 1,
+    "bg_palette_path": "bgplt.gbapal",
+    "sprite_palette_path": "spriteplt.gbapal",
+    "tiles1_count": 416,
+    "tiles2_count": 0,
+    "tiles1_path": "",
+    "tiles2_path": "",
+    "metatiles1_path": "metatiles1.bin",
+    "metatiles2_path": "metatiles2.bin",
+    "collision_path": "",
+    "textbar1_path": "",
+    "textbar2_path": "textbar1.bin",
+    "bg0_path": "bg0.bin",
+    "bg1_path": "bg1.bin",
+    "bg2_path": "bg2.bin",
+    "bg3_path": "bg3.bin",
+    "bg0_is_static": false,
+    "bg1_is_static": false,
+    "bg2_is_static": false,
+    "bg3_is_static": false,
+    "bg0_is_controllable": false,
+    "bg1_is_controllable": false,
+    "bg2_is_controllable": false,
+    "bg3_is_controllable": true,
+    "anims1": [
+        {
+            "path": "anims1/0.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/1.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/2.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/3.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/4.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/5.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/6.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/7.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/8.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/9.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/10.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/11.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/12.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/13.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/14.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/15.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/16.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/17.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/18.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/19.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/20.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/21.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/22.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/23.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/24.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/25.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/26.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/27.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/28.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/29.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/30.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/31.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/32.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/33.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/34.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/35.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/36.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/37.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/38.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/39.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/40.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/41.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/42.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/43.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/44.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/45.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/46.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/47.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/48.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/49.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/50.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/51.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/52.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/53.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/54.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/55.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/56.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/57.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/58.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/59.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/60.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/61.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/62.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/63.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/64.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/65.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/66.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/67.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/68.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/69.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/70.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/71.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/72.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/73.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/74.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/75.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/76.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/77.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/78.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/79.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/80.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/81.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/82.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/83.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/84.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/85.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/86.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/87.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/88.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/89.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/90.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/91.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/92.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/93.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/94.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/95.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/96.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/97.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/98.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/99.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/100.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/101.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/102.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/103.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/104.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/105.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/106.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/107.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/108.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/109.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/110.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/111.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/112.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/113.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/114.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/115.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/116.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/117.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/118.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/119.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/120.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/121.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/122.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/123.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/124.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/125.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/126.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/127.4bpp",
+            "fps": 6
+        },
+        {
+            "path": "anims1/128.4bpp",
+            "fps": 6
+        }
+    ],
+    "anims2": [],
+    "entities": null
+}

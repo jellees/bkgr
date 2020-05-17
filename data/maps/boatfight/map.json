@@ -1,0 +1,284 @@
+{
+    "name": "BOATFIGHT",
+    "x_size": 8,
+    "y_size": 8,
+    "enabled_bgs": 2,
+    "unknown": 0,
+    "unused_path": "unused.bin",
+    "tiles_compression": "lz77",
+    "bg0_use_metatiles": 1,
+    "bg1_use_metatiles": 1,
+    "bg2_use_metatiles": 1,
+    "bg3_use_metatiles": 1,
+    "bg_palette_path": "bgplt.gbapal",
+    "sprite_palette_path": "spriteplt.gbapal",
+    "tiles1_count": 23,
+    "tiles2_count": 0,
+    "tiles1_path": "",
+    "tiles2_path": "",
+    "metatiles1_path": "metatiles1.bin",
+    "metatiles2_path": "metatiles2.bin",
+    "collision_path": "",
+    "textbar1_path": "",
+    "textbar2_path": "textbar1.bin",
+    "bg0_path": "bg0.bin",
+    "bg1_path": "bg1.bin",
+    "bg2_path": "",
+    "bg3_path": "",
+    "bg0_is_static": false,
+    "bg1_is_static": false,
+    "bg2_is_static": false,
+    "bg3_is_static": false,
+    "bg0_is_controllable": false,
+    "bg1_is_controllable": false,
+    "bg2_is_controllable": false,
+    "bg3_is_controllable": false,
+    "anims1": [
+        {
+            "path": "anims1/0.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/1.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/2.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/3.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/4.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/5.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/6.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/7.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/8.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/9.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/10.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/11.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/12.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/13.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/14.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/15.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/16.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/17.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/18.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/19.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/20.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/21.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/22.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/23.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/24.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/25.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/26.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/27.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/28.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/29.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/30.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/31.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/32.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/33.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/34.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/35.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/36.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/37.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/38.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/39.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/40.4bpp",
+            "fps": 7
+        },
+        {
+            "path": "anims1/41.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/42.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/43.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/44.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/45.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/46.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/47.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/48.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/49.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/50.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/51.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/52.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/53.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/54.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/55.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/56.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/57.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/58.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/59.4bpp",
+            "fps": 5
+        },
+        {
+            "path": "anims1/60.4bpp",
+            "fps": 5
+        }
+    ],
+    "anims2": [],
+    "entities": null
+}
