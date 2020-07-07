@@ -14,7 +14,7 @@
     "sprite_palette_path": "spriteplt.gbapal",
     "tiles1_count": 328,
     "tiles2_count": 0,
-    "tiles1_path": "",
+    "tiles1_path": "tiles1.4bpp.lz",
     "tiles2_path": "",
     "metatiles1_path": "metatiles1.bin",
     "metatiles2_path": "metatiles2.bin",
