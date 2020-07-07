@@ -1,18 +1,18 @@
 BIN_DIR			:= $(DEVKITARM)/bin
 PREFIX			:= arm-none-eabi-
 
-CPP				:= $(BIN_DIR)/$(PREFIX)cpp
-OBJCOPY 		:= $(BIN_DIR)/$(PREFIX)objcopy
-LD 				:= $(BIN_DIR)/$(PREFIX)ld
-AS 			    := $(BIN_DIR)/$(PREFIX)as
-
 ifeq ($(OS),Windows_NT)
 WINE :=
 EXE := .exe
 else
-WINE := wine
-EXE :=
+WINE := 
+EXE := .exe
 endif
+
+CPP				:= $(BIN_DIR)/./$(PREFIX)cpp$(EXE)
+OBJCOPY 		:= $(BIN_DIR)/./$(PREFIX)objcopy$(EXE)
+LD 				:= $(BIN_DIR)/./$(PREFIX)ld$(EXE)
+AS 			    := $(BIN_DIR)/./$(PREFIX)as$(EXE)
 
 TITLE       := BANJOKAZOOIE
 GAME_CODE   := BKZE
@@ -38,7 +38,7 @@ DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 
 ASFLAGS 	:= -mcpu=arm7tdmi
 
-CC1			:= $(WINE) tools/agbcc/bin/agbcc.exe
+CC1			:= tools/agbcc/bin/./agbcc$(EXE)
 CFLAGS 		:= -O2 -mthumb-interwork -fhex-asm
 CPPFLAGS 	:= -iquote include -Wno-trigraphs
 
@@ -47,7 +47,7 @@ LIBGCC := tools/agbcc/lib/libgcc.a
 LDFLAGS = -L../tools/agbcc/lib -lgcc -lc
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
-FIX := tools/gbafix/gbafix$(EXE)
+FIX := tools/gbafix/./gbafix
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -104,3 +104,6 @@ $(ELF): $(OBJS)
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+
+echo:
+	echo $(CPP) $(CPPFLAGS) $(C_SUBDIR)/alloc.c -o $(C_BUILDDIR)/alloc.i
