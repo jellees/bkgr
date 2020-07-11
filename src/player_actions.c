@@ -47,20 +47,17 @@ void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown)
     if (gPlayerState > 0x7F)
         HANG;
 
-    _call_via_r2(keyPressed, keyDown, dPlayerBehaviors[gPlayerState]);
+    dPlayerBehaviors[gPlayerState](keyPressed, keyDown);
 }
 
 static void nullsub_16(s32 keyPressed, s32 keyDown) {}
 
 static void Jump(s32 keyPressed, s32 keyDown)
 {
-    s32 pressed = keyPressed;
-    s32 down = keyDown;
+    sub_8016710(&keyPressed, &keyDown);
+    sub_8016624(keyPressed, keyDown);
 
-    sub_8016710(&pressed, &down);
-    sub_8016624(pressed, down);
-
-    switch (down & JOY_EXCL_DPAD)
+    switch (keyDown & JOY_EXCL_DPAD)
     {
     case A_BUTTON: DoFeatheryFlap(); return;
     case B_BUTTON: DoAirAttack(); return;
@@ -74,7 +71,7 @@ static void Jump(s32 keyPressed, s32 keyDown)
         sub_8003368(&gPlayerSprite, 17, 0, 0);
     }
 
-    switch (pressed & DPAD_ANY)
+    switch (keyPressed & DPAD_ANY)
     {
     case DPAD_RIGHT | DPAD_UP:
         if (gPlayerSprite.field_A == 1 && sub_80038AC(dword_2000FC8) << 0x18)
@@ -142,19 +139,16 @@ static void Jump(s32 keyPressed, s32 keyDown)
 
 static void JumpFall(s32 keyPressed, s32 keyDown)
 {
-    s32 pressed = keyPressed;
-    s32 down = keyDown;
+    sub_8016710(&keyPressed, &keyDown);
 
-    sub_8016710(&pressed, &down);
-
-    switch (down & JOY_EXCL_DPAD)
+    switch (keyDown & JOY_EXCL_DPAD)
     {
     case A_BUTTON: DoFeatheryFlap(); return;
     case B_BUTTON: DoAirAttack(); return;
     case L_BUTTON: DoBillDrill(); return;
     }
 
-    switch (pressed & DPAD_ANY)
+    switch (keyPressed & DPAD_ANY)
     {
     case DPAD_RIGHT | DPAD_UP:
         if (gPlayerSprite.field_A == 1 && sub_80038AC(dword_2000FC8) << 0x18)
@@ -222,12 +216,9 @@ static void JumpFall(s32 keyPressed, s32 keyDown)
 
 static void LedgeFall(s32 keyPressed, s32 keyDown)
 {
-    s32 pressed = keyPressed;
-    s32 down = keyDown;
+    sub_8016710(&keyPressed, &keyDown);
 
-    sub_8016710(&pressed, &down);
-
-    switch (down & JOY_EXCL_DPAD)
+    switch (keyDown & JOY_EXCL_DPAD)
     {
     case A_BUTTON: DoFeatheryFlap(); return;
     case B_BUTTON: DoAirAttack(); return;
@@ -237,15 +228,12 @@ static void LedgeFall(s32 keyPressed, s32 keyDown)
 
 static void Idle(s32 keyPressed, s32 keyDown)
 {
-    s32 pressed = keyPressed;
-    s32 down = keyDown;
+    sub_8016710(&keyPressed, &keyDown);
 
-    sub_8016710(&pressed, &down);
-
-    switch (down & JOY_EXCL_DPAD)
+    switch (keyDown & JOY_EXCL_DPAD)
     {
     default:
-        if (pressed & L_BUTTON)
+        if (keyPressed & L_BUTTON)
         {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = 2;
@@ -267,7 +255,7 @@ static void Idle(s32 keyPressed, s32 keyDown)
     case B_BUTTON: DoPackWack(); return;
     }
 
-    switch (pressed & DPAD_ANY)
+    switch (keyPressed & DPAD_ANY)
     {
     case DPAD_RIGHT | DPAD_UP:
         gPreviousPlayerState = gPlayerState;
@@ -338,12 +326,9 @@ static void Idle(s32 keyPressed, s32 keyDown)
 
 static void Walk(s32 keyPressed, s32 keyDown)
 {
-    s32 pressed = keyPressed;
-    s32 down = keyDown;
+    sub_8016710(&keyPressed, &keyDown);
 
-    sub_8016710(&pressed, &down);
-
-    switch (down & 0x30F)
+    switch (keyDown & 0x30F)
     {
     case 1:
         if (sub_08016EE0())
@@ -379,7 +364,7 @@ static void Walk(s32 keyPressed, s32 keyDown)
         return;
     }
 
-    switch (pressed & 0xF0)
+    switch (keyPressed & 0xF0)
     {
     case 0x50:
         gPreviousPlayerState = gPlayerState;
@@ -481,12 +466,9 @@ static void Walk(s32 keyPressed, s32 keyDown)
 
 static void ForwardRoll(s32 keyPressed, s32 keyDown)
 {
-    s32 pressed = keyPressed;
-    s32 down = keyDown;
+    sub_8016710(&keyPressed, &keyDown);
 
-    sub_8016710(&pressed, &down);
-
-    switch (down & 0x30F)
+    switch (keyDown & 0x30F)
     {
     case 1:
         if (!sub_08016EE0())
