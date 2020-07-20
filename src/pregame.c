@@ -2,7 +2,7 @@
 #include "sprite.h"
 #include "menu.h"
 
-extern u32 sub_08044860();
+extern bool32 sub_8044860();
 extern void reset_savefiles();
 extern void MakeFileStrings();
 extern void init_savefiles();
@@ -82,7 +82,7 @@ void ExecutePregame()
     byte_20021F9 = 0;
     dword_203F4DC = 0;
 
-    if (!sub_08044860())
+    if (!sub_8044860())
     {
         gPauseMenuLanguage = 0;
         byte_2000335 = 1;

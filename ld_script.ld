@@ -135,8 +135,15 @@ SECTIONS
 		gMenuParentId = .; . += 1;
 		. += 2; /* padding */
 		gMenu = .; . += 0x40;
-
-		. = 0x0003EAE4;
+		byte_203EAD4 = .; . += 1;
+		. += 1; /* padding */
+		word_203EAD6 = .; . += 2;
+		byte_203EAD8 = .; . += 1;
+		. += 3; /* padding */
+		dword_203EADC = .; . += 4;
+		byte_203EAE0 = .; . += 1 * 3;
+		byte_203EAE3 = .; . += 1;
+	
 		src/random.o(.bss);
 
 		. = 0x0003F4DC;
@@ -167,12 +174,13 @@ SECTIONS
 		. = 0x00002950;
 		byte_3002950 = .; . += 4; /* array */
 
-		. = 0x00002AA4;
+		. = 0x00002A6C;
+		gFunctionArray = .; . += 4 * 14;
 		gNullsub_3 = .; . += 4;
 		gNullsub_4 = .; . += 4;
 		gNullsub_5 = .; . += 4;
-
-		. = 0x000032A9;
+		gTileAnimQueue = .; . += 4 * 510;
+		gTileAnimQueueIndex = .; . += 1;
 		gIsSlideMiniGame = .; . += 1;
 		. += 2; /* padding */
 		dword_30032AC = .; . += 4;
@@ -286,7 +294,8 @@ SECTIONS
 		asm/chunk6.o(.text);
 		src/menu.o(.text);
 		asm/menu.o(.text);
-		asm/chunk7.o(.text);
+		src/80447C4.o(.text);
+		asm/80447C4.o(.text);
 		src/random.o(.text);
 		asm/random.o(.text);
 		asm/chunk10.o(.text);

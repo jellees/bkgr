@@ -107,3 +107,6 @@ $(ROM): $(ELF)
 
 echo:
 	echo $(CPP) $(CPPFLAGS) $(C_SUBDIR)/alloc.c -o $(C_BUILDDIR)/alloc.i
+
+show:
+	$(BIN_DIR)

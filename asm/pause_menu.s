@@ -2414,7 +2414,7 @@ _0804659C:
 	ldr r0, _08046618
 	ldrb r1, [r0]
 	mov r0, r8
-	bl sub_080449B0
+	bl sub_80449B0
 	movs r0, #4
 	bl CheckHeap
 	movs r0, #4
