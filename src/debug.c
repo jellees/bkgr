@@ -227,3 +227,101 @@ void sub_800FA84()
     gDebugInfoIndex = 0;
     byte_2001442 = 0;
 }
+
+void sub_800FCD8()
+{
+    switch (byte_200145B)
+    {
+    case 0:
+        gDebugInfoIndex = 5;
+        dword_2001394 = 0;
+        dword_2001398 = 0;
+        dword_200138C = 1;
+        dword_2001390 = 1;
+        gDebugMESN = 0;
+        byte_200138A = 0;
+        byte_200145B++;
+        break;
+    case 1:
+        gDebugInfoIndex = 9;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B++;
+        break;
+    case 2:
+        gDebugInfoIndex = 12;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B++;
+        break;
+    case 3:
+        gDebugInfoIndex = 13;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B++;
+        break;
+    case 4:
+        gDebugInfoIndex = 14;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B++;
+        break;
+    case 5:
+        gDebugInfoIndex = 15;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B++;
+        break;
+    case 6:
+        gDebugInfoIndex = 16;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B++;
+        break;
+    case 7:
+        gDebugInfoIndex = 17;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B++;
+        break;
+    case 8:
+        gDebugInfoIndex = 18;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B++;
+        break;
+    case 9:
+        gDebugInfoIndex = 19;
+        byte_200138A = 0;
+        REG_TM2CNT_H = 128;
+        REG_TM3CNT_H = 132;
+        REG_TM2CNT_L = 0;
+        REG_TM3CNT_L = 0;
+        byte_200145B = 0;
+        break;
+    }
+}
