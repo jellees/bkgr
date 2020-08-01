@@ -33,7 +33,7 @@ extern u32 dword_2001248;
 extern u32 dword_200124C;
 extern s32 dword_2001250;
 extern s32 dword_2001254;
-extern u32 dword_2001258;
+extern s32 dword_2001258;
 extern u32 dword_200125C;
 extern u32 dword_2001260;
 extern u32 dword_2001264;
@@ -110,7 +110,7 @@ extern u8 gDebugMESN;
 extern u8 byte_200138A;
 extern u32 dword_200138C;
 extern u32 dword_2001390;
-extern u32 dword_2001394;
+extern s32 dword_2001394;
 extern u32 dword_2001398;
 extern struct TextBox gDebugTextBox1;
 extern struct TextBox gDebugTextBox2;
@@ -743,4 +743,88 @@ void sub_80107E8(u32 a1)
         }
         break;
     }
+}
+
+void sub_801088C(u32 a1)
+{
+    switch (gDebugInfoIndex)
+    {
+    case 6: dword_2001210 = a1; break;
+    case 7:
+        dword_2001258 += a1;
+        dword_20012A0--;
+        if (!dword_20012A0)
+        {
+            dword_20012A0 = 2;
+            dword_2001210 = dword_2001258 >> 1;
+            dword_2001258 = 0;
+        }
+        break;
+    case 8:
+        dword_2001258 += a1;
+        dword_20012A0--;
+        if (!dword_20012A0)
+        {
+            dword_20012A0 = 4;
+            dword_2001210 = dword_2001258 >> 2;
+            dword_2001258 = 0;
+        }
+        break;
+    }
+}
+
+void Debug_SetAfterGameUpdate(s32 a1)
+{
+    switch (gDebugInfoIndex)
+    {
+    case 0: break;
+    case 1: gDebugESN = a1; break;
+    case 2:
+        dword_2001394 += a1;
+        dword_200138C--;
+        if (!dword_200138C)
+        {
+            dword_200138C = 2;
+            gDebugESN = dword_2001394 >> 1;
+            dword_2001394 = 0;
+        }
+        break;
+    case 3:
+        dword_2001394 += a1;
+        dword_200138C--;
+        if (!dword_200138C)
+        {
+            dword_200138C = 4;
+            gDebugESN = dword_2001394 >> 2;
+            dword_2001394 = 0;
+        }
+        break;
+    case 4:
+        dword_2001394 += a1;
+        dword_200138C--;
+        if (!dword_200138C)
+        {
+            dword_200138C = 8;
+            gDebugESN = dword_2001394 >> 3;
+            dword_2001394 = 0;
+        }
+        break;
+    case 5:
+        gDebugESN = a1;
+        if (a1 > gDebugMESN)
+            gDebugMESN = a1;
+        break;
+    }
+}
+
+void Debug_SetAfterVideoUpdate(u32 vcount)
+{
+    s32 a = gDebugInfoIndex;
+    if (a == 0)
+        return;
+    if (a < 0)
+        return;
+    if (a > 5)
+        return;
+    gDebugESV = vcount;
 }

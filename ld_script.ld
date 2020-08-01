@@ -413,7 +413,6 @@ SECTIONS
 		asm/chunk4.o(.text);
 		src/palette_effects.o(.text);
 		src/debug.o(.text);
-		asm/debug.o(.text);
 		asm/chunk5.o(.text);
 		src/player_actions.o(.text);
 		asm/player_actions.o(.text);
