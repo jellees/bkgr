@@ -31,8 +31,8 @@ extern u32 dword_2001240;
 extern u32 dword_2001244;
 extern u32 dword_2001248;
 extern u32 dword_200124C;
-extern u32 dword_2001250;
-extern u32 dword_2001254;
+extern s32 dword_2001250;
+extern s32 dword_2001254;
 extern u32 dword_2001258;
 extern u32 dword_200125C;
 extern u32 dword_2001260;
@@ -681,4 +681,66 @@ void Debug_ShowInfo()
     gDebugTextBox1.yPosition = 152;
     gDebugTextBox1.stringOffset = 0;
     AddStringToBuffer(&gDebugTextBox1, gDebugString);
+}
+
+void sub_8010744(u32 a1)
+{
+    switch (gDebugInfoIndex)
+    {
+    case 6:
+    case 9: dword_2001208 = a1; break;
+    case 7:
+    case 0xA:
+        dword_2001250 += a1;
+        dword_2001298--;
+        if (!dword_2001298)
+        {
+            dword_2001298 = 2;
+            dword_2001208 = dword_2001250 >> 1;
+            dword_2001250 = 0;
+        }
+        break;
+    case 8:
+    case 0xB:
+        dword_2001250 += a1;
+        dword_2001298--;
+        if (!dword_2001298)
+        {
+            dword_2001298 = 4;
+            dword_2001208 = dword_2001250 >> 2;
+            dword_2001250 = 0;
+        }
+        break;
+    }
+}
+
+void sub_80107E8(u32 a1)
+{
+    switch (gDebugInfoIndex)
+    {
+    case 6:
+    case 9: dword_200120C = a1; break;
+    case 7:
+    case 0xA:
+        dword_2001254 += a1;
+        dword_200129C--;
+        if (!dword_200129C)
+        {
+            dword_200129C = 2;
+            dword_200120C = dword_2001254 >> 1;
+            dword_2001254 = 0;
+        }
+        break;
+    case 8:
+    case 0xB:
+        dword_2001254 += a1;
+        dword_200129C--;
+        if (!dword_200129C)
+        {
+            dword_200129C = 4;
+            dword_200120C = dword_2001254 >> 2;
+            dword_2001254 = 0;
+        }
+        break;
+    }
 }
