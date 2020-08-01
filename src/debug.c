@@ -325,3 +325,360 @@ void sub_800FCD8()
         break;
     }
 }
+
+void Debug_ShowInfo()
+{
+    switch (gDebugInfoIndex)
+    {
+    case 0: return;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        gDebugString[0] = '0';
+        gDebugString[1] = '0';
+        gDebugString[2] = ' ';
+        gDebugString[3] = '0';
+        gDebugString[4] = '0';
+        gDebugString[5] = '0';
+        gDebugString[6] = ' ';
+        gDebugString[7] = '0';
+        gDebugString[8] = '0';
+        gDebugString[9] = '0';
+        gDebugString[10] = -1;
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            sub_8010744(dword_20012E4 - dword_20012E0 + 1);
+            sub_80107E8(dword_20012EC - dword_20012E8 + 1);
+            sub_801088C(dword_20012F4 - dword_20012F0 + 1);
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(gDebugFPS, &gDebugString[1]);
+        IntegerToAsciiBw(gDebugESN, &gDebugString[5]);
+        IntegerToAsciiBw(gDebugESV, &gDebugString[9]);
+        gDebugTextBox1.xPosition = 0x52;
+        break;
+    case 5:
+        gDebugString[0] = '0';
+        gDebugString[1] = '0';
+        gDebugString[2] = ' ';
+        gDebugString[3] = '0';
+        gDebugString[4] = '0';
+        gDebugString[5] = '0';
+        gDebugString[6] = ' ';
+        gDebugString[7] = '0';
+        gDebugString[8] = '0';
+        gDebugString[9] = '0';
+        gDebugString[10] = -1;
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            sub_8010744(dword_20012E4 - dword_20012E0 + 1);
+            sub_80107E8(dword_20012EC - dword_20012E8 + 1);
+            sub_801088C(dword_20012F4 - dword_20012F0 + 1);
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(gDebugFPS, &gDebugString[1]);
+        IntegerToAsciiBw(gDebugESN, &gDebugString[5]);
+        IntegerToAsciiBw(gDebugMESN, &gDebugString[9]);
+        gDebugTextBox1.xPosition = 82;
+        break;
+    case 6:
+    case 7:
+    case 8:
+        gDebugString[0] = '0';
+        gDebugString[1] = '0';
+        gDebugString[2] = '0';
+        gDebugString[3] = ' ';
+        gDebugString[4] = '0';
+        gDebugString[5] = '0';
+        gDebugString[6] = '0';
+        gDebugString[7] = ' ';
+        gDebugString[8] = '0';
+        gDebugString[9] = '0';
+        gDebugString[10] = '0';
+        gDebugString[11] = -1;
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            sub_8010744(dword_20012E4 - dword_20012E0 + 1);
+            sub_80107E8(dword_20012EC - dword_20012E8 + 1);
+            sub_801088C(dword_20012F4 - dword_20012F0 + 1);
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw((u8)dword_2001208, &gDebugString[2]);
+        IntegerToAsciiBw((u8)dword_200120C, &gDebugString[6]);
+        IntegerToAsciiBw((u8)dword_2001210, &gDebugString[10]);
+        gDebugTextBox1.xPosition = 82;
+        break;
+    case 9:
+    case 0xA:
+    case 0xB:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            sub_8010744(dword_20012E4 - dword_20012E0 + 1);
+            sub_80107E8(dword_20012EC - dword_20012E8 + 1);
+        }
+        else
+        {
+            --byte_200138A;
+        }
+
+        IntegerToAsciiBw(dword_2001208, &gDebugString[9]);
+        IntegerToAsciiBw(dword_200120C, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    case 0xC:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            dword_2001210 = dword_20012F4 - dword_20012F0 + 1;
+            dword_2001214 = dword_20012FC - dword_20012F8 + 1;
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(dword_2001210, &gDebugString[9]);
+        IntegerToAsciiBw(dword_2001214, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    case 0xD:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            dword_2001218 = dword_2001304 - dword_2001300 + 1;
+            dword_200121C = dword_200130C - dword_2001308 + 1;
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(dword_2001218, &gDebugString[9]);
+        IntegerToAsciiBw(dword_200121C, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    case 0xE:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            dword_2001220 = dword_2001314 - dword_2001310 + 1;
+            dword_2001224 = dword_200131C - dword_2001318 + 1;
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(dword_2001220, &gDebugString[9]);
+        IntegerToAsciiBw(dword_2001224, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    case 0xF:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            dword_2001228 = dword_2001324 - dword_2001320 + 1;
+            dword_200122C = dword_200132C - dword_2001328 + 1;
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(dword_2001228, &gDebugString[9]);
+        IntegerToAsciiBw(dword_200122C, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    case 0x10:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            dword_2001230 = dword_2001334 - dword_2001330 + 1;
+            dword_2001234 = dword_200133C - dword_2001338 + 1;
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(dword_2001230, &gDebugString[9]);
+        IntegerToAsciiBw(dword_2001234, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    case 0x11:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            dword_2001238 = dword_2001344 - dword_2001340 + 1;
+            dword_200123C = dword_200134C - dword_2001348 + 1;
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(dword_2001238, &gDebugString[9]);
+        IntegerToAsciiBw(dword_200123C, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    case 0x12:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            dword_2001240 = dword_2001354 - dword_2001350 + 1;
+            dword_2001244 = dword_200135C - dword_2001358 + 1;
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(dword_2001240, &gDebugString[9]);
+        IntegerToAsciiBw(dword_2001244, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    case 0x13:
+    {
+        s32 i;
+        for (i = 0; i < 10; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[10] = ' ';
+
+        for (i = 11; i <= 20; i++)
+            gDebugString[i] = '0';
+
+        gDebugString[21] = -1;
+
+        if (!byte_200138A)
+        {
+            byte_200138A = 8;
+            dword_2001248 = dword_2001364 - dword_2001360 + 1;
+            dword_200124C = dword_200136C - dword_2001368 + 1;
+        }
+        else
+        {
+            --byte_200138A;
+        }
+        IntegerToAsciiBw(dword_2001248, &gDebugString[9]);
+        IntegerToAsciiBw(dword_200124C, &gDebugString[20]);
+        gDebugTextBox1.xPosition = 36;
+    }
+    break;
+    }
+
+    gDebugTextBox1.yPosition = 152;
+    gDebugTextBox1.stringOffset = 0;
+    AddStringToBuffer(&gDebugTextBox1, gDebugString);
+}
