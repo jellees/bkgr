@@ -169,9 +169,9 @@ SECTIONS
 		gDebugMESN = .; . += 1;
 		byte_200138A = .; . += 1;
 		. += 1; /* padding */
-		dword_200138C = .; . += 4;
+		gDebugESNFrameCount = .; . += 4;
 		dword_2001390 = .; . += 4;
-		dword_2001394 = .; . += 4;
+		gDebugESNSum = .; . += 4;
 		dword_2001398 = .; . += 4;
 		gDebugTextBox1  = .; . += 0x14;
 		gDebugTextBox2  = .; . += 0x14;
