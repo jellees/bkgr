@@ -12,6 +12,7 @@ extern u32 gLoadedTileAnimCount;
 
 extern u8 gBGControlActions;
 extern u8 byte_2002070;
+extern u16 gColorSpecEffectsSel;
 
 void ResetTileAnimCount()
 {
@@ -174,4 +175,51 @@ void sub_80127B8(s32 a1)
         REG_BG3HOFS = 0;
     else
         REG_BG3HOFS = a1;
+}
+
+void EnableBGAlphaBlending()
+{
+    gColorSpecEffectsSel = BLDCNT_TGT2_ALL;
+
+    if (gRoomHeader.isControllableBG0)
+        gColorSpecEffectsSel |= BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG0;
+
+    if (gRoomHeader.isControllableBG1)
+        gColorSpecEffectsSel |= BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1;
+
+    if (gRoomHeader.isControllableBG2)
+        gColorSpecEffectsSel |= BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2;
+
+    if (gRoomHeader.isControllableBG3)
+        gColorSpecEffectsSel |= BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG3;
+}
+
+void DisableBackgrounds()
+{
+    if (gRoomHeader.isControllableBG0)
+        REG_DISPCNT &= ~DISPCNT_BG0_ON;
+
+    if (gRoomHeader.isControllableBG1)
+        REG_DISPCNT &= ~DISPCNT_BG1_ON;
+
+    if (gRoomHeader.isControllableBG2)
+        REG_DISPCNT &= ~DISPCNT_BG2_ON;
+
+    if (gRoomHeader.isControllableBG3)
+        REG_DISPCNT &= ~DISPCNT_BG3_ON;
+}
+
+void EnableBackgrounds()
+{
+    if (gRoomHeader.isControllableBG0)
+        REG_DISPCNT |= DISPCNT_BG0_ON;
+
+    if (gRoomHeader.isControllableBG1)
+        REG_DISPCNT |= DISPCNT_BG1_ON;
+
+    if (gRoomHeader.isControllableBG2)
+        REG_DISPCNT |= DISPCNT_BG2_ON;
+
+    if (gRoomHeader.isControllableBG3)
+        REG_DISPCNT |= DISPCNT_BG3_ON;
 }
