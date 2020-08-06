@@ -212,6 +212,8 @@ SECTIONS
 
 		. = 0x00002068;
 		gLoadedTileAnimCount = .; . += 4;
+		gTilesCount = .; . += 4;
+		byte_2002070 = .; . += 1;
 
 		. = 0x00002090;
 		gPreviousPlayerState = .; . += 2;
