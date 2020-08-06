@@ -3,134 +3,121 @@
 
     .text
 
-    .thumb
-    .global ResetTileAnimCount
-ResetTileAnimCount: @ 0x08012524
-	ldr r0, _08012530
-	movs r1, #0
-	str r1, [r0]
-	ldr r0, _08012534
-	str r1, [r0]
-	bx lr
-	.align 2, 0
-_08012530: .4byte 0x02002068
-_08012534: .4byte dword_2001470
-
-    .thumb
-SetupBGOffsets: @ 0x08012538
-	push {lr}
-	ldr r1, _08012558
-	adds r0, r1, #0
-	adds r0, #0x5c
-	ldrb r0, [r0]
-	mov ip, r1
-	cmp r0, #0
-	beq _08012568
-	ldr r0, _0801255C
-	movs r1, #0
-	strh r1, [r0]
-	adds r0, #2
-	strh r1, [r0]
-	ldr r3, _08012560
-	ldr r2, _08012564
-	b _0801257A
-	.align 2, 0
-_08012558: .4byte gRoomHeader
-_0801255C: .4byte 0x04000010
-_08012560: .4byte 0x02001460
-_08012564: .4byte 0x02001462
-_08012568:
-	ldr r1, _08012590
-	ldr r3, _08012594
-	ldrh r0, [r3]
-	strh r0, [r1]
-	ldr r2, _08012598
-	ldr r1, _0801259C
-	ldrh r0, [r1]
-	strh r0, [r2]
-	adds r2, r1, #0
-_0801257A:
-	mov r0, ip
-	adds r0, #0x5d
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _080125A4
-	ldr r0, _080125A0
-	movs r1, #0
-	strh r1, [r0]
-	adds r0, #2
-	strh r1, [r0]
-	b _080125B0
-	.align 2, 0
-_08012590: .4byte 0x04000010
-_08012594: .4byte 0x02001460
-_08012598: .4byte 0x04000012
-_0801259C: .4byte 0x02001462
-_080125A0: .4byte 0x04000014
-_080125A4:
-	ldr r1, _080125C8
-	ldrh r0, [r3]
-	strh r0, [r1]
-	adds r1, #2
-	ldrh r0, [r2]
-	strh r0, [r1]
-_080125B0:
-	mov r0, ip
-	adds r0, #0x5e
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _080125D0
-	ldr r0, _080125CC
-	movs r1, #0
-	strh r1, [r0]
-	adds r0, #2
-	strh r1, [r0]
-	b _080125DC
-	.align 2, 0
-_080125C8: .4byte 0x04000014
-_080125CC: .4byte 0x04000018
-_080125D0:
-	ldr r1, _080125F4
-	ldrh r0, [r3]
-	strh r0, [r1]
-	adds r1, #2
-	ldrh r0, [r2]
-	strh r0, [r1]
-_080125DC:
-	mov r0, ip
-	adds r0, #0x5f
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _080125FC
-	ldr r0, _080125F8
-	movs r1, #0
-	strh r1, [r0]
-	adds r0, #2
-	strh r1, [r0]
-	b _08012608
-	.align 2, 0
-_080125F4: .4byte 0x04000018
-_080125F8: .4byte 0x0400001C
-_080125FC:
-	ldr r1, _08012618
-	ldrh r0, [r3]
-	strh r0, [r1]
-	adds r1, #2
-	ldrh r0, [r2]
-	strh r0, [r1]
-_08012608:
-	ldr r1, _0801261C
-	ldrh r0, [r3]
-	strb r0, [r1]
-	ldr r1, _08012620
-	ldrh r0, [r2]
-	strb r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08012618: .4byte 0x0400001C
-_0801261C: .4byte gBGOffsetHorizontal
-_08012620: .4byte gBGOffsetVertical
+@     .thumb
+@ SetupBGOffsets: @ 0x08012538
+@ 	push {lr}
+@ 	ldr r1, _08012558
+@ 	adds r0, r1, #0
+@ 	adds r0, #0x5c
+@ 	ldrb r0, [r0]
+@ 	mov ip, r1
+@ 	cmp r0, #0
+@ 	beq _08012568
+@ 	ldr r0, _0801255C
+@ 	movs r1, #0
+@ 	strh r1, [r0]
+@ 	adds r0, #2
+@ 	strh r1, [r0]
+@ 	ldr r3, _08012560
+@ 	ldr r2, _08012564
+@ 	b _0801257A
+@ 	.align 2, 0
+@ _08012558: .4byte gRoomHeader
+@ _0801255C: .4byte 0x04000010
+@ _08012560: .4byte 0x02001460
+@ _08012564: .4byte 0x02001462
+@ _08012568:
+@ 	ldr r1, _08012590
+@ 	ldr r3, _08012594
+@ 	ldrh r0, [r3]
+@ 	strh r0, [r1]
+@ 	ldr r2, _08012598
+@ 	ldr r1, _0801259C
+@ 	ldrh r0, [r1]
+@ 	strh r0, [r2]
+@ 	adds r2, r1, #0
+@ _0801257A:
+@ 	mov r0, ip
+@ 	adds r0, #0x5d
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _080125A4
+@ 	ldr r0, _080125A0
+@ 	movs r1, #0
+@ 	strh r1, [r0]
+@ 	adds r0, #2
+@ 	strh r1, [r0]
+@ 	b _080125B0
+@ 	.align 2, 0
+@ _08012590: .4byte 0x04000010
+@ _08012594: .4byte 0x02001460
+@ _08012598: .4byte 0x04000012
+@ _0801259C: .4byte 0x02001462
+@ _080125A0: .4byte 0x04000014
+@ _080125A4:
+@ 	ldr r1, _080125C8
+@ 	ldrh r0, [r3]
+@ 	strh r0, [r1]
+@ 	adds r1, #2
+@ 	ldrh r0, [r2]
+@ 	strh r0, [r1]
+@ _080125B0:
+@ 	mov r0, ip
+@ 	adds r0, #0x5e
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _080125D0
+@ 	ldr r0, _080125CC
+@ 	movs r1, #0
+@ 	strh r1, [r0]
+@ 	adds r0, #2
+@ 	strh r1, [r0]
+@ 	b _080125DC
+@ 	.align 2, 0
+@ _080125C8: .4byte 0x04000014
+@ _080125CC: .4byte 0x04000018
+@ _080125D0:
+@ 	ldr r1, _080125F4
+@ 	ldrh r0, [r3]
+@ 	strh r0, [r1]
+@ 	adds r1, #2
+@ 	ldrh r0, [r2]
+@ 	strh r0, [r1]
+@ _080125DC:
+@ 	mov r0, ip
+@ 	adds r0, #0x5f
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _080125FC
+@ 	ldr r0, _080125F8
+@ 	movs r1, #0
+@ 	strh r1, [r0]
+@ 	adds r0, #2
+@ 	strh r1, [r0]
+@ 	b _08012608
+@ 	.align 2, 0
+@ _080125F4: .4byte 0x04000018
+@ _080125F8: .4byte 0x0400001C
+@ _080125FC:
+@ 	ldr r1, _08012618
+@ 	ldrh r0, [r3]
+@ 	strh r0, [r1]
+@ 	adds r1, #2
+@ 	ldrh r0, [r2]
+@ 	strh r0, [r1]
+@ _08012608:
+@ 	ldr r1, _0801261C
+@ 	ldrh r0, [r3]
+@ 	strb r0, [r1]
+@ 	ldr r1, _08012620
+@ 	ldrh r0, [r2]
+@ 	strb r0, [r1]
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _08012618: .4byte 0x0400001C
+@ _0801261C: .4byte gBGOffsetHorizontal
+@ _08012620: .4byte gBGOffsetVertical
 
 	.thumb
 sub_8012624: @ 0x08012624
@@ -732,7 +719,7 @@ _08012A8E:
 	beq _08012AF2
 	b _08012B74
 	.align 2, 0
-_08012AAC: .4byte 0x02002068
+_08012AAC: .4byte gLoadedTileAnimCount
 _08012AB0: .4byte 0x030032A8
 _08012AB4: .4byte gLoadedRoomIndex
 _08012AB8: .4byte gLoadedRoomLevel
@@ -1341,7 +1328,7 @@ _08012F6C:
 	beq _08012FD2
 	b _08013054
 	.align 2, 0
-_08012F88: .4byte 0x02002068
+_08012F88: .4byte gLoadedTileAnimCount
 _08012F8C: .4byte 0x030032A8
 _08012F90: .4byte gLoadedRoomIndex
 _08012F94: .4byte gLoadedRoomLevel
@@ -1967,7 +1954,7 @@ _08013472:
 	beq _080134D6
 	b _08013558
 	.align 2, 0
-_08013490: .4byte 0x02002068
+_08013490: .4byte gLoadedTileAnimCount
 _08013494: .4byte 0x030032A8
 _08013498: .4byte gLoadedRoomIndex
 _0801349C: .4byte gLoadedRoomLevel
@@ -2543,7 +2530,7 @@ _08013914:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08013924: .4byte 0x02002068
+_08013924: .4byte gLoadedTileAnimCount
 _08013928: .4byte 0x02001474
 
     .thumb
@@ -2570,7 +2557,7 @@ sub_801392C: @ 0x0801392C
 	str r0, [r2]
 	b _080139CC
 	.align 2, 0
-_08013954: .4byte 0x02002068
+_08013954: .4byte gLoadedTileAnimCount
 _08013958: .4byte 0x0200031C
 _0801395C:
 	ldr r0, _080139DC
@@ -2644,7 +2631,7 @@ _080139DC: .4byte 0x02000318
 _080139E0: .4byte 0x02001474
 _080139E4: .4byte 0x03002AB0
 _080139E8: .4byte 0x030032A8
-_080139EC: .4byte 0x02002068
+_080139EC: .4byte gLoadedTileAnimCount
 
     .thumb
 	.global sub_80139F0
@@ -7153,7 +7140,7 @@ sub_08015CC0: @ 0x08015CC0
 	beq _08015CFE
 	b _08015F48
 	.align 2, 0
-_08015CE8: .4byte 0x0200146C
+_08015CE8: .4byte dword_200146C
 _08015CEC: .4byte gBGControlActions
 _08015CF0:
 	cmp r2, #2
@@ -7757,7 +7744,7 @@ sub_080161CC: @ 0x080161CC
 	beq _080161F6
 	b _08016408
 	.align 2, 0
-_080161E4: .4byte 0x0200146C
+_080161E4: .4byte dword_200146C
 _080161E8:
 	cmp r2, #2
 	bne _080161EE

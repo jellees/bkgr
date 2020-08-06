@@ -207,9 +207,11 @@ SECTIONS
 		gPlayerInitPixelPos = .; . += 4;
 		gCameraPixelX = .; . += 2;
 		gCameraPixelY = .; . += 2;
-
-		. = 0x00001470;
+		dword_200146C = .; . += 4;
 		dword_2001470 = .; . += 4;
+
+		. = 0x00002068;
+		gLoadedTileAnimCount = .; . += 4;
 
 		. = 0x00002090;
 		gPreviousPlayerState = .; . += 2;
@@ -414,6 +416,7 @@ SECTIONS
 		src/palette_effects.o(.text);
 		src/debug.o(.text);
 		asm/chunk5.o(.text);
+		src/room.o(.text);
 		asm/room.o(.text);
 		asm/chunk11.o(.text);
 		src/player_actions.o(.text);
