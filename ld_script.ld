@@ -261,6 +261,8 @@ SECTIONS
 		. = 0x0000DCE0;
 		src/alloc.o(.bss);
 
+		gEntitySection = .; . += 4;
+
 		. = 0x0003DFC4;
 		dword_203DFC4 = .; . += 4;
 
