@@ -65,7 +65,7 @@ struct TileAnimSection {
 
 struct RoomIndex {
     struct RoomHeader* room;
-    u16 level;
+    u8 level;
     u16 music;
 };
 
@@ -157,7 +157,9 @@ enum Rooms {
     ROOM_FRONTEND,
     ROOM_GRUNTYSHOOT,
     ROOM_FJORDCAVERN,
-    ROOM_SHEEPDIP
+    ROOM_SHEEPDIP,
+
+    ROOM_COUNT
 };
 
 #endif
