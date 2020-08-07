@@ -214,8 +214,18 @@ SECTIONS
 		gLoadedTileAnimCount = .; . += 4;
 		gTilesCount = .; . += 4;
 		byte_2002070 = .; . += 1;
+		. += 3; /* padding */
+		dword_2002074 = .; . += 4;
+		dword_2002078 = .; . += 4;
+		dword_200207C = .; . += 4;
+		dword_2002080 = .; . += 4;
+		dword_2002084 = .; . += 4;
+		dword_2002088 = .; . += 4;
+		gBG0Static = .; . += 1;
+		gBG1Static = .; . += 1;
+		gBG2Static = .; . += 1;
+		gBG3Static = .; . += 1;
 
-		. = 0x00002090;
 		gPreviousPlayerState = .; . += 2;
 		gPlayerState = .; . += 2;
 
@@ -257,7 +267,8 @@ SECTIONS
 		. = 0x0003DFD7;
 		gInInteractionArea = .; . += 1;
 
-		. = 0x0003EA89;
+		. = 0x0003EA88;
+		gCanChangeBgm = .; . += 1;
 		byte_203EA89 = .; . += 1;
 		gBgmVolumeIndex = .; . += 1;
 		gSfxVolumeIndex = .; . += 1;
@@ -347,10 +358,7 @@ SECTIONS
 		. += 2; /* padding */
 		gBGMapOffsetVertical = .; . += 4;
 		gBGMapOffsetHorizontal = .; . += 4;
-		gBG0TileSet = .; . += 4;
-		gBG1TileSet = .; . += 4;
-		gBG2TileSet = .; . += 4;
-		gBG3TileSet = .; . += 4;
+		gTileSetBG = .; . += 4 * 4;
 		gMapPixelSizeX = .; . += 2;
 		gMapPixelSizeY = .; . += 2;
 

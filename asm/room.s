@@ -3,627 +3,627 @@
 
     .text
 
-    .thumb
-    .global SetupRoom
-SetupRoom: @ 0x08012994
-	push {r4, r5, r6, r7, lr}
-	mov r7, sb
-	mov r6, r8
-	push {r6, r7}
-	adds r5, r0, #0
-	mov r8, r1
-	adds r6, r2, #0
-	mov sb, r3
-	movs r7, #0
-	cmp r5, #0x25
-	bls _080129AE
-	.2byte 0xEE00, 0xEE00
-_080129AE:
-	ldr r0, _08012AAC
-	str r7, [r0]
-	ldr r0, _08012AB0
-	strb r7, [r0]
-	ldr r0, _08012AB4
-	strh r5, [r0]
-	ldr r2, _08012AB8
-	ldr r0, _08012ABC
-	lsls r1, r5, #3
-	adds r0, r1, r0
-	ldrb r3, [r0, #4]
-	ldrh r0, [r2]
-	adds r4, r1, #0
-	cmp r0, r3
-	beq _080129D6
-	cmp r3, #0xff
-	beq _080129D6
-	adds r0, r3, #0
-	bl sub_800A710
-_080129D6:
-	cmp r6, #0
-	beq _080129F8
-	ldr r2, _08012AC0
-	ldr r0, _08012ABC
-	adds r0, r4, r0
-	ldrh r1, [r0, #6]
-	ldrh r0, [r2]
-	cmp r0, r1
-	beq _080129F8
-	strh r1, [r2]
-	ldr r0, _08012AC4
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _080129F8
-	ldrh r0, [r2]
-	bl audio_start_tune
-_080129F8:
-	ldr r0, _08012ABC
-	adds r0, r4, r0
-	ldr r0, [r0]
-	ldr r4, _08012AC8
-	adds r1, r4, #0
-	movs r2, #0x19
-	bl DmaTransfer32
-	ldr r1, _08012ACC
-	ldrh r0, [r4, #8]
-	strh r0, [r1]
-	ldr r0, [r4, #0x48]
-	ldrh r0, [r0]
-	cmp r0, #0xff
-	bls _08012A1A
-	.2byte 0xEE00, 0xEE00
-_08012A1A:
-	ldr r1, _08012AD0
-	ldrh r0, [r4, #0xa]
-	lsls r0, r0, #5
-	strh r0, [r1]
-	ldr r1, _08012AD4
-	ldrh r0, [r4, #0xc]
-	lsls r0, r0, #5
-	strh r0, [r1]
-	ldr r1, _08012AD8
-	adds r0, r4, #0
-	adds r0, #0x5c
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldr r1, _08012ADC
-	adds r0, r4, #0
-	adds r0, #0x5d
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldr r1, _08012AE0
-	adds r0, r4, #0
-	adds r0, #0x5e
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldr r1, _08012AE4
-	adds r0, r4, #0
-	adds r0, #0x5f
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldr r0, [r4, #0x34]
-	mov r1, r8
-	bl setup_collision_warp
-	ldr r0, _08012AB8
-	ldrh r0, [r0]
-	bl sub_8038FA0
-	ldr r2, [r4, #0x40]
-	adds r0, r5, #0
-	mov r1, sb
-	bl setup_entities
-	ldr r0, [r4, #0x44]
-	ldr r1, _08012AE8
-	movs r2, #0x80
-	bl DmaTransfer32
-	ldr r0, [r4, #0x18]
-	movs r1, #0xa0
-	lsls r1, r1, #0x13
-	movs r2, #0x80
-	bl DmaTransfer32
-	ldr r1, _08012AAC
-	ldr r0, [r1]
-	cmp r0, #0
-	beq _08012A8E
-	movs r0, #0
-	str r0, [r1]
-_08012A8E:
-	ldrh r0, [r4]
-	cmp r0, #0
-	beq _08012B74
-	ldr r1, [r4, #0x2c]
-	cmp r1, #0
-	bne _08012B1A
-	ldrb r0, [r4, #0xf]
-	cmp r0, #1
-	beq _08012B02
-	cmp r0, #1
-	bgt _08012AEC
-	cmp r0, #0
-	beq _08012AF2
-	b _08012B74
-	.align 2, 0
-_08012AAC: .4byte gLoadedTileAnimCount
-_08012AB0: .4byte 0x030032A8
-_08012AB4: .4byte gLoadedRoomIndex
-_08012AB8: .4byte gLoadedRoomLevel
-_08012ABC: .4byte 0x080CF4EC
-_08012AC0: .4byte gLoadedRoomBgm
-_08012AC4: .4byte 0x0203EA88
-_08012AC8: .4byte gRoomHeader
-_08012ACC: .4byte gEnabledBGs
-_08012AD0: .4byte gMapPixelSizeX
-_08012AD4: .4byte gMapPixelSizeY
-_08012AD8: .4byte 0x0200208C
-_08012ADC: .4byte 0x0200208D
-_08012AE0: .4byte 0x0200208E
-_08012AE4: .4byte 0x0200208F
-_08012AE8: .4byte 0x05000200
-_08012AEC:
-	cmp r0, #2
-	beq _08012B0E
-	b _08012B74
-_08012AF2:
-	ldr r0, [r4, #0x1c]
-	movs r1, #0xc0
-	lsls r1, r1, #0x13
-	ldrh r2, [r4]
-	lsls r2, r2, #3
-	bl DmaTransfer32
-	b _08012B74
-_08012B02:
-	ldr r0, [r4, #0x1c]
-	movs r1, #0xc0
-	lsls r1, r1, #0x13
-	bl LZ77UnCompReadNormalWrite16bit
-	b _08012B74
-_08012B0E:
-	ldr r0, [r4, #0x1c]
-	movs r1, #0xc0
-	lsls r1, r1, #0x13
-	bl HuffUnCompReadNormal
-	b _08012B74
-_08012B1A:
-	ldrb r0, [r4, #0xf]
-	cmp r0, #1
-	beq _08012B46
-	cmp r0, #1
-	bgt _08012B2A
-	cmp r0, #0
-	beq _08012B30
-	b _08012B68
-_08012B2A:
-	cmp r0, #2
-	beq _08012B58
-	b _08012B68
-_08012B30:
-	ldr r0, [r4, #0x1c]
-	ldr r1, [r1]
-	lsls r1, r1, #5
-	movs r2, #0xc0
-	lsls r2, r2, #0x13
-	adds r1, r1, r2
-	ldrh r2, [r4]
-	lsls r2, r2, #3
-	bl DmaTransfer32
-	b _08012B68
-_08012B46:
-	ldr r0, [r4, #0x1c]
-	ldr r1, [r1]
-	lsls r1, r1, #5
-	movs r3, #0xc0
-	lsls r3, r3, #0x13
-	adds r1, r1, r3
-	bl LZ77UnCompReadNormalWrite16bit
-	b _08012B68
-_08012B58:
-	ldr r0, [r4, #0x1c]
-	ldr r1, [r1]
-	lsls r1, r1, #5
-	movs r2, #0xc0
-	lsls r2, r2, #0x13
-	adds r1, r1, r2
-	bl HuffUnCompReadNormal
-_08012B68:
-	ldr r0, _08012B94
-	ldr r0, [r0, #0x2c]
-	movs r1, #0xc0
-	lsls r1, r1, #0x13
-	bl SetupAnimationTiles
-_08012B74:
-	ldr r2, _08012B94
-	ldrh r0, [r2, #4]
-	cmp r0, #0
-	beq _08012C2C
-	ldr r1, [r2, #0x30]
-	cmp r1, #0
-	bne _08012BD0
-	ldrb r0, [r2, #0xf]
-	cmp r0, #1
-	beq _08012BB0
-	cmp r0, #1
-	bgt _08012B98
-	cmp r0, #0
-	beq _08012B9E
-	b _08012C2C
-	.align 2, 0
-_08012B94: .4byte gRoomHeader
-_08012B98:
-	cmp r0, #2
-	beq _08012BC0
-	b _08012C2C
-_08012B9E:
-	ldr r0, [r2, #0x24]
-	ldr r1, _08012BAC
-	ldrh r2, [r2, #4]
-	lsls r2, r2, #3
-	bl DmaTransfer32
-	b _08012C2C
-	.align 2, 0
-_08012BAC: .4byte 0x06008000
-_08012BB0:
-	ldr r0, [r2, #0x24]
-	ldr r1, _08012BBC
-	bl LZ77UnCompReadNormalWrite16bit
-	b _08012C2C
-	.align 2, 0
-_08012BBC: .4byte 0x06008000
-_08012BC0:
-	ldr r0, [r2, #0x24]
-	ldr r1, _08012BCC
-	bl HuffUnCompReadNormal
-	b _08012C2C
-	.align 2, 0
-_08012BCC: .4byte 0x06008000
-_08012BD0:
-	ldrb r0, [r2, #0xf]
-	cmp r0, #1
-	beq _08012C00
-	cmp r0, #1
-	bgt _08012BE0
-	cmp r0, #0
-	beq _08012BE6
-	b _08012C22
-_08012BE0:
-	cmp r0, #2
-	beq _08012C14
-	b _08012C22
-_08012BE6:
-	ldr r0, [r2, #0x24]
-	ldr r1, [r1]
-	lsls r1, r1, #5
-	ldr r3, _08012BFC
-	adds r1, r1, r3
-	ldrh r2, [r2, #4]
-	lsls r2, r2, #3
-	bl DmaTransfer32
-	b _08012C22
-	.align 2, 0
-_08012BFC: .4byte 0x06008000
-_08012C00:
-	ldr r0, [r2, #0x24]
-	ldr r1, [r1]
-	lsls r1, r1, #5
-	ldr r2, _08012C10
-	adds r1, r1, r2
-	bl LZ77UnCompReadNormalWrite16bit
-	b _08012C22
-	.align 2, 0
-_08012C10: .4byte 0x06008000
-_08012C14:
-	ldr r0, [r2, #0x24]
-	ldr r1, [r1]
-	lsls r1, r1, #5
-	ldr r3, _08012C4C
-	adds r1, r1, r3
-	bl HuffUnCompReadNormal
-_08012C22:
-	ldr r0, _08012C50
-	ldr r0, [r0, #0x30]
-	ldr r1, _08012C4C
-	bl SetupAnimationTiles
-_08012C2C:
-	ldr r3, _08012C54
-	ldr r1, _08012C50
-	ldrh r2, [r1, #0xa]
-	ldrh r0, [r1, #0xc]
-	muls r0, r2, r0
-	str r0, [r3]
-	ldrh r0, [r1, #8]
-	adds r4, r1, #0
-	cmp r0, #2
-	beq _08012CA0
-	cmp r0, #2
-	bgt _08012C58
-	cmp r0, #1
-	beq _08012C64
-	b _08012E58
-	.align 2, 0
-_08012C4C: .4byte 0x06008000
-_08012C50: .4byte gRoomHeader
-_08012C54: .4byte 0x0200206C
-_08012C58:
-	cmp r0, #3
-	beq _08012D08
-	cmp r0, #4
-	bne _08012C62
-	b _08012D9C
-_08012C62:
-	b _08012E58
-_08012C64:
-	movs r7, #1
-	ldr r2, _08012C80
-	ldrh r0, [r2]
-	ldr r1, _08012C84
-	ands r1, r0
-	strh r1, [r2]
-	ldrb r0, [r4, #0x14]
-	cmp r0, #0
-	bne _08012C8C
-	ldr r1, _08012C88
-	ldr r0, [r4, #0x20]
-	str r0, [r1]
-	b _08012E5C
-	.align 2, 0
-_08012C80: .4byte 0x04000008
-_08012C84: .4byte 0x0000FFF3
-_08012C88: .4byte gBG0TileSet
-_08012C8C:
-	ldrh r0, [r2]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r1, _08012C9C
-	ldr r0, [r4, #0x28]
-	str r0, [r1]
-	b _08012E5C
-	.align 2, 0
-_08012C9C: .4byte gBG0TileSet
-_08012CA0:
-	movs r7, #3
-	ldr r3, _08012CC4
-	ldrh r2, [r3]
-	ldr r1, _08012CC8
-	adds r0, r1, #0
-	ands r0, r2
-	strh r0, [r3]
-	ldr r2, _08012CCC
-	ldrh r0, [r2]
-	ands r1, r0
-	strh r1, [r2]
-	ldrb r0, [r4, #0x14]
-	cmp r0, #0
-	bne _08012CD4
-	ldr r1, _08012CD0
-	ldr r0, [r4, #0x20]
-	b _08012CE0
-	.align 2, 0
-_08012CC4: .4byte 0x04000008
-_08012CC8: .4byte 0x0000FFF3
-_08012CCC: .4byte 0x0400000A
-_08012CD0: .4byte gBG0TileSet
-_08012CD4:
-	ldrh r0, [r3]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r3]
-	ldr r1, _08012CF0
-	ldr r0, [r4, #0x28]
-_08012CE0:
-	str r0, [r1]
-	adds r3, r1, #0
-	ldrb r0, [r4, #0x15]
-	cmp r0, #0
-	bne _08012CF4
-	ldr r0, [r4, #0x20]
-	str r0, [r3, #4]
-	b _08012E5C
-	.align 2, 0
-_08012CF0: .4byte gBG0TileSet
-_08012CF4:
-	ldr r2, _08012D04
-	ldrh r0, [r2]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, [r4, #0x28]
-	str r0, [r3, #4]
-	b _08012E5C
-	.align 2, 0
-_08012D04: .4byte 0x0400000A
-_08012D08:
-	movs r7, #7
-	ldr r5, _08012D34
-	ldrh r2, [r5]
-	ldr r1, _08012D38
-	adds r0, r1, #0
-	ands r0, r2
-	strh r0, [r5]
-	ldr r3, _08012D3C
-	ldrh r2, [r3]
-	adds r0, r1, #0
-	ands r0, r2
-	strh r0, [r3]
-	ldr r2, _08012D40
-	ldrh r0, [r2]
-	ands r1, r0
-	strh r1, [r2]
-	ldrb r0, [r4, #0x14]
-	cmp r0, #0
-	bne _08012D48
-	ldr r1, _08012D44
-	ldr r0, [r4, #0x20]
-	b _08012D54
-	.align 2, 0
-_08012D34: .4byte 0x04000008
-_08012D38: .4byte 0x0000FFF3
-_08012D3C: .4byte 0x0400000A
-_08012D40: .4byte 0x0400000C
-_08012D44: .4byte gBG0TileSet
-_08012D48:
-	ldrh r0, [r5]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r5]
-	ldr r1, _08012D64
-	ldr r0, [r4, #0x28]
-_08012D54:
-	str r0, [r1]
-	adds r3, r1, #0
-	ldrb r0, [r4, #0x15]
-	cmp r0, #0
-	bne _08012D68
-	ldr r0, [r4, #0x20]
-	b _08012D74
-	.align 2, 0
-_08012D64: .4byte gBG0TileSet
-_08012D68:
-	ldr r2, _08012D84
-	ldrh r0, [r2]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, [r4, #0x28]
-_08012D74:
-	str r0, [r3, #4]
-	ldrb r0, [r4, #0x16]
-	cmp r0, #0
-	bne _08012D88
-	ldr r0, [r4, #0x20]
-	str r0, [r3, #8]
-	b _08012E5C
-	.align 2, 0
-_08012D84: .4byte 0x0400000A
-_08012D88:
-	ldr r2, _08012D98
-	ldrh r0, [r2]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, [r4, #0x28]
-	str r0, [r3, #8]
-	b _08012E5C
-	.align 2, 0
-_08012D98: .4byte 0x0400000C
-_08012D9C:
-	movs r7, #0xf
-	ldr r5, _08012DD4
-	ldrh r2, [r5]
-	ldr r1, _08012DD8
-	adds r0, r1, #0
-	ands r0, r2
-	strh r0, [r5]
-	ldr r3, _08012DDC
-	ldrh r2, [r3]
-	adds r0, r1, #0
-	ands r0, r2
-	strh r0, [r3]
-	adds r3, #2
-	ldrh r2, [r3]
-	adds r0, r1, #0
-	ands r0, r2
-	strh r0, [r3]
-	ldr r2, _08012DE0
-	ldrh r0, [r2]
-	ands r1, r0
-	strh r1, [r2]
-	ldrb r0, [r4, #0x14]
-	cmp r0, #0
-	bne _08012DE8
-	ldr r1, _08012DE4
-	ldr r0, [r4, #0x20]
-	b _08012DF4
-	.align 2, 0
-_08012DD4: .4byte 0x04000008
-_08012DD8: .4byte 0x0000FFF3
-_08012DDC: .4byte 0x0400000A
-_08012DE0: .4byte 0x0400000E
-_08012DE4: .4byte gBG0TileSet
-_08012DE8:
-	ldrh r0, [r5]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r5]
-	ldr r1, _08012E04
-	ldr r0, [r4, #0x28]
-_08012DF4:
-	str r0, [r1]
-	adds r3, r1, #0
-	ldrb r0, [r4, #0x15]
-	cmp r0, #0
-	bne _08012E08
-	ldr r0, [r4, #0x20]
-	b _08012E14
-	.align 2, 0
-_08012E04: .4byte gBG0TileSet
-_08012E08:
-	ldr r2, _08012E20
-	ldrh r0, [r2]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, [r4, #0x28]
-_08012E14:
-	str r0, [r3, #4]
-	ldrb r0, [r4, #0x16]
-	cmp r0, #0
-	bne _08012E24
-	ldr r0, [r4, #0x20]
-	b _08012E30
-	.align 2, 0
-_08012E20: .4byte 0x0400000A
-_08012E24:
-	ldr r2, _08012E40
-	ldrh r0, [r2]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, [r4, #0x28]
-_08012E30:
-	str r0, [r3, #8]
-	ldrb r0, [r4, #0x17]
-	cmp r0, #0
-	bne _08012E44
-	ldr r0, [r4, #0x20]
-	str r0, [r3, #0xc]
-	b _08012E5C
-	.align 2, 0
-_08012E40: .4byte 0x0400000C
-_08012E44:
-	ldr r2, _08012E54
-	ldrh r0, [r2]
-	movs r1, #8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, [r4, #0x28]
-	str r0, [r3, #0xc]
-	b _08012E5C
-	.align 2, 0
-_08012E54: .4byte 0x0400000E
-_08012E58:
-	.2byte 0xEE00, 0xEE00
-_08012E5C:
-	movs r2, #0x80
-	lsls r2, r2, #0x13
-	ldrh r1, [r2]
-	ldr r0, _08012E88
-	ands r0, r1
-	strh r0, [r2]
-	lsls r0, r7, #8
-	ldrh r1, [r2]
-	orrs r0, r1
-	strh r0, [r2]
-	bl SetupBGOffsets
-	ldr r1, _08012E8C
-	movs r0, #0
-	strb r0, [r1]
-	pop {r3, r4}
-	mov r8, r3
-	mov sb, r4
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08012E88: .4byte 0x0000F0FF
-_08012E8C: .4byte gBGControlActions
+@     .thumb
+@     .global SetupRoom
+@ SetupRoom: @ 0x08012994
+@ 	push {r4, r5, r6, r7, lr}
+@ 	mov r7, sb
+@ 	mov r6, r8
+@ 	push {r6, r7}
+@ 	adds r5, r0, #0
+@ 	mov r8, r1
+@ 	adds r6, r2, #0
+@ 	mov sb, r3
+@ 	movs r7, #0
+@ 	cmp r5, #0x25
+@ 	bls _080129AE
+@ 	.2byte 0xEE00, 0xEE00
+@ _080129AE:
+@ 	ldr r0, _08012AAC
+@ 	str r7, [r0]
+@ 	ldr r0, _08012AB0
+@ 	strb r7, [r0]
+@ 	ldr r0, _08012AB4
+@ 	strh r5, [r0]
+@ 	ldr r2, _08012AB8
+@ 	ldr r0, _08012ABC
+@ 	lsls r1, r5, #3
+@ 	adds r0, r1, r0
+@ 	ldrb r3, [r0, #4]
+@ 	ldrh r0, [r2]
+@ 	adds r4, r1, #0
+@ 	cmp r0, r3
+@ 	beq _080129D6
+@ 	cmp r3, #0xff
+@ 	beq _080129D6
+@ 	adds r0, r3, #0
+@ 	bl sub_800A710
+@ _080129D6:
+@ 	cmp r6, #0
+@ 	beq _080129F8
+@ 	ldr r2, _08012AC0
+@ 	ldr r0, _08012ABC
+@ 	adds r0, r4, r0
+@ 	ldrh r1, [r0, #6]
+@ 	ldrh r0, [r2]
+@ 	cmp r0, r1
+@ 	beq _080129F8
+@ 	strh r1, [r2]
+@ 	ldr r0, _08012AC4
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _080129F8
+@ 	ldrh r0, [r2]
+@ 	bl audio_start_tune
+@ _080129F8:
+@ 	ldr r0, _08012ABC
+@ 	adds r0, r4, r0
+@ 	ldr r0, [r0]
+@ 	ldr r4, _08012AC8
+@ 	adds r1, r4, #0
+@ 	movs r2, #0x19
+@ 	bl DmaTransfer32
+@ 	ldr r1, _08012ACC
+@ 	ldrh r0, [r4, #8]
+@ 	strh r0, [r1]
+@ 	ldr r0, [r4, #0x48]
+@ 	ldrh r0, [r0]
+@ 	cmp r0, #0xff
+@ 	bls _08012A1A
+@ 	.2byte 0xEE00, 0xEE00
+@ _08012A1A:
+@ 	ldr r1, _08012AD0
+@ 	ldrh r0, [r4, #0xa]
+@ 	lsls r0, r0, #5
+@ 	strh r0, [r1]
+@ 	ldr r1, _08012AD4
+@ 	ldrh r0, [r4, #0xc]
+@ 	lsls r0, r0, #5
+@ 	strh r0, [r1]
+@ 	ldr r1, _08012AD8
+@ 	adds r0, r4, #0
+@ 	adds r0, #0x5c
+@ 	ldrb r0, [r0]
+@ 	strb r0, [r1]
+@ 	ldr r1, _08012ADC
+@ 	adds r0, r4, #0
+@ 	adds r0, #0x5d
+@ 	ldrb r0, [r0]
+@ 	strb r0, [r1]
+@ 	ldr r1, _08012AE0
+@ 	adds r0, r4, #0
+@ 	adds r0, #0x5e
+@ 	ldrb r0, [r0]
+@ 	strb r0, [r1]
+@ 	ldr r1, _08012AE4
+@ 	adds r0, r4, #0
+@ 	adds r0, #0x5f
+@ 	ldrb r0, [r0]
+@ 	strb r0, [r1]
+@ 	ldr r0, [r4, #0x34]
+@ 	mov r1, r8
+@ 	bl setup_collision_warp
+@ 	ldr r0, _08012AB8
+@ 	ldrh r0, [r0]
+@ 	bl sub_8038FA0
+@ 	ldr r2, [r4, #0x40]
+@ 	adds r0, r5, #0
+@ 	mov r1, sb
+@ 	bl setup_entities
+@ 	ldr r0, [r4, #0x44]
+@ 	ldr r1, _08012AE8
+@ 	movs r2, #0x80
+@ 	bl DmaTransfer32
+@ 	ldr r0, [r4, #0x18]
+@ 	movs r1, #0xa0
+@ 	lsls r1, r1, #0x13
+@ 	movs r2, #0x80
+@ 	bl DmaTransfer32
+@ 	ldr r1, _08012AAC
+@ 	ldr r0, [r1]
+@ 	cmp r0, #0
+@ 	beq _08012A8E
+@ 	movs r0, #0
+@ 	str r0, [r1]
+@ _08012A8E:
+@ 	ldrh r0, [r4]
+@ 	cmp r0, #0
+@ 	beq _08012B74
+@ 	ldr r1, [r4, #0x2c]
+@ 	cmp r1, #0
+@ 	bne _08012B1A
+@ 	ldrb r0, [r4, #0xf]
+@ 	cmp r0, #1
+@ 	beq _08012B02
+@ 	cmp r0, #1
+@ 	bgt _08012AEC
+@ 	cmp r0, #0
+@ 	beq _08012AF2
+@ 	b _08012B74
+@ 	.align 2, 0
+@ _08012AAC: .4byte gLoadedTileAnimCount
+@ _08012AB0: .4byte 0x030032A8
+@ _08012AB4: .4byte gLoadedRoomIndex
+@ _08012AB8: .4byte gLoadedRoomLevel
+@ _08012ABC: .4byte 0x080CF4EC
+@ _08012AC0: .4byte gLoadedRoomBgm
+@ _08012AC4: .4byte 0x0203EA88
+@ _08012AC8: .4byte gRoomHeader
+@ _08012ACC: .4byte gEnabledBGs
+@ _08012AD0: .4byte gMapPixelSizeX
+@ _08012AD4: .4byte gMapPixelSizeY
+@ _08012AD8: .4byte 0x0200208C
+@ _08012ADC: .4byte 0x0200208D
+@ _08012AE0: .4byte 0x0200208E
+@ _08012AE4: .4byte 0x0200208F
+@ _08012AE8: .4byte 0x05000200
+@ _08012AEC:
+@ 	cmp r0, #2
+@ 	beq _08012B0E
+@ 	b _08012B74
+@ _08012AF2:
+@ 	ldr r0, [r4, #0x1c]
+@ 	movs r1, #0xc0
+@ 	lsls r1, r1, #0x13
+@ 	ldrh r2, [r4]
+@ 	lsls r2, r2, #3
+@ 	bl DmaTransfer32
+@ 	b _08012B74
+@ _08012B02:
+@ 	ldr r0, [r4, #0x1c]
+@ 	movs r1, #0xc0
+@ 	lsls r1, r1, #0x13
+@ 	bl LZ77UnCompReadNormalWrite16bit
+@ 	b _08012B74
+@ _08012B0E:
+@ 	ldr r0, [r4, #0x1c]
+@ 	movs r1, #0xc0
+@ 	lsls r1, r1, #0x13
+@ 	bl HuffUnCompReadNormal
+@ 	b _08012B74
+@ _08012B1A:
+@ 	ldrb r0, [r4, #0xf]
+@ 	cmp r0, #1
+@ 	beq _08012B46
+@ 	cmp r0, #1
+@ 	bgt _08012B2A
+@ 	cmp r0, #0
+@ 	beq _08012B30
+@ 	b _08012B68
+@ _08012B2A:
+@ 	cmp r0, #2
+@ 	beq _08012B58
+@ 	b _08012B68
+@ _08012B30:
+@ 	ldr r0, [r4, #0x1c]
+@ 	ldr r1, [r1]
+@ 	lsls r1, r1, #5
+@ 	movs r2, #0xc0
+@ 	lsls r2, r2, #0x13
+@ 	adds r1, r1, r2
+@ 	ldrh r2, [r4]
+@ 	lsls r2, r2, #3
+@ 	bl DmaTransfer32
+@ 	b _08012B68
+@ _08012B46:
+@ 	ldr r0, [r4, #0x1c]
+@ 	ldr r1, [r1]
+@ 	lsls r1, r1, #5
+@ 	movs r3, #0xc0
+@ 	lsls r3, r3, #0x13
+@ 	adds r1, r1, r3
+@ 	bl LZ77UnCompReadNormalWrite16bit
+@ 	b _08012B68
+@ _08012B58:
+@ 	ldr r0, [r4, #0x1c]
+@ 	ldr r1, [r1]
+@ 	lsls r1, r1, #5
+@ 	movs r2, #0xc0
+@ 	lsls r2, r2, #0x13
+@ 	adds r1, r1, r2
+@ 	bl HuffUnCompReadNormal
+@ _08012B68:
+@ 	ldr r0, _08012B94
+@ 	ldr r0, [r0, #0x2c]
+@ 	movs r1, #0xc0
+@ 	lsls r1, r1, #0x13
+@ 	bl SetupAnimationTiles
+@ _08012B74:
+@ 	ldr r2, _08012B94
+@ 	ldrh r0, [r2, #4]
+@ 	cmp r0, #0
+@ 	beq _08012C2C
+@ 	ldr r1, [r2, #0x30]
+@ 	cmp r1, #0
+@ 	bne _08012BD0
+@ 	ldrb r0, [r2, #0xf]
+@ 	cmp r0, #1
+@ 	beq _08012BB0
+@ 	cmp r0, #1
+@ 	bgt _08012B98
+@ 	cmp r0, #0
+@ 	beq _08012B9E
+@ 	b _08012C2C
+@ 	.align 2, 0
+@ _08012B94: .4byte gRoomHeader
+@ _08012B98:
+@ 	cmp r0, #2
+@ 	beq _08012BC0
+@ 	b _08012C2C
+@ _08012B9E:
+@ 	ldr r0, [r2, #0x24]
+@ 	ldr r1, _08012BAC
+@ 	ldrh r2, [r2, #4]
+@ 	lsls r2, r2, #3
+@ 	bl DmaTransfer32
+@ 	b _08012C2C
+@ 	.align 2, 0
+@ _08012BAC: .4byte 0x06008000
+@ _08012BB0:
+@ 	ldr r0, [r2, #0x24]
+@ 	ldr r1, _08012BBC
+@ 	bl LZ77UnCompReadNormalWrite16bit
+@ 	b _08012C2C
+@ 	.align 2, 0
+@ _08012BBC: .4byte 0x06008000
+@ _08012BC0:
+@ 	ldr r0, [r2, #0x24]
+@ 	ldr r1, _08012BCC
+@ 	bl HuffUnCompReadNormal
+@ 	b _08012C2C
+@ 	.align 2, 0
+@ _08012BCC: .4byte 0x06008000
+@ _08012BD0:
+@ 	ldrb r0, [r2, #0xf]
+@ 	cmp r0, #1
+@ 	beq _08012C00
+@ 	cmp r0, #1
+@ 	bgt _08012BE0
+@ 	cmp r0, #0
+@ 	beq _08012BE6
+@ 	b _08012C22
+@ _08012BE0:
+@ 	cmp r0, #2
+@ 	beq _08012C14
+@ 	b _08012C22
+@ _08012BE6:
+@ 	ldr r0, [r2, #0x24]
+@ 	ldr r1, [r1]
+@ 	lsls r1, r1, #5
+@ 	ldr r3, _08012BFC
+@ 	adds r1, r1, r3
+@ 	ldrh r2, [r2, #4]
+@ 	lsls r2, r2, #3
+@ 	bl DmaTransfer32
+@ 	b _08012C22
+@ 	.align 2, 0
+@ _08012BFC: .4byte 0x06008000
+@ _08012C00:
+@ 	ldr r0, [r2, #0x24]
+@ 	ldr r1, [r1]
+@ 	lsls r1, r1, #5
+@ 	ldr r2, _08012C10
+@ 	adds r1, r1, r2
+@ 	bl LZ77UnCompReadNormalWrite16bit
+@ 	b _08012C22
+@ 	.align 2, 0
+@ _08012C10: .4byte 0x06008000
+@ _08012C14:
+@ 	ldr r0, [r2, #0x24]
+@ 	ldr r1, [r1]
+@ 	lsls r1, r1, #5
+@ 	ldr r3, _08012C4C
+@ 	adds r1, r1, r3
+@ 	bl HuffUnCompReadNormal
+@ _08012C22:
+@ 	ldr r0, _08012C50
+@ 	ldr r0, [r0, #0x30]
+@ 	ldr r1, _08012C4C
+@ 	bl SetupAnimationTiles
+@ _08012C2C:
+@ 	ldr r3, _08012C54
+@ 	ldr r1, _08012C50
+@ 	ldrh r2, [r1, #0xa]
+@ 	ldrh r0, [r1, #0xc]
+@ 	muls r0, r2, r0
+@ 	str r0, [r3]
+@ 	ldrh r0, [r1, #8]
+@ 	adds r4, r1, #0
+@ 	cmp r0, #2
+@ 	beq _08012CA0
+@ 	cmp r0, #2
+@ 	bgt _08012C58
+@ 	cmp r0, #1
+@ 	beq _08012C64
+@ 	b _08012E58
+@ 	.align 2, 0
+@ _08012C4C: .4byte 0x06008000
+@ _08012C50: .4byte gRoomHeader
+@ _08012C54: .4byte 0x0200206C
+@ _08012C58:
+@ 	cmp r0, #3
+@ 	beq _08012D08
+@ 	cmp r0, #4
+@ 	bne _08012C62
+@ 	b _08012D9C
+@ _08012C62:
+@ 	b _08012E58
+@ _08012C64:
+@ 	movs r7, #1
+@ 	ldr r2, _08012C80
+@ 	ldrh r0, [r2]
+@ 	ldr r1, _08012C84
+@ 	ands r1, r0
+@ 	strh r1, [r2]
+@ 	ldrb r0, [r4, #0x14]
+@ 	cmp r0, #0
+@ 	bne _08012C8C
+@ 	ldr r1, _08012C88
+@ 	ldr r0, [r4, #0x20]
+@ 	str r0, [r1]
+@ 	b _08012E5C
+@ 	.align 2, 0
+@ _08012C80: .4byte 0x04000008
+@ _08012C84: .4byte 0x0000FFF3
+@ _08012C88: .4byte gTileSetBG
+@ _08012C8C:
+@ 	ldrh r0, [r2]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r2]
+@ 	ldr r1, _08012C9C
+@ 	ldr r0, [r4, #0x28]
+@ 	str r0, [r1]
+@ 	b _08012E5C
+@ 	.align 2, 0
+@ _08012C9C: .4byte gTileSetBG
+@ _08012CA0:
+@ 	movs r7, #3
+@ 	ldr r3, _08012CC4
+@ 	ldrh r2, [r3]
+@ 	ldr r1, _08012CC8
+@ 	adds r0, r1, #0
+@ 	ands r0, r2
+@ 	strh r0, [r3]
+@ 	ldr r2, _08012CCC
+@ 	ldrh r0, [r2]
+@ 	ands r1, r0
+@ 	strh r1, [r2]
+@ 	ldrb r0, [r4, #0x14]
+@ 	cmp r0, #0
+@ 	bne _08012CD4
+@ 	ldr r1, _08012CD0
+@ 	ldr r0, [r4, #0x20]
+@ 	b _08012CE0
+@ 	.align 2, 0
+@ _08012CC4: .4byte 0x04000008
+@ _08012CC8: .4byte 0x0000FFF3
+@ _08012CCC: .4byte 0x0400000A
+@ _08012CD0: .4byte gTileSetBG
+@ _08012CD4:
+@ 	ldrh r0, [r3]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r3]
+@ 	ldr r1, _08012CF0
+@ 	ldr r0, [r4, #0x28]
+@ _08012CE0:
+@ 	str r0, [r1]
+@ 	adds r3, r1, #0
+@ 	ldrb r0, [r4, #0x15]
+@ 	cmp r0, #0
+@ 	bne _08012CF4
+@ 	ldr r0, [r4, #0x20]
+@ 	str r0, [r3, #4]
+@ 	b _08012E5C
+@ 	.align 2, 0
+@ _08012CF0: .4byte gTileSetBG
+@ _08012CF4:
+@ 	ldr r2, _08012D04
+@ 	ldrh r0, [r2]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r2]
+@ 	ldr r0, [r4, #0x28]
+@ 	str r0, [r3, #4]
+@ 	b _08012E5C
+@ 	.align 2, 0
+@ _08012D04: .4byte 0x0400000A
+@ _08012D08:
+@ 	movs r7, #7
+@ 	ldr r5, _08012D34
+@ 	ldrh r2, [r5]
+@ 	ldr r1, _08012D38
+@ 	adds r0, r1, #0
+@ 	ands r0, r2
+@ 	strh r0, [r5]
+@ 	ldr r3, _08012D3C
+@ 	ldrh r2, [r3]
+@ 	adds r0, r1, #0
+@ 	ands r0, r2
+@ 	strh r0, [r3]
+@ 	ldr r2, _08012D40
+@ 	ldrh r0, [r2]
+@ 	ands r1, r0
+@ 	strh r1, [r2]
+@ 	ldrb r0, [r4, #0x14]
+@ 	cmp r0, #0
+@ 	bne _08012D48
+@ 	ldr r1, _08012D44
+@ 	ldr r0, [r4, #0x20]
+@ 	b _08012D54
+@ 	.align 2, 0
+@ _08012D34: .4byte 0x04000008
+@ _08012D38: .4byte 0x0000FFF3
+@ _08012D3C: .4byte 0x0400000A
+@ _08012D40: .4byte 0x0400000C
+@ _08012D44: .4byte gTileSetBG
+@ _08012D48:
+@ 	ldrh r0, [r5]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r5]
+@ 	ldr r1, _08012D64
+@ 	ldr r0, [r4, #0x28]
+@ _08012D54:
+@ 	str r0, [r1]
+@ 	adds r3, r1, #0
+@ 	ldrb r0, [r4, #0x15]
+@ 	cmp r0, #0
+@ 	bne _08012D68
+@ 	ldr r0, [r4, #0x20]
+@ 	b _08012D74
+@ 	.align 2, 0
+@ _08012D64: .4byte gTileSetBG
+@ _08012D68:
+@ 	ldr r2, _08012D84
+@ 	ldrh r0, [r2]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r2]
+@ 	ldr r0, [r4, #0x28]
+@ _08012D74:
+@ 	str r0, [r3, #4]
+@ 	ldrb r0, [r4, #0x16]
+@ 	cmp r0, #0
+@ 	bne _08012D88
+@ 	ldr r0, [r4, #0x20]
+@ 	str r0, [r3, #8]
+@ 	b _08012E5C
+@ 	.align 2, 0
+@ _08012D84: .4byte 0x0400000A
+@ _08012D88:
+@ 	ldr r2, _08012D98
+@ 	ldrh r0, [r2]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r2]
+@ 	ldr r0, [r4, #0x28]
+@ 	str r0, [r3, #8]
+@ 	b _08012E5C
+@ 	.align 2, 0
+@ _08012D98: .4byte 0x0400000C
+@ _08012D9C:
+@ 	movs r7, #0xf
+@ 	ldr r5, _08012DD4
+@ 	ldrh r2, [r5]
+@ 	ldr r1, _08012DD8
+@ 	adds r0, r1, #0
+@ 	ands r0, r2
+@ 	strh r0, [r5]
+@ 	ldr r3, _08012DDC
+@ 	ldrh r2, [r3]
+@ 	adds r0, r1, #0
+@ 	ands r0, r2
+@ 	strh r0, [r3]
+@ 	adds r3, #2
+@ 	ldrh r2, [r3]
+@ 	adds r0, r1, #0
+@ 	ands r0, r2
+@ 	strh r0, [r3]
+@ 	ldr r2, _08012DE0
+@ 	ldrh r0, [r2]
+@ 	ands r1, r0
+@ 	strh r1, [r2]
+@ 	ldrb r0, [r4, #0x14]
+@ 	cmp r0, #0
+@ 	bne _08012DE8
+@ 	ldr r1, _08012DE4
+@ 	ldr r0, [r4, #0x20]
+@ 	b _08012DF4
+@ 	.align 2, 0
+@ _08012DD4: .4byte 0x04000008
+@ _08012DD8: .4byte 0x0000FFF3
+@ _08012DDC: .4byte 0x0400000A
+@ _08012DE0: .4byte 0x0400000E
+@ _08012DE4: .4byte gTileSetBG
+@ _08012DE8:
+@ 	ldrh r0, [r5]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r5]
+@ 	ldr r1, _08012E04
+@ 	ldr r0, [r4, #0x28]
+@ _08012DF4:
+@ 	str r0, [r1]
+@ 	adds r3, r1, #0
+@ 	ldrb r0, [r4, #0x15]
+@ 	cmp r0, #0
+@ 	bne _08012E08
+@ 	ldr r0, [r4, #0x20]
+@ 	b _08012E14
+@ 	.align 2, 0
+@ _08012E04: .4byte gTileSetBG
+@ _08012E08:
+@ 	ldr r2, _08012E20
+@ 	ldrh r0, [r2]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r2]
+@ 	ldr r0, [r4, #0x28]
+@ _08012E14:
+@ 	str r0, [r3, #4]
+@ 	ldrb r0, [r4, #0x16]
+@ 	cmp r0, #0
+@ 	bne _08012E24
+@ 	ldr r0, [r4, #0x20]
+@ 	b _08012E30
+@ 	.align 2, 0
+@ _08012E20: .4byte 0x0400000A
+@ _08012E24:
+@ 	ldr r2, _08012E40
+@ 	ldrh r0, [r2]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r2]
+@ 	ldr r0, [r4, #0x28]
+@ _08012E30:
+@ 	str r0, [r3, #8]
+@ 	ldrb r0, [r4, #0x17]
+@ 	cmp r0, #0
+@ 	bne _08012E44
+@ 	ldr r0, [r4, #0x20]
+@ 	str r0, [r3, #0xc]
+@ 	b _08012E5C
+@ 	.align 2, 0
+@ _08012E40: .4byte 0x0400000C
+@ _08012E44:
+@ 	ldr r2, _08012E54
+@ 	ldrh r0, [r2]
+@ 	movs r1, #8
+@ 	orrs r0, r1
+@ 	strh r0, [r2]
+@ 	ldr r0, [r4, #0x28]
+@ 	str r0, [r3, #0xc]
+@ 	b _08012E5C
+@ 	.align 2, 0
+@ _08012E54: .4byte 0x0400000E
+@ _08012E58:
+@ 	.2byte 0xEE00, 0xEE00
+@ _08012E5C:
+@ 	movs r2, #0x80
+@ 	lsls r2, r2, #0x13
+@ 	ldrh r1, [r2]
+@ 	ldr r0, _08012E88
+@ 	ands r0, r1
+@ 	strh r0, [r2]
+@ 	lsls r0, r7, #8
+@ 	ldrh r1, [r2]
+@ 	orrs r0, r1
+@ 	strh r0, [r2]
+@ 	bl SetupBGOffsets
+@ 	ldr r1, _08012E8C
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	pop {r3, r4}
+@ 	mov r8, r3
+@ 	mov sb, r4
+@ 	pop {r4, r5, r6, r7}
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _08012E88: .4byte 0x0000F0FF
+@ _08012E8C: .4byte gBGControlActions
 
     .thumb
 	.global sub_08012E90
@@ -975,7 +975,7 @@ _08013144:
 	.align 2, 0
 _08013160: .4byte 0x04000008
 _08013164: .4byte 0x0000FFF3
-_08013168: .4byte gBG0TileSet
+_08013168: .4byte gTileSetBG
 _0801316C:
 	ldrh r0, [r2]
 	movs r1, #8
@@ -986,7 +986,7 @@ _0801316C:
 	str r0, [r1]
 	b _0801333C
 	.align 2, 0
-_0801317C: .4byte gBG0TileSet
+_0801317C: .4byte gTileSetBG
 _08013180:
 	movs r6, #3
 	ldr r3, _080131A4
@@ -1009,7 +1009,7 @@ _08013180:
 _080131A4: .4byte 0x04000008
 _080131A8: .4byte 0x0000FFF3
 _080131AC: .4byte 0x0400000A
-_080131B0: .4byte gBG0TileSet
+_080131B0: .4byte gTileSetBG
 _080131B4:
 	ldrh r0, [r3]
 	movs r1, #8
@@ -1027,7 +1027,7 @@ _080131C0:
 	str r0, [r3, #4]
 	b _0801333C
 	.align 2, 0
-_080131D0: .4byte gBG0TileSet
+_080131D0: .4byte gTileSetBG
 _080131D4:
 	ldr r2, _080131E4
 	ldrh r0, [r2]
@@ -1067,7 +1067,7 @@ _08013214: .4byte 0x04000008
 _08013218: .4byte 0x0000FFF3
 _0801321C: .4byte 0x0400000A
 _08013220: .4byte 0x0400000C
-_08013224: .4byte gBG0TileSet
+_08013224: .4byte gTileSetBG
 _08013228:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -1084,7 +1084,7 @@ _08013234:
 	ldr r0, [r4, #0x20]
 	b _08013254
 	.align 2, 0
-_08013244: .4byte gBG0TileSet
+_08013244: .4byte gTileSetBG
 _08013248:
 	ldr r2, _08013264
 	ldrh r0, [r2]
@@ -1146,7 +1146,7 @@ _080132B4: .4byte 0x04000008
 _080132B8: .4byte 0x0000FFF3
 _080132BC: .4byte 0x0400000A
 _080132C0: .4byte 0x0400000E
-_080132C4: .4byte gBG0TileSet
+_080132C4: .4byte gTileSetBG
 _080132C8:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -1163,7 +1163,7 @@ _080132D4:
 	ldr r0, [r4, #0x20]
 	b _080132F4
 	.align 2, 0
-_080132E4: .4byte gBG0TileSet
+_080132E4: .4byte gTileSetBG
 _080132E8:
 	ldr r2, _08013300
 	ldrh r0, [r2]
@@ -1600,7 +1600,7 @@ _08013648:
 	.align 2, 0
 _08013664: .4byte 0x04000008
 _08013668: .4byte 0x0000FFF3
-_0801366C: .4byte gBG0TileSet
+_0801366C: .4byte gTileSetBG
 _08013670:
 	ldrh r0, [r2]
 	movs r1, #8
@@ -1611,7 +1611,7 @@ _08013670:
 	str r0, [r1]
 	b _08013840
 	.align 2, 0
-_08013680: .4byte gBG0TileSet
+_08013680: .4byte gTileSetBG
 _08013684:
 	movs r6, #3
 	ldr r3, _080136A8
@@ -1634,7 +1634,7 @@ _08013684:
 _080136A8: .4byte 0x04000008
 _080136AC: .4byte 0x0000FFF3
 _080136B0: .4byte 0x0400000A
-_080136B4: .4byte gBG0TileSet
+_080136B4: .4byte gTileSetBG
 _080136B8:
 	ldrh r0, [r3]
 	movs r1, #8
@@ -1652,7 +1652,7 @@ _080136C4:
 	str r0, [r3, #4]
 	b _08013840
 	.align 2, 0
-_080136D4: .4byte gBG0TileSet
+_080136D4: .4byte gTileSetBG
 _080136D8:
 	ldr r2, _080136E8
 	ldrh r0, [r2]
@@ -1692,7 +1692,7 @@ _08013718: .4byte 0x04000008
 _0801371C: .4byte 0x0000FFF3
 _08013720: .4byte 0x0400000A
 _08013724: .4byte 0x0400000C
-_08013728: .4byte gBG0TileSet
+_08013728: .4byte gTileSetBG
 _0801372C:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -1709,7 +1709,7 @@ _08013738:
 	ldr r0, [r4, #0x20]
 	b _08013758
 	.align 2, 0
-_08013748: .4byte gBG0TileSet
+_08013748: .4byte gTileSetBG
 _0801374C:
 	ldr r2, _08013768
 	ldrh r0, [r2]
@@ -1771,7 +1771,7 @@ _080137B8: .4byte 0x04000008
 _080137BC: .4byte 0x0000FFF3
 _080137C0: .4byte 0x0400000A
 _080137C4: .4byte 0x0400000E
-_080137C8: .4byte gBG0TileSet
+_080137C8: .4byte gTileSetBG
 _080137CC:
 	ldrh r0, [r5]
 	movs r1, #8
@@ -1788,7 +1788,7 @@ _080137D8:
 	ldr r0, [r4, #0x20]
 	b _080137F8
 	.align 2, 0
-_080137E8: .4byte gBG0TileSet
+_080137E8: .4byte gTileSetBG
 _080137EC:
 	ldr r2, _08013804
 	ldrh r0, [r2]
@@ -1861,6 +1861,7 @@ _0801386C: .4byte 0x0000F0FF
 _08013870: .4byte gBGControlActions
 
     .thumb
+	.global SetupAnimationTiles
 SetupAnimationTiles: @ 0x08013874
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
@@ -2213,7 +2214,7 @@ _08013AFA:
 _08013B10: .4byte 0x0600E000
 _08013B14: .4byte 0x0001FFC0
 _08013B18: .4byte gRoomHeader
-_08013B1C: .4byte gBG0TileSet
+_08013B1C: .4byte gTileSetBG
 _08013B20: .4byte 0xFFFE003F
 _08013B24: .4byte 0xFFFE07FF
 _08013B28: .4byte 0x0600E800
@@ -2326,7 +2327,7 @@ _08013BDE:
 	.align 2, 0
 _08013BF4: .4byte 0x0600E800
 _08013BF8: .4byte 0x0001FFC0
-_08013BFC: .4byte gBG0TileSet
+_08013BFC: .4byte gTileSetBG
 _08013C00: .4byte 0x0200206C
 _08013C04: .4byte gRoomHeader
 _08013C08: .4byte 0xFFFE003F
@@ -2439,7 +2440,7 @@ _08013CBC:
 	.align 2, 0
 _08013CD8: .4byte 0x0600F000
 _08013CDC: .4byte 0x0001FFC0
-_08013CE0: .4byte gBG0TileSet
+_08013CE0: .4byte gTileSetBG
 _08013CE4: .4byte 0x0200206C
 _08013CE8: .4byte gRoomHeader
 _08013CEC: .4byte 0xFFFE003F
@@ -2549,7 +2550,7 @@ _08013DA6:
 	.align 2, 0
 _08013DB8: .4byte 0x0600F800
 _08013DBC: .4byte 0x0001FFC0
-_08013DC0: .4byte gBG0TileSet
+_08013DC0: .4byte gTileSetBG
 _08013DC4: .4byte 0x0200206C
 _08013DC8: .4byte gRoomHeader
 _08013DCC: .4byte 0xFFFE003F
@@ -2925,7 +2926,7 @@ _08014078:
 	.align 2, 0
 _08014088: .4byte 0x0001FFC0
 _0801408C: .4byte gRoomHeader
-_08014090: .4byte gBG0TileSet
+_08014090: .4byte gTileSetBG
 _08014094: .4byte 0xFFFE003F
 _08014098: .4byte 0xFFFE07FF
 _0801409C: .4byte 0x0600E800
@@ -3866,7 +3867,7 @@ _0801476E:
 	b _080147F0
 	.align 2, 0
 _080147E0: .4byte gRoomHeader
-_080147E4: .4byte gBG0TileSet
+_080147E4: .4byte gTileSetBG
 _080147E8: .4byte gBG0VerticalBuffer
 _080147EC: .4byte gBG1VerticalBuffer
 _080147F0:
@@ -4755,7 +4756,7 @@ _08014E3C:
 	strh r0, [r2, #8]
 	b _08014EE4
 	.align 2, 0
-_08014ED4: .4byte gBG0TileSet
+_08014ED4: .4byte gTileSetBG
 _08014ED8: .4byte gBG2VerticalBuffer
 _08014EDC: .4byte gRoomHeader
 _08014EE0: .4byte gBG3VerticalBuffer
@@ -5632,7 +5633,7 @@ _08015486:
 	b _080155B8
 	.align 2, 0
 _080155A8: .4byte gRoomHeader
-_080155AC: .4byte gBG0TileSet
+_080155AC: .4byte gTileSetBG
 _080155B0: .4byte gBG0HorizontalBuffer
 _080155B4: .4byte gBG1HorizontalBuffer
 _080155B8:
@@ -6345,7 +6346,7 @@ _080159FE:
 	ldrh r0, [r0]
 	b _08015B48
 	.align 2, 0
-_08015B3C: .4byte gBG0TileSet
+_08015B3C: .4byte gTileSetBG
 _08015B40: .4byte gBG2HorizontalBuffer
 _08015B44: .4byte gBG3HorizontalBuffer
 _08015B48:

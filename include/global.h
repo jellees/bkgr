@@ -58,6 +58,17 @@ struct Vec3fx {
     u32 x, y, z;
 };
 
+struct TileAnimSection {
+    u32 tileAnimCount;
+    u32 tileAnimIndexes;
+};
+
+struct RoomIndex {
+    struct RoomHeader* room;
+    u16 level;
+    u16 music;
+};
+
 struct RoomHeader {
     u16 tileData1Count;
     u16 tileSet1Count;
@@ -80,14 +91,14 @@ struct RoomHeader {
     void* tileset1;
     void* tiledata2;
     void* tileset2;
-    void* tileAnimations1;
-    void* tileAnimations2;
+    struct TileAnimSection* tileAnimations1;
+    struct TileAnimSection* tileAnimations2;
     void* collision;
     void* textbarNPC;
     void* textbarBozzeye;
     void* entities;
     u16* spritePalette;
-    u32 unknown3;
+    u16* unknown3;
     void* map1;
     void* map2;
     void* map3;
