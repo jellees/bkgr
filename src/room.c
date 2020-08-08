@@ -741,3 +741,248 @@ void sub_08012E90(u32 room)
     SetupBGOffsets();
     gBGControlActions = 0;
 }
+
+void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5)
+{
+    u16 displayBGFlag = 0;
+
+    if (room >= ROOM_COUNT)
+        HANG;
+
+    gLoadedTileAnimCount = 0;
+    gTileAnimQueueIndex = 0;
+
+    gLoadedRoomIndex = room;
+
+    if (gLoadedRoomLevel != dRoomIndexes[room].level && dRoomIndexes[room].level != 255)
+        sub_800A710(dRoomIndexes[room].level);
+
+    if (gLoadedRoomBgm != dRoomIndexes[room].music)
+    {
+        gLoadedRoomBgm = dRoomIndexes[room].music;
+        if (gCanChangeBgm)
+            audio_start_tune(gLoadedRoomBgm);
+    }
+
+    DmaTransfer32(dRoomIndexes[room].room, &gRoomHeader, 25);
+
+    gEnabledBGs = gRoomHeader.enabledBGs;
+
+    if (*gRoomHeader.unknown3 > 255)
+        HANG;
+
+    gMapPixelSizeX = 32 * gRoomHeader.mapSizeX;
+    gMapPixelSizeY = 32 * gRoomHeader.mapSizeY;
+    gBG0Static = gRoomHeader.isStaticBG0;
+    gBG1Static = gRoomHeader.isStaticBG1;
+    gBG2Static = gRoomHeader.isStaticBG2;
+    gBG3Static = gRoomHeader.isStaticBG3;
+
+    setup_collision_xyz(gRoomHeader.collision, a2, a3, a4);
+    sub_8038FA0(gLoadedRoomLevel);
+    setup_entities(room, a5, gRoomHeader.entities);
+
+    DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
+    DmaTransfer32(gRoomHeader.backgroundPalette, BG_PLTT, 128);
+
+    if (gLoadedTileAnimCount)
+        gLoadedTileAnimCount = 0;
+
+    if (gRoomHeader.tileData1Count)
+    {
+        if (!gRoomHeader.tileAnimations1)
+        {
+            switch (gRoomHeader.compression)
+            {
+            case 0: DmaTransfer32(gRoomHeader.tiledata1, BG_CHAR_ADDR(0), 8 * gRoomHeader.tileData1Count); break;
+            case 1: LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata1, BG_CHAR_ADDR(0)); break;
+            case 2: HuffUnCompReadNormal(gRoomHeader.tiledata1, BG_CHAR_ADDR(0)); break;
+            }
+        }
+        else
+        {
+            switch (gRoomHeader.compression)
+            {
+            case 0:
+                DmaTransfer32(gRoomHeader.tiledata1,
+                              TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount + BG_CHAR_ADDR(0),
+                              8 * gRoomHeader.tileData1Count);
+                break;
+            case 1:
+                LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata1,
+                                               TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                                   + BG_CHAR_ADDR(0));
+                break;
+            case 2:
+                HuffUnCompReadNormal(gRoomHeader.tiledata1,
+                                     TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount + BG_CHAR_ADDR(0));
+                break;
+            }
+            SetupAnimationTiles(gRoomHeader.tileAnimations1, BG_CHAR_ADDR(0));
+        }
+    }
+
+    if (gRoomHeader.tileData2Count)
+    {
+        if (!gRoomHeader.tileAnimations2)
+        {
+            switch (gRoomHeader.compression)
+            {
+            case 0: DmaTransfer32(gRoomHeader.tiledata2, BG_CHAR_ADDR(2), 8 * gRoomHeader.tileData2Count); break;
+            case 1: LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata2, BG_CHAR_ADDR(2)); break;
+            case 2: HuffUnCompReadNormal(gRoomHeader.tiledata2, BG_CHAR_ADDR(2)); break;
+            }
+        }
+        else
+        {
+            switch (gRoomHeader.compression)
+            {
+            case 0:
+                DmaTransfer32(gRoomHeader.tiledata2,
+                              TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount + BG_CHAR_ADDR(2),
+                              8 * gRoomHeader.tileData2Count);
+                break;
+            case 1:
+                LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata2,
+                                               TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                                   + BG_CHAR_ADDR(2));
+                break;
+            case 2:
+                HuffUnCompReadNormal(gRoomHeader.tiledata2,
+                                     TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount + BG_CHAR_ADDR(2));
+                break;
+            }
+            SetupAnimationTiles(gRoomHeader.tileAnimations2, BG_CHAR_ADDR(2));
+        }
+    }
+
+    gTilesCount = gRoomHeader.mapSizeX * gRoomHeader.mapSizeY;
+
+    switch (gRoomHeader.enabledBGs)
+    {
+    case 1:
+        displayBGFlag = (DISPCNT_BG0_ON) >> 8;
+        REG_BG0CNT &= CHARBASE_MASK;
+        if (!gRoomHeader.tilesetBG0)
+        {
+            gTileSetBG[0] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG0CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[0] = gRoomHeader.tileset2;
+        }
+        break;
+    case 2:
+        displayBGFlag = (DISPCNT_BG0_ON | DISPCNT_BG1_ON) >> 8;
+        REG_BG0CNT &= CHARBASE_MASK;
+        REG_BG1CNT &= CHARBASE_MASK;
+        if (!gRoomHeader.tilesetBG0)
+        {
+            gTileSetBG[0] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG0CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[0] = gRoomHeader.tileset2;
+        }
+
+        if (!gRoomHeader.tilesetBG1)
+        {
+            gTileSetBG[1] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG1CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[1] = gRoomHeader.tileset2;
+        }
+        break;
+    case 3:
+        displayBGFlag = (DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON) >> 8;
+        REG_BG0CNT &= CHARBASE_MASK;
+        REG_BG1CNT &= CHARBASE_MASK;
+        REG_BG2CNT &= CHARBASE_MASK;
+        if (!gRoomHeader.tilesetBG0)
+        {
+            gTileSetBG[0] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG0CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[0] = gRoomHeader.tileset2;
+        }
+
+        if (!gRoomHeader.tilesetBG1)
+        {
+            gTileSetBG[1] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG1CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[1] = gRoomHeader.tileset2;
+        }
+
+        if (!gRoomHeader.tilesetBG2)
+        {
+            gTileSetBG[2] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG2CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[2] = gRoomHeader.tileset2;
+        }
+        break;
+    case 4:
+        displayBGFlag = (DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON) >> 8;
+        REG_BG0CNT &= CHARBASE_MASK;
+        REG_BG1CNT &= CHARBASE_MASK;
+        REG_BG2CNT &= CHARBASE_MASK;
+        REG_BG3CNT &= CHARBASE_MASK;
+        if (!gRoomHeader.tilesetBG0)
+        {
+            gTileSetBG[0] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG0CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[0] = gRoomHeader.tileset2;
+        }
+
+        if (!gRoomHeader.tilesetBG1)
+        {
+            gTileSetBG[1] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG1CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[1] = gRoomHeader.tileset2;
+        }
+
+        if (!gRoomHeader.tilesetBG2)
+        {
+            gTileSetBG[2] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG2CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[2] = gRoomHeader.tileset2;
+        }
+
+        if (!gRoomHeader.tilesetBG3)
+        {
+            gTileSetBG[3] = gRoomHeader.tileset1;
+        }
+        else
+        {
+            REG_BG3CNT |= BGCNT_CHARBASE(2);
+            gTileSetBG[3] = gRoomHeader.tileset2;
+        }
+        break;
+    default: HANG;
+    }
+
+    REG_DISPCNT &= ~DISPCNT_BG_ALL_ON;
+    REG_DISPCNT |= displayBGFlag << 8;
+    SetupBGOffsets();
+    gBGControlActions = 0;
+}
