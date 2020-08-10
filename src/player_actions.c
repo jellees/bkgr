@@ -44,8 +44,7 @@ extern struct struct_0 stru_200209A;
 
 void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown)
 {
-    if (gPlayerState > 0x7F)
-        HANG;
+    ASSERT(gPlayerState < 0x80);
 
     dPlayerBehaviors[gPlayerState](keyPressed, keyDown);
 }

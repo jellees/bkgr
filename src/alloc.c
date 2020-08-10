@@ -100,17 +100,15 @@ void InitHeap(u32 heap)
         ((struct MemoryBlock*)gHeap6)->next = 0;
         ((struct MemoryBlock*)gHeap6)->previous = 0;
         break;
-    default: HANG;
+    default: ASSERT(0);
     }
 }
 
 void sub_80277D0(u32 heap, u32 a2)
 {
-    if (a2 > 1)
-        HANG;
+    ASSERT(a2 < 2);
 
-    if (heap > 5)
-        HANG;
+    ASSERT(heap < 6);
 
     gHeaps[heap].field_14 = a2;
 }

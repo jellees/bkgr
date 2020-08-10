@@ -19,24 +19,24 @@ extern u16 sub_8064760(int a, u8* b);
 
 void sub_80447C4()
 {
-  sub_80643E8(64);
-  sub_8064450(3, &gFunctionArray[6]);
-  dword_203EADC = (u8*)Alloc(0x7F8u, 9, 4);
-  DmaFill32(0, dword_203EADC, 510);
-  REG_IME = 0;
-  SyncVblank();
-  SyncVblank();
-  audio_pause();
-  byte_203EAD4 = 1;
-  byte_203EAD8 = 31;
+    sub_80643E8(64);
+    sub_8064450(3, &gFunctionArray[6]);
+    dword_203EADC = (u8*)Alloc(0x7F8u, 9, 4);
+    DmaFill32(0, dword_203EADC, 510);
+    REG_IME = 0;
+    SyncVblank();
+    SyncVblank();
+    audio_pause();
+    byte_203EAD4 = 1;
+    byte_203EAD8 = 31;
 }
 
 void sub_8044828()
 {
-  gFunctionArray[6] = 0x800A4A1;
-  Free(dword_203EADC, 4);
-  REG_IME = 1;
-  byte_203EAD4 = 0;
+    gFunctionArray[6] = 0x800A4A1;
+    Free(dword_203EADC, 4);
+    REG_IME = 1;
+    byte_203EAD4 = 0;
 }
 
 bool32 sub_8044860()
@@ -56,14 +56,14 @@ bool32 sub_8044860()
 
     if (sub_80645D4(0, v1))
     {
-        HANG;
+        ASSERT(0);
         sub_8044828();
         return FALSE;
     }
 
     sum1 = v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5];
     sum2 = v1[7] << 8 | v1[6];
-    
+
     if (sum2 != sum1)
     {
         sub_8044828();
@@ -93,7 +93,7 @@ bool32 sub_8044860()
 
     if (sub_80645D4(1, dword_203EADC))
     {
-        HANG;
+        ASSERT(0);
         sub_8044828();
         return FALSE;
     }
@@ -103,21 +103,14 @@ bool32 sub_8044860()
     byte_203EAE0[2] = v1[2];
     byte_203EAE3 = v1[3];
 
-    if (byte_203EAE0[0] > 3 || byte_203EAE0[1] > 3 || byte_203EAE0[2] > 3 || byte_203EAE3 > 3)
-        HANG;
-    
-    if (byte_203EAE0[0] == byte_203EAE0[1]
-        || byte_203EAE0[0] == byte_203EAE0[2]
-        || byte_203EAE0[0] == byte_203EAE3)
-        HANG;
-    
-    if (byte_203EAE0[1] == byte_203EAE0[2]
-        || byte_203EAE0[1] == byte_203EAE3)
-        HANG;
-    
-    if (byte_203EAE0[2] == byte_203EAE3)
-        HANG;
-    
+    ASSERT(byte_203EAE0[0] < 4 && byte_203EAE0[1] < 4 && byte_203EAE0[2] < 4 && byte_203EAE3 < 4);
+
+    ASSERT(byte_203EAE0[0] != byte_203EAE0[1] && byte_203EAE0[0] != byte_203EAE0[2] && byte_203EAE0[0] != byte_203EAE3);
+
+    ASSERT(byte_203EAE0[1] != byte_203EAE0[2] && byte_203EAE0[1] != byte_203EAE3);
+
+    ASSERT(byte_203EAE0[2] != byte_203EAE3);
+
     sub_8044828();
     return TRUE;
 }
@@ -165,7 +158,7 @@ bool32 sub_80449B0(u32 a1, int a2)
             sub_8044828();
             return FALSE;
         }
-        
+
         if (sub_8064760(0, dword_203EADC))
         {
             HANG;
@@ -203,7 +196,7 @@ bool32 sub_80449B0(u32 a1, int a2)
         HANG;
 
     v8 = dword_80AF4F0[byte_203EAE3];
-    for(i = 0; i < 0xFF; i++)
+    for (i = 0; i < 0xFF; i++)
     {
         if (sub_8064684((u16)v8, &dword_203EADC[8 * i]))
         {

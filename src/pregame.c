@@ -116,8 +116,7 @@ void ExecutePregame()
     FreeById(4, 15);
     ResetMenu();
 
-    if (DoesMemBlockExistById(4, 15))
-        HANG;
+    ASSERT(DoesMemBlockExistById(4, 15) == FALSE);
 }
 
 void ShowSelectGame(int a1)

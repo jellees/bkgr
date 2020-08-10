@@ -256,8 +256,7 @@ void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4)
 {
     u16 displayBGFlag = 0;
 
-    if (room >= ROOM_COUNT)
-        HANG;
+    ASSERT(room < ROOM_COUNT);
 
     gLoadedTileAnimCount = 0;
     gTileAnimQueueIndex = 0;
@@ -487,7 +486,7 @@ void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4)
             gTileSetBG[3] = gRoomHeader.tileset2;
         }
         break;
-    default: HANG;
+    default: ASSERT(0);
     }
 
     REG_DISPCNT &= ~DISPCNT_BG_ALL_ON;
@@ -500,8 +499,7 @@ void sub_08012E90(u32 room)
 {
     u16 displayBGFlag = 0;
 
-    if (room >= ROOM_COUNT)
-        HANG;
+    ASSERT(room < ROOM_COUNT);
 
     gLoadedTileAnimCount = 0;
     gTileAnimQueueIndex = 0;
@@ -732,7 +730,7 @@ void sub_08012E90(u32 room)
             gTileSetBG[3] = gRoomHeader.tileset2;
         }
         break;
-    default: HANG;
+    default: ASSERT(0);
     }
 
     REG_DISPCNT &= ~DISPCNT_BG_ALL_ON;
@@ -748,8 +746,7 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5)
 {
     u16 displayBGFlag = 0;
 
-    if (room >= ROOM_COUNT)
-        HANG;
+    ASSERT(room < ROOM_COUNT);
 
     gLoadedTileAnimCount = 0;
     gTileAnimQueueIndex = 0;
@@ -980,7 +977,7 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5)
             gTileSetBG[3] = gRoomHeader.tileset2;
         }
         break;
-    default: HANG;
+    default: ASSERT(0);
     }
 
     REG_DISPCNT &= ~DISPCNT_BG_ALL_ON;
