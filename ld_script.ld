@@ -210,7 +210,8 @@ SECTIONS
 		dword_200146C = .; . += 4;
 		dword_2001470 = .; . += 4;
 
-		. = 0x00002068;
+		gTileAnimTable = .; . += 0xC * 255;
+
 		gLoadedTileAnimCount = .; . += 4;
 		gTilesCount = .; . += 4;
 		byte_2002070 = .; . += 1;

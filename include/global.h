@@ -4,6 +4,7 @@
 #include "gba/gba.h"
 
 #define HANG asm(".word 0xEE00EE00")
+#define ASSERT(expr) do { if (!(expr)) HANG; } while (0)
 
 // Puts 0xFF after a string.
 #define FORMAT(s) s"\xff"
@@ -58,9 +59,24 @@ struct Vec3fx {
     u32 x, y, z;
 };
 
+struct TileAnimTable_rt {
+    u8 framesPerSecondCount;
+    u8 framesPerSecond;
+    u8 numberOfFramesCount;
+    u8 numberOfFrames;
+    u8* tileData;
+    u8* destiny;
+};
+
+struct TileAnimIndex {
+    u16 numberOfFrames;
+    u16 framesPerSecond;
+    u8* tileData;
+};
+
 struct TileAnimSection {
-    u32 tileAnimCount;
-    u32 tileAnimIndexes;
+    s32 tileAnimCount;
+    struct TileAnimIndex tileAnimIndexes[0];
 };
 
 struct RoomIndex {

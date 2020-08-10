@@ -5,99 +5,99 @@
 
     .thumb
 	.global SetupAnimationTiles
-SetupAnimationTiles: @ 0x08013874
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	mov r8, r0
-	adds r3, r1, #0
-	ldr r2, [r0]
-	cmp r2, #0
-	bne _0801388C
-	.2byte 0xEE00, 0xEE00
-_0801388C:
-	ldr r1, _08013924
-	ldr r0, [r1]
-	adds r0, r2, r0
-	cmp r0, #0xff
-	ble _0801389A
-	.2byte 0xEE00, 0xEE00
-_0801389A:
-	movs r0, #0
-	mov ip, r0
-	cmp ip, r2
-	bge _08013914
-	ldr r6, _08013928
-	adds r5, r1, #0
-	mov sb, r0
-	movs r1, #8
-	adds r1, r1, r6
-	mov sl, r1
-	adds r7, r3, #0
-	mov r4, r8
-	adds r4, #4
-_080138B4:
-	ldr r1, [r5]
-	lsls r0, r1, #1
-	adds r0, r0, r1
-	lsls r0, r0, #2
-	adds r0, r0, r6
-	ldrh r1, [r4, #2]
-	strb r1, [r0, #1]
-	ldr r1, [r5]
-	lsls r0, r1, #1
-	adds r0, r0, r1
-	lsls r0, r0, #2
-	adds r0, r0, r6
-	ldrh r1, [r4]
-	strb r1, [r0, #3]
-	ldr r1, [r5]
-	lsls r0, r1, #1
-	adds r0, r0, r1
-	lsls r0, r0, #2
-	adds r0, r0, r6
-	mov r1, sb
-	strb r1, [r0, #2]
-	ldr r1, [r5]
-	lsls r0, r1, #1
-	adds r0, r0, r1
-	lsls r0, r0, #2
-	adds r0, r0, r6
-	mov r1, sb
-	strb r1, [r0]
-	ldr r3, [r5]
-	lsls r0, r3, #1
-	adds r0, r0, r3
-	lsls r0, r0, #2
-	adds r1, r6, #4
-	adds r1, r0, r1
-	ldr r2, [r4, #4]
-	str r2, [r1]
-	add r0, sl
-	str r7, [r0]
-	adds r3, #1
-	str r3, [r5]
-	adds r7, #0x20
-	adds r4, #8
-	movs r0, #1
-	add ip, r0
-	mov r1, r8
-	ldr r0, [r1]
-	cmp ip, r0
-	blt _080138B4
-_08013914:
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08013924: .4byte gLoadedTileAnimCount
-_08013928: .4byte 0x02001474
+@ SetupAnimationTiles: @ 0x08013874
+@ 	push {r4, r5, r6, r7, lr}
+@ 	mov r7, sl
+@ 	mov r6, sb
+@ 	mov r5, r8
+@ 	push {r5, r6, r7}
+@ 	mov r8, r0
+@ 	adds r3, r1, #0
+@ 	ldr r2, [r0]
+@ 	cmp r2, #0
+@ 	bne _0801388C
+@ 	.2byte 0xEE00, 0xEE00
+@ _0801388C:
+@ 	ldr r1, _08013924
+@ 	ldr r0, [r1]
+@ 	adds r0, r2, r0
+@ 	cmp r0, #0xff
+@ 	ble _0801389A
+@ 	.2byte 0xEE00, 0xEE00
+@ _0801389A:
+@ 	movs r0, #0
+@ 	mov ip, r0
+@ 	cmp ip, r2
+@ 	bge _08013914
+@ 	ldr r6, _08013928
+@ 	adds r5, r1, #0
+@ 	mov sb, r0
+@ 	movs r1, #8
+@ 	adds r1, r1, r6
+@ 	mov sl, r1
+@ 	adds r7, r3, #0
+@ 	mov r4, r8
+@ 	adds r4, #4
+@ _080138B4:
+@ 	ldr r1, [r5]
+@ 	lsls r0, r1, #1
+@ 	adds r0, r0, r1
+@ 	lsls r0, r0, #2
+@ 	adds r0, r0, r6
+@ 	ldrh r1, [r4, #2]
+@ 	strb r1, [r0, #1]
+@ 	ldr r1, [r5]
+@ 	lsls r0, r1, #1
+@ 	adds r0, r0, r1
+@ 	lsls r0, r0, #2
+@ 	adds r0, r0, r6
+@ 	ldrh r1, [r4]
+@ 	strb r1, [r0, #3]
+@ 	ldr r1, [r5]
+@ 	lsls r0, r1, #1
+@ 	adds r0, r0, r1
+@ 	lsls r0, r0, #2
+@ 	adds r0, r0, r6
+@ 	mov r1, sb
+@ 	strb r1, [r0, #2]
+@ 	ldr r1, [r5]
+@ 	lsls r0, r1, #1
+@ 	adds r0, r0, r1
+@ 	lsls r0, r0, #2
+@ 	adds r0, r0, r6
+@ 	mov r1, sb
+@ 	strb r1, [r0]
+@ 	ldr r3, [r5]
+@ 	lsls r0, r3, #1
+@ 	adds r0, r0, r3
+@ 	lsls r0, r0, #2
+@ 	adds r1, r6, #4
+@ 	adds r1, r0, r1
+@ 	ldr r2, [r4, #4]
+@ 	str r2, [r1]
+@ 	add r0, sl
+@ 	str r7, [r0]
+@ 	adds r3, #1
+@ 	str r3, [r5]
+@ 	adds r7, #0x20
+@ 	adds r4, #8
+@ 	movs r0, #1
+@ 	add ip, r0
+@ 	mov r1, r8
+@ 	ldr r0, [r1]
+@ 	cmp ip, r0
+@ 	blt _080138B4
+@ _08013914:
+@ 	pop {r3, r4, r5}
+@ 	mov r8, r3
+@ 	mov sb, r4
+@ 	mov sl, r5
+@ 	pop {r4, r5, r6, r7}
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _08013924: .4byte gLoadedTileAnimCount
+@ _08013928: .4byte 0x02001474
 
     .thumb
 	.global sub_801392C

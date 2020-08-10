@@ -9,7 +9,7 @@ extern u16 gBGInitOffsetVertical;
 extern u8 gBGOffsetHorizontal;
 extern u8 gBGOffsetVertical;
 
-extern u32 gLoadedTileAnimCount;
+extern s32 gLoadedTileAnimCount;
 extern u32 dword_2001470;
 
 extern u8 gBGControlActions;
@@ -37,6 +37,8 @@ extern u32 gTilesCount;
 extern u16* gTileSetBG[4];
 
 extern u32* gEntitySection;
+
+extern struct TileAnimTable_rt gTileAnimTable[255];
 
 void ResetTileAnimCount()
 {
@@ -985,4 +987,26 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5)
     REG_DISPCNT |= displayBGFlag << 8;
     SetupBGOffsets();
     gBGControlActions = 0;
+}
+
+void SetupAnimationTiles(struct TileAnimSection* animationTiles, u8* destiny)
+{
+    s32 i;
+
+    ASSERT(animationTiles->tileAnimCount != 0);
+
+    ASSERT(animationTiles->tileAnimCount + gLoadedTileAnimCount <= 255);
+
+    for (i = 0; i < animationTiles->tileAnimCount; i++)
+    {
+        struct TileAnimIndex* index = &animationTiles->tileAnimIndexes[i];
+
+        gTileAnimTable[gLoadedTileAnimCount].framesPerSecond = index->framesPerSecond;
+        gTileAnimTable[gLoadedTileAnimCount].numberOfFrames = index->numberOfFrames;
+        gTileAnimTable[gLoadedTileAnimCount].numberOfFramesCount = 0;
+        gTileAnimTable[gLoadedTileAnimCount].framesPerSecondCount = 0;
+        gTileAnimTable[gLoadedTileAnimCount].tileData = index->tileData;
+        gTileAnimTable[gLoadedTileAnimCount].destiny = destiny + 32 * i;
+        gLoadedTileAnimCount++;
+    }
 }
