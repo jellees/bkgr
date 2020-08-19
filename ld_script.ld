@@ -5,7 +5,9 @@ SECTIONS
 	ewram (NOLOAD) :
     ALIGN(0)
 	{
-		. = 0x00000320;
+		. = 0x00000318;
+		dword_2000318 = .; . += 4;
+		dword_200031C = .; . += 4;
 		gPauseMenuLanguage = .; . += 1;
 		. += 3; /* padding */
 		gMatrices = .; . += 4;
@@ -325,7 +327,7 @@ SECTIONS
 		gNullsub_3 = .; . += 4;
 		gNullsub_4 = .; . += 4;
 		gNullsub_5 = .; . += 4;
-		gTileAnimQueue = .; . += 4 * 510;
+		gTileAnimQueue = .; . += 8 * 255;
 		gTileAnimQueueIndex = .; . += 1;
 		gIsSlideMiniGame = .; . += 1;
 		. += 2; /* padding */

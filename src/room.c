@@ -40,6 +40,17 @@ extern u32* gEntitySection;
 
 extern struct TileAnimTable_rt gTileAnimTable[255];
 
+extern s32 dword_200031C;
+extern s32 dword_2000318;
+
+struct TileAnimQueueIndex
+{
+    u8* field_0;
+    u8* field_4;
+};
+
+extern struct TileAnimQueueIndex gTileAnimQueue[255];
+
 void ResetTileAnimCount()
 {
     gLoadedTileAnimCount = 0;
@@ -1005,5 +1016,35 @@ void SetupAnimationTiles(struct TileAnimSection* animationTiles, u8* destiny)
         gTileAnimTable[gLoadedTileAnimCount].tileData = index->tileData;
         gTileAnimTable[gLoadedTileAnimCount].destiny = destiny + 32 * i;
         gLoadedTileAnimCount++;
+    }
+}
+
+void sub_801392C()
+{
+    s32 i;
+
+    if (gLoadedTileAnimCount == 0)
+        return;
+
+    if (dword_200031C == -1)
+        return;
+
+    if (dword_200031C)
+    {
+        dword_200031C--;
+        return;
+    }
+
+    dword_200031C = dword_2000318;
+
+    for (i = 0; i < gLoadedTileAnimCount; i++)
+    {
+        gTileAnimTable[i].numberOfFramesCount++;
+        if (gTileAnimTable[i].numberOfFramesCount == gTileAnimTable[i].numberOfFrames)
+            gTileAnimTable[i].numberOfFramesCount = 0;
+        gTileAnimQueue[gTileAnimQueueIndex].field_0
+            = gTileAnimTable[i].tileData + 32 * gTileAnimTable[i].numberOfFramesCount;
+        gTileAnimQueue[gTileAnimQueueIndex].field_4 = gTileAnimTable[i].destiny;
+        gTileAnimQueueIndex++;
     }
 }
