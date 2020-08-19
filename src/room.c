@@ -1048,3 +1048,10 @@ void sub_801392C()
         gTileAnimQueueIndex++;
     }
 }
+
+void sub_80139F0(s32 a1)
+{
+    dword_2000318 = a1;
+    if (dword_200031C < 0)
+        dword_200031C = a1;
+}
