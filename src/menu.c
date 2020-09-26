@@ -12,6 +12,14 @@ extern char file_string_1[0x1A];
 extern char file_string_2[0x1A];
 extern char file_string_3[0x1A];
 
+extern u8* dword_203FA7C;
+extern u8* dword_203FA80;
+extern u8* dword_203FA84;
+
+extern struct Font font_80B01A8[3];
+
+extern u8 byte_203E16C;
+
 void ResetMenuEx()
 {
     gMenuId = -1;
@@ -30,7 +38,271 @@ void ResetMenu()
     gMenu.spriteBuffer = NULL;
 }
 
+extern u8 str_ENGLISH;
+extern u8 str_FRANCAIS;
+extern u8 str_ESPANOL;
+extern u8 str_DEUTSCH;
+extern u8 str_ITALIANO;
+extern u8 str_08068434;
+extern u8 str_08068440;
+extern u8 str_08068460;
+extern u8 str_08068474;
+extern u8 str_080684C4;
+extern u8 str_080684D4;
+extern u8 str_08068490;
+extern u8 str_080684A0;
+extern u8 str_080684F0;
+extern u8 str_08068500;
+extern u8 str_08067D6C;
+extern u8 str_08067D78;
+extern u8 str_08067D84;
+extern u8 str_08067DFC;
+extern u8 str_08067E0C;
+extern u8 str_08067E18;
+extern u8 str_08067F44;
+extern u8 str_08067F58;
+extern u8 str_08067F70;
+extern u8 str_08067E94;
+extern u8 str_08067EAC;
+extern u8 str_08067EC0;
+extern u8 str_08067FE4;
+extern u8 str_08067FF4;
+extern u8 str_08067FFC;
+extern u8 str_08067D44;
+extern u8 str_08067D50;
+extern u8 str_08067D58;
+extern u8 str_08067D64;
+extern u8 str_08067DCC;
+extern u8 str_08067DD8;
+extern u8 str_08067DE0;
+extern u8 str_08067DEC;
+extern u8 str_08067F14;
+extern u8 str_08067F20;
+extern u8 str_08067F2C;
+extern u8 str_08067F38;
+extern u8 str_08067E64;
+extern u8 str_08067E70;
+extern u8 str_08067E7C;
+extern u8 str_08067E88;
+extern u8 str_08067FBC;
+extern u8 str_08067FC8;
+extern u8 str_08067FD0;
+extern u8 str_08067FDC;
+extern u8 str_08068058;
+extern u8 str_08068064;
+extern u8 str_080680E8;
+extern u8 str_080680FC;
+extern u8 str_08068244;
+extern u8 str_08068258;
+extern u8 str_08068190;
+extern u8 str_080681A4;
+extern u8 str_080682E4;
+extern u8 str_080682F4;
+extern u8 str_08068370;
+extern u8 str_08068380;
+extern u8 str_08068388;
+extern u8 str_0806839C;
+extern u8 str_080683A4;
+extern u8 str_080683B8;
+extern u8 str_080683C4;
+extern u8 str_080683D8;
+extern u8 str_080683E0;
+extern u8 str_080683F4;
+extern u8 str_080683FC;
+extern u8 str_08068404;
+extern u8 str_08068408;
+extern u8 str_08068410;
+extern u8 str_08068418;
+extern u8 str_0806841C;
+extern u8 str_08068424;
+extern u8 str_08068428;
+extern u8 str_0806842C;
+extern u8 str_08068430;
+extern u8 str_08065320;
+extern u8 str_08065328;
+extern u8 str_080657B0;
+extern u8 str_0806570C;
+extern u8 str_080657C4;
+extern u8 str_0806571C;
+extern u8 str_080657D8;
+extern u8 str_08065728;
+extern u8 str_080657EC;
+extern u8 str_08065738;
+extern u8 str_08065788;
+extern u8 str_08065928;
+extern u8 str_08065850;
+extern u8 str_0806593C;
+extern u8 str_08065868;
+extern u8 str_08065950;
+extern u8 str_0806587C;
+extern u8 str_08065964;
+extern u8 str_08065894;
+extern u8 str_080658FC;
+extern u8 str_08065BE4;
+extern u8 str_08065B1C;
+extern u8 str_08065BF8;
+extern u8 str_08065B2C;
+extern u8 str_08065C0C;
+extern u8 str_08065B40;
+extern u8 str_08065C20;
+extern u8 str_08065B50;
+extern u8 str_08065BB8;
+extern u8 str_08065D4C;
+extern u8 str_08065C84;
+extern u8 str_08065D60;
+extern u8 str_08065C98;
+extern u8 str_08065D74;
+extern u8 str_08065CB0;
+extern u8 str_08065D88;
+extern u8 str_08065CC0;
+extern u8 str_08065D24;
+extern u8 str_08065A7C;
+extern u8 str_080659C8;
+extern u8 str_08065A90;
+extern u8 str_080659D4;
+extern u8 str_08065AA4;
+extern u8 str_080659E4;
+extern u8 str_08065AB8;
+extern u8 str_080659F0;
+extern u8 str_08065A4C;
+extern u8 str_08065800;
+extern u8 str_08065748;
+extern u8 str_08065814;
+extern u8 str_08065758;
+extern u8 str_08065828;
+extern u8 str_08065768;
+extern u8 str_0806583C;
+extern u8 str_08065778;
+extern u8 str_08065790;
+extern u8 str_08065978;
+extern u8 str_080658AC;
+extern u8 str_0806598C;
+extern u8 str_080658C0;
+extern u8 str_080659A0;
+extern u8 str_080658D4;
+extern u8 str_080659B4;
+extern u8 str_080658E8;
+extern u8 str_08065908;
+extern u8 str_08065C34;
+extern u8 str_08065B68;
+extern u8 str_08065C48;
+extern u8 str_08065B7C;
+extern u8 str_08065C5C;
+extern u8 str_08065B90;
+extern u8 str_08065C70;
+extern u8 str_08065BA4;
+extern u8 str_08065BC4;
+extern u8 str_08065D9C;
+extern u8 str_08065CD4;
+extern u8 str_08065DB0;
+extern u8 str_08065CE8;
+extern u8 str_08065DC4;
+extern u8 str_08065D00;
+extern u8 str_08065DD8;
+extern u8 str_08065D14;
+extern u8 str_08065D2C;
+extern u8 str_08065ACC;
+extern u8 str_080659FC;
+extern u8 str_08065AE0;
+extern u8 str_08065A10;
+extern u8 str_08065AF4;
+extern u8 str_08065A28;
+extern u8 str_08065B08;
+extern u8 str_08065A3C;
+extern u8 str_08065A58;
+
+extern u8 str_WARP_MAP;
+extern u8 str_WARP_TEMP;
+extern u8 str_DEBUG_INFO;
+extern u8 str_CHEATS;
+extern u8 str_TRANSFORM;
+extern u8 str_RESERVED_0;
+extern u8 str_PROFILE;
+extern u8 str_UNLOCK_GAME;
+extern u8 str_RESERVED_1;
+extern u8 str_GOD_MODE;
+extern u8 str_FULL_EF;
+extern u8 str_NONE;
+extern u8 str_FPS_ESN_ESV;
+extern u8 str_FPS_A2ESN_ESV;
+extern u8 str_FPS_A4ESN_ESV;
+extern u8 str_FPS_A8ESN_ESV;
+extern u8 str_NEXT_0;
+extern u8 str_FPS_ESN_MESN;
+extern u8 str_CA_CB_CC;
+extern u8 str_CA2_CB2_CC2;
+extern u8 str_CA4_CB4_CC4;
+extern u8 str_CCA_CCB;
+extern u8 str_NEXT_1;
+extern u8 str_CCA2_CCB2;
+extern u8 str_CCA4_CCB4;
+extern u8 str_CCC_CCD;
+extern u8 str_CCE_CCF;
+extern u8 str_CCG_CCH;
+extern u8 str_NEXT_2;
+extern u8 str_CCI_CCJ;
+extern u8 str_CCK_CCL;
+extern u8 str_CCM_CCN;
+extern u8 str_CCO_CCP;
+extern u8 str_CCQ_CCR;
+extern u8 str_RESERVED_2;
+extern u8 str_NORMAL;
+extern u8 str_NO_AI;
+extern u8 str_NO_HARM;
+extern u8 str_NO_AI_HARM;
+extern u8 str_GOD_ON;
+extern u8 str_GOD_OFF;
+extern u8 str_BANJO;
+extern u8 str_MOUSE;
+extern u8 str_CANDLE;
+extern u8 str_TANK;
+extern u8 str_OCTOPUS;
+extern u8 str_RESERVED_3;
+extern u8 str_RM_SPIRAL_BOT;
+extern u8 str_RM_SPIRAL_MID_E;
+extern u8 str_RM_SPIRAL_MID_W;
+extern u8 str_RM_SPIRAL_TOP;
+extern u8 str_RM_JIGGY_TMPL;
+extern u8 str_RM_RESERVED_4;
+extern u8 str_RM_NEXT_3;
+extern u8 str_RM_FARM_LOWER;
+extern u8 str_RM_FARM_UPPER;
+extern u8 str_RM_COW_BOSS;
+extern u8 str_RM_MILL_HOUSE;
+extern u8 str_RM_MUMBO_FARM;
+extern u8 str_RM_RESERVED_5;
+extern u8 str_RM_NEXT_4;
+extern u8 str_RM_BEACH;
+extern u8 str_RM_QUARRY_BOT;
+extern u8 str_RM_QUARRY_TOP;
+extern u8 str_RM_UNDERCORAL;
+extern u8 str_RM_BEACH_TOP;
+extern u8 str_RM_MUMBO_BCH;
+extern u8 str_RM_NEXT_5;
+extern u8 str_RM_BOARDWALK;
+extern u8 str_RM_HOUSEROOM;
+extern u8 str_RM_CANDLE_PUZ;
+extern u8 str_RM_SWAMP_GAS;
+extern u8 str_RM_MUMBO_SWMP;
+extern u8 str_RM_RESERVED_6;
+extern u8 str_RM_NEXT_6;
+extern u8 str_RM_HARBOUR;
+extern u8 str_RM_SAND_AREA;
+extern u8 str_RM_CASTLE_IN;
+extern u8 str_RM_VILLAGE;
+extern u8 str_RM_INSIDE_A;
+extern u8 str_RM_MUMBO_HARB;
+extern u8 str_RM_NEXT_7;
+extern u8 str_RM_FJORD;
+extern u8 str_RM_FJORD_CAV;
+extern u8 str_RM_FURN_SECT;
+extern u8 str_RM_FURNSTORE;
+extern u8 str_RM_POISONROOM;
+extern u8 str_RM_MUMBO_FURN;
+extern u8 str_RM_NEXT_8;
+
 #ifdef NONMATCHING
+
 void InitMenu(u32 menu, u32 language)
 {
     if (gMenu.texts)
@@ -59,7 +331,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 85;
         gMenu.selected.yPosition = 40;
         gMenu.selected.letterSpacing = 1;
@@ -69,19 +341,19 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 5;
-        gMenu.texts = Alloc(0x14u, 15, 4);
+        gMenu.texts = (u8**)Alloc(0x14u, 15, 4);
         gMenu.curEntry = 0;
         gMenu.field_3A = 1;
         gMenu.lineHeight = 16;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = "ENGLISH";
-        gMenu.texts[1] = "FRANÇAIS";
-        gMenu.texts[2] = "ESPAÑOL";
-        gMenu.texts[3] = "DEUTSCH";
-        gMenu.texts[4] = "ITALIANO";
+        gMenu.texts[0] = &str_ENGLISH; // "ENGLISH";
+        gMenu.texts[1] = &str_FRANCAIS; // "FRANÇAIS";
+        gMenu.texts[2] = &str_ESPANOL; // "ESPAÑOL";
+        gMenu.texts[3] = &str_DEUTSCH; // "DEUTSCH";
+        gMenu.texts[4] = &str_ITALIANO; // "ITALIANO";
         break;
     case 0:
         gMenu.xPosition = 77;
@@ -95,7 +367,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 77;
         gMenu.selected.yPosition = 122;
         gMenu.selected.letterSpacing = 1;
@@ -105,9 +377,9 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 2;
-        gMenu.texts = Alloc(8, 15, 4);
+        gMenu.texts = (u8**)Alloc(8, 15, 4);
         gMenu.curEntry = 0;
         gMenu.field_3A = 1;
         gMenu.lineHeight = 16;
@@ -116,24 +388,24 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            gMenu.texts[0] = FORMAT("NEW GAME");
-            gMenu.texts[1] = FORMAT("CONTINUE");
+            gMenu.texts[0] = &str_08068434; // FORMAT("NEW GAME");
+            gMenu.texts[1] = &str_08068440; // FORMAT("CONTINUE");
             break;
         case 1:
-            gMenu.texts[0] = FORMAT("NOUVELLE PARTIE");
-            gMenu.texts[1] = FORMAT("CONTINUER");
+            gMenu.texts[0] = &str_08068460; // FORMAT("NOUVELLE PARTIE");
+            gMenu.texts[1] = &str_08068474; // FORMAT("CONTINUER");
             break;
         case 2:
-            gMenu.texts[0] = FORMAT("NUEVA PARTIDA");
-            gMenu.texts[1] = FORMAT("CONTINUAR");
-            break;
-        case 3:
-            gMenu.texts[0] = FORMAT("NEUES SPIEL");
-            gMenu.texts[1] = FORMAT("FORTSETZEN");
+            gMenu.texts[0] = &str_080684C4; // FORMAT("NUEVA PARTIDA");
+            gMenu.texts[1] = &str_080684D4; // FORMAT("CONTINUAR");
             break;
         case 4:
-            gMenu.texts[0] = FORMAT("NUOVA PARTITA");
-            gMenu.texts[1] = FORMAT("CONTINUA");
+            gMenu.texts[0] = &str_080684F0; // FORMAT("NUOVA PARTITA");
+            gMenu.texts[1] = &str_08068500; // FORMAT("CONTINUA");
+            break;
+        case 3:
+            gMenu.texts[0] = &str_08068490; // FORMAT("NEUES SPIEL");
+            gMenu.texts[1] = &str_080684A0; // FORMAT("FORTSETZEN");
             break;
         default: HANG; break;
         }
@@ -150,7 +422,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 8;
         gMenu.selected.yPosition = 36;
         gMenu.selected.letterSpacing = 1;
@@ -160,9 +432,9 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 3;
-        gMenu.texts = Alloc(0xCu, 15, 4);
+        gMenu.texts = (u8**)Alloc(0xCu, 15, 4);
         gMenu.curEntry = 0;
         gMenu.field_3A = 1;
         gMenu.lineHeight = 20;
@@ -171,29 +443,29 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            gMenu.texts[0] = FORMAT("TEXT SPEED");
-            gMenu.texts[1] = FORMAT("BGM VOLUME");
-            gMenu.texts[2] = FORMAT("SE VOLUME");
+            gMenu.texts[0] = &str_08067D6C; // FORMAT("TEXT SPEED");
+            gMenu.texts[1] = &str_08067D78; // FORMAT("BGM VOLUME");
+            gMenu.texts[2] = &str_08067D84; // FORMAT("SE VOLUME");
             break;
         case 1:
-            gMenu.texts[0] = FORMAT("VITESSE TEXTE");
-            gMenu.texts[1] = FORMAT("MUSIQUE");
-            gMenu.texts[2] = FORMAT("EFFETS SONORES");
-            break;
-        case 3:
-            gMenu.texts[0] = FORMAT("VELOCIDAD TEXTO");
-            gMenu.texts[1] = FORMAT("VOLUMEN MÚSICA FONDO");
-            gMenu.texts[2] = FORMAT("VOLUMEN EFECTOS");
+            gMenu.texts[0] = &str_08067DFC; // FORMAT("VITESSE TEXTE");
+            gMenu.texts[1] = &str_08067E0C; // FORMAT("MUSIQUE");
+            gMenu.texts[2] = &str_08067E18; // FORMAT("EFFETS SONORES");
             break;
         case 2:
-            gMenu.texts[0] = FORMAT("TEXT-GESCHWINDIGKEIT");
-            gMenu.texts[1] = FORMAT("MUSIK-LAUTSTÄRKE");
-            gMenu.texts[2] = FORMAT("EFFEKT-LAUTSTÄRKE");
+            gMenu.texts[0] = &str_08067F44; // FORMAT("VELOCIDAD TEXTO");
+            gMenu.texts[1] = &str_08067F58; // FORMAT("VOLUMEN MÚSICA FONDO");
+            gMenu.texts[2] = &str_08067F70; // FORMAT("VOLUMEN EFECTOS");
             break;
         case 4:
-            gMenu.texts[0] = FORMAT("VELOCITÀ TESTO");
-            gMenu.texts[1] = FORMAT("MUSICA");
-            gMenu.texts[2] = FORMAT("EFFETTI SONORI");
+            gMenu.texts[0] = &str_08067FE4; // FORMAT("VELOCITÀ TESTO");
+            gMenu.texts[1] = &str_08067FF4; // FORMAT("MUSICA");
+            gMenu.texts[2] = &str_08067FFC; // FORMAT("EFFETTI SONORI");
+            break;
+        case 3:
+            gMenu.texts[0] = &str_08067E94; // FORMAT("TEXT-GESCHWINDIGKEIT");
+            gMenu.texts[1] = &str_08067EAC; // FORMAT("MUSIK-LAUTSTÄRKE");
+            gMenu.texts[2] = &str_08067EC0; // FORMAT("EFFEKT-LAUTSTÄRKE");
             break;
         default: HANG; break;
         }
@@ -210,7 +482,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 52;
         gMenu.selected.yPosition = 36;
         gMenu.selected.letterSpacing = 1;
@@ -220,9 +492,9 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 4;
-        gMenu.texts = Alloc(0x10, 15, 4);
+        gMenu.texts = (u8**)Alloc(0x10, 15, 4);
         gMenu.curEntry = 0;
         gMenu.field_3A = 1;
         gMenu.lineHeight = 24;
@@ -236,34 +508,34 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            gMenu.texts[0] = FORMAT("CONTINUE");
-            gMenu.texts[1] = FORMAT("TOTALS");
-            gMenu.texts[1] = FORMAT("OPTIONS");
-            gMenu.texts[1] = FORMAT("SAVE");
+            gMenu.texts[0] = &str_08067D44; // FORMAT("CONTINUE");
+            gMenu.texts[1] = &str_08067D50; // FORMAT("TOTALS");
+            gMenu.texts[2] = &str_08067D58; // FORMAT("OPTIONS");
+            gMenu.texts[3] = &str_08067D64; // FORMAT("SAVE");
             break;
         case 1:
-            gMenu.texts[0] = FORMAT("CONTINUER");
-            gMenu.texts[1] = FORMAT("TOTAL");
-            gMenu.texts[1] = FORMAT("OPTIONS");
-            gMenu.texts[1] = FORMAT("SAUVEGARDER");
+            gMenu.texts[0] = &str_08067DCC; // FORMAT("CONTINUER");
+            gMenu.texts[1] = &str_08067DD8; // FORMAT("TOTAL");
+            gMenu.texts[2] = &str_08067DE0; // FORMAT("OPTIONS");
+            gMenu.texts[3] = &str_08067DEC; // FORMAT("SAUVEGARDER");
             break;
         case 2:
-            gMenu.texts[0] = FORMAT("CONTINUAR");
-            gMenu.texts[1] = FORMAT("TOTALES");
-            gMenu.texts[1] = FORMAT("OPCIONES");
-            gMenu.texts[1] = FORMAT("GUARDAR");
-            break;
-        case 3:
-            gMenu.texts[0] = FORMAT("FORTSETZEN");
-            gMenu.texts[1] = FORMAT("ÜBERSICHT");
-            gMenu.texts[1] = FORMAT("OPTIONEN");
-            gMenu.texts[1] = FORMAT("SPEICHERN");
+            gMenu.texts[0] = &str_08067F14; // FORMAT("CONTINUAR");
+            gMenu.texts[1] = &str_08067F20; // FORMAT("TOTALES");
+            gMenu.texts[2] = &str_08067F2C; // FORMAT("OPCIONES");
+            gMenu.texts[3] = &str_08067F38; // FORMAT("GUARDAR");
             break;
         case 4:
-            gMenu.texts[0] = FORMAT("CONTINUA");
-            gMenu.texts[1] = FORMAT("TOTALE");
-            gMenu.texts[1] = FORMAT("OPZIONI");
-            gMenu.texts[1] = FORMAT("SALVA");
+            gMenu.texts[0] = &str_08067FBC; // FORMAT("CONTINUA");
+            gMenu.texts[1] = &str_08067FC8; // FORMAT("TOTALE");
+            gMenu.texts[2] = &str_08067FD0; // FORMAT("OPZIONI");
+            gMenu.texts[3] = &str_08067FDC; // FORMAT("SALVA");
+            break;
+        case 3:
+            gMenu.texts[0] = &str_08067E64; // FORMAT("FORTSETZEN");
+            gMenu.texts[1] = &str_08067E70; // FORMAT("ÜBERSICHT");
+            gMenu.texts[2] = &str_08067E7C; // FORMAT("OPTIONEN");
+            gMenu.texts[3] = &str_08067E88; // FORMAT("SPEICHERN");
             break;
         default: HANG; break;
         }
@@ -280,7 +552,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 52;
         gMenu.selected.yPosition = 36;
         gMenu.selected.letterSpacing = 1;
@@ -290,7 +562,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 2;
         gMenu.texts = Alloc(8u, 15, 4);
         gMenu.curEntry = 0;
@@ -304,24 +576,24 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            gMenu.texts[0] = FORMAT("SAVE GAME");
-            gMenu.texts[1] = FORMAT("ARE YOU SURE?");
+            gMenu.texts[0] = &str_08068058; // FORMAT("SAVE GAME");
+            gMenu.texts[1] = &str_08068064; // FORMAT("ARE YOU SURE?");
             break;
         case 1:
-            gMenu.texts[0] = FORMAT("SAUVEGARDER PARTIE");
-            gMenu.texts[1] = FORMAT("ES-TU SÛR ?");
+            gMenu.texts[0] = &str_080680E8; // FORMAT("SAUVEGARDER PARTIE");
+            gMenu.texts[1] = &str_080680FC; // FORMAT("ES-TU SÛR ?");
             break;
         case 2:
-            gMenu.texts[0] = FORMAT("GUARDAR PARTIDA");
-            gMenu.texts[1] = FORMAT("¿SEGURO?");
-            break;
-        case 3:
-            gMenu.texts[0] = FORMAT("SPIEL SPEICHERN");
-            gMenu.texts[1] = FORMAT("BIST DU SICHER?");
+            gMenu.texts[0] = &str_08068244; // FORMAT("GUARDAR PARTIDA");
+            gMenu.texts[1] = &str_08068258; // FORMAT("¿SEGURO?");
             break;
         case 4:
-            gMenu.texts[0] = FORMAT("SALVA PARTITA");
-            gMenu.texts[1] = FORMAT("SEI SICURO?");
+            gMenu.texts[0] = &str_080682E4; // FORMAT("SALVA PARTITA");
+            gMenu.texts[1] = &str_080682F4; // FORMAT("SEI SICURO?");
+            break;
+        case 3:
+            gMenu.texts[0] = &str_08068190; // FORMAT("SPIEL SPEICHERN");
+            gMenu.texts[1] = &str_080681A4; // FORMAT("BIST DU SICHER?");
             break;
         default: HANG; break;
         }
@@ -338,7 +610,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 52;
         gMenu.selected.yPosition = 102;
         gMenu.selected.letterSpacing = 1;
@@ -348,7 +620,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 2;
         gMenu.texts = Alloc(8u, 15, 4);
         gMenu.curEntry = 0;
@@ -362,24 +634,24 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            gMenu.texts[0] = FORMAT("CONTINUE GAME");
-            gMenu.texts[1] = FORMAT("QUIT");
+            gMenu.texts[0] = &str_08068370; // FORMAT("CONTINUE GAME");
+            gMenu.texts[1] = &str_08068380; // FORMAT("QUIT");
             break;
         case 1:
-            gMenu.texts[0] = FORMAT("CONTINUER PARTIE");
-            gMenu.texts[1] = FORMAT("QUITER");
-            break;
-        case 3:
-            gMenu.texts[0] = FORMAT("SPIEL FORTSETZEN");
-            gMenu.texts[1] = FORMAT("VERLASSEN");
+            gMenu.texts[0] = &str_08068388; // FORMAT("CONTINUER PARTIE");
+            gMenu.texts[1] = &str_0806839C; // FORMAT("QUITER");
             break;
         case 2:
-            gMenu.texts[0] = FORMAT("CONTINUAR PARTIDA");
-            gMenu.texts[1] = FORMAT("SALIR");
+            gMenu.texts[0] = &str_080683C4; // FORMAT("CONTINUAR PARTIDA");
+            gMenu.texts[1] = &str_080683D8; // FORMAT("SALIR");
             break;
         case 4:
-            gMenu.texts[0] = FORMAT("CONTINUA PARTITA");
-            gMenu.texts[1] = FORMAT("ESCI");
+            gMenu.texts[0] = &str_080683E0; // FORMAT("CONTINUA PARTITA");
+            gMenu.texts[1] = &str_080683F4; // FORMAT("ESCI");
+            break;
+        case 3:
+            gMenu.texts[0] = &str_080683A4; // FORMAT("SPIEL FORTSETZEN");
+            gMenu.texts[1] = &str_080683B8; // FORMAT("VERLASSEN");
             break;
         default: HANG; break;
         }
@@ -396,7 +668,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 92;
         gMenu.selected.yPosition = 102;
         gMenu.selected.letterSpacing = 1;
@@ -406,7 +678,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 2;
         gMenu.texts = Alloc(8u, 15, 4);
         gMenu.curEntry = 0;
@@ -420,24 +692,24 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            gMenu.texts[0] = FORMAT("YES");
-            gMenu.texts[1] = FORMAT("NO");
+            gMenu.texts[0] = &str_080683FC; // FORMAT("YES");
+            gMenu.texts[1] = &str_08068404; // FORMAT("NO");
             break;
         case 1:
-            gMenu.texts[0] = FORMAT("OUI");
-            gMenu.texts[1] = FORMAT("NON");
-            break;
-        case 3:
-            gMenu.texts[0] = FORMAT("JA");
-            gMenu.texts[1] = FORMAT("NEIN");
+            gMenu.texts[0] = &str_08068408; // FORMAT("OUI");
+            gMenu.texts[1] = &str_08068410; // FORMAT("NON");
             break;
         case 2:
-            gMenu.texts[0] = FORMAT("SÍ");
-            gMenu.texts[1] = FORMAT("NO");
+            gMenu.texts[0] = &str_08068424; // FORMAT("SÍ");
+            gMenu.texts[1] = &str_08068428; // FORMAT("NO");
             break;
         case 4:
-            gMenu.texts[0] = FORMAT("SÌ");
-            gMenu.texts[1] = FORMAT("NO");
+            gMenu.texts[0] = &str_0806842C; // FORMAT("SÌ");
+            gMenu.texts[1] = &str_08068430; // FORMAT("NO");
+            break;
+        case 3:
+            gMenu.texts[0] = &str_08068418; // FORMAT("JA");
+            gMenu.texts[1] = &str_0806841C; // FORMAT("NEIN");
             break;
         default: HANG; break;
         }
@@ -454,7 +726,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 95;
         gMenu.selected.yPosition = 70;
         gMenu.selected.letterSpacing = 1;
@@ -464,7 +736,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 2;
         gMenu.texts = Alloc(8u, 15, 4);
         gMenu.curEntry = 0;
@@ -472,8 +744,8 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 16;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("YES");
-        gMenu.texts[1] = FORMAT("NO");
+        gMenu.texts[0] = &str_08065320; // FORMAT("YES");
+        gMenu.texts[1] = &str_08065328; // FORMAT("NO");
         break;
     case 7:
         gMenu.xPosition = 16;
@@ -487,7 +759,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 40;
         gMenu.selected.letterSpacing = 1;
@@ -497,7 +769,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 3;
         gMenu.texts = Alloc(0xCu, 15, 4);
         gMenu.curEntry = 0;
@@ -521,7 +793,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 20;
         gMenu.selected.yPosition = 60;
         gMenu.selected.letterSpacing = 1;
@@ -531,7 +803,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 3;
         gMenu.texts = Alloc(0xCu, 15, 4);
         gMenu.curEntry = 0;
@@ -543,9 +815,9 @@ void InitMenu(u32 menu, u32 language)
         SetSprite(&gMenu.spriteBuffer[0], 0x476u, 0, 0, 0, gMenu.xPosition, gMenu.yPosition, 2);
         SetSprite(&gMenu.spriteBuffer[1], 0x477u, 0, 0, 0, gMenu.xPosition, gMenu.yPosition + gMenu.lineHeight, 2);
         SetSprite(&gMenu.spriteBuffer[2], 0x478u, 0, 0, 0, gMenu.xPosition, 2 * gMenu.lineHeight + gMenu.yPosition, 2);
-        gMenu.texts[0] = (u8*)0x203FA7C;
-        gMenu.texts[1] = (u8*)0x203FA80;
-        gMenu.texts[2] = (u8*)0x203FA84;
+        gMenu.texts[0] = dword_203FA7C;
+        gMenu.texts[1] = dword_203FA80;
+        gMenu.texts[2] = dword_203FA84;
         break;
     case 10:
         gMenu.xPosition = 66;
@@ -559,7 +831,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 66;
         gMenu.selected.yPosition = 48;
         gMenu.selected.letterSpacing = 1;
@@ -569,7 +841,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 5;
         gMenu.texts = Alloc(0x14u, 15, 4);
         gMenu.curEntry = 0;
@@ -580,114 +852,114 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            if (*((u8*)0x203E16C) < 20)
-                gMenu.texts[0] = FORMAT("????? FOR 20 \xfc\x0e");
+            if (byte_203E16C < 20)
+                gMenu.texts[0] = &str_080657B0; // FORMAT("????? FOR 20 \xfc\x0e");
             else
-                gMenu.texts[0] = FORMAT("EGG SCRAMBLE");
+                gMenu.texts[0] = &str_0806570C; // FORMAT("EGG SCRAMBLE");
 
-            if (*((u8*)0x203E16C) < 40)
-                gMenu.texts[1] = FORMAT("????? FOR 40 \xfc\x0e");
+            if (byte_203E16C < 40)
+                gMenu.texts[1] = &str_080657C4; // FORMAT("????? FOR 40 \xfc\x0e");
             else
-                gMenu.texts[1] = FORMAT("SHEEP DIP");
+                gMenu.texts[1] = &str_0806571C; // FORMAT("SHEEP DIP");
 
-            if (*((u8*)0x203E16C) < 60)
-                gMenu.texts[2] = FORMAT("????? FOR 60 \xfc\x0e");
+            if (byte_203E16C < 60)
+                gMenu.texts[2] = &str_080657D8; // FORMAT("????? FOR 60 \xfc\x0e");
             else
-                gMenu.texts[2] = FORMAT("BATTLE BOATS");
+                gMenu.texts[2] = &str_08065728; // FORMAT("BATTLE BOATS");
 
-            if (*((u8*)0x203E16C) < 80)
-                gMenu.texts[3] = FORMAT("????? FOR 80 \xfc\x0e");
+            if (byte_203E16C < 80)
+                gMenu.texts[3] = &str_080657EC; // FORMAT("????? FOR 80 \xfc\x0e");
             else
-                gMenu.texts[3] = FORMAT("GRUBBY CHUTE");
-            gMenu.texts[4] = FORMAT("NEXT");
+                gMenu.texts[3] = &str_08065738; // FORMAT("GRUBBY CHUTE");
+            gMenu.texts[4] = &str_08065788; // FORMAT("NEXT");
             break;
         case 1:
-            if (*((u8*)0x203E16C) < 20)
-                gMenu.texts[0] = FORMAT("????? POUR 20 \xfc\x0e");
+            if (byte_203E16C < 20)
+                gMenu.texts[0] = &str_08065928; // FORMAT("????? POUR 20 \xfc\x0e");
             else
-                gMenu.texts[0] = FORMAT("BROUILLEMENT D'ŒUFS");
+                gMenu.texts[0] = &str_08065850; // FORMAT("BROUILLEMENT D'ŒUFS");
 
-            if (*((u8*)0x203E16C) < 40)
-                gMenu.texts[1] = FORMAT("????? POUR 40 \xfc\x0e");
+            if (byte_203E16C < 40)
+                gMenu.texts[1] = &str_0806593C; // FORMAT("????? POUR 40 \xfc\x0e");
             else
-                gMenu.texts[1] = FORMAT("BAIN PARASITICIDE");
+                gMenu.texts[1] = &str_08065868; // FORMAT("BAIN PARASITICIDE");
 
-            if (*((u8*)0x203E16C) < 60)
-                gMenu.texts[2] = FORMAT("????? POUR 60 \xfc\x0e");
+            if (byte_203E16C < 60)
+                gMenu.texts[2] = &str_08065950; // FORMAT("????? POUR 60 \xfc\x0e");
             else
-                gMenu.texts[2] = FORMAT("BATEAUX DE BATAILLES");
+                gMenu.texts[2] = &str_0806587C; // FORMAT("BATEAUX DE BATAILLES");
 
-            if (*((u8*)0x203E16C) < 80)
-                gMenu.texts[3] = FORMAT("????? POUR 80 \xfc\x0e");
+            if (byte_203E16C < 80)
+                gMenu.texts[3] = &str_08065964; // FORMAT("????? POUR 80 \xfc\x0e");
             else
-                gMenu.texts[3] = FORMAT("GLISSIÈRE GRAISSEUSE");
-            gMenu.texts[4] = FORMAT("SUIVANT");
+                gMenu.texts[3] = &str_08065894; // FORMAT("GLISSIÈRE GRAISSEUSE");
+            gMenu.texts[4] = &str_080658FC; // FORMAT("SUIVANT");
             break;
         case 2:
-            if (*((u8*)0x203E16C) < 20)
-                gMenu.texts[0] = FORMAT("????? PARA 20 \xfc\x0e");
+            if (byte_203E16C < 20)
+                gMenu.texts[0] = &str_08065BE4; // FORMAT("????? PARA 20 \xfc\x0e");
             else
-                gMenu.texts[0] = FORMAT("HUEVO REVUELTO");
+                gMenu.texts[0] = &str_08065B1C; // FORMAT("HUEVO REVUELTO");
 
-            if (*((u8*)0x203E16C) < 40)
-                gMenu.texts[1] = FORMAT("????? PARA 40 \xfc\x0e");
+            if (byte_203E16C < 40)
+                gMenu.texts[1] = &str_08065BF8; // FORMAT("????? PARA 40 \xfc\x0e");
             else
-                gMenu.texts[1] = FORMAT("BAÑO DESINFECTANTE");
+                gMenu.texts[1] = &str_08065B2C; // FORMAT("BAÑO DESINFECTANTE");
 
-            if (*((u8*)0x203E16C) < 60)
-                gMenu.texts[2] = FORMAT("????? PARA 60 \xfc\x0e");
+            if (byte_203E16C < 60)
+                gMenu.texts[2] = &str_08065C0C; // FORMAT("????? PARA 60 \xfc\x0e");
             else
-                gMenu.texts[2] = FORMAT("BARCOS BATALLA");
+                gMenu.texts[2] = &str_08065B40; // FORMAT("BARCOS BATALLA");
 
-            if (*((u8*)0x203E16C) < 80)
-                gMenu.texts[3] = FORMAT("????? PARA 80 \xfc\x0e");
+            if (byte_203E16C < 80)
+                gMenu.texts[3] = &str_08065C20; // FORMAT("????? PARA 80 \xfc\x0e");
             else
-                gMenu.texts[3] = FORMAT("DESLIZADOR AGUSANADO");
-            gMenu.texts[4] = FORMAT("SIGUIENTE");
-            break;
-        case 3:
-            if (*((u8*)0x203E16C) < 20)
-                gMenu.texts[0] = FORMAT("????? FÜR 20 \xfc\x0e");
-            else
-                gMenu.texts[0] = FORMAT("EIERJAGD");
-
-            if (*((u8*)0x203E16C) < 40)
-                gMenu.texts[1] = FORMAT("????? FÜR 40 \xfc\x0e");
-            else
-                gMenu.texts[1] = FORMAT("SCHAFANGELN");
-
-            if (*((u8*)0x203E16C) < 60)
-                gMenu.texts[2] = FORMAT("????? FÜR 60 \xfc\x0e");
-            else
-                gMenu.texts[2] = FORMAT("KAMPFBOOT");
-
-            if (*((u8*)0x203E16C) < 80)
-                gMenu.texts[3] = FORMAT("????? FÜR 80 \xfc\x0e");
-            else
-                gMenu.texts[3] = FORMAT("WURMJAGD");
-            gMenu.texts[4] = FORMAT("NÄCHSTES");
+                gMenu.texts[3] = &str_08065B50; // FORMAT("DESLIZADOR AGUSANADO");
+            gMenu.texts[4] = &str_08065BB8; // FORMAT("SIGUIENTE");
             break;
         case 4:
-            if (*((u8*)0x203E16C) < 20)
-                gMenu.texts[0] = FORMAT("????? PER 20 \xfc\x0e");
+            if (byte_203E16C < 20)
+                gMenu.texts[0] = &str_08065D4C; // FORMAT("????? PER 20 \xfc\x0e");
             else
-                gMenu.texts[0] = FORMAT("UOVA STRAPAZZATE");
+                gMenu.texts[0] = &str_08065C84; // FORMAT("UOVA STRAPAZZATE");
 
-            if (*((u8*)0x203E16C) < 40)
-                gMenu.texts[1] = FORMAT("????? PER 40 \xfc\x0e");
+            if (byte_203E16C < 40)
+                gMenu.texts[1] = &str_08065D60; // FORMAT("????? PER 40 \xfc\x0e");
             else
-                gMenu.texts[1] = FORMAT("BAGNO ANTIPARASSITARIO");
+                gMenu.texts[1] = &str_08065C98; // FORMAT("BAGNO ANTIPARASSITARIO");
 
-            if (*((u8*)0x203E16C) < 60)
-                gMenu.texts[2] = FORMAT("????? PER 60 \xfc\x0e");
+            if (byte_203E16C < 60)
+                gMenu.texts[2] = &str_08065D74; // FORMAT("????? PER 60 \xfc\x0e");
             else
-                gMenu.texts[2] = FORMAT("NAVI DA GUERRA");
+                gMenu.texts[2] = &str_08065CB0; // FORMAT("NAVI DA GUERRA");
 
-            if (*((u8*)0x203E16C) < 80)
-                gMenu.texts[3] = FORMAT("????? PER 80 \xfc\x0e");
+            if (byte_203E16C < 80)
+                gMenu.texts[3] = &str_08065D88; // FORMAT("????? PER 80 \xfc\x0e");
             else
-                gMenu.texts[3] = FORMAT("SCIVOLO SUDICIO");
-            gMenu.texts[4] = FORMAT("AVANTI");
+                gMenu.texts[3] = &str_08065CC0; // FORMAT("SCIVOLO SUDICIO");
+            gMenu.texts[4] = &str_08065D24; // FORMAT("AVANTI");
+            break;
+        case 3:
+            if (byte_203E16C < 20)
+                gMenu.texts[0] = &str_08065A7C; // FORMAT("????? FÜR 20 \xfc\x0e");
+            else
+                gMenu.texts[0] = &str_080659C8; // FORMAT("EIERJAGD");
+
+            if (byte_203E16C < 40)
+                gMenu.texts[1] = &str_08065A90; // FORMAT("????? FÜR 40 \xfc\x0e");
+            else
+                gMenu.texts[1] = &str_080659D4; // FORMAT("SCHAFANGELN");
+
+            if (byte_203E16C < 60)
+                gMenu.texts[2] = &str_08065AA4; // FORMAT("????? FÜR 60 \xfc\x0e");
+            else
+                gMenu.texts[2] = &str_080659E4; // FORMAT("KAMPFBOOT");
+
+            if (byte_203E16C < 80)
+                gMenu.texts[3] = &str_08065AB8; // FORMAT("????? FÜR 80 \xfc\x0e");
+            else
+                gMenu.texts[3] = &str_080659F0; // FORMAT("WURMJAGD");
+            gMenu.texts[4] = &str_08065A4C; // FORMAT("NÄCHSTES");
             break;
         default: HANG; break;
         }
@@ -703,7 +975,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01B0;
+        gMenu.unselected.font = (void*)&font_80B01A8[1];
         gMenu.selected.xPosition = 66;
         gMenu.selected.yPosition = 48;
         gMenu.selected.letterSpacing = 1;
@@ -713,7 +985,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01B0;
+        gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 5;
         gMenu.texts = Alloc(0x14u, 15, 4);
         gMenu.curEntry = 0;
@@ -724,114 +996,114 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            if (*((u8*)0x203E16C) < 100)
-                gMenu.texts[0] = FORMAT("????? FOR 100 \xfc\x0e");
+            if (byte_203E16C < 100)
+                gMenu.texts[0] = &str_08065800; // FORMAT("????? FOR 100 \xfc\x0e");
             else
-                gMenu.texts[0] = FORMAT("AGIC ANGLER");
+                gMenu.texts[0] = &str_08065748; // FORMAT("AGIC ANGLER");
 
-            if (*((u8*)0x203E16C) < 120)
-                gMenu.texts[1] = FORMAT("????? FOR 120 \xfc\x0e");
+            if (byte_203E16C < 120)
+                gMenu.texts[1] = &str_08065814; // FORMAT("????? FOR 120 \xfc\x0e");
             else
-                gMenu.texts[1] = FORMAT("SLIDE O' FEAR");
+                gMenu.texts[1] = &str_08065758; // FORMAT("SLIDE O' FEAR");
 
-            if (*((u8*)0x203E16C) < 140)
-                gMenu.texts[2] = FORMAT("????? FOR 140 \xfc\x0e");
+            if (byte_203E16C < 140)
+                gMenu.texts[2] = &str_08065828; // FORMAT("????? FOR 140 \xfc\x0e");
             else
-                gMenu.texts[2] = FORMAT("FROZEN FISH");
+                gMenu.texts[2] = &str_08065768; // FORMAT("FROZEN FISH");
 
-            if (*((u8*)0x203E16C) < 160)
-                gMenu.texts[3] = FORMAT("????? FOR 160 \xfc\x0e");
+            if (byte_203E16C < 160)
+                gMenu.texts[3] = &str_0806583C; // FORMAT("????? FOR 160 \xfc\x0e");
             else
-                gMenu.texts[3] = FORMAT("SNOWY SLEDS");
-            gMenu.texts[4] = FORMAT("PREVIOUS");
+                gMenu.texts[3] = &str_08065778; // FORMAT("SNOWY SLEDS");
+            gMenu.texts[4] = &str_08065790; // FORMAT("PREVIOUS");
             break;
         case 1:
-            if (*((u8*)0x203E16C) < 100)
-                gMenu.texts[0] = FORMAT("????? POUR 100 \xfc\x0e");
+            if (byte_203E16C < 100)
+                gMenu.texts[0] = &str_08065978; // FORMAT("????? POUR 100 \xfc\x0e");
             else
-                gMenu.texts[0] = FORMAT("PÊCHEUR MAGIQUE");
+                gMenu.texts[0] = &str_080658AC; // FORMAT("PÊCHEUR MAGIQUE");
 
-            if (*((u8*)0x203E16C) < 120)
-                gMenu.texts[1] = FORMAT("????? POUR 120 \xfc\x0e");
+            if (byte_203E16C < 120)
+                gMenu.texts[1] = &str_0806598C; // FORMAT("????? POUR 120 \xfc\x0e");
             else
-                gMenu.texts[1] = FORMAT("TERRIBLE TOBOGGAN");
+                gMenu.texts[1] = &str_080658C0; // FORMAT("TERRIBLE TOBOGGAN");
 
-            if (*((u8*)0x203E16C) < 140)
-                gMenu.texts[2] = FORMAT("????? POUR 140 \xfc\x0e");
+            if (byte_203E16C < 140)
+                gMenu.texts[2] = &str_080659A0; // FORMAT("????? POUR 140 \xfc\x0e");
             else
-                gMenu.texts[2] = FORMAT("POISSON EN GLAÇON");
+                gMenu.texts[2] = &str_080658D4; // FORMAT("POISSON EN GLAÇON");
 
-            if (*((u8*)0x203E16C) < 160)
-                gMenu.texts[3] = FORMAT("????? POUR 160 \xfc\x0e");
+            if (byte_203E16C < 160)
+                gMenu.texts[3] = &str_080659B4; // FORMAT("????? POUR 160 \xfc\x0e");
             else
-                gMenu.texts[3] = FORMAT("TRAÎNEAU NEIGEUX");
-            gMenu.texts[4] = FORMAT("PRÉCÉDENT");
+                gMenu.texts[3] = &str_080658E8; // FORMAT("TRAÎNEAU NEIGEUX");
+            gMenu.texts[4] = &str_08065908; // FORMAT("PRÉCÉDENT");
             break;
         case 2:
-            if (*((u8*)0x203E16C) < 100)
-                gMenu.texts[0] = FORMAT("????? PARA 100 \xfc\x0e");
+            if (byte_203E16C < 100)
+                gMenu.texts[0] = &str_08065C34; // FORMAT("????? PARA 100 \xfc\x0e");
             else
-                gMenu.texts[0] = FORMAT("PESCADOR MÁGICO");
+                gMenu.texts[0] = &str_08065B68; // FORMAT("PESCADOR MÁGICO");
 
-            if (*((u8*)0x203E16C) < 120)
-                gMenu.texts[1] = FORMAT("????? PARA 120 \xfc\x0e");
+            if (byte_203E16C < 120)
+                gMenu.texts[1] = &str_08065C48; // FORMAT("????? PARA 120 \xfc\x0e");
             else
-                gMenu.texts[1] = FORMAT("TOBOGÁN TERRIBLE");
+                gMenu.texts[1] = &str_08065B7C; // FORMAT("TOBOGÁN TERRIBLE");
 
-            if (*((u8*)0x203E16C) < 140)
-                gMenu.texts[2] = FORMAT("????? PARA 140 \xfc\x0e");
+            if (byte_203E16C < 140)
+                gMenu.texts[2] = &str_08065C5C; // FORMAT("????? PARA 140 \xfc\x0e");
             else
-                gMenu.texts[2] = FORMAT("PESCADO CONGELADO");
+                gMenu.texts[2] = &str_08065B90; // FORMAT("PESCADO CONGELADO");
 
-            if (*((u8*)0x203E16C) < 160)
-                gMenu.texts[3] = FORMAT("????? PARA 160 \xfc\x0e");
+            if (byte_203E16C < 160)
+                gMenu.texts[3] = &str_08065C70; // FORMAT("????? PARA 160 \xfc\x0e");
             else
-                gMenu.texts[3] = FORMAT("TRINEOS NEVADOS");
-            gMenu.texts[4] = FORMAT("ANTERIOR");
-            break;
-        case 3:
-            if (*((u8*)0x203E16C) < 100)
-                gMenu.texts[0] = FORMAT("????? FÜR 100 \xfc\x0e");
-            else
-                gMenu.texts[0] = FORMAT("MAGISCHER ANGLER");
-
-            if (*((u8*)0x203E16C) < 120)
-                gMenu.texts[1] = FORMAT("????? FÜR 120 \xfc\x0e");
-            else
-                gMenu.texts[1] = FORMAT("RUTSCHE DES GRAUENS");
-
-            if (*((u8*)0x203E16C) < 140)
-                gMenu.texts[2] = FORMAT("????? FÜR 140 \xfc\x0e");
-            else
-                gMenu.texts[2] = FORMAT("GEFRORENER FISCH");
-
-            if (*((u8*)0x203E16C) < 160)
-                gMenu.texts[3] = FORMAT("????? FÜR 160 \xfc\x0e");
-            else
-                gMenu.texts[3] = FORMAT("SCHNEEMOBIL");
-            gMenu.texts[4] = FORMAT("VORHERIGES");
+                gMenu.texts[3] = &str_08065BA4; // FORMAT("TRINEOS NEVADOS");
+            gMenu.texts[4] = &str_08065BC4; // FORMAT("ANTERIOR");
             break;
         case 4:
-            if (*((u8*)0x203E16C) < 100)
-                gMenu.texts[0] = FORMAT("????? PER 100 \xfc\x0e");
+            if (byte_203E16C < 100)
+                gMenu.texts[0] = &str_08065D9C; // FORMAT("????? PER 100 \xfc\x0e");
             else
-                gMenu.texts[0] = FORMAT("PESCATORE MAGICO");
+                gMenu.texts[0] = &str_08065CD4; // FORMAT("PESCATORE MAGICO");
 
-            if (*((u8*)0x203E16C) < 120)
-                gMenu.texts[1] = FORMAT("????? PER 120 \xfc\x0e");
+            if (byte_203E16C < 120)
+                gMenu.texts[1] = &str_08065DB0; // FORMAT("????? PER 120 \xfc\x0e");
             else
-                gMenu.texts[1] = FORMAT("SCIVOLO DELLA PAURA");
+                gMenu.texts[1] = &str_08065CE8; // FORMAT("SCIVOLO DELLA PAURA");
 
-            if (*((u8*)0x203E16C) < 140)
-                gMenu.texts[2] = FORMAT("????? PER 140 \xfc\x0e");
+            if (byte_203E16C < 140)
+                gMenu.texts[2] = &str_08065DC4; // FORMAT("????? PER 140 \xfc\x0e");
             else
-                gMenu.texts[2] = FORMAT("PESCE CONGELATO");
+                gMenu.texts[2] = &str_08065D00; // FORMAT("PESCE CONGELATO");
 
-            if (*((u8*)0x203E16C) < 160)
-                gMenu.texts[3] = FORMAT("????? PER 160 \xfc\x0e");
+            if (byte_203E16C < 160)
+                gMenu.texts[3] = &str_08065DD8; // FORMAT("????? PER 160 \xfc\x0e");
             else
-                gMenu.texts[3] = FORMAT("SLITTE NEVOSE");
-            gMenu.texts[4] = FORMAT("INDIETRO");
+                gMenu.texts[3] = &str_08065D14; // FORMAT("SLITTE NEVOSE");
+            gMenu.texts[4] = &str_08065D2C; // FORMAT("INDIETRO");
+            break;
+        case 3:
+            if (byte_203E16C < 100)
+                gMenu.texts[0] = &str_08065ACC; // FORMAT("????? FÜR 100 \xfc\x0e");
+            else
+                gMenu.texts[0] = &str_080659FC; // FORMAT("MAGISCHER ANGLER");
+
+            if (byte_203E16C < 120)
+                gMenu.texts[1] = &str_08065AE0; // FORMAT("????? FÜR 120 \xfc\x0e");
+            else
+                gMenu.texts[1] = &str_08065A10; // FORMAT("RUTSCHE DES GRAUENS");
+
+            if (byte_203E16C < 140)
+                gMenu.texts[2] = &str_08065AF4; // FORMAT("????? FÜR 140 \xfc\x0e");
+            else
+                gMenu.texts[2] = &str_08065A28; // FORMAT("GEFRORENER FISCH");
+
+            if (byte_203E16C < 160)
+                gMenu.texts[3] = &str_08065B08; // FORMAT("????? FÜR 160 \xfc\x0e");
+            else
+                gMenu.texts[3] = &str_08065A3C; // FORMAT("SCHNEEMOBIL");
+            gMenu.texts[4] = &str_08065A58; // FORMAT("VORHERIGES");
             break;
         default: HANG; break;
         }
@@ -848,7 +1120,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -858,7 +1130,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 7;
         gMenu.texts = Alloc(0x1Cu, 15, 4);
         gMenu.curEntry = 0;
@@ -866,13 +1138,13 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("WARP MAP");
-        gMenu.texts[1] = FORMAT("WARP TEMP");
-        gMenu.texts[2] = FORMAT("DEBUG INFO");
-        gMenu.texts[3] = FORMAT("CHEATS");
-        gMenu.texts[4] = FORMAT("TRANSFORM");
-        gMenu.texts[5] = FORMAT("RESERVED");
-        gMenu.texts[6] = FORMAT("PROFILE");
+        gMenu.texts[0] = &str_WARP_MAP; // FORMAT("WARP MAP");
+        gMenu.texts[1] = &str_WARP_TEMP; // FORMAT("WARP TEMP");
+        gMenu.texts[2] = &str_DEBUG_INFO; // FORMAT("DEBUG INFO");
+        gMenu.texts[3] = &str_CHEATS; // FORMAT("CHEATS");
+        gMenu.texts[4] = &str_TRANSFORM; // FORMAT("TRANSFORM");
+        gMenu.texts[5] = &str_RESERVED_0; // FORMAT("RESERVED");
+        gMenu.texts[6] = &str_PROFILE; // FORMAT("PROFILE");
         break;
     case 19:
         gMenu.xPosition = 16;
@@ -886,7 +1158,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -896,7 +1168,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 4;
         gMenu.texts = Alloc(0x10u, 15, 4);
         gMenu.curEntry = 0;
@@ -904,10 +1176,10 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("UNLOCK GAME");
-        gMenu.texts[1] = FORMAT("RESERVED");
-        gMenu.texts[2] = FORMAT("GOD MODE");
-        gMenu.texts[3] = FORMAT("FULL E/F");
+        gMenu.texts[0] = &str_UNLOCK_GAME; // FORMAT("UNLOCK GAME");
+        gMenu.texts[1] = &str_RESERVED_1; // FORMAT("RESERVED");
+        gMenu.texts[2] = &str_GOD_MODE; // FORMAT("GOD MODE");
+        gMenu.texts[3] = &str_FULL_EF; // FORMAT("FULL E/F");
         break;
     case 13:
         gMenu.xPosition = 16;
@@ -921,7 +1193,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -931,7 +1203,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 6;
         gMenu.texts = Alloc(0x18u, 15, 4);
         gMenu.curEntry = 0;
@@ -939,12 +1211,12 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("NONE");
-        gMenu.texts[1] = FORMAT("FPS, ESN, ESV");
-        gMenu.texts[2] = FORMAT("FPS, A2ESN, ESV");
-        gMenu.texts[3] = FORMAT("FPS, A4ESN, ESV");
-        gMenu.texts[4] = FORMAT("FPS, A8ESN, ESV");
-        gMenu.texts[5] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_NONE; // FORMAT("NONE");
+        gMenu.texts[1] = &str_FPS_ESN_ESV; // FORMAT("FPS, ESN, ESV");
+        gMenu.texts[2] = &str_FPS_A2ESN_ESV; // FORMAT("FPS, A2ESN, ESV");
+        gMenu.texts[3] = &str_FPS_A4ESN_ESV; // FORMAT("FPS, A4ESN, ESV");
+        gMenu.texts[4] = &str_FPS_A8ESN_ESV; // FORMAT("FPS, A8ESN, ESV");
+        gMenu.texts[5] = &str_NEXT_0; // FORMAT("NEXT");
         break;
     case 14:
         gMenu.xPosition = 16;
@@ -958,7 +1230,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -968,7 +1240,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 6;
         gMenu.texts = Alloc(0x18u, 15, 4);
         gMenu.curEntry = 0;
@@ -976,12 +1248,12 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("FPS, ESN, MESN");
-        gMenu.texts[1] = FORMAT("CA, CB, CC");
-        gMenu.texts[2] = FORMAT("CA2, CB2, CC2");
-        gMenu.texts[3] = FORMAT("CA4, CB4, CC4");
-        gMenu.texts[4] = FORMAT("CCA, CCB");
-        gMenu.texts[5] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_FPS_ESN_MESN; // FORMAT("FPS, ESN, MESN");
+        gMenu.texts[1] = &str_CA_CB_CC; // FORMAT("CA, CB, CC");
+        gMenu.texts[2] = &str_CA2_CB2_CC2; // FORMAT("CA2, CB2, CC2");
+        gMenu.texts[3] = &str_CA4_CB4_CC4; // FORMAT("CA4, CB4, CC4");
+        gMenu.texts[4] = &str_CCA_CCB; // FORMAT("CCA, CCB");
+        gMenu.texts[5] = &str_NEXT_1; // FORMAT("NEXT");
         break;
     case 15:
         gMenu.xPosition = 16;
@@ -995,7 +1267,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1005,7 +1277,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 6;
         gMenu.texts = Alloc(0x18u, 15, 4);
         gMenu.curEntry = 0;
@@ -1013,12 +1285,12 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("CCA2, CCB2");
-        gMenu.texts[1] = FORMAT("CCA4, CCB4");
-        gMenu.texts[2] = FORMAT("CCC, CCD");
-        gMenu.texts[3] = FORMAT("CCE, CCF");
-        gMenu.texts[4] = FORMAT("CCG, CCH");
-        gMenu.texts[5] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_CCA2_CCB2; // FORMAT("CCA2, CCB2");
+        gMenu.texts[1] = &str_CCA4_CCB4; // FORMAT("CCA4, CCB4");
+        gMenu.texts[2] = &str_CCC_CCD; // FORMAT("CCC, CCD");
+        gMenu.texts[3] = &str_CCE_CCF; // FORMAT("CCE, CCF");
+        gMenu.texts[4] = &str_CCG_CCH; // FORMAT("CCG, CCH");
+        gMenu.texts[5] = &str_NEXT_2; // FORMAT("NEXT");
         break;
     case 16:
         gMenu.xPosition = 16;
@@ -1032,7 +1304,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1042,7 +1314,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 6;
         gMenu.texts = Alloc(0x18u, 15, 4);
         gMenu.curEntry = 0;
@@ -1050,12 +1322,12 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("CCI, CCJ");
-        gMenu.texts[1] = FORMAT("CCK, CCL");
-        gMenu.texts[2] = FORMAT("CCM, CCN");
-        gMenu.texts[3] = FORMAT("CCO, CCP");
-        gMenu.texts[4] = FORMAT("CCQ, CCR");
-        gMenu.texts[5] = FORMAT("RESERVED");
+        gMenu.texts[0] = &str_CCI_CCJ; // FORMAT("CCI, CCJ");
+        gMenu.texts[1] = &str_CCK_CCL; // FORMAT("CCK, CCL");
+        gMenu.texts[2] = &str_CCM_CCN; // FORMAT("CCM, CCN");
+        gMenu.texts[3] = &str_CCO_CCP; // FORMAT("CCO, CCP");
+        gMenu.texts[4] = &str_CCQ_CCR; // FORMAT("CCQ, CCR");
+        gMenu.texts[5] = &str_RESERVED_2; // FORMAT("RESERVED");
         break;
     case 17:
         gMenu.xPosition = 16;
@@ -1069,7 +1341,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1079,7 +1351,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 4;
         gMenu.texts = Alloc(0x10u, 15, 4);
         gMenu.curEntry = 0;
@@ -1087,10 +1359,10 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("NORMAL");
-        gMenu.texts[1] = FORMAT("NO AI");
-        gMenu.texts[2] = FORMAT("NO HARM");
-        gMenu.texts[3] = FORMAT("NO AI-HARM");
+        gMenu.texts[0] = &str_NORMAL; // FORMAT("NORMAL");
+        gMenu.texts[1] = &str_NO_AI; // FORMAT("NO AI");
+        gMenu.texts[2] = &str_NO_HARM; // FORMAT("NO HARM");
+        gMenu.texts[3] = &str_NO_AI_HARM; // FORMAT("NO AI-HARM");
         break;
     case 18:
         gMenu.xPosition = 16;
@@ -1104,7 +1376,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1114,7 +1386,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 2;
         gMenu.texts = Alloc(8u, 15, 4);
         gMenu.curEntry = 0;
@@ -1122,8 +1394,8 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("GOD ON");
-        gMenu.texts[1] = FORMAT("GOD OFF");
+        gMenu.texts[0] = &str_GOD_ON; // FORMAT("GOD ON");
+        gMenu.texts[1] = &str_GOD_OFF; // FORMAT("GOD OFF");
         break;
     case 20:
         gMenu.xPosition = 16;
@@ -1137,7 +1409,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1147,7 +1419,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 6;
         gMenu.texts = Alloc(0x18u, 15, 4);
         gMenu.curEntry = 0;
@@ -1155,12 +1427,12 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("BANJO");
-        gMenu.texts[1] = FORMAT("MOUSE");
-        gMenu.texts[2] = FORMAT("CANDLE");
-        gMenu.texts[3] = FORMAT("TANK");
-        gMenu.texts[4] = FORMAT("OCTOPUS");
-        gMenu.texts[5] = FORMAT("RESERVED");
+        gMenu.texts[0] = &str_BANJO; // FORMAT("BANJO");
+        gMenu.texts[1] = &str_MOUSE; // FORMAT("MOUSE");
+        gMenu.texts[2] = &str_CANDLE; // FORMAT("CANDLE");
+        gMenu.texts[3] = &str_TANK; // FORMAT("TANK");
+        gMenu.texts[4] = &str_OCTOPUS; // FORMAT("OCTOPUS");
+        gMenu.texts[5] = &str_RESERVED_3; // FORMAT("RESERVED");
         break;
     case 22:
         gMenu.xPosition = 16;
@@ -1174,7 +1446,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1184,7 +1456,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 7;
         gMenu.texts = Alloc(0x1Cu, 15, 4);
         gMenu.curEntry = 0;
@@ -1192,13 +1464,13 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("SPIRAL BOT");
-        gMenu.texts[1] = FORMAT("SPIRAL MID E");
-        gMenu.texts[2] = FORMAT("PIRAL MID W");
-        gMenu.texts[3] = FORMAT("SPIRAL TOP");
-        gMenu.texts[4] = FORMAT("JIGGY TMPL");
-        gMenu.texts[5] = FORMAT("RESERVED");
-        gMenu.texts[6] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_RM_SPIRAL_BOT; // FORMAT("SPIRAL BOT");
+        gMenu.texts[1] = &str_RM_SPIRAL_MID_E; // FORMAT("SPIRAL MID E");
+        gMenu.texts[2] = &str_RM_SPIRAL_MID_W; // FORMAT("PIRAL MID W");
+        gMenu.texts[3] = &str_RM_SPIRAL_TOP; // FORMAT("SPIRAL TOP");
+        gMenu.texts[4] = &str_RM_JIGGY_TMPL; // FORMAT("JIGGY TMPL");
+        gMenu.texts[5] = &str_RM_RESERVED_4; // FORMAT("RESERVED");
+        gMenu.texts[6] = &str_RM_NEXT_3; // FORMAT("NEXT");
         break;
     case 23:
         gMenu.xPosition = 16;
@@ -1212,7 +1484,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1222,7 +1494,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 7;
         gMenu.texts = Alloc(0x1Cu, 15, 4);
         gMenu.curEntry = 0;
@@ -1230,13 +1502,13 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("FARM LOWER");
-        gMenu.texts[1] = FORMAT("FARM UPPER");
-        gMenu.texts[2] = FORMAT("COW BOSS");
-        gMenu.texts[3] = FORMAT("MILL HOUSE");
-        gMenu.texts[4] = FORMAT("MUMBO FARM");
-        gMenu.texts[5] = FORMAT("RESERVED");
-        gMenu.texts[6] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_RM_FARM_LOWER; // FORMAT("FARM LOWER");
+        gMenu.texts[1] = &str_RM_FARM_UPPER; // FORMAT("FARM UPPER");
+        gMenu.texts[2] = &str_RM_COW_BOSS; // FORMAT("COW BOSS");
+        gMenu.texts[3] = &str_RM_MILL_HOUSE; // FORMAT("MILL HOUSE");
+        gMenu.texts[4] = &str_RM_MUMBO_FARM; // FORMAT("MUMBO FARM");
+        gMenu.texts[5] = &str_RM_RESERVED_5; // FORMAT("RESERVED");
+        gMenu.texts[6] = &str_RM_NEXT_4; // FORMAT("NEXT");
         break;
     case 24:
         gMenu.xPosition = 16;
@@ -1250,7 +1522,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1260,7 +1532,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 7;
         gMenu.texts = Alloc(0x1Cu, 15, 4);
         gMenu.curEntry = 0;
@@ -1268,13 +1540,13 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("BEACH");
-        gMenu.texts[1] = FORMAT("QUARRY BOT");
-        gMenu.texts[2] = FORMAT("QUARRY TOP");
-        gMenu.texts[3] = FORMAT("UNDERCORAL");
-        gMenu.texts[4] = FORMAT("BEACH TOP");
-        gMenu.texts[5] = FORMAT("MUMBO BCH");
-        gMenu.texts[6] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_RM_BEACH; // FORMAT("BEACH");
+        gMenu.texts[1] = &str_RM_QUARRY_BOT; // FORMAT("QUARRY BOT");
+        gMenu.texts[2] = &str_RM_QUARRY_TOP; // FORMAT("QUARRY TOP");
+        gMenu.texts[3] = &str_RM_UNDERCORAL; // FORMAT("UNDERCORAL");
+        gMenu.texts[4] = &str_RM_BEACH_TOP; // FORMAT("BEACH TOP");
+        gMenu.texts[5] = &str_RM_MUMBO_BCH; // FORMAT("MUMBO BCH");
+        gMenu.texts[6] = &str_RM_NEXT_5; // FORMAT("NEXT");
         break;
     case 25:
         gMenu.xPosition = 16;
@@ -1288,7 +1560,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1298,7 +1570,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 7;
         gMenu.texts = Alloc(0x1Cu, 15, 4);
         gMenu.curEntry = 0;
@@ -1306,13 +1578,13 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("BOARDWALK");
-        gMenu.texts[1] = FORMAT("HOUSEROOM");
-        gMenu.texts[2] = FORMAT("CANDLE PUZ");
-        gMenu.texts[3] = FORMAT("SWAMP GAS");
-        gMenu.texts[4] = FORMAT("MUMBO SWMP");
-        gMenu.texts[5] = FORMAT("RESERVED");
-        gMenu.texts[6] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_RM_BOARDWALK; // FORMAT("BOARDWALK");
+        gMenu.texts[1] = &str_RM_HOUSEROOM; // FORMAT("HOUSEROOM");
+        gMenu.texts[2] = &str_RM_CANDLE_PUZ; // FORMAT("CANDLE PUZ");
+        gMenu.texts[3] = &str_RM_SWAMP_GAS; // FORMAT("SWAMP GAS");
+        gMenu.texts[4] = &str_RM_MUMBO_SWMP; // FORMAT("MUMBO SWMP");
+        gMenu.texts[5] = &str_RM_RESERVED_6; // FORMAT("RESERVED");
+        gMenu.texts[6] = &str_RM_NEXT_6; // FORMAT("NEXT");
         break;
     case 26:
         gMenu.xPosition = 16;
@@ -1326,7 +1598,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1336,7 +1608,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 7;
         gMenu.texts = Alloc(0x1Cu, 15, 4);
         gMenu.curEntry = 0;
@@ -1344,13 +1616,13 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("HARBOUR");
-        gMenu.texts[1] = FORMAT("SAND AREA");
-        gMenu.texts[2] = FORMAT("CASTLE IN");
-        gMenu.texts[3] = FORMAT("VILLAGE");
-        gMenu.texts[4] = FORMAT("INSIDE A");
-        gMenu.texts[5] = FORMAT("MUMBO HARB");
-        gMenu.texts[6] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_RM_HARBOUR; // FORMAT("HARBOUR");
+        gMenu.texts[1] = &str_RM_SAND_AREA; // FORMAT("SAND AREA");
+        gMenu.texts[2] = &str_RM_CASTLE_IN; // FORMAT("CASTLE IN");
+        gMenu.texts[3] = &str_RM_VILLAGE; // FORMAT("VILLAGE");
+        gMenu.texts[4] = &str_RM_INSIDE_A; // FORMAT("INSIDE A");
+        gMenu.texts[5] = &str_RM_MUMBO_HARB; // FORMAT("MUMBO HARB");
+        gMenu.texts[6] = &str_RM_NEXT_7; // FORMAT("NEXT");
         break;
     case 27:
         gMenu.xPosition = 16;
@@ -1364,7 +1636,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.unselected.field_11 = 6;
         gMenu.unselected.stringOffset = 0;
         gMenu.unselected.palette = 15;
-        gMenu.unselected.font = (void*)0x80B01A8;
+        gMenu.unselected.font = (void*)&font_80B01A8[0];
         gMenu.selected.xPosition = 16;
         gMenu.selected.yPosition = 72;
         gMenu.selected.letterSpacing = 1;
@@ -1374,7 +1646,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.field_11 = 6;
         gMenu.selected.stringOffset = 0;
         gMenu.selected.palette = 10;
-        gMenu.selected.font = (void*)0x80B01A8;
+        gMenu.selected.font = (void*)&font_80B01A8[0];
         gMenu.entryCount = 7;
         gMenu.texts = Alloc(0x1Cu, 15, 4);
         gMenu.curEntry = 0;
@@ -1382,16 +1654,17 @@ void InitMenu(u32 menu, u32 language)
         gMenu.lineHeight = 8;
         gMenu.horizontalPadding = 0;
         gMenu.useSpriteBuffer = 0;
-        gMenu.texts[0] = FORMAT("FJORD");
-        gMenu.texts[1] = FORMAT("FJORD CAV");
-        gMenu.texts[2] = FORMAT("FURN SECT");
-        gMenu.texts[3] = FORMAT("FURNSTORE");
-        gMenu.texts[4] = FORMAT("POISONROOM");
-        gMenu.texts[5] = FORMAT("MUMBO FURN");
-        gMenu.texts[6] = FORMAT("NEXT");
+        gMenu.texts[0] = &str_RM_FJORD; // FORMAT("FJORD");
+        gMenu.texts[1] = &str_RM_FJORD_CAV; // FORMAT("FJORD CAV");
+        gMenu.texts[2] = &str_RM_FURN_SECT; // FORMAT("FURN SECT");
+        gMenu.texts[3] = &str_RM_FURNSTORE; // FORMAT("FURNSTORE");
+        gMenu.texts[4] = &str_RM_POISONROOM; // FORMAT("POISONROOM");
+        gMenu.texts[5] = &str_RM_MUMBO_FURN; // FORMAT("MUMBO FURN");
+        gMenu.texts[6] = &str_RM_NEXT_8; // FORMAT("NEXT");
         break;
     case 21:
     default: HANG;
     }
 }
+
 #endif

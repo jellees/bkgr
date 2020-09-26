@@ -55,6 +55,6 @@ struct TextBox {
     u8 field_13;
 };
 
-extern void SetSprite(struct Sprite *sprite, u16 index, u32 a3, u8 a4, u32 a5, u16 xPos, u16 yPos, u32 bank);
+extern void SetSprite(struct Sprite *sprite, u16 index, u32 a3, u8 a4, u32 a5, u16 xPos, s16 yPos, u32 bank);
 
 #endif

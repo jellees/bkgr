@@ -272,6 +272,9 @@ SECTIONS
 		. = 0x0003DFD7;
 		gInInteractionArea = .; . += 1;
 
+		. = 0x0003E16C;
+		byte_203E16C = .; . += 1;
+
 		. = 0x0003EA88;
 		gCanChangeBgm = .; . += 1;
 		byte_203EA89 = .; . += 1;
@@ -312,6 +315,11 @@ SECTIONS
 
 		. = 0x0003FA35;
 		byte_203FA35 = .; . += 1;
+
+		. = 0x0003FA7C;
+		dword_203FA7C = .; . += 4;
+		dword_203FA80 = .; . += 4;
+		dword_203FA84 = .; . += 4;
 	}
 
 	. = 0x3000000;
