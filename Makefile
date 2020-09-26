@@ -5,8 +5,8 @@ ifeq ($(OS),Windows_NT)
 WINE :=
 EXE := .exe
 else
-WINE := 
-EXE := .exe
+WINE := .exe
+EXE :=
 endif
 
 CPP				:= $(BIN_DIR)/./$(PREFIX)cpp$(EXE)
