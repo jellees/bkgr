@@ -221,3 +221,50 @@ void UpdateGame(void)
         sub_8003A34(dword_30032CC, dword_30032B0, &dword_3003DA4);
     }
 }
+
+NAKED void sub_8009D2C()
+{
+#ifdef NONMATCHING
+    dword_30032B0 = gOAMBufferFramePtr;
+    gOAMBufferFramePtr = gOAMBuffer2;
+    gOAMBufferEnd = (u16*)(gOAMBuffer2 - ((gOAMBuffer1 - gOAMBufferFramePtr) + 0x400));
+    dword_30032AC = &dword_3003DA4;
+    dword_30032CC = 0;
+#else
+    asm_unified("\n\
+sub_8009D2C: @ 0x08009D2C \n\
+    ldr r2, _08009D58 \n\
+    ldr r1, _08009D5C \n\
+    ldr r0, [r1] \n\
+    str r0, [r2] \n\
+    ldr r2, _08009D60 \n\
+    str r2, [r1] \n\
+    ldr r3, _08009D64 \n\
+    ldr r1, _08009D68 \n\
+    subs r0, r0, r1 \n\
+    asrs r0, r0, #1 \n\
+    lsls r0, r0, #1 \n\
+    ldr r1, _08009D6C \n\
+    adds r0, r0, r1 \n\
+    subs r2, r2, r0 \n\
+    str r2, [r3] \n\
+    ldr r1, _08009D70 \n\
+    ldr r0, _08009D74 \n\
+    str r0, [r1] \n\
+    ldr r1, _08009D78 \n\
+    movs r0, #0 \n\
+    str r0, [r1] \n\
+    bx lr \n\
+    .align 2, 0 \n\
+_08009D58: .4byte dword_30032B0 \n\
+_08009D5C: .4byte gOAMBufferFramePtr \n\
+_08009D60: .4byte gOAMBuffer2 \n\
+_08009D64: .4byte gOAMBufferEnd \n\
+_08009D68: .4byte gOAMBuffer1 \n\
+_08009D6C: .4byte 0xFFFFFC00 \n\
+_08009D70: .4byte dword_30032AC \n\
+_08009D74: .4byte dword_3003DA4 \n\
+_08009D78: .4byte dword_30032CC \n\
+");
+#endif
+}

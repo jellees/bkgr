@@ -54,6 +54,7 @@ extern u32 dword_30032CC;
 extern u32 gPlayerPos[];
 extern u32 dword_30032DC[];
 
+extern u32 gOAMBuffer2[];
 extern u32 gOAMBuffer1[];
 extern u32* gOAMBufferFramePtr;
 extern u32* gOAMBufferEnd;

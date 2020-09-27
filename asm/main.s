@@ -2,41 +2,41 @@
 
     .text
 
-    .thumb
-	.global sub_8009D2C
-sub_8009D2C: @ 0x08009D2C
-	ldr r2, _08009D58
-	ldr r1, _08009D5C
-	ldr r0, [r1]
-	str r0, [r2]
-	ldr r2, _08009D60
-	str r2, [r1]
-	ldr r3, _08009D64
-	ldr r1, _08009D68
-	subs r0, r0, r1
-	asrs r0, r0, #1
-	lsls r0, r0, #1
-	ldr r1, _08009D6C
-	adds r0, r0, r1
-	subs r2, r2, r0
-	str r2, [r3]
-	ldr r1, _08009D70
-	ldr r0, _08009D74
-	str r0, [r1]
-	ldr r1, _08009D78
-	movs r0, #0
-	str r0, [r1]
-	bx lr
-	.align 2, 0
-_08009D58: .4byte dword_30032B0
-_08009D5C: .4byte gOAMBufferFramePtr
-_08009D60: .4byte gOAMBuffer2
-_08009D64: .4byte gOAMBufferEnd
-_08009D68: .4byte gOAMBuffer1
-_08009D6C: .4byte 0xFFFFFC00
-_08009D70: .4byte dword_30032AC
-_08009D74: .4byte dword_3003DA4
-_08009D78: .4byte dword_30032CC
+@     .thumb
+@ 	.global sub_8009D2C
+@ sub_8009D2C: @ 0x08009D2C
+@ 	ldr r2, _08009D58
+@ 	ldr r1, _08009D5C
+@ 	ldr r0, [r1]
+@ 	str r0, [r2]
+@ 	ldr r2, _08009D60
+@ 	str r2, [r1]
+@ 	ldr r3, _08009D64
+@ 	ldr r1, _08009D68
+@ 	subs r0, r0, r1
+@ 	asrs r0, r0, #1
+@ 	lsls r0, r0, #1
+@ 	ldr r1, _08009D6C
+@ 	adds r0, r0, r1
+@ 	subs r2, r2, r0
+@ 	str r2, [r3]
+@ 	ldr r1, _08009D70
+@ 	ldr r0, _08009D74
+@ 	str r0, [r1]
+@ 	ldr r1, _08009D78
+@ 	movs r0, #0
+@ 	str r0, [r1]
+@ 	bx lr
+@ 	.align 2, 0
+@ _08009D58: .4byte dword_30032B0
+@ _08009D5C: .4byte gOAMBufferFramePtr
+@ _08009D60: .4byte gOAMBuffer2
+@ _08009D64: .4byte gOAMBufferEnd
+@ _08009D68: .4byte gOAMBuffer1
+@ _08009D6C: .4byte 0xFFFFFC00
+@ _08009D70: .4byte dword_30032AC
+@ _08009D74: .4byte dword_3003DA4
+@ _08009D78: .4byte dword_30032CC
 
     .thumb
     .global sub_08009D7C
