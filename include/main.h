@@ -58,11 +58,11 @@ extern u32 gOAMBuffer2[];
 extern u32 gOAMBuffer1[];
 extern u32* gOAMBufferFramePtr;
 extern u32* gOAMBufferEnd;
-extern u32*  gOBJTileFramePtr;
-extern u32  gOBJTileCount;
-extern u32*  gOBJTileFrameStart;
-extern u32  dword_3003DA0;
-extern u32  dword_3003DA4;
+extern u32* gOBJTileFramePtr;
+extern u32 gOBJTileCount;
+extern u32* gOBJTileFrameStart;
+extern u32 dword_3003DA0;
+extern u32 dword_3003DA4;
 
 //ROM
 extern u8 byte_80CEB84[];

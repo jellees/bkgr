@@ -1,6 +1,15 @@
 #include "global.h"
 #include "main.h"
 
+extern u32* dword_2000F60;
+extern u32 dword_2000F64;
+
+extern u8 gShowEraseDataScreen;
+extern u8 byte_2000F59;
+extern u8 byte_2000F5A;
+
+extern u32 dword_3007FFC;
+
 int AgbMain()
 {
     prepare_wram();
@@ -59,9 +68,8 @@ void UpdateGame(void)
     if (dword_2001470)
         sub_8015FD4();
 
-    if (gKeysDown & 8 && !(gPlayerStateSettings[gPlayerState] & 0x800)
-        && !byte_20021F0 && !byte_203F99C && gGameStatus.health
-        && !gIsPaletteEffectsActive && !byte_203FA35)
+    if (gKeysDown & 8 && !(gPlayerStateSettings[gPlayerState] & 0x800) && !byte_20021F0 && !byte_203F99C
+        && gGameStatus.health && !gIsPaletteEffectsActive && !byte_203FA35)
     {
         if ((gPlayerState != 101 || gIsSlideMiniGame))
         {
@@ -110,7 +118,7 @@ void UpdateGame(void)
     //_0800997C
     if (!gIsSlideMiniGame)
     {
-        label_08009984:
+    label_08009984:
         s_load_object(gCameraPixelX + 120, gCameraPixelY + 80);
         sub_800DF34();
         sub_8062484();
@@ -172,7 +180,7 @@ void UpdateGame(void)
         if (r1 >= dword_80CEBC4)
             r0 = byte_80CEB84[dword_80CEBC4 - 1];
         else
-            r0 =  byte_80CEB84[r1];
+            r0 = byte_80CEB84[r1];
         sub_80037F4(r2, r0);
     }
     //_08009BE4
@@ -267,4 +275,46 @@ _08009D74: .4byte dword_3003DA4 \n\
 _08009D78: .4byte dword_30032CC \n\
 ");
 #endif
+}
+
+void sub_8009D7C(u32 a1)
+{
+    dword_2000F60[dword_2000F64++] = a1;
+    ASSERT(dword_2000F64 != 256);
+}
+
+u32 sub_8009DAC()
+{
+    ASSERT(dword_2000F64 != 0);
+    return dword_2000F60[--dword_2000F64];
+}
+
+void nullsub_3() { }
+
+void nullsub_4() { }
+
+void nullsub_5() { }
+
+void prepare_wram()
+{
+    u8 v0 = gShowEraseDataScreen;
+    u8 v1 = byte_2000F59;
+    u8 v2 = byte_2000F5A;
+    u8 v3 = (u8)gKeysPressed;
+
+    RegisterRamReset(0xFDu);
+    DmaFill32(0, (u8*)0x2000000, 0x10000);
+    DmaFill32(0, (u8*)0x3000000, 0x1D27);
+
+    copy_sub_80001EC_to_iram();
+
+    dword_3007FFC = 0x3000C24;
+    REG_WAITCNT = 0x4014;
+    REG_TM3CNT_L = 0;
+    REG_TM3CNT_H = 128;
+
+    gShowEraseDataScreen = v0;
+    byte_2000F59 = v1;
+    byte_2000F5A = v2;
+    gKeysPressed = v3;
 }

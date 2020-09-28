@@ -5,6 +5,10 @@ SECTIONS
 	ewram (NOLOAD) :
     ALIGN(0)
 	{
+		. = 0x00000000;
+		gDestinationWarps = .; . += 4;
+		gDestinationWarpCount = .; . += 2;
+
 		. = 0x00000318;
 		dword_2000318 = .; . += 4;
 		dword_200031C = .; . += 4;
@@ -23,12 +27,18 @@ SECTIONS
 
 		. = 0x00000F55;
 		byte_2000F55 = .; . += 1;
-
-		. = 0x00000F57;
+		byte_2000F56 = .; . += 1;
 		byte_2000F57 = .; . += 1;
+		gShowEraseDataScreen = .; . += 1;
+		byte_2000F59 = .; . += 1;
+		byte_2000F5A = .; . += 1;
 
 		. = 0x00000F5D;
 		byte_2000F5D = .; . += 1;
+		byte_2000F5E = .; . += 1;
+		. += 1; /* padding */
+		dword_2000F60 = .; . += 4;
+		dword_2000F64 = .; . += 4;
 
 		. = 0x00000F70;
 		gUnused_ExecUnusedInputFunc = .; . += 1;
@@ -327,6 +337,9 @@ SECTIONS
 	.bss (NOLOAD) :
     ALIGN(0)
 	{
+		. = 0x00000000;
+		unk_3000000 = .;  . += 0x1D27; /* space for ARM functions */
+
 		. = 0x00002950;
 		byte_3002950 = .; . += 4; /* array */
 
@@ -418,6 +431,9 @@ SECTIONS
 		audio_voices = .; . += 4 * 16;
 		audio_samp_list = .; . += 4;
 		audio_midi_tracks = .; . += 4 * 16;
+
+		. = 0x00007FFC;
+		dword_3007FFC = .; . += 4;
 	}
 
 	. = 0x8000000;
