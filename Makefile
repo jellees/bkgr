@@ -40,7 +40,7 @@ ASFLAGS 	:= -mcpu=arm7tdmi
 
 CC1			:= tools/agbcc/bin/./agbcc$(EXE)
 CFLAGS 		:= -O2 -mthumb-interwork -fhex-asm
-CPPFLAGS 	:= -iquote include -Wno-trigraphs
+CPPFLAGS 	:= -I tools/agbcc/include -nostdinc -undef -iquote include -Wno-trigraphs
 
 LIBC   := tools/agbcc/lib/libc.a
 LIBGCC := tools/agbcc/lib/libgcc.a
