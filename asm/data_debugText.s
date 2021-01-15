@@ -1,5 +1,5 @@
     
-    .text
+    .section .rodata
 
     @ Debug or ingame strings.
     @ 08064848

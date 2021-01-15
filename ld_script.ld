@@ -477,11 +477,11 @@ SECTIONS
 		asm/chunk_end.o(.text);
 
 		/* data */
-		asm/data_paletteBytes.o(.text);
-		asm/data_debugText.o(.text);
-		asm/data_playerBehavior.o(.text);
-		asm/data_text.o(.text);
-		asm/data.o(.text);
+		asm/data_paletteBytes.o(.rodata);
+		asm/data_debugText.o(.rodata);
+		asm/data_playerBehavior.o(.rodata);
+		asm/data_text.o(.rodata);
+		asm/data.o(.rodata);
 	}
 
     /* Discard everything not specifically mentioned above. */

@@ -1,5 +1,5 @@
     
-    .text
+    .section .rodata
 
     @ Pointers to player behavior functions (state machine).
     @ 08064F04

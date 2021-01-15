@@ -1,5 +1,5 @@
 
-    .text
+    .section .rodata
 
     @ All text seen in the game.
     @ 08065210

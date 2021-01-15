@@ -1,5 +1,5 @@
 	
-	.text
+    .section .rodata
 	
 	@ First 3 integers found at rodata.
 	@ 0806483C
