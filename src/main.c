@@ -368,3 +368,13 @@ void sub_8009ED8()
     REG_IME = 1;
     REG_KEYCNT = 0xC00F;
 }
+
+extern void sub_80001EC();
+extern void UpdateBackgrounds();
+
+extern u8 unk_3000000;
+
+void copy_sub_80001EC_to_iram()
+{
+    DmaTransfer32(sub_80001EC, &unk_3000000, ((UpdateBackgrounds - sub_80001EC) >> 2) + 1);
+}

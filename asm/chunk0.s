@@ -1,4 +1,6 @@
 @	ARM_FUNC_START sub_80001EC
+	.arm
+	.global sub_80001EC
 sub_80001EC: @ 0x080001EC
 	push {r4, r5, r6, r7, r8, sb, sl, fp, lr}
 	mov r3, r0
