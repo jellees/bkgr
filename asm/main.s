@@ -2,106 +2,59 @@
 
     .text
 
-    .thumb
-    .global EnableDisplay
-EnableDisplay: @ 0x08009E80
-	movs r1, #0x80
-	lsls r1, r1, #0x13
-	movs r2, #0xfa
-	lsls r2, r2, #5
-	adds r0, r2, #0
-	strh r0, [r1]
-	adds r1, #8
-	ldr r2, _08009ED0
-	adds r0, r2, #0
-	strh r0, [r1]
-	adds r1, #2
-	adds r2, #0xff
-	adds r0, r2, #0
-	strh r0, [r1]
-	adds r1, #2
-	adds r2, #0xff
-	adds r0, r2, #0
-	strh r0, [r1]
-	adds r1, #2
-	adds r2, #0xff
-	adds r0, r2, #0
-	strh r0, [r1]
-	ldr r0, _08009ED4
-	movs r1, #0
-	strh r1, [r0]
-	adds r0, #4
-	strh r1, [r0]
-	adds r0, #4
-	strh r1, [r0]
-	adds r0, #4
-	strh r1, [r0]
-	subs r0, #0xa
-	strh r1, [r0]
-	adds r0, #4
-	strh r1, [r0]
-	adds r0, #4
-	strh r1, [r0]
-	adds r0, #4
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_08009ED0: .4byte 0x00001C03
-_08009ED4: .4byte 0x04000010
-
-    .thumb
-sub_8009ED8: @ 0x08009ED8
-	push {r4, r5, r6, lr}
-	ldr r0, _08009F24
-	movs r1, #0
-	str r1, [r0]
-	ldr r0, _08009F28
-	str r1, [r0]
-	ldr r1, _08009F2C
-	ldr r4, _08009F30
-	ldr r5, _08009F34
-	ldr r6, _08009F38
-	adds r3, r1, #0
-	ldr r2, _08009F3C
-	adds r0, r1, #0
-	adds r0, #0x34
-_08009EF4:
-	str r2, [r0]
-	subs r0, #4
-	cmp r0, r3
-	bge _08009EF4
-	str r4, [r1]
-	str r5, [r1, #8]
-	str r6, [r1, #0x30]
-	ldr r1, _08009F40
-	movs r0, #0x28
-	strh r0, [r1]
-	ldr r1, _08009F44
-	ldr r2, _08009F48
-	adds r0, r2, #0
-	strh r0, [r1]
-	adds r1, #8
-	movs r0, #1
-	strh r0, [r1]
-	subs r1, #0xd6
-	ldr r2, _08009F4C
-	adds r0, r2, #0
-	strh r0, [r1]
-	pop {r4, r5, r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009F24: .4byte 0x02000F68
-_08009F28: .4byte 0x02000F6C
-_08009F2C: .4byte 0x03002A6C
-_08009F30: .4byte 0x0800A37D
-_08009F34: .4byte 0x0800A529
-_08009F38: .4byte 0x0800A595
-_08009F3C: .4byte 0x0800A4A1
-_08009F40: .4byte 0x04000004
-_08009F44: .4byte 0x04000200
-_08009F48: .4byte 0x00001005
-_08009F4C: .4byte 0x0000C00F
+@     .thumb
+@ sub_8009ED8: @ 0x08009ED8
+@ 	push {r4, r5, r6, lr}
+@ 	ldr r0, _08009F24
+@ 	movs r1, #0
+@ 	str r1, [r0]
+@ 	ldr r0, _08009F28
+@ 	str r1, [r0]
+@ 	ldr r1, _08009F2C
+@ 	ldr r4, _08009F30
+@ 	ldr r5, _08009F34
+@ 	ldr r6, _08009F38
+@ 	adds r3, r1, #0
+@ 	ldr r2, _08009F3C
+@ 	adds r0, r1, #0
+@ 	adds r0, #0x34
+@ _08009EF4:
+@ 	str r2, [r0]
+@ 	subs r0, #4
+@ 	cmp r0, r3
+@ 	bge _08009EF4
+@ 	str r4, [r1]
+@ 	str r5, [r1, #8]
+@ 	str r6, [r1, #0x30]
+@ 	ldr r1, _08009F40
+@ 	movs r0, #0x28
+@ 	strh r0, [r1]
+@ 	ldr r1, _08009F44
+@ 	ldr r2, _08009F48
+@ 	adds r0, r2, #0
+@ 	strh r0, [r1]
+@ 	adds r1, #8
+@ 	movs r0, #1
+@ 	strh r0, [r1]
+@ 	subs r1, #0xd6
+@ 	ldr r2, _08009F4C
+@ 	adds r0, r2, #0
+@ 	strh r0, [r1]
+@ 	pop {r4, r5, r6}
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _08009F24: .4byte 0x02000F68
+@ _08009F28: .4byte 0x02000F6C
+@ _08009F2C: .4byte 0x03002A6C
+@ _08009F30: .4byte 0x0800A37D
+@ _08009F34: .4byte 0x0800A529
+@ _08009F38: .4byte 0x0800A595
+@ _08009F3C: .4byte 0x0800A4A1
+@ _08009F40: .4byte 0x04000004
+@ _08009F44: .4byte 0x04000200
+@ _08009F48: .4byte 0x00001005
+@ _08009F4C: .4byte 0x0000C00F
 
     .thumb
 	.global copy_sub_80001EC_to_iram
@@ -532,6 +485,7 @@ _0800A374: .4byte byte_2000334
 _0800A378: .4byte dword_200032C
 
     .thumb
+	.global sub_800A37C
 sub_800A37C: @ 0x0800A37C
 	push {r4, lr}
 	ldr r4, _0800A44C
@@ -669,6 +623,7 @@ _0800A494:
 _0800A49C: .4byte 0x02000F59
 
 	.thumb
+	.global nullsub_15
 nullsub_15: @ 0x0800A4A0
 	bx lr
 	.align 2, 0
@@ -738,6 +693,7 @@ _0800A520: .4byte 0x02000F54
 _0800A524: .4byte 0x02000360
 
     .thumb
+	.global sub_800A528
 sub_800A528: @ 0x0800A528
 	push {r4, lr}
 	ldr r4, _0800A564

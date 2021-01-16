@@ -3,12 +3,22 @@
 
 extern u32* dword_2000F60;
 extern u32 dword_2000F64;
+extern u32 dword_2000F68;
+extern u32 dword_2000F6C;
 
 extern u8 gShowEraseDataScreen;
 extern u8 byte_2000F59;
 extern u8 byte_2000F5A;
 
 extern u32 dword_3007FFC;
+
+//extern u32* gFunctionArray[14];
+extern void (*gFunctionArray[14])();
+
+extern void sub_800A37C();
+extern void sub_800A528();
+extern void sub_800A594();
+extern void nullsub_15();
 
 int AgbMain()
 {
@@ -317,4 +327,44 @@ void prepare_wram()
     byte_2000F59 = v1;
     byte_2000F5A = v2;
     gKeysPressed = v3;
+}
+
+void EnableDisplay()
+{
+  REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP;
+  REG_BG0CNT = 0x1C03;      // Setup priority and base blocks.
+  REG_BG1CNT = 0x1D02;
+  REG_BG2CNT = 0x1E01;
+  REG_BG3CNT = 0x1F00;
+  REG_BG0HOFS = 0;
+  REG_BG1HOFS = 0;
+  REG_BG2HOFS = 0;
+  REG_BG3HOFS = 0;
+  REG_BG0VOFS = 0;
+  REG_BG1VOFS = 0;
+  REG_BG2VOFS = 0;
+  REG_BG3VOFS = 0;
+}
+
+void sub_8009ED8()
+{
+    s32 i;
+
+    dword_2000F68 = 0;
+    dword_2000F6C = 0;
+
+    for (i = 0; i < 14; i++)
+    {
+        gFunctionArray[i] = (u8*)nullsub_15+1;
+    }
+
+    // The +1 is a hack and should be fixed.
+    gFunctionArray[0] = (u8*)sub_800A37C+1;
+    gFunctionArray[2] = (u8*)sub_800A528+1;
+    gFunctionArray[12] = (u8*)sub_800A594+1;
+
+    REG_DISPSTAT = 0x28;
+    REG_IE = 0x1005;
+    REG_IME = 1;
+    REG_KEYCNT = 0xC00F;
 }

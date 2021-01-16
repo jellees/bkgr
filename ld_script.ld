@@ -39,8 +39,8 @@ SECTIONS
 		. += 1; /* padding */
 		dword_2000F60 = .; . += 4;
 		dword_2000F64 = .; . += 4;
-
-		. = 0x00000F70;
+		dword_2000F68 = .; . += 4;
+		dword_2000F6C = .; . += 4;
 		gUnused_ExecUnusedInputFunc = .; . += 1;
 
 		. = 0x00000F74;
