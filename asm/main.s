@@ -413,6 +413,7 @@ _0800A374: .4byte byte_2000334
 _0800A378: .4byte dword_200032C
 
     .thumb
+	.thumb_func
 	.global sub_800A37C
 sub_800A37C: @ 0x0800A37C
 	push {r4, lr}
@@ -551,6 +552,7 @@ _0800A494:
 _0800A49C: .4byte 0x02000F59
 
 	.thumb
+	.thumb_func
 	.global nullsub_15
 nullsub_15: @ 0x0800A4A0
 	bx lr
@@ -621,6 +623,7 @@ _0800A520: .4byte 0x02000F54
 _0800A524: .4byte 0x02000360
 
     .thumb
+	.thumb_func
 	.global sub_800A528
 sub_800A528: @ 0x0800A528
 	push {r4, lr}
@@ -673,6 +676,7 @@ _0800A58A:
 _0800A590: .4byte 0x030032A8
 
     .thumb
+	.thumb_func
 	.global sub_800A594
 sub_800A594: @ 0x0800A594
 	push {r4, lr}

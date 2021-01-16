@@ -355,13 +355,12 @@ void sub_8009ED8()
 
     for (i = 0; i < 14; i++)
     {
-        gFunctionArray[i] = (u8*)nullsub_15+1;
+        gFunctionArray[i] = nullsub_15;
     }
 
-    // The +1 is a hack and should be fixed.
-    gFunctionArray[0] = (u8*)sub_800A37C+1;
-    gFunctionArray[2] = (u8*)sub_800A528+1;
-    gFunctionArray[12] = (u8*)sub_800A594+1;
+    gFunctionArray[0] = sub_800A37C;
+    gFunctionArray[2] = sub_800A528;
+    gFunctionArray[12] = sub_800A594;
 
     REG_DISPSTAT = 0x28;
     REG_IE = 0x1005;
