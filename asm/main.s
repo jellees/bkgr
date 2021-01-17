@@ -3,32 +3,6 @@
     .text
 
     .thumb
-	.global sub_800A344
-sub_800A344: @ 0x0800A344
-	ldr r0, _0800A364
-	movs r1, #0
-	strb r1, [r0]
-	ldr r0, _0800A368
-	strb r1, [r0]
-	ldr r0, _0800A36C
-	strb r1, [r0]
-	ldr r0, _0800A370
-	strb r1, [r0]
-	ldr r0, _0800A374
-	strb r1, [r0]
-	ldr r1, _0800A378
-	movs r0, #0
-	str r0, [r1]
-	bx lr
-	.align 2, 0
-_0800A364: .4byte byte_2000330
-_0800A368: .4byte byte_2000331
-_0800A36C: .4byte byte_2000332
-_0800A370: .4byte byte_2000333
-_0800A374: .4byte byte_2000334
-_0800A378: .4byte dword_200032C
-
-    .thumb
 	.thumb_func
 	.global sub_800A37C
 sub_800A37C: @ 0x0800A37C

@@ -485,3 +485,13 @@ void StartGame()
         gClockEnabled = 1;
     }
 }
+
+void sub_800A344()
+{
+  byte_2000330 = 0;
+  byte_2000331 = 0;
+  byte_2000332 = 0;
+  byte_2000333 = 0;
+  byte_2000334 = 0;
+  dword_200032C = 0;
+}
