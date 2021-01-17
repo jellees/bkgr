@@ -1,6 +1,7 @@
 #include "global.h"
 #include "alloc.h"
 #include "sprite.h"
+#include "common.h"
 
 // These are probably all part of debug ram.
 // And thus not extern.

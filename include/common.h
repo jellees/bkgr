@@ -36,14 +36,23 @@ struct TileAnimQueueIndex
     u8* field_4;
 };
 
+struct SpriteDMATableEntry
+{
+    u8* source;
+    u8* destiny;
+    u32 count;
+};
+
 //EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
 
+extern u8 byte_2000314;
 extern s32 dword_2000318;
 extern s32 dword_200031C;
 extern u8 gPauseMenuLanguage;
-
+extern u32* gMatrices;
+extern u32 gMatricesCount;
 extern u32 dword_200032C;
 extern u8 byte_2000330;
 extern u8 byte_2000331;
@@ -53,13 +62,16 @@ extern u8 byte_2000334;
 extern u8 byte_2000335;
 extern u16 gColorSpecEffectsSel;
 
+extern struct SpriteDMATableEntry gSpriteDMATable;
+extern u8 gSpriteDMACount;
 extern u8 byte_2000F55; // possibly bool8
 extern u8 byte_2000F56; // possibly bool8
 extern u8 byte_2000F57; // possibly bool8
 extern u8 gShowEraseDataScreen;
 extern u8 byte_2000F59;
 extern u8 byte_2000F5A;
-
+extern u8 gClockFrameCounter;
+extern bool8 gClockEnabled;
 extern bool8 byte_2000F5D;
 extern bool8 byte_2000F5E;
 extern u32* dword_2000F60;
@@ -80,8 +92,12 @@ extern u16 gLoadedRoomIndex;
 extern u16 gLoadedRoomLevel;
 extern u16 gLoadedRoomBgm;
 
+extern u8 gRoomGoal;
+extern u8 gWarpGoal;
+extern u8 byte_20010AA;
 extern u16 word_20010AC;
 extern u8 gContinueGame;
+extern u8 byte_20010AF;
 
 extern char file_string_1[0x1A];
 extern char file_string_2[0x1A];
@@ -93,7 +109,8 @@ extern u16 word_200145C;
 extern u16 word_200145E;
 extern u16 gBGInitOffsetHorizontal;
 extern u16 gBGInitOffsetVertical;
-
+extern u16 gPlayerInitPixelPosX;
+extern u16 gPlayerInitPixelPosY;
 extern s16 gCameraPixelX;
 extern s16 gCameraPixelY;
 extern u32 dword_200146C;
@@ -152,6 +169,7 @@ extern u8* dword_203EADC;
 extern u8 byte_203EAE0[3];
 extern u8 byte_203EAE3;
 
+extern u8 gClockStatus;
 extern u32 dword_203F4DC;
 
 extern s16 word_203F998;
@@ -176,9 +194,9 @@ extern u8 unk_3000000;
 extern u8 byte_3002950[];
 
 extern void (*gFunctionArray[14])();
-extern u32 gNullsub_3;
-extern u32 gNullsub_4;
-extern void *gNullsub_5;
+extern void (*gNullsub_3)();
+extern void (*gNullsub_4)();
+extern void (*gNullsub_5)();
 extern struct TileAnimQueueIndex gTileAnimQueue[255];
 extern u8 gTileAnimQueueIndex;
 extern bool8 gIsSlideMiniGame;
@@ -230,6 +248,8 @@ extern struct Font font_80B01A8[3];
 
 extern struct RoomIndex dRoomIndexes[38];
 extern struct GameStatus stru_80CC8C4;
+
+extern u8 unk_80CC8F8;
 
 // Other
 

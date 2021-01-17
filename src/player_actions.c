@@ -1,5 +1,6 @@
 #include "global.h"
 #include "sprite.h"
+#include "common.h"
 
 extern struct SoundEffect dSoundEffects[];
 

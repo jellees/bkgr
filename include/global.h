@@ -59,6 +59,10 @@ struct Vec3fx {
     u32 x, y, z;
 };
 
+struct Vec2fx16 {
+    u16 x, y;
+};
+
 struct TileAnimTable_rt {
     u8 framesPerSecondCount;
     u8 framesPerSecond;
@@ -177,7 +181,5 @@ enum Rooms {
 
     ROOM_COUNT
 };
-
-#include "common.h"
 
 #endif

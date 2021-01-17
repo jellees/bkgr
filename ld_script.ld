@@ -9,7 +9,9 @@ SECTIONS
 		gDestinationWarps = .; . += 4;
 		gDestinationWarpCount = .; . += 2;
 
-		. = 0x00000318;
+		. = 0x00000314;
+		byte_2000314 = .; . += 1;
+		. += 3; /* padding */
 		dword_2000318 = .; . += 4;
 		dword_200031C = .; . += 4;
 		gPauseMenuLanguage = .; . += 1;
@@ -25,15 +27,17 @@ SECTIONS
 		byte_2000335 = .; . += 1;
 		gColorSpecEffectsSel = .; . += 2;
 
-		. = 0x00000F55;
+		. = 0x00000360;
+		gSpriteDMATable = .; . += 0xC * 255;
+		gSpriteDMACount = .; . += 1;
 		byte_2000F55 = .; . += 1;
 		byte_2000F56 = .; . += 1;
 		byte_2000F57 = .; . += 1;
 		gShowEraseDataScreen = .; . += 1;
 		byte_2000F59 = .; . += 1;
 		byte_2000F5A = .; . += 1;
-
-		. = 0x00000F5D;
+		gClockFrameCounter = .; . += 1;
+		gClockEnabled = .; . += 1;
 		byte_2000F5D = .; . += 1;
 		byte_2000F5E = .; . += 1;
 		. += 1; /* padding */
@@ -59,9 +63,14 @@ SECTIONS
 		gLoadedRoomLevel = .; . += 2;
 		gLoadedRoomBgm = .; . += 2;
 
-		. = 0x000010AC;
+		. = 0x000010A8;
+		gRoomGoal = .; . += 1;
+		gWarpGoal = .; . += 1;
+		byte_20010AA = .; . += 1;
+		. += 1; /* padding */
 		word_20010AC = .; . += 2;
 		gContinueGame = .; . += 1;
+		byte_20010AF = .; . += 1;
 
 		. = 0x000010B2;
 		file_string_1 = .; . += 0x1A;
@@ -216,7 +225,8 @@ SECTIONS
 		word_200145E = .; . += 2;
 		gBGInitOffsetHorizontal = .; . += 2;
 		gBGInitOffsetVertical = .; . += 2;
-		gPlayerInitPixelPos = .; . += 4;
+		gPlayerInitPixelPosX = .; . += 2;
+		gPlayerInitPixelPosY = .; . += 2;
 		gCameraPixelX = .; . += 2;
 		gCameraPixelY = .; . += 2;
 		dword_200146C = .; . += 4;
@@ -307,7 +317,9 @@ SECTIONS
 	
 		src/random.o(.bss);
 
-		. = 0x0003F4DC;
+		. = 0x0003F4D8;
+		gClockStatus = .; . += 1;
+		. += 3; /* padding */
 		dword_203F4DC = .; . += 4;
 
 		. = 0x0003F998;

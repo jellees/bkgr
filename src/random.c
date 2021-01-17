@@ -1,4 +1,5 @@
 #include "global.h"
+#include "common.h"
 
 IWRAM_DATA u32 gSeedTable[625];
 IWRAM_DATA u32* gSeedTablePtr;

@@ -1,5 +1,7 @@
 #include "global.h"
 #include "main.h"
+#include "sprite.h"
+#include "common.h"
 
 extern void sub_800A37C();
 extern void sub_800A528();
@@ -7,6 +9,10 @@ extern void sub_800A594();
 extern void nullsub_15();
 extern void sub_80001EC();
 extern void UpdateBackgrounds();
+extern u32 sub_80266A8();
+extern void nullsub_3();
+extern void nullsub_4();
+extern void nullsub_5();
 
 int AgbMain()
 {
@@ -319,19 +325,19 @@ void prepare_wram()
 
 void EnableDisplay()
 {
-  REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP;
-  REG_BG0CNT = 0x1C03;      // Setup priority and base blocks.
-  REG_BG1CNT = 0x1D02;
-  REG_BG2CNT = 0x1E01;
-  REG_BG3CNT = 0x1F00;
-  REG_BG0HOFS = 0;
-  REG_BG1HOFS = 0;
-  REG_BG2HOFS = 0;
-  REG_BG3HOFS = 0;
-  REG_BG0VOFS = 0;
-  REG_BG1VOFS = 0;
-  REG_BG2VOFS = 0;
-  REG_BG3VOFS = 0;
+    REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP;
+    REG_BG0CNT = 0x1C03; // Setup priority and base blocks.
+    REG_BG1CNT = 0x1D02;
+    REG_BG2CNT = 0x1E01;
+    REG_BG3CNT = 0x1F00;
+    REG_BG0HOFS = 0;
+    REG_BG1HOFS = 0;
+    REG_BG2HOFS = 0;
+    REG_BG3HOFS = 0;
+    REG_BG0VOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG3VOFS = 0;
 }
 
 void sub_8009ED8()
@@ -359,4 +365,123 @@ void sub_8009ED8()
 void copy_sub_80001EC_to_iram()
 {
     DmaTransfer32(sub_80001EC, &unk_3000000, ((UpdateBackgrounds - sub_80001EC) >> 2) + 1);
+}
+
+void StartGame()
+{
+    gSpriteDMACount = 0;
+    gTileAnimQueueIndex = 0;
+    byte_2000314 = 0;
+    gColorSpecEffectsSel = 0x3F00;
+    byte_20010AF = 0;
+    gContinueGame = 0;
+    byte_2000F5E = 0;
+    gClockStatus = 0;
+    byte_2000F55 = 0;
+    byte_2000F57 = 0;
+    byte_203EAD4 = 0;
+    gMatricesCount = 0;
+    gMatrices = 0;
+
+    DmaFill32(170, gOAMBuffer2, 256);
+
+    gOAMBufferFramePtr = gOAMBuffer2;
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileFrameStart = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    dword_3003DA0 = 0;
+
+    gNullsub_3 = nullsub_3;
+    gNullsub_4 = nullsub_4;
+    gNullsub_5 = nullsub_5;
+
+    gIsSlideMiniGame = 0;
+
+    sub_8003884(dword_2000FC8, 0, 0, 0);
+    InitAllHeaps();
+    sub_800A344();
+    sub_8016440();
+    audio_init_p1();
+    ResetMenuEx();
+    ResetTileAnimCount();
+    sub_80266B4();
+    sub_80400B4();
+    sub_080281A8();
+    sub_800A5F4();
+    sub_08030C68();
+    sub_08047504();
+    sub_805D158();
+    sub_08063234();
+    sub_8044DFC();
+
+    gClockFrameCounter = 0;
+    gClockEnabled = 0;
+
+    byte_2000F5D = 0;
+
+    dword_2000F60 = (u32*)Alloc(0x400u, 19, 4);
+    dword_2000F64 = 0;
+
+    sub_8009ED8();
+    sub_8025798(&unk_80CC8F8, sub_80266A8());
+
+    if (gShowEraseDataScreen)
+        ShowEraseData();
+
+    ExecutePregame();
+
+    DmaFill32(170, (void*)0x7000000, 256);
+    REG_BLDCNT = gColorSpecEffectsSel;
+    REG_BLDALPHA = 0x907;
+    REG_BG1CNT &= 0xFFFC;
+    REG_BG1CNT |= 2;
+
+    if (!gContinueGame)
+    {
+        gRoomGoal = 0;
+        gWarpGoal = 0;
+        byte_20010AA = 0;
+        sub_8025E44(0);
+        SetSpritePriority(&gPlayerSprite, byte_3002950[3]);
+        SetSprite(&gPlayerSprite, 0x1Du, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        sub_800378C(&gPlayerShadowSprite, 0);
+        gPlayerShadowSprite.field_10 = 1;
+        gPlayerShadowSprite.field_13 = 0;
+        if (byte_20020B1)
+            sub_08019FCC(byte_20020B1);
+        sub_8044DFC();
+        init_function(12);
+        gClockEnabled = 1;
+    }
+    else
+    {
+        gLoadedRoomLevel = 255;
+        SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
+        if (gLoadedRoomIndex == 6)
+            gLoadedRoomLevel = byte_20010AA;
+        sub_8025E44(gLoadedRoomLevel);
+        sub_80409DC();
+        sub_803FE78();
+        SetSpritePriority(&gPlayerSprite, byte_3002950[3]);
+        sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+        EnableBGAlphaBlending();
+        InitPaletteEffects();
+        sub_800DEE4();
+        sub_0800ED80();
+        SetSprite(&gPlayerSprite, 0x1Du, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        sub_800378C(&gPlayerShadowSprite, 0);
+        gPlayerShadowSprite.field_10 = 1;
+        gPlayerShadowSprite.field_13 = 0;
+        if (byte_20020B1)
+        {
+            sub_08019FCC(byte_20020B1);
+            sub_801A2E4();
+        }
+        sub_8026E48(4095, 1, 1);
+        sub_8013DD4(21, 32);
+        sub_8044DFC();
+        gClockEnabled = 1;
+    }
 }

@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "alloc.h"
 #include "menu.h"
+#include "common.h"
 
 // Todo: define this here.
 /*extern u8 gMenuId;

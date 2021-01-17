@@ -1,4 +1,5 @@
 #include "global.h"
+#include "common.h"
 
 void ResetTileAnimCount()
 {

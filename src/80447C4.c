@@ -1,5 +1,6 @@
 #include "global.h"
 #include "alloc.h"
+#include "common.h"
 
 extern u16 sub_80645D4(int a, u8* b);
 extern u16 sub_8064684(int a, u8* b);

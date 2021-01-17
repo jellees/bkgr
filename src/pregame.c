@@ -1,6 +1,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "menu.h"
+#include "common.h"
 
 extern bool32 sub_8044860();
 extern void reset_savefiles();
