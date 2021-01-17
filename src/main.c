@@ -488,10 +488,77 @@ void StartGame()
 
 void sub_800A344()
 {
-  byte_2000330 = 0;
-  byte_2000331 = 0;
-  byte_2000332 = 0;
-  byte_2000333 = 0;
-  byte_2000334 = 0;
-  dword_200032C = 0;
+    byte_2000330 = 0;
+    byte_2000331 = 0;
+    byte_2000332 = 0;
+    byte_2000333 = 0;
+    byte_2000334 = 0;
+    dword_200032C = 0;
 }
+
+// This should be defined in debug.c
+extern u8 byte_2001200;
+extern u8 gMainFrameCounter;
+extern u8 gDebugFPS;
+
+void sub_800A37C()
+{
+    ASSERT(dword_2000F6C == 0);
+    dword_2000F6C++;
+
+    if (!byte_203EAD4)
+        sub_8045044();
+
+    dword_2000F6C--;
+
+    if (gClockEnabled && !gClockStatus)
+    {
+        gClockFrameCounter++;
+        if (gClockFrameCounter == 60)
+        {
+            gClockFrameCounter = 0;
+            gGameStatus.clockSecond++;
+            if (gGameStatus.clockSecond == 60)
+            {
+                gGameStatus.clockSecond = 0;
+                gGameStatus.clockMinute++;
+                if (gGameStatus.clockMinute == 60)
+                {
+                    gGameStatus.clockMinute = 0;
+                    gGameStatus.clockHour++;
+                    if (gGameStatus.clockHour == 100)
+                    {
+                        gGameStatus.clockHour = 99;
+                        gGameStatus.clockMinute = 59;
+                        gGameStatus.clockSecond = 59;
+                    }
+                }
+            }
+        }
+    }
+
+    byte_2001200--;
+    if (byte_2001200 == 0)
+    {
+        byte_2001200 = 60;
+        gDebugFPS = gMainFrameCounter;
+        gMainFrameCounter = 0;
+    }
+
+    sub_8003A3C(gTileAnimQueue, gTileAnimQueueIndex);
+    gTileAnimQueueIndex = 0;
+
+    if (byte_2000F5A == 0)
+    {
+        if (byte_2000F59 && !(gKeysPressed & 0xF))
+            byte_2000F5A = 5;
+    }
+    else
+    {
+        byte_2000F5A--;
+        if (byte_2000F5A == 0)
+            byte_2000F59 = 0;
+    }
+}
+
+void nullsub_15() {}
