@@ -1,46 +1,7 @@
 #include "global.h"
 #include "sprite.h"
 
-extern u16 gPlayerState;
-extern u32 dword_2000FC8;
-extern u16 gPreviousPlayerState;
-extern struct Sprite gPlayerSprite;
-extern bool8 gInInteractionArea;
-
-extern void (*dPlayerBehaviors[1])(s32, s32);
-extern u32 dword_80CC290[8];
-extern u8 byte_203EA89;
 extern struct SoundEffect dSoundEffects[];
-extern u8 byte_203EA8C;
-
-struct struct_0
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-    u8 field_4;
-    u8 field_5;
-    u8 field_6;
-    u8 field_7;
-    u8 field_8;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
-    u8 field_C;
-    u8 field_D;
-    u8 field_E;
-    u8 field_F;
-    u8 field_10;
-    u8 field_11;
-    u8 field_12;
-    u8 field_13;
-    u8 field_14;
-    u8 field_15;
-    u8 field_16;
-};
-
-extern struct struct_0 stru_200209A;
 
 void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown)
 {

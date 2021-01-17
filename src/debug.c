@@ -2,10 +2,6 @@
 #include "alloc.h"
 #include "sprite.h"
 
-extern struct GameStatus gGameStatus;
-extern struct GameStatus stru_80CC8C4;
-extern struct Font font_80B01A8[3];
-
 // These are probably all part of debug ram.
 // And thus not extern.
 extern u8 byte_2001200;

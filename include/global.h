@@ -178,4 +178,6 @@ enum Rooms {
     ROOM_COUNT
 };
 
+#include "common.h"
+
 #endif

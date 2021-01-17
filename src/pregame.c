@@ -19,51 +19,7 @@ extern u32 DoesMemBlockExistById(int, int);
 
 extern void DmaFill32(int, void*, int);
 
-extern u8 byte_20021F0;
-extern u32 dword_20021F4;
-
-extern u8 gPauseMenuLanguage;
-extern u8 byte_2000335;
-extern u8 byte_20021F8;
-extern u8 byte_20021F9;
-extern u32 dword_203F4DC;
-
-extern struct SaveFile gSaveFiles[3];
-
-extern u32 gOAMBuffer1[];
-extern u32* gOAMBufferFramePtr;
-extern u32* gOAMBufferEnd;
-extern u32* gOBJTileFramePtr;
-extern u32 gOBJTileCount;
-
-extern u16 gPreviousKeys;
-extern u16 gKeysPressed;
-extern u16 gKeysDown;
-
 extern struct SoundEffect dSoundEffects[];
-
-extern u8 byte_203EA89;
-extern u8 byte_203EA8C;
-
-extern u8 gContinueGame;
-
-extern u16 word_200145C;
-extern u16 word_200145E;
-extern u16 gBGInitOffsetHorizontal;
-extern u16 gBGInitOffsetVertical;
-
-extern struct Font font_80B01A8[3];
-
-extern u32 dword_200032C;
-extern u8 byte_2000330;
-extern u8 byte_2000331;
-extern u8 byte_2000332;
-extern u8 byte_2000333;
-extern u8 byte_2000334;
-
-extern bool8 byte_203F99E;
-
-extern bool8 gIsPaletteEffectsActive;
 
 void InitPregame()
 {

@@ -1,24 +1,12 @@
 #include "global.h"
 #include "main.h"
 
-extern u32* dword_2000F60;
-extern u32 dword_2000F64;
-extern u32 dword_2000F68;
-extern u32 dword_2000F6C;
-
-extern u8 gShowEraseDataScreen;
-extern u8 byte_2000F59;
-extern u8 byte_2000F5A;
-
-extern u32 dword_3007FFC;
-
-//extern u32* gFunctionArray[14];
-extern void (*gFunctionArray[14])();
-
 extern void sub_800A37C();
 extern void sub_800A528();
 extern void sub_800A594();
 extern void nullsub_15();
+extern void sub_80001EC();
+extern void UpdateBackgrounds();
 
 int AgbMain()
 {
@@ -367,11 +355,6 @@ void sub_8009ED8()
     REG_IME = 1;
     REG_KEYCNT = 0xC00F;
 }
-
-extern void sub_80001EC();
-extern void UpdateBackgrounds();
-
-extern u8 unk_3000000;
 
 void copy_sub_80001EC_to_iram()
 {

@@ -1,18 +1,6 @@
 #include "global.h"
 #include "alloc.h"
 
-extern u32 gFunctionArray[14];
-extern u8* dword_203EADC;
-extern u8 byte_203EAD4;
-extern u8 byte_203EAD8;
-
-extern u16 word_203EAD6;
-extern u8 byte_203EAE0[3];
-extern u8 byte_203EAE3;
-extern u8 gPauseMenuLanguage;
-
-extern u32 dword_80AF4F0[4];
-
 extern u16 sub_80645D4(int a, u8* b);
 extern u16 sub_8064684(int a, u8* b);
 extern u16 sub_8064760(int a, u8* b);

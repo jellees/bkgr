@@ -8,18 +8,6 @@
 extern u8 gMenuParentId;
 extern struct Menu gMenu;*/
 
-extern char file_string_1[0x1A];
-extern char file_string_2[0x1A];
-extern char file_string_3[0x1A];
-
-extern u8* dword_203FA7C;
-extern u8* dword_203FA80;
-extern u8* dword_203FA84;
-
-extern struct Font font_80B01A8[3];
-
-extern u8 byte_203E16C;
-
 void ResetMenuEx()
 {
     gMenuId = -1;

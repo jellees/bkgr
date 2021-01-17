@@ -1,56 +1,5 @@
 #include "global.h"
 
-extern struct RoomIndex dRoomIndexes[38];
-
-extern struct RoomHeader gRoomHeader;
-extern u16 gBGInitOffsetHorizontal;
-extern u16 gBGInitOffsetVertical;
-
-extern u8 gBGOffsetHorizontal;
-extern u8 gBGOffsetVertical;
-
-extern s32 gLoadedTileAnimCount;
-extern u32 dword_2001470;
-
-extern u8 gBGControlActions;
-extern u8 byte_2002070;
-extern u16 gColorSpecEffectsSel;
-
-extern u8 gTileAnimQueueIndex;
-
-extern u16 gLoadedRoomLevel;
-extern u16 gLoadedRoomIndex;
-extern u16 gLoadedRoomBgm;
-
-extern u8 gCanChangeBgm;
-
-extern u16 gEnabledBGs;
-
-extern u16 gMapPixelSizeX;
-extern u16 gMapPixelSizeY;
-extern u8 gBG0Static;
-extern u8 gBG1Static;
-extern u8 gBG2Static;
-extern u8 gBG3Static;
-
-extern u32 gTilesCount;
-extern u16* gTileSetBG[4];
-
-extern u32* gEntitySection;
-
-extern struct TileAnimTable_rt gTileAnimTable[255];
-
-extern s32 dword_200031C;
-extern s32 dword_2000318;
-
-struct TileAnimQueueIndex
-{
-    u8* field_0;
-    u8* field_4;
-};
-
-extern struct TileAnimQueueIndex gTileAnimQueue[255];
-
 void ResetTileAnimCount()
 {
     gLoadedTileAnimCount = 0;
