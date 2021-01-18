@@ -85,6 +85,7 @@ extern struct Sprite gPlayerShadowSprite;
 
 extern u32 dword_2000FC8;
 
+extern u8 byte_2000FCC[120];
 extern struct GameStatus gGameStatus;
 extern struct SaveFile gSaveFiles[3];
 
@@ -233,6 +234,7 @@ extern u32* gOBJTileFrameStart;
 extern u32 dword_3003DA0;
 extern u32 dword_3003DA4;
 
+extern bool8 byte_3007FFA;
 extern u32 dword_3007FFC;
 
 //ROM

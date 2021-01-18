@@ -582,3 +582,47 @@ void UpdateVideo()
 
     HandlePaletteEffects();
 }
+
+void sub_800A528()
+{
+    ASSERT(dword_2000F68 == 0);
+    dword_2000F68++;
+
+    if (!byte_203EAD4)
+        seq_update_p();
+
+    dword_2000F68--;
+
+    if (!byte_2000314)
+    {
+        sub_8003A44(gTileAnimTable, gLoadedTileAnimCount, gTileAnimQueue, &gTileAnimQueueIndex);
+    }
+    else
+    {
+        gTileAnimQueueIndex = 0;
+        sub_801392C();
+    }
+}
+
+void sub_800A594()
+{
+    if (!byte_2000F59)
+    {
+        audio_pause();
+        REG_IME = 0;
+        REG_DISPSTAT = 0;
+        REG_IE = 0;
+        REG_KEYCNT = 0;
+        REG_DMA0CNT_H = 0;
+        REG_DMA1CNT_H = 0;
+        REG_DMA2CNT_H = 0;
+        REG_DMA3CNT_H = 0;
+        byte_3007FFA = 0;
+        sub_080643D0(0);
+    }
+}
+
+void sub_800A5E8()
+{
+    sub_800A5F4();
+}

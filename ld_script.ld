@@ -54,7 +54,8 @@ SECTIONS
 		. = 0x00000FC8;
 		dword_2000FC8 = .; . += 4;
 
-		. = 0x00001044;
+		. = 0x00000FCC;
+		byte_2000FCC = .; . += 120; /*  array */
 		gGameStatus = .; . += 0x20;
 		gSaveFiles = .; . += 8 * 3;
 
@@ -445,7 +446,9 @@ SECTIONS
 		audio_samp_list = .; . += 4;
 		audio_midi_tracks = .; . += 4 * 16;
 
-		. = 0x00007FFC;
+		. = 0x00007FFA;
+		byte_3007FFA = .; . += 1;
+		. += 1; /* padding */
 		dword_3007FFC = .; . += 4;
 	}
 
