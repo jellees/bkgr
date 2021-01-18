@@ -229,7 +229,8 @@ SECTIONS
 		gPlayerInitPixelPosY = .; . += 2;
 		gCameraPixelX = .; . += 2;
 		gCameraPixelY = .; . += 2;
-		dword_200146C = .; . += 4;
+		byte_200146C = .; . += 1;
+		. += 3; /* padding */
 		dword_2001470 = .; . += 4;
 
 		gTileAnimTable = .; . += 0xC * 255;

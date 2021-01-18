@@ -561,4 +561,24 @@ void sub_800A37C()
     }
 }
 
-void nullsub_15() {}
+void nullsub_15() { }
+
+void UpdateVideo()
+{
+    DmaTransfer32(gOAMBuffer1, 0x7000000, 256);
+
+    if (gMatricesCount)
+        CallARM_SetOamMatrices(gMatrices, gMatricesCount);
+
+    if (!byte_200146C)
+        UpdateBackgrounds();
+
+    while (gSpriteDMACount)
+    {
+        gSpriteDMACount--;
+        DmaTransfer32(gSpriteDMATable[gSpriteDMACount].source, gSpriteDMATable[gSpriteDMACount].destiny,
+                      gSpriteDMATable[gSpriteDMACount].count);
+    }
+
+    HandlePaletteEffects();
+}

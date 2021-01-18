@@ -4491,7 +4491,7 @@ sub_08015CC0: @ 0x08015CC0
 	beq _08015CFE
 	b _08015F48
 	.align 2, 0
-_08015CE8: .4byte dword_200146C
+_08015CE8: .4byte byte_200146C
 _08015CEC: .4byte gBGControlActions
 _08015CF0:
 	cmp r2, #2
@@ -5095,7 +5095,7 @@ sub_080161CC: @ 0x080161CC
 	beq _080161F6
 	b _08016408
 	.align 2, 0
-_080161E4: .4byte dword_200146C
+_080161E4: .4byte byte_200146C
 _080161E8:
 	cmp r2, #2
 	bne _080161EE

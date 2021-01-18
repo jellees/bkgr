@@ -62,7 +62,7 @@ extern u8 byte_2000334;
 extern u8 byte_2000335;
 extern u16 gColorSpecEffectsSel;
 
-extern struct SpriteDMATableEntry gSpriteDMATable;
+extern struct SpriteDMATableEntry gSpriteDMATable[255];
 extern u8 gSpriteDMACount;
 extern u8 byte_2000F55; // possibly bool8
 extern u8 byte_2000F56; // possibly bool8
@@ -113,7 +113,7 @@ extern u16 gPlayerInitPixelPosX;
 extern u16 gPlayerInitPixelPosY;
 extern s16 gCameraPixelX;
 extern s16 gCameraPixelY;
-extern u32 dword_200146C;
+extern bool8 byte_200146C;
 extern u32 dword_2001470;
 
 extern struct TileAnimTable_rt gTileAnimTable[255];
