@@ -1,6 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "sprite.h"
+#include "palette_effects.h"
 #include "common.h"
 
 extern void sub_800A37C();
@@ -625,4 +626,40 @@ void sub_800A594()
 void sub_800A5E8()
 {
     sub_800A5F4();
+}
+
+// Annoying. Move to palette_effects.h asap.
+extern s32 gPaletteEffects;
+
+void sub_800A5F4()
+{
+    DmaFill32(0, byte_2000FCC, 30);
+    DmaFill32(0, &gGameStatus, 8);
+    dword_2001104 = 0;
+    dword_2001108 = 0;
+    byte_200110C = 0;
+    word_20010AC = 0;
+    byte_200112A = 0;
+    byte_20010B1 = 0;
+    gPaletteEffects = 0;
+    gLoadedRoomBgm = -1;
+    gGameStatus.field_16 = stru_80CC8C4.field_16;
+    gGameStatus.field_17 = stru_80CC8C4.field_17;
+    byte_200108C = -1;
+    byte_20020B1 = 0;
+    byte_20010B0 = 0;
+    byte_2001100 = 1;
+    dword_2001110 = 0;
+    dword_2001114 = 0;
+    dword_20011FC = 1;
+    gGameStatus.health = 4;
+    gGameStatus.enableExtraHealth = 0;
+    gGameStatus.maxHealth = 4;
+    byte_200107C = 0;
+    byte_200107D = stru_80CC8C4.maxHealth - 4;
+    byte_200107E = 0;
+    byte_200107F = dword_80CC8F4;
+    dword_3003300 = 0x160000;
+    dword_3003308 = 0x240000;
+    dword_3003304 = 0x180000;
 }

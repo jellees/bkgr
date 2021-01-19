@@ -4312,7 +4312,7 @@ _0800E02C:
 	bl sub_800BFA0
 	b _0800E172
 	.align 2, 0
-_0800E048: .4byte 0x0200112A
+_0800E048: .4byte byte_200112A
 _0800E04C: .4byte 0x0200112C
 _0800E050: .4byte 0x0200113D
 _0800E054: .4byte 0x02000FAC
@@ -5115,7 +5115,7 @@ _0800E6BC:
 	.align 2, 0
 _0800E6C4: .4byte 0x030028FC
 _0800E6C8: .4byte byte_20020B1
-_0800E6CC: .4byte 0x0200112A
+_0800E6CC: .4byte byte_200112A
 
     .thumb
 sub_800E6D0: @ 0x0800E6D0
@@ -5182,7 +5182,7 @@ sub_800E6D0: @ 0x0800E6D0
 	bl audio_new_fx
 	b _0800E794
 	.align 2, 0
-_0800E754: .4byte 0x0200112A
+_0800E754: .4byte byte_200112A
 _0800E758: .4byte 0x0200112C
 _0800E75C: .4byte 0x020010AF
 _0800E760: .4byte 0x0200112E
@@ -5217,5 +5217,5 @@ sub_800E7A0: @ 0x0800E7A0
 	strb r1, [r0]
 	bx lr
 	.align 2, 0
-_0800E7AC: .4byte 0x0200112A
+_0800E7AC: .4byte byte_200112A
 _0800E7B0: .4byte 0x020010AF

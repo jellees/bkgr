@@ -58,11 +58,16 @@ SECTIONS
 		byte_2000FCC = .; . += 120; /*  array */
 		gGameStatus = .; . += 0x20;
 		gSaveFiles = .; . += 8 * 3;
-
-		. = 0x00001080;
+		byte_200107C = .; . += 1;
+		byte_200107D = .; . += 1;
+		byte_200107E = .; . += 1;
+		byte_200107F = .; . += 1;
 		gLoadedRoomIndex = .; . += 2;
 		gLoadedRoomLevel = .; . += 2;
 		gLoadedRoomBgm = .; . += 2;
+		
+		. = 0x0000108C;
+		byte_200108C = .; . += 1;
 
 		. = 0x000010A8;
 		gRoomGoal = .; . += 1;
@@ -72,20 +77,30 @@ SECTIONS
 		word_20010AC = .; . += 2;
 		gContinueGame = .; . += 1;
 		byte_20010AF = .; . += 1;
-
-		. = 0x000010B2;
+		byte_20010B0 = .; . += 1;
+		byte_20010B1 = .; . += 1;
 		file_string_1 = .; . += 0x1A;
 		file_string_2 = .; . += 0x1A;
 		file_string_3 = .; . += 0x1A;
-
-		. = 0x0000110C;
+		byte_2001100 = .; . += 1;
+		. += 3; /* padding */
+		dword_2001104 = .; . += 4;
+		dword_2001108 = .; . += 4;
 		byte_200110C = .; . += 1;
+		. += 3; /* padding */
+		dword_2001110 = .; . += 4;
+		dword_2001114 = .; . += 4;
+
+		. = 0x0000112A;
+		byte_200112A = .; . += 1;
 
 		. = 0x000011CC;
 		src/palette_effects.o(.bss);
 
 		gPoisonEffectEnabled = .; . += 4;
 		gPoisonHitTimer = .; . += 4;
+		dword_20011F8 = .; . += 4;
+		dword_20011FC = .; . += 4;
 
 		. = 0x00001200;
 		/* debug ram */
@@ -379,6 +394,11 @@ SECTIONS
 		dword_30032CC = .; . += 4;
 		gPlayerPos = .; . += 0xC;
 		dword_30032DC = .; . += 0xC;
+
+		. = 0x00003300;
+		dword_3003300 = .; . += 4;
+		dword_3003304 = .; . += 4;
+		dword_3003308 = .; . += 4;
 
 		. = 0x00003340;
 		gBGControlActions = .; . += 1;

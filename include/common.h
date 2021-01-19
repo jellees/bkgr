@@ -88,10 +88,15 @@ extern u32 dword_2000FC8;
 extern u8 byte_2000FCC[120];
 extern struct GameStatus gGameStatus;
 extern struct SaveFile gSaveFiles[3];
-
+extern u8 byte_200107C;
+extern u8 byte_200107D;
+extern u8 byte_200107E;
+extern u8 byte_200107F;
 extern u16 gLoadedRoomIndex;
 extern u16 gLoadedRoomLevel;
 extern u16 gLoadedRoomBgm;
+
+extern s8 byte_200108C;
 
 extern u8 gRoomGoal;
 extern u8 gWarpGoal;
@@ -99,12 +104,22 @@ extern u8 byte_20010AA;
 extern u16 word_20010AC;
 extern u8 gContinueGame;
 extern u8 byte_20010AF;
-
+extern u8 byte_20010B0;
+extern u8 byte_20010B1;
 extern char file_string_1[0x1A];
 extern char file_string_2[0x1A];
 extern char file_string_3[0x1A];
-
+extern u8 byte_2001100;
+extern u32 dword_2001104;
+extern u32 dword_2001108;
 extern u8 byte_200110C; // possibly bool8
+extern u32 dword_2001110;
+extern u32 dword_2001114;
+
+extern u8 byte_200112A;
+
+extern u32 dword_20011F8;
+extern u32 dword_20011FC;
 
 extern u16 word_200145C;
 extern u16 word_200145E;
@@ -214,6 +229,10 @@ extern u32 dword_30032CC;
 extern u32 gPlayerPos[];
 extern u32 dword_30032DC[];
 
+extern u32 dword_3003300;
+extern u32 dword_3003304;
+extern u32 dword_3003308;
+
 extern u8 gBGControlActions;
 extern u8 gBGOffsetHorizontal;
 extern u8 gBGOffsetVertical;
@@ -252,6 +271,7 @@ extern struct RoomIndex dRoomIndexes[38];
 extern struct GameStatus stru_80CC8C4;
 
 extern u8 unk_80CC8F8;
+extern u32 dword_80CC8F4;
 
 // Other
 
