@@ -483,7 +483,6 @@ SECTIONS
 		asm/audio.o(.text);
 		asm/collision.o(.text);
 		src/main.o(.text);
-		asm/main.o(.text);
 		asm/player.o(.text);
 		asm/chunk3.o(.text);
 		asm/savefile.o(.text);

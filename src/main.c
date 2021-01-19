@@ -663,3 +663,13 @@ void sub_800A5F4()
     dword_3003308 = 0x240000;
     dword_3003304 = 0x180000;
 }
+
+void sub_800A710(u16 a1)
+{
+    ASSERT(a1 <= 5 || a1 == 255);
+
+    gLoadedRoomLevel = a1;
+    byte_20010AA = a1;
+    sub_8040178();
+    sub_8039234();
+}
