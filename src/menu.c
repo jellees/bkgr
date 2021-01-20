@@ -290,6 +290,8 @@ extern u8 str_RM_POISONROOM;
 extern u8 str_RM_MUMBO_FURN;
 extern u8 str_RM_NEXT_8;
 
+extern u32 dword_80CF3B0[8];
+
 #ifdef NONMATCHING
 
 void InitMenu(u32 menu, u32 language)
@@ -832,7 +834,7 @@ void InitMenu(u32 menu, u32 language)
         gMenu.selected.palette = 10;
         gMenu.selected.font = (void*)&font_80B01A8[1];
         gMenu.entryCount = 5;
-        gMenu.texts = Alloc(0x14u, 15, 4);
+        gMenu.texts = Alloc(20, 15, 4);
         gMenu.curEntry = 0;
         gMenu.field_3A = 1;
         gMenu.lineHeight = 20;
@@ -841,117 +843,118 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            if (byte_203E16C < 20)
-                gMenu.texts[0] = &str_080657B0; // FORMAT("????? FOR 20 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[0])
+                gMenu.texts[0] = &str_0806570C; // "EGG SCRAMBLE"
             else
-                gMenu.texts[0] = &str_0806570C; // FORMAT("EGG SCRAMBLE");
+                gMenu.texts[0] = &str_080657B0; // "????? FOR 20 \xfc\x0e"
 
-            if (byte_203E16C < 40)
-                gMenu.texts[1] = &str_080657C4; // FORMAT("????? FOR 40 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[1])
+                gMenu.texts[1] = &str_0806571C; // "SHEEP DIP"
             else
-                gMenu.texts[1] = &str_0806571C; // FORMAT("SHEEP DIP");
+                gMenu.texts[1] = &str_080657C4; // "????? FOR 40 \xfc\x0e"
 
-            if (byte_203E16C < 60)
-                gMenu.texts[2] = &str_080657D8; // FORMAT("????? FOR 60 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[2])
+                gMenu.texts[2] = &str_08065728; // "BATTLE BOATS"
             else
-                gMenu.texts[2] = &str_08065728; // FORMAT("BATTLE BOATS");
+                gMenu.texts[2] = &str_080657D8; // "????? FOR 60 \xfc\x0e"
 
-            if (byte_203E16C < 80)
-                gMenu.texts[3] = &str_080657EC; // FORMAT("????? FOR 80 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[3])
+                gMenu.texts[3] = &str_08065738; // "GRUBBY CHUTE"
             else
-                gMenu.texts[3] = &str_08065738; // FORMAT("GRUBBY CHUTE");
-            gMenu.texts[4] = &str_08065788; // FORMAT("NEXT");
+                gMenu.texts[3] = &str_080657EC; // "????? FOR 80 \xfc\x0e"
+            gMenu.texts[4] = &str_08065788; // "NEXT"
             break;
         case 1:
-            if (byte_203E16C < 20)
-                gMenu.texts[0] = &str_08065928; // FORMAT("????? POUR 20 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[0])
+                gMenu.texts[0] = &str_08065850; // "BROUILLEMENT D'ŒUFS"
             else
-                gMenu.texts[0] = &str_08065850; // FORMAT("BROUILLEMENT D'ŒUFS");
+                gMenu.texts[0] = &str_08065928; // "????? POUR 20 \xfc\x0e"
 
-            if (byte_203E16C < 40)
-                gMenu.texts[1] = &str_0806593C; // FORMAT("????? POUR 40 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[1])
+                gMenu.texts[1] = &str_08065868; // "BAIN PARASITICIDE"
             else
-                gMenu.texts[1] = &str_08065868; // FORMAT("BAIN PARASITICIDE");
+                gMenu.texts[1] = &str_0806593C; // "????? POUR 40 \xfc\x0e"
 
-            if (byte_203E16C < 60)
-                gMenu.texts[2] = &str_08065950; // FORMAT("????? POUR 60 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[2])
+                gMenu.texts[2] = &str_0806587C; // "BATEAUX DE BATAILLES"
             else
-                gMenu.texts[2] = &str_0806587C; // FORMAT("BATEAUX DE BATAILLES");
+                gMenu.texts[2] = &str_08065950; // "????? POUR 60 \xfc\x0e"
 
-            if (byte_203E16C < 80)
-                gMenu.texts[3] = &str_08065964; // FORMAT("????? POUR 80 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[3])
+                gMenu.texts[3] = &str_08065894; // "GLISSIÈRE GRAISSEUSE"
             else
-                gMenu.texts[3] = &str_08065894; // FORMAT("GLISSIÈRE GRAISSEUSE");
-            gMenu.texts[4] = &str_080658FC; // FORMAT("SUIVANT");
+                gMenu.texts[3] = &str_08065964; // "????? POUR 80 \xfc\x0e"
+            gMenu.texts[4] = &str_080658FC; // "SUIVANT"
             break;
         case 2:
-            if (byte_203E16C < 20)
-                gMenu.texts[0] = &str_08065BE4; // FORMAT("????? PARA 20 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[0])
+                gMenu.texts[0] = &str_08065B1C; // "HUEVO REVUELTO"
             else
-                gMenu.texts[0] = &str_08065B1C; // FORMAT("HUEVO REVUELTO");
+                gMenu.texts[0] = &str_08065BE4; // "????? PARA 20 \xfc\x0e"
 
-            if (byte_203E16C < 40)
-                gMenu.texts[1] = &str_08065BF8; // FORMAT("????? PARA 40 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[1])
+                gMenu.texts[1] = &str_08065B2C; // "BAÑO DESINFECTANTE"
             else
-                gMenu.texts[1] = &str_08065B2C; // FORMAT("BAÑO DESINFECTANTE");
+                gMenu.texts[1] = &str_08065BF8; // "????? PARA 40 \xfc\x0e"
 
-            if (byte_203E16C < 60)
-                gMenu.texts[2] = &str_08065C0C; // FORMAT("????? PARA 60 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[2])
+                gMenu.texts[2] = &str_08065B40; // "BARCOS BATALLA"
             else
-                gMenu.texts[2] = &str_08065B40; // FORMAT("BARCOS BATALLA");
+                gMenu.texts[2] = &str_08065C0C; // "????? PARA 60 \xfc\x0e"
 
-            if (byte_203E16C < 80)
-                gMenu.texts[3] = &str_08065C20; // FORMAT("????? PARA 80 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[3])
+                gMenu.texts[3] = &str_08065B50; // "DESLIZADOR AGUSANADO"
             else
-                gMenu.texts[3] = &str_08065B50; // FORMAT("DESLIZADOR AGUSANADO");
-            gMenu.texts[4] = &str_08065BB8; // FORMAT("SIGUIENTE");
+                gMenu.texts[3] = &str_08065C20; // "????? PARA 80 \xfc\x0e"
+            gMenu.texts[4] = &str_08065BB8; // "SIGUIENTE"
             break;
         case 4:
-            if (byte_203E16C < 20)
-                gMenu.texts[0] = &str_08065D4C; // FORMAT("????? PER 20 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[0])
+                gMenu.texts[0] = &str_08065C84; // "UOVA STRAPAZZATE"
             else
-                gMenu.texts[0] = &str_08065C84; // FORMAT("UOVA STRAPAZZATE");
+                gMenu.texts[0] = &str_08065D4C; // "????? PER 20 \xfc\x0e"
 
-            if (byte_203E16C < 40)
-                gMenu.texts[1] = &str_08065D60; // FORMAT("????? PER 40 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[1])
+                gMenu.texts[1] = &str_08065C98; // "BAGNO ANTIPARASSITARIO"
             else
-                gMenu.texts[1] = &str_08065C98; // FORMAT("BAGNO ANTIPARASSITARIO");
+                gMenu.texts[1] = &str_08065D60; // "????? PER 40 \xfc\x0e"
 
-            if (byte_203E16C < 60)
-                gMenu.texts[2] = &str_08065D74; // FORMAT("????? PER 60 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[2])
+                gMenu.texts[2] = &str_08065CB0; // "NAVI DA GUERRA"
             else
-                gMenu.texts[2] = &str_08065CB0; // FORMAT("NAVI DA GUERRA");
+                gMenu.texts[2] = &str_08065D74; // "????? PER 60 \xfc\x0e"
 
-            if (byte_203E16C < 80)
-                gMenu.texts[3] = &str_08065D88; // FORMAT("????? PER 80 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[3])
+                gMenu.texts[3] = &str_08065CC0; // "SCIVOLO SUDICIO"
             else
-                gMenu.texts[3] = &str_08065CC0; // FORMAT("SCIVOLO SUDICIO");
-            gMenu.texts[4] = &str_08065D24; // FORMAT("AVANTI");
+                gMenu.texts[3] = &str_08065D88; // "????? PER 80 \xfc\x0e"
+            gMenu.texts[4] = &str_08065D24; // "AVANTI"
             break;
         case 3:
-            if (byte_203E16C < 20)
-                gMenu.texts[0] = &str_08065A7C; // FORMAT("????? FÜR 20 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[0])
+                gMenu.texts[0] = &str_080659C8; // "EIERJAGD"
             else
-                gMenu.texts[0] = &str_080659C8; // FORMAT("EIERJAGD");
+                gMenu.texts[0] = &str_08065A7C; // "????? FÜR 20 \xfc\x0e"
 
-            if (byte_203E16C < 40)
-                gMenu.texts[1] = &str_08065A90; // FORMAT("????? FÜR 40 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[1])
+                gMenu.texts[1] = &str_080659D4; // "SCHAFANGELN"
             else
-                gMenu.texts[1] = &str_080659D4; // FORMAT("SCHAFANGELN");
+                gMenu.texts[1] = &str_08065A90; // "????? FÜR 40 \xfc\x0e"
 
-            if (byte_203E16C < 60)
-                gMenu.texts[2] = &str_08065AA4; // FORMAT("????? FÜR 60 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[2])
+                gMenu.texts[2] = &str_080659E4; // "KAMPFBOOT"
             else
-                gMenu.texts[2] = &str_080659E4; // FORMAT("KAMPFBOOT");
+                gMenu.texts[2] = &str_08065AA4; // "????? FÜR 60 \xfc\x0e"
 
-            if (byte_203E16C < 80)
-                gMenu.texts[3] = &str_08065AB8; // FORMAT("????? FÜR 80 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[3])
+                gMenu.texts[3] = &str_080659F0; // "WURMJAGD"
             else
-                gMenu.texts[3] = &str_080659F0; // FORMAT("WURMJAGD");
-            gMenu.texts[4] = &str_08065A4C; // FORMAT("NÄCHSTES");
+                gMenu.texts[3] = &str_08065AB8; // "????? FÜR 80 \xfc\x0e"
+            gMenu.texts[4] = &str_08065A4C; // "NÄCHSTES"
             break;
         default: HANG; break;
         }
+        break;
     case 11:
         gMenu.xPosition = 66;
         gMenu.yPosition = 48;
@@ -985,114 +988,114 @@ void InitMenu(u32 menu, u32 language)
         switch (language)
         {
         case 0:
-            if (byte_203E16C < 100)
-                gMenu.texts[0] = &str_08065800; // FORMAT("????? FOR 100 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[4])
+                gMenu.texts[0] = &str_08065748; // "AGIC ANGLER"
             else
-                gMenu.texts[0] = &str_08065748; // FORMAT("AGIC ANGLER");
+                gMenu.texts[0] = &str_08065800; // "????? FOR 100 \xfc\x0e"
 
-            if (byte_203E16C < 120)
-                gMenu.texts[1] = &str_08065814; // FORMAT("????? FOR 120 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[5])
+                gMenu.texts[1] = &str_08065758; // "SLIDE O' FEAR"
             else
-                gMenu.texts[1] = &str_08065758; // FORMAT("SLIDE O' FEAR");
+                gMenu.texts[1] = &str_08065814; // "????? FOR 120 \xfc\x0e"
 
-            if (byte_203E16C < 140)
-                gMenu.texts[2] = &str_08065828; // FORMAT("????? FOR 140 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[6])
+                gMenu.texts[2] = &str_08065768; // "FROZEN FISH"
             else
-                gMenu.texts[2] = &str_08065768; // FORMAT("FROZEN FISH");
+                gMenu.texts[2] = &str_08065828; // "????? FOR 140 \xfc\x0e"
 
-            if (byte_203E16C < 160)
-                gMenu.texts[3] = &str_0806583C; // FORMAT("????? FOR 160 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[7])
+                gMenu.texts[3] = &str_08065778; // "SNOWY SLEDS"
             else
-                gMenu.texts[3] = &str_08065778; // FORMAT("SNOWY SLEDS");
-            gMenu.texts[4] = &str_08065790; // FORMAT("PREVIOUS");
+                gMenu.texts[3] = &str_0806583C; // "????? FOR 160 \xfc\x0e"
+            gMenu.texts[4] = &str_08065790; // "PREVIOUS"
             break;
         case 1:
-            if (byte_203E16C < 100)
-                gMenu.texts[0] = &str_08065978; // FORMAT("????? POUR 100 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[4])
+                gMenu.texts[0] = &str_080658AC; // "PÊCHEUR MAGIQUE"
             else
-                gMenu.texts[0] = &str_080658AC; // FORMAT("PÊCHEUR MAGIQUE");
+                gMenu.texts[0] = &str_08065978; // "????? POUR 100 \xfc\x0e"
 
-            if (byte_203E16C < 120)
-                gMenu.texts[1] = &str_0806598C; // FORMAT("????? POUR 120 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[5])
+                gMenu.texts[1] = &str_080658C0; // "TERRIBLE TOBOGGAN"
             else
-                gMenu.texts[1] = &str_080658C0; // FORMAT("TERRIBLE TOBOGGAN");
+                gMenu.texts[1] = &str_0806598C; // "????? POUR 120 \xfc\x0e"
 
-            if (byte_203E16C < 140)
-                gMenu.texts[2] = &str_080659A0; // FORMAT("????? POUR 140 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[6])
+                gMenu.texts[2] = &str_080658D4; // "POISSON EN GLAÇON"
             else
-                gMenu.texts[2] = &str_080658D4; // FORMAT("POISSON EN GLAÇON");
+                gMenu.texts[2] = &str_080659A0; // "????? POUR 140 \xfc\x0e"
 
-            if (byte_203E16C < 160)
-                gMenu.texts[3] = &str_080659B4; // FORMAT("????? POUR 160 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[7])
+                gMenu.texts[3] = &str_080658E8; // "TRAÎNEAU NEIGEUX"
             else
-                gMenu.texts[3] = &str_080658E8; // FORMAT("TRAÎNEAU NEIGEUX");
-            gMenu.texts[4] = &str_08065908; // FORMAT("PRÉCÉDENT");
+                gMenu.texts[3] = &str_080659B4; // "????? POUR 160 \xfc\x0e"
+            gMenu.texts[4] = &str_08065908; // "PRÉCÉDENT"
             break;
         case 2:
-            if (byte_203E16C < 100)
-                gMenu.texts[0] = &str_08065C34; // FORMAT("????? PARA 100 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[4])
+                gMenu.texts[0] = &str_08065B68; // "PESCADOR MÁGICO"
             else
-                gMenu.texts[0] = &str_08065B68; // FORMAT("PESCADOR MÁGICO");
+                gMenu.texts[0] = &str_08065C34; // "????? PARA 100 \xfc\x0e"
 
-            if (byte_203E16C < 120)
-                gMenu.texts[1] = &str_08065C48; // FORMAT("????? PARA 120 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[5])
+                gMenu.texts[1] = &str_08065B7C; // "TOBOGÁN TERRIBLE"
             else
-                gMenu.texts[1] = &str_08065B7C; // FORMAT("TOBOGÁN TERRIBLE");
+                gMenu.texts[1] = &str_08065C48; // "????? PARA 120 \xfc\x0e"
 
-            if (byte_203E16C < 140)
-                gMenu.texts[2] = &str_08065C5C; // FORMAT("????? PARA 140 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[6])
+                gMenu.texts[2] = &str_08065B90; // "PESCADO CONGELADO"
             else
-                gMenu.texts[2] = &str_08065B90; // FORMAT("PESCADO CONGELADO");
+                gMenu.texts[2] = &str_08065C5C; // "????? PARA 140 \xfc\x0e"
 
-            if (byte_203E16C < 160)
-                gMenu.texts[3] = &str_08065C70; // FORMAT("????? PARA 160 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[7])
+                gMenu.texts[3] = &str_08065BA4; // "TRINEOS NEVADOS"
             else
-                gMenu.texts[3] = &str_08065BA4; // FORMAT("TRINEOS NEVADOS");
-            gMenu.texts[4] = &str_08065BC4; // FORMAT("ANTERIOR");
+                gMenu.texts[3] = &str_08065C70; // "????? PARA 160 \xfc\x0e"
+            gMenu.texts[4] = &str_08065BC4; // "ANTERIOR"
             break;
         case 4:
-            if (byte_203E16C < 100)
-                gMenu.texts[0] = &str_08065D9C; // FORMAT("????? PER 100 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[4])
+                gMenu.texts[0] = &str_08065CD4; // "PESCATORE MAGICO"
             else
-                gMenu.texts[0] = &str_08065CD4; // FORMAT("PESCATORE MAGICO");
+                gMenu.texts[0] = &str_08065D9C; // "????? PER 100 \xfc\x0e"
 
-            if (byte_203E16C < 120)
-                gMenu.texts[1] = &str_08065DB0; // FORMAT("????? PER 120 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[5])
+                gMenu.texts[1] = &str_08065CE8; // "SCIVOLO DELLA PAURA"
             else
-                gMenu.texts[1] = &str_08065CE8; // FORMAT("SCIVOLO DELLA PAURA");
+                gMenu.texts[1] = &str_08065DB0; // "????? PER 120 \xfc\x0e"
 
-            if (byte_203E16C < 140)
-                gMenu.texts[2] = &str_08065DC4; // FORMAT("????? PER 140 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[6])
+                gMenu.texts[2] = &str_08065D00; // "PESCE CONGELATO"
             else
-                gMenu.texts[2] = &str_08065D00; // FORMAT("PESCE CONGELATO");
+                gMenu.texts[2] = &str_08065DC4; // "????? PER 140 \xfc\x0e"
 
-            if (byte_203E16C < 160)
-                gMenu.texts[3] = &str_08065DD8; // FORMAT("????? PER 160 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[7])
+                gMenu.texts[3] = &str_08065D14; // "SLITTE NEVOSE"
             else
-                gMenu.texts[3] = &str_08065D14; // FORMAT("SLITTE NEVOSE");
-            gMenu.texts[4] = &str_08065D2C; // FORMAT("INDIETRO");
+                gMenu.texts[3] = &str_08065DD8; // "????? PER 160 \xfc\x0e"
+            gMenu.texts[4] = &str_08065D2C; // "INDIETRO"
             break;
         case 3:
-            if (byte_203E16C < 100)
-                gMenu.texts[0] = &str_08065ACC; // FORMAT("????? FÜR 100 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[4])
+                gMenu.texts[0] = &str_080659FC; // "MAGISCHER ANGLER"
             else
-                gMenu.texts[0] = &str_080659FC; // FORMAT("MAGISCHER ANGLER");
+                gMenu.texts[0] = &str_08065ACC; // "????? FÜR 100 \xfc\x0e"
 
-            if (byte_203E16C < 120)
-                gMenu.texts[1] = &str_08065AE0; // FORMAT("????? FÜR 120 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[5])
+                gMenu.texts[1] = &str_08065A10; // "RUTSCHE DES GRAUENS"
             else
-                gMenu.texts[1] = &str_08065A10; // FORMAT("RUTSCHE DES GRAUENS");
+                gMenu.texts[1] = &str_08065AE0; // "????? FÜR 120 \xfc\x0e"
 
-            if (byte_203E16C < 140)
-                gMenu.texts[2] = &str_08065AF4; // FORMAT("????? FÜR 140 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[6])
+                gMenu.texts[2] = &str_08065A28; // "GEFRORENER FISCH"
             else
-                gMenu.texts[2] = &str_08065A28; // FORMAT("GEFRORENER FISCH");
+                gMenu.texts[2] = &str_08065AF4; // "????? FÜR 140 \xfc\x0e"
 
-            if (byte_203E16C < 160)
-                gMenu.texts[3] = &str_08065B08; // FORMAT("????? FÜR 160 \xfc\x0e");
+            if (byte_203E16C >= dword_80CF3B0[7])
+                gMenu.texts[3] = &str_08065A3C; // "SCHNEEMOBIL"
             else
-                gMenu.texts[3] = &str_08065A3C; // FORMAT("SCHNEEMOBIL");
-            gMenu.texts[4] = &str_08065A58; // FORMAT("VORHERIGES");
+                gMenu.texts[3] = &str_08065B08; // "????? FÜR 160 \xfc\x0e"
+            gMenu.texts[4] = &str_08065A58; // "VORHERIGES"
             break;
         default: HANG; break;
         }
