@@ -505,7 +505,7 @@ SECTIONS
 		asm/80447C4.o(.text);
 		src/random.o(.text);
 		asm/random.o(.text);
-		asm/chunk10.o(.text);
+		src/8045038.o(.text);
 		asm/pause_menu.o(.text);
 		asm/chunk8.o(.text);
 		*libgcc.a:*_call_via_rX*.o(.text*);

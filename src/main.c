@@ -2,6 +2,7 @@
 #include "main.h"
 #include "sprite.h"
 #include "palette_effects.h"
+#include "8045038.h"
 #include "common.h"
 
 extern void sub_800A37C();
