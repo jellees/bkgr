@@ -6561,7 +6561,7 @@ _0804A3D4:
 	movs r1, #0xa0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _0804A450
 	str r4, [r0]
 	ldr r1, _0804A454
@@ -6955,7 +6955,7 @@ _0804A720:
 	ldr r0, [r7, #0x2c]
 	ldr r1, _0804A76C
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0804A99C
 	.align 2, 0
 _0804A75C: .4byte 0x080CEB84
@@ -7386,7 +7386,7 @@ _0804AAA4:
 	movs r1, #0xa0
 	lsls r1, r1, #0xb
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r1, _0804AB7C
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -7603,7 +7603,7 @@ _0804ACCA:
 	ldr r0, [r5, #0x2c]
 	ldr r1, _0804ACF8
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0804AF44
 	.align 2, 0
 _0804ACEC: .4byte 0x080CEB84
@@ -8600,7 +8600,7 @@ _0804B524:
 	ldr r1, _0804B570
 _0804B556:
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0804B74C
 	.align 2, 0
 _0804B560: .4byte 0x080CEB84
@@ -10234,7 +10234,7 @@ _0804C342:
 	movs r1, #0xa0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _0804C3B0
 	str r4, [r0]
 	ldr r1, _0804C3B4
@@ -10730,7 +10730,7 @@ _0804C75E:
 	ldr r1, [r1, #0x28]
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	movs r2, #1
 _0804C790:
 	adds r0, r5, #1
@@ -10804,7 +10804,7 @@ _0804C7DA:
 	ldr r0, [r7, #0x2c]
 	ldr r1, _0804C838
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0804CAA0
 	.align 2, 0
 _0804C82C: .4byte 0x080CEB84
@@ -16217,7 +16217,7 @@ _0804F58E:
 	movs r1, #0xd0
 	lsls r1, r1, #9
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _0804F5B2:
 	pop {r3, r4, r5}
 	mov r8, r3
@@ -17953,7 +17953,7 @@ _080502E2:
 	ldr r1, [r4, #0x28]
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _080502EE:
 	pop {r4}
 	pop {r0}
@@ -18052,7 +18052,7 @@ _080503A8:
 	ldr r1, [r4, #0x28]
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _080503BE:
 	add sp, #0xc
 	pop {r4, r5}
@@ -18150,7 +18150,7 @@ _08050474:
 	ldr r1, [r4, #0x28]
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _0805048A:
 	add sp, #0xc
 	pop {r4, r5}
@@ -18294,7 +18294,7 @@ _080505A4:
 	ldr r1, [r5, #0x28]
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _080505BA:
 	add sp, #0x18
 	pop {r3}
@@ -18322,7 +18322,7 @@ sub_80505C8: @ 0x080505C8
 	ldr r1, [r4, #0x28]
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _080505F4
 _080505F0:
 	subs r0, #1
@@ -18465,7 +18465,7 @@ _08050704:
 	ldr r1, [r4, #0x28]
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _08050716
 _08050712:
 	subs r0, #1
@@ -18832,7 +18832,7 @@ sub_80509C8: @ 0x080509C8
 	ldr r0, [r4, #0x2c]
 	ldr r1, _08050A04
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _08050AE4
 	.align 2, 0
 _08050A00: .4byte gPlayerPos
@@ -18895,7 +18895,7 @@ _08050A66:
 	movs r1, #0x80
 	lsls r1, r1, #8
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _08050A82:
 	ldr r0, [sp]
 	asrs r0, r0, #0x10
@@ -19106,7 +19106,7 @@ _08050C2C:
 	movs r1, #0x80
 	lsls r1, r1, #8
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _08050C38:
 	add sp, #0x18
 	pop {r3, r4, r5}
@@ -54018,7 +54018,7 @@ _080626B6:
 	adds r1, r1, r3
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _08062702
 _080626F0:
 	ldr r0, [r6, #4]
@@ -54028,7 +54028,7 @@ _080626F0:
 	ldr r1, [r1]
 	rsbs r1, r1, #0
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _08062702:
 	adds r1, r6, #0
 	adds r1, #0x24

@@ -3,373 +3,6 @@
 
     .text
 
-    .thumb
-sub_801B1D0: @ 0x0801B1D0
-	push {r4, lr}
-	sub sp, #8
-	str r0, [sp]
-	str r1, [sp, #4]
-	add r1, sp, #4
-	mov r0, sp
-	bl sub_8016710
-	ldr r4, _0801B204
-	adds r0, r4, #0
-	bl sub_8003770
-	cmp r0, #0
-	bne _0801B1EE
-	b _0801B4B4
-_0801B1EE:
-	ldr r1, [sp, #4]
-	ldr r0, _0801B208
-	ands r1, r0
-	cmp r1, #2
-	bne _0801B1FA
-	b _0801B300
-_0801B1FA:
-	cmp r1, #2
-	bgt _0801B20C
-	cmp r1, #1
-	beq _0801B218
-	b _0801B3DC
-	.align 2, 0
-_0801B204: .4byte gPlayerSprite
-_0801B208: .4byte 0x0000030F
-_0801B20C:
-	movs r0, #0x80
-	lsls r0, r0, #1
-	cmp r1, r0
-	bne _0801B216
-	b _0801B36C
-_0801B216:
-	b _0801B3DC
-_0801B218:
-	ldr r0, _0801B228
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0801B22C
-	movs r0, #0
-	bl sub_80186F4
-	b _0801B4B4
-	.align 2, 0
-_0801B228: .4byte gInInteractionArea
-_0801B22C:
-	bl sub_08016EE0
-	cmp r0, #0
-	beq _0801B236
-	b _0801B4B4
-_0801B236:
-	ldr r0, _0801B2D4
-	ldrb r0, [r0, #0x14]
-	cmp r0, #0
-	bne _0801B240
-	b _0801B4B4
-_0801B240:
-	ldr r0, _0801B2D8
-	ldrb r0, [r0]
-	cmp r0, #0
-	bne _0801B258
-	ldr r1, _0801B2DC
-	ldrb r0, [r1]
-	cmp r0, #0
-	beq _0801B258
-	ldrb r0, [r1, #2]
-	cmp r0, #0xa
-	bne _0801B258
-	b _0801B4B4
-_0801B258:
-	ldr r2, _0801B2E0
-	ldr r1, _0801B2E4
-	ldrh r0, [r1]
-	strh r0, [r2]
-	movs r0, #0xf
-	strh r0, [r1]
-	ldr r4, _0801B2E8
-	adds r0, r4, #0
-	movs r1, #0x49
-	movs r2, #4
-	movs r3, #1
-	bl sub_8003368
-	ldr r0, _0801B2EC
-	ldr r0, [r0]
-	movs r1, #0x80
-	lsls r1, r1, #0xb
-	movs r2, #0xd0
-	lsls r2, r2, #5
-	bl sub_8003874
-	ldr r0, _0801B2F0
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0801B2AE
-	ldr r3, _0801B2F4
-	adds r0, r3, #0
-	adds r0, #0xa8
-	ldrh r0, [r0]
-	ldr r2, _0801B2F8
-	adds r1, r3, #0
-	adds r1, #0xaa
-	ldrb r2, [r2]
-	adds r1, r1, r2
-	ldrb r1, [r1]
-	adds r2, r3, #0
-	adds r2, #0xac
-	ldr r2, [r2]
-	movs r3, #0x80
-	lsls r3, r3, #9
-	adds r2, r2, r3
-	bl audio_new_fx
-_0801B2AE:
-	ldrb r1, [r4, #0xa]
-	movs r0, #0
-	bl sub_8016790
-	ldr r0, _0801B2DC
-	ldr r1, [r0, #0x2c]
-	movs r0, #0xb4
-	lsls r0, r0, #0xf
-	cmp r1, r0
-	bne _0801B2C4
-	b _0801B4B4
-_0801B2C4:
-	ldr r1, _0801B2FC
-	ldr r0, [r1, #4]
-	movs r2, #0xc0
-	lsls r2, r2, #0xa
-	adds r0, r0, r2
-	str r0, [r1, #4]
-	b _0801B4B4
-	.align 2, 0
-_0801B2D4: .4byte 0x0200209A
-_0801B2D8: .4byte 0x03003588
-_0801B2DC: .4byte 0x030028FC
-_0801B2E0: .4byte gPreviousPlayerState
-_0801B2E4: .4byte gPlayerState
-_0801B2E8: .4byte gPlayerSprite
-_0801B2EC: .4byte dword_2000FC8
-_0801B2F0: .4byte byte_203EA89
-_0801B2F4: .4byte 0x080CE440
-_0801B2F8: .4byte byte_203EA8C
-_0801B2FC: .4byte gPlayerPos
-_0801B300:
-	bl sub_800DE04
-	cmp r0, #0
-	bne _0801B30A
-	b _0801B4B4
-_0801B30A:
-	ldr r2, _0801B354
-	ldr r1, _0801B358
-	ldrh r0, [r1]
-	strh r0, [r2]
-	movs r0, #9
-	strh r0, [r1]
-	ldr r1, _0801B35C
-	adds r0, r4, #0
-	movs r2, #0
-	movs r3, #1
-	bl sub_8003368
-	ldr r0, _0801B360
-	ldrb r0, [r0]
-	cmp r0, #0
-	bne _0801B32C
-	b _0801B486
-_0801B32C:
-	ldr r3, _0801B364
-	adds r0, r3, #0
-	adds r0, #0xa8
-	ldrh r0, [r0]
-	ldr r2, _0801B368
-	adds r1, r3, #0
-	adds r1, #0xaa
-	ldrb r2, [r2]
-	adds r1, r1, r2
-	ldrb r1, [r1]
-	adds r2, r3, #0
-	adds r2, #0xac
-	ldr r2, [r2]
-	movs r3, #0x80
-	lsls r3, r3, #9
-	adds r2, r2, r3
-	bl audio_new_fx
-	b _0801B486
-	.align 2, 0
-_0801B354: .4byte gPreviousPlayerState
-_0801B358: .4byte gPlayerState
-_0801B35C: .4byte 0x00000109
-_0801B360: .4byte byte_203EA89
-_0801B364: .4byte 0x080CE440
-_0801B368: .4byte byte_203EA8C
-_0801B36C:
-	ldr r0, _0801B3C4
-	ldrb r0, [r0, #0xf]
-	cmp r0, #0
-	bne _0801B376
-	b _0801B4B4
-_0801B376:
-	ldr r2, _0801B3C8
-	ldr r1, _0801B3CC
-	ldrh r0, [r1]
-	strh r0, [r2]
-	movs r0, #0xc
-	strh r0, [r1]
-	adds r0, r4, #0
-	movs r1, #0x31
-	movs r2, #7
-	movs r3, #0
-	bl sub_8003368
-	ldr r0, _0801B3D0
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0801B3BA
-	ldr r3, _0801B3D4
-	adds r0, r3, #0
-	adds r0, #0xa8
-	ldrh r0, [r0]
-	ldr r2, _0801B3D8
-	adds r1, r3, #0
-	adds r1, #0xaa
-	ldrb r2, [r2]
-	adds r1, r1, r2
-	ldrb r1, [r1]
-	adds r2, r3, #0
-	adds r2, #0xac
-	ldr r2, [r2]
-	movs r3, #0x80
-	lsls r3, r3, #9
-	adds r2, r2, r3
-	bl audio_new_fx
-_0801B3BA:
-	ldrb r1, [r4, #0xa]
-	movs r0, #0xf
-	bl sub_8016790
-	b _0801B4B4
-	.align 2, 0
-_0801B3C4: .4byte 0x0200209A
-_0801B3C8: .4byte gPreviousPlayerState
-_0801B3CC: .4byte gPlayerState
-_0801B3D0: .4byte byte_203EA89
-_0801B3D4: .4byte 0x080CE440
-_0801B3D8: .4byte byte_203EA8C
-_0801B3DC:
-	ldr r1, [sp]
-	movs r3, #0x80
-	lsls r3, r3, #2
-	ands r3, r1
-	cmp r3, #0
-	beq _0801B494
-	movs r0, #0xf0
-	ands r0, r1
-	cmp r0, #0x50
-	beq _0801B420
-	cmp r0, #0x50
-	bgt _0801B408
-	cmp r0, #0x20
-	beq _0801B468
-	cmp r0, #0x20
-	bgt _0801B402
-	cmp r0, #0x10
-	beq _0801B474
-	b _0801B4B4
-_0801B402:
-	cmp r0, #0x40
-	beq _0801B450
-	b _0801B4B4
-_0801B408:
-	cmp r0, #0x80
-	beq _0801B45C
-	cmp r0, #0x80
-	bgt _0801B416
-	cmp r0, #0x60
-	beq _0801B444
-	b _0801B4B4
-_0801B416:
-	cmp r0, #0x90
-	beq _0801B42C
-	cmp r0, #0xa0
-	beq _0801B438
-	b _0801B4B4
-_0801B420:
-	ldr r4, _0801B428
-	movs r0, #1
-	b _0801B478
-	.align 2, 0
-_0801B428: .4byte gPlayerSprite
-_0801B42C:
-	ldr r4, _0801B434
-	movs r0, #3
-	b _0801B478
-	.align 2, 0
-_0801B434: .4byte gPlayerSprite
-_0801B438:
-	ldr r4, _0801B440
-	movs r0, #5
-	b _0801B478
-	.align 2, 0
-_0801B440: .4byte gPlayerSprite
-_0801B444:
-	ldr r4, _0801B44C
-	movs r0, #7
-	b _0801B478
-	.align 2, 0
-_0801B44C: .4byte gPlayerSprite
-_0801B450:
-	ldr r4, _0801B458
-	movs r0, #0
-	b _0801B478
-	.align 2, 0
-_0801B458: .4byte gPlayerSprite
-_0801B45C:
-	ldr r4, _0801B464
-	movs r0, #4
-	b _0801B478
-	.align 2, 0
-_0801B464: .4byte gPlayerSprite
-_0801B468:
-	ldr r4, _0801B470
-	movs r0, #6
-	b _0801B478
-	.align 2, 0
-_0801B470: .4byte gPlayerSprite
-_0801B474:
-	ldr r4, _0801B490
-	movs r0, #2
-_0801B478:
-	strb r0, [r4, #0xa]
-	adds r0, r4, #0
-	movs r1, #0x21
-	movs r2, #0
-	movs r3, #1
-	bl sub_80033A4
-_0801B486:
-	ldrb r1, [r4, #0xa]
-	movs r0, #0
-	bl sub_8016790
-	b _0801B4B4
-	.align 2, 0
-_0801B490: .4byte gPlayerSprite
-_0801B494:
-	ldr r2, _0801B4BC
-	ldr r1, _0801B4C0
-	ldrh r0, [r1]
-	strh r0, [r2]
-	strh r3, [r1]
-	ldr r4, _0801B4C4
-	adds r0, r4, #0
-	movs r1, #0x19
-	movs r2, #0
-	movs r3, #0
-	bl sub_8003368
-	ldrb r1, [r4, #0xa]
-	movs r0, #0
-	bl sub_8016790
-_0801B4B4:
-	add sp, #8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801B4BC: .4byte gPreviousPlayerState
-_0801B4C0: .4byte gPlayerState
-_0801B4C4: .4byte gPlayerSprite
-
-
 	.thumb
 sub_801B4C8: @ 0x0801B4C8
 	push {r4, r5, lr}
@@ -2684,7 +2317,7 @@ sub_801C744: @ 0x0801C744
 	ldr r0, [r0]
 	movs r1, #0
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldrb r1, [r4, #0xa]
 	movs r0, #4
 	bl sub_8016790
@@ -4218,7 +3851,7 @@ sub_801D400: @ 0x0801D400
 	lsls r1, r1, #0xb
 	movs r2, #0x80
 	lsls r2, r2, #6
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _0801D436:
 	add sp, #8
 	pop {r0}
@@ -4766,7 +4399,7 @@ _0801D852:
 	movs r2, #0xc4
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _0801D8E0
 	movs r2, #0x96
 	lsls r2, r2, #2
@@ -4826,7 +4459,7 @@ sub_801D8EC: @ 0x0801D8EC
 	movs r2, #0xc4
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _0801D916:
 	ldr r0, [sp]
 	ldr r1, _0801D950
@@ -4848,7 +4481,7 @@ _0801D916:
 	movs r1, #0xc0
 	lsls r1, r1, #9
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0801DD08
 	.align 2, 0
 _0801D944: .4byte gPlayerPos
@@ -4900,7 +4533,7 @@ _0801D9A0:
 	ldr r0, [r4]
 	movs r2, #0xc4
 	lsls r2, r2, #6
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _0801D9C0:
 	ldr r2, _0801D9F8
 	ldrb r3, [r2, #0x16]
@@ -4923,7 +4556,7 @@ _0801D9E2:
 	lsls r1, r1, #0xa
 	movs r2, #0x80
 	lsls r2, r2, #7
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0801DD08
 	.align 2, 0
 _0801D9F0: .4byte dword_2000FC8
@@ -5408,7 +5041,7 @@ _0801DDB6:
 	lsls r1, r1, #0xa
 	movs r2, #0x80
 	lsls r2, r2, #7
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0801E0E0
 	.align 2, 0
 _0801DDE0: .4byte 0x0000030F
@@ -5437,7 +5070,7 @@ _0801DDF4:
 	movs r2, #0xc4
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0801E0E0
 	.align 2, 0
 _0801DE24: .4byte dword_2000FC8
@@ -5454,7 +5087,7 @@ _0801DE30:
 	lsls r1, r1, #9
 	movs r2, #0x80
 	lsls r2, r2, #6
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _0801DE48:
 	ldr r1, [sp]
 	movs r0, #0xf0
@@ -5823,7 +5456,7 @@ sub_801E0F4: @ 0x0801E0F4
 	lsls r1, r1, #0xa
 	movs r2, #0x80
 	lsls r2, r2, #7
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0801E1D0
 	.align 2, 0
 _0801E130: .4byte gGameStatus
@@ -14445,7 +14078,7 @@ sub_8022A4C: @ 0x08022A4C
 	movs r2, #0xc4
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _08022A76:
 	ldr r0, [sp]
 	ldr r1, _08022AB0
@@ -14467,7 +14100,7 @@ _08022A76:
 	movs r1, #0xc0
 	lsls r1, r1, #9
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _08022DF4
 	.align 2, 0
 _08022AA4: .4byte gPlayerPos
@@ -14500,7 +14133,7 @@ _08022AC0:
 	ldr r0, [r4]
 	movs r2, #0xc4
 	lsls r2, r2, #6
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _08022B44
 	.align 2, 0
 _08022AF4: .4byte 0x0000030F
@@ -14527,7 +14160,7 @@ _08022B06:
 	lsls r1, r1, #0xa
 	movs r2, #0x80
 	lsls r2, r2, #7
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _08022DF4
 	.align 2, 0
 _08022B30: .4byte gPreviousPlayerState
@@ -14915,7 +14548,7 @@ sub_8022E08: @ 0x08022E08
 	movs r2, #0xc4
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _08023174
 	.align 2, 0
 _08022E50: .4byte 0x0000030F
@@ -14943,7 +14576,7 @@ _08022E66:
 	lsls r1, r1, #0xa
 	movs r2, #0x80
 	lsls r2, r2, #7
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _08023174
 	.align 2, 0
 _08022E90: .4byte gPreviousPlayerState
@@ -14961,7 +14594,7 @@ _08022EA4:
 	movs r1, #0xc0
 	lsls r1, r1, #9
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _08022EBA:
 	ldr r1, [sp]
 	movs r0, #0xf0
@@ -16644,7 +16277,7 @@ _08023C38:
 	movs r2, #0xc4
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _08023C5E:
 	pop {r4}
 	pop {r0}

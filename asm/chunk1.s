@@ -3923,8 +3923,8 @@ sub_800386C: @ 0x0800386C
 	ldr pc, _080038F0
 
     .thumb
-	.global sub_8003874
-sub_8003874: @ 0x08003874
+	.global CallARM_store_jump_and_other_value
+CallARM_store_jump_and_other_value: @ 0x08003874
 	bx pc
 	nop
     .arm @ 0x08003878

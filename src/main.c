@@ -176,13 +176,13 @@ void UpdateGame(void)
         u32* r2;
         u32 r4 = sub_800C50C();
         SetSpritePriority(&gPlayerSprite, r4);
-        if (Abs(gPlayerPos[1] - dword_30032DC[1]) <= 0x4FFFF || dword_203DFC4)
+        if (Abs(gPlayerPos.y - dword_30032DC[1]) <= 0x4FFFF || dword_203DFC4)
             SetSpritePriority(&gPlayerShadowSprite, r4); //_08009B50
         else //_08009B98
             SetSpritePriority(&gPlayerShadowSprite, byte_3002950[3]);
         //_08009BA2
         r2 = &gPlayerShadowSprite;
-        r1 = (gPlayerPos[1] - dword_30032DC[1]) >> 16;
+        r1 = (gPlayerPos.y - dword_30032DC[1]) >> 16;
         if (r1 >= dword_80CEBC4)
             r0 = byte_80CEB84[dword_80CEBC4 - 1];
         else

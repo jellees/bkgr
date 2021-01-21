@@ -1779,7 +1779,7 @@ _080172B0:
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #0xb
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08017378
 	strb r4, [r0]
 	ldr r0, _0801737C
@@ -1888,7 +1888,7 @@ _080173A4:
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #0xb
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r1, _0801746C
 	movs r0, #1
 	strb r0, [r1]
@@ -1996,7 +1996,7 @@ _08017492:
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #0xb
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r1, _08017554
 	movs r0, #1
 	strb r0, [r1]
@@ -2110,7 +2110,7 @@ _08017584:
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #0xb
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r1, _08017650
 	movs r0, #1
 	strb r0, [r1]
@@ -2219,7 +2219,7 @@ _0801767C:
 	ldr r0, [r0]
 	movs r1, #0xd0
 	lsls r1, r1, #0xa
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r1, _08017730
 	movs r0, #1
 	strb r0, [r1]
@@ -2319,7 +2319,7 @@ _0801775C:
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #0xb
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r1, _08017810
 	movs r0, #1
 	strb r0, [r1]
@@ -2427,7 +2427,7 @@ _0801783C:
 	movs r1, #0xb0
 	lsls r1, r1, #0xb
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _080178C8
 	.align 2, 0
 _0801787C: .4byte 0x03003588
@@ -2455,7 +2455,7 @@ _0801789C:
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #0xb
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r1, _08017938
 	movs r0, #1
 	strb r0, [r1]
@@ -2771,7 +2771,7 @@ _08017B58:
 	movs r2, #0xc4
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08017BD4
 	movs r2, #0x96
 	lsls r2, r2, #2
@@ -2836,7 +2836,7 @@ _08017BFC:
 	movs r2, #0xc4
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _08017C22:
 	pop {r4}
 	pop {r0}
@@ -3262,7 +3262,7 @@ DoFeatheryFlap: @ 0x08017F74
 	movs r2, #0xc0
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	movs r0, #1
 	strb r0, [r4]
 	ldr r0, _08018010
@@ -3338,7 +3338,7 @@ DoAirAttack: @ 0x0801801C
 	movs r2, #0xc0
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	movs r0, #1
 	strb r0, [r5]
 	ldr r0, _080180B0
@@ -3428,7 +3428,7 @@ DoBillDrill: @ 0x080180E0
 	movs r2, #0xc0
 	lsls r2, r2, #6
 	movs r1, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, [r4]
 	ldr r2, _08018188
 	ldrb r1, [r5, #0xa]
@@ -5662,7 +5662,7 @@ _0801956C:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019590
 	movs r1, #0xf1
 	movs r2, #0
@@ -5795,7 +5795,7 @@ _08019690:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _080196B4
 	movs r1, #0xd1
 	movs r2, #0
@@ -5816,7 +5816,7 @@ _080196B8:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	ldr r2, _08019740
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019744
 	movs r1, #0xd1
 	movs r2, #0
@@ -5930,7 +5930,7 @@ _080197C4:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _080197E8
 	movs r1, #0xa1
 	movs r2, #0
@@ -5951,7 +5951,7 @@ _080197EC:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	ldr r2, _080198AC
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _080198B0
 	movs r1, #0xa1
 	movs r2, #0
@@ -6169,7 +6169,7 @@ _080199A4:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	adds r0, r4, #0
 	movs r1, #0xf1
 _080199E4:
@@ -6209,7 +6209,7 @@ _08019A08:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	adds r0, r4, #0
 	movs r1, #0xa1
 	movs r2, #0
@@ -6332,7 +6332,7 @@ _08019B34:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019B50
 	ldr r1, _08019B54
 	b _08019F1E
@@ -6353,7 +6353,7 @@ _08019B58:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	ldr r2, _08019B84
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019B88
 	ldr r1, _08019B8C
 	b _08019F52
@@ -6427,7 +6427,7 @@ _08019C08:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019C2C
 	ldr r1, _08019C30
 	movs r2, #0
@@ -6451,7 +6451,7 @@ _08019C34:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	ldr r2, _08019C90
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019C94
 	ldr r1, _08019C98
 	movs r2, #0
@@ -6550,7 +6550,7 @@ _08019D1C:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019D40
 	ldr r1, _08019D44
 	movs r2, #0
@@ -6574,7 +6574,7 @@ _08019D48:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	ldr r2, _08019DD4
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019DD8
 	ldr r1, _08019DDC
 	movs r2, #0
@@ -6772,7 +6772,7 @@ _08019F0C:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _08019F1A:
 	ldr r0, _08019F30
 	ldr r1, _08019F34
@@ -6796,7 +6796,7 @@ _08019F38:
 	movs r1, #0xc0
 	lsls r1, r1, #0xa
 	ldr r2, _08019FA8
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	ldr r0, _08019FAC
 	ldr r1, _08019FB0
 _08019F52:

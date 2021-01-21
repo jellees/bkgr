@@ -9492,7 +9492,7 @@ _0802C820:
 	movs r1, #0x80
 	lsls r1, r1, #0xb
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 	b _0802C870
 	.align 2, 0
 _0802C844: .4byte dword_80CC290
@@ -9515,7 +9515,7 @@ _0802C864:
 	movs r1, #0x80
 	lsls r1, r1, #0xb
 	movs r2, #0
-	bl sub_8003874
+	bl CallARM_store_jump_and_other_value
 _0802C870:
 	ldrh r1, [r7, #2]
 	ldr r0, _0802C8C0

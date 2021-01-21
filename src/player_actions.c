@@ -11,7 +11,7 @@ void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown)
     dPlayerBehaviors[gPlayerState](keyPressed, keyDown);
 }
 
-static void nullsub_16(s32 keyPressed, s32 keyDown) {}
+static void nullsub_16(s32 keyPressed, s32 keyDown) { }
 
 static void Jump(s32 keyPressed, s32 keyDown)
 {
@@ -463,10 +463,7 @@ static void sub_801B08C(s32 keyPressed, s32 keyDown)
 
 static void PackWackStart(s32 keyPressed, s32 keyDown)
 {
-    s32 pressed = keyPressed;
-    s32 down = keyDown;
-
-    sub_8016710(&pressed, &down);
+    sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite))
     {
@@ -482,16 +479,153 @@ static void PackWackStart(s32 keyPressed, s32 keyDown)
 
 static void PackWackEnd(s32 keyPressed, s32 keyDown)
 {
-    s32 pressed = keyPressed;
-    s32 down = keyDown;
-
-    sub_8016710(&pressed, &down);
+    sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite))
     {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = 0;
         sub_8003368(&gPlayerSprite, 25, 0, 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
+
+void Crouch(s32 keyPressed, s32 keyDown)
+{
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (!sub_8003770(&gPlayerSprite))
+        return;
+
+    switch (keyDown & JOY_EXCL_DPAD)
+    {
+    case A_BUTTON:
+        if (gInInteractionArea)
+        {
+            sub_80186F4(0);
+            return;
+        }
+        else
+        {
+            if (sub_08016EE0())
+                return;
+
+            if (!stru_200209A.field_14)
+                return;
+
+            if (!byte_3003588 && stru_30028FC.field_0 && stru_30028FC.field_2 == 0xA)
+                return;
+
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 15;
+
+            sub_8003368(&gPlayerSprite, 0x49, 4, 1);
+            CallARM_store_jump_and_other_value(dword_2000FC8, 0x40000, 0x1A00);
+
+            if (byte_203EA89)
+            {
+                audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[byte_203EA8C],
+                             dSoundEffects[21].pitch + 0x10000);
+            }
+
+            sub_8016790(0, gPlayerSprite.field_A);
+
+            if (stru_30028FC.field_31 == 0x5A0000)
+                return;
+
+            gPlayerPos.y += 0x30000;
+        }
+        return;
+
+    case B_BUTTON:
+        if (sub_800DE04())
+        {
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 9;
+
+            sub_8003368(&gPlayerSprite, 0x109, 0, 1);
+
+            if (byte_203EA89)
+            {
+                audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[byte_203EA8C],
+                             dSoundEffects[21].pitch + 0x10000);
+            }
+
+            sub_8016790(0, gPlayerSprite.field_A);
+        }
+        return;
+
+    case R_BUTTON:
+        if (stru_200209A.field_F)
+        {
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 12;
+
+            sub_8003368(&gPlayerSprite, 0x31, 7, 0);
+
+            if (byte_203EA89)
+            {
+                audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[byte_203EA8C],
+                             dSoundEffects[21].pitch + 0x10000);
+            }
+
+            sub_8016790(15, gPlayerSprite.field_A);
+        }
+        return;
+    }
+
+    if (keyPressed & L_BUTTON)
+    {
+        switch (keyPressed & DPAD_ANY)
+        {
+        case DPAD_RIGHT | DPAD_UP:
+            gPlayerSprite.field_A = 1;
+            sub_80033A4(&gPlayerSprite, 0x21, 0, 1);
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+        case DPAD_RIGHT | DPAD_DOWN:
+            gPlayerSprite.field_A = 3;
+            sub_80033A4(&gPlayerSprite, 0x21, 0, 1);
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+        case DPAD_LEFT | DPAD_DOWN:
+            gPlayerSprite.field_A = 5;
+            sub_80033A4(&gPlayerSprite, 0x21, 0, 1);
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+        case DPAD_LEFT | DPAD_UP:
+            gPlayerSprite.field_A = 7;
+            sub_80033A4(&gPlayerSprite, 0x21, 0, 1);
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+        case DPAD_UP:
+            gPlayerSprite.field_A = 0;
+            sub_80033A4(&gPlayerSprite, 0x21, 0, 1);
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+        case DPAD_DOWN:
+            gPlayerSprite.field_A = 4;
+            sub_80033A4(&gPlayerSprite, 0x21, 0, 1);
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+        case DPAD_LEFT:
+            gPlayerSprite.field_A = 6;
+            sub_80033A4(&gPlayerSprite, 0x21, 0, 1);
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+        case DPAD_RIGHT:
+            gPlayerSprite.field_A = 2;
+            sub_80033A4(&gPlayerSprite, 0x21, 0, 1);
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+        }
+    }
+    else
+    {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 0;
+
+        sub_8003368(&gPlayerSprite, 0x19, 0, 0);
         sub_8016790(0, gPlayerSprite.field_A);
     }
 }

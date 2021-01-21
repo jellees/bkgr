@@ -43,6 +43,42 @@ struct SpriteDMATableEntry
     u32 count;
 };
 
+struct struc_43
+{
+    u8 field_0;
+    u8 field_1;
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 field_8;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    u8 field_C;
+    u8 field_D;
+    u8 field_E;
+    u8 field_F;
+    u8 field_10;
+    u8 field_11;
+    u8 field_12;
+    u8 field_13;
+    u8 field_14;
+    u8 field_15;
+    u8 field_16;
+    u8 field_17;
+    u8 field_18;
+    u8 field_19;
+    u16 field_1A;
+    u32 field_1C;
+    u32 field_20;
+    u32 field_24;
+    u32 field_28;
+    u32 field_31;
+};
+
 //EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
@@ -207,6 +243,8 @@ extern u8* dword_203FA84;
 //IWRAM
 extern u8 unk_3000000;
 
+extern struct struc_43 stru_30028FC;
+
 extern u8 byte_3002950[];
 
 extern void (*gFunctionArray[14])();
@@ -226,7 +264,7 @@ extern u16 gKeysPressed;
 extern u16 gKeysDown;
 
 extern u32 dword_30032CC;
-extern u32 gPlayerPos[];
+extern struct Vec3fx gPlayerPos;
 extern u32 dword_30032DC[];
 
 extern u32 dword_3003300;
@@ -243,6 +281,7 @@ extern u16* gTileSetBG[4];
 extern u16 gMapPixelSizeX;
 extern u16 gMapPixelSizeY;
 
+extern u8 byte_3003588;
 extern u32 gOAMBuffer2[];
 extern u32 gOAMBuffer1[];
 extern u32* gOAMBufferFramePtr;

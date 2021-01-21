@@ -369,6 +369,9 @@ SECTIONS
         . = 0x00000000;
         unk_3000000 = .;  . += 0x1D27; /* space for ARM functions */
 
+        . = 0x000028FC;
+        stru_30028FC = .; . += 0x30;
+
         . = 0x00002950;
         byte_3002950 = .; . += 4; /* array */
 
@@ -422,7 +425,9 @@ SECTIONS
         gMapPixelSizeX = .; . += 2;
         gMapPixelSizeY = .; . += 2;
 
-        . = 0x0000358C;
+        . = 0x00003588;
+        byte_3003588 = .; . += 1;
+        . += 3; /* padding */
         gOAMBuffer2 = .; . += 0x400;
         gOAMBuffer1 = .; . += 0x400;
         gOAMBufferFramePtr = .; . += 4;
