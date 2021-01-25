@@ -629,3 +629,218 @@ void Crouch(s32 keyPressed, s32 keyDown)
         sub_8016790(0, gPlayerSprite.field_A);
     }
 }
+
+#ifdef NONMATCHING
+void sub_801B4C8(s32 keyPressed, s32 keyDown)
+{
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (!sub_80037A8(&gPlayerSprite))
+        return;
+    
+    switch (keyDown & JOY_EXCL_DPAD)
+    {
+    case A_BUTTON:
+        if (!sub_08016EE0())
+            sub_8017480();
+        return;
+        
+    case L_BUTTON:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 0;
+
+        sub_8003368(&gPlayerSprite, 0x19, 0, 0);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+    
+        if (dword_20020B8 != -1)
+        {
+            if (byte_203EA89)
+                audio_halt_fx(dword_20020B8);
+            dword_20020B8 = -1;
+        }
+
+        sub_8016790(0, gPlayerSprite.field_A);
+        return;
+    }
+
+    switch (keyPressed & DPAD_ANY)
+    {
+    case DPAD_RIGHT | DPAD_UP:
+        if (gPlayerSprite.field_A != 1)
+        {
+            gPlayerSprite.field_A = 1;
+            sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
+        }
+        if (dword_20020B8 == -1)
+        {
+            if (byte_203EA89)
+            {
+                dword_20020B8 = audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                    dSoundEffects[30].pitch + 0x10000);
+            }
+            else
+            {
+                dword_20020B8 = -1;
+            }
+        }
+        break;
+    case DPAD_RIGHT | DPAD_DOWN:
+        if (gPlayerSprite.field_A != 3)
+        {
+            gPlayerSprite.field_A = 3;
+            sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
+        }
+        if (dword_20020B8 == -1)
+        {
+            if (byte_203EA89)
+            {
+                dword_20020B8 = audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                    dSoundEffects[30].pitch + 0x10000);
+            }
+            else
+            {
+                dword_20020B8 = -1;
+            }
+        }
+        break;
+    case DPAD_LEFT | DPAD_DOWN:
+        if (gPlayerSprite.field_A != 5)
+        {
+            gPlayerSprite.field_A = 5;
+            sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
+        }
+        if (dword_20020B8 == -1)
+        {
+            if (byte_203EA89)
+            {
+                dword_20020B8 = audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                    dSoundEffects[30].pitch + 0x10000);
+            }
+            else
+            {
+                dword_20020B8 = -1;
+            }
+        }
+        break;
+    case DPAD_LEFT | DPAD_UP:
+        if (gPlayerSprite.field_A != 7)
+        {
+            gPlayerSprite.field_A = 7;
+            sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
+        }
+        if (dword_20020B8 == -1)
+        {
+            if (byte_203EA89)
+            {
+                dword_20020B8 = audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                    dSoundEffects[30].pitch + 0x10000);
+            }
+            else
+            {
+                dword_20020B8 = -1;
+            }
+        }
+        break;
+    case DPAD_UP:
+        if (gPlayerSprite.field_A != 0)
+        {
+            gPlayerSprite.field_A = 0;
+            sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
+        }
+        if (dword_20020B8 == -1)
+        {
+            if (byte_203EA89)
+            {
+                dword_20020B8 = audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                    dSoundEffects[30].pitch + 0x10000);
+            }
+            else
+            {
+                dword_20020B8 = -1;
+            }
+        }
+        break;
+    case DPAD_DOWN:
+        if (gPlayerSprite.field_A != 4)
+        {
+            gPlayerSprite.field_A = 4;
+            sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
+        }
+        if (dword_20020B8 == -1)
+        {
+            if (byte_203EA89)
+            {
+                dword_20020B8 = audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                    dSoundEffects[30].pitch + 0x10000);
+            }
+            else
+            {
+                dword_20020B8 = -1;
+            }
+        }
+        break;
+    case DPAD_LEFT:
+        if (gPlayerSprite.field_A != 6)
+        {
+            gPlayerSprite.field_A = 6;
+            sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
+        }
+        if (dword_20020B8 == -1)
+        {
+            if (byte_203EA89)
+            {
+                dword_20020B8 = audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                    dSoundEffects[30].pitch + 0x10000);
+            }
+            else
+            {
+                dword_20020B8 = -1;
+            }
+        }
+        break;
+    case DPAD_RIGHT:
+        if (gPlayerSprite.field_A != 2)
+        {
+            gPlayerSprite.field_A = 2;
+            sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0, 0);
+        }
+        if (dword_20020B8 == -1)
+        {
+            if (byte_203EA89)
+            {
+                dword_20020B8 = audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                    dSoundEffects[30].pitch + 0x10000);
+            }
+            else
+            {
+                dword_20020B8 = -1;
+            }
+        }
+        break;
+    default:
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 12;
+
+        sub_800378C(&gPlayerSprite, 6);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+
+        if (dword_20020B8 != -1)
+        {
+            if (byte_203EA89)
+                audio_halt_fx(dword_20020B8);
+            dword_20020B8 = -1;
+        }
+
+        sub_8016790(15, gPlayerSprite.field_A);
+        break;
+    }
+}
+#endif
