@@ -4782,7 +4782,7 @@ _080495A2:
 	movs r0, #0
 	b _080496A4
 	.align 2, 0
-_080495A8: .4byte dword_30032DC
+_080495A8: .4byte stru_30032DC
 _080495AC: .4byte 0x03006EF1
 _080495B0: .4byte byte_203F99C
 _080495B4:
@@ -4834,7 +4834,7 @@ _080495FA:
 	mov pc, r0
 	.align 2, 0
 _08049610: .4byte 0x03006EF0
-_08049614: .4byte dword_30032DC
+_08049614: .4byte stru_30032DC
 _08049618: .4byte 0x0804961C
 _0804961C: @ jump table
 	.4byte _080496A2 @ case 0
@@ -4996,7 +4996,7 @@ _0804973C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08049744: .4byte dword_30032DC
+_08049744: .4byte stru_30032DC
 
     .thumb
 sub_8049748: @ 0x08049748
@@ -5887,7 +5887,7 @@ _08049DA2:
 	bl audio_new_fx
 	b _08049E5C
 	.align 2, 0
-_08049E34: .4byte dword_30032DC
+_08049E34: .4byte stru_30032DC
 _08049E38: .4byte 0x080B1250
 _08049E3C: .4byte 0x080B19E0
 _08049E40: .4byte 0x0203F8D5
@@ -6893,7 +6893,7 @@ _0804A6AE:
 	ldrb r0, [r1]
 	b _0804A6E2
 	.align 2, 0
-_0804A6C8: .4byte dword_30032DC
+_0804A6C8: .4byte stru_30032DC
 _0804A6CC: .4byte 0x080B12D0
 _0804A6D0: .4byte gMapPixelSizeY
 _0804A6D4: .4byte 0x080CEBC4
@@ -7432,7 +7432,7 @@ _0804AB44:
 	b _0804AF44
 	.align 2, 0
 _0804AB6C: .4byte 0x080B12D0
-_0804AB70: .4byte dword_30032DC
+_0804AB70: .4byte stru_30032DC
 _0804AB74: .4byte 0x080B19E0
 _0804AB78: .4byte 0x0203F8D5
 _0804AB7C: .4byte 0x0203F8D4
@@ -8537,7 +8537,7 @@ _0804B4B2:
 	ldrb r0, [r1]
 	b _0804B4E6
 	.align 2, 0
-_0804B4CC: .4byte dword_30032DC
+_0804B4CC: .4byte stru_30032DC
 _0804B4D0: .4byte 0x080B1350
 _0804B4D4: .4byte gMapPixelSizeY
 _0804B4D8: .4byte 0x080CEBC4
@@ -16228,7 +16228,7 @@ _0804F5B2:
 	bx r0
 	.align 2, 0
 _0804F5C0: .4byte 0x03006EF0
-_0804F5C4: .4byte dword_30032DC
+_0804F5C4: .4byte stru_30032DC
 _0804F5C8: .4byte dword_80CC290
 
     .thumb
@@ -16355,7 +16355,7 @@ _0804F682:
 	.align 2, 0
 _0804F6B0: .4byte 0x03006EF1
 _0804F6B4: .4byte 0x080B0FAB
-_0804F6B8: .4byte dword_30032DC
+_0804F6B8: .4byte stru_30032DC
 _0804F6BC: .4byte 0x03006EF0
 _0804F6C0:
 	subs r0, #1
@@ -16680,7 +16680,7 @@ sub_804F918: @ 0x0804F918
 	bl sub_8047430
 	b _0804F948
 	.align 2, 0
-_0804F940: .4byte dword_30032DC
+_0804F940: .4byte stru_30032DC
 _0804F944:
 	subs r0, #1
 	strh r0, [r1]
@@ -16768,7 +16768,7 @@ sub_804F950: @ 0x0804F950
 	bl sub_8049810
 	b _0804FA32
 	.align 2, 0
-_0804F9F4: .4byte dword_30032DC
+_0804F9F4: .4byte stru_30032DC
 _0804F9F8: .4byte 0x03006EF1
 _0804F9FC: .4byte gMapPixelSizeY
 _0804FA00:
@@ -16863,7 +16863,7 @@ sub_804FA64: @ 0x0804FA64
 	strb r5, [r0]
 	b _0804FB7E
 	.align 2, 0
-_0804FAB8: .4byte dword_30032DC
+_0804FAB8: .4byte stru_30032DC
 _0804FABC: .4byte 0x03006EF0
 _0804FAC0: .4byte 0x0203F8CD
 _0804FAC4: .4byte 0x0203F8CE
@@ -17817,7 +17817,7 @@ _080501CA:
 	.align 2, 0
 _080501D4: .4byte 0x03006EF1
 _080501D8: .4byte 0x080B0FAB
-_080501DC: .4byte dword_30032DC
+_080501DC: .4byte stru_30032DC
 _080501E0:
 	adds r0, r5, #0
 	bl sub_8049784
@@ -18589,7 +18589,7 @@ _080507F0:
 	.align 2, 0
 _080507F8: .4byte gPlayerPos
 _080507FC: .4byte 0x004FFFFF
-_08050800: .4byte dword_30032DC
+_08050800: .4byte stru_30032DC
 
 	.thumb
 sub_8050804: @ 0x08050804
@@ -18655,7 +18655,7 @@ sub_8050804: @ 0x08050804
 	bl sub_8049810
 	b _080508AA
 	.align 2, 0
-_0805088C: .4byte dword_30032DC
+_0805088C: .4byte stru_30032DC
 _08050890: .4byte gMapPixelSizeY
 _08050894:
 	ldr r0, [r7, #0x10]
@@ -18699,7 +18699,7 @@ sub_80508B8: @ 0x080508B8
 	movs r1, #1
 	b _08050924
 	.align 2, 0
-_080508E4: .4byte dword_30032DC
+_080508E4: .4byte stru_30032DC
 _080508E8:
 	ldr r0, [r4, #0x2c]
 	add r1, sp, #0xc
@@ -19396,7 +19396,7 @@ sub_8050E34: @ 0x08050E34
 	bl sub_8049008
 	b _08050E8A
 	.align 2, 0
-_08050E7C: .4byte dword_30032DC
+_08050E7C: .4byte stru_30032DC
 _08050E80:
 	ldr r1, _08050EAC
 	adds r0, r6, #0
@@ -19418,7 +19418,7 @@ _08050E8A:
 	strb r1, [r0]
 	b _08050EC6
 	.align 2, 0
-_08050EAC: .4byte dword_30032DC
+_08050EAC: .4byte stru_30032DC
 _08050EB0: .4byte 0x03006EF0
 _08050EB4: .4byte 0x0203F8CD
 _08050EB8: .4byte 0x0203F8CE
@@ -19824,7 +19824,7 @@ _080511F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051200: .4byte dword_30032DC
+_08051200: .4byte stru_30032DC
 
 	.thumb
 sub_8051204: @ 0x08051204
@@ -19911,7 +19911,7 @@ _08051296:
 	b _080513FE
 	.align 2, 0
 _080512AC: .4byte 0x03006EF0
-_080512B0: .4byte dword_30032DC
+_080512B0: .4byte stru_30032DC
 _080512B4: .4byte 0x0200108D
 _080512B8: .4byte 0x0200108E
 _080512BC: .4byte gGameStatus
@@ -44799,7 +44799,7 @@ _0805DBDC:
 	b _0805DC18
 	.align 2, 0
 _0805DBE8: .4byte 0x0203F9FC
-_0805DBEC: .4byte dword_30032DC
+_0805DBEC: .4byte stru_30032DC
 _0805DBF0: .4byte dword_2000FC8
 _0805DBF4: .4byte dword_200032C
 _0805DBF8: .4byte gKeyInput
@@ -47248,7 +47248,7 @@ sub_805EF0C: @ 0x0805EF0C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805EF54: .4byte dword_30032DC
+_0805EF54: .4byte stru_30032DC
 _0805EF58: .4byte gMapPixelSizeY
 
     .thumb
@@ -49044,7 +49044,7 @@ sub_805FCEC: @ 0x0805FCEC
 	b _0805FD1C
 	.align 2, 0
 _0805FD10: .4byte gMapPixelSizeY
-_0805FD14: .4byte dword_30032DC
+_0805FD14: .4byte stru_30032DC
 _0805FD18:
 	adds r0, r4, #0
 	adds r1, r5, #0

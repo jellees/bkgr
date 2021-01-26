@@ -376,7 +376,7 @@ extern u16 gKeysDown;
 
 extern u32 dword_30032CC;
 extern struct Vec3fx gPlayerPos;
-extern u32 dword_30032DC[];
+extern struct Vec3fx stru_30032DC;
 
 extern u32 dword_3003300;
 extern u32 dword_3003304;

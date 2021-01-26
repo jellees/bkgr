@@ -1,11 +1,11 @@
 #include "global.h"
 #include "common.h"
 
-void sub_800A740(struct Vec3fx *a1, struct Vec3fx *a2)
+void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2)
 {
     if (!dword_203DFC4)
         return;
-    
+
     if (byte_203DFE6)
     {
         if (gPlayerStateSettings[gPlayerState] & 0x400)

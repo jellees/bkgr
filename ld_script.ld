@@ -401,7 +401,7 @@ SECTIONS
         gKeyInput = .; . += 2;
         dword_30032CC = .; . += 4;
         gPlayerPos = .; . += 0xC;
-        dword_30032DC = .; . += 0xC;
+        stru_30032DC = .; . += 0xC;
 
         . = 0x00003300;
         dword_3003300 = .; . += 4;
