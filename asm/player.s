@@ -3,85 +3,85 @@
     
     .text
 
-    .thumb
-sub_800A740: @ 0x0800A740
-	push {r4, r5, r6, lr}
-	sub sp, #0xc
-	adds r4, r0, #0
-	adds r5, r1, #0
-	ldr r6, _0800A778
-	ldr r2, [r6]
-	cmp r2, #0
-	beq _0800A7D0
-	ldr r0, _0800A77C
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0800A7C0
-	ldr r1, _0800A780
-	ldr r0, _0800A784
-	ldrh r0, [r0]
-	lsls r0, r0, #1
-	adds r0, r0, r1
-	ldrh r1, [r0]
-	movs r0, #0x80
-	lsls r0, r0, #3
-	ands r0, r1
-	cmp r0, #0
-	beq _0800A788
-	adds r0, r2, #0
-	adds r0, #0x98
-	ldr r0, [r0]
-	str r0, [r4, #4]
-	b _0800A7CE
-	.align 2, 0
-_0800A778: .4byte dword_203DFC4
-_0800A77C: .4byte 0x0203DFE6
-_0800A780: .4byte gPlayerStateSettings
-_0800A784: .4byte gPlayerState
-_0800A788:
-	ldrh r1, [r2, #0x1e]
-	ldr r0, _0800A7BC
-	ldr r0, [r0]
-	adds r0, r0, r1
-	ldrb r0, [r0]
-	add r2, sp, #4
-	add r3, sp, #8
-	mov r1, sp
-	bl sub_8062444
-	ldr r2, [r4]
-	ldr r0, [sp]
-	adds r2, r2, r0
-	str r2, [r4]
-	ldr r0, [r4, #8]
-	ldr r1, [sp, #8]
-	adds r0, r0, r1
-	str r0, [r4, #8]
-	str r2, [r5]
-	str r0, [r5, #8]
-	ldr r0, [r6]
-	adds r0, #0x98
-	ldr r0, [r0]
-	str r0, [r4, #4]
-	b _0800A7CE
-	.align 2, 0
-_0800A7BC: .4byte 0x0203DFC0
-_0800A7C0:
-	ldr r0, _0800A7D8
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0800A7D0
-	adds r0, r2, #0
-	adds r0, #0x98
-	ldr r0, [r0]
-_0800A7CE:
-	str r0, [r5, #4]
-_0800A7D0:
-	add sp, #0xc
-	pop {r4, r5, r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A7D8: .4byte 0x0203DFE7
+@     .thumb
+@ sub_800A740: @ 0x0800A740
+@ 	push {r4, r5, r6, lr}
+@ 	sub sp, #0xc
+@ 	adds r4, r0, #0
+@ 	adds r5, r1, #0
+@ 	ldr r6, _0800A778
+@ 	ldr r2, [r6]
+@ 	cmp r2, #0
+@ 	beq _0800A7D0
+@ 	ldr r0, _0800A77C
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _0800A7C0
+@ 	ldr r1, _0800A780
+@ 	ldr r0, _0800A784
+@ 	ldrh r0, [r0]
+@ 	lsls r0, r0, #1
+@ 	adds r0, r0, r1
+@ 	ldrh r1, [r0]
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #3
+@ 	ands r0, r1
+@ 	cmp r0, #0
+@ 	beq _0800A788
+@ 	adds r0, r2, #0
+@ 	adds r0, #0x98
+@ 	ldr r0, [r0]
+@ 	str r0, [r4, #4]
+@ 	b _0800A7CE
+@ 	.align 2, 0
+@ _0800A778: .4byte dword_203DFC4
+@ _0800A77C: .4byte 0x0203DFE6
+@ _0800A780: .4byte gPlayerStateSettings
+@ _0800A784: .4byte gPlayerState
+@ _0800A788:
+@ 	ldrh r1, [r2, #0x1e]
+@ 	ldr r0, _0800A7BC
+@ 	ldr r0, [r0]
+@ 	adds r0, r0, r1
+@ 	ldrb r0, [r0]
+@ 	add r2, sp, #4
+@ 	add r3, sp, #8
+@ 	mov r1, sp
+@ 	bl sub_8062444
+@ 	ldr r2, [r4]
+@ 	ldr r0, [sp]
+@ 	adds r2, r2, r0
+@ 	str r2, [r4]
+@ 	ldr r0, [r4, #8]
+@ 	ldr r1, [sp, #8]
+@ 	adds r0, r0, r1
+@ 	str r0, [r4, #8]
+@ 	str r2, [r5]
+@ 	str r0, [r5, #8]
+@ 	ldr r0, [r6]
+@ 	adds r0, #0x98
+@ 	ldr r0, [r0]
+@ 	str r0, [r4, #4]
+@ 	b _0800A7CE
+@ 	.align 2, 0
+@ _0800A7BC: .4byte 0x0203DFC0
+@ _0800A7C0:
+@ 	ldr r0, _0800A7D8
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _0800A7D0
+@ 	adds r0, r2, #0
+@ 	adds r0, #0x98
+@ 	ldr r0, [r0]
+@ _0800A7CE:
+@ 	str r0, [r5, #4]
+@ _0800A7D0:
+@ 	add sp, #0xc
+@ 	pop {r4, r5, r6}
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _0800A7D8: .4byte 0x0203DFE7
 
     .thumb
 sub_800A7DC: @ 0x0800A7DC

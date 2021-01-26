@@ -79,6 +79,113 @@ struct struc_43
     u32 field_31;
 };
 
+struct Entity_rt
+{
+    u16 behavior;
+    u16 xPosition;
+    u16 yPosition;
+    u16 field_6;
+    u8 field_8;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    u8 field_C;
+    u8 field_D;
+    u8 field_E;
+    u8 field_F;
+    u8 field_10;
+    u8 field_11;
+    u8 field_12;
+    u8 field_13;
+    u8 field_14;
+    u8 field_15;
+    u8 field_16;
+    u8 field_17;
+    u8 field_18;
+    u8 field_19;
+    u8 field_1A;
+    u8 field_1B;
+    u16 field_1C;
+    u16 field_1E;
+    u16 field_20;
+    u8 field_22;
+    u8 field_23;
+    u8 field_24;
+    u8 field_25;
+    u8 field_26;
+    u8 field_27;
+    u8 field_28;
+    u8 field_29;
+    u8 field_2A;
+    u8 field_2B;
+    u8 field_2C;
+    u8 field_2D;
+    u8 field_2E;
+    u8 field_2F;
+    u8 field_30;
+    u8 field_31;
+    u8 field_32;
+    u8 field_33;
+    u8 field_34;
+    u8 field_35;
+    u8 field_36;
+    u8 field_37;
+    u8 field_38;
+    u8 field_39;
+    u8 field_3A;
+    u8 field_3B;
+    u8 field_3C;
+    u8 field_3D;
+    u8 field_3E;
+    u8 field_3F;
+    u16 field_40;
+    u8 field_42;
+    u8 field_43;
+    u8 field_44;
+    u8 field_45;
+    u8 field_46;
+    u8 field_47;
+    u8 field_48;
+    u8 field_49;
+    u8 field_4A;
+    u8 field_4B;
+    u32 field_4C;
+    u32 field_50;
+    u32 field_54;
+    u32 field_58;
+    u32 field_5C;
+    u32 field_60;
+    u32 field_64;
+    u32 field_68;
+    u32 field_6C;
+    u32 field_70;
+    u32 field_74;
+    u32 field_78;
+    u32 field_7C;
+    u32 field_80;
+    u32 field_84;
+    u32 field_88;
+    u32 field_8C;
+    u32 field_90;
+    u32 field_94;
+    u32 field_98;
+    u32 field_9C;
+    u32 field_A0;
+    u32 field_A4;
+    u32 field_A8;
+    u32 field_AC;
+    u32 field_B0;
+    u32 field_B4;
+    u32 field_B8;
+    u32 field_BC;
+    u32 field_C0;
+    u32 field_C4;
+    u32 field_C8;
+    u32 field_CC;
+    u32 field_D0;
+    u32 field_D4;
+};
+
 //EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
@@ -204,9 +311,13 @@ extern bool8 gIsPaletteEffectsActive;
 
 extern u32* gEntitySection;
 
-extern u32 dword_203DFC4;
+extern u8* dword_203DFC0;
+extern struct Entity_rt* dword_203DFC4;
 
 extern bool8 gInInteractionArea;
+
+extern bool8 byte_203DFE6;
+extern bool8 byte_203DFE7;
 
 extern u8 byte_203E16C;
 

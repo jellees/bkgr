@@ -303,11 +303,16 @@ SECTIONS
 
         gEntitySection = .; . += 4;
 
-        . = 0x0003DFC4;
+        . = 0x0003DFC0;
+        dword_203DFC0 = .; . += 4;
         dword_203DFC4 = .; . += 4;
 
         . = 0x0003DFD7;
         gInInteractionArea = .; . += 1;
+
+        . = 0x0003DFE6;
+        byte_203DFE6 = .; . += 1;
+        byte_203DFE7 = .; . += 1;
 
         . = 0x0003E16C;
         byte_203E16C = .; . += 1;
@@ -488,6 +493,7 @@ SECTIONS
         asm/audio.o(.text);
         asm/collision.o(.text);
         src/main.o(.text);
+        src/player.o(.text);
         asm/player.o(.text);
         asm/chunk3.o(.text);
         asm/savefile.o(.text);
