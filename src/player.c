@@ -83,20 +83,17 @@ bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2)
 
 bool32 sub_0800A8B4()
 {
-    if (gGameStatus.health != 0
-    && stru_30028FC.field_0 != 0
-    && stru_3002950.field_5 != 0
-    && stru_30028FC.field_5 == stru_3002950.field_5)
+    if (gGameStatus.health != 0 && stru_30028FC.field_0 != 0 && stru_3002950.field_5 != 0
+        && stru_30028FC.field_5 == stru_3002950.field_5)
     {
         if (stru_3002950.field_5 & 0x80)
         {
-            if (gPlayerStateSettings[gPlayerState] & 0x100
-            && !(gPlayerStateSettings[gPlayerState] & 0x80))
+            if (gPlayerStateSettings[gPlayerState] & 0x100 && !(gPlayerStateSettings[gPlayerState] & 0x80))
             {
-            ASSERT((stru_3002950.field_5 & 0x7F) - 1 <= 0x25);
-            
-            if (sub_0800BCD4(&stru_3002950))
-                return TRUE;
+                ASSERT((stru_3002950.field_5 & 0x7F) - 1 <= 0x25);
+
+                if (sub_0800BCD4(&stru_3002950))
+                    return TRUE;
             }
         }
         else
@@ -105,7 +102,7 @@ bool32 sub_0800A8B4()
 
             if (sub_0800BCD4(&stru_30028FC))
             {
-                if ( gPlayerStateSettings[gPlayerState] & 0x100 )
+                if (gPlayerStateSettings[gPlayerState] & 0x100)
                     sub_8017A54();
                 return TRUE;
             }
