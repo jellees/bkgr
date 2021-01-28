@@ -358,6 +358,8 @@ extern struct struc_43 stru_30028FC;
 
 extern u8 byte_3002950[];
 
+extern u8 byte_30029A4; // Actually a struct.
+
 extern void (*gFunctionArray[14])();
 extern void (*gNullsub_3)();
 extern void (*gNullsub_4)();

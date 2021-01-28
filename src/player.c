@@ -35,3 +35,48 @@ void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2)
         a2->y = dword_203DFC4->field_98;
     }
 }
+
+bool32 sub_800A7DC(struct Vec3fx *a1, struct Vec3fx *a2)
+{
+    if (byte_203DFE6)
+    {
+        if ( gPlayerStateSettings[gPlayerState] & 0x400 )
+        {
+            if (!sub_8018BB0(&gPlayerSprite))
+                return TRUE;
+
+            gPlayerPos.y = a1->y;
+            stru_30032DC.y = gPlayerPos.y;
+            sub_800388C(dword_2000FC8, 0, 0);
+        }
+        else
+        {
+            if ( !byte_30029A4 )
+            {
+                gPlayerPos.x = a1->x;
+                gPlayerPos.z = a1->z;
+                stru_30032DC.x = gPlayerPos.x;
+                stru_30032DC.z = gPlayerPos.z;
+            }
+            gPlayerPos.y = a1->y;
+            stru_30032DC.y = gPlayerPos.y;
+        }
+        
+        return TRUE;
+    }
+    else if (byte_203DFE7)
+    {
+        stru_30032DC.y = a2->y;
+
+        if (!byte_30029A4)
+        {
+            gPlayerPos.x = a1->x;
+            gPlayerPos.y = a1->y;
+            gPlayerPos.z = a1->z;
+            stru_30032DC.x = a2->x;
+            stru_30032DC.z = a2->z;
+        }
+    }
+    
+    return FALSE;
+}

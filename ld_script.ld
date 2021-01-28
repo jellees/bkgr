@@ -380,6 +380,9 @@ SECTIONS
         . = 0x00002950;
         byte_3002950 = .; . += 4; /* array */
 
+        . = 0x000029A4;
+        byte_30029A4 = .; . += 1;
+
         . = 0x00002A6C;
         gFunctionArray = .; . += 4 * 14;
         gNullsub_3 = .; . += 4;
