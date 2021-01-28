@@ -20,8 +20,6 @@ extern u32 DoesMemBlockExistById(int, int);
 
 extern void DmaFill32(int, void*, int);
 
-extern struct SoundEffect dSoundEffects[];
-
 void InitPregame()
 {
     byte_20021F0 = 0;

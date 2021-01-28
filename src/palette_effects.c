@@ -1,5 +1,4 @@
 #include "global.h"
-#include "palette_effects.h"
 #include "common.h"
 
 IWRAM_DATA s32 gPaletteEffects;

@@ -2,8 +2,6 @@
 #include "sprite.h"
 #include "common.h"
 
-extern struct SoundEffect dSoundEffects[];
-
 void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown)
 {
     ASSERT(gPlayerState < 0x80);

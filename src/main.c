@@ -591,9 +591,6 @@ void sub_800A5E8()
     sub_800A5F4();
 }
 
-// Annoying. Move to palette_effects.h asap.
-extern s32 gPaletteEffects;
-
 void sub_800A5F4()
 {
     DmaFill32(0, byte_2000FCC, 30);

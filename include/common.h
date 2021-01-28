@@ -1,7 +1,173 @@
 #ifndef GUARD_COMMON_H
 #define GUARD_COMMON_H
 
+// Enums
+
+enum Rooms {
+    ROOM_SPIRALBOTTOM,
+    ROOM_SPIRALMIDDLE,
+    ROOM_SPIRALTOP,
+    ROOM_QUARRY,
+    ROOM_LOWERFARM,
+    ROOM_UPPERFARM,
+    ROOM_MUMBOHUT,
+    ROOM_HONEYB,
+    ROOM_BEACHSTART,
+    ROOM_UNDERBORAL,
+    ROOM_OCTOSHOOT,
+    ROOM_COWBOSS,
+    ROOM_BEACHSLIDE,
+    ROOM_BEACHTOP,
+    ROOM_BEACHSHOOT,
+    ROOM_FJORD,
+    ROOM_SKIDDOS,
+    ROOM_FURNSECTION,
+    ROOM_GRUNTY,
+    ROOM_HOUSEROOMS,
+    ROOM_BOARDWALK,
+    ROOM_FURNSTORE,
+    ROOM_HARBOUR,
+    ROOM_CASTLEINNER,
+    ROOM_INSIDES,
+    ROOM_OCTOPUS,
+    ROOM_SANDAREA,
+    ROOM_VILLAGE,
+    ROOM_BOATFIGHT,
+    ROOM_JIGGYTEMPLE,
+    ROOM_DIVESPOT,
+    ROOM_CANDLEPUZ,
+    ROOM_POISONROOM,
+    ROOM_SWAMPGAS,
+    ROOM_FRONTEND,
+    ROOM_GRUNTYSHOOT,
+    ROOM_FJORDCAVERN,
+    ROOM_SHEEPDIP,
+
+    ROOM_COUNT
+};
+
 // Structs
+
+struct GameStatus {
+    u16 totalJiggies;
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 clockHour;
+    u8 clockMinute;
+    u8 clockSecond;
+    u8 field_B;
+    u16 totalNotes;
+    u8 field_E;
+    u8 field_F;
+    u8 field_10;
+    u8 field_11;
+    u8 field_12;
+    u8 health;
+    u8 enableExtraHealth;
+    u8 maxHealth;
+    u8 field_16;
+    u8 field_17;
+    u8 field_18;
+    u8 field_19;
+    u8 field_1A;
+    u8 field_1B;
+    u8 field_1C;
+    u8 field_1D;
+    u8 field_1F;
+};
+
+struct SaveFile {
+    u16 jiggies;
+    u16 notes;
+    u8 hour;
+    u8 minute;
+    u8 second;
+    bool8 empty;
+};
+
+struct Vec3fx {
+    fx32 x, y, z;
+};
+
+struct TileAnimTable_rt {
+    u8 framesPerSecondCount;
+    u8 framesPerSecond;
+    u8 numberOfFramesCount;
+    u8 numberOfFrames;
+    u8* tileData;
+    u8* destiny;
+};
+
+struct TileAnimIndex {
+    u16 numberOfFrames;
+    u16 framesPerSecond;
+    u8* tileData;
+};
+
+struct TileAnimSection {
+    s32 tileAnimCount;
+    struct TileAnimIndex tileAnimIndexes[0];
+};
+
+struct RoomIndex {
+    struct RoomHeader* room;
+    u8 level;
+    u16 music;
+};
+
+struct RoomHeader {
+    u16 tileData1Count;
+    u16 tileSet1Count;
+    u16 tileData2Count;
+    u16 tileSet2Count;
+    u16 enabledBGs;
+    // Expressed in meta tiles. To get the pixels multiply by 32.
+    u16 mapSizeX;
+    // Expressed in meta tiles. To get the pixels multiply by 32.
+    u16 mapSizeY;
+    u8 unknown1;
+    u8 compression;
+    u32 unknown2;
+    u8 tilesetBG0;
+    u8 tilesetBG1;
+    u8 tilesetBG2;
+    u8 tilesetBG3;
+    u16* backgroundPalette;
+    void* tiledata1;
+    void* tileset1;
+    void* tiledata2;
+    void* tileset2;
+    struct TileAnimSection* tileAnimations1;
+    struct TileAnimSection* tileAnimations2;
+    void* collision;
+    void* textbarNPC;
+    void* textbarBozzeye;
+    void* entities;
+    u16* spritePalette;
+    u16* unknown3;
+    void* map1;
+    void* map2;
+    void* map3;
+    void* map4;
+    u8 isStaticBG0;
+    u8 isStaticBG1;
+    u8 isStaticBG2;
+    u8 isStaticBG3;
+    u8 isControllableBG0;
+    u8 isControllableBG1;
+    u8 isControllableBG2;
+    u8 isControllableBG3;
+};
+
+struct SoundEffect {
+    u16 index;
+    u8 volumes[2];
+    u32 pitch;
+};
 
 struct struct_0
 {
@@ -421,6 +587,11 @@ extern u32 dword_80CC7EC[];
 extern u32 dword_80CC818[];
 extern u8 unk_80CC8F8;
 extern u32 dword_80CC8F4;
+extern struct SoundEffect dSoundEffects[];
+
+extern u16 dLightningPalette[];
+extern void* dLavaPaletteAnims[];
+extern u32 dword_806483C[];
 
 // Other
 
