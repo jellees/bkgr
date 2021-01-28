@@ -156,8 +156,8 @@ struct struc_44
     u8 floorTypeEx;
     u8 floorType;
     u8 playerSpritePriority;
-    u8 field_4;
-    u8 field_5;
+    u8 warpDestWarp;
+    u8 warpDestRoom;
     u8 field_6;
     u8 field_7;
     u32 floorHeight;
