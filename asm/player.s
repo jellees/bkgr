@@ -4,69 +4,6 @@
     .text
 
     .thumb
-sub_800AB54: @ 0x0800AB54
-	push {r4, r5, r6, lr}
-	sub sp, #0xc
-	adds r5, r0, #0
-	adds r6, r1, #0
-	ldr r1, _0800ABB0
-	ldr r0, _0800ABB4
-	ldrh r0, [r0]
-	lsls r0, r0, #1
-	adds r0, r0, r1
-	ldrh r1, [r0]
-	movs r0, #0x80
-	lsls r0, r0, #3
-	ands r0, r1
-	cmp r0, #0
-	bne _0800ABC4
-	ldr r0, [r5]
-	str r0, [sp]
-	ldr r0, [r5, #4]
-	movs r1, #0x90
-	lsls r1, r1, #0xd
-	adds r0, r0, r1
-	str r0, [sp, #4]
-	ldr r0, [r5, #8]
-	str r0, [sp, #8]
-	mov r0, sp
-	bl sub_800953C
-	cmp r0, #0
-	beq _0800ABC8
-	ldr r4, _0800ABB8
-	adds r0, r5, #0
-	adds r1, r4, #0
-	bl sub_08009208
-	ldr r2, _0800ABBC
-	ldr r0, [r5, #4]
-	str r0, [r2, #4]
-	ldr r1, _0800ABC0
-	ldr r0, [r4, #8]
-	str r0, [r1, #4]
-	ldr r0, [r5]
-	str r0, [r2]
-	ldr r0, [r6]
-	str r0, [r1]
-	movs r0, #1
-	b _0800ABCA
-	.align 2, 0
-_0800ABB0: .4byte gPlayerStateSettings
-_0800ABB4: .4byte gPlayerState
-_0800ABB8: .4byte stru_3002950
-_0800ABBC: .4byte gPlayerPos
-_0800ABC0: .4byte stru_30032DC
-_0800ABC4:
-	bl sub_8017F14
-_0800ABC8:
-	movs r0, #0
-_0800ABCA:
-	add sp, #0xc
-	pop {r4, r5, r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-
-    .thumb
 sub_800ABD4: @ 0x0800ABD4
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0xc

@@ -150,7 +150,7 @@ void sub_800A9F0()
     }
 }
 
-void sub_800AA6C(struct Vec3fx *a1, struct Vec3fx *a2, struct Vec3fx *a3, struct Vec3fx *a4)
+void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, struct Vec3fx* a4)
 {
     struct Vec3fx a;
     sub_80038C4(dword_2000FC8, &a.x, &a.y, &a.z);
@@ -181,11 +181,39 @@ void sub_800AA6C(struct Vec3fx *a1, struct Vec3fx *a2, struct Vec3fx *a3, struct
 
     if (a1->y < a2->y)
         a1->y = a2->y;
-    
+
     if (a1->y < 0)
         a1->y = 0;
-    
+
     a4->x = a1->x - gPlayerPos.x;
     a4->y = a1->y - gPlayerPos.y;
     a4->z = a1->z - gPlayerPos.z;
+}
+
+bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2)
+{
+    if (!(gPlayerStateSettings[gPlayerState] & 0x400))
+    {
+        struct Vec3fx a;
+        a.x = a1->x;
+        a.y = a1->y + 0x120000;
+        a.z = a1->z;
+
+        if (sub_800953C(&a))
+        {
+            sub_08009208(a1, &stru_3002950);
+            gPlayerPos.y = a1->y;
+            stru_30032DC.y = stru_3002950.floorHeight;
+            gPlayerPos.x = a1->x;
+            stru_30032DC.x = a2->x;
+
+            return TRUE;
+        }
+    }
+    else
+    {
+        sub_8017F14();
+    }
+
+    return FALSE;
 }
