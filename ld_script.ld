@@ -375,9 +375,7 @@ SECTIONS
         unk_3000000 = .;  . += 0x1D27; /* space for ARM functions */
 
         . = 0x000028FC;
-        stru_30028FC = .; . += 0x30;
-
-        . = 0x00002950;
+        stru_30028FC = .; . += 0x54;
         stru_3002950 = .; . += 0x54;
 
         . = 0x000029A4;

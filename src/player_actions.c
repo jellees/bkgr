@@ -513,7 +513,7 @@ void Crouch(s32 keyPressed, s32 keyDown)
             if (!stru_200209A.field_14)
                 return;
 
-            if (!byte_3003588 && stru_30028FC.field_0 && stru_30028FC.field_2 == 0xA)
+            if (!byte_3003588 && stru_30028FC.field_0 && stru_30028FC.floorType == 0xA)
                 return;
 
             gPreviousPlayerState = gPlayerState;
@@ -530,7 +530,7 @@ void Crouch(s32 keyPressed, s32 keyDown)
 
             sub_8016790(0, gPlayerSprite.field_A);
 
-            if (stru_30028FC.field_31 == 0x5A0000)
+            if (stru_30028FC.field_2C == 0x5A0000)
                 return;
 
             gPlayerPos.y += 0x30000;
