@@ -416,6 +416,8 @@ extern struct Font font_80B01A8[3];
 extern struct RoomIndex dRoomIndexes[38];
 extern struct GameStatus stru_80CC8C4;
 
+extern u32 dword_80CC7EC[];
+extern u32 dword_80CC818[];
 extern u8 unk_80CC8F8;
 extern u32 dword_80CC8F4;
 

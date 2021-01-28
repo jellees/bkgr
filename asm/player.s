@@ -4,63 +4,6 @@
     .text
 
     .thumb
-sub_800A9F0: @ 0x0800A9F0
-	push {r4, r5, lr}
-	ldr r0, _0800AA28
-	ldrb r0, [r0]
-	cmp r0, #0
-	bne _0800AA38
-	ldr r5, _0800AA2C
-	ldr r0, [r5]
-	ldr r2, _0800AA30
-	ldr r4, _0800AA34
-	ldrb r1, [r4, #2]
-	lsls r1, r1, #2
-	adds r1, r1, r2
-	ldr r1, [r1]
-	bl sub_8003894
-	ldr r5, [r5]
-	ldr r1, [r4, #0x28]
-	ldr r2, [r4, #0x2c]
-	movs r3, #0
-	ldrb r0, [r4, #2]
-	cmp r0, #0xa
-	bne _0800AA1E
-	movs r3, #1
-_0800AA1E:
-	adds r0, r5, #0
-	bl sub_80038DC
-	b _0800AA58
-	.align 2, 0
-_0800AA28: .4byte 0x03003588
-_0800AA2C: .4byte dword_2000FC8
-_0800AA30: .4byte 0x080CC7EC
-_0800AA34: .4byte 0x030028FC
-_0800AA38:
-	ldr r5, _0800AA60
-	ldr r0, [r5]
-	ldr r2, _0800AA64
-	ldr r4, _0800AA68
-	ldrb r1, [r4, #2]
-	lsls r1, r1, #2
-	adds r1, r1, r2
-	ldr r1, [r1]
-	bl sub_8003894
-	ldr r0, [r5]
-	ldr r1, [r4, #0x28]
-	ldr r2, [r4, #0x2c]
-	movs r3, #0
-	bl sub_80038DC
-_0800AA58:
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AA60: .4byte dword_2000FC8
-_0800AA64: .4byte 0x080CC818
-_0800AA68: .4byte 0x030028FC
-
-    .thumb
 sub_800AA6C: @ 0x0800AA6C
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8

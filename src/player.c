@@ -135,3 +135,17 @@ bool32 sub_800A974()
 
     return TRUE;
 }
+
+void sub_800A9F0()
+{
+    if (!byte_3003588)
+    {
+        sub_8003894(dword_2000FC8, dword_80CC7EC[stru_30028FC.floorType]);
+        sub_80038DC(dword_2000FC8, stru_30028FC.field_28, stru_30028FC.field_2C, stru_30028FC.floorType == 10 ? 1 : 0);
+    }
+    else
+    {
+        sub_8003894(dword_2000FC8, dword_80CC818[stru_30028FC.floorType]);
+        sub_80038DC(dword_2000FC8, stru_30028FC.field_28, stru_30028FC.field_2C, 0);
+    }
+}
