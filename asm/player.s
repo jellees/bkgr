@@ -4,68 +4,6 @@
     .text
 
     .thumb
-sub_800A974: @ 0x0800A974
-	push {lr}
-	ldr r0, _0800A984
-	ldrb r0, [r0, #0x13]
-	cmp r0, #0
-	bne _0800A988
-	movs r0, #0
-	b _0800A9E2
-	.align 2, 0
-_0800A984: .4byte gGameStatus
-_0800A988:
-	ldr r0, _0800A9B4
-	ldrb r0, [r0, #2]
-	cmp r0, #2
-	bne _0800A9C6
-	ldr r0, _0800A9B8
-	ldrb r0, [r0, #2]
-	cmp r0, #2
-	bne _0800A9C6
-	ldr r0, _0800A9BC
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0800A9C0
-	cmp r0, #4
-	beq _0800A9C0
-	movs r1, #1
-	rsbs r1, r1, #0
-	movs r0, #0x10
-	movs r2, #0
-	bl sub_80192D4
-	movs r0, #0
-	b _0800A9E2
-	.align 2, 0
-_0800A9B4: .4byte 0x030028FC
-_0800A9B8: .4byte stru_3002950
-_0800A9BC: .4byte byte_20020B1
-_0800A9C0:
-	bl sub_8017C50
-	b _0800A9E0
-_0800A9C6:
-	ldr r1, _0800A9E8
-	ldr r0, _0800A9EC
-	ldrh r0, [r0]
-	lsls r0, r0, #1
-	adds r0, r0, r1
-	ldrh r1, [r0]
-	movs r0, #0x80
-	lsls r0, r0, #2
-	ands r0, r1
-	cmp r0, #0
-	beq _0800A9E0
-	bl sub_8017D9C
-_0800A9E0:
-	movs r0, #1
-_0800A9E2:
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0800A9E8: .4byte gPlayerStateSettings
-_0800A9EC: .4byte gPlayerState
-
-    .thumb
 sub_800A9F0: @ 0x0800A9F0
 	push {r4, r5, lr}
 	ldr r0, _0800AA28

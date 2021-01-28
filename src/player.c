@@ -115,14 +115,12 @@ bool32 sub_0800A8B4()
     return FALSE;
 }
 
-#ifdef NONMATCHING
-
 bool32 sub_800A974()
 {
     if (gGameStatus.health == 0)
         return FALSE;
 
-    if (stru_30028FC.field_2 == 2 && stru_3002950.floorType == 2)
+    if (stru_30028FC.floorType == 2 && stru_3002950.floorType == 2)
     {
         if (byte_20020B1 != 0 && byte_20020B1 != 4)
         {
@@ -140,5 +138,3 @@ bool32 sub_800A974()
 
     return TRUE;
 }
-
-#endif
