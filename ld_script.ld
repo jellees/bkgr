@@ -66,7 +66,8 @@ SECTIONS
         gLoadedRoomLevel = .; . += 2;
         gLoadedRoomBgm = .; . += 2;
         
-        . = 0x0000108C;
+        . = 0x00001088;
+        dword_2001088 = .; . += 4;
         byte_200108C = .; . += 1;
 
         . = 0x000010A8;

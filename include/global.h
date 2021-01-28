@@ -3,6 +3,8 @@
 
 #include "gba/gba.h"
 
+typedef s32 fx32;
+
 #define HANG asm(".word 0xEE00EE00")
 #define ASSERT(expr) do { if (!(expr)) HANG; } while (0)
 
@@ -56,7 +58,7 @@ struct SaveFile {
 };
 
 struct Vec3fx {
-    u32 x, y, z;
+    fx32 x, y, z;
 };
 
 struct Vec2fx16 {

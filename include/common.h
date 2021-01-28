@@ -234,6 +234,7 @@ extern u16 gLoadedRoomIndex;
 extern u16 gLoadedRoomLevel;
 extern u16 gLoadedRoomBgm;
 
+extern fx32 dword_2001088;
 extern s8 byte_200108C;
 
 extern u8 gRoomGoal;

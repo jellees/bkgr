@@ -149,3 +149,43 @@ void sub_800A9F0()
         sub_80038DC(dword_2000FC8, stru_30028FC.field_28, stru_30028FC.field_2C, 0);
     }
 }
+
+void sub_800AA6C(struct Vec3fx *a1, struct Vec3fx *a2, struct Vec3fx *a3, struct Vec3fx *a4)
+{
+    struct Vec3fx a;
+    sub_80038C4(dword_2000FC8, &a.x, &a.y, &a.z);
+
+    a3->x = a.x >> 8;
+    a3->y = a.y >> 8;
+    a3->z = a.z >> 8;
+
+    a1->x = gPlayerPos.x + a.x;
+    a2->x = stru_30032DC.x + a.x;
+
+    if (!(gPlayerStateSettings[gPlayerState] & 0x40))
+    {
+        a1->y = gPlayerPos.y + a.y;
+        if (a1->y >= dword_2001088)
+            a1->y = gPlayerPos.y;
+        a2->y = stru_30032DC.y;
+        a1->z = gPlayerPos.z + a.z;
+        a2->z = stru_30032DC.z + a.z;
+    }
+    else
+    {
+        a1->y = gPlayerPos.y + a.z;
+        a2->y = stru_30032DC.y;
+        a1->z = gPlayerPos.z;
+        a2->z = stru_30032DC.z;
+    }
+
+    if (a1->y < a2->y)
+        a1->y = a2->y;
+    
+    if (a1->y < 0)
+        a1->y = 0;
+    
+    a4->x = a1->x - gPlayerPos.x;
+    a4->y = a1->y - gPlayerPos.y;
+    a4->z = a1->z - gPlayerPos.z;
+}
