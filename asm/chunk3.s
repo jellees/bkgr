@@ -1433,13 +1433,13 @@ _0800C5CC:
 	ldrb r0, [r0, #3]
 	b _0800C5FE
 	.align 2, 0
-_0800C5D4: .4byte byte_3002950
+_0800C5D4: .4byte stru_3002950
 _0800C5D8:
 	ldr r0, _0800C5E0
 	ldrb r0, [r0, #3]
 	b _0800C5FE
 	.align 2, 0
-_0800C5E0: .4byte byte_3002950
+_0800C5E0: .4byte stru_3002950
 _0800C5E4:
 	asrs r1, r2, #0x10
 	ldr r3, _0800C5F8
@@ -1451,7 +1451,7 @@ _0800C5E4:
 	ldrb r0, [r3, #3]
 	b _0800C5FE
 	.align 2, 0
-_0800C5F8: .4byte byte_3002950
+_0800C5F8: .4byte stru_3002950
 _0800C5FC:
 	ldrb r0, [r3, #6]
 _0800C5FE:

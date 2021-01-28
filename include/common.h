@@ -186,6 +186,37 @@ struct Entity_rt
     u32 field_D4;
 };
 
+struct struc_44
+{
+    u8 field_0;
+    u8 floorTypeEx;
+    u8 floorType;
+    u8 playerSpritePriority;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u32 floorHeight;
+    u32 field_C;
+    u32 field_10;
+    u32 field_14;
+    u32 field_18;
+    u32 field_1C;
+    u32 field_20;
+    u32 staticFloorHeight;
+    u32 field_28;
+    u32 field_2C;
+    u32 field_30;
+    u32 field_34;
+    u32 field_38;
+    u32 field_3C;
+    u32 field_40;
+    u32 field_44;
+    u32 field_48;
+    u32 field_4C;
+    u32 field_50;
+};
+
 //EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
@@ -356,7 +387,7 @@ extern u8 unk_3000000;
 
 extern struct struc_43 stru_30028FC;
 
-extern u8 byte_3002950[];
+extern struct struc_44 stru_3002950;
 
 extern u8 byte_30029A4; // Actually a struct.
 

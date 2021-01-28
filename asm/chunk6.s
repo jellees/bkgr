@@ -39692,7 +39692,7 @@ _0803BB22:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803BB30: .4byte byte_3002950
+_0803BB30: .4byte stru_3002950
 _0803BB34: .4byte 0x080CEE5C
 _0803BB38: .4byte gLoadedRoomLevel
 _0803BB3C: .4byte 0x080CEE74
@@ -39728,7 +39728,7 @@ _0803BB74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803BB80: .4byte byte_3002950
+_0803BB80: .4byte stru_3002950
 _0803BB84: .4byte 0x080CEE8C
 _0803BB88: .4byte gLoadedRoomLevel
 _0803BB8C: .4byte 0x080CEEA4

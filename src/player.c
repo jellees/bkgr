@@ -36,11 +36,11 @@ void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2)
     }
 }
 
-bool32 sub_800A7DC(struct Vec3fx *a1, struct Vec3fx *a2)
+bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2)
 {
     if (byte_203DFE6)
     {
-        if ( gPlayerStateSettings[gPlayerState] & 0x400 )
+        if (gPlayerStateSettings[gPlayerState] & 0x400)
         {
             if (!sub_8018BB0(&gPlayerSprite))
                 return TRUE;
@@ -51,7 +51,7 @@ bool32 sub_800A7DC(struct Vec3fx *a1, struct Vec3fx *a2)
         }
         else
         {
-            if ( !byte_30029A4 )
+            if (!byte_30029A4)
             {
                 gPlayerPos.x = a1->x;
                 gPlayerPos.z = a1->z;
@@ -61,7 +61,7 @@ bool32 sub_800A7DC(struct Vec3fx *a1, struct Vec3fx *a2)
             gPlayerPos.y = a1->y;
             stru_30032DC.y = gPlayerPos.y;
         }
-        
+
         return TRUE;
     }
     else if (byte_203DFE7)
@@ -77,6 +77,34 @@ bool32 sub_800A7DC(struct Vec3fx *a1, struct Vec3fx *a2)
             stru_30032DC.z = a2->z;
         }
     }
-    
+
     return FALSE;
 }
+
+#ifdef NONMATCHING
+
+bool32 sub_800A974()
+{
+    if (gGameStatus.health == 0)
+        return FALSE;
+
+    if (stru_30028FC.field_2 == 2 && stru_3002950.floorType == 2)
+    {
+        if (byte_20020B1 != 0 && byte_20020B1 != 4)
+        {
+            sub_80192D4(16, -1, 0);
+            return FALSE;
+        }
+
+        sub_8017C50();
+    }
+    else
+    {
+        if (gPlayerStateSettings[gPlayerState] & 0x200)
+            sub_8017D9C();
+    }
+
+    return TRUE;
+}
+
+#endif

@@ -179,7 +179,7 @@ void UpdateGame(void)
         if (Abs(gPlayerPos.y - stru_30032DC.y) <= 0x4FFFF || dword_203DFC4)
             SetSpritePriority(&gPlayerShadowSprite, r4); //_08009B50
         else //_08009B98
-            SetSpritePriority(&gPlayerShadowSprite, byte_3002950[3]);
+            SetSpritePriority(&gPlayerShadowSprite, stru_3002950.playerSpritePriority);
         //_08009BA2
         r2 = &gPlayerShadowSprite;
         r1 = (gPlayerPos.y - stru_30032DC.y) >> 16;
@@ -406,7 +406,7 @@ void StartGame()
         gWarpGoal = 0;
         byte_20010AA = 0;
         sub_8025E44(0);
-        SetSpritePriority(&gPlayerSprite, byte_3002950[3]);
+        SetSpritePriority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         SetSprite(&gPlayerSprite, 0x1Du, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         sub_800378C(&gPlayerShadowSprite, 0);
@@ -427,7 +427,7 @@ void StartGame()
         sub_8025E44(gLoadedRoomLevel);
         sub_80409DC();
         sub_803FE78();
-        SetSpritePriority(&gPlayerSprite, byte_3002950[3]);
+        SetSpritePriority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
         EnableBGAlphaBlending();
         InitPaletteEffects();

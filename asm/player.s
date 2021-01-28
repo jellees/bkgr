@@ -59,7 +59,7 @@ _0800A916:
 	.align 2, 0
 _0800A91C: .4byte gGameStatus
 _0800A920: .4byte 0x030028FC
-_0800A924: .4byte byte_3002950
+_0800A924: .4byte stru_3002950
 _0800A928: .4byte gPlayerStateSettings
 _0800A92C: .4byte gPlayerState
 _0800A930:
@@ -131,7 +131,7 @@ _0800A988:
 	b _0800A9E2
 	.align 2, 0
 _0800A9B4: .4byte 0x030028FC
-_0800A9B8: .4byte byte_3002950
+_0800A9B8: .4byte stru_3002950
 _0800A9BC: .4byte byte_20020B1
 _0800A9C0:
 	bl sub_8017C50
@@ -380,7 +380,7 @@ sub_800AB54: @ 0x0800AB54
 	.align 2, 0
 _0800ABB0: .4byte gPlayerStateSettings
 _0800ABB4: .4byte gPlayerState
-_0800ABB8: .4byte byte_3002950
+_0800ABB8: .4byte stru_3002950
 _0800ABBC: .4byte gPlayerPos
 _0800ABC0: .4byte stru_30032DC
 _0800ABC4:
@@ -564,7 +564,7 @@ _0800AD44: .4byte dword_20020B4
 _0800AD48: .4byte byte_203EA89
 _0800AD4C: .4byte gPlayerPos
 _0800AD50: .4byte stru_30032DC
-_0800AD54: .4byte byte_3002950
+_0800AD54: .4byte stru_3002950
 _0800AD58:
 	movs r0, #1
 _0800AD5A:
@@ -596,7 +596,7 @@ _0800AD7C:
 	bl sub_800388C
 	b _0800ADA4
 	.align 2, 0
-_0800AD8C: .4byte byte_3002950
+_0800AD8C: .4byte stru_3002950
 _0800AD90: .4byte 0x030028FC
 _0800AD94: .4byte dword_2000FC8
 _0800AD98:
@@ -652,7 +652,7 @@ _0800ADD2:
 	str r0, [r5, #4]
 	b _0800AE7A
 	.align 2, 0
-_0800ADFC: .4byte byte_3002950
+_0800ADFC: .4byte stru_3002950
 _0800AE00: .4byte 0x030028FC
 _0800AE04: .4byte 0x0004FFFF
 _0800AE08:
@@ -864,7 +864,7 @@ _0800AF94:
 	b _0800B034
 	.align 2, 0
 _0800AFA8: .4byte dword_203DFC4
-_0800AFAC: .4byte byte_3002950
+_0800AFAC: .4byte stru_3002950
 _0800AFB0: .4byte gPlayerStateSettings
 _0800AFB4: .4byte gPlayerState
 _0800AFB8: .4byte 0x030028FC
@@ -933,7 +933,7 @@ _0800B034:
 	.align 2, 0
 _0800B040: .4byte dword_2000FC8
 _0800B044: .4byte 0x080CC7EC
-_0800B048: .4byte byte_3002950
+_0800B048: .4byte stru_3002950
 
     .thumb
 sub_0800B04C: @ 0x0800B04C
@@ -1261,7 +1261,7 @@ _0800B2E6:
 	bl sub_8007434
 	b _0800B334
 	.align 2, 0
-_0800B314: .4byte byte_3002950
+_0800B314: .4byte stru_3002950
 _0800B318: .4byte dword_2000FC8
 _0800B31C: .4byte 0x030028FC
 _0800B320:
@@ -1337,7 +1337,7 @@ _0800B39E:
 _0800B3A8: .4byte 0x030028FC
 _0800B3AC: .4byte gPlayerStateSettings
 _0800B3B0: .4byte gPlayerState
-_0800B3B4: .4byte byte_3002950
+_0800B3B4: .4byte stru_3002950
 _0800B3B8: .4byte 0x030029A4
 _0800B3BC: .4byte 0x020011FC
 _0800B3C0:
