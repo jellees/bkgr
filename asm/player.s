@@ -4,43 +4,6 @@
     .text
 
     .thumb
-sub_800AD64: @ 0x0800AD64
-	push {lr}
-	ldr r2, _0800AD8C
-	ldrb r0, [r2]
-	cmp r0, #0
-	beq _0800ADA4
-	ldrb r0, [r2, #7]
-	cmp r0, #0
-	bne _0800AD7C
-	ldr r2, _0800AD90
-	ldrb r0, [r2]
-	cmp r0, #0
-	beq _0800AD98
-_0800AD7C:
-	ldr r0, _0800AD94
-	ldr r0, [r0]
-	ldr r1, [r2, #0x30]
-	ldr r2, [r2, #0x34]
-	bl sub_800388C
-	b _0800ADA4
-	.align 2, 0
-_0800AD8C: .4byte stru_3002950
-_0800AD90: .4byte 0x030028FC
-_0800AD94: .4byte dword_2000FC8
-_0800AD98:
-	ldr r0, _0800ADA8
-	ldr r0, [r0]
-	movs r1, #0
-	movs r2, #0
-	bl sub_800388C
-_0800ADA4:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800ADA8: .4byte dword_2000FC8
-
-    .thumb
 sub_800ADAC: @ 0x0800ADAC
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8

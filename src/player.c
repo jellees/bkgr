@@ -276,3 +276,21 @@ bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
 
     return TRUE;
 }
+
+void sub_800AD64()
+{
+    // Did the developers really write it like this?
+
+    struct struc_44* plane = &stru_3002950;
+
+    if (!plane->field_0)
+        return;
+
+    if (plane->field_7 || (plane = &stru_30028FC)->field_0)
+    {
+        sub_800388C(dword_2000FC8, plane->field_30, plane->field_34);
+        return;
+    }
+
+    sub_800388C(dword_2000FC8, 0, 0);
+}
