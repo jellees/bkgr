@@ -1,4 +1,5 @@
 #include "global.h"
+#include "sprite.h"
 #include "common.h"
 
 void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2)
@@ -51,7 +52,7 @@ bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2)
         }
         else
         {
-            if (!byte_30029A4)
+            if (!stru_30029A4.field_0)
             {
                 gPlayerPos.x = a1->x;
                 gPlayerPos.z = a1->z;
@@ -68,7 +69,7 @@ bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2)
     {
         stru_30032DC.y = a2->y;
 
-        if (!byte_30029A4)
+        if (!stru_30029A4.field_0)
         {
             gPlayerPos.x = a1->x;
             gPlayerPos.y = a1->y;
@@ -216,4 +217,62 @@ bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2)
     }
 
     return FALSE;
+}
+
+bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
+{
+    if (stru_30028FC.field_0)
+    {
+        if (stru_30028FC.floorType == 2 && byte_20020B1 != 0 && byte_20020B1 != 4 && gGameStatus.health != 0)
+        {
+            if (!byte_20020BC)
+            {
+                sub_80192D4(16, -1, 0);
+            }
+
+            return FALSE;
+        }
+
+        if (stru_30028FC.field_4E && !byte_200108E && byte_20020B1 != 4 && byte_20020B1 != 3
+            && !(gPlayerStateSettings[gPlayerState] & 0x1000))
+        {
+            sub_80192D4(stru_30028FC.field_4E, -1, 1);
+            byte_200108E = 1;
+            word_2001092 = stru_30028FC.field_4F;
+            byte_200108D = 1;
+            word_2001090 = stru_30028FC.field_4F;
+            gPlayerSprite.field_10 = 1;
+
+            return FALSE;
+        }
+    }
+
+    if (stru_30029A4.field_0 && stru_30029A4.floorType == 6 && stru_200209A.field_12 && !byte_20020B1
+        && gGameStatus.health != 0)
+    {
+        struct Vec3fx a;
+        a.x = a1->x;
+        a.y = a1->y + 0x120000;
+        a.z = a1->z;
+        if (sub_800953C(&a))
+        {
+            if (sub_8018BB0(&gPlayerSprite))
+            {
+                if (audio_fx_still_active(dword_20020B4) && byte_203EA89)
+                {
+                    audio_halt_fx(dword_20020B4);
+                }
+
+                sub_8017E1C();
+                gPlayerPos.y = a1->y;
+                stru_30032DC.y = stru_3002950.floorHeight;
+                gPlayerPos.x = a1->x;
+                stru_30032DC.x = a2->x;
+            }
+
+            return FALSE;
+        }
+    }
+
+    return TRUE;
 }

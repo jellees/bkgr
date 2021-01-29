@@ -343,8 +343,14 @@ struct struc_44
     u32 field_40;
     u32 field_44;
     u32 field_48;
-    u32 field_4C;
-    u32 field_50;
+    u8 field_4C;
+    u8 field_4D;
+    u8 field_4E;
+    u8 field_4F;
+    u8 field_50;
+    u8 field_51;
+    u8 field_52;
+    u8 field_53;
 };
 
 //EWRAM
@@ -402,6 +408,10 @@ extern u16 gLoadedRoomBgm;
 
 extern fx32 dword_2001088;
 extern s8 byte_200108C;
+extern u8 byte_200108D;
+extern u8 byte_200108E;
+extern u16 word_2001090;
+extern u16 word_2001092;
 
 extern u8 gRoomGoal;
 extern u8 gWarpGoal;
@@ -518,8 +528,7 @@ extern u8 unk_3000000;
 
 extern struct struc_44 stru_30028FC;
 extern struct struc_44 stru_3002950;
-
-extern u8 byte_30029A4; // Actually a struct.
+extern struct struc_44 stru_30029A4;
 
 extern void (*gFunctionArray[14])();
 extern void (*gNullsub_3)();
