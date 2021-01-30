@@ -142,7 +142,8 @@ void sub_800A9F0()
     if (!byte_3003588)
     {
         sub_8003894(dword_2000FC8, dword_80CC7EC[gFloorPlaneResult.floorType]);
-        sub_80038DC(dword_2000FC8, gFloorPlaneResult.field_28, gFloorPlaneResult.field_2C, gFloorPlaneResult.floorType == 10 ? 1 : 0);
+        sub_80038DC(dword_2000FC8, gFloorPlaneResult.field_28, gFloorPlaneResult.field_2C,
+                    gFloorPlaneResult.floorType == 10 ? 1 : 0);
     }
     else
     {
@@ -294,4 +295,82 @@ void sub_800AD64()
     {
         sub_800388C(dword_2000FC8, 0, 0);
     }
+}
+
+bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
+{
+    fx32 a = a2->y;
+    a2->y = sub_80039C4(a2, stru_3002950.field_1C, stru_3002950.field_20, stru_3002950.staticFloorHeight);
+    if (a2->y < 0)
+        a2->y = a;
+
+    if (gFloorPlaneResult.isColliding)
+    {
+        if (stru_3002950.field_2C != 0x5A0000 && Abs(a1->y - a2->y) < 0x50000)
+        {
+            a1->y = a2->y;
+            sub_800A9F0();
+            if (!sub_800A974() || sub_0800A8B4())
+                return FALSE;
+        }
+        else
+        {
+            a = a1->y;
+            a1->y = sub_80039C4(a1, gFloorPlaneResult.field_1C, gFloorPlaneResult.field_20,
+                                gFloorPlaneResult.staticFloorHeight);
+
+            if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a)
+            {
+                char c[0x60];
+                sub_80039CC(c, a1, &dword_300331C, 0);
+                sub_8007434(c, &gFloorPlaneResult);
+
+                if (!gFloorPlaneResult.isColliding)
+                {
+                    a1->y = a;
+                    gFloorPlaneResult.isColliding = TRUE;
+                    return TRUE;
+                }
+            }
+
+            if (Abs(a - a1->y) > 0x50000)
+            {
+                a1->y = a;
+                sub_800A9F0();
+                if (!sub_800A974() || sub_0800A8B4())
+                    return FALSE;
+            }
+            else if (a1->y < a2->y)
+            {
+                a1->y = a2->y;
+                sub_800A9F0();
+                if (!sub_800A974() || sub_0800A8B4())
+                    return FALSE;
+            }
+            else
+            {
+                a3->y = a1->y - a;
+                sub_800A9F0();
+                if (!sub_800A974() || sub_0800A8B4())
+                    return FALSE;
+            }
+        }
+    }
+    else
+    {
+        if (gPlayerPos.y != gPlayerShadowPos.y)
+        {
+            sub_8003894(dword_2000FC8, dword_80CC818[stru_3002950.floorType]);
+            sub_80038DC(dword_2000FC8, 0, 0x5A0000, 0);
+        }
+
+        if (Abs(a1->y - a2->y) > 0x50000)
+        {
+            sub_80181B8(&a1->y);
+        }
+        else
+            a1->y = a2->y;
+    }
+
+    return TRUE;
 }

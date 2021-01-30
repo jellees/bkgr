@@ -554,6 +554,8 @@ extern u32 dword_3003300;
 extern u32 dword_3003304;
 extern u32 dword_3003308;
 
+extern u32 dword_300331C;
+
 extern u8 gBGControlActions;
 extern u8 gBGOffsetHorizontal;
 extern u8 gBGOffsetVertical;

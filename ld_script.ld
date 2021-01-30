@@ -413,6 +413,9 @@ SECTIONS
         dword_3003304 = .; . += 4;
         dword_3003308 = .; . += 4;
 
+        . = 0x0000331C;
+        dword_300331C = .; . += 4;
+
         . = 0x00003340;
         gBGControlActions = .; . += 1;
         gBGOffsetHorizontal = .; . += 1;
