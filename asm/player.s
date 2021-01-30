@@ -149,7 +149,7 @@ _0800AEBE:
 	b _0800AEEC
 	.align 2, 0
 _0800AED8: .4byte gPlayerPos
-_0800AEDC: .4byte stru_30032DC
+_0800AEDC: .4byte gPlayerShadowPos
 _0800AEE0: .4byte dword_2000FC8
 _0800AEE4: .4byte 0x080CC818
 _0800AEE8:
@@ -287,7 +287,7 @@ _0800AFEE:
 	str r0, [r4, #4]
 	b _0800B006
 	.align 2, 0
-_0800AFF4: .4byte stru_30032DC
+_0800AFF4: .4byte gPlayerShadowPos
 _0800AFF8:
 	ldr r1, [r4, #4]
 	ldr r0, [r6, #4]
@@ -524,7 +524,7 @@ _0800B1EC: .4byte gPlayerStateSettings
 _0800B1F0: .4byte gPlayerState
 _0800B1F4: .4byte 0x03003328
 _0800B1F8: .4byte 0x03003334
-_0800B1FC: .4byte stru_30032DC
+_0800B1FC: .4byte gPlayerShadowPos
 
     .thumb
     .global update_player
@@ -828,7 +828,7 @@ _0800B47C: .4byte gPlayerStateSettings
 _0800B480: .4byte gPlayerState
 _0800B484: .4byte 0x030029A4
 _0800B488: .4byte gPlayerPos
-_0800B48C: .4byte stru_30032DC
+_0800B48C: .4byte gPlayerShadowPos
 _0800B490:
 	bl sub_0800A8B4
 	cmp r0, #0
@@ -970,7 +970,7 @@ _0800B5A8: .4byte 0x03003334
 _0800B5AC: .4byte gPlayerStateSettings
 _0800B5B0: .4byte gPlayerState
 _0800B5B4: .4byte gPlayerPos
-_0800B5B8: .4byte stru_30032DC
+_0800B5B8: .4byte gPlayerShadowPos
 _0800B5BC: .4byte 0x030029F8
 _0800B5C0: .4byte dword_2000FC8
 _0800B5C4: .4byte gIsSlideMiniGame
@@ -1100,7 +1100,7 @@ _0800B6D0: .4byte 0x03003318
 _0800B6D4: .4byte 0x03003310
 _0800B6D8: .4byte gPlayerShadowSprite
 _0800B6DC: .4byte gPlayerPos
-_0800B6E0: .4byte stru_30032DC
+_0800B6E0: .4byte gPlayerShadowPos
 _0800B6E4: .4byte 0x020010AF
 _0800B6E8: .4byte 0x02000FAC
 _0800B6EC:

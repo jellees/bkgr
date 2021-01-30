@@ -381,9 +381,9 @@ SECTIONS
         unk_3000000 = .;  . += 0x1D27; /* space for ARM functions */
 
         . = 0x000028FC;
-        stru_30028FC = .; . += 0x54;
+        gFloorPlaneResult = .; . += 0x54;
         stru_3002950 = .; . += 0x54;
-        stru_30029A4 = .; . += 0x54;
+        gWallPlaneResult = .; . += 0x54;
 
         . = 0x00002A6C;
         gFunctionArray = .; . += 4 * 14;
@@ -406,7 +406,7 @@ SECTIONS
         gKeyInput = .; . += 2;
         dword_30032CC = .; . += 4;
         gPlayerPos = .; . += 0xC;
-        stru_30032DC = .; . += 0xC;
+        gPlayerShadowPos = .; . += 0xC;
 
         . = 0x00003300;
         dword_3003300 = .; . += 4;

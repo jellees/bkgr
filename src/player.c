@@ -47,35 +47,35 @@ bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2)
                 return TRUE;
 
             gPlayerPos.y = a1->y;
-            stru_30032DC.y = gPlayerPos.y;
+            gPlayerShadowPos.y = gPlayerPos.y;
             sub_800388C(dword_2000FC8, 0, 0);
         }
         else
         {
-            if (!stru_30029A4.field_0)
+            if (!gWallPlaneResult.isColliding)
             {
                 gPlayerPos.x = a1->x;
                 gPlayerPos.z = a1->z;
-                stru_30032DC.x = gPlayerPos.x;
-                stru_30032DC.z = gPlayerPos.z;
+                gPlayerShadowPos.x = gPlayerPos.x;
+                gPlayerShadowPos.z = gPlayerPos.z;
             }
             gPlayerPos.y = a1->y;
-            stru_30032DC.y = gPlayerPos.y;
+            gPlayerShadowPos.y = gPlayerPos.y;
         }
 
         return TRUE;
     }
     else if (byte_203DFE7)
     {
-        stru_30032DC.y = a2->y;
+        gPlayerShadowPos.y = a2->y;
 
-        if (!stru_30029A4.field_0)
+        if (!gWallPlaneResult.isColliding)
         {
             gPlayerPos.x = a1->x;
             gPlayerPos.y = a1->y;
             gPlayerPos.z = a1->z;
-            stru_30032DC.x = a2->x;
-            stru_30032DC.z = a2->z;
+            gPlayerShadowPos.x = a2->x;
+            gPlayerShadowPos.z = a2->z;
         }
     }
 
@@ -84,8 +84,8 @@ bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2)
 
 bool32 sub_0800A8B4()
 {
-    if (gGameStatus.health != 0 && stru_30028FC.field_0 != 0 && stru_3002950.warpDestRoom != 0
-        && stru_30028FC.warpDestRoom == stru_3002950.warpDestRoom)
+    if (gGameStatus.health != 0 && gFloorPlaneResult.isColliding && stru_3002950.warpDestRoom != 0
+        && gFloorPlaneResult.warpDestRoom == stru_3002950.warpDestRoom)
     {
         if (stru_3002950.warpDestRoom & 0x80)
         {
@@ -99,9 +99,9 @@ bool32 sub_0800A8B4()
         }
         else
         {
-            ASSERT(stru_30028FC.warpDestRoom - 1 <= 0x25);
+            ASSERT(gFloorPlaneResult.warpDestRoom - 1 <= 0x25);
 
-            if (sub_0800BCD4(&stru_30028FC))
+            if (sub_0800BCD4(&gFloorPlaneResult))
             {
                 if (gPlayerStateSettings[gPlayerState] & 0x100)
                     sub_8017A54();
@@ -118,7 +118,7 @@ bool32 sub_800A974()
     if (gGameStatus.health == 0)
         return FALSE;
 
-    if (stru_30028FC.floorType == 2 && stru_3002950.floorType == 2)
+    if (gFloorPlaneResult.floorType == 2 && stru_3002950.floorType == 2)
     {
         if (byte_20020B1 != 0 && byte_20020B1 != 4)
         {
@@ -141,13 +141,13 @@ void sub_800A9F0()
 {
     if (!byte_3003588)
     {
-        sub_8003894(dword_2000FC8, dword_80CC7EC[stru_30028FC.floorType]);
-        sub_80038DC(dword_2000FC8, stru_30028FC.field_28, stru_30028FC.field_2C, stru_30028FC.floorType == 10 ? 1 : 0);
+        sub_8003894(dword_2000FC8, dword_80CC7EC[gFloorPlaneResult.floorType]);
+        sub_80038DC(dword_2000FC8, gFloorPlaneResult.field_28, gFloorPlaneResult.field_2C, gFloorPlaneResult.floorType == 10 ? 1 : 0);
     }
     else
     {
-        sub_8003894(dword_2000FC8, dword_80CC818[stru_30028FC.floorType]);
-        sub_80038DC(dword_2000FC8, stru_30028FC.field_28, stru_30028FC.field_2C, 0);
+        sub_8003894(dword_2000FC8, dword_80CC818[gFloorPlaneResult.floorType]);
+        sub_80038DC(dword_2000FC8, gFloorPlaneResult.field_28, gFloorPlaneResult.field_2C, 0);
     }
 }
 
@@ -161,23 +161,23 @@ void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, struct
     a3->z = a.z >> 8;
 
     a1->x = gPlayerPos.x + a.x;
-    a2->x = stru_30032DC.x + a.x;
+    a2->x = gPlayerShadowPos.x + a.x;
 
     if (!(gPlayerStateSettings[gPlayerState] & 0x40))
     {
         a1->y = gPlayerPos.y + a.y;
         if (a1->y >= dword_2001088)
             a1->y = gPlayerPos.y;
-        a2->y = stru_30032DC.y;
+        a2->y = gPlayerShadowPos.y;
         a1->z = gPlayerPos.z + a.z;
-        a2->z = stru_30032DC.z + a.z;
+        a2->z = gPlayerShadowPos.z + a.z;
     }
     else
     {
         a1->y = gPlayerPos.y + a.z;
-        a2->y = stru_30032DC.y;
+        a2->y = gPlayerShadowPos.y;
         a1->z = gPlayerPos.z;
-        a2->z = stru_30032DC.z;
+        a2->z = gPlayerShadowPos.z;
     }
 
     if (a1->y < a2->y)
@@ -204,9 +204,9 @@ bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2)
         {
             sub_08009208(a1, &stru_3002950);
             gPlayerPos.y = a1->y;
-            stru_30032DC.y = stru_3002950.floorHeight;
+            gPlayerShadowPos.y = stru_3002950.floorHeight;
             gPlayerPos.x = a1->x;
-            stru_30032DC.x = a2->x;
+            gPlayerShadowPos.x = a2->x;
 
             return TRUE;
         }
@@ -221,9 +221,9 @@ bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2)
 
 bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
 {
-    if (stru_30028FC.field_0)
+    if (gFloorPlaneResult.isColliding)
     {
-        if (stru_30028FC.floorType == 2 && byte_20020B1 != 0 && byte_20020B1 != 4 && gGameStatus.health != 0)
+        if (gFloorPlaneResult.floorType == 2 && byte_20020B1 != 0 && byte_20020B1 != 4 && gGameStatus.health != 0)
         {
             if (!byte_20020BC)
             {
@@ -233,21 +233,21 @@ bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
             return FALSE;
         }
 
-        if (stru_30028FC.field_4E && !byte_200108E && byte_20020B1 != 4 && byte_20020B1 != 3
+        if (gFloorPlaneResult.field_4E && !byte_200108E && byte_20020B1 != 4 && byte_20020B1 != 3
             && !(gPlayerStateSettings[gPlayerState] & 0x1000))
         {
-            sub_80192D4(stru_30028FC.field_4E, -1, 1);
+            sub_80192D4(gFloorPlaneResult.field_4E, -1, 1);
             byte_200108E = 1;
-            word_2001092 = stru_30028FC.field_4F;
+            word_2001092 = gFloorPlaneResult.field_4F;
             byte_200108D = 1;
-            word_2001090 = stru_30028FC.field_4F;
+            word_2001090 = gFloorPlaneResult.field_4F;
             gPlayerSprite.field_10 = 1;
 
             return FALSE;
         }
     }
 
-    if (stru_30029A4.field_0 && stru_30029A4.floorType == 6 && stru_200209A.field_12 && !byte_20020B1
+    if (gWallPlaneResult.isColliding && gWallPlaneResult.floorType == 6 && stru_200209A.field_12 && !byte_20020B1
         && gGameStatus.health != 0)
     {
         struct Vec3fx a;
@@ -265,9 +265,9 @@ bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
 
                 sub_8017E1C();
                 gPlayerPos.y = a1->y;
-                stru_30032DC.y = stru_3002950.floorHeight;
+                gPlayerShadowPos.y = stru_3002950.floorHeight;
                 gPlayerPos.x = a1->x;
-                stru_30032DC.x = a2->x;
+                gPlayerShadowPos.x = a2->x;
             }
 
             return FALSE;
@@ -283,14 +283,15 @@ void sub_800AD64()
 
     struct struc_44* plane = &stru_3002950;
 
-    if (!plane->field_0)
+    if (!plane->isColliding)
         return;
 
-    if (plane->field_7 || (plane = &stru_30028FC)->field_0)
+    if (plane->field_7 || (plane = &gFloorPlaneResult)->isColliding)
     {
         sub_800388C(dword_2000FC8, plane->field_30, plane->field_34);
-        return;
     }
-
-    sub_800388C(dword_2000FC8, 0, 0);
+    else
+    {
+        sub_800388C(dword_2000FC8, 0, 0);
+    }
 }

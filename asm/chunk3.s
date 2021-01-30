@@ -169,7 +169,7 @@ _0800BA96:
 	movs r0, #1
 	b _0800BAE0
 	.align 2, 0
-_0800BA9C: .4byte stru_30032DC
+_0800BA9C: .4byte gPlayerShadowPos
 _0800BAA0: .4byte gPlayerShadowSprite
 _0800BAA4:
 	ldr r1, _0800BAE8
@@ -320,7 +320,7 @@ _0800BBBC: .4byte 0x03003300
 _0800BBC0: .4byte gMapPixelSizeY
 _0800BBC4: .4byte 0x03003308
 _0800BBC8: .4byte 0x03003304
-_0800BBCC: .4byte stru_30032DC
+_0800BBCC: .4byte gPlayerShadowPos
 _0800BBD0: .4byte gPlayerSprite
 _0800BBD4:
 	ldr r0, _0800BC5C
@@ -445,7 +445,7 @@ _0800BCBC:
 	bx r0
 	.align 2, 0
 _0800BCCC: .4byte gPlayerShadowSprite
-_0800BCD0: .4byte stru_30032DC
+_0800BCD0: .4byte gPlayerShadowPos
 
     .thumb
 	.global sub_0800BCD4
@@ -1424,7 +1424,7 @@ _0800C57C:
 	b _0800C5FE
 	.align 2, 0
 _0800C5B8: .4byte gPlayerPos
-_0800C5BC: .4byte stru_30032DC
+_0800C5BC: .4byte gPlayerShadowPos
 _0800C5C0: .4byte gPlayerStateSettings
 _0800C5C4: .4byte gPlayerState
 _0800C5C8: .4byte 0x030028FC

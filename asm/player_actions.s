@@ -4485,7 +4485,7 @@ _0801D916:
 	b _0801DD08
 	.align 2, 0
 _0801D944: .4byte gPlayerPos
-_0801D948: .4byte stru_30032DC
+_0801D948: .4byte gPlayerShadowPos
 _0801D94C: .4byte dword_2000FC8
 _0801D950: .4byte 0x0000030F
 _0801D954: .4byte 0x030029F8
@@ -14104,7 +14104,7 @@ _08022A76:
 	b _08022DF4
 	.align 2, 0
 _08022AA4: .4byte gPlayerPos
-_08022AA8: .4byte stru_30032DC
+_08022AA8: .4byte gPlayerShadowPos
 _08022AAC: .4byte dword_2000FC8
 _08022AB0: .4byte 0x0000030F
 _08022AB4: .4byte 0x030029F8

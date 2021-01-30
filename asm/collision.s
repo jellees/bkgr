@@ -244,7 +244,7 @@ _08006784: .4byte 0x020010A5
 _08006788: .4byte 0x020010A6
 _0800678C: .4byte 0x020010A7
 _08006790: .4byte gPlayerPos
-_08006794: .4byte stru_30032DC
+_08006794: .4byte gPlayerShadowPos
 
     .thumb
 	.global setup_collision_xyz
@@ -313,7 +313,7 @@ _0800681C: .4byte 0x030028E8
 _08006820: .4byte dword_2001088
 _08006824: .4byte 0xFFA00000
 _08006828: .4byte gPlayerPos
-_0800682C: .4byte stru_30032DC
+_0800682C: .4byte gPlayerShadowPos
 
     .thumb
 set_camera_position: @ 0x08006830

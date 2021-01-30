@@ -318,7 +318,7 @@ struct Entity_rt
 
 struct struc_44
 {
-    u8 field_0;
+    bool8 isColliding;
     u8 floorTypeEx;
     u8 floorType;
     u8 playerSpritePriority;
@@ -327,7 +327,7 @@ struct struc_44
     u8 field_6;
     u8 field_7;
     u32 floorHeight;
-    u32 field_C;
+    fx32 planeAngle;
     u32 field_10;
     u32 field_14;
     u32 field_18;
@@ -526,9 +526,9 @@ extern u8* dword_203FA84;
 //IWRAM
 extern u8 unk_3000000;
 
-extern struct struc_44 stru_30028FC;
+extern struct struc_44 gFloorPlaneResult;
 extern struct struc_44 stru_3002950;
-extern struct struc_44 stru_30029A4;
+extern struct struc_44 gWallPlaneResult;
 
 extern void (*gFunctionArray[14])();
 extern void (*gNullsub_3)();
@@ -548,7 +548,7 @@ extern u16 gKeysDown;
 
 extern u32 dword_30032CC;
 extern struct Vec3fx gPlayerPos;
-extern struct Vec3fx stru_30032DC;
+extern struct Vec3fx gPlayerShadowPos;
 
 extern u32 dword_3003300;
 extern u32 dword_3003304;
