@@ -365,11 +365,83 @@ bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
         }
 
         if (Abs(a1->y - a2->y) > 0x50000)
-        {
             sub_80181B8(&a1->y);
-        }
         else
             a1->y = a2->y;
+    }
+
+    return TRUE;
+}
+
+bool32 sub_800AEFC(struct Vec3fx *a1, struct Vec3fx *a2)
+{
+    fx32 a;
+
+    if (!dword_203DFC4)
+    {
+        a = a2->y;
+        a2->y = sub_80039C4(a2, stru_3002950.field_1C, stru_3002950.field_20, stru_3002950.staticFloorHeight);
+        if (a2->y < 0)
+            a2->y = a;
+    }
+
+    if ((gPlayerStateSettings[gPlayerState] & 0x100))
+        return TRUE;
+        
+    if (gFloorPlaneResult.isColliding)
+    {
+        a = a1->y;
+        a1->y = sub_80039C4(a1, gFloorPlaneResult.field_1C, gFloorPlaneResult.field_20, gFloorPlaneResult.staticFloorHeight);
+        if (a1->y < 0 || a1->y < a2->y)
+            a1->y = a;
+        
+        if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a)
+        {
+            char c[0x60];
+            sub_80039CC(c, a1, &dword_300331C, 0);
+            sub_8007434(c, &gFloorPlaneResult);
+
+            if (!gFloorPlaneResult.isColliding)
+            {
+                a1->y = a;
+                gFloorPlaneResult.isColliding = TRUE;
+            }
+        }
+
+        if (Abs(a - a1->y) > 0x50000)
+        {
+            a1->y = a;
+        }
+        else
+        {
+            sub_8018BB0(&gPlayerSprite);
+
+            if (Abs(a1->y - a2->y) <= 0x50000)
+            {
+                a1->y = a2->y;
+            }
+            else if (Abs(a1->y - gPlayerShadowPos.y) <= 0x50000)
+            {
+                a1->y = gPlayerShadowPos.y;
+            }
+
+            sub_800A9F0();
+            sub_800A974();
+        }
+    }
+    else
+    {
+        if (a1->y == a2->y)
+        {
+            sub_8018BB0(&gPlayerSprite);
+            sub_800A9F0();
+            sub_800A974();
+        }
+        else
+        {
+            sub_8003894(dword_2000FC8, dword_80CC7EC[stru_3002950.floorType]);
+            sub_80038DC(dword_2000FC8, stru_3002950.field_28, stru_3002950.field_2C, 0);
+        }
     }
 
     return TRUE;
