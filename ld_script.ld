@@ -416,6 +416,10 @@ SECTIONS
         . = 0x0000331C;
         dword_300331C = .; . += 4;
 
+        . = 0x00003328;
+        gPlayerPosTemp = .; . += 0xC;
+        gPlayerShadowPosTemp = .; . += 0xC;
+
         . = 0x00003340;
         gBGControlActions = .; . += 1;
         gBGOffsetHorizontal = .; . += 1;

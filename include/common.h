@@ -338,9 +338,7 @@ struct struc_44
     u32 field_2C;
     u32 field_30;
     u32 field_34;
-    u32 field_38;
-    u32 field_3C;
-    u32 field_40;
+    struct Vec3fx distance;
     u32 field_44;
     u32 field_48;
     u8 field_4C;
@@ -555,6 +553,9 @@ extern u32 dword_3003304;
 extern u32 dword_3003308;
 
 extern u32 dword_300331C;
+
+extern struct Vec3fx gPlayerPosTemp;
+extern struct Vec3fx gPlayerShadowPosTemp;
 
 extern u8 gBGControlActions;
 extern u8 gBGOffsetHorizontal;

@@ -373,7 +373,7 @@ bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
     return TRUE;
 }
 
-bool32 sub_800AEFC(struct Vec3fx *a1, struct Vec3fx *a2)
+bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2)
 {
     fx32 a;
 
@@ -387,14 +387,15 @@ bool32 sub_800AEFC(struct Vec3fx *a1, struct Vec3fx *a2)
 
     if ((gPlayerStateSettings[gPlayerState] & 0x100))
         return TRUE;
-        
+
     if (gFloorPlaneResult.isColliding)
     {
         a = a1->y;
-        a1->y = sub_80039C4(a1, gFloorPlaneResult.field_1C, gFloorPlaneResult.field_20, gFloorPlaneResult.staticFloorHeight);
+        a1->y = sub_80039C4(a1, gFloorPlaneResult.field_1C, gFloorPlaneResult.field_20,
+                            gFloorPlaneResult.staticFloorHeight);
         if (a1->y < 0 || a1->y < a2->y)
             a1->y = a;
-        
+
         if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a)
         {
             char c[0x60];
@@ -411,23 +412,22 @@ bool32 sub_800AEFC(struct Vec3fx *a1, struct Vec3fx *a2)
         if (Abs(a - a1->y) > 0x50000)
         {
             a1->y = a;
+            return TRUE;
         }
-        else
+
+        sub_8018BB0(&gPlayerSprite);
+
+        if (Abs(a1->y - a2->y) <= 0x50000)
         {
-            sub_8018BB0(&gPlayerSprite);
-
-            if (Abs(a1->y - a2->y) <= 0x50000)
-            {
-                a1->y = a2->y;
-            }
-            else if (Abs(a1->y - gPlayerShadowPos.y) <= 0x50000)
-            {
-                a1->y = gPlayerShadowPos.y;
-            }
-
-            sub_800A9F0();
-            sub_800A974();
+            a1->y = a2->y;
         }
+        else if (Abs(a1->y - gPlayerShadowPos.y) <= 0x50000)
+        {
+            a1->y = gPlayerShadowPos.y;
+        }
+
+        sub_800A9F0();
+        sub_800A974();
     }
     else
     {
@@ -445,4 +445,69 @@ bool32 sub_800AEFC(struct Vec3fx *a1, struct Vec3fx *a2)
     }
 
     return TRUE;
+}
+
+bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
+{
+    struct Vec3fx distance;
+    struct Vec3fx vec1;
+    char c[0x60];
+    fx32 a;
+
+    distance.x = gWallPlaneResult.distance.x;
+    distance.y = gWallPlaneResult.distance.y;
+    distance.z = gWallPlaneResult.distance.z;
+
+    a = sub_800395C(&distance, &distance);
+    if (a >> 8 < 0x8000)
+    {
+        fx32 b = sub_800392C(sub_800395C(a1, &distance) << 8, a << 8);
+        distance.x <<= 8;
+        distance.y <<= 8;
+        distance.z <<= 8;
+        sub_8003994(&distance, b);
+        ASSERT(Abs(distance.x >> 16) < 0x10000 && Abs(distance.z >> 16) < 0x10000);
+    }
+    else
+    {
+        sub_800399C(&distance, sub_8003934(sub_800395C(a1, &distance), a));
+        ASSERT(Abs(distance.x >> 8) < 0x10000 && Abs(distance.z >> 8) < 0x10000);
+        distance.x <<= 8;
+        distance.z <<= 8;
+    }
+
+    sub_80038CC(dword_2000FC8, &distance, a1);
+
+    a2->x = gPlayerPos.x + a1->x;
+    a2->z = gPlayerPos.z + a1->z;
+    a3->x = a2->x;
+    a3->z = a2->z;
+
+    sub_80039CC(c, a2, &dword_300331C, 0);
+
+    vec1.x = a2->x - gPlayerPos.x;
+    vec1.y = a2->y - gPlayerPos.y;
+    vec1.z = a2->z - gPlayerPos.z;
+    sub_8006974(c, &vec1);
+
+    sub_8006FFC(c, &gWallPlaneResult, &gFloorPlaneResult);
+
+    if (!gWallPlaneResult.isColliding)
+    {
+        sub_8007434(c, &gFloorPlaneResult);
+        if (gFloorPlaneResult.floorType != 10 || byte_3003588)
+            return TRUE;
+    }
+    else
+    {
+        if (gPlayerStateSettings[gPlayerState] & 0x400)
+        {
+            gPlayerPosTemp.x = gPlayerPos.x;
+            gPlayerPosTemp.z = gPlayerPos.z;
+            gPlayerShadowPosTemp.x = gPlayerShadowPos.x;
+            gPlayerShadowPosTemp.z = gPlayerShadowPos.z;
+        }
+    }
+
+    return FALSE;
 }
