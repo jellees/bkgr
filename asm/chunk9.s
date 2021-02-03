@@ -330,7 +330,7 @@ sub_8025278: @ 0x08025278
 	ldr r0, [r0]
 	ldr r1, _080252C8
 	ldr r1, [r1]
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r7, r0, #0
 	movs r6, #1
 	movs r5, #0
@@ -893,7 +893,7 @@ sub_8025718: @ 0x08025718
 	mov sl, r1
 	mov r0, sl
 	mov r1, r8
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r6, _08025794
 	ldr r1, [r6]
 	lsls r5, r5, #4
@@ -905,20 +905,20 @@ sub_8025718: @ 0x08025718
 	ldrsh r4, [r4, r0]
 	adds r0, r4, #0
 	mov r1, r8
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r6]
 	adds r1, r5, r1
 	str r0, [r1, #4]
 	rsbs r4, r4, #0
 	adds r0, r4, #0
 	mov r1, r8
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r6]
 	adds r1, r5, r1
 	str r0, [r1, #8]
 	mov r0, sl
 	mov r1, r8
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r6]
 	adds r5, r5, r1
 	str r0, [r5, #0xc]
@@ -3801,7 +3801,7 @@ sub_8026E48: @ 0x08026E48
 	lsls r0, r0, #0x10
 	str r0, [r4]
 	adds r1, r5, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	ldr r1, _08026F38
 	str r0, [r1]
 	movs r0, #0
@@ -3943,7 +3943,7 @@ sub_8026F78: @ 0x08026F78
 	lsls r0, r0, #0x10
 	str r0, [r4]
 	adds r1, r5, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	ldr r1, _08027070
 	str r0, [r1]
 	movs r0, #0
@@ -4086,7 +4086,7 @@ sub_80270AC: @ 0x080270AC
 	lsls r4, r0, #0x10
 	adds r0, r4, #0
 	adds r1, r6, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r7, r0, #0
 _080270CC:
 	mov r1, sp
@@ -4202,7 +4202,7 @@ sub_80271A4: @ 0x080271A4
 	lsls r4, r0, #0x10
 	adds r0, r4, #0
 	adds r1, r6, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r7, r0, #0
 _080271C4:
 	mov r1, sp
@@ -4598,7 +4598,7 @@ sub_80274A4: @ 0x080274A4
 	adds r0, r4, r0
 	ldr r0, [r0]
 	lsls r1, r1, #0x10
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r1, r5, #0
 	adds r1, #8
 	adds r1, r4, r1

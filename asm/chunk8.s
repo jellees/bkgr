@@ -4239,11 +4239,11 @@ _08049158:
 	ldr r5, [r6, #4]
 	ldr r0, [sp, #0x1c]
 	ldr r1, [r6]
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r4, r0, #0
 	ldr r0, [sp, #0x20]
 	ldr r1, [r6, #8]
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r4, r4, r0
 	ldr r0, [sp, #0x24]
 	adds r4, r4, r0
@@ -4476,17 +4476,17 @@ _08049316:
 	ldr r1, [r2, #0x40]
 	str r1, [r4, #8]
 	adds r1, r4, #0
-	bl sub_800395C
+	bl CallARM_VecFX_Dot8
 	adds r5, r0, #0
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl sub_800395C
+	bl CallARM_VecFX_Dot8
 	adds r1, r0, #0
 	adds r0, r5, #0
 	bl sub_8003934
 	adds r1, r0, #0
 	adds r0, r4, #0
-	bl sub_800399C
+	bl CallARM_VecFX_Mul8
 	ldr r0, [r4]
 	lsls r0, r0, #8
 	ldr r3, [sp, #0x154]
@@ -4633,12 +4633,12 @@ _08049486:
 	ldr r0, [sp, #0x1c]
 	ldr r3, [sp, #0x148]
 	ldr r1, [r3]
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r4, r0, #0
 	ldr r0, [sp, #0x20]
 	ldr r2, [sp, #0x148]
 	ldr r1, [r2, #8]
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r4, r4, r0
 	ldr r0, [sp, #0x24]
 	adds r1, r4, r0
@@ -15801,7 +15801,7 @@ sub_804F1E8: @ 0x0804F1E8
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0804F296
 	ldr r1, _0804F278
@@ -17006,7 +17006,7 @@ sub_804FBA0: @ 0x0804FBA0
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0804FC46
 	ldrb r0, [r5]
@@ -17194,7 +17194,7 @@ sub_804FCFC: @ 0x0804FCFC
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0804FD7A
 	ldrb r0, [r5]
@@ -17332,7 +17332,7 @@ sub_804FDEC: @ 0x0804FDEC
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0804FE6C
 	ldrb r0, [r5]
@@ -17474,7 +17474,7 @@ sub_804FEF4: @ 0x0804FEF4
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0804FF40
 	ldr r1, _0804FF54
@@ -17574,7 +17574,7 @@ sub_804FFC0: @ 0x0804FFC0
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0805003C
 	adds r0, r5, #0
@@ -17879,7 +17879,7 @@ sub_8050210: @ 0x08050210
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _08050268
 	ldr r1, _08050284
@@ -18536,7 +18536,7 @@ sub_8050758: @ 0x08050758
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _080507A4
 	ldr r1, _080507B8
@@ -18788,7 +18788,7 @@ sub_8050970: @ 0x08050970
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _080509B0
 	ldr r1, _080509C4
@@ -19727,7 +19727,7 @@ sub_80510F0: @ 0x080510F0
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0805119C
 	ldrb r0, [r5]
@@ -20133,7 +20133,7 @@ sub_8051458: @ 0x08051458
 	ldr r0, _08051494
 	adds r1, #0x64
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0805148C
 	bl sub_801990C
@@ -20565,7 +20565,7 @@ _080517E0:
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _08051804
 	ldr r1, _08051810
@@ -20814,7 +20814,7 @@ sub_80519B8: @ 0x080519B8
 	ldr r1, _08051A60
 	ldr r2, _08051A64
 	adds r0, r6, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _08051A54
 	adds r0, r5, #0
@@ -21279,7 +21279,7 @@ sub_8051D78: @ 0x08051D78
 	ldr r0, _08051DB0
 	adds r1, #0x64
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _08051DA6
 	bl sub_801990C
@@ -21425,7 +21425,7 @@ sub_8051E84: @ 0x08051E84
 	adds r1, r2, #0
 	adds r1, #0x64
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _08051EE0
 	ldr r0, _08051EF0
@@ -21625,7 +21625,7 @@ sub_8052018: @ 0x08052018
 	adds r1, #0x64
 	adds r2, r4, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0805207E
 	ldr r0, _0805208C
@@ -24108,7 +24108,7 @@ _080534E0:
 	lsls r1, r1, #8
 	bl sub_8003934
 	movs r1, #0xc
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	lsls r0, r0, #0x10
 	lsrs r0, r0, #0x10
 	bl SetAlphaBlending
@@ -24421,7 +24421,7 @@ _080536FE:
 	asrs r0, r0, #1
 	ldr r1, _08053818
 	str r3, [sp]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	adds r0, r6, r0
 	lsls r0, r0, #0x10
@@ -24452,7 +24452,7 @@ _08053760:
 	lsls r7, r7, #4
 	adds r1, r7, #0
 	str r3, [sp]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	lsls r1, r5, #0x10
 	asrs r1, r1, #0x10
@@ -24483,7 +24483,7 @@ _080537A0:
 	asrs r0, r0, #1
 	adds r1, r7, #0
 	str r3, [sp]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	lsls r1, r4, #0x10
 	asrs r1, r1, #0x10
@@ -24581,7 +24581,7 @@ _0805382C:
 	asrs r0, r0, #1
 	movs r1, #0xc8
 	lsls r1, r1, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	subs r0, r6, r0
 	lsls r0, r0, #0x10
@@ -24610,7 +24610,7 @@ _08053890:
 	ldr r2, _0805394C
 	adds r1, r2, #0
 	str r2, [sp, #4]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	lsls r1, r5, #0x10
 	asrs r1, r1, #0x10
@@ -24640,7 +24640,7 @@ _080538CE:
 	adds r0, r0, r7
 	asrs r0, r0, #1
 	adds r1, r2, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	lsls r1, r4, #0x10
 	asrs r1, r1, #0x10
@@ -25192,7 +25192,7 @@ _08053D5E:
 	subs r0, r0, r1
 	lsls r0, r0, #8
 	movs r1, #0x10
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	lsls r0, r0, #8
 	lsrs r2, r0, #0x10
 	cmp r2, #0
@@ -25817,7 +25817,7 @@ _0805424A:
 	bl sub_800392C
 	adds r1, r0, #0
 	adds r0, r4, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	ldr r1, [r6]
 	str r0, [r1, #0x24]
 	b _08054290
@@ -25834,7 +25834,7 @@ _08054274:
 	bl sub_800392C
 	adds r1, r0, #0
 	adds r0, r4, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	ldr r1, [r6]
 	str r0, [r1, #0x20]
 _08054290:
@@ -26254,7 +26254,7 @@ _080545AA:
 	adds r0, r0, r1
 	movs r1, #0xaf
 	lsls r1, r1, #3
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	mov r4, sl
 	ldr r1, [r4]
 	adds r1, r5, r1
@@ -26286,7 +26286,7 @@ _080545EA:
 	adds r0, r0, r1
 	movs r1, #0xaf
 	lsls r1, r1, #3
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	mov r4, sl
 	ldr r1, [r4]
 	adds r1, r5, r1
@@ -26325,7 +26325,7 @@ _08054638:
 	adds r0, r0, r1
 	movs r1, #0xaf
 	lsls r1, r1, #3
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	mov r4, sl
 	ldr r1, [r4]
 	adds r1, r5, r1
@@ -26844,7 +26844,7 @@ _08054A3C:
 	lsls r0, r0, #8
 	movs r1, #0x80
 	lsls r1, r1, #2
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	movs r2, #0xa0
 	lsls r2, r2, #1
@@ -27790,10 +27790,10 @@ _080551D4:
 	ldrsh r0, [r0, r6]
 	movs r1, #0x80
 	lsls r1, r1, #2
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	adds r2, r0, #0
 	adds r1, r7, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	adds r2, r0, #0
 	ldr r1, _0805521C
 	ldr r0, [r5]
@@ -27846,7 +27846,7 @@ _08055250:
 	ldrsh r0, [r0, r1]
 	movs r1, #0x80
 	lsls r1, r1, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	adds r0, #0x20
 	strh r0, [r4]
@@ -31190,7 +31190,7 @@ _08056E18:
 	ldrsh r1, [r0, r3]
 	movs r0, #0x91
 	lsls r0, r0, #2
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r6]
 	adds r2, r5, r2
 	ldr r1, [r2, #0x68]
@@ -31206,7 +31206,7 @@ _08056E18:
 	ldrsh r1, [r0, r2]
 	movs r0, #0x91
 	lsls r0, r0, #2
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r6]
 	adds r2, r5, r2
 	ldr r1, [r2, #0x6c]
@@ -31221,7 +31221,7 @@ _08056E18:
 	lsls r0, r0, #8
 	movs r1, #0x80
 	lsls r1, r1, #2
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	movs r2, #0xc0
 	lsls r2, r2, #2
@@ -31248,7 +31248,7 @@ _08056E98:
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	ldr r0, _08056F2C
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r6]
 	adds r2, r5, r2
 	ldr r1, [r2, #0x68]
@@ -31263,7 +31263,7 @@ _08056E98:
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	ldr r0, _08056F2C
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r6]
 	adds r2, r5, r2
 	ldr r1, [r2, #0x6c]
@@ -31886,7 +31886,7 @@ _0805737C:
 	adds r0, r4, r0
 	ldr r0, [r0, #0x5c]
 	movs r1, #0xfc
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r1, r4, r1
 	str r0, [r1, #0x5c]
@@ -31962,7 +31962,7 @@ _08057438:
 	lsls r1, r1, #2
 	movs r0, #0xfa
 	lsls r0, r0, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r1, r4, r1
 	adds r1, #0x62
@@ -31974,7 +31974,7 @@ _08057438:
 	adds r1, r1, r2
 	movs r3, #0
 	ldrsh r1, [r1, r3]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r5]
 	adds r2, r4, r2
 	ldr r1, [r2, #0x54]
@@ -32011,7 +32011,7 @@ _0805746A:
 	lsls r1, r1, #2
 	movs r0, #0xfa
 	lsls r0, r0, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r1, r4, r1
 	adds r1, #0x62
@@ -32022,7 +32022,7 @@ _0805746A:
 	adds r1, r1, r2
 	movs r3, #0
 	ldrsh r1, [r1, r3]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r5]
 	adds r2, r4, r2
 	ldr r1, [r2, #0x58]
@@ -32054,7 +32054,7 @@ _080574E4:
 	adds r1, r1, r7
 	movs r2, #0
 	ldrsh r1, [r1, r2]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r5]
 	adds r2, r4, r2
 	ldr r1, [r2, #0x54]
@@ -32068,7 +32068,7 @@ _080574E4:
 	adds r1, r1, r7
 	movs r3, #0
 	ldrsh r1, [r1, r3]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r4, r4, r1
 	ldr r1, [r4, #0x58]
@@ -32607,7 +32607,7 @@ _08057926:
 	adds r0, r4, r0
 	ldr r0, [r0, #0x5c]
 	movs r1, #0xfc
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r1, r4, r1
 	str r0, [r1, #0x5c]
@@ -32664,7 +32664,7 @@ _08057958:
 	lsls r1, r1, #2
 	movs r0, #0xfa
 	lsls r0, r0, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r1, r4, r1
 	adds r1, #0x62
@@ -32676,7 +32676,7 @@ _08057958:
 	adds r1, r1, r2
 	movs r3, #0
 	ldrsh r1, [r1, r3]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r5]
 	adds r2, r4, r2
 	ldr r1, [r2, #0x54]
@@ -32713,7 +32713,7 @@ _080579D6:
 	lsls r1, r1, #2
 	movs r0, #0xfa
 	lsls r0, r0, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r1, r4, r1
 	adds r1, #0x62
@@ -32724,7 +32724,7 @@ _080579D6:
 	adds r1, r1, r2
 	movs r3, #0
 	ldrsh r1, [r1, r3]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r5]
 	adds r2, r4, r2
 	ldr r1, [r2, #0x58]
@@ -32765,7 +32765,7 @@ _08057A74:
 	adds r1, r1, r6
 	movs r7, #0
 	ldrsh r1, [r1, r7]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r5]
 	adds r2, r4, r2
 	ldr r1, [r2, #0x54]
@@ -32779,7 +32779,7 @@ _08057A74:
 	adds r1, r1, r6
 	movs r2, #0
 	ldrsh r1, [r1, r2]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r4, r4, r1
 	ldr r1, [r4, #0x58]
@@ -32922,7 +32922,7 @@ _08057BBC:
 	lsrs r0, r0, #0x10
 	movs r1, #0xa0
 	lsls r1, r1, #5
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	adds r4, r0, #0
 	lsls r4, r4, #0x10
 	lsrs r4, r4, #0x10
@@ -32944,7 +32944,7 @@ _08057BBC:
 	movs r3, #0
 	ldrsh r1, [r0, r3]
 	adds r0, r4, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r3, [r7]
 	mov r1, sb
 	ldr r2, [r1]
@@ -32961,7 +32961,7 @@ _08057BBC:
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	adds r0, r4, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r7]
 	mov r3, sb
 	ldr r1, [r3]
@@ -33144,7 +33144,7 @@ _08057D6A:
 	lsrs r0, r0, #0x10
 	movs r1, #0xbb
 	lsls r1, r1, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	adds r2, r0, #0
 	lsls r2, r2, #0x10
 	movs r0, #0x80
@@ -33599,7 +33599,7 @@ _080580E8:
 	lsrs r0, r0, #0x10
 	movs r1, #0xbb
 	lsls r1, r1, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	adds r2, r0, #0
 	lsls r2, r2, #0x10
 	movs r0, #0x80
@@ -34655,7 +34655,7 @@ _08058934:
 	movs r0, #0xa0
 	lsls r0, r0, #3
 	movs r1, #0x13
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, _08058970
 	ldr r2, [r1]
 	ldr r1, [sp, #0x10]
@@ -35190,7 +35190,7 @@ _08058D4A:
 	movs r0, #0xa0
 	lsls r0, r0, #3
 	movs r1, #8
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	mov r3, sl
 	ldr r2, [r3]
 	mov r1, r8
@@ -35684,7 +35684,7 @@ _0805914C:
 	lsls r0, r0, #3
 	movs r1, #8
 _08059152:
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r4]
 	rsbs r0, r0, #0
 	adds r1, #0x64
@@ -36952,7 +36952,7 @@ sub_8059BDC: @ 0x08059BDC
 	ldrsh r0, [r0, r1]
 	lsrs r6, r6, #0x11
 	adds r1, r6, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r5, _08059C88
 	ldr r1, [r5]
 	asrs r0, r0, #1
@@ -36964,7 +36964,7 @@ sub_8059BDC: @ 0x08059BDC
 	ldrsh r0, [r0, r2]
 	lsls r0, r0, #1
 	adds r1, r6, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r5, [r5]
 	adds r0, #0x93
 	strh r0, [r5, #6]
@@ -37223,7 +37223,7 @@ _08059E3C:
 	adds r0, #0x6e
 	ldrh r0, [r0]
 	ldr r1, _08059ECC
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r5]
 	adds r1, #0x6e
 	strh r0, [r1]
@@ -37393,7 +37393,7 @@ _08059F98:
 	ldrsh r0, [r0, r1]
 	movs r1, #0x88
 	lsls r1, r1, #5
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r4, _0805A004
 	ldr r2, [r4]
 	asrs r0, r0, #8
@@ -37406,7 +37406,7 @@ _08059F98:
 	lsls r0, r0, #8
 	movs r1, #0xc0
 	lsls r1, r1, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r4]
 	asrs r0, r0, #8
 	strh r0, [r1, #6]
@@ -37482,7 +37482,7 @@ _0805A058:
 	ldr r0, [r0, #0x54]
 	movs r1, #0x80
 	lsls r1, r1, #0xc
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	asrs r0, r0, #0x10
 	ldrb r1, [r4]
 	adds r0, r0, r1
@@ -38021,7 +38021,7 @@ _0805A476:
 	lsls r0, r0, #8
 	movs r1, #0x94
 	lsls r1, r1, #2
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r2, [r7]
 	adds r2, r4, r2
 	asrs r0, r0, #8
@@ -38459,7 +38459,7 @@ _0805A7EE:
 	asrs r0, r0, #0x18
 	lsls r0, r0, #0x10
 	ldr r1, _0805A934
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	ldr r2, [r4]
 	ldr r1, [r2, #0x58]
 	adds r1, r1, r0
@@ -38569,7 +38569,7 @@ _0805A8C6:
 	asrs r0, r0, #0x18
 	lsls r0, r0, #0x10
 	ldr r1, _0805A938
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	mov r3, r8
 	ldr r2, [r3]
 	ldr r1, [r2, #0x58]
@@ -38596,7 +38596,7 @@ _0805A8F8:
 	subs r0, r0, r1
 	movs r1, #0x80
 	lsls r1, r1, #8
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	movs r5, #0x80
 	lsls r5, r5, #9
 	adds r0, r0, r5
@@ -39331,7 +39331,7 @@ sub_805AEFC: @ 0x0805AEFC
 	movs r5, #0x80
 	lsls r5, r5, #1
 	adds r1, r5, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	movs r1, #0x41
 	subs r1, r1, r0
@@ -39348,7 +39348,7 @@ _0805AF2A:
 	ldrsh r0, [r0, r1]
 	lsls r0, r0, #8
 	adds r1, r5, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	adds r0, #0x54
 	lsls r0, r0, #0x10
@@ -39381,7 +39381,7 @@ _0805AF68:
 	movs r5, #0x80
 	lsls r5, r5, #1
 	adds r1, r5, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	adds r0, #0x41
 	lsls r0, r0, #0x10
@@ -39397,7 +39397,7 @@ _0805AF8E:
 	ldrsh r0, [r0, r1]
 	lsls r0, r0, #8
 	adds r1, r5, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	movs r1, #0x54
 	subs r1, r1, r0
@@ -39488,7 +39488,7 @@ sub_805B020: @ 0x0805B020
 	ldrsh r0, [r0, r1]
 	movs r1, #0xa0
 	lsls r1, r1, #4
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	lsls r0, r0, #0x10
 	lsrs r6, r0, #0x10
 	ldr r2, [r5]
@@ -39513,7 +39513,7 @@ sub_805B020: @ 0x0805B020
 	ldrsh r0, [r0, r2]
 	movs r1, #0x80
 	lsls r1, r1, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	adds r1, r0, #0
 	adds r1, #0x40
@@ -39563,7 +39563,7 @@ _0805B0C4:
 	ldrsh r0, [r0, r1]
 	movs r1, #0xc8
 	lsls r1, r1, #2
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	asrs r0, r0, #8
 	adds r1, r0, #0
 	adds r1, #0x40
@@ -39632,7 +39632,7 @@ _0805B154:
 	ldrsh r0, [r0, r2]
 	movs r1, #0xa0
 	lsls r1, r1, #4
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	ldr r1, [r4]
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
@@ -40389,7 +40389,7 @@ _0805B77E:
 	movs r1, #0
 	ldrsh r0, [r0, r1]
 	movs r1, #0xc3
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r4]
 	adds r1, #0x74
 	strh r0, [r1]
@@ -40405,7 +40405,7 @@ _0805B7A0:
 	movs r1, #0
 	ldrsh r0, [r0, r1]
 	movs r1, #0xb4
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r4]
 	adds r1, #0x74
 	strh r0, [r1]
@@ -40497,7 +40497,7 @@ _0805B850:
 	beq _0805B884
 	adds r0, r1, #0
 	movs r1, #0xfb
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r1, [r4]
 	adds r2, r1, #0
 	adds r2, #0x72
@@ -41970,7 +41970,7 @@ _0805C48E:
 	adds r0, #0x42
 	ldrh r0, [r0]
 	movs r1, #0xf0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	lsls r0, r0, #8
 	lsrs r0, r0, #0x10
 	ldr r1, [r5]
@@ -42152,7 +42152,7 @@ _0805C5E8:
 	subs r0, r0, r1
 	movs r1, #0x80
 	lsls r1, r1, #2
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	adds r2, r0, #0
 	movs r0, #0x80
 	lsls r0, r0, #1
@@ -49872,13 +49872,13 @@ _0806041C:
 	rsbs r1, r1, #0
 _0806042A:
 	adds r0, r5, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	lsls r0, r0, #0x10
 	lsrs r4, r0, #0x10
 	lsls r0, r4, #0x10
 	asrs r0, r0, #0x10
 	movs r1, #0x64
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	lsls r0, r0, #0x10
 	lsrs r4, r0, #0x10
 	lsls r0, r7, #1
@@ -49886,11 +49886,11 @@ _0806042A:
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	adds r0, r5, #0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	movs r1, #0x64
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	lsls r0, r0, #0x10
 	lsrs r3, r0, #0x10
 	add r1, sp, #0x10
@@ -51422,7 +51422,7 @@ _08061104:
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	mov r0, r8
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	mov r1, sb
 	ldr r2, [r1]
 	lsls r5, r6, #3
@@ -51439,7 +51439,7 @@ _08061104:
 	movs r2, #0
 	ldrsh r1, [r4, r2]
 	mov r0, r8
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	mov r2, sb
 	ldr r1, [r2]
 	adds r5, r5, r1
@@ -52426,7 +52426,7 @@ _0806199E:
 	adds r1, r1, r5
 	movs r2, #0
 	ldrsh r1, [r1, r2]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldr r6, _08061A4C
 	ldrb r1, [r6]
 	ldr r7, _08061A50
@@ -52442,14 +52442,14 @@ _0806199E:
 	mov r3, r8
 	ldrb r0, [r3]
 	movs r1, #0xd0
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	lsls r0, r0, #8
 	adds r4, #0x40
 	lsls r4, r4, #1
 	adds r4, r4, r5
 	movs r5, #0
 	ldrsh r1, [r4, r5]
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	ldrb r1, [r6]
 	ldr r3, [r7]
 	lsls r2, r1, #3
@@ -52572,7 +52572,7 @@ _08061AD4:
 	ldrsh r0, [r0, r5]
 	movs r1, #0xc0
 	lsls r1, r1, #1
-	bl sub_800394C
+	bl CallARM_FX_Mul8
 	movs r2, #0xa0
 	lsls r2, r2, #2
 	subs r2, r2, r0

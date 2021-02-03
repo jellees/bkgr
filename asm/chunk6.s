@@ -6378,7 +6378,7 @@ _0802AF00:
 	adds r3, #0x70
 	mov r0, sp
 	add r1, sp, #0xc
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	cmp r0, #0
 	beq _0802AF9C
 	adds r1, r4, #0
@@ -6428,7 +6428,7 @@ _0802AF9C:
 	adds r2, r4, #0
 	adds r2, #0x88
 	adds r0, r7, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0802AFE4
 	ldr r2, _0802AFD4
@@ -6587,7 +6587,7 @@ _0802B0E0:
 	adds r2, r5, #0
 	adds r2, #0x70
 	mov r0, sl
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	bne _0802B0F4
 	b _0802B422
@@ -6709,7 +6709,7 @@ _0802B194:
 	adds r2, #0x64
 	adds r3, r5, #0
 	adds r3, #0x70
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	b _0802B1F6
 	.align 2, 0
 _0802B1E0: .4byte 0x03003578
@@ -6720,7 +6720,7 @@ _0802B1E8:
 	adds r2, r5, #0
 	adds r2, #0x70
 	mov r0, sp
-	bl sub_800396C
+	bl VecFX_PointInBox
 _0802B1F6:
 	adds r4, r0, #0
 _0802B1F8:
@@ -7027,7 +7027,7 @@ sub_802B458: @ 0x0802B458
 	adds r2, r4, #0
 	adds r2, #0x88
 	adds r0, r5, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	strb r0, [r6]
 	lsls r0, r0, #0x18
 	cmp r0, #0
@@ -7037,7 +7037,7 @@ sub_802B458: @ 0x0802B458
 	adds r2, r4, #0
 	adds r2, #0x70
 	adds r0, r5, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	adds r1, r0, #0
 	strb r1, [r7]
 	ldrb r0, [r6]
@@ -7137,7 +7137,7 @@ sub_802B54C: @ 0x0802B54C
 	adds r1, #0x64
 	adds r2, r5, #0
 	adds r2, #0x70
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	bne _0802B562
 	movs r0, #0
@@ -7187,7 +7187,7 @@ sub_802B5AC: @ 0x0802B5AC
 	adds r2, #0x64
 	adds r3, r5, #0
 	adds r3, #0x70
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	cmp r0, #0
 	beq _0802B634
 	adds r4, r5, #0
@@ -7286,7 +7286,7 @@ sub_802B63C: @ 0x0802B63C
 	adds r3, r6, #0
 	adds r3, #0x70
 	mov r0, sp
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	b _0802B6AA
 	.align 2, 0
 _0802B694: .4byte 0x03003578
@@ -7297,7 +7297,7 @@ _0802B69C:
 	adds r2, r6, #0
 	adds r2, #0x70
 	adds r0, r4, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 _0802B6AA:
 	adds r5, r0, #0
 _0802B6AC:
@@ -7585,7 +7585,7 @@ _0802B8C0:
 	adds r1, #0x70
 	ldr r2, _0802B958
 	ldr r3, _0802B95C
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	cmp r0, #0
 	beq _0802B96C
 	mov r0, sb
@@ -7669,7 +7669,7 @@ sub_802B980: @ 0x0802B980
 	adds r2, r4, #0
 	adds r2, #0x88
 	adds r0, r3, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	bne _0802B9BE
 	ldrh r0, [r4]
@@ -7685,7 +7685,7 @@ _0802B9AC:
 	adds r2, r4, #0
 	adds r2, #0x70
 	adds r0, r3, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0802B9CE
 _0802B9BE:
@@ -7806,7 +7806,7 @@ _0802BA9A:
 	adds r1, #0x70
 	ldr r2, _0802BAC8
 	ldr r3, _0802BACC
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	cmp r0, #0
 	beq _0802BB04
 	ldrh r0, [r4]
@@ -8000,7 +8000,7 @@ _0802BC2C:
 	adds r2, r4, #0
 	adds r2, #0x70
 	adds r0, r6, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0802BC96
 	ldr r1, _0802BC58
@@ -8134,7 +8134,7 @@ _0802BD3C:
 	adds r2, r4, #0
 	adds r2, #0x70
 	adds r0, r6, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0802BD7A
 	ldr r0, _0802BD64
@@ -8228,7 +8228,7 @@ _0802BDC6:
 	adds r2, #0x70
 	mov r0, sl
 	str r3, [sp]
-	bl sub_800396C
+	bl VecFX_PointInBox
 	ldr r3, [sp]
 	cmp r0, #0
 	beq _0802BE58
@@ -8379,7 +8379,7 @@ _0802BEF0:
 	adds r2, #0x70
 	mov r0, sl
 	str r3, [sp]
-	bl sub_800396C
+	bl VecFX_PointInBox
 	ldr r3, [sp]
 	cmp r0, #0
 	bne _0802BEA0
@@ -8490,7 +8490,7 @@ _0802BFFC:
 	ldr r1, [sp]
 	ldr r2, [sp, #4]
 	str r3, [sp, #0xc]
-	bl sub_800396C
+	bl VecFX_PointInBox
 	ldr r3, [sp, #0xc]
 	cmp r0, #0
 	bne _0802C010
@@ -8785,7 +8785,7 @@ _0802C240:
 	mov r1, sp
 	add r2, sp, #0xc
 	str r3, [sp, #0x2c]
-	bl sub_800396C
+	bl VecFX_PointInBox
 	ldr r3, [sp, #0x2c]
 	cmp r0, #0
 	beq _0802C31E
@@ -8796,12 +8796,12 @@ _0802C240:
 	movs r1, #0xa0
 	lsls r1, r1, #0xb
 	adds r2, r6, #0
-	bl sub_80039A4
+	bl CallARM_VecFX_Mul16_2
 	ldr r4, _0802C2F4
 	adds r0, r4, #0
 	adds r1, r6, #0
 	adds r2, r6, #0
-	bl sub_8003984
+	bl VecFX_Add
 	ldr r0, [r4]
 	ldr r1, [r4, #8]
 	ldr r2, [sp, #0x18]
@@ -9895,11 +9895,11 @@ _0802CB5C:
 	bl sub_800387C
 	ldr r0, [r5, #0x1c]
 	ldr r1, [sp]
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r4, r0, #0
 	ldr r0, [r5, #0x20]
 	ldr r1, [sp, #8]
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r4, r4, r0
 	ldr r0, [r5, #0x24]
 	adds r4, r4, r0
@@ -10515,15 +10515,15 @@ _0802CFF2:
 	ldr r0, [r7, #8]
 	subs r4, r4, r0
 	adds r0, r1, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r5, r0, #0
 	movs r0, #0
 	movs r1, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r6, r0, #0
 	adds r0, r4, #0
 	adds r1, r4, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r5, r5, r6
 	adds r5, r5, r0
 	ldr r0, [sp, #4]
@@ -12357,7 +12357,7 @@ _0802DF06:
 	mov r2, sl
 	adds r2, #0xf0
 	adds r0, r7, #0
-	bl sub_800396C
+	bl VecFX_PointInBox
 	cmp r0, #0
 	beq _0802DF28
 	movs r0, #0
@@ -53077,7 +53077,7 @@ sub_80422FC: @ 0x080422FC
 	lsls r5, r0, #0x10
 	adds r0, r5, #0
 	adds r1, r6, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	mov sb, r0
 	mov r0, r8
 	cmp r0, #0
@@ -53087,7 +53087,7 @@ sub_80422FC: @ 0x080422FC
 	lsls r4, r0, #0x10
 	adds r0, r4, #0
 	adds r1, r6, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r7, r0, #0
 	b _08042374
 	.align 2, 0
@@ -53154,7 +53154,7 @@ sub_804238C: @ 0x0804238C
 	lsls r5, r0, #0x10
 	adds r0, r5, #0
 	adds r1, r6, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	str r0, [sp]
 	movs r5, #0
 	mov r0, sl
@@ -53165,7 +53165,7 @@ sub_804238C: @ 0x0804238C
 	lsls r4, r0, #0x10
 	adds r0, r4, #0
 	adds r1, r6, #0
-	bl CallARM_FX_Mul
+	bl CallARM_FX_Mul16
 	adds r7, r0, #0
 	b _080423D2
 	.align 2, 0

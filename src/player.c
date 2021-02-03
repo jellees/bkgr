@@ -458,19 +458,19 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
     distance.y = gWallPlaneResult.distance.y;
     distance.z = gWallPlaneResult.distance.z;
 
-    a = sub_800395C(&distance, &distance);
+    a = CallARM_VecFX_Dot8(&distance, &distance);
     if (a >> 8 < 0x8000)
     {
-        fx32 b = sub_800392C(sub_800395C(a1, &distance) << 8, a << 8);
+        fx32 b = sub_800392C(CallARM_VecFX_Dot8(a1, &distance) << 8, a << 8);
         distance.x <<= 8;
         distance.y <<= 8;
         distance.z <<= 8;
-        sub_8003994(&distance, b);
+        CallARM_VecFX_Mul16(&distance, b);
         ASSERT(Abs(distance.x >> 16) < 0x10000 && Abs(distance.z >> 16) < 0x10000);
     }
     else
     {
-        sub_800399C(&distance, sub_8003934(sub_800395C(a1, &distance), a));
+        CallARM_VecFX_Mul8(&distance, sub_8003934(CallARM_VecFX_Dot8(a1, &distance), a));
         ASSERT(Abs(distance.x >> 8) < 0x10000 && Abs(distance.z >> 8) < 0x10000);
         distance.x <<= 8;
         distance.z <<= 8;

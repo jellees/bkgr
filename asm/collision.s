@@ -1184,7 +1184,7 @@ _08006E9C:
 	ldr r2, [sp, #0x158]
 	adds r3, r2, #0
 	adds r3, #0x48
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	cmp r0, #0
 	beq _08006FA8
 	ldrb r0, [r5]
@@ -1208,7 +1208,7 @@ _08006F02:
 	adds r0, r4, #4
 	ldr r1, [sp, #0x15c]
 	str r3, [sp, #0x164]
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r3, [sp, #0x164]
 	cmp r0, #0
 	bgt _08006FA0
@@ -1833,7 +1833,7 @@ _08007402:
 	mov r1, sp
 	mov r2, sl
 	adds r2, #0x38
-	bl sub_800398C
+	bl CallARM_VecFX_Sub
 	b _08007420
 _08007410:
 	ldr r2, [sp, #0x94]
@@ -3073,7 +3073,7 @@ _08007D62:
 	ldr r1, [sp, #0x244]
 	add r2, sp, #0x1d8
 	add r3, sp, #0x220
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	cmp r0, #0
 	beq _08007E5E
 	ldrb r2, [r5]
@@ -3131,7 +3131,7 @@ _08007E24:
 	adds r0, r4, #4
 	ldr r1, [sp, #0x238]
 	str r3, [sp, #0x24c]
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r3, [sp, #0x24c]
 	cmp r0, #0
 	bgt _08007E54
@@ -4061,7 +4061,7 @@ _080084EA:
 	ldr r1, [sp, #0x2c8]
 	add r2, sp, #0x258
 	add r3, sp, #0x2a0
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	cmp r0, #0
 	beq _080085CC
 	ldrb r1, [r5]
@@ -4112,7 +4112,7 @@ _08008590:
 	ldr r1, [sp, #0x2b8]
 	str r2, [sp, #0x2d0]
 	str r3, [sp, #0x2d4]
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r2, [sp, #0x2d0]
 	ldr r3, [sp, #0x2d4]
 	cmp r0, #0
@@ -5037,7 +5037,7 @@ _08008C50:
 	ldr r2, [sp, #0x270]
 	adds r3, r2, #0
 	adds r3, #0x48
-	bl sub_8003964
+	bl CallARM_VecFX_BoxInBox
 	cmp r0, #0
 	beq _08008CE6
 	ldrb r0, [r5]
@@ -5051,7 +5051,7 @@ _08008CA8:
 	adds r0, r4, #4
 	ldr r1, [sp, #0x274]
 	str r2, [sp, #0x284]
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r2, [sp, #0x284]
 	cmp r0, #0
 	bgt _08008CDE
@@ -5383,7 +5383,7 @@ _08008F32:
 	add r1, sp, #0x258
 	mov r2, sl
 	adds r2, #0x38
-	bl sub_800398C
+	bl CallARM_VecFX_Sub
 	movs r0, #1
 	b _08008F4E
 _08008F42:
@@ -5421,12 +5421,12 @@ sub_08008F64: @ 0x08008F64
 	mov sb, r0
 	adds r4, r7, #4
 	adds r0, r4, #0
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r1, [r7, #0x10]
 	adds r5, r0, r1
 	adds r0, r4, #0
 	mov r1, r8
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r1, [r7, #0x10]
 	adds r0, r0, r1
 	cmp r5, #0
@@ -5443,10 +5443,10 @@ _08008FA0:
 	mov r0, r8
 	adds r1, r6, #0
 	mov r2, sp
-	bl sub_800398C
+	bl CallARM_VecFX_Sub
 	adds r0, r7, #4
 	mov r1, sp
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	adds r4, r0, #0
 	bl Abs
 	movs r1, #0xa0
@@ -5463,12 +5463,12 @@ _08008FC6:
 	adds r5, r0, #0
 	mov r0, sp
 	adds r1, r5, #0
-	bl sub_8003994
+	bl CallARM_VecFX_Mul16
 	add r4, sp, #0xc
 	adds r0, r6, #0
 	mov r1, sp
 	adds r2, r4, #0
-	bl sub_8003984
+	bl VecFX_Add
 	ldr r0, [r7, #4]
 	bl Abs
 	adds r6, r0, #0
@@ -5550,13 +5550,13 @@ sub_800905C: @ 0x0800905C
 	mov sl, r3
 	ldr r5, _080090EC
 	adds r0, r5, #0
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r4, _080090F0
 	ldr r1, [r4]
 	adds r6, r0, r1
 	adds r0, r5, #0
 	mov r1, r8
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r1, [r4]
 	adds r0, r0, r1
 	cmp r6, #0
@@ -5573,10 +5573,10 @@ _0800909A:
 	mov r0, r8
 	adds r1, r7, #0
 	mov r2, sp
-	bl sub_800398C
+	bl CallARM_VecFX_Sub
 	ldr r0, _080090EC
 	mov r1, sp
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	adds r4, r0, #0
 	bl Abs
 	movs r1, #0xa0
@@ -5589,12 +5589,12 @@ _0800909A:
 	adds r6, r0, #0
 	mov r0, sp
 	adds r1, r6, #0
-	bl sub_8003994
+	bl CallARM_VecFX_Mul16
 	add r4, sp, #0xc
 	adds r0, r7, #0
 	mov r1, sp
 	adds r2, r4, #0
-	bl sub_8003984
+	bl VecFX_Add
 	ldr r0, _080090F4
 	ldr r1, [r0]
 	mov r0, sb
@@ -5691,12 +5691,12 @@ sub_8009174: @ 0x08009174
 	adds r7, r2, #0
 	adds r4, r6, #4
 	adds r0, r4, #0
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r1, [r6, #0x10]
 	adds r5, r0, r1
 	adds r0, r4, #0
 	adds r1, r7, #0
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	ldr r1, [r6, #0x10]
 	adds r0, r0, r1
 	cmp r5, #0
@@ -5713,10 +5713,10 @@ _080091AA:
 	adds r0, r7, #0
 	mov r1, r8
 	mov r2, sp
-	bl sub_800398C
+	bl CallARM_VecFX_Sub
 	adds r0, r6, #4
 	mov r1, sp
-	bl sub_8003954
+	bl CallARM_VecFX_Dot16
 	adds r4, r0, #0
 	bl Abs
 	movs r1, #0xa0
@@ -5729,12 +5729,12 @@ _080091AA:
 	adds r5, r0, #0
 	mov r0, sp
 	adds r1, r5, #0
-	bl sub_8003994
+	bl CallARM_VecFX_Mul16
 	add r4, sp, #0xc
 	adds r0, r7, #0
 	mov r1, sp
 	adds r2, r4, #0
-	bl sub_8003984
+	bl VecFX_Add
 	ldr r0, [r6, #0x20]
 	ldrb r1, [r6]
 	adds r2, r4, #0

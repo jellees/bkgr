@@ -326,21 +326,21 @@ _080012A4:
 	bx lr
 
     .arm
-FX_Mul: @ 0x080012F8
+FX_Mul16: @ 0x080012F8
 	smull r3, r2, r0, r1
 	lsl r0, r2, #0x10
 	orr r0, r0, r3, lsr #16
 	bx lr
 
     .arm
-sub_8001308: @ 0x08001308
+FX_Mul8: @ 0x08001308
 	smull r3, r2, r0, r1
 	lsl r0, r2, #0x18
 	orr r0, r0, r3, lsr #8
 	bx lr
 
     .arm
-sub_8001318: @ 0x08001318
+VecFX_Dot16: @ 0x08001318
 	push {r4, r5, r6}
 	ldm r0, {r2, r3, r4}
 	ldm r1, {r5, r6, ip}
@@ -353,7 +353,7 @@ sub_8001318: @ 0x08001318
 	bx lr
 
     .arm
-sub_8001340: @ 0x08001340
+VecFX_Dot8: @ 0x08001340
 	push {r4, r5, r6}
 	ldm r0, {r2, r3, r4}
 	ldm r1, {r5, r6, ip}
@@ -4079,48 +4079,48 @@ sub_800393C: @ 0x0800393C
 	ldr pc, _08003A8C
 
     .thumb
-	.global CallARM_FX_Mul
-CallARM_FX_Mul: @ 0x08003944
+	.global CallARM_FX_Mul16
+CallARM_FX_Mul16: @ 0x08003944
 	bx pc
 	nop
     .arm
 	ldr pc, _08003A90
 
     .thumb
-	.global sub_800394C
-sub_800394C: @ 0x0800394C
+	.global CallARM_FX_Mul8
+CallARM_FX_Mul8: @ 0x0800394C
 	bx pc
 	nop
 	.arm
 	ldr pc, _08003A94
 
     .thumb
-	.global sub_8003954
-sub_8003954: @ 0x08003954
+	.global CallARM_VecFX_Dot16
+CallARM_VecFX_Dot16: @ 0x08003954
 	bx pc
 	nop
     .arm
 	ldr pc, _08003A98
 
     .thumb
-	.global sub_800395C
-sub_800395C: @ 0x0800395C
+	.global CallARM_VecFX_Dot8
+CallARM_VecFX_Dot8: @ 0x0800395C
 	bx pc
 	nop
 	.arm
 	ldr pc, _08003A9C
 
     .thumb
-	.global sub_8003964
-sub_8003964: @ 0x08003964
+	.global CallARM_VecFX_BoxInBox
+CallARM_VecFX_BoxInBox: @ 0x08003964
 	bx pc
 	nop
     .arm
 	ldr pc, _08003AA0
 
     .thumb
-	.global sub_800396C
-sub_800396C: @ 0x0800396C
+	.global VecFX_PointInBox
+VecFX_PointInBox: @ 0x0800396C
 	bx pc
 	nop
 	.arm
@@ -4143,40 +4143,40 @@ sub_800397C: @ 0x0800397C
 	ldr pc, _08003AAC
 
     .thumb
-	.global sub_8003984
-sub_8003984: @ 0x08003984
+	.global VecFX_Add
+VecFX_Add: @ 0x08003984
 	bx pc
 	nop
     .arm
 	ldr pc, _08003AB0
 
     .thumb
-	.global sub_800398C
-sub_800398C: @ 0x0800398C
+	.global CallARM_VecFX_Sub
+CallARM_VecFX_Sub: @ 0x0800398C
 	bx pc
 	nop
     .arm
 	ldr pc, _08003AB4
 
     .thumb
-	.global sub_8003994
-sub_8003994: @ 0x08003994
+	.global CallARM_VecFX_Mul16
+CallARM_VecFX_Mul16: @ 0x08003994
 	bx pc
 	nop 
 	.arm
 	ldr pc, _08003AB8
 
     .thumb
-	.global sub_800399C
-sub_800399C: @ 0x0800399C
+	.global CallARM_VecFX_Mul8
+CallARM_VecFX_Mul8: @ 0x0800399C
 	bx pc
 	nop
     .arm
 	ldr pc, _08003ABC
 
     .thumb
-	.global sub_80039A4
-sub_80039A4: @ 0x080039A4
+	.global CallARM_VecFX_Mul16_2
+CallARM_VecFX_Mul16_2: @ 0x080039A4
 	bx pc
 	nop
 	.arm
