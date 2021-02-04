@@ -297,7 +297,7 @@ void sub_800AD64()
     }
 }
 
-bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
+bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4)
 {
     fx32 a = a2->y;
     a2->y = sub_80039C4(a2, stru_3002950.field_1C, stru_3002950.field_20, stru_3002950.staticFloorHeight);
@@ -322,7 +322,7 @@ bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
             if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a)
             {
                 char c[0x60];
-                sub_80039CC(c, a1, &dword_300331C, 0);
+                sub_80039CC(c, a1, &stru_300331C, 0);
                 sub_8007434(c, &gFloorPlaneResult);
 
                 if (!gFloorPlaneResult.isColliding)
@@ -373,7 +373,7 @@ bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
     return TRUE;
 }
 
-bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2)
+bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2, char* a3)
 {
     fx32 a;
 
@@ -399,7 +399,7 @@ bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2)
         if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a)
         {
             char c[0x60];
-            sub_80039CC(c, a1, &dword_300331C, 0);
+            sub_80039CC(c, a1, &stru_300331C, 0);
             sub_8007434(c, &gFloorPlaneResult);
 
             if (!gFloorPlaneResult.isColliding)
@@ -447,21 +447,21 @@ bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2)
     return TRUE;
 }
 
-bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
+bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4)
 {
     struct Vec3fx distance;
     struct Vec3fx vec1;
     char c[0x60];
-    fx32 a;
+    fx32 dot;
 
     distance.x = gWallPlaneResult.distance.x;
     distance.y = gWallPlaneResult.distance.y;
     distance.z = gWallPlaneResult.distance.z;
 
-    a = CallARM_VecFX_Dot8(&distance, &distance);
-    if (a >> 8 < 0x8000)
+    dot = CallARM_VecFX_Dot8(&distance, &distance);
+    if (dot >> 8 < 0x8000)
     {
-        fx32 b = sub_800392C(CallARM_VecFX_Dot8(a1, &distance) << 8, a << 8);
+        fx32 b = sub_800392C(CallARM_VecFX_Dot8(a1, &distance) << 8, dot << 8);
         distance.x <<= 8;
         distance.y <<= 8;
         distance.z <<= 8;
@@ -470,7 +470,7 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
     }
     else
     {
-        CallARM_VecFX_Mul8(&distance, sub_8003934(CallARM_VecFX_Dot8(a1, &distance), a));
+        CallARM_VecFX_Mul8(&distance, sub_8003934(CallARM_VecFX_Dot8(a1, &distance), dot));
         ASSERT(Abs(distance.x >> 8) < 0x10000 && Abs(distance.z >> 8) < 0x10000);
         distance.x <<= 8;
         distance.z <<= 8;
@@ -483,7 +483,7 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
     a3->x = a2->x;
     a3->z = a2->z;
 
-    sub_80039CC(c, a2, &dword_300331C, 0);
+    sub_80039CC(c, a2, &stru_300331C, 0);
 
     vec1.x = a2->x - gPlayerPos.x;
     vec1.y = a2->y - gPlayerPos.y;
@@ -511,3 +511,175 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3)
 
     return FALSE;
 }
+
+#ifdef NONMATCHING
+
+extern s8 sub_80038BC(u32);
+
+void update_player()
+{
+    struct Vec3fx vec1;
+    char c[0x60];
+    struct Vec3fx vec2;
+    struct Vec3fx vec3;
+
+    sub_800AA6C(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, &vec3);
+
+    if (sub_802ADE8(&gPlayerPosTemp))
+        return;
+    
+    sub_800A740(&gPlayerPosTemp, &gPlayerShadowPosTemp);
+
+    if (byte_20020B1 == 3)
+    {
+        stru_300331C.x = 0x40000;
+        stru_300331C.y = dword_3003308;
+        stru_300331C.z = 0x40000;
+    }
+    else
+    {
+        stru_300331C.x = 0x80000;
+        stru_300331C.y = dword_3003308;
+        stru_300331C.z = 0x80000;
+    }
+
+    sub_80039CC(c, &gPlayerPosTemp, &stru_300331C, 0);
+    sub_8006974(c, &vec1);
+
+    if ( gPlayerStateSettings[gPlayerState] & 0x40 )
+    {
+        if (!sub_800AB54(&gPlayerPosTemp, &gPlayerShadowPosTemp))
+        {
+            goto update_camera;
+        }
+        return;
+    }
+
+    sub_08009208(&gPlayerPosTemp, &stru_3002950);
+
+    if (!stru_3002950.isColliding)
+    {
+        vec2.x = gPlayerPosTemp.x;
+        vec2.y = gPlayerPosTemp.y + 0x50000;
+        vec2.z = gPlayerPosTemp.z;
+        sub_08009208(&vec2, &stru_3002950);
+    }
+
+    if (gPlayerStateSettings[gPlayerState] & 0x400)
+    {
+        if (sub_80038BC(dword_2000FC8))
+            sub_8007434(c, &gFloorPlaneResult);
+        else
+            gFloorPlaneResult.isColliding = 0;
+    }
+    else
+    {
+        sub_8007434(c, &gFloorPlaneResult);
+    }
+
+    if ( !(gPlayerStateSettings[gPlayerState] & 0x400)
+      && !gFloorPlaneResult.isColliding
+      && gFloorPlaneResult.field_2C != 0x5A0000
+      && (stru_3002950.field_2C != gFloorPlaneResult.field_2C || stru_3002950.field_28 != gFloorPlaneResult.field_28) )
+    {
+      sub_08007890(c, &gFloorPlaneResult);
+    }
+
+    sub_8006FFC(c, &gWallPlaneResult, &gFloorPlaneResult);
+    sub_8007AC4(c);
+
+    if (stru_3002950.isColliding)
+    {
+        if (!gFloorPlaneResult.isColliding || dword_20011FC)
+        {
+            gFloorPlaneResult.isColliding = 1;
+            dword_20011FC--;
+        }
+        else if (!gWallPlaneResult.isColliding || dword_203DFC4)
+        {
+            return;
+        }
+    }
+    else
+    {
+        dword_20011FC = 1;
+    }
+
+    if (sub_800A7DC(&gPlayerPosTemp, &gPlayerShadowPosTemp))
+    {
+        goto update_camera;
+    }
+
+    if (sub_800ABD4(&gPlayerPosTemp, &gPlayerShadowPosTemp))
+    {
+        return;
+    }
+
+    sub_800AD64();
+
+    if (gPlayerStateSettings[gPlayerState] & 0x400 && gPlayerStateSettings[gPlayerState] & 0x100)
+    {
+        sub_800E61C();
+        if (gWallPlaneResult.isColliding && sub_0800B04C(&vec1, &gPlayerPosTemp, &gPlayerShadowPosTemp, c))
+        {
+            goto update_camera;
+        }
+
+        if (!sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c))
+        {
+            goto update_camera;
+        }
+
+        gPlayerPos.x = gPlayerPosTemp.x;
+        gPlayerPos.y = gPlayerPosTemp.y;
+        gPlayerPos.z = gPlayerPosTemp.z;
+        gPlayerShadowPos.x = gPlayerShadowPosTemp.x;
+        gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
+        gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
+
+        goto update_camera;
+    }
+
+    if (sub_0800A8B4())
+        return;
+
+    if ( gWallPlaneResult.isColliding )
+        sub_0800B04C(&vec1, &gPlayerPosTemp, &gPlayerShadowPosTemp, c);
+
+    if ( gPlayerStateSettings[gPlayerState] & 0x100 && gWallPlaneResult.isColliding )
+    {
+        gPlayerPosTemp.x = gPlayerPos.x;
+        gPlayerPosTemp.z = gPlayerPos.z;
+        gPlayerShadowPosTemp.x = gPlayerShadowPos.x;
+        gPlayerShadowPosTemp.z = gPlayerShadowPos.z;
+    }
+
+    if ( sub_800AEFC(&gPlayerPosTemp, &gPlayerShadowPosTemp, c) )
+    {
+        gPlayerPos.x = gPlayerPosTemp.x;
+        gPlayerPos.y = gPlayerPosTemp.y;
+        gPlayerPos.z = gPlayerPosTemp.z;
+        gPlayerShadowPos.x = gPlayerShadowPosTemp.x;
+        gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
+        gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
+
+        if ( byte_30029F8 && sub_80038BC(dword_2000FC8) && !(gPlayerStateSettings[gPlayerState] & 0x100))
+        {
+            sub_800387C(dword_2000FC8);
+            sub_80181B8(&gPlayerPos.y);
+        }
+    }
+
+update_camera:
+    if ( !gIsSlideMiniGame )
+    {
+        stru_30032E8.x = gPlayerPos.x - (dword_3003300 >> 1);
+        stru_30032E8.y = gPlayerPos.y;
+        stru_30032E8.z = gPlayerPos.z - (dword_3003304 >> 1);
+        stru_30032F4.x = gPlayerPos.x + (dword_3003300 >> 1);
+        stru_30032F4.y = gPlayerPos.y + dword_3003308;
+        stru_30032F4.z = gPlayerPos.z + (dword_3003304 >> 1);
+        CameraUpdate(&gPlayerPos, dword_2001110, dword_2001114, word_2002EC2);
+    }
+}
+#endif

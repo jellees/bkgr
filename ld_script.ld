@@ -301,6 +301,9 @@ SECTIONS
         . = 0x00002E4A;
         byte_2002E4A = .; . += 1;
 
+        . = 0x00002EC2;
+        word_2002EC2 = .; . += 2;
+
         . = 0x00007884;
         gIsPaletteEffectsActive = .; . += 1;
 
@@ -384,6 +387,7 @@ SECTIONS
         gFloorPlaneResult = .; . += 0x54;
         stru_3002950 = .; . += 0x54;
         gWallPlaneResult = .; . += 0x54;
+        byte_30029F8 = .; . += 1;
 
         . = 0x00002A6C;
         gFunctionArray = .; . += 4 * 14;
@@ -407,16 +411,14 @@ SECTIONS
         dword_30032CC = .; . += 4;
         gPlayerPos = .; . += 0xC;
         gPlayerShadowPos = .; . += 0xC;
-
-        . = 0x00003300;
+        stru_30032E8 = .; . += 0xC;
+        stru_30032F4 = .; . += 0xC;
         dword_3003300 = .; . += 4;
         dword_3003304 = .; . += 4;
         dword_3003308 = .; . += 4;
 
         . = 0x0000331C;
-        dword_300331C = .; . += 4;
-
-        . = 0x00003328;
+        stru_300331C = .; . += 0xC;
         gPlayerPosTemp = .; . += 0xC;
         gPlayerShadowPosTemp = .; . += 0xC;
 

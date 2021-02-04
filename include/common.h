@@ -477,6 +477,8 @@ extern u8 byte_20021F9;
 
 extern bool8 byte_2002E4A;
 
+extern s16 word_2002EC2;
+
 extern bool8 gIsPaletteEffectsActive;
 
 extern u32* gEntitySection;
@@ -527,6 +529,7 @@ extern u8 unk_3000000;
 extern struct struc_44 gFloorPlaneResult;
 extern struct struc_44 stru_3002950;
 extern struct struc_44 gWallPlaneResult;
+extern u8 byte_30029F8;
 
 extern void (*gFunctionArray[14])();
 extern void (*gNullsub_3)();
@@ -547,13 +550,13 @@ extern u16 gKeysDown;
 extern u32 dword_30032CC;
 extern struct Vec3fx gPlayerPos;
 extern struct Vec3fx gPlayerShadowPos;
-
+extern struct Vec3fx stru_30032E8;
+extern struct Vec3fx stru_30032F4;
 extern u32 dword_3003300;
 extern u32 dword_3003304;
 extern u32 dword_3003308;
 
-extern u32 dword_300331C;
-
+extern struct Vec3fx stru_300331C;
 extern struct Vec3fx gPlayerPosTemp;
 extern struct Vec3fx gPlayerShadowPosTemp;
 

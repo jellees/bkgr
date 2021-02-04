@@ -461,6 +461,7 @@ _0800B5E0: .4byte 0x02001114
 _0800B5E4: .4byte 0x02002EC2
 
     .thumb
+	.global CameraUpdate
 CameraUpdate: @ 0x0800B5E8
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
