@@ -512,9 +512,7 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, cha
     return FALSE;
 }
 
-#ifdef NONMATCHING
-
-extern s8 sub_80038BC(u32);
+extern u8 sub_80038BC(u32);
 
 void update_player()
 {
@@ -523,14 +521,14 @@ void update_player()
     struct Vec3fx vec2;
     struct Vec3fx vec3;
 
-    sub_800AA6C(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, &vec3);
+    sub_800AA6C(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec3, &vec1);
 
     if (sub_802ADE8(&gPlayerPosTemp))
         return;
     
     sub_800A740(&gPlayerPosTemp, &gPlayerShadowPosTemp);
 
-    if (byte_20020B1 == 3)
+    if (byte_20020B1 != 3)
     {
         stru_300331C.x = 0x40000;
         stru_300331C.y = dword_3003308;
@@ -550,9 +548,9 @@ void update_player()
     {
         if (!sub_800AB54(&gPlayerPosTemp, &gPlayerShadowPosTemp))
         {
-            goto update_camera;
+            return;
         }
-        return;
+        goto update_camera;
     }
 
     sub_08009208(&gPlayerPosTemp, &stru_3002950);
@@ -588,14 +586,14 @@ void update_player()
     sub_8006FFC(c, &gWallPlaneResult, &gFloorPlaneResult);
     sub_8007AC4(c);
 
-    if (stru_3002950.isColliding)
+    if (!stru_3002950.isColliding)
     {
-        if (!gFloorPlaneResult.isColliding || dword_20011FC)
+        if (gFloorPlaneResult.isColliding || dword_20011FC > 0)
         {
-            gFloorPlaneResult.isColliding = 1;
+            stru_3002950.isColliding = 1;
             dword_20011FC--;
         }
-        else if (!gWallPlaneResult.isColliding || dword_203DFC4)
+        else if (!gWallPlaneResult.isColliding && !dword_203DFC4)
         {
             return;
         }
@@ -610,22 +608,18 @@ void update_player()
         goto update_camera;
     }
 
-    if (sub_800ABD4(&gPlayerPosTemp, &gPlayerShadowPosTemp))
+    if (!sub_800ABD4(&gPlayerPosTemp, &gPlayerShadowPosTemp))
     {
         return;
     }
 
     sub_800AD64();
 
-    if (gPlayerStateSettings[gPlayerState] & 0x400 && gPlayerStateSettings[gPlayerState] & 0x100)
+    if (!(gPlayerStateSettings[gPlayerState] & 0x400) && !(gPlayerStateSettings[gPlayerState] & 0x100))
     {
         sub_800E61C();
-        if (gWallPlaneResult.isColliding && sub_0800B04C(&vec1, &gPlayerPosTemp, &gPlayerShadowPosTemp, c))
-        {
-            goto update_camera;
-        }
-
-        if (!sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c))
+        if (gWallPlaneResult.isColliding && !sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c)
+            || !sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c))
         {
             goto update_camera;
         }
@@ -644,7 +638,7 @@ void update_player()
         return;
 
     if ( gWallPlaneResult.isColliding )
-        sub_0800B04C(&vec1, &gPlayerPosTemp, &gPlayerShadowPosTemp, c);
+        sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c);
 
     if ( gPlayerStateSettings[gPlayerState] & 0x100 && gWallPlaneResult.isColliding )
     {
@@ -663,7 +657,7 @@ void update_player()
         gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
         gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
 
-        if ( byte_30029F8 && sub_80038BC(dword_2000FC8) && !(gPlayerStateSettings[gPlayerState] & 0x100))
+        if ( byte_30029F8 && !sub_80038BC(dword_2000FC8) && !(gPlayerStateSettings[gPlayerState] & 0x100))
         {
             sub_800387C(dword_2000FC8);
             sub_80181B8(&gPlayerPos.y);
@@ -682,4 +676,3 @@ update_camera:
         CameraUpdate(&gPlayerPos, dword_2001110, dword_2001114, word_2002EC2);
     }
 }
-#endif

@@ -432,7 +432,7 @@ extern u32 dword_2001114;
 extern u8 byte_200112A;
 
 extern u32 dword_20011F8;
-extern u32 dword_20011FC;
+extern s32 dword_20011FC;
 
 extern u16 word_200145C;
 extern u16 word_200145E;
@@ -552,9 +552,9 @@ extern struct Vec3fx gPlayerPos;
 extern struct Vec3fx gPlayerShadowPos;
 extern struct Vec3fx stru_30032E8;
 extern struct Vec3fx stru_30032F4;
-extern u32 dword_3003300;
-extern u32 dword_3003304;
-extern u32 dword_3003308;
+extern s32 dword_3003300;
+extern s32 dword_3003304;
+extern s32 dword_3003308;
 
 extern struct Vec3fx stru_300331C;
 extern struct Vec3fx gPlayerPosTemp;
