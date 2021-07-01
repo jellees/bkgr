@@ -676,3 +676,49 @@ update_camera:
         CameraUpdate(&gPlayerPos, dword_2001110, dword_2001114, word_2002EC2);
     }
 }
+
+void CameraUpdate(struct Vec3fx* position, s32 a2, s32 a3, u32 a4)
+{
+    s32 direction;
+
+    s32 oldCamPosX = gCameraPosX;
+    s32 oldCamPosY = gCameraPosY;
+
+    gCameraGoalPosX = position->x + (a2 << 16);
+    gCameraGoalPosY = (gMapPixelSizeY << 16) - (position->y + position->z + (a3 << 16) + (a4 << 16));
+
+    CameraMove(a4);
+
+    direction = oldCamPosX - gCameraPosX < 0 ? 2 : 1;
+    direction |= oldCamPosY - gCameraPosY < 0 ? 8 : 4;
+
+    gPlayerSprite.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
+    gPlayerSprite.yPos = ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3;
+    gPlayerShadowSprite.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
+    gPlayerShadowSprite.yPos
+        = ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3 + ((gPlayerPos.y - gPlayerShadowPos.y) >> 16);
+
+    if (byte_20010AF)
+    {
+        sprite_2000FAC.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
+        sprite_2000FAC.yPos = ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3;
+    }
+
+    if (direction & 1)
+    {
+        UpdateMapLeft(gCameraPosX);
+    }
+    else if (direction & 2)
+    {
+        UpdateMapRight(gCameraPosX);
+    }
+
+    if (direction & 4)
+    {
+        UpdateMapUp(gCameraPosY);
+    }
+    else if (direction & 8)
+    {
+        UpdateMapDown(gCameraPosY);
+    }
+}
