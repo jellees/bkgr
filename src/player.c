@@ -615,7 +615,7 @@ void update_player()
             if (!(gPlayerStateSettings[gPlayerState] & 0x400) && !(gPlayerStateSettings[gPlayerState] & 0x100))
             {
                 sub_800E61C();
-                
+
                 if (gWallPlaneResult.isColliding && !sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c)
                     || !sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c))
                 {

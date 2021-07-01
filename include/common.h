@@ -390,9 +390,8 @@ extern u8 gUnused_ExecUnusedInputFunc;
 
 extern struct Sprite gPlayerSprite;
 extern struct Sprite gPlayerShadowSprite;
-
+extern struct Sprite sprite_2000FAC;
 extern u32 dword_2000FC8;
-
 extern u8 byte_2000FCC[120];
 extern struct GameStatus gGameStatus;
 extern struct SaveFile gSaveFiles[3];
@@ -555,7 +554,10 @@ extern struct Vec3fx stru_30032F4;
 extern s32 dword_3003300;
 extern s32 dword_3003304;
 extern s32 dword_3003308;
-
+extern s32 gCameraPosX;
+extern s32 gCameraPosY;
+extern s32 gCameraGoalPosX;
+extern s32 gCameraGoalPosY;
 extern struct Vec3fx stru_300331C;
 extern struct Vec3fx gPlayerPosTemp;
 extern struct Vec3fx gPlayerShadowPosTemp;

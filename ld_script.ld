@@ -50,11 +50,8 @@ SECTIONS
         . = 0x00000F74;
         gPlayerSprite = .; . += 0x1C;
         gPlayerShadowSprite = .; . += 0x1C;
-
-        . = 0x00000FC8;
+        sprite_2000FAC = .; . += 0x1C;
         dword_2000FC8 = .; . += 4;
-
-        . = 0x00000FCC;
         byte_2000FCC = .; . += 120; /*  array */
         gGameStatus = .; . += 0x20;
         gSaveFiles = .; . += 8 * 3;
@@ -416,8 +413,10 @@ SECTIONS
         dword_3003300 = .; . += 4;
         dword_3003304 = .; . += 4;
         dword_3003308 = .; . += 4;
-
-        . = 0x0000331C;
+        gCameraPosX = .; . += 4;
+        gCameraPosY = .; . += 4;
+        gCameraGoalPosX = .; . += 4;
+        gCameraGoalPosY = .; . += 4;
         stru_300331C = .; . += 0xC;
         gPlayerPosTemp = .; . += 0xC;
         gPlayerShadowPosTemp = .; . += 0xC;
