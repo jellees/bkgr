@@ -530,18 +530,16 @@ void update_player() {
                 && !(gPlayerStateSettings[gPlayerState] & 0x100)) {
                 sub_800E61C();
 
-                if (gWallPlaneResult.isColliding
-                        && !sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c)
-                    || !sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c)) {
-                    goto update_camera_label;
+                if ((!gWallPlaneResult.isColliding
+                     || sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c))
+                    && sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c)) {
+                    gPlayerPos.x = gPlayerPosTemp.x;
+                    gPlayerPos.y = gPlayerPosTemp.y;
+                    gPlayerPos.z = gPlayerPosTemp.z;
+                    gPlayerShadowPos.x = gPlayerShadowPosTemp.x;
+                    gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
+                    gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
                 }
-
-                gPlayerPos.x = gPlayerPosTemp.x;
-                gPlayerPos.y = gPlayerPosTemp.y;
-                gPlayerPos.z = gPlayerPosTemp.z;
-                gPlayerShadowPos.x = gPlayerShadowPosTemp.x;
-                gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
-                gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
             } else {
                 if (sub_0800A8B4()) {
                     return;
@@ -576,7 +574,6 @@ void update_player() {
         }
     }
 
-update_camera_label:
     if (!gIsSlideMiniGame) {
         stru_30032E8.x = gPlayerPos.x - (dword_3003300 >> 1);
         stru_30032E8.y = gPlayerPos.y;
