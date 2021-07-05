@@ -427,6 +427,8 @@ extern u32 dword_2001108;
 extern u8 byte_200110C; // possibly bool8
 extern u32 dword_2001110;
 extern u32 dword_2001114;
+extern u8 byte_2001118;
+extern u8 byte_2001119;
 
 extern u8 byte_200112A;
 
@@ -554,10 +556,10 @@ extern struct Vec3fx stru_30032F4;
 extern s32 dword_3003300;
 extern s32 dword_3003304;
 extern s32 dword_3003308;
-extern s32 gCameraPosX;
-extern s32 gCameraPosY;
-extern s32 gCameraGoalPosX;
-extern s32 gCameraGoalPosY;
+extern fx32 gCameraPosX;
+extern fx32 gCameraPosY;
+extern fx32 gCameraGoalPosX;
+extern fx32 gCameraGoalPosY;
 extern struct Vec3fx stru_300331C;
 extern struct Vec3fx gPlayerPosTemp;
 extern struct Vec3fx gPlayerShadowPosTemp;
