@@ -2,6 +2,8 @@
 #include "sprite.h"
 #include "common.h"
 
+extern u8 sub_80038BC(u32);
+
 void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2)
 {
     if (!dword_203DFC4)
@@ -511,8 +513,6 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, cha
 
     return FALSE;
 }
-
-extern u8 sub_80038BC(u32);
 
 void update_player()
 {
