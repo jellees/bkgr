@@ -20,8 +20,7 @@ extern u32 DoesMemBlockExistById(int, int);
 
 extern void DmaFill32(int, void*, int);
 
-void InitPregame()
-{
+void InitPregame() {
     byte_20021F0 = 0;
     dword_20021F4 = 0x10000;
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_4;
@@ -31,29 +30,24 @@ void InitPregame()
     DmaTransfer32((void*)0x83FD254, OBJ_PLTT, 128);
 }
 
-void ExecutePregame()
-{
+void ExecutePregame() {
     byte_2000335 = 0;
     byte_20021F9 = 0;
     dword_203F4DC = 0;
 
-    if (!sub_8044860())
-    {
+    if (!sub_8044860()) {
         gPauseMenuLanguage = 0;
         byte_2000335 = 1;
         byte_20021F9 = 1;
         byte_20021F8 = 0;
         reset_savefiles();
         MakeFileStrings();
-    }
-    else
-    {
+    } else {
         init_savefiles();
         MakeFileStrings();
         byte_20021F8 = 1;
 
-        if (gSaveFiles[0].empty && gSaveFiles[1].empty && gSaveFiles[2].empty || byte_2000335)
-        {
+        if (gSaveFiles[0].empty && gSaveFiles[1].empty && gSaveFiles[2].empty || byte_2000335) {
             byte_20021F9 = 1;
             byte_20021F8 = 0;
         }
@@ -65,8 +59,9 @@ void ExecutePregame()
     ShowSelectGame(ShowPressStart());
     SetTextSpriteCount(0);
 
-    if (!byte_20021F9)
+    if (!byte_20021F9) {
         sub_80270AC(4095, 1);
+    }
 
     FreeById(4, 15);
     ResetMenu();
@@ -74,8 +69,7 @@ void ExecutePregame()
     ASSERT(DoesMemBlockExistById(4, 15) == FALSE);
 }
 
-void ShowSelectGame(int a1)
-{
+void ShowSelectGame(int a1) {
     int v2;
     bool32 v3;
 
@@ -89,48 +83,44 @@ void ShowSelectGame(int a1)
     gMenuId = MENU_GAME_OR_CONTINUE;
     gMenuParentId = -1;
 
-    if (!byte_20021F9)
+    if (!byte_20021F9) {
         AdvanceMenuEntryDown();
+    }
 
     SyncVblank();
     UpdateVideo();
     SkipVblank();
     SetObjectsFullAlpha();
 
-    if (a1)
-    {
+    if (a1) {
         REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG1;
         REG_BG1CNT &= BGCNT_MASK_NO_PRIORITY;
         v2 = 2;
-    }
-    else
-    {
+    } else {
         v2 = 0;
     }
 
     v3 = TRUE;
 
-    while (1)
-    {
+    while (1) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
-        if (gKeysDown & B_BUTTON)
-        {
-            if (gMenuParentId != 0xFF)
-            {
+        if (gKeysDown & B_BUTTON) {
+            if (gMenuParentId != 0xFF) {
                 u8 id, id2;
                 gMenuId = gMenuParentId;
                 id = gMenuId;
-                if (!id)
+
+                if (!id) {
                     gMenuParentId = -1;
-                else
+                } else {
                     HANG;
+                }
+
                 id2 = gMenuId;
                 InitMenu(id2, gPauseMenuLanguage);
             }
-        }
-        else if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON)
-        {
+        } else if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON) {
             if (sub_8024200())
                 break;
             SetTextSpriteCount(0);
@@ -149,14 +139,10 @@ void ShowSelectGame(int a1)
             v3 = TRUE;
         }
 
-        if (!(gKeysDown & JOY_EXCL_DPAD))
-        {
-            if (gKeysDown & DPAD_UP)
-            {
-                if (!byte_20021F9)
-                {
-                    if (byte_203EA89)
-                    {
+        if (!(gKeysDown & JOY_EXCL_DPAD)) {
+            if (gKeysDown & DPAD_UP) {
+                if (!byte_20021F9) {
+                    if (byte_203EA89) {
                         u16 value0 = dSoundEffects[204].index;
                         u8 value1 = dSoundEffects[204].volumes[byte_203EA8C];
                         u32 value2 = dSoundEffects[204].pitch + 0x10000;
@@ -164,11 +150,8 @@ void ShowSelectGame(int a1)
                     }
                     AdvanceMenuEntryUp();
                 }
-            }
-            else if (gKeysDown & DPAD_DOWN && !byte_20021F9)
-            {
-                if (byte_203EA89)
-                {
+            } else if (gKeysDown & DPAD_DOWN && !byte_20021F9) {
+                if (byte_203EA89) {
                     u16 value0 = dSoundEffects[204].index;
                     u8 value1 = dSoundEffects[204].volumes[byte_203EA8C];
                     u32 value2 = dSoundEffects[204].pitch + 0x10000;
@@ -193,8 +176,9 @@ void ShowSelectGame(int a1)
         UpdateVideo();
         SkipVblank();
 
-        if (v3 == FALSE)
+        if (v3 == FALSE) {
             continue;
+        }
 
         sub_08026BA8(2, v2);
         v3 = FALSE;
@@ -204,101 +188,115 @@ void ShowSelectGame(int a1)
     SkipVblank();
 }
 
-int sub_8024200()
-{
-    switch (gMenuId)
-    {
-    case MENU_GAME_OR_CONTINUE:
-        switch (GetCurrentMenuEntry())
-        {
-        case 0:
-            FadeOutObjects(2, 2);
-            REG_BG1CNT |= 3;
-            sub_80254E0();
-            sub_8026D84();
-            sub_805E1DC(2);
-            SetTextSpriteCount(0);
-            byte_20021F9 = 1;
+int sub_8024200() {
+    switch (gMenuId) {
+        case MENU_GAME_OR_CONTINUE:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    FadeOutObjects(2, 2);
+                    REG_BG1CNT |= 3;
+                    sub_80254E0();
+                    sub_8026D84();
+                    sub_805E1DC(2);
+                    SetTextSpriteCount(0);
+                    byte_20021F9 = 1;
+                    return 1;
+
+                case 1:
+                    FadeOutObjects(2, 2);
+                    REG_BG1CNT |= 3;
+                    if (sub_80246C8())
+                        return 1;
+                    InitMenu(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
+                    gMenuId = MENU_GAME_OR_CONTINUE;
+                    gMenuParentId = -1;
+                    AdvanceMenuEntryDown();
+                    break;
+            }
+
+            return 0;
+
+        case MENU_FILE_SELECT:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    if (byte_20021F9) {
+                        break;
+                    }
+                    gContinueGame = sub_08044C00(0);
+                    if (gContinueGame) {
+                        sub_8038A34();
+                        sub_803FE78();
+                        dword_203F4DC = 0;
+                    } else {
+                        HANG;
+                    }
+                    return 1;
+
+                case 1:
+                    if (byte_20021F9) {
+                        break;
+                    }
+                    gContinueGame = sub_08044C00(1);
+                    if (gContinueGame) {
+                        sub_8038A34();
+                        sub_803FE78();
+                        dword_203F4DC = 1;
+                    } else {
+                        HANG;
+                    }
+                    return 1;
+
+                case 2:
+                    if (byte_20021F9) {
+                        break;
+                    }
+                    gContinueGame = sub_08044C00(2);
+                    if (gContinueGame) {
+                        sub_8038A34();
+                        sub_803FE78();
+                        dword_203F4DC = 2;
+                    } else {
+                        HANG;
+                    }
+                    return 1;
+
+                default:
+                    return 0;
+            }
             return 1;
-        case 1:
-            FadeOutObjects(2, 2);
-            REG_BG1CNT |= 3;
-            if (sub_80246C8())
-                return 1;
-            InitMenu(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
-            gMenuId = MENU_GAME_OR_CONTINUE;
-            gMenuParentId = -1;
-            AdvanceMenuEntryDown();
-            break;
-        }
-        return 0;
-    case MENU_FILE_SELECT:
-        switch (GetCurrentMenuEntry())
-        {
-        case 0:
-            if (byte_20021F9)
-                break;
-            gContinueGame = sub_08044C00(0);
-            if (gContinueGame)
-            {
-                sub_8038A34();
-                sub_803FE78();
-                dword_203F4DC = 0;
+
+        case MENU_LANGUAGE:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    gPauseMenuLanguage = 0;
+                    return 1;
+
+                case 1:
+                    gPauseMenuLanguage = 1;
+                    return 1;
+
+                case 2:
+                    gPauseMenuLanguage = 2;
+                    return 1;
+
+                case 3:
+                    gPauseMenuLanguage = 3;
+                    return 1;
+
+                case 4:
+                    gPauseMenuLanguage = 4;
+                    return 1;
+
+                default:
+                    return 0;
             }
-            else
-            {
-                HANG;
-            }
-            return 1;
-        case 1:
-            if (byte_20021F9)
-                break;
-            gContinueGame = sub_08044C00(1);
-            if (gContinueGame)
-            {
-                sub_8038A34();
-                sub_803FE78();
-                dword_203F4DC = 1;
-            }
-            else
-            {
-                HANG;
-            }
-            return 1;
-        case 2:
-            if (byte_20021F9)
-                break;
-            gContinueGame = sub_08044C00(2);
-            if (gContinueGame)
-            {
-                sub_8038A34();
-                sub_803FE78();
-                dword_203F4DC = 2;
-            }
-            else
-            {
-                HANG;
-            }
-            return 1;
-        default: return 0;
-        }
-        return 1;
-    case MENU_LANGUAGE:
-        switch (GetCurrentMenuEntry())
-        {
-        case 0: gPauseMenuLanguage = 0; return 1;
-        case 1: gPauseMenuLanguage = 1; return 1;
-        case 2: gPauseMenuLanguage = 2; return 1;
-        case 3: gPauseMenuLanguage = 3; return 1;
-        case 4: gPauseMenuLanguage = 4; return 1;
-        default: return 0;
-        }
-    default: return 0;
+
+        default:
+            return 0;
     }
 }
 
-int ShowPressStart()
-{
+int ShowPressStart() {
     s32 v3;
     bool32 v4;
     struct TextBox v2;
@@ -416,22 +414,17 @@ int ShowPressStart()
     v3 = sub_8025870(string, &v2);
     v4 = FALSE;
 
-    while (1)
-    {
+    while (1) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
-        if (gKeysDown & 8 || gKeysDown & 1)
-        {
-            if (gPauseMenuLanguage == 255)
-            {
+        if (gKeysDown & 8 || gKeysDown & 1) {
+            if (gPauseMenuLanguage == 255) {
                 FadeOutObjects(2, 2);
                 REG_BG1CNT |= 3u;
                 SetTextSpriteCount(0);
                 ShowLanguageSelect();
                 v4 = TRUE;
-            }
-            else
-            {
+            } else {
                 FadeOutObjects(2, 0);
                 SetTextSpriteCount(0);
             }
@@ -461,8 +454,7 @@ int ShowPressStart()
     return v4;
 }
 
-int sub_80246C8()
-{
+int sub_80246C8() {
     u8* text;
     struct TextBox textbox;
     s32 v3;
@@ -479,13 +471,26 @@ int sub_80246C8()
 
     text = NULL;
 
-    switch (gPauseMenuLanguage)
-    {
-    case 0: text = (u8*)0x8068048; break;
-    case 1: text = (u8*)0x80680D4; break;
-    case 3: text = (u8*)0x806817C; break;
-    case 2: text = (u8*)0x8068238; break;
-    case 4: text = (u8*)0x80682D0; break;
+    switch (gPauseMenuLanguage) {
+        case 0:
+            text = (u8*)0x8068048;
+            break;
+
+        case 1:
+            text = (u8*)0x80680D4;
+            break;
+
+        case 3:
+            text = (u8*)0x806817C;
+            break;
+
+        case 2:
+            text = (u8*)0x8068238;
+            break;
+
+        case 4:
+            text = (u8*)0x80682D0;
+            break;
     }
 
     v3 = sub_8025870(text, &textbox);
@@ -494,20 +499,13 @@ int sub_80246C8()
     gMenuParentId = gMenuId;
     gMenuId = MENU_FILE_SELECT;
 
-    if (!gSaveFiles[0].empty)
-    {
+    if (!gSaveFiles[0].empty) {
         SetMenuEntry(0);
-    }
-    else if (!gSaveFiles[1].empty)
-    {
+    } else if (!gSaveFiles[1].empty) {
         SetMenuEntry(1);
-    }
-    else if (!gSaveFiles[2].empty)
-    {
+    } else if (!gSaveFiles[2].empty) {
         SetMenuEntry(2);
-    }
-    else
-    {
+    } else {
         HANG;
     }
 
@@ -525,52 +523,41 @@ int sub_80246C8()
     SyncVblank();
     SkipVblank();
 
-    while (1)
-    {
+    while (1) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
-        if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON)
-        {
-            if (sub_8024200())
-            {
+        if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON) {
+            if (sub_8024200()) {
                 sub_80270AC(0xFFF, 0);
                 sub_805E1DC(2);
                 SetTextSpriteCount(0);
                 return 1;
             }
-        }
-        else if (gKeysDown & B_BUTTON)
-        {
+        } else if (gKeysDown & B_BUTTON) {
             FadeOutObjects(2, 0);
             SetTextSpriteCount(0);
             return 0;
         }
 
-        if (!(gKeysDown & JOY_EXCL_DPAD))
-        {
-            if (gKeysDown & DPAD_UP)
-            {
-                if (byte_203EA89)
-                {
+        if (!(gKeysDown & JOY_EXCL_DPAD)) {
+            if (gKeysDown & DPAD_UP) {
+                if (byte_203EA89) {
                     audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
                                  dSoundEffects[204].pitch + 0x10000);
                 }
 
-                do
+                do {
                     AdvanceMenuEntryUp();
-                while (gSaveFiles[GetCurrentMenuEntry()].empty);
-            }
-            else if (gKeysDown & DPAD_DOWN)
-            {
-                if (byte_203EA89)
-                {
+                } while (gSaveFiles[GetCurrentMenuEntry()].empty);
+            } else if (gKeysDown & DPAD_DOWN) {
+                if (byte_203EA89) {
                     audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
                                  dSoundEffects[204].pitch + 0x10000);
                 }
 
-                do
+                do {
                     AdvanceMenuEntryDown();
-                while (gSaveFiles[GetCurrentMenuEntry()].empty);
+                } while (gSaveFiles[GetCurrentMenuEntry()].empty);
             }
         }
 
@@ -593,16 +580,14 @@ int sub_80246C8()
         UpdateVideo();
         SkipVblank();
 
-        if (v4)
-        {
+        if (v4) {
             sub_08026BA8(2, 0);
             v4 = FALSE;
         }
     }
 }
 
-void ShowLanguageSelect()
-{
+void ShowLanguageSelect() {
     bool32 v0;
 
     InitMenu(MENU_LANGUAGE, 0);
@@ -622,31 +607,27 @@ void ShowLanguageSelect()
     SyncVblank();
     SkipVblank();
 
-    while (1)
-    {
+    while (1) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
-        if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON)
-        {
+        if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON) {
             if (sub_8024200())
                 break;
         }
 
-        if (!(gKeysDown & JOY_EXCL_DPAD))
-        {
-            if (gKeysDown & DPAD_UP)
-            {
-                if (byte_203EA89)
+        if (!(gKeysDown & JOY_EXCL_DPAD)) {
+            if (gKeysDown & DPAD_UP) {
+                if (byte_203EA89) {
                     audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
                                  dSoundEffects[204].pitch + 0x10000);
+                }
 
                 AdvanceMenuEntryUp();
-            }
-            else if (gKeysDown & DPAD_DOWN)
-            {
-                if (byte_203EA89)
+            } else if (gKeysDown & DPAD_DOWN) {
+                if (byte_203EA89) {
                     audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
                                  dSoundEffects[204].pitch + 0x10000);
+                }
 
                 AdvanceMenuEntryDown();
             }
@@ -665,8 +646,7 @@ void ShowLanguageSelect()
         UpdateVideo();
         SkipVblank();
 
-        if (v0)
-        {
+        if (v0) {
             sub_08026BA8(2, 0);
             v0 = FALSE;
         }
@@ -678,8 +658,7 @@ void ShowLanguageSelect()
     SkipVblank();
 }
 
-void ShowEraseData()
-{
+void ShowEraseData() {
     s32 action;
     s32 v1;
     bool32 renderMenu;
@@ -724,45 +703,36 @@ void ShowEraseData()
     v7 = FALSE;
     renderMenu = TRUE;
 
-    while (1)
-    {
-        if (allowInput)
-        {
+    while (1) {
+        if (allowInput) {
             ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
-            if (gKeysDown & A_BUTTON)
-            {
-                switch (GetCurrentMenuEntry())
-                {
-                case 0:
-                    allowInput = FALSE;
-                    action = 1;
-                    v7 = TRUE;
-                    renderMenu = FALSE;
-                    break;
-                case 1:
-                    allowInput = FALSE;
-                    action = 3;
-                    v1 = 180;
-                    renderMenu = FALSE;
+            if (gKeysDown & A_BUTTON) {
+                switch (GetCurrentMenuEntry()) {
+                    case 0:
+                        allowInput = FALSE;
+                        action = 1;
+                        v7 = TRUE;
+                        renderMenu = FALSE;
+                        break;
+
+                    case 1:
+                        allowInput = FALSE;
+                        action = 3;
+                        v1 = 180;
+                        renderMenu = FALSE;
                 }
             }
 
-            if (!(gKeysDown & JOY_EXCL_DPAD))
-            {
-                if (gKeysDown & DPAD_UP)
-                {
-                    if (byte_203EA89)
-                    {
+            if (!(gKeysDown & JOY_EXCL_DPAD)) {
+                if (gKeysDown & DPAD_UP) {
+                    if (byte_203EA89) {
                         audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
                                      dSoundEffects[204].pitch + 0x10000);
                     }
                     AdvanceMenuEntryUp();
-                }
-                else if (gKeysDown & DPAD_DOWN)
-                {
-                    if (byte_203EA89)
-                    {
+                } else if (gKeysDown & DPAD_DOWN) {
+                    if (byte_203EA89) {
                         audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
                                      dSoundEffects[204].pitch + 0x10000);
                     }
@@ -783,25 +753,26 @@ void ShowEraseData()
         tb1.stringOffset = 0;
         AddStringToBuffer(&tb1, 0x080652AC);
 
-        switch (action)
-        {
-        case 1:
-            tb2.xPosition = 16;
-            tb2.yPosition = 70;
-            tb2.stringOffset = 0;
-            AddStringToBuffer(&tb2, 0x080652C4);
-            break;
-        case 2:
-            tb2.xPosition = 16;
-            tb2.yPosition = 70;
-            tb2.stringOffset = 0;
-            AddStringToBuffer(&tb2, 0x080652F0);
-            break;
-        case 3:
-            tb2.xPosition = 16;
-            tb2.yPosition = 70;
-            tb2.stringOffset = 0;
-            AddStringToBuffer(&tb2, 0x08065304);
+        switch (action) {
+            case 1:
+                tb2.xPosition = 16;
+                tb2.yPosition = 70;
+                tb2.stringOffset = 0;
+                AddStringToBuffer(&tb2, 0x080652C4);
+                break;
+
+            case 2:
+                tb2.xPosition = 16;
+                tb2.yPosition = 70;
+                tb2.stringOffset = 0;
+                AddStringToBuffer(&tb2, 0x080652F0);
+                break;
+
+            case 3:
+                tb2.xPosition = 16;
+                tb2.yPosition = 70;
+                tb2.stringOffset = 0;
+                AddStringToBuffer(&tb2, 0x08065304);
         }
 
         if (renderMenu)
@@ -813,26 +784,24 @@ void ShowEraseData()
         UpdateVideo();
         SkipVblank();
 
-        if (v7)
-        {
+        if (v7) {
             sub_8044D30();
             v1 = 180;
             action = 2;
             v7 = FALSE;
         }
 
-        if (v1 != -1)
-        {
-            if (v1 == 0)
+        if (v1 != -1) {
+            if (v1 == 0) {
                 sub_800A594();
-            else
+            } else {
                 --v1;
+            }
         }
     }
 }
 
-void ShowFlashscreens()
-{
+void ShowFlashscreens() {
     s32 minTime;
     s32 maxTime;
     bool32 canSkip;
@@ -856,39 +825,32 @@ void ShowFlashscreens()
     maxTime = 670;
     canSkip = FALSE;
 
-    while (byte_203F99E)
-    {
+    while (byte_203F99E) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
-        if (canSkip && gKeysDown & START_BUTTON)
-        {
+        if (canSkip && gKeysDown & START_BUTTON) {
             audio_halt_all_fx();
             sub_805E1DC(2);
             init_function(8);
             canSkip = FALSE;
         }
 
-        if (minTime == 0)
-        {
+        if (minTime == 0) {
             canSkip = TRUE;
             minTime = -1;
-        }
-        else if (minTime > 0)
-        {
+        } else if (minTime > 0) {
             minTime--;
         }
 
-        if (maxTime == 0)
-        {
+        if (maxTime == 0) {
             canSkip = FALSE;
-        }
-        else
-        {
+        } else {
             maxTime--;
         }
 
-        if (gIsPaletteEffectsActive)
+        if (gIsPaletteEffectsActive) {
             sub_8026DC0();
+        }
 
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
@@ -954,7 +916,7 @@ void ShowFlashscreens()
 
 //     dword_2002200 = r1;
 //     dword_20021FC = Alloc(r1 * 40, 0x11, 4);
-    
+
 //     buffer = &dword_86AD314[0];
 
 //     if (dword_2002200 > 0)
@@ -968,7 +930,7 @@ void ShowFlashscreens()
 
 //         // do
 //         // {
-            
+
 //         // }
 //         // while();
 //     }

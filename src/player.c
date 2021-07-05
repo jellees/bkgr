@@ -4,21 +4,16 @@
 
 extern u8 sub_80038BC(u32);
 
-void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2)
-{
+void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (!dword_203DFC4)
         return;
 
-    if (byte_203DFE6)
-    {
-        if (gPlayerStateSettings[gPlayerState] & 0x400)
-        {
+    if (byte_203DFE6) {
+        if (gPlayerStateSettings[gPlayerState] & 0x400) {
             u32 y = dword_203DFC4->field_98;
             a1->y = y;
             a2->y = y;
-        }
-        else
-        {
+        } else {
             u32 y;
             struct Vec3fx a;
             sub_8062444(dword_203DFC0[dword_203DFC4->field_1E], &a.x, &a.y, &a.z);
@@ -32,47 +27,37 @@ void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2)
             a1->y = y;
             a2->y = y;
         }
-    }
-    else if (byte_203DFE7)
-    {
+    } else if (byte_203DFE7) {
         a2->y = dword_203DFC4->field_98;
     }
 }
 
-bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2)
-{
-    if (byte_203DFE6)
-    {
-        if (gPlayerStateSettings[gPlayerState] & 0x400)
-        {
+bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2) {
+    if (byte_203DFE6) {
+        if (gPlayerStateSettings[gPlayerState] & 0x400) {
             if (!sub_8018BB0(&gPlayerSprite))
                 return TRUE;
 
             gPlayerPos.y = a1->y;
             gPlayerShadowPos.y = gPlayerPos.y;
             sub_800388C(dword_2000FC8, 0, 0);
-        }
-        else
-        {
-            if (!gWallPlaneResult.isColliding)
-            {
+        } else {
+            if (!gWallPlaneResult.isColliding) {
                 gPlayerPos.x = a1->x;
                 gPlayerPos.z = a1->z;
                 gPlayerShadowPos.x = gPlayerPos.x;
                 gPlayerShadowPos.z = gPlayerPos.z;
             }
+
             gPlayerPos.y = a1->y;
             gPlayerShadowPos.y = gPlayerPos.y;
         }
 
         return TRUE;
-    }
-    else if (byte_203DFE7)
-    {
+    } else if (byte_203DFE7) {
         gPlayerShadowPos.y = a2->y;
 
-        if (!gWallPlaneResult.isColliding)
-        {
+        if (!gWallPlaneResult.isColliding) {
             gPlayerPos.x = a1->x;
             gPlayerPos.y = a1->y;
             gPlayerPos.z = a1->z;
@@ -84,29 +69,25 @@ bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2)
     return FALSE;
 }
 
-bool32 sub_0800A8B4()
-{
+bool32 sub_0800A8B4() {
     if (gGameStatus.health != 0 && gFloorPlaneResult.isColliding && stru_3002950.warpDestRoom != 0
-        && gFloorPlaneResult.warpDestRoom == stru_3002950.warpDestRoom)
-    {
-        if (stru_3002950.warpDestRoom & 0x80)
-        {
-            if (gPlayerStateSettings[gPlayerState] & 0x100 && !(gPlayerStateSettings[gPlayerState] & 0x80))
-            {
+        && gFloorPlaneResult.warpDestRoom == stru_3002950.warpDestRoom) {
+        if (stru_3002950.warpDestRoom & 0x80) {
+            if (gPlayerStateSettings[gPlayerState] & 0x100
+                && !(gPlayerStateSettings[gPlayerState] & 0x80)) {
                 ASSERT((stru_3002950.warpDestRoom & 0x7F) - 1 <= 0x25);
 
                 if (sub_0800BCD4(&stru_3002950))
                     return TRUE;
             }
-        }
-        else
-        {
+        } else {
             ASSERT(gFloorPlaneResult.warpDestRoom - 1 <= 0x25);
 
-            if (sub_0800BCD4(&gFloorPlaneResult))
-            {
-                if (gPlayerStateSettings[gPlayerState] & 0x100)
+            if (sub_0800BCD4(&gFloorPlaneResult)) {
+                if (gPlayerStateSettings[gPlayerState] & 0x100) {
                     sub_8017A54();
+                }
+
                 return TRUE;
             }
         }
@@ -115,47 +96,38 @@ bool32 sub_0800A8B4()
     return FALSE;
 }
 
-bool32 sub_800A974()
-{
+bool32 sub_800A974() {
     if (gGameStatus.health == 0)
         return FALSE;
 
-    if (gFloorPlaneResult.floorType == 2 && stru_3002950.floorType == 2)
-    {
-        if (byte_20020B1 != 0 && byte_20020B1 != 4)
-        {
+    if (gFloorPlaneResult.floorType == 2 && stru_3002950.floorType == 2) {
+        if (byte_20020B1 != 0 && byte_20020B1 != 4) {
             sub_80192D4(16, -1, 0);
             return FALSE;
         }
 
         sub_8017C50();
-    }
-    else
-    {
-        if (gPlayerStateSettings[gPlayerState] & 0x200)
+    } else {
+        if (gPlayerStateSettings[gPlayerState] & 0x200) {
             sub_8017D9C();
+        }
     }
 
     return TRUE;
 }
 
-void sub_800A9F0()
-{
-    if (!byte_3003588)
-    {
+void sub_800A9F0() {
+    if (!byte_3003588) {
         sub_8003894(dword_2000FC8, dword_80CC7EC[gFloorPlaneResult.floorType]);
         sub_80038DC(dword_2000FC8, gFloorPlaneResult.field_28, gFloorPlaneResult.field_2C,
                     gFloorPlaneResult.floorType == 10 ? 1 : 0);
-    }
-    else
-    {
+    } else {
         sub_8003894(dword_2000FC8, dword_80CC818[gFloorPlaneResult.floorType]);
         sub_80038DC(dword_2000FC8, gFloorPlaneResult.field_28, gFloorPlaneResult.field_2C, 0);
     }
 }
 
-void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, struct Vec3fx* a4)
-{
+void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, struct Vec3fx* a4) {
     struct Vec3fx a;
     sub_80038C4(dword_2000FC8, &a.x, &a.y, &a.z);
 
@@ -166,45 +138,41 @@ void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, struct
     a1->x = gPlayerPos.x + a.x;
     a2->x = gPlayerShadowPos.x + a.x;
 
-    if (!(gPlayerStateSettings[gPlayerState] & 0x40))
-    {
+    if (!(gPlayerStateSettings[gPlayerState] & 0x40)) {
         a1->y = gPlayerPos.y + a.y;
         if (a1->y >= dword_2001088)
             a1->y = gPlayerPos.y;
         a2->y = gPlayerShadowPos.y;
         a1->z = gPlayerPos.z + a.z;
         a2->z = gPlayerShadowPos.z + a.z;
-    }
-    else
-    {
+    } else {
         a1->y = gPlayerPos.y + a.z;
         a2->y = gPlayerShadowPos.y;
         a1->z = gPlayerPos.z;
         a2->z = gPlayerShadowPos.z;
     }
 
-    if (a1->y < a2->y)
+    if (a1->y < a2->y) {
         a1->y = a2->y;
+    }
 
-    if (a1->y < 0)
+    if (a1->y < 0) {
         a1->y = 0;
+    }
 
     a4->x = a1->x - gPlayerPos.x;
     a4->y = a1->y - gPlayerPos.y;
     a4->z = a1->z - gPlayerPos.z;
 }
 
-bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2)
-{
-    if (!(gPlayerStateSettings[gPlayerState] & 0x400))
-    {
+bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2) {
+    if (!(gPlayerStateSettings[gPlayerState] & 0x400)) {
         struct Vec3fx a;
         a.x = a1->x;
         a.y = a1->y + 0x120000;
         a.z = a1->z;
 
-        if (sub_800953C(&a))
-        {
+        if (sub_800953C(&a)) {
             sub_08009208(a1, &stru_3002950);
             gPlayerPos.y = a1->y;
             gPlayerShadowPos.y = stru_3002950.floorHeight;
@@ -213,23 +181,18 @@ bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2)
 
             return TRUE;
         }
-    }
-    else
-    {
+    } else {
         sub_8017F14();
     }
 
     return FALSE;
 }
 
-bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
-{
-    if (gFloorPlaneResult.isColliding)
-    {
-        if (gFloorPlaneResult.floorType == 2 && byte_20020B1 != 0 && byte_20020B1 != 4 && gGameStatus.health != 0)
-        {
-            if (!byte_20020BC)
-            {
+bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
+    if (gFloorPlaneResult.isColliding) {
+        if (gFloorPlaneResult.floorType == 2 && byte_20020B1 != 0 && byte_20020B1 != 4
+            && gGameStatus.health != 0) {
+            if (!byte_20020BC) {
                 sub_80192D4(16, -1, 0);
             }
 
@@ -237,8 +200,7 @@ bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
         }
 
         if (gFloorPlaneResult.field_4E && !byte_200108E && byte_20020B1 != 4 && byte_20020B1 != 3
-            && !(gPlayerStateSettings[gPlayerState] & 0x1000))
-        {
+            && !(gPlayerStateSettings[gPlayerState] & 0x1000)) {
             sub_80192D4(gFloorPlaneResult.field_4E, -1, 1);
             byte_200108E = 1;
             word_2001092 = gFloorPlaneResult.field_4F;
@@ -250,19 +212,15 @@ bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
         }
     }
 
-    if (gWallPlaneResult.isColliding && gWallPlaneResult.floorType == 6 && stru_200209A.field_12 && !byte_20020B1
-        && gGameStatus.health != 0)
-    {
+    if (gWallPlaneResult.isColliding && gWallPlaneResult.floorType == 6 && stru_200209A.field_12
+        && !byte_20020B1 && gGameStatus.health != 0) {
         struct Vec3fx a;
         a.x = a1->x;
         a.y = a1->y + 0x120000;
         a.z = a1->z;
-        if (sub_800953C(&a))
-        {
-            if (sub_8018BB0(&gPlayerSprite))
-            {
-                if (audio_fx_still_active(dword_20020B4) && byte_203EA89)
-                {
+        if (sub_800953C(&a)) {
+            if (sub_8018BB0(&gPlayerSprite)) {
+                if (audio_fx_still_active(dword_20020B4) && byte_203EA89) {
                     audio_halt_fx(dword_20020B4);
                 }
 
@@ -280,167 +238,145 @@ bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2)
     return TRUE;
 }
 
-void sub_800AD64()
-{
+void sub_800AD64() {
     // Did the developers really write it like this?
 
     struct struc_44* plane = &stru_3002950;
 
-    if (!plane->isColliding)
+    if (!plane->isColliding) {
         return;
-
-    if (plane->field_7 || (plane = &gFloorPlaneResult)->isColliding)
-    {
-        sub_800388C(dword_2000FC8, plane->field_30, plane->field_34);
     }
-    else
-    {
+
+    if (plane->field_7 || (plane = &gFloorPlaneResult)->isColliding) {
+        sub_800388C(dword_2000FC8, plane->field_30, plane->field_34);
+    } else {
         sub_800388C(dword_2000FC8, 0, 0);
     }
 }
 
-bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4)
-{
+bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4) {
     fx32 a = a2->y;
-    a2->y = sub_80039C4(a2, stru_3002950.field_1C, stru_3002950.field_20, stru_3002950.staticFloorHeight);
-    if (a2->y < 0)
-        a2->y = a;
+    a2->y =
+        sub_80039C4(a2, stru_3002950.field_1C, stru_3002950.field_20, stru_3002950.staticFloorHeight);
 
-    if (gFloorPlaneResult.isColliding)
-    {
-        if (stru_3002950.field_2C != 0x5A0000 && Abs(a1->y - a2->y) < 0x50000)
-        {
+    if (a2->y < 0) {
+        a2->y = a;
+    }
+
+    if (gFloorPlaneResult.isColliding) {
+        if (stru_3002950.field_2C != 0x5A0000 && Abs(a1->y - a2->y) < 0x50000) {
             a1->y = a2->y;
             sub_800A9F0();
             if (!sub_800A974() || sub_0800A8B4())
                 return FALSE;
-        }
-        else
-        {
+        } else {
             a = a1->y;
             a1->y = sub_80039C4(a1, gFloorPlaneResult.field_1C, gFloorPlaneResult.field_20,
                                 gFloorPlaneResult.staticFloorHeight);
 
-            if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a)
-            {
+            if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a) {
                 char c[0x60];
                 sub_80039CC(c, a1, &stru_300331C, 0);
                 sub_8007434(c, &gFloorPlaneResult);
 
-                if (!gFloorPlaneResult.isColliding)
-                {
+                if (!gFloorPlaneResult.isColliding) {
                     a1->y = a;
                     gFloorPlaneResult.isColliding = TRUE;
                     return TRUE;
                 }
             }
 
-            if (Abs(a - a1->y) > 0x50000)
-            {
+            if (Abs(a - a1->y) > 0x50000) {
                 a1->y = a;
                 sub_800A9F0();
                 if (!sub_800A974() || sub_0800A8B4())
                     return FALSE;
-            }
-            else if (a1->y < a2->y)
-            {
+            } else if (a1->y < a2->y) {
                 a1->y = a2->y;
                 sub_800A9F0();
                 if (!sub_800A974() || sub_0800A8B4())
                     return FALSE;
-            }
-            else
-            {
+            } else {
                 a3->y = a1->y - a;
                 sub_800A9F0();
                 if (!sub_800A974() || sub_0800A8B4())
                     return FALSE;
             }
         }
-    }
-    else
-    {
-        if (gPlayerPos.y != gPlayerShadowPos.y)
-        {
+    } else {
+        if (gPlayerPos.y != gPlayerShadowPos.y) {
             sub_8003894(dword_2000FC8, dword_80CC818[stru_3002950.floorType]);
             sub_80038DC(dword_2000FC8, 0, 0x5A0000, 0);
         }
 
-        if (Abs(a1->y - a2->y) > 0x50000)
+        if (Abs(a1->y - a2->y) > 0x50000) {
             sub_80181B8(&a1->y);
-        else
+
+        } else {
             a1->y = a2->y;
+        }
     }
 
     return TRUE;
 }
 
-bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2, char* a3)
-{
+bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2, char* a3) {
     fx32 a;
 
-    if (!dword_203DFC4)
-    {
+    if (!dword_203DFC4) {
         a = a2->y;
-        a2->y = sub_80039C4(a2, stru_3002950.field_1C, stru_3002950.field_20, stru_3002950.staticFloorHeight);
-        if (a2->y < 0)
+        a2->y = sub_80039C4(a2, stru_3002950.field_1C, stru_3002950.field_20,
+                            stru_3002950.staticFloorHeight);
+        if (a2->y < 0) {
             a2->y = a;
+        }
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x100))
+    if ((gPlayerStateSettings[gPlayerState] & 0x100)) {
         return TRUE;
+    }
 
-    if (gFloorPlaneResult.isColliding)
-    {
+    if (gFloorPlaneResult.isColliding) {
         a = a1->y;
         a1->y = sub_80039C4(a1, gFloorPlaneResult.field_1C, gFloorPlaneResult.field_20,
                             gFloorPlaneResult.staticFloorHeight);
-        if (a1->y < 0 || a1->y < a2->y)
-            a1->y = a;
 
-        if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a)
-        {
+        if (a1->y < 0 || a1->y < a2->y) {
+            a1->y = a;
+        }
+
+        if (gFloorPlaneResult.field_2C != 0x5A0000 && a1->y != a) {
             char c[0x60];
             sub_80039CC(c, a1, &stru_300331C, 0);
             sub_8007434(c, &gFloorPlaneResult);
 
-            if (!gFloorPlaneResult.isColliding)
-            {
+            if (!gFloorPlaneResult.isColliding) {
                 a1->y = a;
                 gFloorPlaneResult.isColliding = TRUE;
             }
         }
 
-        if (Abs(a - a1->y) > 0x50000)
-        {
+        if (Abs(a - a1->y) > 0x50000) {
             a1->y = a;
             return TRUE;
         }
 
         sub_8018BB0(&gPlayerSprite);
 
-        if (Abs(a1->y - a2->y) <= 0x50000)
-        {
+        if (Abs(a1->y - a2->y) <= 0x50000) {
             a1->y = a2->y;
-        }
-        else if (Abs(a1->y - gPlayerShadowPos.y) <= 0x50000)
-        {
+        } else if (Abs(a1->y - gPlayerShadowPos.y) <= 0x50000) {
             a1->y = gPlayerShadowPos.y;
         }
 
         sub_800A9F0();
         sub_800A974();
-    }
-    else
-    {
-        if (a1->y == a2->y)
-        {
+    } else {
+        if (a1->y == a2->y) {
             sub_8018BB0(&gPlayerSprite);
             sub_800A9F0();
             sub_800A974();
-        }
-        else
-        {
+        } else {
             sub_8003894(dword_2000FC8, dword_80CC7EC[stru_3002950.floorType]);
             sub_80038DC(dword_2000FC8, stru_3002950.field_28, stru_3002950.field_2C, 0);
         }
@@ -449,8 +385,7 @@ bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2, char* a3)
     return TRUE;
 }
 
-bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4)
-{
+bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4) {
     struct Vec3fx distance;
     struct Vec3fx vec1;
     char c[0x60];
@@ -461,17 +396,14 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, cha
     distance.z = gWallPlaneResult.distance.z;
 
     dot = CallARM_VecFX_Dot8(&distance, &distance);
-    if (dot >> 8 < 0x8000)
-    {
+    if (dot >> 8 < 0x8000) {
         fx32 b = sub_800392C(CallARM_VecFX_Dot8(a1, &distance) << 8, dot << 8);
         distance.x <<= 8;
         distance.y <<= 8;
         distance.z <<= 8;
         CallARM_VecFX_Mul16(&distance, b);
         ASSERT(Abs(distance.x >> 16) < 0x10000 && Abs(distance.z >> 16) < 0x10000);
-    }
-    else
-    {
+    } else {
         CallARM_VecFX_Mul8(&distance, sub_8003934(CallARM_VecFX_Dot8(a1, &distance), dot));
         ASSERT(Abs(distance.x >> 8) < 0x10000 && Abs(distance.z >> 8) < 0x10000);
         distance.x <<= 8;
@@ -494,16 +426,14 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, cha
 
     sub_8006FFC(c, &gWallPlaneResult, &gFloorPlaneResult);
 
-    if (!gWallPlaneResult.isColliding)
-    {
+    if (!gWallPlaneResult.isColliding) {
         sub_8007434(c, &gFloorPlaneResult);
-        if (gFloorPlaneResult.floorType != 10 || byte_3003588)
+
+        if (gFloorPlaneResult.floorType != 10 || byte_3003588) {
             return TRUE;
-    }
-    else
-    {
-        if (gPlayerStateSettings[gPlayerState] & 0x400)
-        {
+        }
+    } else {
+        if (gPlayerStateSettings[gPlayerState] & 0x400) {
             gPlayerPosTemp.x = gPlayerPos.x;
             gPlayerPosTemp.z = gPlayerPos.z;
             gPlayerShadowPosTemp.x = gPlayerShadowPos.x;
@@ -514,8 +444,7 @@ bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, cha
     return FALSE;
 }
 
-void update_player()
-{
+void update_player() {
     struct Vec3fx vec1;
     char c[0x60];
     struct Vec3fx vec2;
@@ -528,14 +457,11 @@ void update_player()
 
     sub_800A740(&gPlayerPosTemp, &gPlayerShadowPosTemp);
 
-    if (byte_20020B1 != 3)
-    {
+    if (byte_20020B1 != 3) {
         stru_300331C.x = 0x40000;
         stru_300331C.y = dword_3003308;
         stru_300331C.z = 0x40000;
-    }
-    else
-    {
+    } else {
         stru_300331C.x = 0x80000;
         stru_300331C.y = dword_3003308;
         stru_300331C.z = 0x80000;
@@ -544,81 +470,65 @@ void update_player()
     sub_80039CC(c, &gPlayerPosTemp, &stru_300331C, 0);
     sub_8006974(c, &vec1);
 
-    if (gPlayerStateSettings[gPlayerState] & 0x40)
-    {
-        if (!sub_800AB54(&gPlayerPosTemp, &gPlayerShadowPosTemp))
-        {
+    if (gPlayerStateSettings[gPlayerState] & 0x40) {
+        if (!sub_800AB54(&gPlayerPosTemp, &gPlayerShadowPosTemp)) {
             return;
         }
-    }
-    else
-    {
+    } else {
         sub_08009208(&gPlayerPosTemp, &stru_3002950);
 
-        if (!stru_3002950.isColliding)
-        {
+        if (!stru_3002950.isColliding) {
             vec2.x = gPlayerPosTemp.x;
             vec2.y = gPlayerPosTemp.y + 0x50000;
             vec2.z = gPlayerPosTemp.z;
             sub_08009208(&vec2, &stru_3002950);
         }
 
-        if (gPlayerStateSettings[gPlayerState] & 0x400)
-        {
-            if (sub_80038BC(dword_2000FC8))
+        if (gPlayerStateSettings[gPlayerState] & 0x400) {
+            if (sub_80038BC(dword_2000FC8)) {
                 sub_8007434(c, &gFloorPlaneResult);
-            else
+            } else {
                 gFloorPlaneResult.isColliding = 0;
-        }
-        else
-        {
+            }
+        } else {
             sub_8007434(c, &gFloorPlaneResult);
         }
 
         if (!(gPlayerStateSettings[gPlayerState] & 0x400) && !gFloorPlaneResult.isColliding
             && gFloorPlaneResult.field_2C != 0x5A0000
             && (stru_3002950.field_2C != gFloorPlaneResult.field_2C
-                || stru_3002950.field_28 != gFloorPlaneResult.field_28))
-        {
+                || stru_3002950.field_28 != gFloorPlaneResult.field_28)) {
             sub_08007890(c, &gFloorPlaneResult);
         }
 
         sub_8006FFC(c, &gWallPlaneResult, &gFloorPlaneResult);
         sub_8007AC4(c);
 
-        if (!stru_3002950.isColliding)
-        {
-            if (gFloorPlaneResult.isColliding || dword_20011FC > 0)
-            {
+        if (!stru_3002950.isColliding) {
+            if (gFloorPlaneResult.isColliding || dword_20011FC > 0) {
                 stru_3002950.isColliding = 1;
                 dword_20011FC--;
-            }
-            else if (!gWallPlaneResult.isColliding && !dword_203DFC4)
-            {
+            } else if (!gWallPlaneResult.isColliding && !dword_203DFC4) {
                 return;
             }
-        }
-        else
-        {
+        } else {
             dword_20011FC = 1;
         }
 
-        if (!sub_800A7DC(&gPlayerPosTemp, &gPlayerShadowPosTemp))
-        {
-            if (!sub_800ABD4(&gPlayerPosTemp, &gPlayerShadowPosTemp))
-            {
+        if (!sub_800A7DC(&gPlayerPosTemp, &gPlayerShadowPosTemp)) {
+            if (!sub_800ABD4(&gPlayerPosTemp, &gPlayerShadowPosTemp)) {
                 return;
             }
 
             sub_800AD64();
 
-            if (!(gPlayerStateSettings[gPlayerState] & 0x400) && !(gPlayerStateSettings[gPlayerState] & 0x100))
-            {
+            if (!(gPlayerStateSettings[gPlayerState] & 0x400)
+                && !(gPlayerStateSettings[gPlayerState] & 0x100)) {
                 sub_800E61C();
 
-                if (gWallPlaneResult.isColliding && !sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c)
-                    || !sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c))
-                {
+                if (gWallPlaneResult.isColliding
+                        && !sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c)
+                    || !sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c)) {
                     goto update_camera;
                 }
 
@@ -632,22 +542,22 @@ void update_player()
                 goto update_camera;
             }
 
-            if (sub_0800A8B4())
+            if (sub_0800A8B4()) {
                 return;
+            }
 
-            if (gWallPlaneResult.isColliding)
+            if (gWallPlaneResult.isColliding) {
                 sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c);
+            }
 
-            if (gPlayerStateSettings[gPlayerState] & 0x100 && gWallPlaneResult.isColliding)
-            {
+            if (gPlayerStateSettings[gPlayerState] & 0x100 && gWallPlaneResult.isColliding) {
                 gPlayerPosTemp.x = gPlayerPos.x;
                 gPlayerPosTemp.z = gPlayerPos.z;
                 gPlayerShadowPosTemp.x = gPlayerShadowPos.x;
                 gPlayerShadowPosTemp.z = gPlayerShadowPos.z;
             }
 
-            if (sub_800AEFC(&gPlayerPosTemp, &gPlayerShadowPosTemp, c))
-            {
+            if (sub_800AEFC(&gPlayerPosTemp, &gPlayerShadowPosTemp, c)) {
                 gPlayerPos.x = gPlayerPosTemp.x;
                 gPlayerPos.y = gPlayerPosTemp.y;
                 gPlayerPos.z = gPlayerPosTemp.z;
@@ -655,8 +565,8 @@ void update_player()
                 gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
                 gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
 
-                if (byte_30029F8 && !sub_80038BC(dword_2000FC8) && !(gPlayerStateSettings[gPlayerState] & 0x100))
-                {
+                if (byte_30029F8 && !sub_80038BC(dword_2000FC8)
+                    && !(gPlayerStateSettings[gPlayerState] & 0x100)) {
                     sub_800387C(dword_2000FC8);
                     sub_80181B8(&gPlayerPos.y);
                 }
@@ -665,8 +575,7 @@ void update_player()
     }
 
 update_camera:
-    if (!gIsSlideMiniGame)
-    {
+    if (!gIsSlideMiniGame) {
         stru_30032E8.x = gPlayerPos.x - (dword_3003300 >> 1);
         stru_30032E8.y = gPlayerPos.y;
         stru_30032E8.z = gPlayerPos.z - (dword_3003304 >> 1);
@@ -677,8 +586,7 @@ update_camera:
     }
 }
 
-void CameraUpdate(struct Vec3fx* position, s32 a2, s32 a3, u32 a4)
-{
+void CameraUpdate(struct Vec3fx* position, s32 a2, s32 a3, u32 a4) {
     s32 direction;
 
     fx32 oldCamPosX = gCameraPosX;
@@ -695,36 +603,28 @@ void CameraUpdate(struct Vec3fx* position, s32 a2, s32 a3, u32 a4)
     gPlayerSprite.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
     gPlayerSprite.yPos = ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3;
     gPlayerShadowSprite.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
-    gPlayerShadowSprite.yPos
-        = ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3 + ((gPlayerPos.y - gPlayerShadowPos.y) >> 16);
+    gPlayerShadowSprite.yPos =
+        ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3 + ((gPlayerPos.y - gPlayerShadowPos.y) >> 16);
 
-    if (byte_20010AF)
-    {
+    if (byte_20010AF) {
         sprite_2000FAC.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
         sprite_2000FAC.yPos = ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3;
     }
 
-    if (direction & 1)
-    {
+    if (direction & 1) {
         UpdateMapLeft(gCameraPosX);
-    }
-    else if (direction & 2)
-    {
+    } else if (direction & 2) {
         UpdateMapRight(gCameraPosX);
     }
 
-    if (direction & 4)
-    {
+    if (direction & 4) {
         UpdateMapUp(gCameraPosY);
-    }
-    else if (direction & 8)
-    {
+    } else if (direction & 8) {
         UpdateMapDown(gCameraPosY);
     }
 }
 
-void CameraMove(u32 a1)
-{
+void CameraMove(u32 a1) {
     fx32 difference;
     fx32 absoluteDifference;
     fx32 velocity;
@@ -737,26 +637,20 @@ void CameraMove(u32 a1)
     difference = cameraPos - cameraGoalPos;
     absoluteDifference = Abs(difference);
 
-    if (absoluteDifference <= 0xFFFF)
-    {
+    if (absoluteDifference <= 0xFFFF) {
         gCameraPosX = gCameraGoalPosX;
         velocity = 0;
-    }
-    else
-    {
+    } else {
         velocity = CameraGetVelocity(difference, absoluteDifference);
         gIsCameraMovingX = TRUE;
     }
 
     gCameraPosX += velocity;
 
-    if ((gCameraPosX >> 16) + 120 >= gMapPixelSizeX)
-    {
+    if ((gCameraPosX >> 16) + 120 >= gMapPixelSizeX) {
         gCameraPosX = (gMapPixelSizeX - 120) << 16;
         gIsCameraMovingX = FALSE;
-    }
-    else if ((gCameraPosX >> 16) - 120 < 0)
-    {
+    } else if ((gCameraPosX >> 16) - 120 < 0) {
         gCameraPosX = 0x780000;
         gIsCameraMovingX = FALSE;
     }
@@ -767,83 +661,57 @@ void CameraMove(u32 a1)
     difference = cameraPos - cameraGoalPos;
     absoluteDifference = Abs(difference);
 
-    if (absoluteDifference <= 0xFFFF)
-    {
+    if (absoluteDifference <= 0xFFFF) {
         gCameraPosY = gCameraGoalPosY;
         velocity = 0;
-    }
-    else
-    {
+    } else {
         velocity = CameraGetVelocity(difference, absoluteDifference);
         gIsCameraMovingY = TRUE;
     }
 
     gCameraPosY += velocity;
 
-    if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY)
-    {
+    if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY) {
         // This doesn't match for some reason.
         // gCameraPosY = (gMapPixelSizeY - 80 + a1) << 16;
         gCameraPosY = gMapPixelSizeY - 80;
         gCameraPosY += a1;
         gCameraPosY <<= 16;
 
-        if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY)
-        {
+        if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY) {
             gCameraPosY = (gMapPixelSizeY - 80) << 16;
             gIsCameraMovingY = FALSE;
-        }
-        else if ((gCameraPosY >> 16) - 80 < 0)
-        {
+        } else if ((gCameraPosY >> 16) - 80 < 0) {
             gCameraPosY = 0x500000;
             gIsCameraMovingY = FALSE;
         }
-    }
-    else if ((gCameraPosY >> 16) - 80 < 0)
-    {
+    } else if ((gCameraPosY >> 16) - 80 < 0) {
         gCameraPosY = (a1 << 16) + 0x500000;
 
-        if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY)
-        {
+        if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY) {
             gCameraPosY = (gMapPixelSizeY - 80) << 16;
             gIsCameraMovingY = FALSE;
-        }
-        else if ((gCameraPosY >> 16) - 80 < 0)
-        {
+        } else if ((gCameraPosY >> 16) - 80 < 0) {
             gCameraPosY = 0x500000;
             gIsCameraMovingY = FALSE;
         }
     }
 }
 
-fx32 CameraGetVelocity(fx32 difference, fx32 absoluteDifference)
-{
-    if (absoluteDifference <= 0x17FFF)
-    {
+fx32 CameraGetVelocity(fx32 difference, fx32 absoluteDifference) {
+    if (absoluteDifference <= 0x17FFF) {
         return difference < 0 ? 0x8000 : 0xFFFF8000;
-    }
-    else if (absoluteDifference <= 0x1FFFF)
-    {
+    } else if (absoluteDifference <= 0x1FFFF) {
         return difference < 0 ? 0x18000 : 0xFFFE8000;
-    }
-    else if (absoluteDifference <= 0x27FFF)
-    {
+    } else if (absoluteDifference <= 0x27FFF) {
         return difference < 0 ? 0x20000 : 0xFFFE0000;
-    }
-    else if (absoluteDifference <= 0x3FFFF)
-    {
+    } else if (absoluteDifference <= 0x3FFFF) {
         return difference < 0 ? 0x28000 : 0xFFFD8000;
-    }
-    else if (absoluteDifference <= 0x5FFFF)
-    {
+    } else if (absoluteDifference <= 0x5FFFF) {
         return difference < 0 ? 0x30000 : 0xFFFD0000;
-    }
-    else if (absoluteDifference <= 0xFFFFF)
-    {
+    } else if (absoluteDifference <= 0xFFFFF) {
         return difference < 0 ? 0x38000 : 0xFFFC8000;
-    }
-    else
-    {
+    } else {
         return difference < 0 ? 0x50000 : 0xFFFB0000;
     }
 }
