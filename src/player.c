@@ -8,7 +8,7 @@ static void update_camera(struct Vec3fx* position, s32 a2, s32 a3, s32 offset);
 static void move_camera(s32 offset);
 static fx32 clamp_camera_velocity(fx32 velocity, fx32 speed);
 
-void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
+static void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (!dword_203DFC4)
         return;
 
@@ -36,7 +36,7 @@ void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
     }
 }
 
-bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2) {
+static bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (byte_203DFE6) {
         if (gPlayerStateSettings[gPlayerState] & 0x400) {
             if (!sub_8018BB0(&gPlayerSprite))
@@ -73,7 +73,7 @@ bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2) {
     return FALSE;
 }
 
-bool32 sub_0800A8B4() {
+static bool32 sub_0800A8B4() {
     if (gGameStatus.health != 0 && gFloorPlaneResult.isColliding && stru_3002950.warpDestRoom != 0
         && gFloorPlaneResult.warpDestRoom == stru_3002950.warpDestRoom) {
         if (stru_3002950.warpDestRoom & 0x80) {
@@ -100,7 +100,7 @@ bool32 sub_0800A8B4() {
     return FALSE;
 }
 
-bool32 sub_800A974() {
+static bool32 sub_800A974() {
     if (gGameStatus.health == 0)
         return FALSE;
 
@@ -120,7 +120,7 @@ bool32 sub_800A974() {
     return TRUE;
 }
 
-void sub_800A9F0() {
+static void sub_800A9F0() {
     if (!byte_3003588) {
         sub_8003894(dword_2000FC8, dword_80CC7EC[gFloorPlaneResult.floorType]);
         sub_80038DC(dword_2000FC8, gFloorPlaneResult.field_28, gFloorPlaneResult.field_2C,
@@ -131,7 +131,7 @@ void sub_800A9F0() {
     }
 }
 
-void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, struct Vec3fx* a4) {
+static void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, struct Vec3fx* a4) {
     struct Vec3fx a;
     sub_80038C4(dword_2000FC8, &a.x, &a.y, &a.z);
 
@@ -169,7 +169,7 @@ void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, struct
     a4->z = a1->z - gPlayerPos.z;
 }
 
-bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2) {
+static bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (!(gPlayerStateSettings[gPlayerState] & 0x400)) {
         struct Vec3fx a;
         a.x = a1->x;
@@ -192,7 +192,7 @@ bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2) {
     return FALSE;
 }
 
-bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
+static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (gFloorPlaneResult.isColliding) {
         if (gFloorPlaneResult.floorType == 2 && byte_20020B1 != 0 && byte_20020B1 != 4
             && gGameStatus.health != 0) {
@@ -242,7 +242,7 @@ bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
     return TRUE;
 }
 
-void sub_800AD64() {
+static void sub_800AD64() {
     // Did the developers really write it like this?
 
     struct struc_44* plane = &stru_3002950;
@@ -258,7 +258,7 @@ void sub_800AD64() {
     }
 }
 
-bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4) {
+static bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4) {
     fx32 a = a2->y;
     a2->y =
         sub_80039C4(a2, stru_3002950.field_1C, stru_3002950.field_20, stru_3002950.staticFloorHeight);
@@ -324,7 +324,7 @@ bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char
     return TRUE;
 }
 
-bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2, char* a3) {
+static bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2, char* a3) {
     fx32 a;
 
     if (!dword_203DFC4) {
@@ -389,7 +389,7 @@ bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2, char* a3) {
     return TRUE;
 }
 
-bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4) {
+static bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char* a4) {
     struct Vec3fx distance;
     struct Vec3fx vec1;
     char c[0x60];
