@@ -731,7 +731,7 @@ void CameraMove(u32 a1)
     fx32 cameraPos;
     fx32 cameraGoalPos;
 
-    byte_2001118 = 0;
+    gIsCameraMovingX = FALSE;
     cameraPos = gCameraPosX;
     cameraGoalPos = gCameraGoalPosX;
     difference = cameraPos - cameraGoalPos;
@@ -745,7 +745,7 @@ void CameraMove(u32 a1)
     else
     {
         velocity = CameraGetVelocity(difference, absoluteDifference);
-        byte_2001118 = 1;
+        gIsCameraMovingX = TRUE;
     }
 
     gCameraPosX += velocity;
@@ -753,15 +753,15 @@ void CameraMove(u32 a1)
     if ((gCameraPosX >> 16) + 120 >= gMapPixelSizeX)
     {
         gCameraPosX = (gMapPixelSizeX - 120) << 16;
-        byte_2001118 = 0;
+        gIsCameraMovingX = FALSE;
     }
     else if ((gCameraPosX >> 16) - 120 < 0)
     {
         gCameraPosX = 0x780000;
-        byte_2001118 = 0;
+        gIsCameraMovingX = FALSE;
     }
 
-    byte_2001119 = 0;
+    gIsCameraMovingY = FALSE;
     cameraPos = gCameraPosY;
     cameraGoalPos = gCameraGoalPosY;
     difference = cameraPos - cameraGoalPos;
@@ -775,7 +775,7 @@ void CameraMove(u32 a1)
     else
     {
         velocity = CameraGetVelocity(difference, absoluteDifference);
-        byte_2001119 = 1;
+        gIsCameraMovingY = TRUE;
     }
 
     gCameraPosY += velocity;
@@ -791,12 +791,12 @@ void CameraMove(u32 a1)
         if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY)
         {
             gCameraPosY = (gMapPixelSizeY - 80) << 16;
-            byte_2001119 = 0;
+            gIsCameraMovingY = FALSE;
         }
         else if ((gCameraPosY >> 16) - 80 < 0)
         {
             gCameraPosY = 0x500000;
-            byte_2001119 = 0;
+            gIsCameraMovingY = FALSE;
         }
     }
     else if ((gCameraPosY >> 16) - 80 < 0)
@@ -806,12 +806,44 @@ void CameraMove(u32 a1)
         if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY)
         {
             gCameraPosY = (gMapPixelSizeY - 80) << 16;
-            byte_2001119 = 0;
+            gIsCameraMovingY = FALSE;
         }
         else if ((gCameraPosY >> 16) - 80 < 0)
         {
             gCameraPosY = 0x500000;
-            byte_2001119 = 0;
+            gIsCameraMovingY = FALSE;
         }
+    }
+}
+
+fx32 CameraGetVelocity(fx32 difference, fx32 absoluteDifference)
+{
+    if (absoluteDifference <= 0x17FFF)
+    {
+        return difference < 0 ? 0x8000 : 0xFFFF8000;
+    }
+    else if (absoluteDifference <= 0x1FFFF)
+    {
+        return difference < 0 ? 0x18000 : 0xFFFE8000;
+    }
+    else if (absoluteDifference <= 0x27FFF)
+    {
+        return difference < 0 ? 0x20000 : 0xFFFE0000;
+    }
+    else if (absoluteDifference <= 0x3FFFF)
+    {
+        return difference < 0 ? 0x28000 : 0xFFFD8000;
+    }
+    else if (absoluteDifference <= 0x5FFFF)
+    {
+        return difference < 0 ? 0x30000 : 0xFFFD0000;
+    }
+    else if (absoluteDifference <= 0xFFFFF)
+    {
+        return difference < 0 ? 0x38000 : 0xFFFC8000;
+    }
+    else
+    {
+        return difference < 0 ? 0x50000 : 0xFFFB0000;
     }
 }

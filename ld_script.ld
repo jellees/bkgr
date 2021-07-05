@@ -93,8 +93,8 @@ SECTIONS
         . += 3; /* padding */
         dword_2001110 = .; . += 4;
         dword_2001114 = .; . += 4;
-        byte_2001118 = .; . += 1;
-        byte_2001119 = .; . += 1;
+        gIsCameraMovingX = .; . += 1;
+        gIsCameraMovingY = .; . += 1;
 
         . = 0x0000112A;
         byte_200112A = .; . += 1;
@@ -509,7 +509,6 @@ SECTIONS
         asm/collision.o(.text);
         src/main.o(.text);
         src/player.o(.text);
-        asm/player.o(.text);
         asm/chunk3.o(.text);
         asm/savefile.o(.text);
         asm/chunk4.o(.text);

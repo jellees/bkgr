@@ -427,8 +427,8 @@ extern u32 dword_2001108;
 extern u8 byte_200110C; // possibly bool8
 extern u32 dword_2001110;
 extern u32 dword_2001114;
-extern u8 byte_2001118;
-extern u8 byte_2001119;
+extern bool8 gIsCameraMovingX;
+extern bool8 gIsCameraMovingY;
 
 extern u8 byte_200112A;
 
