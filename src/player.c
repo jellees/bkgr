@@ -173,7 +173,7 @@ bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (!(gPlayerStateSettings[gPlayerState] & 0x400)) {
         struct Vec3fx a;
         a.x = a1->x;
-        a.y = a1->y + 0x120000;
+        a.y = a1->y + FX32_CONST(18);
         a.z = a1->z;
 
         if (sub_800953C(&a)) {
@@ -220,7 +220,7 @@ bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
         && !byte_20020B1 && gGameStatus.health != 0) {
         struct Vec3fx a;
         a.x = a1->x;
-        a.y = a1->y + 0x120000;
+        a.y = a1->y + FX32_CONST(18);
         a.z = a1->z;
         if (sub_800953C(&a)) {
             if (sub_8018BB0(&gPlayerSprite)) {
@@ -313,7 +313,7 @@ bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3, char
             sub_80038DC(dword_2000FC8, 0, 0x5A0000, 0);
         }
 
-        if (Abs(a1->y - a2->y) > 0x50000) {
+        if (Abs(a1->y - a2->y) > FX32_CONST(5)) {
             sub_80181B8(&a1->y);
 
         } else {
@@ -462,13 +462,13 @@ void update_player() {
     sub_800A740(&gPlayerPosTemp, &gPlayerShadowPosTemp);
 
     if (byte_20020B1 != 3) {
-        stru_300331C.x = 0x40000;
+        stru_300331C.x = FX32_CONST(4);
         stru_300331C.y = dword_3003308;
-        stru_300331C.z = 0x40000;
+        stru_300331C.z = FX32_CONST(4);
     } else {
-        stru_300331C.x = 0x80000;
+        stru_300331C.x = FX32_CONST(8);
         stru_300331C.y = dword_3003308;
-        stru_300331C.z = 0x80000;
+        stru_300331C.z = FX32_CONST(8);
     }
 
     sub_80039CC(c, &gPlayerPosTemp, &stru_300331C, 0);
@@ -483,7 +483,7 @@ void update_player() {
 
         if (!stru_3002950.isColliding) {
             vec2.x = gPlayerPosTemp.x;
-            vec2.y = gPlayerPosTemp.y + 0x50000;
+            vec2.y = gPlayerPosTemp.y + FX32_CONST(5);
             vec2.z = gPlayerPosTemp.z;
             sub_08009208(&vec2, &stru_3002950);
         }
@@ -499,7 +499,7 @@ void update_player() {
         }
 
         if (!(gPlayerStateSettings[gPlayerState] & 0x400) && !gFloorPlaneResult.isColliding
-            && gFloorPlaneResult.field_2C != 0x5A0000
+            && gFloorPlaneResult.field_2C != FX32_CONST(90)
             && (stru_3002950.field_2C != gFloorPlaneResult.field_2C
                 || stru_3002950.field_28 != gFloorPlaneResult.field_28)) {
             sub_08007890(c, &gFloorPlaneResult);
