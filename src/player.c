@@ -4,6 +4,10 @@
 
 extern u8 sub_80038BC(u32);
 
+static void update_camera(struct Vec3fx* position, s32 a2, s32 a3, s32 offset);
+static void move_camera(s32 offset);
+static fx32 clamp_camera_velocity(fx32 velocity, fx32 speed);
+
 void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (!dword_203DFC4)
         return;
@@ -529,7 +533,7 @@ void update_player() {
                 if (gWallPlaneResult.isColliding
                         && !sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c)
                     || !sub_800ADAC(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec1, c)) {
-                    goto update_camera;
+                    goto update_camera_label;
                 }
 
                 gPlayerPos.x = gPlayerPosTemp.x;
@@ -538,43 +542,41 @@ void update_player() {
                 gPlayerShadowPos.x = gPlayerShadowPosTemp.x;
                 gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
                 gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
+            } else {
+                if (sub_0800A8B4()) {
+                    return;
+                }
 
-                goto update_camera;
-            }
+                if (gWallPlaneResult.isColliding) {
+                    sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c);
+                }
 
-            if (sub_0800A8B4()) {
-                return;
-            }
+                if (gPlayerStateSettings[gPlayerState] & 0x100 && gWallPlaneResult.isColliding) {
+                    gPlayerPosTemp.x = gPlayerPos.x;
+                    gPlayerPosTemp.z = gPlayerPos.z;
+                    gPlayerShadowPosTemp.x = gPlayerShadowPos.x;
+                    gPlayerShadowPosTemp.z = gPlayerShadowPos.z;
+                }
 
-            if (gWallPlaneResult.isColliding) {
-                sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c);
-            }
+                if (sub_800AEFC(&gPlayerPosTemp, &gPlayerShadowPosTemp, c)) {
+                    gPlayerPos.x = gPlayerPosTemp.x;
+                    gPlayerPos.y = gPlayerPosTemp.y;
+                    gPlayerPos.z = gPlayerPosTemp.z;
+                    gPlayerShadowPos.x = gPlayerShadowPosTemp.x;
+                    gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
+                    gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
 
-            if (gPlayerStateSettings[gPlayerState] & 0x100 && gWallPlaneResult.isColliding) {
-                gPlayerPosTemp.x = gPlayerPos.x;
-                gPlayerPosTemp.z = gPlayerPos.z;
-                gPlayerShadowPosTemp.x = gPlayerShadowPos.x;
-                gPlayerShadowPosTemp.z = gPlayerShadowPos.z;
-            }
-
-            if (sub_800AEFC(&gPlayerPosTemp, &gPlayerShadowPosTemp, c)) {
-                gPlayerPos.x = gPlayerPosTemp.x;
-                gPlayerPos.y = gPlayerPosTemp.y;
-                gPlayerPos.z = gPlayerPosTemp.z;
-                gPlayerShadowPos.x = gPlayerShadowPosTemp.x;
-                gPlayerShadowPos.y = gPlayerShadowPosTemp.y;
-                gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
-
-                if (byte_30029F8 && !sub_80038BC(dword_2000FC8)
-                    && !(gPlayerStateSettings[gPlayerState] & 0x100)) {
-                    sub_800387C(dword_2000FC8);
-                    sub_80181B8(&gPlayerPos.y);
+                    if (byte_30029F8 && !sub_80038BC(dword_2000FC8)
+                        && !(gPlayerStateSettings[gPlayerState] & 0x100)) {
+                        sub_800387C(dword_2000FC8);
+                        sub_80181B8(&gPlayerPos.y);
+                    }
                 }
             }
         }
     }
 
-update_camera:
+update_camera_label:
     if (!gIsSlideMiniGame) {
         stru_30032E8.x = gPlayerPos.x - (dword_3003300 >> 1);
         stru_30032E8.y = gPlayerPos.y;
@@ -582,33 +584,36 @@ update_camera:
         stru_30032F4.x = gPlayerPos.x + (dword_3003300 >> 1);
         stru_30032F4.y = gPlayerPos.y + dword_3003308;
         stru_30032F4.z = gPlayerPos.z + (dword_3003304 >> 1);
-        CameraUpdate(&gPlayerPos, dword_2001110, dword_2001114, word_2002EC2);
+        update_camera(&gPlayerPos, dword_2001110, dword_2001114, word_2002EC2);
     }
 }
 
-void CameraUpdate(struct Vec3fx* position, s32 a2, s32 a3, u32 a4) {
+/**
+ * Calculates the new camera position. Also updates the player sprites' positions.
+ */
+static void update_camera(struct Vec3fx* position, s32 a2, s32 a3, s32 offset) {
     s32 direction;
-
     fx32 oldCamPosX = gCameraPosX;
     fx32 oldCamPosY = gCameraPosY;
 
-    gCameraGoalPosX = position->x + (a2 << 16);
-    gCameraGoalPosY = (gMapPixelSizeY << 16) - (position->y + position->z + (a3 << 16) + (a4 << 16));
+    gCameraGoalPosX = position->x + (a2 << FX32_SHIFT);
+    gCameraGoalPosY = (gMapPixelSizeY << FX32_SHIFT)
+                      - (position->y + position->z + (a3 << FX32_SHIFT) + (offset << FX32_SHIFT));
 
-    CameraMove(a4);
+    move_camera(offset);
 
     direction = oldCamPosX - gCameraPosX < 0 ? 2 : 1;
     direction |= oldCamPosY - gCameraPosY < 0 ? 8 : 4;
 
-    gPlayerSprite.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
-    gPlayerSprite.yPos = ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3;
-    gPlayerShadowSprite.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
-    gPlayerShadowSprite.yPos =
-        ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3 + ((gPlayerPos.y - gPlayerShadowPos.y) >> 16);
+    gPlayerSprite.xPos = ((gCameraGoalPosX - gCameraPosX) >> FX32_SHIFT) + 120 - a2;
+    gPlayerSprite.yPos = ((gCameraGoalPosY - gCameraPosY) >> FX32_SHIFT) + 80 + a3;
+    gPlayerShadowSprite.xPos = ((gCameraGoalPosX - gCameraPosX) >> FX32_SHIFT) + 120 - a2;
+    gPlayerShadowSprite.yPos = ((gCameraGoalPosY - gCameraPosY) >> FX32_SHIFT) + 80 + a3
+                               + ((gPlayerPos.y - gPlayerShadowPos.y) >> FX32_SHIFT);
 
     if (byte_20010AF) {
-        sprite_2000FAC.xPos = ((gCameraGoalPosX - gCameraPosX) >> 16) + 120 - a2;
-        sprite_2000FAC.yPos = ((gCameraGoalPosY - gCameraPosY) >> 16) + 80 + a3;
+        sprite_2000FAC.xPos = ((gCameraGoalPosX - gCameraPosX) >> FX32_SHIFT) + 120 - a2;
+        sprite_2000FAC.yPos = ((gCameraGoalPosY - gCameraPosY) >> FX32_SHIFT) + 80 + a3;
     }
 
     if (direction & 1) {
@@ -624,94 +629,103 @@ void CameraUpdate(struct Vec3fx* position, s32 a2, s32 a3, u32 a4) {
     }
 }
 
-void CameraMove(u32 a1) {
-    fx32 difference;
-    fx32 absoluteDifference;
+/**
+ * Moves the camera to the target position.
+ * \param offset    A pixel offset.
+ */
+static void move_camera(s32 offset) {
+    fx32 delta;
+    fx32 deltaAbs;
     fx32 velocity;
-    fx32 cameraPos;
-    fx32 cameraGoalPos;
+    fx32 position;
+    fx32 targetPos;
 
     gIsCameraMovingX = FALSE;
-    cameraPos = gCameraPosX;
-    cameraGoalPos = gCameraGoalPosX;
-    difference = cameraPos - cameraGoalPos;
-    absoluteDifference = Abs(difference);
+    position = gCameraPosX;
+    targetPos = gCameraGoalPosX;
+    delta = position - targetPos;
+    deltaAbs = Abs(delta);
 
-    if (absoluteDifference <= 0xFFFF) {
+    if (deltaAbs < FX32_ONE) {
         gCameraPosX = gCameraGoalPosX;
         velocity = 0;
     } else {
-        velocity = CameraGetVelocity(difference, absoluteDifference);
+        velocity = clamp_camera_velocity(delta, deltaAbs);
         gIsCameraMovingX = TRUE;
     }
 
     gCameraPosX += velocity;
 
-    if ((gCameraPosX >> 16) + 120 >= gMapPixelSizeX) {
-        gCameraPosX = (gMapPixelSizeX - 120) << 16;
+    if ((gCameraPosX >> FX32_SHIFT) + 120 >= gMapPixelSizeX) {
+        gCameraPosX = (gMapPixelSizeX - 120) << FX32_SHIFT;
         gIsCameraMovingX = FALSE;
-    } else if ((gCameraPosX >> 16) - 120 < 0) {
-        gCameraPosX = 0x780000;
+    } else if ((gCameraPosX >> FX32_SHIFT) - 120 < 0) {
+        gCameraPosX = FX32_CONST(120);
         gIsCameraMovingX = FALSE;
     }
 
     gIsCameraMovingY = FALSE;
-    cameraPos = gCameraPosY;
-    cameraGoalPos = gCameraGoalPosY;
-    difference = cameraPos - cameraGoalPos;
-    absoluteDifference = Abs(difference);
+    position = gCameraPosY;
+    targetPos = gCameraGoalPosY;
+    delta = position - targetPos;
+    deltaAbs = Abs(delta);
 
-    if (absoluteDifference <= 0xFFFF) {
+    if (deltaAbs < FX32_ONE) {
         gCameraPosY = gCameraGoalPosY;
         velocity = 0;
     } else {
-        velocity = CameraGetVelocity(difference, absoluteDifference);
+        velocity = clamp_camera_velocity(delta, deltaAbs);
         gIsCameraMovingY = TRUE;
     }
 
     gCameraPosY += velocity;
 
-    if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY) {
+    if ((gCameraPosY >> FX32_SHIFT) + 80 >= gMapPixelSizeY) {
         // This doesn't match for some reason.
-        // gCameraPosY = (gMapPixelSizeY - 80 + a1) << 16;
+        // gCameraPosY = (gMapPixelSizeY - 80 + a1) << FX32_SHIFT;
         gCameraPosY = gMapPixelSizeY - 80;
-        gCameraPosY += a1;
-        gCameraPosY <<= 16;
+        gCameraPosY += offset;
+        gCameraPosY <<= FX32_SHIFT;
 
-        if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY) {
-            gCameraPosY = (gMapPixelSizeY - 80) << 16;
+        if ((gCameraPosY >> FX32_SHIFT) + 80 >= gMapPixelSizeY) {
+            gCameraPosY = (gMapPixelSizeY - 80) << FX32_SHIFT;
             gIsCameraMovingY = FALSE;
-        } else if ((gCameraPosY >> 16) - 80 < 0) {
-            gCameraPosY = 0x500000;
+        } else if ((gCameraPosY >> FX32_SHIFT) - 80 < 0) {
+            gCameraPosY = FX32_CONST(80);
             gIsCameraMovingY = FALSE;
         }
-    } else if ((gCameraPosY >> 16) - 80 < 0) {
-        gCameraPosY = (a1 << 16) + 0x500000;
+    } else if ((gCameraPosY >> FX32_SHIFT) - 80 < 0) {
+        gCameraPosY = (offset << FX32_SHIFT) + FX32_CONST(80);
 
-        if ((gCameraPosY >> 16) + 80 >= gMapPixelSizeY) {
-            gCameraPosY = (gMapPixelSizeY - 80) << 16;
+        if ((gCameraPosY >> FX32_SHIFT) + 80 >= gMapPixelSizeY) {
+            gCameraPosY = (gMapPixelSizeY - 80) << FX32_SHIFT;
             gIsCameraMovingY = FALSE;
-        } else if ((gCameraPosY >> 16) - 80 < 0) {
-            gCameraPosY = 0x500000;
+        } else if ((gCameraPosY >> FX32_SHIFT) - 80 < 0) {
+            gCameraPosY = FX32_CONST(80);
             gIsCameraMovingY = FALSE;
         }
     }
 }
 
-fx32 CameraGetVelocity(fx32 difference, fx32 absoluteDifference) {
-    if (absoluteDifference <= 0x17FFF) {
-        return difference < 0 ? 0x8000 : 0xFFFF8000;
-    } else if (absoluteDifference <= 0x1FFFF) {
-        return difference < 0 ? 0x18000 : 0xFFFE8000;
-    } else if (absoluteDifference <= 0x27FFF) {
-        return difference < 0 ? 0x20000 : 0xFFFE0000;
-    } else if (absoluteDifference <= 0x3FFFF) {
-        return difference < 0 ? 0x28000 : 0xFFFD8000;
-    } else if (absoluteDifference <= 0x5FFFF) {
-        return difference < 0 ? 0x30000 : 0xFFFD0000;
-    } else if (absoluteDifference <= 0xFFFFF) {
-        return difference < 0 ? 0x38000 : 0xFFFC8000;
+/**
+ * Clamps velocity to predefined velocities.
+ * \param velocity  The velocity can be negative.
+ * \param speed     Speed is an absolute value.
+ */
+static fx32 clamp_camera_velocity(fx32 velocity, fx32 speed) {
+    if (speed < FX32_CONST(1.5)) {
+        return velocity < 0 ? FX32_CONST(0.5) : FX32_CONST(-0.5);
+    } else if (speed < FX32_CONST(2)) {
+        return velocity < 0 ? FX32_CONST(1.5) : FX32_CONST(-1.5);
+    } else if (speed < FX32_CONST(2.5)) {
+        return velocity < 0 ? FX32_CONST(2) : FX32_CONST(-2);
+    } else if (speed < FX32_CONST(4)) {
+        return velocity < 0 ? FX32_CONST(2.5) : FX32_CONST(-2.5);
+    } else if (speed < FX32_CONST(6)) {
+        return velocity < 0 ? FX32_CONST(3) : FX32_CONST(-3);
+    } else if (speed < FX32_CONST(16)) {
+        return velocity < 0 ? FX32_CONST(3.5) : FX32_CONST(-3.5);
     } else {
-        return difference < 0 ? 0x50000 : 0xFFFB0000;
+        return velocity < 0 ? FX32_CONST(5) : FX32_CONST(-5);
     }
 }

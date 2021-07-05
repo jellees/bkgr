@@ -5,6 +5,9 @@
 
 // Fixed point 32-bit 16.16
 typedef s32 fx32;
+#define FX32_SHIFT 16
+#define FX32_CONST(x) ((fx32)((x) * (1 << FX32_SHIFT)))
+#define FX32_ONE FX32_CONST(1)
 
 // Game specific assert.
 #define HANG asm(".word 0xEE00EE00")
