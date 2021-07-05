@@ -332,7 +332,7 @@ sub_8010BA8: @ 0x08010BA8
 	push {r5, r6, r7}
 	sub sp, #8
 	bl audio_halt_all_fx
-	bl RemovePaletteEffect
+	bl pause_efx
 	movs r0, #0
 	bl SetTextSpriteCount
 	ldr r6, _08010C90
@@ -539,7 +539,7 @@ _08010DAC:
 _08010DB4:
 	bl sub_8047BEC
 	bl sub_80524D8
-	bl RestorePaletteEffect
+	bl resume_efx
 	b _08010E16
 	.align 2, 0
 _08010DC4: .4byte 0x0200143E

@@ -100,7 +100,7 @@ SECTIONS
         byte_200112A = .; . += 1;
 
         . = 0x000011CC;
-        src/palette_effects.o(.bss);
+        src/environment_effects.o(.bss);
 
         gPoisonEffectEnabled = .; . += 4;
         gPoisonHitTimer = .; . += 4;
@@ -512,7 +512,7 @@ SECTIONS
         asm/chunk3.o(.text);
         asm/savefile.o(.text);
         asm/chunk4.o(.text);
-        src/palette_effects.o(.text);
+        src/environment_effects.o(.text);
         src/debug.o(.text);
         asm/chunk5.o(.text);
         src/room.o(.text);

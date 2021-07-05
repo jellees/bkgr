@@ -663,7 +663,7 @@ _0800BEBC:
 	strb r7, [r1]
 	bl sub_80275A4
 _0800BECA:
-	bl InitPaletteEffects
+	bl init_efx
 	bl sub_800DEE4
 	bl sub_0800ED80
 	ldrb r0, [r6, #4]
@@ -904,7 +904,7 @@ _0800C0A8:
 	bl sub_801A2E4
 	bl EnableBGAlphaBlending
 	bl sub_800EB14
-	bl InitPaletteEffects
+	bl init_efx
 	bl sub_800DEE4
 	bl sub_0800ED80
 	adds r0, r6, #0
@@ -1072,7 +1072,7 @@ _0800C218:
 	bl sub_801A2E4
 	bl EnableBGAlphaBlending
 	bl sub_800EB14
-	bl InitPaletteEffects
+	bl init_efx
 	bl sub_800DEE4
 	ldr r0, _0800C35C
 	ldrh r0, [r0]
@@ -1256,7 +1256,7 @@ _0800C3B6:
 	bl sub_800EB58
 _0800C436:
 	bl sub_800ECB4
-	bl InitPaletteEffects
+	bl init_efx
 	bl sub_800DEE4
 	bl sub_0800ED80
 	movs r0, #0x38
@@ -2099,7 +2099,7 @@ _0800CC34:
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _0800CCEA
-	bl RemovePaletteEffect
+	bl pause_efx
 	bl audio_halt_all_fx
 	ldr r0, _0800CCA0
 	movs r1, #1
@@ -3345,7 +3345,7 @@ _0800D7A6:
 	ldr r0, _0800D860
 	strb r1, [r0]
 	bl EnableBGAlphaBlending
-	bl InitPaletteEffects
+	bl init_efx
 	bl sub_0800ED80
 	cmp r7, #0
 	bne _0800D868

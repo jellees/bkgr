@@ -1,32 +1,31 @@
 #include "global.h"
 #include "common.h"
+#include "environment_effects.h"
 
-IWRAM_DATA s32 gPaletteEffects;
-IWRAM_DATA s32 gPaletteEffectsSave;
-IWRAM_DATA u32 gLavaPaletteIndex;
-IWRAM_DATA u32 gLavaTimer;
-IWRAM_DATA u16* gLightningPalette;
-IWRAM_DATA u16* gBackupBGPalette;
-IWRAM_DATA u32 gLightningTimer;
-IWRAM_DATA bool32 gLightningActive;
-IWRAM_DATA u32 gThunderTimer;
+s32 gEnvironmentEffects;
+static s32 gEnvironmentEffectsTemp;
+static u32 gLavaPaletteIndex;
+static u32 gLavaTimer;
+static u16* gLightningPalette;
+static u16* gBackupBGPalette;
+static u32 gLightningTimer;
+static bool32 gLightningActive;
+static u32 gThunderTimer;
 
-enum { NONE, LAVA, THUNDER };
-
-void InitPaletteEffects() {
-    gPaletteEffects = NONE;
+void init_efx() {
+    gEnvironmentEffects = EFX_NONE;
 
     switch (gLoadedRoomIndex) {
         case ROOM_FURNSECTION:
         case ROOM_FURNSTORE:
         case ROOM_POISONROOM:
-            gPaletteEffects = LAVA;
+            gEnvironmentEffects = EFX_LAVA;
             gLavaPaletteIndex = 0;
             gLavaTimer = RandomMinMax(8, 24);
             break;
 
         case ROOM_BOARDWALK:
-            gPaletteEffects = THUNDER;
+            gEnvironmentEffects = EFX_THUNDER;
             gLightningPalette = dLightningPalette;
             gBackupBGPalette = gRoomHeader.backgroundPalette;
             gLightningTimer = RandomMinMax(5, 240);
@@ -35,15 +34,15 @@ void InitPaletteEffects() {
     }
 }
 
-void HandlePaletteEffects() {
+void update_efx() {
     if (gIsPaletteEffectsActive)
         return;
 
-    switch (gPaletteEffects) {
-        case NONE:
+    switch (gEnvironmentEffects) {
+        case EFX_NONE:
             break;
 
-        case LAVA:
+        case EFX_LAVA:
             if (--gLavaTimer == 0) {
                 gLavaTimer = RandomMinMax(8, 24);
                 DmaTransferBGPalette(dLavaPaletteAnims[gLavaPaletteIndex], 0, 0);
@@ -52,7 +51,7 @@ void HandlePaletteEffects() {
             }
             break;
 
-        case THUNDER:
+        case EFX_THUNDER:
             if (--gLightningTimer == 0) {
                 if (!gLightningActive) {
                     gLightningActive = 1;
@@ -78,11 +77,11 @@ void HandlePaletteEffects() {
     }
 }
 
-void RemovePaletteEffect() {
-    gPaletteEffectsSave = gPaletteEffects;
-    gPaletteEffects = 0;
+void pause_efx() {
+    gEnvironmentEffectsTemp = gEnvironmentEffects;
+    gEnvironmentEffects = 0;
 }
 
-void RestorePaletteEffect() {
-    gPaletteEffects = gPaletteEffectsSave;
+void resume_efx() {
+    gEnvironmentEffects = gEnvironmentEffectsTemp;
 }

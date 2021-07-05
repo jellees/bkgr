@@ -1,7 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "sprite.h"
-#include "palette_effects.h"
+#include "environment_effects.h"
 #include "8045038.h"
 #include "common.h"
 
@@ -401,7 +401,7 @@ void StartGame() {
         SetSpritePriority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
         EnableBGAlphaBlending();
-        InitPaletteEffects();
+        init_efx();
         sub_800DEE4();
         sub_0800ED80();
         SetSprite(&gPlayerSprite, 0x1Du, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
@@ -507,7 +507,7 @@ void UpdateVideo() {
                       gSpriteDMATable[gSpriteDMACount].count);
     }
 
-    HandlePaletteEffects();
+    update_efx();
 }
 
 void sub_800A528() {
@@ -557,7 +557,7 @@ void sub_800A5F4() {
     word_20010AC = 0;
     byte_200112A = 0;
     byte_20010B1 = 0;
-    gPaletteEffects = 0;
+    gEnvironmentEffects = EFX_NONE;
     gLoadedRoomBgm = -1;
     gGameStatus.field_16 = stru_80CC8C4.field_16;
     gGameStatus.field_17 = stru_80CC8C4.field_17;

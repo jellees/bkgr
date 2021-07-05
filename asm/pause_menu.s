@@ -17,7 +17,7 @@ OpenPauseMenu: @ 0x0804505C
 	bl audio_halt_all_fx
 	movs r0, #1
 	bl sub_80528D8
-	bl RemovePaletteEffect
+	bl pause_efx
 	ldr r0, _080451DC
 	movs r3, #0
 	movs r2, #1
@@ -609,7 +609,7 @@ _080455E6:
 	strb r0, [r1]
 	movs r0, #0
 	bl sub_80528D8
-	bl RestorePaletteEffect
+	bl resume_efx
 	pop {r3, r4, r5}
 	mov r8, r3
 	mov sb, r4

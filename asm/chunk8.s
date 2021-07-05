@@ -46034,7 +46034,7 @@ _0805E566:
 	bl sub_8013A10
 	bl EnableBGAlphaBlending
 	bl sub_800EB14
-	bl InitPaletteEffects
+	bl init_efx
 	bl sub_0800ED80
 	bl sub_80631A0
 	cmp r0, #0
@@ -46175,7 +46175,7 @@ _0805E6B2:
 	bl sub_8013A10
 	bl EnableBGAlphaBlending
 	bl sub_800EB14
-	bl InitPaletteEffects
+	bl init_efx
 	bl sub_0800ED80
 	bl sub_80631A0
 	cmp r0, #0
@@ -54438,7 +54438,7 @@ sub_80629E8: @ 0x080629E8
 	ldr r1, _08062AF0
 	strh r0, [r1]
 	bl audio_halt_all_fx
-	bl RemovePaletteEffect
+	bl pause_efx
 	ldr r0, _08062AF4
 	movs r1, #1
 	bl sub_80270AC
