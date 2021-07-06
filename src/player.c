@@ -706,7 +706,7 @@ static void move_camera(s32 offset) {
 
 /**
  * Clamps velocity to predefined velocities.
- * \param velocity  The velocity can be negative.
+ * \param velocity  Velocity can be negative.
  * \param speed     Speed is an absolute value.
  */
 static fx32 clamp_camera_velocity(fx32 velocity, fx32 speed) {
