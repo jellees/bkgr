@@ -54,13 +54,15 @@ char byte_203F6AC;
 
 u16 gPaletteCopy[0x100];
 
-void OpenPauseMenu() {
+void open_pause_menu() {
     int i;
 
     gClockStatus = 1;
+
     audio_halt_all_fx();
     sub_80528D8(1);
     pause_efx();
+
     stru_203F55C.letterSpacing = 1;
     stru_203F55C.field_12 = 0;
     stru_203F55C.field_A = 1;
@@ -69,6 +71,7 @@ void OpenPauseMenu() {
     stru_203F55C.stringOffset = 0;
     stru_203F55C.field_11 = 6;
     stru_203F55C.font = &font_80B01A8[1];
+
     stru_203F5A8.letterSpacing = 1;
     stru_203F5A8.field_12 = 0;
     stru_203F5A8.field_A = 1;
@@ -77,6 +80,7 @@ void OpenPauseMenu() {
     stru_203F5A8.stringOffset = 0;
     stru_203F5A8.field_11 = 6;
     stru_203F5A8.font = &font_80B01A8[1];
+
     stru_203F670[0].letterSpacing = 1;
     stru_203F670[0].field_12 = 0;
     stru_203F670[0].field_A = 1;
@@ -101,6 +105,7 @@ void OpenPauseMenu() {
     stru_203F670[2].stringOffset = 0;
     stru_203F670[2].field_11 = 6;
     stru_203F670[2].font = &font_80B01A8[1];
+
     stru_203F5EC[0].letterSpacing = 1;
     stru_203F5EC[0].field_12 = 0;
     stru_203F5EC[0].field_A = 1;
@@ -149,6 +154,7 @@ void OpenPauseMenu() {
     stru_203F5EC[5].stringOffset = 0;
     stru_203F5EC[5].field_11 = 6;
     stru_203F5EC[5].font = &font_80B01A8[1];
+
     switch (gPauseMenuLanguage) {
         case 0:
             dword_203F550 = &unk_86AD9E0;
@@ -163,6 +169,7 @@ void OpenPauseMenu() {
             dword_203F664[1] = &str_08067DA8;
             dword_203F664[2] = &str_08067D9C;
             break;
+
         case 1:
             dword_203F550 = &unk_86ADAA8;
             dword_203F554 = &str_08067E58;
@@ -176,6 +183,7 @@ void OpenPauseMenu() {
             dword_203F664[1] = &str_08067E3C;
             dword_203F664[2] = &str_08067E30;
             break;
+
         case 2:
             dword_203F550 = &unk_86ADC38;
             dword_203F554 = &str_08067FB0;
@@ -189,6 +197,7 @@ void OpenPauseMenu() {
             dword_203F664[1] = &str_08067F98;
             dword_203F664[2] = &str_08067F8C;
             break;
+
         case 4:
             dword_203F550 = &unk_86ADD00;
             dword_203F554 = &str_0806803C;
@@ -202,6 +211,7 @@ void OpenPauseMenu() {
             dword_203F664[1] = &str_08068020;
             dword_203F664[2] = &str_08068014;
             break;
+
         case 3:
             dword_203F550 = &unk_86ADB70;
             dword_203F554 = &str_08067F08;
@@ -215,6 +225,7 @@ void OpenPauseMenu() {
             dword_203F664[1] = &str_08067EEC;
             dword_203F664[2] = &str_08067EE0;
             break;
+
         default:
             ASSERT(0);
             break;
@@ -226,6 +237,7 @@ void OpenPauseMenu() {
     dword_203F5D4[3] = sub_8025870(dword_203F5BC[3], &stru_203F5EC[3]);
     dword_203F5D4[4] = sub_8025870(dword_203F5BC[4], &stru_203F5EC[4]);
     dword_203F5D4[5] = sub_8025870(dword_203F5BC[5], &stru_203F5EC[5]);
+
     dword_203F558 = sub_8025870(dword_203F554, &stru_203F55C);
     dword_203F4EC = Alloc(0x54u, 15, 4);
     dword_203F4F0 = Alloc(3u, 15, 4);
@@ -243,13 +255,18 @@ void OpenPauseMenu() {
     SyncVblank();
     UpdateVideo();
     SkipVblank();
+
     DmaTransfer32(0x5000200, gPaletteCopy, 128);
     DmaTransfer32(&unk_83FD254, 0x5000200, 128);
+
     sub_8026CC8(2048, 45056);
     DisableBackgrounds();
+
     InitPauseMenu();
     PauseMenuBehavior();
+
     FadeOutObjects(2, 0);
+
     SetTextSpriteCount(0);
     DmaFill32(170, gOAMBuffer1, 256);
     gOAMBufferFramePtr = gOAMBuffer1;
@@ -259,25 +276,34 @@ void OpenPauseMenu() {
     SyncVblank();
     UpdateVideo();
     SkipVblank();
-    REG_BLDCNT = 16128;
+
+    REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = 2311;
     EnableBGAlphaBlending();
+
     REG_BLDCNT = gColorSpecEffectsSel;
     EnableBackgrounds();
+
     sub_8026D84();
     DmaTransfer32(gPaletteCopy, 0x5000200, 128);
     sub_800EECC();
-    if (!gIsSlideMiniGame)
+
+    if (!gIsSlideMiniGame) {
         sub_801A2E4();
+    }
+
     if (gLoadedRoomIndex == 30 || gLoadedRoomIndex == 9) {
         sub_800EC94();
         sub_800ECB4();
     }
+
     sub_8047BEC();
     sub_80524D8();
     FreeById(4, 15);
     ResetMenu();
+
     ASSERT(DoesMemBlockExistById(4, 15) == FALSE);
+
     gClockStatus = 0;
     sub_80528D8(0);
     resume_efx();

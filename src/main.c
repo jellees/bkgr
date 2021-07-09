@@ -87,7 +87,7 @@ void UpdateGame(void) {
                     audio_halt_fx(dword_20020B4);
                 if (gPlayerState == 35)
                     sub_8064380();
-                OpenPauseMenu();
+                open_pause_menu();
                 if (gPlayerState == 35)
                     sub_806438C();
                 if (!gIsSlideMiniGame) {

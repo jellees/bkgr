@@ -4,6 +4,6 @@
 extern u8 gClockStatus;
 extern u32 dword_203F4DC;
 
-void OpenPauseMenu();
+void open_pause_menu();
 
 #endif
