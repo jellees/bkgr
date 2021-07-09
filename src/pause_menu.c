@@ -1,6 +1,8 @@
 #include "global.h"
 #include "sprite.h"
+#include "menu.h"
 #include "pause_menu.h"
+#include "alloc.h"
 #include "common.h"
 
 u8 gClockStatus;
@@ -53,6 +55,8 @@ struct TextBox stru_203F670[3];
 char byte_203F6AC;
 
 u16 gPaletteCopy[0x100];
+
+static void init();
 
 void open_pause_menu() {
     int i;
@@ -239,8 +243,8 @@ void open_pause_menu() {
     dword_203F5D4[5] = sub_8025870(dword_203F5BC[5], &stru_203F5EC[5]);
 
     dword_203F558 = sub_8025870(dword_203F554, &stru_203F55C);
-    dword_203F4EC = Alloc(0x54u, 15, 4);
-    dword_203F4F0 = Alloc(3u, 15, 4);
+    dword_203F4EC = Alloc(sizeof(struct Sprite) * 3, 15, 4);
+    dword_203F4F0 = Alloc(3, 15, 4);
 
     for (i = 0; i < 3; i++) {
         dword_203F4F0[i] = 0;
@@ -256,13 +260,13 @@ void open_pause_menu() {
     UpdateVideo();
     SkipVblank();
 
-    DmaTransfer32(0x5000200, gPaletteCopy, 128);
-    DmaTransfer32(&unk_83FD254, 0x5000200, 128);
+    DmaTransfer32(OBJ_PLTT, gPaletteCopy, 128);
+    DmaTransfer32(&unk_83FD254, OBJ_PLTT, 128);
 
     sub_8026CC8(2048, 45056);
     DisableBackgrounds();
 
-    InitPauseMenu();
+    init();
     PauseMenuBehavior();
 
     FadeOutObjects(2, 0);
@@ -285,7 +289,7 @@ void open_pause_menu() {
     EnableBackgrounds();
 
     sub_8026D84();
-    DmaTransfer32(gPaletteCopy, 0x5000200, 128);
+    DmaTransfer32(gPaletteCopy, OBJ_PLTT, 128);
     sub_800EECC();
 
     if (!gIsSlideMiniGame) {
@@ -307,4 +311,40 @@ void open_pause_menu() {
     gClockStatus = 0;
     sub_80528D8(0);
     resume_efx();
+}
+
+static void init() {
+    sub_8040B3C(gPlayerStateSettings[gPlayerState] & 0x100);
+
+    InitMenu(MENU_PAUSE_MAIN, gPauseMenuLanguage);
+    gMenuId = MENU_PAUSE_MAIN;
+    gMenuParentId = -1;
+
+    stru_203F4FC.xPosition = 92;
+    stru_203F4FC.yPosition = 131;
+    stru_203F4FC.letterSpacing = 1;
+    stru_203F4FC.field_12 = 0;
+    stru_203F4FC.field_A = 1;
+    stru_203F4FC.size = 240;
+    stru_203F4FC.palette = 10;
+    stru_203F4FC.stringOffset = 0;
+    stru_203F4FC.field_11 = 6;
+    stru_203F4FC.font = &font_80B01A8[1];
+
+    stru_203F538.xPosition = 0;
+    stru_203F538.yPosition = 0;
+    stru_203F538.letterSpacing = 1;
+    stru_203F538.field_12 = 0;
+    stru_203F538.field_A = 2;
+    stru_203F538.size = 240;
+    stru_203F538.palette = 10;
+    stru_203F538.stringOffset = 0;
+    stru_203F538.field_11 = 6;
+    stru_203F538.font = &font_80B01A8[1];
+
+    SetSprite(&stru_203F510, 0x47A, 0, 0, 0, 0x48, 0x83, 2);     // Jiggy
+    SetSprite(&dword_203F4EC[1], 0x486, 0, 0, 0, 0xA4, 0x90, 2); // A button
+    SetSprite(&dword_203F4EC[2], 0x487, 0, 0, 0, 0x4C, 0x90, 2);
+
+    byte_203F54C = TRUE;
 }
