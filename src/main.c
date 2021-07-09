@@ -4,6 +4,7 @@
 #include "environment_effects.h"
 #include "8045038.h"
 #include "player.h"
+#include "pause_menu.h"
 #include "common.h"
 
 extern void sub_800A37C();

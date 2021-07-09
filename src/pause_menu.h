@@ -1,0 +1,9 @@
+#ifndef GUARD_PAUSE_MENU_H
+#define GUARD_PAUSE_MENU_H
+
+extern u8 gClockStatus;
+extern u32 dword_203F4DC;
+
+void OpenPauseMenu();
+
+#endif

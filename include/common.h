@@ -505,9 +505,6 @@ extern u8* dword_203EADC;
 extern u8 byte_203EAE0[3];
 extern u8 byte_203EAE3;
 
-extern u8 gClockStatus;
-extern u32 dword_203F4DC;
-
 extern s16 word_203F998;
 extern s16 word_203F99A;
 extern u8 byte_203F99C; // possibly bool8
@@ -611,6 +608,69 @@ extern struct SoundEffect dSoundEffects[];
 extern u16 dLightningPalette[];
 extern void* dLavaPaletteAnims[];
 extern u32 dword_806483C[];
+
+// Some strings used by pause menu
+extern char* unk_86AD9E0;
+extern u8 str_08067DC0;
+extern u8 str_08068058;
+extern u8 str_08068064;
+extern u8 str_08068074;
+extern u8 str_08068084;
+extern u8 str_080680B0;
+extern u8 str_080680BC;
+extern u8 str_08067DB4;
+extern u8 str_08067DA8;
+extern u8 str_08067D9C;
+
+extern char* unk_86ADAA8;
+extern u8 str_08067E58;
+extern u8 str_080680E8;
+extern u8 str_080680FC;
+extern u8 str_0806810C;
+extern u8 str_08068120;
+extern u8 str_08068148;
+extern u8 str_0806815C;
+extern u8 str_08067E4C;
+extern u8 str_08067E3C;
+extern u8 str_08067E30;
+
+extern char* unk_86ADC38;
+extern u8 str_08067FB0;
+extern u8 str_08068244;
+extern u8 str_08068258;
+extern u8 str_08068264;
+extern u8 str_08068274;
+extern u8 str_08068298;
+extern u8 str_080682AC;
+extern u8 str_08067FA4;
+extern u8 str_08067F98;
+extern u8 str_08067F8C;
+
+extern char* unk_86ADB70;
+extern u8 str_08067F08;
+extern u8 str_08068190;
+extern u8 str_080681A4;
+extern u8 str_080681B8;
+extern u8 str_080681CC;
+extern u8 str_08068208;
+extern u8 str_0806821C;
+extern u8 str_08067EF8;
+extern u8 str_08067EEC;
+extern u8 str_08067EE0;
+
+extern char* unk_86ADD00;
+extern u8 str_0806803C;
+extern u8 str_080682E4;
+extern u8 str_080682F4;
+extern u8 str_08068304;
+extern u8 str_08068314;
+extern u8 str_0806833C;
+extern u8 str_08068350;
+extern u8 str_08068030;
+extern u8 str_08068020;
+extern u8 str_08068014;
+
+extern u8 unk_83FD254;
 
 // Other
 

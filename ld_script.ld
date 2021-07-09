@@ -348,9 +348,7 @@ SECTIONS
         src/random.o(.bss);
 
         . = 0x0003F4D8;
-        gClockStatus = .; . += 1;
-        . += 3; /* padding */
-        dword_203F4DC = .; . += 4;
+        src/pause_menu.o(.bss);
 
         . = 0x0003F998;
         word_203F998 = .; . += 2;
@@ -531,6 +529,7 @@ SECTIONS
         src/random.o(.text);
         asm/random.o(.text);
         src/8045038.o(.text);
+        src/pause_menu.o(.text);
         asm/pause_menu.o(.text);
         asm/chunk8.o(.text);
         *libgcc.a:*_call_via_rX*.o(.text*);
