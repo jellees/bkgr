@@ -39,7 +39,7 @@ DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 ASFLAGS 	:= -mcpu=arm7tdmi
 
 CC1			:= tools/agbcc/bin/./agbcc$(EXE)
-CFLAGS 		:= -O2 -mthumb-interwork -fhex-asm -fno-common
+CFLAGS 		:= -O2 -mthumb-interwork -fhex-asm -fno-common -g
 CPPFLAGS 	:= -I tools/agbcc/include -nostdinc -undef -iquote include -Wno-trigraphs
 
 LIBC   := tools/agbcc/lib/libc.a
