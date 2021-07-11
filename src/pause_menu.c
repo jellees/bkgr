@@ -57,6 +57,7 @@ char byte_203F6AC;
 u16 gPaletteCopy[0x100];
 
 static void init();
+static void PauseMenuBehavior();
 
 void open_pause_menu() {
     int i;
@@ -347,4 +348,147 @@ static void init() {
     SetSprite(&dword_203F4EC[2], 0x487, 0, 0, 0, 0x4C, 0x90, 2);
 
     byte_203F54C = TRUE;
+}
+
+static void PauseMenuBehavior() 
+{
+    bool8 r6 = FALSE;
+    int var_28, var_24;
+
+    SetObjectsFullAlpha();
+
+    var_24 = 1;
+    var_28 = 0;
+
+    while(1)
+    {
+        if ( gMenuId == 1 )
+        {
+            byte_203F54C = sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100) && !r6 ? 1 : 0;
+        }
+        else
+        {
+            byte_203F54C = !r6 ? 1 : 0;
+        }
+
+        if (byte_203F54C)
+        {
+            ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+            if ( gKeysDown & 8)
+            {
+                if ( sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100) )
+                {
+                    r6 = 1;
+                    sub_8040E74();
+                }
+            }
+            else if (gKeysDown & 2)
+            {
+                if (gMenuParentId == 0xFF)
+                {
+                    if ( sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100) )
+                    {
+                        r6 = 1;
+                        sub_8040E74();
+                    }
+                }
+                else
+                {
+                    gMenuId = gMenuParentId;
+
+                    //
+                    // This code is wrong, but it almost matches.
+                    //
+                    // if (gMenuParentId == 1)
+                    // {
+                    //     gMenuParentId = -1;
+                    //     sub_8040B3C(gPlayerStateSettings[gPlayerState] & 0x100);
+                    // }
+                    // else { HANG; }
+
+                    //
+                    // This code should match, and matches in CE but not with in this project?
+                    switch(gMenuId)
+                    {
+                        case 1:
+                            gMenuParentId = 0xFF;
+                            sub_8040B3C(gPlayerStateSettings[gPlayerState] & 0x100);
+                            break;
+                        default:
+                            ASSERT(0);
+                            break;
+                    }
+
+                    InitMenu(gMenuId, gPauseMenuLanguage);
+                }
+            }
+            else if ( gKeysDown & 1 )
+            {
+                if ( PauseMenuChooseEntry(&var_28) )
+                {
+                    r6 = 1;
+                    sub_8040E74();
+                }
+
+                if ( var_28 )
+                {
+                    var_28 = 0;
+                    InitMenu(gMenuId, gPauseMenuLanguage);
+                    sub_8040B3C(gPlayerStateSettings[gPlayerState] & 0x100);
+                    SetObjectsFullAlpha();
+                    var_24 = 1;
+                }
+            }
+            else if ( gKeysDown & 0x40 )
+            {
+                if (byte_203EA89) {
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                 dSoundEffects[204].pitch + 0x10000);
+                }
+                AdvanceMenuEntryUp();
+            }
+            else if ( gKeysDown & 0x80 )
+            {
+                if (byte_203EA89) {
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                 dSoundEffects[204].pitch + 0x10000);
+                }                AdvanceMenuEntryDown();
+            }
+        }
+
+        if (r6 && sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100))
+        {
+            if (gMenuId == 1)
+                break;
+            
+            InitMenu(gMenuId, gPauseMenuLanguage);
+            r6 = FALSE;
+        }
+
+        sub_804087C();
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        sub_804095C();
+        FlushMenuToTextBuffer();
+        RenderText();
+        sub_80408F0();
+        RenderMenuSprites();
+        sub_8046D44();
+        CheckHeap(4);
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+
+        if (var_24)
+        {
+            sub_08026BA8(2, 0);
+            var_24 = 0;
+        }
+    }
 }

@@ -3,342 +3,342 @@
 
     .text
 
-    .thumb
-	.global PauseMenuBehavior
-PauseMenuBehavior: @ 0x08045790
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	sub sp, #8
-	movs r6, #0
-	bl SetObjectsFullAlpha
-	movs r0, #1
-	str r0, [sp, #4]
-	str r6, [sp]
-	ldr r1, _080457EC
-	mov sb, r1
-	ldr r3, _080457F0
-	mov r8, r3
-	ldr r0, _080457F4
-	mov sl, r0
-	movs r1, #0x80
-	lsls r1, r1, #1
-	adds r7, r1, #0
-_080457BA:
-	ldr r0, _080457F8
-	ldrb r0, [r0]
-	cmp r0, #1
-	bne _08045800
-	ldr r5, _080457FC
-	movs r4, #0
-	mov r3, r8
-	ldrh r0, [r3]
-	lsls r0, r0, #1
-	add r0, sb
-	ldrh r0, [r0]
-	ands r0, r7
-	lsls r0, r0, #0x10
-	lsrs r0, r0, #0x10
-	bl sub_8040E8C
-	cmp r0, #0
-	beq _080457E4
-	cmp r6, #0
-	bne _080457E4
-	movs r4, #1
-_080457E4:
-	strb r4, [r5]
-	ldr r1, _080457FC
-	b _0804580C
-	.align 2, 0
-_080457EC: .4byte gPlayerStateSettings
-_080457F0: .4byte gPlayerState
-_080457F4: .4byte 0x080CE440
-_080457F8: .4byte gMenuId
-_080457FC: .4byte 0x0203F54C
-_08045800:
-	movs r0, #0
-	ldr r1, _08045830
-	cmp r6, #0
-	bne _0804580A
-	movs r0, #1
-_0804580A:
-	strb r0, [r1]
-_0804580C:
-	ldrb r0, [r1]
-	cmp r0, #0
-	bne _08045814
-	b _08045992
-_08045814:
-	ldr r4, _08045834
-	ldr r0, _08045838
-	adds r1, r4, #0
-	ldr r2, _0804583C
-	bl ReadKeys
-	ldrh r4, [r4]
-	movs r0, #8
-	ands r0, r4
-	cmp r0, #0
-	beq _08045840
-	mov r1, r8
-	ldrh r0, [r1]
-	b _0804585A
-	.align 2, 0
-_08045830: .4byte 0x0203F54C
-_08045834: .4byte gKeysDown
-_08045838: .4byte gKeysPressed
-_0804583C: .4byte gPreviousKeys
-_08045840:
-	movs r0, #2
-	ands r0, r4
-	lsls r0, r0, #0x10
-	lsrs r5, r0, #0x10
-	cmp r5, #0
-	beq _080458C0
-	ldr r2, _08045878
-	ldrb r1, [r2]
-	adds r0, r1, #0
-	cmp r0, #0xff
-	bne _0804587C
-	mov r3, r8
-	ldrh r0, [r3]
-_0804585A:
-	lsls r0, r0, #1
-	add r0, sb
-	ldrh r0, [r0]
-	ands r0, r7
-	lsls r0, r0, #0x10
-	lsrs r0, r0, #0x10
-	bl sub_8040E8C
-	cmp r0, #0
-	bne _08045870
-	b _08045992
-_08045870:
-	movs r6, #1
-	bl sub_8040E74
-	b _08045992
-	.align 2, 0
-_08045878: .4byte gMenuParentId
-_0804587C:
-	ldr r0, _080458A0
-	strb r1, [r0]
-	ldrb r0, [r0]
-	cmp r0, #1
-	bne _080458A4
-	movs r0, #0xff
-	strb r0, [r2]
-	mov r1, r8
-	ldrh r0, [r1]
-	lsls r0, r0, #1
-	add r0, sb
-	ldrh r0, [r0]
-	ands r0, r7
-	lsls r0, r0, #0x10
-	lsrs r0, r0, #0x10
-	bl sub_8040B3C
-	b _080458A8
-	.align 2, 0
-_080458A0: .4byte gMenuId
-_080458A4:
-	.2byte 0xEE00, 0xEE00
-_080458A8:
-	ldr r0, _080458B8
-	ldrb r0, [r0]
-	ldr r1, _080458BC
-	ldrb r1, [r1]
-	bl InitMenu
-	b _08045992
-	.align 2, 0
-_080458B8: .4byte gMenuId
-_080458BC: .4byte 0x02000320
-_080458C0:
-	movs r0, #1
-	ands r0, r4
-	cmp r0, #0
-	beq _08045914
-	mov r0, sp
-	bl PauseMenuChooseEntry
-	cmp r0, #0
-	beq _080458D8
-	movs r6, #1
-	bl sub_8040E74
-_080458D8:
-	ldr r0, [sp]
-	cmp r0, #0
-	beq _08045992
-	str r5, [sp]
-	ldr r0, _0804590C
-	ldrb r0, [r0]
-	ldr r1, _08045910
-	ldrb r1, [r1]
-	bl InitMenu
-	mov r3, r8
-	ldrh r0, [r3]
-	lsls r0, r0, #1
-	add r0, sb
-	ldrh r0, [r0]
-	ands r0, r7
-	lsls r0, r0, #0x10
-	lsrs r0, r0, #0x10
-	bl sub_8040B3C
-	bl SetObjectsFullAlpha
-	movs r0, #1
-	str r0, [sp, #4]
-	b _08045992
-	.align 2, 0
-_0804590C: .4byte gMenuId
-_08045910: .4byte 0x02000320
-_08045914:
-	movs r0, #0x40
-	ands r0, r4
-	cmp r0, #0
-	beq _0804595C
-	ldr r0, _0804594C
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _08045946
-	movs r0, #0xcc
-	lsls r0, r0, #3
-	add r0, sl
-	ldrh r0, [r0]
-	ldr r2, _08045950
-	ldr r1, _08045954
-	add r1, sl
-	ldrb r2, [r2]
-	adds r1, r1, r2
-	ldrb r1, [r1]
-	ldr r3, _08045958
-	ldr r2, [r3]
-	movs r3, #0x80
-	lsls r3, r3, #9
-	adds r2, r2, r3
-	bl audio_new_fx
-_08045946:
-	bl AdvanceMenuEntryUp
-	b _08045992
-	.align 2, 0
-_0804594C: .4byte byte_203EA89
-_08045950: .4byte byte_203EA8C
-_08045954: .4byte 0x00000662
-_08045958: .4byte 0x080CEAA4
-_0804595C:
-	movs r0, #0x80
-	ands r0, r4
-	cmp r0, #0
-	beq _08045992
-	ldr r0, _08045A38
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0804598E
-	movs r0, #0xcc
-	lsls r0, r0, #3
-	add r0, sl
-	ldrh r0, [r0]
-	ldr r2, _08045A3C
-	ldr r1, _08045A40
-	add r1, sl
-	ldrb r2, [r2]
-	adds r1, r1, r2
-	ldrb r1, [r1]
-	ldr r3, _08045A44
-	ldr r2, [r3]
-	movs r3, #0x80
-	lsls r3, r3, #9
-	adds r2, r2, r3
-	bl audio_new_fx
-_0804598E:
-	bl AdvanceMenuEntryDown
-_08045992:
-	cmp r6, #0
-	beq _080459C0
-	mov r1, r8
-	ldrh r0, [r1]
-	lsls r0, r0, #1
-	add r0, sb
-	ldrh r0, [r0]
-	ands r0, r7
-	lsls r0, r0, #0x10
-	lsrs r0, r0, #0x10
-	bl sub_8040FF4
-	cmp r0, #0
-	beq _080459C0
-	ldr r1, _08045A48
-	ldrb r0, [r1]
-	cmp r0, #1
-	beq _08045A68
-	ldr r1, _08045A4C
-	ldrb r1, [r1]
-	bl InitMenu
-	movs r6, #0
-_080459C0:
-	bl sub_804087C
-	movs r0, #0
-	bl SetTextSpriteCount
-	ldr r4, _08045A50
-	movs r0, #0xaa
-	adds r1, r4, #0
-	movs r2, #0x80
-	lsls r2, r2, #1
-	bl DmaFill32
-	ldr r0, _08045A54
-	str r4, [r0]
-	ldr r0, _08045A58
-	movs r3, #0x80
-	lsls r3, r3, #3
-	adds r4, r4, r3
-	str r4, [r0]
-	ldr r1, _08045A5C
-	ldr r0, _08045A60
-	str r0, [r1]
-	ldr r1, _08045A64
-	movs r0, #0
-	str r0, [r1]
-	bl sub_804095C
-	bl FlushMenuToTextBuffer
-	bl RenderText
-	bl sub_80408F0
-	bl RenderMenuSprites
-	bl sub_8046D44
-	movs r0, #4
-	bl CheckHeap
-	bl CheckStacks
-	bl SyncVblank
-	bl UpdateVideo
-	bl SkipVblank
-	ldr r0, [sp, #4]
-	cmp r0, #0
-	bne _08045A28
-	b _080457BA
-_08045A28:
-	movs r0, #2
-	movs r1, #0
-	bl sub_08026BA8
-	movs r1, #0
-	str r1, [sp, #4]
-	b _080457BA
-	.align 2, 0
-_08045A38: .4byte byte_203EA89
-_08045A3C: .4byte byte_203EA8C
-_08045A40: .4byte 0x00000662
-_08045A44: .4byte 0x080CEAA4
-_08045A48: .4byte gMenuId
-_08045A4C: .4byte 0x02000320
-_08045A50: .4byte gOAMBuffer1
-_08045A54: .4byte gOAMBufferFramePtr
-_08045A58: .4byte gOAMBufferEnd
-_08045A5C: .4byte gOBJTileFramePtr
-_08045A60: .4byte 0x06010000
-_08045A64: .4byte gOBJTileCount
-_08045A68:
-	add sp, #8
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
+@     .thumb
+@ 	.global PauseMenuBehavior
+@ PauseMenuBehavior: @ 0x08045790
+@ 	push {r4, r5, r6, r7, lr}
+@ 	mov r7, sl
+@ 	mov r6, sb
+@ 	mov r5, r8
+@ 	push {r5, r6, r7}
+@ 	sub sp, #8
+@ 	movs r6, #0
+@ 	bl SetObjectsFullAlpha
+@ 	movs r0, #1
+@ 	str r0, [sp, #4]
+@ 	str r6, [sp]
+@ 	ldr r1, _080457EC
+@ 	mov sb, r1
+@ 	ldr r3, _080457F0
+@ 	mov r8, r3
+@ 	ldr r0, _080457F4
+@ 	mov sl, r0
+@ 	movs r1, #0x80
+@ 	lsls r1, r1, #1
+@ 	adds r7, r1, #0
+@ _080457BA:
+@ 	ldr r0, _080457F8
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #1
+@ 	bne _08045800
+@ 	ldr r5, _080457FC
+@ 	movs r4, #0
+@ 	mov r3, r8
+@ 	ldrh r0, [r3]
+@ 	lsls r0, r0, #1
+@ 	add r0, sb
+@ 	ldrh r0, [r0]
+@ 	ands r0, r7
+@ 	lsls r0, r0, #0x10
+@ 	lsrs r0, r0, #0x10
+@ 	bl sub_8040E8C
+@ 	cmp r0, #0
+@ 	beq _080457E4
+@ 	cmp r6, #0
+@ 	bne _080457E4
+@ 	movs r4, #1
+@ _080457E4:
+@ 	strb r4, [r5]
+@ 	ldr r1, _080457FC
+@ 	b _0804580C
+@ 	.align 2, 0
+@ _080457EC: .4byte gPlayerStateSettings
+@ _080457F0: .4byte gPlayerState
+@ _080457F4: .4byte 0x080CE440
+@ _080457F8: .4byte gMenuId
+@ _080457FC: .4byte 0x0203F54C
+@ _08045800:
+@ 	movs r0, #0
+@ 	ldr r1, _08045830
+@ 	cmp r6, #0
+@ 	bne _0804580A
+@ 	movs r0, #1
+@ _0804580A:
+@ 	strb r0, [r1]
+@ _0804580C:
+@ 	ldrb r0, [r1]
+@ 	cmp r0, #0
+@ 	bne _08045814
+@ 	b _08045992
+@ _08045814:
+@ 	ldr r4, _08045834
+@ 	ldr r0, _08045838
+@ 	adds r1, r4, #0
+@ 	ldr r2, _0804583C
+@ 	bl ReadKeys
+@ 	ldrh r4, [r4]
+@ 	movs r0, #8
+@ 	ands r0, r4
+@ 	cmp r0, #0
+@ 	beq _08045840
+@ 	mov r1, r8
+@ 	ldrh r0, [r1]
+@ 	b _0804585A
+@ 	.align 2, 0
+@ _08045830: .4byte 0x0203F54C
+@ _08045834: .4byte gKeysDown
+@ _08045838: .4byte gKeysPressed
+@ _0804583C: .4byte gPreviousKeys
+@ _08045840:
+@ 	movs r0, #2
+@ 	ands r0, r4
+@ 	lsls r0, r0, #0x10
+@ 	lsrs r5, r0, #0x10
+@ 	cmp r5, #0
+@ 	beq _080458C0
+@ 	ldr r2, _08045878
+@ 	ldrb r1, [r2]
+@ 	adds r0, r1, #0
+@ 	cmp r0, #0xff
+@ 	bne _0804587C
+@ 	mov r3, r8
+@ 	ldrh r0, [r3]
+@ _0804585A:
+@ 	lsls r0, r0, #1
+@ 	add r0, sb
+@ 	ldrh r0, [r0]
+@ 	ands r0, r7
+@ 	lsls r0, r0, #0x10
+@ 	lsrs r0, r0, #0x10
+@ 	bl sub_8040E8C
+@ 	cmp r0, #0
+@ 	bne _08045870
+@ 	b _08045992
+@ _08045870:
+@ 	movs r6, #1
+@ 	bl sub_8040E74
+@ 	b _08045992
+@ 	.align 2, 0
+@ _08045878: .4byte gMenuParentId
+@ _0804587C:
+@ 	ldr r0, _080458A0
+@ 	strb r1, [r0]
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #1
+@ 	bne _080458A4
+@ 	movs r0, #0xff
+@ 	strb r0, [r2]
+@ 	mov r1, r8
+@ 	ldrh r0, [r1]
+@ 	lsls r0, r0, #1
+@ 	add r0, sb
+@ 	ldrh r0, [r0]
+@ 	ands r0, r7
+@ 	lsls r0, r0, #0x10
+@ 	lsrs r0, r0, #0x10
+@ 	bl sub_8040B3C
+@ 	b _080458A8
+@ 	.align 2, 0
+@ _080458A0: .4byte gMenuId
+@ _080458A4:
+@ 	.2byte 0xEE00, 0xEE00
+@ _080458A8:
+@ 	ldr r0, _080458B8
+@ 	ldrb r0, [r0]
+@ 	ldr r1, _080458BC
+@ 	ldrb r1, [r1]
+@ 	bl InitMenu
+@ 	b _08045992
+@ 	.align 2, 0
+@ _080458B8: .4byte gMenuId
+@ _080458BC: .4byte 0x02000320
+@ _080458C0:
+@ 	movs r0, #1
+@ 	ands r0, r4
+@ 	cmp r0, #0
+@ 	beq _08045914
+@ 	mov r0, sp
+@ 	bl PauseMenuChooseEntry
+@ 	cmp r0, #0
+@ 	beq _080458D8
+@ 	movs r6, #1
+@ 	bl sub_8040E74
+@ _080458D8:
+@ 	ldr r0, [sp]
+@ 	cmp r0, #0
+@ 	beq _08045992
+@ 	str r5, [sp]
+@ 	ldr r0, _0804590C
+@ 	ldrb r0, [r0]
+@ 	ldr r1, _08045910
+@ 	ldrb r1, [r1]
+@ 	bl InitMenu
+@ 	mov r3, r8
+@ 	ldrh r0, [r3]
+@ 	lsls r0, r0, #1
+@ 	add r0, sb
+@ 	ldrh r0, [r0]
+@ 	ands r0, r7
+@ 	lsls r0, r0, #0x10
+@ 	lsrs r0, r0, #0x10
+@ 	bl sub_8040B3C
+@ 	bl SetObjectsFullAlpha
+@ 	movs r0, #1
+@ 	str r0, [sp, #4]
+@ 	b _08045992
+@ 	.align 2, 0
+@ _0804590C: .4byte gMenuId
+@ _08045910: .4byte 0x02000320
+@ _08045914:
+@ 	movs r0, #0x40
+@ 	ands r0, r4
+@ 	cmp r0, #0
+@ 	beq _0804595C
+@ 	ldr r0, _0804594C
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _08045946
+@ 	movs r0, #0xcc
+@ 	lsls r0, r0, #3
+@ 	add r0, sl
+@ 	ldrh r0, [r0]
+@ 	ldr r2, _08045950
+@ 	ldr r1, _08045954
+@ 	add r1, sl
+@ 	ldrb r2, [r2]
+@ 	adds r1, r1, r2
+@ 	ldrb r1, [r1]
+@ 	ldr r3, _08045958
+@ 	ldr r2, [r3]
+@ 	movs r3, #0x80
+@ 	lsls r3, r3, #9
+@ 	adds r2, r2, r3
+@ 	bl audio_new_fx
+@ _08045946:
+@ 	bl AdvanceMenuEntryUp
+@ 	b _08045992
+@ 	.align 2, 0
+@ _0804594C: .4byte byte_203EA89
+@ _08045950: .4byte byte_203EA8C
+@ _08045954: .4byte 0x00000662
+@ _08045958: .4byte 0x080CEAA4
+@ _0804595C:
+@ 	movs r0, #0x80
+@ 	ands r0, r4
+@ 	cmp r0, #0
+@ 	beq _08045992
+@ 	ldr r0, _08045A38
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _0804598E
+@ 	movs r0, #0xcc
+@ 	lsls r0, r0, #3
+@ 	add r0, sl
+@ 	ldrh r0, [r0]
+@ 	ldr r2, _08045A3C
+@ 	ldr r1, _08045A40
+@ 	add r1, sl
+@ 	ldrb r2, [r2]
+@ 	adds r1, r1, r2
+@ 	ldrb r1, [r1]
+@ 	ldr r3, _08045A44
+@ 	ldr r2, [r3]
+@ 	movs r3, #0x80
+@ 	lsls r3, r3, #9
+@ 	adds r2, r2, r3
+@ 	bl audio_new_fx
+@ _0804598E:
+@ 	bl AdvanceMenuEntryDown
+@ _08045992:
+@ 	cmp r6, #0
+@ 	beq _080459C0
+@ 	mov r1, r8
+@ 	ldrh r0, [r1]
+@ 	lsls r0, r0, #1
+@ 	add r0, sb
+@ 	ldrh r0, [r0]
+@ 	ands r0, r7
+@ 	lsls r0, r0, #0x10
+@ 	lsrs r0, r0, #0x10
+@ 	bl sub_8040FF4
+@ 	cmp r0, #0
+@ 	beq _080459C0
+@ 	ldr r1, _08045A48
+@ 	ldrb r0, [r1]
+@ 	cmp r0, #1
+@ 	beq _08045A68
+@ 	ldr r1, _08045A4C
+@ 	ldrb r1, [r1]
+@ 	bl InitMenu
+@ 	movs r6, #0
+@ _080459C0:
+@ 	bl sub_804087C
+@ 	movs r0, #0
+@ 	bl SetTextSpriteCount
+@ 	ldr r4, _08045A50
+@ 	movs r0, #0xaa
+@ 	adds r1, r4, #0
+@ 	movs r2, #0x80
+@ 	lsls r2, r2, #1
+@ 	bl DmaFill32
+@ 	ldr r0, _08045A54
+@ 	str r4, [r0]
+@ 	ldr r0, _08045A58
+@ 	movs r3, #0x80
+@ 	lsls r3, r3, #3
+@ 	adds r4, r4, r3
+@ 	str r4, [r0]
+@ 	ldr r1, _08045A5C
+@ 	ldr r0, _08045A60
+@ 	str r0, [r1]
+@ 	ldr r1, _08045A64
+@ 	movs r0, #0
+@ 	str r0, [r1]
+@ 	bl sub_804095C
+@ 	bl FlushMenuToTextBuffer
+@ 	bl RenderText
+@ 	bl sub_80408F0
+@ 	bl RenderMenuSprites
+@ 	bl sub_8046D44
+@ 	movs r0, #4
+@ 	bl CheckHeap
+@ 	bl CheckStacks
+@ 	bl SyncVblank
+@ 	bl UpdateVideo
+@ 	bl SkipVblank
+@ 	ldr r0, [sp, #4]
+@ 	cmp r0, #0
+@ 	bne _08045A28
+@ 	b _080457BA
+@ _08045A28:
+@ 	movs r0, #2
+@ 	movs r1, #0
+@ 	bl sub_08026BA8
+@ 	movs r1, #0
+@ 	str r1, [sp, #4]
+@ 	b _080457BA
+@ 	.align 2, 0
+@ _08045A38: .4byte byte_203EA89
+@ _08045A3C: .4byte byte_203EA8C
+@ _08045A40: .4byte 0x00000662
+@ _08045A44: .4byte 0x080CEAA4
+@ _08045A48: .4byte gMenuId
+@ _08045A4C: .4byte 0x02000320
+@ _08045A50: .4byte gOAMBuffer1
+@ _08045A54: .4byte gOAMBufferFramePtr
+@ _08045A58: .4byte gOAMBufferEnd
+@ _08045A5C: .4byte gOBJTileFramePtr
+@ _08045A60: .4byte 0x06010000
+@ _08045A64: .4byte gOBJTileCount
+@ _08045A68:
+@ 	add sp, #8
+@ 	pop {r3, r4, r5}
+@ 	mov r8, r3
+@ 	mov sb, r4
+@ 	mov sl, r5
+@ 	pop {r4, r5, r6, r7}
+@ 	pop {r0}
+@ 	bx r0
 
 	.thumb
 sub_8045A78: @ 0x08045A78
@@ -384,6 +384,7 @@ _08045ACC: .4byte gGameStatus
 _08045AD0: .4byte 0x0203F4FC
 
     .thumb
+	.global PauseMenuChooseEntry
 PauseMenuChooseEntry: @ 0x08045AD4
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
@@ -2511,6 +2512,7 @@ _08046D3C: .4byte 0x04000050
 _08046D40: .4byte 0x00000907
 
     .thumb
+	.global sub_8046D44
 sub_8046D44: @ 0x08046D44
 	push {r4, r5, r6, lr}
 	movs r4, #0
