@@ -24,11 +24,11 @@ struct Sprite stru_203F510;
 
 char byte_203F52C[9];
 
-struct TextBox stru_203F538;
+struct TextBox gLevelNameTextBox;
 
 bool8 byte_203F54C;
 
-char* dword_203F550;
+char** dword_203F550;
 char* dword_203F554;
 
 int dword_203F558;
@@ -58,6 +58,8 @@ u16 gPaletteCopy[0x100];
 
 static void init();
 static void PauseMenuBehavior();
+static bool32 PauseMenuChooseEntry(bool32* changeMenu);
+static void sub_8045C08();
 
 void open_pause_menu() {
     int i;
@@ -332,16 +334,16 @@ static void init() {
     stru_203F4FC.field_11 = 6;
     stru_203F4FC.font = &font_80B01A8[1];
 
-    stru_203F538.xPosition = 0;
-    stru_203F538.yPosition = 0;
-    stru_203F538.letterSpacing = 1;
-    stru_203F538.field_12 = 0;
-    stru_203F538.field_A = 2;
-    stru_203F538.size = 240;
-    stru_203F538.palette = 10;
-    stru_203F538.stringOffset = 0;
-    stru_203F538.field_11 = 6;
-    stru_203F538.font = &font_80B01A8[1];
+    gLevelNameTextBox.xPosition = 0;
+    gLevelNameTextBox.yPosition = 0;
+    gLevelNameTextBox.letterSpacing = 1;
+    gLevelNameTextBox.field_12 = 0;
+    gLevelNameTextBox.field_A = 2;
+    gLevelNameTextBox.size = 240;
+    gLevelNameTextBox.palette = 10;
+    gLevelNameTextBox.stringOffset = 0;
+    gLevelNameTextBox.field_11 = 6;
+    gLevelNameTextBox.font = &font_80B01A8[1];
 
     SetSprite(&stru_203F510, 0x47A, 0, 0, 0, 0x48, 0x83, 2);     // Jiggy
     SetSprite(&dword_203F4EC[1], 0x486, 0, 0, 0, 0xA4, 0x90, 2); // A button
@@ -351,19 +353,19 @@ static void init() {
 }
 
 static void PauseMenuBehavior() {
-    int var_28, var_24;
-    bool8 r6 = FALSE;
+    bool32 changeMenu, fadeIn;
+    bool32 loadMenu = FALSE;
 
     SetObjectsFullAlpha();
 
-    var_24 = 1;
-    var_28 = 0;
+    fadeIn = TRUE;
+    changeMenu = FALSE;
 
     while (1) {
         if (gMenuId == 1) {
-            byte_203F54C = sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100) && !r6 ? 1 : 0;
+            byte_203F54C = sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100) && !loadMenu ? 1 : 0;
         } else {
-            byte_203F54C = !r6 ? 1 : 0;
+            byte_203F54C = !loadMenu ? 1 : 0;
         }
 
         if (byte_203F54C) {
@@ -371,13 +373,13 @@ static void PauseMenuBehavior() {
 
             if (gKeysDown & START_BUTTON) {
                 if (sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100)) {
-                    r6 = TRUE;
+                    loadMenu = TRUE;
                     sub_8040E74();
                 }
             } else if (gKeysDown & B_BUTTON) {
                 if (gMenuParentId == 0xFF) {
                     if (sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100)) {
-                        r6 = TRUE;
+                        loadMenu = TRUE;
                         sub_8040E74();
                     }
                 } else {
@@ -397,17 +399,17 @@ static void PauseMenuBehavior() {
                     InitMenu(gMenuId, gPauseMenuLanguage);
                 }
             } else if (gKeysDown & A_BUTTON) {
-                if (PauseMenuChooseEntry(&var_28)) {
-                    r6 = TRUE;
+                if (PauseMenuChooseEntry(&changeMenu)) {
+                    loadMenu = TRUE;
                     sub_8040E74();
                 }
 
-                if (var_28) {
-                    var_28 = 0;
+                if (changeMenu) {
+                    changeMenu = FALSE;
                     InitMenu(gMenuId, gPauseMenuLanguage);
                     sub_8040B3C(gPlayerStateSettings[gPlayerState] & 0x100);
                     SetObjectsFullAlpha();
-                    var_24 = 1;
+                    fadeIn = 1;
                 }
             } else if (gKeysDown & DPAD_UP) {
                 if (byte_203EA89) {
@@ -424,12 +426,12 @@ static void PauseMenuBehavior() {
             }
         }
 
-        if (r6 && sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
+        if (loadMenu && sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
             if (gMenuId == MENU_PAUSE_MAIN)
                 break;
 
             InitMenu(gMenuId, gPauseMenuLanguage);
-            r6 = FALSE;
+            loadMenu = FALSE;
         }
 
         sub_804087C();
@@ -453,9 +455,248 @@ static void PauseMenuBehavior() {
         UpdateVideo();
         SkipVblank();
 
-        if (var_24) {
+        if (fadeIn) {
             sub_08026BA8(2, 0);
-            var_24 = 0;
+            fadeIn = 0;
+        }
+    }
+}
+
+static void sub_8045A78() {
+    byte_203F52C[0] = '0';
+    byte_203F52C[1] = '0';
+    byte_203F52C[2] = ':';
+    byte_203F52C[3] = '0';
+    byte_203F52C[4] = '0';
+    byte_203F52C[5] = ':';
+    byte_203F52C[6] = '0';
+    byte_203F52C[7] = '0';
+    byte_203F52C[8] = -1;
+    IntegerToAsciiBw(gGameStatus.clockHour, &byte_203F52C[1]);
+    IntegerToAsciiBw(gGameStatus.clockMinute, &byte_203F52C[4]);
+    IntegerToAsciiBw(gGameStatus.clockSecond, &byte_203F52C[7]);
+    stru_203F4FC.xPosition = 92;
+    stru_203F4FC.yPosition = 131;
+    stru_203F4FC.stringOffset = 0;
+    AddStringToBuffer(&stru_203F4FC, byte_203F52C);
+}
+
+static bool32 PauseMenuChooseEntry(bool32* changeMenu) {
+    if (gMenuId != MENU_PAUSE_MAIN) {
+        return FALSE;
+    }
+
+    switch (GetCurrentMenuEntry()) {
+        case 0: // Continue
+            return TRUE;
+
+        case 1: // Totals
+            sub_8040E74();
+            sub_8045C08();
+            *changeMenu = TRUE;
+            break;
+
+        case 2: // Options
+            sub_8040E74();
+            sub_080466EC();
+            gMenuId = MENU_PAUSE_MAIN;
+            gMenuParentId = 0xFF;
+            *changeMenu = TRUE;
+            break;
+
+        case 3: // Save
+            sub_8040E74();
+            if (!sub_08045F14()) {
+                gMenuId = MENU_PAUSE_MAIN;
+                gMenuParentId = 0xFF;
+                *changeMenu = TRUE;
+                return FALSE;
+            } else {
+                gMenuId = MENU_PAUSE_MAIN;
+                gMenuParentId = 0xFF;
+                return TRUE;
+            }
+    }
+
+    return FALSE;
+}
+
+static void load_page_name(s32 page) {
+    gLevelNameTextBox.xPosition = (240 - sub_8025870(dword_203F550[page], &gLevelNameTextBox)) >> 1;
+    gLevelNameTextBox.yPosition = 8;
+    gLevelNameTextBox.stringOffset = 0;
+    AddStringToBuffer(&gLevelNameTextBox, dword_203F550[page]);
+}
+
+static void load_jinjo_palette(s32 page) {
+    switch (page) {
+        case 0:
+            DmaTransferObjPalette(&unk_83FD894, 2, 2);
+            break;
+
+        case 1:
+            DmaTransferObjPalette(&unk_83FD8B4, 2, 2);
+            break;
+
+        case 2:
+            DmaTransferObjPalette(&unk_83FD8D4, 2, 2);
+            break;
+
+        case 3:
+            DmaTransferObjPalette(&unk_83FD8F4, 2, 2);
+            break;
+
+        case 4:
+            DmaTransferObjPalette(&unk_83FD914, 2, 2);
+            break;
+
+        case 5:
+            DmaTransferObjPalette(&unk_83FD934, 2, 2);
+            break;
+
+        case 6:
+            DmaTransferObjPalette(&unk_83FD954, 2, 2);
+            break;
+    }
+}
+
+static void sub_8045C08() {
+    s32 page, nextPage;
+    bool32 loadNextPage;
+    bool32 fadeIn;
+
+    while (!sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
+        sub_804087C();
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        sub_804095C();
+        FlushMenuToTextBuffer();
+        RenderText();
+        sub_80408F0();
+        RenderMenuSprites();
+        sub_8046D44();
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+    }
+
+    FadeOutObjects(2, 0);
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    UpdateVideo();
+    SkipVblank();
+    REG_BLDCNT = 16128;
+    REG_BLDALPHA = 2311;
+
+    page = gLoadedRoomLevel;
+    nextPage = -1;
+
+    sub_0804147C(page);
+    load_jinjo_palette(page);
+
+    loadNextPage = FALSE;
+    SetObjectsFullAlpha();
+    fadeIn = TRUE;
+
+    while (1) {
+        if (sub_08041AC0(page) && !loadNextPage) {
+            ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+            if (gKeysDown & B_BUTTON) {
+                if (sub_08041AC0(page)) {
+                    loadNextPage = TRUE;
+                    nextPage = -1;
+                    sub_8041AAC(page);
+                }
+            } else if (gKeysDown & DPAD_LEFT) {
+                nextPage = page - 1;
+
+                if (nextPage < 0) {
+                    nextPage = 6;
+                }
+
+                if (gUnlockedLevels != gTotalAmountOfLevels && nextPage != 6 && nextPage > gUnlockedLevels) {
+                    nextPage = gUnlockedLevels;
+                }
+
+                loadNextPage = TRUE;
+                sub_8041AAC(page);
+            } else if (gKeysDown & DPAD_RIGHT) {
+                nextPage = page + 1;
+
+                if (nextPage > 6) {
+                    nextPage = 0;
+                }
+
+                if (gUnlockedLevels != gTotalAmountOfLevels && nextPage != 6 && nextPage > gUnlockedLevels) {
+                    nextPage = 6;
+                }
+
+                loadNextPage = TRUE;
+                sub_8041AAC(page);
+            }
+        }
+
+        if (loadNextPage && sub_08041C8C(page)) {
+            load_jinjo_palette(6);
+            FadeOutObjects(2, 0);
+            SetTextSpriteCount(0);
+            DmaFill32(170, gOAMBuffer1, 256);
+            gOAMBufferFramePtr = gOAMBuffer1;
+            gOAMBufferEnd = &gOAMBuffer1[0x100];
+            gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+            gOBJTileCount = 0;
+            SyncVblank();
+            UpdateVideo();
+            SkipVblank();
+            REG_BLDCNT = 16128;
+            REG_BLDALPHA = 2311;
+
+            if (nextPage < 0)
+                break;
+
+            page = nextPage;
+
+            sub_0804147C(page);
+            load_jinjo_palette(page);
+
+            loadNextPage = FALSE;
+
+            SetObjectsFullAlpha();
+            fadeIn = TRUE;
+        }
+
+        sub_804087C();
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        load_page_name(page);
+        sub_804095C();
+        RenderText();
+        sub_80408F0();
+        sub_8046D44();
+        CheckHeap(4);
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+
+        if (fadeIn) {
+            sub_08026BA8(2, 0);
+            fadeIn = FALSE;
         }
     }
 }

@@ -575,8 +575,8 @@ void sub_800A5F4() {
     gGameStatus.maxHealth = 4;
     byte_200107C = 0;
     byte_200107D = stru_80CC8C4.maxHealth - 4;
-    byte_200107E = 0;
-    byte_200107F = dword_80CC8F4;
+    gUnlockedLevels = 0;
+    gTotalAmountOfLevels = dword_80CC8F4;
     dword_3003300 = 0x160000;
     dword_3003308 = 0x240000;
     dword_3003304 = 0x180000;

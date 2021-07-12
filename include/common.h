@@ -397,8 +397,8 @@ extern struct GameStatus gGameStatus;
 extern struct SaveFile gSaveFiles[3];
 extern u8 byte_200107C;
 extern u8 byte_200107D;
-extern u8 byte_200107E;
-extern u8 byte_200107F;
+extern u8 gUnlockedLevels;
+extern u8 gTotalAmountOfLevels;
 extern u16 gLoadedRoomIndex;
 extern u16 gLoadedRoomLevel;
 extern u16 gLoadedRoomBgm;
@@ -671,6 +671,14 @@ extern u8 str_08068020;
 extern u8 str_08068014;
 
 extern u8 unk_83FD254;
+
+extern u16 unk_83FD894;
+extern u16 unk_83FD8B4;
+extern u16 unk_83FD8D4;
+extern u16 unk_83FD8F4;
+extern u16 unk_83FD914;
+extern u16 unk_83FD934;
+extern u16 unk_83FD954;
 
 // Other
 

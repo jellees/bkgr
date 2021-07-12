@@ -57,8 +57,8 @@ SECTIONS
         gSaveFiles = .; . += 8 * 3;
         byte_200107C = .; . += 1;
         byte_200107D = .; . += 1;
-        byte_200107E = .; . += 1;
-        byte_200107F = .; . += 1;
+        gUnlockedLevels = .; . += 1;
+        gTotalAmountOfLevels = .; . += 1;
         gLoadedRoomIndex = .; . += 2;
         gLoadedRoomLevel = .; . += 2;
         gLoadedRoomBgm = .; . += 2;
