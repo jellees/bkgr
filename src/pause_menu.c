@@ -6,7 +6,7 @@
 #include "common.h"
 
 u8 gClockStatus;
-u32 dword_203F4DC;
+s32 dword_203F4DC;
 
 char byte_203F4E0;
 
@@ -44,10 +44,9 @@ int dword_203F590;
 struct TextBox stru_203F594;
 struct TextBox stru_203F5A8;
 
-char* dword_203F5BC[6];
-char* dword_203F5D4[6];
-
-struct TextBox stru_203F5EC[6];
+char* gSaveGameText[6];
+s32 gSaveGameTextOffsets[6];
+struct TextBox gSaveGameTextBoxes[6];
 
 char* dword_203F664[3];
 struct TextBox stru_203F670[3];
@@ -113,65 +112,65 @@ void open_pause_menu() {
     stru_203F670[2].field_11 = 6;
     stru_203F670[2].font = &font_80B01A8[1];
 
-    stru_203F5EC[0].letterSpacing = 1;
-    stru_203F5EC[0].field_12 = 0;
-    stru_203F5EC[0].field_A = 1;
-    stru_203F5EC[0].size = 240;
-    stru_203F5EC[0].palette = 10;
-    stru_203F5EC[0].stringOffset = 0;
-    stru_203F5EC[0].field_11 = 6;
-    stru_203F5EC[0].font = &font_80B01A8[1];
-    stru_203F5EC[1].letterSpacing = 1;
-    stru_203F5EC[1].field_12 = 0;
-    stru_203F5EC[1].field_A = 1;
-    stru_203F5EC[1].size = 240;
-    stru_203F5EC[1].palette = 10;
-    stru_203F5EC[1].stringOffset = 0;
-    stru_203F5EC[1].field_11 = 6;
-    stru_203F5EC[1].font = &font_80B01A8[1];
-    stru_203F5EC[2].letterSpacing = 1;
-    stru_203F5EC[2].field_12 = 0;
-    stru_203F5EC[2].field_A = 1;
-    stru_203F5EC[2].size = 240;
-    stru_203F5EC[2].palette = 10;
-    stru_203F5EC[2].stringOffset = 0;
-    stru_203F5EC[2].field_11 = 6;
-    stru_203F5EC[2].font = &font_80B01A8[1];
-    stru_203F5EC[3].letterSpacing = 1;
-    stru_203F5EC[3].field_12 = 0;
-    stru_203F5EC[3].field_A = 2;
-    stru_203F5EC[3].size = 208;
-    stru_203F5EC[3].palette = 10;
-    stru_203F5EC[3].stringOffset = 0;
-    stru_203F5EC[3].field_11 = 6;
-    stru_203F5EC[3].font = &font_80B01A8[1];
-    stru_203F5EC[4].letterSpacing = 1;
-    stru_203F5EC[4].field_12 = 0;
-    stru_203F5EC[4].field_A = 1;
-    stru_203F5EC[4].size = 240;
-    stru_203F5EC[4].palette = 10;
-    stru_203F5EC[4].stringOffset = 0;
-    stru_203F5EC[4].field_11 = 6;
-    stru_203F5EC[4].font = &font_80B01A8[1];
-    stru_203F5EC[5].letterSpacing = 1;
-    stru_203F5EC[5].field_12 = 0;
-    stru_203F5EC[5].field_A = 1;
-    stru_203F5EC[5].size = 240;
-    stru_203F5EC[5].palette = 10;
-    stru_203F5EC[5].stringOffset = 0;
-    stru_203F5EC[5].field_11 = 6;
-    stru_203F5EC[5].font = &font_80B01A8[1];
+    gSaveGameTextBoxes[0].letterSpacing = 1;
+    gSaveGameTextBoxes[0].field_12 = 0;
+    gSaveGameTextBoxes[0].field_A = 1;
+    gSaveGameTextBoxes[0].size = 240;
+    gSaveGameTextBoxes[0].palette = 10;
+    gSaveGameTextBoxes[0].stringOffset = 0;
+    gSaveGameTextBoxes[0].field_11 = 6;
+    gSaveGameTextBoxes[0].font = &font_80B01A8[1];
+    gSaveGameTextBoxes[1].letterSpacing = 1;
+    gSaveGameTextBoxes[1].field_12 = 0;
+    gSaveGameTextBoxes[1].field_A = 1;
+    gSaveGameTextBoxes[1].size = 240;
+    gSaveGameTextBoxes[1].palette = 10;
+    gSaveGameTextBoxes[1].stringOffset = 0;
+    gSaveGameTextBoxes[1].field_11 = 6;
+    gSaveGameTextBoxes[1].font = &font_80B01A8[1];
+    gSaveGameTextBoxes[2].letterSpacing = 1;
+    gSaveGameTextBoxes[2].field_12 = 0;
+    gSaveGameTextBoxes[2].field_A = 1;
+    gSaveGameTextBoxes[2].size = 240;
+    gSaveGameTextBoxes[2].palette = 10;
+    gSaveGameTextBoxes[2].stringOffset = 0;
+    gSaveGameTextBoxes[2].field_11 = 6;
+    gSaveGameTextBoxes[2].font = &font_80B01A8[1];
+    gSaveGameTextBoxes[3].letterSpacing = 1;
+    gSaveGameTextBoxes[3].field_12 = 0;
+    gSaveGameTextBoxes[3].field_A = 2;
+    gSaveGameTextBoxes[3].size = 208;
+    gSaveGameTextBoxes[3].palette = 10;
+    gSaveGameTextBoxes[3].stringOffset = 0;
+    gSaveGameTextBoxes[3].field_11 = 6;
+    gSaveGameTextBoxes[3].font = &font_80B01A8[1];
+    gSaveGameTextBoxes[4].letterSpacing = 1;
+    gSaveGameTextBoxes[4].field_12 = 0;
+    gSaveGameTextBoxes[4].field_A = 1;
+    gSaveGameTextBoxes[4].size = 240;
+    gSaveGameTextBoxes[4].palette = 10;
+    gSaveGameTextBoxes[4].stringOffset = 0;
+    gSaveGameTextBoxes[4].field_11 = 6;
+    gSaveGameTextBoxes[4].font = &font_80B01A8[1];
+    gSaveGameTextBoxes[5].letterSpacing = 1;
+    gSaveGameTextBoxes[5].field_12 = 0;
+    gSaveGameTextBoxes[5].field_A = 1;
+    gSaveGameTextBoxes[5].size = 240;
+    gSaveGameTextBoxes[5].palette = 10;
+    gSaveGameTextBoxes[5].stringOffset = 0;
+    gSaveGameTextBoxes[5].field_11 = 6;
+    gSaveGameTextBoxes[5].font = &font_80B01A8[1];
 
     switch (gPauseMenuLanguage) {
         case 0:
             dword_203F550 = &unk_86AD9E0;
             dword_203F554 = &str_08067DC0;
-            dword_203F5BC[0] = &str_08068058;
-            dword_203F5BC[1] = &str_08068064;
-            dword_203F5BC[2] = &str_08068074;
-            dword_203F5BC[3] = &str_08068084;
-            dword_203F5BC[4] = &str_080680B0;
-            dword_203F5BC[5] = &str_080680BC;
+            gSaveGameText[0] = &str_08068058;
+            gSaveGameText[1] = &str_08068064;
+            gSaveGameText[2] = &str_08068074;
+            gSaveGameText[3] = &str_08068084;
+            gSaveGameText[4] = &str_080680B0;
+            gSaveGameText[5] = &str_080680BC;
             dword_203F664[0] = &str_08067DB4;
             dword_203F664[1] = &str_08067DA8;
             dword_203F664[2] = &str_08067D9C;
@@ -180,12 +179,12 @@ void open_pause_menu() {
         case 1:
             dword_203F550 = &unk_86ADAA8;
             dword_203F554 = &str_08067E58;
-            dword_203F5BC[0] = &str_080680E8;
-            dword_203F5BC[1] = &str_080680FC;
-            dword_203F5BC[2] = &str_0806810C;
-            dword_203F5BC[3] = &str_08068120;
-            dword_203F5BC[4] = &str_08068148;
-            dword_203F5BC[5] = &str_0806815C;
+            gSaveGameText[0] = &str_080680E8;
+            gSaveGameText[1] = &str_080680FC;
+            gSaveGameText[2] = &str_0806810C;
+            gSaveGameText[3] = &str_08068120;
+            gSaveGameText[4] = &str_08068148;
+            gSaveGameText[5] = &str_0806815C;
             dword_203F664[0] = &str_08067E4C;
             dword_203F664[1] = &str_08067E3C;
             dword_203F664[2] = &str_08067E30;
@@ -194,12 +193,12 @@ void open_pause_menu() {
         case 2:
             dword_203F550 = &unk_86ADC38;
             dword_203F554 = &str_08067FB0;
-            dword_203F5BC[0] = &str_08068244;
-            dword_203F5BC[1] = &str_08068258;
-            dword_203F5BC[2] = &str_08068264;
-            dword_203F5BC[3] = &str_08068274;
-            dword_203F5BC[4] = &str_08068298;
-            dword_203F5BC[5] = &str_080682AC;
+            gSaveGameText[0] = &str_08068244;
+            gSaveGameText[1] = &str_08068258;
+            gSaveGameText[2] = &str_08068264;
+            gSaveGameText[3] = &str_08068274;
+            gSaveGameText[4] = &str_08068298;
+            gSaveGameText[5] = &str_080682AC;
             dword_203F664[0] = &str_08067FA4;
             dword_203F664[1] = &str_08067F98;
             dword_203F664[2] = &str_08067F8C;
@@ -208,12 +207,12 @@ void open_pause_menu() {
         case 4:
             dword_203F550 = &unk_86ADD00;
             dword_203F554 = &str_0806803C;
-            dword_203F5BC[0] = &str_080682E4;
-            dword_203F5BC[1] = &str_080682F4;
-            dword_203F5BC[2] = &str_08068304;
-            dword_203F5BC[3] = &str_08068314;
-            dword_203F5BC[4] = &str_0806833C;
-            dword_203F5BC[5] = &str_08068350;
+            gSaveGameText[0] = &str_080682E4;
+            gSaveGameText[1] = &str_080682F4;
+            gSaveGameText[2] = &str_08068304;
+            gSaveGameText[3] = &str_08068314;
+            gSaveGameText[4] = &str_0806833C;
+            gSaveGameText[5] = &str_08068350;
             dword_203F664[0] = &str_08068030;
             dword_203F664[1] = &str_08068020;
             dword_203F664[2] = &str_08068014;
@@ -222,12 +221,12 @@ void open_pause_menu() {
         case 3:
             dword_203F550 = &unk_86ADB70;
             dword_203F554 = &str_08067F08;
-            dword_203F5BC[0] = &str_08068190;
-            dword_203F5BC[1] = &str_080681A4;
-            dword_203F5BC[2] = &str_080681B8;
-            dword_203F5BC[3] = &str_080681CC;
-            dword_203F5BC[4] = &str_08068208;
-            dword_203F5BC[5] = &str_0806821C;
+            gSaveGameText[0] = &str_08068190;
+            gSaveGameText[1] = &str_080681A4;
+            gSaveGameText[2] = &str_080681B8;
+            gSaveGameText[3] = &str_080681CC;
+            gSaveGameText[4] = &str_08068208;
+            gSaveGameText[5] = &str_0806821C;
             dword_203F664[0] = &str_08067EF8;
             dword_203F664[1] = &str_08067EEC;
             dword_203F664[2] = &str_08067EE0;
@@ -238,12 +237,12 @@ void open_pause_menu() {
             break;
     }
 
-    dword_203F5D4[0] = sub_8025870(dword_203F5BC[0], stru_203F5EC);
-    dword_203F5D4[1] = sub_8025870(dword_203F5BC[1], &stru_203F5EC[1]);
-    dword_203F5D4[2] = sub_8025870(dword_203F5BC[2], &stru_203F5EC[2]);
-    dword_203F5D4[3] = sub_8025870(dword_203F5BC[3], &stru_203F5EC[3]);
-    dword_203F5D4[4] = sub_8025870(dword_203F5BC[4], &stru_203F5EC[4]);
-    dword_203F5D4[5] = sub_8025870(dword_203F5BC[5], &stru_203F5EC[5]);
+    gSaveGameTextOffsets[0] = sub_8025870(gSaveGameText[0], gSaveGameTextBoxes);
+    gSaveGameTextOffsets[1] = sub_8025870(gSaveGameText[1], &gSaveGameTextBoxes[1]);
+    gSaveGameTextOffsets[2] = sub_8025870(gSaveGameText[2], &gSaveGameTextBoxes[2]);
+    gSaveGameTextOffsets[3] = sub_8025870(gSaveGameText[3], &gSaveGameTextBoxes[3]);
+    gSaveGameTextOffsets[4] = sub_8025870(gSaveGameText[4], &gSaveGameTextBoxes[4]);
+    gSaveGameTextOffsets[5] = sub_8025870(gSaveGameText[5], &gSaveGameTextBoxes[5]);
 
     dword_203F558 = sub_8025870(dword_203F554, &stru_203F55C);
     dword_203F4EC = Alloc(sizeof(struct Sprite) * 3, 15, 4);
@@ -285,7 +284,7 @@ void open_pause_menu() {
     SkipVblank();
 
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
-    REG_BLDALPHA = 2311;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
     EnableBGAlphaBlending();
 
     REG_BLDCNT = gColorSpecEffectsSel;
@@ -595,8 +594,8 @@ static void sub_8045C08() {
     SyncVblank();
     UpdateVideo();
     SkipVblank();
-    REG_BLDCNT = 16128;
-    REG_BLDALPHA = 2311;
+    REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
 
     page = gLoadedRoomLevel;
     nextPage = -1;
@@ -625,7 +624,8 @@ static void sub_8045C08() {
                     nextPage = 6;
                 }
 
-                if (gUnlockedLevels != gTotalAmountOfLevels && nextPage != 6 && nextPage > gUnlockedLevels) {
+                if (gUnlockedLevels != gTotalAmountOfLevels && nextPage != 6
+                    && nextPage > gUnlockedLevels) {
                     nextPage = gUnlockedLevels;
                 }
 
@@ -638,7 +638,8 @@ static void sub_8045C08() {
                     nextPage = 0;
                 }
 
-                if (gUnlockedLevels != gTotalAmountOfLevels && nextPage != 6 && nextPage > gUnlockedLevels) {
+                if (gUnlockedLevels != gTotalAmountOfLevels && nextPage != 6
+                    && nextPage > gUnlockedLevels) {
                     nextPage = 6;
                 }
 
@@ -659,8 +660,8 @@ static void sub_8045C08() {
             SyncVblank();
             UpdateVideo();
             SkipVblank();
-            REG_BLDCNT = 16128;
-            REG_BLDALPHA = 2311;
+            REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
+            REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
 
             if (nextPage < 0)
                 break;
@@ -699,4 +700,351 @@ static void sub_8045C08() {
             fadeIn = FALSE;
         }
     }
+}
+
+static bool32 sub_08045F14() {
+    enum PauseMenuState { SHOW_SAVE_GAMES, MOVE_TEXT, WAIT_FOR_CONFIRMATION, SAVING_GAME, GAME_SAVED };
+
+    int i;
+    enum PauseMenuState state;
+    int gameIdx;
+    bool32 isCancelled;
+    struct TextBox textbox;
+    bool32 fadeIn;
+    bool32 saveGame;
+    int var_48;
+    int saveGameWaitCounter;
+    int min;
+    int max;
+    int currentSfxIdx;
+    int sfxId;
+    int var_30;
+    int xPos;
+    fx32 yPos;
+    fx32 yPosTarget;
+    char* string;
+
+    min = 0;
+    max = 0;
+    currentSfxIdx = -1;
+    currentSfxIdx++;
+    currentSfxIdx--;
+    sfxId = -1;
+    var_30 = 1;
+    xPos = 0;
+    yPos = 0;
+    yPosTarget = 0;
+    string = NULL;
+    isCancelled = FALSE;
+
+    textbox.letterSpacing = 1;
+    textbox.field_12 = 0;
+    textbox.field_A = 1;
+    textbox.size = 240;
+    textbox.palette = 10;
+    textbox.stringOffset = 0;
+    textbox.field_11 = 6;
+    textbox.font = &font_80B01A8[1];
+
+    while (!sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
+        sub_804087C();
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        sub_804095C();
+        FlushMenuToTextBuffer();
+        RenderText();
+        sub_80408F0();
+        RenderMenuSprites();
+        sub_8046D44();
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+    }
+
+    FadeOutObjects(2, 0);
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    UpdateVideo();
+    SkipVblank();
+    REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+    InitMenu(MENU_FILE_SELECT, gPauseMenuLanguage);
+    gMenuParentId = gMenuId;
+    gMenuId = MENU_FILE_SELECT;
+
+    for (i = 0; i < dword_203F4DC; ++i) {
+        AdvanceMenuEntryDown();
+    }
+
+    state = SHOW_SAVE_GAMES;
+
+    SetObjectsFullAlpha();
+
+    fadeIn = TRUE;
+    saveGame = FALSE;
+    var_48 = 0;
+    saveGameWaitCounter = -1;
+    gameIdx = -1;
+
+    while (1) {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+        if (gKeysDown & B_BUTTON) {
+            if (byte_203EA89) {
+                audio_new_fx(dSoundEffects[208].index, dSoundEffects[208].volumes[byte_203EA8C],
+                             dSoundEffects[208].pitch + 0x10000);
+            }
+            isCancelled = TRUE;
+        } else if (gKeysDown & A_BUTTON) {
+            switch (state) {
+                case SHOW_SAVE_GAMES:
+                    state = MOVE_TEXT;
+                    switch (GetCurrentMenuEntry()) {
+                        case 0:
+                            xPos = 16;
+                            yPos = FX32_CONST(40);
+                            yPosTarget = FX32_CONST(40);
+                            string = file_string_1;
+                            gameIdx = 0;
+                            dword_203F4DC = 0;
+                            break;
+
+                        case 1:
+                            xPos = 16;
+                            yPos = FX32_CONST(72);
+                            yPosTarget = FX32_CONST(40);
+                            string = file_string_2;
+                            gameIdx = 1;
+                            dword_203F4DC = 1;
+                            break;
+
+                        case 2:
+                            xPos = 16;
+                            yPos = FX32_CONST(104);
+                            yPosTarget = FX32_CONST(40);
+                            string = file_string_3;
+                            gameIdx = 2;
+                            dword_203F4DC = 2;
+                            break;
+                    }
+                    break;
+
+                case WAIT_FOR_CONFIRMATION:
+                    state = SAVING_GAME;
+                    saveGame = TRUE;
+                    break;
+            }
+        } else if (gKeysDown & DPAD_UP) {
+            if (byte_203EA89) {
+                audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                             dSoundEffects[204].pitch + 0x10000);
+            }
+            AdvanceMenuEntryUp();
+        } else if (gKeysDown & DPAD_DOWN) {
+            if (byte_203EA89) {
+                audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                             dSoundEffects[204].pitch + 0x10000);
+            }
+            AdvanceMenuEntryDown();
+        }
+
+        if (isCancelled) {
+            FadeOutObjects(2, 0);
+            SetTextSpriteCount(0);
+            DmaFill32(170, gOAMBuffer1, 256);
+            gOAMBufferFramePtr = gOAMBuffer1;
+            gOAMBufferEnd = &gOAMBuffer1[0x100];
+            gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+            gOBJTileCount = 0;
+            SyncVblank();
+            UpdateVideo();
+            SkipVblank();
+            REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
+            REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+            return 0;
+        }
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        gSaveGameTextBoxes[0].xPosition = (240 - gSaveGameTextOffsets[0]) >> 1;
+        gSaveGameTextBoxes[0].yPosition = 8;
+        gSaveGameTextBoxes[0].stringOffset = 0;
+        AddStringToBuffer(gSaveGameTextBoxes, gSaveGameText[0]);
+
+        switch (state) {
+            case SHOW_SAVE_GAMES:
+                FlushMenuToTextBuffer();
+                RenderText();
+                RenderMenuSprites();
+                sub_8046D44();
+                break;
+
+            case MOVE_TEXT:
+                textbox.xPosition = xPos;
+                textbox.yPosition = yPos >> FX32_SHIFT;
+                textbox.stringOffset = 0;
+                AddStringToBuffer(&textbox, string);
+                yPos -= FX32_CONST(3.5);
+                if (yPos <= yPosTarget) {
+                    yPos = yPosTarget;
+                    state = 2;
+                }
+                RenderText();
+                break;
+
+            case WAIT_FOR_CONFIRMATION:
+                textbox.xPosition = xPos;
+                textbox.yPosition = yPos >> FX32_SHIFT;
+                textbox.stringOffset = 0;
+                AddStringToBuffer(&textbox, string);
+                if (gSaveFiles[gameIdx].empty) {
+                    gSaveGameTextBoxes[1].xPosition = (240 - gSaveGameTextOffsets[1]) >> 1;
+                    gSaveGameTextBoxes[1].yPosition = (yPos >> FX32_SHIFT) + 32;
+                    gSaveGameTextBoxes[1].stringOffset = 0;
+                    AddStringToBuffer(&gSaveGameTextBoxes[1], gSaveGameText[1]);
+                } else {
+                    gSaveGameTextBoxes[5].xPosition = (240 - gSaveGameTextOffsets[5]) >> 1;
+                    gSaveGameTextBoxes[5].yPosition = (yPos >> FX32_SHIFT) + 32;
+                    gSaveGameTextBoxes[5].stringOffset = 0;
+                    AddStringToBuffer(&gSaveGameTextBoxes[5], gSaveGameText[5]);
+                }
+                gSaveGameTextBoxes[2].xPosition = (240 - gSaveGameTextOffsets[2]) >> 1;
+                gSaveGameTextBoxes[2].yPosition = (yPos >> FX32_SHIFT) + 64;
+                gSaveGameTextBoxes[2].stringOffset = 0;
+                AddStringToBuffer(&gSaveGameTextBoxes[2], gSaveGameText[2]);
+                RenderText();
+                break;
+
+            case SAVING_GAME:
+                textbox.xPosition = xPos;
+                textbox.yPosition = yPos >> FX32_SHIFT;
+                textbox.stringOffset = 0;
+                AddStringToBuffer(&textbox, string);
+                gSaveGameTextBoxes[3].xPosition = 16;
+                gSaveGameTextBoxes[3].yPosition = (yPos >> FX32_SHIFT) + 32;
+                gSaveGameTextBoxes[3].stringOffset = 0;
+                AddStringToBuffer(&gSaveGameTextBoxes[3], gSaveGameText[3]);
+                RenderText();
+                break;
+
+            case GAME_SAVED:
+                if (var_48 && !audio_fx_still_active(sfxId)) {
+                    int r5 = var_30 - 1;
+                    int newIdx;
+                    do {
+                        newIdx = RandomMinMax(min, max);
+                    } while (newIdx == currentSfxIdx);
+                    currentSfxIdx = newIdx;
+                    if (byte_203EA89) {
+                        sfxId = audio_new_fx(dSoundEffects[newIdx].index,
+                                             dSoundEffects[newIdx].volumes[byte_203EA8C],
+                                             dSoundEffects[newIdx].pitch + 0x10000);
+                    } else {
+                        sfxId = -1;
+                    }
+                    var_30 = r5;
+                    if (var_30 == 0) {
+                        var_48 = 0;
+                    }
+                }
+                textbox.xPosition = xPos;
+                textbox.yPosition = yPos >> FX32_SHIFT;
+                textbox.stringOffset = 0;
+                AddStringToBuffer(&textbox, string);
+                gSaveGameTextBoxes[4].xPosition = (240 - gSaveGameTextOffsets[4]) >> 1;
+                gSaveGameTextBoxes[4].yPosition = (yPos >> FX32_SHIFT) + 32;
+                gSaveGameTextBoxes[4].stringOffset = 0;
+                AddStringToBuffer(&gSaveGameTextBoxes[4], gSaveGameText[4]);
+                RenderText();
+                break;
+        }
+
+        CheckHeap(4);
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+
+        if (fadeIn) {
+            sub_08026BA8(2, 0);
+            fadeIn = 0;
+        }
+
+        if (saveGame) {
+            ASSERT(gameIdx >= 0);
+
+            gSaveFiles[gameIdx].hour = gGameStatus.clockHour;
+            gSaveFiles[gameIdx].minute = gGameStatus.clockMinute;
+            gSaveFiles[gameIdx].second = gGameStatus.clockSecond;
+            gSaveFiles[gameIdx].jiggies = (u8)gGameStatus.totalJiggies;
+            gSaveFiles[gameIdx].notes = gGameStatus.totalNotes;
+            gSaveFiles[gameIdx].empty = 0;
+            MakeFileStrings();
+            sub_80449B0(gameIdx, byte_2000335);
+            CheckHeap(4);
+            ASSERT(DoesMemBlockExistById(4, 9) == FALSE);
+
+            state = GAME_SAVED;
+            saveGameWaitCounter = 40;
+            saveGame = FALSE;
+            var_48 = 1;
+
+            switch (gameIdx) {
+                case 0:
+                    min = 8;
+                    max = 11;
+                    var_30 = 2;
+                    break;
+
+                case 1:
+                    min = 15;
+                    max = 18;
+                    var_30 = 2;
+                    break;
+
+                case 2:
+                    min = 67;
+                    max = 69;
+                    var_30 = 4;
+                    break;
+            }
+
+            sfxId = currentSfxIdx = -1;
+        }
+
+        if (saveGameWaitCounter >= 0) {
+            if (saveGameWaitCounter == 0) {
+                break;
+            }
+            saveGameWaitCounter--;
+        }
+    }
+
+    FadeOutObjects(2, 0);
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = saveGameWaitCounter;
+    SyncVblank();
+    UpdateVideo();
+    SkipVblank();
+    REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+    return 1;
 }
