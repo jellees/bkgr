@@ -85,7 +85,7 @@ SECTIONS
         file_string_1 = .; . += 0x1A;
         file_string_2 = .; . += 0x1A;
         file_string_3 = .; . += 0x1A;
-        byte_2001100 = .; . += 1;
+        gTextSpeed = .; . += 1;
         . += 3; /* padding */
         dword_2001104 = .; . += 4;
         dword_2001108 = .; . += 4;
@@ -530,7 +530,6 @@ SECTIONS
         asm/random.o(.text);
         src/8045038.o(.text);
         src/pause_menu.o(.text);
-        asm/pause_menu.o(.text);
         asm/chunk8.o(.text);
         *libgcc.a:*_call_via_rX*.o(.text*);
         asm/chunk_end.o(.text);

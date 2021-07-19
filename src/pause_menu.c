@@ -14,13 +14,13 @@ char byte_203F4E0;
 int dword_203F4E4;
 int dword_203F4E8;
 
-struct Sprite* dword_203F4EC;
+struct Sprite* gPauseMenuControlsSprites;
 char* dword_203F4F0;
 struct Sprite* dword_203F4F4;
 char* dword_203F4F8;
 
 struct TextBox stru_203F4FC;
-struct Sprite stru_203F510;
+struct Sprite gPauseMenuJiggySprite;
 
 char byte_203F52C[9];
 
@@ -33,7 +33,7 @@ char* dword_203F554;
 
 int dword_203F558;
 
-struct TextBox stru_203F55C;
+struct TextBox gOptionsTextBox;
 char* dword_203F570;
 int dword_203F574;
 
@@ -44,12 +44,12 @@ int dword_203F590;
 struct TextBox stru_203F594;
 struct TextBox stru_203F5A8;
 
-char* gSaveGameText[6];
+char* gSaveGameTexts[6];
 s32 gSaveGameTextOffsets[6];
 struct TextBox gSaveGameTextBoxes[6];
 
-char* dword_203F664[3];
-struct TextBox stru_203F670[3];
+char* gTextSpeedTexts[3];
+struct TextBox gTextSpeedTextBoxes[3];
 
 char byte_203F6AC;
 
@@ -59,6 +59,7 @@ static void init();
 static void PauseMenuBehavior();
 static bool32 PauseMenuChooseEntry(bool32* changeMenu);
 static void sub_8045C08();
+static void render_controls();
 
 void open_pause_menu() {
     int i;
@@ -69,14 +70,14 @@ void open_pause_menu() {
     sub_80528D8(1);
     pause_efx();
 
-    stru_203F55C.letterSpacing = 1;
-    stru_203F55C.field_12 = 0;
-    stru_203F55C.field_A = 1;
-    stru_203F55C.size = 240;
-    stru_203F55C.palette = 10;
-    stru_203F55C.stringOffset = 0;
-    stru_203F55C.field_11 = 6;
-    stru_203F55C.font = &font_80B01A8[1];
+    gOptionsTextBox.letterSpacing = 1;
+    gOptionsTextBox.field_12 = 0;
+    gOptionsTextBox.field_A = 1;
+    gOptionsTextBox.size = 240;
+    gOptionsTextBox.palette = 10;
+    gOptionsTextBox.stringOffset = 0;
+    gOptionsTextBox.field_11 = 6;
+    gOptionsTextBox.font = &font_80B01A8[1];
 
     stru_203F5A8.letterSpacing = 1;
     stru_203F5A8.field_12 = 0;
@@ -87,30 +88,30 @@ void open_pause_menu() {
     stru_203F5A8.field_11 = 6;
     stru_203F5A8.font = &font_80B01A8[1];
 
-    stru_203F670[0].letterSpacing = 1;
-    stru_203F670[0].field_12 = 0;
-    stru_203F670[0].field_A = 1;
-    stru_203F670[0].size = 240;
-    stru_203F670[0].palette = 10;
-    stru_203F670[0].stringOffset = 0;
-    stru_203F670[0].field_11 = 6;
-    stru_203F670[0].font = &font_80B01A8[1];
-    stru_203F670[1].letterSpacing = 1;
-    stru_203F670[1].field_12 = 0;
-    stru_203F670[1].field_A = 1;
-    stru_203F670[1].size = 240;
-    stru_203F670[1].palette = 10;
-    stru_203F670[1].stringOffset = 0;
-    stru_203F670[1].field_11 = 6;
-    stru_203F670[1].font = &font_80B01A8[1];
-    stru_203F670[2].letterSpacing = 1;
-    stru_203F670[2].field_12 = 0;
-    stru_203F670[2].field_A = 1;
-    stru_203F670[2].size = 240;
-    stru_203F670[2].palette = 10;
-    stru_203F670[2].stringOffset = 0;
-    stru_203F670[2].field_11 = 6;
-    stru_203F670[2].font = &font_80B01A8[1];
+    gTextSpeedTextBoxes[0].letterSpacing = 1;
+    gTextSpeedTextBoxes[0].field_12 = 0;
+    gTextSpeedTextBoxes[0].field_A = 1;
+    gTextSpeedTextBoxes[0].size = 240;
+    gTextSpeedTextBoxes[0].palette = 10;
+    gTextSpeedTextBoxes[0].stringOffset = 0;
+    gTextSpeedTextBoxes[0].field_11 = 6;
+    gTextSpeedTextBoxes[0].font = &font_80B01A8[1];
+    gTextSpeedTextBoxes[1].letterSpacing = 1;
+    gTextSpeedTextBoxes[1].field_12 = 0;
+    gTextSpeedTextBoxes[1].field_A = 1;
+    gTextSpeedTextBoxes[1].size = 240;
+    gTextSpeedTextBoxes[1].palette = 10;
+    gTextSpeedTextBoxes[1].stringOffset = 0;
+    gTextSpeedTextBoxes[1].field_11 = 6;
+    gTextSpeedTextBoxes[1].font = &font_80B01A8[1];
+    gTextSpeedTextBoxes[2].letterSpacing = 1;
+    gTextSpeedTextBoxes[2].field_12 = 0;
+    gTextSpeedTextBoxes[2].field_A = 1;
+    gTextSpeedTextBoxes[2].size = 240;
+    gTextSpeedTextBoxes[2].palette = 10;
+    gTextSpeedTextBoxes[2].stringOffset = 0;
+    gTextSpeedTextBoxes[2].field_11 = 6;
+    gTextSpeedTextBoxes[2].font = &font_80B01A8[1];
 
     gSaveGameTextBoxes[0].letterSpacing = 1;
     gSaveGameTextBoxes[0].field_12 = 0;
@@ -165,71 +166,71 @@ void open_pause_menu() {
         case 0:
             dword_203F550 = &unk_86AD9E0;
             dword_203F554 = &str_08067DC0;
-            gSaveGameText[0] = &str_08068058;
-            gSaveGameText[1] = &str_08068064;
-            gSaveGameText[2] = &str_08068074;
-            gSaveGameText[3] = &str_08068084;
-            gSaveGameText[4] = &str_080680B0;
-            gSaveGameText[5] = &str_080680BC;
-            dword_203F664[0] = &str_08067DB4;
-            dword_203F664[1] = &str_08067DA8;
-            dword_203F664[2] = &str_08067D9C;
+            gSaveGameTexts[0] = &str_08068058;
+            gSaveGameTexts[1] = &str_08068064;
+            gSaveGameTexts[2] = &str_08068074;
+            gSaveGameTexts[3] = &str_08068084;
+            gSaveGameTexts[4] = &str_080680B0;
+            gSaveGameTexts[5] = &str_080680BC;
+            gTextSpeedTexts[0] = &str_08067DB4;
+            gTextSpeedTexts[1] = &str_08067DA8;
+            gTextSpeedTexts[2] = &str_08067D9C;
             break;
 
         case 1:
             dword_203F550 = &unk_86ADAA8;
             dword_203F554 = &str_08067E58;
-            gSaveGameText[0] = &str_080680E8;
-            gSaveGameText[1] = &str_080680FC;
-            gSaveGameText[2] = &str_0806810C;
-            gSaveGameText[3] = &str_08068120;
-            gSaveGameText[4] = &str_08068148;
-            gSaveGameText[5] = &str_0806815C;
-            dword_203F664[0] = &str_08067E4C;
-            dword_203F664[1] = &str_08067E3C;
-            dword_203F664[2] = &str_08067E30;
+            gSaveGameTexts[0] = &str_080680E8;
+            gSaveGameTexts[1] = &str_080680FC;
+            gSaveGameTexts[2] = &str_0806810C;
+            gSaveGameTexts[3] = &str_08068120;
+            gSaveGameTexts[4] = &str_08068148;
+            gSaveGameTexts[5] = &str_0806815C;
+            gTextSpeedTexts[0] = &str_08067E4C;
+            gTextSpeedTexts[1] = &str_08067E3C;
+            gTextSpeedTexts[2] = &str_08067E30;
             break;
 
         case 2:
             dword_203F550 = &unk_86ADC38;
             dword_203F554 = &str_08067FB0;
-            gSaveGameText[0] = &str_08068244;
-            gSaveGameText[1] = &str_08068258;
-            gSaveGameText[2] = &str_08068264;
-            gSaveGameText[3] = &str_08068274;
-            gSaveGameText[4] = &str_08068298;
-            gSaveGameText[5] = &str_080682AC;
-            dword_203F664[0] = &str_08067FA4;
-            dword_203F664[1] = &str_08067F98;
-            dword_203F664[2] = &str_08067F8C;
+            gSaveGameTexts[0] = &str_08068244;
+            gSaveGameTexts[1] = &str_08068258;
+            gSaveGameTexts[2] = &str_08068264;
+            gSaveGameTexts[3] = &str_08068274;
+            gSaveGameTexts[4] = &str_08068298;
+            gSaveGameTexts[5] = &str_080682AC;
+            gTextSpeedTexts[0] = &str_08067FA4;
+            gTextSpeedTexts[1] = &str_08067F98;
+            gTextSpeedTexts[2] = &str_08067F8C;
             break;
 
         case 4:
             dword_203F550 = &unk_86ADD00;
             dword_203F554 = &str_0806803C;
-            gSaveGameText[0] = &str_080682E4;
-            gSaveGameText[1] = &str_080682F4;
-            gSaveGameText[2] = &str_08068304;
-            gSaveGameText[3] = &str_08068314;
-            gSaveGameText[4] = &str_0806833C;
-            gSaveGameText[5] = &str_08068350;
-            dword_203F664[0] = &str_08068030;
-            dword_203F664[1] = &str_08068020;
-            dword_203F664[2] = &str_08068014;
+            gSaveGameTexts[0] = &str_080682E4;
+            gSaveGameTexts[1] = &str_080682F4;
+            gSaveGameTexts[2] = &str_08068304;
+            gSaveGameTexts[3] = &str_08068314;
+            gSaveGameTexts[4] = &str_0806833C;
+            gSaveGameTexts[5] = &str_08068350;
+            gTextSpeedTexts[0] = &str_08068030;
+            gTextSpeedTexts[1] = &str_08068020;
+            gTextSpeedTexts[2] = &str_08068014;
             break;
 
         case 3:
             dword_203F550 = &unk_86ADB70;
             dword_203F554 = &str_08067F08;
-            gSaveGameText[0] = &str_08068190;
-            gSaveGameText[1] = &str_080681A4;
-            gSaveGameText[2] = &str_080681B8;
-            gSaveGameText[3] = &str_080681CC;
-            gSaveGameText[4] = &str_08068208;
-            gSaveGameText[5] = &str_0806821C;
-            dword_203F664[0] = &str_08067EF8;
-            dword_203F664[1] = &str_08067EEC;
-            dword_203F664[2] = &str_08067EE0;
+            gSaveGameTexts[0] = &str_08068190;
+            gSaveGameTexts[1] = &str_080681A4;
+            gSaveGameTexts[2] = &str_080681B8;
+            gSaveGameTexts[3] = &str_080681CC;
+            gSaveGameTexts[4] = &str_08068208;
+            gSaveGameTexts[5] = &str_0806821C;
+            gTextSpeedTexts[0] = &str_08067EF8;
+            gTextSpeedTexts[1] = &str_08067EEC;
+            gTextSpeedTexts[2] = &str_08067EE0;
             break;
 
         default:
@@ -237,15 +238,15 @@ void open_pause_menu() {
             break;
     }
 
-    gSaveGameTextOffsets[0] = sub_8025870(gSaveGameText[0], gSaveGameTextBoxes);
-    gSaveGameTextOffsets[1] = sub_8025870(gSaveGameText[1], &gSaveGameTextBoxes[1]);
-    gSaveGameTextOffsets[2] = sub_8025870(gSaveGameText[2], &gSaveGameTextBoxes[2]);
-    gSaveGameTextOffsets[3] = sub_8025870(gSaveGameText[3], &gSaveGameTextBoxes[3]);
-    gSaveGameTextOffsets[4] = sub_8025870(gSaveGameText[4], &gSaveGameTextBoxes[4]);
-    gSaveGameTextOffsets[5] = sub_8025870(gSaveGameText[5], &gSaveGameTextBoxes[5]);
+    gSaveGameTextOffsets[0] = sub_8025870(gSaveGameTexts[0], gSaveGameTextBoxes);
+    gSaveGameTextOffsets[1] = sub_8025870(gSaveGameTexts[1], &gSaveGameTextBoxes[1]);
+    gSaveGameTextOffsets[2] = sub_8025870(gSaveGameTexts[2], &gSaveGameTextBoxes[2]);
+    gSaveGameTextOffsets[3] = sub_8025870(gSaveGameTexts[3], &gSaveGameTextBoxes[3]);
+    gSaveGameTextOffsets[4] = sub_8025870(gSaveGameTexts[4], &gSaveGameTextBoxes[4]);
+    gSaveGameTextOffsets[5] = sub_8025870(gSaveGameTexts[5], &gSaveGameTextBoxes[5]);
 
-    dword_203F558 = sub_8025870(dword_203F554, &stru_203F55C);
-    dword_203F4EC = Alloc(sizeof(struct Sprite) * 3, 15, 4);
+    dword_203F558 = sub_8025870(dword_203F554, &gOptionsTextBox);
+    gPauseMenuControlsSprites = Alloc(sizeof(struct Sprite) * 3, 15, 4);
     dword_203F4F0 = Alloc(3, 15, 4);
 
     for (i = 0; i < 3; i++) {
@@ -344,9 +345,9 @@ static void init() {
     gLevelNameTextBox.field_11 = 6;
     gLevelNameTextBox.font = &font_80B01A8[1];
 
-    SetSprite(&stru_203F510, 0x47A, 0, 0, 0, 0x48, 0x83, 2);     // Jiggy
-    SetSprite(&dword_203F4EC[1], 0x486, 0, 0, 0, 0xA4, 0x90, 2); // A button
-    SetSprite(&dword_203F4EC[2], 0x487, 0, 0, 0, 0x4C, 0x90, 2);
+    SetSprite(&gPauseMenuJiggySprite, 0x47A, 0, 0, 0, 0x48, 0x83, 2);        // Jiggy
+    SetSprite(&gPauseMenuControlsSprites[1], 0x486, 0, 0, 0, 0xA4, 0x90, 2); // A button
+    SetSprite(&gPauseMenuControlsSprites[2], 0x487, 0, 0, 0, 0x4C, 0x90, 2); // D-pad
 
     byte_203F54C = TRUE;
 }
@@ -447,7 +448,7 @@ static void PauseMenuBehavior() {
         RenderText();
         sub_80408F0();
         RenderMenuSprites();
-        sub_8046D44();
+        render_controls();
         CheckHeap(4);
         CheckStacks();
         SyncVblank();
@@ -577,7 +578,7 @@ static void sub_8045C08() {
         RenderText();
         sub_80408F0();
         RenderMenuSprites();
-        sub_8046D44();
+        render_controls();
         CheckStacks();
         SyncVblank();
         UpdateVideo();
@@ -604,7 +605,9 @@ static void sub_8045C08() {
     load_jinjo_palette(page);
 
     loadNextPage = FALSE;
+
     SetObjectsFullAlpha();
+
     fadeIn = TRUE;
 
     while (1) {
@@ -688,7 +691,7 @@ static void sub_8045C08() {
         sub_804095C();
         RenderText();
         sub_80408F0();
-        sub_8046D44();
+        render_controls();
         CheckHeap(4);
         CheckStacks();
         SyncVblank();
@@ -759,7 +762,7 @@ static bool32 sub_08045F14() {
         RenderText();
         sub_80408F0();
         RenderMenuSprites();
-        sub_8046D44();
+        render_controls();
         CheckStacks();
         SyncVblank();
         UpdateVideo();
@@ -778,6 +781,7 @@ static bool32 sub_08045F14() {
     SkipVblank();
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+
     InitMenu(MENU_FILE_SELECT, gPauseMenuLanguage);
     gMenuParentId = gMenuId;
     gMenuId = MENU_FILE_SELECT;
@@ -883,14 +887,14 @@ static bool32 sub_08045F14() {
         gSaveGameTextBoxes[0].xPosition = (240 - gSaveGameTextOffsets[0]) >> 1;
         gSaveGameTextBoxes[0].yPosition = 8;
         gSaveGameTextBoxes[0].stringOffset = 0;
-        AddStringToBuffer(gSaveGameTextBoxes, gSaveGameText[0]);
+        AddStringToBuffer(gSaveGameTextBoxes, gSaveGameTexts[0]);
 
         switch (state) {
             case SHOW_SAVE_GAMES:
                 FlushMenuToTextBuffer();
                 RenderText();
                 RenderMenuSprites();
-                sub_8046D44();
+                render_controls();
                 break;
 
             case MOVE_TEXT:
@@ -915,17 +919,17 @@ static bool32 sub_08045F14() {
                     gSaveGameTextBoxes[1].xPosition = (240 - gSaveGameTextOffsets[1]) >> 1;
                     gSaveGameTextBoxes[1].yPosition = (yPos >> FX32_SHIFT) + 32;
                     gSaveGameTextBoxes[1].stringOffset = 0;
-                    AddStringToBuffer(&gSaveGameTextBoxes[1], gSaveGameText[1]);
+                    AddStringToBuffer(&gSaveGameTextBoxes[1], gSaveGameTexts[1]);
                 } else {
                     gSaveGameTextBoxes[5].xPosition = (240 - gSaveGameTextOffsets[5]) >> 1;
                     gSaveGameTextBoxes[5].yPosition = (yPos >> FX32_SHIFT) + 32;
                     gSaveGameTextBoxes[5].stringOffset = 0;
-                    AddStringToBuffer(&gSaveGameTextBoxes[5], gSaveGameText[5]);
+                    AddStringToBuffer(&gSaveGameTextBoxes[5], gSaveGameTexts[5]);
                 }
                 gSaveGameTextBoxes[2].xPosition = (240 - gSaveGameTextOffsets[2]) >> 1;
                 gSaveGameTextBoxes[2].yPosition = (yPos >> FX32_SHIFT) + 64;
                 gSaveGameTextBoxes[2].stringOffset = 0;
-                AddStringToBuffer(&gSaveGameTextBoxes[2], gSaveGameText[2]);
+                AddStringToBuffer(&gSaveGameTextBoxes[2], gSaveGameTexts[2]);
                 RenderText();
                 break;
 
@@ -937,7 +941,7 @@ static bool32 sub_08045F14() {
                 gSaveGameTextBoxes[3].xPosition = 16;
                 gSaveGameTextBoxes[3].yPosition = (yPos >> FX32_SHIFT) + 32;
                 gSaveGameTextBoxes[3].stringOffset = 0;
-                AddStringToBuffer(&gSaveGameTextBoxes[3], gSaveGameText[3]);
+                AddStringToBuffer(&gSaveGameTextBoxes[3], gSaveGameTexts[3]);
                 RenderText();
                 break;
 
@@ -968,7 +972,7 @@ static bool32 sub_08045F14() {
                 gSaveGameTextBoxes[4].xPosition = (240 - gSaveGameTextOffsets[4]) >> 1;
                 gSaveGameTextBoxes[4].yPosition = (yPos >> FX32_SHIFT) + 32;
                 gSaveGameTextBoxes[4].stringOffset = 0;
-                AddStringToBuffer(&gSaveGameTextBoxes[4], gSaveGameText[4]);
+                AddStringToBuffer(&gSaveGameTextBoxes[4], gSaveGameTexts[4]);
                 RenderText();
                 break;
         }
@@ -1047,4 +1051,308 @@ static bool32 sub_08045F14() {
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
     return 1;
+}
+
+void sub_080466EC() {
+    struct TextBox bgmVolumeTextBox;
+    struct TextBox sfxVolumeTextBox;
+    char bgmText[6];
+    char sfxText[6];
+    bool32 exit;
+    bool32 fadeIn;
+
+    bgmVolumeTextBox.letterSpacing = 1;
+    bgmVolumeTextBox.field_12 = 0;
+    bgmVolumeTextBox.field_A = 1;
+    bgmVolumeTextBox.size = 240;
+    bgmVolumeTextBox.palette = 10;
+    bgmVolumeTextBox.stringOffset = 0;
+    bgmVolumeTextBox.field_11 = 6;
+    bgmVolumeTextBox.font = &font_80B01A8[1];
+
+    sfxVolumeTextBox.letterSpacing = 1;
+    sfxVolumeTextBox.field_12 = 0;
+    sfxVolumeTextBox.field_A = 1;
+    sfxVolumeTextBox.size = 240;
+    sfxVolumeTextBox.palette = 10;
+    sfxVolumeTextBox.stringOffset = 0;
+    sfxVolumeTextBox.field_11 = 6;
+    sfxVolumeTextBox.font = &font_80B01A8[1];
+
+    bgmText[0] = '{';
+    bgmText[1] = ' ';
+    IntegerToAsciiBw(gBgmVolumeIndex, &bgmText[2]);
+    bgmText[3] = ' ';
+    bgmText[4] = '}';
+    bgmText[5] = -1;
+
+    sfxText[0] = '{';
+    sfxText[1] = ' ';
+    IntegerToAsciiBw(gSfxVolumeIndex, &sfxText[2]);
+    sfxText[3] = ' ';
+    sfxText[4] = '}';
+    sfxText[5] = -1;
+
+    while (!sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
+        sub_804087C();
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        sub_804095C();
+        FlushMenuToTextBuffer();
+        RenderText();
+        sub_80408F0();
+        RenderMenuSprites();
+        render_controls();
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+    }
+
+    FadeOutObjects(2, 0);
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    UpdateVideo();
+    SkipVblank();
+    REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+
+    InitMenu(MENU_PAUSE_OPTIONS, gPauseMenuLanguage);
+    gMenuParentId = gMenuId;
+    gMenuId = MENU_PAUSE_OPTIONS;
+
+    exit = FALSE;
+
+    SetObjectsFullAlpha();
+
+    fadeIn = TRUE;
+
+    while (1) {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+        if (gKeysDown & B_BUTTON) {
+#ifndef NONMATCHING
+            goto _broken;
+#else
+            break;
+#endif
+        } else if (gKeysDown & DPAD_LEFT) {
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    if (gTextSpeed != 0) {
+                        gTextSpeed--;
+                    }
+                    break;
+
+                case 1:
+                    if (gBgmVolumeIndex != 0) {
+                        gBgmVolumeIndex--;
+                        audio_set_tune_vol(dVolumes[gBgmVolumeIndex]);
+                        IntegerToAsciiBw(gBgmVolumeIndex, &bgmText[2]);
+                    }
+                    break;
+
+                case 2:
+                    if (gSfxVolumeIndex != 0) {
+                        gSfxVolumeIndex--;
+                        audio_set_fx_vol(dVolumes[gSfxVolumeIndex]);
+                        if (byte_203EA89) {
+                            audio_new_fx(dSoundEffects[200].index,
+                                         dSoundEffects[200].volumes[byte_203EA8C],
+                                         dSoundEffects[200].pitch + 0x10000);
+                        }
+                        IntegerToAsciiBw(gSfxVolumeIndex, &sfxText[2]);
+                    }
+                    break;
+
+                case 3:
+                    if (gPauseMenuLanguage != 0) {
+                        gPauseMenuLanguage--;
+                        sub_8025E44(gLoadedRoomLevel);
+                    }
+                    break;
+
+                default:
+                    ASSERT(0);
+                    break;
+            }
+        } else if (gKeysDown & DPAD_RIGHT) {
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    if (gTextSpeed < 2) {
+                        gTextSpeed++;
+                    }
+                    break;
+
+                case 1:
+                    if (gBgmVolumeIndex < 9) {
+                        gBgmVolumeIndex++;
+                        audio_set_tune_vol(dVolumes[gBgmVolumeIndex]);
+                        IntegerToAsciiBw(gBgmVolumeIndex, &bgmText[2]);
+                    }
+                    break;
+
+                case 2:
+                    if (gSfxVolumeIndex < 9) {
+                        gSfxVolumeIndex++;
+                        audio_set_fx_vol(dVolumes[gSfxVolumeIndex]);
+                        if (byte_203EA89) {
+                            audio_new_fx(dSoundEffects[200].index,
+                                         dSoundEffects[200].volumes[byte_203EA8C],
+                                         dSoundEffects[200].pitch + 0x10000);
+                        }
+                        IntegerToAsciiBw(gSfxVolumeIndex, &sfxText[2]);
+                    }
+                    break;
+
+                case 3:
+                    if (gPauseMenuLanguage < 4) {
+                        gPauseMenuLanguage++;
+                        sub_8025E44(gLoadedRoomLevel);
+                    }
+                    break;
+
+                default:
+                    ASSERT(0);
+                    break;
+            }
+        } else if (gKeysDown & DPAD_UP) {
+            if (byte_203EA89) {
+                audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                             dSoundEffects[204].pitch + 0x10000);
+            }
+            AdvanceMenuEntryUp();
+        } else if (gKeysDown & DPAD_DOWN) {
+            if (byte_203EA89) {
+                audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                             dSoundEffects[204].pitch + 0x10000);
+            }
+            AdvanceMenuEntryDown();
+        }
+
+        if (exit) {
+            break;
+        }
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        gOptionsTextBox.xPosition = (240 - dword_203F558) >> 1;
+        gOptionsTextBox.yPosition = 8;
+        gOptionsTextBox.stringOffset = 0;
+        AddStringToBuffer(&gOptionsTextBox, dword_203F554);
+
+        switch (gTextSpeed) {
+            case 0:
+                gTextSpeedTextBoxes[0].xPosition = 120;
+                gTextSpeedTextBoxes[0].yPosition = 36;
+                gTextSpeedTextBoxes[0].stringOffset = 0;
+                if (GetCurrentMenuEntry() == 0) {
+                    gTextSpeedTextBoxes[0].palette = 10;
+                } else {
+                    gTextSpeedTextBoxes[0].palette = 15;
+                }
+                AddStringToBuffer(&gTextSpeedTextBoxes[0], gTextSpeedTexts[0]);
+                break;
+
+            case 1:
+                gTextSpeedTextBoxes[1].xPosition = 120;
+                gTextSpeedTextBoxes[1].yPosition = 36;
+                gTextSpeedTextBoxes[1].stringOffset = 0;
+                if (GetCurrentMenuEntry() == 0) {
+                    gTextSpeedTextBoxes[1].palette = 10;
+                } else {
+                    gTextSpeedTextBoxes[1].palette = 15;
+                }
+                AddStringToBuffer(&gTextSpeedTextBoxes[1], gTextSpeedTexts[1]);
+                break;
+
+            case 2:
+                gTextSpeedTextBoxes[2].xPosition = 120;
+                gTextSpeedTextBoxes[2].yPosition = 36;
+                gTextSpeedTextBoxes[2].stringOffset = 0;
+                if (GetCurrentMenuEntry() == 0) {
+                    gTextSpeedTextBoxes[2].palette = 10;
+                } else {
+                    gTextSpeedTextBoxes[2].palette = 15;
+                }
+                AddStringToBuffer(&gTextSpeedTextBoxes[2], gTextSpeedTexts[2]);
+                break;
+
+            default:
+                ASSERT(0);
+                break;
+        }
+
+        bgmVolumeTextBox.xPosition = 120;
+        bgmVolumeTextBox.yPosition = 56;
+        bgmVolumeTextBox.stringOffset = 0;
+        if (GetCurrentMenuEntry() == 1) {
+            bgmVolumeTextBox.palette = 10;
+        } else {
+            bgmVolumeTextBox.palette = 15;
+        }
+        AddStringToBuffer(&bgmVolumeTextBox, bgmText);
+
+        sfxVolumeTextBox.xPosition = 120;
+        sfxVolumeTextBox.yPosition = 76;
+        sfxVolumeTextBox.stringOffset = 0;
+        if (GetCurrentMenuEntry() == 2) {
+            sfxVolumeTextBox.palette = 10;
+        } else {
+            sfxVolumeTextBox.palette = 15;
+        }
+        AddStringToBuffer(&sfxVolumeTextBox, sfxText);
+
+        FlushMenuToTextBuffer();
+        RenderText();
+        RenderMenuSprites();
+        render_controls();
+        CheckHeap(4);
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+
+        if (fadeIn) {
+            sub_08026BA8(2, 0);
+            fadeIn = FALSE;
+        }
+    }
+
+_broken:
+    FadeOutObjects(2, 0);
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    UpdateVideo();
+    SkipVblank();
+    REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+}
+
+static void render_controls() {
+    int i;
+
+    for (i = 0; i < 3; i++) {
+        if (dword_203F4F0[i]) {
+            RenderSprite(&gPauseMenuControlsSprites[i]);
+        }
+    }
 }

@@ -566,7 +566,7 @@ void sub_800A5F4() {
     byte_200108C = -1;
     byte_20020B1 = 0;
     byte_20010B0 = 0;
-    byte_2001100 = 1;
+    gTextSpeed = 1;
     dword_2001110 = 0;
     dword_2001114 = 0;
     dword_20011FC = 1;

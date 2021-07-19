@@ -421,7 +421,7 @@ extern u8 byte_20010B1;
 extern char file_string_1[0x1A];
 extern char file_string_2[0x1A];
 extern char file_string_3[0x1A];
-extern u8 byte_2001100;
+extern u8 gTextSpeed;
 extern u32 dword_2001104;
 extern u32 dword_2001108;
 extern u8 byte_200110C; // possibly bool8
@@ -496,6 +496,8 @@ extern u8 byte_203E16C;
 
 extern u8 gCanChangeBgm;
 extern u8 byte_203EA89; // possibily bool8
+extern u8 gBgmVolumeIndex;
+extern u8 gSfxVolumeIndex;
 extern u8 byte_203EA8C;
 
 extern u8 byte_203EAD4;
@@ -586,6 +588,7 @@ extern bool8 byte_3007FFA;
 extern u32 dword_3007FFC;
 
 //ROM
+extern int dVolumes[20];
 extern u8 byte_80CEB84[];
 extern s32 dword_80CEBC4;
 
