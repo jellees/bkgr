@@ -60,6 +60,7 @@ static void PauseMenuBehavior();
 static bool32 PauseMenuChooseEntry(bool32* changeMenu);
 static void sub_8045C08();
 static void render_controls();
+static void sub_80473FC();
 
 void open_pause_menu() {
     int i;
@@ -1353,6 +1354,264 @@ static void render_controls() {
     for (i = 0; i < 3; i++) {
         if (dword_203F4F0[i]) {
             RenderSprite(&gPauseMenuControlsSprites[i]);
+        }
+    }
+}
+
+void sub_08046D78() {
+    int i;
+
+    if (gPlayerState == 101) {
+        return;
+    }
+
+    audio_halt_all_fx();
+    sub_8038FA0(gLoadedRoomLevel);
+    sub_80409DC();
+
+    stru_203F578.letterSpacing = -2;
+    stru_203F578.field_12 = 0;
+    stru_203F578.field_A = 1;
+    stru_203F578.size = 240;
+    stru_203F578.palette = 1;
+    stru_203F578.stringOffset = 0;
+    stru_203F578.field_11 = 6;
+    stru_203F578.font = &font_80B01A8[2];
+
+    stru_203F594.letterSpacing = -2;
+    stru_203F594.field_12 = 0;
+    stru_203F594.field_A = 1;
+    stru_203F594.size = 240;
+    stru_203F594.palette = 1;
+    stru_203F594.stringOffset = 0;
+    stru_203F594.field_11 = 6;
+    stru_203F594.font = &font_80B01A8[2];
+
+    switch (gPauseMenuLanguage) {
+        case 0:
+            dword_203F570 = str_806579C;
+            dword_203F58C = str_80657A8;
+            break;
+
+        case 1:
+            dword_203F570 = str_806579C;
+            dword_203F58C = str_80657A8;
+            break;
+
+        case 2:
+            dword_203F570 = str_806579C;
+            dword_203F58C = str_80657A8;
+            break;
+
+        case 3:
+            dword_203F570 = str_806579C;
+            dword_203F58C = str_80657A8;
+            break;
+
+        case 4:
+            dword_203F570 = str_806579C;
+            dword_203F58C = str_80657A8;
+            break;
+
+        default:
+            ASSERT(0);
+            break;
+    }
+
+    dword_203F574 = sub_8025870(dword_203F570, &stru_203F578);
+    dword_203F590 = sub_8025870(dword_203F58C, &stru_203F594);
+
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    UpdateVideo();
+    SkipVblank();
+    sub_80270AC(4095, 1);
+
+    if (gCanChangeBgm) {
+        audio_start_tune(15);
+    }
+
+    DisableBackgrounds();
+    DmaFill32(0, BG_PLTT, 128);
+    DmaTransfer32(&unk_83FD254, OBJ_PLTT, 128);
+    DmaTransferObjPalette(&unk_83FD974, 5, 5);
+
+    InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
+    gMenuId = MENU_ARCADE_1;
+    gMenuParentId = -1;
+
+    SetObjectsFullAlpha();
+
+    byte_203F6AC = 1;
+    sub_8026E48(4095, 1, 1);
+    sub_8016688();
+    byte_2000F56 = 1;
+    gKeysDown = 0;
+    sub_08040204(55, byte_203E16C);
+    sub_08041FA4(55);
+    dword_203F4F4 = Alloc(sizeof(struct Sprite) * 3, 25, 4);
+    dword_203F4F8 = Alloc(3, 25, 4);
+
+    for (i = 0; i < 3; i++) {
+        dword_203F4F8[i] = 0;
+    }
+
+    SetSprite(&dword_203F4F4[1], 0x486, 0, 0, 0, 0xD6, 0x90, 2); // A button
+    SetSprite(&dword_203F4F4[2], 0x487, 0, 0, 0, 0x1A, 0x90, 2); // D-pad
+}
+
+void sub_8047000(bool32 a1) {
+    audio_halt_all_fx();
+
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    UpdateVideo();
+    SkipVblank();
+
+    DmaFill32(0, BG_PLTT, 128);
+    DmaTransfer32(&unk_83FD254, OBJ_PLTT, 128);
+    DmaTransferObjPalette(&unk_83FD974, 5, 5);
+
+    InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
+    gMenuId = MENU_ARCADE_1;
+    gMenuParentId = -1;
+
+    if (a1) {
+        sub_8026F78(4095, 1, 0);
+    } else {
+        sub_8026E48(4095, 1, 1);
+    }
+
+    SetObjectsFullAlpha();
+
+    byte_203F6AC = 1;
+    sub_8016688();
+    byte_2000F56 = 1;
+    gKeysDown = 0;
+    sub_08040204(55, byte_203E16C);
+    sub_08041FA4(55);
+}
+
+void sub_08047108() {
+    if (gPlayerState != 101) {
+        return;
+    }
+
+    if (byte_203F4E0) {
+        return;
+    }
+
+    stru_203F578.xPosition = (240 - dword_203F574) >> 1;
+    stru_203F578.yPosition = 8;
+    stru_203F578.stringOffset = 0;
+    AddStringToBuffer(&stru_203F578, dword_203F570);
+
+    stru_203F594.xPosition = (240 - dword_203F590) >> 1;
+    stru_203F594.yPosition = 24;
+    stru_203F594.stringOffset = 0;
+    AddStringToBuffer(&stru_203F594, dword_203F58C);
+
+    FlushMenuToTextBuffer();
+
+    if (gKeysDown & A_BUTTON) {
+        u32 isNot10 = gMenuId != MENU_ARCADE_1;
+        int entry = GetCurrentMenuEntry();
+        if (entry == 4) {
+            if (gMenuId == MENU_ARCADE_1) {
+                InitMenu(MENU_ARCADE_2, gPauseMenuLanguage);
+                gMenuId = MENU_ARCADE_2;
+            } else {
+                InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
+                gMenuId = MENU_ARCADE_1;
+            }
+        } else {
+            int idx = 4 * isNot10 + entry;
+            if (byte_203E16C >= dword_80CF3B0[idx]) {
+                dword_203F4E4 = 27;
+                dword_203F4E8 = 25;
+                SetTextSpriteCount(0);
+                DmaFill32(170, gOAMBuffer1, 256);
+                gOAMBufferFramePtr = gOAMBuffer1;
+                gOAMBufferEnd = &gOAMBuffer1[0x100];
+                gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+                gOBJTileCount = 0;
+                SyncVblank();
+                UpdateVideo();
+                SkipVblank();
+                sub_0800D1A8(dword_80CF390[idx]);
+            }
+        }
+    } else if (gKeysDown & B_BUTTON) {
+        if (gMenuId == MENU_ARCADE_2) {
+            InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
+            gMenuId = MENU_ARCADE_1;
+        } else {
+            sub_80270AC(4095, 1);
+
+            if (gCanChangeBgm) {
+                audio_start_tune(gLoadedRoomBgm);
+            }
+
+            DmaTransfer32(gRoomHeader.spritePalette, 0x5000200, 128);
+            DmaTransfer32(gRoomHeader.backgroundPalette, 0x5000000, 128);
+            sub_0804200C(55);
+            sub_80409DC();
+            FreeById(4, 25);
+            ResetMenu();
+            ASSERT(DoesMemBlockExistById(4, 25) == FALSE);
+            sub_8026E48(4095, 1, 1);
+            sub_8016C78(0);
+            byte_2000F56 = 0;
+        }
+    } else if (gKeysDown & DPAD_UP) {
+        if (byte_203EA89) {
+            audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                         dSoundEffects[204].pitch + 0x10000);
+        }
+        AdvanceMenuEntryUp();
+    } else if (gKeysDown & DPAD_DOWN) {
+        if (byte_203EA89) {
+            audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                         dSoundEffects[204].pitch + 0x10000);
+        }
+        AdvanceMenuEntryDown();
+    }
+}
+
+void sub_80473BC() {
+    if (gPlayerState != 101) {
+        return;
+    }
+
+    if (byte_203F4E0) {
+        return;
+    }
+
+    RenderMenuSprites();
+    sub_80473FC();
+
+    if (byte_203F6AC) {
+        sub_08026BA8(2, 0);
+        byte_203F6AC = 0;
+    }
+}
+
+static void sub_80473FC() {
+    int i;
+
+    for (i = 0; i < 3; i++) {
+        if (dword_203F4F8[i]) {
+            RenderSprite(&dword_203F4F4[i]);
         }
     }
 }

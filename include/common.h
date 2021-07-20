@@ -674,6 +674,7 @@ extern u8 str_08068020;
 extern u8 str_08068014;
 
 extern u8 unk_83FD254;
+extern u8 unk_83FD974;
 
 extern u16 unk_83FD894;
 extern u16 unk_83FD8B4;
@@ -682,6 +683,11 @@ extern u16 unk_83FD8F4;
 extern u16 unk_83FD914;
 extern u16 unk_83FD934;
 extern u16 unk_83FD954;
+
+extern char str_806579C[2];
+extern char str_80657A8[2];
+extern s32 dword_80CF3B0[8];
+extern int dword_80CF390[8];
 
 // Other
 

@@ -288,8 +288,6 @@ extern u8 str_RM_POISONROOM;
 extern u8 str_RM_MUMBO_FURN;
 extern u8 str_RM_NEXT_8;
 
-extern s32 dword_80CF3B0[8];
-
 #ifdef NONMATCHING
 
 void InitMenu(u32 menu, u32 language) {
