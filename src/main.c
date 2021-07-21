@@ -174,7 +174,7 @@ void UpdateGame(void) {
     gOAMBufferEnd = &gOAMBuffer1[256];
     gOBJTileFramePtr = gOBJTileFrameStart;
     gOBJTileCount = dword_3003DA0;
-    sub_08047108();
+    exec_arcade_menu();
     sub_8025278();
     sub_800EE68();
     sub_804095C();
@@ -198,7 +198,7 @@ void UpdateGame(void) {
     sub_80408F0();
     sub_8061F80();
     sub_8064234();
-    sub_80473BC();
+    draw_arcade_menu();
     _call_via_r0(gNullsub_4);
 
     if (!gIsSlideMiniGame && gPlayerState != 101) {

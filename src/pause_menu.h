@@ -5,9 +5,9 @@ extern u8 gClockStatus;
 extern s32 dword_203F4DC;
 
 void open_pause_menu();
-void sub_08046D78();
+void init_arcade_menu();
 void sub_8047000(bool32 a1);
-void sub_08047108();
-void sub_80473BC();
+void exec_arcade_menu();
+void draw_arcade_menu();
 
 #endif

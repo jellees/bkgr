@@ -19,29 +19,29 @@ char* dword_203F4F0;
 struct Sprite* dword_203F4F4;
 char* dword_203F4F8;
 
-struct TextBox stru_203F4FC;
+struct TextBox gTimeTextBox;
 struct Sprite gPauseMenuJiggySprite;
 
-char byte_203F52C[9];
+char gTimeText[9];
 
 struct TextBox gLevelNameTextBox;
 
 bool8 byte_203F54C;
 
-char** dword_203F550;
+char** gLevelNameTexts;
 char* dword_203F554;
 
 int dword_203F558;
 
 struct TextBox gOptionsTextBox;
-char* dword_203F570;
-int dword_203F574;
+char* gNKreditzText;
+int gNKreditzTextOffset;
 
-struct TextBox stru_203F578;
-char* dword_203F58C;
-int dword_203F590;
+struct TextBox gNKreditzTextBox;
+char* gArcadeText;
+int gArcadeTextOffset;
 
-struct TextBox stru_203F594;
+struct TextBox gArcadeTextBox;
 struct TextBox stru_203F5A8;
 
 char* gSaveGameTexts[6];
@@ -51,16 +51,18 @@ struct TextBox gSaveGameTextBoxes[6];
 char* gTextSpeedTexts[3];
 struct TextBox gTextSpeedTextBoxes[3];
 
-char byte_203F6AC;
+bool8 gArcadeFadeIn;
 
 u16 gPaletteCopy[0x100];
 
 static void init();
-static void PauseMenuBehavior();
-static bool32 PauseMenuChooseEntry(bool32* changeMenu);
-static void sub_8045C08();
+static void exec_pause_menu();
+static bool32 choose_sub_menu(bool32* changeMenu);
+static void exec_totals_menu();
+static bool32 exec_save_menu();
+static void exec_options_menu();
 static void render_controls();
-static void sub_80473FC();
+static void draw_arcade_menu_sprites();
 
 void open_pause_menu() {
     int i;
@@ -165,7 +167,7 @@ void open_pause_menu() {
 
     switch (gPauseMenuLanguage) {
         case 0:
-            dword_203F550 = &unk_86AD9E0;
+            gLevelNameTexts = &unk_86AD9E0;
             dword_203F554 = &str_08067DC0;
             gSaveGameTexts[0] = &str_08068058;
             gSaveGameTexts[1] = &str_08068064;
@@ -179,7 +181,7 @@ void open_pause_menu() {
             break;
 
         case 1:
-            dword_203F550 = &unk_86ADAA8;
+            gLevelNameTexts = &unk_86ADAA8;
             dword_203F554 = &str_08067E58;
             gSaveGameTexts[0] = &str_080680E8;
             gSaveGameTexts[1] = &str_080680FC;
@@ -193,7 +195,7 @@ void open_pause_menu() {
             break;
 
         case 2:
-            dword_203F550 = &unk_86ADC38;
+            gLevelNameTexts = &unk_86ADC38;
             dword_203F554 = &str_08067FB0;
             gSaveGameTexts[0] = &str_08068244;
             gSaveGameTexts[1] = &str_08068258;
@@ -207,7 +209,7 @@ void open_pause_menu() {
             break;
 
         case 4:
-            dword_203F550 = &unk_86ADD00;
+            gLevelNameTexts = &unk_86ADD00;
             dword_203F554 = &str_0806803C;
             gSaveGameTexts[0] = &str_080682E4;
             gSaveGameTexts[1] = &str_080682F4;
@@ -221,7 +223,7 @@ void open_pause_menu() {
             break;
 
         case 3:
-            dword_203F550 = &unk_86ADB70;
+            gLevelNameTexts = &unk_86ADB70;
             dword_203F554 = &str_08067F08;
             gSaveGameTexts[0] = &str_08068190;
             gSaveGameTexts[1] = &str_080681A4;
@@ -271,7 +273,7 @@ void open_pause_menu() {
     DisableBackgrounds();
 
     init();
-    PauseMenuBehavior();
+    exec_pause_menu();
 
     FadeOutObjects(2, 0);
 
@@ -324,16 +326,16 @@ static void init() {
     gMenuId = MENU_PAUSE_MAIN;
     gMenuParentId = -1;
 
-    stru_203F4FC.xPosition = 92;
-    stru_203F4FC.yPosition = 131;
-    stru_203F4FC.letterSpacing = 1;
-    stru_203F4FC.field_12 = 0;
-    stru_203F4FC.field_A = 1;
-    stru_203F4FC.size = 240;
-    stru_203F4FC.palette = 10;
-    stru_203F4FC.stringOffset = 0;
-    stru_203F4FC.field_11 = 6;
-    stru_203F4FC.font = &font_80B01A8[1];
+    gTimeTextBox.xPosition = 92;
+    gTimeTextBox.yPosition = 131;
+    gTimeTextBox.letterSpacing = 1;
+    gTimeTextBox.field_12 = 0;
+    gTimeTextBox.field_A = 1;
+    gTimeTextBox.size = 240;
+    gTimeTextBox.palette = 10;
+    gTimeTextBox.stringOffset = 0;
+    gTimeTextBox.field_11 = 6;
+    gTimeTextBox.font = &font_80B01A8[1];
 
     gLevelNameTextBox.xPosition = 0;
     gLevelNameTextBox.yPosition = 0;
@@ -353,7 +355,7 @@ static void init() {
     byte_203F54C = TRUE;
 }
 
-static void PauseMenuBehavior() {
+static void exec_pause_menu() {
     bool32 changeMenu, fadeIn;
     bool32 loadMenu = FALSE;
 
@@ -400,7 +402,7 @@ static void PauseMenuBehavior() {
                     InitMenu(gMenuId, gPauseMenuLanguage);
                 }
             } else if (gKeysDown & A_BUTTON) {
-                if (PauseMenuChooseEntry(&changeMenu)) {
+                if (choose_sub_menu(&changeMenu)) {
                     loadMenu = TRUE;
                     sub_8040E74();
                 }
@@ -463,26 +465,29 @@ static void PauseMenuBehavior() {
     }
 }
 
-static void sub_8045A78() {
-    byte_203F52C[0] = '0';
-    byte_203F52C[1] = '0';
-    byte_203F52C[2] = ':';
-    byte_203F52C[3] = '0';
-    byte_203F52C[4] = '0';
-    byte_203F52C[5] = ':';
-    byte_203F52C[6] = '0';
-    byte_203F52C[7] = '0';
-    byte_203F52C[8] = -1;
-    IntegerToAsciiBw(gGameStatus.clockHour, &byte_203F52C[1]);
-    IntegerToAsciiBw(gGameStatus.clockMinute, &byte_203F52C[4]);
-    IntegerToAsciiBw(gGameStatus.clockSecond, &byte_203F52C[7]);
-    stru_203F4FC.xPosition = 92;
-    stru_203F4FC.yPosition = 131;
-    stru_203F4FC.stringOffset = 0;
-    AddStringToBuffer(&stru_203F4FC, byte_203F52C);
+/**
+ * Draws play time. This function is never used.
+ */
+static void draw_time() {
+    gTimeText[0] = '0';
+    gTimeText[1] = '0';
+    gTimeText[2] = ':';
+    gTimeText[3] = '0';
+    gTimeText[4] = '0';
+    gTimeText[5] = ':';
+    gTimeText[6] = '0';
+    gTimeText[7] = '0';
+    gTimeText[8] = -1;
+    IntegerToAsciiBw(gGameStatus.clockHour, &gTimeText[1]);
+    IntegerToAsciiBw(gGameStatus.clockMinute, &gTimeText[4]);
+    IntegerToAsciiBw(gGameStatus.clockSecond, &gTimeText[7]);
+    gTimeTextBox.xPosition = 92;
+    gTimeTextBox.yPosition = 131;
+    gTimeTextBox.stringOffset = 0;
+    AddStringToBuffer(&gTimeTextBox, gTimeText);
 }
 
-static bool32 PauseMenuChooseEntry(bool32* changeMenu) {
+static bool32 choose_sub_menu(bool32* changeMenu) {
     if (gMenuId != MENU_PAUSE_MAIN) {
         return FALSE;
     }
@@ -493,13 +498,13 @@ static bool32 PauseMenuChooseEntry(bool32* changeMenu) {
 
         case 1: // Totals
             sub_8040E74();
-            sub_8045C08();
+            exec_totals_menu();
             *changeMenu = TRUE;
             break;
 
         case 2: // Options
             sub_8040E74();
-            sub_080466EC();
+            exec_options_menu();
             gMenuId = MENU_PAUSE_MAIN;
             gMenuParentId = 0xFF;
             *changeMenu = TRUE;
@@ -507,7 +512,7 @@ static bool32 PauseMenuChooseEntry(bool32* changeMenu) {
 
         case 3: // Save
             sub_8040E74();
-            if (!sub_08045F14()) {
+            if (!exec_save_menu()) {
                 gMenuId = MENU_PAUSE_MAIN;
                 gMenuParentId = 0xFF;
                 *changeMenu = TRUE;
@@ -522,13 +527,19 @@ static bool32 PauseMenuChooseEntry(bool32* changeMenu) {
     return FALSE;
 }
 
-static void load_page_name(s32 page) {
-    gLevelNameTextBox.xPosition = (240 - sub_8025870(dword_203F550[page], &gLevelNameTextBox)) >> 1;
+/**
+ * Draws the page name to the buffer.
+ */
+static void draw_page_name(s32 page) {
+    gLevelNameTextBox.xPosition = (240 - sub_8025870(gLevelNameTexts[page], &gLevelNameTextBox)) >> 1;
     gLevelNameTextBox.yPosition = 8;
     gLevelNameTextBox.stringOffset = 0;
-    AddStringToBuffer(&gLevelNameTextBox, dword_203F550[page]);
+    AddStringToBuffer(&gLevelNameTextBox, gLevelNameTexts[page]);
 }
 
+/**
+ * Loads palette for jinjo sprite on page.
+ */
 static void load_jinjo_palette(s32 page) {
     switch (page) {
         case 0:
@@ -561,7 +572,7 @@ static void load_jinjo_palette(s32 page) {
     }
 }
 
-static void sub_8045C08() {
+static void exec_totals_menu() {
     s32 page, nextPage;
     bool32 loadNextPage;
     bool32 fadeIn;
@@ -688,7 +699,7 @@ static void sub_8045C08() {
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        load_page_name(page);
+        draw_page_name(page);
         sub_804095C();
         RenderText();
         sub_80408F0();
@@ -706,7 +717,7 @@ static void sub_8045C08() {
     }
 }
 
-static bool32 sub_08045F14() {
+static bool32 exec_save_menu() {
     enum PauseMenuState { SHOW_SAVE_GAMES, MOVE_TEXT, WAIT_FOR_CONFIRMATION, SAVING_GAME, GAME_SAVED };
 
     int i;
@@ -1054,7 +1065,7 @@ static bool32 sub_08045F14() {
     return 1;
 }
 
-void sub_080466EC() {
+static void exec_options_menu() {
     struct TextBox bgmVolumeTextBox;
     struct TextBox sfxVolumeTextBox;
     char bgmText[6];
@@ -1348,6 +1359,9 @@ _broken:
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
 }
 
+/**
+ * Renders D-pad and A button sprites. They are always disabled so never seen.
+ */
 static void render_controls() {
     int i;
 
@@ -1358,7 +1372,7 @@ static void render_controls() {
     }
 }
 
-void sub_08046D78() {
+void init_arcade_menu() {
     int i;
 
     if (gPlayerState == 101) {
@@ -1369,48 +1383,48 @@ void sub_08046D78() {
     sub_8038FA0(gLoadedRoomLevel);
     sub_80409DC();
 
-    stru_203F578.letterSpacing = -2;
-    stru_203F578.field_12 = 0;
-    stru_203F578.field_A = 1;
-    stru_203F578.size = 240;
-    stru_203F578.palette = 1;
-    stru_203F578.stringOffset = 0;
-    stru_203F578.field_11 = 6;
-    stru_203F578.font = &font_80B01A8[2];
+    gNKreditzTextBox.letterSpacing = -2;
+    gNKreditzTextBox.field_12 = 0;
+    gNKreditzTextBox.field_A = 1;
+    gNKreditzTextBox.size = 240;
+    gNKreditzTextBox.palette = 1;
+    gNKreditzTextBox.stringOffset = 0;
+    gNKreditzTextBox.field_11 = 6;
+    gNKreditzTextBox.font = &font_80B01A8[2];
 
-    stru_203F594.letterSpacing = -2;
-    stru_203F594.field_12 = 0;
-    stru_203F594.field_A = 1;
-    stru_203F594.size = 240;
-    stru_203F594.palette = 1;
-    stru_203F594.stringOffset = 0;
-    stru_203F594.field_11 = 6;
-    stru_203F594.font = &font_80B01A8[2];
+    gArcadeTextBox.letterSpacing = -2;
+    gArcadeTextBox.field_12 = 0;
+    gArcadeTextBox.field_A = 1;
+    gArcadeTextBox.size = 240;
+    gArcadeTextBox.palette = 1;
+    gArcadeTextBox.stringOffset = 0;
+    gArcadeTextBox.field_11 = 6;
+    gArcadeTextBox.font = &font_80B01A8[2];
 
     switch (gPauseMenuLanguage) {
         case 0:
-            dword_203F570 = str_806579C;
-            dword_203F58C = str_80657A8;
+            gNKreditzText = str_806579C;
+            gArcadeText = str_80657A8;
             break;
 
         case 1:
-            dword_203F570 = str_806579C;
-            dword_203F58C = str_80657A8;
+            gNKreditzText = str_806579C;
+            gArcadeText = str_80657A8;
             break;
 
         case 2:
-            dword_203F570 = str_806579C;
-            dword_203F58C = str_80657A8;
+            gNKreditzText = str_806579C;
+            gArcadeText = str_80657A8;
             break;
 
         case 3:
-            dword_203F570 = str_806579C;
-            dword_203F58C = str_80657A8;
+            gNKreditzText = str_806579C;
+            gArcadeText = str_80657A8;
             break;
 
         case 4:
-            dword_203F570 = str_806579C;
-            dword_203F58C = str_80657A8;
+            gNKreditzText = str_806579C;
+            gArcadeText = str_80657A8;
             break;
 
         default:
@@ -1418,8 +1432,8 @@ void sub_08046D78() {
             break;
     }
 
-    dword_203F574 = sub_8025870(dword_203F570, &stru_203F578);
-    dword_203F590 = sub_8025870(dword_203F58C, &stru_203F594);
+    gNKreditzTextOffset = sub_8025870(gNKreditzText, &gNKreditzTextBox);
+    gArcadeTextOffset = sub_8025870(gArcadeText, &gArcadeTextBox);
 
     SetTextSpriteCount(0);
     DmaFill32(170, gOAMBuffer1, 256);
@@ -1447,13 +1461,14 @@ void sub_08046D78() {
 
     SetObjectsFullAlpha();
 
-    byte_203F6AC = 1;
+    gArcadeFadeIn = TRUE;
     sub_8026E48(4095, 1, 1);
     sub_8016688();
     byte_2000F56 = 1;
     gKeysDown = 0;
     sub_08040204(55, byte_203E16C);
     sub_08041FA4(55);
+
     dword_203F4F4 = Alloc(sizeof(struct Sprite) * 3, 25, 4);
     dword_203F4F8 = Alloc(3, 25, 4);
 
@@ -1494,7 +1509,7 @@ void sub_8047000(bool32 a1) {
 
     SetObjectsFullAlpha();
 
-    byte_203F6AC = 1;
+    gArcadeFadeIn = TRUE;
     sub_8016688();
     byte_2000F56 = 1;
     gKeysDown = 0;
@@ -1502,7 +1517,7 @@ void sub_8047000(bool32 a1) {
     sub_08041FA4(55);
 }
 
-void sub_08047108() {
+void exec_arcade_menu() {
     if (gPlayerState != 101) {
         return;
     }
@@ -1511,15 +1526,15 @@ void sub_08047108() {
         return;
     }
 
-    stru_203F578.xPosition = (240 - dword_203F574) >> 1;
-    stru_203F578.yPosition = 8;
-    stru_203F578.stringOffset = 0;
-    AddStringToBuffer(&stru_203F578, dword_203F570);
+    gNKreditzTextBox.xPosition = (240 - gNKreditzTextOffset) >> 1;
+    gNKreditzTextBox.yPosition = 8;
+    gNKreditzTextBox.stringOffset = 0;
+    AddStringToBuffer(&gNKreditzTextBox, gNKreditzText);
 
-    stru_203F594.xPosition = (240 - dword_203F590) >> 1;
-    stru_203F594.yPosition = 24;
-    stru_203F594.stringOffset = 0;
-    AddStringToBuffer(&stru_203F594, dword_203F58C);
+    gArcadeTextBox.xPosition = (240 - gArcadeTextOffset) >> 1;
+    gArcadeTextBox.yPosition = 24;
+    gArcadeTextBox.stringOffset = 0;
+    AddStringToBuffer(&gArcadeTextBox, gArcadeText);
 
     FlushMenuToTextBuffer();
 
@@ -1588,7 +1603,7 @@ void sub_08047108() {
     }
 }
 
-void sub_80473BC() {
+void draw_arcade_menu() {
     if (gPlayerState != 101) {
         return;
     }
@@ -1598,15 +1613,15 @@ void sub_80473BC() {
     }
 
     RenderMenuSprites();
-    sub_80473FC();
+    draw_arcade_menu_sprites();
 
-    if (byte_203F6AC) {
+    if (gArcadeFadeIn) {
         sub_08026BA8(2, 0);
-        byte_203F6AC = 0;
+        gArcadeFadeIn = FALSE;
     }
 }
 
-static void sub_80473FC() {
+static void draw_arcade_menu_sprites() {
     int i;
 
     for (i = 0; i < 3; i++) {

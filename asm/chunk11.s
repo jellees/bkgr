@@ -1386,7 +1386,7 @@ _08016F60:
 	bl sub_800386C
 	movs r0, #0
 	bl sub_8016C78
-	bl sub_08046D78
+	bl init_arcade_menu
 	b _0801722C
 	.align 2, 0
 _08016F78: .4byte gPlayerState
