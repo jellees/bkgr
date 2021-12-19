@@ -2,9 +2,9 @@
 #include "alloc.h"
 #include "common.h"
 
-extern u16 sub_80645D4(int a, u8* b);
-extern u16 sub_8064684(int a, u8* b);
-extern u16 sub_8064760(int a, u8* b);
+extern u16 sub_80645D4(u16 a, u8* b);
+extern u16 sub_8064684(u16 a, u8* b);
+extern u16 sub_8064760(u16 a, u8* b);
 
 void sub_80447C4() {
     sub_80643E8(64);
@@ -20,7 +20,7 @@ void sub_80447C4() {
 }
 
 void sub_8044828() {
-    gFunctionArray[6] = 0x800A4A1;
+    gFunctionArray[6] = (void*)0x800A4A1;
     Free(dword_203EADC, 4);
     REG_IME = 1;
     byte_203EAD4 = 0;
@@ -96,13 +96,12 @@ bool32 sub_8044860() {
     return TRUE;
 }
 
-#ifdef NONMATCHING
-
 bool32 sub_80449B0(u32 a1, int a2) {
     u8* v1;
     s32 v16;
     u32 v17;
     int i;
+    u32 v9;
     u32 v8;
     u8 tmp1;
 
@@ -172,24 +171,21 @@ bool32 sub_80449B0(u32 a1, int a2) {
     if (a1 > 2)
         HANG;
 
-    v8 = dword_80AF4F0[byte_203EAE3];
+    v9 = dword_80AF4F0[byte_203EAE3];
     for (i = 0; i < 0xFF; i++) {
-        if (sub_8064684((u16)v8, &dword_203EADC[8 * i])) {
+        if (sub_8064684(v9 + i, &dword_203EADC[8 * i])) {
             HANG;
             sub_8044828();
             return FALSE;
         }
-        v8 += 1;
     }
 
-    v8 = dword_80AF4F0[byte_203EAE3];
     for (i = 0; i < 0xFF; i++) {
-        if (sub_8064760((u16)v8, &dword_203EADC[8 * i])) {
+        if (sub_8064760(v9 + i, &dword_203EADC[8 * i])) {
             HANG;
             sub_8044828();
             return FALSE;
         }
-        v8 += 1;
     }
 
     tmp1 = byte_203EAE3;
@@ -215,5 +211,3 @@ bool32 sub_80449B0(u32 a1, int a2) {
     sub_8044828();
     return TRUE;
 }
-
-#endif
