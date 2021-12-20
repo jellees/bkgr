@@ -211,3 +211,74 @@ bool32 sub_80449B0(u32 a1, int a2) {
     sub_8044828();
     return TRUE;
 }
+
+bool32 sub_08044C00(int a1) {
+    u8* v1;
+    u32 v9;
+    int i;
+    u16 v2;
+    s32 v16;
+    u32 v17;
+    u32 v3;
+
+    sub_80447C4();
+
+    v1 = dword_203EADC;
+
+    v9 = dword_80AF4F0[byte_203EAE0[a1]];
+    for (i = 0; i < 0xFF; i++) {
+        if (sub_80645D4(v9 + i, &dword_203EADC[8 * i])) {
+            HANG;
+            sub_8044828();
+            return FALSE;
+        }
+    }
+
+    if (v1[0] != 0x84) {
+        sub_8044828();
+        return FALSE;
+    }
+
+    if (v1[1] != 0x48) {
+        sub_8044828();
+        return FALSE;
+    }
+
+    v2 = v1[4] << 8 | v1[3];
+    if (v1[2] != byte_203EAD8 || v2 != word_203EAD6) {
+        sub_8044828();
+        return FALSE;
+    }
+
+    v16 = 0;
+    v17 = 0;
+    v17 = v1[0];
+    v16 = 1;
+    v17 += v1[1];
+    v16 = 2;
+    v17 += v1[2];
+    v16 = 3;
+    v17 += v1[3];
+    v16 = 4;
+    v17 += v1[4];
+    v16 = 5;
+
+    sub_8036138(v1, &v16, &v17);
+    sub_800E408(v1, &v16, &v17);
+    sub_801657C(v1, &v16, &v17);
+
+    v3 = v1[v16++];
+    v3 |= v1[v16++] << 8;
+    v3 |= v1[v16++] << 16;
+    v3 |= v1[v16++] << 24;
+
+    ASSERT(v16 <= 0x7F7);
+
+    if (v3 != v17) {
+        sub_8044828();
+        return FALSE;
+    }
+
+    sub_8044828();
+    return TRUE;
+}
