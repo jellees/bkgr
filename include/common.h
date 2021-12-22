@@ -500,13 +500,6 @@ extern u8 gBgmVolumeIndex;
 extern u8 gSfxVolumeIndex;
 extern u8 byte_203EA8C;
 
-extern u8 byte_203EAD4;
-extern u16 word_203EAD6;
-extern u8 byte_203EAD8;
-extern u8* dword_203EADC;
-extern u8 byte_203EAE0[3];
-extern u8 byte_203EAE3;
-
 extern s16 word_203F998;
 extern s16 word_203F99A;
 extern u8 byte_203F99C; // possibly bool8

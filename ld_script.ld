@@ -336,15 +336,8 @@ SECTIONS
         gMenuParentId = .; . += 1;
         . += 2; /* padding */
         gMenu = .; . += 0x40;
-        byte_203EAD4 = .; . += 1;
-        . += 1; /* padding */
-        word_203EAD6 = .; . += 2;
-        byte_203EAD8 = .; . += 1;
-        . += 3; /* padding */
-        dword_203EADC = .; . += 4;
-        byte_203EAE0 = .; . += 1 * 3;
-        byte_203EAE3 = .; . += 1;
-    
+        
+        src/save.o(.bss);
         src/random.o(.bss);
 
         . = 0x0003F4D8;
@@ -524,8 +517,7 @@ SECTIONS
         asm/chunk6.o(.text);
         src/menu.o(.text);
         asm/menu.o(.text);
-        src/80447C4.o(.text);
-        asm/80447C4.o(.text);
+        src/save.o(.text);
         src/random.o(.text);
         asm/random.o(.text);
         src/8045038.o(.text);

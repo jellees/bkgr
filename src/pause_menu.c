@@ -1,8 +1,9 @@
 #include "global.h"
 #include "sprite.h"
 #include "menu.h"
-#include "pause_menu.h"
 #include "alloc.h"
+#include "save.h"
+#include "pause_menu.h"
 #include "common.h"
 
 u8 gClockStatus;
@@ -1010,7 +1011,7 @@ static bool32 exec_save_menu() {
             gSaveFiles[gameIdx].notes = gGameStatus.totalNotes;
             gSaveFiles[gameIdx].empty = 0;
             MakeFileStrings();
-            sub_80449B0(gameIdx, byte_2000335);
+            save_game(gameIdx, byte_2000335);
             CheckHeap(4);
             ASSERT(DoesMemBlockExistById(4, 9) == FALSE);
 

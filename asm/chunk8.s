@@ -56725,8 +56725,8 @@ _080643E0: .4byte 0x04000208
 _080643E4: .4byte 0x03007F00
 
     .thumb
-	.global sub_80643E8
-sub_80643E8: @ 0x080643E8
+	.global set_eeprom_size
+set_eeprom_size: @ 0x080643E8
 	lsls r0, r0, #0x10
 	lsrs r0, r0, #0x10
 	movs r2, #0

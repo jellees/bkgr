@@ -568,7 +568,7 @@ _08025470:
 	ldr r0, [r0]
 	ldr r1, _080254D0
 	ldrb r1, [r1]
-	bl sub_80449B0
+	bl save_game
 	ldr r0, _080254D4
 	ldr r0, [r0]
 	bl audio_set_tune_vol

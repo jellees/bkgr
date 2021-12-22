@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "menu.h"
 #include "pause_menu.h"
+#include "save.h"
 #include "common.h"
 
 extern bool32 sub_8044860();
@@ -786,7 +787,7 @@ void ShowEraseData() {
         SkipVblank();
 
         if (v7) {
-            sub_8044D30();
+            erase_game();
             v1 = 180;
             action = 2;
             v7 = FALSE;

@@ -5,6 +5,7 @@
 #include "8045038.h"
 #include "player.h"
 #include "pause_menu.h"
+#include "save.h"
 #include "common.h"
 
 extern void sub_800A37C();
@@ -312,7 +313,7 @@ void StartGame() {
     gClockStatus = 0;
     byte_2000F55 = 0;
     byte_2000F57 = 0;
-    byte_203EAD4 = 0;
+    gIsSavingGame = 0;
     gMatricesCount = 0;
     gMatrices = 0;
 
@@ -442,7 +443,7 @@ void sub_800A37C() {
     ASSERT(dword_2000F6C == 0);
     dword_2000F6C++;
 
-    if (!byte_203EAD4) {
+    if (!gIsSavingGame) {
         sub_8045044();
     }
 
@@ -516,7 +517,7 @@ void sub_800A528() {
     ASSERT(dword_2000F68 == 0);
     dword_2000F68++;
 
-    if (!byte_203EAD4) {
+    if (!gIsSavingGame) {
         seq_update_p();
     }
 
