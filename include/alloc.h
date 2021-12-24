@@ -1,8 +1,6 @@
 #ifndef GUARD_ALLOC_H
 #define GUARD_ALLOC_H
 
-#include "gba/gba.h"
-
 struct Heap {
     u32 length;
     struct MemoryBlock* start;
@@ -22,7 +20,7 @@ struct MemoryBlock {
 
 void InitAllHeaps();
 void InitHeap(u32 heap);
-void *Alloc(u32 size, u32 allocId, u32 heap);
+void* Alloc(u32 size, u32 allocId, u32 heap);
 void FreeEx(void* pointer);
 void Free(void* pointer, u32 heap);
 void FreeById(u32 heap, u32 allocId);

@@ -667,7 +667,7 @@ void ShowEraseData() {
     struct TextBox tb1;
     struct TextBox tb2;
     bool32 allowInput;
-    bool32 v7;
+    bool32 erase;
 
     REG_BG2X_L = 0;
     REG_BG2Y_L = 0;
@@ -702,7 +702,7 @@ void ShowEraseData() {
     action = -1;
     allowInput = TRUE;
     v1 = -1;
-    v7 = FALSE;
+    erase = FALSE;
     renderMenu = TRUE;
 
     while (1) {
@@ -714,7 +714,7 @@ void ShowEraseData() {
                     case 0:
                         allowInput = FALSE;
                         action = 1;
-                        v7 = TRUE;
+                        erase = TRUE;
                         renderMenu = FALSE;
                         break;
 
@@ -786,11 +786,11 @@ void ShowEraseData() {
         UpdateVideo();
         SkipVblank();
 
-        if (v7) {
+        if (erase) {
             erase_game();
             v1 = 180;
             action = 2;
-            v7 = FALSE;
+            erase = FALSE;
         }
 
         if (v1 != -1) {

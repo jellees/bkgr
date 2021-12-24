@@ -1,8 +1,6 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
-#include "gba/gba.h"
-
 struct Menu {
     u16 xPosition;
     u16 yPosition;

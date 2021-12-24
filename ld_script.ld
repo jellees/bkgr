@@ -523,6 +523,7 @@ SECTIONS
         src/8045038.o(.text);
         src/pause_menu.o(.text);
         asm/chunk8.o(.text);
+        asm/eeprom.o(.text);
         *libgcc.a:*_call_via_rX*.o(.text*);
         asm/chunk_end.o(.text);
 
@@ -532,6 +533,8 @@ SECTIONS
         asm/data_playerBehavior.o(.rodata);
         asm/data_text.o(.rodata);
         asm/data.o(.rodata);
+        asm/eeprom.o(.rodata);
+        asm/data1.o(.rodata);
     }
 
     /* Discard everything not specifically mentioned above. */

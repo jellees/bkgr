@@ -1,8 +1,6 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
-#include "gba/gba.h"
-
 struct Sprite {
     u16 index;
     u8 curFrame;
