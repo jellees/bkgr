@@ -201,7 +201,7 @@ _0800E92C:
 	movs r0, #1
 	mov r8, r0
 	adds r0, r6, #0
-	bl sub_08044C00
+	bl load_game
 	cmp r0, #0
 	beq _0800E97A
 	bl sub_8038A34

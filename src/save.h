@@ -4,10 +4,10 @@
 extern bool8 gIsSavingGame;
 extern u16 word_203EAD6;
 
-bool32 sub_8044860();
+bool32 load_save_header();
 bool32 save_game(u32 game, bool32 a2);
-bool32 sub_08044C00(int game);
-void erase_game();
+bool32 load_game(int game);
+void erase_all_save_data();
 int sub_8044D70(int game);
 
 #endif

@@ -37,7 +37,7 @@ static void remove_eeprom_buffer() {
     gIsSavingGame = FALSE;
 }
 
-bool32 sub_8044860() {
+bool32 load_save_header() {
     u8* buffer;
     u16 sum1, sum2;
 
@@ -220,7 +220,7 @@ bool32 save_game(u32 game, bool32 a2) {
     return TRUE;
 }
 
-bool32 sub_08044C00(int game) {
+bool32 load_game(int game) {
     u8* buffer;
     u32 v9;
     int i;
@@ -291,7 +291,7 @@ bool32 sub_08044C00(int game) {
     return TRUE;
 }
 
-void erase_game() {
+void erase_all_save_data() {
     u16 data[4];
     int i;
 

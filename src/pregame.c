@@ -5,7 +5,6 @@
 #include "save.h"
 #include "common.h"
 
-extern bool32 sub_8044860();
 extern void reset_savefiles();
 extern void MakeFileStrings();
 extern void init_savefiles();
@@ -37,7 +36,7 @@ void ExecutePregame() {
     byte_20021F9 = 0;
     dword_203F4DC = 0;
 
-    if (!sub_8044860()) {
+    if (!load_save_header()) {
         gPauseMenuLanguage = 0;
         byte_2000335 = 1;
         byte_20021F9 = 1;
@@ -224,7 +223,7 @@ int sub_8024200() {
                     if (byte_20021F9) {
                         break;
                     }
-                    gContinueGame = sub_08044C00(0);
+                    gContinueGame = load_game(0);
                     if (gContinueGame) {
                         sub_8038A34();
                         sub_803FE78();
@@ -238,7 +237,7 @@ int sub_8024200() {
                     if (byte_20021F9) {
                         break;
                     }
-                    gContinueGame = sub_08044C00(1);
+                    gContinueGame = load_game(1);
                     if (gContinueGame) {
                         sub_8038A34();
                         sub_803FE78();
@@ -252,7 +251,7 @@ int sub_8024200() {
                     if (byte_20021F9) {
                         break;
                     }
-                    gContinueGame = sub_08044C00(2);
+                    gContinueGame = load_game(2);
                     if (gContinueGame) {
                         sub_8038A34();
                         sub_803FE78();
@@ -787,7 +786,7 @@ void ShowEraseData() {
         SkipVblank();
 
         if (erase) {
-            erase_game();
+            erase_all_save_data();
             v1 = 180;
             action = 2;
             erase = FALSE;
