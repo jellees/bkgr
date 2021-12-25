@@ -3,6 +3,7 @@
 
 extern u8 gClockStatus;
 extern s32 dword_203F4DC;
+extern bool8 byte_203F4E0;
 
 void open_pause_menu();
 void init_arcade_menu();

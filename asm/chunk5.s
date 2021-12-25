@@ -461,7 +461,7 @@ _08010CC0:
 	.align 2, 0
 _08010CF4: .4byte 0x02001441
 _08010CF8: .4byte gInInteractionArea
-_08010CFC: .4byte 0x0203DFDC
+_08010CFC: .4byte dword_203DFDC
 _08010D00: .4byte gLoadedRoomBgm
 _08010D04: .4byte 0x0000FFFF
 _08010D08: .4byte 0x02001443
@@ -581,7 +581,7 @@ _08010E16:
 	bx r0
 	.align 2, 0
 _08010E28: .4byte gInInteractionArea
-_08010E2C: .4byte 0x0203DFDC
+_08010E2C: .4byte dword_203DFDC
 _08010E30: .4byte gLoadedRoomBgm
 _08010E34: .4byte 0x0000FFFF
 _08010E38: .4byte 0x0200143F

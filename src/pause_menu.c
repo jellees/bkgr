@@ -9,7 +9,7 @@
 u8 gClockStatus;
 s32 dword_203F4DC;
 
-char byte_203F4E0;
+bool8 byte_203F4E0;
 
 // These two are room and warp.
 int dword_203F4E4;

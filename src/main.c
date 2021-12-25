@@ -1,23 +1,21 @@
 #include "global.h"
-#include "main.h"
 #include "sprite.h"
 #include "environment_effects.h"
 #include "8045038.h"
 #include "player.h"
 #include "pause_menu.h"
 #include "save.h"
+#include "main.h"
 #include "common.h"
 
-extern void sub_800A37C();
-extern void sub_800A528();
-extern void sub_800A594();
-extern void nullsub_15();
 extern void sub_80001EC();
 extern void UpdateBackgrounds();
 extern u32 sub_80266A8();
-extern void nullsub_3();
-extern void nullsub_4();
-extern void nullsub_5();
+
+static void UpdateGame(void);
+void nullsub_15();
+static void sub_800A528();
+static void sub_800A37C();
 
 int AgbMain() {
     prepare_wram();
@@ -40,7 +38,7 @@ int AgbMain() {
     }
 }
 
-void UpdateGame(void) {
+static void UpdateGame(void) {
     if (gIsPaletteEffectsActive)
         sub_8026DC0();
     call_functions();
@@ -439,7 +437,7 @@ extern u8 byte_2001200;
 extern u8 gMainFrameCounter;
 extern u8 gDebugFPS;
 
-void sub_800A37C() {
+static void sub_800A37C() {
     ASSERT(dword_2000F6C == 0);
     dword_2000F6C++;
 
@@ -513,7 +511,7 @@ void UpdateVideo() {
     update_efx();
 }
 
-void sub_800A528() {
+static void sub_800A528() {
     ASSERT(dword_2000F68 == 0);
     dword_2000F68++;
 

@@ -26,6 +26,16 @@ SECTIONS
         byte_2000334 = .; . += 1;
         byte_2000335 = .; . += 1;
         gColorSpecEffectsSel = .; . += 2;
+        gDisplayControl = .; . += 2;
+        gBG0Control = .; . += 2;
+        gBG1Control = .; . += 2;
+        gBG2Control = .; . += 2;
+        gBG3Control = .; . += 2;
+        word_2000342 = .; . += 2;
+        word_2000344 = .; . += 2;
+        word_2000346 = .; . += 2;
+        word_2000348 = .; . += 2;
+        word_200034A = .; . += 2;
 
         . = 0x00000360;
         gSpriteDMATable = .; . += 0xC * 255;
@@ -287,6 +297,9 @@ SECTIONS
         . += 1; /* padding */
         gPlayerStateSettings = .; . += 2 * 128;
 
+        . = 0x000021C4;
+        byte_20021C4 = .; . += 1;
+
         . = 0x000021F0;
         byte_20021F0 = .; . += 1;
         . += 3; /* padding */
@@ -318,6 +331,10 @@ SECTIONS
         . = 0x0003DFD7;
         gInInteractionArea = .; . += 1;
 
+        . = 0x0003DFDC;
+        dword_203DFDC = .; . += 4;
+        dword_203DFE0 = .; . += 4;
+        
         . = 0x0003DFE6;
         byte_203DFE6 = .; . += 1;
         byte_203DFE7 = .; . += 1;
@@ -523,6 +540,9 @@ SECTIONS
         src/8045038.o(.text);
         src/pause_menu.o(.text);
         asm/chunk8.o(.text);
+        src/gameover.o(.text);
+        asm/gameover.o(.text);
+        asm/chunk12.o(.text);
         asm/eeprom.o(.text);
         *libgcc.a:*_call_via_rX*.o(.text*);
         asm/chunk_end.o(.text);

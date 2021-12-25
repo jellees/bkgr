@@ -369,6 +369,16 @@ extern u8 byte_2000333;
 extern u8 byte_2000334;
 extern u8 byte_2000335;
 extern u16 gColorSpecEffectsSel;
+extern u16 gDisplayControl;
+extern u16 gBG0Control;
+extern u16 gBG1Control;
+extern u16 gBG2Control;
+extern u16 gBG3Control;
+extern u16 word_2000342;
+extern u16 word_2000344;
+extern u16 word_2000346;
+extern u16 word_2000348;
+extern u16 word_200034A;
 
 extern struct SpriteDMATableEntry gSpriteDMATable[255];
 extern u8 gSpriteDMACount;
@@ -471,6 +481,8 @@ extern s32 dword_20020B8;
 extern u8 byte_20020BC; // possibily bool8
 extern u16 gPlayerStateSettings[128];
 
+extern u8 byte_20021C4;
+
 extern u8 byte_20021F0; // possibly bool8
 extern u32 dword_20021F4;
 extern u8 byte_20021F8; // possibily bool8
@@ -488,6 +500,9 @@ extern u8* dword_203DFC0;
 extern struct Entity_rt* dword_203DFC4;
 
 extern bool8 gInInteractionArea;
+
+extern u32 dword_203DFDC;
+extern u32 dword_203DFE0;
 
 extern bool8 byte_203DFE6;
 extern bool8 byte_203DFE7;
@@ -681,6 +696,9 @@ extern char str_806579C[2];
 extern char str_80657A8[2];
 extern s32 dword_80CF3B0[8];
 extern int dword_80CF390[8];
+
+extern u8 unk_87E0240[1]; // Unknown size.
+extern u32 unk_83FC114[129];
 
 // Other
 

@@ -77,7 +77,7 @@ _080164B4: .4byte 0x020021C6
 _080164B8: .4byte 0x020021C7
 _080164BC: .4byte byte_20020B3
 _080164C0: .4byte 0x020021BE
-_080164C4: .4byte 0x020021C4
+_080164C4: .4byte byte_20021C4
 _080164C8: .4byte dword_20020B8
 _080164CC: .4byte dword_20020B4
 _080164D0: .4byte 0x020021DC
@@ -1019,10 +1019,10 @@ _08016C58: .4byte gPlayerState
 _08016C5C: .4byte gPlayerSprite
 _08016C60: .4byte 0x02002E4D
 _08016C64: .4byte 0x02002E4C
-_08016C68: .4byte 0x0203DFDC
+_08016C68: .4byte dword_203DFDC
 _08016C6C: .4byte 0x020021C0
 _08016C70: .4byte gInInteractionArea
-_08016C74: .4byte 0x0203DFE0
+_08016C74: .4byte dword_203DFE0
 
     .thumb
     .global sub_8016C78
@@ -1425,7 +1425,7 @@ _08016F94:
 	b _08016FD2
 	.align 2, 0
 _08016FC4: .4byte gPlayerState
-_08016FC8: .4byte 0x020021C4
+_08016FC8: .4byte byte_20021C4
 _08016FCC: .4byte dword_2000FC8
 _08016FD0:
 	ldr r0, _08016FDC

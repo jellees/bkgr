@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "pause_menu.h"
 #include "save.h"
+#include "main.h"
 #include "common.h"
 
 extern void reset_savefiles();
