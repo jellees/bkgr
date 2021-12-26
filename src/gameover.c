@@ -4,6 +4,8 @@
 #include "main.h"
 #include "common.h"
 
+static void sub_8062D04();
+
 void sub_80629E8() {
     gDisplayControl = REG_DISPCNT;
     gBG0Control = REG_BG0CNT;
@@ -25,7 +27,7 @@ void sub_80629E8() {
     InitMenu(4u, gPauseMenuLanguage);
     gMenuId = 4;
     gMenuParentId = -1;
-    sub_08062D04();
+    sub_8062D04();
 
     SetTextSpriteCount(0);
     DmaFill32(170, gOAMBuffer1, 256);
@@ -96,9 +98,132 @@ void show_gameover_screen() {
     SyncVblank();
     DmaTransfer32(&unk_83FC114, BG_PLTT, 129);
     DmaTransfer32(&unk_83FD254, OBJ_PLTT, 128);
-    
+
     gLoadedRoomBgm = 16;
     if (gCanChangeBgm) {
         audio_start_tune(16);
     }
+}
+
+static void sub_8062D04() {
+    bool32 v0;
+    struct TextBox textbox;
+    char string[14];
+    int objCount;
+    bool32 v4;
+
+    string[0] = 'G';
+    string[1] = 'A';
+    string[2] = 'M';
+    string[3] = 'E';
+    string[4] = ' ';
+    string[5] = 'O';
+    string[6] = 'V';
+    string[7] = 'E';
+    string[8] = 'R';
+    string[9] = -1;
+
+    textbox.letterSpacing = -2;
+    textbox.field_12 = 0;
+    textbox.field_A = 2;
+    textbox.size = 240;
+    textbox.palette = 1;
+    textbox.stringOffset = 0;
+    textbox.field_11 = 6;
+    textbox.font = &font_80B01A8[2];
+    objCount = sub_8025870(string, &textbox);
+
+    init_function(14);
+
+    v0 = 1;
+    v4 = 0;
+
+    while (1) {
+        if (!v4 && !v0) {
+            ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+            
+            if (gKeysDown & B_BUTTON) {
+                if (gMenuParentId != 0xFF) {
+                    gMenuId = gMenuParentId;
+                    switch (gMenuParentId) {
+                        default:
+                            HANG;
+                            break;
+
+                        case 4:
+                            gMenuParentId = -1;
+                            string[0] = 'G';
+                            string[1] = 'A';
+                            string[2] = 'M';
+                            string[3] = 'E';
+                            string[4] = ' ';
+                            string[5] = 'O';
+                            string[6] = 'V';
+                            string[7] = 'E';
+                            string[8] = 'R';
+                            string[9] = -1;
+                            objCount = sub_8025870(string, &textbox);
+                            break;
+
+                        case 5:
+                            gMenuParentId = 4;
+                            break;
+                    }
+
+                    InitMenu(gMenuId, gPauseMenuLanguage);
+                }
+            } else if (gKeysDown & A_BUTTON) {
+                if (sub_8062FC4(&textbox, string, &objCount)) {
+                    v4 = 1;
+                    sub_805E1DC(2);
+                    init_function(15);
+                }
+            }
+
+            if (!(gKeysDown & JOY_EXCL_DPAD)) {
+                if (gKeysDown & DPAD_UP) {
+                    if (byte_203EA89) {
+                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                     dSoundEffects[204].pitch + 0x10000);
+                    }
+                    AdvanceMenuEntryUp();
+                } else if (gKeysDown & DPAD_DOWN) {
+                    if (byte_203EA89) {
+                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                                     dSoundEffects[204].pitch + 0x10000);
+                    }
+                    AdvanceMenuEntryDown();
+                }
+            }
+        } else if (!byte_203F99E) {
+            break;
+        }
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBufferFramePtr[0x100];
+        gOBJTileFramePtr = (void*)0x6014000;
+        gOBJTileCount = 512;
+        call_functions();
+        sub_805E088();
+        textbox.xPosition = (240 - objCount) >> 1;
+        textbox.yPosition = 20;
+        textbox.stringOffset = 0;
+        AddStringToBuffer(&textbox, string);
+        FlushMenuToTextBuffer();
+        RenderText();
+        RenderMenuSprites();
+        CheckStacks();
+        SyncVblank();
+        UpdateVideo();
+        SkipVblank();
+
+        if (v0) {
+            v0 = 0;
+            sub_8026E48(4095, 1, 0);
+        }
+    }
+
+    SetTextSpriteCount(0);
 }
