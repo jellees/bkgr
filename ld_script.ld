@@ -541,7 +541,6 @@ SECTIONS
         src/pause_menu.o(.text);
         asm/chunk8.o(.text);
         src/gameover.o(.text);
-        asm/gameover.o(.text);
         asm/chunk12.o(.text);
         asm/eeprom.o(.text);
         *libgcc.a:*_call_via_rX*.o(.text*);

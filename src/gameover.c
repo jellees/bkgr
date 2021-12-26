@@ -4,7 +4,9 @@
 #include "main.h"
 #include "common.h"
 
+static void show_gameover_screen();
 static void sub_8062D04();
+static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount);
 
 void sub_80629E8() {
     gDisplayControl = REG_DISPCNT;
@@ -24,8 +26,8 @@ void sub_80629E8() {
     sub_805E1DC(1);
     byte_203F4E0 = 0;
     show_gameover_screen();
-    InitMenu(4u, gPauseMenuLanguage);
-    gMenuId = 4;
+    InitMenu(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
+    gMenuId = MENU_CONTINUE_OR_QUIT;
     gMenuParentId = -1;
     sub_8062D04();
 
@@ -86,7 +88,7 @@ void sub_80629E8() {
         sub_8016C78(0);
 }
 
-void show_gameover_screen() {
+static void show_gameover_screen() {
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_4;
     REG_BG2CNT = 0;
     gColorSpecEffectsSel = BLDCNT_TGT2_ALL;
@@ -135,13 +137,13 @@ static void sub_8062D04() {
 
     init_function(14);
 
-    v0 = 1;
-    v4 = 0;
+    v0 = TRUE;
+    v4 = FALSE;
 
     while (1) {
         if (!v4 && !v0) {
             ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
-            
+
             if (gKeysDown & B_BUTTON) {
                 if (gMenuParentId != 0xFF) {
                     gMenuId = gMenuParentId;
@@ -150,7 +152,7 @@ static void sub_8062D04() {
                             HANG;
                             break;
 
-                        case 4:
+                        case MENU_CONTINUE_OR_QUIT:
                             gMenuParentId = -1;
                             string[0] = 'G';
                             string[1] = 'A';
@@ -165,8 +167,8 @@ static void sub_8062D04() {
                             objCount = sub_8025870(string, &textbox);
                             break;
 
-                        case 5:
-                            gMenuParentId = 4;
+                        case MENU_YES_NO:
+                            gMenuParentId = MENU_CONTINUE_OR_QUIT;
                             break;
                     }
 
@@ -174,7 +176,7 @@ static void sub_8062D04() {
                 }
             } else if (gKeysDown & A_BUTTON) {
                 if (sub_8062FC4(&textbox, string, &objCount)) {
-                    v4 = 1;
+                    v4 = TRUE;
                     sub_805E1DC(2);
                     init_function(15);
                 }
@@ -220,10 +222,70 @@ static void sub_8062D04() {
         SkipVblank();
 
         if (v0) {
-            v0 = 0;
+            v0 = FALSE;
             sub_8026E48(4095, 1, 0);
         }
     }
 
     SetTextSpriteCount(0);
+}
+
+static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount) {
+    switch (gMenuId) {
+        case MENU_CONTINUE_OR_QUIT:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    return TRUE;
+
+                case 1:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_YES_NO;
+                    InitMenu(MENU_YES_NO, gPauseMenuLanguage);
+                    string[0] = 'A';
+                    string[1] = 'R';
+                    string[2] = 'E';
+                    string[3] = ' ';
+                    string[4] = 'Y';
+                    string[5] = 'O';
+                    string[6] = 'U';
+                    string[7] = ' ';
+                    string[8] = 'S';
+                    string[9] = 'U';
+                    string[10] = 'R';
+                    string[11] = 'E';
+                    string[12] = '?';
+                    string[13] = -1;
+                    *objCount = sub_8025870(string, textbox);
+                    break;
+            }
+            break;
+
+        case MENU_YES_NO:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    sub_80271A4(4095, 1);
+                    sub_080643D0(0xFF);
+                    break;
+
+                case 1:
+                    gMenuParentId = -1;
+                    gMenuId = MENU_CONTINUE_OR_QUIT;
+                    InitMenu(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
+                    string[0] = 'G';
+                    string[1] = 'A';
+                    string[2] = 'M';
+                    string[3] = 'E';
+                    string[4] = ' ';
+                    string[5] = 'O';
+                    string[6] = 'V';
+                    string[7] = 'E';
+                    string[8] = 'R';
+                    string[9] = -1;
+                    *objCount = sub_8025870(string, textbox);
+                    break;
+            }
+            break;
+    }
+
+    return FALSE;
 }
