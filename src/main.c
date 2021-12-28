@@ -175,7 +175,7 @@ static void UpdateGame(void) {
     gOBJTileCount = dword_3003DA0;
     exec_arcade_menu();
     sub_8025278();
-    sub_800EE68();
+    show_room_name();
     sub_804095C();
     if (gPlayerStateSettings[gPlayerState] & 0x800) {
         if (byte_2000F5D) {
@@ -403,8 +403,8 @@ void StartGame() {
         sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
         EnableBGAlphaBlending();
         init_efx();
-        sub_800DEE4();
-        sub_0800ED80();
+        enable_poison_effect();
+        init_room_name();
         SetSprite(&gPlayerSprite, 0x1Du, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         sub_800378C(&gPlayerShadowSprite, 0);

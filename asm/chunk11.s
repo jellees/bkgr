@@ -4114,7 +4114,7 @@ _0801877C:
 	beq _08018794
 	bl sub_800DE9C
 _08018794:
-	bl sub_800EEC0
+	bl hide_room_name
 	ldr r1, _080187F8
 	ldrh r0, [r4]
 	strh r0, [r1]
@@ -5413,7 +5413,7 @@ _08019304:
 	bl audio_new_fx
 _08019350:
 	mov r0, sb
-	bl sub_800E178
+	bl decrease_player_health
 	mov r2, r8
 	ldrb r0, [r2, #0x13]
 	cmp r0, #0
@@ -6015,7 +6015,7 @@ _08019880:
 	str r4, [r5]
 _08019882:
 	mov r0, sb
-	bl sub_800E178
+	bl decrease_player_health
 	ldr r0, _080198C4
 	ldrb r0, [r0, #0x13]
 	cmp r0, #0

@@ -436,8 +436,8 @@ _0800ED78: .4byte 0x0200115C
 _0800ED7C: .4byte 0x02001148
 
     .thumb
-    .global sub_0800ED80
-sub_0800ED80: @ 0x0800ED80
+    .global init_room_name
+init_room_name: @ 0x0800ED80
 	push {r4, lr}
 	ldr r0, _0800EDD0
 	ldrb r1, [r0]
@@ -479,10 +479,10 @@ sub_0800ED80: @ 0x0800ED80
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0800EDD0: .4byte 0x020010A6
-_0800EDD4: .4byte 0x0200116D
-_0800EDD8: .4byte 0x0200116E
-_0800EDDC: .4byte 0x02001170
+_0800EDD0: .4byte gRoomNameNumber
+_0800EDD4: .4byte gShowRoomName
+_0800EDD8: .4byte gRoomNameApparenceTimer
+_0800EDDC: .4byte gRoomNameTextBox
 _0800EDE0: .4byte 0x080B01B8
 _0800EDE4: .4byte 0x02000320
 _0800EDE8: .4byte 0x0800EDEC
@@ -497,28 +497,28 @@ _0800EE00:
 	ldr r1, _0800EE0C
 	b _0800EE44
 	.align 2, 0
-_0800EE08: .4byte 0x02001184
+_0800EE08: .4byte gRoomName
 _0800EE0C: .4byte 0x086AD9FC
 _0800EE10:
 	ldr r2, _0800EE18
 	ldr r1, _0800EE1C
 	b _0800EE44
 	.align 2, 0
-_0800EE18: .4byte 0x02001184
+_0800EE18: .4byte gRoomName
 _0800EE1C: .4byte 0x086ADAC4
 _0800EE20:
 	ldr r2, _0800EE28
 	ldr r1, _0800EE2C
 	b _0800EE44
 	.align 2, 0
-_0800EE28: .4byte 0x02001184
+_0800EE28: .4byte gRoomName
 _0800EE2C: .4byte 0x086ADC54
 _0800EE30:
 	ldr r2, _0800EE38
 	ldr r1, _0800EE3C
 	b _0800EE44
 	.align 2, 0
-_0800EE38: .4byte 0x02001184
+_0800EE38: .4byte gRoomName
 _0800EE3C: .4byte 0x086ADD1C
 _0800EE40:
 	ldr r2, _0800EE54
@@ -532,7 +532,7 @@ _0800EE44:
 	str r0, [r2]
 	b _0800EE60
 	.align 2, 0
-_0800EE54: .4byte 0x02001184
+_0800EE54: .4byte gRoomName
 _0800EE58: .4byte 0x086ADB8C
 _0800EE5C:
 	.2byte 0xEE00, 0xEE00
@@ -543,8 +543,8 @@ _0800EE60:
 	.align 2, 0
 
     .thumb
-    .global sub_800EE68
-sub_800EE68: @ 0x0800EE68
+    .global show_room_name
+show_room_name: @ 0x0800EE68
 	push {r4, r5, lr}
 	ldr r3, _0800EE80
 	ldrb r0, [r3]
@@ -558,8 +558,8 @@ sub_800EE68: @ 0x0800EE68
 	strb r1, [r3]
 	b _0800EE8C
 	.align 2, 0
-_0800EE80: .4byte 0x0200116D
-_0800EE84: .4byte 0x0200116E
+_0800EE80: .4byte gShowRoomName
+_0800EE84: .4byte gRoomNameApparenceTimer
 _0800EE88:
 	subs r0, #1
 	strh r0, [r2]
@@ -585,18 +585,18 @@ _0800EEB0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800EEB8: .4byte 0x02001184
-_0800EEBC: .4byte 0x02001170
+_0800EEB8: .4byte gRoomName
+_0800EEBC: .4byte gRoomNameTextBox
 
     .thumb
-	.global sub_800EEC0
-sub_800EEC0: @ 0x0800EEC0
+	.global hide_room_name
+hide_room_name: @ 0x0800EEC0
 	ldr r1, _0800EEC8
 	movs r0, #0
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_0800EEC8: .4byte 0x0200116D
+_0800EEC8: .4byte gShowRoomName
 
     .thumb
 	.global sub_800EECC

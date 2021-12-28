@@ -82,7 +82,9 @@ SECTIONS
         word_2001090 = .; . += 2;
         word_2001092 = .; . += 2;
 
-        . = 0x000010A8;
+        . = 0x000010A6;
+        gRoomNameNumber = .; . += 1;
+        byte_20010A7 = .; . += 1;
         gRoomGoal = .; . += 1;
         gWarpGoal = .; . += 1;
         byte_20010AA = .; . += 1;
@@ -108,6 +110,12 @@ SECTIONS
 
         . = 0x0000112A;
         byte_200112A = .; . += 1;
+
+        . = 0x0000116D;
+        gShowRoomName = .; . += 1;
+        gRoomNameApparenceTimer = .; . += 2;
+        gRoomNameTextBox = .; . += 0x14;
+        gRoomName = .; . += 4;
 
         . = 0x000011CC;
         src/environment_effects.o(.bss);

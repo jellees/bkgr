@@ -664,8 +664,8 @@ _0800BEBC:
 	bl sub_80275A4
 _0800BECA:
 	bl init_efx
-	bl sub_800DEE4
-	bl sub_0800ED80
+	bl enable_poison_effect
+	bl init_room_name
 	ldrb r0, [r6, #4]
 	bl sub_800EF6C
 	ldr r0, _0800BF2C
@@ -905,8 +905,8 @@ _0800C0A8:
 	bl EnableBGAlphaBlending
 	bl sub_800EB14
 	bl init_efx
-	bl sub_800DEE4
-	bl sub_0800ED80
+	bl enable_poison_effect
+	bl init_room_name
 	adds r0, r6, #0
 	bl sub_800EF6C
 	ldr r0, _0800C188
@@ -1073,7 +1073,7 @@ _0800C218:
 	bl EnableBGAlphaBlending
 	bl sub_800EB14
 	bl init_efx
-	bl sub_800DEE4
+	bl enable_poison_effect
 	ldr r0, _0800C35C
 	ldrh r0, [r0]
 	cmp r0, #0x1e
@@ -1149,7 +1149,7 @@ _0800C31C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800C32C: .4byte 0x0200116D
+_0800C32C: .4byte gShowRoomName
 _0800C330: .4byte gLoadedRoomLevel
 _0800C334: .4byte gLoadedRoomBgm
 _0800C338: .4byte 0x080CF4EC
@@ -1257,8 +1257,8 @@ _0800C3B6:
 _0800C436:
 	bl sub_800ECB4
 	bl init_efx
-	bl sub_800DEE4
-	bl sub_0800ED80
+	bl enable_poison_effect
+	bl init_room_name
 	movs r0, #0x38
 	bl sub_08040A38
 	mov r0, r8
@@ -1593,7 +1593,7 @@ _0800C6E0:
 _0800C73C: .4byte 0x00000FFF
 _0800C740: .4byte 0x02001118
 _0800C744: .4byte 0x02001119
-_0800C748: .4byte 0x0200116D
+_0800C748: .4byte gShowRoomName
 _0800C74C: .4byte 0x02001128
 _0800C750: .4byte 0x020010B0
 _0800C754: .4byte word_2000342
@@ -1652,7 +1652,7 @@ _0800C778:
 _0800C7D4: .4byte 0x00000FFF
 _0800C7D8: .4byte 0x02001118
 _0800C7DC: .4byte 0x02001119
-_0800C7E0: .4byte 0x0200116D
+_0800C7E0: .4byte gShowRoomName
 _0800C7E4: .4byte 0x02001128
 _0800C7E8: .4byte 0x020010B0
 _0800C7EC: .4byte word_2000342
@@ -1714,7 +1714,7 @@ _0800C86A:
 _0800C874: .4byte 0x00000FFF
 _0800C878: .4byte 0x02001118
 _0800C87C: .4byte 0x02001119
-_0800C880: .4byte 0x0200116D
+_0800C880: .4byte gShowRoomName
 _0800C884: .4byte 0x02001128
 _0800C888: .4byte 0x020010B0
 _0800C88C: .4byte word_2000342
@@ -1790,7 +1790,7 @@ _0800C92C: .4byte 0x0200209A
 _0800C930: .4byte 0x00000FFF
 _0800C934: .4byte 0x02001118
 _0800C938: .4byte 0x02001119
-_0800C93C: .4byte 0x0200116D
+_0800C93C: .4byte gShowRoomName
 _0800C940: .4byte 0x020010B0
 _0800C944: .4byte word_2000342
 _0800C948: .4byte word_2000344
@@ -1861,7 +1861,7 @@ _0800C9DA:
 _0800C9E0: .4byte 0x00000FFF
 _0800C9E4: .4byte 0x02001118
 _0800C9E8: .4byte 0x02001119
-_0800C9EC: .4byte 0x0200116D
+_0800C9EC: .4byte gShowRoomName
 _0800C9F0: .4byte 0x020010B0
 _0800C9F4: .4byte word_2000342
 _0800C9F8: .4byte word_2000344
@@ -1927,7 +1927,7 @@ _0800CA2C:
 _0800CA88: .4byte 0x00000FFF
 _0800CA8C: .4byte 0x02001118
 _0800CA90: .4byte 0x02001119
-_0800CA94: .4byte 0x0200116D
+_0800CA94: .4byte gShowRoomName
 _0800CA98: .4byte 0x020010B0
 _0800CA9C: .4byte word_2000342
 _0800CAA0: .4byte word_2000344
@@ -1996,7 +1996,7 @@ _0800CB2C:
 _0800CB34: .4byte 0x00000FFF
 _0800CB38: .4byte 0x02001118
 _0800CB3C: .4byte 0x02001119
-_0800CB40: .4byte 0x0200116D
+_0800CB40: .4byte gShowRoomName
 _0800CB44: .4byte 0x020010B0
 _0800CB48: .4byte word_2000342
 _0800CB4C: .4byte word_2000344
@@ -2080,7 +2080,7 @@ _0800CB9E:
 _0800CBF8: .4byte 0x00000FFF
 _0800CBFC: .4byte 0x02001118
 _0800CC00: .4byte 0x02001119
-_0800CC04: .4byte 0x0200116D
+_0800CC04: .4byte gShowRoomName
 _0800CC08: .4byte 0x020010B0
 _0800CC0C: .4byte word_2000342
 _0800CC10: .4byte word_2000344
@@ -2145,7 +2145,7 @@ _0800CC34:
 _0800CCA0: .4byte 0x00000FFF
 _0800CCA4: .4byte 0x02001118
 _0800CCA8: .4byte 0x02001119
-_0800CCAC: .4byte 0x0200116D
+_0800CCAC: .4byte gShowRoomName
 _0800CCB0: .4byte 0x020010B0
 _0800CCB4: .4byte word_2000342
 _0800CCB8: .4byte word_2000344
@@ -2216,7 +2216,7 @@ _0800CD46:
 _0800CD50: .4byte 0x00000FFF
 _0800CD54: .4byte 0x02001118
 _0800CD58: .4byte 0x02001119
-_0800CD5C: .4byte 0x0200116D
+_0800CD5C: .4byte gShowRoomName
 _0800CD60: .4byte 0x020010B0
 _0800CD64: .4byte word_2000342
 _0800CD68: .4byte word_2000344
@@ -2297,7 +2297,7 @@ _0800CDD4:
 	b _0800CF08
 	.align 2, 0
 _0800CE1C: .4byte 0x00000FFF
-_0800CE20: .4byte 0x0200116D
+_0800CE20: .4byte gShowRoomName
 _0800CE24: .4byte 0x020010B0
 _0800CE28: .4byte word_2000342
 _0800CE2C: .4byte word_2000344
@@ -2344,7 +2344,7 @@ _0800CE4C:
 	b _0800CF08
 	.align 2, 0
 _0800CE94: .4byte 0x00000FFF
-_0800CE98: .4byte 0x0200116D
+_0800CE98: .4byte gShowRoomName
 _0800CE9C: .4byte 0x020010B0
 _0800CEA0: .4byte word_2000342
 _0800CEA4: .4byte word_2000344
@@ -2394,7 +2394,7 @@ _0800CF08:
 	b _0800D1A4
 	.align 2, 0
 _0800CF10: .4byte 0x00000FFF
-_0800CF14: .4byte 0x0200116D
+_0800CF14: .4byte gShowRoomName
 _0800CF18: .4byte 0x020010B0
 _0800CF1C: .4byte word_2000342
 _0800CF20: .4byte word_2000344
@@ -2441,7 +2441,7 @@ _0800CF40:
 	b _0800CFFC
 	.align 2, 0
 _0800CF88: .4byte 0x00000FFF
-_0800CF8C: .4byte 0x0200116D
+_0800CF8C: .4byte gShowRoomName
 _0800CF90: .4byte 0x020010B0
 _0800CF94: .4byte word_2000342
 _0800CF98: .4byte word_2000344
@@ -2491,7 +2491,7 @@ _0800CFFC:
 	b _0800D1A4
 	.align 2, 0
 _0800D004: .4byte 0x00000FFF
-_0800D008: .4byte 0x0200116D
+_0800D008: .4byte gShowRoomName
 _0800D00C: .4byte 0x020010B0
 _0800D010: .4byte word_2000342
 _0800D014: .4byte word_2000344
@@ -2538,7 +2538,7 @@ _0800D034:
 	b _0800D168
 	.align 2, 0
 _0800D07C: .4byte 0x00000FFF
-_0800D080: .4byte 0x0200116D
+_0800D080: .4byte gShowRoomName
 _0800D084: .4byte 0x020010B0
 _0800D088: .4byte word_2000342
 _0800D08C: .4byte word_2000344
@@ -2585,7 +2585,7 @@ _0800D0AC:
 	b _0800D168
 	.align 2, 0
 _0800D0F4: .4byte 0x00000FFF
-_0800D0F8: .4byte 0x0200116D
+_0800D0F8: .4byte gShowRoomName
 _0800D0FC: .4byte 0x020010B0
 _0800D100: .4byte word_2000342
 _0800D104: .4byte word_2000344
@@ -2635,7 +2635,7 @@ _0800D168:
 	b _0800D1A4
 	.align 2, 0
 _0800D170: .4byte 0x00000FFF
-_0800D174: .4byte 0x0200116D
+_0800D174: .4byte gShowRoomName
 _0800D178: .4byte 0x020010B0
 _0800D17C: .4byte word_2000342
 _0800D180: .4byte word_2000344
@@ -2716,7 +2716,7 @@ _0800D1E8:
 	b _0800D330
 	.align 2, 0
 _0800D234: .4byte 0x00000FFF
-_0800D238: .4byte 0x0200116D
+_0800D238: .4byte gShowRoomName
 _0800D23C: .4byte 0x020010B0
 _0800D240: .4byte 0x0203F4E0
 _0800D244: .4byte word_2000342
@@ -2766,7 +2766,7 @@ _0800D268:
 	b _0800D330
 	.align 2, 0
 _0800D2B4: .4byte 0x00000FFF
-_0800D2B8: .4byte 0x0200116D
+_0800D2B8: .4byte gShowRoomName
 _0800D2BC: .4byte 0x020010B0
 _0800D2C0: .4byte 0x0203F4E0
 _0800D2C4: .4byte word_2000342
@@ -2819,7 +2819,7 @@ _0800D330:
 	b _0800D5F8
 	.align 2, 0
 _0800D338: .4byte 0x00000FFF
-_0800D33C: .4byte 0x0200116D
+_0800D33C: .4byte gShowRoomName
 _0800D340: .4byte 0x020010B0
 _0800D344: .4byte 0x0203F4E0
 _0800D348: .4byte word_2000342
@@ -2869,7 +2869,7 @@ _0800D36C:
 	b _0800D434
 	.align 2, 0
 _0800D3B8: .4byte 0x00000FFF
-_0800D3BC: .4byte 0x0200116D
+_0800D3BC: .4byte gShowRoomName
 _0800D3C0: .4byte 0x020010B0
 _0800D3C4: .4byte 0x0203F4E0
 _0800D3C8: .4byte word_2000342
@@ -2922,7 +2922,7 @@ _0800D434:
 	b _0800D5F8
 	.align 2, 0
 _0800D43C: .4byte 0x00000FFF
-_0800D440: .4byte 0x0200116D
+_0800D440: .4byte gShowRoomName
 _0800D444: .4byte 0x020010B0
 _0800D448: .4byte 0x0203F4E0
 _0800D44C: .4byte word_2000342
@@ -2972,7 +2972,7 @@ _0800D470:
 	b _0800D5B8
 	.align 2, 0
 _0800D4BC: .4byte 0x00000FFF
-_0800D4C0: .4byte 0x0200116D
+_0800D4C0: .4byte gShowRoomName
 _0800D4C4: .4byte 0x020010B0
 _0800D4C8: .4byte 0x0203F4E0
 _0800D4CC: .4byte word_2000342
@@ -3022,7 +3022,7 @@ _0800D4F0:
 	b _0800D5B8
 	.align 2, 0
 _0800D53C: .4byte 0x00000FFF
-_0800D540: .4byte 0x0200116D
+_0800D540: .4byte gShowRoomName
 _0800D544: .4byte 0x020010B0
 _0800D548: .4byte 0x0203F4E0
 _0800D54C: .4byte word_2000342
@@ -3075,7 +3075,7 @@ _0800D5B8:
 	b _0800D5F8
 	.align 2, 0
 _0800D5C0: .4byte 0x00000FFF
-_0800D5C4: .4byte 0x0200116D
+_0800D5C4: .4byte gShowRoomName
 _0800D5C8: .4byte 0x020010B0
 _0800D5CC: .4byte 0x0203F4E0
 _0800D5D0: .4byte word_2000342
@@ -3346,7 +3346,7 @@ _0800D7A6:
 	strb r1, [r0]
 	bl EnableBGAlphaBlending
 	bl init_efx
-	bl sub_0800ED80
+	bl init_room_name
 	cmp r7, #0
 	bne _0800D868
 	ldr r0, _0800D864
@@ -3471,7 +3471,7 @@ sub_800D8E8: @ 0x0800D8E8
 	ldr r1, [r1]
 	bl sub_800389C
 	bl EnableBGAlphaBlending
-	bl sub_0800ED80
+	bl init_room_name
 	ldr r0, _0800D9DC
 	strb r5, [r0]
 	ldr r4, _0800D9E0
@@ -4135,8 +4135,8 @@ _0800DEDC: .4byte 0x0200108C
 _0800DEE0: .4byte 0x0002CCCC
 
     .thumb
-    .global sub_800DEE4
-sub_800DEE4: @ 0x0800DEE4
+    .global enable_poison_effect
+enable_poison_effect: @ 0x0800DEE4
 	push {lr}
 	ldr r0, _0800DF0C
 	ldrh r0, [r0]
@@ -4453,8 +4453,8 @@ _0800E172:
 	bx r0
 
     .thumb
-	.global sub_800E178
-sub_800E178: @ 0x0800E178
+	.global decrease_player_health
+decrease_player_health: @ 0x0800E178
 	push {r4, lr}
 	cmp r0, #0
 	beq _0800E1FC

@@ -113,7 +113,7 @@ void ShowSelectGame(int a1) {
                 gMenuId = gMenuParentId;
                 id = gMenuId;
 
-                if (!id) {
+                if (id == MENU_GAME_OR_CONTINUE) {
                     gMenuParentId = -1;
                 } else {
                     HANG;
@@ -419,10 +419,10 @@ int ShowPressStart() {
     while (1) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
-        if (gKeysDown & 8 || gKeysDown & 1) {
-            if (gPauseMenuLanguage == 255) {
+        if (gKeysDown & START_BUTTON || gKeysDown & A_BUTTON) {
+            if (gPauseMenuLanguage == 0xFF) {
                 FadeOutObjects(2, 2);
-                REG_BG1CNT |= 3u;
+                REG_BG1CNT |= BGCNT_PRIORITY(3);
                 SetTextSpriteCount(0);
                 ShowLanguageSelect();
                 v4 = TRUE;

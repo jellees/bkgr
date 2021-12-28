@@ -45305,7 +45305,7 @@ _0805E566:
 	bl EnableBGAlphaBlending
 	bl sub_800EB14
 	bl init_efx
-	bl sub_0800ED80
+	bl init_room_name
 	bl sub_80631A0
 	cmp r0, #0
 	beq _0805E5B4
@@ -45446,7 +45446,7 @@ _0805E6B2:
 	bl EnableBGAlphaBlending
 	bl sub_800EB14
 	bl init_efx
-	bl sub_0800ED80
+	bl init_room_name
 	bl sub_80631A0
 	cmp r0, #0
 	beq _0805E6FC
