@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "alloc.h"
 #include "save.h"
+#include "savefile.h"
 #include "pause_menu.h"
 #include "common.h"
 

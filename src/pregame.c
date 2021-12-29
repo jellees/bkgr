@@ -3,12 +3,10 @@
 #include "menu.h"
 #include "pause_menu.h"
 #include "save.h"
+#include "savefile.h"
 #include "main.h"
 #include "common.h"
 
-extern void reset_savefiles();
-extern void MakeFileStrings();
-extern void init_savefiles();
 extern void InitPregame();
 extern void SetVolumeToDefault();
 extern void ShowFlashscreens();
