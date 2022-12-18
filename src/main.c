@@ -39,7 +39,7 @@ int AgbMain() {
         UpdateGame();
         Debug_SetAfterGameUpdate(REG_VCOUNT & 0xFF);
         SyncVblank();
-        _call_via_r0(gNullsub_5);
+        gNullsub_5();
         UpdateVideo();
         Debug_SetAfterVideoUpdate(REG_VCOUNT & 0xFF);
         SkipVblank();
