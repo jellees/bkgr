@@ -6,6 +6,7 @@
 #include "pause_menu.h"
 #include "save.h"
 #include "room.h"
+#include "debug.h"
 #include "main.h"
 #include "common.h"
 
