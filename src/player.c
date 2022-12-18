@@ -1,5 +1,6 @@
 #include "global.h"
 #include "sprite.h"
+#include "audio_b.h"
 #include "common.h"
 
 extern u8 sub_80038BC(u32);

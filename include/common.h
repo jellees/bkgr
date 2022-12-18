@@ -488,12 +488,6 @@ extern bool8 byte_203DFE7;
 
 extern u8 byte_203E16C;
 
-extern u8 gCanChangeBgm;
-extern u8 gCanPlaySfx; // possibily bool8
-extern u8 gBgmMainVolume;
-extern u8 gSfxMainVolume;
-extern u8 gSfxVolume;
-
 extern s16 word_203F998;
 extern s16 word_203F99A;
 extern u8 byte_203F99C; // possibly bool8

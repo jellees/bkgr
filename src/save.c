@@ -1,7 +1,7 @@
 #include "global.h"
 #include "alloc.h"
-#include "save.h"
 #include "common.h"
+#include "save.h"
 
 // Functions from libagbbackup
 extern u16 IdentifyEeprom(u16 eeprom_KbitSize);

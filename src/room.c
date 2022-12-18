@@ -1,6 +1,7 @@
 #include "global.h"
-#include "room.h"
+#include "audio_b.h"
 #include "common.h"
+#include "room.h"
 
 EWRAM_DATA u16 word_200145C;
 EWRAM_DATA u16 word_200145E;

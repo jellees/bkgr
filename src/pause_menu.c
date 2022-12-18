@@ -4,8 +4,9 @@
 #include "alloc.h"
 #include "save.h"
 #include "savefile.h"
-#include "pause_menu.h"
+#include "audio_b.h"
 #include "common.h"
+#include "pause_menu.h"
 
 u8 gClockStatus;
 s32 dword_203F4DC;

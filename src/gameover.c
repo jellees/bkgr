@@ -4,6 +4,7 @@
 #include "main.h"
 #include "room.h"
 #include "common.h"
+#include "audio_b.h"
 
 static void show_gameover_screen();
 static void sub_8062D04();

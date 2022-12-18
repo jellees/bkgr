@@ -1,8 +1,8 @@
 #include "global.h"
 #include "alloc.h"
 #include "sprite.h"
-#include "debug.h"
 #include "common.h"
+#include "debug.h"
 
 EWRAM_DATA u8 byte_2001200;
 EWRAM_DATA u8 gMainFrameCounter;

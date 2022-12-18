@@ -1,7 +1,7 @@
 #include "global.h"
 #include "audio_a.h"
-#include "audio_b.h"
 #include "common.h"
+#include "audio_b.h"
 
 bool8 gCanChangeBgm;
 bool8 gCanPlaySfx;

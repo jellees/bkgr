@@ -1,8 +1,8 @@
 #include "global.h"
 #include "sprite.h"
 #include "alloc.h"
-#include "menu.h"
 #include "common.h"
+#include "menu.h"
 
 EWRAM_DATA u8 gMenuId;
 EWRAM_DATA u8 gMenuParentId;

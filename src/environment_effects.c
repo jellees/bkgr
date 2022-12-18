@@ -1,4 +1,5 @@
 #include "global.h"
+#include "audio_b.h"
 #include "common.h"
 #include "environment_effects.h"
 

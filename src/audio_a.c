@@ -1,4 +1,5 @@
 #include "global.h"
+#include "common.h"
 
 int audio_num_channels;
 int dword_203F4B8;

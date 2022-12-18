@@ -8,8 +8,8 @@
 #include "save.h"
 #include "room.h"
 #include "debug.h"
-#include "main.h"
 #include "common.h"
+#include "main.h"
 
 /* --- Move this at some point */
 extern void sub_80001EC();

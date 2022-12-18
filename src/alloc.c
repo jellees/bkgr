@@ -1,6 +1,6 @@
 #include "global.h"
-#include "alloc.h"
 #include "common.h"
+#include "alloc.h"
 
 IWRAM_DATA u8 gHeap3[0x1040];
 IWRAM_DATA struct Heap gHeaps[6];
