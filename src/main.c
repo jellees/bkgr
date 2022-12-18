@@ -5,6 +5,7 @@
 #include "player.h"
 #include "pause_menu.h"
 #include "save.h"
+#include "room.h"
 #include "main.h"
 #include "common.h"
 

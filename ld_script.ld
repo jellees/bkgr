@@ -259,35 +259,7 @@ SECTIONS
         byte_200145B = .; . += 1;
         /* end of debug ram */
 
-        . = 0x0000145C;
-        word_200145C = .; . += 2;
-        word_200145E = .; . += 2;
-        gBGInitOffsetHorizontal = .; . += 2;
-        gBGInitOffsetVertical = .; . += 2;
-        gPlayerInitPixelPosX = .; . += 2;
-        gPlayerInitPixelPosY = .; . += 2;
-        gCameraPixelX = .; . += 2;
-        gCameraPixelY = .; . += 2;
-        byte_200146C = .; . += 1;
-        . += 3; /* padding */
-        dword_2001470 = .; . += 4;
-
-        gTileAnimTable = .; . += 0xC * 255;
-
-        gLoadedTileAnimCount = .; . += 4;
-        gTilesCount = .; . += 4;
-        byte_2002070 = .; . += 1;
-        . += 3; /* padding */
-        dword_2002074 = .; . += 4;
-        dword_2002078 = .; . += 4;
-        dword_200207C = .; . += 4;
-        dword_2002080 = .; . += 4;
-        dword_2002084 = .; . += 4;
-        dword_2002088 = .; . += 4;
-        gBG0Static = .; . += 1;
-        gBG1Static = .; . += 1;
-        gBG2Static = .; . += 1;
-        gBG3Static = .; . += 1;
+        src/room.o(.bss);
 
         gPreviousPlayerState = .; . += 2;
         gPlayerState = .; . += 2;

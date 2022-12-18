@@ -1,5 +1,31 @@
 #include "global.h"
+#include "room.h"
 #include "common.h"
+
+EWRAM_DATA u16 word_200145C;
+EWRAM_DATA u16 word_200145E;
+EWRAM_DATA u16 gBGInitOffsetHorizontal;
+EWRAM_DATA u16 gBGInitOffsetVertical;
+EWRAM_DATA u16 gPlayerInitPixelPosX;
+EWRAM_DATA u16 gPlayerInitPixelPosY;
+EWRAM_DATA s16 gCameraPixelX;
+EWRAM_DATA s16 gCameraPixelY;
+EWRAM_DATA bool8 byte_200146C;
+EWRAM_DATA u32 dword_2001470;
+EWRAM_DATA struct TileAnimTable_rt gTileAnimTable[255];
+EWRAM_DATA s32 gLoadedTileAnimCount;
+EWRAM_DATA u32 gTilesCount;
+EWRAM_DATA u8 byte_2002070;
+EWRAM_DATA u32 dword_2002074;
+EWRAM_DATA u32 dword_2002078;
+EWRAM_DATA u32 dword_200207C;
+EWRAM_DATA u32 dword_2002080;
+EWRAM_DATA u32 dword_2002084;
+EWRAM_DATA u32 dword_2002088;
+EWRAM_DATA u8 gBG0Static;
+EWRAM_DATA u8 gBG1Static;
+EWRAM_DATA u8 gBG2Static;
+EWRAM_DATA u8 gBG3Static;
 
 void ResetTileAnimCount() {
     gLoadedTileAnimCount = 0;

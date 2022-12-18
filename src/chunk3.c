@@ -1,5 +1,6 @@
 #include "global.h"
 #include "sprite.h"
+#include "room.h"
 #include "common.h"
 
 void sub_800B958(int a1, int a2, int a3, int a4, int a5) {

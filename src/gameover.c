@@ -2,6 +2,7 @@
 #include "menu.h"
 #include "pause_menu.h"
 #include "main.h"
+#include "room.h"
 #include "common.h"
 
 static void show_gameover_screen();

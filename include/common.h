@@ -445,27 +445,6 @@ extern u8 byte_200112A;
 extern u32 dword_20011F8;
 extern s32 dword_20011FC;
 
-extern u16 word_200145C;
-extern u16 word_200145E;
-extern u16 gBGInitOffsetHorizontal;
-extern u16 gBGInitOffsetVertical;
-extern u16 gPlayerInitPixelPosX;
-extern u16 gPlayerInitPixelPosY;
-extern s16 gCameraPixelX;
-extern s16 gCameraPixelY;
-extern bool8 byte_200146C;
-extern u32 dword_2001470;
-
-extern struct TileAnimTable_rt gTileAnimTable[255];
-
-extern s32 gLoadedTileAnimCount;
-extern u32 gTilesCount;
-extern u8 byte_2002070;
-
-extern u8 gBG0Static;
-extern u8 gBG1Static;
-extern u8 gBG2Static;
-extern u8 gBG3Static;
 
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;

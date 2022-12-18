@@ -5,6 +5,7 @@
 #include "save.h"
 #include "savefile.h"
 #include "main.h"
+#include "room.h"
 #include "common.h"
 
 extern void InitPregame();
