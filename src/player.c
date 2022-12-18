@@ -224,7 +224,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
         a.z = a1->z;
         if (sub_800953C(&a)) {
             if (sub_8018BB0(&gPlayerSprite)) {
-                if (audio_fx_still_active(dword_20020B4) && byte_203EA89) {
+                if (audio_fx_still_active(dword_20020B4) && gCanPlaySfx) {
                     audio_halt_fx(dword_20020B4);
                 }
 

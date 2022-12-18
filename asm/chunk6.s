@@ -6934,11 +6934,11 @@ _0802B37C:
 	.align 2, 0
 _0802B3A4: .4byte 0x0203DFB8
 _0802B3A8: .4byte 0x080CC938
-_0802B3AC: .4byte byte_203EA89
+_0802B3AC: .4byte gCanPlaySfx
 _0802B3B0: .4byte 0x080CE440
 _0802B3B4: .4byte 0x080CF080
 _0802B3B8: .4byte 0x080CF140
-_0802B3BC: .4byte byte_203EA8C
+_0802B3BC: .4byte gSfxVolume
 _0802B3C0:
 	adds r0, r5, #0
 	adds r0, #0xa0
@@ -8560,8 +8560,8 @@ _0802C094: .4byte 0x080CE440
 _0802C098: .4byte 0x080CC2B0
 _0802C09C: .4byte 0x03003578
 _0802C0A0: .4byte 0x080CC938
-_0802C0A4: .4byte byte_203EA89
-_0802C0A8: .4byte byte_203EA8C
+_0802C0A4: .4byte gCanPlaySfx
+_0802C0A8: .4byte gSfxVolume
 _0802C0AC: .4byte 0x080CE444
 _0802C0B0:
 	adds r0, r4, #0
@@ -8606,8 +8606,8 @@ _0802C0F2:
 	.align 2, 0
 _0802C100: .4byte 0x00000451
 _0802C104: .4byte 0x080A75A4
-_0802C108: .4byte byte_203EA89
-_0802C10C: .4byte byte_203EA8C
+_0802C108: .4byte gCanPlaySfx
+_0802C10C: .4byte gSfxVolume
 _0802C110: .4byte 0x000005F2
 _0802C114: .4byte 0x080CEA34
 _0802C118:
@@ -8666,8 +8666,8 @@ _0802C142:
 	movs r0, #1
 	b _0802C1C4
 	.align 2, 0
-_0802C188: .4byte byte_203EA89
-_0802C18C: .4byte byte_203EA8C
+_0802C188: .4byte gCanPlaySfx
+_0802C18C: .4byte gSfxVolume
 _0802C190: .4byte 0x00000632
 _0802C194: .4byte 0x080CEA74
 _0802C198: .4byte dword_80CC290
@@ -12294,9 +12294,9 @@ _0802DE10:
 _0802DE88: .4byte 0x080CC938
 _0802DE8C: .4byte dword_80CC290
 _0802DE90: .4byte gPlayerSprite
-_0802DE94: .4byte byte_203EA89
+_0802DE94: .4byte gCanPlaySfx
 _0802DE98: .4byte 0x080CE440
-_0802DE9C: .4byte byte_203EA8C
+_0802DE9C: .4byte gSfxVolume
 _0802DEA0: .4byte 0x080CE444
 _0802DEA4:
 	adds r4, r6, #0
@@ -17114,9 +17114,9 @@ _08030A58: .4byte 0x0203E014
 _08030A5C: .4byte 0x0203E015
 _08030A60: .4byte 0x0203E016
 _08030A64: .4byte 0x0203DFCC
-_08030A68: .4byte byte_203EA89
+_08030A68: .4byte gCanPlaySfx
 _08030A6C: .4byte 0x080CE440
-_08030A70: .4byte byte_203EA8C
+_08030A70: .4byte gSfxVolume
 _08030A74:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -22298,8 +22298,8 @@ _080334A2:
 	.align 2, 0
 _080334D0: .4byte 0x080CE440
 _080334D4: .4byte 0x0000058C
-_080334D8: .4byte byte_203EA89
-_080334DC: .4byte byte_203EA8C
+_080334D8: .4byte gCanPlaySfx
+_080334DC: .4byte gSfxVolume
 _080334E0:
 	adds r5, #1
 	adds r3, r2, #0
@@ -22650,9 +22650,9 @@ _080337B4:
 	bl audio_new_fx
 	b _080337AC
 	.align 2, 0
-_08033800: .4byte byte_203EA89
+_08033800: .4byte gCanPlaySfx
 _08033804: .4byte 0x080CE440
-_08033808: .4byte byte_203EA8C
+_08033808: .4byte gSfxVolume
 _0803380C: .4byte 0x0000054A
 _08033810: .4byte 0x0000054C
 _08033814:
@@ -23036,9 +23036,9 @@ _08033B30:
 	movs r1, #0
 	b _08033C8E
 	.align 2, 0
-_08033B68: .4byte byte_203EA89
+_08033B68: .4byte gCanPlaySfx
 _08033B6C: .4byte 0x080CE440
-_08033B70: .4byte byte_203EA8C
+_08033B70: .4byte gSfxVolume
 _08033B74: .4byte 0x0203E138
 _08033B78: .4byte 0x0203E13C
 _08033B7C: .4byte gLoadedRoomLevel
@@ -23104,9 +23104,9 @@ _08033BB6:
 	bl audio_new_fx
 	b _08033C3E
 	.align 2, 0
-_08033BFC: .4byte byte_203EA89
+_08033BFC: .4byte gCanPlaySfx
 _08033C00: .4byte 0x080CE440
-_08033C04: .4byte byte_203EA8C
+_08033C04: .4byte gSfxVolume
 _08033C08:
 	movs r0, #0
 	strb r0, [r2, #1]
@@ -23180,9 +23180,9 @@ _08033C8E:
 	bl sub_8034460
 	b _08033CC0
 	.align 2, 0
-_08033C98: .4byte byte_203EA89
+_08033C98: .4byte gCanPlaySfx
 _08033C9C: .4byte 0x080CE440
-_08033CA0: .4byte byte_203EA8C
+_08033CA0: .4byte gSfxVolume
 _08033CA4: .4byte 0x0203E99C
 _08033CA8: .4byte 0x0203E998
 _08033CAC: .4byte 0x0203E138
@@ -24759,9 +24759,9 @@ _08034954: .4byte 0x0203E12C
 _08034958: .4byte 0x02000FCC
 _0803495C: .4byte gLoadedRoomLevel
 _08034960: .4byte gGameStatus
-_08034964: .4byte byte_203EA89
+_08034964: .4byte gCanPlaySfx
 _08034968: .4byte 0x080CE440
-_0803496C: .4byte byte_203EA8C
+_0803496C: .4byte gSfxVolume
 
     .thumb
     .global sub_8034970
@@ -39906,9 +39906,9 @@ _0803BCA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803BCB0: .4byte byte_203EA89
+_0803BCB0: .4byte gCanPlaySfx
 _0803BCB4: .4byte 0x080CE440
-_0803BCB8: .4byte byte_203EA8C
+_0803BCB8: .4byte gSfxVolume
 _0803BCBC: .4byte 0x00000492
 _0803BCC0: .4byte 0x00000494
 
@@ -39942,9 +39942,9 @@ _0803BCF4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803BCFC: .4byte byte_203EA89
+_0803BCFC: .4byte gCanPlaySfx
 _0803BD00: .4byte 0x080CE440
-_0803BD04: .4byte byte_203EA8C
+_0803BD04: .4byte gSfxVolume
 _0803BD08: .4byte 0x00000492
 _0803BD0C: .4byte 0x00000494
 
@@ -39978,9 +39978,9 @@ _0803BD40:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803BD48: .4byte byte_203EA89
+_0803BD48: .4byte gCanPlaySfx
 _0803BD4C: .4byte 0x080CE440
-_0803BD50: .4byte byte_203EA8C
+_0803BD50: .4byte gSfxVolume
 _0803BD54: .4byte 0x00000492
 _0803BD58: .4byte 0x00000494
 
@@ -40014,9 +40014,9 @@ _0803BD8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803BD94: .4byte byte_203EA89
+_0803BD94: .4byte gCanPlaySfx
 _0803BD98: .4byte 0x080CE440
-_0803BD9C: .4byte byte_203EA8C
+_0803BD9C: .4byte gSfxVolume
 _0803BDA0: .4byte 0x00000482
 _0803BDA4: .4byte 0x00000484
 
@@ -40050,9 +40050,9 @@ _0803BDD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803BDE0: .4byte byte_203EA89
+_0803BDE0: .4byte gCanPlaySfx
 _0803BDE4: .4byte 0x080CE440
-_0803BDE8: .4byte byte_203EA8C
+_0803BDE8: .4byte gSfxVolume
 _0803BDEC: .4byte 0x0000048A
 _0803BDF0: .4byte 0x0000048C
 
@@ -41315,9 +41315,9 @@ _0803C770: .4byte 0x0203E440
 _0803C774: .4byte gLoadedRoomLevel
 _0803C778: .4byte 0x02000FCC
 _0803C77C: .4byte gGameStatus
-_0803C780: .4byte byte_203EA89
+_0803C780: .4byte gCanPlaySfx
 _0803C784: .4byte 0x080CE440
-_0803C788: .4byte byte_203EA8C
+_0803C788: .4byte gSfxVolume
 
 	.thumb
 sub_803C78C: @ 0x0803C78C
@@ -41429,9 +41429,9 @@ _0803C854: .4byte 0x0203E170
 _0803C858: .4byte gLoadedRoomLevel
 _0803C85C: .4byte 0x02000FCC
 _0803C860: .4byte gGameStatus
-_0803C864: .4byte byte_203EA89
+_0803C864: .4byte gCanPlaySfx
 _0803C868: .4byte 0x080CE440
-_0803C86C: .4byte byte_203EA8C
+_0803C86C: .4byte gSfxVolume
 
 	.thumb
 sub_803C870: @ 0x0803C870
@@ -42051,9 +42051,9 @@ _0803CD0C: .4byte 0x0203E170
 _0803CD10: .4byte gLoadedRoomLevel
 _0803CD14: .4byte 0x02000FCC
 _0803CD18: .4byte gGameStatus
-_0803CD1C: .4byte byte_203EA89
+_0803CD1C: .4byte gCanPlaySfx
 _0803CD20: .4byte 0x080CE440
-_0803CD24: .4byte byte_203EA8C
+_0803CD24: .4byte gSfxVolume
 _0803CD28: .4byte 0x00000175
 
 	.thumb
@@ -42130,9 +42130,9 @@ _0803CDB8: .4byte 0x0203E170
 _0803CDBC: .4byte gLoadedRoomLevel
 _0803CDC0: .4byte 0x02000FCC
 _0803CDC4: .4byte gGameStatus
-_0803CDC8: .4byte byte_203EA89
+_0803CDC8: .4byte gCanPlaySfx
 _0803CDCC: .4byte 0x080CE440
-_0803CDD0: .4byte byte_203EA8C
+_0803CDD0: .4byte gSfxVolume
 
 	.thumb
 sub_803CDD4: @ 0x0803CDD4
@@ -42256,9 +42256,9 @@ _0803CEB0: .4byte 0x0203E170
 _0803CEB4: .4byte gLoadedRoomLevel
 _0803CEB8: .4byte 0x02000FCC
 _0803CEBC: .4byte gGameStatus
-_0803CEC0: .4byte byte_203EA89
+_0803CEC0: .4byte gCanPlaySfx
 _0803CEC4: .4byte 0x080CE440
-_0803CEC8: .4byte byte_203EA8C
+_0803CEC8: .4byte gSfxVolume
 
 	.thumb
 sub_803CECC: @ 0x0803CECC
@@ -42359,9 +42359,9 @@ _0803CF7C: .4byte 0x0203E170
 _0803CF80: .4byte gLoadedRoomLevel
 _0803CF84: .4byte 0x02000FCC
 _0803CF88: .4byte gGameStatus
-_0803CF8C: .4byte byte_203EA89
+_0803CF8C: .4byte gCanPlaySfx
 _0803CF90: .4byte 0x080CE440
-_0803CF94: .4byte byte_203EA8C
+_0803CF94: .4byte gSfxVolume
 
 	.thumb
 sub_803CF98: @ 0x0803CF98
@@ -42519,9 +42519,9 @@ _0803D0A0: .4byte 0x0203E132
 _0803D0A4: .4byte 0x02000FCC
 _0803D0A8: .4byte gLoadedRoomLevel
 _0803D0AC: .4byte gGameStatus
-_0803D0B0: .4byte byte_203EA89
+_0803D0B0: .4byte gCanPlaySfx
 _0803D0B4: .4byte 0x080CE440
-_0803D0B8: .4byte byte_203EA8C
+_0803D0B8: .4byte gSfxVolume
 _0803D0BC:
 	.2byte 0xEE00, 0xEE00
 _0803D0C0:
@@ -42715,9 +42715,9 @@ _0803D1EC:
 _0803D220: .4byte 0x0203E97D
 _0803D224: .4byte 0x0203E170
 _0803D228: .4byte gLoadedRoomLevel
-_0803D22C: .4byte byte_203EA89
+_0803D22C: .4byte gCanPlaySfx
 _0803D230: .4byte 0x080CE440
-_0803D234: .4byte byte_203EA8C
+_0803D234: .4byte gSfxVolume
 _0803D238: .4byte 0x00000183
 _0803D23C:
 	ldr r0, _0803D258
@@ -43190,9 +43190,9 @@ _0803D5CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803D5D8: .4byte byte_203EA89
+_0803D5D8: .4byte gCanPlaySfx
 _0803D5DC: .4byte 0x080CE440
-_0803D5E0: .4byte byte_203EA8C
+_0803D5E0: .4byte gSfxVolume
 
 	.thumb
 sub_803D5E4: @ 0x0803D5E4
@@ -43238,9 +43238,9 @@ _0803D62C:
 	.align 2, 0
 _0803D634: .4byte 0x0203E440
 _0803D638: .4byte gLoadedRoomLevel
-_0803D63C: .4byte byte_203EA89
+_0803D63C: .4byte gCanPlaySfx
 _0803D640: .4byte 0x080CE440
-_0803D644: .4byte byte_203EA8C
+_0803D644: .4byte gSfxVolume
 
 	.thumb
 sub_803D648: @ 0x0803D648
@@ -43286,9 +43286,9 @@ _0803D690:
 	.align 2, 0
 _0803D698: .4byte 0x0203E440
 _0803D69C: .4byte gLoadedRoomLevel
-_0803D6A0: .4byte byte_203EA89
+_0803D6A0: .4byte gCanPlaySfx
 _0803D6A4: .4byte 0x080CE440
-_0803D6A8: .4byte byte_203EA8C
+_0803D6A8: .4byte gSfxVolume
 
 	.thumb
 sub_803D6AC: @ 0x0803D6AC
@@ -43334,9 +43334,9 @@ _0803D6F4:
 	.align 2, 0
 _0803D6FC: .4byte 0x0203E440
 _0803D700: .4byte gLoadedRoomLevel
-_0803D704: .4byte byte_203EA89
+_0803D704: .4byte gCanPlaySfx
 _0803D708: .4byte 0x080CE440
-_0803D70C: .4byte byte_203EA8C
+_0803D70C: .4byte gSfxVolume
 
 	.thumb
 sub_803D710: @ 0x0803D710
@@ -43417,9 +43417,9 @@ _0803D7A8: .4byte 0x0203E170
 _0803D7AC: .4byte gLoadedRoomLevel
 _0803D7B0: .4byte 0x02000FCC
 _0803D7B4: .4byte gGameStatus
-_0803D7B8: .4byte byte_203EA89
+_0803D7B8: .4byte gCanPlaySfx
 _0803D7BC: .4byte 0x080CE440
-_0803D7C0: .4byte byte_203EA8C
+_0803D7C0: .4byte gSfxVolume
 _0803D7C4: .4byte 0x0203E988
 _0803D7C8:
 	ldr r0, _0803D7E0
@@ -43518,9 +43518,9 @@ _0803D880: .4byte gLoadedRoomLevel
 _0803D884: .4byte 0x0203E170
 _0803D888: .4byte 0x02000FCC
 _0803D88C: .4byte gGameStatus
-_0803D890: .4byte byte_203EA89
+_0803D890: .4byte gCanPlaySfx
 _0803D894: .4byte 0x080CE440
-_0803D898: .4byte byte_203EA8C
+_0803D898: .4byte gSfxVolume
 
 	.thumb
 sub_803D89C: @ 0x0803D89C
@@ -43610,9 +43610,9 @@ _0803D944: .4byte 0x0203E170
 _0803D948: .4byte gLoadedRoomLevel
 _0803D94C: .4byte 0x02000FCC
 _0803D950: .4byte gGameStatus
-_0803D954: .4byte byte_203EA89
+_0803D954: .4byte gCanPlaySfx
 _0803D958: .4byte 0x080CE440
-_0803D95C: .4byte byte_203EA8C
+_0803D95C: .4byte gSfxVolume
 _0803D960: .4byte 0x080CC84C
 _0803D964: .4byte 0x0203E135
 
@@ -43704,9 +43704,9 @@ _0803DA10: .4byte 0x0203E170
 _0803DA14: .4byte gLoadedRoomLevel
 _0803DA18: .4byte 0x02000FCC
 _0803DA1C: .4byte gGameStatus
-_0803DA20: .4byte byte_203EA89
+_0803DA20: .4byte gCanPlaySfx
 _0803DA24: .4byte 0x080CE440
-_0803DA28: .4byte byte_203EA8C
+_0803DA28: .4byte gSfxVolume
 _0803DA2C: .4byte 0x080CC84C
 _0803DA30: .4byte 0x0203E135
 
@@ -43798,9 +43798,9 @@ _0803DADC: .4byte 0x0203E170
 _0803DAE0: .4byte gLoadedRoomLevel
 _0803DAE4: .4byte 0x02000FCC
 _0803DAE8: .4byte gGameStatus
-_0803DAEC: .4byte byte_203EA89
+_0803DAEC: .4byte gCanPlaySfx
 _0803DAF0: .4byte 0x080CE440
-_0803DAF4: .4byte byte_203EA8C
+_0803DAF4: .4byte gSfxVolume
 _0803DAF8: .4byte 0x080CC84C
 _0803DAFC: .4byte 0x0203E135
 
@@ -43938,10 +43938,10 @@ _0803DC0C: .4byte gLoadedRoomLevel
 _0803DC10: .4byte 0x0203E170
 _0803DC14: .4byte 0x02000FCC
 _0803DC18: .4byte gGameStatus
-_0803DC1C: .4byte byte_203EA89
+_0803DC1C: .4byte gCanPlaySfx
 _0803DC20: .4byte 0x0203DFCC
 _0803DC24: .4byte 0x080CE440
-_0803DC28: .4byte byte_203EA8C
+_0803DC28: .4byte gSfxVolume
 _0803DC2C: .4byte 0x0203E110
 _0803DC30: .4byte 0x0203E11C
 _0803DC34: .4byte 0x0203E116
@@ -44083,10 +44083,10 @@ _0803DD50: .4byte gLoadedRoomLevel
 _0803DD54: .4byte 0x0203E170
 _0803DD58: .4byte 0x02000FCC
 _0803DD5C: .4byte gGameStatus
-_0803DD60: .4byte byte_203EA89
+_0803DD60: .4byte gCanPlaySfx
 _0803DD64: .4byte 0x0203DFCC
 _0803DD68: .4byte 0x080CE440
-_0803DD6C: .4byte byte_203EA8C
+_0803DD6C: .4byte gSfxVolume
 _0803DD70: .4byte 0x0203E110
 _0803DD74: .4byte 0x0203E11C
 _0803DD78: .4byte 0x0203E116
@@ -44228,10 +44228,10 @@ _0803DE94: .4byte gLoadedRoomLevel
 _0803DE98: .4byte 0x0203E170
 _0803DE9C: .4byte 0x02000FCC
 _0803DEA0: .4byte gGameStatus
-_0803DEA4: .4byte byte_203EA89
+_0803DEA4: .4byte gCanPlaySfx
 _0803DEA8: .4byte 0x0203DFCC
 _0803DEAC: .4byte 0x080CE440
-_0803DEB0: .4byte byte_203EA8C
+_0803DEB0: .4byte gSfxVolume
 _0803DEB4: .4byte 0x0203E110
 _0803DEB8: .4byte 0x0203E11C
 _0803DEBC: .4byte 0x0203E116
@@ -44373,10 +44373,10 @@ _0803DFD8: .4byte gLoadedRoomLevel
 _0803DFDC: .4byte 0x0203E170
 _0803DFE0: .4byte 0x02000FCC
 _0803DFE4: .4byte gGameStatus
-_0803DFE8: .4byte byte_203EA89
+_0803DFE8: .4byte gCanPlaySfx
 _0803DFEC: .4byte 0x0203DFCC
 _0803DFF0: .4byte 0x080CE440
-_0803DFF4: .4byte byte_203EA8C
+_0803DFF4: .4byte gSfxVolume
 _0803DFF8: .4byte 0x0203E110
 _0803DFFC: .4byte 0x0203E11C
 _0803E000: .4byte 0x0203E116
@@ -44518,10 +44518,10 @@ _0803E11C: .4byte gLoadedRoomLevel
 _0803E120: .4byte 0x0203E170
 _0803E124: .4byte 0x02000FCC
 _0803E128: .4byte gGameStatus
-_0803E12C: .4byte byte_203EA89
+_0803E12C: .4byte gCanPlaySfx
 _0803E130: .4byte 0x0203DFCC
 _0803E134: .4byte 0x080CE440
-_0803E138: .4byte byte_203EA8C
+_0803E138: .4byte gSfxVolume
 _0803E13C: .4byte 0x0203E110
 _0803E140: .4byte 0x0203E11C
 _0803E144: .4byte 0x0203E116
@@ -44616,9 +44616,9 @@ _0803E1FC: .4byte gLoadedRoomLevel
 _0803E200: .4byte 0x0203E170
 _0803E204: .4byte 0x02000FCC
 _0803E208: .4byte gGameStatus
-_0803E20C: .4byte byte_203EA89
+_0803E20C: .4byte gCanPlaySfx
 _0803E210: .4byte 0x080CE440
-_0803E214: .4byte byte_203EA8C
+_0803E214: .4byte gSfxVolume
 _0803E218: .4byte 0x0203E140
 
 	.thumb
@@ -44708,9 +44708,9 @@ _0803E2C4: .4byte gLoadedRoomLevel
 _0803E2C8: .4byte 0x0203E170
 _0803E2CC: .4byte 0x02000FCC
 _0803E2D0: .4byte gGameStatus
-_0803E2D4: .4byte byte_203EA89
+_0803E2D4: .4byte gCanPlaySfx
 _0803E2D8: .4byte 0x080CE440
-_0803E2DC: .4byte byte_203EA8C
+_0803E2DC: .4byte gSfxVolume
 _0803E2E0: .4byte 0x0203E140
 
 	.thumb
@@ -44800,9 +44800,9 @@ _0803E38C: .4byte gLoadedRoomLevel
 _0803E390: .4byte 0x0203E170
 _0803E394: .4byte 0x02000FCC
 _0803E398: .4byte gGameStatus
-_0803E39C: .4byte byte_203EA89
+_0803E39C: .4byte gCanPlaySfx
 _0803E3A0: .4byte 0x080CE440
-_0803E3A4: .4byte byte_203EA8C
+_0803E3A4: .4byte gSfxVolume
 _0803E3A8: .4byte 0x0203E140
 
 	.thumb
@@ -44892,9 +44892,9 @@ _0803E454: .4byte gLoadedRoomLevel
 _0803E458: .4byte 0x0203E170
 _0803E45C: .4byte 0x02000FCC
 _0803E460: .4byte gGameStatus
-_0803E464: .4byte byte_203EA89
+_0803E464: .4byte gCanPlaySfx
 _0803E468: .4byte 0x080CE440
-_0803E46C: .4byte byte_203EA8C
+_0803E46C: .4byte gSfxVolume
 _0803E470: .4byte 0x0203E140
 
 	.thumb
@@ -44968,9 +44968,9 @@ _0803E4F8: .4byte 0x0203E134
 _0803E4FC: .4byte gLoadedRoomLevel
 _0803E500: .4byte gGameStatus
 _0803E504: .4byte 0x080CC8C4
-_0803E508: .4byte byte_203EA89
+_0803E508: .4byte gCanPlaySfx
 _0803E50C: .4byte 0x080CE440
-_0803E510: .4byte byte_203EA8C
+_0803E510: .4byte gSfxVolume
 
 	.thumb
 sub_803E514: @ 0x0803E514
@@ -45043,9 +45043,9 @@ _0803E598: .4byte 0x0203E134
 _0803E59C: .4byte gLoadedRoomLevel
 _0803E5A0: .4byte gGameStatus
 _0803E5A4: .4byte 0x080CC8C4
-_0803E5A8: .4byte byte_203EA89
+_0803E5A8: .4byte gCanPlaySfx
 _0803E5AC: .4byte 0x080CE440
-_0803E5B0: .4byte byte_203EA8C
+_0803E5B0: .4byte gSfxVolume
 
 	.thumb
 sub_803E5B4: @ 0x0803E5B4
@@ -45118,9 +45118,9 @@ _0803E638: .4byte 0x0203E134
 _0803E63C: .4byte gLoadedRoomLevel
 _0803E640: .4byte gGameStatus
 _0803E644: .4byte 0x080CC8C4
-_0803E648: .4byte byte_203EA89
+_0803E648: .4byte gCanPlaySfx
 _0803E64C: .4byte 0x080CE440
-_0803E650: .4byte byte_203EA8C
+_0803E650: .4byte gSfxVolume
 
 	.thumb
 sub_803E654: @ 0x0803E654
@@ -45193,9 +45193,9 @@ _0803E6D8: .4byte 0x0203E134
 _0803E6DC: .4byte gLoadedRoomLevel
 _0803E6E0: .4byte gGameStatus
 _0803E6E4: .4byte 0x080CC8C4
-_0803E6E8: .4byte byte_203EA89
+_0803E6E8: .4byte gCanPlaySfx
 _0803E6EC: .4byte 0x080CE440
-_0803E6F0: .4byte byte_203EA8C
+_0803E6F0: .4byte gSfxVolume
 
 	.thumb
 sub_803E6F4: @ 0x0803E6F4
@@ -45268,9 +45268,9 @@ _0803E778: .4byte 0x0203E134
 _0803E77C: .4byte gLoadedRoomLevel
 _0803E780: .4byte gGameStatus
 _0803E784: .4byte 0x080CC8C4
-_0803E788: .4byte byte_203EA89
+_0803E788: .4byte gCanPlaySfx
 _0803E78C: .4byte 0x080CE440
-_0803E790: .4byte byte_203EA8C
+_0803E790: .4byte gSfxVolume
 
 	.thumb
 sub_803E794: @ 0x0803E794
@@ -45361,9 +45361,9 @@ _0803E83C: .4byte gLoadedRoomLevel
 _0803E840: .4byte 0x0203E170
 _0803E844: .4byte gGameStatus
 _0803E848: .4byte 0x080CC8C4
-_0803E84C: .4byte byte_203EA89
+_0803E84C: .4byte gCanPlaySfx
 _0803E850: .4byte 0x080CE440
-_0803E854: .4byte byte_203EA8C
+_0803E854: .4byte gSfxVolume
 
 	.thumb
 sub_803E858: @ 0x0803E858
@@ -45454,9 +45454,9 @@ _0803E900: .4byte gLoadedRoomLevel
 _0803E904: .4byte 0x0203E170
 _0803E908: .4byte gGameStatus
 _0803E90C: .4byte 0x080CC8C4
-_0803E910: .4byte byte_203EA89
+_0803E910: .4byte gCanPlaySfx
 _0803E914: .4byte 0x080CE440
-_0803E918: .4byte byte_203EA8C
+_0803E918: .4byte gSfxVolume
 
 	.thumb
 sub_803E91C: @ 0x0803E91C
@@ -45550,9 +45550,9 @@ _0803E9CC: .4byte gLoadedRoomLevel
 _0803E9D0: .4byte 0x03006EF3
 _0803E9D4: .4byte 0x0203E170
 _0803E9D8: .4byte byte_20020BC
-_0803E9DC: .4byte byte_203EA89
+_0803E9DC: .4byte gCanPlaySfx
 _0803E9E0: .4byte 0x080CE440
-_0803E9E4: .4byte byte_203EA8C
+_0803E9E4: .4byte gSfxVolume
 _0803E9E8:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -45675,9 +45675,9 @@ _0803EAA6:
 	bl audio_new_fx
 	b _0803EB0C
 	.align 2, 0
-_0803EAE0: .4byte byte_203EA89
+_0803EAE0: .4byte gCanPlaySfx
 _0803EAE4: .4byte 0x080CE440
-_0803EAE8: .4byte byte_203EA8C
+_0803EAE8: .4byte gSfxVolume
 _0803EAEC:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -45788,9 +45788,9 @@ _0803EB90:
 	.align 2, 0
 _0803EBC8: .4byte 0x0203E170
 _0803EBCC: .4byte gLoadedRoomLevel
-_0803EBD0: .4byte byte_203EA89
+_0803EBD0: .4byte gCanPlaySfx
 _0803EBD4: .4byte 0x080CE440
-_0803EBD8: .4byte byte_203EA8C
+_0803EBD8: .4byte gSfxVolume
 _0803EBDC:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -45901,9 +45901,9 @@ _0803EC80:
 	.align 2, 0
 _0803ECB8: .4byte 0x0203E170
 _0803ECBC: .4byte gLoadedRoomLevel
-_0803ECC0: .4byte byte_203EA89
+_0803ECC0: .4byte gCanPlaySfx
 _0803ECC4: .4byte 0x080CE440
-_0803ECC8: .4byte byte_203EA8C
+_0803ECC8: .4byte gSfxVolume
 _0803ECCC:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -45982,9 +45982,9 @@ _0803ED56:
 	.align 2, 0
 _0803ED5C: .4byte 0x0203E170
 _0803ED60: .4byte gLoadedRoomLevel
-_0803ED64: .4byte byte_203EA89
+_0803ED64: .4byte gCanPlaySfx
 _0803ED68: .4byte 0x080CE440
-_0803ED6C: .4byte byte_203EA8C
+_0803ED6C: .4byte gSfxVolume
 
 	.thumb
 sub_803ED70: @ 0x0803ED70
@@ -46039,9 +46039,9 @@ _0803EDCA:
 	.align 2, 0
 _0803EDD0: .4byte 0x0203E170
 _0803EDD4: .4byte gLoadedRoomLevel
-_0803EDD8: .4byte byte_203EA89
+_0803EDD8: .4byte gCanPlaySfx
 _0803EDDC: .4byte 0x080CE440
-_0803EDE0: .4byte byte_203EA8C
+_0803EDE0: .4byte gSfxVolume
 
 	.thumb
 sub_803EDE4: @ 0x0803EDE4
@@ -46089,9 +46089,9 @@ _0803EE32:
 	bx r0
 	.align 2, 0
 _0803EE38: .4byte gGameStatus
-_0803EE3C: .4byte byte_203EA89
+_0803EE3C: .4byte gCanPlaySfx
 _0803EE40: .4byte 0x080CE440
-_0803EE44: .4byte byte_203EA8C
+_0803EE44: .4byte gSfxVolume
 _0803EE48: .4byte 0x000003E2
 _0803EE4C: .4byte 0x02002098
 _0803EE50: .4byte 0x02002096
@@ -46236,9 +46236,9 @@ _0803EF50:
 	bx r0
 	.align 2, 0
 _0803EF58: .4byte gGameStatus
-_0803EF5C: .4byte byte_203EA89
+_0803EF5C: .4byte gCanPlaySfx
 _0803EF60: .4byte 0x080CE440
-_0803EF64: .4byte byte_203EA8C
+_0803EF64: .4byte gSfxVolume
 
 	.thumb
 sub_803EF68: @ 0x0803EF68
@@ -47930,9 +47930,9 @@ _0803FAEA:
 	bl sub_8003368
 	b _0803FB54
 	.align 2, 0
-_0803FB10: .4byte byte_203EA89
+_0803FB10: .4byte gCanPlaySfx
 _0803FB14: .4byte 0x080CE440
-_0803FB18: .4byte byte_203EA8C
+_0803FB18: .4byte gSfxVolume
 _0803FB1C: .4byte 0x00000552
 _0803FB20: .4byte 0x00000554
 _0803FB24: .4byte 0x080A8CF0
@@ -48098,9 +48098,9 @@ _0803FC42:
 	bl sub_8003368
 	b _0803FCC8
 	.align 2, 0
-_0803FC68: .4byte byte_203EA89
+_0803FC68: .4byte gCanPlaySfx
 _0803FC6C: .4byte 0x080CE440
-_0803FC70: .4byte byte_203EA8C
+_0803FC70: .4byte gSfxVolume
 _0803FC74: .4byte 0x00000552
 _0803FC78: .4byte 0x00000554
 _0803FC7C: .4byte 0x080A8CF0
@@ -48207,9 +48207,9 @@ _0803FCF8:
 	b _0803FD64
 	.align 2, 0
 _0803FD4C: .4byte 0x0203EA84
-_0803FD50: .4byte byte_203EA89
+_0803FD50: .4byte gCanPlaySfx
 _0803FD54: .4byte 0x080CE440
-_0803FD58: .4byte byte_203EA8C
+_0803FD58: .4byte gSfxVolume
 _0803FD5C: .4byte 0x00000644
 _0803FD60:
 	movs r0, #1
@@ -53009,238 +53009,3 @@ _0804227C: .4byte 0x0203EA7C
 _08042280: .4byte byte_20020BC
 _08042284: .4byte 0x0200108E
 _08042288: .4byte 0x0203EA81
-
-    .thumb
-    .global audio_init_p1
-audio_init_p1: @ 0x0804228C
-	push {lr}
-	ldr r0, _080422A8
-	ldr r0, [r0]
-	cmp r0, #0xe3
-	beq _0804229A
-	.2byte 0xEE00, 0xEE00
-_0804229A:
-	bl audio_init_p
-	bl SetVolumeToDefault
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080422A8: .4byte dword_80CEB58
-
-    .thumb
-    .global SetVolumeToDefault
-SetVolumeToDefault: @ 0x080422AC
-	push {r4, r5, lr}
-	ldr r0, _080422E4
-	movs r1, #1
-	strb r1, [r0]
-	ldr r0, _080422E8
-	strb r1, [r0]
-	ldr r1, _080422EC
-	movs r0, #4
-	strb r0, [r1]
-	ldr r5, _080422F0
-	movs r0, #9
-	strb r0, [r5]
-	ldr r1, _080422F4
-	movs r0, #0
-	strb r0, [r1]
-	ldr r4, _080422F8
-	ldr r0, [r4, #0x10]
-	bl audio_set_tune_vol
-	ldrb r0, [r5]
-	lsls r0, r0, #2
-	adds r0, r0, r4
-	ldr r0, [r0]
-	bl audio_set_fx_vol
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080422E4: .4byte 0x0203EA88
-_080422E8: .4byte byte_203EA89
-_080422EC: .4byte gBgmVolumeIndex
-_080422F0: .4byte gSfxVolumeIndex
-_080422F4: .4byte byte_203EA8C
-_080422F8: .4byte dVolumes
-
-	.thumb
-sub_80422FC: @ 0x080422FC
-	push {r4, r5, r6, r7, lr}
-	mov r7, sb
-	mov r6, r8
-	push {r6, r7}
-	adds r6, r0, #0
-	mov r8, r1
-	ldr r0, _08042330
-	ldrb r0, [r0]
-	lsls r5, r0, #0x10
-	adds r0, r5, #0
-	adds r1, r6, #0
-	bl CallARM_FX_Mul16
-	mov sb, r0
-	mov r0, r8
-	cmp r0, #0
-	beq _08042338
-	ldr r0, _08042334
-	ldrb r0, [r0]
-	lsls r4, r0, #0x10
-	adds r0, r4, #0
-	adds r1, r6, #0
-	bl CallARM_FX_Mul16
-	adds r7, r0, #0
-	b _08042374
-	.align 2, 0
-_08042330: .4byte gBgmVolumeIndex
-_08042334: .4byte gSfxVolumeIndex
-_08042338:
-	movs r4, #0
-	movs r7, #0
-	b _08042374
-_0804233E:
-	bl SyncVblank
-	mov r0, sb
-	subs r5, r5, r0
-	cmp r5, #0
-	bge _0804234C
-	movs r5, #0
-_0804234C:
-	ldr r6, _08042388
-	asrs r0, r5, #0x10
-	lsls r0, r0, #2
-	adds r0, r0, r6
-	ldr r0, [r0]
-	bl audio_set_tune_vol
-	mov r0, r8
-	cmp r0, #0
-	beq _08042374
-	subs r4, r4, r7
-	cmp r4, #0
-	bge _08042368
-	movs r4, #0
-_08042368:
-	asrs r0, r4, #0x10
-	lsls r0, r0, #2
-	adds r0, r0, r6
-	ldr r0, [r0]
-	bl audio_set_fx_vol
-_08042374:
-	cmp r5, #0
-	beq _0804237C
-	cmp r4, #0
-	bne _0804233E
-_0804237C:
-	pop {r3, r4}
-	mov r8, r3
-	mov sb, r4
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08042388: .4byte dVolumes
-
-	.thumb
-sub_804238C: @ 0x0804238C
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	sub sp, #4
-	adds r6, r0, #0
-	mov sl, r1
-	ldr r0, _080423C8
-	ldrb r0, [r0]
-	lsls r5, r0, #0x10
-	adds r0, r5, #0
-	adds r1, r6, #0
-	bl CallARM_FX_Mul16
-	str r0, [sp]
-	movs r5, #0
-	mov r0, sl
-	cmp r0, #0
-	beq _080423D0
-	ldr r0, _080423CC
-	ldrb r0, [r0]
-	lsls r4, r0, #0x10
-	adds r0, r4, #0
-	adds r1, r6, #0
-	bl CallARM_FX_Mul16
-	adds r7, r0, #0
-	b _080423D2
-	.align 2, 0
-_080423C8: .4byte gBgmVolumeIndex
-_080423CC: .4byte gSfxVolumeIndex
-_080423D0:
-	movs r7, #0
-_080423D2:
-	movs r4, #0
-	ldr r2, _08042454
-	ldrb r0, [r2]
-	lsls r0, r0, #0x10
-	cmp r5, r0
-	beq _08042442
-	ldr r1, _08042458
-	ldrb r0, [r1]
-	lsls r0, r0, #0x10
-	cmp r4, r0
-	beq _08042442
-	mov sb, r2
-	mov r8, r1
-_080423EC:
-	bl SyncVblank
-	ldr r1, [sp]
-	adds r5, r5, r1
-	mov r1, sb
-	ldrb r0, [r1]
-	lsls r0, r0, #0x10
-	cmp r5, r0
-	ble _08042400
-	adds r5, r0, #0
-_08042400:
-	ldr r6, _0804245C
-	asrs r0, r5, #0x10
-	lsls r0, r0, #2
-	adds r0, r0, r6
-	ldr r0, [r0]
-	bl audio_set_tune_vol
-	mov r0, sl
-	cmp r0, #0
-	beq _0804242E
-	adds r4, r4, r7
-	mov r1, r8
-	ldrb r0, [r1]
-	lsls r0, r0, #0x10
-	cmp r4, r0
-	ble _08042422
-	adds r4, r0, #0
-_08042422:
-	asrs r0, r4, #0x10
-	lsls r0, r0, #2
-	adds r0, r0, r6
-	ldr r0, [r0]
-	bl audio_set_fx_vol
-_0804242E:
-	mov r1, sb
-	ldrb r0, [r1]
-	lsls r0, r0, #0x10
-	cmp r5, r0
-	beq _08042442
-	mov r1, r8
-	ldrb r0, [r1]
-	lsls r0, r0, #0x10
-	cmp r4, r0
-	bne _080423EC
-_08042442:
-	add sp, #4
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08042454: .4byte gBgmVolumeIndex
-_08042458: .4byte gSfxVolumeIndex
-_0804245C: .4byte dVolumes

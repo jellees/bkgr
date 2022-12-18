@@ -6,10 +6,10 @@
 #include "savefile.h"
 #include "main.h"
 #include "room.h"
+#include "audio_b.h"
 #include "common.h"
 
 extern void InitPregame();
-extern void SetVolumeToDefault();
 extern void ShowFlashscreens();
 extern int ShowPressStart();
 void ShowSelectGame(int);
@@ -55,7 +55,7 @@ void ExecutePregame() {
     }
 
     InitPregame();
-    SetVolumeToDefault();
+    reset_volume();
     ShowFlashscreens();
     ShowSelectGame(ShowPressStart());
     SetTextSpriteCount(0);
@@ -143,18 +143,18 @@ void ShowSelectGame(int a1) {
         if (!(gKeysDown & JOY_EXCL_DPAD)) {
             if (gKeysDown & DPAD_UP) {
                 if (!byte_20021F9) {
-                    if (byte_203EA89) {
+                    if (gCanPlaySfx) {
                         u16 value0 = dSoundEffects[204].index;
-                        u8 value1 = dSoundEffects[204].volumes[byte_203EA8C];
+                        u8 value1 = dSoundEffects[204].volumes[gSfxVolume];
                         u32 value2 = dSoundEffects[204].pitch + 0x10000;
                         audio_new_fx(value0, value1, value2);
                     }
                     AdvanceMenuEntryUp();
                 }
             } else if (gKeysDown & DPAD_DOWN && !byte_20021F9) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     u16 value0 = dSoundEffects[204].index;
-                    u8 value1 = dSoundEffects[204].volumes[byte_203EA8C];
+                    u8 value1 = dSoundEffects[204].volumes[gSfxVolume];
                     u32 value2 = dSoundEffects[204].pitch + 0x10000;
                     audio_new_fx(value0, value1, value2);
                 }
@@ -542,8 +542,8 @@ int sub_80246C8() {
 
         if (!(gKeysDown & JOY_EXCL_DPAD)) {
             if (gKeysDown & DPAD_UP) {
-                if (byte_203EA89) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                if (gCanPlaySfx) {
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
                                  dSoundEffects[204].pitch + 0x10000);
                 }
 
@@ -551,8 +551,8 @@ int sub_80246C8() {
                     AdvanceMenuEntryUp();
                 } while (gSaveFiles[GetCurrentMenuEntry()].empty);
             } else if (gKeysDown & DPAD_DOWN) {
-                if (byte_203EA89) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                if (gCanPlaySfx) {
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
                                  dSoundEffects[204].pitch + 0x10000);
                 }
 
@@ -618,15 +618,15 @@ void ShowLanguageSelect() {
 
         if (!(gKeysDown & JOY_EXCL_DPAD)) {
             if (gKeysDown & DPAD_UP) {
-                if (byte_203EA89) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                if (gCanPlaySfx) {
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
                                  dSoundEffects[204].pitch + 0x10000);
                 }
 
                 AdvanceMenuEntryUp();
             } else if (gKeysDown & DPAD_DOWN) {
-                if (byte_203EA89) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                if (gCanPlaySfx) {
+                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
                                  dSoundEffects[204].pitch + 0x10000);
                 }
 
@@ -727,14 +727,14 @@ void ShowEraseData() {
 
             if (!(gKeysDown & JOY_EXCL_DPAD)) {
                 if (gKeysDown & DPAD_UP) {
-                    if (byte_203EA89) {
-                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                    if (gCanPlaySfx) {
+                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
                                      dSoundEffects[204].pitch + 0x10000);
                     }
                     AdvanceMenuEntryUp();
                 } else if (gKeysDown & DPAD_DOWN) {
-                    if (byte_203EA89) {
-                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[byte_203EA8C],
+                    if (gCanPlaySfx) {
+                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
                                      dSoundEffects[204].pitch + 0x10000);
                     }
                     AdvanceMenuEntryDown();

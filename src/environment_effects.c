@@ -66,9 +66,9 @@ void update_efx() {
 
             if (--gThunderTimer == 0) {
                 gThunderTimer = RandomMinMax(180, 300);
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     u32 a = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].index;
-                    u32 b = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].volumes[byte_203EA8C];
+                    u32 b = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].volumes[gSfxVolume];
                     u32 c = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].pitch + 0x10000;
                     audio_new_fx(a, b, c);
                 }

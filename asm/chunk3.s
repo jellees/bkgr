@@ -3341,9 +3341,9 @@ _0800DC24: .4byte 0x0200209A
 _0800DC28: .4byte 0x02001052
 _0800DC2C: .4byte gGameStatus
 _0800DC30: .4byte 0x02001124
-_0800DC34: .4byte byte_203EA89
+_0800DC34: .4byte gCanPlaySfx
 _0800DC38: .4byte 0x080CE440
-_0800DC3C: .4byte byte_203EA8C
+_0800DC3C: .4byte gSfxVolume
 _0800DC40:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -3995,9 +3995,9 @@ _0800E112:
 	.align 2, 0
 _0800E158: .4byte 0x02001138
 _0800E15C: .4byte 0x0200113C
-_0800E160: .4byte byte_203EA89
+_0800E160: .4byte gCanPlaySfx
 _0800E164: .4byte 0x080CE440
-_0800E168: .4byte byte_203EA8C
+_0800E168: .4byte gSfxVolume
 _0800E16C:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -4057,9 +4057,9 @@ _0800E1C2:
 	b _0800E1FC
 	.align 2, 0
 _0800E1D4: .4byte gGameStatus
-_0800E1D8: .4byte byte_203EA89
+_0800E1D8: .4byte gCanPlaySfx
 _0800E1DC: .4byte 0x080CE440
-_0800E1E0: .4byte byte_203EA8C
+_0800E1E0: .4byte gSfxVolume
 _0800E1E4: .4byte 0x0000027A
 _0800E1E8: .4byte gIsSlideMiniGame
 _0800E1EC: .4byte 0x020010B0
@@ -4321,8 +4321,8 @@ _0800E3EC: .4byte 0x02001098
 _0800E3F0: .4byte 0x0200109C
 _0800E3F4: .4byte 0x020010A0
 _0800E3F8: .4byte gTextSpeed
-_0800E3FC: .4byte gBgmVolumeIndex
-_0800E400: .4byte gSfxVolumeIndex
+_0800E3FC: .4byte gBgmMainVolume
+_0800E400: .4byte gSfxMainVolume
 _0800E404: .4byte 0x02000320
 
     .thumb
@@ -4578,8 +4578,8 @@ _0800E600: .4byte 0x02001098
 _0800E604: .4byte 0x0200109C
 _0800E608: .4byte 0x020010A0
 _0800E60C: .4byte gTextSpeed
-_0800E610: .4byte gBgmVolumeIndex
-_0800E614: .4byte gSfxVolumeIndex
+_0800E610: .4byte gBgmMainVolume
+_0800E614: .4byte gSfxMainVolume
 _0800E618: .4byte 0x02000320
 
     .thumb
@@ -4750,9 +4750,9 @@ _0800E774: .4byte 0x000004CB
 _0800E778: .4byte gPlayerSprite
 _0800E77C: .4byte 0x0200113C
 _0800E780: .4byte 0x02001138
-_0800E784: .4byte byte_203EA89
+_0800E784: .4byte gCanPlaySfx
 _0800E788: .4byte 0x080CE440
-_0800E78C: .4byte byte_203EA8C
+_0800E78C: .4byte gSfxVolume
 _0800E790:
 	movs r0, #1
 	rsbs r0, r0, #0

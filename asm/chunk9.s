@@ -2098,7 +2098,7 @@ _08026060: .4byte byte_2002E4A
 _08026064: .4byte 0x02002E54
 _08026068: .4byte 0x02002E74
 _0802606C: .4byte 0x02002E6C
-_08026070: .4byte byte_203EA89
+_08026070: .4byte gCanPlaySfx
 _08026074: .4byte 0x02002EBC
 _08026078:
 	strb r2, [r6, #0x13]
@@ -2215,7 +2215,7 @@ _08026168: .4byte 0x02002232
 _0802616C: .4byte 0x02002E54
 _08026170: .4byte 0x02002E74
 _08026174: .4byte 0x02002E6C
-_08026178: .4byte byte_203EA89
+_08026178: .4byte gCanPlaySfx
 _0802617C: .4byte 0x02002EBC
 
     .thumb
@@ -2350,7 +2350,7 @@ _08026284:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08026290: .4byte byte_203EA89
+_08026290: .4byte gCanPlaySfx
 _08026294: .4byte 0x02002EBC
 _08026298: .4byte 0x02002E6C
 _0802629C: .4byte 0x02002E74
@@ -2697,9 +2697,9 @@ _080265B0: .4byte 0x02002EB8
 _080265B4: .4byte 0x02002EB4
 _080265B8: .4byte 0x02002EB6
 _080265BC: .4byte 0x02002EBC
-_080265C0: .4byte byte_203EA89
+_080265C0: .4byte gCanPlaySfx
 _080265C4: .4byte 0x080CE440
-_080265C8: .4byte byte_203EA8C
+_080265C8: .4byte gSfxVolume
 _080265CC:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -2795,9 +2795,9 @@ _08026680: .4byte 0x02002EB4
 _08026684: .4byte 0x02002EB6
 _08026688: .4byte 0x02002EB8
 _0802668C: .4byte 0x02002EBC
-_08026690: .4byte byte_203EA89
+_08026690: .4byte gCanPlaySfx
 _08026694: .4byte 0x080CE440
-_08026698: .4byte byte_203EA8C
+_08026698: .4byte gSfxVolume
 _0802669C:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -2973,7 +2973,7 @@ _080267C4:
 	mov r8, r1
 	b _080267FC
 	.align 2, 0
-_080267DC: .4byte gBgmVolumeIndex
+_080267DC: .4byte gBgmMainVolume
 _080267E0: .4byte 0x04000050
 _080267E4: .4byte 0x00003FFF
 _080267E8: .4byte 0x04000054
@@ -3040,7 +3040,7 @@ _0802684A:
 _08026860: .4byte 0xFFFF0000
 _08026864: .4byte 0xFFFE0000
 _08026868: .4byte 0x04000054
-_0802686C: .4byte gBgmVolumeIndex
+_0802686C: .4byte gBgmMainVolume
 _08026870: .4byte dVolumes
 _08026874: .4byte 0x04000050
 
@@ -3083,7 +3083,7 @@ _080268A6:
 	mov r8, r1
 	b _080268DC
 	.align 2, 0
-_080268BC: .4byte gBgmVolumeIndex
+_080268BC: .4byte gBgmMainVolume
 _080268C0: .4byte 0x04000050
 _080268C4: .4byte 0x00003FFF
 _080268C8: .4byte 0x04000054
@@ -3186,7 +3186,7 @@ _08026978:
 	mov r8, r1
 	b _080269B0
 	.align 2, 0
-_08026990: .4byte gBgmVolumeIndex
+_08026990: .4byte gBgmMainVolume
 _08026994: .4byte 0x04000050
 _08026998: .4byte 0x00003FBF
 _0802699C: .4byte 0x04000054
@@ -3253,7 +3253,7 @@ _080269FE:
 _08026A14: .4byte 0xFFFF0000
 _08026A18: .4byte 0xFFFE0000
 _08026A1C: .4byte 0x04000054
-_08026A20: .4byte gBgmVolumeIndex
+_08026A20: .4byte gBgmMainVolume
 _08026A24: .4byte dVolumes
 _08026A28: .4byte 0x04000050
 
@@ -3295,7 +3295,7 @@ _08026A5A:
 	mov r8, r1
 	b _08026A90
 	.align 2, 0
-_08026A70: .4byte gBgmVolumeIndex
+_08026A70: .4byte gBgmMainVolume
 _08026A74: .4byte 0x04000050
 _08026A78: .4byte 0x00003FBF
 _08026A7C: .4byte 0x04000054
@@ -3779,7 +3779,7 @@ _08026E2C: .4byte 0x0200C490
 _08026E30: .4byte 0x0200DCCC
 _08026E34: .4byte 0x0200DCD0
 _08026E38: .4byte 0x0200DCD4
-_08026E3C: .4byte gBgmVolumeIndex
+_08026E3C: .4byte gBgmMainVolume
 _08026E40: .4byte dVolumes
 _08026E44: .4byte gIsPaletteEffectsActive
 
@@ -3900,7 +3900,7 @@ _08026F16:
 	b _08026F66
 	.align 2, 0
 _08026F30: .4byte 0x0200DCD0
-_08026F34: .4byte gBgmVolumeIndex
+_08026F34: .4byte gBgmMainVolume
 _08026F38: .4byte 0x0200DCD4
 _08026F3C: .4byte 0x0200DCB0
 _08026F40: .4byte 0x0000FFFF
@@ -4046,7 +4046,7 @@ _08027050:
 	b _0802709C
 	.align 2, 0
 _08027068: .4byte 0x0200DCD0
-_0802706C: .4byte gBgmVolumeIndex
+_0802706C: .4byte gBgmMainVolume
 _08027070: .4byte 0x0200DCD4
 _08027074: .4byte 0x0200DCB0
 _08027078: .4byte 0x0000FFFF
@@ -4176,7 +4176,7 @@ _08027140:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08027180: .4byte gBgmVolumeIndex
+_08027180: .4byte gBgmMainVolume
 _08027184: .4byte 0x0000FFFF
 _08027188: .4byte 0x0200AC90
 _0802718C: .4byte 0x0200C490
@@ -4294,7 +4294,7 @@ _0802723C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802727C: .4byte gBgmVolumeIndex
+_0802727C: .4byte gBgmMainVolume
 _08027280: .4byte 0x0000FFFF
 _08027284: .4byte 0x0200AC90
 _08027288: .4byte 0x0200C490

@@ -428,9 +428,9 @@ _08016766:
 	b _08016788
 	.align 2, 0
 _08016770: .4byte 0x0000030F
-_08016774: .4byte byte_203EA89
+_08016774: .4byte gCanPlaySfx
 _08016778: .4byte 0x080CE440
-_0801677C: .4byte byte_203EA8C
+_0801677C: .4byte gSfxVolume
 _08016780:
 	movs r0, #0
 	str r0, [r5]
@@ -641,7 +641,7 @@ _0801692A:
 	b _0801697C
 	.align 2, 0
 _08016940: .4byte 0x020021DC
-_08016944: .4byte byte_203EA89
+_08016944: .4byte gCanPlaySfx
 _08016948: .4byte gPlayerState
 _0801694C: .4byte byte_20020B3
 _08016950: .4byte gPlayerSprite
@@ -723,9 +723,9 @@ _080169BC:
 	.align 2, 0
 _080169F0: .4byte gPlayerSprite
 _080169F4: .4byte 0x020021D8
-_080169F8: .4byte byte_203EA89
+_080169F8: .4byte gCanPlaySfx
 _080169FC: .4byte 0x080CE440
-_08016A00: .4byte byte_203EA8C
+_08016A00: .4byte gSfxVolume
 _08016A04: .4byte 0x0000056A
 _08016A08: .4byte 0x0000056C
 _08016A0C:
@@ -947,9 +947,9 @@ _08016BB0: .4byte gPreviousPlayerState
 _08016BB4: .4byte gPlayerState
 _08016BB8: .4byte gPlayerSprite
 _08016BBC: .4byte 0x00000109
-_08016BC0: .4byte byte_203EA89
+_08016BC0: .4byte gCanPlaySfx
 _08016BC4: .4byte 0x080CE440
-_08016BC8: .4byte byte_203EA8C
+_08016BC8: .4byte gSfxVolume
 _08016BCC: .4byte 0x0200108C
 
     .thumb
@@ -1201,7 +1201,7 @@ _08016DE4: .4byte gPreviousPlayerState
 _08016DE8: .4byte dword_2000FC8
 _08016DEC: .4byte dword_80CC290
 _08016DF0: .4byte dword_20020B8
-_08016DF4: .4byte byte_203EA89
+_08016DF4: .4byte gCanPlaySfx
 _08016DF8: .4byte gPlayerSprite
 _08016DFC:
 	movs r0, #4
@@ -1354,7 +1354,7 @@ _08016F2E:
 	b _08017228
 	.align 2, 0
 _08016F30: .4byte dword_20020B8
-_08016F34: .4byte byte_203EA89
+_08016F34: .4byte gCanPlaySfx
 _08016F38: .4byte 0x0203DFCA
 _08016F3C:
 	cmp r0, #0x2b
@@ -1595,9 +1595,9 @@ _08017134: .4byte gPlayerState
 _08017138: .4byte gPlayerSprite
 _0801713C: .4byte dword_2000FC8
 _08017140: .4byte dword_80CC290
-_08017144: .4byte byte_203EA89
+_08017144: .4byte gCanPlaySfx
 _08017148: .4byte 0x080CE440
-_0801714C: .4byte byte_203EA8C
+_0801714C: .4byte gSfxVolume
 _08017150: .4byte 0x0000068A
 _08017154: .4byte 0x0000068C
 _08017158:
@@ -1681,9 +1681,9 @@ _080171FC: .4byte gPlayerSprite
 _08017200: .4byte 0x000001F1
 _08017204: .4byte dword_2000FC8
 _08017208: .4byte dword_80CC290
-_0801720C: .4byte byte_203EA89
+_0801720C: .4byte gCanPlaySfx
 _08017210: .4byte 0x080CE440
-_08017214: .4byte byte_203EA8C
+_08017214: .4byte gSfxVolume
 _08017218: .4byte 0x00000672
 _0801721C: .4byte 0x00000674
 _08017220: .4byte 0x02002094
@@ -1846,9 +1846,9 @@ _0801736C: .4byte 0x020021E0
 _08017370: .4byte 0xFFFFE000
 _08017374: .4byte dword_2000FC8
 _08017378: .4byte 0x020021CB
-_0801737C: .4byte byte_203EA89
+_0801737C: .4byte gCanPlaySfx
 _08017380: .4byte 0x080CE440
-_08017384: .4byte byte_203EA8C
+_08017384: .4byte gSfxVolume
 _08017388: .4byte gPlayerPos
 
 
@@ -1957,9 +1957,9 @@ _08017460: .4byte 0x020021E0
 _08017464: .4byte 0xFFFFE000
 _08017468: .4byte dword_2000FC8
 _0801746C: .4byte 0x020021CB
-_08017470: .4byte byte_203EA89
+_08017470: .4byte gCanPlaySfx
 _08017474: .4byte 0x080CE440
-_08017478: .4byte byte_203EA8C
+_08017478: .4byte gSfxVolume
 _0801747C: .4byte gPlayerPos
 
 
@@ -2068,9 +2068,9 @@ _0801754C: .4byte 0xFFFFE000
 _08017550: .4byte dword_2000FC8
 _08017554: .4byte 0x020021CB
 _08017558: .4byte dword_20020B8
-_0801755C: .4byte byte_203EA89
+_0801755C: .4byte gCanPlaySfx
 _08017560: .4byte 0x080CE440
-_08017564: .4byte byte_203EA8C
+_08017564: .4byte gSfxVolume
 _08017568: .4byte gPlayerPos
 
 
@@ -2179,9 +2179,9 @@ _08017644: .4byte 0x020021E0
 _08017648: .4byte 0xFFFFE000
 _0801764C: .4byte dword_2000FC8
 _08017650: .4byte 0x020021CB
-_08017654: .4byte byte_203EA89
+_08017654: .4byte gCanPlaySfx
 _08017658: .4byte 0x080CE440
-_0801765C: .4byte byte_203EA8C
+_0801765C: .4byte gSfxVolume
 _08017660: .4byte gPlayerPos
 
 	.thumb
@@ -2279,9 +2279,9 @@ _08017724: .4byte 0x020021E0
 _08017728: .4byte 0xFFFFE000
 _0801772C: .4byte dword_2000FC8
 _08017730: .4byte 0x020021CB
-_08017734: .4byte byte_203EA89
+_08017734: .4byte gCanPlaySfx
 _08017738: .4byte 0x080CE440
-_0801773C: .4byte byte_203EA8C
+_0801773C: .4byte gSfxVolume
 _08017740: .4byte gPlayerPos
 
 	.thumb
@@ -2379,9 +2379,9 @@ _08017804: .4byte 0x020021E0
 _08017808: .4byte 0xFFFFE000
 _0801780C: .4byte dword_2000FC8
 _08017810: .4byte 0x020021CB
-_08017814: .4byte byte_203EA89
+_08017814: .4byte gCanPlaySfx
 _08017818: .4byte 0x080CE440
-_0801781C: .4byte byte_203EA8C
+_0801781C: .4byte gSfxVolume
 _08017820: .4byte gPlayerPos
 
 	.thumb
@@ -2511,9 +2511,9 @@ _0801792C: .4byte 0x020021E0
 _08017930: .4byte 0xFFFFE000
 _08017934: .4byte dword_2000FC8
 _08017938: .4byte 0x020021CB
-_0801793C: .4byte byte_203EA89
+_0801793C: .4byte gCanPlaySfx
 _08017940: .4byte 0x080CE440
-_08017944: .4byte byte_203EA8C
+_08017944: .4byte gSfxVolume
 _08017948: .4byte 0x0000060A
 _0801794C: .4byte 0x0000060C
 _08017950: .4byte 0x030028FC
@@ -2629,9 +2629,9 @@ _08017A38: .4byte gPlayerSprite
 _08017A3C: .4byte 0x000001E9
 _08017A40: .4byte dword_2000FC8
 _08017A44: .4byte dword_80CC290
-_08017A48: .4byte byte_203EA89
+_08017A48: .4byte gCanPlaySfx
 _08017A4C: .4byte 0x080CE440
-_08017A50: .4byte byte_203EA8C
+_08017A50: .4byte gSfxVolume
 
     .thumb
 	.global sub_8017A54
@@ -2724,9 +2724,9 @@ _08017AE6:
 	.align 2, 0
 _08017B14: .4byte gPlayerSprite
 _08017B18: .4byte gGameStatus
-_08017B1C: .4byte byte_203EA89
+_08017B1C: .4byte gCanPlaySfx
 _08017B20: .4byte 0x080CE440
-_08017B24: .4byte byte_203EA8C
+_08017B24: .4byte gSfxVolume
 _08017B28: .4byte 0x000003E2
 _08017B2C: .4byte dword_2000FC8
 _08017B30: .4byte dword_80CC290
@@ -3006,10 +3006,10 @@ _08017D7C: .4byte dword_2000FC8
 _08017D80: .4byte dword_80CC290
 _08017D84: .4byte gPlayerShadowSprite
 _08017D88: .4byte dword_20020B8
-_08017D8C: .4byte byte_203EA89
+_08017D8C: .4byte gCanPlaySfx
 _08017D90: .4byte dword_20020B4
 _08017D94: .4byte 0x080CE440
-_08017D98: .4byte byte_203EA8C
+_08017D98: .4byte gSfxVolume
 
     .thumb
 	.global sub_8017D9C
@@ -3181,7 +3181,7 @@ _08017F00: .4byte 0x020021C6
 _08017F04: .4byte 0x020021C7
 _08017F08: .4byte gPreviousPlayerState
 _08017F0C: .4byte dword_20020B8
-_08017F10: .4byte byte_203EA89
+_08017F10: .4byte gCanPlaySfx
 
     .thumb
 	.global sub_8017F14
@@ -3302,9 +3302,9 @@ _08018000: .4byte gPreviousPlayerState
 _08018004: .4byte gPlayerState
 _08018008: .4byte gPlayerSprite
 _0801800C: .4byte dword_2000FC8
-_08018010: .4byte byte_203EA89
+_08018010: .4byte gCanPlaySfx
 _08018014: .4byte 0x080CE440
-_08018018: .4byte byte_203EA8C
+_08018018: .4byte gSfxVolume
 
     .thumb
 	.global DoAirAttack
@@ -3376,9 +3376,9 @@ _080180A8: .4byte gPlayerSprite
 _080180AC: .4byte dword_2000FC8
 _080180B0: .4byte 0x020021C8
 _080180B4: .4byte 0x020021D0
-_080180B8: .4byte byte_203EA89
+_080180B8: .4byte gCanPlaySfx
 _080180BC: .4byte 0x080CE440
-_080180C0: .4byte byte_203EA8C
+_080180C0: .4byte gSfxVolume
 _080180C4:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -3473,9 +3473,9 @@ _08018180: .4byte gPlayerSprite
 _08018184: .4byte dword_2000FC8
 _08018188: .4byte dword_80CC290
 _0801818C: .4byte dword_20020B4
-_08018190: .4byte byte_203EA89
+_08018190: .4byte gCanPlaySfx
 _08018194: .4byte 0x080CE440
-_08018198: .4byte byte_203EA8C
+_08018198: .4byte gSfxVolume
 _0801819C:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -3556,7 +3556,7 @@ _0801821E:
 _08018228: .4byte gPlayerStateSettings
 _0801822C: .4byte gPlayerState
 _08018230: .4byte dword_20020B4
-_08018234: .4byte byte_203EA89
+_08018234: .4byte gCanPlaySfx
 _08018238: .4byte 0x0203DFE8
 _0801823C: .4byte 0xFFFB0000
 _08018240: .4byte gPreviousPlayerState
@@ -3761,7 +3761,7 @@ _08018480: .4byte gPlayerSprite
 _08018484: .4byte dword_2000FC8
 _08018488: .4byte dword_80CC290
 _0801848C: .4byte dword_20020B8
-_08018490: .4byte byte_203EA89
+_08018490: .4byte gCanPlaySfx
 _08018494:
 	movs r0, #0x2b
 	strh r0, [r2]
@@ -3907,9 +3907,9 @@ _080185CC: .4byte 0x00000161
 _080185D0: .4byte dword_2000FC8
 _080185D4: .4byte dword_80CC290
 _080185D8: .4byte 0x020021D4
-_080185DC: .4byte byte_203EA89
+_080185DC: .4byte gCanPlaySfx
 _080185E0: .4byte 0x080CE440
-_080185E4: .4byte byte_203EA8C
+_080185E4: .4byte gSfxVolume
 _080185E8: .4byte 0x000005D2
 _080185EC: .4byte 0x000005D4
 _080185F0:
@@ -3971,9 +3971,9 @@ _08018654: .4byte 0x0203DFD4
 _08018658: .4byte 0x0203DFD5
 _0801865C: .4byte gPlayerPos
 _08018660: .4byte stru_3002950
-_08018664: .4byte byte_203EA89
+_08018664: .4byte gCanPlaySfx
 _08018668: .4byte 0x080CE440
-_0801866C: .4byte byte_203EA8C
+_0801866C: .4byte gSfxVolume
 _08018670: .4byte 0x000005DA
 _08018674: .4byte 0x000005DC
 
@@ -4026,9 +4026,9 @@ _080186D0: .4byte 0x0203DFD4
 _080186D4: .4byte 0x0203DFD5
 _080186D8: .4byte gPlayerPos
 _080186DC: .4byte stru_3002950
-_080186E0: .4byte byte_203EA89
+_080186E0: .4byte gCanPlaySfx
 _080186E4: .4byte 0x080CE440
-_080186E8: .4byte byte_203EA8C
+_080186E8: .4byte gSfxVolume
 _080186EC: .4byte 0x000005C2
 _080186F0: .4byte 0x000005C4
 
@@ -4152,7 +4152,7 @@ _080187DE:
 	bx r1
 	.align 2, 0
 _080187E4: .4byte dword_20020B8
-_080187E8: .4byte byte_203EA89
+_080187E8: .4byte gCanPlaySfx
 _080187EC: .4byte dword_20020B4
 _080187F0: .4byte gPlayerStateSettings
 _080187F4: .4byte gPlayerState
@@ -4668,7 +4668,7 @@ _08018C10: .4byte gPlayerStateSettings
 _08018C14: .4byte gPlayerState
 _08018C18: .4byte 0x0203DFE8
 _08018C1C: .4byte dword_20020B4
-_08018C20: .4byte byte_203EA89
+_08018C20: .4byte gCanPlaySfx
 _08018C24: .4byte gGameStatus
 _08018C28: .4byte 0x02001370
 _08018C2C: .4byte dword_2000FC8
@@ -4841,9 +4841,9 @@ _08018E0A:
 _08018E3C: .4byte gPlayerSprite
 _08018E40: .4byte gBGOffsetVertical
 _08018E44: .4byte dword_20020B4
-_08018E48: .4byte byte_203EA89
+_08018E48: .4byte gCanPlaySfx
 _08018E4C: .4byte 0x080CE440
-_08018E50: .4byte byte_203EA8C
+_08018E50: .4byte gSfxVolume
 _08018E54:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -5077,9 +5077,9 @@ _08019058: .4byte gPlayerSprite
 _0801905C: .4byte 0x000001C1
 _08019060: .4byte 0x0001CCCD
 _08019064: .4byte dword_80CC290
-_08019068: .4byte byte_203EA89
+_08019068: .4byte gCanPlaySfx
 _0801906C: .4byte 0x080CE440
-_08019070: .4byte byte_203EA8C
+_08019070: .4byte gSfxVolume
 _08019074:
 	ldr r1, _08019090
 	movs r0, #0x52
@@ -5436,9 +5436,9 @@ _08019374: .4byte gGameStatus
 _08019378: .4byte word_20010AC
 _0801937C: .4byte gIsSlideMiniGame
 _08019380: .4byte gPlayerState
-_08019384: .4byte byte_203EA89
+_08019384: .4byte gCanPlaySfx
 _08019388: .4byte 0x080CE440
-_0801938C: .4byte byte_203EA8C
+_0801938C: .4byte gSfxVolume
 _08019390: .4byte 0x02001370
 _08019394:
 	ldr r6, _080193C4
@@ -5597,9 +5597,9 @@ _080194A0:
 _080194E0: .4byte gPreviousPlayerState
 _080194E4: .4byte gPlayerSprite
 _080194E8: .4byte 0x00000219
-_080194EC: .4byte byte_203EA89
+_080194EC: .4byte gCanPlaySfx
 _080194F0: .4byte 0x080CE440
-_080194F4: .4byte byte_203EA8C
+_080194F4: .4byte gSfxVolume
 _080194F8:
 	movs r0, #4
 	ands r0, r1
@@ -5729,9 +5729,9 @@ _080195F8:
 	.align 2, 0
 _08019604: .4byte gPreviousPlayerState
 _08019608: .4byte gPlayerSprite
-_0801960C: .4byte byte_203EA89
+_0801960C: .4byte gCanPlaySfx
 _08019610: .4byte 0x080CE440
-_08019614: .4byte byte_203EA8C
+_08019614: .4byte gSfxVolume
 _08019618:
 	movs r0, #0x80
 	lsls r0, r0, #8
@@ -5870,9 +5870,9 @@ _08019738: .4byte gPreviousPlayerState
 _0801973C: .4byte dword_2000FC8
 _08019740: .4byte 0xFFFFE000
 _08019744: .4byte gPlayerSprite
-_08019748: .4byte byte_203EA89
+_08019748: .4byte gCanPlaySfx
 _0801974C: .4byte 0x080CE440
-_08019750: .4byte byte_203EA8C
+_08019750: .4byte gSfxVolume
 _08019754: .4byte dword_20020B8
 _08019758:
 	cmp r7, #1
@@ -6034,9 +6034,9 @@ _080198A4: .4byte gPreviousPlayerState
 _080198A8: .4byte dword_2000FC8
 _080198AC: .4byte 0xFFFFE000
 _080198B0: .4byte gPlayerSprite
-_080198B4: .4byte byte_203EA89
+_080198B4: .4byte gCanPlaySfx
 _080198B8: .4byte 0x080CE440
-_080198BC: .4byte byte_203EA8C
+_080198BC: .4byte gSfxVolume
 _080198C0: .4byte dword_20020B4
 _080198C4: .4byte gGameStatus
 _080198C8: .4byte 0x02001370
@@ -6257,7 +6257,7 @@ _08019A94: .4byte dword_2000FC8
 _08019A98: .4byte dword_80CC290
 _08019A9C: .4byte gPlayerSprite
 _08019AA0: .4byte dword_20020B8
-_08019AA4: .4byte byte_203EA89
+_08019AA4: .4byte gCanPlaySfx
 _08019AA8: .4byte dword_20020B4
 
     .thumb
@@ -6486,7 +6486,7 @@ _08019C90: .4byte 0xFFFFE000
 _08019C94: .4byte gPlayerSprite
 _08019C98: .4byte 0x00000169
 _08019C9C: .4byte 0x020021D4
-_08019CA0: .4byte byte_203EA89
+_08019CA0: .4byte gCanPlaySfx
 _08019CA4:
 	cmp r0, #3
 	beq _08019CAA
@@ -6629,9 +6629,9 @@ _08019DD0: .4byte dword_2000FC8
 _08019DD4: .4byte 0xFFFFE000
 _08019DD8: .4byte gPlayerSprite
 _08019DDC: .4byte 0x000001A1
-_08019DE0: .4byte byte_203EA89
+_08019DE0: .4byte gCanPlaySfx
 _08019DE4: .4byte 0x080CE440
-_08019DE8: .4byte byte_203EA8C
+_08019DE8: .4byte gSfxVolume
 _08019DEC:
 	cmp r0, #4
 	beq _08019DF2
@@ -6841,9 +6841,9 @@ _08019FA4: .4byte dword_2000FC8
 _08019FA8: .4byte 0xFFFFE000
 _08019FAC: .4byte gPlayerSprite
 _08019FB0: .4byte 0x000001E1
-_08019FB4: .4byte byte_203EA89
+_08019FB4: .4byte gCanPlaySfx
 _08019FB8: .4byte 0x080CE440
-_08019FBC: .4byte byte_203EA8C
+_08019FBC: .4byte gSfxVolume
 _08019FC0:
 	.2byte 0xEE00, 0xEE00
 _08019FC4:
@@ -7081,9 +7081,9 @@ _0801A1DC: .4byte dword_2000FC8
 _0801A1E0: .4byte dword_80CC290
 _0801A1E4: .4byte 0x083FD774
 _0801A1E8: .4byte 0x020021DC
-_0801A1EC: .4byte byte_203EA89
+_0801A1EC: .4byte gCanPlaySfx
 _0801A1F0: .4byte 0x080CE440
-_0801A1F4: .4byte byte_203EA8C
+_0801A1F4: .4byte gSfxVolume
 _0801A1F8: .4byte 0x00000612
 _0801A1FC: .4byte 0x00000614
 _0801A200:
@@ -7174,7 +7174,7 @@ _0801A2BC: .4byte 0x03003300
 _0801A2C0: .4byte 0x03003308
 _0801A2C4: .4byte 0x03003304
 _0801A2C8: .4byte 0x020021DC
-_0801A2CC: .4byte byte_203EA89
+_0801A2CC: .4byte gCanPlaySfx
 _0801A2D0:
 	.2byte 0xEE00, 0xEE00
 _0801A2D4:
@@ -7390,6 +7390,6 @@ _0801A474:
 _0801A47C: .4byte gGameStatus
 _0801A480: .4byte gPlayerPos
 _0801A484: .4byte stru_3002950
-_0801A488: .4byte byte_203EA89
+_0801A488: .4byte gCanPlaySfx
 _0801A48C: .4byte 0x080CE440
-_0801A490: .4byte byte_203EA8C
+_0801A490: .4byte gSfxVolume

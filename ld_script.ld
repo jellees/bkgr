@@ -190,12 +190,7 @@ SECTIONS
         byte_203E16C = .; . += 1;
 
         . = 0x0003EA88;
-        gCanChangeBgm = .; . += 1;
-        byte_203EA89 = .; . += 1;
-        gBgmVolumeIndex = .; . += 1;
-        gSfxVolumeIndex = .; . += 1;
-        byte_203EA8C = .; . += 1;
-
+        src/audio_b.o(.bss);
         src/menu.o(.bss);
         src/save.o(.bss);
         src/random.o(.bss);
@@ -376,6 +371,7 @@ SECTIONS
         asm/chunk9.o(.text);
         src/alloc.o(.text);
         asm/chunk6.o(.text);
+        src/audio_b.o(.text);
         src/menu.o(.text);
         asm/menu.o(.text);
         src/save.o(.text);

@@ -335,8 +335,8 @@ static void Walk(s32 keyPressed, s32 keyDown) {
                 gPlayerState = 13;
                 sub_8003368(&gPlayerSprite, 97, 0, 1);
                 sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[gPlayerSprite.field_A], 0);
-                if (byte_203EA89) {
-                    audio_new_fx(dSoundEffects[7].index, dSoundEffects[7].volumes[byte_203EA8C],
+                if (gCanPlaySfx) {
+                    audio_new_fx(dSoundEffects[7].index, dSoundEffects[7].volumes[gSfxVolume],
                                  dSoundEffects[7].pitch + 0x10000);
                 }
                 sub_8016790(2, gPlayerSprite.field_A);
@@ -497,8 +497,8 @@ static void PackWackStart(s32 keyPressed, s32 keyDown) {
         gPlayerState = 28;
         sub_8003368(&gPlayerSprite, 185, 0, 1);
 
-        if (byte_203EA89) {
-            audio_new_fx(dSoundEffects[13].index, dSoundEffects[13].volumes[byte_203EA8C],
+        if (gCanPlaySfx) {
+            audio_new_fx(dSoundEffects[13].index, dSoundEffects[13].volumes[gSfxVolume],
                          dSoundEffects[13].pitch + 0x10000);
         }
 
@@ -545,8 +545,8 @@ void Crouch(s32 keyPressed, s32 keyDown) {
                 sub_8003368(&gPlayerSprite, 0x49, 4, 1);
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x40000, 0x1A00);
 
-                if (byte_203EA89) {
-                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[byte_203EA8C],
+                if (gCanPlaySfx) {
+                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[gSfxVolume],
                                  dSoundEffects[21].pitch + 0x10000);
                 }
 
@@ -566,8 +566,8 @@ void Crouch(s32 keyPressed, s32 keyDown) {
 
                 sub_8003368(&gPlayerSprite, 0x109, 0, 1);
 
-                if (byte_203EA89) {
-                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[byte_203EA8C],
+                if (gCanPlaySfx) {
+                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[gSfxVolume],
                                  dSoundEffects[21].pitch + 0x10000);
                 }
 
@@ -582,8 +582,8 @@ void Crouch(s32 keyPressed, s32 keyDown) {
 
                 sub_8003368(&gPlayerSprite, 0x31, 7, 0);
 
-                if (byte_203EA89) {
-                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[byte_203EA8C],
+                if (gCanPlaySfx) {
+                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[gSfxVolume],
                                  dSoundEffects[21].pitch + 0x10000);
                 }
 
@@ -672,7 +672,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
 
             if (dword_20020B8 != -1) {
-                if (byte_203EA89)
+                if (gCanPlaySfx)
                     audio_halt_fx(dword_20020B8);
                 dword_20020B8 = -1;
             }
@@ -689,9 +689,9 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
                                      dSoundEffects[30].pitch + 0x10000);
                 } else {
                     dword_20020B8 = -1;
@@ -705,9 +705,9 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
                                      dSoundEffects[30].pitch + 0x10000);
                 } else {
                     dword_20020B8 = -1;
@@ -721,9 +721,9 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
                                      dSoundEffects[30].pitch + 0x10000);
                 } else {
                     dword_20020B8 = -1;
@@ -737,9 +737,9 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
                                      dSoundEffects[30].pitch + 0x10000);
                 } else {
                     dword_20020B8 = -1;
@@ -753,9 +753,9 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
                                      dSoundEffects[30].pitch + 0x10000);
                 } else {
                     dword_20020B8 = -1;
@@ -769,9 +769,9 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
                                      dSoundEffects[30].pitch + 0x10000);
                 } else {
                     dword_20020B8 = -1;
@@ -785,9 +785,9 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
                                      dSoundEffects[30].pitch + 0x10000);
                 } else {
                     dword_20020B8 = -1;
@@ -801,9 +801,9 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0, 0);
             }
             if (dword_20020B8 == -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[byte_203EA8C],
+                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
                                      dSoundEffects[30].pitch + 0x10000);
                 } else {
                     dword_20020B8 = -1;
@@ -818,7 +818,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
 
             if (dword_20020B8 != -1) {
-                if (byte_203EA89)
+                if (gCanPlaySfx)
                     audio_halt_fx(dword_20020B8);
                 dword_20020B8 = -1;
             }

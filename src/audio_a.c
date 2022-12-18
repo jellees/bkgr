@@ -10,7 +10,7 @@ int* gSequences;
 int dword_203F4D0;
 int dword_203F4D4;
 
-void audio_init_p() {
+void init_audio() {
     audio_init();
 }
 

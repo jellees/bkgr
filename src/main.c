@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "environment_effects.h"
 #include "audio_a.h"
+#include "audio_b.h"
 #include "player.h"
 #include "pause_menu.h"
 #include "save.h"
@@ -99,14 +100,14 @@ static void UpdateGame(void) {
             sub_80409DC();
 
             if (dword_20020B8 != -1) {
-                if (byte_203EA89) {
+                if (gCanPlaySfx) {
                     audio_halt_fx(dword_20020B8);
                 }
 
                 dword_20020B8 = -1;
             }
 
-            if (audio_fx_still_active(dword_20020B4) && byte_203EA89) {
+            if (audio_fx_still_active(dword_20020B4) && gCanPlaySfx) {
                 audio_halt_fx(dword_20020B4);
             }
 
@@ -381,7 +382,7 @@ static void StartGame() {
     InitAllHeaps();
     sub_800A344();
     sub_8016440();
-    audio_init_p1();
+    init_audio_and_reset_volume();
     ResetMenuEx();
     ResetTileAnimCount();
     sub_80266B4();

@@ -1547,9 +1547,9 @@ _08063DD0: .4byte 0x0203FB14
 _08063DD4: .4byte 0x0203FA97
 _08063DD8: .4byte 0x0203FA98
 _08063DDC: .4byte 0x0203FAD8
-_08063DE0: .4byte byte_203EA89
+_08063DE0: .4byte gCanPlaySfx
 _08063DE4: .4byte 0x080CE440
-_08063DE8: .4byte byte_203EA8C
+_08063DE8: .4byte gSfxVolume
 _08063DEC:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -1644,9 +1644,9 @@ _08063EAC: .4byte 0x0203FA97
 _08063EB0: .4byte 0x0203FA98
 _08063EB4: .4byte 0x000004D9
 _08063EB8: .4byte 0x0203FAD8
-_08063EBC: .4byte byte_203EA89
+_08063EBC: .4byte gCanPlaySfx
 _08063EC0: .4byte 0x080CE440
-_08063EC4: .4byte byte_203EA8C
+_08063EC4: .4byte gSfxVolume
 _08063EC8:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -1722,9 +1722,9 @@ _08063F5A:
 	bl AdvanceMenuEntryUp
 	b _0806422A
 	.align 2, 0
-_08063F60: .4byte byte_203EA89
+_08063F60: .4byte gCanPlaySfx
 _08063F64: .4byte 0x080CE440
-_08063F68: .4byte byte_203EA8C
+_08063F68: .4byte gSfxVolume
 _08063F6C: .4byte 0x00000662
 _08063F70: .4byte 0x00000664
 _08063F74:
@@ -1760,9 +1760,9 @@ _08063FAC:
 	bl AdvanceMenuEntryDown
 	b _0806422A
 	.align 2, 0
-_08063FB4: .4byte byte_203EA89
+_08063FB4: .4byte gCanPlaySfx
 _08063FB8: .4byte 0x080CE440
-_08063FBC: .4byte byte_203EA8C
+_08063FBC: .4byte gSfxVolume
 _08063FC0: .4byte 0x00000662
 _08063FC4: .4byte 0x00000664
 _08063FC8:
@@ -1895,9 +1895,9 @@ _080640D4: .4byte 0x0203FB14
 _080640D8: .4byte 0x0203FA97
 _080640DC: .4byte 0x0203FA98
 _080640E0: .4byte 0x0203FAD8
-_080640E4: .4byte byte_203EA89
+_080640E4: .4byte gCanPlaySfx
 _080640E8: .4byte 0x080CE440
-_080640EC: .4byte byte_203EA8C
+_080640EC: .4byte gSfxVolume
 _080640F0:
 	movs r0, #1
 	rsbs r0, r0, #0
@@ -1992,9 +1992,9 @@ _080641B0: .4byte 0x0203FA97
 _080641B4: .4byte 0x0203FA98
 _080641B8: .4byte 0x000004D9
 _080641BC: .4byte 0x0203FAD8
-_080641C0: .4byte byte_203EA89
+_080641C0: .4byte gCanPlaySfx
 _080641C4: .4byte 0x080CE440
-_080641C8: .4byte byte_203EA8C
+_080641C8: .4byte gSfxVolume
 _080641CC:
 	movs r0, #1
 	rsbs r0, r0, #0

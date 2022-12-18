@@ -1367,9 +1367,9 @@ _0800F51E:
 	.align 2, 0
 _0800F544: .4byte 0x02001121
 _0800F548: .4byte gKeysDown
-_0800F54C: .4byte byte_203EA89
+_0800F54C: .4byte gCanPlaySfx
 _0800F550: .4byte 0x080CE440
-_0800F554: .4byte byte_203EA8C
+_0800F554: .4byte gSfxVolume
 _0800F558: .4byte 0x0000067C
 _0800F55C: .4byte 0x0200111C
 _0800F560: .4byte 0x020011B8
@@ -1424,9 +1424,9 @@ _0800F5A8:
 	strb r5, [r0]
 	b _0800F668
 	.align 2, 0
-_0800F5D0: .4byte byte_203EA89
+_0800F5D0: .4byte gCanPlaySfx
 _0800F5D4: .4byte 0x080CE440
-_0800F5D8: .4byte byte_203EA8C
+_0800F5D8: .4byte gSfxVolume
 _0800F5DC: .4byte 0x00000682
 _0800F5E0: .4byte 0x00000684
 _0800F5E4: .4byte 0x0200111C
@@ -1665,9 +1665,9 @@ _0800F7EC:
 	bx r0
 	.align 2, 0
 _0800F7F4: .4byte gGameStatus
-_0800F7F8: .4byte byte_203EA89
+_0800F7F8: .4byte gCanPlaySfx
 _0800F7FC: .4byte 0x080CE440
-_0800F800: .4byte byte_203EA8C
+_0800F800: .4byte gSfxVolume
 
     .thumb
 	.global IsGameComplete

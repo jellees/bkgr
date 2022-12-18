@@ -489,10 +489,10 @@ extern bool8 byte_203DFE7;
 extern u8 byte_203E16C;
 
 extern u8 gCanChangeBgm;
-extern u8 byte_203EA89; // possibily bool8
-extern u8 gBgmVolumeIndex;
-extern u8 gSfxVolumeIndex;
-extern u8 byte_203EA8C;
+extern u8 gCanPlaySfx; // possibily bool8
+extern u8 gBgmMainVolume;
+extern u8 gSfxMainVolume;
+extern u8 gSfxVolume;
 
 extern s16 word_203F998;
 extern s16 word_203F99A;
@@ -680,9 +680,8 @@ extern int dword_80CF390[8];
 extern u8 unk_87E0240[1]; // Unknown size.
 extern u32 unk_83FC114[129];
 
-// Other
+extern u32 dword_80CEB58;
 
-// Comes from debug ram.
-extern u8 gMainFrameCounter;
+// Other
 
 #endif
