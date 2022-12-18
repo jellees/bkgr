@@ -1,5 +1,5 @@
-#ifndef GUARD_8045038_H
-#define GUARD_8045038_H
+#ifndef GUARD_AUDIO_A_H
+#define GUARD_AUDIO_A_H
 
 extern void audio_init_p();
 extern void sub_8045044();

@@ -195,16 +195,11 @@ SECTIONS
         gBgmVolumeIndex = .; . += 1;
         gSfxVolumeIndex = .; . += 1;
         byte_203EA8C = .; . += 1;
-        . += 3; /* padding */
-        gMenuId = .; . += 1;
-        gMenuParentId = .; . += 1;
-        . += 2; /* padding */
-        gMenu = .; . += 0x40;
-        
+
+        src/menu.o(.bss);
         src/save.o(.bss);
         src/random.o(.bss);
-
-        . = 0x0003F4D8;
+        src/audio_a.o(.bss);
         src/pause_menu.o(.bss);
 
         . = 0x0003F998;
@@ -386,7 +381,7 @@ SECTIONS
         src/save.o(.text);
         src/random.o(.text);
         asm/random.o(.text);
-        src/8045038.o(.text);
+        src/audio_a.o(.text);
         src/pause_menu.o(.text);
         asm/chunk8.o(.text);
         src/gameover.o(.text);

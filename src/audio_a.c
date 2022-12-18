@@ -1,0 +1,23 @@
+#include "global.h"
+
+int audio_num_channels;
+int dword_203F4B8;
+int dword_203F4BC;
+int dword_203F4C0;
+int dword_203F4C4;
+int dword_203F4C8;
+int* gSequences;
+int dword_203F4D0;
+int dword_203F4D4;
+
+void audio_init_p() {
+    audio_init();
+}
+
+void sub_8045044() {
+    audio_vsync_asm();
+}
+
+void seq_update_p() {
+    audio_asmprocess();
+}

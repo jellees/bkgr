@@ -4,10 +4,9 @@
 #include "menu.h"
 #include "common.h"
 
-// Todo: define this here.
-/*extern u8 gMenuId;
-extern u8 gMenuParentId;
-extern struct Menu gMenu;*/
+EWRAM_DATA u8 gMenuId;
+EWRAM_DATA u8 gMenuParentId;
+EWRAM_DATA struct Menu gMenu;
 
 void ResetMenuEx() {
     gMenuId = -1;

@@ -18,10 +18,9 @@ struct Menu {
     struct Sprite* spriteBuffer;
 };
 
-extern struct Menu gMenu;
-
 extern u8 gMenuId;
 extern u8 gMenuParentId;
+extern struct Menu gMenu;
 
 enum Menus {
     MENU_GAME_OR_CONTINUE,
