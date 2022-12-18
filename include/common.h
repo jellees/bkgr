@@ -524,6 +524,7 @@ extern bool8 byte_203F99E;
 extern u8 byte_203F99F; // possibly bool8
 
 extern u8 byte_203F9A1; // possibly bool8
+extern u8 byte_203F9A2;
 
 extern u8 byte_203FA35; // possibly bool8
 

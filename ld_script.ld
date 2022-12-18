@@ -380,6 +380,7 @@ SECTIONS
 
         . = 0x0003F9A1;
         byte_203F9A1 = .; . += 1;
+        byte_203F9A2 = .; . += 1;
 
         . = 0x0003FA35;
         byte_203FA35 = .; . += 1;
@@ -525,6 +526,7 @@ SECTIONS
         asm/collision.o(.text);
         src/main.o(.text);
         src/player.o(.text);
+        src/chunk3.o(.text);
         asm/chunk3.o(.text);
         src/savefile.o(.text);
         asm/chunk4.o(.text);
