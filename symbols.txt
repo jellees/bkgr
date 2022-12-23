@@ -1,0 +1,6 @@
+dword_80CEBE0 = 0x80CEBE0;
+dword_80CEBF8 = 0x80CEBF8;
+dword_80CEE5C = 0x80CEE5C;
+dword_80CEE74 = 0x80CEE74;
+
+dword_80CC844 = 0x80CC844;

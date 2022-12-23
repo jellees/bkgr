@@ -44,7 +44,7 @@ CPPFLAGS 	:= -I tools/agbcc/include -nostdinc -undef -iquote include -Wno-trigra
 
 LIBC   := tools/agbcc/lib/libc.a
 LIBGCC := tools/agbcc/lib/libgcc.a
-LDFLAGS = -L../tools/agbcc/lib -lgcc -lc
+LDFLAGS = -L../tools/agbcc/lib -lgcc -lc --just-symbols=../symbols.txt
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 FIX := tools/gbafix/./gbafix

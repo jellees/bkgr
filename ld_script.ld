@@ -82,7 +82,9 @@ SECTIONS
         word_2001090 = .; . += 2;
         word_2001092 = .; . += 2;
 
-        . = 0x000010A6;
+        . = 0x000010A4;
+        byte_20010A4 = .; . += 1;
+        byte_20010A5 = .; . += 1;
         gRoomNameNumber = .; . += 1;
         byte_20010A7 = .; . += 1;
         gRoomGoal = .; . += 1;

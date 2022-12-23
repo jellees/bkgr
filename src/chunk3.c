@@ -128,3 +128,185 @@ void sub_800BAF0(u32** a1, u32* a2) {
     *a1 = v8 + 3;
     ++*a2;
 }
+
+bool32 sub_0800BCD4(struct struc_44* a1) {
+    bool32 isMusicChanged;
+    u32 level;
+    int v3;
+    int room;
+
+    v3 = a1->warpDestRoom & 0x80;
+    room = (a1->warpDestRoom & 0x7F) - 1;
+
+    ASSERT(room >= 0);
+
+    level = gLoadedRoomLevel;
+
+    if (gLoadedRoomIndex == ROOM_MUMBOHUT) {
+        audio_halt_all_fx();
+        isMusicChanged = TRUE;
+        sub_80270AC(4095, 1);
+        gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
+        gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
+        SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
+        sub_803FE78();
+    } else {
+        switch (sub_0800C63C(room, a1->warpDestWarp)) {
+            case 1:
+                return TRUE;
+
+            case 2:
+                return FALSE;
+
+            case 0:
+            default:
+                sub_805E1DC(1);
+                audio_halt_all_fx();
+                isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
+                sub_80270AC(4095, isMusicChanged);
+                room = (a1->warpDestRoom & 0x7F) - 1;
+                if (!v3) {
+                    if (dword_80CEE5C[gLoadedRoomLevel] != room
+                        || dword_80CEE74[gLoadedRoomLevel] != a1->warpDestWarp) {
+                        if (room != ROOM_MUMBOHUT) {
+                            gRoomGoal = room;
+                            gWarpGoal = a1->warpDestWarp;
+                        } else {
+                            gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
+                            gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
+                        }
+                    }
+                }
+                SetupRoom(room, a1->warpDestWarp, 1, 0);
+                break;
+        }
+    }
+
+    sub_8025E44(gLoadedRoomLevel);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+    sub_8018BB0(&gPlayerSprite);
+    audio_halt_all_fx();
+    sub_801A2E4();
+    EnableBGAlphaBlending();
+
+    if (v3) {
+        if (!byte_20010B1) {
+            sub_800EB58(1);
+        }
+        sub_800ECB4();
+    } else if (byte_20010B1) {
+        byte_20010B1 = 0;
+        sub_80275A4();
+    }
+
+    init_efx();
+    enable_poison_effect();
+    init_room_name();
+    sub_800EF6C(a1->warpDestWarp);
+    sub_8026E48(4095, isMusicChanged, 1);
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+    sub_8041E88(&gPlayerShadowSprite);
+
+    if (level != gLoadedRoomLevel) {
+        sub_8040178();
+    }
+
+    if (byte_20010A4) {
+        sub_8016C78(byte_20010A5);
+        word_20010AC = gKeysPressed & 0x3FF;
+    } else {
+        sub_8016C78(gPlayerSprite.field_A);
+    }
+
+    sub_8039210();
+
+    if (gInInteractionArea) {
+        gInInteractionArea = 0;
+        dword_203DFE0 = 0;
+    }
+
+    gFloorPlaneResult.isColliding = 0;
+    gPlayerSprite.field_13 = 0;
+
+    return TRUE;
+}
+
+void sub_800BFA0(int room, int warp, int a3)
+{
+    bool32 isMusicChanged;
+    u32 level;
+
+    level = gLoadedRoomLevel;
+    
+    sub_805E1DC(1);
+    audio_halt_all_fx();
+
+    if (gLoadedRoomIndex == ROOM_MUMBOHUT) {
+        isMusicChanged = TRUE;
+        sub_80270AC(4095, 1);
+        gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
+        gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
+        SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
+        sub_803FE78();
+    }
+    else
+    {
+        isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
+        sub_80270AC(4095, isMusicChanged);
+
+        if ((dword_80CEE5C[gLoadedRoomLevel] != room || dword_80CEE74[gLoadedRoomLevel] != warp) && a3) {
+            if (room != ROOM_MUMBOHUT) {
+                gRoomGoal = room;
+                gWarpGoal = warp;
+            } else {
+                gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
+                gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
+            }
+        }
+
+        SetupRoom(room, warp, 1, 0);
+    }
+
+    sub_8025E44(gLoadedRoomLevel);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+    sub_8018BB0(&gPlayerSprite);
+    audio_halt_all_fx();
+    sub_801A2E4();
+    EnableBGAlphaBlending();
+    sub_800EB14();
+    init_efx();
+    enable_poison_effect();
+    init_room_name();
+    sub_800EF6C(warp);
+    sub_8026E48(4095, isMusicChanged, 1);
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+    sub_8041E88(&gPlayerShadowSprite);
+
+    if ( level != gLoadedRoomLevel )
+        sub_8040178();
+    
+    if (byte_20010A4) {
+        sub_8016C78(byte_20010A5);
+        word_20010AC = gKeysPressed & 0x3FF;
+    } else {
+        sub_8016C78(gPlayerSprite.field_A);
+    }
+
+    sub_8039210();
+
+    if (gInInteractionArea) {
+        gInInteractionArea = 0;
+        dword_203DFE0 = 0;
+    }
+
+    gPlayerSprite.field_13 = 0;
+}
+

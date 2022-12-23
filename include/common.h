@@ -420,6 +420,10 @@ extern u8 byte_200108E;
 extern u16 word_2001090;
 extern u16 word_2001092;
 
+extern u8 byte_20010A4;
+extern u8 byte_20010A5;
+extern u8 gRoomNameNumber;
+extern u8 byte_20010A7;
 extern u8 gRoomGoal;
 extern u8 gWarpGoal;
 extern u8 byte_20010AA;
@@ -675,6 +679,13 @@ extern u8 unk_87E0240[1]; // Unknown size.
 extern u32 unk_83FC114[129];
 
 extern u32 dword_80CEB58;
+
+extern u32 dword_80CEBE0[6];
+extern u32 dword_80CEBF8[6];
+extern u32 dword_80CEE5C[6];
+extern u32 dword_80CEE74[6];
+
+extern u32 dword_80CC844[2];
 
 // Other
 
