@@ -235,13 +235,12 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
     return TRUE;
 }
 
-void sub_800BFA0(int room, int warp, int a3)
-{
+void sub_800BFA0(int room, int warp, int a3) {
     bool32 isMusicChanged;
     u32 level;
 
     level = gLoadedRoomLevel;
-    
+
     sub_805E1DC(1);
     audio_halt_all_fx();
 
@@ -252,13 +251,12 @@ void sub_800BFA0(int room, int warp, int a3)
         gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
         SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
         sub_803FE78();
-    }
-    else
-    {
+    } else {
         isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
         sub_80270AC(4095, isMusicChanged);
 
-        if ((dword_80CEE5C[gLoadedRoomLevel] != room || dword_80CEE74[gLoadedRoomLevel] != warp) && a3) {
+        if ((dword_80CEE5C[gLoadedRoomLevel] != room || dword_80CEE74[gLoadedRoomLevel] != warp)
+            && a3) {
             if (room != ROOM_MUMBOHUT) {
                 gRoomGoal = room;
                 gWarpGoal = warp;
@@ -290,9 +288,10 @@ void sub_800BFA0(int room, int warp, int a3)
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
     sub_8041E88(&gPlayerShadowSprite);
 
-    if ( level != gLoadedRoomLevel )
+    if (level != gLoadedRoomLevel) {
         sub_8040178();
-    
+    }
+
     if (byte_20010A4) {
         sub_8016C78(byte_20010A5);
         word_20010AC = gKeysPressed & 0x3FF;
@@ -310,3 +309,61 @@ void sub_800BFA0(int room, int warp, int a3)
     gPlayerSprite.field_13 = 0;
 }
 
+void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
+    bool32 isMusicChanged;
+    u32 level;
+
+    gShowRoomName = 0;
+    level = gLoadedRoomLevel;
+
+    if (a6 != 2) {
+        sub_805E1DC(1);
+    }
+
+    audio_halt_all_fx();
+
+    isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
+
+    sub_80270AC(4095, isMusicChanged);
+    sub_08013378(room, a2, a3, a4, a6);
+    sub_8025E44(gLoadedRoomLevel);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+    sub_801A2E4();
+    EnableBGAlphaBlending();
+    sub_800EB14();
+    init_efx();
+    enable_poison_effect();
+
+    if (gLoadedRoomIndex == ROOM_DIVESPOT || gLoadedRoomIndex == ROOM_UNDERCORAL) {
+        byte_20010A4 = 0;
+        sub_8017B34(byte_20020B1 != 0);
+    }
+
+    if (dword_2001104 == 1) {
+        DmaTransfer32(&unk_83FCF14, BG_PLTT, 128);
+    }
+
+    if (a5) {
+        sub_8026E48(4095, isMusicChanged, 1);
+    }
+
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+
+    sub_803FE78();
+    sub_8041E88();
+
+    if (level != gLoadedRoomLevel) {
+        sub_8040178();
+    }
+
+    sub_8039210();
+    gPlayerSprite.field_13 = 0;
+    if (gInInteractionArea) {
+        gInInteractionArea = 0;
+        dword_203DFE0 = 0;
+    }
+}

@@ -4,3 +4,5 @@ dword_80CEE5C = 0x80CEE5C;
 dword_80CEE74 = 0x80CEE74;
 
 dword_80CC844 = 0x80CC844;
+
+unk_83FCF14 = 0x83FCF14;

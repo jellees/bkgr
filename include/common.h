@@ -13,7 +13,7 @@ enum Rooms {
     ROOM_MUMBOHUT,
     ROOM_HONEYB,
     ROOM_BEACHSTART,
-    ROOM_UNDERBORAL,
+    ROOM_UNDERCORAL,
     ROOM_OCTOSHOOT,
     ROOM_COWBOSS,
     ROOM_BEACHSLIDE,
@@ -446,6 +446,8 @@ extern bool8 gIsCameraMovingY;
 
 extern u8 byte_200112A;
 
+extern u8 gShowRoomName;
+
 extern u32 dword_20011F8;
 extern s32 dword_20011FC;
 
@@ -686,6 +688,8 @@ extern u32 dword_80CEE5C[6];
 extern u32 dword_80CEE74[6];
 
 extern u32 dword_80CC844[2];
+
+extern u16 unk_83FCF14;
 
 // Other
 
