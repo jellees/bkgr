@@ -367,3 +367,109 @@ void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
         dword_203DFE0 = 0;
     }
 }
+
+void sub_0800C388(int a1, int a2) {
+    bool32 isMusicChanged;
+    s32 room;
+    u32 level;
+
+    ASSERT(a1 & 0x80);
+
+    level = gLoadedRoomLevel;
+    room = (a1 & 0x7F) - 1;
+
+    ASSERT(room >= 0);
+
+    sub_805E1DC(1);
+    audio_halt_all_fx();
+
+    isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
+
+    sub_80270AC(4095, isMusicChanged);
+    SetupRoom(room, a2, 1, 0);
+    sub_8025E44(gLoadedRoomLevel);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+    sub_801A2E4();
+    EnableBGAlphaBlending();
+
+    if (!byte_20010B1) {
+        sub_800EB58(1);
+    }
+
+    sub_800ECB4();
+    init_efx();
+    enable_poison_effect();
+    init_room_name();
+    sub_08040A38(56);
+    sub_8026E48(4095, isMusicChanged, 1);
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+    sub_803FE78();
+    sub_8041E88();
+
+    if (level != gLoadedRoomLevel) {
+        sub_8040178();
+    }
+
+    sub_8039210();
+    gPlayerSprite.field_13 = 0;
+
+    if (gLoadedRoomIndex == ROOM_UNDERCORAL && !sub_80342CC(94, 0)) {
+        init_function(80);
+    }
+
+    if (gInInteractionArea) {
+        gInInteractionArea = 0;
+        dword_203DFE0 = 0;
+    }
+}
+
+int sub_800C50C() {
+    fx32 pos;
+
+    if (dword_203DFC4) {
+        u8 a = dword_203DFC0[dword_203DFC4->field_1E];
+        pos = gPlayerPos.y - dword_203DFC4->field_98;
+
+        if (pos >> 16 >= dword_203FA5C[a].field_28) {
+            return dword_203FA5C[a].field_27;
+        } else {
+            return dword_203DFC4->field_8;
+        }
+    }
+
+    if ((gKeysPressed & word_20010AC) != 0) {
+        return byte_20010A7;
+    }
+
+    pos = gPlayerPos.y - gPlayerShadowPos.y;
+
+    if ((gPlayerStateSettings[gPlayerState] & 0x400) == 0) {
+        if (pos != 0) {
+            if ((gPlayerStateSettings[gPlayerState] & 0x100) == 0
+                && (gPlayerStateSettings[gPlayerState] & 0x40) == 0) {
+                return gFloorPlaneResult.playerSpritePriority;
+            } else {
+                return stru_3002950.playerSpritePriority;
+            }
+        }
+
+        return stru_3002950.playerSpritePriority;
+    }
+
+    if (pos >> 16 >= stru_3002950.field_48) {
+        return stru_3002950.field_6;
+    }
+
+    return stru_3002950.playerSpritePriority;
+}
+
+void sub_800C604() {
+    byte_2001094 = gLoadedRoomIndex;
+    dword_2001098 = gPlayerPos.x;
+    dword_200109C = gPlayerPos.y;
+    dword_20010A0 = gPlayerPos.z;
+}

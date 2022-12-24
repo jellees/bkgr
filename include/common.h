@@ -340,7 +340,8 @@ struct struc_44
     u32 field_34;
     struct Vec3fx distance;
     u32 field_44;
-    u32 field_48;
+    u16 field_48;
+    u16 field_4A;
     u8 field_4C;
     u8 field_4D;
     u8 field_4E;
@@ -349,6 +350,15 @@ struct struc_44
     u8 field_51;
     u8 field_52;
     u8 field_53;
+};
+
+struct struc_46
+{
+    u32 field_0[9];
+    u8 field_24[3];
+    u8 field_27;
+    u16 field_28;
+    u32 field_2C;
 };
 
 //EWRAM
@@ -420,6 +430,10 @@ extern u8 byte_200108E;
 extern u16 word_2001090;
 extern u16 word_2001092;
 
+extern u8 byte_2001094;
+extern fx32 dword_2001098;
+extern fx32 dword_200109C;
+extern fx32 dword_20010A0;
 extern u8 byte_20010A4;
 extern u8 byte_20010A5;
 extern u8 gRoomNameNumber;
@@ -506,6 +520,8 @@ extern u8 byte_203F9A1; // possibly bool8
 extern u8 byte_203F9A2;
 
 extern u8 byte_203FA35; // possibly bool8
+
+extern struct struc_46* dword_203FA5C;
 
 extern u8* dword_203FA7C;
 extern u8* dword_203FA80;
