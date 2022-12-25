@@ -1,6 +1,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "room.h"
+#include "pause_menu.h"
 #include "common.h"
 
 void sub_800B958(int a1, int a2, int a3, int a4, int a5) {
@@ -798,6 +799,126 @@ void sub_0800CD94(int a1) {
             word_2000348 = REG_BG2CNT;
             word_200034A = REG_BG3CNT;
             sub_0805BA1C(8, 1);
+            break;
+
+        default:
+            HANG;
+            break;
+    }
+}
+
+void sub_0800D1A8(int a1) {
+    switch (a1) {
+        case 9:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            byte_203F4E0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_080593D0(9, 2);
+            break;
+
+        case 0:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            byte_203F4E0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_080593D0(0, 2);
+            break;
+
+        case 5:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            byte_203F4E0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_080593D0(5, 2);
+            break;
+
+        case 3:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            byte_203F4E0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_08055A14(3, 2);
+            break;
+
+        case 4:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            byte_203F4E0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_08055A14(4, 2);
+            break;
+
+        case 6:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            byte_203F4E0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_0805BA1C(6, 2);
+            break;
+
+        case 7:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            byte_203F4E0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_0805BA1C(7, 2);
+            break;
+
+        case 8:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            byte_203F4E0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_0805BA1C(8, 2);
             break;
 
         default:
