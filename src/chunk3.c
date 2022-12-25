@@ -693,3 +693,115 @@ int sub_0800C63C(int room, u32 warp) {
 
     return 0;
 }
+
+void sub_0800CD94(int a1) {
+    switch (a1) {
+        case 9:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_080593D0(9, 1);
+            break;
+
+        case 0:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_080593D0(0, 1);
+            break;
+
+        case 5:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_080593D0(5, 1);
+            break;
+
+        case 3:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_08055A14(3, 1);
+            break;
+
+        case 4:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_08055A14(4, 1);
+            break;
+
+        case 6:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_0805BA1C(6, 1);
+            break;
+
+        case 7:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_0805BA1C(7, 1);
+            break;
+
+        case 8:
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            sub_0805BA1C(8, 1);
+            break;
+
+        default:
+            HANG;
+            break;
+    }
+}

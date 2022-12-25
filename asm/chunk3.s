@@ -3,422 +3,422 @@
 
     .text
 
-    .thumb
-	.global sub_0800CD94
-sub_0800CD94: @ 0x0800CD94
-	push {lr}
-	cmp r0, #9
-	bls _0800CD9C
-	b _0800D1A0
-_0800CD9C:
-	lsls r0, r0, #2
-	ldr r1, _0800CDA8
-	adds r0, r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0800CDA8: .4byte 0x0800CDAC
-_0800CDAC: @ jump table
-	.4byte _0800CE4C @ case 0
-	.4byte _0800D1A0 @ case 1
-	.4byte _0800D1A0 @ case 2
-	.4byte _0800CF40 @ case 3
-	.4byte _0800CFB8 @ case 4
-	.4byte _0800CEC4 @ case 5
-	.4byte _0800D034 @ case 6
-	.4byte _0800D0AC @ case 7
-	.4byte _0800D124 @ case 8
-	.4byte _0800CDD4 @ case 9
-_0800CDD4:
-	bl audio_halt_all_fx
-	ldr r0, _0800CE1C
-	movs r1, #1
-	bl sub_80270AC
-	ldr r1, _0800CE20
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _0800CE24
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _0800CE28
-	movs r0, #0x80
-	lsls r0, r0, #0x13
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CE2C
-	ldr r0, _0800CE30
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CE34
-	ldr r0, _0800CE38
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CE3C
-	ldr r0, _0800CE40
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CE44
-	ldr r0, _0800CE48
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, #9
-	b _0800CF08
-	.align 2, 0
-_0800CE1C: .4byte 0x00000FFF
-_0800CE20: .4byte gShowRoomName
-_0800CE24: .4byte 0x020010B0
-_0800CE28: .4byte word_2000342
-_0800CE2C: .4byte word_2000344
-_0800CE30: .4byte 0x04000008
-_0800CE34: .4byte word_2000346
-_0800CE38: .4byte 0x0400000A
-_0800CE3C: .4byte word_2000348
-_0800CE40: .4byte 0x0400000C
-_0800CE44: .4byte word_200034A
-_0800CE48: .4byte 0x0400000E
-_0800CE4C:
-	bl audio_halt_all_fx
-	ldr r0, _0800CE94
-	movs r1, #1
-	bl sub_80270AC
-	ldr r1, _0800CE98
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _0800CE9C
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _0800CEA0
-	movs r0, #0x80
-	lsls r0, r0, #0x13
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CEA4
-	ldr r0, _0800CEA8
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CEAC
-	ldr r0, _0800CEB0
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CEB4
-	ldr r0, _0800CEB8
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CEBC
-	ldr r0, _0800CEC0
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, #0
-	b _0800CF08
-	.align 2, 0
-_0800CE94: .4byte 0x00000FFF
-_0800CE98: .4byte gShowRoomName
-_0800CE9C: .4byte 0x020010B0
-_0800CEA0: .4byte word_2000342
-_0800CEA4: .4byte word_2000344
-_0800CEA8: .4byte 0x04000008
-_0800CEAC: .4byte word_2000346
-_0800CEB0: .4byte 0x0400000A
-_0800CEB4: .4byte word_2000348
-_0800CEB8: .4byte 0x0400000C
-_0800CEBC: .4byte word_200034A
-_0800CEC0: .4byte 0x0400000E
-_0800CEC4:
-	bl audio_halt_all_fx
-	ldr r0, _0800CF10
-	movs r1, #1
-	bl sub_80270AC
-	ldr r1, _0800CF14
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _0800CF18
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _0800CF1C
-	movs r0, #0x80
-	lsls r0, r0, #0x13
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CF20
-	ldr r0, _0800CF24
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CF28
-	ldr r0, _0800CF2C
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CF30
-	ldr r0, _0800CF34
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CF38
-	ldr r0, _0800CF3C
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, #5
-_0800CF08:
-	movs r1, #1
-	bl sub_080593D0
-	b _0800D1A4
-	.align 2, 0
-_0800CF10: .4byte 0x00000FFF
-_0800CF14: .4byte gShowRoomName
-_0800CF18: .4byte 0x020010B0
-_0800CF1C: .4byte word_2000342
-_0800CF20: .4byte word_2000344
-_0800CF24: .4byte 0x04000008
-_0800CF28: .4byte word_2000346
-_0800CF2C: .4byte 0x0400000A
-_0800CF30: .4byte word_2000348
-_0800CF34: .4byte 0x0400000C
-_0800CF38: .4byte word_200034A
-_0800CF3C: .4byte 0x0400000E
-_0800CF40:
-	bl audio_halt_all_fx
-	ldr r0, _0800CF88
-	movs r1, #1
-	bl sub_80270AC
-	ldr r1, _0800CF8C
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _0800CF90
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _0800CF94
-	movs r0, #0x80
-	lsls r0, r0, #0x13
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CF98
-	ldr r0, _0800CF9C
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CFA0
-	ldr r0, _0800CFA4
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CFA8
-	ldr r0, _0800CFAC
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800CFB0
-	ldr r0, _0800CFB4
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, #3
-	b _0800CFFC
-	.align 2, 0
-_0800CF88: .4byte 0x00000FFF
-_0800CF8C: .4byte gShowRoomName
-_0800CF90: .4byte 0x020010B0
-_0800CF94: .4byte word_2000342
-_0800CF98: .4byte word_2000344
-_0800CF9C: .4byte 0x04000008
-_0800CFA0: .4byte word_2000346
-_0800CFA4: .4byte 0x0400000A
-_0800CFA8: .4byte word_2000348
-_0800CFAC: .4byte 0x0400000C
-_0800CFB0: .4byte word_200034A
-_0800CFB4: .4byte 0x0400000E
-_0800CFB8:
-	bl audio_halt_all_fx
-	ldr r0, _0800D004
-	movs r1, #1
-	bl sub_80270AC
-	ldr r1, _0800D008
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _0800D00C
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _0800D010
-	movs r0, #0x80
-	lsls r0, r0, #0x13
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D014
-	ldr r0, _0800D018
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D01C
-	ldr r0, _0800D020
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D024
-	ldr r0, _0800D028
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D02C
-	ldr r0, _0800D030
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, #4
-_0800CFFC:
-	movs r1, #1
-	bl sub_08055A14
-	b _0800D1A4
-	.align 2, 0
-_0800D004: .4byte 0x00000FFF
-_0800D008: .4byte gShowRoomName
-_0800D00C: .4byte 0x020010B0
-_0800D010: .4byte word_2000342
-_0800D014: .4byte word_2000344
-_0800D018: .4byte 0x04000008
-_0800D01C: .4byte word_2000346
-_0800D020: .4byte 0x0400000A
-_0800D024: .4byte word_2000348
-_0800D028: .4byte 0x0400000C
-_0800D02C: .4byte word_200034A
-_0800D030: .4byte 0x0400000E
-_0800D034:
-	bl audio_halt_all_fx
-	ldr r0, _0800D07C
-	movs r1, #1
-	bl sub_80270AC
-	ldr r1, _0800D080
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _0800D084
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _0800D088
-	movs r0, #0x80
-	lsls r0, r0, #0x13
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D08C
-	ldr r0, _0800D090
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D094
-	ldr r0, _0800D098
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D09C
-	ldr r0, _0800D0A0
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D0A4
-	ldr r0, _0800D0A8
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, #6
-	b _0800D168
-	.align 2, 0
-_0800D07C: .4byte 0x00000FFF
-_0800D080: .4byte gShowRoomName
-_0800D084: .4byte 0x020010B0
-_0800D088: .4byte word_2000342
-_0800D08C: .4byte word_2000344
-_0800D090: .4byte 0x04000008
-_0800D094: .4byte word_2000346
-_0800D098: .4byte 0x0400000A
-_0800D09C: .4byte word_2000348
-_0800D0A0: .4byte 0x0400000C
-_0800D0A4: .4byte word_200034A
-_0800D0A8: .4byte 0x0400000E
-_0800D0AC:
-	bl audio_halt_all_fx
-	ldr r0, _0800D0F4
-	movs r1, #1
-	bl sub_80270AC
-	ldr r1, _0800D0F8
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _0800D0FC
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _0800D100
-	movs r0, #0x80
-	lsls r0, r0, #0x13
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D104
-	ldr r0, _0800D108
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D10C
-	ldr r0, _0800D110
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D114
-	ldr r0, _0800D118
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D11C
-	ldr r0, _0800D120
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, #7
-	b _0800D168
-	.align 2, 0
-_0800D0F4: .4byte 0x00000FFF
-_0800D0F8: .4byte gShowRoomName
-_0800D0FC: .4byte 0x020010B0
-_0800D100: .4byte word_2000342
-_0800D104: .4byte word_2000344
-_0800D108: .4byte 0x04000008
-_0800D10C: .4byte word_2000346
-_0800D110: .4byte 0x0400000A
-_0800D114: .4byte word_2000348
-_0800D118: .4byte 0x0400000C
-_0800D11C: .4byte word_200034A
-_0800D120: .4byte 0x0400000E
-_0800D124:
-	bl audio_halt_all_fx
-	ldr r0, _0800D170
-	movs r1, #1
-	bl sub_80270AC
-	ldr r1, _0800D174
-	movs r0, #0
-	strb r0, [r1]
-	ldr r1, _0800D178
-	movs r0, #1
-	strb r0, [r1]
-	ldr r1, _0800D17C
-	movs r0, #0x80
-	lsls r0, r0, #0x13
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D180
-	ldr r0, _0800D184
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D188
-	ldr r0, _0800D18C
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D190
-	ldr r0, _0800D194
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldr r1, _0800D198
-	ldr r0, _0800D19C
-	ldrh r0, [r0]
-	strh r0, [r1]
-	movs r0, #8
-_0800D168:
-	movs r1, #1
-	bl sub_0805BA1C
-	b _0800D1A4
-	.align 2, 0
-_0800D170: .4byte 0x00000FFF
-_0800D174: .4byte gShowRoomName
-_0800D178: .4byte 0x020010B0
-_0800D17C: .4byte word_2000342
-_0800D180: .4byte word_2000344
-_0800D184: .4byte 0x04000008
-_0800D188: .4byte word_2000346
-_0800D18C: .4byte 0x0400000A
-_0800D190: .4byte word_2000348
-_0800D194: .4byte 0x0400000C
-_0800D198: .4byte word_200034A
-_0800D19C: .4byte 0x0400000E
-_0800D1A0:
-	.2byte 0xEE00, 0xEE00
-_0800D1A4:
-	pop {r0}
-	bx r0
+@     .thumb
+@ 	.global sub_0800CD94
+@ sub_0800CD94: @ 0x0800CD94
+@ 	push {lr}
+@ 	cmp r0, #9
+@ 	bls _0800CD9C
+@ 	b _0800D1A0
+@ _0800CD9C:
+@ 	lsls r0, r0, #2
+@ 	ldr r1, _0800CDA8
+@ 	adds r0, r0, r1
+@ 	ldr r0, [r0]
+@ 	mov pc, r0
+@ 	.align 2, 0
+@ _0800CDA8: .4byte 0x0800CDAC
+@ _0800CDAC: @ jump table
+@ 	.4byte _0800CE4C @ case 0
+@ 	.4byte _0800D1A0 @ case 1
+@ 	.4byte _0800D1A0 @ case 2
+@ 	.4byte _0800CF40 @ case 3
+@ 	.4byte _0800CFB8 @ case 4
+@ 	.4byte _0800CEC4 @ case 5
+@ 	.4byte _0800D034 @ case 6
+@ 	.4byte _0800D0AC @ case 7
+@ 	.4byte _0800D124 @ case 8
+@ 	.4byte _0800CDD4 @ case 9
+@ _0800CDD4:
+@ 	bl audio_halt_all_fx
+@ 	ldr r0, _0800CE1C
+@ 	movs r1, #1
+@ 	bl sub_80270AC
+@ 	ldr r1, _0800CE20
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800CE24
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800CE28
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #0x13
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CE2C
+@ 	ldr r0, _0800CE30
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CE34
+@ 	ldr r0, _0800CE38
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CE3C
+@ 	ldr r0, _0800CE40
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CE44
+@ 	ldr r0, _0800CE48
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	movs r0, #9
+@ 	b _0800CF08
+@ 	.align 2, 0
+@ _0800CE1C: .4byte 0x00000FFF
+@ _0800CE20: .4byte gShowRoomName
+@ _0800CE24: .4byte 0x020010B0
+@ _0800CE28: .4byte word_2000342
+@ _0800CE2C: .4byte word_2000344
+@ _0800CE30: .4byte 0x04000008
+@ _0800CE34: .4byte word_2000346
+@ _0800CE38: .4byte 0x0400000A
+@ _0800CE3C: .4byte word_2000348
+@ _0800CE40: .4byte 0x0400000C
+@ _0800CE44: .4byte word_200034A
+@ _0800CE48: .4byte 0x0400000E
+@ _0800CE4C:
+@ 	bl audio_halt_all_fx
+@ 	ldr r0, _0800CE94
+@ 	movs r1, #1
+@ 	bl sub_80270AC
+@ 	ldr r1, _0800CE98
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800CE9C
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800CEA0
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #0x13
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CEA4
+@ 	ldr r0, _0800CEA8
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CEAC
+@ 	ldr r0, _0800CEB0
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CEB4
+@ 	ldr r0, _0800CEB8
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CEBC
+@ 	ldr r0, _0800CEC0
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	movs r0, #0
+@ 	b _0800CF08
+@ 	.align 2, 0
+@ _0800CE94: .4byte 0x00000FFF
+@ _0800CE98: .4byte gShowRoomName
+@ _0800CE9C: .4byte 0x020010B0
+@ _0800CEA0: .4byte word_2000342
+@ _0800CEA4: .4byte word_2000344
+@ _0800CEA8: .4byte 0x04000008
+@ _0800CEAC: .4byte word_2000346
+@ _0800CEB0: .4byte 0x0400000A
+@ _0800CEB4: .4byte word_2000348
+@ _0800CEB8: .4byte 0x0400000C
+@ _0800CEBC: .4byte word_200034A
+@ _0800CEC0: .4byte 0x0400000E
+@ _0800CEC4:
+@ 	bl audio_halt_all_fx
+@ 	ldr r0, _0800CF10
+@ 	movs r1, #1
+@ 	bl sub_80270AC
+@ 	ldr r1, _0800CF14
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800CF18
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800CF1C
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #0x13
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CF20
+@ 	ldr r0, _0800CF24
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CF28
+@ 	ldr r0, _0800CF2C
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CF30
+@ 	ldr r0, _0800CF34
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CF38
+@ 	ldr r0, _0800CF3C
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	movs r0, #5
+@ _0800CF08:
+@ 	movs r1, #1
+@ 	bl sub_080593D0
+@ 	b _0800D1A4
+@ 	.align 2, 0
+@ _0800CF10: .4byte 0x00000FFF
+@ _0800CF14: .4byte gShowRoomName
+@ _0800CF18: .4byte 0x020010B0
+@ _0800CF1C: .4byte word_2000342
+@ _0800CF20: .4byte word_2000344
+@ _0800CF24: .4byte 0x04000008
+@ _0800CF28: .4byte word_2000346
+@ _0800CF2C: .4byte 0x0400000A
+@ _0800CF30: .4byte word_2000348
+@ _0800CF34: .4byte 0x0400000C
+@ _0800CF38: .4byte word_200034A
+@ _0800CF3C: .4byte 0x0400000E
+@ _0800CF40:
+@ 	bl audio_halt_all_fx
+@ 	ldr r0, _0800CF88
+@ 	movs r1, #1
+@ 	bl sub_80270AC
+@ 	ldr r1, _0800CF8C
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800CF90
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800CF94
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #0x13
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CF98
+@ 	ldr r0, _0800CF9C
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CFA0
+@ 	ldr r0, _0800CFA4
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CFA8
+@ 	ldr r0, _0800CFAC
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800CFB0
+@ 	ldr r0, _0800CFB4
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	movs r0, #3
+@ 	b _0800CFFC
+@ 	.align 2, 0
+@ _0800CF88: .4byte 0x00000FFF
+@ _0800CF8C: .4byte gShowRoomName
+@ _0800CF90: .4byte 0x020010B0
+@ _0800CF94: .4byte word_2000342
+@ _0800CF98: .4byte word_2000344
+@ _0800CF9C: .4byte 0x04000008
+@ _0800CFA0: .4byte word_2000346
+@ _0800CFA4: .4byte 0x0400000A
+@ _0800CFA8: .4byte word_2000348
+@ _0800CFAC: .4byte 0x0400000C
+@ _0800CFB0: .4byte word_200034A
+@ _0800CFB4: .4byte 0x0400000E
+@ _0800CFB8:
+@ 	bl audio_halt_all_fx
+@ 	ldr r0, _0800D004
+@ 	movs r1, #1
+@ 	bl sub_80270AC
+@ 	ldr r1, _0800D008
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800D00C
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800D010
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #0x13
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D014
+@ 	ldr r0, _0800D018
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D01C
+@ 	ldr r0, _0800D020
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D024
+@ 	ldr r0, _0800D028
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D02C
+@ 	ldr r0, _0800D030
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	movs r0, #4
+@ _0800CFFC:
+@ 	movs r1, #1
+@ 	bl sub_08055A14
+@ 	b _0800D1A4
+@ 	.align 2, 0
+@ _0800D004: .4byte 0x00000FFF
+@ _0800D008: .4byte gShowRoomName
+@ _0800D00C: .4byte 0x020010B0
+@ _0800D010: .4byte word_2000342
+@ _0800D014: .4byte word_2000344
+@ _0800D018: .4byte 0x04000008
+@ _0800D01C: .4byte word_2000346
+@ _0800D020: .4byte 0x0400000A
+@ _0800D024: .4byte word_2000348
+@ _0800D028: .4byte 0x0400000C
+@ _0800D02C: .4byte word_200034A
+@ _0800D030: .4byte 0x0400000E
+@ _0800D034:
+@ 	bl audio_halt_all_fx
+@ 	ldr r0, _0800D07C
+@ 	movs r1, #1
+@ 	bl sub_80270AC
+@ 	ldr r1, _0800D080
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800D084
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800D088
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #0x13
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D08C
+@ 	ldr r0, _0800D090
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D094
+@ 	ldr r0, _0800D098
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D09C
+@ 	ldr r0, _0800D0A0
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D0A4
+@ 	ldr r0, _0800D0A8
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	movs r0, #6
+@ 	b _0800D168
+@ 	.align 2, 0
+@ _0800D07C: .4byte 0x00000FFF
+@ _0800D080: .4byte gShowRoomName
+@ _0800D084: .4byte 0x020010B0
+@ _0800D088: .4byte word_2000342
+@ _0800D08C: .4byte word_2000344
+@ _0800D090: .4byte 0x04000008
+@ _0800D094: .4byte word_2000346
+@ _0800D098: .4byte 0x0400000A
+@ _0800D09C: .4byte word_2000348
+@ _0800D0A0: .4byte 0x0400000C
+@ _0800D0A4: .4byte word_200034A
+@ _0800D0A8: .4byte 0x0400000E
+@ _0800D0AC:
+@ 	bl audio_halt_all_fx
+@ 	ldr r0, _0800D0F4
+@ 	movs r1, #1
+@ 	bl sub_80270AC
+@ 	ldr r1, _0800D0F8
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800D0FC
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800D100
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #0x13
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D104
+@ 	ldr r0, _0800D108
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D10C
+@ 	ldr r0, _0800D110
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D114
+@ 	ldr r0, _0800D118
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D11C
+@ 	ldr r0, _0800D120
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	movs r0, #7
+@ 	b _0800D168
+@ 	.align 2, 0
+@ _0800D0F4: .4byte 0x00000FFF
+@ _0800D0F8: .4byte gShowRoomName
+@ _0800D0FC: .4byte 0x020010B0
+@ _0800D100: .4byte word_2000342
+@ _0800D104: .4byte word_2000344
+@ _0800D108: .4byte 0x04000008
+@ _0800D10C: .4byte word_2000346
+@ _0800D110: .4byte 0x0400000A
+@ _0800D114: .4byte word_2000348
+@ _0800D118: .4byte 0x0400000C
+@ _0800D11C: .4byte word_200034A
+@ _0800D120: .4byte 0x0400000E
+@ _0800D124:
+@ 	bl audio_halt_all_fx
+@ 	ldr r0, _0800D170
+@ 	movs r1, #1
+@ 	bl sub_80270AC
+@ 	ldr r1, _0800D174
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800D178
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	ldr r1, _0800D17C
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #0x13
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D180
+@ 	ldr r0, _0800D184
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D188
+@ 	ldr r0, _0800D18C
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D190
+@ 	ldr r0, _0800D194
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	ldr r1, _0800D198
+@ 	ldr r0, _0800D19C
+@ 	ldrh r0, [r0]
+@ 	strh r0, [r1]
+@ 	movs r0, #8
+@ _0800D168:
+@ 	movs r1, #1
+@ 	bl sub_0805BA1C
+@ 	b _0800D1A4
+@ 	.align 2, 0
+@ _0800D170: .4byte 0x00000FFF
+@ _0800D174: .4byte gShowRoomName
+@ _0800D178: .4byte 0x020010B0
+@ _0800D17C: .4byte word_2000342
+@ _0800D180: .4byte word_2000344
+@ _0800D184: .4byte 0x04000008
+@ _0800D188: .4byte word_2000346
+@ _0800D18C: .4byte 0x0400000A
+@ _0800D190: .4byte word_2000348
+@ _0800D194: .4byte 0x0400000C
+@ _0800D198: .4byte word_200034A
+@ _0800D19C: .4byte 0x0400000E
+@ _0800D1A0:
+@ 	.2byte 0xEE00, 0xEE00
+@ _0800D1A4:
+@ 	pop {r0}
+@ 	bx r0
 
     .thumb
 	.global sub_0800D1A8
