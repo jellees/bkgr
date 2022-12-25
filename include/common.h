@@ -20,7 +20,7 @@ enum Rooms {
     ROOM_BEACHTOP,
     ROOM_BEACHSHOOT,
     ROOM_FJORD,
-    ROOM_SKIDDOS,
+    ROOM_SKIDOOS,
     ROOM_FURNSECTION,
     ROOM_GRUNTY,
     ROOM_HOUSEROOMS,
@@ -458,6 +458,7 @@ extern u32 dword_2001114;
 extern bool8 gIsCameraMovingX;
 extern bool8 gIsCameraMovingY;
 
+extern u16 word_2001128;
 extern u8 byte_200112A;
 
 extern u8 gShowRoomName;

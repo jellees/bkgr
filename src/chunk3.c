@@ -473,3 +473,223 @@ void sub_800C604() {
     dword_200109C = gPlayerPos.y;
     dword_20010A0 = gPlayerPos.z;
 }
+
+int sub_0800C63C(int room, u32 warp) {
+    switch (room) {
+        case ROOM_BEACHSLIDE:
+            switch (gLoadedRoomIndex) {
+                case ROOM_LOWERFARM:
+                    audio_halt_all_fx();
+                    sub_80270AC(4095, 1);
+                    sub_800DE9C();
+                    sub_8016C78(0);
+                    gIsCameraMovingX = 0;
+                    gIsCameraMovingY = 0;
+                    gShowRoomName = 0;
+                    word_2001128 = warp;
+                    byte_20010B0 = 1;
+                    word_2000342 = REG_DISPCNT;
+                    word_2000344 = REG_BG0CNT;
+                    word_2000346 = REG_BG1CNT;
+                    word_2000348 = REG_BG2CNT;
+                    word_200034A = REG_BG3CNT;
+                    sub_080593D0(9, 0);
+                    break;
+
+                case ROOM_BEACHTOP:
+                    audio_halt_all_fx();
+                    sub_80270AC(4095, 1);
+                    sub_800DE9C();
+                    sub_8016C78(0);
+                    gIsCameraMovingX = 0;
+                    gIsCameraMovingY = 0;
+                    gShowRoomName = 0;
+                    word_2001128 = warp;
+                    byte_20010B0 = 1;
+                    word_2000342 = REG_DISPCNT;
+                    word_2000344 = REG_BG0CNT;
+                    word_2000346 = REG_BG1CNT;
+                    word_2000348 = REG_BG2CNT;
+                    word_200034A = REG_BG3CNT;
+                    sub_080593D0(0, 0);
+                    break;
+
+                case ROOM_VILLAGE:
+                    audio_halt_all_fx();
+                    sub_80270AC(4095, 1);
+                    sub_800DE9C();
+                    sub_8016C78(0);
+                    gIsCameraMovingX = 0;
+                    gIsCameraMovingY = 0;
+                    gShowRoomName = 0;
+                    word_2001128 = warp;
+                    byte_20010B0 = 1;
+                    word_2000342 = REG_DISPCNT;
+                    word_2000344 = REG_BG0CNT;
+                    word_2000346 = REG_BG1CNT;
+                    word_2000348 = REG_BG2CNT;
+                    word_200034A = REG_BG3CNT;
+                    sub_080593D0(5, 0);
+                    break;
+
+                default:
+                    HANG;
+                    break;
+            }
+            return 1;
+
+        case ROOM_BEACHSHOOT:
+            if (!stru_200209A.field_6 || sub_80342CC(217, 10)) {
+                return 2;
+            }
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            sub_800DE9C();
+            sub_8016C78(0);
+            gIsCameraMovingX = 0;
+            gIsCameraMovingY = 0;
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            word_2001128 = warp;
+            sub_08052B58(1, 0);
+            return 1;
+
+        case ROOM_GRUNTYSHOOT:
+            if (sub_80342CC(205, 0)) {
+                return 2;
+            }
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            sub_800DE9C();
+            sub_8016C78(0);
+            gIsCameraMovingX = 0;
+            gIsCameraMovingY = 0;
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            word_2001128 = warp;
+            sub_08052B58(2, 0);
+            return 1;
+
+        case ROOM_SKIDOOS:
+            if (sub_80342CC(217, 14)) {
+                return 2;
+            }
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            sub_800DE9C();
+            sub_8016C78(0);
+            gIsCameraMovingX = 0;
+            gIsCameraMovingY = 0;
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            word_2001128 = warp;
+            sub_08055A14(4, 0);
+            return 1;
+
+        case ROOM_BOATFIGHT:
+            if (sub_80342CC(217, 11)) {
+                return 2;
+            }
+            audio_halt_all_fx();
+            sub_80270AC(4095, 1);
+            sub_800DE9C();
+            sub_8016C78(0);
+            gIsCameraMovingX = 0;
+            gIsCameraMovingY = 0;
+            gShowRoomName = 0;
+            byte_20010B0 = 1;
+            word_2000342 = REG_DISPCNT;
+            word_2000344 = REG_BG0CNT;
+            word_2000346 = REG_BG1CNT;
+            word_2000348 = REG_BG2CNT;
+            word_200034A = REG_BG3CNT;
+            word_2001128 = warp;
+            sub_08055A14(3, 0);
+            return 1;
+
+        case ROOM_SHEEPDIP:
+            switch (gLoadedRoomIndex) {
+                case ROOM_UPPERFARM:
+                    if (sub_80342CC(217, 15)) {
+                        return 2;
+                    }
+                    audio_halt_all_fx();
+                    sub_80270AC(4095, 1);
+                    sub_800DE9C();
+                    sub_8016C78(0);
+                    gIsCameraMovingX = 0;
+                    gIsCameraMovingY = 0;
+                    gShowRoomName = 0;
+                    byte_20010B0 = 1;
+                    word_2000342 = REG_DISPCNT;
+                    word_2000344 = REG_BG0CNT;
+                    word_2000346 = REG_BG1CNT;
+                    word_2000348 = REG_BG2CNT;
+                    word_200034A = REG_BG3CNT;
+                    word_2001128 = warp;
+                    sub_0805BA1C(6, 0);
+                    return 1;
+
+                case ROOM_BOARDWALK:
+                    if (sub_80342CC(217, 17)) {
+                        return 2;
+                    }
+                    pause_efx();
+                    audio_halt_all_fx();
+                    sub_80270AC(4095, 1);
+                    sub_800DE9C();
+                    sub_8016C78(0);
+                    gIsCameraMovingX = 0;
+                    gIsCameraMovingY = 0;
+                    gShowRoomName = 0;
+                    byte_20010B0 = 1;
+                    word_2000342 = REG_DISPCNT;
+                    word_2000344 = REG_BG0CNT;
+                    word_2000346 = REG_BG1CNT;
+                    word_2000348 = REG_BG2CNT;
+                    word_200034A = REG_BG3CNT;
+                    word_2001128 = warp;
+                    sub_0805BA1C(7, 0);
+                    return 1;
+
+                case ROOM_FJORD:
+                    if (sub_80342CC(217, 18)) {
+                        return 2;
+                    }
+                    audio_halt_all_fx();
+                    sub_80270AC(4095, 1);
+                    sub_800DE9C();
+                    sub_8016C78(0);
+                    gIsCameraMovingX = 0;
+                    gIsCameraMovingY = 0;
+                    gShowRoomName = 0;
+                    byte_20010B0 = 1;
+                    word_2000342 = REG_DISPCNT;
+                    word_2000344 = REG_BG0CNT;
+                    word_2000346 = REG_BG1CNT;
+                    word_2000348 = REG_BG2CNT;
+                    word_200034A = REG_BG3CNT;
+                    word_2001128 = warp;
+                    sub_0805BA1C(8, 0);
+                    return 1;
+            }
+            break;
+    }
+
+    return 0;
+}
