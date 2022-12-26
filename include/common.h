@@ -528,6 +528,12 @@ extern u8* dword_203FA7C;
 extern u8* dword_203FA80;
 extern u8* dword_203FA84;
 
+extern u32 dword_203FA8C;
+extern u32 dword_203FA90;
+extern u8 byte_203FA94;
+extern u8 byte_203FA95;
+extern u8 byte_203FA96;
+
 //IWRAM
 extern u8 unk_3000000;
 

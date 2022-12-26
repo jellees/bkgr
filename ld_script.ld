@@ -229,6 +229,13 @@ SECTIONS
         dword_203FA7C = .; . += 4;
         dword_203FA80 = .; . += 4;
         dword_203FA84 = .; . += 4;
+
+        . = 0x0003FA8C;
+        dword_203FA8C = .; . += 4;
+        dword_203FA90 = .; . += 4;
+        byte_203FA94 = .; . += 1;
+        byte_203FA95 = .; . += 1;
+        byte_203FA96 = .; . += 1;
     }
 
     . = 0x3000000;

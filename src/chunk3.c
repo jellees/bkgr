@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "room.h"
 #include "pause_menu.h"
+#include "audio_b.h"
 #include "common.h"
 
 void sub_800B958(int a1, int a2, int a3, int a4, int a5) {
@@ -925,4 +926,217 @@ void sub_0800D1A8(int a1) {
             HANG;
             break;
     }
+}
+
+void sub_800D5FC(int a1, int a2, int a3) {
+    int room;
+    int r5;
+
+    byte_20010B0 = 0;
+
+    room = 0;
+    r5 = 0;
+
+    switch (a1) {
+        case 9:
+            room = ROOM_LOWERFARM;
+            if (sub_80342CC(0xD9, 0x10)) {
+                r5 = 0;
+            } else if (a2) {
+                sub_8034460(217, 16, 0, 0);
+                r5 = 0x45;
+            } else {
+                r5 = 0x46;
+            }
+            break;
+
+        case 0:
+            room = ROOM_BEACHSTART;
+            if (sub_80342CC(0xD9, 9)) {
+                r5 = 0;
+            } else if (a2) {
+                sub_8034460(0xD9, 9, 0, 0);
+                r5 = 0x54;
+            } else {
+                r5 = 0x55;
+            }
+            break;
+
+        case 5:
+            room = ROOM_SANDAREA;
+            if (sub_80342CC(0xD9, 0xD)) {
+                r5 = 0;
+            } else if (a2) {
+                sub_8034460(0xD9, 0xD, 0, 0);
+                r5 = 0x76;
+            } else {
+                r5 = 0x77;
+            }
+            break;
+
+        case 1:
+            room = ROOM_BEACHSTART;
+            if (a2 && !sub_80342CC(0xD9, 0xA)) {
+                sub_8034460(0xD9, 0xA, 0, 0);
+                r5 = 0x4E;
+                break;
+            } else {
+                r5 = 0;
+                break;
+            }
+
+        case 2:
+            room = ROOM_HARBOUR;
+            if (a2 && !sub_80342CC(0xCD, 0)) {
+                sub_8034460(0xCD, 0, 0, 0);
+                r5 = 0x81;
+                break;
+            } else {
+                r5 = 0;
+                break;
+            }
+
+        case 3:
+            room = ROOM_BEACHSTART;
+            if (a2 && !sub_80342CC(0xD9, 0xB)) {
+                sub_80342F8(0xD9, 0xB);
+                r5 = 0;
+                break;
+            } else {
+                r5 = 0;
+                break;
+            }
+
+        case 4:
+            room = ROOM_FJORD;
+            if (a2 && !sub_80342CC(0xD9, 0xE)) {
+                sub_80342F8(0xD9, 0xE);
+                r5 = 0;
+                break;
+            } else {
+                r5 = 0;
+                break;
+            }
+
+        case 6:
+            room = ROOM_UPPERFARM;
+            if (a2 && !sub_80342CC(0xD9, 0xF)) {
+                sub_8034460(0xD9, 0xF, 0, 0);
+                r5 = 0x48;
+            } else {
+                r5 = 0;
+            }
+            break;
+
+        case 7:
+            room = ROOM_BOARDWALK;
+            if (a2 && !sub_80342CC(0xD9, 0x11)) {
+                sub_8034460(0xD9, 0x11, 0, 0);
+                r5 = 0x67;
+            } else {
+                r5 = 0;
+            }
+            break;
+
+        case 8:
+            room = ROOM_FJORD;
+            if (a2 && !sub_80342CC(0xD9, 0x12)) {
+                sub_8034460(0xD9, 0x12, 0, 0);
+                r5 = 0x93;
+            } else {
+                r5 = 0;
+            }
+            break;
+
+        default:
+            HANG;
+            break;
+    }
+
+    gRoomGoal = room;
+    gWarpGoal = word_2001128;
+
+    SetupRoom(room, gWarpGoal, 1, 0);
+    sub_8025E44(gLoadedRoomLevel);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+    sub_8018BB0(&gPlayerSprite);
+    sub_801A2E4();
+    byte_200108D = 0;
+    gPlayerSprite.field_10 = 0;
+    byte_200108E = 0;
+    EnableBGAlphaBlending();
+    init_efx();
+    init_room_name();
+
+    if (!a3) {
+        sub_8026E48(4095, 1, 1);
+    } else {
+        sub_8026F78(4095, 1, 1);
+    }
+
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+    sub_803FE78();
+    sub_8040178();
+    if (byte_20010A4) {
+        sub_8016C78(byte_20010A5);
+        word_20010AC = gKeysPressed & 0x3FF;
+    }
+    sub_8063178();
+
+    if (r5 != 0) {
+        init_function(r5);
+    }
+}
+
+void sub_800D8E8(int a1, char a2, char a3) {
+    byte_20010B0 = 0;
+    byte_203FA95 = 0;
+    byte_203FA94 = a2;
+    byte_203FA96 = a3;
+    SetupRoom(dword_203FA8C, dword_203FA90, 1, 0);
+    sub_8025E44(gLoadedRoomLevel);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+    EnableBGAlphaBlending();
+    init_room_name();
+    byte_200108D = 0;
+    gPlayerSprite.field_10 = 0;
+    byte_200108E = 0;
+    sub_800EF6C(dword_203FA90);
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+    sub_803FE78();
+    sub_8040178();
+    sub_80409DC();
+    sub_8063178();
+    dword_2001110 = 136 - gCameraPixelX;
+    dword_2001114 = gCameraPixelY;
+}
+
+void sub_800DA04(int a1, int a2, int a3) {
+    byte_20010B0 = 0;
+    byte_203F4E0 = 0;
+    SetupRoom(dword_203F4E4, dword_203F4E8, 1, 0);
+    if (gCanChangeBgm) {
+        audio_start_tune(15);
+    }
+    sub_8025E44(gLoadedRoomLevel);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+    EnableBGAlphaBlending();
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+    sub_803FE78();
+    sub_8040178();
+    sub_80409DC();
+    sub_8063178();
+    sub_8047000(a3);
 }
