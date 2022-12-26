@@ -1542,7 +1542,7 @@ void exec_arcade_menu() {
     FlushMenuToTextBuffer();
 
     if (gKeysDown & A_BUTTON) {
-        u32 isNot10 = gMenuId != MENU_ARCADE_1;
+        u32 arcadePage = gMenuId != MENU_ARCADE_1 ? 1 : 0;
         int entry = GetCurrentMenuEntry();
         if (entry == 4) {
             if (gMenuId == MENU_ARCADE_1) {
@@ -1553,9 +1553,9 @@ void exec_arcade_menu() {
                 gMenuId = MENU_ARCADE_1;
             }
         } else {
-            int idx = 4 * isNot10 + entry;
+            int idx = 4 * arcadePage + entry;
             if (byte_203E16C >= dword_80CF3B0[idx]) {
-                dword_203F4E4 = 27;
+                dword_203F4E4 = ROOM_VILLAGE;
                 dword_203F4E8 = 25;
                 SetTextSpriteCount(0);
                 DmaFill32(170, gOAMBuffer1, 256);
@@ -1566,7 +1566,7 @@ void exec_arcade_menu() {
                 SyncVblank();
                 UpdateVideo();
                 SkipVblank();
-                sub_0800D1A8(dword_80CF390[idx]);
+                load_mini_game_from_arcade(dword_80CF390[idx]);
             }
         }
     } else if (gKeysDown & B_BUTTON) {

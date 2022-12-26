@@ -808,9 +808,9 @@ void sub_0800CD94(int a1) {
     }
 }
 
-void sub_0800D1A8(int a1) {
-    switch (a1) {
-        case 9:
+void load_mini_game_from_arcade(int miniGame) {
+    switch (miniGame) {
+        case MINI_GAME_EGG_SCRAMBLE:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;
@@ -824,7 +824,7 @@ void sub_0800D1A8(int a1) {
             sub_080593D0(9, 2);
             break;
 
-        case 0:
+        case MINI_GAME_CHUBBY_CHUTE:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;
@@ -838,7 +838,7 @@ void sub_0800D1A8(int a1) {
             sub_080593D0(0, 2);
             break;
 
-        case 5:
+        case MINI_GAME_SLIDE_O_FEAR:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;
@@ -852,7 +852,7 @@ void sub_0800D1A8(int a1) {
             sub_080593D0(5, 2);
             break;
 
-        case 3:
+        case MINI_GAME_BATTLE_BOATS:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;
@@ -866,7 +866,7 @@ void sub_0800D1A8(int a1) {
             sub_08055A14(3, 2);
             break;
 
-        case 4:
+        case MINI_GAME_SNOWY_SLEDS:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;
@@ -880,7 +880,7 @@ void sub_0800D1A8(int a1) {
             sub_08055A14(4, 2);
             break;
 
-        case 6:
+        case MINI_GAME_SHEEP_DIP:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;
@@ -894,7 +894,7 @@ void sub_0800D1A8(int a1) {
             sub_0805BA1C(6, 2);
             break;
 
-        case 7:
+        case MINI_GAME_MAGIC_ANGLER:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;
@@ -908,7 +908,7 @@ void sub_0800D1A8(int a1) {
             sub_0805BA1C(7, 2);
             break;
 
-        case 8:
+        case MINI_GAME_FROZEN_FISH:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;
