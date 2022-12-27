@@ -217,7 +217,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
         }
     }
 
-    if (gWallPlaneResult.isColliding && gWallPlaneResult.floorType == 6 && stru_200209A[18]
+    if (gWallPlaneResult.isColliding && gWallPlaneResult.floorType == 6 && gUnlockedMoves[18]
         && !byte_20020B1 && gGameStatus.health != 0) {
         struct Vec3fx a;
         a.x = a1->x;

@@ -541,7 +541,7 @@ int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_BEACHSHOOT:
-            if (!stru_200209A[6] || sub_80342CC(217, 10)) {
+            if (!gUnlockedMoves[6] || sub_80342CC(217, 10)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -1167,7 +1167,7 @@ void sub_800DAE4(int a1) {
             return;
         }
 
-        if (stru_200209A[r5 + 6]) {
+        if (gUnlockedMoves[6 + r5]) {
             if (a1 == 0) {
                 r1 = TRUE;
             } else if (gGameStatus.field_E[r5]) {

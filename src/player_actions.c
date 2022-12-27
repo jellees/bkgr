@@ -331,7 +331,7 @@ static void Walk(s32 keyPressed, s32 keyDown) {
             return;
 
         case 2:
-            if (stru_200209A[2]) {
+            if (gUnlockedMoves[2]) {
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = 13;
                 sub_8003368(&gPlayerSprite, 97, 0, 1);
@@ -533,7 +533,7 @@ void Crouch(s32 keyPressed, s32 keyDown) {
                 if (sub_08016EE0())
                     return;
 
-                if (!stru_200209A[20])
+                if (!gUnlockedMoves[20])
                     return;
 
                 if (!byte_3003588 && gFloorPlaneResult.isColliding
@@ -577,7 +577,7 @@ void Crouch(s32 keyPressed, s32 keyDown) {
             return;
 
         case R_BUTTON:
-            if (stru_200209A[15]) {
+            if (gUnlockedMoves[15]) {
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = 12;
 

@@ -180,29 +180,6 @@ struct SoundEffect {
     u32 pitch;
 };
 
-struct struct_0
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-    u8 field_4;
-    u8 field_5;
-    u8 field_6[5];
-    u8 field_B;
-    u8 field_C;
-    u8 field_D;
-    u8 field_E;
-    u8 field_F;
-    u8 field_10;
-    u8 field_11;
-    u8 field_12;
-    u8 field_13;
-    u8 field_14;
-    u8 field_15;
-    u8 field_16;
-};
-
 struct TileAnimQueueIndex
 {
     u8* field_0;
@@ -478,9 +455,7 @@ extern s32 dword_20011FC;
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;
 
-// This is probably just an array of bool8.
-// extern struct struct_0 stru_200209A;
-extern u8 stru_200209A[23];
+extern bool8 gUnlockedMoves[23];
 extern u8 byte_20020B1;
 extern u8 byte_20020B2;
 extern u8 byte_20020B3;

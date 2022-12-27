@@ -141,7 +141,7 @@ SECTIONS
         gPlayerState = .; . += 2;
 
         . = 0x0000209A;
-        stru_200209A = .; . += 0x17;
+        gUnlockedMoves = .; . += 0x17;
         byte_20020B1 = .; . += 1;
         byte_20020B2 = .; . += 1;
         byte_20020B3 = .; . += 1;
