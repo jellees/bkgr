@@ -3,177 +3,177 @@
 
     .text
 
-    .thumb
-	.global sub_800DAE4
-sub_800DAE4: @ 0x0800DAE4
-	push {r4, r5, r6, r7, lr}
-	adds r4, r0, #0
-	ldr r5, _0800DB40
-	movs r0, #0
-	ldrsb r0, [r5, r0]
-	cmp r0, #0
-	bge _0800DAFA
-	ldr r0, _0800DB44
-	ldr r1, _0800DB48
-	bl sub_080121F0
-_0800DAFA:
-	cmp r4, #0
-	bne _0800DB50
-	movs r0, #0
-	ldrsb r0, [r5, r0]
-	adds r0, #9
-	bl sub_0804207C
-	cmp r0, #0
-	bne _0800DB50
-	movs r0, #0
-	ldrsb r0, [r5, r0]
-	adds r0, #9
-	bl sub_080420E8
-	cmp r0, #0
-	beq _0800DB1C
-	b _0800DC46
-_0800DB1C:
-	movs r0, #0
-	ldrsb r0, [r5, r0]
-	adds r0, #9
-	bl sub_08041FA4
-	movs r2, #0
-	ldrsb r2, [r5, r2]
-	adds r0, r2, #0
-	adds r0, #9
-	ldr r1, _0800DB4C
-	adds r1, #0xe
-	adds r2, r2, r1
-	movs r1, #0
-	ldrsb r1, [r2, r1]
-	bl sub_08040204
-	b _0800DC46
-	.align 2, 0
-_0800DB40: .4byte 0x0200108C
-_0800DB44: .4byte 0x08064848
-_0800DB48: .4byte 0x08064850
-_0800DB4C: .4byte gGameStatus
-_0800DB50:
-	ldr r0, _0800DC20
-	movs r5, #0
-	ldrsb r5, [r0, r5]
-	movs r1, #0
-	adds r2, r5, #0
-	ldr r7, _0800DC24
-	ldr r6, _0800DC28
-	movs r3, #3
-_0800DB60:
-	adds r5, #1
-	ands r5, r3
-	cmp r5, r2
-	beq _0800DC46
-	adds r0, r5, #6
-	adds r0, r0, r7
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0800DB84
-	cmp r4, #0
-	beq _0800DB88
-	adds r0, r5, r6
-	ldrb r0, [r0]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0
-	beq _0800DB84
-	movs r1, #1
-_0800DB84:
-	cmp r1, #0
-	beq _0800DB60
-_0800DB88:
-	cmp r4, #0
-	beq _0800DBA4
-	ldr r0, _0800DC20
-	movs r2, #0
-	ldrsb r2, [r0, r2]
-	adds r0, r2, #0
-	adds r0, #9
-	ldr r1, _0800DC2C
-	adds r1, #0xe
-	adds r2, r2, r1
-	movs r1, #0
-	ldrsb r1, [r2, r1]
-	bl sub_08040204
-_0800DBA4:
-	ldr r4, _0800DC20
-	movs r0, #0
-	ldrsb r0, [r4, r0]
-	adds r0, #9
-	bl sub_0804200C
-	strb r5, [r4]
-	movs r0, #0
-	ldrsb r0, [r4, r0]
-	adds r0, #9
-	bl sub_08041FA4
-	movs r2, #0
-	ldrsb r2, [r4, r2]
-	adds r0, r2, #0
-	adds r0, #9
-	ldr r1, _0800DC2C
-	adds r1, #0xe
-	adds r2, r2, r1
-	movs r1, #0
-	ldrsb r1, [r2, r1]
-	bl sub_08040204
-	ldr r4, _0800DC30
-	ldr r0, [r4]
-	bl audio_fx_still_active
-	cmp r0, #0
-	beq _0800DBEC
-	ldr r0, _0800DC34
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0800DBEC
-	ldr r0, [r4]
-	bl audio_halt_fx
-_0800DBEC:
-	ldr r4, _0800DC30
-	ldr r0, _0800DC34
-	ldrb r0, [r0]
-	cmp r0, #0
-	beq _0800DC40
-	ldr r3, _0800DC38
-	movs r1, #0x9c
-	lsls r1, r1, #1
-	adds r0, r3, r1
-	ldrh r0, [r0]
-	ldr r2, _0800DC3C
-	movs r5, #0x9d
-	lsls r5, r5, #1
-	adds r1, r3, r5
-	ldrb r2, [r2]
-	adds r1, r1, r2
-	ldrb r1, [r1]
-	adds r5, #2
-	adds r2, r3, r5
-	ldr r2, [r2]
-	movs r3, #0x80
-	lsls r3, r3, #9
-	adds r2, r2, r3
-	bl audio_new_fx
-	b _0800DC44
-	.align 2, 0
-_0800DC20: .4byte 0x0200108C
-_0800DC24: .4byte 0x0200209A
-_0800DC28: .4byte 0x02001052
-_0800DC2C: .4byte gGameStatus
-_0800DC30: .4byte 0x02001124
-_0800DC34: .4byte gCanPlaySfx
-_0800DC38: .4byte 0x080CE440
-_0800DC3C: .4byte gSfxVolume
-_0800DC40:
-	movs r0, #1
-	rsbs r0, r0, #0
-_0800DC44:
-	str r0, [r4]
-_0800DC46:
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
+@     .thumb
+@ 	.global sub_800DAE4
+@ sub_800DAE4: @ 0x0800DAE4
+@ 	push {r4, r5, r6, r7, lr}
+@ 	adds r4, r0, #0
+@ 	ldr r5, _0800DB40
+@ 	movs r0, #0
+@ 	ldrsb r0, [r5, r0]
+@ 	cmp r0, #0
+@ 	bge _0800DAFA
+@ 	ldr r0, _0800DB44
+@ 	ldr r1, _0800DB48
+@ 	bl sub_080121F0
+@ _0800DAFA:
+@ 	cmp r4, #0
+@ 	bne _0800DB50
+@ 	movs r0, #0
+@ 	ldrsb r0, [r5, r0]
+@ 	adds r0, #9
+@ 	bl sub_0804207C
+@ 	cmp r0, #0
+@ 	bne _0800DB50
+@ 	movs r0, #0
+@ 	ldrsb r0, [r5, r0]
+@ 	adds r0, #9
+@ 	bl sub_080420E8
+@ 	cmp r0, #0
+@ 	beq _0800DB1C
+@ 	b _0800DC46
+@ _0800DB1C:
+@ 	movs r0, #0
+@ 	ldrsb r0, [r5, r0]
+@ 	adds r0, #9
+@ 	bl sub_08041FA4
+@ 	movs r2, #0
+@ 	ldrsb r2, [r5, r2]
+@ 	adds r0, r2, #0
+@ 	adds r0, #9
+@ 	ldr r1, _0800DB4C
+@ 	adds r1, #0xe
+@ 	adds r2, r2, r1
+@ 	movs r1, #0
+@ 	ldrsb r1, [r2, r1]
+@ 	bl sub_08040204
+@ 	b _0800DC46
+@ 	.align 2, 0
+@ _0800DB40: .4byte 0x0200108C
+@ _0800DB44: .4byte 0x08064848
+@ _0800DB48: .4byte 0x08064850
+@ _0800DB4C: .4byte gGameStatus
+@ _0800DB50:
+@ 	ldr r0, _0800DC20
+@ 	movs r5, #0
+@ 	ldrsb r5, [r0, r5]
+@ 	movs r1, #0
+@ 	adds r2, r5, #0
+@ 	ldr r7, _0800DC24
+@ 	ldr r6, _0800DC28
+@ 	movs r3, #3
+@ _0800DB60:
+@ 	adds r5, #1
+@ 	ands r5, r3
+@ 	cmp r5, r2
+@ 	beq _0800DC46
+@ 	adds r0, r5, #6
+@ 	adds r0, r0, r7
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _0800DB84
+@ 	cmp r4, #0
+@ 	beq _0800DB88
+@ 	adds r0, r5, r6
+@ 	ldrb r0, [r0]
+@ 	lsls r0, r0, #0x18
+@ 	asrs r0, r0, #0x18
+@ 	cmp r0, #0
+@ 	beq _0800DB84
+@ 	movs r1, #1
+@ _0800DB84:
+@ 	cmp r1, #0
+@ 	beq _0800DB60
+@ _0800DB88:
+@ 	cmp r4, #0
+@ 	beq _0800DBA4
+@ 	ldr r0, _0800DC20
+@ 	movs r2, #0
+@ 	ldrsb r2, [r0, r2]
+@ 	adds r0, r2, #0
+@ 	adds r0, #9
+@ 	ldr r1, _0800DC2C
+@ 	adds r1, #0xe
+@ 	adds r2, r2, r1
+@ 	movs r1, #0
+@ 	ldrsb r1, [r2, r1]
+@ 	bl sub_08040204
+@ _0800DBA4:
+@ 	ldr r4, _0800DC20
+@ 	movs r0, #0
+@ 	ldrsb r0, [r4, r0]
+@ 	adds r0, #9
+@ 	bl sub_0804200C
+@ 	strb r5, [r4]
+@ 	movs r0, #0
+@ 	ldrsb r0, [r4, r0]
+@ 	adds r0, #9
+@ 	bl sub_08041FA4
+@ 	movs r2, #0
+@ 	ldrsb r2, [r4, r2]
+@ 	adds r0, r2, #0
+@ 	adds r0, #9
+@ 	ldr r1, _0800DC2C
+@ 	adds r1, #0xe
+@ 	adds r2, r2, r1
+@ 	movs r1, #0
+@ 	ldrsb r1, [r2, r1]
+@ 	bl sub_08040204
+@ 	ldr r4, _0800DC30
+@ 	ldr r0, [r4]
+@ 	bl audio_fx_still_active
+@ 	cmp r0, #0
+@ 	beq _0800DBEC
+@ 	ldr r0, _0800DC34
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _0800DBEC
+@ 	ldr r0, [r4]
+@ 	bl audio_halt_fx
+@ _0800DBEC:
+@ 	ldr r4, _0800DC30
+@ 	ldr r0, _0800DC34
+@ 	ldrb r0, [r0]
+@ 	cmp r0, #0
+@ 	beq _0800DC40
+@ 	ldr r3, _0800DC38
+@ 	movs r1, #0x9c
+@ 	lsls r1, r1, #1
+@ 	adds r0, r3, r1
+@ 	ldrh r0, [r0]
+@ 	ldr r2, _0800DC3C
+@ 	movs r5, #0x9d
+@ 	lsls r5, r5, #1
+@ 	adds r1, r3, r5
+@ 	ldrb r2, [r2]
+@ 	adds r1, r1, r2
+@ 	ldrb r1, [r1]
+@ 	adds r5, #2
+@ 	adds r2, r3, r5
+@ 	ldr r2, [r2]
+@ 	movs r3, #0x80
+@ 	lsls r3, r3, #9
+@ 	adds r2, r2, r3
+@ 	bl audio_new_fx
+@ 	b _0800DC44
+@ 	.align 2, 0
+@ _0800DC20: .4byte 0x0200108C
+@ _0800DC24: .4byte 0x0200209A
+@ _0800DC28: .4byte 0x02001052
+@ _0800DC2C: .4byte gGameStatus
+@ _0800DC30: .4byte 0x02001124
+@ _0800DC34: .4byte gCanPlaySfx
+@ _0800DC38: .4byte 0x080CE440
+@ _0800DC3C: .4byte gSfxVolume
+@ _0800DC40:
+@ 	movs r0, #1
+@ 	rsbs r0, r0, #0
+@ _0800DC44:
+@ 	str r0, [r4]
+@ _0800DC46:
+@ 	pop {r4, r5, r6, r7}
+@ 	pop {r0}
+@ 	bx r0
 
     .thumb
 	.global sub_800DC4C

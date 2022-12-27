@@ -541,7 +541,7 @@ int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_BEACHSHOOT:
-            if (!stru_200209A.field_6 || sub_80342CC(217, 10)) {
+            if (!stru_200209A[6] || sub_80342CC(217, 10)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -1139,4 +1139,58 @@ void sub_800DA04(int a1, int a2, int a3) {
     sub_80409DC();
     sub_8063178();
     sub_8047000(a3);
+}
+
+void sub_800DAE4(int a1) {
+    s32 r5;
+    bool8 r1;
+    u32 idx;
+
+    if (byte_200108C < 0) {
+        sub_080121F0(&byte_8064848, &byte_8064850);
+    }
+
+    if (!a1 && !sub_0804207C(byte_200108C + 9)) {
+        if (!sub_080420E8(byte_200108C + 9)) {
+            sub_08041FA4(byte_200108C + 9);
+            sub_08040204(byte_200108C + 9, gGameStatus.field_E[byte_200108C]);
+        }
+        return;
+    }
+
+    r5 = byte_200108C;
+    r1 = FALSE;
+
+    while (!r1) {
+        r5 = (r5 + 1) & 3;
+        if (r5 == byte_200108C) {
+            return;
+        }
+
+        if (stru_200209A[r5 + 6]) {
+            if (a1 == 0) {
+                r1 = TRUE;
+            } else if (gGameStatus.field_E[r5]) {
+                r1 = TRUE;
+            }
+        }
+    }
+
+    if (a1) {
+        sub_08040204(byte_200108C + 9, gGameStatus.field_E[byte_200108C]);
+    }
+
+    sub_0804200C(byte_200108C + 9);
+    byte_200108C = r5;
+    sub_08041FA4(byte_200108C + 9);
+    sub_08040204(byte_200108C + 9, gGameStatus.field_E[byte_200108C]);
+
+    if (audio_fx_still_active(dword_2001124) && gCanPlaySfx) {
+        audio_halt_fx(dword_2001124);
+    }
+
+    dword_2001124 = gCanPlaySfx
+                        ? audio_new_fx(dSoundEffects[39].index, dSoundEffects[39].volumes[gSfxVolume],
+                                       dSoundEffects[39].pitch + 0x10000)
+                        : -1;
 }

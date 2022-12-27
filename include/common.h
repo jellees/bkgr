@@ -76,11 +76,7 @@ struct GameStatus {
     u8 clockSecond;
     u8 field_B;
     u16 totalNotes;
-    u8 field_E;
-    u8 field_F;
-    u8 field_10;
-    u8 field_11;
-    u8 field_12;
+    s8 field_E[5];
     u8 health;
     u8 enableExtraHealth;
     u8 maxHealth;
@@ -192,11 +188,7 @@ struct struct_0
     u8 field_3;
     u8 field_4;
     u8 field_5;
-    u8 field_6;
-    u8 field_7;
-    u8 field_8;
-    u8 field_9;
-    u8 field_A;
+    u8 field_6[5];
     u8 field_B;
     u8 field_C;
     u8 field_D;
@@ -473,6 +465,7 @@ extern u32 dword_2001114;
 extern bool8 gIsCameraMovingX;
 extern bool8 gIsCameraMovingY;
 
+extern u32 dword_2001124;
 extern u16 word_2001128;
 extern u8 byte_200112A;
 
@@ -485,7 +478,9 @@ extern s32 dword_20011FC;
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;
 
-extern struct struct_0 stru_200209A;
+// This is probably just an array of bool8.
+// extern struct struct_0 stru_200209A;
+extern u8 stru_200209A[23];
 extern u8 byte_20020B1;
 extern u8 byte_20020B2;
 extern u8 byte_20020B3;
@@ -728,6 +723,9 @@ extern u32 dword_80CEE74[6];
 extern u32 dword_80CC844[2];
 
 extern u16 unk_83FCF14;
+
+extern u8 byte_8064848;
+extern u8 byte_8064850;
 
 // Other
 

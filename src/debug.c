@@ -134,11 +134,11 @@ EWRAM_DATA u8 byte_200145A;
 EWRAM_DATA u8 byte_200145B;
 
 void sub_800FA58() {
-    gGameStatus.field_E = stru_80CC8C4.field_E;
-    gGameStatus.field_F = stru_80CC8C4.field_F;
-    gGameStatus.field_11 = stru_80CC8C4.field_11;
-    gGameStatus.field_10 = stru_80CC8C4.field_10;
-    gGameStatus.field_12 = stru_80CC8C4.field_12;
+    gGameStatus.field_E[0] = stru_80CC8C4.field_E[0];
+    gGameStatus.field_E[1] = stru_80CC8C4.field_E[1];
+    gGameStatus.field_E[3] = stru_80CC8C4.field_E[3];
+    gGameStatus.field_E[2] = stru_80CC8C4.field_E[2];
+    gGameStatus.field_E[4] = stru_80CC8C4.field_E[4];
     sub_803FE78();
 }
 

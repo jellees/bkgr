@@ -115,7 +115,8 @@ SECTIONS
         gIsCameraMovingX = .; . += 1;
         gIsCameraMovingY = .; . += 1;
 
-        . = 0x00001128;
+        . = 0x00001124;
+        dword_2001124 = .; . += 4;
         word_2001128 = .; . += 2;
         byte_200112A = .; . += 1;
 
