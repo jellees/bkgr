@@ -1141,53 +1141,75 @@ void sub_800DA04(int a1, int a2, int a3) {
     sub_8047000(a3);
 }
 
-void sub_800DAE4(int a1) {
+void sub_800DAE4(bool32 a1) {
     s32 r5;
     bool8 r1;
     u32 idx;
 
-    if (byte_200108C < 0) {
+    if (gSelectedEgg < 0) {
         sub_080121F0(&byte_8064848, &byte_8064850);
     }
 
-    if (!a1 && !sub_0804207C(byte_200108C + 9)) {
-        if (!sub_080420E8(byte_200108C + 9)) {
-            sub_08041FA4(byte_200108C + 9);
-            sub_08040204(byte_200108C + 9, gGameStatus.field_E[byte_200108C]);
+    if (!a1 && !sub_0804207C(gSelectedEgg + 9)) {
+        if (!sub_080420E8(gSelectedEgg + 9)) {
+            sub_08041FA4(gSelectedEgg + 9);
+            sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
         }
         return;
     }
 
-    r5 = byte_200108C;
+    r5 = gSelectedEgg;
     r1 = FALSE;
 
     while (!r1) {
         r5 = (r5 + 1) & 3;
-        if (r5 == byte_200108C) {
+        if (r5 == gSelectedEgg) {
             return;
         }
 
         if (gUnlockedMoves[6 + r5]) {
-            if (a1 == 0) {
+            if (!a1) {
                 r1 = TRUE;
-            } else if (gGameStatus.field_E[r5]) {
+            } else if (gGameStatus.eggs[r5]) {
                 r1 = TRUE;
             }
         }
     }
 
     if (a1) {
-        sub_08040204(byte_200108C + 9, gGameStatus.field_E[byte_200108C]);
+        sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 
-    sub_0804200C(byte_200108C + 9);
-    byte_200108C = r5;
-    sub_08041FA4(byte_200108C + 9);
-    sub_08040204(byte_200108C + 9, gGameStatus.field_E[byte_200108C]);
+    sub_0804200C(gSelectedEgg + 9);
+    gSelectedEgg = r5;
+    sub_08041FA4(gSelectedEgg + 9);
+    sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
 
     if (audio_fx_still_active(dword_2001124) && gCanPlaySfx) {
         audio_halt_fx(dword_2001124);
     }
 
     dword_2001124 = PLAY_SFX(39);
+}
+
+void sub_800DC4C(int a1, bool32 a2) {
+    if (gSelectedEgg < 0) {
+        gGameStatus.eggs[EGG_NORMAL] -= a1;
+        if (gGameStatus.eggs[EGG_NORMAL] <= 0) {
+            gGameStatus.eggs[EGG_NORMAL] = 0;
+            if (a2) {
+                sub_800DAE4(TRUE);
+            }
+        }
+        sub_08040204(9, gGameStatus.eggs[0]);
+    } else {
+        gGameStatus.eggs[gSelectedEgg] -= a1;
+        if (gGameStatus.eggs[gSelectedEgg] <= 0) {
+            gGameStatus.eggs[gSelectedEgg] = 0;
+            if (a2) {
+                sub_800DAE4(TRUE);
+            }
+        }
+        sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+    }
 }

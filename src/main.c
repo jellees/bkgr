@@ -606,7 +606,7 @@ static void sub_800A5F4() {
     gLoadedRoomBgm = -1;
     gGameStatus.field_16 = stru_80CC8C4.field_16;
     gGameStatus.field_17 = stru_80CC8C4.field_17;
-    byte_200108C = -1;
+    gSelectedEgg = -1;
     byte_20020B1 = 0;
     byte_20010B0 = 0;
     gTextSpeed = 1;

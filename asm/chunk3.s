@@ -175,81 +175,81 @@
 @ 	pop {r0}
 @ 	bx r0
 
-    .thumb
-	.global sub_800DC4C
-sub_800DC4C: @ 0x0800DC4C
-	push {r4, r5, lr}
-	adds r4, r0, #0
-	adds r5, r1, #0
-	ldr r3, _0800DC88
-	movs r0, #0
-	ldrsb r0, [r3, r0]
-	cmp r0, #0
-	bge _0800DC90
-	ldr r1, _0800DC8C
-	ldrb r0, [r1, #0xe]
-	subs r0, r0, r4
-	strb r0, [r1, #0xe]
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bgt _0800DC78
-	movs r0, #0
-	strb r0, [r1, #0xe]
-	cmp r5, #0
-	beq _0800DC78
-	movs r0, #1
-	bl sub_800DAE4
-_0800DC78:
-	ldr r0, _0800DC8C
-	movs r1, #0xe
-	ldrsb r1, [r0, r1]
-	movs r0, #9
-	bl sub_08040204
-	b _0800DCD4
-	.align 2, 0
-_0800DC88: .4byte 0x0200108C
-_0800DC8C: .4byte gGameStatus
-_0800DC90:
-	ldr r2, _0800DCDC
-	movs r1, #0
-	ldrsb r1, [r3, r1]
-	adds r2, #0xe
-	adds r1, r1, r2
-	ldrb r0, [r1]
-	subs r0, r0, r4
-	strb r0, [r1]
-	movs r0, #0
-	ldrsb r0, [r3, r0]
-	adds r1, r0, r2
-	movs r0, #0
-	ldrsb r0, [r1, r0]
-	cmp r0, #0
-	bgt _0800DCBC
-	movs r0, #0
-	strb r0, [r1]
-	cmp r5, #0
-	beq _0800DCBC
-	movs r0, #1
-	bl sub_800DAE4
-_0800DCBC:
-	ldr r0, _0800DCE0
-	movs r2, #0
-	ldrsb r2, [r0, r2]
-	adds r0, r2, #0
-	adds r0, #9
-	ldr r1, _0800DCDC
-	adds r1, #0xe
-	adds r2, r2, r1
-	movs r1, #0
-	ldrsb r1, [r2, r1]
-	bl sub_08040204
-_0800DCD4:
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800DCDC: .4byte gGameStatus
-_0800DCE0: .4byte 0x0200108C
+@     .thumb
+@ 	.global sub_800DC4C
+@ sub_800DC4C: @ 0x0800DC4C
+@ 	push {r4, r5, lr}
+@ 	adds r4, r0, #0
+@ 	adds r5, r1, #0
+@ 	ldr r3, _0800DC88
+@ 	movs r0, #0
+@ 	ldrsb r0, [r3, r0]
+@ 	cmp r0, #0
+@ 	bge _0800DC90
+@ 	ldr r1, _0800DC8C
+@ 	ldrb r0, [r1, #0xe]
+@ 	subs r0, r0, r4
+@ 	strb r0, [r1, #0xe]
+@ 	lsls r0, r0, #0x18
+@ 	cmp r0, #0
+@ 	bgt _0800DC78
+@ 	movs r0, #0
+@ 	strb r0, [r1, #0xe]
+@ 	cmp r5, #0
+@ 	beq _0800DC78
+@ 	movs r0, #1
+@ 	bl sub_800DAE4
+@ _0800DC78:
+@ 	ldr r0, _0800DC8C
+@ 	movs r1, #0xe
+@ 	ldrsb r1, [r0, r1]
+@ 	movs r0, #9
+@ 	bl sub_08040204
+@ 	b _0800DCD4
+@ 	.align 2, 0
+@ _0800DC88: .4byte 0x0200108C
+@ _0800DC8C: .4byte gGameStatus
+@ _0800DC90:
+@ 	ldr r2, _0800DCDC
+@ 	movs r1, #0
+@ 	ldrsb r1, [r3, r1]
+@ 	adds r2, #0xe
+@ 	adds r1, r1, r2
+@ 	ldrb r0, [r1]
+@ 	subs r0, r0, r4
+@ 	strb r0, [r1]
+@ 	movs r0, #0
+@ 	ldrsb r0, [r3, r0]
+@ 	adds r1, r0, r2
+@ 	movs r0, #0
+@ 	ldrsb r0, [r1, r0]
+@ 	cmp r0, #0
+@ 	bgt _0800DCBC
+@ 	movs r0, #0
+@ 	strb r0, [r1]
+@ 	cmp r5, #0
+@ 	beq _0800DCBC
+@ 	movs r0, #1
+@ 	bl sub_800DAE4
+@ _0800DCBC:
+@ 	ldr r0, _0800DCE0
+@ 	movs r2, #0
+@ 	ldrsb r2, [r0, r2]
+@ 	adds r0, r2, #0
+@ 	adds r0, #9
+@ 	ldr r1, _0800DCDC
+@ 	adds r1, #0xe
+@ 	adds r2, r2, r1
+@ 	movs r1, #0
+@ 	ldrsb r1, [r2, r1]
+@ 	bl sub_08040204
+@ _0800DCD4:
+@ 	pop {r4, r5}
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _0800DCDC: .4byte gGameStatus
+@ _0800DCE0: .4byte 0x0200108C
 
     .thumb
 	.global sub_800DCE4

@@ -75,7 +75,7 @@ SECTIONS
         
         . = 0x00001088;
         dword_2001088 = .; . += 4;
-        byte_200108C = .; . += 1;
+        gSelectedEgg = .; . += 1;
         byte_200108D = .; . += 1;
         byte_200108E = .; . += 1;
         . += 1; /* padding */

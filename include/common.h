@@ -61,6 +61,13 @@ enum MiniGames {
     MINI_GAME_COUNT
 };
 
+enum Eggs {
+    EGG_NORMAL,
+    EGG_ELECTRIC,
+    EGG_ICE,
+    EGG_FIRE
+};
+
 // Structs
 
 struct GameStatus {
@@ -76,7 +83,7 @@ struct GameStatus {
     u8 clockSecond;
     u8 field_B;
     u16 totalNotes;
-    s8 field_E[5];
+    s8 eggs[5];
     u8 health;
     u8 enableExtraHealth;
     u8 maxHealth;
@@ -408,7 +415,7 @@ extern u16 gLoadedRoomLevel;
 extern u16 gLoadedRoomBgm;
 
 extern fx32 dword_2001088;
-extern s8 byte_200108C;
+extern s8 gSelectedEgg;
 extern u8 byte_200108D;
 extern u8 byte_200108E;
 extern u16 word_2001090;
