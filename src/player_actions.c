@@ -637,7 +637,6 @@ void Crouch(s32 keyPressed, s32 keyDown) {
     }
 }
 
-#ifdef NONMATCHING
 void sub_801B4C8(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
@@ -675,13 +674,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (gCanPlaySfx) {
-                    dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
-                                     dSoundEffects[30].pitch + 0x10000);
-                } else {
-                    dword_20020B8 = -1;
-                }
+                dword_20020B8 = PLAY_SFX(30);
             }
             break;
         case DPAD_RIGHT | DPAD_DOWN:
@@ -691,13 +684,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (gCanPlaySfx) {
-                    dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
-                                     dSoundEffects[30].pitch + 0x10000);
-                } else {
-                    dword_20020B8 = -1;
-                }
+                dword_20020B8 = PLAY_SFX(30);
             }
             break;
         case DPAD_LEFT | DPAD_DOWN:
@@ -707,13 +694,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (gCanPlaySfx) {
-                    dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
-                                     dSoundEffects[30].pitch + 0x10000);
-                } else {
-                    dword_20020B8 = -1;
-                }
+                dword_20020B8 = PLAY_SFX(30);
             }
             break;
         case DPAD_LEFT | DPAD_UP:
@@ -723,13 +704,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (gCanPlaySfx) {
-                    dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
-                                     dSoundEffects[30].pitch + 0x10000);
-                } else {
-                    dword_20020B8 = -1;
-                }
+                dword_20020B8 = PLAY_SFX(30);
             }
             break;
         case DPAD_UP:
@@ -739,13 +714,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (gCanPlaySfx) {
-                    dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
-                                     dSoundEffects[30].pitch + 0x10000);
-                } else {
-                    dword_20020B8 = -1;
-                }
+                dword_20020B8 = PLAY_SFX(30);
             }
             break;
         case DPAD_DOWN:
@@ -755,13 +724,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (gCanPlaySfx) {
-                    dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
-                                     dSoundEffects[30].pitch + 0x10000);
-                } else {
-                    dword_20020B8 = -1;
-                }
+                dword_20020B8 = PLAY_SFX(30);
             }
             break;
         case DPAD_LEFT:
@@ -771,13 +734,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
             }
             if (dword_20020B8 == -1) {
-                if (gCanPlaySfx) {
-                    dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
-                                     dSoundEffects[30].pitch + 0x10000);
-                } else {
-                    dword_20020B8 = -1;
-                }
+                dword_20020B8 = PLAY_SFX(30);
             }
             break;
         case DPAD_RIGHT:
@@ -787,13 +744,7 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0x28000, 0, 0);
             }
             if (dword_20020B8 == -1) {
-                if (gCanPlaySfx) {
-                    dword_20020B8 =
-                        audio_new_fx(dSoundEffects[30].index, dSoundEffects[30].volumes[gSfxVolume],
-                                     dSoundEffects[30].pitch + 0x10000);
-                } else {
-                    dword_20020B8 = -1;
-                }
+                dword_20020B8 = PLAY_SFX(30);
             }
             break;
         default:
@@ -813,4 +764,3 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
             break;
     }
 }
-#endif
