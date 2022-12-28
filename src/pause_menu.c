@@ -418,16 +418,10 @@ static void exec_pause_menu() {
                     fadeIn = 1;
                 }
             } else if (gKeysDown & DPAD_UP) {
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                 dSoundEffects[204].pitch + 0x10000);
-                }
+                PLAY_SFX(204);
                 AdvanceMenuEntryUp();
             } else if (gKeysDown & DPAD_DOWN) {
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                 dSoundEffects[204].pitch + 0x10000);
-                }
+                PLAY_SFX(204);
                 AdvanceMenuEntryDown();
             }
         }
@@ -819,10 +813,7 @@ static bool32 exec_save_menu() {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
         if (gKeysDown & B_BUTTON) {
-            if (gCanPlaySfx) {
-                audio_new_fx(dSoundEffects[208].index, dSoundEffects[208].volumes[gSfxVolume],
-                             dSoundEffects[208].pitch + 0x10000);
-            }
+            PLAY_SFX(208);
             isCancelled = TRUE;
         } else if (gKeysDown & A_BUTTON) {
             switch (state) {
@@ -864,16 +855,10 @@ static bool32 exec_save_menu() {
                     break;
             }
         } else if (gKeysDown & DPAD_UP) {
-            if (gCanPlaySfx) {
-                audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                             dSoundEffects[204].pitch + 0x10000);
-            }
+            PLAY_SFX(204);
             AdvanceMenuEntryUp();
         } else if (gKeysDown & DPAD_DOWN) {
-            if (gCanPlaySfx) {
-                audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                             dSoundEffects[204].pitch + 0x10000);
-            }
+            PLAY_SFX(204);
             AdvanceMenuEntryDown();
         }
 
@@ -968,13 +953,7 @@ static bool32 exec_save_menu() {
                         newIdx = RandomMinMax(min, max);
                     } while (newIdx == currentSfxIdx);
                     currentSfxIdx = newIdx;
-                    if (gCanPlaySfx) {
-                        sfxId = audio_new_fx(dSoundEffects[newIdx].index,
-                                             dSoundEffects[newIdx].volumes[gSfxVolume],
-                                             dSoundEffects[newIdx].pitch + 0x10000);
-                    } else {
-                        sfxId = -1;
-                    }
+                    sfxId = PLAY_SFX(newIdx);
                     var_30 = r5;
                     if (var_30 == 0) {
                         var_48 = 0;
@@ -1180,11 +1159,7 @@ static void exec_options_menu() {
                     if (gSfxMainVolume != 0) {
                         gSfxMainVolume--;
                         audio_set_fx_vol(dVolumes[gSfxMainVolume]);
-                        if (gCanPlaySfx) {
-                            audio_new_fx(dSoundEffects[200].index,
-                                         dSoundEffects[200].volumes[gSfxVolume],
-                                         dSoundEffects[200].pitch + 0x10000);
-                        }
+                        PLAY_SFX(200);
                         IntegerToAsciiBw(gSfxMainVolume, &sfxText[2]);
                     }
                     break;
@@ -1220,11 +1195,7 @@ static void exec_options_menu() {
                     if (gSfxMainVolume < 9) {
                         gSfxMainVolume++;
                         audio_set_fx_vol(dVolumes[gSfxMainVolume]);
-                        if (gCanPlaySfx) {
-                            audio_new_fx(dSoundEffects[200].index,
-                                         dSoundEffects[200].volumes[gSfxVolume],
-                                         dSoundEffects[200].pitch + 0x10000);
-                        }
+                        PLAY_SFX(200);
                         IntegerToAsciiBw(gSfxMainVolume, &sfxText[2]);
                     }
                     break;
@@ -1241,16 +1212,10 @@ static void exec_options_menu() {
                     break;
             }
         } else if (gKeysDown & DPAD_UP) {
-            if (gCanPlaySfx) {
-                audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                             dSoundEffects[204].pitch + 0x10000);
-            }
+            PLAY_SFX(204);
             AdvanceMenuEntryUp();
         } else if (gKeysDown & DPAD_DOWN) {
-            if (gCanPlaySfx) {
-                audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                             dSoundEffects[204].pitch + 0x10000);
-            }
+            PLAY_SFX(204);
             AdvanceMenuEntryDown();
         }
 
@@ -1592,16 +1557,10 @@ void exec_arcade_menu() {
             byte_2000F56 = 0;
         }
     } else if (gKeysDown & DPAD_UP) {
-        if (gCanPlaySfx) {
-            audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                         dSoundEffects[204].pitch + 0x10000);
-        }
+        PLAY_SFX(204);
         AdvanceMenuEntryUp();
     } else if (gKeysDown & DPAD_DOWN) {
-        if (gCanPlaySfx) {
-            audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                         dSoundEffects[204].pitch + 0x10000);
-        }
+        PLAY_SFX(204);
         AdvanceMenuEntryDown();
     }
 }

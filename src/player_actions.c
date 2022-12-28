@@ -336,10 +336,7 @@ static void Walk(s32 keyPressed, s32 keyDown) {
                 gPlayerState = 13;
                 sub_8003368(&gPlayerSprite, 97, 0, 1);
                 sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[gPlayerSprite.field_A], 0);
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[7].index, dSoundEffects[7].volumes[gSfxVolume],
-                                 dSoundEffects[7].pitch + 0x10000);
-                }
+                PLAY_SFX(7);
                 sub_8016790(2, gPlayerSprite.field_A);
             } else {
                 DoPackWack();
@@ -498,10 +495,7 @@ static void PackWackStart(s32 keyPressed, s32 keyDown) {
         gPlayerState = 28;
         sub_8003368(&gPlayerSprite, 185, 0, 1);
 
-        if (gCanPlaySfx) {
-            audio_new_fx(dSoundEffects[13].index, dSoundEffects[13].volumes[gSfxVolume],
-                         dSoundEffects[13].pitch + 0x10000);
-        }
+        PLAY_SFX(13);
 
         sub_8016790(1, gPlayerSprite.field_A);
     }
@@ -546,10 +540,7 @@ void Crouch(s32 keyPressed, s32 keyDown) {
                 sub_8003368(&gPlayerSprite, 0x49, 4, 1);
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x40000, 0x1A00);
 
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[gSfxVolume],
-                                 dSoundEffects[21].pitch + 0x10000);
-                }
+                PLAY_SFX(21);
 
                 sub_8016790(0, gPlayerSprite.field_A);
 
@@ -567,10 +558,7 @@ void Crouch(s32 keyPressed, s32 keyDown) {
 
                 sub_8003368(&gPlayerSprite, 0x109, 0, 1);
 
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[gSfxVolume],
-                                 dSoundEffects[21].pitch + 0x10000);
-                }
+                PLAY_SFX(21);
 
                 sub_8016790(0, gPlayerSprite.field_A);
             }
@@ -583,10 +571,7 @@ void Crouch(s32 keyPressed, s32 keyDown) {
 
                 sub_8003368(&gPlayerSprite, 0x31, 7, 0);
 
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[21].index, dSoundEffects[21].volumes[gSfxVolume],
-                                 dSoundEffects[21].pitch + 0x10000);
-                }
+                PLAY_SFX(21);
 
                 sub_8016790(15, gPlayerSprite.field_A);
             }

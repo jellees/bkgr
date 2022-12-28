@@ -1189,8 +1189,5 @@ void sub_800DAE4(int a1) {
         audio_halt_fx(dword_2001124);
     }
 
-    dword_2001124 = gCanPlaySfx
-                        ? audio_new_fx(dSoundEffects[39].index, dSoundEffects[39].volumes[gSfxVolume],
-                                       dSoundEffects[39].pitch + 0x10000)
-                        : -1;
+    dword_2001124 = PLAY_SFX(39);
 }

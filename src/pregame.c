@@ -143,21 +143,11 @@ void ShowSelectGame(int a1) {
         if (!(gKeysDown & JOY_EXCL_DPAD)) {
             if (gKeysDown & DPAD_UP) {
                 if (!byte_20021F9) {
-                    if (gCanPlaySfx) {
-                        u16 value0 = dSoundEffects[204].index;
-                        u8 value1 = dSoundEffects[204].volumes[gSfxVolume];
-                        u32 value2 = dSoundEffects[204].pitch + 0x10000;
-                        audio_new_fx(value0, value1, value2);
-                    }
+                    PLAY_SFX(204);
                     AdvanceMenuEntryUp();
                 }
             } else if (gKeysDown & DPAD_DOWN && !byte_20021F9) {
-                if (gCanPlaySfx) {
-                    u16 value0 = dSoundEffects[204].index;
-                    u8 value1 = dSoundEffects[204].volumes[gSfxVolume];
-                    u32 value2 = dSoundEffects[204].pitch + 0x10000;
-                    audio_new_fx(value0, value1, value2);
-                }
+                PLAY_SFX(204);
                 AdvanceMenuEntryDown();
             }
         }
@@ -542,19 +532,13 @@ int sub_80246C8() {
 
         if (!(gKeysDown & JOY_EXCL_DPAD)) {
             if (gKeysDown & DPAD_UP) {
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                 dSoundEffects[204].pitch + 0x10000);
-                }
+                PLAY_SFX(204);
 
                 do {
                     AdvanceMenuEntryUp();
                 } while (gSaveFiles[GetCurrentMenuEntry()].empty);
             } else if (gKeysDown & DPAD_DOWN) {
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                 dSoundEffects[204].pitch + 0x10000);
-                }
+                PLAY_SFX(204);
 
                 do {
                     AdvanceMenuEntryDown();
@@ -618,17 +602,11 @@ void ShowLanguageSelect() {
 
         if (!(gKeysDown & JOY_EXCL_DPAD)) {
             if (gKeysDown & DPAD_UP) {
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                 dSoundEffects[204].pitch + 0x10000);
-                }
+                PLAY_SFX(204);
 
                 AdvanceMenuEntryUp();
             } else if (gKeysDown & DPAD_DOWN) {
-                if (gCanPlaySfx) {
-                    audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                 dSoundEffects[204].pitch + 0x10000);
-                }
+                PLAY_SFX(204);
 
                 AdvanceMenuEntryDown();
             }
@@ -727,16 +705,10 @@ void ShowEraseData() {
 
             if (!(gKeysDown & JOY_EXCL_DPAD)) {
                 if (gKeysDown & DPAD_UP) {
-                    if (gCanPlaySfx) {
-                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                     dSoundEffects[204].pitch + 0x10000);
-                    }
+                    PLAY_SFX(204);
                     AdvanceMenuEntryUp();
                 } else if (gKeysDown & DPAD_DOWN) {
-                    if (gCanPlaySfx) {
-                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                     dSoundEffects[204].pitch + 0x10000);
-                    }
+                    PLAY_SFX(204);
                     AdvanceMenuEntryDown();
                 }
             }

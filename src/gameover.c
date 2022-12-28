@@ -186,16 +186,10 @@ static void sub_8062D04() {
 
             if (!(gKeysDown & JOY_EXCL_DPAD)) {
                 if (gKeysDown & DPAD_UP) {
-                    if (gCanPlaySfx) {
-                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                     dSoundEffects[204].pitch + 0x10000);
-                    }
+                    PLAY_SFX(204);
                     AdvanceMenuEntryUp();
                 } else if (gKeysDown & DPAD_DOWN) {
-                    if (gCanPlaySfx) {
-                        audio_new_fx(dSoundEffects[204].index, dSoundEffects[204].volumes[gSfxVolume],
-                                     dSoundEffects[204].pitch + 0x10000);
-                    }
+                    PLAY_SFX(204);
                     AdvanceMenuEntryDown();
                 }
             }
