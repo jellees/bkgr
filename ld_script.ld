@@ -142,7 +142,7 @@ SECTIONS
 
         . = 0x0000209A;
         gUnlockedMoves = .; . += 0x17;
-        byte_20020B1 = .; . += 1;
+        gTransformation = .; . += 1;
         byte_20020B2 = .; . += 1;
         byte_20020B3 = .; . += 1;
         dword_20020B4 = .; . += 4;

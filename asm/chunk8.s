@@ -45647,7 +45647,7 @@ _0805E89A:
 	beq _0805E8BE
 	b _0805E8C2
 	.align 2, 0
-_0805E8A0: .4byte byte_20020B1
+_0805E8A0: .4byte gTransformation
 _0805E8A4:
 	ldr r0, _0805E8B0
 	ldrb r0, [r0, #0x16]
@@ -45983,7 +45983,7 @@ sub_805EB10: @ 0x0805EB10
 	beq _0805EB36
 	b _0805ED14
 	.align 2, 0
-_0805EB2C: .4byte byte_20020B1
+_0805EB2C: .4byte gTransformation
 _0805EB30:
 	cmp r2, #2
 	beq _0805EB4E
@@ -50098,7 +50098,7 @@ _08060CA6:
 	.align 2, 0
 _08060CAC: .4byte gPlayerStateSettings
 _08060CB0: .4byte gPlayerState
-_08060CB4: .4byte byte_20020B1
+_08060CB4: .4byte gTransformation
 
 	.thumb
 sub_8060CB8: @ 0x08060CB8
@@ -50987,7 +50987,7 @@ _08061384:
 	.align 2, 0
 _080613B4: .4byte 0x0203FA38
 _080613B8: .4byte gMatrices
-_080613BC: .4byte byte_20020B1
+_080613BC: .4byte gTransformation
 _080613C0:
 	ldr r0, _080613D4
 	ldrh r1, [r0]
@@ -51399,7 +51399,7 @@ _08061718: .4byte 0x0203FA46
 _0806171C: .4byte gKeysPressed
 _08061720: .4byte 0x080CF460
 _08061724: .4byte 0x0203FA4D
-_08061728: .4byte byte_20020B1
+_08061728: .4byte gTransformation
 _0806172C: .4byte 0x0203FA53
 _08061730: .4byte gCanPlaySfx
 _08061734: .4byte 0x080CE440

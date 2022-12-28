@@ -106,7 +106,7 @@ static bool32 sub_800A974() {
         return FALSE;
 
     if (gFloorPlaneResult.floorType == 2 && stru_3002950.floorType == 2) {
-        if (byte_20020B1 != 0 && byte_20020B1 != 4) {
+        if (gTransformation != TRANSFORMATION_BANJO && gTransformation != TRANSFORMATION_OCTOPUS) {
             sub_80192D4(16, -1, 0);
             return FALSE;
         }
@@ -195,8 +195,8 @@ static bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2) {
 
 static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (gFloorPlaneResult.isColliding) {
-        if (gFloorPlaneResult.floorType == 2 && byte_20020B1 != 0 && byte_20020B1 != 4
-            && gGameStatus.health != 0) {
+        if (gFloorPlaneResult.floorType == 2 && gTransformation != TRANSFORMATION_BANJO
+            && gTransformation != TRANSFORMATION_OCTOPUS && gGameStatus.health != 0) {
             if (!byte_20020BC) {
                 sub_80192D4(16, -1, 0);
             }
@@ -204,7 +204,8 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
             return FALSE;
         }
 
-        if (gFloorPlaneResult.field_4E && !byte_200108E && byte_20020B1 != 4 && byte_20020B1 != 3
+        if (gFloorPlaneResult.field_4E && !byte_200108E && gTransformation != TRANSFORMATION_OCTOPUS
+            && gTransformation != TRANSFORMATION_TANK
             && !(gPlayerStateSettings[gPlayerState] & 0x1000)) {
             sub_80192D4(gFloorPlaneResult.field_4E, -1, 1);
             byte_200108E = 1;
@@ -218,7 +219,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
     }
 
     if (gWallPlaneResult.isColliding && gWallPlaneResult.floorType == 6 && gUnlockedMoves[18]
-        && !byte_20020B1 && gGameStatus.health != 0) {
+        && gTransformation == TRANSFORMATION_BANJO && gGameStatus.health != 0) {
         struct Vec3fx a;
         a.x = a1->x;
         a.y = a1->y + FX32_CONST(18);
@@ -462,7 +463,7 @@ void update_player() {
 
     sub_800A740(&gPlayerPosTemp, &gPlayerShadowPosTemp);
 
-    if (byte_20020B1 != 3) {
+    if (gTransformation != TRANSFORMATION_TANK) {
         stru_300331C.x = FX32_CONST(4);
         stru_300331C.y = dword_3003308;
         stru_300331C.z = FX32_CONST(4);

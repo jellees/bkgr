@@ -4,48 +4,6 @@
     .text
 
     .thumb
-    .global enable_poison_effect
-enable_poison_effect: @ 0x0800DEE4
-	push {lr}
-	ldr r0, _0800DF0C
-	ldrh r0, [r0]
-	cmp r0, #0x21
-	bgt _0800DF20
-	cmp r0, #0x20
-	blt _0800DF20
-	ldr r0, _0800DF10
-	ldrb r0, [r0]
-	cmp r0, #3
-	beq _0800DF2C
-	ldr r0, _0800DF14
-	movs r1, #1
-	str r1, [r0]
-	ldr r0, _0800DF18
-	str r1, [r0]
-	ldr r1, _0800DF1C
-	movs r0, #0xf0
-	b _0800DF2A
-	.align 2, 0
-_0800DF0C: .4byte gLoadedRoomIndex
-_0800DF10: .4byte byte_20020B1
-_0800DF14: .4byte gPoisonEffectEnabled
-_0800DF18: .4byte 0x020011F8
-_0800DF1C: .4byte gPoisonHitTimer
-_0800DF20:
-	ldr r1, _0800DF30
-	ldr r0, [r1]
-	cmp r0, #0
-	beq _0800DF2C
-	movs r0, #0
-_0800DF2A:
-	str r0, [r1]
-_0800DF2C:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800DF30: .4byte gPoisonEffectEnabled
-
-    .thumb
     .global sub_800DF34
 sub_800DF34: @ 0x0800DF34
 	push {r4, r5, lr}
@@ -983,7 +941,7 @@ _0800E6BC:
 	bx r0
 	.align 2, 0
 _0800E6C4: .4byte 0x030028FC
-_0800E6C8: .4byte byte_20020B1
+_0800E6C8: .4byte gTransformation
 _0800E6CC: .4byte byte_200112A
 
     .thumb

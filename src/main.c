@@ -130,7 +130,7 @@ static void UpdateGame(void) {
             gKeysDown = 0;
             gKeysPressed = 0;
 
-            if (gPlayerStateSettings[gPlayerState] & 0x100 && byte_20020B1 != 4) {
+            if (gPlayerStateSettings[gPlayerState] & 0x100 && gTransformation != TRANSFORMATION_OCTOPUS) {
                 sub_08040204(57, gGameStatus.field_16);
                 sub_08041FA4(57);
             }
@@ -430,8 +430,8 @@ static void StartGame() {
         gPlayerShadowSprite.field_10 = 1;
         gPlayerShadowSprite.field_13 = 0;
 
-        if (byte_20020B1) {
-            sub_08019FCC(byte_20020B1);
+        if (gTransformation != TRANSFORMATION_BANJO) {
+            sub_08019FCC(gTransformation);
         }
 
         sub_8044DFC();
@@ -460,8 +460,8 @@ static void StartGame() {
         gPlayerShadowSprite.field_10 = 1;
         gPlayerShadowSprite.field_13 = 0;
 
-        if (byte_20020B1) {
-            sub_08019FCC(byte_20020B1);
+        if (gTransformation != TRANSFORMATION_BANJO) {
+            sub_08019FCC(gTransformation);
             sub_801A2E4();
         }
 
@@ -607,7 +607,7 @@ static void sub_800A5F4() {
     gGameStatus.field_16 = stru_80CC8C4.field_16;
     gGameStatus.field_17 = stru_80CC8C4.field_17;
     gSelectedEgg = -1;
-    byte_20020B1 = 0;
+    gTransformation = TRANSFORMATION_BANJO;
     byte_20010B0 = 0;
     gTextSpeed = 1;
     dword_2001110 = 0;

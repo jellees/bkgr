@@ -3251,7 +3251,7 @@ _0801D26E:
 	b _0801D3B6
 	.align 2, 0
 _0801D294: .4byte gGameStatus
-_0801D298: .4byte byte_20020B1
+_0801D298: .4byte gTransformation
 _0801D29C: .4byte gPlayerStateSettings
 _0801D2A0: .4byte gPreviousPlayerState
 _0801D2A4: .4byte gPlayerSprite

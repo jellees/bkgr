@@ -68,6 +68,14 @@ enum Eggs {
     EGG_FIRE
 };
 
+enum Transformations {
+    TRANSFORMATION_BANJO,
+    TRANSFORMATION_MOUSE,
+    TRANSFORMATION_CANDLE,
+    TRANSFORMATION_TANK,
+    TRANSFORMATION_OCTOPUS,
+};
+
 // Structs
 
 struct GameStatus {
@@ -455,15 +463,16 @@ extern u8 byte_200112A;
 
 extern u8 gShowRoomName;
 
+extern int gPoisonEffectEnabled;
+extern int gPoisonHitTimer;
 extern u32 dword_20011F8;
 extern s32 dword_20011FC;
-
 
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;
 
 extern bool8 gUnlockedMoves[23];
-extern u8 byte_20020B1;
+extern u8 gTransformation;
 extern u8 byte_20020B2;
 extern u8 byte_20020B3;
 extern u8 byte_20020B4;

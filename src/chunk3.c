@@ -339,7 +339,7 @@ void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
 
     if (gLoadedRoomIndex == ROOM_DIVESPOT || gLoadedRoomIndex == ROOM_UNDERCORAL) {
         byte_20010A4 = 0;
-        sub_8017B34(byte_20020B1 != 0);
+        sub_8017B34(gTransformation != TRANSFORMATION_BANJO);
     }
 
     if (dword_2001104 == 1) {
@@ -1277,5 +1277,24 @@ void sub_800DE9C() {
         sub_08041F3C(11, 0x2CCCC);
         sub_08041F3C(12, 0x2CCCC);
         sub_0804200C(gSelectedEgg + 9);
+    }
+}
+
+void enable_poison_effect() {
+    switch (gLoadedRoomIndex) {
+        case ROOM_POISONROOM:
+        case ROOM_SWAMPGAS:
+            if (gTransformation != TRANSFORMATION_TANK) {
+                gPoisonEffectEnabled = 1;
+                dword_20011F8 = 1;
+                gPoisonHitTimer = 240;
+            }
+            break;
+
+        default:
+            if (gPoisonEffectEnabled) {
+                gPoisonEffectEnabled = 0;
+            }
+            break;
     }
 }

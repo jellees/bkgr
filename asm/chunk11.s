@@ -122,7 +122,7 @@ _08016504:
 	movs r2, #0
 	b _08016530
 	.align 2, 0
-_08016520: .4byte byte_20020B1
+_08016520: .4byte gTransformation
 _08016524: .4byte 0x020021BE
 _08016528: .4byte 0x0200209A
 _0801652C:
@@ -253,7 +253,7 @@ _080165C2:
 	bx r0
 	.align 2, 0
 _08016618: .4byte 0x0200209A
-_0801661C: .4byte byte_20020B1
+_0801661C: .4byte gTransformation
 _08016620: .4byte 0x020021BE
 
     .thumb
@@ -552,7 +552,7 @@ _08016868:
 _08016870: .4byte dword_2000FC8
 _08016874: .4byte 0x080CC818
 _08016878: .4byte stru_3002950
-_0801687C: .4byte byte_20020B1
+_0801687C: .4byte gTransformation
 _08016880: .4byte 0x03003300
 _08016884: .4byte 0x080CB9A9
 _08016888: .4byte 0x03003308
@@ -594,7 +594,7 @@ _080168AA:
 _080168CC: .4byte gPlayerStateSettings
 _080168D0: .4byte gPlayerState
 _080168D4: .4byte gPreviousPlayerState
-_080168D8: .4byte byte_20020B1
+_080168D8: .4byte gTransformation
 _080168DC: .4byte byte_20020B3
 _080168E0: .4byte gPlayerSprite
 _080168E4: .4byte 0x00000121
@@ -1044,7 +1044,7 @@ sub_8016C78: @ 0x08016C78
 	b _08016E0E
 	.align 2, 0
 _08016C98: .4byte gPlayerSprite
-_08016C9C: .4byte byte_20020B1
+_08016C9C: .4byte gTransformation
 _08016CA0: .4byte gPreviousPlayerState
 _08016CA4: .4byte gPlayerState
 _08016CA8: .4byte 0x00000141
@@ -2563,7 +2563,7 @@ _0801796A:
 	b _080179DC
 	.align 2, 0
 _080179A4: .4byte 0x0200209A
-_080179A8: .4byte byte_20020B1
+_080179A8: .4byte gTransformation
 _080179AC: .4byte 0x030028FC
 _080179B0: .4byte 0x020021E8
 _080179B4: .4byte 0x020021EC
@@ -2656,7 +2656,7 @@ sub_8017A54: @ 0x08017A54
 	.align 2, 0
 _08017A78: .4byte gPreviousPlayerState
 _08017A7C: .4byte gPlayerState
-_08017A80: .4byte byte_20020B1
+_08017A80: .4byte gTransformation
 _08017A84: .4byte gPlayerSprite
 _08017A88: .4byte 0x000001D1
 _08017A8C:
@@ -2919,7 +2919,7 @@ _08017CA4:
 _08017CC4: .4byte gPlayerStateSettings
 _08017CC8: .4byte gPlayerState
 _08017CCC: .4byte gPreviousPlayerState
-_08017CD0: .4byte byte_20020B1
+_08017CD0: .4byte gTransformation
 _08017CD4: .4byte gPlayerSprite
 _08017CD8: .4byte 0x000001D9
 _08017CDC:
@@ -3048,7 +3048,7 @@ sub_8017D9C: @ 0x08017D9C
 _08017DDC: .4byte gPlayerStateSettings
 _08017DE0: .4byte gPlayerState
 _08017DE4: .4byte gPlayerShadowSprite
-_08017DE8: .4byte byte_20020B1
+_08017DE8: .4byte gTransformation
 _08017DEC: .4byte gPreviousPlayerState
 _08017DF0: .4byte gPlayerSprite
 _08017DF4: .4byte 0x000001A9
@@ -3171,7 +3171,7 @@ _08017ED4:
 _08017EDC: .4byte 0x0200209A
 _08017EE0: .4byte gPlayerStateSettings
 _08017EE4: .4byte gPlayerState
-_08017EE8: .4byte byte_20020B1
+_08017EE8: .4byte gTransformation
 _08017EEC: .4byte dword_2000FC8
 _08017EF0: .4byte 0x00019999
 _08017EF4: .4byte dword_80CC290
@@ -4234,7 +4234,7 @@ _0801884E:
 	bl sub_8016790
 	b _08018A68
 	.align 2, 0
-_08018888: .4byte byte_20020B1
+_08018888: .4byte gTransformation
 _0801888C: .4byte gPlayerStateSettings
 _08018890: .4byte gPreviousPlayerState
 _08018894: .4byte gPlayerState
@@ -4498,7 +4498,7 @@ sub_08018A94: @ 0x08018A94
 	movs r1, #0x69
 	b _08018B92
 	.align 2, 0
-_08018AC0: .4byte byte_20020B1
+_08018AC0: .4byte gTransformation
 _08018AC4: .4byte gPlayerStateSettings
 _08018AC8: .4byte gPlayerState
 _08018ACC: .4byte gPlayerSprite
@@ -5465,7 +5465,7 @@ _080193AE:
 	b _08019882
 	.align 2, 0
 _080193C4: .4byte gPlayerStateSettings
-_080193C8: .4byte byte_20020B1
+_080193C8: .4byte gTransformation
 _080193CC:
 	ldrh r2, [r5]
 	lsls r0, r2, #1
@@ -6102,7 +6102,7 @@ _0801992E:
 	.align 2, 0
 _08019944: .4byte gPlayerStateSettings
 _08019948: .4byte gPlayerState
-_0801994C: .4byte byte_20020B1
+_0801994C: .4byte gTransformation
 _08019950:
 	ldrh r1, [r4]
 	lsls r0, r1, #1
@@ -6304,7 +6304,7 @@ _08019ACA:
 	bl sub_8003884
 	b _08019B34
 	.align 2, 0
-_08019AFC: .4byte byte_20020B1
+_08019AFC: .4byte gTransformation
 _08019B00: .4byte gPreviousPlayerState
 _08019B04: .4byte gPlayerState
 _08019B08: .4byte gPlayerSprite
@@ -7184,7 +7184,7 @@ _0801A2D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801A2E0: .4byte byte_20020B1
+_0801A2E0: .4byte gTransformation
 
     .thumb
     .global sub_801A2E4
@@ -7197,7 +7197,7 @@ sub_801A2E4: @ 0x0801A2E4
 	ldr r0, _0801A2F8
 	b _0801A30E
 	.align 2, 0
-_0801A2F4: .4byte byte_20020B1
+_0801A2F4: .4byte gTransformation
 _0801A2F8: .4byte 0x083FD734
 _0801A2FC:
 	cmp r0, #2

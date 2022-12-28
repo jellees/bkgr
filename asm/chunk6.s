@@ -6973,7 +6973,7 @@ _0802B3CC:
 _0802B3FC: .4byte 0x00001FFF
 _0802B400: .4byte gPlayerStateSettings
 _0802B404: .4byte gPlayerState
-_0802B408: .4byte byte_20020B1
+_0802B408: .4byte gTransformation
 _0802B40C:
 	.2byte 0xEE00, 0xEE00
 	b _0802B422
@@ -7815,7 +7815,7 @@ _0802BA9A:
 	bl sub_80342F8
 	b _0802BB16
 	.align 2, 0
-_0802BAC4: .4byte byte_20020B1
+_0802BAC4: .4byte gTransformation
 _0802BAC8: .4byte 0x030032E8
 _0802BACC: .4byte 0x030032F4
 _0802BAD0:
@@ -17046,7 +17046,7 @@ _080309C6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080309CC: .4byte byte_20020B1
+_080309CC: .4byte gTransformation
 _080309D0: .4byte 0x00000199
 _080309D4: .4byte 0x0000019B
 
@@ -37035,7 +37035,7 @@ _0803A95A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A960: .4byte byte_20020B1
+_0803A960: .4byte gTransformation
 _0803A964: .4byte 0x0203E95D
 
 	.thumb
@@ -37056,7 +37056,7 @@ _0803A97E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A984: .4byte byte_20020B1
+_0803A984: .4byte gTransformation
 _0803A988: .4byte 0x0203E95E
 
 	.thumb
@@ -37077,7 +37077,7 @@ _0803A9A2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A9A8: .4byte byte_20020B1
+_0803A9A8: .4byte gTransformation
 _0803A9AC: .4byte 0x0203E95F
 
 	.thumb
@@ -37098,7 +37098,7 @@ _0803A9C6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A9CC: .4byte byte_20020B1
+_0803A9CC: .4byte gTransformation
 _0803A9D0: .4byte 0x0203E960
 
 	.thumb
@@ -37110,7 +37110,7 @@ sub_803A9D4: @ 0x0803A9D4
 	lsrs r0, r0, #0x1f
 	bx lr
 	.align 2, 0
-_0803A9E0: .4byte byte_20020B1
+_0803A9E0: .4byte gTransformation
 
 	.thumb
 sub_803A9E4: @ 0x0803A9E4
@@ -37126,7 +37126,7 @@ _0803A9F2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A9F8: .4byte byte_20020B1
+_0803A9F8: .4byte gTransformation
 
 	.thumb
 sub_803A9FC: @ 0x0803A9FC
@@ -37142,7 +37142,7 @@ _0803AA0A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803AA10: .4byte byte_20020B1
+_0803AA10: .4byte gTransformation
 
 	.thumb
 sub_803AA14: @ 0x0803AA14
@@ -37158,7 +37158,7 @@ _0803AA22:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803AA28: .4byte byte_20020B1
+_0803AA28: .4byte gTransformation
 
 	.thumb
 sub_803AA2C: @ 0x0803AA2C
@@ -37174,7 +37174,7 @@ _0803AA3A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803AA40: .4byte byte_20020B1
+_0803AA40: .4byte gTransformation
 
 	.thumb
 sub_803AA44: @ 0x0803AA44
@@ -37190,7 +37190,7 @@ _0803AA52:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803AA58: .4byte byte_20020B1
+_0803AA58: .4byte gTransformation
 
 	.thumb
 sub_803AA5C: @ 0x0803AA5C
@@ -37203,7 +37203,7 @@ sub_803AA5C: @ 0x0803AA5C
 	lsrs r0, r0, #0x1f
 	bx lr
 	.align 2, 0
-_0803AA6C: .4byte byte_20020B1
+_0803AA6C: .4byte gTransformation
 
 	.thumb
 sub_803AA70: @ 0x0803AA70
@@ -37216,7 +37216,7 @@ sub_803AA70: @ 0x0803AA70
 	lsrs r0, r0, #0x1f
 	bx lr
 	.align 2, 0
-_0803AA80: .4byte byte_20020B1
+_0803AA80: .4byte gTransformation
 
 	.thumb
 sub_803AA84: @ 0x0803AA84
@@ -37229,7 +37229,7 @@ sub_803AA84: @ 0x0803AA84
 	lsrs r0, r0, #0x1f
 	bx lr
 	.align 2, 0
-_0803AA94: .4byte byte_20020B1
+_0803AA94: .4byte gTransformation
 
 	.thumb
 sub_803AA98: @ 0x0803AA98
@@ -37242,7 +37242,7 @@ sub_803AA98: @ 0x0803AA98
 	lsrs r0, r0, #0x1f
 	bx lr
 	.align 2, 0
-_0803AAA8: .4byte byte_20020B1
+_0803AAA8: .4byte gTransformation
 
 	.thumb
 sub_803AAAC: @ 0x0803AAAC
@@ -38608,7 +38608,7 @@ _0803B3B2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803B3B8: .4byte byte_20020B1
+_0803B3B8: .4byte gTransformation
 
 	.thumb
 sub_803B3BC: @ 0x0803B3BC
@@ -38624,7 +38624,7 @@ _0803B3CA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803B3D0: .4byte byte_20020B1
+_0803B3D0: .4byte gTransformation
 
 	.thumb
 sub_803B3D4: @ 0x0803B3D4
@@ -38640,7 +38640,7 @@ _0803B3E2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803B3E8: .4byte byte_20020B1
+_0803B3E8: .4byte gTransformation
 
 	.thumb
 sub_803B3EC: @ 0x0803B3EC
@@ -38656,7 +38656,7 @@ _0803B3FA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803B400: .4byte byte_20020B1
+_0803B400: .4byte gTransformation
 
 	.thumb
 sub_803B404: @ 0x0803B404
@@ -38672,7 +38672,7 @@ _0803B412:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803B418: .4byte byte_20020B1
+_0803B418: .4byte gTransformation
 
 	.thumb
 sub_803B41C: @ 0x0803B41C
