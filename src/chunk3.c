@@ -1387,3 +1387,21 @@ void sub_800DF34() {
         dword_2001138 = PLAY_SFX(sfx);
     }
 }
+
+void decrease_player_health(int a1) {
+    if (a1 == 0) {
+        return;
+    }
+
+    if (gGameStatus.health <= a1) {
+        gGameStatus.health = 0;
+        sub_08040204(56, 0);
+        PLAY_SFX(79);
+        if (gIsSlideMiniGame) {
+            byte_20010B0 = 1;
+        }
+    } else {
+        gGameStatus.health -= a1;
+        sub_08040204(56, gGameStatus.health);
+    }
+}
