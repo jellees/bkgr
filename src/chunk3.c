@@ -1298,3 +1298,92 @@ void enable_poison_effect() {
             break;
     }
 }
+
+void sub_800DF34() {
+    if (gPoisonEffectEnabled && !byte_203F99C && gGameStatus.health) {
+        if (gPoisonHitTimer == 0) {
+            gPoisonHitTimer = 240;
+            sub_80192D4(dword_20011F8, -1, 1);
+        } else {
+            gPoisonHitTimer--;
+        }
+    }
+
+    if (byte_200108D) {
+        if (word_2001090 == 0) {
+            byte_200108D = 0;
+            gPlayerSprite.field_10 = 0;
+        } else {
+            word_2001090--;
+        }
+    }
+
+    if (byte_200108E) {
+        if (word_2001092 == 0 && !byte_20020BC) {
+            byte_200108E = 0;
+        } else {
+            word_2001092--;
+        }
+    }
+
+    if (!byte_200112A) {
+        return;
+    }
+
+    if (!word_200112C && !byte_200113D) {
+        sprite_2000FAC.field_13 = 1;
+
+        if ((gPlayerStateSettings[gPlayerState] & 0x800) == 0) {
+            sub_800E7A0();
+
+            if (gGameStatus.health) {
+                sub_800BFA0(dword_80CEBF8[gLoadedRoomLevel], dword_80CEBE0[gLoadedRoomLevel], 1);
+            }
+        }
+
+        return;
+    }
+
+    if ((--word_200112C << 16) < 0) {
+        word_200112C = 0;
+    }
+
+    if (byte_200113D) {
+        if (word_200112E == 0) {
+            word_2001130--;
+            if (word_2001130 < 3) {
+                word_2001130 = 3;
+            }
+            word_200112E = word_2001130;
+            byte_200113D = 0;
+            sprite_2000FAC.field_13 = 1;
+        } else {
+            word_200112E--;
+        }
+    } else {
+        if (word_2001132 == 0) {
+            word_2001134--;
+            if (word_2001134 < 3) {
+                word_2001134 = 3;
+            }
+            word_2001132 = word_2001134;
+            byte_200113D = 1;
+            sprite_2000FAC.field_13 = 0;
+        } else {
+            word_2001132--;
+        }
+    }
+
+    if (!audio_fx_still_active(dword_2001138)) {
+        int sfx;
+        while (1) {
+            int candidate = RandomMinMax(67, 69);
+            if (candidate != byte_200113C) {
+                sfx = candidate;
+                break;
+            }
+        }
+        byte_200113C = sfx;
+        dword_2001138 = PLAY_SFX(sfx);
+    }
+}

@@ -460,6 +460,15 @@ extern bool8 gIsCameraMovingY;
 extern u32 dword_2001124;
 extern u16 word_2001128;
 extern u8 byte_200112A;
+extern s16 word_200112C;
+extern s16 word_200112E;
+extern s16 word_2001130;
+extern s16 word_2001132;
+extern s16 word_2001134;
+extern int dword_2001138;
+extern u8 byte_200113C;
+
+extern u8 byte_200113D;
 
 extern u8 gShowRoomName;
 
