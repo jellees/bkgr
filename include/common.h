@@ -385,6 +385,18 @@ struct level_struc
     u8 field_13;
 };
 
+struct struc_49
+{
+    u8 field_0;
+    u8 field_1;
+    u16 field_2;
+    u16 field_4;
+    u16 field_6;
+    u32 field_8;
+    u32 field_C;
+    u8 gap[12];
+};
+
 //EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
@@ -495,6 +507,9 @@ extern u8 byte_200113C;
 
 extern u8 byte_200113D;
 
+extern s32 dword_2001164;
+extern u8* dword_2001168;
+extern bool8 byte_200116C;
 extern u8 gShowRoomName;
 
 extern int gPoisonEffectEnabled;
@@ -526,6 +541,11 @@ extern u8 byte_20021F9;
 extern bool8 byte_2002E4A;
 
 extern s16 word_2002EC2;
+extern u32 unk_2002EC4[1];
+
+extern u32 unk_20046C4[1];
+
+extern struct struc_49 stru_20076C4[15];
 
 extern bool8 gIsPaletteEffectsActive;
 

@@ -1,6 +1,14 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+struct SpriteFrame_d {
+    u32* tiles;
+    u16 tilesCount;
+    u16 field_6;
+    u16* field_8;
+    u32 field_C;
+};
+
 struct Sprite {
     u16 index;
     u8 curFrame;
@@ -23,7 +31,7 @@ struct Sprite {
     u8 field_15;
     u8 field_16;
     u8 field_17;
-    u32* spriteFrames;
+    struct SpriteFrame_d* spriteFrames;
 };
 
 struct Letter {

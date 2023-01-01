@@ -132,7 +132,10 @@ SECTIONS
         . = 0x0000113D;
         byte_200113D = .; . += 1;
 
-        . = 0x0000116D;
+        . = 0x00001164;
+        dword_2001164 = .; . += 4;
+        dword_2001168 = .; . += 4;
+        byte_200116C = .; . += 1;
         gShowRoomName = .; . += 1;
         gRoomNameApparenceTimer = .; . += 2;
         gRoomNameTextBox = .; . += 0x14;
@@ -183,6 +186,13 @@ SECTIONS
 
         . = 0x00002EC2;
         word_2002EC2 = .; . += 2;
+        unk_2002EC4 = .; . += 4; /* probably an array of structs */
+
+        . = 0x000046C4;
+        unk_20046C4 = .; . += 4; /* probably an array of structs */
+
+        . = 0x000076C4;
+        stru_20076C4 = .; . += 28 * 5;
 
         . = 0x00007884;
         gIsPaletteEffectsActive = .; . += 1;
@@ -388,6 +398,7 @@ SECTIONS
         src/player.o(.text);
         src/chunk3.o(.text);
         src/savefile.o(.text);
+        src/chunk4.o(.text);
         asm/chunk4.o(.text);
         src/environment_effects.o(.text);
         src/debug.o(.text);
