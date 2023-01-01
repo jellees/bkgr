@@ -387,7 +387,6 @@ SECTIONS
         src/main.o(.text);
         src/player.o(.text);
         src/chunk3.o(.text);
-        asm/chunk3.o(.text);
         src/savefile.o(.text);
         asm/chunk4.o(.text);
         src/environment_effects.o(.text);

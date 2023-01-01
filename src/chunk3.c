@@ -1406,8 +1406,7 @@ void decrease_player_health(int a1) {
     }
 }
 
-void sub_800E204(u8 *buffer, s32 *a2, u32 *a3)
-{
+void sub_800E204(u8* buffer, s32* a2, u32* a3) {
     int i;
     s32 r5;
     u32 r6;
@@ -1415,8 +1414,7 @@ void sub_800E204(u8 *buffer, s32 *a2, u32 *a3)
     r5 = *a2;
     r6 = *a3;
 
-    for (i = 0; i < 6; i++)
-    {
+    for (i = 0; i < 6; i++) {
         buffer[r5] = byte_2000FCC[i].field_8;
         r6 += buffer[r5++];
         buffer[r5] = byte_2000FCC[i].field_D;
@@ -1438,8 +1436,7 @@ void sub_800E204(u8 *buffer, s32 *a2, u32 *a3)
     buffer[r5] = gGameStatus.field_1B;
     r6 += buffer[r5++];
 
-    for ( i = 0; i <= 3; i++)
-    {
+    for (i = 0; i <= 3; i++) {
         buffer[r5] = gGameStatus.eggs[i];
         r6 += buffer[r5++];
     }
@@ -1485,4 +1482,136 @@ void sub_800E204(u8 *buffer, s32 *a2, u32 *a3)
 
     *a2 = r5;
     *a3 = r6;
+}
+
+void sub_800E408(u8* buffer, s32* a2, u32* a3) {
+    int i;
+    s32 r5;
+    u32 r6;
+
+    r5 = *a2;
+    r6 = *a3;
+
+    for (i = 0; i < 6; i++) {
+        byte_2000FCC[i].field_8 = buffer[r5];
+        r6 += buffer[r5++];
+        byte_2000FCC[i].field_D = buffer[r5];
+        r6 += buffer[r5++];
+    }
+
+    gGameStatus.field_6 = buffer[r5];
+    r6 += buffer[r5++];
+    gGameStatus.clockHour = buffer[r5];
+    r6 += buffer[r5++];
+    gGameStatus.clockMinute = buffer[r5];
+    r6 += buffer[r5++];
+    gGameStatus.clockSecond = buffer[r5];
+    r6 += buffer[r5++];
+    gGameStatus.enableExtraHealth = buffer[r5];
+    r6 += buffer[r5++];
+    gGameStatus.field_7 = buffer[r5];
+    r6 += buffer[r5++];
+    gGameStatus.field_1B = buffer[r5];
+    r6 += buffer[r5++];
+
+    for (i = 0; i <= 3; i++) {
+        gGameStatus.eggs[i] = buffer[r5];
+        r6 += buffer[r5++];
+    }
+
+    gGameStatus.field_12 = buffer[r5];
+    r6 += buffer[r5++];
+    gGameStatus.maxHealth = buffer[r5];
+    r6 += buffer[r5++];
+    r6 += buffer[r5++];
+    byte_200107C = buffer[r5];
+    r6 += buffer[r5++];
+    gUnlockedLevels = buffer[r5];
+    r6 += buffer[r5++];
+    byte_20010AA = buffer[r5];
+    r6 += buffer[r5++];
+    gRoomGoal = buffer[r5];
+    r6 += buffer[r5++];
+    gWarpGoal = buffer[r5];
+    r6 += buffer[r5++];
+    byte_2001094 = buffer[r5];
+    r6 += buffer[r5++];
+    dword_2001098 = buffer[r5] << 16 | buffer[r5 + 1] << 24;
+    r6 += buffer[r5++];
+    r6 += buffer[r5++];
+    dword_200109C = buffer[r5] << 16 | buffer[r5 + 1] << 24;
+    r6 += buffer[r5++];
+    r6 += buffer[r5++];
+    dword_20010A0 = buffer[r5] << 16 | buffer[r5 + 1] << 24;
+    r6 += buffer[r5++];
+    r6 += buffer[r5++];
+    gTextSpeed = buffer[r5];
+    r6 += buffer[r5++];
+    gBgmMainVolume = buffer[r5];
+    r6 += buffer[r5++];
+    gSfxMainVolume = buffer[r5];
+    r6 += buffer[r5++];
+    gPauseMenuLanguage = buffer[r5];
+    r6 += buffer[r5++];
+
+    *a2 = r5;
+    *a3 = r6;
+}
+
+void sub_800E61C() {
+    bool32 v0;
+
+    if (gFloorPlaneResult.isColliding && gTransformation != TRANSFORMATION_BANJO) {
+        v0 = FALSE;
+
+        if (gFloorPlaneResult.field_50) {
+            v0 = 1;
+            if (!byte_200112A && gTransformation == TRANSFORMATION_MOUSE) {
+                sub_800E6D0();
+            }
+        }
+
+        if (gFloorPlaneResult.field_51) {
+            v0 = TRUE;
+            if (!byte_200112A && gTransformation == TRANSFORMATION_CANDLE) {
+                sub_800E6D0();
+            }
+        }
+
+        if (gFloorPlaneResult.field_52) {
+            v0 = TRUE;
+            if (!byte_200112A && gTransformation == TRANSFORMATION_TANK) {
+                sub_800E6D0();
+            }
+        }
+
+        if (gFloorPlaneResult.field_53) {
+            v0 = TRUE;
+            if (!byte_200112A && gTransformation == TRANSFORMATION_OCTOPUS) {
+                sub_800E6D0();
+            }
+        }
+
+        if (!v0 && byte_200112A) {
+            sub_800E7A0();
+        }
+    }
+}
+
+void sub_800E6D0() {
+    byte_200112A = 1;
+    word_200112C = 60;
+    byte_20010AF = 1;
+    word_200112E = 10;
+    word_2001132 = 10;
+    word_2001130 = 10;
+    word_2001134 = 10;
+    SetSprite(&sprite_2000FAC, 0x4CB, 0, 0, 0, gPlayerSprite.xPos, gPlayerSprite.yPos, 2);
+    byte_200113C = RandomMinMax(67, 69);
+    dword_2001138 = PLAY_SFX(byte_200113C);
+}
+
+void sub_800E7A0() {
+    byte_200112A = 0;
+    byte_20010AF = 0;
 }
