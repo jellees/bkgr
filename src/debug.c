@@ -138,7 +138,7 @@ void sub_800FA58() {
     gGameStatus.eggs[1] = stru_80CC8C4.eggs[1];
     gGameStatus.eggs[3] = stru_80CC8C4.eggs[3];
     gGameStatus.eggs[2] = stru_80CC8C4.eggs[2];
-    gGameStatus.eggs[4] = stru_80CC8C4.eggs[4];
+    gGameStatus.field_12 = stru_80CC8C4.field_12;
     sub_803FE78();
 }
 

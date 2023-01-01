@@ -91,7 +91,8 @@ struct GameStatus {
     u8 clockSecond;
     u8 field_B;
     u16 totalNotes;
-    s8 eggs[5];
+    s8 eggs[4];
+    u8 field_12;
     u8 health;
     u8 enableExtraHealth;
     u8 maxHealth;
