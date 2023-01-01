@@ -3,255 +3,255 @@
 
     .text
 
-    .thumb
-	.global sub_800E204
-sub_800E204: @ 0x0800E204
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	adds r7, r0, #0
-	mov r8, r1
-	mov sb, r2
-	ldr r5, [r1]
-	ldr r6, [r2]
-	ldr r0, _0800E3CC
-	mov ip, r0
-	ldr r2, _0800E3D0
-	mov sl, r2
-	ldr r0, _0800E3D4
-	adds r4, r0, #0
-	adds r4, #8
-	adds r2, r5, r7
-	movs r3, #5
-_0800E22A:
-	ldrb r0, [r4]
-	strb r0, [r2]
-	ldrb r1, [r2]
-	adds r2, #1
-	ldrb r0, [r4, #5]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r2, #1
-	adds r5, #2
-	adds r4, #0x14
-	subs r3, #1
-	cmp r3, #0
-	bge _0800E22A
-	adds r1, r7, r5
-	mov r3, ip
-	ldrb r0, [r3, #6]
-	strb r0, [r1]
-	ldrb r1, [r1]
-	adds r5, #1
-	adds r2, r7, r5
-	ldrb r0, [r3, #8]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldrb r0, [r3, #9]
-	strb r0, [r1]
-	ldrb r1, [r1]
-	adds r5, #1
-	adds r2, r7, r5
-	ldrb r0, [r3, #0xa]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldrb r0, [r3, #0x14]
-	strb r0, [r1]
-	ldrb r1, [r1]
-	adds r5, #1
-	adds r2, r7, r5
-	ldrb r0, [r3, #7]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldrb r0, [r3, #0x1b]
-	strb r0, [r1]
-	ldrb r0, [r1]
-	adds r6, r6, r0
-	adds r5, #1
-	movs r3, #0
-	mov r2, ip
-	adds r2, #0xe
-_0800E29C:
-	adds r1, r7, r5
-	adds r0, r3, r2
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldrb r0, [r1]
-	adds r6, r6, r0
-	adds r5, #1
-	adds r3, #1
-	cmp r3, #3
-	ble _0800E29C
-	adds r1, r7, r5
-	mov r2, ip
-	ldrb r0, [r2, #0x12]
-	strb r0, [r1]
-	ldrb r1, [r1]
-	adds r5, #1
-	adds r2, r7, r5
-	mov r3, ip
-	ldrb r0, [r3, #0x15]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldrb r0, [r3, #0x13]
-	strb r0, [r1]
-	ldrb r1, [r1]
-	adds r5, #1
-	adds r2, r7, r5
-	mov r3, sl
-	ldrb r0, [r3]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldr r2, _0800E3D8
-	ldrb r0, [r2]
-	strb r0, [r1]
-	ldrb r1, [r1]
-	adds r5, #1
-	adds r2, r7, r5
-	ldr r3, _0800E3DC
-	ldrb r0, [r3]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldr r2, _0800E3E0
-	ldrb r0, [r2]
-	strb r0, [r1]
-	ldrb r1, [r1]
-	adds r5, #1
-	adds r2, r7, r5
-	ldr r3, _0800E3E4
-	ldrb r0, [r3]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldr r2, _0800E3E8
-	ldrb r0, [r2]
-	strb r0, [r1]
-	ldrb r2, [r1]
-	adds r5, #1
-	adds r3, r7, r5
-	ldr r0, _0800E3EC
-	ldr r1, [r0]
-	movs r4, #0xff
-	lsls r4, r4, #0x10
-	adds r0, r1, #0
-	ands r0, r4
-	asrs r0, r0, #0x10
-	strb r0, [r3]
-	adds r2, r6, r2
-	adds r6, r2, r0
-	adds r5, #1
-	adds r0, r7, r5
-	asrs r1, r1, #0x18
-	strb r1, [r0]
-	ldrb r2, [r0]
-	adds r5, #1
-	adds r3, r7, r5
-	ldr r0, _0800E3F0
-	ldr r1, [r0]
-	adds r0, r1, #0
-	ands r0, r4
-	asrs r0, r0, #0x10
-	strb r0, [r3]
-	adds r2, r6, r2
-	adds r6, r2, r0
-	adds r5, #1
-	adds r0, r7, r5
-	asrs r1, r1, #0x18
-	strb r1, [r0]
-	ldrb r2, [r0]
-	adds r5, #1
-	adds r3, r7, r5
-	ldr r0, _0800E3F4
-	ldr r1, [r0]
-	adds r0, r1, #0
-	ands r0, r4
-	asrs r0, r0, #0x10
-	strb r0, [r3]
-	adds r2, r6, r2
-	adds r6, r2, r0
-	adds r5, #1
-	adds r0, r7, r5
-	asrs r1, r1, #0x18
-	strb r1, [r0]
-	ldrb r1, [r0]
-	adds r5, #1
-	adds r2, r7, r5
-	ldr r3, _0800E3F8
-	ldrb r0, [r3]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldr r2, _0800E3FC
-	ldrb r0, [r2]
-	strb r0, [r1]
-	ldrb r1, [r1]
-	adds r5, #1
-	adds r2, r7, r5
-	ldr r3, _0800E400
-	ldrb r0, [r3]
-	strb r0, [r2]
-	adds r1, r6, r1
-	adds r6, r1, r0
-	adds r5, #1
-	adds r1, r7, r5
-	ldr r2, _0800E404
-	ldrb r0, [r2]
-	strb r0, [r1]
-	ldrb r0, [r1]
-	adds r6, r6, r0
-	adds r5, #1
-	mov r3, r8
-	str r5, [r3]
-	mov r0, sb
-	str r6, [r0]
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800E3CC: .4byte gGameStatus
-_0800E3D0: .4byte 0x0200107C
-_0800E3D4: .4byte 0x02000FCC
-_0800E3D8: .4byte 0x0200107E
-_0800E3DC: .4byte 0x020010AA
-_0800E3E0: .4byte 0x020010A8
-_0800E3E4: .4byte 0x020010A9
-_0800E3E8: .4byte 0x02001094
-_0800E3EC: .4byte 0x02001098
-_0800E3F0: .4byte 0x0200109C
-_0800E3F4: .4byte 0x020010A0
-_0800E3F8: .4byte gTextSpeed
-_0800E3FC: .4byte gBgmMainVolume
-_0800E400: .4byte gSfxMainVolume
-_0800E404: .4byte 0x02000320
+@     .thumb
+@ 	.global sub_800E204
+@ sub_800E204: @ 0x0800E204
+@ 	push {r4, r5, r6, r7, lr}
+@ 	mov r7, sl
+@ 	mov r6, sb
+@ 	mov r5, r8
+@ 	push {r5, r6, r7}
+@ 	adds r7, r0, #0
+@ 	mov r8, r1
+@ 	mov sb, r2
+@ 	ldr r5, [r1]
+@ 	ldr r6, [r2]
+@ 	ldr r0, _0800E3CC
+@ 	mov ip, r0
+@ 	ldr r2, _0800E3D0
+@ 	mov sl, r2
+@ 	ldr r0, _0800E3D4
+@ 	adds r4, r0, #0
+@ 	adds r4, #8
+@ 	adds r2, r5, r7
+@ 	movs r3, #5
+@ _0800E22A:
+@ 	ldrb r0, [r4]
+@ 	strb r0, [r2]
+@ 	ldrb r1, [r2]
+@ 	adds r2, #1
+@ 	ldrb r0, [r4, #5]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r2, #1
+@ 	adds r5, #2
+@ 	adds r4, #0x14
+@ 	subs r3, #1
+@ 	cmp r3, #0
+@ 	bge _0800E22A
+@ 	adds r1, r7, r5
+@ 	mov r3, ip
+@ 	ldrb r0, [r3, #6]
+@ 	strb r0, [r1]
+@ 	ldrb r1, [r1]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	ldrb r0, [r3, #8]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldrb r0, [r3, #9]
+@ 	strb r0, [r1]
+@ 	ldrb r1, [r1]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	ldrb r0, [r3, #0xa]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldrb r0, [r3, #0x14]
+@ 	strb r0, [r1]
+@ 	ldrb r1, [r1]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	ldrb r0, [r3, #7]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldrb r0, [r3, #0x1b]
+@ 	strb r0, [r1]
+@ 	ldrb r0, [r1]
+@ 	adds r6, r6, r0
+@ 	adds r5, #1
+@ 	movs r3, #0
+@ 	mov r2, ip
+@ 	adds r2, #0xe
+@ _0800E29C:
+@ 	adds r1, r7, r5
+@ 	adds r0, r3, r2
+@ 	ldrb r0, [r0]
+@ 	strb r0, [r1]
+@ 	ldrb r0, [r1]
+@ 	adds r6, r6, r0
+@ 	adds r5, #1
+@ 	adds r3, #1
+@ 	cmp r3, #3
+@ 	ble _0800E29C
+@ 	adds r1, r7, r5
+@ 	mov r2, ip
+@ 	ldrb r0, [r2, #0x12]
+@ 	strb r0, [r1]
+@ 	ldrb r1, [r1]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	mov r3, ip
+@ 	ldrb r0, [r3, #0x15]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldrb r0, [r3, #0x13]
+@ 	strb r0, [r1]
+@ 	ldrb r1, [r1]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	mov r3, sl
+@ 	ldrb r0, [r3]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldr r2, _0800E3D8
+@ 	ldrb r0, [r2]
+@ 	strb r0, [r1]
+@ 	ldrb r1, [r1]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	ldr r3, _0800E3DC
+@ 	ldrb r0, [r3]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldr r2, _0800E3E0
+@ 	ldrb r0, [r2]
+@ 	strb r0, [r1]
+@ 	ldrb r1, [r1]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	ldr r3, _0800E3E4
+@ 	ldrb r0, [r3]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldr r2, _0800E3E8
+@ 	ldrb r0, [r2]
+@ 	strb r0, [r1]
+@ 	ldrb r2, [r1]
+@ 	adds r5, #1
+@ 	adds r3, r7, r5
+@ 	ldr r0, _0800E3EC
+@ 	ldr r1, [r0]
+@ 	movs r4, #0xff
+@ 	lsls r4, r4, #0x10
+@ 	adds r0, r1, #0
+@ 	ands r0, r4
+@ 	asrs r0, r0, #0x10
+@ 	strb r0, [r3]
+@ 	adds r2, r6, r2
+@ 	adds r6, r2, r0
+@ 	adds r5, #1
+@ 	adds r0, r7, r5
+@ 	asrs r1, r1, #0x18
+@ 	strb r1, [r0]
+@ 	ldrb r2, [r0]
+@ 	adds r5, #1
+@ 	adds r3, r7, r5
+@ 	ldr r0, _0800E3F0
+@ 	ldr r1, [r0]
+@ 	adds r0, r1, #0
+@ 	ands r0, r4
+@ 	asrs r0, r0, #0x10
+@ 	strb r0, [r3]
+@ 	adds r2, r6, r2
+@ 	adds r6, r2, r0
+@ 	adds r5, #1
+@ 	adds r0, r7, r5
+@ 	asrs r1, r1, #0x18
+@ 	strb r1, [r0]
+@ 	ldrb r2, [r0]
+@ 	adds r5, #1
+@ 	adds r3, r7, r5
+@ 	ldr r0, _0800E3F4
+@ 	ldr r1, [r0]
+@ 	adds r0, r1, #0
+@ 	ands r0, r4
+@ 	asrs r0, r0, #0x10
+@ 	strb r0, [r3]
+@ 	adds r2, r6, r2
+@ 	adds r6, r2, r0
+@ 	adds r5, #1
+@ 	adds r0, r7, r5
+@ 	asrs r1, r1, #0x18
+@ 	strb r1, [r0]
+@ 	ldrb r1, [r0]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	ldr r3, _0800E3F8
+@ 	ldrb r0, [r3]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldr r2, _0800E3FC
+@ 	ldrb r0, [r2]
+@ 	strb r0, [r1]
+@ 	ldrb r1, [r1]
+@ 	adds r5, #1
+@ 	adds r2, r7, r5
+@ 	ldr r3, _0800E400
+@ 	ldrb r0, [r3]
+@ 	strb r0, [r2]
+@ 	adds r1, r6, r1
+@ 	adds r6, r1, r0
+@ 	adds r5, #1
+@ 	adds r1, r7, r5
+@ 	ldr r2, _0800E404
+@ 	ldrb r0, [r2]
+@ 	strb r0, [r1]
+@ 	ldrb r0, [r1]
+@ 	adds r6, r6, r0
+@ 	adds r5, #1
+@ 	mov r3, r8
+@ 	str r5, [r3]
+@ 	mov r0, sb
+@ 	str r6, [r0]
+@ 	pop {r3, r4, r5}
+@ 	mov r8, r3
+@ 	mov sb, r4
+@ 	mov sl, r5
+@ 	pop {r4, r5, r6, r7}
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _0800E3CC: .4byte gGameStatus
+@ _0800E3D0: .4byte 0x0200107C
+@ _0800E3D4: .4byte 0x02000FCC
+@ _0800E3D8: .4byte 0x0200107E
+@ _0800E3DC: .4byte 0x020010AA
+@ _0800E3E0: .4byte 0x020010A8
+@ _0800E3E4: .4byte 0x020010A9
+@ _0800E3E8: .4byte 0x02001094
+@ _0800E3EC: .4byte 0x02001098
+@ _0800E3F0: .4byte 0x0200109C
+@ _0800E3F4: .4byte 0x020010A0
+@ _0800E3F8: .4byte gTextSpeed
+@ _0800E3FC: .4byte gBgmMainVolume
+@ _0800E400: .4byte gSfxMainVolume
+@ _0800E404: .4byte 0x02000320
 
     .thumb
 	.global sub_800E408

@@ -361,6 +361,30 @@ struct struc_46
     u32 field_2C;
 };
 
+struct level_struc
+{
+    u8 field_0; 
+    u8 field_1; 
+    u8 field_2; 
+    u8 field_3; 
+    u8 field_4; 
+    u8 field_5; 
+    u8 field_6; 
+    u8 field_7; 
+    u8 field_8; 
+    u8 field_9; 
+    u8 field_A; 
+    u8 field_B; 
+    u8 field_C; 
+    u8 field_D; 
+    u8 field_E; 
+    u8 field_F; 
+    u8 field_10;
+    u8 field_11;
+    u8 field_12;
+    u8 field_13;
+};
+
 //EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
@@ -412,7 +436,7 @@ extern struct Sprite gPlayerSprite;
 extern struct Sprite gPlayerShadowSprite;
 extern struct Sprite sprite_2000FAC;
 extern u32 dword_2000FC8;
-extern u8 byte_2000FCC[120];
+extern struct level_struc byte_2000FCC[6];
 extern struct GameStatus gGameStatus;
 extern struct SaveFile gSaveFiles[3];
 extern u8 byte_200107C;

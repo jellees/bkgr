@@ -261,15 +261,15 @@ bool32 load_game(int game) {
     v16 = 0;
     v17 = 0;
     v17 = buffer[0];
-    v16 = 1;
+    v16++;
     v17 += buffer[1];
-    v16 = 2;
+    v16++;
     v17 += buffer[2];
-    v16 = 3;
+    v16++;
     v17 += buffer[3];
-    v16 = 4;
+    v16++;
     v17 += buffer[4];
-    v16 = 5;
+    v16++;
 
     sub_8036138(buffer, &v16, &v17);
     sub_800E408(buffer, &v16, &v17);

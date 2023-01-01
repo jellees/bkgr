@@ -1405,3 +1405,84 @@ void decrease_player_health(int a1) {
         sub_08040204(56, gGameStatus.health);
     }
 }
+
+void sub_800E204(u8 *buffer, s32 *a2, u32 *a3)
+{
+    int i;
+    s32 r5;
+    u32 r6;
+
+    r5 = *a2;
+    r6 = *a3;
+
+    for (i = 0; i < 6; i++)
+    {
+        buffer[r5] = byte_2000FCC[i].field_8;
+        r6 += buffer[r5++];
+        buffer[r5] = byte_2000FCC[i].field_D;
+        r6 += buffer[r5++];
+    }
+
+    buffer[r5] = gGameStatus.field_6;
+    r6 += buffer[r5++];
+    buffer[r5] = gGameStatus.clockHour;
+    r6 += buffer[r5++];
+    buffer[r5] = gGameStatus.clockMinute;
+    r6 += buffer[r5++];
+    buffer[r5] = gGameStatus.clockSecond;
+    r6 += buffer[r5++];
+    buffer[r5] = gGameStatus.enableExtraHealth;
+    r6 += buffer[r5++];
+    buffer[r5] = gGameStatus.field_7;
+    r6 += buffer[r5++];
+    buffer[r5] = gGameStatus.field_1B;
+    r6 += buffer[r5++];
+
+    for ( i = 0; i <= 3; i++)
+    {
+        buffer[r5] = gGameStatus.eggs[i];
+        r6 += buffer[r5++];
+    }
+
+    buffer[r5] = gGameStatus.field_12;
+    r6 += buffer[r5++];
+    buffer[r5] = gGameStatus.maxHealth;
+    r6 += buffer[r5++];
+    buffer[r5] = gGameStatus.health;
+    r6 += buffer[r5++];
+    buffer[r5] = byte_200107C;
+    r6 += buffer[r5++];
+    buffer[r5] = gUnlockedLevels;
+    r6 += buffer[r5++];
+    buffer[r5] = byte_20010AA;
+    r6 += buffer[r5++];
+    buffer[r5] = gRoomGoal;
+    r6 += buffer[r5++];
+    buffer[r5] = gWarpGoal;
+    r6 += buffer[r5++];
+    buffer[r5] = byte_2001094;
+    r6 += buffer[r5++];
+    buffer[r5] = (dword_2001098 & 0xFF0000) >> 16;
+    r6 += buffer[r5++];
+    buffer[r5] = dword_2001098 >> 24;
+    r6 += buffer[r5++];
+    buffer[r5] = (dword_200109C & 0xFF0000) >> 16;
+    r6 += buffer[r5++];
+    buffer[r5] = dword_200109C >> 24;
+    r6 += buffer[r5++];
+    buffer[r5] = (dword_20010A0 & 0xFF0000) >> 16;
+    r6 += buffer[r5++];
+    buffer[r5] = dword_20010A0 >> 24;
+    r6 += buffer[r5++];
+    buffer[r5] = gTextSpeed;
+    r6 += buffer[r5++];
+    buffer[r5] = gBgmMainVolume;
+    r6 += buffer[r5++];
+    buffer[r5] = gSfxMainVolume;
+    r6 += buffer[r5++];
+    buffer[r5] = gPauseMenuLanguage;
+    r6 += buffer[r5++];
+
+    *a2 = r5;
+    *a3 = r6;
+}
