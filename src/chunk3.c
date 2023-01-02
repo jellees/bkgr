@@ -1415,7 +1415,7 @@ void sub_800E204(u8* buffer, s32* a2, u32* a3) {
     r6 = *a3;
 
     for (i = 0; i < 6; i++) {
-        buffer[r5] = byte_2000FCC[i].field_8;
+        buffer[r5] = byte_2000FCC[i].bozzeyeCount;
         r6 += buffer[r5++];
         buffer[r5] = byte_2000FCC[i].field_D;
         r6 += buffer[r5++];
@@ -1493,7 +1493,7 @@ void sub_800E408(u8* buffer, s32* a2, u32* a3) {
     r6 = *a3;
 
     for (i = 0; i < 6; i++) {
-        byte_2000FCC[i].field_8 = buffer[r5];
+        byte_2000FCC[i].bozzeyeCount = buffer[r5];
         r6 += buffer[r5++];
         byte_2000FCC[i].field_D = buffer[r5];
         r6 += buffer[r5++];

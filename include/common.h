@@ -363,22 +363,22 @@ struct struc_46
 
 struct level_struc
 {
-    u8 field_0; 
-    u8 field_1; 
-    u8 field_2; 
-    u8 field_3; 
-    u8 field_4; 
-    u8 field_5; 
-    u8 field_6; 
-    u8 field_7; 
-    u8 field_8; 
-    u8 field_9; 
-    u8 field_A; 
-    u8 field_B; 
-    u8 field_C; 
-    u8 field_D; 
-    u8 field_E; 
-    u8 field_F; 
+    u8 jiggyCount;
+    u8 honeycombCount;
+    u8 field_2;
+    u8 field_3;
+    u8 chickCount;
+    u8 jinjoCount;
+    u8 noteCount;
+    u8 field_7;
+    u8 bozzeyeCount;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    u8 field_C;
+    u8 field_D;
+    u8 field_E;
+    u8 silverCoinCount;
     u8 field_10;
     u8 field_11;
     u8 field_12;
