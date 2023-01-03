@@ -2,6 +2,10 @@
 #include "sprite.h"
 #include "common.h"
 
+/* External declarations. */
+extern void sub_8003A04(u32, u32*, u8, u8);
+/* End external declarations. */
+
 void sub_800E9EC(struct Sprite* a1, int palette, int a3) {
     u32 v6;
     u32 v7;
@@ -58,4 +62,38 @@ void sub_800EB14() {
         byte_20010B1 = 0;
         sub_80275A4();
     }
+}
+
+void sub_800EB58(bool32 a1)
+{
+    // This function probably uses predefined macro's
+    // a lot. Most likely v1 is used for registers.
+
+    u32 v1;
+
+    if (a1)
+    {
+        v1 &= 0xFFFFFF00;
+        v1 &= 0xFFFF00FF;
+        v1 |= 0xF00;
+        sub_8003A04(4, &unk_2005EC4, v1, v1 << 16 >> 24);
+        dword_2001140 = sub_08027378((u8*)&v1, &unk_2005EC4, 2048, 0x8000);
+        dword_2001150 = sub_800392C(0x8000, 2048) >> 16;
+        dword_200114C = -1;
+    }
+
+    ((u8*)&v1)[0] = 0x12;
+    ((u8*)&v1)[1] = 0x1E;
+    sub_8003A04(4, &unk_2005EC4, ((u8*)&v1)[0], ((u8*)&v1)[1]);
+    dword_2001144 = sub_08027378((u8*)&v1, &unk_2005EC4, 2048, 24576);
+    dword_2001158 = sub_800392C(24576, 2048) >> 16;
+    dword_2001154 = -1;
+
+    ((u8*)&v1)[0] = 0x10;
+    ((u8*)&v1)[1] = 0x11;
+    sub_8003A04(4, &unk_2005EC4, ((u8*)&v1)[0], ((u8*)&v1)[1]);
+    dword_2001148 = sub_08027378((u8*)&v1, &unk_2005EC4, 2048, 24576);
+    dword_2001160 = sub_800392C(24576, 2048) >> 16;
+    dword_200115C = -1;
+    byte_20010B1 = 1;
 }

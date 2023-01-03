@@ -504,9 +504,16 @@ extern s16 word_2001132;
 extern s16 word_2001134;
 extern int dword_2001138;
 extern u8 byte_200113C;
-
 extern u8 byte_200113D;
-
+extern s32 dword_2001140;
+extern s32 dword_2001144;
+extern s32 dword_2001148;
+extern s32 dword_200114C;
+extern s32 dword_2001150;
+extern s32 dword_2001154;
+extern s32 dword_2001158;
+extern s32 dword_200115C;
+extern s32 dword_2001160;
 extern s32 dword_2001164;
 extern u8* dword_2001168;
 extern bool8 byte_200116C;
@@ -544,6 +551,8 @@ extern s16 word_2002EC2;
 extern u32 unk_2002EC4[1];
 
 extern u32 unk_20046C4[1];
+
+extern u32 unk_2005EC4;
 
 extern struct struc_49 stru_20076C4[15];
 

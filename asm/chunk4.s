@@ -3,146 +3,146 @@
 
     .text
 
-    .thumb
-    .global sub_800EB58
-sub_800EB58: @ 0x0800EB58
-	push {r4, r5, r6, lr}
-	mov r6, sl
-	mov r5, sb
-	mov r4, r8
-	push {r4, r5, r6}
-	sub sp, #4
-	cmp r0, #0
-	beq _0800EBBA
-	ldr r0, _0800EC60
-	ldr r3, [sp]
-	ands r3, r0
-	ldr r0, _0800EC64
-	ands r3, r0
-	movs r0, #0xf0
-	lsls r0, r0, #4
-	orrs r3, r0
-	str r3, [sp]
-	ldr r4, _0800EC68
-	mov r0, sp
-	ldrb r2, [r0]
-	lsls r3, r3, #0x10
-	lsrs r3, r3, #0x18
-	movs r0, #4
-	adds r1, r4, #0
-	bl sub_8003A04
-	movs r6, #0x80
-	lsls r6, r6, #4
-	movs r5, #0x80
-	lsls r5, r5, #8
-	mov r0, sp
-	adds r1, r4, #0
-	adds r2, r6, #0
-	adds r3, r5, #0
-	bl sub_08027378
-	ldr r1, _0800EC6C
-	str r0, [r1]
-	ldr r4, _0800EC70
-	adds r0, r5, #0
-	adds r1, r6, #0
-	bl sub_800392C
-	asrs r0, r0, #0x10
-	str r0, [r4]
-	ldr r1, _0800EC74
-	movs r0, #1
-	rsbs r0, r0, #0
-	str r0, [r1]
-_0800EBBA:
-	movs r1, #0x12
-	mov r0, sp
-	strb r1, [r0]
-	mov sl, sp
-	movs r0, #0x1e
-	mov r1, sl
-	strb r0, [r1, #1]
-	ldr r6, _0800EC68
-	mov r0, sp
-	ldrb r2, [r0]
-	movs r0, #4
-	adds r1, r6, #0
-	movs r3, #0x1e
-	bl sub_8003A04
-	movs r0, #0x80
-	lsls r0, r0, #4
-	mov r8, r0
-	movs r5, #0xc0
-	lsls r5, r5, #7
-	mov r0, sp
-	adds r1, r6, #0
-	mov r2, r8
-	adds r3, r5, #0
-	bl sub_08027378
-	ldr r1, _0800EC78
-	str r0, [r1]
-	ldr r4, _0800EC7C
-	adds r0, r5, #0
-	mov r1, r8
-	bl sub_800392C
-	asrs r0, r0, #0x10
-	str r0, [r4]
-	ldr r0, _0800EC80
-	movs r1, #1
-	rsbs r1, r1, #0
-	mov sb, r1
-	str r1, [r0]
-	movs r1, #0x10
-	mov r0, sp
-	strb r1, [r0]
-	movs r0, #0x11
-	mov r1, sl
-	strb r0, [r1, #1]
-	mov r0, sp
-	ldrb r2, [r0]
-	movs r0, #4
-	adds r1, r6, #0
-	movs r3, #0x11
-	bl sub_8003A04
-	mov r0, sp
-	adds r1, r6, #0
-	mov r2, r8
-	adds r3, r5, #0
-	bl sub_08027378
-	ldr r1, _0800EC84
-	str r0, [r1]
-	ldr r4, _0800EC88
-	adds r0, r5, #0
-	mov r1, r8
-	bl sub_800392C
-	asrs r0, r0, #0x10
-	str r0, [r4]
-	ldr r0, _0800EC8C
-	mov r1, sb
-	str r1, [r0]
-	ldr r1, _0800EC90
-	movs r0, #1
-	strb r0, [r1]
-	add sp, #4
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800EC60: .4byte 0xFFFFFF00
-_0800EC64: .4byte 0xFFFF00FF
-_0800EC68: .4byte 0x02005EC4
-_0800EC6C: .4byte 0x02001140
-_0800EC70: .4byte 0x02001150
-_0800EC74: .4byte 0x0200114C
-_0800EC78: .4byte 0x02001144
-_0800EC7C: .4byte 0x02001158
-_0800EC80: .4byte 0x02001154
-_0800EC84: .4byte 0x02001148
-_0800EC88: .4byte 0x02001160
-_0800EC8C: .4byte 0x0200115C
-_0800EC90: .4byte 0x020010B1
+@     .thumb
+@     .global sub_800EB58
+@ sub_800EB58: @ 0x0800EB58
+@ 	push {r4, r5, r6, lr}
+@ 	mov r6, sl
+@ 	mov r5, sb
+@ 	mov r4, r8
+@ 	push {r4, r5, r6}
+@ 	sub sp, #4
+@ 	cmp r0, #0
+@ 	beq _0800EBBA
+@ 	ldr r0, _0800EC60
+@ 	ldr r3, [sp]
+@ 	ands r3, r0
+@ 	ldr r0, _0800EC64
+@ 	ands r3, r0
+@ 	movs r0, #0xf0
+@ 	lsls r0, r0, #4
+@ 	orrs r3, r0
+@ 	str r3, [sp]
+@ 	ldr r4, _0800EC68
+@ 	mov r0, sp
+@ 	ldrb r2, [r0]
+@ 	lsls r3, r3, #0x10
+@ 	lsrs r3, r3, #0x18
+@ 	movs r0, #4
+@ 	adds r1, r4, #0
+@ 	bl sub_8003A04
+@ 	movs r6, #0x80
+@ 	lsls r6, r6, #4
+@ 	movs r5, #0x80
+@ 	lsls r5, r5, #8
+@ 	mov r0, sp
+@ 	adds r1, r4, #0
+@ 	adds r2, r6, #0
+@ 	adds r3, r5, #0
+@ 	bl sub_08027378
+@ 	ldr r1, _0800EC6C
+@ 	str r0, [r1]
+@ 	ldr r4, _0800EC70
+@ 	adds r0, r5, #0
+@ 	adds r1, r6, #0
+@ 	bl sub_800392C
+@ 	asrs r0, r0, #0x10
+@ 	str r0, [r4]
+@ 	ldr r1, _0800EC74
+@ 	movs r0, #1
+@ 	rsbs r0, r0, #0
+@ 	str r0, [r1]
+@ _0800EBBA:
+@ 	movs r1, #0x12
+@ 	mov r0, sp
+@ 	strb r1, [r0]
+@ 	mov sl, sp
+@ 	movs r0, #0x1e
+@ 	mov r1, sl
+@ 	strb r0, [r1, #1]
+@ 	ldr r6, _0800EC68
+@ 	mov r0, sp
+@ 	ldrb r2, [r0]
+@ 	movs r0, #4
+@ 	adds r1, r6, #0
+@ 	movs r3, #0x1e
+@ 	bl sub_8003A04
+@ 	movs r0, #0x80
+@ 	lsls r0, r0, #4
+@ 	mov r8, r0
+@ 	movs r5, #0xc0
+@ 	lsls r5, r5, #7
+@ 	mov r0, sp
+@ 	adds r1, r6, #0
+@ 	mov r2, r8
+@ 	adds r3, r5, #0
+@ 	bl sub_08027378
+@ 	ldr r1, _0800EC78
+@ 	str r0, [r1]
+@ 	ldr r4, _0800EC7C
+@ 	adds r0, r5, #0
+@ 	mov r1, r8
+@ 	bl sub_800392C
+@ 	asrs r0, r0, #0x10
+@ 	str r0, [r4]
+@ 	ldr r0, _0800EC80
+@ 	movs r1, #1
+@ 	rsbs r1, r1, #0
+@ 	mov sb, r1
+@ 	str r1, [r0]
+@ 	movs r1, #0x10
+@ 	mov r0, sp
+@ 	strb r1, [r0]
+@ 	movs r0, #0x11
+@ 	mov r1, sl
+@ 	strb r0, [r1, #1]
+@ 	mov r0, sp
+@ 	ldrb r2, [r0]
+@ 	movs r0, #4
+@ 	adds r1, r6, #0
+@ 	movs r3, #0x11
+@ 	bl sub_8003A04
+@ 	mov r0, sp
+@ 	adds r1, r6, #0
+@ 	mov r2, r8
+@ 	adds r3, r5, #0
+@ 	bl sub_08027378
+@ 	ldr r1, _0800EC84
+@ 	str r0, [r1]
+@ 	ldr r4, _0800EC88
+@ 	adds r0, r5, #0
+@ 	mov r1, r8
+@ 	bl sub_800392C
+@ 	asrs r0, r0, #0x10
+@ 	str r0, [r4]
+@ 	ldr r0, _0800EC8C
+@ 	mov r1, sb
+@ 	str r1, [r0]
+@ 	ldr r1, _0800EC90
+@ 	movs r0, #1
+@ 	strb r0, [r1]
+@ 	add sp, #4
+@ 	pop {r3, r4, r5}
+@ 	mov r8, r3
+@ 	mov sb, r4
+@ 	mov sl, r5
+@ 	pop {r4, r5, r6}
+@ 	pop {r0}
+@ 	bx r0
+@ 	.align 2, 0
+@ _0800EC60: .4byte 0xFFFFFF00
+@ _0800EC64: .4byte 0xFFFF00FF
+@ _0800EC68: .4byte 0x02005EC4
+@ _0800EC6C: .4byte 0x02001140
+@ _0800EC70: .4byte 0x02001150
+@ _0800EC74: .4byte 0x0200114C
+@ _0800EC78: .4byte 0x02001144
+@ _0800EC7C: .4byte 0x02001158
+@ _0800EC80: .4byte 0x02001154
+@ _0800EC84: .4byte 0x02001148
+@ _0800EC88: .4byte 0x02001160
+@ _0800EC8C: .4byte 0x0200115C
+@ _0800EC90: .4byte 0x020010B1
 
     .thumb
 	.global sub_800EC94
