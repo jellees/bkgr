@@ -47,3 +47,15 @@ void sub_800EACC() {
         }
     }
 }
+
+void sub_800EB14() {
+    if (gLoadedRoomIndex == ROOM_DIVESPOT || gLoadedRoomIndex == ROOM_UNDERCORAL) {
+        if (!byte_20010B1) {
+            sub_800EB58(1);
+        }
+        sub_800ECB4();
+    } else if (byte_20010B1) {
+        byte_20010B1 = 0;
+        sub_80275A4();
+    }
+}

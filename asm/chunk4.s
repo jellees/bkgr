@@ -4,43 +4,6 @@
     .text
 
     .thumb
-    .global sub_800EB14
-sub_800EB14: @ 0x0800EB14
-	push {lr}
-	ldr r0, _0800EB38
-	ldrh r0, [r0]
-	cmp r0, #0x1e
-	beq _0800EB22
-	cmp r0, #9
-	bne _0800EB40
-_0800EB22:
-	ldr r0, _0800EB3C
-	ldrb r0, [r0]
-	cmp r0, #0
-	bne _0800EB30
-	movs r0, #1
-	bl sub_800EB58
-_0800EB30:
-	bl sub_800ECB4
-	b _0800EB50
-	.align 2, 0
-_0800EB38: .4byte gLoadedRoomIndex
-_0800EB3C: .4byte 0x020010B1
-_0800EB40:
-	ldr r1, _0800EB54
-	ldrb r0, [r1]
-	cmp r0, #0
-	beq _0800EB50
-	movs r0, #0
-	strb r0, [r1]
-	bl sub_80275A4
-_0800EB50:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800EB54: .4byte 0x020010B1
-
-    .thumb
     .global sub_800EB58
 sub_800EB58: @ 0x0800EB58
 	push {r4, r5, r6, lr}
