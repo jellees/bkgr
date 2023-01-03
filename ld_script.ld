@@ -387,6 +387,9 @@ SECTIONS
         audio_samp_list = .; . += 4;
         audio_midi_tracks = .; . += 4 * 16;
 
+        . = 0x00006EF3;
+        byte_3006EF3 = .; . += 1;
+
         . = 0x00007FFA;
         byte_3007FFA = .; . += 1;
         . += 1; /* padding */

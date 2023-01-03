@@ -518,6 +518,9 @@ extern s32 dword_2001164;
 extern u8* dword_2001168;
 extern bool8 byte_200116C;
 extern u8 gShowRoomName;
+extern u16 gRoomNameApparenceTimer;
+extern struct TextBox gRoomNameTextBox;
+extern char* gRoomName;
 
 extern int gPoisonEffectEnabled;
 extern int gPoisonHitTimer;
@@ -659,6 +662,8 @@ extern u32* gOBJTileFrameStart;
 extern u32 dword_3003DA0;
 extern u32 dword_3003DA4;
 
+extern bool8 byte_3006EF3;
+
 extern bool8 byte_3007FFA;
 extern u32 dword_3007FFC;
 
@@ -780,6 +785,17 @@ extern u16 unk_83FCF14;
 
 extern u8 byte_8064848;
 extern u8 byte_8064850;
+
+extern u16 unk_83FD7B4[];
+extern u16 unk_83FD7D4[];
+extern u16 unk_83FD7F4[];
+extern u16 unk_83FD814[];
+
+extern char* unk_86AD9FC[38];
+extern char* unk_86ADAC4[38];
+extern char* unk_86ADC54[38];
+extern char* unk_86ADD1C[38];
+extern char* unk_86ADB8C[38];
 
 // Other
 

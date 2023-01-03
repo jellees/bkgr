@@ -64,15 +64,13 @@ void sub_800EB14() {
     }
 }
 
-void sub_800EB58(bool32 a1)
-{
+void sub_800EB58(bool32 a1) {
     // This function probably uses predefined macro's
     // a lot. Most likely v1 is used for registers.
 
     u32 v1;
 
-    if (a1)
-    {
+    if (a1) {
         v1 &= 0xFFFFFF00;
         v1 &= 0xFFFF00FF;
         v1 |= 0xF00;
@@ -96,4 +94,158 @@ void sub_800EB58(bool32 a1)
     dword_2001160 = sub_800392C(24576, 2048) >> 16;
     dword_200115C = -1;
     byte_20010B1 = 1;
+}
+
+void sub_800EC94() {
+    dword_2001154 = -1;
+    dword_200114C = -1;
+    dword_200115C = -1;
+}
+
+void sub_800ECB4() {
+    s32 v0;
+
+    if (byte_20010B1 && !gIsPaletteEffectsActive) {
+        v0 = dword_2001150 - (gPlayerPos.y >> 19);
+        if (v0 < 0) {
+            v0 = 0;
+        }
+
+        if (v0 != dword_200114C) {
+            sub_80274A4(dword_2001140, v0, &unk_2002EC4, &unk_20046C4);
+            dword_200114C = v0;
+        }
+
+        v0 = dword_2001158 - (gPlayerPos.y >> 19);
+        if (v0 < 0) {
+            v0 = 0;
+        }
+
+        if (v0 != dword_2001154) {
+            sub_80274A4(dword_2001144, v0, &unk_2002EC4, &unk_20046C4);
+            dword_2001154 = v0;
+        }
+
+        v0 = dword_2001160 - (gPlayerPos.y >> 19);
+        if (v0 < 0) {
+            v0 = 0;
+        }
+
+        if (v0 != dword_200115C) {
+            sub_80274A4(dword_2001148, v0, &unk_2002EC4, &unk_20046C4);
+            dword_200115C = v0;
+        }
+    }
+}
+
+void init_room_name() {
+    if (gRoomNameNumber) {
+        gShowRoomName = 1;
+        gRoomNameApparenceTimer = 120;
+        gRoomNameTextBox.xPosition = 0;
+        gRoomNameTextBox.yPosition = 0;
+        gRoomNameTextBox.letterSpacing = -2;
+        gRoomNameTextBox.field_12 = 0;
+        gRoomNameTextBox.field_A = 2;
+        gRoomNameTextBox.size = 240;
+        gRoomNameTextBox.palette = 1;
+        gRoomNameTextBox.stringOffset = 0;
+        gRoomNameTextBox.field_11 = 6;
+        gRoomNameTextBox.font = &font_80B01A8[2];
+        switch (gPauseMenuLanguage) {
+            case 0:
+                gRoomName = unk_86AD9FC[gRoomNameNumber - 1];
+                break;
+
+            case 1:
+                gRoomName = unk_86ADAC4[gRoomNameNumber - 1];
+                break;
+
+            case 2:
+                gRoomName = unk_86ADC54[gRoomNameNumber - 1];
+                break;
+
+            case 4:
+                gRoomName = unk_86ADD1C[gRoomNameNumber - 1];
+                break;
+
+            case 3:
+                gRoomName = unk_86ADB8C[gRoomNameNumber - 1];
+                break;
+
+            default:
+                HANG;
+                break;
+        }
+    }
+}
+
+void show_room_name() {
+    if (gShowRoomName) {
+        if (gRoomNameApparenceTimer == 0) {
+            gShowRoomName = 0;
+        } else {
+            --gRoomNameApparenceTimer;
+        }
+        gRoomNameTextBox.xPosition = (240 - sub_8025870(gRoomName, &gRoomNameTextBox)) >> 1;
+        gRoomNameTextBox.yPosition = 120;
+        gRoomNameTextBox.stringOffset = 0;
+        AddStringToBuffer(&gRoomNameTextBox, gRoomName);
+    }
+}
+
+void hide_room_name() {
+    gShowRoomName = 0;
+}
+
+void sub_800EECC() {
+    if (!byte_3006EF3) {
+        return;
+    }
+
+    switch (gLoadedRoomLevel) {
+        case 0:
+            sub_8049A1C();
+            break;
+
+        case 2:
+            if (gLoadedRoomIndex == dword_80CEE5C[gLoadedRoomLevel]) {
+                DmaTransferObjPalette(&unk_83FD7B4, 3, 3);
+                DmaTransferObjPalette(&unk_83FD7D4, 5, 5);
+                DmaTransferObjPalette(&unk_83FD7F4, 8, 8);
+                DmaTransferObjPalette(&unk_83FD814, 11, 11);
+            }
+            break;
+
+        case 1:
+        case 3:
+        case 4:
+        case 5:
+            break;
+    }
+}
+
+void sub_800EF6C(int a1) {
+    switch (gLoadedRoomLevel) {
+        case 0:
+            if (dword_2001104 == 1)
+                DmaTransfer32(&unk_83FCF14, BG_PLTT, 128);
+            break;
+
+        case 2:
+            if (gLoadedRoomIndex == dword_80CEE5C[gLoadedRoomLevel]
+                && a1 == dword_80CEE74[gLoadedRoomLevel]) {
+                DmaTransferObjPalette(&unk_83FD7B4, 3, 3);
+                DmaTransferObjPalette(&unk_83FD7D4, 5, 5);
+                DmaTransferObjPalette(&unk_83FD7F4, 8, 8);
+                DmaTransferObjPalette(&unk_83FD814, 11, 11);
+            }
+            break;
+
+        case 1:
+        case 3:
+        case 4:
+        case 5:
+            break;
+    }
 }
