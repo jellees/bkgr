@@ -305,7 +305,7 @@ void open_pause_menu() {
         sub_801A2E4();
     }
 
-    if (gLoadedRoomIndex == 30 || gLoadedRoomIndex == 9) {
+    if (gLoadedRoomIndex == ROOM_DIVESPOT || gLoadedRoomIndex == ROOM_UNDERCORAL) {
         sub_800EC94();
         sub_800ECB4();
     }

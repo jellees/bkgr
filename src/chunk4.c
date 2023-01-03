@@ -139,7 +139,7 @@ void sub_800ECB4() {
 }
 
 void init_room_name() {
-    if (gRoomNameNumber) {
+    if (gRoomNameNumber != 0) {
         gShowRoomName = 1;
         gRoomNameApparenceTimer = 120;
         gRoomNameTextBox.xPosition = 0;
@@ -204,11 +204,11 @@ void sub_800EECC() {
     }
 
     switch (gLoadedRoomLevel) {
-        case 0:
+        case LEVEL_SPIRAL_MOUNTAIN:
             sub_8049A1C();
             break;
 
-        case 2:
+        case LEVEL_BREEGULL_BEACH:
             if (gLoadedRoomIndex == dword_80CEE5C[gLoadedRoomLevel]) {
                 DmaTransferObjPalette(&unk_83FD7B4, 3, 3);
                 DmaTransferObjPalette(&unk_83FD7D4, 5, 5);
@@ -217,22 +217,23 @@ void sub_800EECC() {
             }
             break;
 
-        case 1:
-        case 3:
-        case 4:
-        case 5:
+        case LEVEL_CLIFF_FARM:
+        case LEVEL_BAD_MAGIC_BAYOU:
+        case LEVEL_SPILLERS_HARBOR:
+        case LEVEL_FREEZING_FURNACE:
             break;
     }
 }
 
 void sub_800EF6C(int a1) {
     switch (gLoadedRoomLevel) {
-        case 0:
-            if (dword_2001104 == 1)
+        case LEVEL_SPIRAL_MOUNTAIN:
+            if (dword_2001104 == 1) {
                 DmaTransfer32(&unk_83FCF14, BG_PLTT, 128);
+            }
             break;
 
-        case 2:
+        case LEVEL_BREEGULL_BEACH:
             if (gLoadedRoomIndex == dword_80CEE5C[gLoadedRoomLevel]
                 && a1 == dword_80CEE74[gLoadedRoomLevel]) {
                 DmaTransferObjPalette(&unk_83FD7B4, 3, 3);
@@ -242,10 +243,10 @@ void sub_800EF6C(int a1) {
             }
             break;
 
-        case 1:
-        case 3:
-        case 4:
-        case 5:
+        case LEVEL_CLIFF_FARM:
+        case LEVEL_BAD_MAGIC_BAYOU:
+        case LEVEL_SPILLERS_HARBOR:
+        case LEVEL_FREEZING_FURNACE:
             break;
     }
 }

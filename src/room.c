@@ -237,7 +237,7 @@ void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4) {
 
     gLoadedRoomIndex = room;
 
-    if (gLoadedRoomLevel != dRoomIndexes[room].level && dRoomIndexes[room].level != 255) {
+    if (gLoadedRoomLevel != dRoomIndexes[room].level && dRoomIndexes[room].level != LEVEL_NONE) {
         sub_800A710(dRoomIndexes[room].level);
     }
 

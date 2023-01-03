@@ -46,6 +46,18 @@ enum Rooms {
     ROOM_COUNT
 };
 
+enum Levels {
+    LEVEL_SPIRAL_MOUNTAIN,
+    LEVEL_CLIFF_FARM,
+    LEVEL_BREEGULL_BEACH,
+    LEVEL_BAD_MAGIC_BAYOU,
+    LEVEL_SPILLERS_HARBOR,
+    LEVEL_FREEZING_FURNACE,
+
+    LEVEL_COUNT,
+    LEVEL_NONE = 255
+};
+
 enum MiniGames {
     MINI_GAME_CHUBBY_CHUTE,
     MINI_GAME_UNKNOWN_1,
@@ -61,12 +73,7 @@ enum MiniGames {
     MINI_GAME_COUNT
 };
 
-enum Eggs {
-    EGG_NORMAL,
-    EGG_ELECTRIC,
-    EGG_ICE,
-    EGG_FIRE
-};
+enum Eggs { EGG_NORMAL, EGG_ELECTRIC, EGG_ICE, EGG_FIRE };
 
 enum Transformations {
     TRANSFORMATION_BANJO,
@@ -196,21 +203,18 @@ struct SoundEffect {
     u32 pitch;
 };
 
-struct TileAnimQueueIndex
-{
+struct TileAnimQueueIndex {
     u8* field_0;
     u8* field_4;
 };
 
-struct SpriteDMATableEntry
-{
+struct SpriteDMATableEntry {
     u8* source;
     u8* destiny;
     u32 count;
 };
 
-struct Entity_rt
-{
+struct Entity_rt {
     u16 behavior;
     u16 xPosition;
     u16 yPosition;
@@ -316,8 +320,7 @@ struct Entity_rt
     u32 field_D4;
 };
 
-struct struc_44
-{
+struct struc_44 {
     bool8 isColliding;
     u8 floorTypeEx;
     u8 floorType;
@@ -352,8 +355,7 @@ struct struc_44
     u8 field_53;
 };
 
-struct struc_46
-{
+struct struc_46 {
     u32 field_0[9];
     u8 field_24[3];
     u8 field_27;
@@ -361,8 +363,7 @@ struct struc_46
     u32 field_2C;
 };
 
-struct level_struc
-{
+struct level_struc {
     u8 jiggyCount;
     u8 honeycombCount;
     u8 field_2;
@@ -385,8 +386,7 @@ struct level_struc
     u8 field_13;
 };
 
-struct struc_49
-{
+struct struc_49 {
     u8 field_0;
     u8 field_1;
     u16 field_2;
@@ -397,7 +397,7 @@ struct struc_49
     u8 gap[12];
 };
 
-//EWRAM
+// EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
 
@@ -601,7 +601,7 @@ extern u8 byte_203FA94;
 extern u8 byte_203FA95;
 extern u8 byte_203FA96;
 
-//IWRAM
+// IWRAM
 extern u8 unk_3000000;
 
 extern struct struc_44 gFloorPlaneResult;
@@ -667,12 +667,12 @@ extern bool8 byte_3006EF3;
 extern bool8 byte_3007FFA;
 extern u32 dword_3007FFC;
 
-//ROM
+// ROM
 extern int dVolumes[20];
 extern u8 byte_80CEB84[];
 extern s32 dword_80CEBC4;
 
-extern u32 Abs(u32); //return type is u32, can tell by the branch instruction
+extern u32 Abs(u32); // return type is u32, can tell by the branch instruction
 
 extern void (*dPlayerBehaviors[1])(s32, s32);
 extern u32 dword_80CC290[8];

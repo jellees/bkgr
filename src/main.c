@@ -438,10 +438,10 @@ static void StartGame() {
         init_function(12);
         gClockEnabled = 1;
     } else {
-        gLoadedRoomLevel = 255;
+        gLoadedRoomLevel = LEVEL_NONE;
         SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
 
-        if (gLoadedRoomIndex == 6) {
+        if (gLoadedRoomIndex == ROOM_MUMBOHUT) {
             gLoadedRoomLevel = byte_20010AA;
         }
 
