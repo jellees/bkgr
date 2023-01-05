@@ -425,7 +425,6 @@ extern u16 word_2000344;
 extern u16 word_2000346;
 extern u16 word_2000348;
 extern u16 word_200034A;
-
 extern struct SpriteDMATableEntry gSpriteDMATable[255];
 extern u8 gSpriteDMACount;
 extern u8 byte_2000F55; // possibly bool8
@@ -443,7 +442,6 @@ extern u32 dword_2000F64;
 extern u32 dword_2000F68;
 extern u32 dword_2000F6C;
 extern u8 gUnused_ExecUnusedInputFunc;
-
 extern struct Sprite gPlayerSprite;
 extern struct Sprite gPlayerShadowSprite;
 extern struct Sprite sprite_2000FAC;
@@ -458,14 +456,12 @@ extern u8 gTotalAmountOfLevels;
 extern u16 gLoadedRoomIndex;
 extern u16 gLoadedRoomLevel;
 extern u16 gLoadedRoomBgm;
-
 extern fx32 dword_2001088;
 extern s8 gSelectedEgg;
 extern u8 byte_200108D;
 extern u8 byte_200108E;
 extern u16 word_2001090;
 extern u16 word_2001092;
-
 extern u8 byte_2001094;
 extern fx32 dword_2001098;
 extern fx32 dword_200109C;
@@ -493,7 +489,15 @@ extern u32 dword_2001110;
 extern u32 dword_2001114;
 extern bool8 gIsCameraMovingX;
 extern bool8 gIsCameraMovingY;
-
+extern u8 byte_200111A;
+extern u8 byte_200111B;
+extern u8 byte_200111C;
+extern u8 byte_200111D;
+extern u8 byte_200111E;
+extern u8 byte_200111F;
+extern u8 byte_2001120;
+extern u8 byte_2001121;
+extern u8 byte_2001122;
 extern u32 dword_2001124;
 extern u16 word_2001128;
 extern u8 byte_200112A;
@@ -521,6 +525,15 @@ extern u8 gShowRoomName;
 extern u16 gRoomNameApparenceTimer;
 extern struct TextBox gRoomNameTextBox;
 extern char* gRoomName;
+extern u32 dword_2001188;
+extern u32 dword_200118C;
+extern struct TextBox stru_2001190;
+extern struct TextBox stru_20011A4;
+extern u32 dword_20011B8;
+extern u32 dword_20011BC;
+extern u32 dword_20011C0;
+extern u32 dword_20011C4;
+extern int dword_20011C8;
 
 extern int gPoisonEffectEnabled;
 extern int gPoisonHitTimer;
@@ -692,6 +705,28 @@ extern u16 dLightningPalette[];
 extern void* dLavaPaletteAnims[];
 extern u32 dword_806483C[];
 
+// More strings.
+extern char dword_8065F60[];
+extern char dword_8065F70[];
+extern char dword_8065F7C[];
+extern char dword_8065F88[];
+extern char dword_8065FA0[];
+extern char dword_8065FB4[];
+extern char dword_8065FC4[];
+extern char dword_8065FD0[];
+extern char dword_8065FF4[];
+extern char dword_8066008[];
+extern char dword_8066014[];
+extern char dword_8066024[];
+extern char dword_8066044[];
+extern char dword_8066054[];
+extern char dword_806606C[];
+extern char dword_8066078[];
+extern char dword_8066094[];
+extern char dword_80660A4[];
+extern char dword_80660B0[];
+extern char dword_80660B8[];
+
 // Some strings used by pause menu
 extern char* unk_86AD9E0;
 extern u8 str_08067DC0;
@@ -752,6 +787,7 @@ extern u8 str_08068350;
 extern u8 str_08068030;
 extern u8 str_08068020;
 extern u8 str_08068014;
+
 
 extern u8 unk_83FD254;
 extern u8 unk_83FD974;

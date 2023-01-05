@@ -36,7 +36,7 @@ SECTIONS
         word_2000346 = .; . += 2;
         word_2000348 = .; . += 2;
         word_200034A = .; . += 2;
-
+        /* unused memory region */
         . = 0x00000360;
         gSpriteDMATable = .; . += 0xC * 255;
         gSpriteDMACount = .; . += 1;
@@ -56,8 +56,7 @@ SECTIONS
         dword_2000F68 = .; . += 4;
         dword_2000F6C = .; . += 4;
         gUnused_ExecUnusedInputFunc = .; . += 1;
-
-        . = 0x00000F74;
+        . += 3; /* padding */
         gPlayerSprite = .; . += 0x1C;
         gPlayerShadowSprite = .; . += 0x1C;
         sprite_2000FAC = .; . += 0x1C;
@@ -72,8 +71,7 @@ SECTIONS
         gLoadedRoomIndex = .; . += 2;
         gLoadedRoomLevel = .; . += 2;
         gLoadedRoomBgm = .; . += 2;
-        
-        . = 0x00001088;
+        . += 2; /* padding */
         dword_2001088 = .; . += 4;
         gSelectedEgg = .; . += 1;
         byte_200108D = .; . += 1;
@@ -81,8 +79,6 @@ SECTIONS
         . += 1; /* padding */
         word_2001090 = .; . += 2;
         word_2001092 = .; . += 2;
-
-        . = 0x00001094;
         byte_2001094 = .; . += 1;
         . += 3; /* padding */
         dword_2001098 = .; . += 4;
@@ -114,8 +110,16 @@ SECTIONS
         dword_2001114 = .; . += 4;
         gIsCameraMovingX = .; . += 1;
         gIsCameraMovingY = .; . += 1;
-
-        . = 0x00001124;
+        byte_200111A = .; . += 1;
+        byte_200111B = .; . += 1;
+        byte_200111C = .; . += 1;
+        byte_200111D = .; . += 1;
+        byte_200111E = .; . += 1;
+        byte_200111F = .; . += 1;
+        byte_2001120 = .; . += 1;
+        byte_2001121 = .; . += 1;
+        byte_2001122 = .; . += 1;
+        . += 1; /* padding */
         dword_2001124 = .; . += 4;
         word_2001128 = .; . += 2;
         byte_200112A = .; . += 1;
@@ -146,6 +150,15 @@ SECTIONS
         gRoomNameApparenceTimer = .; . += 2;
         gRoomNameTextBox = .; . += 0x14;
         gRoomName = .; . += 4;
+        dword_2001188 = .; . += 4;
+        dword_200118C = .; . += 4;
+        stru_2001190 = .; . += 0x14;
+        stru_20011A4 = .; . += 0x14;
+        dword_20011B8 = .; . += 4;
+        dword_20011BC = .; . += 4;
+        dword_20011C0 = .; . += 4;
+        dword_20011C4 = .; . += 4;
+        dword_20011C8 = .; . += 4;
 
         . = 0x000011CC;
         src/environment_effects.o(.bss);

@@ -250,3 +250,225 @@ void sub_800EF6C(int a1) {
             break;
     }
 }
+
+void sub_0800F02C(int a1, int a2, int a3) {
+    byte_200110C = 1;
+    dword_20011C8 = a1;
+    byte_200111F = 0;
+
+    switch (a2) {
+        case 0:
+            byte_200111E = 0x18;
+            byte_200111D = 0x28;
+            break;
+
+        case 2:
+            byte_200111E = 0x74;
+            byte_200111D = 0x84;
+            break;
+
+        case 1:
+        default:
+            byte_200111E = 0x40;
+            byte_200111D = 0x50;
+            break;
+    }
+
+    switch (gPauseMenuLanguage) {
+        case 0:
+            switch (a3) {
+                case 0:
+                    dword_2001188 = dword_8065F60;
+                    dword_200118C = a3;
+                    byte_2001120 = 1;
+                    byte_2001121 = a3;
+                    break;
+
+                case 1:
+                    dword_2001188 = dword_8065F60;
+                    dword_200118C = dword_8065F70;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 2:
+                    dword_2001188 = dword_8065F60;
+                    dword_200118C = dword_8065F7C;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 3:
+                    dword_2001188 = dword_8065F88;
+                    dword_200118C = 0;
+                    byte_2001120 = 1;
+                    byte_2001121 = 1;
+                    byte_2001122 = 0x1E;
+                    break;
+            }
+            break;
+
+        case 1:
+            switch (a3) {
+                case 0:
+                    dword_2001188 = dword_8065FA0;
+                    dword_200118C = a3;
+                    byte_2001120 = 1;
+                    byte_2001121 = a3;
+                    break;
+
+                case 1:
+                    dword_2001188 = dword_8065FA0;
+                    dword_200118C = dword_8065FB4;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 2:
+                    dword_2001188 = dword_8065FA0;
+                    dword_200118C = dword_8065FC4;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 3:
+                    dword_2001188 = dword_8065FD0;
+                    dword_200118C = 0;
+                    byte_2001120 = 1;
+                    byte_2001121 = 1;
+                    byte_2001122 = 0x1E;
+                    break;
+            }
+            break;
+
+        case 2:
+            switch (a3) {
+                case 0:
+                    dword_2001188 = dword_8066044;
+                    dword_200118C = a3;
+                    byte_2001120 = 1;
+                    byte_2001121 = a3;
+                    break;
+
+                case 1:
+                    dword_2001188 = dword_8066044;
+                    dword_200118C = dword_8066054;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 2:
+                    dword_2001188 = dword_8066044;
+                    dword_200118C = dword_806606C;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 3:
+                    dword_2001188 = dword_8066078;
+                    dword_200118C = 0;
+                    byte_2001120 = 1;
+                    byte_2001121 = 1;
+                    byte_2001122 = 0x1E;
+                    break;
+            }
+            break;
+
+        case 4:
+            switch (a3) {
+                case 0:
+                    dword_2001188 = dword_8066094;
+                    dword_200118C = a3;
+                    byte_2001120 = 1;
+                    byte_2001121 = a3;
+                    break;
+
+                case 1:
+                    dword_2001188 = dword_8066094;
+                    dword_200118C = dword_80660A4;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 2:
+                    dword_2001188 = dword_8066094;
+                    dword_200118C = dword_80660B0;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 3:
+                    dword_2001188 = dword_80660B8;
+                    dword_200118C = 0;
+                    byte_2001120 = 1;
+                    byte_2001121 = 1;
+                    byte_2001122 = 0x1E;
+                    break;
+            }
+            break;
+
+        case 3:
+            switch (a3) {
+                case 0:
+                    dword_2001188 = dword_8065FF4;
+                    dword_200118C = a3;
+                    byte_2001120 = 1;
+                    byte_2001121 = a3;
+                    break;
+
+                case 1:
+                    dword_2001188 = dword_8065FF4;
+                    dword_200118C = dword_8066008;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 2:
+                    dword_2001188 = dword_8065FF4;
+                    dword_200118C = dword_8066014;
+                    byte_2001120 = 0;
+                    byte_2001121 = 0;
+                    break;
+
+                case 3:
+                    dword_2001188 = dword_8066024;
+                    dword_200118C = 0;
+                    byte_2001120 = 1;
+                    byte_2001121 = 1;
+                    byte_2001122 = 0x1E;
+                    break;
+            }
+            break;
+
+        default:
+            ASSERT(0);
+            break;
+    }
+
+    stru_2001190.xPosition = 0;
+    stru_2001190.yPosition = 0;
+    stru_2001190.letterSpacing = -2;
+    stru_2001190.field_12 = 0;
+    stru_2001190.field_A = 1;
+    stru_2001190.size = 240;
+    stru_2001190.palette = 1;
+    stru_2001190.stringOffset = 0;
+    stru_2001190.field_11 = 6;
+    stru_2001190.font = &font_80B01A8[2];
+    stru_20011A4.xPosition = 0;
+    stru_20011A4.yPosition = 0;
+    stru_20011A4.letterSpacing = -2;
+    stru_20011A4.field_12 = 0;
+    stru_20011A4.field_A = 1;
+    stru_20011A4.size = 240;
+    stru_20011A4.palette = 1;
+    stru_20011A4.stringOffset = 0;
+    stru_20011A4.field_11 = 6;
+    stru_20011A4.font = &font_80B01A8[2];
+    byte_200111A = sub_8025870(dword_2001188, &stru_2001190);
+    dword_20011B8 = (240 - byte_200111A) >> 1 << 16;
+    dword_20011C0 = -byte_200111A << 16;
+    byte_200111B = sub_8025870(dword_200118C, &stru_20011A4);
+    dword_20011BC = (240 - byte_200111B) >> 1 << 16;
+    dword_20011C4 = -byte_200111B << 16;
+}
