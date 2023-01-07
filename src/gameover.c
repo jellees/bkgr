@@ -214,7 +214,7 @@ static void sub_8062D04() {
         RenderMenuSprites();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (v0) {

@@ -45637,7 +45637,7 @@ _0805E878: @ jump table
 	.4byte _0805E8A4 @ case 4
 	.4byte _0805E8B4 @ case 5
 _0805E890:
-	bl IsGameComplete
+	bl is_game_complete
 	b _0805E89A
 _0805E896:
 	ldr r0, _0805E8A0
@@ -48779,7 +48779,7 @@ _0806008A:
 	lsls r0, r0, #2
 	str r0, [r1]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	bl SetObjectsFullAlpha
 	movs r2, #1
@@ -48845,7 +48845,7 @@ _08060102:
 	bl RenderText
 	bl CheckStacks
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r0, [sp, #0x18]
 	cmp r0, #0
@@ -48882,7 +48882,7 @@ _08060176:
 	mov r1, r8
 	str r5, [r1]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r1, _08060208
 	ldr r2, _0806020C
@@ -49213,7 +49213,7 @@ _080604B8:
 _080604C2:
 	bl CheckStacks
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl sub_8003A14
 	bl SkipVblank
 	adds r6, #1
@@ -49568,7 +49568,7 @@ _080607A4:
 	lsls r0, r0, #2
 	str r0, [r1]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r0, _08060848
 	movs r1, #0
@@ -49670,7 +49670,7 @@ _080608C0:
 	bge _080608C0
 	bl CheckStacks
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r0, [sp, #0x40]
 	cmp r0, #0
@@ -49809,7 +49809,7 @@ show_licence_screen: @ 0x08060978
 	lsls r0, r0, #2
 	str r0, [r1]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	adds r0, r6, #0
 	movs r1, #0
@@ -49876,7 +49876,7 @@ _08060AAA:
 	str r0, [r1]
 	bl CheckStacks
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	cmp r6, #0
 	bne _08060A2A
@@ -52271,7 +52271,7 @@ _08061E5A:
 	ldr r0, [r0]
 	adds r0, #0x2c
 	strb r1, [r0]
-	bl sub_800F7A0
+	bl restore_full_health
 	ldr r1, _08061F00
 	movs r0, #0x10
 	strb r0, [r1]

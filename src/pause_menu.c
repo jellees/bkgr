@@ -266,7 +266,7 @@ void open_pause_menu() {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
 
     DmaTransfer32(OBJ_PLTT, gPaletteCopy, 128);
@@ -287,7 +287,7 @@ void open_pause_menu() {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
 
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
@@ -452,7 +452,7 @@ static void exec_pause_menu() {
         CheckHeap(4);
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (fadeIn) {
@@ -590,7 +590,7 @@ static void exec_totals_menu() {
         render_controls();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
     }
 
@@ -602,7 +602,7 @@ static void exec_totals_menu() {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
@@ -670,7 +670,7 @@ static void exec_totals_menu() {
             gOBJTileFramePtr = (u32*)OBJ_VRAM0;
             gOBJTileCount = 0;
             SyncVblank();
-            UpdateVideo();
+            update_video();
             SkipVblank();
             REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
             REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
@@ -704,7 +704,7 @@ static void exec_totals_menu() {
         CheckHeap(4);
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (fadeIn) {
@@ -774,7 +774,7 @@ static bool32 exec_save_menu() {
         render_controls();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
     }
 
@@ -786,7 +786,7 @@ static bool32 exec_save_menu() {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
@@ -824,7 +824,7 @@ static bool32 exec_save_menu() {
                             xPos = 16;
                             yPos = FX32_CONST(40);
                             yPosTarget = FX32_CONST(40);
-                            string = file_string_1;
+                            string = gSaveFileString1;
                             gameIdx = 0;
                             dword_203F4DC = 0;
                             break;
@@ -833,7 +833,7 @@ static bool32 exec_save_menu() {
                             xPos = 16;
                             yPos = FX32_CONST(72);
                             yPosTarget = FX32_CONST(40);
-                            string = file_string_2;
+                            string = gSaveFileString2;
                             gameIdx = 1;
                             dword_203F4DC = 1;
                             break;
@@ -842,7 +842,7 @@ static bool32 exec_save_menu() {
                             xPos = 16;
                             yPos = FX32_CONST(104);
                             yPosTarget = FX32_CONST(40);
-                            string = file_string_3;
+                            string = gSaveFileString3;
                             gameIdx = 2;
                             dword_203F4DC = 2;
                             break;
@@ -871,7 +871,7 @@ static bool32 exec_save_menu() {
             gOBJTileFramePtr = (u32*)OBJ_VRAM0;
             gOBJTileCount = 0;
             SyncVblank();
-            UpdateVideo();
+            update_video();
             SkipVblank();
             REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
             REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
@@ -974,7 +974,7 @@ static bool32 exec_save_menu() {
         CheckHeap(4);
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (fadeIn) {
@@ -991,7 +991,7 @@ static bool32 exec_save_menu() {
             gSaveFiles[gameIdx].jiggies = (u8)gGameStatus.totalJiggies;
             gSaveFiles[gameIdx].notes = gGameStatus.totalNotes;
             gSaveFiles[gameIdx].empty = 0;
-            MakeFileStrings();
+            setup_save_file_strings();
             save_game(gameIdx, byte_2000335);
             CheckHeap(4);
             ASSERT(DoesMemBlockExistById(4, 9) == FALSE);
@@ -1040,7 +1040,7 @@ static bool32 exec_save_menu() {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = saveGameWaitCounter;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
@@ -1103,7 +1103,7 @@ static void exec_options_menu() {
         render_controls();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
     }
 
@@ -1115,7 +1115,7 @@ static void exec_options_menu() {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
@@ -1303,7 +1303,7 @@ static void exec_options_menu() {
         CheckHeap(4);
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (fadeIn) {
@@ -1321,7 +1321,7 @@ _broken:
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
@@ -1410,7 +1410,7 @@ void init_arcade_menu() {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
     sub_80270AC(4095, 1);
 
@@ -1458,7 +1458,7 @@ void sub_8047000(bool32 a1) {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
 
     DmaFill32(0, BG_PLTT, 128);
@@ -1529,7 +1529,7 @@ void exec_arcade_menu() {
                 gOBJTileFramePtr = (u32*)OBJ_VRAM0;
                 gOBJTileCount = 0;
                 SyncVblank();
-                UpdateVideo();
+                update_video();
                 SkipVblank();
                 load_mini_game_from_arcade(dword_80CF390[idx]);
             }

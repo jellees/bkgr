@@ -358,7 +358,7 @@ sub_8010BA8: @ 0x08010BA8
 	movs r4, #0
 	str r4, [r1]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r0, _08010CA8
 	ldr r1, _08010CAC
@@ -412,7 +412,7 @@ _08010C4C:
 	mov r0, r8
 	str r4, [r0]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r4, _08010CBC
 	movs r1, #0xfc
@@ -490,7 +490,7 @@ _08010D18:
 	mov r1, r8
 	str r4, [r1]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r4, _08010DD0
 	movs r2, #0xfc
@@ -616,7 +616,7 @@ sub_8010E40: @ 0x08010E40
 	movs r7, #0
 	str r7, [r0]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r0, _08010F50
 	ldr r1, _08010F54
@@ -793,7 +793,7 @@ _08010FEC:
 	bl RenderText
 	bl CheckStacks
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 _08011022:
 	ldr r4, _08011124
@@ -833,7 +833,7 @@ _08011022:
 	movs r0, #0
 	str r0, [r1]
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r4, _08011134
 	movs r1, #0xfc
@@ -1224,7 +1224,7 @@ _080113B8:
 	bl RenderText
 	bl CheckStacks
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	b _08011278
 	.align 2, 0
@@ -3054,7 +3054,7 @@ _08012386:
 	bl AddStringToBuffer
 	bl RenderText
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	cmp r5, #1
 	ble _08012302

@@ -4673,7 +4673,7 @@ _08018C24: .4byte gGameStatus
 _08018C28: .4byte 0x02001370
 _08018C2C: .4byte dword_2000FC8
 _08018C30:
-	bl sub_800F7A0
+	bl restore_full_health
 _08018C34:
 	ldr r1, _08018C50
 	ldr r2, _08018C54
@@ -6027,7 +6027,7 @@ _08019882:
 	cmp r0, #0
 	beq _080198CC
 _0801989C:
-	bl sub_800F7A0
+	bl restore_full_health
 	b _080198EC
 	.align 2, 0
 _080198A4: .4byte gPreviousPlayerState

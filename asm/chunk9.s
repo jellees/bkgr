@@ -549,7 +549,7 @@ _08025410:
 	bl RenderText
 	bl CheckStacks
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	mov r0, sb
 	cmp r0, #0
@@ -767,7 +767,7 @@ _08025612:
 	bl RenderText
 	bl CheckStacks
 	bl SyncVblank
-	bl UpdateVideo
+	bl update_video
 	bl SkipVblank
 	ldr r1, [sp, #0x14]
 	cmp r1, #0

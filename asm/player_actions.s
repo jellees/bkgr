@@ -988,7 +988,7 @@ sub_801BFEC: @ 0x0801BFEC
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _0801C078
-	bl sub_800F7A0
+	bl restore_full_health
 	ldr r2, _0801C068
 	ldr r1, _0801C06C
 	ldrh r0, [r1]
@@ -5234,7 +5234,7 @@ sub_801E2B8: @ 0x0801E2B8
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _0801E330
-	bl sub_800F7A0
+	bl restore_full_health
 	ldr r2, _0801E320
 	ldr r1, _0801E324
 	ldrh r0, [r1]
@@ -15692,7 +15692,7 @@ sub_8023AB4: @ 0x08023AB4
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _08023B30
-	bl sub_800F7A0
+	bl restore_full_health
 	ldr r2, _08023B1C
 	ldr r1, _08023B20
 	ldrh r0, [r1]

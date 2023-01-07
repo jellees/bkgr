@@ -97,9 +97,9 @@ u8 gContinueGame;
 u8 byte_20010AF;
 u8 byte_20010B0;
 u8 byte_20010B1;
-char file_string_1[0x1A];
-char file_string_2[0x1A];
-char file_string_3[0x1A];
+char gSaveFileString1[0x1A];
+char gSaveFileString2[0x1A];
+char gSaveFileString3[0x1A];
 u8 gTextSpeed;
 u32 dword_2001104;
 u32 dword_2001108;
@@ -167,11 +167,11 @@ int gPoisonHitTimer;
 u32 dword_20011F8;
 s32 dword_20011FC;
 
-static void UpdateGame(void);
+static void update_game(void);
 static void sub_8009D2C();
-static void prepare_wram();
+static void init_memory();
 static void copy_sub_80001EC_to_iram();
-static void StartGame();
+static void start_game();
 static void sub_800A344();
 static void sub_800A37C();
 static void nullsub_15();
@@ -192,24 +192,24 @@ static void sub_800EA9C();
 static void sub_800EACC();
 static void sub_800EB58(bool32 a1);
 static void show_room_name();
-static void sub_800EF6C(int a1);
+static void sub_800EF6C(int warp);
 static void sub_800F430();
 static void update_efx();
 
 int AgbMain() {
-    prepare_wram();
-    EnableDisplay();
-    sub_800FA84();
-    StartGame();
+    init_memory();
+    setup_display();
+    init_debug();
+    start_game();
 
     while (1) {
         SetTextSpriteCount(0);
         Debug_ShowInfo();
-        UpdateGame();
+        update_game();
         Debug_SetAfterGameUpdate(REG_VCOUNT & 0xFF);
         SyncVblank();
         gNullsub_5();
-        UpdateVideo();
+        update_video();
         Debug_SetAfterVideoUpdate(REG_VCOUNT & 0xFF);
         SkipVblank();
         ++gMainFrameCounter;
@@ -217,7 +217,7 @@ int AgbMain() {
     }
 }
 
-static void UpdateGame(void) {
+static void update_game(void) {
     if (gIsPaletteEffectsActive) {
         sub_8026DC0();
     }
@@ -246,7 +246,7 @@ static void UpdateGame(void) {
     sub_806127C();
 
     if (word_203F998 == 12 && byte_20021F8 && !(gPlayerStateSettings[gPlayerState] & 0x800)) {
-        if (byte_2000F55 || gKeysDown & 2) {
+        if (byte_2000F55 || gKeysDown & B_BUTTON) {
             sub_80271A4(0xFFF, 1);
             sub_805E1DC(2);
             init_function(43);
@@ -257,8 +257,8 @@ static void UpdateGame(void) {
         sub_8015FD4();
     }
 
-    if (gKeysDown & 8 && !(gPlayerStateSettings[gPlayerState] & 0x800) && !byte_20021F0 && !byte_203F99C
-        && gGameStatus.health && !gIsPaletteEffectsActive && !byte_203FA35) {
+    if (gKeysDown & START_BUTTON && !(gPlayerStateSettings[gPlayerState] & 0x800) && !byte_20021F0
+        && !byte_203F99C && gGameStatus.health && !gIsPaletteEffectsActive && !byte_203FA35) {
         if ((gPlayerState != 101 || gIsSlideMiniGame) && !byte_2000F57) {
             if (byte_20020BC) {
                 sub_8016B0C();
@@ -298,7 +298,8 @@ static void UpdateGame(void) {
             gKeysDown = 0;
             gKeysPressed = 0;
 
-            if (gPlayerStateSettings[gPlayerState] & 0x100 && gTransformation != TRANSFORMATION_OCTOPUS) {
+            if (gPlayerStateSettings[gPlayerState] & 0x100
+                && gTransformation != TRANSFORMATION_OCTOPUS) {
                 sub_08040204(57, gGameStatus.field_16);
                 sub_08041FA4(57);
             }
@@ -404,7 +405,7 @@ static void UpdateGame(void) {
                 byte_2000F5D = TRUE;
             }
 
-            sub_8025948(gKeysPressed & 1);
+            sub_8025948(gKeysPressed & A_BUTTON);
         }
     } else {
         RenderText();
@@ -454,35 +455,37 @@ void nullsub_4() {
 void nullsub_5() {
 }
 
-static void prepare_wram() {
-    u8 v0 = gShowEraseDataScreen;
-    u8 v1 = byte_2000F59;
-    u8 v2 = byte_2000F5A;
-    u8 v3 = (u8)gKeysPressed;
+static void init_memory() {
+    u8 backup1 = gShowEraseDataScreen;
+    u8 backup2 = byte_2000F59;
+    u8 backup3 = byte_2000F5A;
+    u8 backup4 = (u8)gKeysPressed;
 
     RegisterRamReset(0xFDu);
-    DmaFill32(0, (u8*)0x2000000, 0x10000);
-    DmaFill32(0, (u8*)0x3000000, 0x1D27);
+    DmaFill32(0, EWRAM_START, 0x10000);
+    DmaFill32(0, IWRAM_START, 0x1D27);
 
     copy_sub_80001EC_to_iram();
 
     dword_3007FFC = 0x3000C24;
-    REG_WAITCNT = 0x4014;
+    REG_WAITCNT = WAITCNT_AGB | WAITCNT_PREFETCH_ENABLE | WAITCNT_PHI_OUT_NONE | WAITCNT_WS2_S_8
+                  | WAITCNT_WS2_N_4 | WAITCNT_WS1_S_4 | WAITCNT_WS1_N_4 | WAITCNT_WS0_S_1
+                  | WAITCNT_WS0_N_3 | WAITCNT_SRAM_4;
     REG_TM3CNT_L = 0;
     REG_TM3CNT_H = 128;
 
-    gShowEraseDataScreen = v0;
-    byte_2000F59 = v1;
-    byte_2000F5A = v2;
-    gKeysPressed = v3;
+    gShowEraseDataScreen = backup1;
+    byte_2000F59 = backup2;
+    byte_2000F5A = backup3;
+    gKeysPressed = backup4;
 }
 
-void EnableDisplay() {
+void setup_display() {
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP;
-    REG_BG0CNT = 0x1C03; // Setup priority and base blocks.
-    REG_BG1CNT = 0x1D02;
-    REG_BG2CNT = 0x1E01;
-    REG_BG3CNT = 0x1F00;
+    REG_BG0CNT = BGCNT_SCREENBASE(28) | BGCNT_PRIORITY(3);
+    REG_BG1CNT = BGCNT_SCREENBASE(29) | BGCNT_PRIORITY(2);
+    REG_BG2CNT = BGCNT_SCREENBASE(30) | BGCNT_PRIORITY(1);
+    REG_BG3CNT = BGCNT_SCREENBASE(31) | BGCNT_PRIORITY(0);
     REG_BG0HOFS = 0;
     REG_BG1HOFS = 0;
     REG_BG2HOFS = 0;
@@ -493,8 +496,8 @@ void EnableDisplay() {
     REG_BG3VOFS = 0;
 }
 
-static void sub_8009ED8() {
-    s32 i;
+static void setup_interrupts() {
+    int i;
 
     dword_2000F68 = 0;
     dword_2000F6C = 0;
@@ -507,21 +510,21 @@ static void sub_8009ED8() {
     gFunctionArray[2] = sub_800A528;
     gFunctionArray[12] = sub_800A594;
 
-    REG_DISPSTAT = 0x28;
-    REG_IE = 0x1005;
-    REG_IME = 1;
-    REG_KEYCNT = 0xC00F;
+    REG_DISPSTAT = DISPSTAT_VCOUNT_INTR | DISPSTAT_VBLANK_INTR;
+    REG_IE = INTR_FLAG_KEYPAD | INTR_FLAG_VCOUNT | INTR_FLAG_VBLANK;
+    REG_IME = TRUE;
+    REG_KEYCNT = KEY_AND_INTR | KEY_INTR_ENABLE | START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON;
 }
 
 static void copy_sub_80001EC_to_iram() {
     DmaTransfer32(sub_80001EC, &unk_3000000, ((UpdateBackgrounds - sub_80001EC) >> 2) + 1);
 }
 
-static void StartGame() {
+static void start_game() {
     gSpriteDMACount = 0;
     gTileAnimQueueIndex = 0;
     byte_2000314 = 0;
-    gColorSpecEffectsSel = 0x3F00;
+    gColorSpecEffectsSel = BLDCNT_TGT2_ALL;
     byte_20010AF = 0;
     gContinueGame = 0;
     byte_2000F5E = 0;
@@ -571,7 +574,7 @@ static void StartGame() {
     dword_2000F60 = (u32*)Alloc(0x400u, 19, 4);
     dword_2000F64 = 0;
 
-    sub_8009ED8();
+    setup_interrupts();
     sub_8025798(&unk_80CC8F8, sub_80266A8());
 
     if (gShowEraseDataScreen) {
@@ -580,11 +583,11 @@ static void StartGame() {
 
     ExecutePregame();
 
-    DmaFill32(170, (void*)0x7000000, 256);
+    DmaFill32(170, OAM, 256);
     REG_BLDCNT = gColorSpecEffectsSel;
-    REG_BLDALPHA = 0x907;
-    REG_BG1CNT &= 0xFFFC;
-    REG_BG1CNT |= 2;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+    REG_BG1CNT &= BGCNT_MASK_NO_PRIORITY;
+    REG_BG1CNT |= BGCNT_PRIORITY(2);
 
     if (!gContinueGame) {
         gRoomGoal = 0;
@@ -691,7 +694,7 @@ static void sub_800A37C() {
     gTileAnimQueueIndex = 0;
 
     if (byte_2000F5A == 0) {
-        if (byte_2000F59 && !(gKeysPressed & 0xF))
+        if (byte_2000F59 && !(gKeysPressed & (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON)))
             byte_2000F5A = 5;
     } else {
         byte_2000F5A--;
@@ -703,8 +706,8 @@ static void sub_800A37C() {
 static void nullsub_15() {
 }
 
-void UpdateVideo() {
-    DmaTransfer32(gOAMBuffer1, 0x7000000, 256);
+void update_video() {
+    DmaTransfer32(gOAMBuffer1, OAM, 256);
 
     if (gMatricesCount) {
         CallARM_SetOamMatrices(gMatrices, gMatricesCount);
@@ -744,7 +747,7 @@ static void sub_800A528() {
 void sub_800A594() {
     if (!byte_2000F59) {
         audio_pause();
-        REG_IME = 0;
+        REG_IME = FALSE;
         REG_DISPSTAT = 0;
         REG_IE = 0;
         REG_KEYCNT = 0;
@@ -788,16 +791,16 @@ static void sub_800A5F4() {
     byte_200107D = stru_80CC8C4.maxHealth - 4;
     gUnlockedLevels = 0;
     gTotalAmountOfLevels = dword_80CC8F4;
-    dword_3003300 = 0x160000;
-    dword_3003308 = 0x240000;
-    dword_3003304 = 0x180000;
+    dword_3003300 = FX32_CONST(22);
+    dword_3003308 = FX32_CONST(36);
+    dword_3003304 = FX32_CONST(24);
 }
 
-void sub_800A710(u16 a1) {
-    ASSERT(a1 <= 5 || a1 == 255);
+void sub_800A710(u16 level) {
+    ASSERT(level < LEVEL_COUNT || level == LEVEL_NONE);
 
-    gLoadedRoomLevel = a1;
-    byte_20010AA = a1;
+    gLoadedRoomLevel = level;
+    byte_20010AA = level;
     sub_8040178();
     sub_8039234();
 }
@@ -1287,7 +1290,7 @@ static void update_player() {
             if (sub_80038BC(dword_2000FC8)) {
                 sub_8007434(c, &gFloorPlaneResult);
             } else {
-                gFloorPlaneResult.isColliding = 0;
+                gFloorPlaneResult.isColliding = FALSE;
             }
         } else {
             sub_8007434(c, &gFloorPlaneResult);
@@ -1305,7 +1308,7 @@ static void update_player() {
 
         if (!stru_3002950.isColliding) {
             if (gFloorPlaneResult.isColliding || dword_20011FC > 0) {
-                stru_3002950.isColliding = 1;
+                stru_3002950.isColliding = TRUE;
                 dword_20011FC--;
             } else if (!gWallPlaneResult.isColliding && !dword_203DFC4) {
                 return;
@@ -1736,7 +1739,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
 
     if (byte_20010A4) {
         sub_8016C78(byte_20010A5);
-        word_20010AC = gKeysPressed & 0x3FF;
+        word_20010AC = gKeysPressed & KEYS_MASK;
     } else {
         sub_8016C78(gPlayerSprite.field_A);
     }
@@ -1748,7 +1751,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
         dword_203DFE0 = 0;
     }
 
-    gFloorPlaneResult.isColliding = 0;
+    gFloorPlaneResult.isColliding = FALSE;
     gPlayerSprite.field_13 = 0;
 
     return TRUE;
@@ -1813,7 +1816,7 @@ void sub_800BFA0(int room, int warp, int a3) {
 
     if (byte_20010A4) {
         sub_8016C78(byte_20010A5);
-        word_20010AC = gKeysPressed & 0x3FF;
+        word_20010AC = gKeysPressed & KEYS_MASK;
     } else {
         sub_8016C78(gPlayerSprite.field_A);
     }
@@ -3133,86 +3136,89 @@ static void sub_800E7A0() {
     byte_20010AF = 0;
 }
 
-void MakeFileStrings() {
+/**
+ * Setup the save file strings with the current information.
+ */
+void setup_save_file_strings() {
     int i;
 
     for (i = 0; i < 26; i++) {
-        file_string_1[i] = ' ';
+        gSaveFileString1[i] = ' ';
     }
 
-    file_string_1[25] = 0xFF;
-    file_string_1[19] = ':';
-    file_string_1[22] = ':';
-    file_string_1[17] = '0';
-    file_string_1[20] = '0';
-    file_string_1[23] = '0';
-    file_string_1[4] = 0xFC;
-    file_string_1[5] = 6;
-    file_string_1[9] = 0xFC;
-    file_string_1[10] = 7;
-    file_string_1[15] = 0xFC;
-    file_string_1[16] = 8;
-    file_string_1[0] = 0xFC;
-    file_string_1[1] = 9;
+    gSaveFileString1[25] = 0xFF;
+    gSaveFileString1[19] = ':';
+    gSaveFileString1[22] = ':';
+    gSaveFileString1[17] = '0';
+    gSaveFileString1[20] = '0';
+    gSaveFileString1[23] = '0';
+    gSaveFileString1[4] = 0xFC;
+    gSaveFileString1[5] = 6;
+    gSaveFileString1[9] = 0xFC;
+    gSaveFileString1[10] = 7;
+    gSaveFileString1[15] = 0xFC;
+    gSaveFileString1[16] = 8;
+    gSaveFileString1[0] = 0xFC;
+    gSaveFileString1[1] = 9;
 
-    IntegerToAsciiFw(gSaveFiles[0].jiggies, &file_string_1[6]);
-    IntegerToAsciiFw(gSaveFiles[0].notes, &file_string_1[11]);
-    IntegerToAsciiBw(gSaveFiles[0].hour, &file_string_1[18]);
-    IntegerToAsciiBw(gSaveFiles[0].minute, &file_string_1[21]);
-    IntegerToAsciiBw(gSaveFiles[0].second, &file_string_1[24]);
+    IntegerToAsciiFw(gSaveFiles[0].jiggies, &gSaveFileString1[6]);
+    IntegerToAsciiFw(gSaveFiles[0].notes, &gSaveFileString1[11]);
+    IntegerToAsciiBw(gSaveFiles[0].hour, &gSaveFileString1[18]);
+    IntegerToAsciiBw(gSaveFiles[0].minute, &gSaveFileString1[21]);
+    IntegerToAsciiBw(gSaveFiles[0].second, &gSaveFileString1[24]);
 
     for (i = 0; i < 26; i++) {
-        file_string_2[i] = ' ';
+        gSaveFileString2[i] = ' ';
     }
 
-    file_string_2[25] = 0xFF;
-    file_string_2[19] = ':';
-    file_string_2[22] = ':';
-    file_string_2[17] = '0';
-    file_string_2[20] = '0';
-    file_string_2[23] = '0';
-    file_string_2[4] = 0xFC;
-    file_string_2[5] = 6;
-    file_string_2[9] = 0xFC;
-    file_string_2[10] = 7;
-    file_string_2[15] = 0xFC;
-    file_string_2[16] = 8;
-    file_string_2[0] = 0xFC;
-    file_string_2[1] = 10;
+    gSaveFileString2[25] = 0xFF;
+    gSaveFileString2[19] = ':';
+    gSaveFileString2[22] = ':';
+    gSaveFileString2[17] = '0';
+    gSaveFileString2[20] = '0';
+    gSaveFileString2[23] = '0';
+    gSaveFileString2[4] = 0xFC;
+    gSaveFileString2[5] = 6;
+    gSaveFileString2[9] = 0xFC;
+    gSaveFileString2[10] = 7;
+    gSaveFileString2[15] = 0xFC;
+    gSaveFileString2[16] = 8;
+    gSaveFileString2[0] = 0xFC;
+    gSaveFileString2[1] = 10;
 
-    IntegerToAsciiFw(gSaveFiles[1].jiggies, &file_string_2[6]);
-    IntegerToAsciiFw(gSaveFiles[1].notes, &file_string_2[11]);
-    IntegerToAsciiBw(gSaveFiles[1].hour, &file_string_2[18]);
-    IntegerToAsciiBw(gSaveFiles[1].minute, &file_string_2[21]);
-    IntegerToAsciiBw(gSaveFiles[1].second, &file_string_2[24]);
+    IntegerToAsciiFw(gSaveFiles[1].jiggies, &gSaveFileString2[6]);
+    IntegerToAsciiFw(gSaveFiles[1].notes, &gSaveFileString2[11]);
+    IntegerToAsciiBw(gSaveFiles[1].hour, &gSaveFileString2[18]);
+    IntegerToAsciiBw(gSaveFiles[1].minute, &gSaveFileString2[21]);
+    IntegerToAsciiBw(gSaveFiles[1].second, &gSaveFileString2[24]);
 
     for (i = 0; i < 26; i++) {
-        file_string_3[i] = ' ';
+        gSaveFileString3[i] = ' ';
     }
 
-    file_string_3[25] = 0xFF;
-    file_string_3[19] = ':';
-    file_string_3[22] = ':';
-    file_string_3[17] = '0';
-    file_string_3[20] = '0';
-    file_string_3[23] = '0';
-    file_string_3[4] = 0xFC;
-    file_string_3[5] = 6;
-    file_string_3[9] = 0xFC;
-    file_string_3[10] = 7;
-    file_string_3[15] = 0xFC;
-    file_string_3[16] = 8;
-    file_string_3[0] = 0xFC;
-    file_string_3[1] = 11;
-    
-    IntegerToAsciiFw(gSaveFiles[2].jiggies, &file_string_3[6]);
-    IntegerToAsciiFw(gSaveFiles[2].notes, &file_string_3[11]);
-    IntegerToAsciiBw(gSaveFiles[2].hour, &file_string_3[18]);
-    IntegerToAsciiBw(gSaveFiles[2].minute, &file_string_3[21]);
-    IntegerToAsciiBw(gSaveFiles[2].second, &file_string_3[24]);
+    gSaveFileString3[25] = 0xFF;
+    gSaveFileString3[19] = ':';
+    gSaveFileString3[22] = ':';
+    gSaveFileString3[17] = '0';
+    gSaveFileString3[20] = '0';
+    gSaveFileString3[23] = '0';
+    gSaveFileString3[4] = 0xFC;
+    gSaveFileString3[5] = 6;
+    gSaveFileString3[9] = 0xFC;
+    gSaveFileString3[10] = 7;
+    gSaveFileString3[15] = 0xFC;
+    gSaveFileString3[16] = 8;
+    gSaveFileString3[0] = 0xFC;
+    gSaveFileString3[1] = 11;
+
+    IntegerToAsciiFw(gSaveFiles[2].jiggies, &gSaveFileString3[6]);
+    IntegerToAsciiFw(gSaveFiles[2].notes, &gSaveFileString3[11]);
+    IntegerToAsciiBw(gSaveFiles[2].hour, &gSaveFileString3[18]);
+    IntegerToAsciiBw(gSaveFiles[2].minute, &gSaveFileString3[21]);
+    IntegerToAsciiBw(gSaveFiles[2].second, &gSaveFileString3[24]);
 }
 
-void init_savefiles() {
+void init_save_files() {
     int i;
     int v0 = 0;
 
@@ -3253,7 +3259,7 @@ void init_savefiles() {
     sub_803FE78();
 }
 
-void reset_savefiles() {
+void reset_save_files() {
     int i;
 
     for (i = 0; i < 3; i++) {
@@ -3485,7 +3491,7 @@ void sub_800EECC() {
     }
 }
 
-static void sub_800EF6C(int a1) {
+static void sub_800EF6C(int warp) {
     switch (gLoadedRoomLevel) {
         case LEVEL_SPIRAL_MOUNTAIN:
             if (dword_2001104 == 1) {
@@ -3495,7 +3501,7 @@ static void sub_800EF6C(int a1) {
 
         case LEVEL_BREEGULL_BEACH:
             if (gLoadedRoomIndex == dword_80CEE5C[gLoadedRoomLevel]
-                && a1 == dword_80CEE74[gLoadedRoomLevel]) {
+                && warp == dword_80CEE74[gLoadedRoomLevel]) {
                 DmaTransferObjPalette(&unk_83FD7B4, 3, 3);
                 DmaTransferObjPalette(&unk_83FD7D4, 5, 5);
                 DmaTransferObjPalette(&unk_83FD7F4, 8, 8);
@@ -3860,7 +3866,7 @@ static void sub_800F430() {
     }
 }
 
-void sub_800F7A0() {
+void restore_full_health() {
     if (gGameStatus.health < gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1)) {
         gGameStatus.health = gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1);
         sub_08040204(56, gGameStatus.health);
@@ -3868,7 +3874,7 @@ void sub_800F7A0() {
     }
 }
 
-bool32 IsGameComplete() {
+bool32 is_game_complete() {
     bool32 complete = FALSE;
     if (gGameStatus.totalNotes == stru_80CC8C4.totalNotes
         && gGameStatus.totalJiggies == stru_80CC8C4.totalJiggies) {
@@ -3931,12 +3937,7 @@ static void update_efx() {
 
             if (--gThunderTimer == 0) {
                 gThunderTimer = RandomMinMax(180, 300);
-                if (gCanPlaySfx) {
-                    u32 a = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].index;
-                    u32 b = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].volumes[gSfxVolume];
-                    u32 c = dSoundEffects[dword_806483C[RandomMinMax(0, 2)]].pitch + 0x10000;
-                    audio_new_fx(a, b, c);
-                }
+                PLAY_SFX(dword_806483C[RandomMinMax(0, 2)]);
             }
             break;
     }

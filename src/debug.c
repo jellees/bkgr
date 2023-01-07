@@ -143,7 +143,7 @@ void sub_800FA58() {
     sub_803FE78();
 }
 
-void sub_800FA84() {
+void init_debug() {
     gDebugESNSum = 0;
     dword_2001398 = 0;
     gDebugESNFrameCount = 1;

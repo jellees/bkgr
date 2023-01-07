@@ -771,9 +771,9 @@ void InitMenu(u32 menu, u32 language) {
             gMenu.lineHeight = 32;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
-            gMenu.texts[0] = file_string_1;
-            gMenu.texts[1] = file_string_2;
-            gMenu.texts[2] = file_string_3;
+            gMenu.texts[0] = gSaveFileString1;
+            gMenu.texts[1] = gSaveFileString2;
+            gMenu.texts[2] = gSaveFileString3;
             break;
         case 9:
             gMenu.xPosition = 20;

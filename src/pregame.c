@@ -40,11 +40,11 @@ void ExecutePregame() {
         byte_2000335 = 1;
         byte_20021F9 = 1;
         byte_20021F8 = 0;
-        reset_savefiles();
-        MakeFileStrings();
+        reset_save_files();
+        setup_save_file_strings();
     } else {
-        init_savefiles();
-        MakeFileStrings();
+        init_save_files();
+        setup_save_file_strings();
         byte_20021F8 = 1;
 
         if (gSaveFiles[0].empty && gSaveFiles[1].empty && gSaveFiles[2].empty || byte_2000335) {
@@ -88,7 +88,7 @@ void ShowSelectGame(int a1) {
     }
 
     SyncVblank();
-    UpdateVideo();
+    update_video();
     SkipVblank();
     SetObjectsFullAlpha();
 
@@ -130,7 +130,7 @@ void ShowSelectGame(int a1) {
             gOBJTileFramePtr = (u32*)OBJ_VRAM0;
             gOBJTileCount = 0;
             SyncVblank();
-            UpdateVideo();
+            update_video();
             SkipVblank();
             SetObjectsFullAlpha();
             REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BG1;
@@ -163,7 +163,7 @@ void ShowSelectGame(int a1) {
         RenderMenuSprites();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (v3 == FALSE) {
@@ -294,7 +294,7 @@ int ShowPressStart() {
     u8 s1[27], s2[21], s3[21];
     u8* string;
 
-    EnableDisplay();
+    setup_display();
     REG_BG2X_L = 0;
     REG_BG2Y_L = 0;
     REG_BG2PB = 0;
@@ -435,7 +435,7 @@ int ShowPressStart() {
         RenderText();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
     }
 
@@ -561,7 +561,7 @@ int sub_80246C8() {
         RenderMenuSprites();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (v4) {
@@ -621,7 +621,7 @@ void ShowLanguageSelect() {
         RenderText();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (v0) {
@@ -753,7 +753,7 @@ void ShowEraseData() {
         RenderText();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
 
         if (erase) {
@@ -835,7 +835,7 @@ void ShowFlashscreens() {
         sub_805E088();
         CheckStacks();
         SyncVblank();
-        UpdateVideo();
+        update_video();
         SkipVblank();
     }
 

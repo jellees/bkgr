@@ -14817,7 +14817,7 @@ _0802F6EC:
 	ldrb r0, [r0]
 	subs r0, #1
 	bl sub_8025EF4
-	bl sub_800F7A0
+	bl restore_full_health
 	b _0802FDA8
 	.align 2, 0
 _0802F714: .4byte 0x0200107C
@@ -15279,7 +15279,7 @@ _0802FAE8:
 	beq _0802FB96
 	ldr r0, _0802FB2C
 	strb r4, [r0]
-	bl sub_800F7A0
+	bl restore_full_health
 	ldr r0, _0802FB30
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -15363,7 +15363,7 @@ _0802FBBC:
 	ldr r0, _0802FC04
 	strb r4, [r0]
 _0802FBC0:
-	bl sub_800F7A0
+	bl restore_full_health
 	ldr r0, _0802FC08
 	ldr r4, _0802FC0C
 	ldr r2, [r4]
