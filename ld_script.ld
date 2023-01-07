@@ -424,7 +424,6 @@ SECTIONS
         src/chunk3.o(.text);
         src/savefile.o(.text);
         src/chunk4.o(.text);
-        asm/chunk4.o(.text);
         src/environment_effects.o(.text);
         src/debug.o(.text);
         asm/chunk5.o(.text);

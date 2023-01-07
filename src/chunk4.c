@@ -1,5 +1,6 @@
 #include "global.h"
 #include "sprite.h"
+#include "audio_b.h"
 #include "common.h"
 
 /* External declarations. */
@@ -251,7 +252,7 @@ void sub_800EF6C(int a1) {
     }
 }
 
-void sub_0800F02C(int a1, int a2, int a3) {
+void sub_0800F02C(int* a1, int a2, int a3) {
     byte_200110C = 1;
     dword_20011C8 = a1;
     byte_200111F = 0;
@@ -466,9 +467,153 @@ void sub_0800F02C(int a1, int a2, int a3) {
     stru_20011A4.field_11 = 6;
     stru_20011A4.font = &font_80B01A8[2];
     byte_200111A = sub_8025870(dword_2001188, &stru_2001190);
-    dword_20011B8 = (240 - byte_200111A) >> 1 << 16;
-    dword_20011C0 = -byte_200111A << 16;
+    dword_20011B8 = FX32_CONST((240 - byte_200111A) >> 1);
+    dword_20011C0 = FX32_CONST(-byte_200111A);
     byte_200111B = sub_8025870(dword_200118C, &stru_20011A4);
-    dword_20011BC = (240 - byte_200111B) >> 1 << 16;
-    dword_20011C4 = -byte_200111B << 16;
+    dword_20011BC = FX32_CONST((240 - byte_200111B) >> 1);
+    dword_20011C4 = FX32_CONST(-byte_200111B);
+}
+
+void sub_800F430() {
+    if (byte_200110C == 0)
+        return;
+
+    switch (byte_200110C) {
+        case 1:
+            if (byte_2001120 && byte_200111F) {
+                byte_200110C = 2;
+                if (dword_200118C) {
+                    stru_20011A4.xPosition = dword_20011C4 >> FX32_SHIFT;
+                    stru_20011A4.yPosition = byte_200111E;
+                    stru_20011A4.stringOffset = 0;
+                    AddStringToBuffer(&stru_20011A4, dword_200118C);
+                }
+                stru_2001190.xPosition = dword_20011C0 >> FX32_SHIFT;
+                stru_2001190.yPosition = byte_200111D;
+                stru_2001190.stringOffset = 0;
+                AddStringToBuffer(&stru_2001190, dword_2001188);
+            } else {
+                if (dword_200118C) {
+                    stru_20011A4.xPosition = dword_20011C4 >> FX32_SHIFT;
+                    stru_20011A4.yPosition = byte_200111E;
+                    stru_20011A4.stringOffset = 0;
+                    AddStringToBuffer(&stru_20011A4, dword_200118C);
+                    dword_20011C4 += FX32_CONST(4);
+                    if (dword_20011C4 >= dword_20011BC) {
+                        dword_20011C4 = dword_20011BC;
+                        byte_2001120 = 1;
+                    }
+                }
+                stru_2001190.xPosition = dword_20011C0 >> FX32_SHIFT;
+                stru_2001190.yPosition = byte_200111D;
+                stru_2001190.stringOffset = 0;
+                AddStringToBuffer(&stru_2001190, dword_2001188);
+                dword_20011C0 += FX32_CONST(4);
+                if (dword_20011C0 >= dword_20011B8) {
+                    dword_20011C0 = dword_20011B8;
+                    byte_200111F = 1;
+                }
+            }
+            break;
+
+        case 2:
+            if (!byte_2001121) {
+                if (gKeysDown & A_BUTTON) {
+                    PLAY_SFX(207);
+                    byte_200111C = 1;
+                    byte_200110C = 3;
+                    dword_20011B8 = FX32_CONST(250);
+                    dword_20011BC = FX32_CONST(250);
+                    byte_200111F = 0;
+                    if (dword_200118C) {
+                        byte_2001120 = 0;
+                    } else {
+                        byte_2001120 = 1;
+                    }
+                } else if (gKeysDown & B_BUTTON) {
+                    PLAY_SFX(208);
+                    byte_200111C = 0;
+                    byte_200110C = 3;
+                    dword_20011B8 = FX32_CONST(250);
+                    dword_20011BC = FX32_CONST(250);
+                    byte_200111F = 0;
+                    if (dword_200118C) {
+                        byte_2001120 = 0;
+                    } else {
+                        byte_2001120 = 1;
+                    }
+                }
+            } else {
+                if (byte_2001122 == 0) {
+                    byte_200111C = 1;
+                    byte_200110C = 3;
+                    dword_20011B8 = FX32_CONST(250);
+                    dword_20011BC = FX32_CONST(250);
+                    byte_200111F = 0;
+                    if (dword_200118C) {
+                        byte_2001120 = 0;
+                    } else {
+                        byte_2001120 = 1;
+                    }
+                } else {
+                    byte_2001122--;
+                }
+            }
+            stru_2001190.xPosition = dword_20011C0 >> FX32_SHIFT;
+            stru_2001190.yPosition = byte_200111D;
+            stru_2001190.stringOffset = 0;
+            AddStringToBuffer(&stru_2001190, dword_2001188);
+            if (dword_200118C) {
+                stru_20011A4.xPosition = dword_20011C4 >> FX32_SHIFT;
+                stru_20011A4.yPosition = byte_200111E;
+                stru_20011A4.stringOffset = 0;
+                AddStringToBuffer(&stru_20011A4, dword_200118C);
+            }
+            break;
+
+        case 3:
+            if (byte_2001120 && byte_200111F) {
+                byte_200110C = 0;
+                dword_20011C8[0] = byte_200111C;
+            } else {
+                if (dword_200118C) {
+                    stru_20011A4.xPosition = dword_20011C4 >> FX32_SHIFT;
+                    stru_20011A4.yPosition = byte_200111E;
+                    stru_20011A4.stringOffset = 0;
+                    AddStringToBuffer(&stru_20011A4, dword_200118C);
+                    dword_20011C4 += FX32_CONST(4);
+                    if (dword_20011C4 >= dword_20011BC) {
+                        dword_20011C4 = dword_20011BC;
+                        byte_2001120 = 1;
+                    }
+                }
+                stru_2001190.xPosition = dword_20011C0 >> FX32_SHIFT;
+                stru_2001190.yPosition = byte_200111D;
+                stru_2001190.stringOffset = 0;
+                AddStringToBuffer(&stru_2001190, dword_2001188);
+                dword_20011C0 += FX32_CONST(4);
+                if (dword_20011C0 >= dword_20011B8) {
+                    dword_20011C0 = dword_20011B8;
+                    byte_200111F = 1;
+                }
+            }
+            break;
+    }
+}
+
+void sub_800F7A0() {
+    if (gGameStatus.health < gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1)) {
+        gGameStatus.health = gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1);
+        sub_08040204(56, gGameStatus.health);
+        PLAY_SFX(40);
+    }
+}
+
+bool32 IsGameComplete() {
+    bool32 complete = FALSE;
+    if (gGameStatus.totalNotes == stru_80CC8C4.totalNotes
+        && gGameStatus.totalJiggies == stru_80CC8C4.totalJiggies) {
+        complete = TRUE;
+    }
+    return complete;
 }

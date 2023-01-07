@@ -529,11 +529,11 @@ extern u32 dword_2001188;
 extern u32 dword_200118C;
 extern struct TextBox stru_2001190;
 extern struct TextBox stru_20011A4;
-extern u32 dword_20011B8;
-extern u32 dword_20011BC;
-extern u32 dword_20011C0;
-extern u32 dword_20011C4;
-extern int dword_20011C8;
+extern fx32 dword_20011B8;
+extern fx32 dword_20011BC;
+extern fx32 dword_20011C0;
+extern fx32 dword_20011C4;
+extern int* dword_20011C8;
 
 extern int gPoisonEffectEnabled;
 extern int gPoisonHitTimer;
