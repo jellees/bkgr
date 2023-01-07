@@ -534,7 +534,15 @@ extern fx32 dword_20011BC;
 extern fx32 dword_20011C0;
 extern fx32 dword_20011C4;
 extern int* dword_20011C8;
-
+extern s32 gEnvironmentEffects;
+extern s32 gEnvironmentEffectsTemp;
+extern u32 gLavaPaletteIndex;
+extern u32 gLavaTimer;
+extern u16* gLightningPalette;
+extern u16* gBackupBGPalette;
+extern u32 gLightningTimer;
+extern bool32 gLightningActive;
+extern u32 gThunderTimer;
 extern int gPoisonEffectEnabled;
 extern int gPoisonHitTimer;
 extern u32 dword_20011F8;

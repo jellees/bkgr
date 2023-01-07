@@ -15,16 +15,6 @@ extern void UpdateBackgrounds();
 extern u32 sub_80266A8();
 extern u8 sub_80038BC(u32);
 extern void sub_8003A04(u32, u32*, u8, u8);
-
-extern s32 gEnvironmentEffects;
-extern s32 gEnvironmentEffectsTemp;
-extern u32 gLavaPaletteIndex;
-extern u32 gLavaTimer;
-extern u16* gLightningPalette;
-extern u16* gBackupBGPalette;
-extern u32 gLightningTimer;
-extern bool32 gLightningActive;
-extern u32 gThunderTimer;
 /* --- */
 
 enum EnvironmentEffects { EFX_NONE, EFX_LAVA, EFX_THUNDER };
@@ -172,10 +162,10 @@ u16* gBackupBGPalette;
 u32 gLightningTimer;
 bool32 gLightningActive;
 u32 gThunderTimer;
-// int gPoisonEffectEnabled;
-// int gPoisonHitTimer;
-// u32 dword_20011F8;
-// s32 dword_20011FC;
+int gPoisonEffectEnabled;
+int gPoisonHitTimer;
+u32 dword_20011F8;
+s32 dword_20011FC;
 
 static void UpdateGame(void);
 static void sub_8009D2C();

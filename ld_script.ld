@@ -11,12 +11,6 @@ SECTIONS
 
         . = 0x00000314;
         src/main.o(.bss);
-
-        gPoisonEffectEnabled = .; . += 4;
-        gPoisonHitTimer = .; . += 4;
-        dword_20011F8 = .; . += 4;
-        dword_20011FC = .; . += 4;
-
         src/debug.o(.bss);
         src/room.o(.bss);
 
