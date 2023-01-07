@@ -29,6 +29,154 @@ extern u32 gThunderTimer;
 
 enum EnvironmentEffects { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 
+u8 byte_2000314;
+s32 dword_2000318;
+s32 dword_200031C;
+u8 gPauseMenuLanguage;
+u32* gMatrices;
+u32 gMatricesCount;
+u32 dword_200032C;
+u8 byte_2000330;
+u8 byte_2000331;
+u8 byte_2000332;
+u8 byte_2000333;
+u8 byte_2000334;
+u8 byte_2000335;
+u16 gColorSpecEffectsSel;
+u16 gDisplayControl;
+u16 gBG0Control;
+u16 gBG1Control;
+u16 gBG2Control;
+u16 gBG3Control;
+u16 word_2000342;
+u16 word_2000344;
+u16 word_2000346;
+u16 word_2000348;
+// Probably not an array, but it needs to be in order to fill up the void.
+u16 word_200034A[11];
+struct SpriteDMATableEntry gSpriteDMATable[255];
+u8 gSpriteDMACount;
+u8 byte_2000F55; // possibly bool8
+u8 byte_2000F56; // possibly bool8
+u8 byte_2000F57; // possibly bool8
+u8 gShowEraseDataScreen;
+u8 byte_2000F59;
+u8 byte_2000F5A;
+u8 gClockFrameCounter;
+bool8 gClockEnabled;
+bool8 byte_2000F5D;
+bool8 byte_2000F5E;
+u32* dword_2000F60;
+u32 dword_2000F64;
+u32 dword_2000F68;
+u32 dword_2000F6C;
+u8 gUnused_ExecUnusedInputFunc;
+struct Sprite gPlayerSprite;
+struct Sprite gPlayerShadowSprite;
+struct Sprite sprite_2000FAC;
+u32 dword_2000FC8;
+struct level_struc byte_2000FCC[6];
+struct GameStatus gGameStatus;
+struct SaveFile gSaveFiles[3];
+u8 byte_200107C;
+u8 byte_200107D;
+u8 gUnlockedLevels;
+u8 gTotalAmountOfLevels;
+u16 gLoadedRoomIndex;
+u16 gLoadedRoomLevel;
+u16 gLoadedRoomBgm;
+fx32 dword_2001088;
+s8 gSelectedEgg;
+u8 byte_200108D;
+u8 byte_200108E;
+u16 word_2001090;
+u16 word_2001092;
+u8 byte_2001094;
+fx32 dword_2001098;
+fx32 dword_200109C;
+fx32 dword_20010A0;
+u8 byte_20010A4;
+u8 byte_20010A5;
+u8 gRoomNameNumber;
+u8 byte_20010A7;
+u8 gRoomGoal;
+u8 gWarpGoal;
+u8 byte_20010AA;
+u16 word_20010AC;
+u8 gContinueGame;
+u8 byte_20010AF;
+u8 byte_20010B0;
+u8 byte_20010B1;
+char file_string_1[0x1A];
+char file_string_2[0x1A];
+char file_string_3[0x1A];
+u8 gTextSpeed;
+u32 dword_2001104;
+u32 dword_2001108;
+u8 byte_200110C; // possibly bool8
+u32 dword_2001110;
+u32 dword_2001114;
+bool8 gIsCameraMovingX;
+bool8 gIsCameraMovingY;
+u8 byte_200111A;
+u8 byte_200111B;
+u8 byte_200111C;
+u8 byte_200111D;
+u8 byte_200111E;
+u8 byte_200111F;
+u8 byte_2001120;
+u8 byte_2001121;
+u8 byte_2001122;
+u32 dword_2001124;
+u16 word_2001128;
+u8 byte_200112A;
+s16 word_200112C;
+s16 word_200112E;
+s16 word_2001130;
+s16 word_2001132;
+s16 word_2001134;
+int dword_2001138;
+u8 byte_200113C;
+u8 byte_200113D;
+s32 dword_2001140;
+s32 dword_2001144;
+s32 dword_2001148;
+s32 dword_200114C;
+s32 dword_2001150;
+s32 dword_2001154;
+s32 dword_2001158;
+s32 dword_200115C;
+s32 dword_2001160;
+s32 dword_2001164;
+u8* dword_2001168;
+bool8 byte_200116C;
+u8 gShowRoomName;
+u16 gRoomNameApparenceTimer;
+struct TextBox gRoomNameTextBox;
+char* gRoomName;
+u32 dword_2001188;
+u32 dword_200118C;
+struct TextBox stru_2001190;
+struct TextBox stru_20011A4;
+fx32 dword_20011B8;
+fx32 dword_20011BC;
+fx32 dword_20011C0;
+fx32 dword_20011C4;
+int* dword_20011C8;
+s32 gEnvironmentEffects;
+s32 gEnvironmentEffectsTemp;
+u32 gLavaPaletteIndex;
+u32 gLavaTimer;
+u16* gLightningPalette;
+u16* gBackupBGPalette;
+u32 gLightningTimer;
+bool32 gLightningActive;
+u32 gThunderTimer;
+// int gPoisonEffectEnabled;
+// int gPoisonHitTimer;
+// u32 dword_20011F8;
+// s32 dword_20011FC;
+
 static void UpdateGame(void);
 static void sub_8009D2C();
 static void prepare_wram();
@@ -1873,7 +2021,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     word_2000344 = REG_BG0CNT;
                     word_2000346 = REG_BG1CNT;
                     word_2000348 = REG_BG2CNT;
-                    word_200034A = REG_BG3CNT;
+                    word_200034A[0] = REG_BG3CNT;
                     sub_080593D0(9, 0);
                     break;
 
@@ -1891,7 +2039,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     word_2000344 = REG_BG0CNT;
                     word_2000346 = REG_BG1CNT;
                     word_2000348 = REG_BG2CNT;
-                    word_200034A = REG_BG3CNT;
+                    word_200034A[0] = REG_BG3CNT;
                     sub_080593D0(0, 0);
                     break;
 
@@ -1909,7 +2057,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     word_2000344 = REG_BG0CNT;
                     word_2000346 = REG_BG1CNT;
                     word_2000348 = REG_BG2CNT;
-                    word_200034A = REG_BG3CNT;
+                    word_200034A[0] = REG_BG3CNT;
                     sub_080593D0(5, 0);
                     break;
 
@@ -1935,7 +2083,7 @@ static int sub_0800C63C(int room, u32 warp) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             word_2001128 = warp;
             sub_08052B58(1, 0);
             return 1;
@@ -1956,7 +2104,7 @@ static int sub_0800C63C(int room, u32 warp) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             word_2001128 = warp;
             sub_08052B58(2, 0);
             return 1;
@@ -1977,7 +2125,7 @@ static int sub_0800C63C(int room, u32 warp) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             word_2001128 = warp;
             sub_08055A14(4, 0);
             return 1;
@@ -1998,7 +2146,7 @@ static int sub_0800C63C(int room, u32 warp) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             word_2001128 = warp;
             sub_08055A14(3, 0);
             return 1;
@@ -2021,7 +2169,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     word_2000344 = REG_BG0CNT;
                     word_2000346 = REG_BG1CNT;
                     word_2000348 = REG_BG2CNT;
-                    word_200034A = REG_BG3CNT;
+                    word_200034A[0] = REG_BG3CNT;
                     word_2001128 = warp;
                     sub_0805BA1C(6, 0);
                     return 1;
@@ -2043,7 +2191,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     word_2000344 = REG_BG0CNT;
                     word_2000346 = REG_BG1CNT;
                     word_2000348 = REG_BG2CNT;
-                    word_200034A = REG_BG3CNT;
+                    word_200034A[0] = REG_BG3CNT;
                     word_2001128 = warp;
                     sub_0805BA1C(7, 0);
                     return 1;
@@ -2064,7 +2212,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     word_2000344 = REG_BG0CNT;
                     word_2000346 = REG_BG1CNT;
                     word_2000348 = REG_BG2CNT;
-                    word_200034A = REG_BG3CNT;
+                    word_200034A[0] = REG_BG3CNT;
                     word_2001128 = warp;
                     sub_0805BA1C(8, 0);
                     return 1;
@@ -2086,7 +2234,7 @@ void sub_0800CD94(int a1) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_080593D0(9, 1);
             break;
 
@@ -2099,7 +2247,7 @@ void sub_0800CD94(int a1) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_080593D0(0, 1);
             break;
 
@@ -2112,7 +2260,7 @@ void sub_0800CD94(int a1) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_080593D0(5, 1);
             break;
 
@@ -2125,7 +2273,7 @@ void sub_0800CD94(int a1) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_08055A14(3, 1);
             break;
 
@@ -2138,7 +2286,7 @@ void sub_0800CD94(int a1) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_08055A14(4, 1);
             break;
 
@@ -2151,7 +2299,7 @@ void sub_0800CD94(int a1) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_0805BA1C(6, 1);
             break;
 
@@ -2164,7 +2312,7 @@ void sub_0800CD94(int a1) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_0805BA1C(7, 1);
             break;
 
@@ -2177,7 +2325,7 @@ void sub_0800CD94(int a1) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_0805BA1C(8, 1);
             break;
 
@@ -2199,7 +2347,7 @@ void load_mini_game_from_arcade(int miniGame) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_080593D0(9, 2);
             break;
 
@@ -2213,7 +2361,7 @@ void load_mini_game_from_arcade(int miniGame) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_080593D0(0, 2);
             break;
 
@@ -2227,7 +2375,7 @@ void load_mini_game_from_arcade(int miniGame) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_080593D0(5, 2);
             break;
 
@@ -2241,7 +2389,7 @@ void load_mini_game_from_arcade(int miniGame) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_08055A14(3, 2);
             break;
 
@@ -2255,7 +2403,7 @@ void load_mini_game_from_arcade(int miniGame) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_08055A14(4, 2);
             break;
 
@@ -2269,7 +2417,7 @@ void load_mini_game_from_arcade(int miniGame) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_0805BA1C(6, 2);
             break;
 
@@ -2283,7 +2431,7 @@ void load_mini_game_from_arcade(int miniGame) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_0805BA1C(7, 2);
             break;
 
@@ -2297,7 +2445,7 @@ void load_mini_game_from_arcade(int miniGame) {
             word_2000344 = REG_BG0CNT;
             word_2000346 = REG_BG1CNT;
             word_2000348 = REG_BG2CNT;
-            word_200034A = REG_BG3CNT;
+            word_200034A[0] = REG_BG3CNT;
             sub_0805BA1C(8, 2);
             break;
 

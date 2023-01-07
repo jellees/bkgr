@@ -424,7 +424,7 @@ extern u16 word_2000342;
 extern u16 word_2000344;
 extern u16 word_2000346;
 extern u16 word_2000348;
-extern u16 word_200034A;
+extern u16 word_200034A[11];
 extern struct SpriteDMATableEntry gSpriteDMATable[255];
 extern u8 gSpriteDMACount;
 extern u8 byte_2000F55; // possibly bool8

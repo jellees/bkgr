@@ -8,6 +8,7 @@
 
 #define IWRAM_DATA __attribute__((section(".iwram_data")))
 #define EWRAM_DATA __attribute__((section(".ewram_data")))
+#define UNUSED __attribute__((unused))
 
 #define ALIGNED(n) __attribute__((aligned(n)))
 
