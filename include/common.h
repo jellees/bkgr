@@ -85,44 +85,6 @@ enum Transformations {
 
 // Structs
 
-struct GameStatus {
-    u16 totalJiggies;
-    u8 field_2;
-    u8 field_3;
-    u8 field_4;
-    u8 field_5;
-    u8 field_6;
-    u8 field_7;
-    u8 clockHour;
-    u8 clockMinute;
-    u8 clockSecond;
-    u8 field_B;
-    u16 totalNotes;
-    s8 eggs[4];
-    u8 field_12;
-    u8 health;
-    u8 enableExtraHealth;
-    u8 maxHealth;
-    u8 field_16;
-    u8 field_17;
-    u8 field_18;
-    u8 field_19;
-    u8 field_1A;
-    u8 field_1B;
-    u8 field_1C;
-    u8 field_1D;
-    u8 field_1F;
-};
-
-struct SaveFile {
-    u16 jiggies;
-    u16 notes;
-    u8 hour;
-    u8 minute;
-    u8 second;
-    bool8 empty;
-};
-
 struct Vec3fx {
     fx32 x, y, z;
 };
@@ -206,12 +168,6 @@ struct SoundEffect {
 struct TileAnimQueueIndex {
     u8* field_0;
     u8* field_4;
-};
-
-struct SpriteDMATableEntry {
-    u8* source;
-    u8* destiny;
-    u32 count;
 };
 
 struct Entity_rt {
@@ -363,28 +319,6 @@ struct struc_46 {
     u32 field_2C;
 };
 
-struct level_struc {
-    u8 jiggyCount;
-    u8 honeycombCount;
-    u8 field_2;
-    u8 field_3;
-    u8 chickCount;
-    u8 jinjoCount;
-    u8 noteCount;
-    u8 field_7;
-    u8 bozzeyeCount;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
-    u8 field_C;
-    u8 field_D;
-    u8 field_E;
-    u8 silverCoinCount;
-    u8 field_10;
-    u8 field_11;
-    u8 field_12;
-    u8 field_13;
-};
 
 struct struc_49 {
     u8 field_0;
@@ -400,153 +334,6 @@ struct struc_49 {
 // EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
-
-extern u8 byte_2000314;
-extern s32 dword_2000318;
-extern s32 dword_200031C;
-extern u8 gPauseMenuLanguage;
-extern u32* gMatrices;
-extern u32 gMatricesCount;
-extern u32 dword_200032C;
-extern u8 byte_2000330;
-extern u8 byte_2000331;
-extern u8 byte_2000332;
-extern u8 byte_2000333;
-extern u8 byte_2000334;
-extern u8 byte_2000335;
-extern u16 gColorSpecEffectsSel;
-extern u16 gDisplayControl;
-extern u16 gBG0Control;
-extern u16 gBG1Control;
-extern u16 gBG2Control;
-extern u16 gBG3Control;
-extern u16 word_2000342;
-extern u16 word_2000344;
-extern u16 word_2000346;
-extern u16 word_2000348;
-extern u16 word_200034A[11];
-extern struct SpriteDMATableEntry gSpriteDMATable[255];
-extern u8 gSpriteDMACount;
-extern u8 byte_2000F55; // possibly bool8
-extern u8 byte_2000F56; // possibly bool8
-extern u8 byte_2000F57; // possibly bool8
-extern u8 gShowEraseDataScreen;
-extern u8 byte_2000F59;
-extern u8 byte_2000F5A;
-extern u8 gClockFrameCounter;
-extern bool8 gClockEnabled;
-extern bool8 byte_2000F5D;
-extern bool8 byte_2000F5E;
-extern u32* dword_2000F60;
-extern u32 dword_2000F64;
-extern u32 dword_2000F68;
-extern u32 dword_2000F6C;
-extern u8 gUnused_ExecUnusedInputFunc;
-extern struct Sprite gPlayerSprite;
-extern struct Sprite gPlayerShadowSprite;
-extern struct Sprite sprite_2000FAC;
-extern u32 dword_2000FC8;
-extern struct level_struc byte_2000FCC[6];
-extern struct GameStatus gGameStatus;
-extern struct SaveFile gSaveFiles[3];
-extern u8 byte_200107C;
-extern u8 byte_200107D;
-extern u8 gUnlockedLevels;
-extern u8 gTotalAmountOfLevels;
-extern u16 gLoadedRoomIndex;
-extern u16 gLoadedRoomLevel;
-extern u16 gLoadedRoomBgm;
-extern fx32 dword_2001088;
-extern s8 gSelectedEgg;
-extern u8 byte_200108D;
-extern u8 byte_200108E;
-extern u16 word_2001090;
-extern u16 word_2001092;
-extern u8 byte_2001094;
-extern fx32 dword_2001098;
-extern fx32 dword_200109C;
-extern fx32 dword_20010A0;
-extern u8 byte_20010A4;
-extern u8 byte_20010A5;
-extern u8 gRoomNameNumber;
-extern u8 byte_20010A7;
-extern u8 gRoomGoal;
-extern u8 gWarpGoal;
-extern u8 byte_20010AA;
-extern u16 word_20010AC;
-extern u8 gContinueGame;
-extern u8 byte_20010AF;
-extern u8 byte_20010B0;
-extern u8 byte_20010B1;
-extern char file_string_1[0x1A];
-extern char file_string_2[0x1A];
-extern char file_string_3[0x1A];
-extern u8 gTextSpeed;
-extern u32 dword_2001104;
-extern u32 dword_2001108;
-extern u8 byte_200110C; // possibly bool8
-extern u32 dword_2001110;
-extern u32 dword_2001114;
-extern bool8 gIsCameraMovingX;
-extern bool8 gIsCameraMovingY;
-extern u8 byte_200111A;
-extern u8 byte_200111B;
-extern u8 byte_200111C;
-extern u8 byte_200111D;
-extern u8 byte_200111E;
-extern u8 byte_200111F;
-extern u8 byte_2001120;
-extern u8 byte_2001121;
-extern u8 byte_2001122;
-extern u32 dword_2001124;
-extern u16 word_2001128;
-extern u8 byte_200112A;
-extern s16 word_200112C;
-extern s16 word_200112E;
-extern s16 word_2001130;
-extern s16 word_2001132;
-extern s16 word_2001134;
-extern int dword_2001138;
-extern u8 byte_200113C;
-extern u8 byte_200113D;
-extern s32 dword_2001140;
-extern s32 dword_2001144;
-extern s32 dword_2001148;
-extern s32 dword_200114C;
-extern s32 dword_2001150;
-extern s32 dword_2001154;
-extern s32 dword_2001158;
-extern s32 dword_200115C;
-extern s32 dword_2001160;
-extern s32 dword_2001164;
-extern u8* dword_2001168;
-extern bool8 byte_200116C;
-extern u8 gShowRoomName;
-extern u16 gRoomNameApparenceTimer;
-extern struct TextBox gRoomNameTextBox;
-extern char* gRoomName;
-extern u32 dword_2001188;
-extern u32 dword_200118C;
-extern struct TextBox stru_2001190;
-extern struct TextBox stru_20011A4;
-extern fx32 dword_20011B8;
-extern fx32 dword_20011BC;
-extern fx32 dword_20011C0;
-extern fx32 dword_20011C4;
-extern int* dword_20011C8;
-extern s32 gEnvironmentEffects;
-extern s32 gEnvironmentEffectsTemp;
-extern u32 gLavaPaletteIndex;
-extern u32 gLavaTimer;
-extern u16* gLightningPalette;
-extern u16* gBackupBGPalette;
-extern u32 gLightningTimer;
-extern bool32 gLightningActive;
-extern u32 gThunderTimer;
-extern int gPoisonEffectEnabled;
-extern int gPoisonHitTimer;
-extern u32 dword_20011F8;
-extern s32 dword_20011FC;
 
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "audio_b.h"
+#include "main.h"
 #include "common.h"
 #include "room.h"
 

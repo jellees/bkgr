@@ -1,5 +1,6 @@
 #include "global.h"
 #include "alloc.h"
+#include "main.h"
 #include "common.h"
 #include "save.h"
 

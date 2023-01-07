@@ -1,6 +1,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "audio_b.h"
+#include "main.h"
 #include "common.h"
 
 void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown) {

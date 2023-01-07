@@ -51,7 +51,7 @@ void sub_80629E8() {
         REG_BG0CNT = word_2000344;
         REG_BG1CNT = word_2000346;
         REG_BG2CNT = word_2000348;
-        REG_BG3CNT = word_200034A[0];
+        REG_BG3CNT = word_200034A;
         if (gIsSlideMiniGame) {
             gIsSlideMiniGame = 0;
             gNullsub_3 = nullsub_3;

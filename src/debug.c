@@ -1,6 +1,7 @@
 #include "global.h"
 #include "alloc.h"
 #include "sprite.h"
+#include "main.h"
 #include "common.h"
 #include "debug.h"
 
