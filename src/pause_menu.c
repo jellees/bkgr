@@ -3,7 +3,7 @@
 #include "menu.h"
 #include "alloc.h"
 #include "save.h"
-#include "savefile.h"
+#include "main.h"
 #include "audio_b.h"
 #include "common.h"
 #include "pause_menu.h"

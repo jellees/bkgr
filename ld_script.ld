@@ -420,11 +420,6 @@ SECTIONS
         asm/audio.o(.text);
         asm/collision.o(.text);
         src/main.o(.text);
-        src/player.o(.text);
-        src/chunk3.o(.text);
-        src/savefile.o(.text);
-        src/chunk4.o(.text);
-        src/environment_effects.o(.text);
         src/debug.o(.text);
         asm/chunk5.o(.text);
         src/room.o(.text);
