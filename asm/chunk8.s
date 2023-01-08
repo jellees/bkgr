@@ -4509,7 +4509,7 @@ _080498F4:
 _08049908:
 	movs r0, #1
 	movs r1, #0
-	bl sub_800DC4C
+	bl decrease_eggs
 	ldr r1, [r4]
 	movs r2, #1
 	rsbs r2, r2, #0
@@ -24860,7 +24860,7 @@ _0805405E:
 	strb r1, [r0, #0x1d]
 	movs r0, #1
 	movs r1, #0
-	bl sub_800DC4C
+	bl decrease_eggs
 	adds r0, r5, #0
 	movs r1, #0
 	movs r2, #0x80

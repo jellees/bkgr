@@ -937,7 +937,7 @@ _08016B90:
 	movs r0, #0
 	strb r0, [r1]
 	movs r0, #0xf
-	bl sub_800DCE4
+	bl increase_eggs
 	bl sub_800DE04
 	pop {r4}
 	pop {r0}
@@ -7360,7 +7360,7 @@ _0801A432:
 	bl sub_0802D0A0
 	movs r0, #1
 	adds r1, r4, #0
-	bl sub_800DC4C
+	bl decrease_eggs
 	ldr r0, _0801A488
 	ldrb r0, [r0]
 	cmp r0, #0

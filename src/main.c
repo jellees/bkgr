@@ -2712,9 +2712,9 @@ void sub_800DAE4(bool32 a1) {
     dword_2001124 = PLAY_SFX(39);
 }
 
-void sub_800DC4C(int a1, bool32 a2) {
+void decrease_eggs(int eggs, bool32 a2) {
     if (gSelectedEgg < 0) {
-        gGameStatus.eggs[EGG_NORMAL] -= a1;
+        gGameStatus.eggs[EGG_NORMAL] -= eggs;
         if (gGameStatus.eggs[EGG_NORMAL] <= 0) {
             gGameStatus.eggs[EGG_NORMAL] = 0;
             if (a2) {
@@ -2723,7 +2723,7 @@ void sub_800DC4C(int a1, bool32 a2) {
         }
         sub_08040204(9, gGameStatus.eggs[EGG_NORMAL]);
     } else {
-        gGameStatus.eggs[gSelectedEgg] -= a1;
+        gGameStatus.eggs[gSelectedEgg] -= eggs;
         if (gGameStatus.eggs[gSelectedEgg] <= 0) {
             gGameStatus.eggs[gSelectedEgg] = 0;
             if (a2) {
@@ -2734,15 +2734,15 @@ void sub_800DC4C(int a1, bool32 a2) {
     }
 }
 
-void sub_800DCE4(int a1) {
+void increase_eggs(int eggs) {
     if (gSelectedEgg < 0) {
-        gGameStatus.eggs[EGG_NORMAL] += a1;
+        gGameStatus.eggs[EGG_NORMAL] += eggs;
         if (gGameStatus.eggs[EGG_NORMAL] > stru_80CC8C4.eggs[EGG_NORMAL]) {
             gGameStatus.eggs[EGG_NORMAL] = stru_80CC8C4.eggs[EGG_NORMAL];
         }
         sub_08040204(9, gGameStatus.eggs[EGG_NORMAL]);
     } else {
-        gGameStatus.eggs[gSelectedEgg] += a1;
+        gGameStatus.eggs[gSelectedEgg] += eggs;
         if (gGameStatus.eggs[gSelectedEgg] > stru_80CC8C4.eggs[gSelectedEgg]) {
             gGameStatus.eggs[gSelectedEgg] = stru_80CC8C4.eggs[gSelectedEgg];
         }
@@ -2750,15 +2750,15 @@ void sub_800DCE4(int a1) {
     }
 }
 
-void sub_800DD78(int a1) {
+void set_eggs(int eggs) {
     if (gSelectedEgg < 0) {
-        gGameStatus.eggs[EGG_NORMAL] = a1;
+        gGameStatus.eggs[EGG_NORMAL] = eggs;
         if (gGameStatus.eggs[EGG_NORMAL] > stru_80CC8C4.eggs[EGG_NORMAL]) {
             gGameStatus.eggs[EGG_NORMAL] = stru_80CC8C4.eggs[EGG_NORMAL];
         }
         sub_08040204(9, gGameStatus.eggs[EGG_NORMAL]);
     } else {
-        gGameStatus.eggs[gSelectedEgg] = a1;
+        gGameStatus.eggs[gSelectedEgg] = eggs;
         if (gGameStatus.eggs[gSelectedEgg] > stru_80CC8C4.eggs[gSelectedEgg]) {
             gGameStatus.eggs[gSelectedEgg] = stru_80CC8C4.eggs[gSelectedEgg];
         }
