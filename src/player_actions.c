@@ -765,3 +765,155 @@ void sub_801B4C8(s32 keyPressed, s32 keyDown) {
             break;
     }
 }
+
+void sub_801B814(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (!sub_80037A8(&gPlayerSprite))
+        return;
+
+    switch (keyDown & JOY_EXCL_DPAD) {
+        case A_BUTTON:
+            if (gInInteractionArea) {
+                sub_80186F4(0);
+                return;
+            }
+            if (sub_08016EE0()) {
+                return;
+            }
+            sub_8017480();
+            return;
+
+        case L_BUTTON:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 0;
+
+            sub_8003368(&gPlayerSprite, 25, 0, 0);
+            sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+
+            if (dword_20020B8 != -1) {
+                if (gCanPlaySfx)
+                    audio_halt_fx(dword_20020B8);
+                dword_20020B8 = -1;
+            }
+
+            sub_8016790(0, gPlayerSprite.field_A);
+            return;
+    }
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 10;
+            gPlayerSprite.field_A = 1;
+            sub_80033A4(&gPlayerSprite, 49, 7, 0);
+            sub_80037F4(&gPlayerSprite, 7);
+            sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
+            if (dword_20020B8 == -1) {
+                dword_20020B8 = PLAY_SFX(30);
+            }
+            sub_8016790(15, gPlayerSprite.field_A);
+            break;
+
+        case 0x90:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 10;
+            gPlayerSprite.field_A = 3;
+            sub_80033A4(&gPlayerSprite, 49, 7, 0);
+            sub_80037F4(&gPlayerSprite, 7);
+            sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
+            if (dword_20020B8 == -1) {
+                dword_20020B8 = PLAY_SFX(30);
+            }
+            sub_8016790(15, gPlayerSprite.field_A);
+            break;
+
+        case 0xA0:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 10;
+            gPlayerSprite.field_A = 5;
+            sub_80033A4(&gPlayerSprite, 49, 7, 0);
+            sub_80037F4(&gPlayerSprite, 7);
+            sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
+            if (dword_20020B8 == -1) {
+                dword_20020B8 = PLAY_SFX(30);
+            }
+            sub_8016790(15, gPlayerSprite.field_A);
+            break;
+
+        case 0x60:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 10;
+            gPlayerSprite.field_A = 7;
+            sub_80033A4(&gPlayerSprite, 49, 7, 0);
+            sub_80037F4(&gPlayerSprite, 7);
+            sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
+            if (dword_20020B8 == -1) {
+                dword_20020B8 = PLAY_SFX(30);
+            }
+            sub_8016790(15, gPlayerSprite.field_A);
+            break;
+
+        case 0x40:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 10;
+            gPlayerSprite.field_A = 0;
+            sub_80033A4(&gPlayerSprite, 49, 7, 0);
+            sub_80037F4(&gPlayerSprite, 7);
+            sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
+            if (dword_20020B8 == -1) {
+                dword_20020B8 = PLAY_SFX(30);
+            }
+            sub_8016790(15, gPlayerSprite.field_A);
+            break;
+
+        case 0x80:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 10;
+            gPlayerSprite.field_A = 4;
+            sub_80033A4(&gPlayerSprite, 49, 7, 0);
+            sub_80037F4(&gPlayerSprite, 7);
+            sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
+            if (dword_20020B8 == -1) {
+                dword_20020B8 = PLAY_SFX(30);
+            }
+            sub_8016790(15, gPlayerSprite.field_A);
+            break;
+
+        case 0x20:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 10;
+            gPlayerSprite.field_A = 6;
+            sub_80033A4(&gPlayerSprite, 49, 7, 0);
+            sub_80037F4(&gPlayerSprite, 7);
+            sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
+            if (dword_20020B8 == -1) {
+                dword_20020B8 = PLAY_SFX(30);
+            }
+            sub_8016790(15, gPlayerSprite.field_A);
+            break;
+
+        case 0x10:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 10;
+            gPlayerSprite.field_A = 2;
+            sub_80033A4(&gPlayerSprite, 49, 7, 0);
+            sub_80037F4(&gPlayerSprite, 7);
+            sub_8003884(dword_2000FC8, 0x28000, 0, 0);
+            if (dword_20020B8 == -1) {
+                dword_20020B8 = PLAY_SFX(30);
+            }
+            sub_8016790(15, gPlayerSprite.field_A);
+            break;
+
+        default:
+            if (gPlayerState != gPreviousPlayerState) {
+                gPreviousPlayerState = gPlayerState;
+                gPlayerState = 12;
+                sub_800378C(&gPlayerSprite, 6);
+                sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+                sub_8016790(15, gPlayerSprite.field_A);
+            }
+            break;
+    }
+}
