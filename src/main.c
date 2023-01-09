@@ -162,7 +162,7 @@ u16* gBackupBGPalette;
 u32 gLightningTimer;
 bool32 gLightningActive;
 u32 gThunderTimer;
-int gPoisonEffectEnabled;
+bool32 gPoisonEffectEnabled;
 int gPoisonHitTimer;
 u32 dword_20011F8;
 s32 dword_20011FC;
@@ -785,7 +785,7 @@ static void sub_800A5F4() {
     dword_2001114 = 0;
     dword_20011FC = 1;
     gGameStatus.health = 4;
-    gGameStatus.enableExtraHealth = 0;
+    gGameStatus.enableExtraHealth = FALSE;
     gGameStatus.maxHealth = 4;
     byte_200107C = 0;
     byte_200107D = stru_80CC8C4.maxHealth - 4;
@@ -2061,7 +2061,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_BEACHSHOOT:
-            if (!gUnlockedMoves[6] || sub_80342CC(217, 10)) {
+            if (!gUnlockedMoves[MOVE_EGG_BLUE] || sub_80342CC(217, 10)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2661,10 +2661,9 @@ void sub_800DA04(int a1, int a2, int a3) {
     sub_8047000(a3);
 }
 
-void sub_800DAE4(bool32 a1) {
-    s32 r5;
-    bool8 r1;
-    u32 idx;
+void select_next_available_egg(bool32 a1) {
+    int nextEgg;
+    bool8 isNextEggSelected;
 
     if (gSelectedEgg < 0) {
         sub_080121F0(&byte_8064848, &byte_8064850);
@@ -2678,20 +2677,20 @@ void sub_800DAE4(bool32 a1) {
         return;
     }
 
-    r5 = gSelectedEgg;
-    r1 = FALSE;
+    nextEgg = gSelectedEgg;
+    isNextEggSelected = FALSE;
 
-    while (!r1) {
-        r5 = (r5 + 1) & 3;
-        if (r5 == gSelectedEgg) {
+    while (!isNextEggSelected) {
+        nextEgg = (nextEgg + 1) & 3;
+        if (nextEgg == gSelectedEgg) {
             return;
         }
 
-        if (gUnlockedMoves[6 + r5]) {
+        if (gUnlockedMoves[MOVE_EGG_BLUE + nextEgg]) {
             if (!a1) {
-                r1 = TRUE;
-            } else if (gGameStatus.eggs[r5]) {
-                r1 = TRUE;
+                isNextEggSelected = TRUE;
+            } else if (gGameStatus.eggs[nextEgg] != 0) {
+                isNextEggSelected = TRUE;
             }
         }
     }
@@ -2701,7 +2700,7 @@ void sub_800DAE4(bool32 a1) {
     }
 
     sub_0804200C(gSelectedEgg + 9);
-    gSelectedEgg = r5;
+    gSelectedEgg = nextEgg;
     sub_08041FA4(gSelectedEgg + 9);
     sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
 
@@ -2712,22 +2711,22 @@ void sub_800DAE4(bool32 a1) {
     dword_2001124 = PLAY_SFX(39);
 }
 
-void decrease_eggs(int eggs, bool32 a2) {
+void decrease_eggs(int eggs, bool32 selectNextAvailableEgg) {
     if (gSelectedEgg < 0) {
-        gGameStatus.eggs[EGG_NORMAL] -= eggs;
-        if (gGameStatus.eggs[EGG_NORMAL] <= 0) {
-            gGameStatus.eggs[EGG_NORMAL] = 0;
-            if (a2) {
-                sub_800DAE4(TRUE);
+        gGameStatus.eggs[EGG_BLUE] -= eggs;
+        if (gGameStatus.eggs[EGG_BLUE] <= 0) {
+            gGameStatus.eggs[EGG_BLUE] = 0;
+            if (selectNextAvailableEgg) {
+                select_next_available_egg(TRUE);
             }
         }
-        sub_08040204(9, gGameStatus.eggs[EGG_NORMAL]);
+        sub_08040204(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] -= eggs;
         if (gGameStatus.eggs[gSelectedEgg] <= 0) {
             gGameStatus.eggs[gSelectedEgg] = 0;
-            if (a2) {
-                sub_800DAE4(TRUE);
+            if (selectNextAvailableEgg) {
+                select_next_available_egg(TRUE);
             }
         }
         sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
@@ -2736,11 +2735,11 @@ void decrease_eggs(int eggs, bool32 a2) {
 
 void increase_eggs(int eggs) {
     if (gSelectedEgg < 0) {
-        gGameStatus.eggs[EGG_NORMAL] += eggs;
-        if (gGameStatus.eggs[EGG_NORMAL] > stru_80CC8C4.eggs[EGG_NORMAL]) {
-            gGameStatus.eggs[EGG_NORMAL] = stru_80CC8C4.eggs[EGG_NORMAL];
+        gGameStatus.eggs[EGG_BLUE] += eggs;
+        if (gGameStatus.eggs[EGG_BLUE] > stru_80CC8C4.eggs[EGG_BLUE]) {
+            gGameStatus.eggs[EGG_BLUE] = stru_80CC8C4.eggs[EGG_BLUE];
         }
-        sub_08040204(9, gGameStatus.eggs[EGG_NORMAL]);
+        sub_08040204(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] += eggs;
         if (gGameStatus.eggs[gSelectedEgg] > stru_80CC8C4.eggs[gSelectedEgg]) {
@@ -2752,11 +2751,11 @@ void increase_eggs(int eggs) {
 
 void set_eggs(int eggs) {
     if (gSelectedEgg < 0) {
-        gGameStatus.eggs[EGG_NORMAL] = eggs;
-        if (gGameStatus.eggs[EGG_NORMAL] > stru_80CC8C4.eggs[EGG_NORMAL]) {
-            gGameStatus.eggs[EGG_NORMAL] = stru_80CC8C4.eggs[EGG_NORMAL];
+        gGameStatus.eggs[EGG_BLUE] = eggs;
+        if (gGameStatus.eggs[EGG_BLUE] > stru_80CC8C4.eggs[EGG_BLUE]) {
+            gGameStatus.eggs[EGG_BLUE] = stru_80CC8C4.eggs[EGG_BLUE];
         }
-        sub_08040204(9, gGameStatus.eggs[EGG_NORMAL]);
+        sub_08040204(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] = eggs;
         if (gGameStatus.eggs[gSelectedEgg] > stru_80CC8C4.eggs[gSelectedEgg]) {
@@ -2768,13 +2767,13 @@ void set_eggs(int eggs) {
 
 bool32 sub_800DE04() {
     if (gSelectedEgg < 0) {
-        if (gUnlockedMoves[6]) {
-            gSelectedEgg = EGG_NORMAL;
-        } else if (gUnlockedMoves[7]) {
+        if (gUnlockedMoves[MOVE_EGG_BLUE]) {
+            gSelectedEgg = EGG_BLUE;
+        } else if (gUnlockedMoves[MOVE_EGG_ELECTRIC]) {
             gSelectedEgg = EGG_ELECTRIC;
-        } else if (gUnlockedMoves[8]) {
+        } else if (gUnlockedMoves[MOVE_EGG_ICE]) {
             gSelectedEgg = EGG_ICE;
-        } else if (gUnlockedMoves[9]) {
+        } else if (gUnlockedMoves[MOVE_EGG_FIRE]) {
             gSelectedEgg = EGG_FIRE;
         } else {
             return FALSE;
@@ -2805,7 +2804,7 @@ static void enable_poison_effect() {
         case ROOM_POISONROOM:
         case ROOM_SWAMPGAS:
             if (gTransformation != TRANSFORMATION_TANK) {
-                gPoisonEffectEnabled = 1;
+                gPoisonEffectEnabled = TRUE;
                 dword_20011F8 = 1;
                 gPoisonHitTimer = 240;
             }
@@ -2813,7 +2812,7 @@ static void enable_poison_effect() {
 
         default:
             if (gPoisonEffectEnabled) {
-                gPoisonEffectEnabled = 0;
+                gPoisonEffectEnabled = FALSE;
             }
             break;
     }

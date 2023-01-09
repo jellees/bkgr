@@ -9721,7 +9721,7 @@ _08020890: .4byte dword_2000FC8
 _08020894: .4byte dword_80CC290
 _08020898:
 	movs r0, #0
-	bl sub_800DAE4
+	bl select_next_available_egg
 _0802089E:
 	ldr r1, [sp]
 	movs r0, #0xf0
@@ -10131,7 +10131,7 @@ _08020C04: .4byte gPlayerSprite
 _08020C08: .4byte 0x00000211
 _08020C0C:
 	movs r0, #0
-	bl sub_800DAE4
+	bl select_next_available_egg
 _08020C12:
 	ldr r1, [sp]
 	movs r0, #0xf0
@@ -10520,7 +10520,7 @@ _08020F58:
 	b _08021116
 _08020F60:
 	movs r0, #0
-	bl sub_800DAE4
+	bl select_next_available_egg
 _08020F66:
 	ldr r1, [sp]
 	movs r0, #0xf0
@@ -10772,7 +10772,7 @@ _08021154:
 	b _08021312
 _0802115C:
 	movs r0, #0
-	bl sub_800DAE4
+	bl select_next_available_egg
 _08021162:
 	ldr r1, [sp]
 	movs r0, #0xf0

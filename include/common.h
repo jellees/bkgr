@@ -73,7 +73,7 @@ enum MiniGames {
     MINI_GAME_COUNT
 };
 
-enum Eggs { EGG_NORMAL, EGG_ELECTRIC, EGG_ICE, EGG_FIRE };
+enum Eggs { EGG_BLUE, EGG_ELECTRIC, EGG_ICE, EGG_FIRE };
 
 enum Transformations {
     TRANSFORMATION_BANJO,
@@ -81,6 +81,34 @@ enum Transformations {
     TRANSFORMATION_CANDLE,
     TRANSFORMATION_TANK,
     TRANSFORMATION_OCTOPUS,
+};
+
+enum Moves {
+    MOVE_0,
+    MOVE_PACK_WACK,
+    MOVE_FORWARD_ROLL,
+    MOVE_AIR_ATTACK,
+    MOVE_4,
+    MOVE_5,
+    MOVE_EGG_BLUE,
+    MOVE_EGG_ELECTRIC,
+    MOVE_EGG_ICE,
+    MOVE_EGG_FIRE,
+    MOVE_10,
+    MOVE_11,
+    MOVE_12,
+    MOVE_13,
+    MOVE_14,
+    MOVE_TALON_TROT,
+    MOVE_16,
+    MOVE_17,
+    MOVE_18,
+    MOVE_19,
+    MOVE_FLAP_FLIP,
+    MOVE_21,
+    MOVE_22,
+    
+    MOVE_COUNT
 };
 
 // Structs
@@ -338,7 +366,7 @@ extern u32 gDestinationWarpCount;
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;
 
-extern bool8 gUnlockedMoves[23];
+extern bool8 gUnlockedMoves[MOVE_COUNT];
 extern u8 gTransformation;
 extern u8 byte_20020B2;
 extern u8 byte_20020B3;
