@@ -11,6 +11,8 @@ extern u16 ReadEepromDword(u16 epAdr,u16 *dst);
 extern u16 ProgramEepromDword(u16 epAdr,u16 *src);
 extern u16 VerifyEepromDword(u16 epAdr,u16 *src);
 
+#define BUFFER_SIZE 2040
+
 bool8 gIsSavingGame;
 u16 word_203EAD6;
 u8 byte_203EAD8;
@@ -21,7 +23,7 @@ u8 byte_203EAE3;
 static void create_eeprom_buffer() {
     IdentifyEeprom(64);
     SetEepromTimerIntr(3, &gFunctionArray[6]);
-    gBuffer = (u8*)Alloc(0x7F8u, 9, 4);
+    gBuffer = (u8*)Alloc(BUFFER_SIZE, 9, 4);
     DmaFill32(0, gBuffer, 510);
     REG_IME = 0;
     SyncVblank();
@@ -177,11 +179,11 @@ bool32 save_game(u32 game, bool32 a2) {
     buffer[v16++] = v17 >> 16;
     buffer[v16++] = v17 >> 24;
 
-    ASSERT(v16 < 0x7F8);
+    ASSERT(v16 < BUFFER_SIZE);
     ASSERT(game < 3);
 
     v9 = dword_80AF4F0[byte_203EAE3];
-    for (i = 0; i < 0xFF; i++) {
+    for (i = 0; i < BUFFER_SIZE / 8; i++) {
         if (ProgramEepromDword(v9 + i, &gBuffer[8 * i])) {
             HANG;
             remove_eeprom_buffer();
@@ -189,7 +191,7 @@ bool32 save_game(u32 game, bool32 a2) {
         }
     }
 
-    for (i = 0; i < 0xFF; i++) {
+    for (i = 0; i < BUFFER_SIZE / 8; i++) {
         if (VerifyEepromDword(v9 + i, &gBuffer[8 * i])) {
             HANG;
             remove_eeprom_buffer();
@@ -281,7 +283,7 @@ bool32 load_game(int game) {
     v3 |= buffer[v16++] << 16;
     v3 |= buffer[v16++] << 24;
 
-    ASSERT(v16 <= 0x7F7);
+    ASSERT(v16 < BUFFER_SIZE);
 
     if (v3 != v17) {
         remove_eeprom_buffer();
