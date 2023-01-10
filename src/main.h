@@ -204,5 +204,6 @@ extern bool32 is_game_complete();
 extern void init_efx();
 extern void pause_efx();
 extern void resume_efx();
+extern void sub_800FA58();
 
 #endif

@@ -1,7 +1,6 @@
 #include "global.h"
 #include "alloc.h"
 #include "sprite.h"
-#include "main.h"
 #include "common.h"
 #include "debug.h"
 
@@ -133,15 +132,6 @@ EWRAM_DATA u32 dword_2001454;
 EWRAM_DATA u16 word_2001458;
 EWRAM_DATA u8 byte_200145A;
 EWRAM_DATA u8 byte_200145B;
-
-void sub_800FA58() {
-    gGameStatus.eggs[0] = stru_80CC8C4.eggs[0];
-    gGameStatus.eggs[1] = stru_80CC8C4.eggs[1];
-    gGameStatus.eggs[3] = stru_80CC8C4.eggs[3];
-    gGameStatus.eggs[2] = stru_80CC8C4.eggs[2];
-    gGameStatus.field_12 = stru_80CC8C4.field_12;
-    sub_803FE78();
-}
 
 void init_debug() {
     gDebugESNSum = 0;
