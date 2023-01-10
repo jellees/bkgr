@@ -32,7 +32,7 @@ static void create_eeprom_buffer() {
 }
 
 static void remove_eeprom_buffer() {
-    gFunctionArray[6] = (void*)0x800A4A1;
+    gFunctionArray[6] = nullsub_15;
     Free(gBuffer, 4);
     REG_IME = 1;
     gIsSavingGame = FALSE;

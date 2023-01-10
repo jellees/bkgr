@@ -174,7 +174,6 @@ static void copy_sub_80001EC_to_iram();
 static void start_game();
 static void sub_800A344();
 static void sub_800A37C();
-static void nullsub_15();
 static void sub_800A528();
 static void sub_800A5F4();
 static void update_player();
@@ -703,7 +702,7 @@ static void sub_800A37C() {
     }
 }
 
-static void nullsub_15() {
+void nullsub_15() {
 }
 
 void update_video() {

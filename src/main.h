@@ -164,6 +164,7 @@ extern void nullsub_3();
 extern void nullsub_4();
 extern void nullsub_5();
 extern void setup_display();
+extern void nullsub_15();
 extern void update_video();
 extern void sub_800A594();
 extern void sub_800A710(u16 level);
