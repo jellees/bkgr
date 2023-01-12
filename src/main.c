@@ -9,14 +9,6 @@
 #include "common.h"
 #include "main.h"
 
-/* --- External declarations: Move this at some point */
-extern void sub_80001EC();
-extern void UpdateBackgrounds();
-extern u32 sub_80266A8();
-extern u8 sub_80038BC(u32);
-extern void sub_8003A04(u32, u32*, u8, u8);
-/* --- */
-
 enum EnvironmentEffects { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 
 u8 byte_2000314;

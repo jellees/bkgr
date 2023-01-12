@@ -917,9 +917,6 @@ void sub_801B814(s32 keyPressed, s32 keyDown) {
     }
 }
 
-extern u8 sub_80038AC(u32);
-extern u8 sub_80038BC(u32);
-
 void sub_801BC18(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);

@@ -1,6 +1,15 @@
 #ifndef GUARD_COMMON_H
 #define GUARD_COMMON_H
 
+// Function declarations
+
+extern void sub_80001EC();
+extern void UpdateBackgrounds();
+extern u8 sub_80038AC(u32);
+extern u8 sub_80038BC(u32);
+extern void sub_8003A04(u32, u32*, u8, u8);
+extern u32 sub_80266A8();
+
 // Enums
 
 enum Rooms {
@@ -107,7 +116,7 @@ enum Moves {
     MOVE_FLAP_FLIP,
     MOVE_21,
     MOVE_22,
-    
+
     MOVE_COUNT
 };
 
@@ -346,7 +355,6 @@ struct struc_46 {
     u16 field_28;
     u32 field_2C;
 };
-
 
 struct struc_49 {
     u8 field_0;
@@ -611,7 +619,6 @@ extern u8 str_08068030;
 extern u8 str_08068020;
 extern u8 str_08068014;
 
-
 extern u8 unk_83FD254;
 extern u8 unk_83FD974;
 
@@ -655,7 +662,5 @@ extern char* unk_86ADAC4[38];
 extern char* unk_86ADC54[38];
 extern char* unk_86ADD1C[38];
 extern char* unk_86ADB8C[38];
-
-// Other
 
 #endif
