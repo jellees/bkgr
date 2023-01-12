@@ -7,9 +7,9 @@
 // Functions from libagbbackup
 extern u16 IdentifyEeprom(u16 eeprom_KbitSize);
 extern u16 SetEepromTimerIntr(u8 timerNo, void (**IntrFunc)(void));
-extern u16 ReadEepromDword(u16 epAdr,u16 *dst);
-extern u16 ProgramEepromDword(u16 epAdr,u16 *src);
-extern u16 VerifyEepromDword(u16 epAdr,u16 *src);
+extern u16 ReadEepromDword(u16 epAdr, u16* dst);
+extern u16 ProgramEepromDword(u16 epAdr, u16* src);
+extern u16 VerifyEepromDword(u16 epAdr, u16* src);
 
 #define BUFFER_SIZE 2040
 
