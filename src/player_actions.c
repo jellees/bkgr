@@ -31,7 +31,7 @@ static void Jump(s32 keyPressed, s32 keyDown) {
             return;
     }
 
-    if (sub_80038BC(dword_2000FC8) << 0x18) {
+    if (sub_80038BC(dword_2000FC8)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = 18;
         sub_8003368(&gPlayerSprite, 17, 0, 0);
@@ -39,73 +39,74 @@ static void Jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.field_A == 1 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 1;
-            sub_8003368(&gPlayerSprite, 9, 0, 1);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (gPlayerSprite.field_A != 1 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 1;
+                sub_8003368(&gPlayerSprite, 9, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
             return;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.field_A == 3 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 3;
-            sub_8003368(&gPlayerSprite, 9, 0, 1);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (gPlayerSprite.field_A != 3 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 3;
+                sub_8003368(&gPlayerSprite, 9, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
             return;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.field_A == 5 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 5;
-            sub_8003368(&gPlayerSprite, 9, 0, 1);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (gPlayerSprite.field_A != 5 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 5;
+                sub_8003368(&gPlayerSprite, 9, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
             return;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.field_A == 7 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 7;
-            sub_8003368(&gPlayerSprite, 9, 0, 1);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (gPlayerSprite.field_A != 7 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 7;
+                sub_8003368(&gPlayerSprite, 9, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
             return;
 
         case DPAD_UP:
-            if (gPlayerSprite.field_A == 0 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 0;
-            sub_8003368(&gPlayerSprite, 9, 0, 1);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (gPlayerSprite.field_A != 0 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 0;
+                sub_8003368(&gPlayerSprite, 9, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
             return;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.field_A == 4 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 4;
-            sub_8003368(&gPlayerSprite, 9, 0, 1);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (gPlayerSprite.field_A != 4 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 4;
+                sub_8003368(&gPlayerSprite, 9, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
             return;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.field_A == 6 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 6;
-            sub_8003368(&gPlayerSprite, 9, 0, 1);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (gPlayerSprite.field_A != 6 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 6;
+                sub_8003368(&gPlayerSprite, 9, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
             return;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.field_A == 2 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 2;
-            sub_8003368(&gPlayerSprite, 9, 0, 1);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            if (gPlayerSprite.field_A != 2 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 2;
+                sub_8003368(&gPlayerSprite, 9, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
             return;
 
         default:
-            if (sub_80038AC(dword_2000FC8) << 0x18) {
+            if (sub_80038AC(dword_2000FC8)) {
                 sub_8003884(dword_2000FC8, 0x3000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
+            break;
     }
 }
 
@@ -128,73 +129,74 @@ static void JumpFall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.field_A == 1 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 1;
-            sub_8003368(&gPlayerSprite, 17, 0, 0);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
-            return;
+            if (gPlayerSprite.field_A != 1 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 1;
+                sub_8003368(&gPlayerSprite, 17, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.field_A == 3 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 3;
-            sub_8003368(&gPlayerSprite, 17, 0, 0);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
-            return;
+            if (gPlayerSprite.field_A != 3 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 3;
+                sub_8003368(&gPlayerSprite, 17, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.field_A == 5 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 5;
-            sub_8003368(&gPlayerSprite, 17, 0, 0);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
-            return;
+            if (gPlayerSprite.field_A != 5 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 5;
+                sub_8003368(&gPlayerSprite, 17, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.field_A == 7 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 7;
-            sub_8003368(&gPlayerSprite, 17, 0, 0);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
-            return;
+            if (gPlayerSprite.field_A != 7 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 7;
+                sub_8003368(&gPlayerSprite, 17, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
 
         case DPAD_UP:
-            if (gPlayerSprite.field_A == 0 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 0;
-            sub_8003368(&gPlayerSprite, 17, 0, 0);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
-            return;
+            if (gPlayerSprite.field_A != 0 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 0;
+                sub_8003368(&gPlayerSprite, 17, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.field_A == 4 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 4;
-            sub_8003368(&gPlayerSprite, 17, 0, 0);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
-            return;
+            if (gPlayerSprite.field_A != 4 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 4;
+                sub_8003368(&gPlayerSprite, 17, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.field_A == 6 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 6;
-            sub_8003368(&gPlayerSprite, 17, 0, 0);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
-            return;
+            if (gPlayerSprite.field_A != 6 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 6;
+                sub_8003368(&gPlayerSprite, 17, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.field_A == 2 && sub_80038AC(dword_2000FC8) << 0x18)
-                return;
-            gPlayerSprite.field_A = 2;
-            sub_8003368(&gPlayerSprite, 17, 0, 0);
-            sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
-            return;
+            if (gPlayerSprite.field_A != 2 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 2;
+                sub_8003368(&gPlayerSprite, 17, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
 
         default:
-            if (sub_80038AC(dword_2000FC8) << 0x18) {
+            if (sub_80038AC(dword_2000FC8)) {
                 sub_8003884(dword_2000FC8, 0x3000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
+            break;
     }
 }
 
@@ -925,87 +927,77 @@ void sub_801BC18(s32 keyPressed, s32 keyDown) {
         case 2:
             DoAirAttack();
             return;
+    }
 
-        default:
-            if (sub_80038BC(dword_2000FC8)) {
-                gPreviousPlayerState = gPlayerState;
-                gPlayerState = 20;
-                sub_8003368(&gPlayerSprite, 201, 0, 1);
-            }
-            break;
+    if (sub_80038BC(dword_2000FC8)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 20;
+        sub_8003368(&gPlayerSprite, 201, 0, 1);
     }
 
     switch (keyPressed & DPAD_ANY) {
         case 0x50:
-            if (gPlayerSprite.field_A == 1 && sub_80038AC(dword_2000FC8)) {
-                break;
+            if (gPlayerSprite.field_A != 1 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 1;
+                sub_8003368(&gPlayerSprite, 193, 0, 1);
+                sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
-            gPlayerSprite.field_A = 1;
-            sub_8003368(&gPlayerSprite, 193, 0, 1);
-            sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
 
         case 0x90:
-            if (gPlayerSprite.field_A == 3 && sub_80038AC(dword_2000FC8)) {
-                break;
+            if (gPlayerSprite.field_A != 3 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 3;
+                sub_8003368(&gPlayerSprite, 193, 0, 1);
+                sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
-            gPlayerSprite.field_A = 3;
-            sub_8003368(&gPlayerSprite, 193, 0, 1);
-            sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
 
         case 0xA0:
-            if (gPlayerSprite.field_A == 5 && sub_80038AC(dword_2000FC8)) {
-                break;
+            if (gPlayerSprite.field_A != 5 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 5;
+                sub_8003368(&gPlayerSprite, 193, 0, 1);
+                sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
-            gPlayerSprite.field_A = 5;
-            sub_8003368(&gPlayerSprite, 193, 0, 1);
-            sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
 
         case 0x60:
-            if (gPlayerSprite.field_A == 7 && sub_80038AC(dword_2000FC8)) {
-                break;
+            if (gPlayerSprite.field_A != 7 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 7;
+                sub_8003368(&gPlayerSprite, 193, 0, 1);
+                sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
-            gPlayerSprite.field_A = 7;
-            sub_8003368(&gPlayerSprite, 193, 0, 1);
-            sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
 
         case 0x40:
-            if (gPlayerSprite.field_A == 0 && sub_80038AC(dword_2000FC8)) {
-                break;
+            if (gPlayerSprite.field_A != 0 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 0;
+                sub_8003368(&gPlayerSprite, 193, 0, 1);
+                sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
-            gPlayerSprite.field_A = 0;
-            sub_8003368(&gPlayerSprite, 193, 0, 1);
-            sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
 
         case 0x80:
-            if (gPlayerSprite.field_A == 4 && sub_80038AC(dword_2000FC8)) {
-                break;
+            if (gPlayerSprite.field_A != 4 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 4;
+                sub_8003368(&gPlayerSprite, 193, 0, 1);
+                sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
-            gPlayerSprite.field_A = 4;
-            sub_8003368(&gPlayerSprite, 193, 0, 1);
-            sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
 
         case 0x20:
-            if (gPlayerSprite.field_A == 6 && sub_80038AC(dword_2000FC8)) {
-                break;
+            if (gPlayerSprite.field_A != 6 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 6;
+                sub_8003368(&gPlayerSprite, 193, 0, 1);
+                sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
-            gPlayerSprite.field_A = 6;
-            sub_8003368(&gPlayerSprite, 193, 0, 1);
-            sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
 
         case 0x10:
-            if (gPlayerSprite.field_A == 2 && sub_80038AC(dword_2000FC8)) {
-                break;
+            if (gPlayerSprite.field_A != 2 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 2;
+                sub_8003368(&gPlayerSprite, 193, 0, 1);
+                sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             }
-            gPlayerSprite.field_A = 2;
-            sub_8003368(&gPlayerSprite, 193, 0, 1);
-            sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
 
         default:
