@@ -4,5 +4,6 @@
 extern u8 byte_2001200;
 extern u8 gMainFrameCounter;
 extern u8 gDebugFPS;
+extern u8 byte_2001370;
 
 #endif
