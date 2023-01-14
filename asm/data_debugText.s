@@ -18,9 +18,6 @@ str_\name:
     .balign 4, 0
     .endm
 
-    debug_str "GAME"
-    debug_str "CHANGE EGG TYPE: CURRENT EGG TYPE IS INVALID"
-
     debug_str "FURNACE"
     debug_str "HARBOUR"
     debug_str "SWAMP"

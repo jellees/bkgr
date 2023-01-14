@@ -290,7 +290,7 @@ SECTIONS
         asm/chunk_end.o(.text);
 
         /* data */
-        asm/data_paletteBytes.o(.rodata);
+        src/main.o(.rodata);
         asm/data_debugText.o(.rodata);
         asm/data_playerBehavior.o(.rodata);
         asm/data_text.o(.rodata);

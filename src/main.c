@@ -11,6 +11,8 @@
 
 enum EnvironmentEffects { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 
+static const int dThunderSfxIds[3] = { 211, 212, 213 };
+
 u8 byte_2000314;
 s32 dword_2000318;
 s32 dword_200031C;
@@ -2657,7 +2659,7 @@ void select_next_available_egg(bool32 a1) {
     bool8 isNextEggSelected;
 
     if (gSelectedEgg < 0) {
-        sub_080121F0(&byte_8064848, &byte_8064850);
+        sub_080121F0("GAME\xff", "CHANGE EGG TYPE: CURRENT EGG TYPE IS INVALID\xff");
     }
 
     if (!a1 && !sub_0804207C(gSelectedEgg + 9)) {
@@ -3927,7 +3929,7 @@ static void update_efx() {
 
             if (--gThunderTimer == 0) {
                 gThunderTimer = RandomMinMax(180, 300);
-                PLAY_SFX(dword_806483C[RandomMinMax(0, 2)]);
+                PLAY_SFX(dThunderSfxIds[RandomMinMax(0, 2)]);
             }
             break;
     }

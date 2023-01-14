@@ -534,7 +534,6 @@ extern struct SoundEffect dSoundEffects[];
 
 extern u16 dLightningPalette[];
 extern void* dLavaPaletteAnims[];
-extern u32 dword_806483C[];
 
 // More strings.
 extern char dword_8065F60[];
