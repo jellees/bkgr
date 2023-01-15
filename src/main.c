@@ -526,7 +526,7 @@ static void start_game() {
     byte_2000F57 = 0;
     gIsSavingGame = 0;
     gMatricesCount = 0;
-    gMatrices = 0;
+    gMatrices = NULL;
 
     DmaFill32(170, gOAMBuffer2, 256);
 
@@ -564,7 +564,7 @@ static void start_game() {
 
     byte_2000F5D = 0;
 
-    dword_2000F60 = (u32*)Alloc(0x400u, 19, 4);
+    dword_2000F60 = (u32*)Alloc(0x400, 19, 4);
     dword_2000F64 = 0;
 
     setup_interrupts();
@@ -588,7 +588,7 @@ static void start_game() {
         byte_20010AA = 0;
         sub_8025E44(0);
         SetSpritePriority(&gPlayerSprite, stru_3002950.playerSpritePriority);
-        SetSprite(&gPlayerSprite, 0x1Du, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerSprite, 0x1D, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         sub_800378C(&gPlayerShadowSprite, 0);
         gPlayerShadowSprite.field_10 = 1;
@@ -618,7 +618,7 @@ static void start_game() {
         init_efx();
         enable_poison_effect();
         init_room_name();
-        SetSprite(&gPlayerSprite, 0x1Du, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerSprite, 0x1D, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         sub_800378C(&gPlayerShadowSprite, 0);
         gPlayerShadowSprite.field_10 = 1;
@@ -687,8 +687,9 @@ static void sub_800A37C() {
     gTileAnimQueueIndex = 0;
 
     if (byte_2000F5A == 0) {
-        if (byte_2000F59 && !(gKeysPressed & (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON)))
+        if (byte_2000F59 && !(gKeysPressed & (START_BUTTON | SELECT_BUTTON | B_BUTTON | A_BUTTON))) {
             byte_2000F5A = 5;
+        }
     } else {
         byte_2000F5A--;
         if (byte_2000F5A == 0)
@@ -702,7 +703,7 @@ void nullsub_15() {
 void update_video() {
     DmaTransfer32(gOAMBuffer1, OAM, 256);
 
-    if (gMatricesCount) {
+    if (gMatricesCount != 0) {
         CallARM_SetOamMatrices(gMatrices, gMatricesCount);
     }
 
@@ -799,8 +800,9 @@ void sub_800A710(u16 level) {
 }
 
 static void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
-    if (!dword_203DFC4)
+    if (!dword_203DFC4) {
         return;
+    }
 
     if (byte_203DFE6) {
         if (gPlayerStateSettings[gPlayerState] & 0x400) {
@@ -829,8 +831,9 @@ static void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
 static bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (byte_203DFE6) {
         if (gPlayerStateSettings[gPlayerState] & 0x400) {
-            if (!sub_8018BB0(&gPlayerSprite))
+            if (!sub_8018BB0(&gPlayerSprite)) {
                 return TRUE;
+            }
 
             gPlayerPos.y = a1->y;
             gPlayerShadowPos.y = gPlayerPos.y;
@@ -871,8 +874,9 @@ static bool32 sub_0800A8B4() {
                 && !(gPlayerStateSettings[gPlayerState] & 0x80)) {
                 ASSERT((stru_3002950.warpDestRoom & 0x7F) - 1 <= 0x25);
 
-                if (sub_0800BCD4(&stru_3002950))
+                if (sub_0800BCD4(&stru_3002950)) {
                     return TRUE;
+                }
             }
         } else {
             ASSERT(gFloorPlaneResult.warpDestRoom - 1 <= 0x25);
@@ -891,8 +895,9 @@ static bool32 sub_0800A8B4() {
 }
 
 static bool32 sub_800A974() {
-    if (gGameStatus.health == 0)
+    if (gGameStatus.health == 0) {
         return FALSE;
+    }
 
     if (gFloorPlaneResult.floorType == 2 && stru_3002950.floorType == 2) {
         if (gTransformation != TRANSFORMATION_BANJO && gTransformation != TRANSFORMATION_OCTOPUS) {
@@ -1247,8 +1252,9 @@ static void update_player() {
 
     sub_800AA6C(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec3, &vec1);
 
-    if (sub_802ADE8(&gPlayerPosTemp))
+    if (sub_802ADE8(&gPlayerPosTemp)) {
         return;
+    }
 
     sub_800A740(&gPlayerPosTemp, &gPlayerShadowPosTemp);
 
@@ -2636,9 +2642,11 @@ void sub_800DA04(int a1, int a2, int a3) {
     byte_20010B0 = 0;
     byte_203F4E0 = 0;
     SetupRoom(dword_203F4E4, dword_203F4E8, 1, 0);
+
     if (gCanChangeBgm) {
         audio_start_tune(15);
     }
+
     sub_8025E44(gLoadedRoomLevel);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
@@ -3270,8 +3278,10 @@ void sub_800E9EC(struct Sprite* a1, int palette, int a3) {
     u8 r1;
     u16 r1_1;
 
-    if (byte_200116C)
+    if (byte_200116C) {
         sub_800EA9C();
+    }
+
     DmaMoveObjPalette(a1->spriteFrames->field_8[3] >> 12, palette);
     byte_200116C = 1;
     dword_2001168 = &a1->field_12;
@@ -3732,8 +3742,9 @@ void sub_0800F02C(int* a1, int a2, int a3) {
 }
 
 static void sub_800F430() {
-    if (byte_200110C == 0)
+    if (byte_200110C == 0) {
         return;
+    }
 
     switch (byte_200110C) {
         case 1:
@@ -3898,8 +3909,9 @@ void init_efx() {
 }
 
 static void update_efx() {
-    if (gIsPaletteEffectsActive)
+    if (gIsPaletteEffectsActive) {
         return;
+    }
 
     switch (gEnvironmentEffects) {
         case EFX_NONE:
