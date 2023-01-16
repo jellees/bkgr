@@ -26,3 +26,17 @@ jobs:
       - name: Build
         run: |
           make
+
+      - name: Calculate progress
+        run: | 
+          echo "PROGRESS=$(python3 score.py -p)" >> $GITHUB_ENV
+      
+      - name: Create progress badge
+        uses: schneegans/dynamic-badges-action@v1.3.0
+        with:
+          auth: ${{ secrets.BKGR_PROGRESS_SECRET }}
+          gistID: b35087f821408554ad6d43f1ca9b1399
+          filename: bkgr-progress.json
+          label: Progress
+          message: ${{ env.PROGRESS }}%
+          color: green
