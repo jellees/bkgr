@@ -18,6 +18,11 @@ jobs:
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
 
-      - name: Install agbcc
+      - name: Make gbafix
+        run: |
+          make
+        working-directory: tools/gbafix
+
+      - name: Build
         run: |
           make
