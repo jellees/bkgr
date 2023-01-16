@@ -10,7 +10,7 @@ extern u8 gSfxVolume;
 extern void init_audio_and_reset_volume();
 extern void reset_volume();
 
-#define AUDIO_NEW_SFX(idx, base)                                                                      \
+#define AUDIO_NEW_SFX(idx, base)                                                                       \
     audio_new_fx(dSoundEffects[(idx)].index, dSoundEffects[(idx)].volumes[gSfxVolume],                 \
                  dSoundEffects[(idx)].pitch + (base))
 
