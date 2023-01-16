@@ -39,4 +39,6 @@ jobs:
           filename: bkgr-progress.json
           label: Progress
           message: ${{ env.PROGRESS }}%
-          color: green
+          valColorRange: ${{ env.PROGRESS }}
+          maxColorRange: 100
+          minColorRange: 0
