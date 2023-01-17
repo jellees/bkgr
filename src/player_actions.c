@@ -1447,3 +1447,83 @@ void sub_801C80C(s32 keyPressed, s32 keyDown) {
         sub_802672C();
     }
 }
+
+void sub_801C8A0(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    switch (keyDown & JOY_EXCL_DPAD) {
+        case 1:
+            DoJump();
+            return;
+    }
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            if (gPlayerSprite.field_A != 1 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 1;
+                sub_80037A0(&gPlayerSprite);
+                sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x90:
+            if (gPlayerSprite.field_A != 3 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 3;
+                sub_80037A0(&gPlayerSprite);
+                sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0xA0:
+            if (gPlayerSprite.field_A != 5 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 5;
+                sub_80037A0(&gPlayerSprite);
+                sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x60:
+            if (gPlayerSprite.field_A != 7 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 7;
+                sub_80037A0(&gPlayerSprite);
+                sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x40:
+            if (gPlayerSprite.field_A != 0 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 0;
+                sub_80037A0(&gPlayerSprite);
+                sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x80:
+            if (gPlayerSprite.field_A != 4 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 4;
+                sub_80037A0(&gPlayerSprite);
+                sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x20:
+            if (gPlayerSprite.field_A != 6 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 6;
+                sub_80037A0(&gPlayerSprite);
+                sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x10:
+            if (gPlayerSprite.field_A != 2 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 2;
+                sub_80037A0(&gPlayerSprite);
+                sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        default:
+            sub_8003794(&gPlayerSprite);
+            sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+    }
+}
