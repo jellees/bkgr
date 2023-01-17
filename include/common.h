@@ -387,6 +387,10 @@ extern u16 gPlayerStateSettings[128];
 
 extern u8 byte_20021C4;
 
+extern u8 byte_20021C8;
+
+extern u32 dword_20021D0;
+
 extern u8 byte_20021F0; // possibly bool8
 extern u32 dword_20021F4;
 extern u8 byte_20021F8; // possibily bool8

@@ -1,4 +1,8 @@
-# Banjo Kazooie Grunty's Revenge ![progress](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fjellees%2Fb35087f821408554ad6d43f1ca9b1399%2Fraw%2Fbkgr-progress.json)
+# Banjo Kazooie Grunty's Revenge
+
+![example workflow](https://github.com/jellees/bkgr/actions/workflows/build.yml/badge.svg)
+![progress](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fjellees%2Fb35087f821408554ad6d43f1ca9b1399%2Fraw%2Fbkgr-progress.json)
+
 This is a decompilation of Banjo Kazooie Grunty's Revenge (US).
 
 It builds the following ROM:

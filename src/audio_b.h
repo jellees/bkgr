@@ -10,12 +10,13 @@ extern u8 gSfxVolume;
 extern void init_audio_and_reset_volume();
 extern void reset_volume();
 
-#define AUDIO_NEW_SFX(idx, base)                                                                       \
-    audio_new_fx(dSoundEffects[(idx)].index, dSoundEffects[(idx)].volumes[gSfxVolume],                 \
-                 dSoundEffects[(idx)].pitch + (base))
+#define AUDIO_NEW_SFX(idx, volume, pitch) (gCanPlaySfx ? audio_new_fx(idx, volume, pitch) : -1)
 
-#define PLAY_SFX(idx) (gCanPlaySfx ? AUDIO_NEW_SFX(idx, 0x10000) : -1)
+#define PLAY_SFX(idx)                                                                                  \
+    AUDIO_NEW_SFX(dSoundEffects[idx].index, dSoundEffects[idx].volumes[gSfxVolume],                    \
+                  dSoundEffects[idx].pitch + 0x10000)
 
-#define PLAY_SFX_PITCH(idx, base) (gCanPlaySfx ? AUDIO_NEW_SFX(idx, base) : -1)
+#define PLAY_SFX_PITCH(idx, base)                                                                      \
+    AUDIO_NEW_SFX(dSoundEffects[idx].index, dSoundEffects[idx].volumes[gSfxVolume], base)
 
 #endif
