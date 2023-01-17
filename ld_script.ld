@@ -52,7 +52,8 @@ SECTIONS
         . = 0x00002E4A;
         byte_2002E4A = .; . += 1;
 
-        . = 0x00002EC2;
+        . = 0x00002EC0;
+        word_2002EC0 = .; . += 2;
         word_2002EC2 = .; . += 2;
         unk_2002EC4 = .; . += 4; /* probably an array of structs */
 

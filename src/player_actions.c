@@ -1400,3 +1400,50 @@ void sub_801C538(s32 keyPressed, s32 keyDown) {
             break;
     }
 }
+
+void sub_801C744(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 24;
+        sub_8003368(&gPlayerSprite, 145, 0, 0);
+        CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0);
+        sub_8016790(4, gPlayerSprite.field_A);
+    }
+}
+
+void sub_801C7A4(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 0;
+        sub_8003368(&gPlayerSprite, 25, 0, 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
+
+void sub_801C7F4(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+}
+
+void sub_801C80C(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite) && word_2002EC2 == word_2002EC0) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 23;
+        gPlayerSprite.field_A = 4;
+        sub_8003368(&gPlayerSprite, 137, 0, 1);
+        sub_8026714();
+        if (dword_20020B4 != -1) {
+            if (gCanPlaySfx) {
+                audio_halt_fx(dword_20020B4);
+            }
+            dword_20020B4 = -1;
+        }
+    } else {
+        sub_802672C();
+    }
+}

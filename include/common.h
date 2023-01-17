@@ -398,6 +398,7 @@ extern u8 byte_20021F9;
 
 extern bool8 byte_2002E4A;
 
+extern s16 word_2002EC0;
 extern s16 word_2002EC2;
 extern u32 unk_2002EC4[1];
 
