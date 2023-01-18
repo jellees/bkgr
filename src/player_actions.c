@@ -1527,3 +1527,206 @@ void sub_801C8A0(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
     }
 }
+
+void sub_801CA7C(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    switch (keyDown & JOY_EXCL_DPAD) {
+        case 1:
+            DoJump();
+            return;
+
+        case 0x100:
+            sub_8017958();
+            return;
+    }
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            if (gPlayerSprite.field_A != 1) {
+                gPlayerSprite.field_A = 1;
+                sub_8003368(&gPlayerSprite, 41, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13333, 0x2D0000, 0);
+            }
+            break;
+
+        case 0x90:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            if (gPlayerSprite.field_A != 3) {
+                gPlayerSprite.field_A = 3;
+                sub_8003368(&gPlayerSprite, 41, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13333, 0x13B0000, 0);
+            }
+            break;
+
+        case 0xA0:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            if (gPlayerSprite.field_A != 5) {
+                gPlayerSprite.field_A = 5;
+                sub_8003368(&gPlayerSprite, 41, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13333, 0xE10000, 0);
+            }
+            break;
+
+        case 0x60:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            if (gPlayerSprite.field_A != 7) {
+                gPlayerSprite.field_A = 7;
+                sub_8003368(&gPlayerSprite, 41, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13333, 0x870000, 0);
+            }
+            break;
+
+        case 0x40:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            if (gPlayerSprite.field_A != 0) {
+                gPlayerSprite.field_A = 0;
+                sub_8003368(&gPlayerSprite, 41, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13333, 0x5A0000, 0);
+            }
+            break;
+
+        case 0x80:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            if (gPlayerSprite.field_A != 4) {
+                gPlayerSprite.field_A = 4;
+                sub_8003368(&gPlayerSprite, 41, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13333, 0x10E0000, 0);
+            }
+            break;
+
+        case 0x20:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            if (gPlayerSprite.field_A != 6) {
+                gPlayerSprite.field_A = 6;
+                sub_8003368(&gPlayerSprite, 41, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13333, 0xB40000, 0);
+            }
+            break;
+
+        case 0x10:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            if (gPlayerSprite.field_A != 2) {
+                gPlayerSprite.field_A = 2;
+                sub_8003368(&gPlayerSprite, 41, 0, 0);
+                sub_8003884(dword_2000FC8, 0x13333, 0, 0);
+            }
+            break;
+
+        default:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 27;
+            sub_8003368(&gPlayerSprite, 105, 0, 0);
+            sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+            break;
+    }
+}
+
+void sub_801CD74(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+}
+
+void sub_801CD8C(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    switch (keyDown & JOY_EXCL_DPAD) {
+        case 1:
+            if (gInInteractionArea) {
+                sub_80186F4(0);
+            } else {
+                DoJump();
+            }
+            return;
+
+        case 0x100:
+            sub_8017958();
+            return;
+    }
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            gPlayerSprite.field_A = 1;
+            sub_8003368(&gPlayerSprite, 41, 0, 0);
+            sub_8003884(dword_2000FC8, 0x13333, 0x2D0000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x90:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            gPlayerSprite.field_A = 3;
+            sub_8003368(&gPlayerSprite, 41, 0, 0);
+            sub_8003884(dword_2000FC8, 0x13333, 0x13B0000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0xA0:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            gPlayerSprite.field_A = 5;
+            sub_8003368(&gPlayerSprite, 41, 0, 0);
+            sub_8003884(dword_2000FC8, 0x13333, 0xE10000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x60:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            gPlayerSprite.field_A = 7;
+            sub_8003368(&gPlayerSprite, 41, 0, 0);
+            sub_8003884(dword_2000FC8, 0x13333, 0x870000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x40:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            gPlayerSprite.field_A = 0;
+            sub_8003368(&gPlayerSprite, 41, 0, 0);
+            sub_8003884(dword_2000FC8, 0x13333, 0x5A0000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x80:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            gPlayerSprite.field_A = 4;
+            sub_8003368(&gPlayerSprite, 41, 0, 0);
+            sub_8003884(dword_2000FC8, 0x13333, 0x10E0000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x20:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            gPlayerSprite.field_A = 6;
+            sub_8003368(&gPlayerSprite, 41, 0, 0);
+            sub_8003884(dword_2000FC8, 0x13333, 0xB40000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x10:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 5;
+            gPlayerSprite.field_A = 2;
+            sub_8003368(&gPlayerSprite, 41, 0, 0);
+            sub_8003884(dword_2000FC8, 0x13333, 0, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+    }
+}
+
+void sub_801D030(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+}
