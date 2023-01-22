@@ -17,7 +17,9 @@ SECTIONS
         gPreviousPlayerState = .; . += 2;
         gPlayerState = .; . += 2;
 
-        . = 0x0000209A;
+        . = 0x00002096;
+        word_2002096 = .; . += 2;
+        word_2002098 = .; . += 2;
         gUnlockedMoves = .; . += 0x17;
         gTransformation = .; . += 1;
         byte_20020B2 = .; . += 1;
@@ -46,8 +48,8 @@ SECTIONS
 
         . = 0x000021E4;
         dword_20021E4 = .; . += 4;
-
-        . = 0x000021F0;
+        dword_20021E8 = .; . += 4;
+        dword_20021EC = .; . += 4;
         byte_20021F0 = .; . += 1;
         . += 3; /* padding */
         dword_20021F4 = .; . += 4;

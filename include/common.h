@@ -374,6 +374,8 @@ extern u32 gDestinationWarpCount;
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;
 
+extern u16 word_2002096;
+extern u16 word_2002098;
 extern bool8 gUnlockedMoves[MOVE_COUNT];
 extern u8 gTransformation;
 extern u8 byte_20020B2;
@@ -396,7 +398,8 @@ extern u32 dword_20021D0;
 extern u32 dword_20021D8;
 
 extern u32 dword_20021E4;
-
+extern u32 dword_20021E8;
+extern u32 dword_20021EC;
 extern u8 byte_20021F0; // possibly bool8
 extern u32 dword_20021F4;
 extern u8 byte_20021F8; // possibily bool8

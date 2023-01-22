@@ -1889,3 +1889,200 @@ void sub_801D1CC(s32 keyPressed, s32 keyDown) {
     byte_2002E4A = 0;
     byte_20021C9 = 0;
 }
+
+void sub_801D400(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_80037A8(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 36;
+        CallARM_store_jump_and_other_value(dword_2000FC8, 0x40000, 0x2000);
+    }
+}
+
+void sub_801D44C(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_80038BC(dword_2000FC8)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 37;
+        sub_8003368(&gPlayerSprite, 17, 0, 1);
+        return;
+    }
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            if (gPlayerSprite.field_A != 1 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 1;
+                sub_80033A4(&gPlayerSprite, 233, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x90:
+            if (gPlayerSprite.field_A != 3 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 3;
+                sub_80033A4(&gPlayerSprite, 233, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0xA0:
+            if (gPlayerSprite.field_A != 5 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 5;
+                sub_80033A4(&gPlayerSprite, 233, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x60:
+            if (gPlayerSprite.field_A != 7 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 7;
+                sub_80033A4(&gPlayerSprite, 233, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x40:
+            if (gPlayerSprite.field_A != 0 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 0;
+                sub_80033A4(&gPlayerSprite, 233, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x80:
+            if (gPlayerSprite.field_A != 4 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 4;
+                sub_80033A4(&gPlayerSprite, 233, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x20:
+            if (gPlayerSprite.field_A != 6 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 6;
+                sub_80033A4(&gPlayerSprite, 233, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x10:
+            if (gPlayerSprite.field_A != 2 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 2;
+                sub_80033A4(&gPlayerSprite, 233, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+    }
+}
+
+void sub_801D614(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    switch (keyDown & JOY_EXCL_DPAD) {
+        case 1:
+            DoFeatheryFlap();
+            return;
+
+        case 2:
+            DoAirAttack();
+            return;
+
+        case 0x200:
+            DoBillDrill();
+            return;
+    }
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            if (gPlayerSprite.field_A != 1 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 1;
+                sub_80033A4(&gPlayerSprite, 17, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x90:
+            if (gPlayerSprite.field_A != 3 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 3;
+                sub_80033A4(&gPlayerSprite, 17, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0xA0:
+            if (gPlayerSprite.field_A != 5 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 5;
+                sub_80033A4(&gPlayerSprite, 17, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x60:
+            if (gPlayerSprite.field_A != 7 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 7;
+                sub_80033A4(&gPlayerSprite, 17, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x40:
+            if (gPlayerSprite.field_A != 0 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 0;
+                sub_80033A4(&gPlayerSprite, 17, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x80:
+            if (gPlayerSprite.field_A != 4 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 4;
+                sub_80033A4(&gPlayerSprite, 17, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x20:
+            if (gPlayerSprite.field_A != 6 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 6;
+                sub_80033A4(&gPlayerSprite, 17, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x10:
+            if (gPlayerSprite.field_A != 2 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 2;
+                sub_80033A4(&gPlayerSprite, 17, 0, 1);
+                sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+    }
+}
+
+void sub_801D810(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        sub_0800C388(dword_20021E8, dword_20021EC);
+
+        if (byte_20010A4) {
+            gPlayerSprite.field_A = byte_20010A5;
+            word_20010AC = gKeysPressed & 0x3FF;
+        }
+
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 45;
+        sub_8003368(&gPlayerSprite, 57, 0, 0);
+        gPlayerShadowSprite.field_13 = 0;
+        CallARM_store_jump_and_other_value(dword_2000FC8, 0, 12544);
+        word_2002096 = 600;
+        word_2002098 = 600;
+
+        if (!sub_080420E8(56)) {
+            sub_08040204(57, gGameStatus.field_16);
+            sub_08041FA4(57);
+        }
+    }
+}
