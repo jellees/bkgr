@@ -428,12 +428,16 @@ extern u8* dword_203DFC0;
 extern struct Entity_rt* dword_203DFC4;
 
 extern bool8 gInInteractionArea;
-
+extern bool8 byte_203DFD8;
+extern bool8 byte_203DFD9;
+extern bool8 byte_203DFDA;
 extern u32 dword_203DFDC;
 extern u32 dword_203DFE0;
 
 extern bool8 byte_203DFE6;
 extern bool8 byte_203DFE7;
+extern bool8 byte_203DFE8;
+extern bool8 byte_203DFE9;
 
 extern u8 byte_203E16C;
 

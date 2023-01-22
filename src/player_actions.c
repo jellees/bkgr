@@ -1818,3 +1818,74 @@ void sub_801D188(s32 keyPressed, s32 keyDown) {
         sub_08018824();
     }
 }
+
+void sub_801D1CC(s32 keyPressed, s32 keyDown) {
+    struct Vec3fx a;
+    u8 v4;
+
+    if (sub_80038C4(dword_2000FC8, &a.x, &a.y, &a.z) || gIsCameraMovingX || gIsCameraMovingY) {
+        return;
+    }
+
+    if (*((u8*)dword_203DFDC + 52) != 0) {
+        v4 = sub_8003A6C(gPlayerPos.x, gPlayerPos.z, *((u32*)((u8*)dword_203DFDC + 148)),
+                         *((u32*)((u8*)dword_203DFDC + 156)));
+        if (v4 == 0xFF) {
+            v4 = 0;
+        }
+    } else if (byte_203DFDA || byte_203DFE9) {
+        v4 = gPlayerSprite.field_A;
+    } else {
+        v4 = 0;
+    }
+
+    if (v4 != 0xFF && gGameStatus.health != 0) {
+        if (gTransformation == TRANSFORMATION_BANJO) {
+            if ((gPlayerStateSettings[gPreviousPlayerState] & 0x200) != 0) {
+                gPlayerSprite.field_A = v4;
+                sub_8003368(&gPlayerSprite, 105, 0, 0);
+            } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x8000) != 0) {
+                sub_800378C(&gPlayerSprite, 6);
+                if (dword_20020B8 != -1) {
+                    if (gCanPlaySfx) {
+                        audio_halt_fx(dword_20020B8);
+                    }
+                    dword_20020B8 = -1;
+                }
+            } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x4) != 0) {
+                sub_8003368(&gPlayerSprite, 257, 0, 0);
+            } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x4000) != 0) {
+                gPlayerSprite.field_A = v4;
+                sub_8003368(&gPlayerSprite, 505, 0, 0);
+                sub_0804200C(3);
+            } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x1000) == 0) {
+                gPlayerSprite.field_A = v4;
+                sub_8003368(&gPlayerSprite, 25, 0, 0);
+            }
+        } else if (gTransformation == TRANSFORMATION_MOUSE) {
+            gPlayerSprite.field_A = v4;
+            sub_8003368(&gPlayerSprite, 321, 0, 0);
+        } else if (gTransformation == TRANSFORMATION_CANDLE) {
+            gPlayerSprite.field_A = v4;
+            sub_8003368(&gPlayerSprite, 377, 0, 0);
+        } else if (gTransformation == TRANSFORMATION_TANK) {
+            gPlayerSprite.field_A = v4;
+            sub_8003368(&gPlayerSprite, 417, 0, 0);
+        } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
+            if ((gPlayerStateSettings[gPreviousPlayerState] & 0x200) != 0) {
+                gPlayerSprite.field_A = v4;
+                sub_8003368(&gPlayerSprite, 473, 0, 0);
+            } else {
+                gPlayerSprite.field_A = v4;
+                sub_8003368(&gPlayerSprite, 465, 0, 0);
+            }
+        } else {
+            ASSERT(0);
+        }
+    }
+
+    gPlayerState = 32;
+    sub_8016790(0, gPlayerSprite.field_A);
+    byte_2002E4A = 0;
+    byte_20021C9 = 0;
+}

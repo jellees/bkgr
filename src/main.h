@@ -157,6 +157,8 @@ extern u32 dword_2001108;
 extern u8 byte_200110C;
 extern u32 dword_2001110;
 extern u32 dword_2001114;
+extern bool8 gIsCameraMovingX;
+extern bool8 gIsCameraMovingY;
 
 extern void sub_8009D7C(u32 a1);
 extern u32 sub_8009DAC();

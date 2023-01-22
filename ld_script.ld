@@ -96,14 +96,18 @@ SECTIONS
 
         . = 0x0003DFD7;
         gInInteractionArea = .; . += 1;
-
-        . = 0x0003DFDC;
+        byte_203DFD8 = .; . += 1;
+        byte_203DFD9 = .; . += 1;
+        byte_203DFDA = .; . += 1;
+        . += 1; /* padding */
         dword_203DFDC = .; . += 4;
         dword_203DFE0 = .; . += 4;
         
         . = 0x0003DFE6;
         byte_203DFE6 = .; . += 1;
         byte_203DFE7 = .; . += 1;
+        byte_203DFE8 = .; . += 1;
+        byte_203DFE9 = .; . += 1;
 
         . = 0x0003E16C;
         byte_203E16C = .; . += 1;
