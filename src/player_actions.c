@@ -3,6 +3,7 @@
 #include "audio_b.h"
 #include "main.h"
 #include "debug.h"
+#include "room.h"
 #include "common.h"
 
 void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown) {
@@ -1729,4 +1730,91 @@ void sub_801CD8C(s32 keyPressed, s32 keyDown) {
 
 void sub_801D030(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
+}
+
+void sub_801D048(s32 keyPressed, s32 keyDown) {
+    if (byte_20020B3) {
+        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+            sub_80629E8();
+        }
+    } else {
+        if (sub_8003770(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+            sub_80629E8();
+        }
+    }
+}
+
+void sub_801D0AC(s32 keyPressed, s32 keyDown) {
+    if (!byte_20021C9) {
+        byte_20021C9 = sub_0802E080();
+        if (byte_20021C9) {
+            byte_20021CA = 0;
+        } else {
+            return;
+        }
+    }
+
+    if (!byte_20021CA) {
+        if (!dword_2001470) {
+            byte_20021CA = 1;
+            sub_8025FBC();
+            sub_8026180();
+            sub_802625C();
+            dword_20021E4 = 300;
+        }
+        return;
+    }
+
+    if (byte_2002E49) {
+        sub_8018810();
+        return;
+    }
+
+    switch (keyDown & KEYS_MASK) {
+        case 1:
+            dword_20021E4 = 300;
+            if (!sub_8025FF8()) {
+                sub_8026180();
+                sub_80265D8();
+            }
+            return;
+
+        case 2:
+            if (byte_2002E4E) {
+                sub_8018810();
+            } else {
+                sub_8026180();
+                sub_80265D8();
+            }
+            return;
+    }
+
+    if (byte_2002233 == byte_2002232 && --dword_20021E4 == 0) {
+        dword_20021E4 = 300;
+    } else {
+        sub_8026180();
+        sub_80265D8();
+        return;
+    }
+
+    if (!sub_8025FF8()) {
+        sub_8026180();
+        sub_80265D8();
+    }
+}
+
+void sub_801D188(s32 keyPressed, s32 keyDown) {
+    if (byte_20021CA) {
+        if (dword_2001470) {
+            return;
+        }
+
+        sub_080161CC((u8) * ((u8*)dword_203DFDC + 16));
+        sub_8013DD4(21, 32);
+        byte_20021CA = 0;
+    }
+
+    if (sub_802FDC8()) {
+        sub_08018824();
+    }
 }
