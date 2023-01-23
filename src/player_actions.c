@@ -2223,23 +2223,17 @@ void sub_801D8EC(s32 keyPressed, s32 keyDown) {
 void sub_801DD1C(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
-    if ( gGameStatus.field_16 )
-    {
-        if (word_2002098 != 0)
-        {
+    if (gGameStatus.field_16) {
+        if (word_2002098 != 0) {
             word_2002098--;
-        }
-        else
-        {
+        } else {
             word_2002098 = word_2002096;
             gGameStatus.field_16--;
             sub_08040204(57, gGameStatus.field_16);
             sub_08041FA4(57);
             PLAY_SFX(123);
         }
-    }
-    else
-    {
+    } else {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = 48;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
@@ -2247,8 +2241,7 @@ void sub_801DD1C(s32 keyPressed, s32 keyDown) {
         return;
     }
 
-    if ((keyDown & JOY_EXCL_DPAD) == R_BUTTON)
-    {
+    if ((keyDown & JOY_EXCL_DPAD) == R_BUTTON) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = 48;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
@@ -2256,17 +2249,14 @@ void sub_801DD1C(s32 keyPressed, s32 keyDown) {
         return;
     }
 
-    if ((keyPressed & JOY_EXCL_DPAD) != A_BUTTON)
-    {
-        if (sub_80038BC(dword_2000FC8))
-        {
+    if ((keyPressed & JOY_EXCL_DPAD) != A_BUTTON) {
+        if (sub_80038BC(dword_2000FC8)) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = 45;
             CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
             return;
         }
-    }
-    else if ( !byte_30029F8 ){
+    } else if (!byte_30029F8) {
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x18000, 0x2000);
     }
 
@@ -2354,5 +2344,74 @@ void sub_801DD1C(s32 keyPressed, s32 keyDown) {
         default:
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             break;
+    }
+}
+
+void sub_801E0F4(s32 keyPressed, s32 keyDown) {
+    ASSERT(0);
+
+    if (!gGameStatus.field_16) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 48;
+        sub_8003368(&gPlayerSprite, 65, 0, 1);
+        CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
+        return;
+    }
+
+    if (word_2002098 == 0) {
+        word_2002098 = word_2002096;
+        gGameStatus.field_16--;
+        sub_08040204(57, gGameStatus.field_16);
+        sub_08041FA4(57);
+        PLAY_SFX(123);
+    } else {
+        word_2002098--;
+    }
+
+    if (!(keyPressed & 2)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 45;
+        sub_800387C(dword_2000FC8);
+    }
+}
+
+void sub_801E1E4(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 0;
+        sub_800C1E8(byte_2001094, dword_2001098, dword_200109C, dword_20010A0, 1, 0);
+        sub_8017C50();
+        sub_0804200C(57);
+        if (gGameStatus.field_16 != gGameStatus.field_17) {
+            gGameStatus.field_16 = gGameStatus.field_17;
+            sub_08040204(57, gGameStatus.field_16);
+            PLAY_SFX(124);
+        }
+        sub_800387C(dword_2000FC8);
+    }
+}
+
+void sub_801E2B8(s32 keyPressed, s32 keyDown) {
+    if (sub_8003770(&gPlayerSprite)) {
+        if (gGameStatus.health == 0) {
+            if (byte_2001370) {
+                restore_full_health();
+                gPreviousPlayerState = gPlayerState;
+                gPlayerState = 45;
+                sub_8003368(&gPlayerSprite, 57, 0, 0);
+                sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+                sub_8016790(0, gPlayerSprite.field_A);
+            } else {
+                sub_8016890();
+            }
+        } else {
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 45;
+            sub_8003368(&gPlayerSprite, 57, 0, 0);
+            sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+        }
     }
 }
