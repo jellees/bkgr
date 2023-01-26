@@ -2539,3 +2539,348 @@ void sub_801E384(s32 keyPressed, s32 keyDown) {
             break;
     }
 }
+
+void sub_801E694(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    switch (keyDown & JOY_EXCL_DPAD) {
+        case 1:
+            if (gInInteractionArea) {
+                sub_80186F4(0);
+            } else {
+                sub_8017664();
+            }
+            return;
+
+        case 2:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 54;
+            sub_8003368(&gPlayerSprite, 297, 0, 3);
+            sub_8016790(14, gPlayerSprite.field_A);
+            PLAY_SFX(192);
+            return;
+    }
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 49;
+            gPlayerSprite.field_A = 1;
+            sub_8003368(&gPlayerSprite, 329, 0, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x90:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 49;
+            gPlayerSprite.field_A = 3;
+            sub_8003368(&gPlayerSprite, 329, 0, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0xA0:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 49;
+            gPlayerSprite.field_A = 5;
+            sub_8003368(&gPlayerSprite, 329, 0, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x60:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 49;
+            gPlayerSprite.field_A = 7;
+            sub_8003368(&gPlayerSprite, 329, 0, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x40:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 49;
+            gPlayerSprite.field_A = 0;
+            sub_8003368(&gPlayerSprite, 329, 0, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x80:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 49;
+            gPlayerSprite.field_A = 4;
+            sub_8003368(&gPlayerSprite, 329, 0, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x20:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 49;
+            gPlayerSprite.field_A = 6;
+            sub_8003368(&gPlayerSprite, 329, 0, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+
+        case 0x10:
+            gPreviousPlayerState = gPlayerState;
+            gPlayerState = 49;
+            gPlayerSprite.field_A = 2;
+            sub_8003368(&gPlayerSprite, 329, 0, 0);
+            sub_8003884(dword_2000FC8, 0x28000, 0, 0);
+            sub_8016790(0, gPlayerSprite.field_A);
+            break;
+    }
+}
+
+void sub_801E9B8(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+    sub_8016624(keyPressed, keyDown);
+
+    if (sub_80038BC(dword_2000FC8)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 52;
+        sub_8003368(&gPlayerSprite, 313, 0, 1);
+    }
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            if (gPlayerSprite.field_A != 1 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 1;
+                sub_8003368(&gPlayerSprite, 305, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x90:
+            if (gPlayerSprite.field_A != 3 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 3;
+                sub_8003368(&gPlayerSprite, 305, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0xA0:
+            if (gPlayerSprite.field_A != 5 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 5;
+                sub_8003368(&gPlayerSprite, 305, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x60:
+            if (gPlayerSprite.field_A != 7 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 7;
+                sub_8003368(&gPlayerSprite, 305, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x40:
+            if (gPlayerSprite.field_A != 0 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 0;
+                sub_8003368(&gPlayerSprite, 305, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x80:
+            if (gPlayerSprite.field_A != 4 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 4;
+                sub_8003368(&gPlayerSprite, 305, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x20:
+            if (gPlayerSprite.field_A != 6 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 6;
+                sub_8003368(&gPlayerSprite, 305, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x10:
+            if (gPlayerSprite.field_A != 2 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 2;
+                sub_8003368(&gPlayerSprite, 305, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        default:
+            if (sub_80038AC(dword_2000FC8)) {
+                sub_8003884(dword_2000FC8, 0x3000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+    }
+}
+
+void sub_801EB98(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+    sub_8016624(keyPressed, keyDown);
+
+    switch (keyPressed & DPAD_ANY) {
+        case 0x50:
+            if (gPlayerSprite.field_A != 1 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 1;
+                sub_8003368(&gPlayerSprite, 313, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x90:
+            if (gPlayerSprite.field_A != 3 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 3;
+                sub_8003368(&gPlayerSprite, 313, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0xA0:
+            if (gPlayerSprite.field_A != 5 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 5;
+                sub_8003368(&gPlayerSprite, 313, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x60:
+            if (gPlayerSprite.field_A != 7 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 7;
+                sub_8003368(&gPlayerSprite, 313, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x40:
+            if (gPlayerSprite.field_A != 0 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 0;
+                sub_8003368(&gPlayerSprite, 313, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x80:
+            if (gPlayerSprite.field_A != 4 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 4;
+                sub_8003368(&gPlayerSprite, 313, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x20:
+            if (gPlayerSprite.field_A != 6 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 6;
+                sub_8003368(&gPlayerSprite, 313, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        case 0x10:
+            if (gPlayerSprite.field_A != 2 || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.field_A = 2;
+                sub_8003368(&gPlayerSprite, 313, 0, 1);
+                sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+
+        default:
+            if (sub_80038AC(dword_2000FC8)) {
+                sub_8003884(dword_2000FC8, 0x3000, dword_80CC290[gPlayerSprite.field_A], 0);
+            }
+            break;
+    }
+}
+
+void sub_801ED78(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+}
+
+void sub_801ED90(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 50;
+        sub_8003368(&gPlayerSprite, 321, 0, 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
+
+void sub_801EDE4(s32 keyPressed, s32 keyDown) {
+    if (byte_20020B3) {
+        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+            sub_80629E8();
+        }
+    } else if (sub_8003770(&gPlayerSprite)) {
+        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+            sub_80629E8();
+        }
+    }
+}
+
+void sub_801EE48(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 50;
+        sub_8003368(&gPlayerSprite, 321, 0, 0);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
+
+void sub_801EEBC(s32 keyPressed, s32 keyDown) {
+    if (byte_20020B3) {
+        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+            sub_80629E8();
+        }
+    } else if (sub_8003770(&gPlayerSprite)) {
+        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+            sub_80629E8();
+        }
+    }
+}
+
+void sub_801EF20(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 61;
+        sub_8003368(&gPlayerSprite, 377, 0, 0);
+        sub_800386C(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A]);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
+
+void sub_801EFA4(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 61;
+        sub_8003368(&gPlayerSprite, 377, 0, 0);
+        sub_800386C(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A]);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
+
+void sub_801F028(s32 keyPressed, s32 keyDown) {
+    sub_8016710(&keyPressed, &keyDown);
+
+    if (sub_8003770(&gPlayerSprite)) {
+        gPreviousPlayerState = gPlayerState;
+        gPlayerState = 61;
+        sub_8003368(&gPlayerSprite, 377, 0, 0);
+        sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
+        sub_8016790(0, gPlayerSprite.field_A);
+    }
+}
