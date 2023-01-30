@@ -394,8 +394,9 @@ extern u8 byte_20021C9;
 extern u8 byte_20021CA;
 
 extern u32 dword_20021D0;
-
+extern u32 dword_20021D4;
 extern u32 dword_20021D8;
+extern u32 dword_20021DC;
 
 extern u32 dword_20021E4;
 extern u32 dword_20021E8;

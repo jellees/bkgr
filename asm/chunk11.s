@@ -284,7 +284,7 @@ _0801664E:
 	ldr r0, _08016664
 	ldr r0, [r0]
 	ldr r1, [r1]
-	bl sub_80038D4
+	bl CallARM_store_jump_value
 	b _0801666A
 	.align 2, 0
 _0801665C: .4byte 0x020021CB
@@ -3829,7 +3829,7 @@ _08018522:
 	ldr r0, _0801853C
 	ldr r0, [r0]
 	movs r1, #0
-	bl sub_80038D4
+	bl CallARM_store_jump_value
 _0801852C:
 	pop {r4, r5}
 	pop {r0}

@@ -42,9 +42,9 @@ SECTIONS
 
         . = 0x000021D0;
         dword_20021D0 = .; . += 4;
-
-        . = 0x000021D8;
+        dword_20021D4 = .; . += 4;
         dword_20021D8 = .; . += 4;
+        dword_20021DC = .; . += 4;
 
         . = 0x000021E4;
         dword_20021E4 = .; . += 4;
@@ -298,7 +298,6 @@ SECTIONS
         asm/room.o(.text);
         asm/chunk11.o(.text);
         src/player_actions.o(.text);
-        asm/player_actions.o(.text);
         src/pregame.o(.text);
         asm/chunk9.o(.text);
         src/alloc.o(.text);
