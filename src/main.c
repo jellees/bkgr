@@ -1598,8 +1598,10 @@ static void sub_800BAF0(u32** a1, u32* a2) {
 
     char r10 = byte_203F9A2;
 
-    if (r10 || gPlayerState == 35)
+    if (r10 || gPlayerState == 35) {
         return;
+    }
+
     v9[0] = gCameraPixelX;
     v9[1] = gCameraPixelY;
     a4[0] = gCameraPixelX + 240;
