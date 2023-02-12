@@ -7,6 +7,9 @@
 #include "sprite.h"
 #include "common.h"
 
+static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
+static const u16 word_8065104[PLAYER_STATE_COUNT];
+
 static void sub_08019AAC(int a1, int a2);
 
 void sub_8016434() {
@@ -1945,7 +1948,7 @@ static void shoot_egg(bool32 selectNextAvailableEgg) {
 void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown) {
     ASSERT(gPlayerState < PLAYER_STATE_COUNT);
 
-    dPlayerBehaviors[gPlayerState](keyPressed, keyDown);
+    sPlayerStateFuncs[gPlayerState](keyPressed, keyDown);
 }
 
 static void nullsub_16(s32 keyPressed, s32 keyDown) {
@@ -7533,3 +7536,39 @@ static void sub_8023D78(s32 keyPressed, s32 keyDown) {
 
 static void nullsub_7(s32 keyPressed, s32 keyDown) {
 }
+
+static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
+    Idle,        Jump,          Crouch,      sub_801C8A0, Walk,        sub_801CA7C, sub_801D810,
+    sub_801B08C, PackWackStart, sub_80207A8, sub_801B4C8, sub_801BC18, sub_801B814, ForwardRoll,
+    sub_801C36C, sub_801C124,   sub_801C744, sub_801C538, JumpFall,    LedgeFall,   sub_801BE04,
+    sub_801C188, sub_801C0FC,   sub_801C7A4, sub_801C7F4, sub_801C80C, sub_801CD74, sub_801CD8C,
+    PackWackEnd, sub_801D030,   sub_801BFEC, sub_801D048, sub_801D0AC, sub_8020EEC, sub_802112C,
+    nullsub_7,   sub_801D44C,   sub_801D614, sub_801D400, sub_801FC54, sub_801FF64, sub_80202F0,
+    sub_80204C4, sub_80206A8,   sub_801D188, sub_801D8EC, sub_801DD1C, sub_801E0F4, sub_801E1E4,
+    sub_801E384, sub_801E694,   sub_801E9B8, sub_801EB98, sub_801ED78, sub_801ED90, sub_801EDE4,
+    sub_801EE48, sub_801EEBC,   sub_801EF20, sub_801F028, sub_801F09C, sub_801F3C8, sub_801F68C,
+    sub_801F900, sub_801FB74,   sub_801FB8C, sub_801FC00, sub_80206C4, sub_8020738, sub_801E2B8,
+    sub_80207FC, sub_8020B74,   sub_8020E70, sub_8020E88, sub_8020EA0, sub_8021328, sub_80216B0,
+    sub_8021CF8, sub_8021D5C,   sub_8021D74, sub_8021E54, sub_8022118, sub_80223F0, sub_802271C,
+    sub_8022A4C, sub_8023200,   sub_80233F0, sub_80235E4, sub_80237D4, sub_80239C0, sub_8023A40,
+    sub_8023AB4, sub_8023B88,   sub_8023BEC, sub_8023C04, sub_8022E08, sub_8023188, sub_8023C94,
+    sub_8023D78, sub_801D1CC,   sub_801EFA4, nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,
+    nullsub_16,  nullsub_16,    nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,
+    nullsub_16,  nullsub_16,    nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,
+    nullsub_16,  nullsub_16,    nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,
+    nullsub_16,  nullsub_16,
+};
+
+static const u16 word_8065104[PLAYER_STATE_COUNT] = {
+    0x0001, 0x0410, 0x0001, 0x0040, 0x0000, 0x0200, 0x0280, 0x0420, 0x0002, 0x0004, 0x8000, 0x8410,
+    0x8001, 0x0000, 0x0410, 0x0410, 0x0410, 0x0410, 0x0410, 0x0420, 0x8410, 0x0410, 0x8420, 0x0000,
+    0x0410, 0x0000, 0x0000, 0x0201, 0x0002, 0x0408, 0x8408, 0x1000, 0x0800, 0x0414, 0x0414, 0x0001,
+    0x0410, 0x0410, 0x0000, 0x4001, 0x4000, 0x4410, 0x4410, 0x4420, 0x0800, 0x0100, 0x0100, 0x0100,
+    0x0100, 0x2000, 0x2001, 0x2410, 0x2410, 0x2420, 0x2000, 0x3000, 0x2408, 0x3000, 0x2000, 0x2408,
+    0x2000, 0x2001, 0x2410, 0x2410, 0x2420, 0x2410, 0x2410, 0x0000, 0x0000, 0x0508, 0x0004, 0x0005,
+    0x040c, 0x0424, 0x0004, 0x2000, 0x2001, 0x3000, 0x2420, 0x2408, 0x2001, 0x2201, 0x2000, 0x2200,
+    0x2100, 0x2410, 0x2410, 0x2410, 0x2410, 0x2408, 0x2408, 0x2508, 0x3000, 0x2420, 0x2280, 0x2100,
+    0x2100, 0x0004, 0x0004, 0x0800, 0x0420, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+};

@@ -500,8 +500,7 @@ struct struc_49 {
     u8 gap[12];
 };
 
-struct struc_50
-{
+struct struc_50 {
     int field_0;
     int field_4;
     int field_8;
@@ -715,8 +714,6 @@ extern s32 dword_80CEBC4;
 
 extern u32 Abs(u32); // return type is u32, can tell by the branch instruction
 
-extern void (*dPlayerBehaviors[1])(s32, s32);
-extern u16 word_8065104[128];
 extern u32 dword_80CC290[8];
 extern u32 dword_80AF4F0[4];
 extern struct Font font_80B01A8[3];
