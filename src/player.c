@@ -937,16 +937,16 @@ void sub_80181B8(fx32* height) {
         case PLAYER_STATE_SHOOTER_WALK:
         case PLAYER_STATE_SHOOTER_IDLE:
         case PLAYER_STATE_SHOOTER_HURT:
-        case PLAYER_STATE_73:
-        case PLAYER_STATE_74:
-            gPlayerState = PLAYER_STATE_73;
+        case PLAYER_STATE_SHOOTER_LEDGE_FALL:
+        case PLAYER_STATE_SHOOTER_END:
+            gPlayerState = PLAYER_STATE_SHOOTER_LEDGE_FALL;
             sub_800378C(&gPlayerSprite, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
             break;
 
         case PLAYER_STATE_CANDLE_ATTACK:
-            gPlayerState = PLAYER_STATE_100;
+            gPlayerState = PLAYER_STATE_CANDLE_ATTACK_LEDGE_FALL;
             break;
 
         case PLAYER_STATE_CANDLE_DIE:
@@ -1007,7 +1007,7 @@ void sub_80181B8(fx32* height) {
         case PLAYER_STATE_KAZOOIE_JUMP:
         case PLAYER_STATE_KAZOOIE_IDLE:
         case PLAYER_STATE_KAZOOIE_FALL:
-            gPlayerState = PLAYER_STATE_22;
+            gPlayerState = PLAYER_STATE_KAZOOIE_LEDGE_FALL;
             sub_8003368(&gPlayerSprite, 201, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             if (dword_20020B8 != -1) {
@@ -1030,7 +1030,7 @@ void sub_80181B8(fx32* height) {
             break;
 
         case PLAYER_STATE_FORWARD_ROLL:
-            gPlayerState = PLAYER_STATE_7;
+            gPlayerState = PLAYER_STATE_FORWARD_ROLL_LEDGE_FALL;
             sub_8016790(2, gPlayerSprite.field_A);
             break;
 
@@ -1266,7 +1266,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
 
         case PLAYER_STATE_KAZOOIE_JUMP:
         case PLAYER_STATE_KAZOOIE_FALL:
-        case PLAYER_STATE_22:
+        case PLAYER_STATE_KAZOOIE_LEDGE_FALL:
         case PLAYER_STATE_30:
             if (sub_80038AC(dword_2000FC8)) {
                 gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
@@ -1379,7 +1379,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
         case PLAYER_STATE_SHOOTER_JUMP:
         case PLAYER_STATE_SHOOTER_FALL:
         case PLAYER_STATE_SHOOTER_HURT:
-        case PLAYER_STATE_73:
+        case PLAYER_STATE_SHOOTER_LEDGE_FALL:
             sub_80037A0(&gPlayerSprite);
             if (sub_80038AC(dword_2000FC8)) {
                 gPlayerState = PLAYER_STATE_SHOOTER_WALK;
@@ -1392,12 +1392,12 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
             sub_8016790(0, gPlayerSprite.field_A);
             break;
 
-        case PLAYER_STATE_7:
+        case PLAYER_STATE_FORWARD_ROLL_LEDGE_FALL:
             gPlayerState = PLAYER_STATE_FORWARD_ROLL;
             sub_8016790(2, gPlayerSprite.field_A);
             break;
 
-        case PLAYER_STATE_100:
+        case PLAYER_STATE_CANDLE_ATTACK_LEDGE_FALL:
             gPlayerState = PLAYER_STATE_CANDLE_ATTACK;
             break;
 
@@ -2420,7 +2420,7 @@ static void state_forward_roll(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801B08C(s32 keyPressed, s32 keyDown) {
+static void state_forward_roll_ledge_fall(s32 keyPressed, s32 keyDown) {
     if (sub_8003770(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
@@ -3065,7 +3065,7 @@ static void sub_801BFEC(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801C0FC(s32 keyPressed, s32 keyDown) {
+static void state_kazooie_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -4802,7 +4802,7 @@ static void state_candle_attack(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801EFA4(s32 keyPressed, s32 keyDown) {
+static void state_candle_attack_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -5684,7 +5684,7 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
 
         case L_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_74;
+            gPlayerState = PLAYER_STATE_SHOOTER_END;
             sub_8003368(&gPlayerSprite, 529, 0, 1);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -5813,7 +5813,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
 
         case L_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_74;
+            gPlayerState = PLAYER_STATE_SHOOTER_END;
             sub_8003368(&gPlayerSprite, 529, 0, 1);
             sub_8016790(0, gPlayerSprite.field_A);
             return;
@@ -5902,11 +5902,11 @@ static void state_shooter_hurt(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_8020E88(s32 keyPressed, s32 keyDown) {
+static void state_shooter_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_8020EA0(s32 keyPressed, s32 keyDown) {
+static void state_shooter_end(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_800DE9C();
     gPreviousPlayerState = gPlayerState;
@@ -7545,7 +7545,7 @@ static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
     state_walk,
     state_swim,
     state_dive,
-    sub_801B08C,
+    state_forward_roll_ledge_fall,
     state_pack_wack_start,
     state_shooter_start,
     state_kazooie_walk,
@@ -7560,7 +7560,7 @@ static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
     state_ledge_fall,
     state_kazooie_fall,
     state_flap_flip_fall,
-    sub_801C0FC,
+    state_kazooie_ledge_fall,
     state_bill_drill_end,
     state_bill_drill_fall,
     state_bill_drill_hit,
@@ -7611,8 +7611,8 @@ static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
     state_shooter_walk,
     state_shooter_idle,
     state_shooter_hurt,
-    sub_8020E88,
-    sub_8020EA0,
+    state_shooter_ledge_fall,
+    state_shooter_end,
     state_tank_ride,
     state_tank_idle,
     state_tank_die,
@@ -7638,7 +7638,7 @@ static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
     sub_8023C94,
     sub_8023D78,
     sub_801D1CC,
-    sub_801EFA4,
+    state_candle_attack_ledge_fall,
     state_none,
     state_none,
     state_none,
