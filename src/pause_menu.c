@@ -302,7 +302,7 @@ void open_pause_menu() {
     sub_800EECC();
 
     if (!gIsSlideMiniGame) {
-        sub_801A2E4();
+        load_transformation_palette();
     }
 
     if (gLoadedRoomIndex == ROOM_DIVESPOT || gLoadedRoomIndex == ROOM_UNDERCORAL) {

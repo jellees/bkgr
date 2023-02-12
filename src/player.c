@@ -164,7 +164,7 @@ static bool32 sub_8016710(s32* keyPressed, s32* keyDown) {
         return FALSE;
     }
 
-    if ((*keyDown & 0x30F) == 1) {
+    if ((*keyDown & JOY_EXCL_DPAD) == A_BUTTON) {
         sub_8016B0C();
         PLAY_SFX(42);
         *keyPressed = 0;
@@ -531,7 +531,7 @@ static int sub_08016EE0() {
     return r7;
 }
 
-static void DoPackWack() {
+static void do_pack_wack() {
     if (gUnlockedMoves[MOVE_PACK_WACK]) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_PACK_WACK_START;
@@ -541,7 +541,7 @@ static void DoPackWack() {
     }
 }
 
-static void DoJump() {
+static void do_jump() {
     if (!byte_3003588 && gFloorPlaneResult.isColliding && gFloorPlaneResult.floorType == 0xA) {
         return;
     }
@@ -560,7 +560,7 @@ static void DoJump() {
     }
 }
 
-static void sub_801738C() {
+static void do_shooter_jump() {
     if (!byte_3003588 && gFloorPlaneResult.isColliding && gFloorPlaneResult.floorType == 0xA) {
         return;
     }
@@ -578,7 +578,7 @@ static void sub_801738C() {
     }
 }
 
-static void sub_8017480() {
+static void do_kazooie_jump() {
     if (!gFloorPlaneResult.isColliding && !dword_203DFC4) {
         return;
     }
@@ -621,7 +621,7 @@ static void sub_801756C() {
     }
 }
 
-static void sub_8017664() {
+static void do_mouse_jump() {
     if (!byte_3003588 && gFloorPlaneResult.isColliding && gFloorPlaneResult.floorType == 0xA) {
         return;
     }
@@ -639,7 +639,7 @@ static void sub_8017664() {
     }
 }
 
-static void sub_8017744() {
+static void do_candle_jump() {
     if (!byte_3003588 && gFloorPlaneResult.isColliding && gFloorPlaneResult.floorType == 0xA) {
         return;
     }
@@ -657,7 +657,7 @@ static void sub_8017744() {
     }
 }
 
-static void sub_8017824() {
+static void do_octopus_jump() {
     if (!byte_3003588 && gFloorPlaneResult.isColliding && gFloorPlaneResult.floorType == 0xA) {
         return;
     }
@@ -684,8 +684,8 @@ static void sub_8017824() {
     }
 }
 
-static void sub_8017958() {
-    if (!gUnlockedMoves[MOVE_21] && gTransformation != TRANSFORMATION_OCTOPUS) {
+static void do_dive() {
+    if (!gUnlockedMoves[MOVE_DIVE] && gTransformation != TRANSFORMATION_OCTOPUS) {
         return;
     }
 
@@ -698,11 +698,11 @@ static void sub_8017958() {
 
     if (gTransformation != TRANSFORMATION_OCTOPUS) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_6;
+        gPlayerState = PLAYER_STATE_DIVE;
         sub_8003368(&gPlayerSprite, 113, 0, 1);
     } else {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_94;
+        gPlayerState = PLAYER_STATE_OCTOPUS_DIVE;
         sub_8003368(&gPlayerSprite, 489, 0, 1);
     }
 
@@ -739,7 +739,7 @@ void sub_8017B34(int a1) {
             word_20010AC = gKeysPressed & KEYS_MASK;
         }
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_45;
+        gPlayerState = PLAYER_STATE_DIVE_SINK;
         sub_8003368(&gPlayerSprite, 57, 0, 0);
         gPlayerShadowSprite.field_13 = 0;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
@@ -755,7 +755,7 @@ void sub_8017B34(int a1) {
             word_20010AC = gKeysPressed & KEYS_MASK;
         }
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_84;
+        gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SINK;
         sub_8003368(&gPlayerSprite, 457, 0, 0);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
     }
@@ -870,7 +870,7 @@ void sub_8017F14() {
     }
 }
 
-static void DoFeatheryFlap() {
+static void do_feathery_flap() {
     if (gUnlockedMoves[MOVE_FEATHERY_FLAP] && !byte_20021C7 && gGameStatus.health != 0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_FEATHERY_FLAP;
@@ -882,7 +882,7 @@ static void DoFeatheryFlap() {
     }
 }
 
-static void DoAirAttack() {
+static void do_air_attack() {
     if (gUnlockedMoves[MOVE_AIR_ATTACK] && !byte_20021C6 && gGameStatus.health != 0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_AIR_ATTACK;
@@ -895,7 +895,7 @@ static void DoAirAttack() {
     }
 }
 
-static void DoBillDrill() {
+static void do_bill_drill() {
     if (gUnlockedMoves[MOVE_DRILL_BILL] && !byte_20021C5 && gGameStatus.health) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_BILL_DRILL_START;
@@ -1047,7 +1047,7 @@ void sub_80181B8(fx32* height) {
     CallARM_store_jump_value(dword_2000FC8, 0);
 }
 
-static void sub_8018544() {
+static void do_candle_attack() {
     if (gUnlockedMoves[MOVE_CANDLE_ATTACK]) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_CANDLE_ATTACK;
@@ -1058,14 +1058,14 @@ static void sub_8018544() {
     }
 }
 
-static void sub_80185FC() {
+static void shoot_tank_projectile() {
     if (byte_203DFD4 != byte_203DFD5 && sub_8030A88() == 0) {
         sub_0802D0A0(5, &gPlayerPos, stru_3002950.playerSpritePriority);
         PLAY_SFX(187);
     }
 }
 
-static void sub_8018678() {
+static void shoot_octopus_projectile() {
     if (byte_203DFD4 != byte_203DFD5 && sub_8030A88() <= 1) {
         sub_0802D0A0(6, &gPlayerPos, stru_3002950.playerSpritePriority);
         PLAY_SFX(184);
@@ -1141,7 +1141,7 @@ static void sub_08018824() {
             sub_8016790(5, gPlayerSprite.field_A);
         } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x100) != 0) {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_45;
+            gPlayerState = PLAYER_STATE_DIVE_SINK;
             sub_8003368(&gPlayerSprite, 57, 0, 0);
             sub_8016790(21, gPlayerSprite.field_A);
         } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x1000) != 0) {
@@ -1312,8 +1312,8 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
             sub_8016790(0, gPlayerSprite.field_A);
             break;
 
-        case PLAYER_STATE_91:
-            gPlayerState = PLAYER_STATE_84;
+        case PLAYER_STATE_OCTOPUS_DIVE_HURT:
+            gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SINK;
             sub_8003368(&gPlayerSprite, 457, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -1457,7 +1457,7 @@ void sub_80192D4(int a1, int a2, int a3) {
         switch (a3) {
             case 2:
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = PLAYER_STATE_69;
+                gPlayerState = PLAYER_STATE_DIVE_HURT;
                 if (a2 >= 0) {
                     gPlayerSprite.field_A = (a2 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a2], 0);
@@ -1470,7 +1470,7 @@ void sub_80192D4(int a1, int a2, int a3) {
 
             case 1:
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = PLAYER_STATE_69;
+                gPlayerState = PLAYER_STATE_DIVE_HURT;
                 sub_8003368(&gPlayerSprite, 537, 0, 1);
                 break;
 
@@ -1611,7 +1611,7 @@ void sub_801990C() {
         sub_08019AAC(-1, 2);
     } else if ((gPlayerStateSettings[gPlayerState] & 0x100) != 0) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_69;
+        gPlayerState = PLAYER_STATE_DIVE_HURT;
         sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[(gPlayerSprite.field_A + 4) & 7], 0);
         sub_8003368(&gPlayerSprite, 537, 0, 1);
         sub_8016790(0, gPlayerSprite.field_A);
@@ -1742,7 +1742,7 @@ static void sub_08019AAC(int a1, int a2) {
             switch (a2) {
                 case 2:
                     gPreviousPlayerState = gPlayerState;
-                    gPlayerState = PLAYER_STATE_91;
+                    gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_HURT;
                     if (a1 >= 0) {
                         gPlayerSprite.field_A = (a1 + 4) & 7;
                         sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a1], 0);
@@ -1755,7 +1755,7 @@ static void sub_08019AAC(int a1, int a2) {
 
                 case 1:
                     gPreviousPlayerState = gPlayerState;
-                    gPlayerState = PLAYER_STATE_91;
+                    gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_HURT;
                     break;
 
                 case 0:
@@ -1888,7 +1888,7 @@ void sub_08019FCC(u32 transformation) {
     gTransformation = transformation;
 }
 
-void sub_801A2E4() {
+void load_transformation_palette() {
     if (gTransformation == TRANSFORMATION_MOUSE) {
         DmaTransferObjPalette(&unk_83FD734, 7, 7);
     } else if (gTransformation == TRANSFORMATION_CANDLE) {
@@ -1945,30 +1945,30 @@ static void shoot_egg(bool32 selectNextAvailableEgg) {
     PLAY_SFX(24);
 }
 
-void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown) {
+void update_player_state_machine(s32 keyPressed, s32 keyDown) {
     ASSERT(gPlayerState < PLAYER_STATE_COUNT);
 
     sPlayerStateFuncs[gPlayerState](keyPressed, keyDown);
 }
 
-static void nullsub_16(s32 keyPressed, s32 keyDown) {
+static void state_none(s32 keyPressed, s32 keyDown) {
 }
 
-static void Jump(s32 keyPressed, s32 keyDown) {
+static void state_jump(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            DoFeatheryFlap();
+            do_feathery_flap();
             return;
 
         case B_BUTTON:
-            DoAirAttack();
+            do_air_attack();
             return;
 
         case L_BUTTON:
-            DoBillDrill();
+            do_bill_drill();
             return;
     }
 
@@ -2051,20 +2051,20 @@ static void Jump(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void JumpFall(s32 keyPressed, s32 keyDown) {
+static void state_jump_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            DoFeatheryFlap();
+            do_feathery_flap();
             return;
 
         case B_BUTTON:
-            DoAirAttack();
+            do_air_attack();
             return;
 
         case L_BUTTON:
-            DoBillDrill();
+            do_bill_drill();
             return;
     }
 
@@ -2141,25 +2141,25 @@ static void JumpFall(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void LedgeFall(s32 keyPressed, s32 keyDown) {
+static void state_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            DoFeatheryFlap();
+            do_feathery_flap();
             return;
 
         case B_BUTTON:
-            DoAirAttack();
+            do_air_attack();
             return;
 
         case L_BUTTON:
-            DoBillDrill();
+            do_bill_drill();
             return;
     }
 }
 
-static void Idle(s32 keyPressed, s32 keyDown) {
+static void state_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -2181,11 +2181,11 @@ static void Idle(s32 keyPressed, s32 keyDown) {
             if (sub_08016EE0()) {
                 return;
             }
-            DoJump();
+            do_jump();
             return;
 
         case B_BUTTON:
-            DoPackWack();
+            do_pack_wack();
             return;
     }
 
@@ -2264,14 +2264,14 @@ static void Idle(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void Walk(s32 keyPressed, s32 keyDown) {
+static void state_walk(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
             if (sub_08016EE0())
                 return;
-            DoJump();
+            do_jump();
             return;
 
         case B_BUTTON:
@@ -2283,7 +2283,7 @@ static void Walk(s32 keyPressed, s32 keyDown) {
                 PLAY_SFX(7);
                 sub_8016790(2, gPlayerSprite.field_A);
             } else {
-                DoPackWack();
+                do_pack_wack();
             }
             return;
 
@@ -2398,13 +2398,13 @@ static void Walk(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void ForwardRoll(s32 keyPressed, s32 keyDown) {
+static void state_forward_roll(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
             if (!sub_08016EE0())
-                DoJump();
+                do_jump();
             break;
 
         default:
@@ -2431,7 +2431,7 @@ static void sub_801B08C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void PackWackStart(s32 keyPressed, s32 keyDown) {
+static void state_pack_wack_start(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -2445,7 +2445,7 @@ static void PackWackStart(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void PackWackEnd(s32 keyPressed, s32 keyDown) {
+static void state_pack_wack_hit(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -2456,7 +2456,7 @@ static void PackWackEnd(s32 keyPressed, s32 keyDown) {
     }
 }
 
-void Crouch(s32 keyPressed, s32 keyDown) {
+static void state_crouch(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (!sub_8003770(&gPlayerSprite))
@@ -2584,7 +2584,7 @@ void Crouch(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801B4C8(s32 keyPressed, s32 keyDown) {
+static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (!sub_80037A8(&gPlayerSprite))
@@ -2593,7 +2593,7 @@ static void sub_801B4C8(s32 keyPressed, s32 keyDown) {
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
             if (!sub_08016EE0())
-                sub_8017480();
+                do_kazooie_jump();
             return;
 
         case L_BUTTON:
@@ -2712,7 +2712,7 @@ static void sub_801B4C8(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801B814(s32 keyPressed, s32 keyDown) {
+static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (!sub_80037A8(&gPlayerSprite))
@@ -2725,7 +2725,7 @@ static void sub_801B814(s32 keyPressed, s32 keyDown) {
                 return;
             }
             if (!sub_08016EE0()) {
-                sub_8017480();
+                do_kazooie_jump();
             }
             return;
 
@@ -2863,13 +2863,13 @@ static void sub_801B814(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801BC18(s32 keyPressed, s32 keyDown) {
+static void state_kazooie_jump(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            DoAirAttack();
+            do_air_attack();
             return;
     }
 
@@ -2952,12 +2952,12 @@ static void sub_801BC18(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801BE04(s32 keyPressed, s32 keyDown) {
+static void state_kazooie_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            DoAirAttack();
+            do_air_attack();
             return;
     }
 
@@ -3070,17 +3070,17 @@ static void sub_801C0FC(s32 keyPressed, s32 keyDown) {
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            DoAirAttack();
+            do_air_attack();
             return;
     }
 }
 
-static void sub_801C124(s32 keyPressed, s32 keyDown) {
+static void state_flap_flip(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case L_BUTTON:
-            DoBillDrill();
+            do_bill_drill();
             return;
     }
 
@@ -3091,12 +3091,12 @@ static void sub_801C124(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801C188(s32 keyPressed, s32 keyDown) {
+static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case L_BUTTON:
-            DoBillDrill();
+            do_bill_drill();
             return;
     }
 
@@ -3167,7 +3167,7 @@ static void sub_801C188(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801C36C(s32 keyPressed, s32 keyDown) {
+static void state_feathery_flap(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -3177,7 +3177,7 @@ static void sub_801C36C(s32 keyPressed, s32 keyDown) {
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case L_BUTTON:
-            DoBillDrill();
+            do_bill_drill();
             return;
     }
 
@@ -3248,7 +3248,7 @@ static void sub_801C36C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801C538(s32 keyPressed, s32 keyDown) {
+static void state_air_attack(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (!audio_fx_still_active(dword_20021D0)) {
@@ -3258,12 +3258,12 @@ static void sub_801C538(s32 keyPressed, s32 keyDown) {
                 dword_20021D0 = PLAY_SFX_PITCH(29, 0x10000);
                 break;
 
-            case A_BUTTON:
+            case 1:
                 byte_20021C8 = 2;
                 dword_20021D0 = PLAY_SFX_PITCH(29, 0x12000);
                 break;
 
-            case B_BUTTON:
+            case 2:
                 if (sub_8003770(&gPlayerSprite)) {
                     if (audio_fx_still_active(dword_20021D0)) {
                         if (gCanPlaySfx) {
@@ -3344,7 +3344,7 @@ static void sub_801C538(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801C744(s32 keyPressed, s32 keyDown) {
+static void state_bill_drill_start(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -3356,7 +3356,7 @@ static void sub_801C744(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801C7A4(s32 keyPressed, s32 keyDown) {
+static void state_bill_drill_end(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -3367,11 +3367,11 @@ static void sub_801C7A4(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801C7F4(s32 keyPressed, s32 keyDown) {
+static void state_bill_drill_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_801C80C(s32 keyPressed, s32 keyDown) {
+static void state_bill_drill_hit(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite) && word_2002EC2 == word_2002EC0) {
@@ -3391,12 +3391,12 @@ static void sub_801C80C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801C8A0(s32 keyPressed, s32 keyDown) {
+static void state_climb(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            DoJump();
+            do_jump();
             return;
     }
 
@@ -3471,16 +3471,16 @@ static void sub_801C8A0(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801CA7C(s32 keyPressed, s32 keyDown) {
+static void state_swim(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            DoJump();
+            do_jump();
             return;
 
         case R_BUTTON:
-            sub_8017958();
+            do_dive();
             return;
     }
 
@@ -3578,7 +3578,7 @@ static void sub_801CD74(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_801CD8C(s32 keyPressed, s32 keyDown) {
+static void state_swim_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -3586,12 +3586,12 @@ static void sub_801CD8C(s32 keyPressed, s32 keyDown) {
             if (gInInteractionArea) {
                 sub_80186F4(0);
             } else {
-                DoJump();
+                do_jump();
             }
             return;
 
         case R_BUTTON:
-            sub_8017958();
+            do_dive();
             return;
     }
 
@@ -3670,11 +3670,11 @@ static void sub_801CD8C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801D030(s32 keyPressed, s32 keyDown) {
+static void state_hurt(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_801D048(s32 keyPressed, s32 keyDown) {
+static void state_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
         if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
             sub_80629E8();
@@ -3686,7 +3686,7 @@ static void sub_801D048(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801D0AC(s32 keyPressed, s32 keyDown) {
+static void state_dialogue(s32 keyPressed, s32 keyDown) {
     if (!byte_20021C9) {
         byte_20021C9 = sub_0802E080();
         if (byte_20021C9) {
@@ -3745,7 +3745,7 @@ static void sub_801D0AC(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801D188(s32 keyPressed, s32 keyDown) {
+static void state_dialogue_end(s32 keyPressed, s32 keyDown) {
     if (byte_20021CA) {
         if (dword_2001470) {
             return;
@@ -3924,15 +3924,15 @@ static void sub_801D614(s32 keyPressed, s32 keyDown) {
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            DoFeatheryFlap();
+            do_feathery_flap();
             return;
 
         case B_BUTTON:
-            DoAirAttack();
+            do_air_attack();
             return;
 
         case L_BUTTON:
-            DoBillDrill();
+            do_bill_drill();
             return;
     }
 
@@ -4003,7 +4003,7 @@ static void sub_801D614(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801D810(s32 keyPressed, s32 keyDown) {
+static void state_dive(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -4011,11 +4011,11 @@ static void sub_801D810(s32 keyPressed, s32 keyDown) {
 
         if (byte_20010A4) {
             gPlayerSprite.field_A = byte_20010A5;
-            word_20010AC = gKeysPressed & 0x3FF;
+            word_20010AC = gKeysPressed & KEYS_MASK;
         }
 
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_45;
+        gPlayerState = PLAYER_STATE_DIVE_SINK;
         sub_8003368(&gPlayerSprite, 57, 0, 0);
         gPlayerShadowSprite.field_13 = 0;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 12544);
@@ -4029,7 +4029,7 @@ static void sub_801D810(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801D8EC(s32 keyPressed, s32 keyDown) {
+static void state_dive_sink(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (gPlayerPos.y == gPlayerShadowPos.y) {
@@ -4038,14 +4038,14 @@ static void sub_801D8EC(s32 keyPressed, s32 keyDown) {
 
     if ((keyPressed & JOY_EXCL_DPAD) == A_BUTTON && !byte_30029F8) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_46;
+        gPlayerState = PLAYER_STATE_DIVE_RISE;
         CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(1.5), 0);
         return;
     }
 
     if ((keyDown & JOY_EXCL_DPAD) == R_BUTTON) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_48;
+        gPlayerState = PLAYER_STATE_DIVE_SURFACE;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(2), 0x4000);
         return;
@@ -4058,7 +4058,7 @@ static void sub_801D8EC(s32 keyPressed, s32 keyDown) {
 
         if (!gGameStatus.field_16) {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_48;
+            gPlayerState = PLAYER_STATE_DIVE_SURFACE;
             sub_8003368(&gPlayerSprite, 65, 0, 1);
             CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(2), 0x4000);
             return;
@@ -4162,7 +4162,7 @@ static void sub_801D8EC(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801DD1C(s32 keyPressed, s32 keyDown) {
+static void state_dive_rise(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (gGameStatus.field_16) {
@@ -4177,7 +4177,7 @@ static void sub_801DD1C(s32 keyPressed, s32 keyDown) {
         }
     } else {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_48;
+        gPlayerState = PLAYER_STATE_DIVE_SURFACE;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
@@ -4185,7 +4185,7 @@ static void sub_801DD1C(s32 keyPressed, s32 keyDown) {
 
     if ((keyDown & JOY_EXCL_DPAD) == R_BUTTON) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_48;
+        gPlayerState = PLAYER_STATE_DIVE_SURFACE;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
@@ -4194,7 +4194,7 @@ static void sub_801DD1C(s32 keyPressed, s32 keyDown) {
     if ((keyPressed & JOY_EXCL_DPAD) != A_BUTTON) {
         if (sub_80038BC(dword_2000FC8)) {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_45;
+            gPlayerState = PLAYER_STATE_DIVE_SINK;
             CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
             return;
         }
@@ -4294,7 +4294,7 @@ static void sub_801E0F4(s32 keyPressed, s32 keyDown) {
 
     if (!gGameStatus.field_16) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_48;
+        gPlayerState = PLAYER_STATE_DIVE_SURFACE;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
@@ -4310,14 +4310,14 @@ static void sub_801E0F4(s32 keyPressed, s32 keyDown) {
         word_2002098--;
     }
 
-    if (!(keyPressed & 2)) {
+    if (!(keyPressed & B_BUTTON)) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_45;
+        gPlayerState = PLAYER_STATE_DIVE_SINK;
         sub_800387C(dword_2000FC8);
     }
 }
 
-static void sub_801E1E4(s32 keyPressed, s32 keyDown) {
+static void state_dive_surface(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -4335,13 +4335,13 @@ static void sub_801E1E4(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801E2B8(s32 keyPressed, s32 keyDown) {
+static void state_dive_hurt(s32 keyPressed, s32 keyDown) {
     if (sub_8003770(&gPlayerSprite)) {
         if (gGameStatus.health == 0) {
             if (byte_2001370) {
                 restore_full_health();
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = PLAYER_STATE_45;
+                gPlayerState = PLAYER_STATE_DIVE_SINK;
                 sub_8003368(&gPlayerSprite, 57, 0, 0);
                 sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
                 sub_8016790(0, gPlayerSprite.field_A);
@@ -4350,7 +4350,7 @@ static void sub_801E2B8(s32 keyPressed, s32 keyDown) {
             }
         } else {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_45;
+            gPlayerState = PLAYER_STATE_DIVE_SINK;
             sub_8003368(&gPlayerSprite, 57, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -4358,12 +4358,12 @@ static void sub_801E2B8(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801E384(s32 keyPressed, s32 keyDown) {
+static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            sub_8017664();
+            do_mouse_jump();
             return;
     }
 
@@ -4482,7 +4482,7 @@ static void sub_801E384(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801E694(s32 keyPressed, s32 keyDown) {
+static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -4490,7 +4490,7 @@ static void sub_801E694(s32 keyPressed, s32 keyDown) {
             if (gInInteractionArea) {
                 sub_80186F4(0);
             } else {
-                sub_8017664();
+                do_mouse_jump();
             }
             return;
 
@@ -4578,7 +4578,7 @@ static void sub_801E694(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801E9B8(s32 keyPressed, s32 keyDown) {
+static void state_mouse_jump(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
@@ -4661,7 +4661,7 @@ static void sub_801E9B8(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801EB98(s32 keyPressed, s32 keyDown) {
+static void state_mouse_jump_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
@@ -4738,11 +4738,11 @@ static void sub_801EB98(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801ED78(s32 keyPressed, s32 keyDown) {
+static void state_mouse_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_801ED90(s32 keyPressed, s32 keyDown) {
+static void state_mouse_mouse_nibble(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -4753,7 +4753,7 @@ static void sub_801ED90(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801EDE4(s32 keyPressed, s32 keyDown) {
+static void state_mouse_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
         if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
             sub_80629E8();
@@ -4765,7 +4765,7 @@ static void sub_801EDE4(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801EE48(s32 keyPressed, s32 keyDown) {
+static void state_mouse_hurt(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -4777,7 +4777,7 @@ static void sub_801EE48(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801EEBC(s32 keyPressed, s32 keyDown) {
+static void state_candle_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
         if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
             sub_80629E8();
@@ -4789,7 +4789,7 @@ static void sub_801EEBC(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801EF20(s32 keyPressed, s32 keyDown) {
+static void state_candle_attack(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -4815,7 +4815,7 @@ static void sub_801EFA4(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801F028(s32 keyPressed, s32 keyDown) {
+static void state_candle_hurt(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -4827,16 +4827,16 @@ static void sub_801F028(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801F09C(s32 keyPressed, s32 keyDown) {
+static void state_candle_walk(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            sub_8017744();
+            do_candle_jump();
             return;
 
         case B_BUTTON:
-            sub_8018544();
+            do_candle_attack();
             return;
     }
 
@@ -4939,7 +4939,7 @@ static void sub_801F09C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801F3C8(s32 keyPressed, s32 keyDown) {
+static void state_candle_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -4947,12 +4947,12 @@ static void sub_801F3C8(s32 keyPressed, s32 keyDown) {
             if (gInInteractionArea) {
                 sub_80186F4(0);
             } else {
-                sub_8017744();
+                do_candle_jump();
             }
             return;
 
         case B_BUTTON:
-            sub_8018544();
+            do_candle_attack();
             return;
     }
 
@@ -5031,7 +5031,7 @@ static void sub_801F3C8(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801F68C(s32 keyPressed, s32 keyDown) {
+static void state_candle_jump(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
@@ -5124,7 +5124,7 @@ static void sub_801F68C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801F900(s32 keyPressed, s32 keyDown) {
+static void state_candle_jump_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
@@ -5211,11 +5211,11 @@ static void sub_801F900(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801FB74(s32 keyPressed, s32 keyDown) {
+static void state_candle_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_801FB8C(s32 keyPressed, s32 keyDown) {
+static void state_candle_jump_attack_start(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_80038BC(dword_2000FC8)) {
@@ -5231,7 +5231,7 @@ static void sub_801FB8C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_801FC00(s32 keyPressed, s32 keyDown) {
+static void state_candle_jump_attack_end(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -5657,7 +5657,7 @@ static void sub_8020738(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_80207A8(s32 keyPressed, s32 keyDown) {
+static void state_shooter_start(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -5668,13 +5668,13 @@ static void sub_80207A8(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_80207FC(s32 keyPressed, s32 keyDown) {
+static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
             if (!sub_08016EE0()) {
-                sub_801738C();
+                do_shooter_jump();
             }
             return;
 
@@ -5794,7 +5794,7 @@ static void sub_80207FC(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8020B74(s32 keyPressed, s32 keyDown) {
+static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -5803,7 +5803,7 @@ static void sub_8020B74(s32 keyPressed, s32 keyDown) {
                 sub_800DE9C();
                 sub_80186F4(0);
             } else if (!sub_08016EE0()) {
-                sub_801738C();
+                do_shooter_jump();
             }
             return;
 
@@ -5898,7 +5898,7 @@ static void sub_8020B74(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8020E70(s32 keyPressed, s32 keyDown) {
+static void state_shooter_hurt(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
@@ -5915,7 +5915,7 @@ static void sub_8020EA0(s32 keyPressed, s32 keyDown) {
     sub_8016790(0, gPlayerSprite.field_A);
 }
 
-static void sub_8020EEC(s32 keyPressed, s32 keyDown) {
+static void state_shooter_jump(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
@@ -6008,7 +6008,7 @@ static void sub_8020EEC(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_802112C(s32 keyPressed, s32 keyDown) {
+static void state_shooter_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -6094,12 +6094,12 @@ static void sub_802112C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8021328(s32 keyPressed, s32 keyDown) {
+static void state_tank_ride(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_80185FC();
+            shoot_tank_projectile();
             return;
     }
 
@@ -6208,7 +6208,7 @@ static void sub_8021328(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_80216B0(s32 keyPressed, s32 keyDown) {
+static void state_tank_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -6224,7 +6224,7 @@ static void sub_80216B0(s32 keyPressed, s32 keyDown) {
             return;
 
         case B_BUTTON:
-            sub_80185FC();
+            shoot_tank_projectile();
             return;
     }
 
@@ -6357,7 +6357,7 @@ static void sub_80216B0(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8021CF8(s32 keyPressed, s32 keyDown) {
+static void state_tank_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
         if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
             sub_80629E8();
@@ -6369,11 +6369,11 @@ static void sub_8021CF8(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8021D5C(s32 keyPressed, s32 keyDown) {
+static void state_tank_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_8021D74(s32 keyPressed, s32 keyDown) {
+static void state_tank_hurt(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -6391,7 +6391,7 @@ static void sub_8021D74(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8021E54(s32 keyPressed, s32 keyDown) {
+static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -6399,12 +6399,12 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
             if (gInInteractionArea) {
                 sub_80186F4(0);
             } else {
-                sub_8017824();
+                do_octopus_jump();
             }
             return;
 
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             return;
     }
 
@@ -6483,7 +6483,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8022118(s32 keyPressed, s32 keyDown) {
+static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -6491,16 +6491,16 @@ static void sub_8022118(s32 keyPressed, s32 keyDown) {
             if (gInInteractionArea) {
                 sub_80186F4(0);
             } else {
-                sub_8017824();
+                do_octopus_jump();
             }
             return;
 
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             return;
 
         case R_BUTTON:
-            sub_8017958();
+            do_dive();
             return;
     }
 
@@ -6579,16 +6579,16 @@ static void sub_8022118(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_80223F0(s32 keyPressed, s32 keyDown) {
+static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            sub_8017824();
+            do_octopus_jump();
             return;
 
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             return;
     }
 
@@ -6691,20 +6691,20 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_802271C(s32 keyPressed, s32 keyDown) {
+static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            sub_8017824();
+            do_octopus_jump();
             return;
 
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             return;
 
         case R_BUTTON:
-            sub_8017958();
+            do_dive();
             return;
     }
 
@@ -6798,7 +6798,7 @@ static void sub_802271C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8022A4C(s32 keyPressed, s32 keyDown) {
+static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
     fx32 x, y, z;
 
     sub_8016710(&keyPressed, &keyDown);
@@ -6809,7 +6809,7 @@ static void sub_8022A4C(s32 keyPressed, s32 keyDown) {
 
     if ((keyPressed & JOY_EXCL_DPAD) == 1 && !byte_30029F8) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_95;
+        gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_RISE;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x18000, 0);
         return;
     }
@@ -6823,12 +6823,12 @@ static void sub_8022A4C(s32 keyPressed, s32 keyDown) {
             break;
 
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             return;
 
         case R_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_96;
+            gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SURFACE;
             sub_8003368(&gPlayerSprite, 457, 0, 1);
             CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
             return;
@@ -6921,17 +6921,17 @@ static void sub_8022A4C(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8022E08(s32 keyPressed, s32 keyDown) {
+static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             return;
 
         case R_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_96;
+            gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SURFACE;
             sub_8003368(&gPlayerSprite, 457, 0, 1);
             CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
             return;
@@ -6939,7 +6939,7 @@ static void sub_8022E08(s32 keyPressed, s32 keyDown) {
 
     if ((keyPressed & JOY_EXCL_DPAD) != A_BUTTON) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_84;
+        gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SINK;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
         return;
     }
@@ -7035,7 +7035,7 @@ static void sub_8022E08(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8023188(s32 keyPressed, s32 keyDown) {
+static void state_octopus_dive_surface(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite)) {
@@ -7047,13 +7047,13 @@ static void sub_8023188(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8023200(s32 keyPressed, s32 keyDown) {
+static void state_octopus_jump(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             break;
     }
 
@@ -7136,13 +7136,13 @@ static void sub_8023200(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_80233F0(s32 keyPressed, s32 keyDown) {
+static void state_octopus_jump_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             break;
     }
 
@@ -7219,12 +7219,12 @@ static void sub_80233F0(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_80235E4(s32 keyPressed, s32 keyDown) {
+static void state_octopus_water_jump(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             break;
     }
 
@@ -7308,12 +7308,12 @@ static void sub_80235E4(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_80237D4(s32 keyPressed, s32 keyDown) {
+static void state_octopus_water_jump_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_8018678();
+            shoot_octopus_projectile();
             break;
     }
 
@@ -7390,7 +7390,7 @@ static void sub_80237D4(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_80239C0(s32 keyPressed, s32 keyDown) {
+static void state_octopus_hurt(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
     if (sub_8003770(&gPlayerSprite) && gGameStatus.health) {
@@ -7414,13 +7414,13 @@ static void sub_8023A40(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8023AB4(s32 keyPressed, s32 keyDown) {
+static void state_octopus_dive_hurt(s32 keyPressed, s32 keyDown) {
     if (sub_8003770(&gPlayerSprite)) {
         if (gGameStatus.health == 0) {
             if (byte_2001370) {
                 restore_full_health();
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = PLAYER_STATE_84;
+                gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SINK;
                 sub_8003368(&gPlayerSprite, 457, 0, 0);
                 sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
                 sub_8016790(0, gPlayerSprite.field_A);
@@ -7429,7 +7429,7 @@ static void sub_8023AB4(s32 keyPressed, s32 keyDown) {
             }
         } else {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_84;
+            gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SINK;
             sub_8003368(&gPlayerSprite, 457, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -7449,11 +7449,11 @@ static void sub_8023B88(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void sub_8023BEC(s32 keyPressed, s32 keyDown) {
+static void state_octopus_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 }
 
-static void sub_8023C04(s32 keyPressed, s32 keyDown) {
+static void state_octopus_dive(s32 keyPressed, s32 keyDown) {
     if (sub_8003770(&gPlayerSprite)) {
         sub_0800C388(dword_20021E8, dword_20021EC);
         if (byte_20010A4) {
@@ -7461,7 +7461,7 @@ static void sub_8023C04(s32 keyPressed, s32 keyDown) {
             word_20010AC = gKeysPressed & 0x3FF;
         }
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_84;
+        gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SINK;
         sub_8003368(&gPlayerSprite, 457, 0, 0);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 12544);
     }
@@ -7534,29 +7534,138 @@ static void sub_8023D78(s32 keyPressed, s32 keyDown) {
     }
 }
 
-static void nullsub_7(s32 keyPressed, s32 keyDown) {
+static void state_35(s32 keyPressed, s32 keyDown) {
 }
 
 static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
-    Idle,        Jump,          Crouch,      sub_801C8A0, Walk,        sub_801CA7C, sub_801D810,
-    sub_801B08C, PackWackStart, sub_80207A8, sub_801B4C8, sub_801BC18, sub_801B814, ForwardRoll,
-    sub_801C36C, sub_801C124,   sub_801C744, sub_801C538, JumpFall,    LedgeFall,   sub_801BE04,
-    sub_801C188, sub_801C0FC,   sub_801C7A4, sub_801C7F4, sub_801C80C, sub_801CD74, sub_801CD8C,
-    PackWackEnd, sub_801D030,   sub_801BFEC, sub_801D048, sub_801D0AC, sub_8020EEC, sub_802112C,
-    nullsub_7,   sub_801D44C,   sub_801D614, sub_801D400, sub_801FC54, sub_801FF64, sub_80202F0,
-    sub_80204C4, sub_80206A8,   sub_801D188, sub_801D8EC, sub_801DD1C, sub_801E0F4, sub_801E1E4,
-    sub_801E384, sub_801E694,   sub_801E9B8, sub_801EB98, sub_801ED78, sub_801ED90, sub_801EDE4,
-    sub_801EE48, sub_801EEBC,   sub_801EF20, sub_801F028, sub_801F09C, sub_801F3C8, sub_801F68C,
-    sub_801F900, sub_801FB74,   sub_801FB8C, sub_801FC00, sub_80206C4, sub_8020738, sub_801E2B8,
-    sub_80207FC, sub_8020B74,   sub_8020E70, sub_8020E88, sub_8020EA0, sub_8021328, sub_80216B0,
-    sub_8021CF8, sub_8021D5C,   sub_8021D74, sub_8021E54, sub_8022118, sub_80223F0, sub_802271C,
-    sub_8022A4C, sub_8023200,   sub_80233F0, sub_80235E4, sub_80237D4, sub_80239C0, sub_8023A40,
-    sub_8023AB4, sub_8023B88,   sub_8023BEC, sub_8023C04, sub_8022E08, sub_8023188, sub_8023C94,
-    sub_8023D78, sub_801D1CC,   sub_801EFA4, nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,
-    nullsub_16,  nullsub_16,    nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,
-    nullsub_16,  nullsub_16,    nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,
-    nullsub_16,  nullsub_16,    nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,  nullsub_16,
-    nullsub_16,  nullsub_16,
+    state_idle,
+    state_jump,
+    state_crouch,
+    state_climb,
+    state_walk,
+    state_swim,
+    state_dive,
+    sub_801B08C,
+    state_pack_wack_start,
+    state_shooter_start,
+    state_kazooie_walk,
+    state_kazooie_jump,
+    state_kazooie_idle,
+    state_forward_roll,
+    state_feathery_flap,
+    state_flap_flip,
+    state_bill_drill_start,
+    state_air_attack,
+    state_jump_fall,
+    state_ledge_fall,
+    state_kazooie_fall,
+    state_flap_flip_fall,
+    sub_801C0FC,
+    state_bill_drill_end,
+    state_bill_drill_fall,
+    state_bill_drill_hit,
+    sub_801CD74,
+    state_swim_idle,
+    state_pack_wack_hit,
+    state_hurt,
+    sub_801BFEC,
+    state_die,
+    state_dialogue,
+    state_shooter_jump,
+    state_shooter_fall,
+    state_35,
+    sub_801D44C,
+    sub_801D614,
+    sub_801D400,
+    sub_801FC54,
+    sub_801FF64,
+    sub_80202F0,
+    sub_80204C4,
+    sub_80206A8,
+    state_dialogue_end,
+    state_dive_sink,
+    state_dive_rise,
+    sub_801E0F4,
+    state_dive_surface,
+    state_mouse_walk,
+    state_mouse_idle,
+    state_mouse_jump,
+    state_mouse_jump_fall,
+    state_mouse_ledge_fall,
+    state_mouse_mouse_nibble,
+    state_mouse_die,
+    state_mouse_hurt,
+    state_candle_die,
+    state_candle_attack,
+    state_candle_hurt,
+    state_candle_walk,
+    state_candle_idle,
+    state_candle_jump,
+    state_candle_jump_fall,
+    state_candle_ledge_fall,
+    state_candle_jump_attack_start,
+    state_candle_jump_attack_end,
+    sub_80206C4,
+    sub_8020738,
+    state_dive_hurt,
+    state_shooter_walk,
+    state_shooter_idle,
+    state_shooter_hurt,
+    sub_8020E88,
+    sub_8020EA0,
+    state_tank_ride,
+    state_tank_idle,
+    state_tank_die,
+    state_tank_ledge_fall,
+    state_tank_hurt,
+    state_octopus_idle,
+    state_octopus_swim_idle,
+    state_octopus_walk,
+    state_octopus_swim,
+    state_octopus_dive_sink,
+    state_octopus_jump,
+    state_octopus_jump_fall,
+    state_octopus_water_jump,
+    state_octopus_water_jump_fall,
+    state_octopus_hurt,
+    sub_8023A40,
+    state_octopus_dive_hurt,
+    sub_8023B88,
+    state_octopus_ledge_fall,
+    state_octopus_dive,
+    state_octopus_dive_rise,
+    state_octopus_dive_surface,
+    sub_8023C94,
+    sub_8023D78,
+    sub_801D1CC,
+    sub_801EFA4,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
+    state_none,
 };
 
 static const u16 word_8065104[PLAYER_STATE_COUNT] = {

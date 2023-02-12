@@ -525,7 +525,7 @@ _08010D58:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _08010DA0
-	bl sub_801A2E4
+	bl load_transformation_palette
 _08010DA0:
 	ldr r0, _08010DF4
 	ldrh r0, [r0]
@@ -867,7 +867,7 @@ _08011022:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _080110CE
-	bl sub_801A2E4
+	bl load_transformation_palette
 _080110CE:
 	ldr r0, _08011114
 	ldrh r0, [r0]

@@ -315,13 +315,13 @@ static void update_game(void) {
             word_20010AC = 0;
             if (!gIsSlideMiniGame) {
                 if (!byte_200110C) {
-                    UpdatePlayerBehavior(gKeysPressed, gKeysDown);
+                    update_player_state_machine(gKeysPressed, gKeysDown);
                 }
             } else {
                 sub_80038A4(dword_2000FC8);
                 if ((gPlayerStateSettings[gPlayerState] & 0x800)
                     || (gPlayerStateSettings[gPlayerState] & 0x1000)) {
-                    UpdatePlayerBehavior(gKeysPressed, gKeysDown);
+                    update_player_state_machine(gKeysPressed, gKeysDown);
                 }
             }
         }
@@ -331,7 +331,7 @@ static void update_game(void) {
             update_player();
         }
     } else if (byte_203F99F) {
-        UpdatePlayerBehavior(gKeysPressed, gKeysDown);
+        update_player_state_machine(gKeysPressed, gKeysDown);
     }
 
     dword_30032B4[0] = gCameraPixelX - 20;
@@ -627,7 +627,7 @@ static void start_game() {
 
         if (gTransformation != TRANSFORMATION_BANJO) {
             sub_08019FCC(gTransformation);
-            sub_801A2E4();
+            load_transformation_palette();
         }
 
         sub_8026E48(4095, 1, 1);
@@ -1711,7 +1711,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
     sub_8018BB0(&gPlayerSprite);
     audio_halt_all_fx();
-    sub_801A2E4();
+    load_transformation_palette();
     EnableBGAlphaBlending();
 
     if (v3) {
@@ -1798,7 +1798,7 @@ void sub_800BFA0(int room, int warp, int a3) {
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
     sub_8018BB0(&gPlayerSprite);
     audio_halt_all_fx();
-    sub_801A2E4();
+    load_transformation_palette();
     EnableBGAlphaBlending();
     sub_800EB14();
     init_efx();
@@ -1853,7 +1853,7 @@ void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
     sub_8025E44(gLoadedRoomLevel);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
-    sub_801A2E4();
+    load_transformation_palette();
     EnableBGAlphaBlending();
     sub_800EB14();
     init_efx();
@@ -1914,7 +1914,7 @@ void sub_0800C388(int a1, int a2) {
     sub_8025E44(gLoadedRoomLevel);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
-    sub_801A2E4();
+    load_transformation_palette();
     EnableBGAlphaBlending();
 
     if (!byte_20010B1) {
@@ -2583,7 +2583,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
     sub_8018BB0(&gPlayerSprite);
-    sub_801A2E4();
+    load_transformation_palette();
     byte_200108D = 0;
     gPlayerSprite.field_10 = 0;
     byte_200108E = 0;

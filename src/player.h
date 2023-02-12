@@ -30,7 +30,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite);
 void sub_80192D4(int a1, int a2, int a3);
 void sub_801990C();
 void sub_08019FCC(u32 transformation);
-void sub_801A2E4();
-void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown);
+void load_transformation_palette();
+void update_player_state_machine(s32 keyPressed, s32 keyDown);
 
 #endif
