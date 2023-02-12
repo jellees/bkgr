@@ -120,6 +120,139 @@ enum Moves {
     MOVE_COUNT
 };
 
+enum PlayerStates {
+    PLAYER_STATE_IDLE,
+    PLAYER_STATE_JUMP,
+    PLAYER_STATE_CROUCH,
+    PLAYER_STATE_3,
+    PLAYER_STATE_WALK,
+    PLAYER_STATE_SWIM,
+    PLAYER_STATE_6,
+    PLAYER_STATE_7,
+    PLAYER_STATE_PACK_WACK_START,
+    PLAYER_STATE_SHOOTER_START,
+    PLAYER_STATE_KAZOOIE_WALK,
+    PLAYER_STATE_KAZOOIE_JUMP,
+    PLAYER_STATE_KAZOOIE_IDLE,
+    PLAYER_STATE_FORWARD_ROLL,
+    PLAYER_STATE_FEATHERY_FLAP,
+    PLAYER_STATE_FLAP_FLIP,
+    PLAYER_STATE_BILL_DRILL_START,
+    PLAYER_STATE_AIR_ATTACK,
+    PLAYER_STATE_JUMP_FALL,
+    PLAYER_STATE_LEDGE_FALL,
+    PLAYER_STATE_KAZOOIE_FALL,
+    PLAYER_STATE_FLAP_FLIP_FALL,
+    PLAYER_STATE_22,
+    PLAYER_STATE_BILL_DRILL_END,
+    PLAYER_STATE_BILL_DRILL_FALL,
+    PLAYER_STATE_BILL_DRILL_HIT,
+    PLAYER_STATE_26,
+    PLAYER_STATE_SWIM_IDLE,
+    PLAYER_STATE_PACK_WACK_HIT,
+    PLAYER_STATE_HURT,
+    PLAYER_STATE_30,
+    PLAYER_STATE_DIE,
+    PLAYER_STATE_DIALOGUE,
+    PLAYER_STATE_SHOOTER_JUMP,
+    PLAYER_STATE_SHOOTER_FALL,
+    PLAYER_STATE_35,
+    PLAYER_STATE_36,
+    PLAYER_STATE_37,
+    PLAYER_STATE_38,
+    PLAYER_STATE_39,
+    PLAYER_STATE_40,
+    PLAYER_STATE_41,
+    PLAYER_STATE_42,
+    PLAYER_STATE_43,
+    PLAYER_STATE_DIALOGUE_END,
+    PLAYER_STATE_45,
+    PLAYER_STATE_46,
+    PLAYER_STATE_47,
+    PLAYER_STATE_48,
+    PLAYER_STATE_MOUSE_WALK,
+    PLAYER_STATE_MOUSE_IDLE,
+    PLAYER_STATE_MOUSE_JUMP,
+    PLAYER_STATE_MOUSE_JUMP_FALL,
+    PLAYER_STATE_MOUSE_LEDGE_FALL,
+    PLAYER_STATE_MOUSE_NIBBLE,
+    PLAYER_STATE_MOUSE_DIE,
+    PLAYER_STATE_MOUSE_HURT,
+    PLAYER_STATE_CANDLE_DIE,
+    PLAYER_STATE_CANDLE_ATTACK,
+    PLAYER_STATE_CANDLE_HURT,
+    PLAYER_STATE_CANDLE_WALK,
+    PLAYER_STATE_CANDLE_IDLE,
+    PLAYER_STATE_CANDLE_JUMP,
+    PLAYER_STATE_CANDLE_JUMP_FALL,
+    PLAYER_STATE_CANDLE_LEDGE_FALL,
+    PLAYER_STATE_CANDLE_JUMP_ATTACK_START,
+    PLAYER_STATE_CANDLE_JUMP_ATTACK_END,
+    PLAYER_STATE_67,
+    PLAYER_STATE_68,
+    PLAYER_STATE_69,
+    PLAYER_STATE_SHOOTER_WALK,
+    PLAYER_STATE_SHOOTER_IDLE,
+    PLAYER_STATE_72,
+    PLAYER_STATE_73,
+    PLAYER_STATE_74,
+    PLAYER_STATE_TANK_RIDE,
+    PLAYER_STATE_TANK_IDLE,
+    PLAYER_STATE_TANK_DIE,
+    PLAYER_STATE_TANK_LEDGE_FALL,
+    PLAYER_STATE_TANK_HURT,
+    PLAYER_STATE_OCTOPUS_IDLE,
+    PLAYER_STATE_OCTOPUS_SWIM_IDLE,
+    PLAYER_STATE_OCTOPUS_WALK,
+    PLAYER_STATE_OCTOPUS_SWIM,
+    PLAYER_STATE_84,
+    PLAYER_STATE_OCTOPUS_JUMP,
+    PLAYER_STATE_OCTOPUS_JUMP_FALL,
+    PLAYER_STATE_OCTOPUS_WATER_JUMP,
+    PLAYER_STATE_OCTOPUS_WATER_JUMP_FALL,
+    PLAYER_STATE_OCTOPUS_HURT,
+    PLAYER_STATE_90,
+    PLAYER_STATE_91,
+    PLAYER_STATE_92,
+    PLAYER_STATE_OCTOPUS_LEDGE_FALL,
+    PLAYER_STATE_94,
+    PLAYER_STATE_95,
+    PLAYER_STATE_96,
+    PLAYER_STATE_97,
+    PLAYER_STATE_98,
+    PLAYER_STATE_99,
+    PLAYER_STATE_100,
+    PLAYER_STATE_101,
+    PLAYER_STATE_102,
+    PLAYER_STATE_103,
+    PLAYER_STATE_104,
+    PLAYER_STATE_105,
+    PLAYER_STATE_106,
+    PLAYER_STATE_107,
+    PLAYER_STATE_108,
+    PLAYER_STATE_109,
+    PLAYER_STATE_110,
+    PLAYER_STATE_111,
+    PLAYER_STATE_112,
+    PLAYER_STATE_113,
+    PLAYER_STATE_114,
+    PLAYER_STATE_115,
+    PLAYER_STATE_116,
+    PLAYER_STATE_117,
+    PLAYER_STATE_118,
+    PLAYER_STATE_119,
+    PLAYER_STATE_120,
+    PLAYER_STATE_121,
+    PLAYER_STATE_122,
+    PLAYER_STATE_123,
+    PLAYER_STATE_124,
+    PLAYER_STATE_125,
+    PLAYER_STATE_126,
+    PLAYER_STATE_127,
+
+    PLAYER_STATE_COUNT
+};
+
 // Structs
 
 struct Vec3fx {
@@ -367,6 +500,16 @@ struct struc_49 {
     u8 gap[12];
 };
 
+struct struc_50
+{
+    int field_0;
+    int field_4;
+    int field_8;
+    u16 field_C;
+    u8 field_E;
+    u8 field_F;
+};
+
 // EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
@@ -374,6 +517,8 @@ extern u32 gDestinationWarpCount;
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;
 
+extern u8 byte_2002094;
+extern u8 byte_2002095;
 extern u16 word_2002096;
 extern u16 word_2002098;
 extern bool8 gUnlockedMoves[MOVE_COUNT];
@@ -386,18 +531,24 @@ extern s32 dword_20020B8;
 
 extern u8 byte_20020BC; // possibily bool8
 extern u16 gPlayerStateSettings[128];
+extern u8 byte_20021BE;
 
+extern u32 dword_20021C0;
 extern u8 byte_20021C4;
-
+extern u8 byte_20021C5;
+extern u8 byte_20021C6;
+extern u8 byte_20021C7;
 extern u8 byte_20021C8;
 extern u8 byte_20021C9;
 extern u8 byte_20021CA;
+extern u8 byte_20021CB;
 
 extern u32 dword_20021D0;
 extern u32 dword_20021D4;
 extern u32 dword_20021D8;
 extern u32 dword_20021DC;
 
+extern s32 dword_20021E0;
 extern u32 dword_20021E4;
 extern u32 dword_20021E8;
 extern u32 dword_20021EC;
@@ -412,6 +563,8 @@ extern u8 byte_2002233;
 extern bool8 byte_2002E49;
 extern bool8 byte_2002E4A;
 
+extern bool8 byte_2002E4C;
+extern bool8 byte_2002E4D;
 extern bool8 byte_2002E4E;
 
 extern s16 word_2002EC0;
@@ -428,8 +581,15 @@ extern bool8 gIsPaletteEffectsActive;
 
 extern u32* gEntitySection;
 
+extern u8* dword_203DFB8;
+
 extern u8* dword_203DFC0;
 extern struct Entity_rt* dword_203DFC4;
+extern u8 byte_203DFC8;
+extern u16 word_203DFCA;
+
+extern u8 byte_203DFD4;
+extern u8 byte_203DFD5;
 
 extern bool8 gInInteractionArea;
 extern bool8 byte_203DFD8;
@@ -443,7 +603,17 @@ extern bool8 byte_203DFE7;
 extern bool8 byte_203DFE8;
 extern bool8 byte_203DFE9;
 
+extern u8 byte_203E10F;
+
+extern u8 byte_203E16A;
+extern u8 byte_203E16B;
 extern u8 byte_203E16C;
+
+extern u16** dword_203F8B4; // A pointer to a pointer to a struct.
+
+extern u32 dword_203F98C;
+
+extern u16 word_203F992;
 
 extern s16 word_203F998;
 extern s16 word_203F99A;
@@ -463,6 +633,7 @@ extern struct struc_46* dword_203FA5C;
 extern u8* dword_203FA7C;
 extern u8* dword_203FA80;
 extern u8* dword_203FA84;
+extern u8 byte_203FA88;
 
 extern u32 dword_203FA8C;
 extern u32 dword_203FA90;
@@ -519,6 +690,7 @@ extern u16 gEnabledBGs;
 extern u16* gTileSetBG[4];
 extern u16 gMapPixelSizeX;
 extern u16 gMapPixelSizeY;
+extern struct struc_50 stru_3003578;
 
 extern u8 byte_3003588;
 extern u32 gOAMBuffer2[];
@@ -544,6 +716,7 @@ extern s32 dword_80CEBC4;
 extern u32 Abs(u32); // return type is u32, can tell by the branch instruction
 
 extern void (*dPlayerBehaviors[1])(s32, s32);
+extern u16 word_8065104[128];
 extern u32 dword_80CC290[8];
 extern u32 dword_80AF4F0[4];
 extern struct Font font_80B01A8[3];
@@ -686,5 +859,25 @@ extern char* unk_86ADAC4[38];
 extern char* unk_86ADC54[38];
 extern char* unk_86ADD1C[38];
 extern char* unk_86ADB8C[38];
+
+extern u32 dword_80CEF78;
+
+extern int dword_80CB9F0[16][8];
+extern int dword_80CBCD0[16][8];
+extern int dword_80CBFB0[16][8];
+extern u8 byte_80CB94C[16];
+extern u16 word_80CB964[16];
+extern u8 byte_80CB992[3];
+extern u8 dword_80CB9A9[][3];
+
+extern u32 byte_80CEBC8[];
+
+extern u8 unk_80B21B4;
+extern u32 dword_80B21B8;
+
+extern u8 unk_83FD734;
+extern u8 unk_83FD754;
+extern u8 unk_83FD774;
+extern u8 unk_83FD794;
 
 #endif

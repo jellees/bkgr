@@ -6,139 +6,6 @@
 #include "room.h"
 #include "common.h"
 
-enum PlayerStates {
-    PLAYER_STATE_IDLE,
-    PLAYER_STATE_JUMP,
-    PLAYER_STATE_CROUCH,
-    PLAYER_STATE_3,
-    PLAYER_STATE_WALK,
-    PLAYER_STATE_SWIM,
-    PLAYER_STATE_6,
-    PLAYER_STATE_7,
-    PLAYER_STATE_PACK_WACK_START,
-    PLAYER_STATE_SHOOTER_START,
-    PLAYER_STATE_KAZOOIE_WALK,
-    PLAYER_STATE_KAZOOIE_JUMP,
-    PLAYER_STATE_KAZOOIE_IDLE,
-    PLAYER_STATE_FORWARD_ROLL,
-    PLAYER_STATE_FEATHERY_FLAP,
-    PLAYER_STATE_FLAP_FLIP,
-    PLAYER_STATE_BILL_DRILL_START,
-    PLAYER_STATE_AIR_ATTACK,
-    PLAYER_STATE_JUMP_FALL,
-    PLAYER_STATE_LEDGE_FALL,
-    PLAYER_STATE_KAZOOIE_FALL,
-    PLAYER_STATE_FLAP_FLIP_FALL,
-    PLAYER_STATE_22,
-    PLAYER_STATE_BILL_DRILL_END,
-    PLAYER_STATE_BILL_DRILL_FALL,
-    PLAYER_STATE_BILL_DRILL_HIT,
-    PLAYER_STATE_26,
-    PLAYER_STATE_SWIM_IDLE,
-    PLAYER_STATE_PACK_WACK_HIT,
-    PLAYER_STATE_HURT,
-    PLAYER_STATE_30,
-    PLAYER_STATE_DIE,
-    PLAYER_STATE_DIALOGUE,
-    PLAYER_STATE_SHOOTER_JUMP,
-    PLAYER_STATE_SHOOTER_FALL,
-    PLAYER_STATE_35,
-    PLAYER_STATE_36,
-    PLAYER_STATE_37,
-    PLAYER_STATE_38,
-    PLAYER_STATE_39,
-    PLAYER_STATE_40,
-    PLAYER_STATE_41,
-    PLAYER_STATE_42,
-    PLAYER_STATE_43,
-    PLAYER_STATE_DIALOGUE_END,
-    PLAYER_STATE_45,
-    PLAYER_STATE_46,
-    PLAYER_STATE_47,
-    PLAYER_STATE_48,
-    PLAYER_STATE_MOUSE_WALK,
-    PLAYER_STATE_MOUSE_IDLE,
-    PLAYER_STATE_MOUSE_JUMP,
-    PLAYER_STATE_MOUSE_JUMP_FALL,
-    PLAYER_STATE_MOUSE_LEDGE_FALL,
-    PLAYER_STATE_MOUSE_NIBBLE,
-    PLAYER_STATE_MOUSE_DIE,
-    PLAYER_STATE_MOUSE_HURT,
-    PLAYER_STATE_CANDLE_DIE,
-    PLAYER_STATE_CANDLE_ATTACK,
-    PLAYER_STATE_CANDLE_HURT,
-    PLAYER_STATE_CANDLE_WALK,
-    PLAYER_STATE_CANDLE_IDLE,
-    PLAYER_STATE_CANDLE_JUMP,
-    PLAYER_STATE_CANDLE_JUMP_FALL,
-    PLAYER_STATE_CANDLE_LEDGE_FALL,
-    PLAYER_STATE_CANDLE_JUMP_ATTACK_START,
-    PLAYER_STATE_CANDLE_JUMP_ATTACK_END,
-    PLAYER_STATE_67,
-    PLAYER_STATE_68,
-    PLAYER_STATE_69,
-    PLAYER_STATE_SHOOTER_WALK,
-    PLAYER_STATE_SHOOTER_IDLE,
-    PLAYER_STATE_72,
-    PLAYER_STATE_73,
-    PLAYER_STATE_74,
-    PLAYER_STATE_TANK_RIDE,
-    PLAYER_STATE_TANK_IDLE,
-    PLAYER_STATE_TANK_DIE,
-    PLAYER_STATE_TANK_LEDGE_FALL,
-    PLAYER_STATE_TANK_HURT,
-    PLAYER_STATE_OCTOPUS_IDLE,
-    PLAYER_STATE_OCTOPUS_SWIM_IDLE,
-    PLAYER_STATE_OCTOPUS_WALK,
-    PLAYER_STATE_OCTOPUS_SWIM,
-    PLAYER_STATE_84,
-    PLAYER_STATE_OCTOPUS_JUMP,
-    PLAYER_STATE_OCTOPUS_JUMP_FALL,
-    PLAYER_STATE_OCTOPUS_WATER_JUMP,
-    PLAYER_STATE_OCTOPUS_WATER_JUMP_FALL,
-    PLAYER_STATE_OCTOPUS_HURT,
-    PLAYER_STATE_90,
-    PLAYER_STATE_91,
-    PLAYER_STATE_92,
-    PLAYER_STATE_OCTOPUS_LEDGE_FALL,
-    PLAYER_STATE_94,
-    PLAYER_STATE_95,
-    PLAYER_STATE_96,
-    PLAYER_STATE_97,
-    PLAYER_STATE_98,
-    PLAYER_STATE_99,
-    PLAYER_STATE_100,
-    PLAYER_STATE_101,
-    PLAYER_STATE_102,
-    PLAYER_STATE_103,
-    PLAYER_STATE_104,
-    PLAYER_STATE_105,
-    PLAYER_STATE_106,
-    PLAYER_STATE_107,
-    PLAYER_STATE_108,
-    PLAYER_STATE_109,
-    PLAYER_STATE_110,
-    PLAYER_STATE_111,
-    PLAYER_STATE_112,
-    PLAYER_STATE_113,
-    PLAYER_STATE_114,
-    PLAYER_STATE_115,
-    PLAYER_STATE_116,
-    PLAYER_STATE_117,
-    PLAYER_STATE_118,
-    PLAYER_STATE_119,
-    PLAYER_STATE_120,
-    PLAYER_STATE_121,
-    PLAYER_STATE_122,
-    PLAYER_STATE_123,
-    PLAYER_STATE_124,
-    PLAYER_STATE_125,
-    PLAYER_STATE_126,
-    PLAYER_STATE_127,
-
-    PLAYER_STATE_COUNT
-};
-
 void UpdatePlayerBehavior(s32 keyPressed, s32 keyDown) {
     ASSERT(gPlayerState < PLAYER_STATE_COUNT);
 
@@ -662,15 +529,18 @@ void Crouch(s32 keyPressed, s32 keyDown) {
                 sub_80186F4(0);
                 return;
             } else {
-                if (sub_08016EE0())
+                if (sub_08016EE0()) {
                     return;
+                }
 
-                if (!gUnlockedMoves[MOVE_FLAP_FLIP])
+                if (!gUnlockedMoves[MOVE_FLAP_FLIP]) {
                     return;
+                }
 
                 if (!byte_3003588 && gFloorPlaneResult.isColliding
-                    && gFloorPlaneResult.floorType == 0xA)
+                    && gFloorPlaneResult.floorType == 0xA) {
                     return;
+                }
 
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = PLAYER_STATE_FLAP_FLIP;
@@ -3870,7 +3740,7 @@ static void sub_80207FC(s32 keyPressed, s32 keyDown) {
             return;
 
         case B_BUTTON:
-            sub_801A3DC(1);
+            shoot_egg(TRUE);
             return;
 
         case L_BUTTON:
@@ -3999,7 +3869,7 @@ static void sub_8020B74(s32 keyPressed, s32 keyDown) {
             return;
 
         case B_BUTTON:
-            sub_801A3DC(1);
+            shoot_egg(TRUE);
             return;
 
         case L_BUTTON:
@@ -4118,7 +3988,7 @@ static void sub_8020EEC(s32 keyPressed, s32 keyDown) {
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_801A3DC(1);
+            shoot_egg(TRUE);
             return;
 
         case R_BUTTON:
@@ -4204,7 +4074,7 @@ static void sub_802112C(s32 keyPressed, s32 keyDown) {
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_801A3DC(1);
+            shoot_egg(TRUE);
             return;
 
         case R_BUTTON:
@@ -4602,7 +4472,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             gPlayerSprite.field_A = 1;
             sub_8003368(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
@@ -4611,7 +4481,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             gPlayerSprite.field_A = 3;
             sub_8003368(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
@@ -4620,7 +4490,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             gPlayerSprite.field_A = 5;
             sub_8003368(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
@@ -4629,7 +4499,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             gPlayerSprite.field_A = 7;
             sub_8003368(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
@@ -4638,7 +4508,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             gPlayerSprite.field_A = 0;
             sub_8003368(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
@@ -4647,7 +4517,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             gPlayerSprite.field_A = 4;
             sub_8003368(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
@@ -4656,7 +4526,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             gPlayerSprite.field_A = 6;
             sub_8003368(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
@@ -4665,7 +4535,7 @@ static void sub_8021E54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             gPlayerSprite.field_A = 2;
             sub_8003368(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
@@ -4786,7 +4656,7 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             if (gPlayerSprite.field_A != 1) {
                 gPlayerSprite.field_A = 1;
                 sub_8003368(&gPlayerSprite, 425, 0, 0);
@@ -4797,7 +4667,7 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
 
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             if (gPlayerSprite.field_A != 3) {
                 gPlayerSprite.field_A = 3;
                 sub_8003368(&gPlayerSprite, 425, 0, 0);
@@ -4808,7 +4678,7 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             if (gPlayerSprite.field_A != 5) {
                 gPlayerSprite.field_A = 5;
                 sub_8003368(&gPlayerSprite, 425, 0, 0);
@@ -4819,7 +4689,7 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             if (gPlayerSprite.field_A != 7) {
                 gPlayerSprite.field_A = 7;
                 sub_8003368(&gPlayerSprite, 425, 0, 0);
@@ -4830,7 +4700,7 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
 
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             if (gPlayerSprite.field_A != 0) {
                 gPlayerSprite.field_A = 0;
                 sub_8003368(&gPlayerSprite, 425, 0, 0);
@@ -4841,7 +4711,7 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
 
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             if (gPlayerSprite.field_A != 4) {
                 gPlayerSprite.field_A = 4;
                 sub_8003368(&gPlayerSprite, 425, 0, 0);
@@ -4852,7 +4722,7 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             if (gPlayerSprite.field_A != 6) {
                 gPlayerSprite.field_A = 6;
                 sub_8003368(&gPlayerSprite, 425, 0, 0);
@@ -4863,7 +4733,7 @@ static void sub_80223F0(s32 keyPressed, s32 keyDown) {
 
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;;
+            gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
             if (gPlayerSprite.field_A != 2) {
                 gPlayerSprite.field_A = 2;
                 sub_8003368(&gPlayerSprite, 425, 0, 0);
@@ -5661,7 +5531,7 @@ static void sub_8023C04(s32 keyPressed, s32 keyDown) {
 static void sub_8023C94(s32 keyPressed, s32 keyDown) {
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
-            sub_801A3DC(0);
+            shoot_egg(FALSE);
             return;
     }
 

@@ -17,7 +17,9 @@ SECTIONS
         gPreviousPlayerState = .; . += 2;
         gPlayerState = .; . += 2;
 
-        . = 0x00002096;
+        . = 0x00002094;
+        byte_2002094 = .; . += 1;
+        byte_2002095 = .; . += 1;
         word_2002096 = .; . += 2;
         word_2002098 = .; . += 2;
         gUnlockedMoves = .; . += 0x17;
@@ -31,14 +33,18 @@ SECTIONS
         byte_20020BC = .; . += 1;
         . += 1; /* padding */
         gPlayerStateSettings = .; . += 2 * 128;
+        byte_20021BE = .; . += 1;
 
-        . = 0x000021C4;
+        . = 0x000021C0;
+        dword_20021C0 = .; . += 4;
         byte_20021C4 = .; . += 1;
-
-        . = 0x000021C8;
+        byte_20021C5 = .; . += 1;
+        byte_20021C6 = .; . += 1;
+        byte_20021C7 = .; . += 1;
         byte_20021C8 = .; . += 1;
         byte_20021C9 = .; . += 1;
         byte_20021CA = .; . += 1;
+        byte_20021CB = .; . += 1;
 
         . = 0x000021D0;
         dword_20021D0 = .; . += 4;
@@ -46,7 +52,8 @@ SECTIONS
         dword_20021D8 = .; . += 4;
         dword_20021DC = .; . += 4;
 
-        . = 0x000021E4;
+        . = 0x000021E0;
+        dword_20021E0 = .; . += 4;
         dword_20021E4 = .; . += 4;
         dword_20021E8 = .; . += 4;
         dword_20021EC = .; . += 4;
@@ -67,7 +74,9 @@ SECTIONS
         byte_2002E49 = .; . += 1;
         byte_2002E4A = .; . += 1;
 
-        . = 0x00002E4E;
+        . = 0x00002E4C;
+        byte_2002E4C = .; . += 1;
+        byte_2002E4D = .; . += 1;
         byte_2002E4E = .; . += 1;
 
         . = 0x00002EC0;
@@ -92,9 +101,19 @@ SECTIONS
 
         gEntitySection = .; . += 4;
 
+        . = 0x0003DFB8;
+        dword_203DFB8 = .; . += 4;
+
         . = 0x0003DFC0;
         dword_203DFC0 = .; . += 4;
         dword_203DFC4 = .; . += 4;
+        byte_203DFC8 = .; . += 1;
+        . += 1; /* padding */
+        word_203DFCA = .; . += 2;
+
+        . = 0x0003DFD4;
+        byte_203DFD4 = .; . += 1;
+        byte_203DFD5 = .; . += 1;
 
         . = 0x0003DFD7;
         gInInteractionArea = .; . += 1;
@@ -111,7 +130,12 @@ SECTIONS
         byte_203DFE8 = .; . += 1;
         byte_203DFE9 = .; . += 1;
 
-        . = 0x0003E16C;
+        . = 0x0003E10F;
+        byte_203E10F = .; . += 1;
+        
+        . = 0x0003E16A;
+        byte_203E16A = .; . += 1;
+        byte_203E16B = .; . += 1;
         byte_203E16C = .; . += 1;
 
         . = 0x0003EA88;
@@ -121,6 +145,15 @@ SECTIONS
         src/random.o(.bss);
         src/audio_a.o(.bss);
         src/pause_menu.o(.bss);
+
+        . = 0x0003F8B4;
+        dword_203F8B4 = .; . += 4;
+
+        . = 0x0003F98C;
+        dword_203F98C = .; . += 4;
+
+        . = 0x0003F992;
+        word_203F992 = .; . += 2;
 
         . = 0x0003F998;
         word_203F998 = .; . += 2;
@@ -146,6 +179,7 @@ SECTIONS
         dword_203FA7C = .; . += 4;
         dword_203FA80 = .; . += 4;
         dword_203FA84 = .; . += 4;
+        byte_203FA88 = .; . += 1;
 
         . = 0x0003FA8C;
         dword_203FA8C = .; . += 4;
@@ -225,8 +259,7 @@ SECTIONS
         gTileSetBG = .; . += 4 * 4;
         gMapPixelSizeX = .; . += 2;
         gMapPixelSizeY = .; . += 2;
-
-        . = 0x00003588;
+        stru_3003578 = .; . += 0x10;
         byte_3003588 = .; . += 1;
         . += 3; /* padding */
         gOAMBuffer2 = .; . += 0x400;
@@ -296,7 +329,7 @@ SECTIONS
         asm/chunk5.o(.text);
         src/room.o(.text);
         asm/room.o(.text);
-        asm/chunk11.o(.text);
+        src/player.o(.text);
         src/player_actions.o(.text);
         src/pregame.o(.text);
         asm/chunk9.o(.text);
