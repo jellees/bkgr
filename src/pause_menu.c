@@ -1343,7 +1343,7 @@ static void render_controls() {
 void init_arcade_menu() {
     int i;
 
-    if (gPlayerState == 101) {
+    if (gPlayerState == PLAYER_STATE_101) {
         return;
     }
 
@@ -1486,7 +1486,7 @@ void sub_8047000(bool32 a1) {
 }
 
 void exec_arcade_menu() {
-    if (gPlayerState != 101) {
+    if (gPlayerState != PLAYER_STATE_101) {
         return;
     }
 
@@ -1566,7 +1566,7 @@ void exec_arcade_menu() {
 }
 
 void draw_arcade_menu() {
-    if (gPlayerState != 101) {
+    if (gPlayerState != PLAYER_STATE_101) {
         return;
     }
 

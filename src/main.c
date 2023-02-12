@@ -252,7 +252,7 @@ static void update_game(void) {
 
     if (gKeysDown & START_BUTTON && !(gPlayerStateSettings[gPlayerState] & 0x800) && !byte_20021F0
         && !byte_203F99C && gGameStatus.health && !gIsPaletteEffectsActive && !byte_203FA35) {
-        if ((gPlayerState != 101 || gIsSlideMiniGame) && !byte_2000F57) {
+        if ((gPlayerState != PLAYER_STATE_101 || gIsSlideMiniGame) && !byte_2000F57) {
             if (byte_20020BC) {
                 sub_8016B0C();
                 sub_804087C();
@@ -272,13 +272,13 @@ static void update_game(void) {
                 audio_halt_fx(dword_20020B4);
             }
 
-            if (gPlayerState == 35) {
+            if (gPlayerState == PLAYER_STATE_35) {
                 sub_8064380();
             }
 
             open_pause_menu();
 
-            if (gPlayerState == 35) {
+            if (gPlayerState == PLAYER_STATE_35) {
                 sub_806438C();
             }
 
@@ -338,11 +338,11 @@ static void update_game(void) {
     dword_30032BC[0] = gCameraPixelX + 260;
     dword_30032BC[1] = gCameraPixelY + 170;
 
-    if (gPlayerState == 35) {
+    if (gPlayerState == PLAYER_STATE_35) {
         sub_8063B5C();
     }
 
-    if (!gIsSlideMiniGame && gPlayerState != 101) {
+    if (!gIsSlideMiniGame && gPlayerState != PLAYER_STATE_101) {
         sub_8048C78();
     }
 
@@ -411,7 +411,7 @@ static void update_game(void) {
     draw_arcade_menu();
     gNullsub_4();
 
-    if (!gIsSlideMiniGame && gPlayerState != 101) {
+    if (!gIsSlideMiniGame && gPlayerState != PLAYER_STATE_101) {
         sub_8009D2C();
         sub_805DF84(&dword_30032AC, &dword_30032CC);
         sub_800BAF0(&dword_30032AC, &dword_30032CC);
@@ -1012,7 +1012,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
         }
     }
 
-    if (gWallPlaneResult.isColliding && gWallPlaneResult.floorType == 6 && gUnlockedMoves[MOVE_18]
+    if (gWallPlaneResult.isColliding && gWallPlaneResult.floorType == 6 && gUnlockedMoves[MOVE_CLIMB]
         && gTransformation == TRANSFORMATION_BANJO && gGameStatus.health != 0) {
         struct Vec3fx a;
         a.x = a1->x;
@@ -1598,7 +1598,7 @@ static void sub_800BAF0(u32** a1, u32* a2) {
 
     char r10 = byte_203F9A2;
 
-    if (r10 || gPlayerState == 35) {
+    if (r10 || gPlayerState == PLAYER_STATE_35) {
         return;
     }
 

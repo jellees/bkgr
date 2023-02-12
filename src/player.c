@@ -30,7 +30,7 @@ void sub_8016440() {
     gUnlockedMoves[MOVE_0] = TRUE;
     gUnlockedMoves[MOVE_16] = TRUE;
     gUnlockedMoves[MOVE_17] = TRUE;
-    gUnlockedMoves[MOVE_10] = TRUE;
+    gUnlockedMoves[MOVE_CANDLE_ATTACK] = TRUE;
     gUnlockedMoves[MOVE_14] = TRUE;
     gUnlockedMoves[MOVE_11] = TRUE;
 
@@ -190,7 +190,7 @@ void sub_8016790(int a1, int a2) {
         sub_8003894(dword_2000FC8, dword_80CC818[stru_3002950.floorType]);
     }
 
-    if (!gTransformation) {
+    if (gTransformation == TRANSFORMATION_BANJO) {
         dword_3003300 = dword_80CB9A9[a1][0] << 16;
         dword_3003308 = dword_80CB9A9[a1][1] << 16;
         dword_3003304 = dword_80CB9A9[a1][2] << 16;
@@ -816,7 +816,7 @@ void sub_8017D9C() {
 }
 
 void sub_8017E1C() {
-    if (!gUnlockedMoves[MOVE_18]) {
+    if (!gUnlockedMoves[MOVE_CLIMB]) {
         return;
     }
 
@@ -843,7 +843,7 @@ void sub_8017E1C() {
     }
 
     gPreviousPlayerState = gPlayerState;
-    gPlayerState = PLAYER_STATE_3;
+    gPlayerState = PLAYER_STATE_CLIMB;
     sub_8003368(&gPlayerSprite, 121, 0, 0);
     if (dword_20020B8 != -1) {
         if (gCanPlaySfx) {
@@ -864,7 +864,7 @@ void sub_8017F14() {
 }
 
 void DoFeatheryFlap() {
-    if (gUnlockedMoves[MOVE_19] && !byte_20021C7 && gGameStatus.health != 0) {
+    if (gUnlockedMoves[MOVE_FEATHERY_FLAP] && !byte_20021C7 && gGameStatus.health != 0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_FEATHERY_FLAP;
         sub_8003368(&gPlayerSprite, 89, 0, 1);
@@ -889,7 +889,7 @@ void DoAirAttack() {
 }
 
 void DoBillDrill() {
-    if (gUnlockedMoves[MOVE_4] && !byte_20021C5 && gGameStatus.health) {
+    if (gUnlockedMoves[MOVE_DRILL_BILL] && !byte_20021C5 && gGameStatus.health) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_BILL_DRILL_START;
         sub_8003368(&gPlayerSprite, 129, 0, 1);
@@ -929,7 +929,7 @@ void sub_80181B8(fx32* height) {
         case PLAYER_STATE_SHOOTER_FALL:
         case PLAYER_STATE_SHOOTER_WALK:
         case PLAYER_STATE_SHOOTER_IDLE:
-        case PLAYER_STATE_72:
+        case PLAYER_STATE_SHOOTER_HURT:
         case PLAYER_STATE_73:
         case PLAYER_STATE_74:
             gPlayerState = PLAYER_STATE_73;
@@ -1041,9 +1041,9 @@ void sub_80181B8(fx32* height) {
 }
 
 void sub_8018544() {
-    if (gUnlockedMoves[10]) {
+    if (gUnlockedMoves[MOVE_CANDLE_ATTACK]) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 58;
+        gPlayerState = PLAYER_STATE_CANDLE_ATTACK;
         sub_8003368(&gPlayerSprite, 353, 0, 1);
         sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[gPlayerSprite.field_A], 0);
         sub_8016790(10, gPlayerSprite.field_A);
@@ -1371,7 +1371,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
 
         case PLAYER_STATE_SHOOTER_JUMP:
         case PLAYER_STATE_SHOOTER_FALL:
-        case PLAYER_STATE_72:
+        case PLAYER_STATE_SHOOTER_HURT:
         case PLAYER_STATE_73:
             sub_80037A0(&gPlayerSprite);
             if (sub_80038AC(dword_2000FC8)) {
@@ -1478,7 +1478,7 @@ void sub_80192D4(int a1, int a2, int a3) {
         switch (a3) {
             case 2:
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = PLAYER_STATE_72;
+                gPlayerState = PLAYER_STATE_SHOOTER_HURT;
                 if (a2 >= 0) {
                     gPlayerSprite.field_A = (a2 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a2], 0);
@@ -1492,7 +1492,7 @@ void sub_80192D4(int a1, int a2, int a3) {
 
             case 1:
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = PLAYER_STATE_72;
+                gPlayerState = PLAYER_STATE_SHOOTER_HURT;
                 sub_8003368(&gPlayerSprite, 241, 0, 1);
                 break;
 
@@ -1610,7 +1610,7 @@ void sub_801990C() {
         sub_8016790(0, gPlayerSprite.field_A);
     } else if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = PLAYER_STATE_72;
+        gPlayerState = PLAYER_STATE_SHOOTER_HURT;
         sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[(gPlayerSprite.field_A + 4) & 7], 0);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0);
         sub_8003368(&gPlayerSprite, 241, 0, 1);

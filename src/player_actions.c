@@ -1898,7 +1898,7 @@ static void sub_801D400(s32 keyPressed, s32 keyDown) {
 
     if (sub_80037A8(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 36;
+        gPlayerState = PLAYER_STATE_36;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x40000, 0x2000);
     }
 }
@@ -1908,7 +1908,7 @@ static void sub_801D44C(s32 keyPressed, s32 keyDown) {
 
     if (sub_80038BC(dword_2000FC8)) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 37;
+        gPlayerState = PLAYER_STATE_37;
         sub_8003368(&gPlayerSprite, 17, 0, 1);
         return;
     }
@@ -2076,7 +2076,7 @@ static void sub_801D810(s32 keyPressed, s32 keyDown) {
         }
 
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 45;
+        gPlayerState = PLAYER_STATE_45;
         sub_8003368(&gPlayerSprite, 57, 0, 0);
         gPlayerShadowSprite.field_13 = 0;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 12544);
@@ -2099,14 +2099,14 @@ static void sub_801D8EC(s32 keyPressed, s32 keyDown) {
 
     if ((keyPressed & JOY_EXCL_DPAD) == A_BUTTON && !byte_30029F8) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 46;
+        gPlayerState = PLAYER_STATE_46;
         CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(1.5), 0);
         return;
     }
 
     if ((keyDown & JOY_EXCL_DPAD) == R_BUTTON) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 48;
+        gPlayerState = PLAYER_STATE_48;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(2), 0x4000);
         return;
@@ -2119,7 +2119,7 @@ static void sub_801D8EC(s32 keyPressed, s32 keyDown) {
 
         if (!gGameStatus.field_16) {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 48;
+            gPlayerState = PLAYER_STATE_48;
             sub_8003368(&gPlayerSprite, 65, 0, 1);
             CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(2), 0x4000);
             return;
@@ -2238,7 +2238,7 @@ static void sub_801DD1C(s32 keyPressed, s32 keyDown) {
         }
     } else {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 48;
+        gPlayerState = PLAYER_STATE_48;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
@@ -2246,7 +2246,7 @@ static void sub_801DD1C(s32 keyPressed, s32 keyDown) {
 
     if ((keyDown & JOY_EXCL_DPAD) == R_BUTTON) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 48;
+        gPlayerState = PLAYER_STATE_48;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
@@ -2255,7 +2255,7 @@ static void sub_801DD1C(s32 keyPressed, s32 keyDown) {
     if ((keyPressed & JOY_EXCL_DPAD) != A_BUTTON) {
         if (sub_80038BC(dword_2000FC8)) {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 45;
+            gPlayerState = PLAYER_STATE_45;
             CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
             return;
         }
@@ -2355,7 +2355,7 @@ static void sub_801E0F4(s32 keyPressed, s32 keyDown) {
 
     if (!gGameStatus.field_16) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 48;
+        gPlayerState = PLAYER_STATE_48;
         sub_8003368(&gPlayerSprite, 65, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
@@ -2373,7 +2373,7 @@ static void sub_801E0F4(s32 keyPressed, s32 keyDown) {
 
     if (!(keyPressed & 2)) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 45;
+        gPlayerState = PLAYER_STATE_45;
         sub_800387C(dword_2000FC8);
     }
 }
@@ -2402,7 +2402,7 @@ static void sub_801E2B8(s32 keyPressed, s32 keyDown) {
             if (byte_2001370) {
                 restore_full_health();
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = 45;
+                gPlayerState = PLAYER_STATE_45;
                 sub_8003368(&gPlayerSprite, 57, 0, 0);
                 sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
                 sub_8016790(0, gPlayerSprite.field_A);
@@ -2411,7 +2411,7 @@ static void sub_801E2B8(s32 keyPressed, s32 keyDown) {
             }
         } else {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 45;
+            gPlayerState = PLAYER_STATE_45;
             sub_8003368(&gPlayerSprite, 57, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -3313,7 +3313,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
 
         case L_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 68;
+            gPlayerState = PLAYER_STATE_68;
             sub_8003368(&gPlayerSprite, 529, 0, 1);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -3328,7 +3328,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             gPlayerSprite.field_A = 1;
             sub_8003368(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
@@ -3337,7 +3337,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             gPlayerSprite.field_A = 3;
             sub_8003368(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
@@ -3346,7 +3346,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             gPlayerSprite.field_A = 5;
             sub_8003368(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
@@ -3355,7 +3355,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             gPlayerSprite.field_A = 7;
             sub_8003368(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
@@ -3364,7 +3364,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             gPlayerSprite.field_A = 0;
             sub_8003368(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
@@ -3373,7 +3373,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             gPlayerSprite.field_A = 4;
             sub_8003368(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
@@ -3382,7 +3382,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             gPlayerSprite.field_A = 6;
             sub_8003368(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
@@ -3391,7 +3391,7 @@ static void sub_801FC54(s32 keyPressed, s32 keyDown) {
 
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             gPlayerSprite.field_A = 2;
             sub_8003368(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
@@ -3410,7 +3410,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         case L_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 68;
+            gPlayerState = PLAYER_STATE_68;
             sub_8003368(&gPlayerSprite, 529, 0, 1);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -3425,7 +3425,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             if (gPlayerSprite.field_A != 1) {
                 gPlayerSprite.field_A = 1;
                 sub_8003368(&gPlayerSprite, 521, 0, 0);
@@ -3436,7 +3436,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             if (gPlayerSprite.field_A != 3) {
                 gPlayerSprite.field_A = 3;
                 sub_8003368(&gPlayerSprite, 521, 0, 0);
@@ -3447,7 +3447,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             if (gPlayerSprite.field_A != 5) {
                 gPlayerSprite.field_A = 5;
                 sub_8003368(&gPlayerSprite, 521, 0, 0);
@@ -3458,7 +3458,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             if (gPlayerSprite.field_A != 7) {
                 gPlayerSprite.field_A = 7;
                 sub_8003368(&gPlayerSprite, 521, 0, 0);
@@ -3469,7 +3469,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             if (gPlayerSprite.field_A != 0) {
                 gPlayerSprite.field_A = 0;
                 sub_8003368(&gPlayerSprite, 521, 0, 0);
@@ -3480,7 +3480,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             if (gPlayerSprite.field_A != 4) {
                 gPlayerSprite.field_A = 4;
                 sub_8003368(&gPlayerSprite, 521, 0, 0);
@@ -3491,7 +3491,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             if (gPlayerSprite.field_A != 6) {
                 gPlayerSprite.field_A = 6;
                 sub_8003368(&gPlayerSprite, 521, 0, 0);
@@ -3502,7 +3502,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 40;
+            gPlayerState = PLAYER_STATE_40;
             if (gPlayerSprite.field_A != 2) {
                 gPlayerSprite.field_A = 2;
                 sub_8003368(&gPlayerSprite, 521, 0, 0);
@@ -3513,7 +3513,7 @@ static void sub_801FF64(s32 keyPressed, s32 keyDown) {
 
         default:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 39;
+            gPlayerState = PLAYER_STATE_39;
             sub_8003368(&gPlayerSprite, 505, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(5, gPlayerSprite.field_A);
@@ -3527,7 +3527,7 @@ static void sub_80202F0(s32 keyPressed, s32 keyDown) {
 
     if (sub_80038BC(dword_2000FC8)) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 42;
+        gPlayerState = PLAYER_STATE_42;
     }
 
     if (sub_801A334()) {
@@ -3697,7 +3697,7 @@ static void sub_80206C4(s32 keyPressed, s32 keyDown) {
 
     if (sub_8003770(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 39;
+        gPlayerState = PLAYER_STATE_39;
         sub_8003368(&gPlayerSprite, 505, 0, 0);
         sub_8016790(5, gPlayerSprite.field_A);
         gGameStatus.field_12--;
@@ -3745,7 +3745,7 @@ static void sub_80207FC(s32 keyPressed, s32 keyDown) {
 
         case L_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 74;
+            gPlayerState = PLAYER_STATE_74;
             sub_8003368(&gPlayerSprite, 529, 0, 1);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -3874,7 +3874,7 @@ static void sub_8020B74(s32 keyPressed, s32 keyDown) {
 
         case L_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 74;
+            gPlayerState = PLAYER_STATE_74;
             sub_8003368(&gPlayerSprite, 529, 0, 1);
             sub_8016790(0, gPlayerSprite.field_A);
             return;
@@ -4870,7 +4870,7 @@ static void sub_8022A4C(s32 keyPressed, s32 keyDown) {
 
     if ((keyPressed & JOY_EXCL_DPAD) == 1 && !byte_30029F8) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 95;
+        gPlayerState = PLAYER_STATE_95;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x18000, 0);
         return;
     }
@@ -4889,7 +4889,7 @@ static void sub_8022A4C(s32 keyPressed, s32 keyDown) {
 
         case R_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 96;
+            gPlayerState = PLAYER_STATE_96;
             sub_8003368(&gPlayerSprite, 457, 0, 1);
             CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
             return;
@@ -4992,7 +4992,7 @@ static void sub_8022E08(s32 keyPressed, s32 keyDown) {
 
         case R_BUTTON:
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 96;
+            gPlayerState = PLAYER_STATE_96;
             sub_8003368(&gPlayerSprite, 457, 0, 1);
             CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
             return;
@@ -5000,7 +5000,7 @@ static void sub_8022E08(s32 keyPressed, s32 keyDown) {
 
     if ((keyPressed & JOY_EXCL_DPAD) != A_BUTTON) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 84;
+        gPlayerState = PLAYER_STATE_84;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
         return;
     }
@@ -5481,7 +5481,7 @@ static void sub_8023AB4(s32 keyPressed, s32 keyDown) {
             if (byte_2001370) {
                 restore_full_health();
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = 84;
+                gPlayerState = PLAYER_STATE_84;
                 sub_8003368(&gPlayerSprite, 457, 0, 0);
                 sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
                 sub_8016790(0, gPlayerSprite.field_A);
@@ -5490,7 +5490,7 @@ static void sub_8023AB4(s32 keyPressed, s32 keyDown) {
             }
         } else {
             gPreviousPlayerState = gPlayerState;
-            gPlayerState = 84;
+            gPlayerState = PLAYER_STATE_84;
             sub_8003368(&gPlayerSprite, 457, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
@@ -5522,7 +5522,7 @@ static void sub_8023C04(s32 keyPressed, s32 keyDown) {
             word_20010AC = gKeysPressed & 0x3FF;
         }
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 84;
+        gPlayerState = PLAYER_STATE_84;
         sub_8003368(&gPlayerSprite, 457, 0, 0);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 12544);
     }
@@ -5589,7 +5589,7 @@ static void sub_8023C94(s32 keyPressed, s32 keyDown) {
 static void sub_8023D78(s32 keyPressed, s32 keyDown) {
     if (sub_8003770(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
-        gPlayerState = 97;
+        gPlayerState = PLAYER_STATE_97;
         sub_8003368(&gPlayerSprite, 257, 0, 0);
         sub_8016790(0, gPlayerSprite.field_A);
     }
