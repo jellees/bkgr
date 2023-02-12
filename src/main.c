@@ -6,6 +6,7 @@
 #include "save.h"
 #include "room.h"
 #include "debug.h"
+#include "player.h"
 #include "common.h"
 #include "main.h"
 

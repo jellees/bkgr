@@ -330,7 +330,6 @@ SECTIONS
         src/room.o(.text);
         asm/room.o(.text);
         src/player.o(.text);
-        src/player_actions.o(.text);
         src/pregame.o(.text);
         asm/chunk9.o(.text);
         src/alloc.o(.text);
