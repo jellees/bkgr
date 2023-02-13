@@ -7063,7 +7063,7 @@ _0802B49A:
 	cmp r0, r4
 	beq _0802B510
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	cmp r0, #0
 	beq _0802B4E4
 	movs r0, #1
@@ -16951,7 +16951,7 @@ _080308EC:
 	ldr r0, _08030918
 	strh r1, [r0]
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	movs r0, #1
 _0803090C:
 	pop {r4, r5, r6}
@@ -39743,7 +39743,7 @@ sub_803BB94: @ 0x0803BB94
 	movs r1, #0x52
 	strb r1, [r0]
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	movs r0, #0xd4
 	lsls r0, r0, #1
 	movs r1, #0
@@ -39773,7 +39773,7 @@ _0803BBD8: .4byte gGameStatus
 sub_803BBDC: @ 0x0803BBDC
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39781,7 +39781,7 @@ sub_803BBDC: @ 0x0803BBDC
 sub_803BBE8: @ 0x0803BBE8
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39789,7 +39789,7 @@ sub_803BBE8: @ 0x0803BBE8
 sub_803BBF4: @ 0x0803BBF4
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39797,7 +39797,7 @@ sub_803BBF4: @ 0x0803BBF4
 sub_803BC00: @ 0x0803BC00
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39805,7 +39805,7 @@ sub_803BC00: @ 0x0803BC00
 sub_803BC0C: @ 0x0803BC0C
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39813,7 +39813,7 @@ sub_803BC0C: @ 0x0803BC0C
 sub_803BC18: @ 0x0803BC18
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39821,7 +39821,7 @@ sub_803BC18: @ 0x0803BC18
 sub_803BC24: @ 0x0803BC24
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39829,7 +39829,7 @@ sub_803BC24: @ 0x0803BC24
 sub_803BC30: @ 0x0803BC30
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39837,7 +39837,7 @@ sub_803BC30: @ 0x0803BC30
 sub_803BC3C: @ 0x0803BC3C
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -39845,7 +39845,7 @@ sub_803BC3C: @ 0x0803BC3C
 sub_803BC48: @ 0x0803BC48
 	push {lr}
 	movs r0, #1
-	bl sub_80186F4
+	bl start_npc_dialogue
 	pop {r0}
 	bx r0
 
@@ -43409,7 +43409,7 @@ _0803D78C:
 	cmp r4, r0
 	bne _0803D7C8
 	movs r0, #0
-	bl sub_80186F4
+	bl start_npc_dialogue
 	b _0803D7DA
 	.align 2, 0
 _0803D7A4: .4byte 0x0203E128
@@ -43429,7 +43429,7 @@ _0803D7C8:
 	cmp r2, #0
 	bne _0803D7DA
 	movs r0, #0
-	bl sub_80186F4
+	bl start_npc_dialogue
 _0803D7DA:
 	pop {r4, r5, r6}
 	pop {r0}

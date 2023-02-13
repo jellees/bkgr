@@ -253,7 +253,7 @@ static void update_game(void) {
 
     if (gKeysDown & START_BUTTON && !(gPlayerStateSettings[gPlayerState] & 0x800) && !byte_20021F0
         && !byte_203F99C && gGameStatus.health && !gIsPaletteEffectsActive && !byte_203FA35) {
-        if ((gPlayerState != PLAYER_STATE_101 || gIsSlideMiniGame) && !byte_2000F57) {
+        if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
             if (byte_20020BC) {
                 sub_8016B0C();
                 sub_804087C();
@@ -343,7 +343,7 @@ static void update_game(void) {
         sub_8063B5C();
     }
 
-    if (!gIsSlideMiniGame && gPlayerState != PLAYER_STATE_101) {
+    if (!gIsSlideMiniGame && gPlayerState != PLAYER_STATE_NONE) {
         sub_8048C78();
     }
 
@@ -412,7 +412,7 @@ static void update_game(void) {
     draw_arcade_menu();
     gNullsub_4();
 
-    if (!gIsSlideMiniGame && gPlayerState != PLAYER_STATE_101) {
+    if (!gIsSlideMiniGame && gPlayerState != PLAYER_STATE_NONE) {
         sub_8009D2C();
         sub_805DF84(&dword_30032AC, &dword_30032CC);
         sub_800BAF0(&dword_30032AC, &dword_30032CC);

@@ -1343,7 +1343,7 @@ static void render_controls() {
 void init_arcade_menu() {
     int i;
 
-    if (gPlayerState == PLAYER_STATE_101) {
+    if (gPlayerState == PLAYER_STATE_NONE) {
         return;
     }
 
@@ -1431,7 +1431,7 @@ void init_arcade_menu() {
 
     gArcadeFadeIn = TRUE;
     sub_8026E48(4095, 1, 1);
-    sub_8016688();
+    set_player_state_to_none();
     byte_2000F56 = 1;
     gKeysDown = 0;
     sub_08040204(55, byte_203E16C);
@@ -1478,7 +1478,7 @@ void sub_8047000(bool32 a1) {
     SetObjectsFullAlpha();
 
     gArcadeFadeIn = TRUE;
-    sub_8016688();
+    set_player_state_to_none();
     byte_2000F56 = 1;
     gKeysDown = 0;
     sub_08040204(55, byte_203E16C);
@@ -1486,7 +1486,7 @@ void sub_8047000(bool32 a1) {
 }
 
 void exec_arcade_menu() {
-    if (gPlayerState != PLAYER_STATE_101) {
+    if (gPlayerState != PLAYER_STATE_NONE) {
         return;
     }
 
@@ -1566,7 +1566,7 @@ void exec_arcade_menu() {
 }
 
 void draw_arcade_menu() {
-    if (gPlayerState != PLAYER_STATE_101) {
+    if (gPlayerState != PLAYER_STATE_NONE) {
         return;
     }
 
