@@ -2909,7 +2909,7 @@ _08048CE8:
 _08048CF4: .4byte 0x03006EF1
 _08048CF8: .4byte 0x0200108D
 _08048CFC: .4byte 0x0200108E
-_08048D00: .4byte gPlayerStateSettings
+_08048D00: .4byte gPlayerStateFlags
 _08048D04: .4byte gPlayerState
 _08048D08: .4byte gGameStatus
 _08048D0C: .4byte byte_203F99C
@@ -17167,7 +17167,7 @@ _08050268:
 	.align 2, 0
 _08050270: .4byte 0x03006EF1
 _08050274: .4byte 0x03003578
-_08050278: .4byte gPlayerStateSettings
+_08050278: .4byte gPlayerStateFlags
 _0805027C: .4byte gPlayerState
 _08050280: .4byte gPlayerPos
 _08050284: .4byte 0x080CC6B0
@@ -18945,7 +18945,7 @@ _080510B4:
 	bx r0
 	.align 2, 0
 _080510BC: .4byte 0x0203F8CE
-_080510C0: .4byte gPlayerStateSettings
+_080510C0: .4byte gPlayerStateFlags
 _080510C4: .4byte gPlayerState
 _080510C8: .4byte 0x080CC6B0
 _080510CC: .4byte gPlayerPos
@@ -19015,7 +19015,7 @@ sub_80510F0: @ 0x080510F0
 	.align 2, 0
 _08051154: .4byte 0x03006EF1
 _08051158: .4byte 0x03003578
-_0805115C: .4byte gPlayerStateSettings
+_0805115C: .4byte gPlayerStateFlags
 _08051160: .4byte gPlayerState
 _08051164: .4byte gPlayerPos
 _08051168: .4byte 0x080CC6B0
@@ -19186,7 +19186,7 @@ _080512B4: .4byte 0x0200108D
 _080512B8: .4byte 0x0200108E
 _080512BC: .4byte gGameStatus
 _080512C0: .4byte byte_203F99C
-_080512C4: .4byte gPlayerStateSettings
+_080512C4: .4byte gPlayerStateFlags
 _080512C8: .4byte gPlayerState
 _080512CC: .4byte 0x080CC6B0
 _080512D0:
@@ -19771,7 +19771,7 @@ _0805175C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051764: .4byte gPlayerStateSettings
+_08051764: .4byte gPlayerStateFlags
 _08051768: .4byte gPlayerState
 
 	.thumb
@@ -27367,7 +27367,7 @@ _08055454:
 	bics r2, r0
 	b _08055494
 	.align 2, 0
-_08055468: .4byte gPlayerStateSettings
+_08055468: .4byte gPlayerStateFlags
 _0805546C: .4byte gPlayerState
 _08055470:
 	movs r2, #0
@@ -27398,7 +27398,7 @@ _08055498:
 	strb r0, [r1]
 	b _08055A0E
 	.align 2, 0
-_080554A4: .4byte gPlayerStateSettings
+_080554A4: .4byte gPlayerStateFlags
 _080554A8: .4byte gPlayerState
 _080554AC: .4byte 0x0203F960
 _080554B0: .4byte 0x0203F93D
@@ -27589,7 +27589,7 @@ _0805560A:
 	strb r0, [r6]
 	b _08055A0E
 	.align 2, 0
-_08055624: .4byte gPlayerStateSettings
+_08055624: .4byte gPlayerStateFlags
 _08055628: .4byte gPlayerState
 _0805562C: .4byte 0x0203F941
 _08055630: .4byte 0x0203F93F
@@ -28983,7 +28983,7 @@ _080561C4:
 	b _080564D6
 	.align 2, 0
 _0805621C: .4byte 0x0203F978
-_08056220: .4byte gPlayerStateSettings
+_08056220: .4byte gPlayerStateFlags
 _08056224: .4byte gPlayerState
 _08056228: .4byte 0x000004D7
 _0805622C: .4byte 0x0203F93D
@@ -29004,7 +29004,7 @@ _08056230:
 	movs r0, #0x78
 	b _0805625E
 	.align 2, 0
-_08056250: .4byte gPlayerStateSettings
+_08056250: .4byte gPlayerStateFlags
 _08056254: .4byte gPlayerState
 _08056258:
 	adds r1, r3, #0
@@ -29577,7 +29577,7 @@ _080566FC:
 	b _080567C8
 	.align 2, 0
 _08056708: .4byte 0x0203F978
-_0805670C: .4byte gPlayerStateSettings
+_0805670C: .4byte gPlayerStateFlags
 _08056710: .4byte gPlayerState
 _08056714: .4byte 0x0203F940
 _08056718: .4byte 0x0203F941
@@ -34829,7 +34829,7 @@ _08059048:
 	bl sub_8052960
 	b _080593C8
 	.align 2, 0
-_08059050: .4byte gPlayerStateSettings
+_08059050: .4byte gPlayerStateFlags
 _08059054: .4byte gPlayerState
 _08059058:
 	ldr r0, _0805906C
@@ -42337,7 +42337,7 @@ _0805CCB4:
 	beq _0805CCDA
 	b _0805CCF8
 	.align 2, 0
-_0805CCC8: .4byte gPlayerStateSettings
+_0805CCC8: .4byte gPlayerStateFlags
 _0805CCCC: .4byte gPlayerState
 _0805CCD0: .4byte 0x0203F93F
 _0805CCD4:
@@ -42628,7 +42628,7 @@ _0805CEFA:
 	movs r4, #0
 	b _0805CF42
 	.align 2, 0
-_0805CF30: .4byte gPlayerStateSettings
+_0805CF30: .4byte gPlayerStateFlags
 _0805CF34: .4byte gPlayerState
 _0805CF38: .4byte gGameStatus
 _0805CF3C:
@@ -42739,7 +42739,7 @@ _0805D000:
 	b _0805D150
 	.align 2, 0
 _0805D00C: .4byte 0x0203F93C
-_0805D010: .4byte gPlayerStateSettings
+_0805D010: .4byte gPlayerStateFlags
 _0805D014: .4byte gPlayerState
 _0805D018:
 	subs r0, #1
@@ -43656,7 +43656,7 @@ _0805D8B8:
 _0805D8C4: .4byte gCameraPixelX
 _0805D8C8: .4byte gCameraPixelY
 _0805D8CC: .4byte byte_203F99F
-_0805D8D0: .4byte gPlayerStateSettings
+_0805D8D0: .4byte gPlayerStateFlags
 _0805D8D4: .4byte gPlayerState
 
     .thumb
@@ -44075,7 +44075,7 @@ _0805DBF4: .4byte dword_200032C
 _0805DBF8: .4byte gKeyInput
 _0805DBFC: .4byte 0x000003FF
 _0805DC00: .4byte 0x0203F9F8
-_0805DC04: .4byte gPlayerStateSettings
+_0805DC04: .4byte gPlayerStateFlags
 _0805DC08: .4byte gPlayerState
 _0805DC0C: .4byte byte_203F9A1
 _0805DC10:
@@ -44242,7 +44242,7 @@ sub_805DD20: @ 0x0805DD20
 	.align 2, 0
 _0805DD6C: .4byte 0x0203FA12
 _0805DD70: .4byte 0x080B1AE4
-_0805DD74: .4byte gPlayerStateSettings
+_0805DD74: .4byte gPlayerStateFlags
 _0805DD78: .4byte gPlayerState
 
     .thumb
@@ -48444,7 +48444,7 @@ _0805FE20:
 	strb r1, [r0]
 	b _0805FF54
 	.align 2, 0
-_0805FE28: .4byte gPlayerStateSettings
+_0805FE28: .4byte gPlayerStateFlags
 _0805FE2C: .4byte gPlayerState
 _0805FE30: .4byte byte_203F99F
 _0805FE34:
@@ -48505,7 +48505,7 @@ _0805FE94:
 	b _0805FF26
 	.align 2, 0
 _0805FE98: .4byte 0x0203F9F4
-_0805FE9C: .4byte gPlayerStateSettings
+_0805FE9C: .4byte gPlayerStateFlags
 _0805FEA0: .4byte gPlayerState
 _0805FEA4: .4byte byte_203F9A1
 _0805FEA8:
@@ -50096,7 +50096,7 @@ _08060CA6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08060CAC: .4byte gPlayerStateSettings
+_08060CAC: .4byte gPlayerStateFlags
 _08060CB0: .4byte gPlayerState
 _08060CB4: .4byte gTransformation
 

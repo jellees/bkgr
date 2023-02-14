@@ -12,7 +12,7 @@ extern u8 byte_20020B3;
 extern int gBillDrillSfx;
 extern int gKazooieSfx;
 extern u8 byte_20020BC;
-extern u16 gPlayerStateSettings[PLAYER_STATE_COUNT];
+extern u16 gPlayerStateFlags[PLAYER_STATE_COUNT];
 extern u8 byte_20021C4;
 
 void sub_8016434();

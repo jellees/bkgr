@@ -21,7 +21,7 @@ u8 byte_20020B3;
 int gBillDrillSfx;
 int gKazooieSfx;
 u8 byte_20020BC;
-u16 gPlayerStateSettings[PLAYER_STATE_COUNT];
+u16 gPlayerStateFlags[PLAYER_STATE_COUNT];
 u8 byte_20021BE;
 u32 dword_20021C0;
 u8 byte_20021C4;
@@ -43,7 +43,7 @@ u32 dword_20021E8;
 u32 dword_20021EC;
 
 static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
-static const u16 word_8065104[PLAYER_STATE_COUNT];
+static const u16 sPlayerStateFlags[PLAYER_STATE_COUNT];
 
 static void sub_08019AAC(int a1, int a2);
 
@@ -77,7 +77,7 @@ void sub_8016440() {
     gUnlockedMoves[MOVE_11] = TRUE;
 
     for (i = 0; i < 128; i++) {
-        gPlayerStateSettings[i] = word_8065104[i];
+        gPlayerStateFlags[i] = sPlayerStateFlags[i];
     }
 }
 
@@ -240,7 +240,7 @@ static void sub_8016790(int a1, int a2) {
 }
 
 static void sub_8016890() {
-    if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) != 0) {
         sub_800DE9C();
     }
 
@@ -314,8 +314,8 @@ int sub_8016A5C(int a1) {
 }
 
 void sub_8016A94(int a1) {
-    if ((gPlayerStateSettings[gPlayerState] & 8) == 0 && gGameStatus.health != 0
-        && (gPlayerStateSettings[gPlayerState] & PLAYER_FLAGS_IS_DYING) == 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_HURTING) == 0 && gGameStatus.health != 0
+        && (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING) == 0) {
         sub_08040204(56, a1);
         byte_20020BC = 1;
         byte_200108E = 1;
@@ -391,10 +391,10 @@ void sub_8016C78(u8 a1) {
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
         sub_8016790(0, gPlayerSprite.field_A);
     } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
-        if ((gPlayerStateSettings[gPlayerState] & 0x100) != 0) {
+        if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) != 0) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0) {
+        } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM_IDLE;
             sub_8003368(&gPlayerSprite, 473, 0, 0);
@@ -408,16 +408,16 @@ void sub_8016C78(u8 a1) {
             sub_8016790(0, gPlayerSprite.field_A);
         }
     } else {
-        if ((gPlayerStateSettings[gPlayerState] & 0x100) != 0) {
+        if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) != 0) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0) {
+        } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM_IDLE;
             sub_8003368(&gPlayerSprite, 105, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPlayerState] & 0x8000) != 0) {
+        } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_IDLE;
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
@@ -430,13 +430,13 @@ void sub_8016C78(u8 a1) {
                 gKazooieSfx = -1;
             }
             sub_8016790(15, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
+        } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_IDLE;
             sub_8003368(&gPlayerSprite, 257, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPlayerState] & 0x4000) != 0) {
+        } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_WONDERWING_MODE) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_IDLE;
             sub_8003368(&gPlayerSprite, 505, 0, 0);
@@ -697,7 +697,7 @@ static void do_octopus_jump() {
         return;
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0) {
         sub_8017D9C();
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_OCTOPUS_WATER_JUMP;
@@ -797,17 +797,17 @@ void sub_8017B34(int a1) {
 }
 
 void sub_8017C50() {
-    if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0
-        || (gPlayerStateSettings[gPlayerState] & 0x800) != 0
-        || (gPlayerStateSettings[gPlayerState] & 0x400) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0
+        || (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) != 0
+        || (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) != 0) {
         return;
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) != 0) {
         sub_800DE9C();
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x4000) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_WONDERWING_MODE) != 0) {
         sub_0804200C(3);
     }
 
@@ -843,7 +843,7 @@ void sub_8017C50() {
 }
 
 void sub_8017D9C() {
-    if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0) {
         gPlayerShadowSprite.field_13 = 0;
         if (gTransformation == TRANSFORMATION_OCTOPUS) {
             gPreviousPlayerState = gPlayerState;
@@ -862,7 +862,7 @@ void sub_8017E1C() {
         return;
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x40) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING) != 0) {
         return;
     }
 
@@ -870,11 +870,11 @@ void sub_8017E1C() {
         return;
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) != 0) {
         sub_800DE9C();
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x400) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) != 0) {
         if (sub_80038AC(dword_2000FC8)) {
             sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.field_A], 0);
         }
@@ -897,7 +897,7 @@ void sub_8017E1C() {
 }
 
 void sub_8017F14() {
-    if ((gPlayerStateSettings[gPlayerState] & 0x40) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING) != 0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
         sub_8003368(&gPlayerSprite, 25, 0, 0);
@@ -944,7 +944,7 @@ static void do_bill_drill() {
 }
 
 void sub_80181B8(fx32* height) {
-    if ((gPlayerStateSettings[gPlayerState] & 0x20) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_FALLING_FROM_LEDGE) != 0) {
         return;
     }
 
@@ -1108,7 +1108,7 @@ static void shoot_octopus_projectile() {
 }
 
 bool32 start_npc_dialogue(int a1) {
-    if ((gPlayerStateSettings[gPlayerState] & 0x400) != 0 || byte_203E16A || byte_203E16B
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) != 0 || byte_203E16A || byte_203E16B
         || !gGameStatus.health) {
         return FALSE;
     }
@@ -1127,7 +1127,7 @@ bool32 start_npc_dialogue(int a1) {
         gBillDrillSfx = -1;
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) != 0) {
         sub_800DE9C();
     }
 
@@ -1155,31 +1155,31 @@ static void sub_08018824() {
     }
 
     if (gTransformation == TRANSFORMATION_BANJO) {
-        if ((gPlayerStateSettings[gPreviousPlayerState] & 0x200) != 0) {
+        if ((gPlayerStateFlags[gPreviousPlayerState] & 0x200) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM_IDLE;
             sub_8003368(&gPlayerSprite, 105, 0, 0);
             sub_8016790(17, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x8000) != 0) {
+        } else if ((gPlayerStateFlags[gPreviousPlayerState] & 0x8000) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_IDLE;
             sub_8016790(15, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPreviousPlayerState] & 4) != 0) {
+        } else if ((gPlayerStateFlags[gPreviousPlayerState] & 4) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_IDLE;
             sub_8016790(0, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x4000) != 0) {
+        } else if ((gPlayerStateFlags[gPreviousPlayerState] & 0x4000) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_IDLE;
             sub_08040204(3, gGameStatus.goldenFeathers);
             sub_08041FA4(3);
             sub_8016790(5, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x100) != 0) {
+        } else if ((gPlayerStateFlags[gPreviousPlayerState] & 0x100) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_DIVE_SINK;
             sub_8003368(&gPlayerSprite, 57, 0, 0);
             sub_8016790(21, gPlayerSprite.field_A);
-        } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x1000) != 0) {
+        } else if ((gPlayerStateFlags[gPreviousPlayerState] & 0x1000) != 0) {
             gPlayerState = gPreviousPlayerState;
             sub_8016790(0, gPlayerSprite.field_A);
         } else {
@@ -1204,7 +1204,7 @@ static void sub_08018824() {
         sub_8003368(&gPlayerSprite, 417, 0, 0);
         sub_8016790(0, gPlayerSprite.field_A);
     } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
-        if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0) {
+        if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM_IDLE;
             sub_8003368(&gPlayerSprite, 473, 0, 0);
@@ -1223,14 +1223,14 @@ static void sub_08018824() {
 
 void sub_08018A94(int a1) {
     if (gTransformation == TRANSFORMATION_BANJO) {
-        if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0) {
+        if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0) {
             gPlayerSprite.field_A = a1;
             sub_8003368(&gPlayerSprite, 105, 0, 0);
-        } else if ((gPlayerStateSettings[gPlayerState] & 0x8000) != 0) {
+        } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) != 0) {
             gPlayerSprite.field_A = a1;
             sub_800378C(&gPlayerSprite, 6);
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
-        } else if ((gPlayerStateSettings[gPlayerState] & 0x4) != 0) {
+        } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) != 0) {
             gPlayerSprite.field_A = a1;
             sub_8003368(&gPlayerSprite, 257, 0, 0);
         } else {
@@ -1247,7 +1247,7 @@ void sub_08018A94(int a1) {
         gPlayerSprite.field_A = a1;
         sub_8003368(&gPlayerSprite, 417, 0, 0);
     } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
-        if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0) {
+        if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0) {
             gPlayerSprite.field_A = a1;
             sub_8003368(&gPlayerSprite, 473, 0, 0);
         } else {
@@ -1260,7 +1260,7 @@ void sub_08018A94(int a1) {
 }
 
 bool32 sub_8018BB0(const struct Sprite* playerSprite) {
-    if ((gPlayerStateSettings[gPlayerState] & 0x400) == 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) == 0) {
         return TRUE;
     }
 
@@ -1480,7 +1480,7 @@ void sub_80192D4(int a1, int a2, int a3) {
         return;
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x4000) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_WONDERWING_MODE) != 0) {
         sub_0804200C(3);
     }
 
@@ -1488,7 +1488,7 @@ void sub_80192D4(int a1, int a2, int a3) {
 
     if (gTransformation != TRANSFORMATION_BANJO) {
         sub_08019AAC(a2, a3);
-    } else if ((gPlayerStateSettings[gPlayerState] & 0x100) != 0) {
+    } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) != 0) {
         switch (a3) {
             case 2:
                 gPreviousPlayerState = gPlayerState;
@@ -1516,7 +1516,7 @@ void sub_80192D4(int a1, int a2, int a3) {
         sub_8003368(&gPlayerSprite, 537, 0, 1);
         sub_8016790(0, gPlayerSprite.field_A);
         PLAY_SFX(RandomMinMax(4, 5));
-    } else if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
+    } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) != 0) {
         switch (a3) {
             case 2:
                 gPreviousPlayerState = gPlayerState;
@@ -1544,7 +1544,7 @@ void sub_80192D4(int a1, int a2, int a3) {
 
         sub_8016790(0, gPlayerSprite.field_A);
         PLAY_SFX(RandomMinMax(4, 5));
-    } else if ((gPlayerStateSettings[gPlayerState] & 0x8000) != 0) {
+    } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) != 0) {
         switch (a3) {
             case 2:
                 gPreviousPlayerState = gPlayerState;
@@ -1638,19 +1638,19 @@ void sub_80192D4(int a1, int a2, int a3) {
 
 void sub_801990C() {
     sub_8026714();
-    if ((gPlayerStateSettings[gPlayerState] & 0x4000) != 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_WONDERWING_MODE) != 0) {
         sub_0804200C(3);
     }
 
     if (gTransformation != TRANSFORMATION_BANJO) {
         sub_08019AAC(-1, 2);
-    } else if ((gPlayerStateSettings[gPlayerState] & 0x100) != 0) {
+    } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) != 0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_DIVE_HURT;
         sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[(gPlayerSprite.field_A + 4) & 7], 0);
         sub_8003368(&gPlayerSprite, 537, 0, 1);
         sub_8016790(0, gPlayerSprite.field_A);
-    } else if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
+    } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) != 0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_SHOOTER_HURT;
         sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[(gPlayerSprite.field_A + 4) & 7], 0);
@@ -1773,7 +1773,7 @@ static void sub_08019AAC(int a1, int a2) {
         sub_8016790(0, gPlayerSprite.field_A);
         PLAY_SFX(RandomMinMax(4, 5));
     } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
-        if ((gPlayerStateSettings[gPlayerState] & 0x100) != 0) {
+        if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) != 0) {
             switch (a2) {
                 case 2:
                     gPreviousPlayerState = gPlayerState;
@@ -3818,10 +3818,10 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
 
     if (v4 != 0xFF && gGameStatus.health != 0) {
         if (gTransformation == TRANSFORMATION_BANJO) {
-            if ((gPlayerStateSettings[gPreviousPlayerState] & 0x200) != 0) {
+            if ((gPlayerStateFlags[gPreviousPlayerState] & 0x200) != 0) {
                 gPlayerSprite.field_A = v4;
                 sub_8003368(&gPlayerSprite, 105, 0, 0);
-            } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x8000) != 0) {
+            } else if ((gPlayerStateFlags[gPreviousPlayerState] & 0x8000) != 0) {
                 sub_800378C(&gPlayerSprite, 6);
                 if (gKazooieSfx != -1) {
                     if (gCanPlaySfx) {
@@ -3829,13 +3829,13 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
                     }
                     gKazooieSfx = -1;
                 }
-            } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x4) != 0) {
+            } else if ((gPlayerStateFlags[gPreviousPlayerState] & 0x4) != 0) {
                 sub_8003368(&gPlayerSprite, 257, 0, 0);
-            } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x4000) != 0) {
+            } else if ((gPlayerStateFlags[gPreviousPlayerState] & 0x4000) != 0) {
                 gPlayerSprite.field_A = v4;
                 sub_8003368(&gPlayerSprite, 505, 0, 0);
                 sub_0804200C(3);
-            } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x1000) == 0) {
+            } else if ((gPlayerStateFlags[gPreviousPlayerState] & 0x1000) == 0) {
                 gPlayerSprite.field_A = v4;
                 sub_8003368(&gPlayerSprite, 25, 0, 0);
             }
@@ -3849,7 +3849,7 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
             gPlayerSprite.field_A = v4;
             sub_8003368(&gPlayerSprite, 417, 0, 0);
         } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
-            if ((gPlayerStateSettings[gPreviousPlayerState] & 0x200) != 0) {
+            if ((gPlayerStateFlags[gPreviousPlayerState] & 0x200) != 0) {
                 gPlayerSprite.field_A = v4;
                 sub_8003368(&gPlayerSprite, 473, 0, 0);
             } else {
@@ -7703,7 +7703,7 @@ static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
     state_none,
 };
 
-static const u16 word_8065104[PLAYER_STATE_COUNT] = {
+static const u16 sPlayerStateFlags[PLAYER_STATE_COUNT] = {
     /* 0   */ PLAYER_FLAGS_NOT_MOVING,
     /* 1   */ PLAYER_FLAGS_IN_AIR | PLAYER_FLAGS_BIT11,
     /* 2   */ PLAYER_FLAGS_NOT_MOVING,

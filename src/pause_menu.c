@@ -324,7 +324,7 @@ void open_pause_menu() {
 }
 
 static void init() {
-    sub_8040B3C(gPlayerStateSettings[gPlayerState] & 0x100);
+    sub_8040B3C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
 
     InitMenu(MENU_PAUSE_MAIN, gPauseMenuLanguage);
     gMenuId = MENU_PAUSE_MAIN;
@@ -370,7 +370,9 @@ static void exec_pause_menu() {
 
     while (1) {
         if (gMenuId == 1) {
-            byte_203F54C = sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100) && !loadMenu ? 1 : 0;
+            byte_203F54C =
+                sub_8040E8C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) && !loadMenu ? 1
+                                                                                                   : 0;
         } else {
             byte_203F54C = !loadMenu ? 1 : 0;
         }
@@ -379,13 +381,13 @@ static void exec_pause_menu() {
             ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
             if (gKeysDown & START_BUTTON) {
-                if (sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100)) {
+                if (sub_8040E8C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
                     loadMenu = TRUE;
                     sub_8040E74();
                 }
             } else if (gKeysDown & B_BUTTON) {
                 if (gMenuParentId == 0xFF) {
-                    if (sub_8040E8C(gPlayerStateSettings[gPlayerState] & 0x100)) {
+                    if (sub_8040E8C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
                         loadMenu = TRUE;
                         sub_8040E74();
                     }
@@ -395,7 +397,7 @@ static void exec_pause_menu() {
                     switch (gMenuId) {
                         case MENU_PAUSE_MAIN:
                             gMenuParentId = 0xFF;
-                            sub_8040B3C(gPlayerStateSettings[gPlayerState] & 0x100);
+                            sub_8040B3C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
                             break;
 
                         default:
@@ -414,7 +416,7 @@ static void exec_pause_menu() {
                 if (changeMenu) {
                     changeMenu = FALSE;
                     InitMenu(gMenuId, gPauseMenuLanguage);
-                    sub_8040B3C(gPlayerStateSettings[gPlayerState] & 0x100);
+                    sub_8040B3C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
                     SetObjectsFullAlpha();
                     fadeIn = 1;
                 }
@@ -427,7 +429,7 @@ static void exec_pause_menu() {
             }
         }
 
-        if (loadMenu && sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
+        if (loadMenu && sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
             if (gMenuId == MENU_PAUSE_MAIN)
                 break;
 
@@ -575,7 +577,7 @@ static void exec_totals_menu() {
     bool32 loadNextPage;
     bool32 fadeIn;
 
-    while (!sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
+    while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
         sub_804087C();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
@@ -759,7 +761,7 @@ static bool32 exec_save_menu() {
     textbox.field_11 = 6;
     textbox.font = &font_80B01A8[1];
 
-    while (!sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
+    while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
         sub_804087C();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
@@ -1088,7 +1090,7 @@ static void exec_options_menu() {
     sfxText[4] = '}';
     sfxText[5] = -1;
 
-    while (!sub_8040FF4(gPlayerStateSettings[gPlayerState] & 0x100)) {
+    while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
         sub_804087C();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);

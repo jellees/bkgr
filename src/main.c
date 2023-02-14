@@ -239,7 +239,8 @@ static void update_game(void) {
     gNullsub_3();
     sub_806127C();
 
-    if (word_203F998 == 12 && byte_20021F8 && !(gPlayerStateSettings[gPlayerState] & 0x800)) {
+    if (word_203F998 == 12 && byte_20021F8
+        && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
         if (byte_2000F55 || gKeysDown & B_BUTTON) {
             sub_80271A4(0xFFF, 1);
             sub_805E1DC(2);
@@ -251,8 +252,9 @@ static void update_game(void) {
         sub_8015FD4();
     }
 
-    if (gKeysDown & START_BUTTON && !(gPlayerStateSettings[gPlayerState] & 0x800) && !byte_20021F0
-        && !byte_203F99C && gGameStatus.health && !gIsPaletteEffectsActive && !byte_203FA35) {
+    if (gKeysDown & START_BUTTON && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)
+        && !byte_20021F0 && !byte_203F99C && gGameStatus.health && !gIsPaletteEffectsActive
+        && !byte_203FA35) {
         if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
             if (byte_20020BC) {
                 sub_8016B0C();
@@ -291,13 +293,13 @@ static void update_game(void) {
             gKeysDown = 0;
             gKeysPressed = 0;
 
-            if (gPlayerStateSettings[gPlayerState] & 0x100
+            if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING
                 && gTransformation != TRANSFORMATION_OCTOPUS) {
                 sub_08040204(57, gGameStatus.field_16);
                 sub_08041FA4(57);
             }
 
-            if (gPlayerStateSettings[gPlayerState] & 4) {
+            if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) {
                 sub_800DE04();
             }
         }
@@ -318,8 +320,8 @@ static void update_game(void) {
                 }
             } else {
                 sub_80038A4(dword_2000FC8);
-                if ((gPlayerStateSettings[gPlayerState] & 0x800)
-                    || (gPlayerStateSettings[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
+                if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)
+                    || (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
                     update_player_state_machine(gKeysPressed, gKeysDown);
                 }
             }
@@ -385,7 +387,7 @@ static void update_game(void) {
     show_room_name();
     sub_804095C();
 
-    if (gPlayerStateSettings[gPlayerState] & 0x800) {
+    if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) {
         if (byte_2000F5D) {
             sub_8025948(0);
 
@@ -805,7 +807,7 @@ static void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
     }
 
     if (byte_203DFE6) {
-        if (gPlayerStateSettings[gPlayerState] & 0x400) {
+        if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) {
             u32 y = dword_203DFC4->field_98;
             a1->y = y;
             a2->y = y;
@@ -830,7 +832,7 @@ static void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
 
 static bool32 sub_800A7DC(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (byte_203DFE6) {
-        if (gPlayerStateSettings[gPlayerState] & 0x400) {
+        if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) {
             if (!sub_8018BB0(&gPlayerSprite)) {
                 return TRUE;
             }
@@ -870,8 +872,8 @@ static bool32 sub_0800A8B4() {
     if (gGameStatus.health != 0 && gFloorPlaneResult.isColliding && stru_3002950.warpDestRoom != 0
         && gFloorPlaneResult.warpDestRoom == stru_3002950.warpDestRoom) {
         if (stru_3002950.warpDestRoom & 0x80) {
-            if (gPlayerStateSettings[gPlayerState] & 0x100
-                && !(gPlayerStateSettings[gPlayerState] & 0x80)) {
+            if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING
+                && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START)) {
                 ASSERT((stru_3002950.warpDestRoom & 0x7F) - 1 <= 0x25);
 
                 if (sub_0800BCD4(&stru_3002950)) {
@@ -882,7 +884,7 @@ static bool32 sub_0800A8B4() {
             ASSERT(gFloorPlaneResult.warpDestRoom - 1 <= 0x25);
 
             if (sub_0800BCD4(&gFloorPlaneResult)) {
-                if (gPlayerStateSettings[gPlayerState] & 0x100) {
+                if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) {
                     sub_8017A54();
                 }
 
@@ -907,7 +909,7 @@ static bool32 sub_800A974() {
 
         sub_8017C50();
     } else {
-        if (gPlayerStateSettings[gPlayerState] & 0x200) {
+        if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
             sub_8017D9C();
         }
     }
@@ -937,7 +939,7 @@ static void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3,
     a1->x = gPlayerPos.x + a.x;
     a2->x = gPlayerShadowPos.x + a.x;
 
-    if (!(gPlayerStateSettings[gPlayerState] & 0x40)) {
+    if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING)) {
         a1->y = gPlayerPos.y + a.y;
         if (a1->y >= dword_2001088)
             a1->y = gPlayerPos.y;
@@ -965,7 +967,7 @@ static void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3,
 }
 
 static bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2) {
-    if (!(gPlayerStateSettings[gPlayerState] & 0x400)) {
+    if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11)) {
         struct Vec3fx a;
         a.x = a1->x;
         a.y = a1->y + FX32_CONST(18);
@@ -1000,7 +1002,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
 
         if (gFloorPlaneResult.field_4E && !byte_200108E && gTransformation != TRANSFORMATION_OCTOPUS
             && gTransformation != TRANSFORMATION_TANK
-            && !(gPlayerStateSettings[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
+            && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
             sub_80192D4(gFloorPlaneResult.field_4E, -1, 1);
             byte_200108E = 1;
             word_2001092 = gFloorPlaneResult.field_4F;
@@ -1132,7 +1134,7 @@ static bool32 sub_800AEFC(struct Vec3fx* a1, struct Vec3fx* a2, char* a3) {
         }
     }
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x100)) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
         return TRUE;
     }
 
@@ -1233,7 +1235,7 @@ static bool32 sub_0800B04C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* 
             return TRUE;
         }
     } else {
-        if (gPlayerStateSettings[gPlayerState] & 0x400) {
+        if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) {
             gPlayerPosTemp.x = gPlayerPos.x;
             gPlayerPosTemp.z = gPlayerPos.z;
             gPlayerShadowPosTemp.x = gPlayerShadowPos.x;
@@ -1271,7 +1273,7 @@ static void update_player() {
     sub_80039CC(c, &gPlayerPosTemp, &stru_300331C, 0);
     sub_8006974(c, &vec1);
 
-    if (gPlayerStateSettings[gPlayerState] & 0x40) {
+    if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING) {
         if (!sub_800AB54(&gPlayerPosTemp, &gPlayerShadowPosTemp)) {
             return;
         }
@@ -1285,7 +1287,7 @@ static void update_player() {
             sub_08009208(&vec2, &stru_3002950);
         }
 
-        if (gPlayerStateSettings[gPlayerState] & 0x400) {
+        if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) {
             if (sub_80038BC(dword_2000FC8)) {
                 sub_8007434(c, &gFloorPlaneResult);
             } else {
@@ -1295,7 +1297,7 @@ static void update_player() {
             sub_8007434(c, &gFloorPlaneResult);
         }
 
-        if (!(gPlayerStateSettings[gPlayerState] & 0x400) && !gFloorPlaneResult.isColliding
+        if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) && !gFloorPlaneResult.isColliding
             && gFloorPlaneResult.field_2C != FX32_CONST(90)
             && (stru_3002950.field_2C != gFloorPlaneResult.field_2C
                 || stru_3002950.field_28 != gFloorPlaneResult.field_28)) {
@@ -1323,8 +1325,8 @@ static void update_player() {
 
             sub_800AD64();
 
-            if (!(gPlayerStateSettings[gPlayerState] & 0x400)
-                && !(gPlayerStateSettings[gPlayerState] & 0x100)) {
+            if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11)
+                && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
                 sub_800E61C();
 
                 if ((!gWallPlaneResult.isColliding
@@ -1346,7 +1348,8 @@ static void update_player() {
                     sub_0800B04C(&vec3, &gPlayerPosTemp, &gPlayerShadowPosTemp, c);
                 }
 
-                if (gPlayerStateSettings[gPlayerState] & 0x100 && gWallPlaneResult.isColliding) {
+                if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING
+                    && gWallPlaneResult.isColliding) {
                     gPlayerPosTemp.x = gPlayerPos.x;
                     gPlayerPosTemp.z = gPlayerPos.z;
                     gPlayerShadowPosTemp.x = gPlayerShadowPos.x;
@@ -1362,7 +1365,7 @@ static void update_player() {
                     gPlayerShadowPos.z = gPlayerShadowPosTemp.z;
 
                     if (byte_30029F8 && !sub_80038BC(dword_2000FC8)
-                        && !(gPlayerStateSettings[gPlayerState] & 0x100)) {
+                        && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
                         sub_800387C(dword_2000FC8);
                         sub_80181B8(&gPlayerPos.y);
                     }
@@ -1576,10 +1579,10 @@ void sub_800B958(int a1, int a2, int a3, int a4, int a5) {
         gPlayerShadowSprite.yPos = v11;
         if (v11 + 20 >= 248 || v10 < -20 || v10 > 260) {
             gPlayerShadowSprite.field_13 = 1;
-        } else if (!(gPlayerStateSettings[gPlayerState] & 0x200)
-                       && !(gPlayerStateSettings[gPlayerState] & 0x80)
-                       && !(gPlayerStateSettings[gPlayerState] & 0x800)
-                   || gPlayerStateSettings[gPlayerState] & 0x100) {
+        } else if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING)
+                       && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START)
+                       && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)
+                   || gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) {
             gPlayerShadowSprite.field_13 = 0;
         }
     }
@@ -1636,10 +1639,11 @@ static void sub_800BAF0(u32** a1, u32* a2) {
     *a1 = v6 + 3;
     ++*a2;
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x200) != 0
-        || (gPlayerStateSettings[gPlayerState] & 0x80) != 0 || !sub_800397C(v14, v9, a4)) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0
+        || (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START) != 0
+        || !sub_800397C(v14, v9, a4)) {
         gPlayerShadowSprite.field_13 = 1;
-    } else if ((gPlayerStateSettings[gPlayerState] & 0x800) == 0) {
+    } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) == 0) {
         gPlayerShadowSprite.field_13 = 0;
     }
 
@@ -1970,10 +1974,10 @@ int sub_800C50C() {
 
     pos = gPlayerPos.y - gPlayerShadowPos.y;
 
-    if ((gPlayerStateSettings[gPlayerState] & 0x400) == 0) {
+    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) == 0) {
         if (pos != 0) {
-            if ((gPlayerStateSettings[gPlayerState] & 0x100) == 0
-                && (gPlayerStateSettings[gPlayerState] & 0x40) == 0) {
+            if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) == 0
+                && (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING) == 0) {
                 return gFloorPlaneResult.playerSpritePriority;
             } else {
                 return stru_3002950.playerSpritePriority;
@@ -2855,7 +2859,7 @@ static void sub_800DF34() {
     if (!word_200112C && !byte_200113D) {
         sprite_2000FAC.field_13 = 1;
 
-        if ((gPlayerStateSettings[gPlayerState] & 0x800) == 0) {
+        if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) == 0) {
             sub_800E7A0();
 
             if (gGameStatus.health) {
