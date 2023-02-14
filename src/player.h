@@ -1,8 +1,19 @@
 #ifndef GUARD_PLAYER_H
 #define GUARD_PLAYER_H
 
-#include "gba/gba.h"
-#include "sprite.h"
+#include "player_enums.h"
+
+extern u16 gPreviousPlayerState;
+extern u16 gPlayerState;
+extern bool8 gUnlockedMoves[MOVE_COUNT];
+extern u8 gTransformation;
+extern u8 byte_20020B2;
+extern u8 byte_20020B3;
+extern int gBillDrillSfx;
+extern int gKazooieSfx;
+extern u8 byte_20020BC;
+extern u16 gPlayerStateSettings[PLAYER_STATE_COUNT];
+extern u8 byte_20021C4;
 
 void sub_8016434();
 void sub_8016440();

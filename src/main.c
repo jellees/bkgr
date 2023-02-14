@@ -261,16 +261,15 @@ static void update_game(void) {
 
             sub_80409DC();
 
-            if (dword_20020B8 != -1) {
+            if (gKazooieSfx != -1) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20020B8);
+                    audio_halt_fx(gKazooieSfx);
                 }
-
-                dword_20020B8 = -1;
+                gKazooieSfx = -1;
             }
 
-            if (audio_fx_still_active(dword_20020B4) && gCanPlaySfx) {
-                audio_halt_fx(dword_20020B4);
+            if (audio_fx_still_active(gBillDrillSfx) && gCanPlaySfx) {
+                audio_halt_fx(gBillDrillSfx);
             }
 
             if (gPlayerState == PLAYER_STATE_35) {
@@ -1021,8 +1020,8 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
         a.z = a1->z;
         if (sub_800953C(&a)) {
             if (sub_8018BB0(&gPlayerSprite)) {
-                if (audio_fx_still_active(dword_20020B4) && gCanPlaySfx) {
-                    audio_halt_fx(dword_20020B4);
+                if (audio_fx_still_active(gBillDrillSfx) && gCanPlaySfx) {
+                    audio_halt_fx(gBillDrillSfx);
                 }
 
                 sub_8017E1C();
@@ -2964,7 +2963,7 @@ void sub_800E204(u8* buffer, s32* a2, u32* a3) {
         r6 += buffer[r5++];
     }
 
-    buffer[r5] = gGameStatus.field_12;
+    buffer[r5] = gGameStatus.goldenFeathers;
     r6 += buffer[r5++];
     buffer[r5] = gGameStatus.maxHealth;
     r6 += buffer[r5++];
@@ -3042,7 +3041,7 @@ void sub_800E408(u8* buffer, s32* a2, u32* a3) {
         r6 += buffer[r5++];
     }
 
-    gGameStatus.field_12 = buffer[r5];
+    gGameStatus.goldenFeathers = buffer[r5];
     r6 += buffer[r5++];
     gGameStatus.maxHealth = buffer[r5];
     r6 += buffer[r5++];
@@ -3964,6 +3963,6 @@ void sub_800FA58() {
     gGameStatus.eggs[1] = stru_80CC8C4.eggs[1];
     gGameStatus.eggs[3] = stru_80CC8C4.eggs[3];
     gGameStatus.eggs[2] = stru_80CC8C4.eggs[2];
-    gGameStatus.field_12 = stru_80CC8C4.field_12;
+    gGameStatus.goldenFeathers = stru_80CC8C4.goldenFeathers;
     sub_803FE78();
 }

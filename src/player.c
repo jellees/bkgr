@@ -5,7 +5,42 @@
 #include "debug.h"
 #include "room.h"
 #include "sprite.h"
+#include "player_enums.h"
 #include "common.h"
+
+u16 gPreviousPlayerState;
+u16 gPlayerState;
+u8 gFeatherTime;
+u8 gFeatherTimer;
+u16 word_2002096;
+u16 word_2002098;
+bool8 gUnlockedMoves[MOVE_COUNT];
+u8 gTransformation;
+u8 byte_20020B2;
+u8 byte_20020B3;
+int gBillDrillSfx;
+int gKazooieSfx;
+u8 byte_20020BC;
+u16 gPlayerStateSettings[PLAYER_STATE_COUNT];
+u8 byte_20021BE;
+u32 dword_20021C0;
+u8 byte_20021C4;
+u8 byte_20021C5;
+u8 byte_20021C6;
+u8 byte_20021C7;
+u8 byte_20021C8;
+u8 byte_20021C9;
+u8 byte_20021CA;
+u8 byte_20021CB;
+u32 dword_20021CC;
+u32 dword_20021D0;
+u32 dword_20021D4;
+u32 dword_20021D8;
+int gTankSfx;
+s32 dword_20021E0;
+u32 dword_20021E4;
+u32 dword_20021E8;
+u32 dword_20021EC;
 
 static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
 static const u16 word_8065104[PLAYER_STATE_COUNT];
@@ -26,9 +61,9 @@ void sub_8016440() {
     byte_20020B3 = 0;
     byte_20021BE = 0;
     byte_20021C4 = 1;
-    dword_20020B8 = -1;
-    dword_20020B4 = -1;
-    dword_20021DC = -1;
+    gKazooieSfx = -1;
+    gBillDrillSfx = -1;
+    gTankSfx = -1;
 
     for (i = 0; i < MOVE_COUNT; i++) {
         gUnlockedMoves[i] = FALSE;
@@ -226,8 +261,8 @@ static void sub_8016890() {
             sub_8003368(&gPlayerSprite, 345, 0, 1);
         }
     } else if (gTransformation == TRANSFORMATION_TANK) {
-        if (audio_fx_still_active(dword_20021DC) && gCanPlaySfx) {
-            audio_halt_fx(dword_20021DC);
+        if (audio_fx_still_active(gTankSfx) && gCanPlaySfx) {
+            audio_halt_fx(gTankSfx);
         }
         gPlayerState = PLAYER_STATE_TANK_DIE;
         if (byte_20020B3) {
@@ -388,11 +423,11 @@ void sub_8016C78(u8 a1) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_800378C(&gPlayerSprite, 6);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
-            if (dword_20020B8 != -1) {
+            if (gKazooieSfx != -1) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20020B8);
+                    audio_halt_fx(gKazooieSfx);
                 }
-                dword_20020B8 = -1;
+                gKazooieSfx = -1;
             }
             sub_8016790(15, gPlayerSprite.field_A);
         } else if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
@@ -426,11 +461,11 @@ static bool32 interact_with_object() {
 
     didInteract = TRUE;
 
-    if (dword_20020B8 != -1) {
+    if (gKazooieSfx != -1) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B8);
+            audio_halt_fx(gKazooieSfx);
         }
-        dword_20020B8 = -1;
+        gKazooieSfx = -1;
     }
 
     switch (word_203DFCA) {
@@ -507,8 +542,8 @@ static bool32 interact_with_object() {
                 didInteract = FALSE;
                 break;
             }
-            if (!gGameStatus.field_12) {
-                sub_08040204(3, gGameStatus.field_12);
+            if (!gGameStatus.goldenFeathers) {
+                sub_08040204(3, gGameStatus.goldenFeathers);
                 didInteract = FALSE;
                 break;
             }
@@ -518,8 +553,8 @@ static bool32 interact_with_object() {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(5, gPlayerSprite.field_A);
             PLAY_SFX(206);
-            byte_2002094 = 180;
-            byte_2002095 = 180;
+            gFeatherTime = 180;
+            gFeatherTimer = 180;
             break;
 
         default:
@@ -589,11 +624,11 @@ static void do_kazooie_jump() {
     dword_20021E0 = 0xFFFFE000;
     CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(4), 0xFFFFE000);
     byte_20021CB = 1;
-    if (dword_20020B8 != -1) {
+    if (gKazooieSfx != -1) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B8);
+            audio_halt_fx(gKazooieSfx);
         }
-        dword_20020B8 = -1;
+        gKazooieSfx = -1;
     }
     PLAY_SFX(20);
     sub_8016790(15, gPlayerSprite.field_A);
@@ -789,16 +824,16 @@ void sub_8017C50() {
     sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
     gPlayerShadowSprite.field_13 = 1;
 
-    if (dword_20020B8 != -1) {
+    if (gKazooieSfx != -1) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B8);
+            audio_halt_fx(gKazooieSfx);
         }
-        dword_20020B8 = -1;
+        gKazooieSfx = -1;
     }
 
-    if (audio_fx_still_active(dword_20020B4)) {
+    if (audio_fx_still_active(gBillDrillSfx)) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B4);
+            audio_halt_fx(gBillDrillSfx);
         }
     }
 
@@ -852,11 +887,11 @@ void sub_8017E1C() {
     gPreviousPlayerState = gPlayerState;
     gPlayerState = PLAYER_STATE_CLIMB;
     sub_8003368(&gPlayerSprite, 121, 0, 0);
-    if (dword_20020B8 != -1) {
+    if (gKazooieSfx != -1) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B8);
+            audio_halt_fx(gKazooieSfx);
         }
-        dword_20020B8 = -1;
+        gKazooieSfx = -1;
     }
     sub_8016790(0, gPlayerSprite.field_A);
 }
@@ -903,7 +938,7 @@ static void do_bill_drill() {
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3000);
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
         byte_20021C5 = 1;
-        dword_20020B4 = PLAY_SFX(23);
+        gBillDrillSfx = PLAY_SFX(23);
         sub_8016790(0, gPlayerSprite.field_A);
     }
 }
@@ -913,9 +948,9 @@ void sub_80181B8(fx32* height) {
         return;
     }
 
-    if (audio_fx_still_active(dword_20020B4)) {
+    if (audio_fx_still_active(gBillDrillSfx)) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B4);
+            audio_halt_fx(gBillDrillSfx);
         }
     }
 
@@ -1010,11 +1045,11 @@ void sub_80181B8(fx32* height) {
             gPlayerState = PLAYER_STATE_KAZOOIE_LEDGE_FALL;
             sub_8003368(&gPlayerSprite, 201, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
-            if (dword_20020B8 != -1) {
+            if (gKazooieSfx != -1) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20020B8);
+                    audio_halt_fx(gKazooieSfx);
                 }
-                dword_20020B8 = -1;
+                gKazooieSfx = -1;
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -1078,18 +1113,18 @@ bool32 start_npc_dialogue(int a1) {
         return FALSE;
     }
 
-    if (dword_20020B8 != -1) {
+    if (gKazooieSfx != -1) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B8);
+            audio_halt_fx(gKazooieSfx);
         }
-        dword_20020B8 = -1;
+        gKazooieSfx = -1;
     }
 
-    if (audio_fx_still_active(dword_20020B4)) {
+    if (audio_fx_still_active(gBillDrillSfx)) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B4);
+            audio_halt_fx(gBillDrillSfx);
         }
-        dword_20020B4 = -1;
+        gBillDrillSfx = -1;
     }
 
     if ((gPlayerStateSettings[gPlayerState] & 4) != 0) {
@@ -1136,7 +1171,7 @@ static void sub_08018824() {
         } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x4000) != 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_IDLE;
-            sub_08040204(3, gGameStatus.field_12);
+            sub_08040204(3, gGameStatus.goldenFeathers);
             sub_08041FA4(3);
             sub_8016790(5, gPlayerSprite.field_A);
         } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x100) != 0) {
@@ -1233,9 +1268,9 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
         byte_203DFE8 = 0;
     }
 
-    if (audio_fx_still_active(dword_20020B4)) {
+    if (audio_fx_still_active(gBillDrillSfx)) {
         if (gCanPlaySfx) {
-            audio_halt_fx(dword_20020B4);
+            audio_halt_fx(gBillDrillSfx);
         }
     }
 
@@ -1255,19 +1290,19 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
             gPlayerState = PLAYER_STATE_BILL_DRILL_HIT;
             sub_80033A4(&gPlayerSprite, 153, 0, 2);
             sub_80266C8(3, gBGOffsetVertical, 2);
-            if (audio_fx_still_active(dword_20020B4)) {
+            if (audio_fx_still_active(gBillDrillSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20020B4);
+                    audio_halt_fx(gBillDrillSfx);
                 }
             }
-            dword_20020B4 = PLAY_SFX(22);
+            gBillDrillSfx = PLAY_SFX(22);
             sub_8016790(4, gPlayerSprite.field_A);
             break;
 
         case PLAYER_STATE_KAZOOIE_JUMP:
         case PLAYER_STATE_KAZOOIE_FALL:
         case PLAYER_STATE_KAZOOIE_LEDGE_FALL:
-        case PLAYER_STATE_KAZZOIE_HURT:
+        case PLAYER_STATE_KAZOOIE_HURT:
             if (sub_80038AC(dword_2000FC8)) {
                 gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
                 sub_8003368(&gPlayerSprite, 49, 7, 0);
@@ -1513,7 +1548,7 @@ void sub_80192D4(int a1, int a2, int a3) {
         switch (a3) {
             case 2:
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = PLAYER_STATE_KAZZOIE_HURT;
+                gPlayerState = PLAYER_STATE_KAZOOIE_HURT;
                 if (a2 >= 0) {
                     gPlayerSprite.field_A = (a2 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a2], 0);
@@ -1527,7 +1562,7 @@ void sub_80192D4(int a1, int a2, int a3) {
 
             case 1:
                 gPreviousPlayerState = gPlayerState;
-                gPlayerState = PLAYER_STATE_KAZZOIE_HURT;
+                gPlayerState = PLAYER_STATE_KAZOOIE_HURT;
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0xFFFFE000);
                 sub_8003368(&gPlayerSprite, 209, 0, 1);
                 break;
@@ -1539,11 +1574,11 @@ void sub_80192D4(int a1, int a2, int a3) {
         sub_8016790(0, gPlayerSprite.field_A);
         PLAY_SFX(RandomMinMax(4, 5));
 
-        if (dword_20020B8 != -1) {
+        if (gKazooieSfx != -1) {
             if (gCanPlaySfx) {
-                audio_halt_fx(dword_20020B8);
+                audio_halt_fx(gKazooieSfx);
             }
-            dword_20020B8 = -1;
+            gKazooieSfx = -1;
         }
     } else {
         switch (a3) {
@@ -1575,11 +1610,11 @@ void sub_80192D4(int a1, int a2, int a3) {
         sub_8016790(0, gPlayerSprite.field_A);
         PLAY_SFX(RandomMinMax(4, 5));
 
-        if (dword_20020B4 != -1) {
+        if (gBillDrillSfx != -1) {
             if (gCanPlaySfx) {
-                audio_halt_fx(dword_20020B4);
+                audio_halt_fx(gBillDrillSfx);
             }
-            dword_20020B4 = -1;
+            gBillDrillSfx = -1;
         }
     }
 
@@ -1629,17 +1664,17 @@ void sub_801990C() {
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0);
         sub_8003368(&gPlayerSprite, 161, 0, 1);
         sub_8016790(0, gPlayerSprite.field_A);
-        if (dword_20020B8 != -1) {
+        if (gKazooieSfx != -1) {
             if (gCanPlaySfx) {
-                audio_halt_fx(dword_20020B8);
+                audio_halt_fx(gKazooieSfx);
             }
-            dword_20020B8 = -1;
+            gKazooieSfx = -1;
         }
-        if (dword_20020B4 != -1) {
+        if (gBillDrillSfx != -1) {
             if (gCanPlaySfx) {
-                audio_halt_fx(dword_20020B4);
+                audio_halt_fx(gBillDrillSfx);
             }
-            dword_20020B4 = -1;
+            gBillDrillSfx = -1;
         }
     }
 }
@@ -1810,9 +1845,9 @@ void sub_08019FCC(u32 transformation) {
             dword_3003300 = 0x160000;
             dword_3003308 = 0x240000;
             dword_3003304 = 0x180000;
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
             break;
@@ -1827,9 +1862,9 @@ void sub_08019FCC(u32 transformation) {
             dword_3003300 = 0x100000;
             dword_3003308 = 0x100000;
             dword_3003304 = 0x100000;
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
             break;
@@ -1844,9 +1879,9 @@ void sub_08019FCC(u32 transformation) {
             dword_3003300 = 0x160000;
             dword_3003308 = 0x180000;
             dword_3003304 = 0x180000;
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
             break;
@@ -1858,7 +1893,7 @@ void sub_08019FCC(u32 transformation) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
             DmaTransferObjPalette(&unk_83FD774, 7, 7);
-            dword_20021DC = PLAY_SFX(194);
+            gTankSfx = PLAY_SFX(194);
             dword_3003300 = 0x200000;
             dword_3003308 = 0x240000;
             dword_3003304 = 0x200000;
@@ -1874,9 +1909,9 @@ void sub_08019FCC(u32 transformation) {
             dword_3003300 = 0x160000;
             dword_3003308 = 0x100000;
             dword_3003304 = 0x180000;
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
             break;
@@ -1900,26 +1935,26 @@ void load_transformation_palette() {
     }
 }
 
-static int sub_801A334() {
-    if (byte_2002095 == 0) {
-        if (gGameStatus.field_12 == 0) {
+static bool32 update_wonderwing() {
+    if (gFeatherTimer == 0) {
+        if (gGameStatus.goldenFeathers == 0) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_END;
             sub_8003368(&gPlayerSprite, 529, 0, 1);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
             sub_0804200C(3);
-            return 1;
+            return TRUE;
         }
-        byte_2002095 = byte_2002094;
-        gGameStatus.field_12--;
-        sub_08040204(3, gGameStatus.field_12);
+        gFeatherTimer = gFeatherTime;
+        gGameStatus.goldenFeathers--;
+        sub_08040204(3, gGameStatus.goldenFeathers);
         sub_08041FA4(3);
     } else {
-        byte_2002095--;
+        gFeatherTimer--;
     }
 
-    return 0;
+    return FALSE;
 }
 
 static void shoot_egg(bool32 selectNextAvailableEgg) {
@@ -2603,10 +2638,10 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 0x19, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
 
-            if (dword_20020B8 != -1) {
+            if (gKazooieSfx != -1) {
                 if (gCanPlaySfx)
-                    audio_halt_fx(dword_20020B8);
-                dword_20020B8 = -1;
+                    audio_halt_fx(gKazooieSfx);
+                gKazooieSfx = -1;
             }
 
             sub_8016790(0, gPlayerSprite.field_A);
@@ -2620,8 +2655,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
                 sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
             }
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             break;
         case DPAD_RIGHT | DPAD_DOWN:
@@ -2630,8 +2665,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
                 sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
             }
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             break;
         case DPAD_LEFT | DPAD_DOWN:
@@ -2640,8 +2675,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
                 sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
             }
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             break;
         case DPAD_LEFT | DPAD_UP:
@@ -2650,8 +2685,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
                 sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
             }
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             break;
         case DPAD_UP:
@@ -2660,8 +2695,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
                 sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
             }
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             break;
         case DPAD_DOWN:
@@ -2670,8 +2705,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
                 sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
             }
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             break;
         case DPAD_LEFT:
@@ -2680,8 +2715,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
                 sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
             }
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             break;
         case DPAD_RIGHT:
@@ -2690,8 +2725,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
                 sub_80033A4(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0, 0);
             }
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             break;
         default:
@@ -2701,10 +2736,10 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             sub_800378C(&gPlayerSprite, 6);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
 
-            if (dword_20020B8 != -1) {
+            if (gKazooieSfx != -1) {
                 if (gCanPlaySfx)
-                    audio_halt_fx(dword_20020B8);
-                dword_20020B8 = -1;
+                    audio_halt_fx(gKazooieSfx);
+                gKazooieSfx = -1;
             }
 
             sub_8016790(15, gPlayerSprite.field_A);
@@ -2736,10 +2771,10 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 25, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
 
-            if (dword_20020B8 != -1) {
+            if (gKazooieSfx != -1) {
                 if (gCanPlaySfx)
-                    audio_halt_fx(dword_20020B8);
-                dword_20020B8 = -1;
+                    audio_halt_fx(gKazooieSfx);
+                gKazooieSfx = -1;
             }
 
             sub_8016790(0, gPlayerSprite.field_A);
@@ -2754,8 +2789,8 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_80037F4(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -2767,8 +2802,8 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_80037F4(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -2780,8 +2815,8 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_80037F4(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -2793,8 +2828,8 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_80037F4(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -2806,8 +2841,8 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_80037F4(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -2819,8 +2854,8 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_80037F4(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -2832,8 +2867,8 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_80037F4(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -2845,8 +2880,8 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_80033A4(&gPlayerSprite, 49, 7, 0);
             sub_80037F4(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0, 0);
-            if (dword_20020B8 == -1) {
-                dword_20020B8 = PLAY_SFX(30);
+            if (gKazooieSfx == -1) {
+                gKazooieSfx = PLAY_SFX(30);
             }
             sub_8016790(15, gPlayerSprite.field_A);
             break;
@@ -3380,11 +3415,11 @@ static void state_bill_drill_hit(s32 keyPressed, s32 keyDown) {
         gPlayerSprite.field_A = 4;
         sub_8003368(&gPlayerSprite, 137, 0, 1);
         sub_8026714();
-        if (dword_20020B4 != -1) {
+        if (gBillDrillSfx != -1) {
             if (gCanPlaySfx) {
-                audio_halt_fx(dword_20020B4);
+                audio_halt_fx(gBillDrillSfx);
             }
-            dword_20020B4 = -1;
+            gBillDrillSfx = -1;
         }
     } else {
         sub_802672C();
@@ -3788,11 +3823,11 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
                 sub_8003368(&gPlayerSprite, 105, 0, 0);
             } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x8000) != 0) {
                 sub_800378C(&gPlayerSprite, 6);
-                if (dword_20020B8 != -1) {
+                if (gKazooieSfx != -1) {
                     if (gCanPlaySfx) {
-                        audio_halt_fx(dword_20020B8);
+                        audio_halt_fx(gKazooieSfx);
                     }
-                    dword_20020B8 = -1;
+                    gKazooieSfx = -1;
                 }
             } else if ((gPlayerStateSettings[gPreviousPlayerState] & 0x4) != 0) {
                 sub_8003368(&gPlayerSprite, 257, 0, 0);
@@ -5260,7 +5295,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
             return;
     }
 
-    if (sub_801A334()) {
+    if (update_wonderwing()) {
         return;
     }
 
@@ -5357,7 +5392,7 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
             return;
     }
 
-    if (sub_801A334()) {
+    if (update_wonderwing()) {
         return;
     }
 
@@ -5469,7 +5504,7 @@ static void state_wonderwing_jump(s32 keyPressed, s32 keyDown) {
         gPlayerState = PLAYER_STATE_WONDERWING_FALL;
     }
 
-    if (sub_801A334()) {
+    if (update_wonderwing()) {
         return;
     }
 
@@ -5549,7 +5584,7 @@ static void state_wonderwing_jump(s32 keyPressed, s32 keyDown) {
 static void state_wonderwing_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
 
-    if (sub_801A334()) {
+    if (update_wonderwing()) {
         return;
     }
 
@@ -5628,7 +5663,7 @@ static void state_wonderwing_fall(s32 keyPressed, s32 keyDown) {
 
 static void state_wonderwing_ledge_fall(s32 keyPressed, s32 keyDown) {
     sub_8016710(&keyPressed, &keyDown);
-    sub_801A334();
+    update_wonderwing();
 }
 
 static void state_wonderwing_start(s32 keyPressed, s32 keyDown) {
@@ -5639,8 +5674,8 @@ static void state_wonderwing_start(s32 keyPressed, s32 keyDown) {
         gPlayerState = PLAYER_STATE_WONDERWING_IDLE;
         sub_8003368(&gPlayerSprite, 505, 0, 0);
         sub_8016790(5, gPlayerSprite.field_A);
-        gGameStatus.field_12--;
-        sub_08040204(3, gGameStatus.field_12);
+        gGameStatus.goldenFeathers--;
+        sub_08040204(3, gGameStatus.goldenFeathers);
         sub_08041FA4(3);
     }
 }
@@ -6198,12 +6233,12 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 417, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(194);
+            gTankSfx = PLAY_SFX(194);
             break;
     }
 }
@@ -6214,9 +6249,9 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
             if (gInInteractionArea) {
-                if (audio_fx_still_active(dword_20021DC)) {
+                if (audio_fx_still_active(gTankSfx)) {
                     if (gCanPlaySfx) {
-                        audio_halt_fx(dword_20021DC);
+                        audio_halt_fx(gTankSfx);
                     }
                 }
                 start_npc_dialogue(0);
@@ -6236,12 +6271,12 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(195);
+            gTankSfx = PLAY_SFX(195);
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
@@ -6251,12 +6286,12 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(195);
+            gTankSfx = PLAY_SFX(195);
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
@@ -6266,12 +6301,12 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(195);
+            gTankSfx = PLAY_SFX(195);
             break;
 
         case DPAD_LEFT | DPAD_UP:
@@ -6281,12 +6316,12 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(195);
+            gTankSfx = PLAY_SFX(195);
             break;
 
         case DPAD_UP:
@@ -6296,12 +6331,12 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(195);
+            gTankSfx = PLAY_SFX(195);
             break;
 
         case DPAD_DOWN:
@@ -6311,12 +6346,12 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(195);
+            gTankSfx = PLAY_SFX(195);
             break;
 
         case DPAD_LEFT:
@@ -6326,12 +6361,12 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(195);
+            gTankSfx = PLAY_SFX(195);
             break;
 
         case DPAD_RIGHT:
@@ -6341,17 +6376,17 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003368(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             sub_8016790(0, gPlayerSprite.field_A);
-            if (audio_fx_still_active(dword_20021DC)) {
+            if (audio_fx_still_active(gTankSfx)) {
                 if (gCanPlaySfx) {
-                    audio_halt_fx(dword_20021DC);
+                    audio_halt_fx(gTankSfx);
                 }
             }
-            dword_20021DC = PLAY_SFX(195);
+            gTankSfx = PLAY_SFX(195);
             break;
 
         default:
-            if (!audio_fx_still_active(dword_20021DC)) {
-                dword_20021DC = PLAY_SFX(194);
+            if (!audio_fx_still_active(gTankSfx)) {
+                gTankSfx = PLAY_SFX(194);
             }
             break;
     }
@@ -6382,12 +6417,12 @@ static void state_tank_hurt(s32 keyPressed, s32 keyDown) {
         sub_8003368(&gPlayerSprite, 417, 0, 0);
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.field_A], 0);
         sub_8016790(0, gPlayerSprite.field_A);
-        if (audio_fx_still_active(dword_20021DC)) {
+        if (audio_fx_still_active(gTankSfx)) {
             if (gCanPlaySfx) {
-                audio_halt_fx(dword_20021DC);
+                audio_halt_fx(gTankSfx);
             }
         }
-        dword_20021DC = PLAY_SFX(194);
+        gTankSfx = PLAY_SFX(194);
     }
 }
 

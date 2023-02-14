@@ -5,6 +5,7 @@
 #include "save.h"
 #include "main.h"
 #include "audio_b.h"
+#include "player.h"
 #include "common.h"
 #include "pause_menu.h"
 

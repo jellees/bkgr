@@ -3,6 +3,7 @@
 #include "pause_menu.h"
 #include "main.h"
 #include "room.h"
+#include "player.h"
 #include "common.h"
 #include "audio_b.h"
 

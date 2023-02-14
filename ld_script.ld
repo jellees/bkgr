@@ -13,50 +13,8 @@ SECTIONS
         src/main.o(.bss);
         src/debug.o(.bss);
         src/room.o(.bss);
+        src/player.o(.bss);
 
-        gPreviousPlayerState = .; . += 2;
-        gPlayerState = .; . += 2;
-
-        . = 0x00002094;
-        byte_2002094 = .; . += 1;
-        byte_2002095 = .; . += 1;
-        word_2002096 = .; . += 2;
-        word_2002098 = .; . += 2;
-        gUnlockedMoves = .; . += 0x17;
-        gTransformation = .; . += 1;
-        byte_20020B2 = .; . += 1;
-        byte_20020B3 = .; . += 1;
-        dword_20020B4 = .; . += 4;
-        dword_20020B8 = .; . += 4;
-
-        . = 0x000020BC;
-        byte_20020BC = .; . += 1;
-        . += 1; /* padding */
-        gPlayerStateSettings = .; . += 2 * 128;
-        byte_20021BE = .; . += 1;
-
-        . = 0x000021C0;
-        dword_20021C0 = .; . += 4;
-        byte_20021C4 = .; . += 1;
-        byte_20021C5 = .; . += 1;
-        byte_20021C6 = .; . += 1;
-        byte_20021C7 = .; . += 1;
-        byte_20021C8 = .; . += 1;
-        byte_20021C9 = .; . += 1;
-        byte_20021CA = .; . += 1;
-        byte_20021CB = .; . += 1;
-
-        . = 0x000021D0;
-        dword_20021D0 = .; . += 4;
-        dword_20021D4 = .; . += 4;
-        dword_20021D8 = .; . += 4;
-        dword_20021DC = .; . += 4;
-
-        . = 0x000021E0;
-        dword_20021E0 = .; . += 4;
-        dword_20021E4 = .; . += 4;
-        dword_20021E8 = .; . += 4;
-        dword_20021EC = .; . += 4;
         byte_20021F0 = .; . += 1;
         . += 3; /* padding */
         dword_20021F4 = .; . += 4;

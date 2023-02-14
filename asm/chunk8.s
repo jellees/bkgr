@@ -47480,7 +47480,7 @@ _0805F676:
 	b _0805F6B8
 	.align 2, 0
 _0805F6A4: .4byte gCanPlaySfx
-_0805F6A8: .4byte dword_20020B4
+_0805F6A8: .4byte gBillDrillSfx
 _0805F6AC: .4byte 0x080CE440
 _0805F6B0: .4byte gSfxVolume
 _0805F6B4:
@@ -47510,7 +47510,7 @@ _0805F6D6:
 	bx r1
 	.align 2, 0
 _0805F6DC: .4byte gCanPlaySfx
-_0805F6E0: .4byte dword_20020B4
+_0805F6E0: .4byte gBillDrillSfx
 
     .thumb
 audio_set_tune_volByIndex: @ 0x0805F6E4

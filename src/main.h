@@ -17,7 +17,7 @@ struct GameStatus {
     u8 field_B;
     u16 totalNotes;
     s8 eggs[4];
-    s8 field_12;
+    s8 goldenFeathers;
     u8 health;
     bool8 enableExtraHealth;
     u8 maxHealth;
