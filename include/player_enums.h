@@ -144,4 +144,22 @@ enum PlayerStates {
     PLAYER_STATE_COUNT = 128
 };
 
+#define PLAYER_FLAGS_NONE                  (0 << 0)  // 0x0000
+#define PLAYER_FLAGS_NOT_MOVING            (1 << 0)  // 0x0001
+#define PLAYER_FLAGS_PACK_WACK             (1 << 1)  // 0x0002
+#define PLAYER_FLAGS_SHOOTER_MODE          (1 << 2)  // 0x0004
+#define PLAYER_FLAGS_IS_HURTING            (1 << 3)  // 0x0008
+#define PLAYER_FLAGS_IN_AIR                (1 << 4)  // 0x0010
+#define PLAYER_FLAGS_IS_FALLING_FROM_LEDGE (1 << 5)  // 0x0020
+#define PLAYER_FLAGS_IS_CLIMBING           (1 << 6)  // 0x0040
+#define PLAYER_FLAGS_DIVING_START          (1 << 7)  // 0x0080
+#define PLAYER_FLAGS_IS_DIVING             (1 << 8)  // 0x0100
+#define PLAYER_FLAGS_IS_SWIMMING           (1 << 9)  // 0x0200
+#define PLAYER_FLAGS_BIT11                 (1 << 10) // 0x0400
+#define PLAYER_FLAGS_IN_DIALOGUE           (1 << 11) // 0x0800
+#define PLAYER_FLAGS_IS_DYING              (1 << 12) // 0x1000
+#define PLAYER_FLAGS_IN_TRANSFORMATION     (1 << 13) // 0x2000
+#define PLAYER_FLAGS_IN_WONDERWING_MODE    (1 << 14) // 0x4000
+#define PLAYER_FLAGS_IN_KAZOOIE_MODE       (1 << 15) // 0x8000
+
 #endif

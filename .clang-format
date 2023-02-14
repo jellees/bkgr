@@ -16,3 +16,4 @@ Cpp11BracedListStyle: false
 IndentCaseLabels: true
 AlignTrailingComments: true
 UseTab: Never
+AlignConsecutiveMacros: true

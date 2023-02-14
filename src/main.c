@@ -319,7 +319,7 @@ static void update_game(void) {
             } else {
                 sub_80038A4(dword_2000FC8);
                 if ((gPlayerStateSettings[gPlayerState] & 0x800)
-                    || (gPlayerStateSettings[gPlayerState] & 0x1000)) {
+                    || (gPlayerStateSettings[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
                     update_player_state_machine(gKeysPressed, gKeysDown);
                 }
             }
@@ -1000,7 +1000,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
 
         if (gFloorPlaneResult.field_4E && !byte_200108E && gTransformation != TRANSFORMATION_OCTOPUS
             && gTransformation != TRANSFORMATION_TANK
-            && !(gPlayerStateSettings[gPlayerState] & 0x1000)) {
+            && !(gPlayerStateSettings[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
             sub_80192D4(gFloorPlaneResult.field_4E, -1, 1);
             byte_200108E = 1;
             word_2001092 = gFloorPlaneResult.field_4F;
