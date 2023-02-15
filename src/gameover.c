@@ -68,7 +68,7 @@ void sub_80629E8() {
         gGameStatus.health = gGameStatus.maxHealth * 2;
     }
 
-    gGameStatus.field_16 = gGameStatus.field_17;
+    gGameStatus.oxygen = gGameStatus.maxOxygen;
 
     sub_805E1DC(2);
     InitHeap(3);

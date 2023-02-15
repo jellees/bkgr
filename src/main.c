@@ -253,7 +253,7 @@ static void update_game(void) {
     }
 
     if (gKeysDown & START_BUTTON && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)
-        && !byte_20021F0 && !byte_203F99C && gGameStatus.health && !gIsPaletteEffectsActive
+        && !byte_20021F0 && !byte_203F99C && gGameStatus.health != 0 && !gIsPaletteEffectsActive
         && !byte_203FA35) {
         if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
             if (byte_20020BC) {
@@ -295,7 +295,7 @@ static void update_game(void) {
 
             if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING
                 && gTransformation != TRANSFORMATION_OCTOPUS) {
-                sub_08040204(57, gGameStatus.field_16);
+                sub_08040204(57, gGameStatus.oxygen);
                 sub_08041FA4(57);
             }
 
@@ -771,8 +771,8 @@ static void sub_800A5F4() {
     byte_20010B1 = 0;
     gEnvironmentEffects = EFX_NONE;
     gLoadedRoomBgm = -1;
-    gGameStatus.field_16 = stru_80CC8C4.field_16;
-    gGameStatus.field_17 = stru_80CC8C4.field_17;
+    gGameStatus.oxygen = stru_80CC8C4.oxygen;
+    gGameStatus.maxOxygen = stru_80CC8C4.maxOxygen;
     gSelectedEgg = -1;
     gTransformation = TRANSFORMATION_BANJO;
     byte_20010B0 = 0;
@@ -1026,7 +1026,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
                     audio_halt_fx(gBillDrillSfx);
                 }
 
-                sub_8017E1C();
+                set_player_in_climb_state();
                 gPlayerPos.y = a1->y;
                 gPlayerShadowPos.y = stru_3002950.floorHeight;
                 gPlayerPos.x = a1->x;
@@ -1639,11 +1639,10 @@ static void sub_800BAF0(u32** a1, u32* a2) {
     *a1 = v6 + 3;
     ++*a2;
 
-    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) != 0
-        || (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START) != 0
-        || !sub_800397C(v14, v9, a4)) {
+    if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING
+        || gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START || !sub_800397C(v14, v9, a4)) {
         gPlayerShadowSprite.field_13 = 1;
-    } else if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) == 0) {
+    } else if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
         gPlayerShadowSprite.field_13 = 0;
     }
 
@@ -1974,10 +1973,10 @@ int sub_800C50C() {
 
     pos = gPlayerPos.y - gPlayerShadowPos.y;
 
-    if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) == 0) {
+    if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11)) {
         if (pos != 0) {
-            if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) == 0
-                && (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING) == 0) {
+            if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)
+                && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING)) {
                 return gFloorPlaneResult.playerSpritePriority;
             } else {
                 return stru_3002950.playerSpritePriority;
@@ -2826,7 +2825,7 @@ static void enable_poison_effect() {
 }
 
 static void sub_800DF34() {
-    if (gPoisonEffectEnabled && !byte_203F99C && gGameStatus.health) {
+    if (gPoisonEffectEnabled && !byte_203F99C && gGameStatus.health != 0) {
         if (gPoisonHitTimer == 0) {
             gPoisonHitTimer = 240;
             sub_80192D4(dword_20011F8, -1, 1);
@@ -2859,10 +2858,10 @@ static void sub_800DF34() {
     if (!word_200112C && !byte_200113D) {
         sprite_2000FAC.field_13 = 1;
 
-        if ((gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) == 0) {
+        if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
             sub_800E7A0();
 
-            if (gGameStatus.health) {
+            if (gGameStatus.health != 0) {
                 sub_800BFA0(dword_80CEBF8[gLoadedRoomLevel], dword_80CEBE0[gLoadedRoomLevel], 1);
             }
         }

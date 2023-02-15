@@ -32,7 +32,7 @@ void sub_8017A54();
 void sub_8017B34(int a1);
 void sub_8017C50();
 void sub_8017D9C();
-void sub_8017E1C();
+void set_player_in_climb_state();
 void sub_8017F14();
 void sub_80181B8(fx32* height);
 int start_npc_dialogue(int a1);

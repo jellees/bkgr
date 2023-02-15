@@ -21,8 +21,8 @@ struct GameStatus {
     u8 health;
     bool8 enableExtraHealth;
     u8 maxHealth;
-    u8 field_16;
-    u8 field_17;
+    u8 oxygen;
+    u8 maxOxygen;
     u8 field_18;
     u8 field_19;
     u8 field_1A;
