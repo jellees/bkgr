@@ -1,7 +1,7 @@
 #ifndef GUARD_PLAYER_H
 #define GUARD_PLAYER_H
 
-#include "player_enums.h"
+#include "player_defs.h"
 
 extern u16 gPreviousPlayerState;
 extern u16 gPlayerState;

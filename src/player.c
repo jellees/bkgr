@@ -5,7 +5,7 @@
 #include "debug.h"
 #include "room.h"
 #include "sprite.h"
-#include "player_enums.h"
+#include "player_defs.h"
 #include "common.h"
 
 u16 gPreviousPlayerState;
@@ -1964,7 +1964,7 @@ static void shoot_egg(bool32 selectNextAvailableEgg) {
 
     if (gSelectedEgg < EGG_BLUE) {
         if (gGameStatus.eggs[EGG_BLUE] == 0) {
-            //! Needed to match.
+            //! Possible fake match.
             while (0) {
             }
             return;

@@ -1,136 +1,139 @@
 #include "global.h"
 #include "alloc.h"
 #include "sprite.h"
+#include "main.h"
+#include "audio_b.h"
+#include "menu.h"
 #include "common.h"
 
-EWRAM_DATA u8 byte_2001200;
-EWRAM_DATA u8 gMainFrameCounter;
-EWRAM_DATA u8 gDebugFPS;
-EWRAM_DATA u8 gDebugESN;
-EWRAM_DATA u8 gDebugESV;
-EWRAM_DATA u32 dword_2001208;
-EWRAM_DATA u32 dword_200120C;
-EWRAM_DATA u32 dword_2001210;
-EWRAM_DATA u32 dword_2001214;
-EWRAM_DATA u32 dword_2001218;
-EWRAM_DATA u32 dword_200121C;
-EWRAM_DATA u32 dword_2001220;
-EWRAM_DATA u32 dword_2001224;
-EWRAM_DATA u32 dword_2001228;
-EWRAM_DATA u32 dword_200122C;
-EWRAM_DATA u32 dword_2001230;
-EWRAM_DATA u32 dword_2001234;
-EWRAM_DATA u32 dword_2001238;
-EWRAM_DATA u32 dword_200123C;
-EWRAM_DATA u32 dword_2001240;
-EWRAM_DATA u32 dword_2001244;
-EWRAM_DATA u32 dword_2001248;
-EWRAM_DATA u32 dword_200124C;
-EWRAM_DATA s32 dword_2001250;
-EWRAM_DATA s32 dword_2001254;
-EWRAM_DATA s32 dword_2001258;
-EWRAM_DATA u32 dword_200125C;
-EWRAM_DATA u32 dword_2001260;
-EWRAM_DATA u32 dword_2001264;
-EWRAM_DATA u32 dword_2001268;
-EWRAM_DATA u32 dword_200126C;
-EWRAM_DATA u32 dword_2001270;
-EWRAM_DATA u32 dword_2001274;
-EWRAM_DATA u32 dword_2001278;
-EWRAM_DATA u32 dword_200127C;
-EWRAM_DATA u32 dword_2001280;
-EWRAM_DATA u32 dword_2001284;
-EWRAM_DATA u32 dword_2001288;
-EWRAM_DATA u32 dword_200128C;
-EWRAM_DATA u32 dword_2001290;
-EWRAM_DATA u32 dword_2001294;
-EWRAM_DATA u32 dword_2001298;
-EWRAM_DATA u32 dword_200129C;
-EWRAM_DATA u32 dword_20012A0;
-EWRAM_DATA u32 dword_20012A4;
-EWRAM_DATA u32 dword_20012A8;
-EWRAM_DATA u32 dword_20012AC;
-EWRAM_DATA u32 dword_20012B0;
-EWRAM_DATA u32 dword_20012B4;
-EWRAM_DATA u32 dword_20012B8;
-EWRAM_DATA u32 dword_20012BC;
-EWRAM_DATA u32 dword_20012C0;
-EWRAM_DATA u32 dword_20012C4;
-EWRAM_DATA u32 dword_20012C8;
-EWRAM_DATA u32 dword_20012CC;
-EWRAM_DATA u32 dword_20012D0;
-EWRAM_DATA u32 dword_20012D4;
-EWRAM_DATA u32 dword_20012D8;
-EWRAM_DATA u32 dword_20012DC;
-EWRAM_DATA u32 dword_20012E0;
-EWRAM_DATA u32 dword_20012E4;
-EWRAM_DATA u32 dword_20012E8;
-EWRAM_DATA u32 dword_20012EC;
-EWRAM_DATA u32 dword_20012F0;
-EWRAM_DATA u32 dword_20012F4;
-EWRAM_DATA u32 dword_20012F8;
-EWRAM_DATA u32 dword_20012FC;
-EWRAM_DATA u32 dword_2001300;
-EWRAM_DATA u32 dword_2001304;
-EWRAM_DATA u32 dword_2001308;
-EWRAM_DATA u32 dword_200130C;
-EWRAM_DATA u32 dword_2001310;
-EWRAM_DATA u32 dword_2001314;
-EWRAM_DATA u32 dword_2001318;
-EWRAM_DATA u32 dword_200131C;
-EWRAM_DATA u32 dword_2001320;
-EWRAM_DATA u32 dword_2001324;
-EWRAM_DATA u32 dword_2001328;
-EWRAM_DATA u32 dword_200132C;
-EWRAM_DATA u32 dword_2001330;
-EWRAM_DATA u32 dword_2001334;
-EWRAM_DATA u32 dword_2001338;
-EWRAM_DATA u32 dword_200133C;
-EWRAM_DATA u32 dword_2001340;
-EWRAM_DATA u32 dword_2001344;
-EWRAM_DATA u32 dword_2001348;
-EWRAM_DATA u32 dword_200134C;
-EWRAM_DATA u32 dword_2001350;
-EWRAM_DATA u32 dword_2001354;
-EWRAM_DATA u32 dword_2001358;
-EWRAM_DATA u32 dword_200135C;
-EWRAM_DATA u32 dword_2001360;
-EWRAM_DATA u32 dword_2001364;
-EWRAM_DATA u32 dword_2001368;
-EWRAM_DATA u32 dword_200136C;
-EWRAM_DATA u8 byte_2001370;
-EWRAM_DATA u8 gDebugString[0x17];
-EWRAM_DATA u8 gDebugInfoIndex;
-EWRAM_DATA u8 gDebugMESN;
-EWRAM_DATA u8 byte_200138A;
-EWRAM_DATA u32 gDebugESNFrameCount;
-EWRAM_DATA u32 dword_2001390;
-EWRAM_DATA s32 gDebugESNSum;
-EWRAM_DATA u32 dword_2001398;
-EWRAM_DATA struct TextBox gDebugTextBox1;
-EWRAM_DATA struct TextBox gDebugTextBox2;
-EWRAM_DATA struct TextBox gDebugTextBox3;
-EWRAM_DATA struct TextBox gDebugTextBox4;
-EWRAM_DATA struct TextBox gDebugTextBox5;
-EWRAM_DATA struct TextBox gDebugTextBox6;
-EWRAM_DATA struct TextBox gDebugTextBox7;
-EWRAM_DATA struct TextBox gDebugTextBox8;
-EWRAM_DATA u8 byte_200143C;
-EWRAM_DATA u8 byte_200143D;
-EWRAM_DATA u8 byte_200143E;
-EWRAM_DATA u8 byte_200143F;
-EWRAM_DATA u8 byte_2001440;
-EWRAM_DATA u8 byte_2001441;
-EWRAM_DATA u8 byte_2001442;
-EWRAM_DATA u8 byte_2001443;
-EWRAM_DATA u32 dword_2001444;
-EWRAM_DATA u32 dword_2001448;
-EWRAM_DATA u32 dword_200144C;
-EWRAM_DATA u32 dword_2001450;
-EWRAM_DATA u32 dword_2001454;
-EWRAM_DATA u16 word_2001458;
-EWRAM_DATA u8 byte_200145A;
-EWRAM_DATA u8 byte_200145B;
+u8 byte_2001200;
+u8 gMainFrameCounter;
+u8 gDebugFPS;
+u8 gDebugESN;
+u8 gDebugESV;
+u32 dword_2001208;
+u32 dword_200120C;
+u32 dword_2001210;
+u32 dword_2001214;
+u32 dword_2001218;
+u32 dword_200121C;
+u32 dword_2001220;
+u32 dword_2001224;
+u32 dword_2001228;
+u32 dword_200122C;
+u32 dword_2001230;
+u32 dword_2001234;
+u32 dword_2001238;
+u32 dword_200123C;
+u32 dword_2001240;
+u32 dword_2001244;
+u32 dword_2001248;
+u32 dword_200124C;
+s32 dword_2001250;
+s32 dword_2001254;
+s32 dword_2001258;
+u32 dword_200125C;
+u32 dword_2001260;
+u32 dword_2001264;
+u32 dword_2001268;
+u32 dword_200126C;
+u32 dword_2001270;
+u32 dword_2001274;
+u32 dword_2001278;
+u32 dword_200127C;
+u32 dword_2001280;
+u32 dword_2001284;
+u32 dword_2001288;
+u32 dword_200128C;
+u32 dword_2001290;
+u32 dword_2001294;
+u32 dword_2001298;
+u32 dword_200129C;
+u32 dword_20012A0;
+u32 dword_20012A4;
+u32 dword_20012A8;
+u32 dword_20012AC;
+u32 dword_20012B0;
+u32 dword_20012B4;
+u32 dword_20012B8;
+u32 dword_20012BC;
+u32 dword_20012C0;
+u32 dword_20012C4;
+u32 dword_20012C8;
+u32 dword_20012CC;
+u32 dword_20012D0;
+u32 dword_20012D4;
+u32 dword_20012D8;
+u32 dword_20012DC;
+u32 dword_20012E0;
+u32 dword_20012E4;
+u32 dword_20012E8;
+u32 dword_20012EC;
+u32 dword_20012F0;
+u32 dword_20012F4;
+u32 dword_20012F8;
+u32 dword_20012FC;
+u32 dword_2001300;
+u32 dword_2001304;
+u32 dword_2001308;
+u32 dword_200130C;
+u32 dword_2001310;
+u32 dword_2001314;
+u32 dword_2001318;
+u32 dword_200131C;
+u32 dword_2001320;
+u32 dword_2001324;
+u32 dword_2001328;
+u32 dword_200132C;
+u32 dword_2001330;
+u32 dword_2001334;
+u32 dword_2001338;
+u32 dword_200133C;
+u32 dword_2001340;
+u32 dword_2001344;
+u32 dword_2001348;
+u32 dword_200134C;
+u32 dword_2001350;
+u32 dword_2001354;
+u32 dword_2001358;
+u32 dword_200135C;
+u32 dword_2001360;
+u32 dword_2001364;
+u32 dword_2001368;
+u32 dword_200136C;
+u8 byte_2001370;
+u8 gDebugString[0x17];
+u8 gDebugInfoIndex;
+u8 gDebugMESN;
+u8 byte_200138A;
+u32 gDebugESNFrameCount;
+u32 dword_2001390;
+s32 gDebugESNSum;
+u32 dword_2001398;
+struct TextBox gDebugTextBox1;
+struct TextBox gDebugTextBox2;
+struct TextBox gDebugTextBox3;
+struct TextBox gDebugTextBox4;
+struct TextBox gDebugTextBox5;
+struct TextBox gDebugTextBox6;
+struct TextBox gDebugTextBox7;
+struct TextBox gDebugTextBox8;
+u8 byte_200143C;
+u8 byte_200143D;
+u8 byte_200143E;
+u8 byte_200143F;
+u8 byte_2001440;
+u8 byte_2001441;
+u8 byte_2001442;
+u8 byte_2001443;
+u32 dword_2001444;
+u32 dword_2001448;
+u32 dword_200144C;
+u32 dword_2001450;
+u32 dword_2001454;
+u16 word_2001458;
+u8 byte_200145A;
+u8 byte_200145B;
 
 void init_debug() {
     gDebugESNSum = 0;
@@ -781,4 +784,644 @@ void Debug_SetAfterVideoUpdate(u32 vcount) {
         return;
 
     gDebugESV = vcount;
+}
+
+void sub_08010A20() {
+    ASSERT(0);
+}
+
+void sub_08010A28() {
+    ASSERT(0);
+}
+
+void sub_08010A30() {
+    ASSERT(0);
+}
+
+void sub_08010A38() {
+    ASSERT(0);
+}
+
+void sub_08010A40() {
+    ASSERT(0);
+}
+
+void sub_08010A48() {
+    ASSERT(0);
+}
+
+void sub_08010A50() {
+    ASSERT(0);
+}
+
+void sub_08010A58() {
+    ASSERT(0);
+}
+
+void sub_08010A60() {
+    ASSERT(0);
+}
+
+void sub_08010A68() {
+    ASSERT(0);
+}
+
+void sub_08010A70() {
+    ASSERT(0);
+}
+
+void sub_08010A78() {
+    ASSERT(0);
+}
+
+void sub_08010A80() {
+    ASSERT(0);
+}
+
+void sub_08010A88() {
+    ASSERT(0);
+}
+
+void sub_08010A90() {
+    ASSERT(0);
+}
+
+void sub_08010A98() {
+    ASSERT(0);
+}
+
+void sub_08010AA0() {
+    ASSERT(0);
+}
+
+void sub_08010AA8() {
+    ASSERT(0);
+}
+
+void sub_08010AB0() {
+    ASSERT(0);
+}
+
+void sub_08010AB8() {
+    ASSERT(0);
+}
+
+void sub_08010AC0() {
+    ASSERT(0);
+}
+
+void sub_08010AC8() {
+    ASSERT(0);
+}
+
+void sub_08010AD0() {
+    ASSERT(0);
+}
+
+void sub_08010AD8() {
+    ASSERT(0);
+}
+
+void sub_08010AE0() {
+    ASSERT(0);
+}
+
+void sub_08010AE8() {
+    ASSERT(0);
+}
+
+void sub_08010AF0() {
+    ASSERT(0);
+}
+
+void sub_08010AF8() {
+    ASSERT(0);
+}
+
+void sub_08010B00() {
+    ASSERT(0);
+}
+
+void sub_08010B08() {
+    ASSERT(0);
+}
+
+void sub_08010B10() {
+    ASSERT(0);
+}
+
+void sub_08010B18() {
+    ASSERT(0);
+}
+
+void sub_08010B20() {
+    ASSERT(0);
+}
+
+void sub_08010B28() {
+    ASSERT(0);
+}
+
+void sub_08010B30() {
+    ASSERT(0);
+}
+
+void sub_08010B38() {
+    ASSERT(0);
+}
+
+void sub_08010B40() {
+    ASSERT(0);
+}
+
+void sub_08010B48() {
+    ASSERT(0);
+}
+
+void sub_08010B50() {
+    ASSERT(0);
+}
+
+void sub_08010B58() {
+    ASSERT(0);
+}
+
+void sub_08010B60() {
+    ASSERT(0);
+}
+
+void sub_08010B68() {
+    ASSERT(0);
+}
+
+void sub_08010B70() {
+    ASSERT(0);
+}
+
+void sub_08010B78() {
+    ASSERT(0);
+}
+
+void sub_08010B80() {
+    ASSERT(0);
+}
+
+void sub_08010B88() {
+    ASSERT(0);
+}
+
+void sub_08010B90() {
+    ASSERT(0);
+}
+
+void sub_08010B98() {
+    ASSERT(0);
+}
+
+void sub_08010BA0() {
+    ASSERT(0);
+}
+
+void sub_8010BA8(int a1) {
+    audio_halt_all_fx();
+    pause_efx();
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    update_video();
+    SkipVblank();
+    DmaTransfer32(byte_83FD254, OBJ_PLTT, 128);
+    sub_8026CC8(2048, 45056);
+    DisableBackgrounds();
+    audio_set_tune_vol(dVolumes[gBgmMainVolume / 2]);
+    sub_8011158();
+    sub_801126C();
+    FreeById(4, 15);
+    ResetMenu();
+    ASSERT(!DoesMemBlockExistById(4, 15));
+
+    if (byte_200145A) {
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        SyncVblank();
+        update_video();
+        SkipVblank();
+        REG_BLDCNT = BLDCNT_TGT2_ALL;
+        REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+        EnableBGAlphaBlending();
+        REG_BLDCNT = gColorSpecEffectsSel;
+        EnableBackgrounds();
+        sub_8026D84();
+        audio_set_tune_vol(dVolumes[gBgmMainVolume]);
+        DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
+        sub_800EECC();
+        if (!gIsSlideMiniGame)
+            load_transformation_palette();
+        if (gLoadedRoomIndex == 30 || gLoadedRoomIndex == 9) {
+            sub_800EC94();
+            sub_800ECB4();
+        }
+        sub_8047BEC();
+        sub_80524D8();
+        resume_efx();
+    } else if (byte_2001441) {
+        gInInteractionArea = FALSE;
+        dword_203DFDC = 0;
+        gLoadedRoomBgm = -1;
+        sub_800C1E8(byte_2001443, dword_2001444, dword_2001448, dword_200144C, 1, 0);
+    } else if (!byte_200143E) {
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        SyncVblank();
+        update_video();
+        SkipVblank();
+        REG_BLDCNT = BLDCNT_TGT2_ALL;
+        REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+        EnableBGAlphaBlending();
+        REG_BLDCNT = gColorSpecEffectsSel;
+        EnableBackgrounds();
+        sub_8026D84();
+        audio_set_tune_vol(dVolumes[gBgmMainVolume]);
+        DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
+        sub_800EECC();
+
+        if (!gIsSlideMiniGame) {
+            load_transformation_palette();
+        }
+
+        if (gLoadedRoomIndex == ROOM_DIVESPOT || gLoadedRoomIndex == ROOM_UNDERCORAL) {
+            sub_800EC94();
+            sub_800ECB4();
+        }
+
+        sub_8047BEC();
+        sub_80524D8();
+        resume_efx();
+    } else {
+        gInInteractionArea = FALSE;
+        dword_203DFDC = 0;
+        gLoadedRoomBgm = -1;
+        sub_800BFA0(byte_200143F, byte_2001440, 1);
+    }
+}
+
+void sub_8010E40(int a1) {
+    audio_halt_all_fx();
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    update_video();
+    SkipVblank();
+    DmaTransfer32(byte_83FD254, OBJ_PLTT, 128);
+    sub_8026CC8(2048, 45056);
+    DisableBackgrounds();
+    audio_set_tune_vol(dVolumes[gBgmMainVolume / 2]);
+
+    gDebugTextBox2.xPosition = 50;
+    gDebugTextBox2.yPosition = 40;
+    gDebugTextBox2.font = font_80B01A8;
+    gDebugTextBox2.size = 240;
+    gDebugTextBox2.field_A = 1;
+    gDebugTextBox2.stringOffset = 0;
+    gDebugTextBox2.palette = 10;
+    gDebugTextBox2.letterSpacing = 1;
+    gDebugTextBox2.field_11 = 6;
+    gDebugTextBox2.field_12 = 0;
+    gDebugTextBox2.field_13 = 0;
+
+    gDebugTextBox5.xPosition = 50;
+    gDebugTextBox5.yPosition = 56;
+    gDebugTextBox5.font = font_80B01A8;
+    gDebugTextBox5.size = 240;
+    gDebugTextBox5.field_A = 1;
+    gDebugTextBox5.stringOffset = 0;
+    gDebugTextBox5.palette = 10;
+    gDebugTextBox5.letterSpacing = 1;
+    gDebugTextBox5.field_11 = 6;
+    gDebugTextBox5.field_12 = 0;
+    gDebugTextBox5.field_13 = 0;
+
+    gDebugTextBox6.xPosition = 50;
+    gDebugTextBox6.yPosition = 64;
+    gDebugTextBox6.font = font_80B01A8;
+    gDebugTextBox6.size = 240;
+    gDebugTextBox6.field_A = 1;
+    gDebugTextBox6.stringOffset = 0;
+    gDebugTextBox6.palette = 10;
+    gDebugTextBox6.letterSpacing = 1;
+    gDebugTextBox6.field_11 = 6;
+    gDebugTextBox6.field_12 = 0;
+    gDebugTextBox6.field_13 = 0;
+
+    while (ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys), !(gKeysDown & 4)) {
+        u16 x, y;
+        char text[12];
+        int i;
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+        gDebugTextBox2.xPosition = 50;
+        gDebugTextBox2.yPosition = 40;
+        gDebugTextBox2.stringOffset = 0;
+        AddStringToBuffer(&gDebugTextBox2, &aVer04275);
+        gDebugTextBox5.xPosition = 50;
+        gDebugTextBox5.yPosition = 56;
+        gDebugTextBox5.stringOffset = 0;
+        AddStringToBuffer(&gDebugTextBox5, char_86AD26C[gLoadedRoomIndex]);
+        gDebugTextBox6.xPosition = 50;
+        gDebugTextBox6.yPosition = 64;
+        gDebugTextBox6.stringOffset = 0;
+
+        x = gPlayerPos.x >> FX32_SHIFT;
+        y = gMapPixelSizeY - ((gPlayerPos.y + gPlayerPos.z) >> FX32_SHIFT);
+
+        for (i = 0; i < 9; i++) {
+            text[i] = ' ';
+        }
+
+        IntegerToAsciiBw(x, &text[3]);
+        IntegerToAsciiBw(y, &text[8]);
+        text[9] = -1;
+        AddStringToBuffer(&gDebugTextBox6, text);
+
+        RenderText();
+        CheckStacks();
+        SyncVblank();
+        update_video();
+        SkipVblank();
+    }
+
+    FadeOutObjects(2, 0);
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+    gOBJTileCount = 0;
+    SyncVblank();
+    update_video();
+    SkipVblank();
+    REG_BLDCNT = BLDCNT_TGT2_ALL;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+    EnableBGAlphaBlending();
+    REG_BLDCNT = gColorSpecEffectsSel;
+    EnableBackgrounds();
+    sub_8026D84();
+    audio_set_tune_vol(dVolumes[gBgmMainVolume]);
+    DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
+    sub_800EECC();
+
+    if (!gIsSlideMiniGame) {
+        load_transformation_palette();
+    }
+
+    if (gLoadedRoomIndex == ROOM_DIVESPOT || gLoadedRoomIndex == ROOM_UNDERCORAL) {
+        sub_800EC94();
+        sub_800ECB4();
+    }
+}
+
+void sub_8011158() {
+    DmaTransfer32(byte_83FD254, 0x5000200, 128);
+    InitMenu(12, 0);
+    gMenuId = 12;
+    gMenuParentId = -1;
+
+    gDebugTextBox2.xPosition = 16;
+    gDebugTextBox2.yPosition = 8;
+    gDebugTextBox2.font = font_80B01A8;
+    gDebugTextBox2.size = 240;
+    gDebugTextBox2.field_A = 1;
+    gDebugTextBox2.stringOffset = 0;
+    gDebugTextBox2.palette = 10;
+    gDebugTextBox2.letterSpacing = 1;
+    gDebugTextBox2.field_11 = 6;
+    gDebugTextBox2.field_12 = 0;
+    gDebugTextBox2.field_13 = 0;
+
+    gDebugTextBox3.xPosition = 16;
+    gDebugTextBox3.yPosition = 24;
+    gDebugTextBox3.font = font_80B01A8;
+    gDebugTextBox3.size = 240;
+    gDebugTextBox3.field_A = 1;
+    gDebugTextBox3.stringOffset = 0;
+    gDebugTextBox3.palette = 10;
+    gDebugTextBox3.letterSpacing = 1;
+    gDebugTextBox3.field_11 = 6;
+    gDebugTextBox3.field_12 = 0;
+    gDebugTextBox3.field_13 = 0;
+
+    gDebugTextBox4.xPosition = 16;
+    gDebugTextBox4.yPosition = 32;
+    gDebugTextBox4.font = font_80B01A8;
+    gDebugTextBox4.size = 240;
+    gDebugTextBox4.field_A = 1;
+    gDebugTextBox4.stringOffset = 0;
+    gDebugTextBox4.palette = 10;
+    gDebugTextBox4.letterSpacing = 1;
+    gDebugTextBox4.field_11 = 6;
+    gDebugTextBox4.field_12 = 0;
+    gDebugTextBox4.field_13 = 0;
+
+    gDebugTextBox5.xPosition = 16;
+    gDebugTextBox5.yPosition = 40;
+    gDebugTextBox5.font = font_80B01A8;
+    gDebugTextBox5.size = 240;
+    gDebugTextBox5.field_A = 1;
+    gDebugTextBox5.stringOffset = 0;
+    gDebugTextBox5.palette = 10;
+    gDebugTextBox5.letterSpacing = 1;
+    gDebugTextBox5.field_11 = 6;
+    gDebugTextBox5.field_12 = 0;
+    gDebugTextBox5.field_13 = 0;
+
+    gDebugTextBox6.xPosition = 16;
+    gDebugTextBox6.yPosition = 48;
+    gDebugTextBox6.font = font_80B01A8;
+    gDebugTextBox6.size = 240;
+    gDebugTextBox6.field_A = 1;
+    gDebugTextBox6.stringOffset = 0;
+    gDebugTextBox6.palette = 10;
+    gDebugTextBox6.letterSpacing = 1;
+    gDebugTextBox6.field_11 = 6;
+    gDebugTextBox6.field_12 = 0;
+    gDebugTextBox6.field_13 = 0;
+}
+
+void sub_801126C() {
+    byte_200143E = 0;
+    byte_2001441 = 0;
+
+    while (1) {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+        if (gKeysDown & SELECT_BUTTON) {
+            SetTextSpriteCount(0);
+            return;
+        } else if (gKeysDown & B_BUTTON) {
+            if (gMenuParentId == 0xFF) {
+                SetTextSpriteCount(0);
+                return;
+            }
+
+            gMenuId = gMenuParentId;
+
+            //! Possible fake match.
+            do {
+                switch (gMenuId) {
+                    case MENU_DEBUG_MAIN:
+                        gMenuParentId = 0xFF;
+                        break;
+
+                    case MENU_DEBUG_INFO_2:
+                        gMenuParentId = MENU_DEBUG_INFO_1;
+                        break;
+
+                    case MENU_DEBUG_INFO_3:
+                        gMenuParentId = MENU_DEBUG_INFO_2;
+                        break;
+
+                    case MENU_DEBUG_WARP_2:
+                        gMenuParentId = MENU_DEBUG_WARP_1;
+                        break;
+
+                    case MENU_DEBUG_WARP_3:
+                        gMenuParentId = MENU_DEBUG_WARP_2;
+                        break;
+
+                    case MENU_DEBUG_WARP_4:
+                        gMenuParentId = MENU_DEBUG_WARP_3;
+                        break;
+
+                    case MENU_DEBUG_WARP_5:
+                        gMenuParentId = MENU_DEBUG_WARP_4;
+                        break;
+
+                    case MENU_DEBUG_WARP_6:
+                        gMenuParentId = MENU_DEBUG_WARP_5;
+                        break;
+
+                    case 28:
+                        gMenuParentId = MENU_DEBUG_WARP_6;
+                        break;
+
+                    case MENU_DEBUG_AI:
+                    case MENU_DEBUG_GOD_MODE:
+                        gMenuParentId = MENU_DEBUG_CHEATS;
+                        break;
+
+                    case MENU_DEBUG_INFO_1:
+                    case MENU_DEBUG_CHEATS:
+                    case MENU_DEBUG_TRANSFORM:
+                    case MENU_NOTHING:
+                    case MENU_DEBUG_WARP_1:
+                        gMenuParentId = MENU_DEBUG_MAIN;
+                        break;
+
+                    default:
+                        ASSERT(0);
+                        break;
+                }
+            } while (0);
+
+            InitMenu(gMenuId, 0);
+        } else if (gKeysDown & A_BUTTON) {
+            if (sub_8011540()) {
+                SetTextSpriteCount(0);
+                return;
+            }
+        }
+
+        if (!(gKeysDown & JOY_EXCL_DPAD)) {
+            if (gKeysDown & DPAD_UP) {
+                AdvanceMenuEntryUp();
+            } else if (gKeysDown & DPAD_DOWN) {
+                AdvanceMenuEntryDown();
+            }
+        }
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = 0x6014000;
+        gOBJTileCount = 512;
+        sub_8011428();
+        FlushMenuToTextBuffer();
+        RenderText();
+        CheckStacks();
+        SyncVblank();
+        update_video();
+        SkipVblank();
+    }
+}
+
+void sub_8011428() {
+    u16 x, y;
+    char text[12];
+    int i;
+
+    gDebugTextBox2.xPosition = 16;
+    gDebugTextBox2.yPosition = 8;
+    gDebugTextBox2.stringOffset = 0;
+    AddStringToBuffer(&gDebugTextBox2, &aVer04275);
+
+    gDebugTextBox3.xPosition = 16;
+    gDebugTextBox3.yPosition = 24;
+    gDebugTextBox3.stringOffset = 0;
+    if (byte_200143C) {
+        AddStringToBuffer(&gDebugTextBox3, &aLocked);
+    } else {
+        AddStringToBuffer(&gDebugTextBox3, &aUnlocked);
+    }
+
+    gDebugTextBox4.xPosition = 16;
+    gDebugTextBox4.yPosition = 32;
+    gDebugTextBox4.stringOffset = 0;
+    if (byte_2001370) {
+        AddStringToBuffer(&gDebugTextBox4, &aGod);
+    } else {
+        AddStringToBuffer(&gDebugTextBox4, &aMortal);
+    }
+
+    gDebugTextBox5.xPosition = 16;
+    gDebugTextBox5.yPosition = 40;
+    gDebugTextBox5.stringOffset = 0;
+    AddStringToBuffer(&gDebugTextBox5, char_86AD26C[gLoadedRoomIndex]);
+
+    gDebugTextBox6.xPosition = 16;
+    gDebugTextBox6.yPosition = 48;
+    gDebugTextBox6.stringOffset = 0;
+
+    x = gPlayerPos.x >> FX32_SHIFT;
+    y = gMapPixelSizeY - ((gPlayerPos.y + gPlayerPos.z) >> FX32_SHIFT);
+
+    for (i = 0; i < 9; i++) {
+        text[i] = ' ';
+    }
+
+    IntegerToAsciiBw(x, &text[3]);
+    IntegerToAsciiBw(y, &text[8]);
+    text[9] = -1;
+    AddStringToBuffer(&gDebugTextBox6, text);
 }

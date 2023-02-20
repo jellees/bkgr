@@ -670,4 +670,13 @@ extern u8 unk_83FD754;
 extern u8 unk_83FD774;
 extern u8 unk_83FD794;
 
+extern u8 byte_83FD254[512];
+
+extern char* aVer04275;
+extern char* char_86AD26C[];
+extern char* aLocked;
+extern char* aUnlocked;
+extern char* aGod;
+extern char* aMortal;
+
 #endif

@@ -1,5 +1,5 @@
-#ifndef GUARD_PLAYER_ENUMS_H
-#define GUARD_PLAYER_ENUMS_H
+#ifndef GUARD_PLAYER_DEFS_H
+#define GUARD_PLAYER_DEFS_H
 
 enum Transformations {
     TRANSFORMATION_BANJO,
