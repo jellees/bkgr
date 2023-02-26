@@ -4,7 +4,13 @@
 #include "main.h"
 #include "audio_b.h"
 #include "menu.h"
+#include "player.h"
 #include "common.h"
+
+struct InputRecord {
+    s16 keys;
+    s16 count;
+};
 
 u8 byte_2001200;
 u8 gMainFrameCounter;
@@ -129,9 +135,9 @@ u8 byte_2001443;
 u32 dword_2001444;
 u32 dword_2001448;
 u32 dword_200144C;
-u32 dword_2001450;
-u32 dword_2001454;
-u16 word_2001458;
+struct InputRecord* gInputRecords;
+u32 gInputRecordCount;
+u16 gPreviousInput;
 u8 byte_200145A;
 u8 byte_200145B;
 
@@ -410,16 +416,18 @@ void Debug_ShowInfo() {
             break;
 
         case 9:
-        case 0xA:
-        case 0xB: {
+        case 10:
+        case 11: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -436,15 +444,17 @@ void Debug_ShowInfo() {
             gDebugTextBox1.xPosition = 36;
         } break;
 
-        case 0xC: {
+        case 12: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -460,15 +470,17 @@ void Debug_ShowInfo() {
             gDebugTextBox1.xPosition = 36;
         } break;
 
-        case 0xD: {
+        case 13: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -484,15 +496,17 @@ void Debug_ShowInfo() {
             gDebugTextBox1.xPosition = 36;
         } break;
 
-        case 0xE: {
+        case 14: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -508,15 +522,17 @@ void Debug_ShowInfo() {
             gDebugTextBox1.xPosition = 36;
         } break;
 
-        case 0xF: {
+        case 15: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -532,15 +548,17 @@ void Debug_ShowInfo() {
             gDebugTextBox1.xPosition = 36;
         } break;
 
-        case 0x10: {
+        case 16: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -556,15 +574,17 @@ void Debug_ShowInfo() {
             gDebugTextBox1.xPosition = 36;
         } break;
 
-        case 0x11: {
+        case 17: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -580,15 +600,17 @@ void Debug_ShowInfo() {
             gDebugTextBox1.xPosition = 36;
         } break;
 
-        case 0x12: {
+        case 18: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -604,15 +626,17 @@ void Debug_ShowInfo() {
             gDebugTextBox1.xPosition = 36;
         } break;
 
-        case 0x13: {
+        case 19: {
             s32 i;
-            for (i = 0; i < 10; i++)
+            for (i = 0; i < 10; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[10] = ' ';
 
-            for (i = 11; i <= 20; i++)
+            for (i = 11; i <= 20; i++) {
                 gDebugString[i] = '0';
+            }
 
             gDebugString[21] = -1;
 
@@ -765,8 +789,9 @@ void Debug_SetAfterGameUpdate(s32 vcount) {
 
         case 5:
             gDebugESN = vcount;
-            if (vcount > gDebugMESN)
+            if (vcount > gDebugMESN) {
                 gDebugMESN = vcount;
+            }
             break;
     }
 }
@@ -774,14 +799,17 @@ void Debug_SetAfterGameUpdate(s32 vcount) {
 void Debug_SetAfterVideoUpdate(u32 vcount) {
     s32 index = gDebugInfoIndex;
 
-    if (index == 0)
+    if (index == 0) {
         return;
+    }
 
-    if (index < 0)
+    if (index < 0) {
         return;
+    }
 
-    if (index > 5)
+    if (index > 5) {
         return;
+    }
 
     gDebugESV = vcount;
 }
@@ -1023,12 +1051,16 @@ void sub_8010BA8(int a1) {
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
         DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
         sub_800EECC();
-        if (!gIsSlideMiniGame)
+
+        if (!gIsSlideMiniGame) {
             load_transformation_palette();
+        }
+
         if (gLoadedRoomIndex == 30 || gLoadedRoomIndex == 9) {
             sub_800EC94();
             sub_800ECB4();
         }
+
         sub_8047BEC();
         sub_80524D8();
         resume_efx();
@@ -1202,9 +1234,9 @@ void sub_8010E40(int a1) {
 }
 
 void sub_8011158() {
-    DmaTransfer32(byte_83FD254, 0x5000200, 128);
-    InitMenu(12, 0);
-    gMenuId = 12;
+    DmaTransfer32(byte_83FD254, OBJ_PLTT, 128);
+    InitMenu(MENU_DEBUG_MAIN, 0);
+    gMenuId = MENU_DEBUG_MAIN;
     gMenuParentId = -1;
 
     gDebugTextBox2.xPosition = 16;
@@ -1424,4 +1456,853 @@ void sub_8011428() {
     IntegerToAsciiBw(y, &text[8]);
     text[9] = -1;
     AddStringToBuffer(&gDebugTextBox6, text);
+}
+
+bool32 sub_8011540() {
+    int i;
+
+    switch (gMenuId) {
+        case MENU_DEBUG_MAIN:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_WARP_1;
+                    InitMenu(gMenuId, 0);
+                    break;
+
+                case 1:
+                    if (byte_2001442) {
+                        byte_2001441 = 1;
+                        return TRUE;
+                    }
+                    break;
+
+                case 2:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_INFO_1;
+                    InitMenu(gMenuId, 0);
+                    break;
+
+                case 3:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_CHEATS;
+                    InitMenu(gMenuId, 0);
+                    break;
+
+                case 4:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_TRANSFORM;
+                    InitMenu(gMenuId, 0);
+                    break;
+
+                case 6:
+                    sub_8060FF8();
+                    return TRUE;
+            }
+            break;
+
+        case MENU_DEBUG_INFO_1:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    gDebugInfoIndex = 0;
+                    return TRUE;
+
+                case 1:
+                    gDebugInfoIndex = 1;
+                    gDebugESNSum = 0;
+                    dword_2001398 = 0;
+                    gDebugESNFrameCount = 1;
+                    dword_2001390 = 1;
+                    byte_200138A = 0;
+                    return TRUE;
+
+                case 2:
+                    gDebugInfoIndex = 2;
+                    gDebugESNSum = 0;
+                    dword_2001398 = 0;
+                    gDebugESNFrameCount = 1;
+                    dword_2001390 = 1;
+                    byte_200138A = 0;
+                    return TRUE;
+
+                case 3:
+                    gDebugInfoIndex = 3;
+                    gDebugESNSum = 0;
+                    dword_2001398 = 0;
+                    gDebugESNFrameCount = 1;
+                    dword_2001390 = 1;
+                    byte_200138A = 0;
+                    return TRUE;
+
+                case 4:
+                    gDebugInfoIndex = 4;
+                    gDebugESNSum = 0;
+                    dword_2001398 = 0;
+                    gDebugESNFrameCount = 1;
+                    dword_2001390 = 1;
+                    byte_200138A = 0;
+                    return TRUE;
+
+                case 5:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_INFO_2;
+                    InitMenu(gMenuId, 0);
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_INFO_2:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    gDebugInfoIndex = 5;
+                    gDebugESNSum = 0;
+                    dword_2001398 = 0;
+                    gDebugESNFrameCount = 1;
+                    dword_2001390 = 1;
+                    gDebugMESN = 0;
+                    byte_200138A = 0;
+                    return TRUE;
+
+                case 1:
+                    gDebugInfoIndex = 6;
+                    dword_2001208 = 0;
+                    dword_200120C = 0;
+                    dword_2001210 = 0;
+                    dword_2001250 = 0;
+                    dword_2001254 = 0;
+                    dword_2001258 = 0;
+                    dword_2001298 = 1;
+                    dword_200129C = 1;
+                    dword_20012A0 = 1;
+                    byte_200138A = 0;
+                    return TRUE;
+
+                case 2:
+                    gDebugInfoIndex = 7;
+                    dword_2001208 = 0;
+                    dword_200120C = 0;
+                    dword_2001210 = 0;
+                    dword_2001250 = 0;
+                    dword_2001254 = 0;
+                    dword_2001258 = 0;
+                    dword_2001298 = 1;
+                    dword_200129C = 1;
+                    dword_20012A0 = 1;
+                    byte_200138A = 0;
+                    return TRUE;
+
+                case 3:
+                    gDebugInfoIndex = 8;
+                    dword_2001208 = 0;
+                    dword_200120C = 0;
+                    dword_2001210 = 0;
+                    dword_2001250 = 0;
+                    dword_2001254 = 0;
+                    dword_2001258 = 0;
+                    dword_2001298 = 1;
+                    dword_200129C = 1;
+                    dword_20012A0 = 1;
+                    byte_200138A = 0;
+                    return TRUE;
+
+                case 4:
+                    gDebugInfoIndex = 9;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 5:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_INFO_3;
+                    InitMenu(gMenuId, 0);
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_INFO_3:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    gDebugInfoIndex = 10;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 1:
+                    gDebugInfoIndex = 11;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 2:
+                    gDebugInfoIndex = 12;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 3:
+                    gDebugInfoIndex = 13;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 4:
+                    gDebugInfoIndex = 14;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 5:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_INFO_4;
+                    InitMenu(gMenuId, 0);
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_INFO_4:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    gDebugInfoIndex = 15;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 1:
+                    gDebugInfoIndex = 16;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 2:
+                    gDebugInfoIndex = 17;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 3:
+                    gDebugInfoIndex = 18;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 4:
+                    gDebugInfoIndex = 19;
+                    byte_200138A = 0;
+                    REG_TM2CNT_H = 128;
+                    REG_TM3CNT_H = 132;
+                    REG_TM2CNT_L = 0;
+                    REG_TM3CNT_L = 0;
+                    return TRUE;
+
+                case 5:
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_GOD_MODE:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_2001370 = 1;
+                    return 0;
+
+                case 1:
+                    byte_2001370 = 0;
+                    return 0;
+            }
+            break;
+
+        case MENU_DEBUG_AI:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_200143D = 0;
+                    return 0;
+
+                case 1:
+                    byte_200143D = 1;
+                    return 0;
+
+                case 2:
+                    byte_200143D = 2;
+                    return 0;
+
+                case 3:
+                    byte_200143D = 3;
+                    return 0;
+            }
+            break;
+
+        case MENU_DEBUG_CHEATS:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_200143C = 0;
+                    for (i = 0; i < MOVE_COUNT; i++) {
+                        gUnlockedMoves[i] = TRUE;
+                    }
+                    for (i = 0; i < gTotalAmountOfLevels; i++) {
+                        sub_80342F8(223, i);
+                    }
+                    gUnlockedLevels = gTotalAmountOfLevels;
+                    sub_80388E0();
+                    return TRUE;
+
+                case 1:
+                    break;
+
+                case 2:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_GOD_MODE;
+                    InitMenu(gMenuId, 0);
+                    SetMenuEntry(byte_2001370 ? 0 : 1);
+                    break;
+
+                case 3:
+                    sub_800FA58();
+                    return TRUE;
+            }
+            break;
+
+        case MENU_DEBUG_TRANSFORM:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    sub_08019FCC(0);
+                    return TRUE;
+
+                case 1:
+                    sub_08019FCC(1);
+                    return TRUE;
+
+                case 2:
+                    sub_08019FCC(2);
+                    return TRUE;
+
+                case 3:
+                    sub_08019FCC(3);
+                    return TRUE;
+
+                case 4:
+                    sub_08019FCC(4);
+                    return TRUE;
+
+                case 5:
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_WARP_1:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_200143E = 1;
+                    byte_200143F = 0;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 1:
+                    byte_200143E = 1;
+                    byte_200143F = 1;
+                    byte_2001440 = 3;
+                    return TRUE;
+
+                case 2:
+                    byte_200143E = 1;
+                    byte_200143F = 1;
+                    byte_2001440 = 2;
+                    return TRUE;
+
+                case 3:
+                    byte_200143E = 1;
+                    byte_200143F = 2;
+                    byte_2001440 = 1;
+                    return TRUE;
+
+                case 4:
+                    byte_200143E = 1;
+                    byte_200143F = 29;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 5:
+                    break;
+
+                case 6:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_WARP_2;
+                    InitMenu(gMenuId, 0);
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_WARP_2:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_200143E = 1;
+                    byte_200143F = 4;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 1:
+                    byte_200143E = 1;
+                    byte_200143F = 5;
+                    byte_2001440 = 1;
+                    return TRUE;
+
+                case 2:
+                    byte_200143E = 1;
+                    byte_200143F = 11;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 3:
+                    byte_200143E = 1;
+                    byte_200143F = 11;
+                    byte_2001440 = 5;
+                    return TRUE;
+
+                case 4:
+                    byte_200143E = 1;
+                    byte_200143F = gLoadedRoomIndex;
+                    gLoadedRoomIndex = ROOM_MUMBOHUT;
+                    gLoadedRoomLevel = 1;
+                    sub_8040178();
+                    return TRUE;
+
+                case 5:
+                    break;
+
+                case 6:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_WARP_3;
+                    InitMenu(gMenuId, 0);
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_WARP_3:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_200143E = 1;
+                    byte_200143F = 8;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 1:
+                    byte_200143E = 1;
+                    byte_200143F = 3;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 2:
+                    byte_200143E = 1;
+                    byte_200143F = 3;
+                    byte_2001440 = 2;
+                    return TRUE;
+
+                case 3:
+                    byte_200143E = 1;
+                    byte_200143F = 9;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 4:
+                    byte_200143E = 1;
+                    byte_200143F = 13;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 5:
+                    byte_200143E = 1;
+                    byte_200143F = gLoadedRoomIndex;
+                    gLoadedRoomIndex = ROOM_MUMBOHUT;
+                    gLoadedRoomLevel = 2;
+                    sub_8040178();
+                    return TRUE;
+
+                case 6:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_WARP_4;
+                    InitMenu(gMenuId, 0);
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_WARP_4:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_200143E = 1;
+                    byte_200143F = 20;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 1:
+                    byte_200143E = 1;
+                    byte_200143F = 19;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 2:
+                    byte_200143E = 1;
+                    byte_200143F = 31;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 3:
+                    byte_200143E = 1;
+                    byte_200143F = 33;
+                    byte_2001440 = 1;
+                    return TRUE;
+
+                case 4:
+                    byte_200143E = 1;
+                    byte_200143F = gLoadedRoomIndex;
+                    gLoadedRoomIndex = ROOM_MUMBOHUT;
+                    gLoadedRoomLevel = 3;
+                    sub_8040178();
+                    return TRUE;
+
+                case 5:
+                    break;
+
+                case 6:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_WARP_5;
+                    InitMenu(gMenuId, 0);
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_WARP_5:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_200143E = 1;
+                    byte_200143F = 22;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 1:
+                    byte_200143E = 1;
+                    byte_200143F = 26;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 2:
+                    byte_200143E = 1;
+                    byte_200143F = 23;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 3:
+                    byte_200143E = 1;
+                    byte_200143F = 27;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 4:
+                    byte_200143E = 1;
+                    byte_200143F = 24;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 5:
+                    byte_200143E = 1;
+                    byte_200143F = gLoadedRoomIndex;
+                    gLoadedRoomIndex = ROOM_MUMBOHUT;
+                    gLoadedRoomLevel = 4;
+                    sub_8040178();
+                    return TRUE;
+
+                case 6:
+                    gMenuParentId = gMenuId;
+                    gMenuId = MENU_DEBUG_WARP_6;
+                    InitMenu(gMenuId, 0);
+                    break;
+            }
+            break;
+
+        case MENU_DEBUG_WARP_6:
+            switch (GetCurrentMenuEntry()) {
+                case 0:
+                    byte_200143E = 1;
+                    byte_200143F = 15;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 1:
+                    byte_200143E = 1;
+                    byte_200143F = 36;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 2:
+                    byte_200143E = 1;
+                    byte_200143F = 17;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 3:
+                    byte_200143E = 1;
+                    byte_200143F = 21;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 4:
+                    byte_200143E = 1;
+                    byte_200143F = 32;
+                    byte_2001440 = 0;
+                    return TRUE;
+
+                case 5:
+                    byte_200143E = 1;
+                    byte_200143F = gLoadedRoomIndex;
+                    gLoadedRoomIndex = ROOM_MUMBOHUT;
+                    gLoadedRoomLevel = 5;
+                    sub_8040178();
+                    return TRUE;
+
+                case 6:
+                    break;
+            }
+            break;
+    }
+
+    return FALSE;
+}
+
+void sub_80120DC(int a1, int a2, int a3, int a4) {
+    byte_2001442 = 1;
+    dword_2001444 = a2;
+    dword_2001448 = a3;
+    dword_200144C = a4;
+    byte_2001443 = gLoadedRoomIndex;
+}
+
+#define MAX_INPUT_RECORDINGS 256
+
+void debug_record_input() {
+    s16 keys = REG_KEYINPUT & KEYS_MASK;
+
+    if (keys != gPreviousInput) {
+        ASSERT(++gInputRecordCount != MAX_INPUT_RECORDINGS);
+        gInputRecords[gInputRecordCount].keys = keys;
+        gPreviousInput = keys;
+        gInputRecords[gInputRecordCount].count = 0;
+    } else {
+        gInputRecords[gInputRecordCount].count++;
+    }
+}
+
+void init_input_recording() {
+    gInputRecords = (struct InputRecord*)Alloc(sizeof(struct InputRecord) * MAX_INPUT_RECORDINGS, 8, 5);
+    gInputRecordCount = 0;
+    gPreviousInput = REG_KEYINPUT & KEYS_MASK;
+}
+
+void free_input_record_memory() {
+    s32 count = gInputRecordCount;
+    if (count > 0) {
+        while (count != 0) {
+            count--;
+        }
+    }
+    Free(gInputRecords, 4);
+}
+
+void display_error_message(char* type, char* message) {
+    int i;
+
+    REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP;
+    REG_BG2CNT = 0;
+    REG_BLDCNT = BLDCNT_TGT2_ALL;
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+    REG_BLDY = 0;
+    DmaFill32(0, (void*)BG_VRAM, 10240);
+    DmaFill32(0x50005000, BG_PLTT, 128);
+    DmaTransfer32(byte_83FD254, OBJ_PLTT, 128);
+
+    gDebugTextBox5.xPosition = 16;
+    gDebugTextBox5.yPosition = 40;
+    gDebugTextBox5.font = font_80B01A8;
+    gDebugTextBox5.size = 240;
+    gDebugTextBox5.field_A = 1;
+    gDebugTextBox5.stringOffset = 0;
+    gDebugTextBox5.palette = 10;
+    gDebugTextBox5.letterSpacing = 1;
+    gDebugTextBox5.field_11 = 6;
+    gDebugTextBox5.field_12 = 0;
+    gDebugTextBox5.field_13 = 0;
+
+    gDebugTextBox6.xPosition = 16;
+    gDebugTextBox6.yPosition = 48;
+    gDebugTextBox6.font = font_80B01A8;
+    gDebugTextBox6.size = 240;
+    gDebugTextBox6.field_A = 1;
+    gDebugTextBox6.stringOffset = 0;
+    gDebugTextBox6.palette = 10;
+    gDebugTextBox6.letterSpacing = 1;
+    gDebugTextBox6.field_11 = 6;
+    gDebugTextBox6.field_12 = 0;
+    gDebugTextBox6.field_13 = 0;
+
+    gDebugTextBox7.xPosition = 16;
+    gDebugTextBox7.yPosition = 64;
+    gDebugTextBox7.font = font_80B01A8;
+    gDebugTextBox7.size = 240;
+    gDebugTextBox7.field_A = 1;
+    gDebugTextBox7.stringOffset = 0;
+    gDebugTextBox7.palette = 10;
+    gDebugTextBox7.letterSpacing = 1;
+    gDebugTextBox7.field_11 = 6;
+    gDebugTextBox7.field_12 = 0;
+    gDebugTextBox7.field_13 = 0;
+
+    gDebugTextBox8.xPosition = 16;
+    gDebugTextBox8.yPosition = 80;
+    gDebugTextBox8.font = font_80B01A8;
+    gDebugTextBox8.size = 208;
+    gDebugTextBox8.field_A = 5;
+    gDebugTextBox8.stringOffset = 0;
+    gDebugTextBox8.palette = 10;
+    gDebugTextBox8.letterSpacing = 1;
+    gDebugTextBox8.field_11 = 6;
+    gDebugTextBox8.field_12 = 0;
+    gDebugTextBox8.field_13 = 0;
+
+    for (i = 0; i < 2; i++) {
+        u16 x, y;
+        char posText[12];
+        int i;
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (void*)0x6014000;
+        gOBJTileCount = 512;
+
+        gDebugTextBox5.xPosition = 16;
+        gDebugTextBox5.yPosition = 40;
+        gDebugTextBox5.stringOffset = 0;
+        gDebugTextBox6.xPosition = 16;
+        gDebugTextBox6.yPosition = 48;
+        gDebugTextBox6.stringOffset = 0;
+        gDebugTextBox7.xPosition = 16;
+        gDebugTextBox7.yPosition = 64;
+        gDebugTextBox7.stringOffset = 0;
+        gDebugTextBox8.xPosition = 16;
+        gDebugTextBox8.yPosition = 80;
+        gDebugTextBox8.stringOffset = 0;
+        AddStringToBuffer(&gDebugTextBox5, char_86AD26C[gLoadedRoomIndex]);
+
+        x = gPlayerPos.x >> FX32_SHIFT;
+        y = gMapPixelSizeY - ((gPlayerPos.y + gPlayerPos.z) >> FX32_SHIFT);
+
+        for (i = 0; i < 9; i++) {
+            posText[i] = ' ';
+        }
+
+        IntegerToAsciiBw(x, &posText[3]);
+        IntegerToAsciiBw(y, &posText[8]);
+        posText[9] = -1;
+        AddStringToBuffer(&gDebugTextBox6, posText);
+        AddStringToBuffer(&gDebugTextBox7, type);
+        AddStringToBuffer(&gDebugTextBox8, message);
+
+        RenderText();
+        SyncVblank();
+        update_video();
+        SkipVblank();
+    }
+
+    ASSERT(0);
+}
+
+void sub_801243C() {
+    char string[11];
+    struct TextBox textBox1;
+    struct TextBox textBox2;
+    struct TextBox textBox3;
+
+    audio_halt_all_fx();
+    sub_80270AC(4095, 0);
+    DmaFill32(0, BG_PLTT, 128);
+    sub_8026E48(4095, 0, 0);
+
+    //! Possible fake match.
+    do {
+        string[0] = 'S';
+        string[1] = 'C';
+        string[2] = 'R';
+        string[3] = 'I';
+        string[4] = 'P';
+        string[5] = 'T';
+        string[6] = ' ';
+        string[7] = '0';
+        string[8] = '0';
+        string[9] = '0';
+        string[10] = -1;
+    } while (0);
+
+    textBox1.xPosition = 8;
+    textBox1.yPosition = 8;
+    textBox1.font = font_80B01A8;
+    textBox1.size = 240;
+    textBox1.field_A = 1;
+    textBox1.stringOffset = 0;
+    textBox1.palette = 10;
+    textBox1.letterSpacing = 1;
+    textBox1.field_11 = 6;
+    textBox1.field_12 = 0;
+    textBox1.field_13 = 0;
+
+    textBox2.xPosition = 8;
+    textBox2.yPosition = 24;
+    textBox2.font = font_80B01A8;
+    textBox2.size = 240;
+    textBox2.field_A = 1;
+    textBox2.stringOffset = 0;
+    textBox2.palette = 10;
+    textBox2.letterSpacing = 1;
+    textBox2.field_11 = 6;
+    textBox2.field_12 = 0;
+    textBox2.field_13 = 0;
+
+    textBox3.xPosition = 8;
+    textBox3.yPosition = 40;
+    textBox3.font = font_80B01A8;
+    textBox3.size = 240;
+    textBox3.field_A = 1;
+    textBox3.stringOffset = 0;
+    textBox3.palette = 10;
+    textBox3.letterSpacing = 1;
+    textBox3.field_11 = 6;
+    textBox3.field_12 = 0;
+    textBox3.field_13 = 0;
 }

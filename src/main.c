@@ -55,7 +55,7 @@ u32* dword_2000F60;
 u32 dword_2000F64;
 u32 dword_2000F68;
 u32 dword_2000F6C;
-u8 gUnused_ExecUnusedInputFunc;
+bool8 gRecordInput;
 struct Sprite gPlayerSprite;
 struct Sprite gPlayerShadowSprite;
 struct Sprite sprite_2000FAC;
@@ -229,8 +229,8 @@ static void update_game(void) {
 
     if (!byte_203F9A1) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
-        if (gUnused_ExecUnusedInputFunc) {
-            Unused_InputFunction();
+        if (gRecordInput) {
+            debug_record_input();
         }
     } else {
         ReadKeysEx(&gKeysPressed, &gKeysDown, &gPreviousKeys);
@@ -2672,7 +2672,7 @@ void select_next_available_egg(bool32 a1) {
     bool8 isNextEggSelected;
 
     if (gSelectedEgg < 0) {
-        sub_080121F0("GAME\xff", "CHANGE EGG TYPE: CURRENT EGG TYPE IS INVALID\xff");
+        display_error_message("GAME\xff", "CHANGE EGG TYPE: CURRENT EGG TYPE IS INVALID\xff");
     }
 
     if (!a1 && !sub_0804207C(gSelectedEgg + 9)) {

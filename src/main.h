@@ -111,7 +111,7 @@ extern u32* dword_2000F60;
 extern u32 dword_2000F64;
 extern u32 dword_2000F68;
 extern u32 dword_2000F6C;
-extern u8 gUnused_ExecUnusedInputFunc;
+extern bool8 gRecordInput;
 extern struct Sprite gPlayerSprite;
 extern struct Sprite gPlayerShadowSprite;
 extern struct Sprite sprite_2000FAC;

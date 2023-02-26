@@ -284,7 +284,6 @@ SECTIONS
         asm/collision.o(.text);
         src/main.o(.text);
         src/debug.o(.text);
-        asm/chunk5.o(.text);
         src/room.o(.text);
         asm/room.o(.text);
         src/player.o(.text);
