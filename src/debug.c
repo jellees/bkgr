@@ -1161,7 +1161,7 @@ void sub_8010E40(int a1) {
     gDebugTextBox6.field_12 = 0;
     gDebugTextBox6.field_13 = 0;
 
-    while (ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys), !(gKeysDown & 4)) {
+    while (ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys), !(gKeysDown & SELECT_BUTTON)) {
         u16 x, y;
         char text[12];
         int i;

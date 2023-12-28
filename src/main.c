@@ -391,7 +391,7 @@ static void update_game(void) {
         if (byte_2000F5D) {
             sub_8025948(0);
 
-            if (gKeysDown & 1) {
+            if (gKeysDown & A_BUTTON) {
                 byte_2000F5D = FALSE;
             }
         } else {
@@ -2607,7 +2607,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
     sub_8040178();
     if (byte_20010A4) {
         sub_8016C78(byte_20010A5);
-        word_20010AC = gKeysPressed & 0x3FF;
+        word_20010AC = gKeysPressed & KEYS_MASK;
     }
     sub_8063178();
 

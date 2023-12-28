@@ -2,13 +2,13 @@
 #include "common.h"
 #include "alloc.h"
 
-IWRAM_DATA u8 gHeap3[0x1040];
-IWRAM_DATA struct Heap gHeaps[6];
-IWRAM_DATA u8 gHeap1[64000];
-IWRAM_DATA u8 gHeap2[90000];
-IWRAM_DATA u8 gHeap4[0x1000];
-IWRAM_DATA u8 gHeap5[0x8070];
-IWRAM_DATA u8 gHeap6[0x800];
+u8 gHeap3[0x1040];
+struct Heap gHeaps[6];
+u8 gHeap1[64000];
+u8 gHeap2[90000];
+u8 gHeap4[0x1000];
+u8 gHeap5[0x8070];
+u8 gHeap6[0x800];
 
 void sub_8027600(u32 heap) {
     struct MemoryBlock* block = gHeaps[heap].start;
