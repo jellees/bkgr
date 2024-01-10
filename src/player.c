@@ -1497,8 +1497,8 @@ void sub_80192D4(int a1, int a2, int a3) {
                     gPlayerSprite.direction = (a2 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a2], 0);
                 } else {
-                    sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[(gPlayerSprite.direction + 4) & 7],
-                                0);
+                    sub_8003884(dword_2000FC8, 0x20000,
+                                dword_80CC290[(gPlayerSprite.direction + 4) & 7], 0);
                 }
                 sprite_set_anim(&gPlayerSprite, 537, 0, 1);
                 break;
@@ -1525,8 +1525,8 @@ void sub_80192D4(int a1, int a2, int a3) {
                     gPlayerSprite.direction = (a2 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a2], 0);
                 } else {
-                    sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[(gPlayerSprite.direction + 4) & 7],
-                                0);
+                    sub_8003884(dword_2000FC8, 0x20000,
+                                dword_80CC290[(gPlayerSprite.direction + 4) & 7], 0);
                 }
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0);
                 sprite_set_anim(&gPlayerSprite, 241, 0, 1);
@@ -1553,8 +1553,8 @@ void sub_80192D4(int a1, int a2, int a3) {
                     gPlayerSprite.direction = (a2 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a2], 0);
                 } else {
-                    sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[(gPlayerSprite.direction + 4) & 7],
-                                0);
+                    sub_8003884(dword_2000FC8, 0x20000,
+                                dword_80CC290[(gPlayerSprite.direction + 4) & 7], 0);
                 }
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0);
                 sprite_set_anim(&gPlayerSprite, 209, 0, 1);
@@ -1589,8 +1589,8 @@ void sub_80192D4(int a1, int a2, int a3) {
                     gPlayerSprite.direction = (a2 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a2], 0);
                 } else {
-                    sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[(gPlayerSprite.direction + 4) & 7],
-                                0);
+                    sub_8003884(dword_2000FC8, 0x20000,
+                                dword_80CC290[(gPlayerSprite.direction + 4) & 7], 0);
                 }
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0);
                 sprite_set_anim(&gPlayerSprite, 161, 0, 1);
@@ -1689,8 +1689,8 @@ static void sub_08019AAC(int a1, int a2) {
                     gPlayerSprite.direction = (a1 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a1], 0);
                 } else {
-                    sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[(gPlayerSprite.direction + 4) & 7],
-                                0);
+                    sub_8003884(dword_2000FC8, 0x20000,
+                                dword_80CC290[(gPlayerSprite.direction + 4) & 7], 0);
                 }
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0);
                 sprite_set_anim(&gPlayerSprite, 337, 0, 1);
@@ -1718,8 +1718,8 @@ static void sub_08019AAC(int a1, int a2) {
                     gPlayerSprite.direction = (a1 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a1], 0);
                 } else {
-                    sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[(gPlayerSprite.direction + 4) & 7],
-                                0);
+                    sub_8003884(dword_2000FC8, 0x20000,
+                                dword_80CC290[(gPlayerSprite.direction + 4) & 7], 0);
                 }
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0);
                 sprite_set_anim(&gPlayerSprite, 361, 0, 1);
@@ -1752,8 +1752,8 @@ static void sub_08019AAC(int a1, int a2) {
                     gPlayerSprite.direction = (a1 + 4) & 7;
                     sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[a1], 0);
                 } else {
-                    sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[(gPlayerSprite.direction + 4) & 7],
-                                0);
+                    sub_8003884(dword_2000FC8, 0x20000,
+                                dword_80CC290[(gPlayerSprite.direction + 4) & 7], 0);
                 }
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x30000, 0);
                 sprite_set_anim(&gPlayerSprite, 417, 0, 1);
@@ -3715,7 +3715,8 @@ static void state_die(s32 keyPressed, s32 keyDown) {
             sub_80629E8();
         }
     } else {
-        if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8)
+            && !byte_203F99C) {
             sub_80629E8();
         }
     }
@@ -6398,7 +6399,8 @@ static void state_tank_die(s32 keyPressed, s32 keyDown) {
             sub_80629E8();
         }
     } else {
-        if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8)
+            && !byte_203F99C) {
             sub_80629E8();
         }
     }
@@ -7478,7 +7480,8 @@ static void state_octopus_die(s32 keyPressed, s32 keyDown) {
             sub_80629E8();
         }
     } else {
-        if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8)
+            && !byte_203F99C) {
             sub_80629E8();
         }
     }
