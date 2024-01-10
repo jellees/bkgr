@@ -81,7 +81,7 @@ _080474BE:
 	ldrb r3, [r0, #8]
 	adds r0, r6, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	ldr r1, [r5, #0x28]
 	ldr r1, [r1]
@@ -978,13 +978,13 @@ sub_8047CC0: @ 0x08047CC0
 	adds r1, r4, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r5, #0
 	adds r0, #0xbc
 	adds r1, r4, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	strb r6, [r7]
 _08047CFE:
 	ldr r0, _08047D3C
@@ -1000,13 +1000,13 @@ _08047CFE:
 	mov r1, r8
 	movs r2, #0
 	mov r3, sb
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r5, #0
 	adds r0, #0xbc
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	movs r0, #1
 	strb r0, [r4]
 _08047D2E:
@@ -1621,7 +1621,7 @@ _080481BE:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	mov r1, sl
 	ldr r0, [r1, #0x2c]
 	movs r1, #0
@@ -1998,7 +1998,7 @@ _08048510:
 _08048566:
 	ldrb r1, [r6, #8]
 	adds r0, r4, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r2, [sp, #0x2c]
 	ldrb r1, [r6, #9]
 	ldr r0, _080485BC
@@ -2032,9 +2032,9 @@ _080485C4:
 _080485C8:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [sp, #0x2c]
-	bl sub_8003794
+	bl sprite_lock_anim
 	ldr r0, [r5, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -2545,7 +2545,7 @@ _08048A28:
 	ldr r0, [r5]
 	adds r0, #0xa0
 	ldrb r1, [r4]
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r5]
 	adds r2, r0, #0
 	adds r2, #0xbc
@@ -2572,10 +2572,10 @@ _08048A68:
 _08048A6C:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r5]
 	adds r0, #0xbc
-	bl sub_8003794
+	bl sprite_lock_anim
 	ldr r0, [r5]
 	adds r0, #0xb0
 	movs r4, #0
@@ -2601,7 +2601,7 @@ _08048A6C:
 	ldr r1, _08048AD4
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _08048AD8
 	strb r4, [r0]
 _08048AB8:
@@ -4395,7 +4395,7 @@ sub_8049810: @ 0x08049810
 	ldrb r3, [r0, #8]
 	adds r0, r2, #0
 	movs r2, #0
-	bl sub_80033A4
+	bl sprite_set_anim_without_reset
 _08049832:
 	pop {r0}
 	bx r0
@@ -4442,7 +4442,7 @@ _08049868:
 	mov r1, r8
 	movs r2, #0
 	mov r3, sb
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	ldr r3, _080498C4
 	adds r1, r5, #0
@@ -4634,7 +4634,7 @@ sub_80499DC: @ 0x080499DC
 	strb r1, [r0]
 	ldr r0, [r2]
 	adds r0, #0xa0
-	bl sub_8003794
+	bl sprite_lock_anim
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4649,7 +4649,7 @@ sub_8049A04: @ 0x08049A04
 	strb r1, [r2]
 	ldr r0, [r0]
 	adds r0, #0xa0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4800,7 +4800,7 @@ _08049B18:
 	b _08049BB8
 _08049B1E:
 	movs r0, #0x2e
-	bl init_function
+	bl start_script
 	adds r0, r7, #0
 	adds r0, #0xa0
 	ldr r1, _08049B44
@@ -4813,13 +4813,13 @@ _08049B1E:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	b _08049BE0
 	.align 2, 0
 _08049B44: .4byte 0x080B1240
 _08049B48:
 	movs r0, #0x2c
-	bl init_function
+	bl start_script
 	adds r0, r7, #0
 	adds r0, #0xa0
 	ldr r1, _08049B6C
@@ -4832,7 +4832,7 @@ _08049B48:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	b _08049BE0
 	.align 2, 0
 _08049B6C: .4byte 0x080B1240
@@ -4844,7 +4844,7 @@ _08049B70:
 	cmp r0, #0xc
 	bne _08049BA4
 	movs r0, #0x30
-	bl init_function
+	bl start_script
 	adds r0, r7, #0
 	adds r0, #0xa0
 	ldr r1, _08049BA0
@@ -4857,19 +4857,19 @@ _08049B70:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	b _08049BE0
 	.align 2, 0
 _08049BA0: .4byte 0x080B1240
 _08049BA4:
 	movs r0, #0x31
-	bl init_function
+	bl start_script
 	adds r0, r7, #0
 	adds r0, #0xa0
 	ldr r1, _08049BC0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _08049BB8:
 	adds r5, r6, #0
 	adds r5, #0x64
@@ -4889,7 +4889,7 @@ _08049BC4:
 	lsls r0, r0, #4
 	adds r0, r0, r1
 	ldrb r0, [r0, #4]
-	bl init_function
+	bl start_script
 _08049BE0:
 	adds r5, r4, #0
 _08049BE2:
@@ -5067,7 +5067,7 @@ _08049D5C:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _08049D8C
 	str r4, [r0]
 	ldr r1, _08049D90
@@ -5116,7 +5116,7 @@ _08049DA2:
 	ldrh r1, [r2, #0x10]
 	ldrb r3, [r2, #0x12]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r3, _08049E3C
 	adds r1, r7, #0
@@ -5273,7 +5273,7 @@ _08049EF4:
 	ldrh r1, [r2, #0x10]
 	ldrb r3, [r2, #0x12]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r3, _08049F98
 	adds r1, r7, #0
@@ -5411,7 +5411,7 @@ _0804A032:
 	ldrh r1, [r2, #0x1c]
 	ldrb r3, [r2, #0x1e]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	b _0804A1D2
 	.align 2, 0
 _0804A068: .4byte 0x0203F8D8
@@ -5483,7 +5483,7 @@ _0804A0F0:
 	ldr r1, _0804A174
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r5, _0804A178
 	ldr r4, _0804A17C
 	adds r3, r7, #0
@@ -5561,7 +5561,7 @@ _0804A1A4:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r2, _0804A1E4
 	adds r0, r7, #0
 	adds r0, #0x64
@@ -5697,7 +5697,7 @@ _0804A2C4:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _0804A318
 	str r4, [r0]
 	ldr r1, _0804A31C
@@ -5755,7 +5755,7 @@ _0804A344:
 	ldrh r1, [r2, #0xc]
 	ldrb r3, [r2, #0xe]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, _0804A3B4
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -5826,7 +5826,7 @@ _0804A3D4:
 	ldrh r1, [r1, #0x30]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0xa0
 	lsls r1, r1, #0xa
@@ -5972,7 +5972,7 @@ _0804A524:
 _0804A52A:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r7, #0
 	movs r1, #2
 	movs r2, #0
@@ -6000,7 +6000,7 @@ _0804A546:
 	ldrh r1, [r2, #0x10]
 	ldrb r3, [r2, #0x12]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r6, _0804A5C0
 	adds r5, r7, #0
@@ -6175,7 +6175,7 @@ _0804A6DC:
 _0804A6E2:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r7, #0
 	movs r1, #2
 	movs r2, #0
@@ -6210,7 +6210,7 @@ _0804A720:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r2, _0804A768
 	mov r1, r8
@@ -6287,7 +6287,7 @@ _0804A7D4:
 _0804A7DA:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r7, #0x54]
 	cmp r0, #0
 	ble _0804A7EA
@@ -6375,7 +6375,7 @@ _0804A888:
 	ldr r1, _0804A920
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -6469,7 +6469,7 @@ _0804A950:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -6561,7 +6561,7 @@ _0804AA28:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _0804AA88
 	str r4, [r0]
 	ldr r1, _0804AA8C
@@ -6623,7 +6623,7 @@ _0804AAA4:
 	ldrh r1, [r1, #0x30]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, _0804AB70
 	adds r0, r5, #0
 	movs r2, #0
@@ -6830,7 +6830,7 @@ _0804AC80:
 _0804AC86:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r5, #0
 	movs r1, #2
 	movs r2, #0
@@ -6869,7 +6869,7 @@ _0804ACCA:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	ldr r1, _0804ACF8
 	movs r2, #0
@@ -6954,7 +6954,7 @@ _0804AD88:
 _0804AD8E:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r5, #0x54]
 	cmp r0, #0
 	ble _0804AD9E
@@ -7012,7 +7012,7 @@ _0804ADF8:
 	ldr r1, _0804AE78
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _0804AE7C
 	adds r2, r5, #0
 	adds r2, #0x64
@@ -7136,7 +7136,7 @@ _0804AF14:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r5, #0
 	adds r0, #0x5e
 	strh r7, [r0]
@@ -7222,7 +7222,7 @@ _0804AFD0:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _0804B000
 	str r4, [r0]
 	ldr r1, _0804B004
@@ -7256,7 +7256,7 @@ _0804B016:
 	ldrb r3, [r0, #0x16]
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r3, _0804B0BC
 	adds r1, r7, #0
@@ -7281,7 +7281,7 @@ _0804B016:
 	bl sub_8003884
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r1, _0804B0C8
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -7358,7 +7358,7 @@ _0804B0F6:
 	ldrh r1, [r2, #0x18]
 	ldrb r3, [r2, #0x1a]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r1, r7, #0
 	adds r1, #0x5e
 	movs r0, #0x2a
@@ -7435,7 +7435,7 @@ _0804B194:
 	ldrh r1, [r2, #0xc]
 	ldrb r3, [r2, #0xe]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r2, _0804B1E0
 	adds r0, r7, #0
 	adds r0, #0x64
@@ -7481,7 +7481,7 @@ _0804B1E8:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r2, _0804B240
 	mov r1, r8
@@ -7516,7 +7516,7 @@ _0804B244:
 	ldrh r1, [r1, #0x30]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0xa0
 	lsls r1, r1, #0xa
@@ -7620,7 +7620,7 @@ _0804B330:
 _0804B336:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r7, #0
 	movs r1, #2
 	movs r2, #0
@@ -7648,7 +7648,7 @@ _0804B352:
 	ldrh r1, [r2, #0x10]
 	ldrb r3, [r2, #0x12]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r6, _0804B3CC
 	adds r5, r7, #0
@@ -7819,7 +7819,7 @@ _0804B4E0:
 _0804B4E6:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r7, #0
 	movs r1, #2
 	movs r2, #0
@@ -7854,7 +7854,7 @@ _0804B524:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r2, _0804B56C
 	mov r1, r8
@@ -7932,7 +7932,7 @@ _0804B5D8:
 _0804B5DE:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r7, #0x54]
 	cmp r0, #0
 	ble _0804B5EE
@@ -8009,7 +8009,7 @@ _0804B66C:
 	ldr r1, _0804B718
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -8165,7 +8165,7 @@ _0804B78E:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r1, r7, #0
 	adds r1, #0xb0
 	movs r0, #1
@@ -8407,7 +8407,7 @@ _0804B9B8:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r3, _0804BA6C
 	adds r1, r7, #0
@@ -8533,7 +8533,7 @@ _0804BADC:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r3, _0804BBAC
 	adds r1, r7, #0
@@ -8577,7 +8577,7 @@ _0804BB34:
 	ldrh r1, [r1, #0x2c]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -8689,7 +8689,7 @@ _0804BC3A:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	movs r0, #0x5a
 	strh r0, [r6]
 	ldr r0, _0804BCBC
@@ -8804,7 +8804,7 @@ _0804BD40:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _0804BD9C
 	str r6, [r0]
 	ldr r1, _0804BDA0
@@ -8876,7 +8876,7 @@ _0804BDC8:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r1, _0804BEAC
 	mov sl, r1
@@ -9112,7 +9112,7 @@ _0804BFE0:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -9176,7 +9176,7 @@ _0804C060:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #8]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4]
 	ldr r0, [r0, #0x2c]
 	movs r1, #0
@@ -9249,7 +9249,7 @@ _0804C104:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r3, _0804C160
 	adds r1, r7, #0
@@ -9376,7 +9376,7 @@ _0804C238:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _0804C280
 	str r4, [r0]
 	ldr r1, _0804C284
@@ -9420,7 +9420,7 @@ _0804C290:
 	ldrh r1, [r2, #0xc]
 	ldrb r3, [r2, #0xe]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, _0804C30C
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -9499,7 +9499,7 @@ _0804C342:
 	ldrh r1, [r1, #0x30]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0xa0
 	lsls r1, r1, #0xa
@@ -9649,7 +9649,7 @@ _0804C490:
 _0804C496:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r7, #0
 	movs r1, #2
 	movs r2, #0
@@ -9686,7 +9686,7 @@ _0804C4B2:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r6, _0804C538
 	adds r5, r7, #0
@@ -9819,7 +9819,7 @@ _0804C5FC:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	bl sub_800387C
 	ldr r0, [r7, #0x2c]
@@ -9873,7 +9873,7 @@ _0804C65E:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r3, _0804C6B8
 	adds r1, r7, #0
@@ -9944,7 +9944,7 @@ _0804C714:
 _0804C71A:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	movs r2, #0
 	movs r5, #0
 	ldr r0, _0804C7AC
@@ -10042,7 +10042,7 @@ _0804C7D4:
 _0804C7DA:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r1, r7, #0
 	adds r1, #0x5e
 	ldrh r0, [r1]
@@ -10059,7 +10059,7 @@ _0804C7DA:
 	ldrh r1, [r1, #0x34]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	ldr r2, _0804C834
 	adds r1, r6, #0
@@ -10146,7 +10146,7 @@ _0804C8B4:
 _0804C8BA:
 	asrs r1, r0, #1
 	adds r0, r3, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r7, #0x54]
 	cmp r0, #0
 	ble _0804C8CA
@@ -10174,7 +10174,7 @@ _0804C8EC:
 _0804C8F0:
 	asrs r1, r0, #1
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r4, _0804C964
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -10252,7 +10252,7 @@ _0804C980:
 	ldr r1, _0804CA20
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -10347,7 +10347,7 @@ _0804CA50:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -10444,7 +10444,7 @@ _0804CB06:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	mov r2, r8
 	ldr r0, [r2, #0x2c]
 	ldr r6, _0804CC60
@@ -10727,7 +10727,7 @@ _0804CD5E:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	mov r3, r8
 	ldr r0, [r3, #0x2c]
 	ldr r3, _0804CDBC
@@ -10830,7 +10830,7 @@ _0804CE6C:
 	mov r4, r8
 	adds r4, #0xa0
 	adds r0, r4, #0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804CEA8
 	mov r0, r8
@@ -10851,7 +10851,7 @@ _0804CE6C:
 	ldrb r3, [r0, #2]
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804CEA8:
 	adds r0, r6, #0
 	movs r1, #1
@@ -10880,7 +10880,7 @@ _0804CECA:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _0804CEFC
 	str r4, [r0]
 	ldr r1, _0804CF00
@@ -10900,7 +10900,7 @@ _0804CF04:
 	add r4, r8
 	mov sb, r4
 	mov r0, sb
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804CF42
 	mov r0, r8
@@ -10921,7 +10921,7 @@ _0804CF04:
 	ldrb r3, [r0, #2]
 	mov r0, sb
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804CF42:
 	adds r5, r6, #0
 	adds r5, #0x5e
@@ -10950,7 +10950,7 @@ _0804CF4E:
 	ldrb r3, [r0, #2]
 	mov r0, sb
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, _0804CF9C
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -11080,7 +11080,7 @@ _0804D056:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	movs r1, #0xc0
 	lsls r1, r1, #8
@@ -11183,7 +11183,7 @@ _0804D150:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r1, _0804D1D0
 	mov r8, r1
@@ -11233,7 +11233,7 @@ _0804D1D8:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r2, _0804D224
 	mov r1, r8
@@ -11306,10 +11306,10 @@ _0804D234:
 	ldrb r3, [r0, #2]
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r4, #0
 	adds r1, r5, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r6, #0x2c]
 	ldr r3, _0804D344
 	adds r1, r6, #0
@@ -11368,7 +11368,7 @@ _0804D2EE:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r2, _0804D34C
 	mov r1, r8
@@ -11466,7 +11466,7 @@ _0804D390:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r2, _0804D454
 	mov r1, r8
@@ -11566,7 +11566,7 @@ _0804D48E:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r3, _0804D4E8
 	adds r1, r6, #0
@@ -11673,7 +11673,7 @@ _0804D5A0:
 	adds r7, r6, #0
 	adds r7, #0xa0
 	adds r0, r7, #0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804D5DC
 	adds r0, r6, #0
@@ -11694,7 +11694,7 @@ _0804D5A0:
 	ldrb r3, [r0, #2]
 	adds r0, r7, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804D5DC:
 	adds r0, r5, #0
 	movs r1, #1
@@ -11727,7 +11727,7 @@ _0804D606:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _0804D638
 	str r4, [r0]
 	ldr r1, _0804D63C
@@ -11747,7 +11747,7 @@ _0804D640:
 	adds r4, r4, r6
 	mov sb, r4
 	mov r0, sb
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804D67E
 	adds r0, r6, #0
@@ -11768,7 +11768,7 @@ _0804D640:
 	ldrb r3, [r0, #2]
 	mov r0, sb
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804D67E:
 	movs r0, #0x5e
 	adds r0, r0, r5
@@ -11796,7 +11796,7 @@ _0804D67E:
 	ldrb r3, [r0, #2]
 	mov r0, sb
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, _0804D6D4
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -11931,7 +11931,7 @@ _0804D796:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	movs r1, #0xc0
 	lsls r1, r1, #8
@@ -12033,7 +12033,7 @@ _0804D890:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	ldr r1, _0804D91C
 	mov sl, r1
@@ -12090,7 +12090,7 @@ _0804D924:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	ldr r2, _0804D970
 	adds r1, r6, #0
@@ -12172,7 +12172,7 @@ _0804D980:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804D9EC:
 	ldr r0, [r5, #0x2c]
 	ldr r3, _0804DAE4
@@ -12232,7 +12232,7 @@ _0804DA48:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r6, #0
 	adds r0, #0xb0
 	strb r7, [r0]
@@ -12384,7 +12384,7 @@ _0804DB48:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r6, #0
 	adds r0, #0xb0
 	strb r4, [r0]
@@ -12487,7 +12487,7 @@ _0804DC66:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804DC9A:
 	ldr r0, [r5, #0x2c]
 	ldr r3, _0804DCCC
@@ -12596,7 +12596,7 @@ _0804DD88:
 	adds r5, r7, #0
 	adds r5, #0xa0
 	adds r0, r5, #0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804DDC4
 	adds r0, r7, #0
@@ -12617,7 +12617,7 @@ _0804DD88:
 	ldrb r3, [r0, #2]
 	adds r0, r5, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804DDC4:
 	adds r0, r6, #0
 	movs r1, #1
@@ -12717,7 +12717,7 @@ _0804DE4A:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, _0804DEB4
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -12859,7 +12859,7 @@ _0804DF7E:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	movs r1, #0xc0
 	lsls r1, r1, #8
@@ -12961,7 +12961,7 @@ _0804E078:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r1, _0804E104
 	mov sl, r1
@@ -13017,7 +13017,7 @@ _0804E10C:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r2, _0804E150
 	adds r1, r7, #0
@@ -13148,7 +13148,7 @@ _0804E21A:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r7, #0
 	adds r0, #0xb0
 	strb r4, [r0]
@@ -13326,7 +13326,7 @@ _0804E386:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804E3B8:
 	ldr r0, [r6, #0x2c]
 	ldr r3, _0804E3E8
@@ -13417,7 +13417,7 @@ _0804E428:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r3, _0804E4EC
 	adds r1, r6, #0
@@ -13559,7 +13559,7 @@ _0804E588:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r2, _0804E610
 	adds r1, r7, #0
@@ -13623,11 +13623,11 @@ _0804E62C:
 	cmp r0, #1
 	bgt _0804E640
 	movs r0, #0x92
-	bl init_function
+	bl start_script
 	b _0804E774
 _0804E640:
 	movs r0, #0x91
-	bl init_function
+	bl start_script
 	b _0804E774
 _0804E648:
 	ldr r0, _0804E73C
@@ -13645,7 +13645,7 @@ _0804E652:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r2, _0804E744
 	adds r1, r7, #0
@@ -13772,7 +13772,7 @@ _0804E75C:
 	cmp r0, #0
 	bne _0804E774
 	movs r0, #1
-	bl sub_805E1DC
+	bl end_all_scripts
 	b _0804E774
 	.align 2, 0
 _0804E76C: .4byte gGameStatus
@@ -13831,7 +13831,7 @@ _0804E7EC:
 	adds r5, r7, #0
 	adds r5, #0xa0
 	adds r0, r5, #0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804E828
 	adds r0, r7, #0
@@ -13852,7 +13852,7 @@ _0804E7EC:
 	ldrb r3, [r0, #2]
 	adds r0, r5, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804E828:
 	adds r0, r6, #0
 	movs r1, #1
@@ -13952,7 +13952,7 @@ _0804E8AE:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, _0804E918
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -14092,7 +14092,7 @@ _0804E9DC:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	movs r1, #0xc0
 	lsls r1, r1, #8
@@ -14194,7 +14194,7 @@ _0804EAD8:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r1, _0804EB64
 	mov sl, r1
@@ -14250,7 +14250,7 @@ _0804EB6C:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r2, _0804EBB0
 	adds r1, r7, #0
@@ -14372,7 +14372,7 @@ _0804EC68:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r7, #0
 	adds r0, #0xb0
 	strb r4, [r0]
@@ -14509,7 +14509,7 @@ _0804ED76:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804EDA8:
 	ldr r0, [r6, #0x2c]
 	ldr r3, _0804EDD8
@@ -14600,7 +14600,7 @@ _0804EE18:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r3, _0804EEDC
 	adds r1, r6, #0
@@ -14742,7 +14742,7 @@ _0804EF78:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6, #0x2c]
 	ldr r2, _0804F014
 	adds r1, r7, #0
@@ -14958,7 +14958,7 @@ sub_804F130: @ 0x0804F130
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #8]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	movs r1, #0x94
 	adds r1, r1, r6
 	mov r8, r1
@@ -15297,7 +15297,7 @@ _0804F41C:
 	ldrh r1, [r2]
 	ldrb r3, [r2, #2]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0804F42C:
 	ldr r0, [r5, #0x2c]
 	movs r1, #0
@@ -15348,7 +15348,7 @@ _0804F488:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #6]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -15452,10 +15452,10 @@ _0804F54A:
 	ldrb r3, [r0, #8]
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r7]
 	ldr r1, [r7, #8]
 	mov r3, sl
@@ -16080,7 +16080,7 @@ sub_804FA40: @ 0x0804FA40
 	adds r0, r1, #0
 	adds r4, r2, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804FA5C
 	adds r0, r5, #0
@@ -16357,7 +16357,7 @@ sub_804FC68: @ 0x0804FC68
 	adds r4, r0, #0
 	adds r0, r1, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804FC8A
 	adds r0, r4, #0
@@ -16666,7 +16666,7 @@ sub_804FE94: @ 0x0804FE94
 	adds r4, r0, #0
 	adds r0, r1, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804FEB6
 	adds r0, r4, #0
@@ -16696,7 +16696,7 @@ sub_804FEC8: @ 0x0804FEC8
 	adds r4, r0, #0
 	adds r0, r1, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804FEE2
 	adds r0, r4, #0
@@ -16795,7 +16795,7 @@ sub_804FF84: @ 0x0804FF84
 	adds r4, r1, #0
 	adds r0, r4, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0804FFAC
 	adds r0, r5, #0
@@ -16969,7 +16969,7 @@ _080500AA:
 	adds r4, r6, #0
 	adds r4, #0xa0
 	adds r0, r4, #0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	bne _08050172
 	adds r0, r5, #0
@@ -17097,7 +17097,7 @@ _080501E6:
 	ldrb r3, [r0, #8]
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _080501F4:
 	add sp, #0x1c
 	pop {r3, r4, r5}
@@ -17198,7 +17198,7 @@ sub_80502AC: @ 0x080502AC
 	adds r4, r0, #0
 	adds r0, r1, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _080502EE
 	adds r0, r4, #0
@@ -17290,7 +17290,7 @@ _08050368:
 _0805036C:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r4, #0
 	movs r1, #1
 	movs r2, #0
@@ -17391,7 +17391,7 @@ _0805043C:
 _08050440:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r4, #0
 	movs r1, #1
 	movs r2, #0
@@ -17533,7 +17533,7 @@ _08050564:
 _08050568:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r5, #0
 	movs r1, #1
 	movs r2, #0
@@ -17618,7 +17618,7 @@ _08050614:
 _08050618:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	pop {r4, r5}
 	pop {r0}
 	bx r0
@@ -17679,7 +17679,7 @@ _08050690:
 _08050694:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r5, #0x54]
 	cmp r0, #0
 	bgt _080506B8
@@ -17761,7 +17761,7 @@ sub_805072C: @ 0x0805072C
 	adds r4, r0, #0
 	adds r0, r1, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _08050752
 	ldr r0, [r4, #0x1c]
@@ -18211,7 +18211,7 @@ _08050AD8:
 _08050ADC:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 _08050AE4:
 	add sp, #0x18
 	pop {r4, r5, r6, r7}
@@ -18288,7 +18288,7 @@ _08050B70:
 _08050B74:
 	ldrb r1, [r0]
 	adds r0, r7, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r5, #0
 	bl sub_80497C0
 	ldr r0, [sp]
@@ -18345,7 +18345,7 @@ _08050BE8:
 _08050BEC:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r5, #0
 	movs r1, #1
 	movs r2, #0
@@ -19066,7 +19066,7 @@ sub_80511B4: @ 0x080511B4
 	adds r5, #0xa0
 	adds r0, r5, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	adds r0, r4, #0
 	movs r1, #1
 	movs r2, #0
@@ -19084,7 +19084,7 @@ sub_80511B4: @ 0x080511B4
 	bl sub_8047430
 	adds r0, r5, #0
 	movs r1, #1
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r1, r4, #0
 	adds r1, #0x6a
 	movs r0, #1
@@ -19276,7 +19276,7 @@ _08051366:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #8]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0805138A:
 	adds r0, r5, #0
 	adds r0, #0x48
@@ -19285,7 +19285,7 @@ _0805138A:
 	beq _080513FE
 	adds r0, r5, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _080513FE
 	adds r0, r5, #0
@@ -19433,7 +19433,7 @@ sub_80514A8: @ 0x080514A8
 	adds r4, r0, #0
 	adds r0, r1, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _080514C2
 	adds r0, r4, #0
@@ -19612,7 +19612,7 @@ sub_805160C: @ 0x0805160C
 	adds r5, r1, #0
 	adds r0, r5, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _08051666
 	adds r6, r4, #0
@@ -19780,7 +19780,7 @@ sub_805176C: @ 0x0805176C
 	adds r4, r0, #0
 	adds r0, r1, #0
 	adds r0, #0xa0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _0805178E
 	adds r0, r4, #0
@@ -20133,7 +20133,7 @@ sub_80519B8: @ 0x080519B8
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #8]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -20170,7 +20170,7 @@ sub_8051A70: @ 0x08051A70
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #8]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4, #0x2c]
 	ldr r1, [r4, #0x28]
 	ldr r1, [r1]
@@ -20243,7 +20243,7 @@ _08051B10:
 	ldrh r1, [r2, #4]
 	ldrb r3, [r2, #8]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4, #0x2c]
 	ldr r1, [r4, #0x28]
 	ldr r1, [r1]
@@ -20330,7 +20330,7 @@ sub_8051BD0: @ 0x08051BD0
 	adds r6, r4, #0
 	adds r6, #0xa0
 	adds r0, r6, #0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _08051C3C
 	adds r1, r4, #0
@@ -20367,7 +20367,7 @@ sub_8051BD0: @ 0x08051BD0
 	ldrb r3, [r0, #8]
 	adds r0, r6, #0
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5, #0x2c]
 	movs r1, #0
 	movs r2, #0
@@ -21007,7 +21007,7 @@ _0805211C:
 _08052120:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r5, #0
 	movs r1, #1
 	movs r2, #0
@@ -21043,7 +21043,7 @@ _0805216C:
 _08052170:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 _08052178:
 	add sp, #0xc
 	pop {r4, r5, r6}
@@ -21078,7 +21078,7 @@ _080521AC:
 _080521B0:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -22418,7 +22418,7 @@ _08052C94:
 	ldr r0, [r6]
 	adds r0, r0, r4
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r5, #1
 	lsls r0, r0, #0x18
 	lsrs r5, r0, #0x18
@@ -22501,7 +22501,7 @@ _08052D50:
 	ldr r0, [r6]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r5, #1
 	lsls r0, r0, #0x18
 	lsrs r5, r0, #0x18
@@ -22576,7 +22576,7 @@ _08052E0C:
 	bl SetSprite
 	ldr r0, [r5]
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	mov r1, r8
 	ldr r0, [r1]
 	ldr r1, _08053074
@@ -22592,7 +22592,7 @@ _08052E0C:
 	mov r2, r8
 	ldr r0, [r2]
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r5, _08053078
 	ldr r0, [r5]
 	ldr r1, _0805307C
@@ -22607,7 +22607,7 @@ _08052E0C:
 	bl SetSprite
 	ldr r0, [r5]
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r1, _08053080
 	movs r0, #8
 	strb r0, [r1]
@@ -22642,7 +22642,7 @@ _08052E90:
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r5]
 	adds r0, r0, r4
 	mov r2, r8
@@ -22672,12 +22672,12 @@ _08052E90:
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r0, #0x1c
@@ -22722,7 +22722,7 @@ _08052F3A:
 	ldr r0, [r6]
 	adds r0, r0, r4
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r5, #1
 	lsls r0, r0, #0x18
 	lsrs r5, r0, #0x18
@@ -22758,7 +22758,7 @@ _08052F8A:
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #1
@@ -22771,7 +22771,7 @@ _08052F8A:
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #2
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	strb r7, [r0, #0xa]
@@ -22880,7 +22880,7 @@ _080530A8:
 	bl SetSprite
 	ldr r0, [r4]
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	mov r1, r8
 	ldr r0, [r1]
 	ldr r1, _0805334C
@@ -22897,7 +22897,7 @@ _080530A8:
 	mov r2, r8
 	ldr r0, [r2]
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	movs r6, #0
 	ldr r7, _08053350
 	movs r5, #0
@@ -22920,7 +22920,7 @@ _080530F6:
 	ldr r0, [r7]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r7]
 	adds r0, r0, r4
 	mov r2, r8
@@ -23011,7 +23011,7 @@ _080531A2:
 	ldr r0, [r7]
 	adds r0, r0, r5
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r1, [r7]
 	adds r1, r5, r1
 	mov r2, r8
@@ -23067,7 +23067,7 @@ _08053224:
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #1
@@ -23080,7 +23080,7 @@ _08053224:
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #2
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	strb r7, [r0, #0xa]
@@ -23339,7 +23339,7 @@ _0805347E:
 	strb r0, [r3, #8]
 _080534A2:
 	ldr r0, [r2]
-	bl RenderSprite
+	bl sprite_render
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -23972,7 +23972,7 @@ sub_8053954: @ 0x08053954
 	ldr r1, _080539BC
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r4, _080539C0
 	ldr r0, [r4]
 	ldr r0, [r0, #0x1c]
@@ -24098,7 +24098,7 @@ _08053A64:
 	ldr r1, _08053B00
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6]
 	adds r4, r4, r0
 	adds r4, #0x2c
@@ -24145,7 +24145,7 @@ _08053AC4:
 	ldr r1, _08053B00
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6]
 	adds r4, r4, r0
 	adds r4, #0x2c
@@ -24272,7 +24272,7 @@ _08053B9C:
 	lsls r1, r1, #2
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _08053C04
 	ldrb r0, [r0]
 	cmp r0, #1
@@ -24364,7 +24364,7 @@ _08053C8A:
 	cmp r1, r0
 	bne _08053CBC
 	adds r0, r2, #0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _08053CBC
 	ldr r0, [r4]
@@ -24372,7 +24372,7 @@ _08053C8A:
 	ldr r1, _08053CF8
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, [r4]
 	adds r1, r5, r1
 	ldrh r0, [r1, #0x1c]
@@ -24395,7 +24395,7 @@ _08053CBC:
 	ldr r1, _08053CFC
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	b _08053D04
 	.align 2, 0
 _08053CE4: .4byte gGameStatus
@@ -24412,7 +24412,7 @@ _08053D04:
 	ldr r0, _08053D30
 	ldr r0, [r0]
 	adds r0, r0, r5
-	bl RenderSprite
+	bl sprite_render
 	adds r0, r6, #1
 	lsls r0, r0, #0x18
 	lsrs r6, r0, #0x18
@@ -24479,7 +24479,7 @@ _08053D76:
 	ldr r1, _08053DCC
 	ldr r0, [r1]
 	adds r0, r0, r6
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, _08053DD0
 	ldr r0, [r0]
 	ldrb r2, [r0, #8]
@@ -24580,7 +24580,7 @@ _08053E42:
 _08053E54:
 	adds r0, r1, #0
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	b _08053F90
 	.align 2, 0
 _08053E60: .4byte 0x0203F954
@@ -24987,7 +24987,7 @@ _08054188:
 	adds r0, r2, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, [r4]
 	adds r0, r1, #0
 	adds r0, #0x7a
@@ -25572,7 +25572,7 @@ _08054628:
 	ldr r1, _08054634
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 	b _08054684
 	.align 2, 0
 _08054634: .4byte 0x000004B4
@@ -25612,7 +25612,7 @@ _08054638:
 	ldr r1, _080546E8
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 _08054684:
 	mov r2, sl
 	ldr r0, [r2]
@@ -25726,7 +25726,7 @@ _08054760:
 	ldr r1, _0805476C
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 	b _0805478E
 	.align 2, 0
 _0805476C: .4byte 0x000004B4
@@ -25744,7 +25744,7 @@ _08054770:
 	ldr r1, _080547E0
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 _0805478E:
 	ldr r0, _080547E4
 	ldr r0, [r0]
@@ -26095,12 +26095,12 @@ _08054A24:
 	cmp r2, #0
 	ble _08054AE2
 	adds r0, r3, #0
-	bl RenderSprite
+	bl sprite_render
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r0, r4
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 	b _08054AE2
 _08054A3C:
 	cmp r2, #0
@@ -26134,7 +26134,7 @@ _08054A3C:
 	ldr r0, [r3]
 	adds r0, r0, r4
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 _08054A82:
 	ldr r5, _08054B24
 	ldr r0, [r5]
@@ -26151,7 +26151,7 @@ _08054A82:
 	strb r0, [r1, #8]
 	ldr r0, [r5]
 	adds r0, r0, r4
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r5]
 	adds r1, r4, r0
 	movs r2, #0x3e
@@ -26181,7 +26181,7 @@ _08054AC6:
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 _08054AE2:
 	adds r0, r6, #1
 	lsls r0, r0, #0x18
@@ -26203,7 +26203,7 @@ _08054AF2:
 	adds r4, r1, #0
 	adds r4, #0x1c
 	adds r0, r2, r4
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _08054B34
 	ldr r0, [r6]
@@ -26211,7 +26211,7 @@ _08054AF2:
 	ldr r1, _08054B30
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	b _08054B3C
 	.align 2, 0
 _08054B20: .4byte 0x0203F94C
@@ -26222,7 +26222,7 @@ _08054B30: .4byte 0x00000451
 _08054B34:
 	ldr r0, [r6]
 	adds r0, r0, r4
-	bl RenderSprite
+	bl sprite_render
 _08054B3C:
 	adds r0, r5, #1
 	lsls r0, r0, #0x18
@@ -26450,7 +26450,7 @@ _08054CE4:
 	ldr r1, _08054E8C
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r2, _08054E90
 	ldr r0, [r2]
 	adds r0, r4, r0
@@ -26509,7 +26509,7 @@ _08054D32:
 	ldr r1, _08054EA0
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r3, _08054E90
 	ldr r0, [r3]
 	adds r0, r5, r0
@@ -26592,7 +26592,7 @@ _08054DD2:
 	ldr r1, _08054EA0
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7]
 	adds r0, r6, r0
 	adds r0, #0x2c
@@ -26663,7 +26663,7 @@ _08054EB8: .4byte 0x0018FFFE
 _08054EBC: .4byte 0x0203F920
 _08054EC0:
 	adds r0, r3, #0
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _08054EE6
 	ldr r1, _08054F04
@@ -26672,7 +26672,7 @@ _08054EC0:
 	ldr r1, _08054F08
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r2, _08054F04
 	ldr r0, [r2]
 	adds r0, r4, r0
@@ -26705,7 +26705,7 @@ sub_8054F0C: @ 0x08054F0C
 	push {r4, r5, r6, r7, lr}
 	ldr r5, _08054F34
 	ldr r0, [r5]
-	bl RenderSprite
+	bl sprite_render
 	bl sub_8053404
 	ldr r0, _08054F38
 	ldrb r0, [r0, #0x13]
@@ -26746,7 +26746,7 @@ _08054F40:
 	cmp r0, #0
 	bne _08054FE4
 	adds r0, r1, #0
-	bl RenderSprite
+	bl sprite_render
 	ldr r1, [r4]
 	adds r0, r1, #0
 	adds r0, #0xa8
@@ -26827,7 +26827,7 @@ _08054FF4:
 	strb r0, [r1, #8]
 	ldr r0, [r5]
 	adds r0, r0, r2
-	bl RenderSprite
+	bl sprite_render
 _0805501C:
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
@@ -26854,7 +26854,7 @@ _08055042:
 	ldr r0, [r5]
 	adds r0, r0, r1
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
@@ -26891,7 +26891,7 @@ _08055060:
 	strb r0, [r3, #8]
 	ldr r0, [r6]
 	adds r0, r0, r5
-	bl RenderSprite
+	bl sprite_render
 _0805509A:
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
@@ -27599,7 +27599,7 @@ _08055634:
 	ldr r1, _08055654
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, _08055658
 	movs r0, #0xc
 	strb r0, [r1]
@@ -28383,13 +28383,13 @@ _08055C90:
 	ldr r0, [r1]
 	adds r0, r0, r7
 	ldrb r1, [r6, #8]
-	bl SetSpritePalette
+	bl sprite_set_palette
 	mov r2, r8
 	ldr r0, [r2]
 	adds r0, r0, r7
 	adds r0, #0x38
 	ldrb r1, [r6, #0x10]
-	bl SetSpritePalette
+	bl sprite_set_palette
 	b _08055DC4
 	.align 2, 0
 _08055D24: .4byte 0x080B1FB0
@@ -28458,13 +28458,13 @@ _08055D34:
 	ldr r0, [r1]
 	adds r0, r0, r7
 	ldrb r1, [r6, #8]
-	bl SetSpritePalette
+	bl sprite_set_palette
 	mov r2, r8
 	ldr r0, [r2]
 	adds r0, r0, r7
 	adds r0, #0x38
 	ldrb r1, [r6, #0x10]
-	bl SetSpritePalette
+	bl sprite_set_palette
 _08055DC4:
 	ldr r4, [sp, #0x10]
 	add r4, sb
@@ -28473,12 +28473,12 @@ _08055DC4:
 	ldr r0, [r1]
 	adds r0, r0, r4
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	mov r2, r8
 	ldr r0, [r2]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r0, r4
@@ -28504,7 +28504,7 @@ _08055DC4:
 	adds r0, r0, r4
 	adds r0, #0x38
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r0, r4
@@ -28547,7 +28547,7 @@ _08055DC4:
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r5, #0
 	movs r1, #0
 	movs r2, #0xc0
@@ -28613,10 +28613,10 @@ _08055EC0:
 	bl SetSprite
 	ldr r0, [r5]
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r5]
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	b _08055FF6
 	.align 2, 0
 _08055F18: .4byte 0x0203F978
@@ -28661,7 +28661,7 @@ _08055F3E:
 	ldr r0, [r6]
 	adds r0, r0, r5
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r1, [r6]
 	adds r1, r1, r5
 	adds r0, r1, #0
@@ -28683,7 +28683,7 @@ _08055F3E:
 	adds r0, r0, r5
 	adds r0, #0x1c
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r6]
 	adds r0, r5, r0
 	adds r0, #0x2c
@@ -29186,7 +29186,7 @@ _080563CA:
 	ldr r1, _080564A8
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _080563D6:
 	ldr r4, _080564AC
 	ldr r0, [r4]
@@ -29222,7 +29222,7 @@ _08056410:
 	ldr r1, _080564A8
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0805641E:
 	ldr r5, _080564AC
 	ldr r0, [r5]
@@ -29259,19 +29259,19 @@ _08056458:
 	adds r1, r4, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, #0x1c
 	adds r1, r4, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, #0x38
 	adds r1, r4, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _08056484:
 	ldr r0, _080564BC
 	ldrb r0, [r0]
@@ -29588,7 +29588,7 @@ _0805671C:
 	bne _0805672C
 	ldr r0, _080567D8
 	ldr r0, [r0]
-	bl sub_80037A0
+	bl sprite_unlock_anim
 _0805672C:
 	ldr r2, [r4]
 	adds r1, r2, #0
@@ -29634,7 +29634,7 @@ _0805672C:
 	bl SetSprite
 	ldr r0, [r5]
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, _080567F0
 	ldr r0, [r0]
 	bl audio_set_tune_vol
@@ -29803,7 +29803,7 @@ _080568CC:
 	ldr r1, _08056910
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _080568F2:
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
@@ -29820,7 +29820,7 @@ _08056910: .4byte 0x00000451
 _08056914:
 	ldr r4, _08056940
 	ldr r0, [r4]
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	bne _08056922
 	b _08056B24
@@ -29829,7 +29829,7 @@ _08056922:
 	ldr r1, _08056944
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _08056948
 	ldr r0, [r0]
 	adds r0, #0x78
@@ -30149,7 +30149,7 @@ _08056BB2:
 	ldr r1, _08056BE0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, _08056BE4
 	ldrb r0, [r0]
 	cmp r0, #3
@@ -30381,7 +30381,7 @@ _08056D86:
 	ldr r1, _08056E10
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _08056DA4:
 	mov r3, sl
 	ldr r0, [r3]
@@ -30588,7 +30588,7 @@ _08056F3C:
 	ldr r1, _08056FA4
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 _08056F52:
 	mov r1, sl
 	ldr r0, [r1]
@@ -30599,7 +30599,7 @@ _08056F52:
 	bne _08056F7E
 	adds r0, r2, #0
 	adds r0, #0x1c
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	cmp r0, #0
 	beq _08056F7E
 	mov r2, sl
@@ -30609,7 +30609,7 @@ _08056F52:
 	ldr r1, _08056FA8
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _08056F7E:
 	mov r0, r8
 	adds r0, #1
@@ -33849,7 +33849,7 @@ _080588A4:
 	bne _080588BA
 	adds r0, r2, #0
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x84
@@ -33867,7 +33867,7 @@ _080588BA:
 _080588CA:
 	adds r0, r2, #0
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x84
@@ -33887,7 +33887,7 @@ _080588E2:
 	bne _08058914
 	adds r0, r2, #0
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x84
@@ -33897,7 +33897,7 @@ _08058902:
 	adds r0, r2, #0
 	movs r1, #0
 _08058906:
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x84
@@ -34387,7 +34387,7 @@ _08058CC0:
 	bne _08058CD6
 	adds r0, r2, #0
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x84
@@ -34405,7 +34405,7 @@ _08058CD6:
 _08058CE6:
 	adds r0, r2, #0
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x84
@@ -34425,7 +34425,7 @@ _08058CFE:
 	bne _08058D30
 	adds r0, r2, #0
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x84
@@ -34435,7 +34435,7 @@ _08058D1E:
 	adds r0, r2, #0
 	movs r1, #0
 _08058D22:
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x84
@@ -34545,11 +34545,11 @@ _08058DDC:
 	lsls r4, r4, #3
 	ldr r0, [r6]
 	adds r0, r0, r4
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r6]
 	adds r0, r0, r4
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r6]
 	adds r4, r4, r0
 	adds r0, r4, #0
@@ -34564,7 +34564,7 @@ _08058DDC:
 	adds r0, r4, #0
 	adds r0, #0x1c
 	movs r1, #6
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	b _08058E42
 	.align 2, 0
 _08058E1C: .4byte 0x0203F978
@@ -34574,7 +34574,7 @@ _08058E28:
 	adds r0, r4, #0
 	adds r0, #0x1c
 	movs r1, #4
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	b _08058E42
 _08058E34:
 	lsls r1, r5, #3
@@ -34582,7 +34582,7 @@ _08058E34:
 	lsls r1, r1, #3
 	ldr r0, [r6]
 	adds r0, r0, r1
-	bl RenderSprite
+	bl sprite_render
 _08058E42:
 	adds r0, r5, #1
 	lsls r0, r0, #0x18
@@ -34651,7 +34651,7 @@ _08058E62:
 	cmp r1, r0
 	bge _08058EC8
 	adds r0, r3, #0
-	bl RenderSprite
+	bl sprite_render
 _08058EC8:
 	lsls r3, r6, #0x18
 	asrs r1, r3, #0x18
@@ -34670,7 +34670,7 @@ _08058EC8:
 	bne _08058EEE
 	adds r0, r1, #0
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 _08058EEE:
 	subs r0, r7, #3
 	lsls r0, r0, #0x18
@@ -34685,7 +34685,7 @@ _08058EEE:
 	ldr r0, [r2]
 	adds r0, r0, r1
 	adds r0, #0x38
-	bl RenderSprite
+	bl sprite_render
 _08058F0C:
 	movs r5, #0x80
 	lsls r5, r5, #0x11
@@ -34700,13 +34700,13 @@ _08058F1C:
 	bne _08058F38
 	ldr r4, _08058F84
 	ldr r0, [r4]
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r4]
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r4]
 	adds r0, #0x38
-	bl RenderSprite
+	bl sprite_render
 _08058F38:
 	cmp r7, #6
 	bls _08058F54
@@ -34720,7 +34720,7 @@ _08058F38:
 	bne _08058F54
 	ldr r0, _08058F90
 	ldr r0, [r0]
-	bl RenderSprite
+	bl sprite_render
 _08058F54:
 	ldr r0, _08058F94
 	ldrb r0, [r0]
@@ -34728,7 +34728,7 @@ _08058F54:
 	bne _08058F64
 	ldr r0, _08058F98
 	ldr r0, [r0]
-	bl RenderSprite
+	bl sprite_render
 _08058F64:
 	pop {r3, r4, r5}
 	mov r8, r3
@@ -34846,7 +34846,7 @@ _08059070:
 	ldr r4, _080590D0
 	ldr r0, [r4]
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r5, _080590D4
 	ldrh r1, [r5]
 	movs r0, #0x20
@@ -34862,7 +34862,7 @@ _08059070:
 	adds r1, r1, r3
 	strh r1, [r2]
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805909C:
 	ldrh r1, [r5]
 	movs r0, #0x10
@@ -34879,7 +34879,7 @@ _0805909C:
 	adds r1, r1, r3
 	strh r1, [r2]
 	movs r1, #2
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _080590BE:
 	ldrh r1, [r5]
 	movs r0, #1
@@ -34898,7 +34898,7 @@ _080590DC:
 	ldr r4, _08059140
 	ldr r0, [r4]
 	movs r1, #1
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r5, _08059144
 	ldrh r1, [r5]
 	movs r0, #0x20
@@ -34914,7 +34914,7 @@ _080590DC:
 	adds r1, r1, r3
 	strh r1, [r2]
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _08059108:
 	ldrh r1, [r5]
 	movs r0, #0x10
@@ -34931,7 +34931,7 @@ _08059108:
 	adds r1, r1, r3
 	strh r1, [r2]
 	movs r1, #2
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805912A:
 	ldrh r1, [r5]
 	movs r0, #1
@@ -35060,7 +35060,7 @@ _0805921C:
 	ldr r1, _08059258
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _08059230:
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
@@ -35467,7 +35467,7 @@ _08059590:
 	strb r0, [r1]
 	ldr r0, [r4]
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r4]
 	movs r1, #1
 	movs r2, #0
@@ -35712,13 +35712,13 @@ _080597AC:
 	ldr r1, _080597E0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _080597F0
 	.align 2, 0
 _080597DC: .4byte 0x0203F948
@@ -35728,7 +35728,7 @@ _080597E4:
 	ldr r1, _080597FC
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _080597F0:
 	ldr r0, _08059800
 	ldr r1, [r0]
@@ -35749,7 +35749,7 @@ _08059804:
 	lsls r1, r1, #3
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r1, r4, r0
 	adds r0, r1, #0
@@ -35758,20 +35758,20 @@ _08059804:
 	cmp r0, #0
 	beq _08059844
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805984C
 	.align 2, 0
 _08059840: .4byte 0x0203F948
 _08059844:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805984C:
 	ldr r0, _08059858
 	ldr r1, [r0]
@@ -35790,7 +35790,7 @@ _0805985C:
 	ldr r1, _08059898
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r1, r4, r0
 	adds r0, r1, #0
@@ -35799,13 +35799,13 @@ _0805985C:
 	cmp r0, #0
 	beq _0805989C
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _080598A4
 	.align 2, 0
 _08059894: .4byte 0x0203F948
@@ -35813,7 +35813,7 @@ _08059898: .4byte 0x000004C7
 _0805989C:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _080598A4:
 	ldr r0, _080598B0
 	ldr r1, [r0]
@@ -35833,7 +35833,7 @@ _080598B4:
 	lsls r1, r1, #3
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r1, r4, r0
 	adds r0, r1, #0
@@ -35842,20 +35842,20 @@ _080598B4:
 	cmp r0, #0
 	beq _080598F4
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _080598FC
 	.align 2, 0
 _080598F0: .4byte 0x0203F948
 _080598F4:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _080598FC:
 	ldr r0, _08059908
 	ldr r1, [r0]
@@ -35880,13 +35880,13 @@ _0805990C:
 	ldr r1, _08059940
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805995C
 	.align 2, 0
 _0805993C: .4byte 0x0203F948
@@ -35897,11 +35897,11 @@ _08059944:
 	lsls r1, r1, #2
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805995C:
 	ldr r0, _08059968
 	ldr r1, [r0]
@@ -35920,7 +35920,7 @@ _0805996C:
 	ldr r1, _08059990
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r4, r4, r0
 	movs r0, #0
@@ -35944,13 +35944,13 @@ _08059994:
 	ldr r1, _080599D0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r5]
 	adds r0, r4, r0
 _080599C6:
@@ -35965,7 +35965,7 @@ _080599D4:
 	ldr r1, _08059A6C
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, r4, r0
 	movs r1, #1
@@ -35973,7 +35973,7 @@ _080599D4:
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #5
-	bl SetSpritePalette
+	bl sprite_set_palette
 _080599F2:
 	ldr r5, _08059A70
 	adds r4, r6, r7
@@ -35981,7 +35981,7 @@ _080599F2:
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r5]
 	adds r0, r4, r0
 	movs r6, #0
@@ -36061,7 +36061,7 @@ _08059A8E:
 	bl SetSprite
 	ldr r0, [r4]
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r4]
 	movs r1, #1
 	movs r2, #0x1d
@@ -36096,7 +36096,7 @@ _08059A8E:
 	ldr r0, [r4]
 	adds r0, #0x1c
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r4]
 	adds r0, #0x1c
 	movs r1, #1
@@ -36121,7 +36121,7 @@ _08059A8E:
 	ldr r0, [r4]
 	adds r0, #0x38
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r4]
 	adds r0, #0x38
 	movs r1, #1
@@ -36243,7 +36243,7 @@ sub_8059BDC: @ 0x08059BDC
 	cmp r4, r0
 	ble _08059C50
 	adds r0, r5, #0
-	bl RenderSprite
+	bl sprite_render
 _08059C50:
 	mov r4, sl
 	lsls r1, r4, #0x1a
@@ -36636,7 +36636,7 @@ _08059F64:
 	ldr r0, _08059F94
 	ldr r0, [r0]
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	bl sub_80524D8
 	ldr r0, [r4]
 	adds r0, #0x82
@@ -36929,7 +36929,7 @@ sub_805A1B0: @ 0x0805A1B0
 	ldr r1, _0805A1E8
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, r4, r0
 	adds r0, #0x22
@@ -37383,7 +37383,7 @@ _0805A52A:
 	cmp r4, r0
 	ble _0805A54C
 	adds r0, r2, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	mov r1, sl
 	ldr r0, [r1]
 	adds r0, r7, r0
@@ -37627,7 +37627,7 @@ _0805A72C:
 	bhi _0805A73E
 	adds r0, r1, #0
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 _0805A73E:
 	adds r0, r6, #1
 	lsls r0, r0, #0x18
@@ -38204,7 +38204,7 @@ _0805ABC8:
 	ldr r1, _0805ABE4
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	b _0805AE38
 	.align 2, 0
 _0805ABE0: .4byte 0x0203F948
@@ -38224,7 +38224,7 @@ _0805ABE8:
 	ldr r1, _0805AC24
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, [r4]
 	adds r3, r7, #0
 	adds r0, r1, r3
@@ -38232,7 +38232,7 @@ _0805ABE8:
 	lsls r4, r4, #2
 	adds r1, r1, r4
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805AC34
 	.align 2, 0
 _0805AC1C: .4byte 0x0203F948
@@ -38243,7 +38243,7 @@ _0805AC28:
 	ldr r1, _0805AC40
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0805AC34:
 	ldr r0, _0805AC44
 	ldr r0, [r0]
@@ -38263,7 +38263,7 @@ _0805AC48:
 	lsls r1, r1, #3
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4]
 	adds r2, r7, #0
 	adds r1, r0, r2
@@ -38273,7 +38273,7 @@ _0805AC48:
 	cmp r0, #0
 	beq _0805AC90
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r1, [r4]
 	adds r4, r7, #0
 	adds r0, r1, r4
@@ -38281,7 +38281,7 @@ _0805AC48:
 	lsls r5, r5, #2
 	adds r1, r1, r5
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805AC98
 	.align 2, 0
 _0805AC88: .4byte 0x0203F948
@@ -38289,7 +38289,7 @@ _0805AC8C: .4byte 0x000003ED
 _0805AC90:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805AC98:
 	ldr r0, _0805ACA4
 	ldr r0, [r0]
@@ -38308,7 +38308,7 @@ _0805ACA8:
 	adds r1, #0xfb
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4]
 	movs r2, #0xf3
 	lsls r2, r2, #2
@@ -38319,7 +38319,7 @@ _0805ACA8:
 	cmp r0, #0
 	beq _0805ACF4
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r1, [r4]
 	movs r4, #0xf3
 	lsls r4, r4, #2
@@ -38328,7 +38328,7 @@ _0805ACA8:
 	lsls r5, r5, #2
 	adds r1, r1, r5
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805ACFC
 	.align 2, 0
 _0805ACEC: .4byte 0x0203F948
@@ -38336,7 +38336,7 @@ _0805ACF0: .4byte 0x000003ED
 _0805ACF4:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805ACFC:
 	ldr r0, _0805AD08
 	ldr r0, [r0]
@@ -38355,7 +38355,7 @@ _0805AD0C:
 	adds r1, #0xfc
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4]
 	movs r2, #0xf3
 	lsls r2, r2, #2
@@ -38366,7 +38366,7 @@ _0805AD0C:
 	cmp r0, #0
 	beq _0805AD58
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r1, [r4]
 	movs r4, #0xf3
 	lsls r4, r4, #2
@@ -38375,7 +38375,7 @@ _0805AD0C:
 	lsls r5, r5, #2
 	adds r1, r1, r5
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805AD60
 	.align 2, 0
 _0805AD50: .4byte 0x0203F948
@@ -38383,7 +38383,7 @@ _0805AD54: .4byte 0x000003ED
 _0805AD58:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805AD60:
 	ldr r0, _0805AD6C
 	ldr r0, [r0]
@@ -38408,7 +38408,7 @@ _0805AD70:
 	ldr r1, _0805ADB0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, [r4]
 	movs r4, #0xf3
 	lsls r4, r4, #2
@@ -38417,7 +38417,7 @@ _0805AD70:
 	lsls r5, r5, #2
 	adds r1, r1, r5
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805ADD0
 	.align 2, 0
 _0805ADA8: .4byte 0x0203F948
@@ -38429,13 +38429,13 @@ _0805ADB4:
 	lsls r1, r1, #2
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4]
 	movs r7, #0xf3
 	lsls r7, r7, #2
 	adds r0, r0, r7
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805ADD0:
 	ldr r0, _0805ADDC
 	ldr r0, [r0]
@@ -38454,7 +38454,7 @@ _0805ADE0:
 	ldr r1, _0805AE04
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4]
 	movs r3, #0xf3
 	lsls r3, r3, #2
@@ -38478,14 +38478,14 @@ _0805AE08:
 	ldr r1, _0805AE4C
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r1, [r4]
 	adds r0, r1, r5
 	movs r2, #0xfc
 	lsls r2, r2, #2
 	adds r1, r1, r2
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 _0805AE38:
 	ldr r0, [r4]
 _0805AE3A:
@@ -38503,7 +38503,7 @@ _0805AE50:
 	ldr r1, _0805AEA0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4]
 	movs r3, #0xf3
 	lsls r3, r3, #2
@@ -38513,7 +38513,7 @@ _0805AE50:
 	ldr r0, [r4]
 	adds r0, r0, r3
 	movs r1, #5
-	bl SetSpritePalette
+	bl sprite_set_palette
 _0805AE72:
 	ldr r0, _0805AEA4
 	ldr r0, [r0]
@@ -38521,7 +38521,7 @@ _0805AE72:
 	lsls r4, r4, #2
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r2, _0805AEA8
 	ldr r1, [r2]
 	adds r1, #0x7e
@@ -38877,7 +38877,7 @@ _0805B122:
 	bhi _0805B14C
 	adds r0, r1, #0
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	b _0805B154
 	.align 2, 0
 _0805B144: .4byte 0x0203F944
@@ -38885,7 +38885,7 @@ _0805B148: .4byte 0x0203F93D
 _0805B14C:
 	adds r0, r1, #0
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 _0805B154:
 	ldr r4, _0805B188
 	ldr r1, [r4]
@@ -38933,7 +38933,7 @@ _0805B1A8:
 _0805B1AA:
 	ldr r0, _0805B230
 	ldr r0, [r0]
-	bl RenderSprite
+	bl sprite_render
 	cmp r5, #1
 	bne _0805B1D4
 	ldr r0, _0805B234
@@ -38958,12 +38958,12 @@ _0805B1D4:
 	ldr r4, _0805B234
 	ldr r0, [r4]
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r4]
 	adds r0, #0x38
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r4]
-	bl RenderSprite
+	bl sprite_render
 _0805B1F4:
 	cmp r5, #1
 	bne _0805B26A
@@ -38981,7 +38981,7 @@ _0805B1FC:
 	cmp r1, r0
 	bhi _0805B244
 	adds r0, r3, #0
-	bl RenderSprite
+	bl sprite_render
 	adds r4, #1
 	ldr r0, [r6]
 	adds r0, r5, r0
@@ -39008,7 +39008,7 @@ _0805B244:
 	cmp r1, r0
 	bhi _0805B262
 	adds r0, r3, #0
-	bl RenderSprite
+	bl sprite_render
 	adds r0, r4, #0
 	movs r1, #0xc0
 	movs r2, #0xc0
@@ -39114,13 +39114,13 @@ _0805B310:
 	ldr r1, _0805B348
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r4]
 	adds r0, r0, r5
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805B358
 	.align 2, 0
 _0805B344: .4byte 0x0203F948
@@ -39130,7 +39130,7 @@ _0805B34C:
 	ldr r1, _0805B368
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 _0805B358:
 	ldr r0, _0805B36C
 	ldr r1, [r0]
@@ -39153,7 +39153,7 @@ _0805B370:
 	lsls r1, r1, #3
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r1, r4, r0
 	adds r0, r1, #0
@@ -39162,20 +39162,20 @@ _0805B370:
 	cmp r0, #0
 	beq _0805B3B0
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805B3B8
 	.align 2, 0
 _0805B3AC: .4byte 0x0203F948
 _0805B3B0:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805B3B8:
 	ldr r0, _0805B3C8
 	ldr r1, [r0]
@@ -39196,7 +39196,7 @@ _0805B3CC:
 	ldr r1, _0805B40C
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r1, r4, r0
 	adds r0, r1, #0
@@ -39205,13 +39205,13 @@ _0805B3CC:
 	cmp r0, #0
 	beq _0805B410
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805B418
 	.align 2, 0
 _0805B408: .4byte 0x0203F948
@@ -39219,7 +39219,7 @@ _0805B40C: .4byte 0x000004C7
 _0805B410:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805B418:
 	ldr r0, _0805B428
 	ldr r1, [r0]
@@ -39241,7 +39241,7 @@ _0805B42C:
 	lsls r1, r1, #3
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r1, r4, r0
 	adds r0, r1, #0
@@ -39250,20 +39250,20 @@ _0805B42C:
 	cmp r0, #0
 	beq _0805B46C
 	adds r0, r1, #0
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805B474
 	.align 2, 0
 _0805B468: .4byte 0x0203F948
 _0805B46C:
 	adds r0, r1, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805B474:
 	ldr r0, _0805B484
 	ldr r1, [r0]
@@ -39290,13 +39290,13 @@ _0805B488:
 	ldr r1, _0805B4C0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	b _0805B4DC
 	.align 2, 0
 _0805B4BC: .4byte 0x0203F948
@@ -39307,11 +39307,11 @@ _0805B4C4:
 	lsls r1, r1, #2
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r5]
 	adds r0, r0, r4
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _0805B4DC:
 	ldr r0, _0805B4EC
 	ldr r1, [r0]
@@ -39331,7 +39331,7 @@ _0805B4F0:
 	ldr r1, _0805B510
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6]
 	adds r4, r4, r0
 	movs r0, #0
@@ -39354,13 +39354,13 @@ _0805B514:
 	ldr r1, _0805B54C
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6]
 	adds r0, r0, r4
 	adds r1, r0, #0
 	adds r1, #0x24
 	ldrb r1, [r1, #2]
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r6]
 	adds r0, r4, r0
 _0805B546:
@@ -39374,7 +39374,7 @@ _0805B550:
 	ldr r1, _0805B588
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r6]
 	adds r0, r4, r0
 	movs r1, #1
@@ -39382,7 +39382,7 @@ _0805B550:
 	ldr r0, [r6]
 	adds r0, r0, r4
 	movs r1, #5
-	bl SetSpritePalette
+	bl sprite_set_palette
 _0805B56E:
 	mov r0, r8
 	adds r0, #1
@@ -39996,7 +39996,7 @@ sub_0805BA1C: @ 0x0805BA1C
 	bl SetSprite
 	ldr r0, [r4]
 	movs r1, #3
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r6]
 	adds r0, #0x1c
 	movs r1, #0x9d
@@ -40015,7 +40015,7 @@ sub_0805BA1C: @ 0x0805BA1C
 	ldr r0, [r6]
 	adds r0, #0x1c
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r3, _0805BB28
 	strb r5, [r3]
 	cmp r7, #2
@@ -40127,7 +40127,7 @@ _0805BB54:
 	bl SetSprite
 	ldr r0, [r6]
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r1, _0805BBAC
 	ldrb r0, [r1]
 	cmp r0, #0
@@ -40228,7 +40228,7 @@ _0805BBF2:
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r6]
 	adds r0, r4, r0
 	adds r0, #0x2c
@@ -40237,12 +40237,12 @@ _0805BBF2:
 	ldr r0, [r6]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r6]
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r6]
 	adds r0, r0, r4
 	mov r5, r8
@@ -40303,7 +40303,7 @@ _0805BCD0:
 	bl SetSprite
 	ldr r0, [r6]
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r6]
 	adds r0, #0x47
 	movs r1, #0x19
@@ -40375,7 +40375,7 @@ _0805BD48:
 	ldr r0, [r7]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r7]
 	adds r0, r0, r4
 	mov r5, r8
@@ -40431,7 +40431,7 @@ _0805BDC8:
 	ldr r0, [r7]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r7]
 	adds r0, r0, r4
 	mov r5, r8
@@ -40497,7 +40497,7 @@ _0805BE70:
 	bl SetSprite
 	ldr r0, [r6]
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r6]
 	adds r0, #0x47
 	movs r1, #0x19
@@ -40584,7 +40584,7 @@ _0805BEEA:
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r7]
 	adds r0, r4, r0
 	adds r0, #0x2c
@@ -40593,12 +40593,12 @@ _0805BEEA:
 	ldr r0, [r7]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r7]
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r7]
 	adds r0, r0, r4
 	mov r5, r8
@@ -40669,7 +40669,7 @@ _0805BFA8:
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r7]
 	adds r0, r4, r0
 	adds r0, #0x2c
@@ -40678,12 +40678,12 @@ _0805BFA8:
 	ldr r0, [r7]
 	adds r0, r0, r4
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r7]
 	adds r0, r0, r4
 	adds r0, #0x1c
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r7]
 	adds r0, r0, r4
 	mov r5, r8
@@ -40844,7 +40844,7 @@ _0805C192:
 	adds r4, #0x1c
 	adds r0, r4, #0
 	movs r1, #4
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	adds r0, r5, #0
 	adds r0, #0x48
 	ldrb r0, [r0]
@@ -40872,10 +40872,10 @@ _0805C1CE:
 _0805C1D0:
 	adds r0, r5, #0
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r4, #0
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	b _0805C27E
 _0805C1E2:
 	adds r1, r5, #0
@@ -40886,7 +40886,7 @@ _0805C1E2:
 	adds r4, #0x1c
 	adds r0, r4, #0
 	movs r1, #2
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	adds r0, r5, #0
 	adds r0, #0x48
 	ldrb r0, [r0]
@@ -40914,10 +40914,10 @@ _0805C21E:
 _0805C220:
 	adds r0, r5, #0
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r4, #0
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	b _0805C27E
 _0805C232:
 	adds r1, r5, #0
@@ -40928,7 +40928,7 @@ _0805C232:
 	adds r4, #0x1c
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	adds r0, r5, #0
 	adds r0, #0x48
 	ldrb r0, [r0]
@@ -40955,10 +40955,10 @@ _0805C26C:
 _0805C26E:
 	adds r0, r5, #0
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r4, #0
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 _0805C27E:
 	movs r0, #0
 	movs r1, #1
@@ -41040,7 +41040,7 @@ _0805C30A:
 	adds r0, r4, #0
 	adds r0, #0x1c
 	movs r1, #4
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	adds r0, r4, #0
 	adds r0, #0x48
 	ldrb r0, [r0]
@@ -41052,7 +41052,7 @@ _0805C30A:
 _0805C32C:
 	adds r0, r4, #0
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	b _0805C38C
 _0805C336:
 	adds r1, r4, #0
@@ -41062,7 +41062,7 @@ _0805C336:
 	adds r0, r4, #0
 	adds r0, #0x1c
 	movs r1, #2
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	adds r0, r4, #0
 	adds r0, #0x48
 	ldrb r0, [r0]
@@ -41074,13 +41074,13 @@ _0805C336:
 _0805C358:
 	adds r0, r4, #0
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	b _0805C38C
 _0805C362:
 	adds r0, r4, #0
 	adds r0, #0x1c
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	adds r1, r4, #0
 	adds r1, #0x46
 	movs r0, #0x88
@@ -41096,7 +41096,7 @@ _0805C362:
 _0805C384:
 	adds r0, r4, #0
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 _0805C38C:
 	movs r0, #0
 	movs r1, #1
@@ -41208,7 +41208,7 @@ _0805C43C:
 	strb r0, [r2, #8]
 _0805C456:
 	ldr r0, [r5]
-	bl RenderSprite
+	bl sprite_render
 	pop {r4, r5}
 	pop {r0}
 	bx r0
@@ -41248,7 +41248,7 @@ _0805C48E:
 	strh r0, [r1, #0x22]
 	adds r1, #0x1c
 	adds r0, r1, #0
-	bl RenderSprite
+	bl sprite_render
 	cmp r4, #1
 	bne _0805C4CA
 	ldr r1, [r5]
@@ -41261,7 +41261,7 @@ _0805C48E:
 	lsrs r0, r0, #8
 	strb r0, [r1, #8]
 	ldr r0, [r5]
-	bl RenderSprite
+	bl sprite_render
 _0805C4CA:
 	bl sub_805C3C8
 	cmp r4, #1
@@ -41376,11 +41376,11 @@ _0805C58A:
 	cmp r0, #0
 	bne _0805C5D8
 	adds r0, r1, #0
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r5]
 	adds r0, r0, r4
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 	b _0805C5E8
 	.align 2, 0
 _0805C5B0: .4byte 0x0203F988
@@ -41390,7 +41390,7 @@ _0805C5B4:
 	mov r2, r8
 	ldr r0, [r2]
 	adds r0, r0, r1
-	bl RenderSprite
+	bl sprite_render
 	b _0805C5E8
 _0805C5C4:
 	mov r0, r8
@@ -41405,12 +41405,12 @@ _0805C5C4:
 	beq _0805C5E0
 _0805C5D8:
 	adds r0, r1, #0
-	bl RenderSprite
+	bl sprite_render
 	b _0805C5E8
 _0805C5E0:
 	adds r0, r1, #0
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 _0805C5E8:
 	mov r1, r8
 	ldr r0, [r1]
@@ -41764,7 +41764,7 @@ _0805C898:
 _0805C89A:
 	movs r2, #0
 	movs r3, #1
-	bl sub_8003368
+	bl sprite_set_anim
 	b _0805C8BE
 	.align 2, 0
 _0805C8A4: .4byte 0x0203F920
@@ -41943,7 +41943,7 @@ _0805C9D0:
 	adds r0, r2, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	b _0805C9E0
 _0805C9DC:
 	.2byte 0xEE00, 0xEE00
@@ -42180,7 +42180,7 @@ _0805CB2C:
 	ldr r0, [r3]
 	adds r0, r0, r1
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r0, r5, #0
 	adds r0, #0x4c
 	strb r6, [r0]
@@ -42241,7 +42241,7 @@ _0805CBA8:
 	ldr r0, [r3]
 	adds r0, r0, r1
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r1, r5, #0
 	adds r1, #0x4c
 	movs r0, #1
@@ -42948,8 +42948,8 @@ _0805D1E8: .4byte 0x0203FA16
 _0805D1EC: .4byte 0x0203F9A2
 
     .thumb
-    .global init_function
-init_function: @ 0x0805D1F0
+    .global start_script
+start_script: @ 0x0805D1F0
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -43209,7 +43209,7 @@ _0805D290: @ jump table
 	.4byte _0805D55C @ case 176
 	.4byte _0805D558 @ case 177
 _0805D558:
-	bl call_functions
+	bl update_scripts
 _0805D55C:
 	pop {r3}
 	mov r8, r3
@@ -44111,7 +44111,7 @@ sub_805DC28: @ 0x0805DC28
 	adds r0, r5, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_805EAEC
+	bl script_cmd_actor_set_anim
 	movs r0, #0
 	movs r1, #1
 	bl RandomMinMax
@@ -44128,7 +44128,7 @@ sub_805DC28: @ 0x0805DC28
 	adds r0, r5, #0
 	adds r1, r4, #0
 	movs r3, #0
-	bl sub_805EE3C
+	bl script_cmd_actor_set_position_absolute
 	movs r0, #0x32
 	movs r1, #0x3c
 	bl RandomMinMax
@@ -44141,7 +44141,7 @@ sub_805DC28: @ 0x0805DC28
 	lsls r3, r3, #0xb
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_805F148
+	bl script_cmd_actor_move
 	b _0805DCE2
 	.align 2, 0
 _0805DC9C: .4byte 0x0203F9F4
@@ -44158,7 +44158,7 @@ _0805DCA4:
 	adds r0, r5, #0
 	adds r1, r4, #0
 	movs r3, #0
-	bl sub_805EE3C
+	bl script_cmd_actor_set_position_absolute
 	movs r0, #0xb4
 	movs r1, #0xbe
 	bl RandomMinMax
@@ -44171,7 +44171,7 @@ _0805DCA4:
 	lsls r3, r3, #0xb
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_805F148
+	bl script_cmd_actor_move
 _0805DCE2:
 	ldr r0, _0805DD1C
 	ldr r0, [r0]
@@ -44246,8 +44246,8 @@ _0805DD74: .4byte gPlayerStateFlags
 _0805DD78: .4byte gPlayerState
 
     .thumb
-    .global call_functions
-call_functions: @ 0x0805DD7C
+    .global update_scripts
+update_scripts: @ 0x0805DD7C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -44373,7 +44373,7 @@ _0805DE70:
 	cmp r0, #0
 	beq _0805DE88
 	adds r0, r1, #0
-	bl sub_0805E158
+	bl end_script
 _0805DE88:
 	mov r3, sb
 	ldr r2, [r3]
@@ -44470,7 +44470,7 @@ _0805DF40:
 	cmp r0, #0
 	beq _0805DF52
 	adds r0, r1, #0
-	bl sub_0805E158
+	bl end_script
 _0805DF52:
 	ldr r0, [r7]
 	adds r0, #0x24
@@ -44501,8 +44501,8 @@ _0805DF70:
 _0805DF80: .4byte byte_203F9A1
 
     .thumb
-    .global sub_805DF84
-sub_805DF84: @ 0x0805DF84
+    .global render_scripts
+render_scripts: @ 0x0805DF84
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -44563,7 +44563,7 @@ _0805DFDE:
 	bne _0805E05C
 	ldr r1, [r6]
 	adds r0, r2, #0
-	bl sub_80033DC
+	bl sprite_render_ex
 	ldr r0, [r5]
 	adds r4, r7, r0
 	ldrb r0, [r4, #0x10]
@@ -44638,8 +44638,8 @@ _0805E074:
 _0805E084: .4byte gMapPixelSizeY
 
     .thumb
-    .global sub_805E088
-sub_805E088: @ 0x0805E088
+    .global render_scripts_direct
+render_scripts_direct: @ 0x0805E088
 	push {r4, r5, r6, r7, lr}
 	movs r2, #0
 _0805E08C:
@@ -44665,7 +44665,7 @@ _0805E0A6:
 	cmp r0, #0
 	beq _0805E0BA
 	adds r0, r1, #0
-	bl RenderSprite
+	bl sprite_render
 _0805E0BA:
 	adds r5, #0x60
 	adds r6, #1
@@ -44686,7 +44686,7 @@ _0805E0C8:
 _0805E0D8: .4byte 0x0203F9A4
 
     .thumb
-sub_805E0DC: @ 0x0805E0DC
+remove_actors: @ 0x0805E0DC
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -44754,10 +44754,10 @@ _0805E14A:
 _0805E154: .4byte 0x0203F9A0
 
     .thumb
-sub_0805E158: @ 0x0805E158
+end_script: @ 0x0805E158
 	push {r4, r5, lr}
 	adds r4, r0, #0
-	bl sub_805E0DC
+	bl remove_actors
 	adds r1, r4, #0
 	adds r1, #0x21
 	movs r3, #0
@@ -44814,8 +44814,8 @@ _0805E1D4: .4byte 0x0203FA15
 _0805E1D8: .4byte byte_203F99E
 
     .thumb
-    .global sub_805E1DC
-sub_805E1DC: @ 0x0805E1DC
+    .global end_all_scripts
+end_all_scripts: @ 0x0805E1DC
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	ldr r0, _0805E224
@@ -44876,11 +44876,11 @@ _0805E242:
 	bne _0805E25A
 _0805E24C:
 	adds r0, r1, #0
-	bl sub_0805E158
+	bl end_script
 	b _0805E25A
 _0805E254:
 	adds r0, r1, #0
-	bl sub_0805E158
+	bl end_script
 _0805E25A:
 	adds r0, r5, #1
 	lsls r0, r0, #0x18
@@ -45147,7 +45147,7 @@ _0805E452:
 	.align 2, 0
 
     .thumb
-sub_805E458: @ 0x0805E458
+script_cmd_alloc_actors: @ 0x0805E458
 	push {r4, lr}
 	adds r1, r0, #0
 	ldr r4, _0805E4DC
@@ -45218,7 +45218,7 @@ _0805E4D2:
 _0805E4DC: .4byte 0x0203F9F4
 
     .thumb
-sub_805E4E0: @ 0x0805E4E0
+script_cmd_load_and_store_room: @ 0x0805E4E0
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -45271,7 +45271,7 @@ _0805E538:
 _0805E54C:
 	ldr r0, _0805E5D4
 	ldr r0, [r0]
-	bl sub_805E0DC
+	bl remove_actors
 	ldrb r0, [r4]
 	cmp r0, #0
 	beq _0805E566
@@ -45359,7 +45359,7 @@ _0805E5FE:
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_0805F868
+	bl script_cmd_store_camera_position
 _0805E626:
 	bl sub_8041E58
 	movs r0, #1
@@ -45379,7 +45379,7 @@ _0805E64C: .4byte gPlayerShadowSprite
 _0805E650: .4byte 0x0203FA15
 
     .thumb
-sub_805E654: @ 0x0805E654
+script_cmd_load_room: @ 0x0805E654
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -45415,7 +45415,7 @@ _0805E684:
 _0805E698:
 	ldr r0, _0805E71C
 	ldr r0, [r0]
-	bl sub_805E0DC
+	bl remove_actors
 	ldrb r0, [r4]
 	cmp r0, #0
 	beq _0805E6B2
@@ -45507,7 +45507,7 @@ _0805E770: .4byte 0x02001466
 _0805E774: .4byte gPlayerShadowSprite
 
     .thumb
-sub_805E778: @ 0x0805E778
+script_cmd_restore_room: @ 0x0805E778
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r6, r0, #0
@@ -45523,7 +45523,7 @@ sub_805E778: @ 0x0805E778
 _0805E792:
 	ldr r4, _0805E7F8
 	ldr r0, [r4]
-	bl sub_805E0DC
+	bl remove_actors
 	ldr r5, _0805E7FC
 	ldr r2, _0805E800
 	ldr r3, [r4]
@@ -45590,7 +45590,7 @@ _0805E816:
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_0805F868
+	bl script_cmd_store_camera_position
 _0805E830:
 	movs r0, #1
 	add sp, #8
@@ -45603,7 +45603,7 @@ _0805E840: .4byte 0x0203FA16
 _0805E844: .4byte 0x0203FA15
 
 	.thumb
-sub_805E848: @ 0x0805E848
+script_cmd_jump: @ 0x0805E848
 	ldr r2, _0805E858
 	ldr r2, [r2]
 	strh r0, [r2, #0x18]
@@ -45615,7 +45615,7 @@ sub_805E848: @ 0x0805E848
 _0805E858: .4byte 0x0203F9F4
 
     .thumb
-sub_805E85C: @ 0x0805E85C
+script_cmd_jump_cond: @ 0x0805E85C
 	push {r4, r5, r6, lr}
 	adds r4, r1, #0
 	adds r5, r2, #0
@@ -45681,7 +45681,7 @@ _0805E8D4: .4byte 0x0200209A
 _0805E8D8: .4byte 0x0203F9F4
 
     .thumb
-sub_805E8DC: @ 0x0805E8DC
+script_cmd_hide_player: @ 0x0805E8DC
 	push {lr}
 	adds r2, r0, #0
 	cmp r2, #0
@@ -45709,7 +45709,7 @@ _0805E908: .4byte gPlayerSprite
 _0805E90C: .4byte 0x0203F9A2
 
     .thumb
-sub_805E910: @ 0x0805E910
+script_cmd_actor_init: @ 0x0805E910
 	push {r4, r5, r6, lr}
 	mov r6, r8
 	push {r6}
@@ -45830,7 +45830,7 @@ _0805EA00: .4byte gCameraPixelY
 _0805EA04: .4byte 0x0203F9A0
 
     .thumb
-sub_805EA08: @ 0x0805EA08
+script_cmd_actor_disable: @ 0x0805EA08
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	ldr r6, _0805EA9C
@@ -45909,7 +45909,7 @@ _0805EA9C: .4byte 0x0203F9F4
 _0805EAA0: .4byte 0x0203F9A0
 
     .thumb
-sub_805EAA4: @ 0x0805EAA4
+script_cmd_actor_enable: @ 0x0805EAA4
 	push {r4, lr}
 	ldr r4, _0805EAE4
 	ldr r1, [r4]
@@ -45947,7 +45947,7 @@ _0805EAE4: .4byte 0x0203F9F4
 _0805EAE8: .4byte 0x0203F9A0
 
     .thumb
-sub_805EAEC: @ 0x0805EAEC
+script_cmd_actor_set_anim: @ 0x0805EAEC
 	push {r4, lr}
 	adds r3, r2, #0
 	ldr r2, _0805EB0C
@@ -45958,7 +45958,7 @@ sub_805EAEC: @ 0x0805EAEC
 	ldr r0, [r4]
 	adds r0, r0, r2
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	movs r0, #1
 	pop {r4}
 	pop {r1}
@@ -45993,7 +45993,7 @@ _0805EB36:
 	adds r0, r4, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_805EAEC
+	bl script_cmd_actor_set_anim
 	b _0805ED14
 	.align 2, 0
 _0805EB44: .4byte 0x000004EA
@@ -46024,12 +46024,12 @@ _0805EB6C:
 	adds r0, r4, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_805EAEC
+	bl script_cmd_actor_set_anim
 	adds r0, r4, #0
 	movs r1, #6
 	movs r2, #0
 	movs r3, #0
-	bl sub_805EF5C
+	bl script_cmd_actor_set_direction
 	adds r0, r4, #0
 	movs r1, #5
 	movs r2, #0
@@ -46074,12 +46074,12 @@ _0805EBD0:
 	adds r0, r4, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_805EAEC
+	bl script_cmd_actor_set_anim
 	adds r0, r4, #0
 	movs r1, #5
 	movs r2, #0
 	movs r3, #0
-	bl sub_805EF5C
+	bl script_cmd_actor_set_direction
 	adds r0, r4, #0
 	movs r1, #8
 	movs r2, #0
@@ -46124,12 +46124,12 @@ _0805EC34:
 	adds r0, r4, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_805EAEC
+	bl script_cmd_actor_set_anim
 	adds r0, r4, #0
 	movs r1, #5
 	movs r2, #0
 	movs r3, #0
-	bl sub_805EF5C
+	bl script_cmd_actor_set_direction
 	adds r0, r4, #0
 	movs r1, #3
 	movs r2, #0
@@ -46174,12 +46174,12 @@ _0805EC98:
 	adds r0, r4, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_805EAEC
+	bl script_cmd_actor_set_anim
 	adds r0, r4, #0
 	movs r1, #5
 	movs r2, #0
 	movs r3, #0
-	bl sub_805EF5C
+	bl script_cmd_actor_set_direction
 	adds r0, r4, #0
 	movs r1, #9
 	movs r2, #0
@@ -46206,12 +46206,12 @@ _0805ECDE:
 _0805ECE0:
 	movs r2, #1
 	movs r3, #0
-	bl sub_805EAEC
+	bl script_cmd_actor_set_anim
 	adds r0, r4, #0
 	movs r1, #6
 	movs r2, #0
 	movs r3, #0
-	bl sub_805EF5C
+	bl script_cmd_actor_set_direction
 	b _0805ED14
 	.align 2, 0
 _0805ECF8: .4byte 0x000001A1
@@ -46222,12 +46222,12 @@ _0805ECFE:
 _0805ED00:
 	movs r2, #0
 	movs r3, #0
-	bl sub_805EAEC
+	bl script_cmd_actor_set_anim
 	adds r0, r4, #0
 	movs r1, #6
 	movs r2, #0
 	movs r3, #0
-	bl sub_805EF5C
+	bl script_cmd_actor_set_direction
 _0805ED14:
 	movs r0, #1
 	b _0805ED20
@@ -46242,7 +46242,7 @@ _0805ED20:
 	.align 2, 0
 
     .thumb
-sub_805ED28: @ 0x0805ED28
+script_cmd_actor_set_position: @ 0x0805ED28
 	push {r4, r5, r6, lr}
 	mov r6, r8
 	push {r6}
@@ -46309,7 +46309,7 @@ sub_805ED94: @ 0x0805ED94
 	ldrsh r2, [r2, r3]
 	adds r2, r2, r4
 	movs r3, #0
-	bl sub_805ED28
+	bl script_cmd_actor_set_position
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -46318,7 +46318,7 @@ _0805EDB8: .4byte 0x0203F994
 _0805EDBC: .4byte 0x0203F996
 
     .thumb
-sub_805EDC0: @ 0x0805EDC0
+script_cmd_actor_set_position_from_cam: @ 0x0805EDC0
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -46381,7 +46381,7 @@ _0805EE34: .4byte gCameraPixelX
 _0805EE38: .4byte gCameraPixelY
 
     .thumb
-sub_805EE3C: @ 0x0805EE3C
+script_cmd_actor_set_position_absolute: @ 0x0805EE3C
 	push {r4, r5, r6, lr}
 	ldr r6, _0805EE80
 	ldr r3, [r6]
@@ -46420,7 +46420,7 @@ sub_805EE3C: @ 0x0805EE3C
 _0805EE80: .4byte 0x0203F9F4
 
 	.thumb
-sub_805EE84: @ 0x0805EE84
+script_cmd_actor_save_position: @ 0x0805EE84
 	ldr r3, _0805EEAC
 	ldr r1, _0805EEB0
 	ldr r1, [r1]
@@ -46463,14 +46463,14 @@ sub_805EEBC: @ 0x0805EEBC
 	subs r2, r2, r0
 	adds r0, r5, #0
 	movs r3, #0
-	bl sub_805ED28
+	bl script_cmd_actor_set_position
 	bl sub_800C50C
 	movs r1, #3
 	subs r1, r1, r0
 	adds r0, r5, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_805F010
+	bl script_cmd_actor_set_priority
 	ldr r1, [r4, #4]
 	adds r0, r5, #0
 	movs r2, #0
@@ -46500,14 +46500,14 @@ sub_805EF0C: @ 0x0805EF0C
 	subs r2, r2, r0
 	adds r0, r5, #0
 	movs r3, #0
-	bl sub_805ED28
+	bl script_cmd_actor_set_position
 	bl sub_800C50C
 	movs r1, #3
 	subs r1, r1, r0
 	adds r0, r5, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_805F010
+	bl script_cmd_actor_set_priority
 	ldr r1, [r4, #4]
 	adds r0, r5, #0
 	movs r2, #0
@@ -46522,7 +46522,7 @@ _0805EF54: .4byte gPlayerShadowPos
 _0805EF58: .4byte gMapPixelSizeY
 
     .thumb
-sub_805EF5C: @ 0x0805EF5C
+script_cmd_actor_set_direction: @ 0x0805EF5C
 	push {r4, r5, lr}
 	adds r5, r1, #0
 	ldr r4, _0805EF90
@@ -46543,7 +46543,7 @@ sub_805EF5C: @ 0x0805EF5C
 	adds r0, r0, r3
 	ldrb r3, [r0, #0xb]
 	movs r2, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	movs r0, #1
 	pop {r4, r5}
 	pop {r1}
@@ -46605,14 +46605,14 @@ _0805EFF8:
 	adds r0, r7, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_805EF5C
+	bl script_cmd_actor_set_direction
 	pop {r4, r5, r6, r7}
 	pop {r1}
 	bx r1
 	.align 2, 0
 
     .thumb
-sub_805F010: @ 0x0805F010
+script_cmd_actor_set_priority: @ 0x0805F010
 	push {lr}
 	adds r3, r1, #0
 	ldr r1, _0805F030
@@ -46624,7 +46624,7 @@ sub_805F010: @ 0x0805F010
 	adds r0, r0, r1
 	movs r1, #3
 	subs r1, r1, r3
-	bl SetSpritePriority
+	bl sprite_set_priority
 	movs r0, #1
 	pop {r1}
 	bx r1
@@ -46638,7 +46638,7 @@ sub_805F034: @ 0x0805F034
 	ldrb r1, [r1]
 	movs r2, #0
 	movs r3, #0
-	bl sub_805F010
+	bl script_cmd_actor_set_priority
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -46661,7 +46661,7 @@ sub_805F04C: @ 0x0805F04C
 _0805F064: .4byte 0x0203F9F4
 
 	.thumb
-sub_805F068: @ 0x0805F068
+script_cmd_actor_set_obj_mode: @ 0x0805F068
 	ldr r2, _0805F07C
 	ldr r2, [r2]
 	ldr r3, [r2]
@@ -46676,7 +46676,7 @@ sub_805F068: @ 0x0805F068
 _0805F07C: .4byte 0x0203F9F4
 
     .thumb
-sub_805F080: @ 0x0805F080
+script_cmd_actor_set_palette: @ 0x0805F080
 	push {r4, r5, lr}
 	ldr r5, _0805F0A4
 	ldr r2, [r5]
@@ -46685,7 +46685,7 @@ sub_805F080: @ 0x0805F080
 	lsls r4, r4, #5
 	ldr r0, [r2]
 	adds r0, r0, r4
-	bl SetSpritePalette
+	bl sprite_set_palette
 	ldr r0, [r5]
 	ldr r0, [r0]
 	adds r4, r4, r0
@@ -46707,7 +46707,7 @@ sub_805F0A8: @ 0x0805F0A8
 	lsls r2, r2, #5
 	ldr r0, [r3]
 	adds r0, r0, r2
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	movs r0, #1
 	pop {r1}
 	bx r1
@@ -46715,7 +46715,7 @@ sub_805F0A8: @ 0x0805F0A8
 _0805F0C4: .4byte 0x0203F9F4
 
     .thumb
-sub_805F0C8: @ 0x0805F0C8
+script_cmd_actor_unlock_anim: @ 0x0805F0C8
 	push {lr}
 	ldr r1, _0805F0E4
 	ldr r2, [r1]
@@ -46724,7 +46724,7 @@ sub_805F0C8: @ 0x0805F0C8
 	lsls r1, r1, #5
 	ldr r0, [r2]
 	adds r0, r0, r1
-	bl sub_80037A0
+	bl sprite_unlock_anim
 	movs r0, #1
 	pop {r1}
 	bx r1
@@ -46741,7 +46741,7 @@ sub_805F0E8: @ 0x0805F0E8
 	lsls r2, r2, #5
 	ldr r0, [r3]
 	adds r0, r0, r2
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	movs r0, #1
 	pop {r1}
 	bx r1
@@ -46784,7 +46784,7 @@ _0805F140: .4byte 0x0203F9F4
 _0805F144: .4byte 0x00001FFF
 
     .thumb
-sub_805F148: @ 0x0805F148
+script_cmd_actor_move: @ 0x0805F148
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -46947,7 +46947,7 @@ sub_805F28C: @ 0x0805F28C
 	ldr r2, _0805F2AC
 	movs r4, #0
 	ldrsh r2, [r2, r4]
-	bl sub_805F148
+	bl script_cmd_actor_move
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -47152,7 +47152,7 @@ sub_805F428: @ 0x0805F428
 _0805F440: .4byte 0x0203F9F4
 
     .thumb
-AllocateOAMMatrices: @ 0x0805F444
+script_cmd_alloc_oam_matrices: @ 0x0805F444
 	push {r4, lr}
 	ldr r1, _0805F460
 	str r0, [r1]
@@ -47171,7 +47171,7 @@ _0805F460: .4byte gMatricesCount
 _0805F464: .4byte gMatrices
 
     .thumb
-DeleteOAMMatrices: @ 0x0805F468
+script_cmd_free_oam_matrices: @ 0x0805F468
 	push {lr}
 	ldr r0, _0805F47C
 	ldr r0, [r0]
@@ -47306,7 +47306,7 @@ _0805F54C:
 	.align 2, 0
 
     .thumb
-ChangeRoomBgm: @ 0x0805F55C
+script_cmd_play_bgm: @ 0x0805F55C
 	push {lr}
 	adds r1, r0, #0
 	ldr r0, _0805F578
@@ -47326,7 +47326,7 @@ _0805F578: .4byte gLoadedRoomBgm
 _0805F57C: .4byte 0x0203EA88
 
     .thumb
-sub_805F580: @ 0x0805F580
+script_cmd_stop_bgm: @ 0x0805F580
 	push {lr}
 	bl audio_halt_tune
 	movs r0, #1
@@ -47334,7 +47334,7 @@ sub_805F580: @ 0x0805F580
 	bx r1
 
     .thumb
-sub_805F58C: @ 0x0805F58C
+script_cmd_play_sfx: @ 0x0805F58C
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	cmp r1, #0
@@ -47409,7 +47409,7 @@ _0805F61C: .4byte 0x080CE440
 _0805F620: .4byte gSfxVolume
 
     .thumb
-sub_805F624: @ 0x0805F624
+script_cmd_stop_sfx: @ 0x0805F624
 	push {lr}
 	ldr r0, _0805F640
 	ldrb r0, [r0]
@@ -47438,7 +47438,7 @@ _0805F652:
 	bx r1
 
     .thumb
-sub_805F658: @ 0x0805F658
+script_cmd_stop_all_sfx: @ 0x0805F658
 	push {lr}
 	bl audio_halt_all_fx
 	movs r0, #1
@@ -47446,7 +47446,7 @@ sub_805F658: @ 0x0805F658
 	bx r1
 
     .thumb
-sub_805F664: @ 0x0805F664
+script_cmd_play_bill_drill_sfx: @ 0x0805F664
 	push {r4, r5, lr}
 	ldr r4, _0805F6A4
 	ldrb r0, [r4]
@@ -47495,7 +47495,7 @@ _0805F6B8:
 	.align 2, 0
 
     .thumb
-sub_805F6C4: @ 0x0805F6C4
+script_cmd_stop_bill_drill_sfx: @ 0x0805F6C4
 	push {lr}
 	ldr r0, _0805F6DC
 	ldrb r0, [r0]
@@ -47543,7 +47543,7 @@ _0805F714:
 _0805F71C: .4byte dVolumes
 
     .thumb
-sub_805F720: @ 0x0805F720
+script_cmd_set_bgm_volume_if_louder: @ 0x0805F720
 	push {lr}
 	adds r2, r0, #0
 	cmp r1, #0
@@ -47710,7 +47710,7 @@ _0805F860: .4byte 0x0203F992
 _0805F864: .4byte 0x0203FA13
 
     .thumb
-sub_0805F868: @ 0x0805F868
+script_cmd_store_camera_position: @ 0x0805F868
 	push {r4, r5, r6, lr}
 	ldr r5, _0805F8CC
 	ldrb r0, [r5]
@@ -47805,7 +47805,7 @@ _0805F920: .4byte 0x0203FA15
 _0805F924: .4byte 0x0203FA18
 
     .thumb
-sub_0805F928: @ 0x0805F928
+script_cmd_move_camera: @ 0x0805F928
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -48004,7 +48004,7 @@ _0805FAA0:
 _0805FACC: .4byte 0x0203FA18
 
     .thumb
-sub_805FAD0: @ 0x0805FAD0
+script_cmd_move_camera_to_actor_position: @ 0x0805FAD0
 	push {lr}
 	adds r2, r0, #0
 	ldr r0, _0805FAEC
@@ -48014,7 +48014,7 @@ sub_805FAD0: @ 0x0805FAD0
 	movs r3, #0
 	ldrsh r1, [r1, r3]
 	movs r3, #0
-	bl sub_0805F928
+	bl script_cmd_move_camera
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -48032,7 +48032,7 @@ sub_805FAF4: @ 0x0805FAF4
 	movs r3, #2
 	ldrsh r1, [r1, r3]
 	movs r3, #0
-	bl sub_0805F928
+	bl script_cmd_move_camera
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -48068,7 +48068,7 @@ sub_805FB38: @ 0x0805FB38
 _0805FB44: .4byte 0x0203FA18
 
 	.thumb
-sub_805FB48: @ 0x0805FB48
+script_cmd_return_camera: @ 0x0805FB48
 	push {lr}
 	adds r2, r0, #0
 	ldr r0, _0805FB78
@@ -48089,7 +48089,7 @@ _0805FB62:
 	movs r3, #6
 	ldrsh r1, [r1, r3]
 	movs r3, #0
-	bl sub_0805F928
+	bl script_cmd_move_camera
 	movs r0, #1
 	pop {r1}
 	bx r1
@@ -48256,7 +48256,7 @@ _0805FC98: .4byte word_203F99A
 _0805FC9C: .4byte word_203F998
 
 	.thumb
-sub_805FCA0: @ 0x0805FCA0
+script_cmd_wait_frames: @ 0x0805FCA0
 	ldr r1, _0805FCAC
 	ldr r1, [r1]
 	strh r0, [r1, #0x1e]
@@ -48420,7 +48420,7 @@ _0805FDEC:
 	lsls r1, r1, #5
 	ldr r0, [r0]
 	adds r0, r0, r1
-	bl sub_8003770
+	bl sprite_is_anim_done_once
 	b _0805FF46
 	.align 2, 0
 _0805FE00: .4byte 0x0203F9F4
@@ -48610,7 +48610,7 @@ _0805FF5E:
 _0805FF68: .4byte 0x0203F9F4
 
 	.thumb
-sub_805FF6C: @ 0x0805FF6C
+script_cmd_end: @ 0x0805FF6C
 	ldr r0, _0805FF7C
 	ldr r0, [r0]
 	adds r0, #0x21
@@ -49011,7 +49011,7 @@ _08060260:
 	bl SetSprite
 	add r0, sp, #0x10
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r1, _080603DC
 	movs r0, #1
 	str r0, [r1]
@@ -49190,7 +49190,7 @@ _0806042A:
 	cmp r0, #0
 	bne _080604C2
 	add r0, sp, #0x10
-	bl RenderSprite
+	bl sprite_render
 	lsrs r2, r6, #1
 	movs r0, #0x91
 	lsls r0, r0, #1
@@ -49663,7 +49663,7 @@ _08060862:
 	movs r6, #4
 _080608C0:
 	adds r0, r4, #0
-	bl RenderSprite
+	bl sprite_render
 	adds r4, #0x1c
 	subs r6, #1
 	cmp r6, #0
@@ -50022,7 +50022,7 @@ sub_8060C10: @ 0x08060C10
 	.2byte 0xEE00, 0xEE00
 _08060C22:
 	movs r0, #1
-	bl sub_805E1DC
+	bl end_all_scripts
 	movs r0, #1
 	pop {r1}
 	bx r1
@@ -50157,12 +50157,12 @@ _08060CEE:
 	asrs r2, r5, #0x10
 	mov r0, r8
 	movs r3, #0
-	bl sub_805ED28
+	bl script_cmd_actor_set_position
 	ldrb r1, [r4, #4]
 	mov r0, r8
 	movs r2, #0
 	movs r3, #0
-	bl sub_805F010
+	bl script_cmd_actor_set_priority
 	ldrh r1, [r4, #6]
 	mov r0, r8
 	movs r2, #0
@@ -50235,14 +50235,14 @@ _08060DB0:
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_805F58C
+	bl script_cmd_play_sfx
 	b _08060DC8
 _08060DBC:
 	movs r0, #0xe1
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_805F58C
+	bl script_cmd_play_sfx
 _08060DC8:
 	pop {r1}
 	bx r1
@@ -50779,10 +50779,10 @@ sub_8061190: @ 0x08061190
 	bl SetSprite
 	ldr r0, [r4]
 	movs r1, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	ldr r0, [r4]
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r4]
 	adds r0, #0x1c
 	movs r5, #1
@@ -50803,11 +50803,11 @@ sub_8061190: @ 0x08061190
 	ldr r0, [r4]
 	adds r0, #0x1c
 	movs r1, #2
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r4]
 	adds r0, #0x1c
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 	ldr r0, [r4]
 	adds r0, #0x2c
 	strb r5, [r0]
@@ -50904,7 +50904,7 @@ _080612A8: @ jump table
 	.4byte _08061F56 @ case 19
 _080612F8:
 	movs r0, #4
-	bl init_function
+	bl start_script
 	ldr r1, _08061318
 	movs r0, #2
 	strb r0, [r1]
@@ -50940,7 +50940,7 @@ _08061344: .4byte byte_203F99E
 _08061348: .4byte byte_203FA35
 _0806134C:
 	movs r0, #3
-	bl init_function
+	bl start_script
 	ldr r1, _0806135C
 	movs r0, #4
 	strb r0, [r1]
@@ -51072,7 +51072,7 @@ _08061418:
 	ldr r0, [r7]
 	adds r0, r0, r5
 	movs r1, #1
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldr r0, [r7]
 	adds r0, r5, r0
 	mov r3, sl
@@ -51104,13 +51104,13 @@ _08061490:
 	ldr r1, _080614F4
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r0, [r7]
 	adds r0, r0, r5
 	ldr r1, _080614F8
 	add r1, r8
 	ldr r1, [r1]
-	bl SetSpritePalette
+	bl sprite_set_palette
 	ldr r0, [r7]
 	adds r0, r5, r0
 	mov r1, sl
@@ -51370,7 +51370,7 @@ _080616B2:
 	strb r0, [r1]
 	bl sub_8061244
 	movs r0, #6
-	bl init_function
+	bl start_script
 	ldr r0, _08061730
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -51454,7 +51454,7 @@ _08061794:
 	strb r1, [r0]
 	bl sub_8061244
 	movs r0, #6
-	bl init_function
+	bl start_script
 	ldrb r0, [r4]
 	cmp r0, #0
 	beq _080617D0
@@ -51786,7 +51786,7 @@ _08061A5C:
 	ldr r1, _08061AC8
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldrb r1, [r5]
 	ldr r2, [r4]
 	lsls r0, r1, #3
@@ -51873,7 +51873,7 @@ _08061B0C:
 	ldr r1, _08061C14
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldrb r0, [r6]
 	movs r2, #0x80
 	lsls r2, r2, #1
@@ -51893,7 +51893,7 @@ _08061B0C:
 	ldr r0, [r4]
 	adds r0, r0, r1
 	movs r1, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	ldrb r1, [r6]
 	ldr r3, [r4]
 	lsls r0, r1, #3
@@ -52165,7 +52165,7 @@ _08061DA6:
 	strb r1, [r0]
 	bl sub_8061244
 	movs r0, #6
-	bl init_function
+	bl start_script
 	b _08061F68
 	.align 2, 0
 _08061DC8: .4byte 0x0203FA4E
@@ -52379,7 +52379,7 @@ _08061F98:
 	lsls r1, r1, #2
 	ldr r0, [r5]
 	adds r0, r0, r1
-	bl RenderSprite
+	bl sprite_render
 	adds r0, r4, #1
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
@@ -52392,10 +52392,10 @@ _08061FB0:
 	beq _08061FC8
 	ldr r4, _08061FDC
 	ldr r0, [r4]
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, [r4]
 	adds r0, #0x1c
-	bl RenderSprite
+	bl sprite_render
 _08061FC8:
 	pop {r4, r5}
 	pop {r0}
@@ -52906,7 +52906,7 @@ _0806237C:
 _080623CC:
 	ldrb r1, [r7, #8]
 	adds r0, r6, #0
-	bl SetSpritePriority
+	bl sprite_set_priority
 	adds r2, r4, #0
 	ldrb r3, [r7, #9]
 	ldr r0, _08062414
@@ -52937,9 +52937,9 @@ _0806241C:
 _08062420:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	adds r0, r4, #0
-	bl sub_8003794
+	bl sprite_lock_anim
 	add sp, #0x2c
 	pop {r3, r4, r5}
 	mov r8, r3
@@ -53597,7 +53597,7 @@ _0806293C:
 _08062940:
 	ldrb r1, [r0]
 	adds r0, r2, #0
-	bl sub_80037F4
+	bl sprite_set_locked_frame
 	movs r0, #0x24
 	adds r0, r0, r5
 	mov r8, r0

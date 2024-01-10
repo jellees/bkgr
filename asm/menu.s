@@ -3947,7 +3947,7 @@ AdvanceMenuEntryDown: @ 0x08044624
 	ldr r0, [r4, #0x3c]
 	adds r0, r0, r1
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _08044644:
 	ldrh r1, [r4, #0x38]
 	ldr r0, [r4, #0x30]
@@ -3980,7 +3980,7 @@ _08044664:
 	lsls r1, r1, #2
 	ldr r0, [r2, #0x3c]
 	adds r0, r0, r1
-	bl sub_80037A0
+	bl sprite_unlock_anim
 _08044680:
 	pop {r4}
 	pop {r0}
@@ -4005,7 +4005,7 @@ AdvanceMenuEntryUp: @ 0x0804468C
 	ldr r0, [r4, #0x3c]
 	adds r0, r0, r1
 	movs r1, #0
-	bl sub_800378C
+	bl sprite_lock_anim_on_frame
 _080446AC:
 	ldrh r0, [r4, #0x38]
 	cmp r0, #0
@@ -4032,7 +4032,7 @@ _080446C2:
 	lsls r1, r1, #2
 	ldr r0, [r2, #0x3c]
 	adds r0, r0, r1
-	bl sub_80037A0
+	bl sprite_unlock_anim
 _080446DE:
 	pop {r4}
 	pop {r0}
@@ -4124,7 +4124,7 @@ RenderMenuSprites: @ 0x08044760
 _0804477A:
 	ldr r0, [r6, #0x3c]
 	adds r0, r0, r5
-	bl RenderSprite
+	bl sprite_render
 	adds r5, #0x1c
 	adds r4, #1
 	ldr r0, [r6, #0x30]

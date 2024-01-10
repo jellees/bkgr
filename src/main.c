@@ -72,9 +72,9 @@ u16 gLoadedRoomLevel;
 u16 gLoadedRoomBgm;
 fx32 dword_2001088;
 s8 gSelectedEgg;
-u8 byte_200108D;
+u8 gPlayerIsTransparent;
 u8 byte_200108E;
-u16 word_2001090;
+u16 gHurtTransparencyTimer;
 u16 word_2001092;
 u8 byte_2001094;
 fx32 dword_2001098;
@@ -175,7 +175,7 @@ static void update_player();
 static void update_camera(struct Vec3fx* position, s32 a2, s32 a3, s32 offset);
 static void move_camera(s32 offset);
 static fx32 clamp_camera_velocity(fx32 velocity, fx32 speed);
-static void sub_800BAF0(u32** a1, u32* a2);
+static void render_player(u32** a1, u32* spriteCount);
 static int sub_0800C63C(int room, u32 warp);
 static void enable_poison_effect();
 static void sub_800DF34();
@@ -216,7 +216,7 @@ static void update_game(void) {
         sub_8026DC0();
     }
 
-    call_functions();
+    update_scripts();
     sub_80631AC();
     sub_800EACC();
     sub_800ECB4();
@@ -243,8 +243,8 @@ static void update_game(void) {
         && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
         if (byte_2000F55 || gKeysDown & B_BUTTON) {
             sub_80271A4(0xFFF, 1);
-            sub_805E1DC(2);
-            init_function(43);
+            end_all_scripts(2);
+            start_script(43);
         }
     }
 
@@ -356,12 +356,12 @@ static void update_game(void) {
         u32* r2;
         u32 r4 = sub_800C50C();
 
-        SetSpritePriority(&gPlayerSprite, r4);
+        sprite_set_priority(&gPlayerSprite, r4);
 
         if (Abs(gPlayerPos.y - gPlayerShadowPos.y) <= 0x4FFFF || dword_203DFC4) {
-            SetSpritePriority(&gPlayerShadowSprite, r4);
+            sprite_set_priority(&gPlayerShadowSprite, r4);
         } else {
-            SetSpritePriority(&gPlayerShadowSprite, stru_3002950.playerSpritePriority);
+            sprite_set_priority(&gPlayerShadowSprite, stru_3002950.playerSpritePriority);
         }
 
         r2 = &gPlayerShadowSprite;
@@ -373,7 +373,7 @@ static void update_game(void) {
             r0 = byte_80CEB84[r1];
         }
 
-        sub_80037F4(r2, r0);
+        sprite_set_locked_frame(r2, r0);
     }
 
     DmaFill32(170, gOAMBuffer1, 0x100);
@@ -415,8 +415,8 @@ static void update_game(void) {
 
     if (!gIsSlideMiniGame && gPlayerState != PLAYER_STATE_NONE) {
         sub_8009D2C();
-        sub_805DF84(&dword_30032AC, &dword_30032CC);
-        sub_800BAF0(&dword_30032AC, &dword_30032CC);
+        render_scripts(&dword_30032AC, &dword_30032CC);
+        render_player(&dword_30032AC, &dword_30032CC);
         sub_802ADB0(&dword_30032AC, &dword_30032CC);
         sub_8003A34(dword_30032CC, dword_30032B0, &dword_3003DA4);
     }
@@ -589,19 +589,19 @@ static void start_game() {
         gWarpGoal = 0;
         byte_20010AA = 0;
         sub_8025E44(0);
-        SetSpritePriority(&gPlayerSprite, stru_3002950.playerSpritePriority);
+        sprite_set_priority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         SetSprite(&gPlayerSprite, 0x1D, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
-        sub_800378C(&gPlayerShadowSprite, 0);
-        gPlayerShadowSprite.field_10 = 1;
-        gPlayerShadowSprite.field_13 = 0;
+        sprite_lock_anim_on_frame(&gPlayerShadowSprite, 0);
+        gPlayerShadowSprite.objMode = ST_OAM_OBJ_BLEND;
+        gPlayerShadowSprite.attr0Flag9 = 0;
 
         if (gTransformation != TRANSFORMATION_BANJO) {
             sub_08019FCC(gTransformation);
         }
 
         sub_8044DFC();
-        init_function(12);
+        start_script(12);
         gClockEnabled = 1;
     } else {
         gLoadedRoomLevel = LEVEL_NONE;
@@ -614,7 +614,7 @@ static void start_game() {
         sub_8025E44(gLoadedRoomLevel);
         sub_80409DC();
         sub_803FE78();
-        SetSpritePriority(&gPlayerSprite, stru_3002950.playerSpritePriority);
+        sprite_set_priority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
         EnableBGAlphaBlending();
         init_efx();
@@ -622,9 +622,9 @@ static void start_game() {
         init_room_name();
         SetSprite(&gPlayerSprite, 0x1D, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
-        sub_800378C(&gPlayerShadowSprite, 0);
-        gPlayerShadowSprite.field_10 = 1;
-        gPlayerShadowSprite.field_13 = 0;
+        sprite_lock_anim_on_frame(&gPlayerShadowSprite, 0);
+        gPlayerShadowSprite.objMode = ST_OAM_OBJ_BLEND;
+        gPlayerShadowSprite.attr0Flag9 = 0;
 
         if (gTransformation != TRANSFORMATION_BANJO) {
             sub_08019FCC(gTransformation);
@@ -1006,9 +1006,9 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
             sub_80192D4(gFloorPlaneResult.field_4E, -1, 1);
             byte_200108E = 1;
             word_2001092 = gFloorPlaneResult.field_4F;
-            byte_200108D = 1;
-            word_2001090 = gFloorPlaneResult.field_4F;
-            gPlayerSprite.field_10 = 1;
+            gPlayerIsTransparent = 1;
+            gHurtTransparencyTimer = gFloorPlaneResult.field_4F;
+            gPlayerSprite.objMode = ST_OAM_OBJ_BLEND;
 
             return FALSE;
         }
@@ -1565,9 +1565,9 @@ void sub_800B958(int a1, int a2, int a3, int a4, int a5) {
         gPlayerSprite.xPos = v10;
         gPlayerSprite.yPos = v11;
         if (v11 + 20 >= 248 || v10 < -20 || v10 > 260) {
-            gPlayerSprite.field_13 = 1;
+            gPlayerSprite.attr0Flag9 = 1;
         } else {
-            gPlayerSprite.field_13 = 0;
+            gPlayerSprite.attr0Flag9 = 0;
         }
 
         v10 = gPlayerSprite.xPos;
@@ -1578,18 +1578,17 @@ void sub_800B958(int a1, int a2, int a3, int a4, int a5) {
         gPlayerShadowSprite.xPos = v10;
         gPlayerShadowSprite.yPos = v11;
         if (v11 + 20 >= 248 || v10 < -20 || v10 > 260) {
-            gPlayerShadowSprite.field_13 = 1;
+            gPlayerShadowSprite.attr0Flag9 = 1;
         } else if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING)
                        && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START)
                        && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)
                    || gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) {
-            gPlayerShadowSprite.field_13 = 0;
+            gPlayerShadowSprite.attr0Flag9 = 0;
         }
     }
 }
 
-static void sub_800BAF0(u32** a1, u32* a2) {
-    int* v6;
+static void render_player(u32** a1, u32* spriteCount) {
     int* v8;
     u32 priority, pos;
     int v9[2];
@@ -1599,9 +1598,7 @@ static void sub_800BAF0(u32** a1, u32* a2) {
     int v14[2];
     s16* stuff;
 
-    char r10 = byte_203F9A2;
-
-    if (r10 || gPlayerState == PLAYER_STATE_35) {
+    if (gHidePlayer || gPlayerState == PLAYER_STATE_35) {
         return;
     }
 
@@ -1619,40 +1616,37 @@ static void sub_800BAF0(u32** a1, u32* a2) {
     v14[1] = gMapPixelSizeY - ((gPlayerShadowPos.y + gPlayerShadowPos.z) >> 16);
 
     if (!sub_8003974(a1a, a2a, v9, a4)) {
-        gPlayerSprite.field_13 = 1;
+        gPlayerSprite.attr0Flag9 = 1;
     } else {
-        gPlayerSprite.field_13 = r10;
+        gPlayerSprite.attr0Flag9 = 0;
     }
 
     if (byte_20010AF) {
-        int* v5;
-        sub_80033DC(&sprite_2000FAC, *a1);
-        v5 = *a1;
-        *v5 = sprite_2000FAC.priority << 30;
-        *a1 = v5 + 3;
-        ++*a2;
+        sprite_render_ex(&sprite_2000FAC, *a1);
+        *a1[0] = sprite_2000FAC.priority << 30;
+        *a1 += 3;
+        ++*spriteCount;
     }
 
-    sub_80033DC(&gPlayerSprite, *a1);
-    v6 = *a1;
-    *v6 = (gPlayerSprite.priority << 30) | ((u32)gPlayerPos.z >> 4);
-    *a1 = v6 + 3;
-    ++*a2;
+    sprite_render_ex(&gPlayerSprite, *a1);
+    *a1[0] = (gPlayerSprite.priority << 30) | ((u32)gPlayerPos.z >> 4);
+    *a1 += 3;
+    ++*spriteCount;
 
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING
         || gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START || !sub_800397C(v14, v9, a4)) {
-        gPlayerShadowSprite.field_13 = 1;
+        gPlayerShadowSprite.attr0Flag9 = 1;
     } else if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
-        gPlayerShadowSprite.field_13 = 0;
+        gPlayerShadowSprite.attr0Flag9 = 0;
     }
 
-    sub_80033DC(&gPlayerShadowSprite, *a1);
+    sprite_render_ex(&gPlayerShadowSprite, *a1);
     v8 = *a1;
     priority = gPlayerShadowSprite.priority << 30;
     pos = ((u32)gPlayerShadowPos.z >> 4) | 0x10000000;
     *v8 = priority | pos;
     *a1 = v8 + 3;
-    ++*a2;
+    ++*spriteCount;
 }
 
 bool32 sub_0800BCD4(struct struc_44* a1) {
@@ -1686,7 +1680,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
 
             case 0:
             default:
-                sub_805E1DC(1);
+                end_all_scripts(1);
                 audio_halt_all_fx();
                 isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
                 sub_80270AC(4095, isMusicChanged);
@@ -1745,7 +1739,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
         sub_8016C78(byte_20010A5);
         word_20010AC = gKeysPressed & KEYS_MASK;
     } else {
-        sub_8016C78(gPlayerSprite.field_A);
+        sub_8016C78(gPlayerSprite.direction);
     }
 
     sub_8039210();
@@ -1756,7 +1750,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
     }
 
     gFloorPlaneResult.isColliding = FALSE;
-    gPlayerSprite.field_13 = 0;
+    gPlayerSprite.attr0Flag9 = 0;
 
     return TRUE;
 }
@@ -1767,7 +1761,7 @@ void sub_800BFA0(int room, int warp, int a3) {
 
     level = gLoadedRoomLevel;
 
-    sub_805E1DC(1);
+    end_all_scripts(1);
     audio_halt_all_fx();
 
     if (gLoadedRoomIndex == ROOM_MUMBOHUT) {
@@ -1822,7 +1816,7 @@ void sub_800BFA0(int room, int warp, int a3) {
         sub_8016C78(byte_20010A5);
         word_20010AC = gKeysPressed & KEYS_MASK;
     } else {
-        sub_8016C78(gPlayerSprite.field_A);
+        sub_8016C78(gPlayerSprite.direction);
     }
 
     sub_8039210();
@@ -1832,7 +1826,7 @@ void sub_800BFA0(int room, int warp, int a3) {
         dword_203DFE0 = 0;
     }
 
-    gPlayerSprite.field_13 = 0;
+    gPlayerSprite.attr0Flag9 = 0;
 }
 
 void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
@@ -1843,7 +1837,7 @@ void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
     level = gLoadedRoomLevel;
 
     if (a6 != 2) {
-        sub_805E1DC(1);
+        end_all_scripts(1);
     }
 
     audio_halt_all_fx();
@@ -1887,7 +1881,7 @@ void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
     }
 
     sub_8039210();
-    gPlayerSprite.field_13 = 0;
+    gPlayerSprite.attr0Flag9 = 0;
     if (gInInteractionArea) {
         gInInteractionArea = 0;
         dword_203DFE0 = 0;
@@ -1906,7 +1900,7 @@ void sub_0800C388(int a1, int a2) {
 
     ASSERT(room >= 0);
 
-    sub_805E1DC(1);
+    end_all_scripts(1);
     audio_halt_all_fx();
 
     isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
@@ -1941,10 +1935,10 @@ void sub_0800C388(int a1, int a2) {
     }
 
     sub_8039210();
-    gPlayerSprite.field_13 = 0;
+    gPlayerSprite.attr0Flag9 = 0;
 
     if (gLoadedRoomIndex == ROOM_UNDERCORAL && !sub_80342CC(94, 0)) {
-        init_function(80);
+        start_script(80);
     }
 
     if (gInInteractionArea) {
@@ -2586,8 +2580,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
     sub_8018BB0(&gPlayerSprite);
     load_transformation_palette();
-    byte_200108D = 0;
-    gPlayerSprite.field_10 = 0;
+    gPlayerIsTransparent = 0;
+    gPlayerSprite.objMode = ST_OAM_OBJ_NORMAL;
     byte_200108E = 0;
     EnableBGAlphaBlending();
     init_efx();
@@ -2612,7 +2606,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
     sub_8063178();
 
     if (r5 != 0) {
-        init_function(r5);
+        start_script(r5);
     }
 }
 
@@ -2627,8 +2621,8 @@ void sub_800D8E8(int a1, char a2, char a3) {
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
     EnableBGAlphaBlending();
     init_room_name();
-    byte_200108D = 0;
-    gPlayerSprite.field_10 = 0;
+    gPlayerIsTransparent = 0;
+    gPlayerSprite.objMode = ST_OAM_OBJ_NORMAL;
     byte_200108E = 0;
     sub_800EF6C(dword_203FA90);
     gPlayerSprite.xPos = gPlayerInitPixelPosX;
@@ -2834,12 +2828,12 @@ static void sub_800DF34() {
         }
     }
 
-    if (byte_200108D) {
-        if (word_2001090 == 0) {
-            byte_200108D = 0;
-            gPlayerSprite.field_10 = 0;
+    if (gPlayerIsTransparent) {
+        if (gHurtTransparencyTimer == 0) {
+            gPlayerIsTransparent = 0;
+            gPlayerSprite.objMode = ST_OAM_OBJ_NORMAL;
         } else {
-            word_2001090--;
+            gHurtTransparencyTimer--;
         }
     }
 
@@ -2856,7 +2850,7 @@ static void sub_800DF34() {
     }
 
     if (!word_200112C && !byte_200113D) {
-        sprite_2000FAC.field_13 = 1;
+        sprite_2000FAC.attr0Flag9 = 1;
 
         if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
             sub_800E7A0();
@@ -2881,7 +2875,7 @@ static void sub_800DF34() {
             }
             word_200112E = word_2001130;
             byte_200113D = 0;
-            sprite_2000FAC.field_13 = 1;
+            sprite_2000FAC.attr0Flag9 = 1;
         } else {
             word_200112E--;
         }
@@ -2893,7 +2887,7 @@ static void sub_800DF34() {
             }
             word_2001132 = word_2001134;
             byte_200113D = 1;
-            sprite_2000FAC.field_13 = 0;
+            sprite_2000FAC.attr0Flag9 = 0;
         } else {
             word_2001132--;
         }
@@ -3289,7 +3283,7 @@ void sub_800E9EC(struct Sprite* a1, int palette, int a3) {
 
     DmaMoveObjPalette(a1->spriteFrames->field_8[3] >> 12, palette);
     byte_200116C = 1;
-    dword_2001168 = &a1->field_12;
+    dword_2001168 = &a1->alwaysUsePalette0;
 
     r1 = palette + 16;
     v6 = (v6 & 0xFFFFFF00) | r1;
@@ -3303,8 +3297,8 @@ void sub_800E9EC(struct Sprite* a1, int palette, int a3) {
     if (dword_2001164 < 0) {
         byte_200116C = 0;
     } else {
-        a1->field_12 = 1;
-        SetSpritePalette(a1, palette);
+        a1->alwaysUsePalette0 = 1;
+        sprite_set_palette(a1, palette);
     }
 }
 

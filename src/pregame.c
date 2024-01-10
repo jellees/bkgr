@@ -151,7 +151,7 @@ void ShowSelectGame(int a1) {
             }
         }
 
-        call_functions();
+        update_scripts();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -187,7 +187,7 @@ int sub_8024200() {
                     REG_BG1CNT |= 3;
                     sub_80254E0();
                     sub_8026D84();
-                    sub_805E1DC(2);
+                    end_all_scripts(2);
                     SetTextSpriteCount(0);
                     byte_20021F9 = 1;
                     return 1;
@@ -308,7 +308,7 @@ int ShowPressStart() {
     REG_BG1CNT &= 0xFFFC;
     sub_8026D20(0x800, 0x7000, 0x20, 0x100);
     sub_8026E48(0xFFF, 0, 0);
-    init_function(10);
+    start_script(10);
 
     v1.font = &font_80B01A8[0];
     v1.size = 0xF0;
@@ -421,7 +421,7 @@ int ShowPressStart() {
             break;
         }
 
-        call_functions();
+        update_scripts();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -519,7 +519,7 @@ int sub_80246C8() {
         if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON) {
             if (sub_8024200()) {
                 sub_80270AC(0xFFF, 0);
-                sub_805E1DC(2);
+                end_all_scripts(2);
                 SetTextSpriteCount(0);
                 return 1;
             }
@@ -545,7 +545,7 @@ int sub_80246C8() {
             }
         }
 
-        call_functions();
+        update_scripts();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -791,7 +791,7 @@ void ShowFlashscreens() {
     byte_2000333 = 10;
     byte_2000334 = 0;
 
-    init_function(7);
+    start_script(7);
 
     minTime = 388;
     maxTime = 670;
@@ -802,8 +802,8 @@ void ShowFlashscreens() {
 
         if (canSkip && gKeysDown & START_BUTTON) {
             audio_halt_all_fx();
-            sub_805E1DC(2);
-            init_function(8);
+            end_all_scripts(2);
+            start_script(8);
             canSkip = FALSE;
         }
 
@@ -831,8 +831,8 @@ void ShowFlashscreens() {
         gOBJTileFramePtr = (void*)0x6014000;
         gOBJTileCount = 512;
 
-        call_functions();
-        sub_805E088();
+        update_scripts();
+        render_scripts_direct();
         CheckStacks();
         SyncVblank();
         update_video();

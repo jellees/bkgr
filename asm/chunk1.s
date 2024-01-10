@@ -3203,8 +3203,8 @@ _08003360: .4byte 0x03007B9C
 _08003364: .4byte 0x0300749C
 
     .thumb
-	.global sub_8003368
-sub_8003368: @ 0x08003368
+	.global sprite_set_anim
+sprite_set_anim: @ 0x08003368
 	strb r2, [r0, #0xe]
 	strb r3, [r0, #0xb]
 	mov ip, r1
@@ -3237,8 +3237,8 @@ sub_8003368: @ 0x08003368
 	mov pc, lr
 
     .thumb
-	.global sub_80033A4
-sub_80033A4: @ 0x080033A4
+	.global sprite_set_anim_without_reset
+sprite_set_anim_without_reset: @ 0x080033A4
 	strb r2, [r0, #0xe]
 	strb r3, [r0, #0xb]
 	mov ip, r1
@@ -3269,8 +3269,8 @@ sub_80033A4: @ 0x080033A4
 	mov pc, lr
 
     .thumb
-	.global sub_80033DC
-sub_80033DC: @ 0x080033DC
+	.global sprite_render_ex
+sprite_render_ex: @ 0x080033DC
 	push {r4, r5, r6, r7, lr}
 	mov r3, r8
 	mov r4, sb
@@ -3459,7 +3459,7 @@ _08003520:
 	ldrb r7, [r0, #8]
 	push {r1}
 	adds r0, r2, #0
-	bl RenderSpriteFrame
+	bl sprite_render_frame
 	pop {r1}
 	ldr r2, _08003584
 	ldr r2, [r2]
@@ -3483,8 +3483,8 @@ _08003580: .4byte gOAMBufferFramePtr
 _08003584: .4byte gOAMBufferFramePtr
 
     .thumb
-	.global RenderSprite
-RenderSprite: @ 0x08003588
+	.global sprite_render
+sprite_render: @ 0x08003588
 	push {r4, r5, r6, r7, lr}
 	mov r3, r8
 	mov r4, sb
@@ -3641,7 +3641,7 @@ _08003694:
 	ldrsh r6, [r0, r5]
 	ldrb r7, [r0, #8]
 	adds r0, r2, #0
-	bl RenderSpriteFrame
+	bl sprite_render_frame
 	pop {r3, r4, r5, r6}
 	mov r8, r3
 	mov sb, r4
@@ -3650,7 +3650,7 @@ _08003694:
 	pop {r4, r5, r6, r7, pc}
 
     .thumb
-RenderSpriteFrame: @ 0x080036C4
+sprite_render_frame: @ 0x080036C4
 	push {lr}
 	ldr r3, _08003838
 	ldrb r1, [r3]
@@ -3740,8 +3740,8 @@ _0800375E:
 	.align 2, 0
 
     .thumb
-	.global sub_8003770
-sub_8003770: @ 0x08003770
+	.global sprite_is_anim_done_once
+sprite_is_anim_done_once: @ 0x08003770
 	ldrb r1, [r0, #0xb]
 	cmp r1, #0
 	beq _08003784
@@ -3760,16 +3760,16 @@ _08003788:
 	mov pc, lr
 
     .thumb
-	.global sub_800378C
-sub_800378C: @ 0x0800378C
+	.global sprite_lock_anim_on_frame
+sprite_lock_anim_on_frame: @ 0x0800378C
 	movs r2, #0x80
 	orrs r2, r1
 	strb r2, [r0, #0xf]
 	mov pc, lr
 
     .thumb
-	.global sub_8003794
-sub_8003794: @ 0x08003794
+	.global sprite_lock_anim
+sprite_lock_anim: @ 0x08003794
 	movs r2, #0x80
 	ldrb r1, [r0, #2]
 	orrs r2, r1
@@ -3778,8 +3778,8 @@ sub_8003794: @ 0x08003794
 	.align 2, 0
 
     .thumb
-	.global sub_80037A0
-sub_80037A0: @ 0x080037A0
+	.global sprite_unlock_anim
+sprite_unlock_anim: @ 0x080037A0
 	movs r2, #0
 	strb r2, [r0, #0xf]
 	mov pc, lr
@@ -3803,8 +3803,8 @@ _080037BC:
 	mov pc, lr
 
     .thumb
-	.global SetSpritePriority
-SetSpritePriority: @ 0x080037C0
+	.global sprite_set_priority
+sprite_set_priority: @ 0x080037C0
 	cmp r1, #3
 	bls _080037CE
 	push {lr}
@@ -3823,8 +3823,8 @@ _080037CE:
 	mov pc, lr
 
     .thumb
-	.global SetSpritePalette
-SetSpritePalette: @ 0x080037E0
+	.global sprite_set_palette
+sprite_set_palette: @ 0x080037E0
 	cmp r1, #0xf
 	bls _080037E8
 	bl sub_08010A70
@@ -3837,8 +3837,8 @@ _080037E8:
 	mov pc, lr
 
     .thumb
-	.global sub_80037F4
-sub_80037F4: @ 0x080037F4
+	.global sprite_set_locked_frame
+sprite_set_locked_frame: @ 0x080037F4
 	ldrb r2, [r0, #3]
 	cmp r1, r2
 	bhs _08003806

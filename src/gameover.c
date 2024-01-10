@@ -26,7 +26,7 @@ void sub_80629E8() {
     sub_80409DC();
     sub_8016B0C();
     byte_200108E = 0;
-    sub_805E1DC(1);
+    end_all_scripts(1);
     byte_203F4E0 = 0;
     show_gameover_screen();
     InitMenu(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
@@ -70,7 +70,7 @@ void sub_80629E8() {
 
     gGameStatus.oxygen = gGameStatus.maxOxygen;
 
-    sub_805E1DC(2);
+    end_all_scripts(2);
     InitHeap(3);
     sub_8038FA0(gLoadedRoomLevel);
     sub_8039234();
@@ -138,7 +138,7 @@ static void sub_8062D04() {
     textbox.font = &font_80B01A8[2];
     objCount = sub_8025870(string, &textbox);
 
-    init_function(14);
+    start_script(14);
 
     v0 = TRUE;
     v4 = FALSE;
@@ -180,8 +180,8 @@ static void sub_8062D04() {
             } else if (gKeysDown & A_BUTTON) {
                 if (sub_8062FC4(&textbox, string, &objCount)) {
                     v4 = TRUE;
-                    sub_805E1DC(2);
-                    init_function(15);
+                    end_all_scripts(2);
+                    start_script(15);
                 }
             }
 
@@ -204,8 +204,8 @@ static void sub_8062D04() {
         gOAMBufferEnd = &gOAMBufferFramePtr[0x100];
         gOBJTileFramePtr = (void*)0x6014000;
         gOBJTileCount = 512;
-        call_functions();
-        sub_805E088();
+        update_scripts();
+        render_scripts_direct();
         textbox.xPosition = (240 - objCount) >> 1;
         textbox.yPosition = 20;
         textbox.stringOffset = 0;

@@ -1157,7 +1157,7 @@ RenderText: @ 0x08025914
 	adds r6, r1, #0
 _0802592A:
 	adds r0, r5, #0
-	bl RenderSprite
+	bl sprite_render
 	adds r5, #0x1c
 	adds r4, #1
 	ldrb r0, [r6]
@@ -1189,7 +1189,7 @@ sub_8025948: @ 0x08025948
 	adds r6, r0, #0
 _08025962:
 	adds r0, r4, #0
-	bl RenderSprite
+	bl sprite_render
 	adds r4, #0x1c
 	adds r5, #1
 	ldrb r0, [r6]
@@ -1242,7 +1242,7 @@ _080259BA:
 	adds r6, r3, #0
 _080259D0:
 	adds r0, r4, #0
-	bl RenderSprite
+	bl sprite_render
 	adds r4, #0x1c
 	adds r5, #1
 	ldrb r0, [r6]
@@ -1263,7 +1263,7 @@ _080259E0:
 	adds r6, r2, #0
 _080259F8:
 	adds r0, r4, #0
-	bl RenderSprite
+	bl sprite_render
 	adds r4, #0x1c
 	adds r5, #1
 	ldrb r0, [r6]
@@ -1434,7 +1434,7 @@ _08025B1E:
 	lsls r0, r0, #2
 	adds r0, r0, r7
 	ldrh r1, [r4, #0xe]
-	bl SetSpritePalette
+	bl sprite_set_palette
 	ldrb r1, [r6]
 	lsls r0, r1, #3
 	subs r0, r0, r1
@@ -1715,7 +1715,7 @@ _08025D32:
 	lsls r0, r0, #2
 	adds r0, r0, r7
 	ldrh r1, [r4, #0xe]
-	bl SetSpritePalette
+	bl sprite_set_palette
 	ldrb r1, [r6]
 	lsls r0, r1, #3
 	subs r0, r0, r1
@@ -2309,9 +2309,9 @@ sub_8026234: @ 0x08026234
 	cmp r0, #0
 	beq _0802624A
 	ldr r0, _08026254
-	bl RenderSprite
+	bl sprite_render
 	ldr r0, _08026258
-	bl RenderSprite
+	bl sprite_render
 _0802624A:
 	pop {r0}
 	bx r0

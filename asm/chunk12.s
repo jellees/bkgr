@@ -1347,7 +1347,7 @@ _08063BDC:
 	lsls r0, r0, #2
 	adds r0, r0, r1
 	ldr r0, [r0]
-	bl init_function
+	bl start_script
 	b _08063CCC
 	.align 2, 0
 _08063C14: .4byte 0x0203FAD8
@@ -1511,7 +1511,7 @@ _08063D5A:
 	lsls r1, r1, #3
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r4, _08063DDC
 	ldr r0, _08063DE0
 	ldrb r0, [r0]
@@ -1612,7 +1612,7 @@ _08063E54:
 	ldr r1, _08063EB4
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r4, _08063EB8
 	ldr r0, _08063EBC
 	ldrb r0, [r0]
@@ -1863,7 +1863,7 @@ _0806406E:
 	lsls r1, r1, #3
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r4, _080640E0
 	ldr r0, _080640E4
 	ldrb r0, [r0]
@@ -1960,7 +1960,7 @@ _08064158:
 	ldr r1, _080641B8
 	movs r2, #0
 	movs r3, #0
-	bl sub_8003368
+	bl sprite_set_anim
 	ldr r4, _080641BC
 	ldr r0, _080641C0
 	ldrb r0, [r0]
@@ -2106,7 +2106,7 @@ _0806428C:
 _080642A4:
 	ldr r0, [r7]
 	adds r0, r0, r5
-	bl RenderSprite
+	bl sprite_render
 	adds r5, #0x1c
 	adds r4, #1
 	ldrb r0, [r6]
@@ -2133,7 +2133,7 @@ _080642C4:
 _080642DC:
 	ldr r0, [r7]
 	adds r0, r0, r5
-	bl RenderSprite
+	bl sprite_render
 	adds r5, #0x1c
 	adds r4, #1
 	ldrb r0, [r6]
@@ -2166,7 +2166,7 @@ _0806430C:
 _08064320:
 	ldr r0, [r7]
 	adds r0, r0, r5
-	bl RenderSprite
+	bl sprite_render
 	adds r5, #0x1c
 	adds r4, #1
 	ldrb r0, [r6]
@@ -2194,7 +2194,7 @@ _08064344:
 _0806435C:
 	ldr r0, [r7]
 	adds r0, r0, r5
-	bl RenderSprite
+	bl sprite_render
 	adds r5, #0x1c
 	adds r4, #1
 	ldrb r0, [r6]

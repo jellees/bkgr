@@ -125,7 +125,7 @@ SECTIONS
 
         . = 0x0003F9A1;
         byte_203F9A1 = .; . += 1;
-        byte_203F9A2 = .; . += 1;
+        gHidePlayer = .; . += 1;
 
         . = 0x0003FA35;
         byte_203FA35 = .; . += 1;

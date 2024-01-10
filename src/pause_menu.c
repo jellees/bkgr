@@ -1338,7 +1338,7 @@ static void render_controls() {
 
     for (i = 0; i < 3; i++) {
         if (dword_203F4F0[i]) {
-            RenderSprite(&gPauseMenuControlsSprites[i]);
+            sprite_render(&gPauseMenuControlsSprites[i]);
         }
     }
 }
@@ -1591,7 +1591,7 @@ static void draw_arcade_menu_sprites() {
 
     for (i = 0; i < 3; i++) {
         if (dword_203F4F8[i]) {
-            RenderSprite(&dword_203F4F4[i]);
+            sprite_render(&dword_203F4F4[i]);
         }
     }
 }
