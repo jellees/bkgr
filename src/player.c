@@ -42,7 +42,7 @@ u32 dword_20021E4;
 u32 dword_20021E8;
 u32 dword_20021EC;
 
-static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
+static void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
 static const u16 sPlayerStateFlags[PLAYER_STATE_COUNT];
 
 static void sub_08019AAC(int a1, int a2);
@@ -7575,7 +7575,7 @@ static void sub_8023D78(s32 keyPressed, s32 keyDown) {
 static void state_35(s32 keyPressed, s32 keyDown) {
 }
 
-static const void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
+static void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32) = {
     state_idle,
     state_jump,
     state_crouch,
