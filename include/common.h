@@ -439,6 +439,9 @@ extern bool32 audio_fx_still_active(int);
 extern void audio_halt_fx(int);
 extern void audio_start_tune(int);
 extern void audio_halt_all_fx(void);
+extern void audio_init(void);
+extern void audio_vsync_asm(void);
+extern void audio_asmprocess(void);
 
 extern void CallARM_store_jump_and_other_value(u32, fx32, fx32);
 extern void CallARM_store_jump_value(u32, s32);
