@@ -3791,7 +3791,7 @@ static void state_dialogue_end(s32 keyPressed, s32 keyDown) {
             return;
         }
 
-        sub_080161CC((u8) * ((u8*)dword_203DFDC + 16));
+        sub_080161CC(*((u8*)dword_203DFDC + 16));
         sub_8013DD4(21, 32);
         byte_20021CA = 0;
     }

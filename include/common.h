@@ -398,30 +398,94 @@ struct SpriteDMATableEntry {
     u32 count;
 };
 
+// Struct forward declarations
+struct Sprite;
+
 // Function prototypes
 
 extern void sub_80001EC();
 extern void UpdateBackgrounds();
 extern void DmaFill32(int, void*, size_t);
 extern void SyncVblank(void);
+extern void DmaTransferObjPalette(u8*, int, int);
+
+extern void sprite_set_anim(struct Sprite* sprite, int idx, bool8 loopFrame, bool8 maxAnimRepeats);
+extern void sprite_set_anim_without_reset(struct Sprite* sprite, int idx, bool8 loopFrame,
+                                          bool8 maxAnimRepeats);
+extern void sprite_render_ex(struct Sprite* sprite, int* a2);
+extern void sprite_render(struct Sprite* sprite);
+// extern void sprite_render_frame(); // This is a private function.
+extern bool32 sprite_is_anim_done_once(struct Sprite* sprite);
+extern void sprite_lock_anim_on_frame(struct Sprite* sprite, u8 frame);
+extern void sprite_lock_anim(struct Sprite* sprite);
+extern void sprite_unlock_anim(struct Sprite* sprite);
+extern bool32 sub_80037A8(struct Sprite* sprite);
+extern void sprite_set_priority(struct Sprite* sprite, int priority);
+extern void sprite_set_palette(struct Sprite* sprite, int palette);
+extern void sprite_set_locked_frame(struct Sprite* sprite, int frame);
+extern void sub_8003808(struct Sprite* sprite, int a2);
+extern void sub_8003820(struct Sprite* sprite, int a2, u8 a3);
 
 extern void audio_pause(void);
 extern void audio_set_tune_vol(int);
 extern void audio_set_fx_vol(int);
+extern bool32 audio_fx_still_active(int);
+extern void audio_halt_fx(int);
+extern void audio_start_tune(int);
 
+extern void CallARM_store_jump_and_other_value(u32, fx32, fx32);
 extern void CallARM_store_jump_value(u32, s32);
+extern void sub_8003884(u32, u32, u32, u32);
 extern fx32 CallARM_FX_Mul16(fx32, fx32);
 
+extern void sub_800387C(u32);
+extern void sub_8003894(u32, u32);
 extern void sub_8003A04(u32, u32*, u8, u8);
 extern u8 sub_80038AC(u32);
 extern u8 sub_80038BC(u32);
+extern bool32 sub_80038C4(u32, fx32*, fx32*, fx32*);
+extern u8 sub_8003A6C(fx32, fx32, u32, u32);
+
+extern void sub_8013DD4(int, int);
+extern void sub_080161CC(u8);
+
+extern void sub_8025FBC(void);
+extern bool32 sub_8025FF8(void);
+extern void sub_8026180(void);
+extern void sub_802625C(void);
+extern void sub_80265D8(void);
 extern u32 sub_80266A8(void);
+extern void sub_80266C8(u16, u8, u16);
+extern void sub_8026714(void);
+extern void sub_802672C(void);
+extern void sub_0802D0A0(int, struct Vec3fx*, u8);
+extern u8 sub_0802E080(void);
 extern void sub_0802FEDC(int);
+extern bool32 sub_802FDC8(void);
+
+extern int sub_8030A88(void);
+extern int sub_80342CC(int, int);
+extern void sub_80342F8(int, int);
 extern void sub_8034460(int, int, int, int);
 extern void sub_8034970(u8*, s32*, u32*);
 extern void sub_8036138(u8*, s32*, u32*);
 extern bool32 sub_8037C08(u8*, u32*);
+extern void sub_800386C(u32, u32, u32);
+
+extern void sub_08040204(int, int);
+extern void sub_08041FA4(int);
+extern void sub_0804200C(int);
+extern bool32 sub_080420E8(int);
+extern void sub_8042250(void);
+extern int RandomMinMax(int, int);
+extern void sub_804888C(u8);
+extern void sub_8048B1C(void);
+
+extern void start_script(int);
+
+extern void sub_80629E8(void);
 extern void sub_8063578(void);
+
 extern u16 IdentifyEeprom(u16 eeprom_KbitSize);
 extern u16 SetEepromTimerIntr(u8 timerNo, void (**IntrFunc)(void));
 extern u16 ReadEepromDword(u16 epAdr, u16* dst);
