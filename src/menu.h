@@ -3,25 +3,6 @@
 
 #include "sprite.h"
 
-struct Menu {
-    u16 xPosition;
-    u16 yPosition;
-    u16 lineHeight;
-    u16 horizontalPadding;
-    struct TextBox unselected;
-    struct TextBox selected;
-    u32 entryCount;
-    u8** texts;
-    u16 curEntry;
-    u8 field_3A;
-    bool8 useSpriteBuffer;
-    struct Sprite* spriteBuffer;
-};
-
-extern u8 gMenuId;
-extern u8 gMenuParentId;
-extern struct Menu gMenu;
-
 enum Menus {
     MENU_GAME_OR_CONTINUE,
     MENU_PAUSE_MAIN,
@@ -52,5 +33,35 @@ enum Menus {
     MENU_DEBUG_WARP_5,
     MENU_DEBUG_WARP_6,
 };
+
+struct Menu {
+    u16 xPosition;
+    u16 yPosition;
+    u16 lineHeight;
+    u16 horizontalPadding;
+    struct TextBox unselected;
+    struct TextBox selected;
+    u32 entryCount;
+    u8** texts;
+    u16 curEntry;
+    u8 field_3A;
+    bool8 useSpriteBuffer;
+    struct Sprite* spriteBuffer;
+};
+
+void ResetMenuEx(void);
+void ResetMenu(void);
+void InitMenu(int menu, int language);
+void AdvanceMenuEntryDown(void);
+void AdvanceMenuEntryUp(void);
+void FlushMenuToTextBuffer(void);
+void RenderMenuSprites(void);
+int GetCurrentMenuEntry(void);
+void SetMenuEntry(int entry);
+
+extern u8 gMenuId;
+extern u8 gMenuParentId;
+// This can be make static.
+extern struct Menu gMenu; 
 
 #endif

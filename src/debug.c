@@ -108,7 +108,7 @@ u32 dword_2001364;
 u32 dword_2001368;
 u32 dword_200136C;
 u8 byte_2001370;
-u8 gDebugString[0x17];
+char gDebugString[23];
 u8 gDebugInfoIndex;
 u8 gDebugMESN;
 u8 byte_200138A;
@@ -141,7 +141,15 @@ u16 gPreviousInput;
 u8 byte_200145A;
 u8 byte_200145B;
 
-void init_debug() {
+void sub_8010744(u32 a1);
+void sub_80107E8(u32 a1);
+void sub_801088C(u32 a1);
+void sub_8011158(void);
+void sub_801126C(void);
+void sub_8011428(void);
+bool32 sub_8011540(void);
+
+void init_debug(void) {
     gDebugESNSum = 0;
     dword_2001398 = 0;
     gDebugESNFrameCount = 1;
@@ -221,7 +229,7 @@ void init_debug() {
     byte_2001442 = 0;
 }
 
-void sub_800FCD8() {
+void sub_800FCD8(void) {
     switch (byte_200145B) {
         case 0:
             gDebugInfoIndex = 5;
@@ -326,7 +334,7 @@ void sub_800FCD8() {
     }
 }
 
-void Debug_ShowInfo() {
+void Debug_ShowInfo(void) {
     switch (gDebugInfoIndex) {
         case 0:
             return;
@@ -814,199 +822,199 @@ void Debug_SetAfterVideoUpdate(u32 vcount) {
     gDebugESV = vcount;
 }
 
-void sub_08010A20() {
+void sub_08010A20(void) {
     ASSERT(0);
 }
 
-void sub_08010A28() {
+void sub_08010A28(void) {
     ASSERT(0);
 }
 
-void sub_08010A30() {
+void sub_08010A30(void) {
     ASSERT(0);
 }
 
-void sub_08010A38() {
+void sub_08010A38(void) {
     ASSERT(0);
 }
 
-void sub_08010A40() {
+void sub_08010A40(void) {
     ASSERT(0);
 }
 
-void sub_08010A48() {
+void sub_08010A48(void) {
     ASSERT(0);
 }
 
-void sub_08010A50() {
+void sub_08010A50(void) {
     ASSERT(0);
 }
 
-void sub_08010A58() {
+void sub_08010A58(void) {
     ASSERT(0);
 }
 
-void sub_08010A60() {
+void sub_08010A60(void) {
     ASSERT(0);
 }
 
-void sub_08010A68() {
+void sub_08010A68(void) {
     ASSERT(0);
 }
 
-void sub_08010A70() {
+void sub_08010A70(void) {
     ASSERT(0);
 }
 
-void sub_08010A78() {
+void sub_08010A78(void) {
     ASSERT(0);
 }
 
-void sub_08010A80() {
+void sub_08010A80(void) {
     ASSERT(0);
 }
 
-void sub_08010A88() {
+void sub_08010A88(void) {
     ASSERT(0);
 }
 
-void sub_08010A90() {
+void sub_08010A90(void) {
     ASSERT(0);
 }
 
-void sub_08010A98() {
+void sub_08010A98(void) {
     ASSERT(0);
 }
 
-void sub_08010AA0() {
+void sub_08010AA0(void) {
     ASSERT(0);
 }
 
-void sub_08010AA8() {
+void sub_08010AA8(void) {
     ASSERT(0);
 }
 
-void sub_08010AB0() {
+void sub_08010AB0(void) {
     ASSERT(0);
 }
 
-void sub_08010AB8() {
+void sub_08010AB8(void) {
     ASSERT(0);
 }
 
-void sub_08010AC0() {
+void sub_08010AC0(void) {
     ASSERT(0);
 }
 
-void sub_08010AC8() {
+void sub_08010AC8(void) {
     ASSERT(0);
 }
 
-void sub_08010AD0() {
+void sub_08010AD0(void) {
     ASSERT(0);
 }
 
-void sub_08010AD8() {
+void sub_08010AD8(void) {
     ASSERT(0);
 }
 
-void sub_08010AE0() {
+void sub_08010AE0(void) {
     ASSERT(0);
 }
 
-void sub_08010AE8() {
+void sub_08010AE8(void) {
     ASSERT(0);
 }
 
-void sub_08010AF0() {
+void sub_08010AF0(void) {
     ASSERT(0);
 }
 
-void sub_08010AF8() {
+void sub_08010AF8(void) {
     ASSERT(0);
 }
 
-void sub_08010B00() {
+void sub_08010B00(void) {
     ASSERT(0);
 }
 
-void sub_08010B08() {
+void sub_08010B08(void) {
     ASSERT(0);
 }
 
-void sub_08010B10() {
+void sub_08010B10(void) {
     ASSERT(0);
 }
 
-void sub_08010B18() {
+void sub_08010B18(void) {
     ASSERT(0);
 }
 
-void sub_08010B20() {
+void sub_08010B20(void) {
     ASSERT(0);
 }
 
-void sub_08010B28() {
+void sub_08010B28(void) {
     ASSERT(0);
 }
 
-void sub_08010B30() {
+void sub_08010B30(void) {
     ASSERT(0);
 }
 
-void sub_08010B38() {
+void sub_08010B38(void) {
     ASSERT(0);
 }
 
-void sub_08010B40() {
+void sub_08010B40(void) {
     ASSERT(0);
 }
 
-void sub_08010B48() {
+void sub_08010B48(void) {
     ASSERT(0);
 }
 
-void sub_08010B50() {
+void sub_08010B50(void) {
     ASSERT(0);
 }
 
-void sub_08010B58() {
+void sub_08010B58(void) {
     ASSERT(0);
 }
 
-void sub_08010B60() {
+void sub_08010B60(void) {
     ASSERT(0);
 }
 
-void sub_08010B68() {
+void sub_08010B68(void) {
     ASSERT(0);
 }
 
-void sub_08010B70() {
+void sub_08010B70(void) {
     ASSERT(0);
 }
 
-void sub_08010B78() {
+void sub_08010B78(void) {
     ASSERT(0);
 }
 
-void sub_08010B80() {
+void sub_08010B80(void) {
     ASSERT(0);
 }
 
-void sub_08010B88() {
+void sub_08010B88(void) {
     ASSERT(0);
 }
 
-void sub_08010B90() {
+void sub_08010B90(void) {
     ASSERT(0);
 }
 
-void sub_08010B98() {
+void sub_08010B98(void) {
     ASSERT(0);
 }
 
-void sub_08010BA0() {
+void sub_08010BA0(void) {
     ASSERT(0);
 }
 
@@ -1022,7 +1030,7 @@ void sub_8010BA8(int a1) {
     SyncVblank();
     update_video();
     SkipVblank();
-    DmaTransfer32(byte_83FD254, OBJ_PLTT, 128);
+    DmaTransfer32(byte_83FD254, (void*)OBJ_PLTT, 128);
     sub_8026CC8(2048, 45056);
     DisableBackgrounds();
     audio_set_tune_vol(dVolumes[gBgmMainVolume / 2]);
@@ -1049,7 +1057,7 @@ void sub_8010BA8(int a1) {
         EnableBackgrounds();
         sub_8026D84();
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
-        DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
+        DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
         sub_800EECC();
 
         if (!gIsSlideMiniGame) {
@@ -1086,7 +1094,7 @@ void sub_8010BA8(int a1) {
         EnableBackgrounds();
         sub_8026D84();
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
-        DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
+        DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
         sub_800EECC();
 
         if (!gIsSlideMiniGame) {
@@ -1120,7 +1128,7 @@ void sub_8010E40(int a1) {
     SyncVblank();
     update_video();
     SkipVblank();
-    DmaTransfer32(byte_83FD254, OBJ_PLTT, 128);
+    DmaTransfer32(byte_83FD254, (void*)OBJ_PLTT, 128);
     sub_8026CC8(2048, 45056);
     DisableBackgrounds();
     audio_set_tune_vol(dVolumes[gBgmMainVolume / 2]);
@@ -1175,7 +1183,7 @@ void sub_8010E40(int a1) {
         gDebugTextBox2.xPosition = 50;
         gDebugTextBox2.yPosition = 40;
         gDebugTextBox2.stringOffset = 0;
-        AddStringToBuffer(&gDebugTextBox2, &aVer04275);
+        AddStringToBuffer(&gDebugTextBox2, aVer04275);
         gDebugTextBox5.xPosition = 50;
         gDebugTextBox5.yPosition = 56;
         gDebugTextBox5.stringOffset = 0;
@@ -1220,7 +1228,7 @@ void sub_8010E40(int a1) {
     EnableBackgrounds();
     sub_8026D84();
     audio_set_tune_vol(dVolumes[gBgmMainVolume]);
-    DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
+    DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
     sub_800EECC();
 
     if (!gIsSlideMiniGame) {
@@ -1233,8 +1241,8 @@ void sub_8010E40(int a1) {
     }
 }
 
-void sub_8011158() {
-    DmaTransfer32(byte_83FD254, OBJ_PLTT, 128);
+void sub_8011158(void) {
+    DmaTransfer32(byte_83FD254, (void*)OBJ_PLTT, 128);
     InitMenu(MENU_DEBUG_MAIN, 0);
     gMenuId = MENU_DEBUG_MAIN;
     gMenuParentId = -1;
@@ -1300,7 +1308,7 @@ void sub_8011158() {
     gDebugTextBox6.field_13 = 0;
 }
 
-void sub_801126C() {
+void sub_801126C(void) {
     byte_200143E = 0;
     byte_2001441 = 0;
 
@@ -1396,7 +1404,7 @@ void sub_801126C() {
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = 0x6014000;
+        gOBJTileFramePtr = (u32*)0x6014000;
         gOBJTileCount = 512;
         sub_8011428();
         FlushMenuToTextBuffer();
@@ -1408,7 +1416,7 @@ void sub_801126C() {
     }
 }
 
-void sub_8011428() {
+void sub_8011428(void) {
     u16 x, y;
     char text[12];
     int i;
@@ -1416,24 +1424,24 @@ void sub_8011428() {
     gDebugTextBox2.xPosition = 16;
     gDebugTextBox2.yPosition = 8;
     gDebugTextBox2.stringOffset = 0;
-    AddStringToBuffer(&gDebugTextBox2, &aVer04275);
+    AddStringToBuffer(&gDebugTextBox2, aVer04275);
 
     gDebugTextBox3.xPosition = 16;
     gDebugTextBox3.yPosition = 24;
     gDebugTextBox3.stringOffset = 0;
     if (byte_200143C) {
-        AddStringToBuffer(&gDebugTextBox3, &aLocked);
+        AddStringToBuffer(&gDebugTextBox3, aLocked);
     } else {
-        AddStringToBuffer(&gDebugTextBox3, &aUnlocked);
+        AddStringToBuffer(&gDebugTextBox3, aUnlocked);
     }
 
     gDebugTextBox4.xPosition = 16;
     gDebugTextBox4.yPosition = 32;
     gDebugTextBox4.stringOffset = 0;
     if (byte_2001370) {
-        AddStringToBuffer(&gDebugTextBox4, &aGod);
+        AddStringToBuffer(&gDebugTextBox4, aGod);
     } else {
-        AddStringToBuffer(&gDebugTextBox4, &aMortal);
+        AddStringToBuffer(&gDebugTextBox4, aMortal);
     }
 
     gDebugTextBox5.xPosition = 16;
@@ -1458,7 +1466,7 @@ void sub_8011428() {
     AddStringToBuffer(&gDebugTextBox6, text);
 }
 
-bool32 sub_8011540() {
+bool32 sub_8011540(void) {
     int i;
 
     switch (gMenuId) {
@@ -2106,7 +2114,7 @@ void sub_80120DC(int a1, int a2, int a3, int a4) {
 
 #define MAX_INPUT_RECORDINGS 256
 
-void debug_record_input() {
+void debug_record_input(void) {
     s16 keys = REG_KEYINPUT & KEYS_MASK;
 
     if (keys != gPreviousInput) {
@@ -2119,13 +2127,13 @@ void debug_record_input() {
     }
 }
 
-void init_input_recording() {
+void init_input_recording(void) {
     gInputRecords = (struct InputRecord*)Alloc(sizeof(struct InputRecord) * MAX_INPUT_RECORDINGS, 8, 5);
     gInputRecordCount = 0;
     gPreviousInput = REG_KEYINPUT & KEYS_MASK;
 }
 
-void free_input_record_memory() {
+void free_input_record_memory(void) {
     s32 count = gInputRecordCount;
     if (count > 0) {
         while (count != 0) {
@@ -2144,8 +2152,8 @@ void display_error_message(char* type, char* message) {
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
     REG_BLDY = 0;
     DmaFill32(0, (void*)BG_VRAM, 10240);
-    DmaFill32(0x50005000, BG_PLTT, 128);
-    DmaTransfer32(byte_83FD254, OBJ_PLTT, 128);
+    DmaFill32(0x50005000, (void*)BG_PLTT, 128);
+    DmaTransfer32(byte_83FD254, (void*)OBJ_PLTT, 128);
 
     gDebugTextBox5.xPosition = 16;
     gDebugTextBox5.yPosition = 40;
@@ -2244,7 +2252,7 @@ void display_error_message(char* type, char* message) {
     ASSERT(0);
 }
 
-void sub_801243C() {
+void sub_801243C(void) {
     char string[11];
     struct TextBox textBox1;
     struct TextBox textBox2;
@@ -2252,7 +2260,7 @@ void sub_801243C() {
 
     audio_halt_all_fx();
     sub_80270AC(4095, 0);
-    DmaFill32(0, BG_PLTT, 128);
+    DmaFill32(0, (void*)BG_PLTT, 128);
     sub_8026E48(4095, 0, 0);
 
     //! Possible fake match.

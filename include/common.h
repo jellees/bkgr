@@ -400,14 +400,20 @@ struct SpriteDMATableEntry {
 
 // Struct forward declarations
 struct Sprite;
+struct TextBox;
 
 // Function prototypes
 
 extern void sub_80001EC();
 extern void UpdateBackgrounds();
+extern void IntegerToAsciiBw(int, char*);
 extern void DmaFill32(int, void*, size_t);
+extern void DmaTransfer32(void*, void*, size_t);
 extern void SyncVblank(void);
+extern void SkipVblank(void);
+extern void ReadKeys(u16*, u16*, u16*);
 extern void DmaTransferObjPalette(u8*, int, int);
+extern void CheckStacks(void);
 
 extern void sprite_set_anim(struct Sprite* sprite, int idx, bool8 loopFrame, bool8 maxAnimRepeats);
 extern void sprite_set_anim_without_reset(struct Sprite* sprite, int idx, bool8 loopFrame,
@@ -432,6 +438,7 @@ extern void audio_set_fx_vol(int);
 extern bool32 audio_fx_still_active(int);
 extern void audio_halt_fx(int);
 extern void audio_start_tune(int);
+extern void audio_halt_all_fx(void);
 
 extern void CallARM_store_jump_and_other_value(u32, fx32, fx32);
 extern void CallARM_store_jump_value(u32, s32);
@@ -446,9 +453,17 @@ extern u8 sub_80038BC(u32);
 extern bool32 sub_80038C4(u32, fx32*, fx32*, fx32*);
 extern u8 sub_8003A6C(fx32, fx32, u32, u32);
 
+extern void sub_8011158(void);
+extern void sub_801126C(void);
+extern void DisableBackgrounds(void);
 extern void sub_8013DD4(int, int);
+extern void EnableBGAlphaBlending(void);
+extern void EnableBackgrounds(void);
 extern void sub_080161CC(u8);
 
+extern void SetTextSpriteCount(int);
+extern void RenderText(void);
+extern void AddStringToBuffer(struct TextBox*, char*);
 extern void sub_8025FBC(void);
 extern bool32 sub_8025FF8(void);
 extern void sub_8026180(void);
@@ -458,6 +473,11 @@ extern u32 sub_80266A8(void);
 extern void sub_80266C8(u16, u8, u16);
 extern void sub_8026714(void);
 extern void sub_802672C(void);
+extern void FadeOutObjects(int, int);
+extern void sub_8026CC8(int, int);
+extern void sub_8026D84(void);
+extern void sub_8026E48(int, int, int);
+extern void sub_80270AC(int, int);
 extern void sub_0802D0A0(int, struct Vec3fx*, u8);
 extern u8 sub_0802E080(void);
 extern void sub_0802FEDC(int);
@@ -471,18 +491,24 @@ extern void sub_8034970(u8*, s32*, u32*);
 extern void sub_8036138(u8*, s32*, u32*);
 extern bool32 sub_8037C08(u8*, u32*);
 extern void sub_800386C(u32, u32, u32);
+extern void sub_80388E0(void);
 
+extern void sub_8040178(void);
 extern void sub_08040204(int, int);
 extern void sub_08041FA4(int);
 extern void sub_0804200C(int);
 extern bool32 sub_080420E8(int);
 extern void sub_8042250(void);
 extern int RandomMinMax(int, int);
+extern void sub_8047BEC(void);
 extern void sub_804888C(u8);
 extern void sub_8048B1C(void);
 
+extern void sub_80524D8(void);
+
 extern void start_script(int);
 
+extern void sub_8060FF8(void);
 extern void sub_80629E8(void);
 extern void sub_8063578(void);
 
@@ -826,11 +852,11 @@ extern u8 unk_83FD794;
 
 extern u8 byte_83FD254[512];
 
-extern char* aVer04275;
+extern char aVer04275[];
 extern char* char_86AD26C[];
-extern char* aLocked;
-extern char* aUnlocked;
-extern char* aGod;
-extern char* aMortal;
+extern char aLocked[];
+extern char aUnlocked[];
+extern char aGod[];
+extern char aMortal[];
 
 #endif
