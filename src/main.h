@@ -12,7 +12,7 @@ extern s32 dword_200031C;
 extern u8 gPauseMenuLanguage;
 extern u32* gMatrices;
 extern u32 gMatricesCount;
-extern u32 dword_200032C;
+extern u32* dword_200032C;
 extern u8 byte_2000330;
 extern u8 byte_2000331;
 extern u8 byte_2000332;

@@ -19,7 +19,7 @@ s32 dword_200031C;
 u8 gPauseMenuLanguage;
 u32* gMatrices;
 u32 gMatricesCount;
-u32 dword_200032C;
+u32* dword_200032C;
 u8 byte_2000330;
 u8 byte_2000331;
 u8 byte_2000332;

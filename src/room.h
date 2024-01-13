@@ -14,4 +14,6 @@ extern u32 dword_2001470;
 extern struct TileAnimTable_rt gTileAnimTable[255];
 extern s32 gLoadedTileAnimCount;
 
+void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4);
+
 #endif

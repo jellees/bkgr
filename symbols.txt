@@ -72,3 +72,9 @@ aLocked = 0x8064EB8;
 aUnlocked = 0x8064EAC;
 aGod = 0x8064EC8;
 aMortal = 0x8064EC0;
+char_080652AC = 0x80652AC;
+char_080652C4 = 0x80652C4;
+char_080652F0 = 0x80652F0;
+char_08065304 = 0x8065304;
+
+unk_83FD454 = 0x83FD454;

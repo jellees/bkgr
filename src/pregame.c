@@ -7,25 +7,23 @@
 #include "main.h"
 #include "room.h"
 #include "audio_b.h"
+#include "alloc.h"
 
-extern void InitPregame();
-extern void ShowFlashscreens();
-extern int ShowPressStart();
 void ShowSelectGame(int);
-extern void SetTextSpriteCount(int);
-extern void sub_80270AC(int, int);
-extern void FreeById(int, int);
-extern void ResetMenu();
-extern u32 DoesMemBlockExistById(int, int);
+bool32 sub_8024200(void);
+int ShowPressStart(void);
+void ShowFlashscreens(void);
+int sub_80246C8(void);
+void ShowLanguageSelect(void);
 
-void InitPregame() {
+void InitPregame(void) {
     byte_20021F0 = 0;
     dword_20021F4 = 0x10000;
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_4;
     REG_BG2CNT = 0;
-    DmaFill32(0, VRAM, 0x5000);
-    DmaFill32(0, PLTT, 128);
-    DmaTransfer32((void*)0x83FD254, OBJ_PLTT, 128);
+    DmaFill32(0, (void*)VRAM, 0x5000);
+    DmaFill32(0, (void*)PLTT, 128);
+    DmaTransfer32(byte_83FD254, (void*)OBJ_PLTT, 128);
 }
 
 void ExecutePregame() {
@@ -45,7 +43,7 @@ void ExecutePregame() {
         setup_save_file_strings();
         byte_20021F8 = 1;
 
-        if (gSaveFiles[0].empty && gSaveFiles[1].empty && gSaveFiles[2].empty || byte_2000335) {
+        if ((gSaveFiles[0].empty && gSaveFiles[1].empty && gSaveFiles[2].empty) || byte_2000335) {
             byte_20021F9 = 1;
             byte_20021F8 = 0;
         }
@@ -176,7 +174,7 @@ void ShowSelectGame(int a1) {
     SkipVblank();
 }
 
-int sub_8024200() {
+bool32 sub_8024200(void) {
     switch (gMenuId) {
         case MENU_GAME_OR_CONTINUE:
             switch (GetCurrentMenuEntry()) {
@@ -202,7 +200,7 @@ int sub_8024200() {
                     break;
             }
 
-            return 0;
+            return FALSE;
 
         case MENU_FILE_SELECT:
             switch (GetCurrentMenuEntry()) {
@@ -218,7 +216,7 @@ int sub_8024200() {
                     } else {
                         HANG;
                     }
-                    return 1;
+                    return TRUE;
 
                 case 1:
                     if (byte_20021F9) {
@@ -232,7 +230,7 @@ int sub_8024200() {
                     } else {
                         HANG;
                     }
-                    return 1;
+                    return TRUE;
 
                 case 2:
                     if (byte_20021F9) {
@@ -246,51 +244,51 @@ int sub_8024200() {
                     } else {
                         HANG;
                     }
-                    return 1;
+                    return TRUE;
 
                 default:
-                    return 0;
+                    return FALSE;
             }
-            return 1;
+            return TRUE;
 
         case MENU_LANGUAGE:
             switch (GetCurrentMenuEntry()) {
                 case 0:
                     gPauseMenuLanguage = 0;
-                    return 1;
+                    return TRUE;
 
                 case 1:
                     gPauseMenuLanguage = 1;
-                    return 1;
+                    return TRUE;
 
                 case 2:
                     gPauseMenuLanguage = 2;
-                    return 1;
+                    return TRUE;
 
                 case 3:
                     gPauseMenuLanguage = 3;
-                    return 1;
+                    return TRUE;
 
                 case 4:
                     gPauseMenuLanguage = 4;
-                    return 1;
+                    return TRUE;
 
                 default:
-                    return 0;
+                    return FALSE;
             }
 
         default:
-            return 0;
+            return FALSE;
     }
 }
 
-int ShowPressStart() {
+int ShowPressStart(void) {
     s32 v3;
     bool32 v4;
     struct TextBox v2;
     struct TextBox v1;
-    u8 s1[27], s2[21], s3[21];
-    u8* string;
+    char s1[27], s2[21], s3[21];
+    char* string;
 
     setup_display();
     REG_BG2X_L = 0;
@@ -299,7 +297,7 @@ int ShowPressStart() {
     REG_BG2PC = 0;
     REG_BG2PA = 256;
     REG_BG2PD = 256;
-    SetupRoom(ROOM_FRONTEND, 0, 1, 0);
+    SetupRoom(ROOM_FRONTEND, 0, TRUE, 0);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
 
     EnableBGAlphaBlending();
@@ -309,15 +307,15 @@ int ShowPressStart() {
     start_script(10);
 
     v1.font = &font_80B01A8[0];
-    v1.size = 0xF0;
+    v1.size = 240;
     v1.field_A = 1;
-    v1.palette = 0xA;
+    v1.palette = 10;
     v1.letterSpacing = 1;
     v1.field_11 = 6;
     v1.field_12 = 0;
     v1.field_13 = 0;
 
-    s1[0] = '©';
+    s1[0] = '\xa9'; // ©
     s1[1] = ' ';
     s1[2] = '&';
     s1[3] = ' ';
@@ -343,7 +341,7 @@ int ShowPressStart() {
     s1[23] = 'E';
     s1[24] = 'D';
     s1[25] = '.';
-    s1[26] = 0xFF;
+    s1[26] = -1;
 
     s2[0] = 'A';
     s2[1] = 'L';
@@ -389,10 +387,10 @@ int ShowPressStart() {
     s3[19] = 'O';
     s3[20] = -1;
 
-    v2.letterSpacing = 0xFE;
+    v2.letterSpacing = 254;
     v2.field_12 = 0;
     v2.field_A = 2;
-    v2.size = 0xF0;
+    v2.size = 240;
     v2.palette = 1;
     v2.stringOffset = 0;
     v2.field_11 = 6;
@@ -442,7 +440,7 @@ int ShowPressStart() {
     return v4;
 }
 
-int sub_80246C8() {
+int sub_80246C8(void) {
     u8* text;
     struct TextBox textbox;
     s32 v3;
@@ -569,7 +567,7 @@ int sub_80246C8() {
     }
 }
 
-void ShowLanguageSelect() {
+void ShowLanguageSelect(void) {
     bool32 v0;
 
     InitMenu(MENU_LANGUAGE, 0);
@@ -721,28 +719,28 @@ void ShowEraseData() {
         tb1.xPosition = 16;
         tb1.yPosition = 16;
         tb1.stringOffset = 0;
-        AddStringToBuffer(&tb1, 0x080652AC);
+        AddStringToBuffer(&tb1, char_080652AC);
 
         switch (action) {
             case 1:
                 tb2.xPosition = 16;
                 tb2.yPosition = 70;
                 tb2.stringOffset = 0;
-                AddStringToBuffer(&tb2, 0x080652C4);
+                AddStringToBuffer(&tb2, char_080652C4);
                 break;
 
             case 2:
                 tb2.xPosition = 16;
                 tb2.yPosition = 70;
                 tb2.stringOffset = 0;
-                AddStringToBuffer(&tb2, 0x080652F0);
+                AddStringToBuffer(&tb2, char_080652F0);
                 break;
 
             case 3:
                 tb2.xPosition = 16;
                 tb2.yPosition = 70;
                 tb2.stringOffset = 0;
-                AddStringToBuffer(&tb2, 0x08065304);
+                AddStringToBuffer(&tb2, char_08065304);
         }
 
         if (renderMenu)
@@ -771,13 +769,13 @@ void ShowEraseData() {
     }
 }
 
-void ShowFlashscreens() {
+void ShowFlashscreens(void) {
     s32 minTime;
     s32 maxTime;
     bool32 canSkip;
 
     sub_80270AC(4095, 0);
-    DmaTransfer32((void*)0x83FD454, OBJ_PLTT, 128);
+    DmaTransfer32(unk_83FD454, (void*)OBJ_PLTT, 128);
     sub_8026E48(4095, 0, 0);
 
     dword_200032C = Alloc(0x460u, 11, 4);

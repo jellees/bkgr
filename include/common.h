@@ -457,6 +457,7 @@ extern void sub_8011158(void);
 extern void sub_801126C(void);
 extern void DisableBackgrounds(void);
 extern void sub_8013DD4(int, int);
+extern void sub_8013A10(u16, u16, u16, u16, int, int);
 extern void EnableBGAlphaBlending(void);
 extern void EnableBackgrounds(void);
 extern void sub_080161CC(u8);
@@ -464,6 +465,9 @@ extern void sub_080161CC(u8);
 extern void SetTextSpriteCount(int);
 extern void RenderText(void);
 extern void AddStringToBuffer(struct TextBox*, char*);
+extern void sub_80254E0(void);
+extern int sub_8025870(char*, struct TextBox*);
+
 extern void sub_8025FBC(void);
 extern bool32 sub_8025FF8(void);
 extern void sub_8026180(void);
@@ -473,9 +477,13 @@ extern u32 sub_80266A8(void);
 extern void sub_80266C8(u16, u8, u16);
 extern void sub_8026714(void);
 extern void sub_802672C(void);
+extern void SetObjectsFullAlpha(void);
 extern void FadeOutObjects(int, int);
+extern void sub_08026BA8(int, int);
 extern void sub_8026CC8(int, int);
+extern void sub_8026D20(int, int, int, int);
 extern void sub_8026D84(void);
+extern void sub_8026DC0(void);
 extern void sub_8026E48(int, int, int);
 extern void sub_80270AC(int, int);
 extern void sub_0802D0A0(int, struct Vec3fx*, u8);
@@ -492,6 +500,8 @@ extern void sub_8036138(u8*, s32*, u32*);
 extern bool32 sub_8037C08(u8*, u32*);
 extern void sub_800386C(u32, u32, u32);
 extern void sub_80388E0(void);
+extern void sub_8038A34(void);
+extern void sub_803FE78(void);
 
 extern void sub_8040178(void);
 extern void sub_08040204(int, int);
@@ -507,6 +517,9 @@ extern void sub_8048B1C(void);
 extern void sub_80524D8(void);
 
 extern void start_script(int);
+extern void update_scripts(void);
+extern void render_scripts_direct(void);
+extern void end_all_scripts(int);
 
 extern void sub_8060FF8(void);
 extern void sub_80629E8(void);
@@ -858,5 +871,12 @@ extern char aLocked[];
 extern char aUnlocked[];
 extern char aGod[];
 extern char aMortal[];
+extern char char_080652AC[];
+
+extern char char_080652C4[];
+extern char char_080652F0[];
+extern char char_08065304[];
+
+extern u8 unk_83FD454[];
 
 #endif
