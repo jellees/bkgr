@@ -340,6 +340,73 @@ struct struc_50 {
     u8 field_F;
 };
 
+struct GameStatus {
+    u16 totalJiggies;
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 clockHour;
+    u8 clockMinute;
+    u8 clockSecond;
+    u8 field_B;
+    u16 totalNotes;
+    s8 eggs[4];
+    s8 goldenFeathers;
+    u8 health;
+    bool8 enableExtraHealth;
+    u8 maxHealth;
+    u8 oxygen;
+    u8 maxOxygen;
+    u8 field_18;
+    u8 field_19;
+    u8 field_1A;
+    u8 field_1B;
+    u8 field_1C;
+    u8 field_1D;
+    u8 field_1F;
+};
+
+struct SaveFile {
+    u16 jiggies;
+    u16 notes;
+    u8 hour;
+    u8 minute;
+    u8 second;
+    bool8 empty;
+};
+
+struct level_struc {
+    u8 jiggyCount;
+    u8 honeycombCount;
+    u8 field_2;
+    u8 field_3;
+    u8 chickCount;
+    u8 jinjoCount;
+    u8 noteCount;
+    u8 field_7;
+    u8 bozzeyeCount;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    u8 field_C;
+    u8 field_D;
+    u8 field_E;
+    u8 silverCoinCount;
+    u8 field_10;
+    u8 field_11;
+    u8 field_12;
+    u8 field_13;
+};
+
+struct SpriteDMATableEntry {
+    u8* source;
+    u8* destiny;
+    u32 count;
+};
+
 // EWRAM
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;

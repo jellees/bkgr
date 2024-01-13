@@ -1,4 +1,5 @@
 #include "global.h"
+#include "common.h"
 #include "sprite.h"
 #include "menu.h"
 #include "pause_menu.h"
@@ -6,7 +7,6 @@
 #include "main.h"
 #include "room.h"
 #include "audio_b.h"
-#include "common.h"
 
 extern void InitPregame();
 extern void ShowFlashscreens();

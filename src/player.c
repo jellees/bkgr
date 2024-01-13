@@ -1,4 +1,5 @@
 #include "global.h"
+#include "common.h"
 #include "main.h"
 #include "audio_b.h"
 #include "pause_menu.h"
@@ -6,7 +7,6 @@
 #include "room.h"
 #include "sprite.h"
 #include "player_defs.h"
-#include "common.h"
 
 u16 gPreviousPlayerState;
 u16 gPlayerState;

@@ -1,13 +1,12 @@
 #include "global.h"
+#include "common.h"
 #include "sprite.h"
 #include "menu.h"
 #include "alloc.h"
 #include "save.h"
-#include "main.h"
 #include "audio_b.h"
 #include "player.h"
-#include "common.h"
-#include "pause_menu.h"
+#include "main.h"
 
 u8 gClockStatus;
 s32 dword_203F4DC;

@@ -1,11 +1,11 @@
 #include "global.h"
+#include "common.h"
 #include "alloc.h"
 #include "sprite.h"
 #include "main.h"
 #include "audio_b.h"
 #include "menu.h"
 #include "player.h"
-#include "common.h"
 
 struct InputRecord {
     s16 keys;

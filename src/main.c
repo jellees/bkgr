@@ -1,4 +1,5 @@
 #include "global.h"
+#include "common.h"
 #include "sprite.h"
 #include "audio_a.h"
 #include "audio_b.h"
@@ -7,8 +8,6 @@
 #include "room.h"
 #include "debug.h"
 #include "player.h"
-#include "common.h"
-#include "main.h"
 
 enum EnvironmentEffects { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 
@@ -162,6 +161,24 @@ int gPoisonHitTimer;
 u32 dword_20011F8;
 s32 dword_20011FC;
 
+// Forward declarations.
+void nullsub_3();
+void nullsub_4();
+void nullsub_5();
+void setup_display();
+void nullsub_15();
+void update_video();
+void sub_800A594();
+bool32 sub_0800BCD4(struct struc_44* a1);
+int sub_800C50C();
+bool32 sub_800DE04();
+void sub_800DE9C();
+void sub_800EB14();
+void sub_800ECB4();
+void init_room_name();
+void hide_room_name();
+void init_efx();
+void pause_efx();
 static void update_game(void);
 static void sub_8009D2C();
 static void init_memory();
@@ -353,7 +370,7 @@ static void update_game(void) {
     if (!gIsSlideMiniGame) {
         s16 r1;
         u32 r0;
-        u32* r2;
+        struct Sprite* shadowSprite;
         u32 r4 = sub_800C50C();
 
         sprite_set_priority(&gPlayerSprite, r4);
@@ -364,7 +381,7 @@ static void update_game(void) {
             sprite_set_priority(&gPlayerShadowSprite, stru_3002950.playerSpritePriority);
         }
 
-        r2 = &gPlayerShadowSprite;
+        shadowSprite = &gPlayerShadowSprite;
         r1 = (gPlayerPos.y - gPlayerShadowPos.y) >> 16;
 
         if (r1 >= dword_80CEBC4) {
@@ -373,7 +390,7 @@ static void update_game(void) {
             r0 = byte_80CEB84[r1];
         }
 
-        sprite_set_locked_frame(r2, r0);
+        sprite_set_locked_frame(shadowSprite, r0);
     }
 
     DmaFill32(170, gOAMBuffer1, 0x100);

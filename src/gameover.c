@@ -1,10 +1,10 @@
 #include "global.h"
+#include "common.h"
 #include "menu.h"
 #include "pause_menu.h"
 #include "main.h"
 #include "room.h"
 #include "player.h"
-#include "common.h"
 #include "audio_b.h"
 
 static void show_gameover_screen();

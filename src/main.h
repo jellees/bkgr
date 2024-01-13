@@ -1,76 +1,12 @@
 #ifndef GUARD_MAIN_H
 #define GUARD_MAIN_H
 
-#include "sprite.h"
+struct Sprite;
+struct GameStatus;
+struct SaveFile;
+struct level_struc;
+struct SpriteDMATableEntry;
 
-struct GameStatus {
-    u16 totalJiggies;
-    u8 field_2;
-    u8 field_3;
-    u8 field_4;
-    u8 field_5;
-    u8 field_6;
-    u8 field_7;
-    u8 clockHour;
-    u8 clockMinute;
-    u8 clockSecond;
-    u8 field_B;
-    u16 totalNotes;
-    s8 eggs[4];
-    s8 goldenFeathers;
-    u8 health;
-    bool8 enableExtraHealth;
-    u8 maxHealth;
-    u8 oxygen;
-    u8 maxOxygen;
-    u8 field_18;
-    u8 field_19;
-    u8 field_1A;
-    u8 field_1B;
-    u8 field_1C;
-    u8 field_1D;
-    u8 field_1F;
-};
-
-struct SaveFile {
-    u16 jiggies;
-    u16 notes;
-    u8 hour;
-    u8 minute;
-    u8 second;
-    bool8 empty;
-};
-
-struct level_struc {
-    u8 jiggyCount;
-    u8 honeycombCount;
-    u8 field_2;
-    u8 field_3;
-    u8 chickCount;
-    u8 jinjoCount;
-    u8 noteCount;
-    u8 field_7;
-    u8 bozzeyeCount;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
-    u8 field_C;
-    u8 field_D;
-    u8 field_E;
-    u8 silverCoinCount;
-    u8 field_10;
-    u8 field_11;
-    u8 field_12;
-    u8 field_13;
-};
-
-struct SpriteDMATableEntry {
-    u8* source;
-    u8* destiny;
-    u32 count;
-};
-
-extern u8 byte_2000314;
 extern s32 dword_2000318;
 extern s32 dword_200031C;
 extern u8 gPauseMenuLanguage;
@@ -94,33 +30,14 @@ extern u16 word_2000344;
 extern u16 word_2000346;
 extern u16 word_2000348;
 extern u16 word_200034A;
-extern u16 void_200034C[10];
-extern struct SpriteDMATableEntry gSpriteDMATable[255];
-extern u8 gSpriteDMACount;
 extern u8 byte_2000F55;
 extern u8 byte_2000F56;
 extern u8 byte_2000F57;
-extern u8 gShowEraseDataScreen;
-extern u8 byte_2000F59;
-extern u8 byte_2000F5A;
-extern u8 gClockFrameCounter;
-extern bool8 gClockEnabled;
-extern bool8 byte_2000F5D;
-extern bool8 byte_2000F5E;
-extern u32* dword_2000F60;
-extern u32 dword_2000F64;
-extern u32 dword_2000F68;
-extern u32 dword_2000F6C;
-extern bool8 gRecordInput;
 extern struct Sprite gPlayerSprite;
 extern struct Sprite gPlayerShadowSprite;
-extern struct Sprite sprite_2000FAC;
 extern u32 dword_2000FC8;
-extern struct level_struc byte_2000FCC[6];
 extern struct GameStatus gGameStatus;
 extern struct SaveFile gSaveFiles[3];
-extern u8 byte_200107C;
-extern u8 byte_200107D;
 extern u8 gUnlockedLevels;
 extern u8 gTotalAmountOfLevels;
 extern u16 gLoadedRoomIndex;
@@ -139,15 +56,11 @@ extern fx32 dword_20010A0;
 extern u8 byte_20010A4;
 extern u8 byte_20010A5;
 extern u8 gRoomNameNumber;
-extern u8 byte_20010A7;
 extern u8 gRoomGoal;
 extern u8 gWarpGoal;
-extern u8 byte_20010AA;
 extern u16 word_20010AC;
 extern u8 gContinueGame;
-extern u8 byte_20010AF;
 extern u8 byte_20010B0;
-extern u8 byte_20010B1;
 extern char gSaveFileString1[0x1A];
 extern char gSaveFileString2[0x1A];
 extern char gSaveFileString3[0x1A];
