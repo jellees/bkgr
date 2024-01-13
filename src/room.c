@@ -2,6 +2,7 @@
 #include "common.h"
 #include "audio_b.h"
 #include "main.h"
+#include "alloc.h"
 
 u16 word_200145C;
 u16 word_200145E;
@@ -28,12 +29,14 @@ u8 gBG1Static;
 u8 gBG2Static;
 u8 gBG3Static;
 
-void ResetTileAnimCount() {
+static void SetupAnimationTiles(struct TileAnimSection* animationTiles, u8* destination);
+
+void ResetTileAnimCount(void) {
     gLoadedTileAnimCount = 0;
     dword_2001470 = 0;
 }
 
-void SetupBGOffsets() {
+static void SetupBGOffsets(void) {
     if (gRoomHeader.isStaticBG0) {
         REG_BG0HOFS = 0;
         REG_BG0VOFS = 0;
@@ -169,7 +172,7 @@ void sub_80127B8(s32 a1) {
     }
 }
 
-void EnableBGAlphaBlending() {
+void EnableBGAlphaBlending(void) {
     gColorSpecEffectsSel = BLDCNT_TGT2_ALL;
 
     if (gRoomHeader.isControllableBG0) {
@@ -189,7 +192,7 @@ void EnableBGAlphaBlending() {
     }
 }
 
-void DisableBackgrounds() {
+void DisableBackgrounds(void) {
     if (gRoomHeader.isControllableBG0) {
         REG_DISPCNT &= ~DISPCNT_BG0_ON;
     }
@@ -207,7 +210,7 @@ void DisableBackgrounds() {
     }
 }
 
-void EnableBackgrounds() {
+void EnableBackgrounds(void) {
     if (gRoomHeader.isControllableBG0) {
         REG_DISPCNT |= DISPCNT_BG0_ON;
     }
@@ -266,8 +269,8 @@ void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4) {
     setup_collision_warp(gRoomHeader.collision, warp);
     sub_8038FA0(gLoadedRoomLevel);
     setup_entities(room, a4, gRoomHeader.entities);
-    DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
-    DmaTransfer32(gRoomHeader.backgroundPalette, BG_PLTT, 128);
+    DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
+    DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);
 
     if (gLoadedTileAnimCount) {
         gLoadedTileAnimCount = 0;
@@ -277,41 +280,43 @@ void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4) {
         if (!gRoomHeader.tileAnimations1) {
             switch (gRoomHeader.compression) {
                 case 0:
-                    DmaTransfer32(gRoomHeader.tiledata1, BG_CHAR_ADDR(0),
+                    DmaTransfer32(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0),
                                   8 * gRoomHeader.tileData1Count);
                     break;
 
                 case 1:
-                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata1, BG_CHAR_ADDR(0));
+                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata1, BG_CHAR_ADDR(0));
+                    HuffUnCompReadNormal(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0));
                     break;
             }
         } else {
             switch (gRoomHeader.compression) {
                 case 0:
                     DmaTransfer32(gRoomHeader.tiledata1,
-                                  TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
-                                      + BG_CHAR_ADDR(0),
+                                  (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                          + BG_CHAR_ADDR(0)),
                                   8 * gRoomHeader.tileData1Count);
                     break;
 
                 case 1:
                     LZ77UnCompReadNormalWrite16bit(
                         gRoomHeader.tiledata1,
-                        TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount + BG_CHAR_ADDR(0));
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                + BG_CHAR_ADDR(0)));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata1,
-                                         TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
-                                             + BG_CHAR_ADDR(0));
+                    HuffUnCompReadNormal(
+                        gRoomHeader.tiledata1,
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                + BG_CHAR_ADDR(0)));
                     break;
             }
 
-            SetupAnimationTiles(gRoomHeader.tileAnimations1, BG_CHAR_ADDR(0));
+            SetupAnimationTiles(gRoomHeader.tileAnimations1, (void*)BG_CHAR_ADDR(0));
         }
     }
 
@@ -319,41 +324,43 @@ void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4) {
         if (!gRoomHeader.tileAnimations2) {
             switch (gRoomHeader.compression) {
                 case 0:
-                    DmaTransfer32(gRoomHeader.tiledata2, BG_CHAR_ADDR(2),
+                    DmaTransfer32(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2),
                                   8 * gRoomHeader.tileData2Count);
                     break;
 
                 case 1:
-                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata2, BG_CHAR_ADDR(2));
+                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata2, BG_CHAR_ADDR(2));
+                    HuffUnCompReadNormal(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2));
                     break;
             }
         } else {
             switch (gRoomHeader.compression) {
                 case 0:
                     DmaTransfer32(gRoomHeader.tiledata2,
-                                  TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
-                                      + BG_CHAR_ADDR(2),
+                                  (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                          + BG_CHAR_ADDR(2)),
                                   8 * gRoomHeader.tileData2Count);
                     break;
 
                 case 1:
                     LZ77UnCompReadNormalWrite16bit(
                         gRoomHeader.tiledata2,
-                        TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount + BG_CHAR_ADDR(2));
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                + BG_CHAR_ADDR(2)));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata2,
-                                         TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
-                                             + BG_CHAR_ADDR(2));
+                    HuffUnCompReadNormal(
+                        gRoomHeader.tiledata2,
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                + BG_CHAR_ADDR(2)));
                     break;
             }
 
-            SetupAnimationTiles(gRoomHeader.tileAnimations2, BG_CHAR_ADDR(2));
+            SetupAnimationTiles(gRoomHeader.tileAnimations2, (void*)BG_CHAR_ADDR(2));
         }
     }
 
@@ -493,7 +500,7 @@ void sub_08012E90(u32 room) {
     FreeById(1, 21);
     gEntitySection = 0;
 
-    DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
+    DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
 
     gMapPixelSizeX = 32 * gRoomHeader.mapSizeX;
     gMapPixelSizeY = 32 * gRoomHeader.mapSizeY;
@@ -502,7 +509,7 @@ void sub_08012E90(u32 room) {
     gBG2Static = gRoomHeader.isStaticBG2;
     gBG3Static = gRoomHeader.isStaticBG3;
 
-    DmaTransfer32(gRoomHeader.backgroundPalette, BG_PLTT, 128);
+    DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);
 
     if (gLoadedTileAnimCount) {
         gLoadedTileAnimCount = 0;
@@ -512,40 +519,42 @@ void sub_08012E90(u32 room) {
         if (!gRoomHeader.tileAnimations1) {
             switch (gRoomHeader.compression) {
                 case 0:
-                    DmaTransfer32(gRoomHeader.tiledata1, BG_CHAR_ADDR(0),
+                    DmaTransfer32(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0),
                                   8 * gRoomHeader.tileData1Count);
                     break;
 
                 case 1:
-                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata1, BG_CHAR_ADDR(0));
+                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata1, BG_CHAR_ADDR(0));
+                    HuffUnCompReadNormal(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0));
                     break;
             }
         } else {
             switch (gRoomHeader.compression) {
                 case 0:
                     DmaTransfer32(gRoomHeader.tiledata1,
-                                  TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
-                                      + BG_CHAR_ADDR(0),
+                                  (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                          + BG_CHAR_ADDR(0)),
                                   8 * gRoomHeader.tileData1Count);
                     break;
 
                 case 1:
                     LZ77UnCompReadNormalWrite16bit(
                         gRoomHeader.tiledata1,
-                        TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount + BG_CHAR_ADDR(0));
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                + BG_CHAR_ADDR(0)));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata1,
-                                         TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
-                                             + BG_CHAR_ADDR(0));
+                    HuffUnCompReadNormal(
+                        gRoomHeader.tiledata1,
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                + BG_CHAR_ADDR(0)));
                     break;
             }
-            SetupAnimationTiles(gRoomHeader.tileAnimations1, BG_CHAR_ADDR(0));
+            SetupAnimationTiles(gRoomHeader.tileAnimations1, (void*)BG_CHAR_ADDR(0));
         }
     }
 
@@ -553,41 +562,43 @@ void sub_08012E90(u32 room) {
         if (!gRoomHeader.tileAnimations2) {
             switch (gRoomHeader.compression) {
                 case 0:
-                    DmaTransfer32(gRoomHeader.tiledata2, BG_CHAR_ADDR(2),
+                    DmaTransfer32(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2),
                                   8 * gRoomHeader.tileData2Count);
                     break;
 
                 case 1:
-                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata2, BG_CHAR_ADDR(2));
+                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata2, BG_CHAR_ADDR(2));
+                    HuffUnCompReadNormal(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2));
                     break;
             }
         } else {
             switch (gRoomHeader.compression) {
                 case 0:
                     DmaTransfer32(gRoomHeader.tiledata2,
-                                  TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
-                                      + BG_CHAR_ADDR(2),
+                                  (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                          + BG_CHAR_ADDR(2)),
                                   8 * gRoomHeader.tileData2Count);
                     break;
 
                 case 1:
                     LZ77UnCompReadNormalWrite16bit(
                         gRoomHeader.tiledata2,
-                        TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount + BG_CHAR_ADDR(2));
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                + BG_CHAR_ADDR(2)));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata2,
-                                         TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
-                                             + BG_CHAR_ADDR(2));
+                    HuffUnCompReadNormal(
+                        gRoomHeader.tiledata2,
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                + BG_CHAR_ADDR(2)));
                     break;
             }
 
-            SetupAnimationTiles(gRoomHeader.tileAnimations2, BG_CHAR_ADDR(2));
+            SetupAnimationTiles(gRoomHeader.tileAnimations2, (void*)BG_CHAR_ADDR(2));
         }
     }
 
@@ -739,8 +750,8 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5) {
     sub_8038FA0(gLoadedRoomLevel);
     setup_entities(room, a5, gRoomHeader.entities);
 
-    DmaTransfer32(gRoomHeader.spritePalette, OBJ_PLTT, 128);
-    DmaTransfer32(gRoomHeader.backgroundPalette, BG_PLTT, 128);
+    DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
+    DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);
 
     if (gLoadedTileAnimCount) {
         gLoadedTileAnimCount = 0;
@@ -750,41 +761,43 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5) {
         if (!gRoomHeader.tileAnimations1) {
             switch (gRoomHeader.compression) {
                 case 0:
-                    DmaTransfer32(gRoomHeader.tiledata1, BG_CHAR_ADDR(0),
+                    DmaTransfer32(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0),
                                   8 * gRoomHeader.tileData1Count);
                     break;
 
                 case 1:
-                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata1, BG_CHAR_ADDR(0));
+                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata1, BG_CHAR_ADDR(0));
+                    HuffUnCompReadNormal(gRoomHeader.tiledata1, (void*)BG_CHAR_ADDR(0));
                     break;
             }
         } else {
             switch (gRoomHeader.compression) {
                 case 0:
                     DmaTransfer32(gRoomHeader.tiledata1,
-                                  TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
-                                      + BG_CHAR_ADDR(0),
+                                  (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                          + BG_CHAR_ADDR(0)),
                                   8 * gRoomHeader.tileData1Count);
                     break;
 
                 case 1:
                     LZ77UnCompReadNormalWrite16bit(
                         gRoomHeader.tiledata1,
-                        TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount + BG_CHAR_ADDR(0));
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                + BG_CHAR_ADDR(0)));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata1,
-                                         TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
-                                             + BG_CHAR_ADDR(0));
+                    HuffUnCompReadNormal(
+                        gRoomHeader.tiledata1,
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations1->tileAnimCount
+                                + BG_CHAR_ADDR(0)));
                     break;
             }
 
-            SetupAnimationTiles(gRoomHeader.tileAnimations1, BG_CHAR_ADDR(0));
+            SetupAnimationTiles(gRoomHeader.tileAnimations1, (void*)BG_CHAR_ADDR(0));
         }
     }
 
@@ -792,41 +805,43 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5) {
         if (!gRoomHeader.tileAnimations2) {
             switch (gRoomHeader.compression) {
                 case 0:
-                    DmaTransfer32(gRoomHeader.tiledata2, BG_CHAR_ADDR(2),
+                    DmaTransfer32(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2),
                                   8 * gRoomHeader.tileData2Count);
                     break;
 
                 case 1:
-                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata2, BG_CHAR_ADDR(2));
+                    LZ77UnCompReadNormalWrite16bit(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata2, BG_CHAR_ADDR(2));
+                    HuffUnCompReadNormal(gRoomHeader.tiledata2, (void*)BG_CHAR_ADDR(2));
                     break;
             }
         } else {
             switch (gRoomHeader.compression) {
                 case 0:
                     DmaTransfer32(gRoomHeader.tiledata2,
-                                  TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
-                                      + BG_CHAR_ADDR(2),
+                                  (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                          + BG_CHAR_ADDR(2)),
                                   8 * gRoomHeader.tileData2Count);
                     break;
 
                 case 1:
                     LZ77UnCompReadNormalWrite16bit(
                         gRoomHeader.tiledata2,
-                        TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount + BG_CHAR_ADDR(2));
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                + BG_CHAR_ADDR(2)));
                     break;
 
                 case 2:
-                    HuffUnCompReadNormal(gRoomHeader.tiledata2,
-                                         TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
-                                             + BG_CHAR_ADDR(2));
+                    HuffUnCompReadNormal(
+                        gRoomHeader.tiledata2,
+                        (void*)(TILE_SIZE_4BPP * gRoomHeader.tileAnimations2->tileAnimCount
+                                + BG_CHAR_ADDR(2)));
                     break;
             }
 
-            SetupAnimationTiles(gRoomHeader.tileAnimations2, BG_CHAR_ADDR(2));
+            SetupAnimationTiles(gRoomHeader.tileAnimations2, (void*)BG_CHAR_ADDR(2));
         }
     }
 
@@ -935,7 +950,7 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5) {
     gBGControlActions = 0;
 }
 
-void SetupAnimationTiles(struct TileAnimSection* animationTiles, u8* destiny) {
+static void SetupAnimationTiles(struct TileAnimSection* animationTiles, u8* destination) {
     s32 i;
 
     ASSERT(animationTiles->tileAnimCount != 0);
@@ -950,12 +965,12 @@ void SetupAnimationTiles(struct TileAnimSection* animationTiles, u8* destiny) {
         gTileAnimTable[gLoadedTileAnimCount].numberOfFramesCount = 0;
         gTileAnimTable[gLoadedTileAnimCount].framesPerSecondCount = 0;
         gTileAnimTable[gLoadedTileAnimCount].tileData = index->tileData;
-        gTileAnimTable[gLoadedTileAnimCount].destiny = destiny + 32 * i;
+        gTileAnimTable[gLoadedTileAnimCount].destination = destination + 32 * i;
         gLoadedTileAnimCount++;
     }
 }
 
-void sub_801392C() {
+void sub_801392C(void) {
     s32 i;
 
     if (gLoadedTileAnimCount == 0) {
@@ -980,7 +995,7 @@ void sub_801392C() {
         }
         gTileAnimQueue[gTileAnimQueueIndex].field_0 =
             gTileAnimTable[i].tileData + 32 * gTileAnimTable[i].numberOfFramesCount;
-        gTileAnimQueue[gTileAnimQueueIndex].field_4 = gTileAnimTable[i].destiny;
+        gTileAnimQueue[gTileAnimQueueIndex].field_4 = gTileAnimTable[i].destination;
         gTileAnimQueueIndex++;
     }
 }

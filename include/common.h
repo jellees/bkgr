@@ -87,7 +87,7 @@ struct TileAnimTable_rt {
     u8 numberOfFramesCount;
     u8 numberOfFrames;
     u8* tileData;
-    u8* destiny;
+    u8* destination;
 };
 
 struct TileAnimIndex {
@@ -443,6 +443,9 @@ extern void audio_init(void);
 extern void audio_vsync_asm(void);
 extern void audio_asmprocess(void);
 
+extern void setup_collision_warp(void*, u32);
+extern void setup_collision_xyz(void*, u32, u32, u32);
+
 extern void CallARM_store_jump_and_other_value(u32, fx32, fx32);
 extern void CallARM_store_jump_value(u32, s32);
 extern void sub_8003884(u32, u32, u32, u32);
@@ -458,11 +461,9 @@ extern u8 sub_8003A6C(fx32, fx32, u32, u32);
 
 extern void sub_8011158(void);
 extern void sub_801126C(void);
-extern void DisableBackgrounds(void);
 extern void sub_8013DD4(int, int);
 extern void sub_8013A10(u16, u16, u16, u16, int, int);
 extern void EnableBGAlphaBlending(void);
-extern void EnableBackgrounds(void);
 extern void sub_080161CC(u8);
 
 extern void SetTextSpriteCount(int);
@@ -492,6 +493,7 @@ extern void sub_8026E48(int, int, int);
 extern void sub_8026F78(int, int, int);
 extern void sub_80270AC(int, int);
 extern void sub_80271A4(int, int);
+extern void setup_entities(u32, u32, void*);
 extern void sub_0802D0A0(int, struct Vec3fx*, u8);
 extern u8 sub_0802E080(void);
 extern void sub_0802FEDC(int);
@@ -548,6 +550,7 @@ extern void sub_8063578(void);
 extern void sub_080643D0(int);
 
 extern void LZ77UnCompReadNormalWrite16bit(void*, void*);
+extern void HuffUnCompReadNormal(void*, void*);
 
 extern u16 IdentifyEeprom(u16 eeprom_KbitSize);
 extern u16 SetEepromTimerIntr(u8 timerNo, void (**IntrFunc)(void));
