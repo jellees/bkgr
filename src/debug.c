@@ -6,6 +6,7 @@
 #include "audio_b.h"
 #include "menu.h"
 #include "player.h"
+#include "room.h"
 
 struct InputRecord {
     s16 keys;

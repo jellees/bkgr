@@ -109,7 +109,6 @@ bool32 save_game(u32 game, bool32 a2) {
     u32 v17;
     int i;
     u32 v9;
-    u32 v8;
     u8 tmp1;
 
     create_eeprom_buffer();

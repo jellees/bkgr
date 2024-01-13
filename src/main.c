@@ -8,6 +8,10 @@
 #include "room.h"
 #include "debug.h"
 #include "player.h"
+#include "alloc.h"
+#include "pregame.h"
+#include "menu.h"
+#include "random.h"
 
 enum EnvironmentEffects { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 
@@ -138,8 +142,8 @@ u8 gShowRoomName;
 u16 gRoomNameApparenceTimer;
 struct TextBox gRoomNameTextBox;
 char* gRoomName;
-u32 dword_2001188;
-u32 dword_200118C;
+char* dword_2001188;
+char* dword_200118C;
 struct TextBox stru_2001190;
 struct TextBox stru_20011A4;
 fx32 dword_20011B8;
@@ -440,10 +444,10 @@ static void update_game(void) {
 }
 
 static void sub_8009D2C() {
-    dword_30032B0 = (u16*)gOAMBufferFramePtr;
+    dword_30032B0 = (s32)gOAMBufferFramePtr;
     gOAMBufferFramePtr = gOAMBuffer2;
-    gOAMBufferEnd = (u32*)((u16*)gOAMBufferFramePtr
-                           - ((u32)(((s32)dword_30032B0 - (s32)gOAMBuffer1) >> 1) - 0x200));
+    gOAMBufferEnd =
+        (u32*)((u16*)gOAMBufferFramePtr - ((u32)((dword_30032B0 - (s32)gOAMBuffer1) >> 1) - 0x200));
     dword_30032AC = &dword_3003DA4;
     dword_30032CC = 0;
 }
@@ -474,8 +478,8 @@ static void init_memory() {
     u8 backup4 = (u8)gKeysPressed;
 
     RegisterRamReset(0xFDu);
-    DmaFill32(0, EWRAM_START, 0x10000);
-    DmaFill32(0, IWRAM_START, 0x1D27);
+    DmaFill32(0, (void*)EWRAM_START, 0x10000);
+    DmaFill32(0, (void*)IWRAM_START, 0x1D27);
 
     copy_sub_80001EC_to_iram();
 
@@ -529,7 +533,7 @@ static void setup_interrupts() {
 }
 
 static void copy_sub_80001EC_to_iram() {
-    DmaTransfer32(sub_80001EC, &unk_3000000, ((UpdateBackgrounds - sub_80001EC) >> 2) + 1);
+    DmaTransfer32(sub_80001EC, &unk_3000000, (((int)UpdateBackgrounds - (int)sub_80001EC) >> 2) + 1);
 }
 
 static void start_game() {
@@ -595,7 +599,7 @@ static void start_game() {
 
     ExecutePregame();
 
-    DmaFill32(170, OAM, 256);
+    DmaFill32(170, (void*)OAM, 256);
     REG_BLDCNT = gColorSpecEffectsSel;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
     REG_BG1CNT &= BGCNT_MASK_NO_PRIORITY;
@@ -720,7 +724,7 @@ void nullsub_15() {
 }
 
 void update_video() {
-    DmaTransfer32(gOAMBuffer1, OAM, 256);
+    DmaTransfer32(gOAMBuffer1, (void*)OAM, 256);
 
     if (gMatricesCount != 0) {
         CallARM_SetOamMatrices(gMatrices, gMatricesCount);
@@ -984,8 +988,9 @@ static void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3,
 }
 
 static bool32 sub_800AB54(struct Vec3fx* a1, struct Vec3fx* a2) {
+    struct Vec3fx a;
+
     if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11)) {
-        struct Vec3fx a;
         a.x = a1->x;
         a.y = a1->y + FX32_CONST(18);
         a.z = a1->z;
@@ -1596,9 +1601,9 @@ void sub_800B958(int a1, int a2, int a3, int a4, int a5) {
         gPlayerShadowSprite.yPos = v11;
         if (v11 + 20 >= 248 || v10 < -20 || v10 > 260) {
             gPlayerShadowSprite.attr0Flag9 = 1;
-        } else if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING)
-                       && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START)
-                       && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)
+        } else if ((!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING)
+                    && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_DIVING_START)
+                    && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE))
                    || gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) {
             gPlayerShadowSprite.attr0Flag9 = 0;
         }
@@ -1746,7 +1751,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    sub_8041E88(&gPlayerShadowSprite);
+    sub_8041E88();
 
     if (level != gLoadedRoomLevel) {
         sub_8040178();
@@ -1823,7 +1828,7 @@ void sub_800BFA0(int room, int warp, int a3) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    sub_8041E88(&gPlayerShadowSprite);
+    sub_8041E88();
 
     if (level != gLoadedRoomLevel) {
         sub_8040178();
@@ -1878,7 +1883,7 @@ void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
     }
 
     if (dword_2001104 == 1) {
-        DmaTransfer32(&unk_83FCF14, BG_PLTT, 128);
+        DmaTransfer32(&unk_83FCF14, (void*)BG_PLTT, 128);
     }
 
     if (a5) {
@@ -3307,7 +3312,7 @@ void sub_800E9EC(struct Sprite* a1, int palette, int a3) {
     r1_1 = r1 << 8;
     v6 = (v6 & 0xFFFF00FF) | r1_1;
 
-    v7 = ((v7 & 0xFFFFFF00 | 0x1F) & 0xFFFF00FF | 0x1F00) & 0xFF00FFFF | 0x1F0000;
+    v7 = (((((v7 & 0xFFFFFF00) | 0x1F) & 0xFFFF00FF) | 0x1F00) & 0xFF00FFFF) | 0x1F0000;
 
     dword_2001164 = sub_080272A0(&v6, &v7, a3, 0xFFFF);
 
@@ -3329,7 +3334,7 @@ static void sub_800EA9C() {
 static void sub_800EACC() {
     if (byte_200116C) {
         if (stru_20076C4[dword_2001164].field_0) {
-            sub_802742C(dword_2001164, &unk_2002EC4, &unk_20046C4);
+            sub_802742C(dword_2001164, unk_2002EC4, unk_20046C4);
         } else {
             sub_800EA9C();
         }
@@ -3396,7 +3401,7 @@ void sub_800ECB4() {
         }
 
         if (v0 != dword_200114C) {
-            sub_80274A4(dword_2001140, v0, &unk_2002EC4, &unk_20046C4);
+            sub_80274A4(dword_2001140, v0, unk_2002EC4, unk_20046C4);
             dword_200114C = v0;
         }
 
@@ -3406,7 +3411,7 @@ void sub_800ECB4() {
         }
 
         if (v0 != dword_2001154) {
-            sub_80274A4(dword_2001144, v0, &unk_2002EC4, &unk_20046C4);
+            sub_80274A4(dword_2001144, v0, unk_2002EC4, unk_20046C4);
             dword_2001154 = v0;
         }
 
@@ -3416,7 +3421,7 @@ void sub_800ECB4() {
         }
 
         if (v0 != dword_200115C) {
-            sub_80274A4(dword_2001148, v0, &unk_2002EC4, &unk_20046C4);
+            sub_80274A4(dword_2001148, v0, unk_2002EC4, unk_20046C4);
             dword_200115C = v0;
         }
     }
@@ -3513,7 +3518,7 @@ static void sub_800EF6C(int warp) {
     switch (gLoadedRoomLevel) {
         case LEVEL_SPIRAL_MOUNTAIN:
             if (dword_2001104 == 1) {
-                DmaTransfer32(&unk_83FCF14, BG_PLTT, 128);
+                DmaTransfer32(&unk_83FCF14, (void*)BG_PLTT, 128);
             }
             break;
 
@@ -3563,9 +3568,9 @@ void sub_0800F02C(int* a1, int a2, int a3) {
             switch (a3) {
                 case 0:
                     dword_2001188 = dword_8065F60;
-                    dword_200118C = a3;
+                    dword_200118C = NULL;
                     byte_2001120 = 1;
-                    byte_2001121 = a3;
+                    byte_2001121 = 0;
                     break;
 
                 case 1:
@@ -3596,9 +3601,9 @@ void sub_0800F02C(int* a1, int a2, int a3) {
             switch (a3) {
                 case 0:
                     dword_2001188 = dword_8065FA0;
-                    dword_200118C = a3;
+                    dword_200118C = NULL;
                     byte_2001120 = 1;
-                    byte_2001121 = a3;
+                    byte_2001121 = 0;
                     break;
 
                 case 1:
@@ -3629,9 +3634,9 @@ void sub_0800F02C(int* a1, int a2, int a3) {
             switch (a3) {
                 case 0:
                     dword_2001188 = dword_8066044;
-                    dword_200118C = a3;
+                    dword_200118C = NULL;
                     byte_2001120 = 1;
-                    byte_2001121 = a3;
+                    byte_2001121 = 0;
                     break;
 
                 case 1:
@@ -3662,9 +3667,9 @@ void sub_0800F02C(int* a1, int a2, int a3) {
             switch (a3) {
                 case 0:
                     dword_2001188 = dword_8066094;
-                    dword_200118C = a3;
+                    dword_200118C = NULL;
                     byte_2001120 = 1;
-                    byte_2001121 = a3;
+                    byte_2001121 = 0;
                     break;
 
                 case 1:
@@ -3695,9 +3700,9 @@ void sub_0800F02C(int* a1, int a2, int a3) {
             switch (a3) {
                 case 0:
                     dword_2001188 = dword_8065FF4;
-                    dword_200118C = a3;
+                    dword_200118C = NULL;
                     byte_2001120 = 1;
-                    byte_2001121 = a3;
+                    byte_2001121 = 0;
                     break;
 
                 case 1:

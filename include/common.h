@@ -404,15 +404,19 @@ struct TextBox;
 
 // Function prototypes
 
-extern void sub_80001EC();
-extern void UpdateBackgrounds();
+extern void sub_80001EC(void);
+extern void UpdateBackgrounds(void);
 extern void IntegerToAsciiBw(int, char*);
+extern void IntegerToAsciiFw(int, char*);
 extern void DmaFill32(int, void*, size_t);
 extern void DmaTransfer32(void*, void*, size_t);
 extern void SyncVblank(void);
 extern void SkipVblank(void);
 extern void ReadKeys(u16*, u16*, u16*);
+extern void ReadKeysEx(u16*, u16*, u16*);
 extern void DmaTransferObjPalette(void*, int, int);
+extern void DmaTransferBGPalette(void*, int, int);
+extern void DmaMoveObjPalette(int, int);
 extern void CheckStacks(void);
 
 extern void sprite_set_anim(struct Sprite* sprite, int idx, bool8 loopFrame, bool8 maxAnimRepeats);
@@ -443,43 +447,78 @@ extern void audio_init(void);
 extern void audio_vsync_asm(void);
 extern void audio_asmprocess(void);
 
-extern void setup_collision_warp(void*, u32);
-extern void setup_collision_xyz(void*, u32, u32, u32);
-
 extern void CallARM_store_jump_and_other_value(u32, fx32, fx32);
-extern void CallARM_store_jump_value(u32, s32);
-extern void sub_8003884(u32, u32, u32, u32);
-extern fx32 CallARM_FX_Mul16(fx32, fx32);
-
 extern void sub_800387C(u32);
+extern void sub_8003884(u32, u32, u32, u32);
+extern void sub_800388C(u32, int, int);
 extern void sub_8003894(u32, u32);
-extern void sub_8003A04(u32, u32*, u8, u8);
+extern void sub_800389C(u32, u32);
+extern void sub_80038A4(u32);
 extern u8 sub_80038AC(u32);
 extern u8 sub_80038BC(u32);
 extern bool32 sub_80038C4(u32, fx32*, fx32*, fx32*);
+extern void sub_80038CC(u32, struct Vec3fx*, struct Vec3fx*);
+extern void CallARM_store_jump_value(u32, s32);
+extern void sub_80038DC(u32, u32, u32, bool32);
+extern fx32 sub_800392C(fx32, fx32);
+extern fx32 sub_8003934(fx32, fx32);
+extern fx32 CallARM_FX_Mul16(fx32, fx32);
+extern fx32 CallARM_VecFX_Dot8(struct Vec3fx*, struct Vec3fx*);
+extern bool32 sub_8003974(int*,int*,int*,int*);
+extern bool32 sub_800397C(int*, int*,int*);
+extern fx32 CallARM_VecFX_Mul16(struct Vec3fx*, fx32);
+extern fx32 CallARM_VecFX_Mul8(struct Vec3fx*, fx32);
+extern fx32 sub_80039C4(struct Vec3fx*, u32, u32, u32);
+extern void sub_80039CC(char*, struct Vec3fx*, struct Vec3fx*, int);
+extern void CallARM_SetOamMatrices(u32*, u32);
+extern void sub_8003A04(u32, u32*, u8, u8);
+extern void sub_8003A34(u32, s32, u32*);
+extern void sub_8003A3C(struct TileAnimQueueIndex*, u8);
+extern void sub_8003A44(struct TileAnimTable_rt*, s32, struct TileAnimQueueIndex*, u8*);
+
+extern void setup_collision_warp(void*, u32);
+extern void setup_collision_xyz(void*, u32, u32, u32);
+extern void sub_8006974(char*, struct Vec3fx*);
+extern void sub_8006FFC(char*, struct struc_44*, struct struc_44*);
+extern void sub_8007434(char*, struct struc_44*);
+extern void sub_08007890(char*, struct struc_44*);
+extern void sub_8007AC4(char*);
+extern void sub_08009208(struct Vec3fx*, struct struc_44*);
+extern bool32 sub_800953C(struct Vec3fx*);
 extern u8 sub_8003A6C(fx32, fx32, u32, u32);
 
 extern void sub_8011158(void);
 extern void sub_801126C(void);
 extern void sub_8013DD4(int, int);
 extern void sub_8013A10(u16, u16, u16, u16, int, int);
-extern void EnableBGAlphaBlending(void);
+extern void UpdateMapUp(fx32);
+extern void UpdateMapDown(fx32);
+extern void UpdateMapLeft(fx32);
+extern void UpdateMapRight(fx32);
+extern void sub_8015FD4(void);
 extern void sub_080161CC(u8);
+
+// Part of pregame.c?
+extern void sub_8025278(void);
 
 extern void SetTextSpriteCount(int);
 extern void RenderText(void);
 extern void AddStringToBuffer(struct TextBox*, char*);
 extern void sub_80254E0(void);
+extern void sub_8025798(u8*, u32);
 extern int sub_8025870(char*, struct TextBox*);
+extern void sub_8025948(int);
 
 extern void sub_8025E44(int);
 extern void sub_8025FBC(void);
 extern bool32 sub_8025FF8(void);
 extern void sub_8026180(void);
+extern void sub_8026234(void);
 extern void sub_802625C(void);
 extern void sub_80265D8(void);
 extern u32 sub_80266A8(void);
 extern void sub_80266C8(u16, u8, u16);
+extern void sub_80266B4(void);
 extern void sub_8026714(void);
 extern void sub_802672C(void);
 extern void SetObjectsFullAlpha(void);
@@ -493,16 +532,29 @@ extern void sub_8026E48(int, int, int);
 extern void sub_8026F78(int, int, int);
 extern void sub_80270AC(int, int);
 extern void sub_80271A4(int, int);
+extern int sub_080272A0(int*, int*, int, int);
+extern s32 sub_08027378(u8*, u32*, int, int);
+extern void sub_802742C(s32, u32*,u32*);
+extern void sub_80274A4(s32, s32, u32*,u32*);
+extern void sub_80275A4(void);
+extern void sub_80275CC(s32);
+extern void sub_080281A8(void);
 extern void setup_entities(u32, u32, void*);
+extern void s_load_object(fx32, fx32);
+extern void sub_802ADB0(u32**, u32*);
+extern bool32 sub_802ADE8(struct Vec3fx*);
 extern void sub_0802D0A0(int, struct Vec3fx*, u8);
 extern u8 sub_0802E080(void);
 extern void sub_0802FEDC(int);
 extern bool32 sub_802FDC8(void);
 
 extern int sub_8030A88(void);
+extern void sub_8030C54(void);
+extern void sub_08030C68(void);
 extern int sub_80342CC(int, int);
 extern void sub_80342F8(int, int);
 extern void sub_8034460(int, int, int, int);
+extern void sub_80344DC(void);
 extern void sub_8034970(u8*, s32*, u32*);
 extern void sub_8036138(u8*, s32*, u32*);
 extern bool32 sub_8037C08(u8*, u32*);
@@ -510,15 +562,18 @@ extern void sub_800386C(u32, u32, u32);
 extern void sub_80388E0(void);
 extern void sub_8038A34(void);
 extern void sub_8038FA0(u16);
+extern void sub_8039210(void);
 extern void sub_8039234(void);
 extern void sub_803FE78(void);
 
+extern void sub_80400B4(void);
 extern void sub_8040178(void);
 extern void sub_08040204(int, int);
 extern void sub_804087C(void);
 extern void sub_80408F0(void);
 extern void sub_804095C(void);
 extern void sub_80409DC(void);
+extern void sub_08040A38(int);
 extern void sub_8040B3C(int);
 extern void sub_8040E74(void);
 extern bool32 sub_8040E8C(int);
@@ -527,26 +582,51 @@ extern void sub_0804147C(int);
 extern void sub_8041AAC(int);
 extern bool32 sub_08041AC0(int);
 extern bool32 sub_08041C8C(int);
+extern void sub_8041E88(void);
+extern void sub_08041F3C(int, int);
 extern void sub_08041FA4(int);
 extern void sub_0804200C(int);
+extern bool32 sub_0804207C(int);
 extern bool32 sub_080420E8(int);
 extern void sub_8042250(void);
+
 extern int RandomMinMax(int, int);
+
+extern void sub_08047504(void);
 extern void sub_8047BEC(void);
 extern void sub_804888C(u8);
 extern void sub_8048B1C(void);
+extern void sub_8048C78(void);
+extern void sub_8049A1C(void);
 
 extern void sub_80524D8(void);
 extern void sub_80528D8(int);
+extern void sub_08052B58(int, int);
+extern void sub_08055A14(int, int);
+extern void sub_080593D0(int, int);
+extern void sub_0805BA1C(int, int);
+extern void sub_805D158(void);
 
 extern void start_script(int);
 extern void update_scripts(void);
+extern void render_scripts(u32**, u32*);
 extern void render_scripts_direct(void);
 extern void end_all_scripts(int);
 
 extern void sub_8060FF8(void);
+extern void sub_806127C(void);
+extern void sub_8061F80(void);
+extern void sub_8062444(u8, fx32*, fx32*, fx32*);
+extern void sub_8062484(void);
 extern void sub_80629E8(void);
+extern void sub_8063178(void);
+extern void sub_80631AC(void);
+extern void sub_08063234(void);
 extern void sub_8063578(void);
+extern void sub_8063B5C(void);
+extern void sub_8064234(void);
+extern void sub_8064380(void);
+extern void sub_806438C(void);
 extern void sub_080643D0(int);
 
 extern void LZ77UnCompReadNormalWrite16bit(void*, void*);
@@ -668,8 +748,8 @@ extern void (*gNullsub_5)();
 extern struct TileAnimQueueIndex gTileAnimQueue[255];
 extern u8 gTileAnimQueueIndex;
 extern bool8 gIsSlideMiniGame;
-extern u32 dword_30032AC;
-extern u32 dword_30032B0;
+extern u32* dword_30032AC;
+extern s32 dword_30032B0;
 extern u32 dword_30032B4[];
 extern u32 dword_30032BC[];
 

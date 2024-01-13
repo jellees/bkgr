@@ -7,6 +7,7 @@
 #include "audio_b.h"
 #include "player.h"
 #include "main.h"
+#include "room.h"
 
 u8 gClockStatus;
 s32 dword_203F4DC;

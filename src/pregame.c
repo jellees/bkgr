@@ -9,12 +9,12 @@
 #include "audio_b.h"
 #include "alloc.h"
 
-void ShowSelectGame(int);
-bool32 sub_8024200(void);
-int ShowPressStart(void);
-void ShowFlashscreens(void);
-int sub_80246C8(void);
-void ShowLanguageSelect(void);
+static void ShowSelectGame(int);
+static bool32 sub_8024200(void);
+static int ShowPressStart(void);
+static int sub_80246C8(void);
+static void ShowLanguageSelect(void);
+static void ShowFlashscreens(void);
 
 void InitPregame(void) {
     byte_20021F0 = 0;
@@ -26,7 +26,7 @@ void InitPregame(void) {
     DmaTransfer32(byte_83FD254, (void*)OBJ_PLTT, 128);
 }
 
-void ExecutePregame() {
+void ExecutePregame(void) {
     byte_2000335 = 0;
     byte_20021F9 = 0;
     dword_203F4DC = 0;
@@ -65,7 +65,7 @@ void ExecutePregame() {
     ASSERT(DoesMemBlockExistById(4, 15) == FALSE);
 }
 
-void ShowSelectGame(int a1) {
+static void ShowSelectGame(int a1) {
     int v2;
     bool32 v3;
 
@@ -174,7 +174,7 @@ void ShowSelectGame(int a1) {
     SkipVblank();
 }
 
-bool32 sub_8024200(void) {
+static bool32 sub_8024200(void) {
     switch (gMenuId) {
         case MENU_GAME_OR_CONTINUE:
             switch (GetCurrentMenuEntry()) {
@@ -282,7 +282,7 @@ bool32 sub_8024200(void) {
     }
 }
 
-int ShowPressStart(void) {
+static int ShowPressStart(void) {
     s32 v3;
     bool32 v4;
     struct TextBox v2;
@@ -440,7 +440,7 @@ int ShowPressStart(void) {
     return v4;
 }
 
-int sub_80246C8(void) {
+static int sub_80246C8(void) {
     u8* text;
     struct TextBox textbox;
     s32 v3;
@@ -567,7 +567,7 @@ int sub_80246C8(void) {
     }
 }
 
-void ShowLanguageSelect(void) {
+static void ShowLanguageSelect(void) {
     bool32 v0;
 
     InitMenu(MENU_LANGUAGE, 0);
@@ -632,7 +632,7 @@ void ShowLanguageSelect(void) {
     SkipVblank();
 }
 
-void ShowEraseData() {
+void ShowEraseData(void) {
     s32 action;
     s32 v1;
     bool32 renderMenu;
@@ -769,7 +769,7 @@ void ShowEraseData() {
     }
 }
 
-void ShowFlashscreens(void) {
+static void ShowFlashscreens(void) {
     s32 minTime;
     s32 maxTime;
     bool32 canSkip;

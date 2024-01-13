@@ -6,7 +6,9 @@ IWRAM_DATA u32* gSeedTablePtr;
 IWRAM_DATA u32 gSeed;
 IWRAM_DATA u32 dword_203F4B0;
 
-void sub_8044DFC() {
+void sub_8044E28(u32 a1);
+
+void sub_8044DFC(void) {
     gSeed = -1;
     dword_203F4B0 = REG_TM3CNT_L | 1;
     sub_8044E28(dword_203F4B0);

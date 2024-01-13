@@ -38,7 +38,7 @@ void reset_volume(void) {
  * \param t         The time interval over which to fade out the volume.
  * \param fadeSfx   A boolean value indicating whether or not to fade out the volume of audio effects.
  */
-static void fade_out_volume(fx32 t, bool32 fadeSfx) {
+void fade_out_volume(fx32 t, bool32 fadeSfx) {
     fx32 bgmVolume;
     fx32 bgmVolumeDecrement;
     fx32 sfxVolume;
@@ -79,7 +79,7 @@ static void fade_out_volume(fx32 t, bool32 fadeSfx) {
  * \param t         The time interval over which to fade in the volume.
  * \param fadeSfx   A boolean value indicating whether or not to fade in the volume of audio effects.
  */
-static void fade_in_volume(fx32 t, bool32 fadeSfx) {
+void fade_in_volume(fx32 t, bool32 fadeSfx) {
     fx32 bgmVolume;
     fx32 bgmVolumeIncrement;
     fx32 sfxVolume;
