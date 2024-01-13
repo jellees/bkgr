@@ -7,10 +7,10 @@ extern bool8 byte_203F4E0;
 extern int dword_203F4E4;
 extern int dword_203F4E8;
 
-void open_pause_menu();
-void init_arcade_menu();
+void open_pause_menu(void);
+void init_arcade_menu(void);
 void sub_8047000(bool32 a1);
-void exec_arcade_menu();
-void draw_arcade_menu();
+void exec_arcade_menu(void);
+void draw_arcade_menu(void);
 
 #endif

@@ -58,16 +58,16 @@ bool8 gArcadeFadeIn;
 
 u16 gPaletteCopy[0x100];
 
-static void init();
-static void exec_pause_menu();
+static void init(void);
+static void exec_pause_menu(void);
 static bool32 choose_sub_menu(bool32* changeMenu);
-static void exec_totals_menu();
-static bool32 exec_save_menu();
-static void exec_options_menu();
-static void render_controls();
-static void draw_arcade_menu_sprites();
+static void exec_totals_menu(void);
+static bool32 exec_save_menu(void);
+static void exec_options_menu(void);
+static void render_controls(void);
+static void draw_arcade_menu_sprites(void);
 
-void open_pause_menu() {
+void open_pause_menu(void) {
     int i;
 
     gClockStatus = 1;
@@ -269,8 +269,8 @@ void open_pause_menu() {
     update_video();
     SkipVblank();
 
-    DmaTransfer32(OBJ_PLTT, gPaletteCopy, 128);
-    DmaTransfer32(&unk_83FD254, OBJ_PLTT, 128);
+    DmaTransfer32((void*)OBJ_PLTT, gPaletteCopy, 128);
+    DmaTransfer32(&unk_83FD254, (void*)OBJ_PLTT, 128);
 
     sub_8026CC8(2048, 45056);
     DisableBackgrounds();
@@ -298,7 +298,7 @@ void open_pause_menu() {
     EnableBackgrounds();
 
     sub_8026D84();
-    DmaTransfer32(gPaletteCopy, OBJ_PLTT, 128);
+    DmaTransfer32(gPaletteCopy, (void*)OBJ_PLTT, 128);
     sub_800EECC();
 
     if (!gIsSlideMiniGame) {
@@ -322,7 +322,7 @@ void open_pause_menu() {
     resume_efx();
 }
 
-static void init() {
+static void init(void) {
     sub_8040B3C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
 
     InitMenu(MENU_PAUSE_MAIN, gPauseMenuLanguage);
@@ -358,7 +358,7 @@ static void init() {
     byte_203F54C = TRUE;
 }
 
-static void exec_pause_menu() {
+static void exec_pause_menu(void) {
     bool32 changeMenu, fadeIn;
     bool32 loadMenu = FALSE;
 
@@ -467,7 +467,7 @@ static void exec_pause_menu() {
 /**
  * Draws play time. This function is never used.
  */
-static void draw_time() {
+void draw_time(void) {
     gTimeText[0] = '0';
     gTimeText[1] = '0';
     gTimeText[2] = ':';
@@ -571,7 +571,7 @@ static void load_jinjo_palette(s32 page) {
     }
 }
 
-static void exec_totals_menu() {
+static void exec_totals_menu(void) {
     s32 page, nextPage;
     bool32 loadNextPage;
     bool32 fadeIn;
@@ -716,7 +716,7 @@ static void exec_totals_menu() {
     }
 }
 
-static bool32 exec_save_menu() {
+static bool32 exec_save_menu(void) {
     enum PauseMenuState { SHOW_SAVE_GAMES, MOVE_TEXT, WAIT_FOR_CONFIRMATION, SAVING_GAME, GAME_SAVED };
 
     int i;
@@ -854,6 +854,9 @@ static bool32 exec_save_menu() {
                 case WAIT_FOR_CONFIRMATION:
                     state = SAVING_GAME;
                     saveGame = TRUE;
+                    break;
+                
+                default:
                     break;
             }
         } else if (gKeysDown & DPAD_UP) {
@@ -1049,7 +1052,7 @@ static bool32 exec_save_menu() {
     return 1;
 }
 
-static void exec_options_menu() {
+static void exec_options_menu(void) {
     struct TextBox bgmVolumeTextBox;
     struct TextBox sfxVolumeTextBox;
     char bgmText[6];
@@ -1332,7 +1335,7 @@ _broken:
 /**
  * Renders D-pad and A button sprites. They are always disabled so never seen.
  */
-static void render_controls() {
+static void render_controls(void) {
     int i;
 
     for (i = 0; i < 3; i++) {
@@ -1342,7 +1345,7 @@ static void render_controls() {
     }
 }
 
-void init_arcade_menu() {
+void init_arcade_menu(void) {
     int i;
 
     if (gPlayerState == PLAYER_STATE_NONE) {
@@ -1421,8 +1424,8 @@ void init_arcade_menu() {
     }
 
     DisableBackgrounds();
-    DmaFill32(0, BG_PLTT, 128);
-    DmaTransfer32(&unk_83FD254, OBJ_PLTT, 128);
+    DmaFill32(0, (void*)BG_PLTT, 128);
+    DmaTransfer32(&unk_83FD254, (void*)OBJ_PLTT, 128);
     DmaTransferObjPalette(&unk_83FD974, 5, 5);
 
     InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
@@ -1463,8 +1466,8 @@ void sub_8047000(bool32 a1) {
     update_video();
     SkipVblank();
 
-    DmaFill32(0, BG_PLTT, 128);
-    DmaTransfer32(&unk_83FD254, OBJ_PLTT, 128);
+    DmaFill32(0, (void*)BG_PLTT, 128);
+    DmaTransfer32(&unk_83FD254, (void*)OBJ_PLTT, 128);
     DmaTransferObjPalette(&unk_83FD974, 5, 5);
 
     InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
@@ -1487,7 +1490,7 @@ void sub_8047000(bool32 a1) {
     sub_08041FA4(55);
 }
 
-void exec_arcade_menu() {
+void exec_arcade_menu(void) {
     if (gPlayerState != PLAYER_STATE_NONE) {
         return;
     }
@@ -1547,8 +1550,8 @@ void exec_arcade_menu() {
                 audio_start_tune(gLoadedRoomBgm);
             }
 
-            DmaTransfer32(gRoomHeader.spritePalette, 0x5000200, 128);
-            DmaTransfer32(gRoomHeader.backgroundPalette, 0x5000000, 128);
+            DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
+            DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);
             sub_0804200C(55);
             sub_80409DC();
             FreeById(4, 25);
@@ -1567,7 +1570,7 @@ void exec_arcade_menu() {
     }
 }
 
-void draw_arcade_menu() {
+void draw_arcade_menu(void) {
     if (gPlayerState != PLAYER_STATE_NONE) {
         return;
     }
@@ -1585,7 +1588,7 @@ void draw_arcade_menu() {
     }
 }
 
-static void draw_arcade_menu_sprites() {
+static void draw_arcade_menu_sprites(void) {
     int i;
 
     for (i = 0; i < 3; i++) {

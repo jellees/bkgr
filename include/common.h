@@ -412,7 +412,7 @@ extern void DmaTransfer32(void*, void*, size_t);
 extern void SyncVblank(void);
 extern void SkipVblank(void);
 extern void ReadKeys(u16*, u16*, u16*);
-extern void DmaTransferObjPalette(u8*, int, int);
+extern void DmaTransferObjPalette(void*, int, int);
 extern void CheckStacks(void);
 
 extern void sprite_set_anim(struct Sprite* sprite, int idx, bool8 loopFrame, bool8 maxAnimRepeats);
@@ -468,6 +468,7 @@ extern void AddStringToBuffer(struct TextBox*, char*);
 extern void sub_80254E0(void);
 extern int sub_8025870(char*, struct TextBox*);
 
+extern void sub_8025E44(int);
 extern void sub_8025FBC(void);
 extern bool32 sub_8025FF8(void);
 extern void sub_8026180(void);
@@ -485,6 +486,7 @@ extern void sub_8026D20(int, int, int, int);
 extern void sub_8026D84(void);
 extern void sub_8026DC0(void);
 extern void sub_8026E48(int, int, int);
+extern void sub_8026F78(int, int, int);
 extern void sub_80270AC(int, int);
 extern void sub_80271A4(int, int);
 extern void sub_0802D0A0(int, struct Vec3fx*, u8);
@@ -508,7 +510,18 @@ extern void sub_803FE78(void);
 
 extern void sub_8040178(void);
 extern void sub_08040204(int, int);
+extern void sub_804087C(void);
+extern void sub_80408F0(void);
+extern void sub_804095C(void);
 extern void sub_80409DC(void);
+extern void sub_8040B3C(int);
+extern void sub_8040E74(void);
+extern bool32 sub_8040E8C(int);
+extern bool32 sub_8040FF4(int);
+extern void sub_0804147C(int);
+extern void sub_8041AAC(int);
+extern bool32 sub_08041AC0(int);
+extern bool32 sub_08041C8C(int);
 extern void sub_08041FA4(int);
 extern void sub_0804200C(int);
 extern bool32 sub_080420E8(int);
@@ -519,6 +532,7 @@ extern void sub_804888C(u8);
 extern void sub_8048B1C(void);
 
 extern void sub_80524D8(void);
+extern void sub_80528D8(int);
 
 extern void start_script(int);
 extern void update_scripts(void);
