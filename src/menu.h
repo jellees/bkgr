@@ -62,6 +62,6 @@ void SetMenuEntry(int entry);
 extern u8 gMenuId;
 extern u8 gMenuParentId;
 // This can be make static.
-extern struct Menu gMenu; 
+extern struct Menu gMenu;
 
 #endif

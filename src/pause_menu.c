@@ -856,7 +856,7 @@ static bool32 exec_save_menu(void) {
                     state = SAVING_GAME;
                     saveGame = TRUE;
                     break;
-                
+
                 default:
                     break;
             }
