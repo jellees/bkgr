@@ -18,8 +18,6 @@ extern void FreeById(int, int);
 extern void ResetMenu();
 extern u32 DoesMemBlockExistById(int, int);
 
-extern void DmaFill32(int, void*, int);
-
 void InitPregame() {
     byte_20021F0 = 0;
     dword_20021F4 = 0x10000;

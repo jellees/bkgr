@@ -4,13 +4,6 @@
 #include "main.h"
 #include "player.h"
 
-// Functions from libagbbackup
-extern u16 IdentifyEeprom(u16 eeprom_KbitSize);
-extern u16 SetEepromTimerIntr(u8 timerNo, void (**IntrFunc)(void));
-extern u16 ReadEepromDword(u16 epAdr, u16* dst);
-extern u16 ProgramEepromDword(u16 epAdr, u16* src);
-extern u16 VerifyEepromDword(u16 epAdr, u16* src);
-
 #define BUFFER_SIZE 2040
 
 bool8 gIsSavingGame;
@@ -20,7 +13,7 @@ u8* gBuffer;
 u8 byte_203EAE0[3];
 u8 byte_203EAE3;
 
-static void create_eeprom_buffer() {
+static void create_eeprom_buffer(void) {
     IdentifyEeprom(64);
     SetEepromTimerIntr(3, &gFunctionArray[6]);
     gBuffer = (u8*)Alloc(BUFFER_SIZE, 9, 4);
@@ -33,14 +26,14 @@ static void create_eeprom_buffer() {
     byte_203EAD8 = 31;
 }
 
-static void remove_eeprom_buffer() {
+static void remove_eeprom_buffer(void) {
     gFunctionArray[6] = nullsub_15;
     Free(gBuffer, 4);
     REG_IME = 1;
     gIsSavingGame = FALSE;
 }
 
-bool32 load_save_header() {
+bool32 load_save_header(void) {
     u8* buffer;
     u16 sum1, sum2;
 
@@ -54,7 +47,7 @@ bool32 load_save_header() {
     byte_203EAE0[2] = 2;
     byte_203EAE3 = 3;
 
-    if (ReadEepromDword(0, buffer)) {
+    if (ReadEepromDword(0, (u16*)buffer)) {
         ASSERT(0);
         remove_eeprom_buffer();
         return FALSE;
@@ -86,7 +79,7 @@ bool32 load_save_header() {
 
     gPauseMenuLanguage = buffer[5];
 
-    if (ReadEepromDword(1, gBuffer)) {
+    if (ReadEepromDword(1, (u16*)gBuffer)) {
         ASSERT(0);
         remove_eeprom_buffer();
         return FALSE;
@@ -144,13 +137,13 @@ bool32 save_game(u32 game, bool32 a2) {
         buffer[6] = v2;
         buffer[7] = v2 >> 8;
 
-        if (ProgramEepromDword(0, gBuffer)) {
+        if (ProgramEepromDword(0, (u16*)gBuffer)) {
             HANG;
             remove_eeprom_buffer();
             return FALSE;
         }
 
-        if (VerifyEepromDword(0, gBuffer)) {
+        if (VerifyEepromDword(0, (u16*)gBuffer)) {
             HANG;
             remove_eeprom_buffer();
             return FALSE;
@@ -184,7 +177,7 @@ bool32 save_game(u32 game, bool32 a2) {
 
     v9 = dword_80AF4F0[byte_203EAE3];
     for (i = 0; i < BUFFER_SIZE / 8; i++) {
-        if (ProgramEepromDword(v9 + i, &gBuffer[8 * i])) {
+        if (ProgramEepromDword(v9 + i, (u16*)&gBuffer[8 * i])) {
             HANG;
             remove_eeprom_buffer();
             return FALSE;
@@ -192,7 +185,7 @@ bool32 save_game(u32 game, bool32 a2) {
     }
 
     for (i = 0; i < BUFFER_SIZE / 8; i++) {
-        if (VerifyEepromDword(v9 + i, &gBuffer[8 * i])) {
+        if (VerifyEepromDword(v9 + i, (u16*)&gBuffer[8 * i])) {
             HANG;
             remove_eeprom_buffer();
             return FALSE;
@@ -207,13 +200,13 @@ bool32 save_game(u32 game, bool32 a2) {
     buffer[2] = byte_203EAE0[2];
     buffer[3] = byte_203EAE0[3];
 
-    if (ProgramEepromDword(1, gBuffer)) {
+    if (ProgramEepromDword(1, (u16*)gBuffer)) {
         HANG;
         remove_eeprom_buffer();
         return FALSE;
     }
 
-    if (VerifyEepromDword(1, gBuffer)) {
+    if (VerifyEepromDword(1, (u16*)gBuffer)) {
         HANG;
         remove_eeprom_buffer();
         return FALSE;
@@ -238,7 +231,7 @@ bool32 load_game(int game) {
 
     v9 = dword_80AF4F0[byte_203EAE0[game]];
     for (i = 0; i < 0xFF; i++) {
-        if (ReadEepromDword(v9 + i, &gBuffer[8 * i])) {
+        if (ReadEepromDword(v9 + i, (u16*)&gBuffer[8 * i])) {
             HANG;
             remove_eeprom_buffer();
             return FALSE;
@@ -294,7 +287,7 @@ bool32 load_game(int game) {
     return TRUE;
 }
 
-void erase_all_save_data() {
+void erase_all_save_data(void) {
     u16 data[4];
     int i;
 
@@ -306,7 +299,7 @@ void erase_all_save_data() {
     create_eeprom_buffer();
 
     for (i = 0; i < 0x3FF; i++) {
-        ProgramEepromDword(i, (u8*)&data);
+        ProgramEepromDword(i, data);
     }
 
     remove_eeprom_buffer();
@@ -324,7 +317,7 @@ int sub_8044D70(int game) {
 
     v9 = dword_80AF4F0[byte_203EAE0[game]];
     for (i = 0; i < 0xFF; i++) {
-        if (ReadEepromDword(v9 + i, &gBuffer[8 * i]) != 0) {
+        if (ReadEepromDword(v9 + i, (u16*)&gBuffer[8 * i]) != 0) {
             ASSERT(0);
         }
     }

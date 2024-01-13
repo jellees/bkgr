@@ -7,8 +7,10 @@ extern u8 gBgmMainVolume;
 extern u8 gSfxMainVolume;
 extern u8 gSfxVolume;
 
-extern void init_audio_and_reset_volume();
-extern void reset_volume();
+extern void init_audio_and_reset_volume(void);
+extern void reset_volume(void);
+
+extern int audio_new_fx(int, int, int);
 
 #define AUDIO_NEW_SFX(idx, volume, pitch) (gCanPlaySfx ? audio_new_fx(idx, volume, pitch) : -1)
 

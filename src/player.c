@@ -45,13 +45,17 @@ u32 dword_20021EC;
 static void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
 static const u16 sPlayerStateFlags[PLAYER_STATE_COUNT];
 
-static void sub_08019AAC(int a1, int a2);
+void sub_8016440(void);
+void sub_8016B0C(void);
+void sub_8017D9C(void);
+bool32 start_npc_dialogue(int);
+static void sub_08019AAC(int, int);
 
-void sub_8016434() {
+void sub_8016434(void) {
     sub_8016440();
 }
 
-void sub_8016440() {
+void sub_8016440(void) {
     int i;
 
     byte_20020BC = 0;
@@ -173,12 +177,12 @@ static void sub_8016670() {
     gPlayerState = PLAYER_STATE_35;
 }
 
-void set_player_state_to_none() {
+void set_player_state_to_none(void) {
     gPreviousPlayerState = gPlayerState;
     gPlayerState = PLAYER_STATE_NONE;
 }
 
-void sub_80166A0() {
+void sub_80166A0(void) {
     sub_8063578();
     if (byte_203FA88) {
         dword_2001108++;
@@ -323,11 +327,11 @@ void sub_8016A94(int a1) {
     }
 }
 
-void sub_8016B0C() {
+void sub_8016B0C(void) {
     sub_8042250();
 }
 
-void sub_8016B18() {
+void sub_8016B18(void) {
     start_script(42);
     sub_8034460(253, 0, 5, 0);
     if (gCanChangeBgm) {
@@ -335,7 +339,7 @@ void sub_8016B18() {
     }
 }
 
-void sub_8016B44() {
+void sub_8016B44(void) {
     sub_8048B1C();
     gPreviousPlayerState = gPlayerState;
     gPlayerState = PLAYER_STATE_98;
@@ -747,7 +751,7 @@ static void do_dive() {
     sub_800C604();
 }
 
-void sub_8017A54() {
+void sub_8017A54(void) {
     gPreviousPlayerState = gPlayerState;
     if (gTransformation == TRANSFORMATION_OCTOPUS) {
         gPlayerState = PLAYER_STATE_OCTOPUS_IDLE;
@@ -796,7 +800,7 @@ void sub_8017B34(int a1) {
     }
 }
 
-void sub_8017C50() {
+void sub_8017C50(void) {
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING
         || gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE
         || gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) {
@@ -842,7 +846,7 @@ void sub_8017C50() {
     sub_8016790(0, gPlayerSprite.direction);
 }
 
-void sub_8017D9C() {
+void sub_8017D9C(void) {
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
         gPlayerShadowSprite.attr0Flag9 = 0;
         if (gTransformation == TRANSFORMATION_OCTOPUS) {
@@ -857,7 +861,7 @@ void sub_8017D9C() {
     }
 }
 
-void set_player_in_climb_state() {
+void set_player_in_climb_state(void) {
     if (!gUnlockedMoves[MOVE_CLIMB]) {
         return;
     }
@@ -896,7 +900,7 @@ void set_player_in_climb_state() {
     sub_8016790(0, gPlayerSprite.direction);
 }
 
-void sub_8017F14() {
+void sub_8017F14(void) {
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
@@ -1636,7 +1640,7 @@ void sub_80192D4(int a1, int a2, int a3) {
     }
 }
 
-void sub_801990C() {
+void sub_801990C(void) {
     sub_8026714();
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_WONDERWING_MODE) {
         sub_0804200C(3);
@@ -1923,7 +1927,7 @@ void sub_08019FCC(u32 transformation) {
     gTransformation = transformation;
 }
 
-void load_transformation_palette() {
+void load_transformation_palette(void) {
     if (gTransformation == TRANSFORMATION_MOUSE) {
         DmaTransferObjPalette(&unk_83FD734, 7, 7);
     } else if (gTransformation == TRANSFORMATION_CANDLE) {

@@ -8,10 +8,12 @@ u8 gBgmMainVolume;
 u8 gSfxMainVolume;
 u8 gSfxVolume;
 
+void reset_volume(void);
+
 /**
  * Initialises audio and resets volume to their default values.
  */
-void init_audio_and_reset_volume() {
+void init_audio_and_reset_volume(void) {
     ASSERT(dword_80CEB58 == 0xE3);
     init_audio();
     reset_volume();
@@ -20,7 +22,7 @@ void init_audio_and_reset_volume() {
 /**
  * Resets the volume of audio tunes and effects to their default values.
  */
-void reset_volume() {
+void reset_volume(void) {
     gCanChangeBgm = TRUE;
     gCanPlaySfx = TRUE;
     gBgmMainVolume = 4;

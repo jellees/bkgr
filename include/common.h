@@ -1,15 +1,6 @@
 #ifndef GUARD_COMMON_H
 #define GUARD_COMMON_H
 
-// Function declarations
-
-extern void sub_80001EC();
-extern void UpdateBackgrounds();
-extern u8 sub_80038AC(u32);
-extern u8 sub_80038BC(u32);
-extern void sub_8003A04(u32, u32*, u8, u8);
-extern u32 sub_80266A8();
-
 // Enums
 
 enum Rooms {
@@ -407,7 +398,38 @@ struct SpriteDMATableEntry {
     u32 count;
 };
 
+// Function prototypes
+
+extern void sub_80001EC();
+extern void UpdateBackgrounds();
+extern void DmaFill32(int, void*, size_t);
+extern void SyncVblank(void);
+
+extern void audio_pause(void);
+extern void audio_set_tune_vol(int);
+extern void audio_set_fx_vol(int);
+
+extern void CallARM_store_jump_value(u32, s32);
+extern fx32 CallARM_FX_Mul16(fx32, fx32);
+
+extern void sub_8003A04(u32, u32*, u8, u8);
+extern u8 sub_80038AC(u32);
+extern u8 sub_80038BC(u32);
+extern u32 sub_80266A8(void);
+extern void sub_0802FEDC(int);
+extern void sub_8034460(int, int, int, int);
+extern void sub_8034970(u8*, s32*, u32*);
+extern void sub_8036138(u8*, s32*, u32*);
+extern bool32 sub_8037C08(u8*, u32*);
+extern void sub_8063578(void);
+extern u16 IdentifyEeprom(u16 eeprom_KbitSize);
+extern u16 SetEepromTimerIntr(u8 timerNo, void (**IntrFunc)(void));
+extern u16 ReadEepromDword(u16 epAdr, u16* dst);
+extern u16 ProgramEepromDword(u16 epAdr, u16* src);
+extern u16 VerifyEepromDword(u16 epAdr, u16* src);
+
 // EWRAM
+
 extern u32 gDestinationWarps;
 extern u32 gDestinationWarpCount;
 
@@ -470,7 +492,7 @@ extern u8 byte_203E16C;
 
 extern u16** dword_203F8B4; // A pointer to a pointer to a struct.
 
-extern u32 dword_203F98C;
+extern u8* dword_203F98C;
 
 extern u16 word_203F992;
 
@@ -501,6 +523,7 @@ extern u8 byte_203FA95;
 extern u8 byte_203FA96;
 
 // IWRAM
+
 extern u8 unk_3000000;
 
 extern struct struc_44 gFloorPlaneResult;
