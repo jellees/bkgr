@@ -486,6 +486,7 @@ extern void sub_8026D84(void);
 extern void sub_8026DC0(void);
 extern void sub_8026E48(int, int, int);
 extern void sub_80270AC(int, int);
+extern void sub_80271A4(int, int);
 extern void sub_0802D0A0(int, struct Vec3fx*, u8);
 extern u8 sub_0802E080(void);
 extern void sub_0802FEDC(int);
@@ -501,10 +502,13 @@ extern bool32 sub_8037C08(u8*, u32*);
 extern void sub_800386C(u32, u32, u32);
 extern void sub_80388E0(void);
 extern void sub_8038A34(void);
+extern void sub_8038FA0(u16);
+extern void sub_8039234(void);
 extern void sub_803FE78(void);
 
 extern void sub_8040178(void);
 extern void sub_08040204(int, int);
+extern void sub_80409DC(void);
 extern void sub_08041FA4(int);
 extern void sub_0804200C(int);
 extern bool32 sub_080420E8(int);
@@ -524,6 +528,9 @@ extern void end_all_scripts(int);
 extern void sub_8060FF8(void);
 extern void sub_80629E8(void);
 extern void sub_8063578(void);
+extern void sub_080643D0(int);
+
+extern void LZ77UnCompReadNormalWrite16bit(void*, void*);
 
 extern u16 IdentifyEeprom(u16 eeprom_KbitSize);
 extern u16 SetEepromTimerIntr(u8 timerNo, void (**IntrFunc)(void));

@@ -6,9 +6,10 @@
 #include "room.h"
 #include "player.h"
 #include "audio_b.h"
+#include "alloc.h"
 
-static void show_gameover_screen();
-static void sub_8062D04();
+static void show_gameover_screen(void);
+static void sub_8062D04(void);
 static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount);
 
 void sub_80629E8() {
@@ -91,18 +92,18 @@ void sub_80629E8() {
         sub_8016C78(0);
 }
 
-static void show_gameover_screen() {
+static void show_gameover_screen(void) {
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_4;
     REG_BG2CNT = 0;
     gColorSpecEffectsSel = BLDCNT_TGT2_ALL;
 
     SyncVblank();
-    DmaFill32(0, BG_VRAM, 0x5000);
+    DmaFill32(0, (void*)BG_VRAM, 0x5000);
     SyncVblank();
-    LZ77UnCompReadNormalWrite16bit(&unk_87E0240, BG_VRAM);
+    LZ77UnCompReadNormalWrite16bit(&unk_87E0240, (void*)BG_VRAM);
     SyncVblank();
-    DmaTransfer32(&unk_83FC114, BG_PLTT, 129);
-    DmaTransfer32(&unk_83FD254, OBJ_PLTT, 128);
+    DmaTransfer32(&unk_83FC114, (void*)BG_PLTT, 129);
+    DmaTransfer32(&unk_83FD254, (void*)OBJ_PLTT, 128);
 
     gLoadedRoomBgm = 16;
     if (gCanChangeBgm) {
@@ -110,7 +111,7 @@ static void show_gameover_screen() {
     }
 }
 
-static void sub_8062D04() {
+static void sub_8062D04(void) {
     bool32 v0;
     struct TextBox textbox;
     char string[14];
