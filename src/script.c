@@ -444,3 +444,8 @@ bool32 sub_805DD20(void) {
     sub_805DC28(3);
     return (gPlayerStateFlags[gPlayerState] & 0x800) == 0;
 }
+
+// https://decomp.me/scratch/BrRUy
+#ifndef NONMATCHING
+asm_unified(".include \"asm/nonmatching/update_scripts.s\"");
+#endif
