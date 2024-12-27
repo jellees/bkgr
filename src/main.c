@@ -23,7 +23,7 @@ s32 dword_200031C;
 u8 gPauseMenuLanguage;
 u32* gMatrices;
 u32 gMatricesCount;
-u32* dword_200032C;
+struct struc_200032C* dword_200032C;
 u8 byte_2000330;
 u8 byte_2000331;
 u8 byte_2000332;
@@ -1549,7 +1549,7 @@ static fx32 clamp_camera_velocity(fx32 velocity, fx32 speed) {
     }
 }
 
-void sub_800B958(int a1, int a2, int a3, int a4, int a5) {
+void sub_800B958(fx32 a1, fx32 a2, fx32 a3, fx32 a4, bool32 a5) {
     fx32 v6;
     u32 direction;
 
@@ -3249,7 +3249,7 @@ void init_save_files() {
         gSaveFiles[i].second = 0;
         gSaveFiles[i].jiggies = 0;
         gSaveFiles[i].notes = 0;
-        gSaveFiles[i].empty = 1;
+        gSaveFiles[i].empty = TRUE;
 
         if (sub_8044D70(i) == 1) {
             v0 = 1;
@@ -3260,7 +3260,7 @@ void init_save_files() {
                 gSaveFiles[i].second = gGameStatus.clockSecond;
                 gSaveFiles[i].jiggies = (u8)gGameStatus.totalJiggies;
                 gSaveFiles[i].notes = gGameStatus.totalNotes;
-                gSaveFiles[i].empty = 0;
+                gSaveFiles[i].empty = FALSE;
 
                 sub_8030C54();
                 sub_800A5E8();
@@ -3289,7 +3289,7 @@ void reset_save_files() {
         gSaveFiles[i].second = 0;
         gSaveFiles[i].jiggies = 0;
         gSaveFiles[i].notes = 0;
-        gSaveFiles[i].empty = 1;
+        gSaveFiles[i].empty = TRUE;
     }
 }
 

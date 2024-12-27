@@ -398,6 +398,43 @@ struct SpriteDMATableEntry {
     u32 count;
 };
 
+struct struc_203F98C
+{
+    u16 input;
+    u16 count;
+};
+
+struct struc_200032C {
+    u32 field_0;
+    u32 field_4;
+    u32 field_8;
+    u32 field_C;
+    u32 field_10;
+    u32 field_14;
+    u32 field_18;
+    u32 field_1C;
+    u32 field_20;
+    u32 field_24;
+    u32 field_28;
+    u32 field_2C;
+    u32 field_30;
+    u32 field_34;
+    u32 field_38;
+    u32 field_3C;
+    u32 field_40;
+    u32 field_44;
+    u32 field_48;
+    u32 field_4C;
+    u32 field_50;
+    u32 field_54;
+    u32 field_58;
+    u32 field_5C;
+    u32 field_60;
+    u32 field_64;
+    u32 field_68;
+    u32 field_6C;
+};
+
 // Struct forward declarations
 struct Sprite;
 struct TextBox;
@@ -447,6 +484,7 @@ extern void audio_init(void);
 extern void audio_vsync_asm(void);
 extern void audio_asmprocess(void);
 
+extern void sub_8003864(u32);
 extern void CallARM_store_jump_and_other_value(u32, fx32, fx32);
 extern void sub_800387C(u32);
 extern void sub_8003884(u32, u32, u32, u32);
@@ -505,6 +543,7 @@ extern void SetTextSpriteCount(int);
 extern void RenderText(void);
 extern void AddStringToBuffer(struct TextBox*, char*);
 extern void sub_80254E0(void);
+extern void sub_8025718(u8, u32, u32);
 extern void sub_8025798(u8*, u32);
 extern int sub_8025870(char*, struct TextBox*);
 extern void sub_8025948(int);
@@ -605,8 +644,8 @@ extern void sub_08052B58(int, int);
 extern void sub_08055A14(int, int);
 extern void sub_080593D0(int, int);
 extern void sub_0805BA1C(int, int);
-extern void sub_805D158(void);
 
+extern void sub_805D158(void);
 extern void start_script(int);
 extern void update_scripts(void);
 extern void render_scripts(u32**, u32*);
@@ -702,8 +741,9 @@ extern u8 byte_203E16C;
 
 extern u16** dword_203F8B4; // A pointer to a pointer to a struct.
 
-extern u8* dword_203F98C;
+extern struct struc_203F98C* dword_203F98C;
 
+extern u16 word_203F990;
 extern u16 word_203F992;
 
 extern s16 word_203F998;
@@ -714,8 +754,21 @@ extern bool8 byte_203F99E;
 
 extern u8 byte_203F99F; // possibly bool8
 
-extern u8 byte_203F9A1; // possibly bool8
+extern fx32 dword_203F9F8;
+extern fx32 dword_203F9FC;
+
+// REMOVE THIS AT SOME POINT.
+extern u8 byte_203F9A1;
 extern bool8 gHidePlayer;
+
+extern u16 word_203FA10;
+
+extern u8 byte_203FA12;
+extern u8 byte_203FA13;
+extern u8 byte_203FA14;
+extern u8 byte_203FA15;
+extern u8 byte_203FA16;
+extern u8 byte_203FA16_2;
 
 extern u8 byte_203FA35; // possibly bool8
 
@@ -756,6 +809,7 @@ extern u32 dword_30032BC[];
 extern u16 gPreviousKeys;
 extern u16 gKeysPressed;
 extern u16 gKeysDown;
+extern u16 gKeyInput;
 
 extern u32 dword_30032CC;
 extern struct Vec3fx gPlayerPos;
@@ -962,7 +1016,7 @@ extern u8 dword_80CB9A9[][3];
 
 extern u32 byte_80CEBC8[];
 
-extern u8 unk_80B21B4;
+extern struct struc_203F98C unk_80B21B4[];
 extern u32 dword_80B21B8;
 
 extern u8 unk_83FD734;
@@ -985,5 +1039,7 @@ extern char char_080652F0[];
 extern char char_08065304[];
 
 extern u8 unk_83FD454[];
+
+extern s16 dword_80B1AE4[];
 
 #endif

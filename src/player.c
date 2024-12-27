@@ -517,7 +517,7 @@ static bool32 interact_with_object() {
             if (byte_203E10F) {
                 byte_20020B2 = 1;
                 sub_80342F8(223, gUnlockedLevels);
-                dword_203F98C = &unk_80B21B4;
+                dword_203F98C = unk_80B21B4;
                 word_203F992 = dword_80B21B8;
                 start_script(byte_80CEBC8[gUnlockedLevels++]);
                 sub_8034460(228, 0, 2, 0);
