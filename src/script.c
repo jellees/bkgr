@@ -4,6 +4,7 @@
 #include "room.h"
 #include "player.h"
 #include "main.h"
+#include "alloc.h"
 
 #define MAX_SCRIPTS 2
 
@@ -82,9 +83,10 @@ extern struct ScriptCamera* dword_203FA18;
 extern fx32 dword_203FA1C;
 extern fx32 dword_203FA20;
 
+bool32 script_cmd_actor_set_anim(int, int, bool32, int);
 bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
 bool32 script_cmd_actor_move(int, int, int, fx32);
-bool32 script_cmd_actor_set_anim(int, int, bool32, int);
+bool32 sub_0805F8DC(int, int, int, int);
 
 void sub_805D158(void) {
     u8 i = 0;
@@ -457,7 +459,7 @@ void render_scripts(u32** a1, u32* a2) {
         return;
     }
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < MAX_SCRIPTS; i++) {
         struct Script* script = &gScripts[i];
 
         if (script->isActive && (script->field_23 || !byte_203FA16)) {
@@ -491,4 +493,96 @@ void render_scripts(u32** a1, u32* a2) {
             }
         }
     }
+}
+
+void render_scripts_direct(void) {
+    u8 i;
+    int actorIdx;
+
+    for (i = 0; i < MAX_SCRIPTS; i++) {
+        struct Script* script = &gScripts[i];
+        for (actorIdx = 0; actorIdx < script->actorCount; actorIdx++) {
+            if (script->actors[actorIdx].isVisible) {
+                sprite_render(&script->actors[actorIdx].sprite);
+            }
+        }
+    }
+}
+
+void remove_actors(struct Script* script) {
+    u8 i;
+
+    if (script->actorCount == 0) {
+        return;
+    }
+
+    for (i = 0; i < script->actorCount; i++) {
+        if (script->actors[i].isVisible) {
+            if (script->actors[i].calcIdx != -1) {
+                sub_8003864(script->actors[i].calcIdx);
+                script->actors[i].calcIdx = -1;
+            }
+            gActorCount--;
+        }
+    }
+
+    Free(script->actors, 3);
+    script->actorCount = 0;
+}
+
+void end_script(struct Script* script) {
+    remove_actors(script);
+    script->endScript = TRUE;
+
+    if (script->field_23) {
+        byte_203F99C = 0;
+        word_203F998 = -1;
+        word_203F99A = -1;
+        script->field_23 = 0;
+        byte_203FA14 = 0;
+        ASSERT(!byte_203FA15);
+    }
+
+    script->isActive = FALSE;
+    sub_805D568();
+    ASSERT(byte_203F99E || !DoesMemBlockExistById(3, 5));
+}
+
+void end_all_scripts(int a1) {
+    u8 i;
+
+    if (byte_203FA15) {
+        switch (a1) {
+            case 0:
+            case 2:
+                sub_0805F8DC(0, 0, 0, 0);
+                break;
+        }
+    }
+
+    for (i = 0; i < MAX_SCRIPTS; i++) {
+        if (!gScripts[i].isActive) {
+            continue;
+        }
+
+        switch (a1) {
+            case 0:
+                if (gCurrentScript->field_23) {
+                    end_script(&gScripts[i]);
+                }
+                break;
+
+            case 1:
+                if (!gCurrentScript->field_23) {
+                    end_script(&gScripts[i]);
+                }
+                break;
+
+            case 2:
+                end_script(&gScripts[i]);
+                break;
+        }
+    }
+
+    sub_805D568();
 }
