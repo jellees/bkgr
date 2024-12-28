@@ -2470,47 +2470,47 @@ void load_mini_game_from_arcade(int miniGame) {
 
 void sub_800D5FC(int a1, int a2, int a3) {
     int room;
-    int r5;
+    int script;
 
     byte_20010B0 = 0;
 
     room = 0;
-    r5 = 0;
+    script = 0;
 
     switch (a1) {
         case 9:
             room = ROOM_LOWERFARM;
             if (sub_80342CC(0xD9, 0x10)) {
-                r5 = 0;
+                script = 0;
             } else if (a2) {
                 sub_8034460(217, 16, 0, 0);
-                r5 = 0x45;
+                script = 69;
             } else {
-                r5 = 0x46;
+                script = 70;
             }
             break;
 
         case 0:
             room = ROOM_BEACHSTART;
             if (sub_80342CC(0xD9, 9)) {
-                r5 = 0;
+                script = 0;
             } else if (a2) {
                 sub_8034460(0xD9, 9, 0, 0);
-                r5 = 0x54;
+                script = 84;
             } else {
-                r5 = 0x55;
+                script = 85;
             }
             break;
 
         case 5:
             room = ROOM_SANDAREA;
             if (sub_80342CC(0xD9, 0xD)) {
-                r5 = 0;
+                script = 0;
             } else if (a2) {
                 sub_8034460(0xD9, 0xD, 0, 0);
-                r5 = 0x76;
+                script = 118;
             } else {
-                r5 = 0x77;
+                script = 119;
             }
             break;
 
@@ -2518,10 +2518,10 @@ void sub_800D5FC(int a1, int a2, int a3) {
             room = ROOM_BEACHSTART;
             if (a2 && !sub_80342CC(0xD9, 0xA)) {
                 sub_8034460(0xD9, 0xA, 0, 0);
-                r5 = 0x4E;
+                script = 78;
                 break;
             } else {
-                r5 = 0;
+                script = 0;
                 break;
             }
 
@@ -2529,10 +2529,10 @@ void sub_800D5FC(int a1, int a2, int a3) {
             room = ROOM_HARBOUR;
             if (a2 && !sub_80342CC(0xCD, 0)) {
                 sub_8034460(0xCD, 0, 0, 0);
-                r5 = 0x81;
+                script = 129;
                 break;
             } else {
-                r5 = 0;
+                script = 0;
                 break;
             }
 
@@ -2540,10 +2540,10 @@ void sub_800D5FC(int a1, int a2, int a3) {
             room = ROOM_BEACHSTART;
             if (a2 && !sub_80342CC(0xD9, 0xB)) {
                 sub_80342F8(0xD9, 0xB);
-                r5 = 0;
+                script = 0;
                 break;
             } else {
-                r5 = 0;
+                script = 0;
                 break;
             }
 
@@ -2551,10 +2551,10 @@ void sub_800D5FC(int a1, int a2, int a3) {
             room = ROOM_FJORD;
             if (a2 && !sub_80342CC(0xD9, 0xE)) {
                 sub_80342F8(0xD9, 0xE);
-                r5 = 0;
+                script = 0;
                 break;
             } else {
-                r5 = 0;
+                script = 0;
                 break;
             }
 
@@ -2562,9 +2562,9 @@ void sub_800D5FC(int a1, int a2, int a3) {
             room = ROOM_UPPERFARM;
             if (a2 && !sub_80342CC(0xD9, 0xF)) {
                 sub_8034460(0xD9, 0xF, 0, 0);
-                r5 = 0x48;
+                script = 72;
             } else {
-                r5 = 0;
+                script = 0;
             }
             break;
 
@@ -2572,9 +2572,9 @@ void sub_800D5FC(int a1, int a2, int a3) {
             room = ROOM_BOARDWALK;
             if (a2 && !sub_80342CC(0xD9, 0x11)) {
                 sub_8034460(0xD9, 0x11, 0, 0);
-                r5 = 0x67;
+                script = 103;
             } else {
-                r5 = 0;
+                script = 0;
             }
             break;
 
@@ -2582,9 +2582,9 @@ void sub_800D5FC(int a1, int a2, int a3) {
             room = ROOM_FJORD;
             if (a2 && !sub_80342CC(0xD9, 0x12)) {
                 sub_8034460(0xD9, 0x12, 0, 0);
-                r5 = 0x93;
+                script = 147;
             } else {
-                r5 = 0;
+                script = 0;
             }
             break;
 
@@ -2627,8 +2627,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
     }
     sub_8063178();
 
-    if (r5 != 0) {
-        start_script(r5);
+    if (script != 0) {
+        start_script(script);
     }
 }
 

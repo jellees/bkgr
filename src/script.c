@@ -130,7 +130,7 @@ void start_script(int idx) {
     gCurrentScript->actorCount = 0;
     gCurrentScript->field_24 = 0;
     gCurrentScript->activeSfx = -1;
-    byte_203F99E = 1;
+    byte_203F99E = TRUE;
     byte_203F99C = 1;
 
     switch (idx) {
@@ -449,3 +449,46 @@ bool32 sub_805DD20(void) {
 #ifndef NONMATCHING
 asm_unified(".include \"asm/nonmatching/update_scripts.s\"");
 #endif
+
+void render_scripts(u32** a1, u32* a2) {
+    u8 i;
+
+    if (!byte_203F99E) {
+        return;
+    }
+
+    for (i = 0; i < 2; i++) {
+        struct Script* script = &gScripts[i];
+
+        if (script->isActive && (script->field_23 || !byte_203FA16)) {
+            int actorIdx;
+            for (actorIdx = 0; actorIdx < script->actorCount; actorIdx++) {
+                if (script->actors[actorIdx].isVisible && !script->actors[actorIdx].sprite.attr0Flag9) {
+                    u32 v10;
+
+                    sprite_render_ex(&script->actors[actorIdx].sprite, *a1);
+
+                    if (script->actors[actorIdx].sprite.objMode == 1) {
+                        u32* var1 = *a1;
+                        u32 priority = script->actors[actorIdx].sprite.priority << 30;
+                        v10 = (((gMapPixelSizeY << 16) - script->actors[actorIdx].yPos
+                                - script->actors[actorIdx].field_38)
+                               >> 4)
+                              | 0x10000000;
+                        *var1 = priority | v10;
+                    } else {
+                        u32* var1 = *a1;
+                        u32 priority = script->actors[actorIdx].sprite.priority << 30;
+                        v10 = ((gMapPixelSizeY << 16) - script->actors[actorIdx].yPos
+                               - script->actors[actorIdx].field_38)
+                              >> 4;
+                        *var1 = priority | v10;
+                    }
+
+                    *a1 += 3;
+                    *a2 += 1;
+                }
+            }
+        }
+    }
+}
