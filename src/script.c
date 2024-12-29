@@ -806,3 +806,45 @@ bool32 script_cmd_load_room(int room, int warp, int a3, bool32 changeMusic) {
 
     return TRUE;
 }
+
+bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
+    bool32 isMusicChanged;
+
+    if (byte_203FA15) {
+        sub_0805F8DC(0, 0, 0, 0);
+    }
+
+    remove_actors(gCurrentScript);
+    isMusicChanged = gLoadedRoomBgm != dRoomIndexes[gCurrentScript->loadedRoomIdx].music;
+
+    sub_800C1E8(gCurrentScript->loadedRoomIdx, gCurrentScript->playerPos.x, gCurrentScript->playerPos.y,
+                gCurrentScript->playerPos.z, 0, 2);
+
+    if (sub_80631A0()) {
+        byte_203E137 = 0;
+        sub_8063194();
+    }
+
+    sub_8029DA8(256);
+
+    switch (a1) {
+        default:
+        case 0:
+            sub_8026E48(4095, isMusicChanged, 1);
+            break;
+
+        case 1:
+            sub_8026F78(4095, isMusicChanged, 1);
+            break;
+
+        case 3:
+            break;
+    }
+
+    byte_203FA16 = 0;
+    if (byte_203FA15) {
+        script_cmd_store_camera_position(0, 0, 0, 0);
+    }
+
+    return 1;
+}
