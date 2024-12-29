@@ -86,6 +86,7 @@ extern fx32 dword_203FA20;
 bool32 script_cmd_actor_set_anim(int, int, bool32, int);
 bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
 bool32 script_cmd_actor_move(int, int, int, fx32);
+bool32 script_cmd_store_camera_position(int, int, int, int);
 bool32 sub_0805F8DC(int, int, int, int);
 
 void sub_805D158(void) {
@@ -674,4 +675,134 @@ int sub_805E3CC(fx32 a1) {
         return 0;
     }
     return 1;
+}
+
+/**************************************************************
+ *                  SCRIPT COMMAND FUNCTIONS                  *
+ **************************************************************/
+
+bool32 script_cmd_alloc_actors(int count, int _, int __, int ___) {
+    u8 i;
+
+    gCurrentScript->actorCount = count;
+
+    if (count != 0) {
+        gCurrentScript->actors = Alloc(sizeof(struct Actor) * count, 5, 3);
+
+        for (i = 0; i < gCurrentScript->actorCount; i++) {
+            gCurrentScript->actors[i].isVisible = FALSE;
+            gCurrentScript->actors[i].isMoving = FALSE;
+            gCurrentScript->actors[i].field_58 = 0;
+            gCurrentScript->actors[i].field_59 = 0;
+            gCurrentScript->actors[i].calcIdx = -1;
+        }
+    }
+
+    return TRUE;
+}
+
+bool32 script_cmd_load_and_store_room(int room, int warp, bool32 a3, bool32 changeMusic) {
+    audio_halt_all_fx();
+
+    gCurrentScript->loadedRoomIdx = gLoadedRoomIndex;
+    gCurrentScript->playerPos.x = gPlayerPos.x;
+    gCurrentScript->playerPos.y = gPlayerPos.y;
+    gCurrentScript->playerPos.z = gPlayerPos.z;
+
+    if (a3) {
+        sub_80271A4(4095, changeMusic);
+    } else {
+        sub_80270AC(4095, changeMusic);
+    }
+
+    if (byte_203FA15) {
+        sub_0805F8DC(0, 0, 0, 0);
+    }
+
+    remove_actors(gCurrentScript);
+
+    if (byte_203FA15) {
+        sub_0805F8DC(0, 0, 0, 0);
+    }
+
+    byte_203FA16 = 1;
+    SetupRoom(room, warp, changeMusic, 1);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    EnableBGAlphaBlending();
+    sub_800EB14();
+    init_efx();
+    init_room_name();
+
+    if (sub_80631A0()) {
+        byte_203E137 = 1;
+        sub_8063188();
+    }
+
+    gPlayerSprite.attr0Flag9 = 0;
+
+    if (a3) {
+        sub_8026F78(4095, changeMusic, 1);
+    } else {
+        sub_8026E48(4095, changeMusic, 1);
+    }
+
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+
+    if (byte_203FA15) {
+        script_cmd_store_camera_position(0, 0, 0, 0);
+    }
+
+    sub_8041E58();
+
+    return TRUE;
+}
+
+bool32 script_cmd_load_room(int room, int warp, int a3, bool32 changeMusic) {
+    audio_halt_all_fx();
+
+    if (a3) {
+        sub_80271A4(4095, changeMusic);
+    } else {
+        sub_80270AC(4095, changeMusic);
+    }
+
+    if (byte_203FA15) {
+        sub_0805F8DC(0, 0, 0, 0);
+    }
+
+    remove_actors(gCurrentScript);
+
+    if (byte_203FA15) {
+        sub_0805F8DC(0, 0, 0, 0);
+    }
+
+    SetupRoom(room, warp, changeMusic, 0);
+    sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
+    EnableBGAlphaBlending();
+    sub_800EB14();
+    init_efx();
+    init_room_name();
+
+    if (sub_80631A0()) {
+        byte_203E137 = 1;
+        sub_8063188();
+    }
+
+    gPlayerSprite.attr0Flag9 = 0;
+
+    if (a3) {
+        sub_8026F78(4095, changeMusic, 1);
+    } else {
+        sub_8026E48(4095, changeMusic, 1);
+    }
+
+    gPlayerSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerSprite.yPos = gPlayerInitPixelPosY;
+    gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
+    gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
+
+    return TRUE;
 }

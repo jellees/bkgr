@@ -621,6 +621,7 @@ extern void sub_0804147C(int);
 extern void sub_8041AAC(int);
 extern bool32 sub_08041AC0(int);
 extern bool32 sub_08041C8C(int);
+extern void sub_8041E58(void);
 extern void sub_8041E88(void);
 extern void sub_08041F3C(int, int);
 extern void sub_08041FA4(int);
@@ -659,6 +660,8 @@ extern void sub_8062444(u8, fx32*, fx32*, fx32*);
 extern void sub_8062484(void);
 extern void sub_80629E8(void);
 extern void sub_8063178(void);
+extern void sub_8063188(void);
+extern int sub_80631A0(void);
 extern void sub_80631AC(void);
 extern void sub_08063234(void);
 extern void sub_8063578(void);
@@ -734,6 +737,8 @@ extern bool8 byte_203DFE8;
 extern bool8 byte_203DFE9;
 
 extern u8 byte_203E10F;
+
+extern u8 byte_203E137;
 
 extern u8 byte_203E16A;
 extern u8 byte_203E16B;
