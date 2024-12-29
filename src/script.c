@@ -587,59 +587,60 @@ void end_all_scripts(int a1) {
     sub_805D568();
 }
 
-void sub_0805E270(int a1, int a2, int a3, int a4) {
-    u8 v10;
-    u8 v11;
-    u8 v15;
-    u8 v16;
-    int v17;
-    int v18;
+void sub_0805E270(int xMin, int xMax, int yMin, int yMax) {
+    u8 yDistanceToMax;
+    u8 yDistanceToMin;
+    u8 xDistanceToMin;
+    u8 xDistanceToMax;
+    int xClearance;
+    int yClearance;
 
-    ASSERT(a1 < a2 && a3 < a4);
+    ASSERT(xMin < xMax && yMin < yMax);
 
-    v17 = (a2 - a1) >> 2;
-    v18 = (a4 - a3) >> 2;
-    v16 = a2 - (dword_203FA18->xPosCurrent >> 16);
-    v15 = (dword_203FA18->xPosCurrent >> 16) - a1;
-    v10 = a4 - (dword_203FA18->yPosCurrent >> 16);
-    v11 = (dword_203FA18->yPosCurrent >> 16) - a3;
+    xClearance = (xMax - xMin) >> 2;
+    yClearance = (yMax - yMin) >> 2;
+
+    xDistanceToMax = xMax - (dword_203FA18->xPosCurrent >> FX32_SHIFT);
+    xDistanceToMin = (dword_203FA18->xPosCurrent >> FX32_SHIFT) - xMin;
+    yDistanceToMax = yMax - (dword_203FA18->yPosCurrent >> FX32_SHIFT);
+    yDistanceToMin = (dword_203FA18->yPosCurrent >> FX32_SHIFT) - yMin;
 
     while (dword_203FA18->xPosTarget == dword_203FA18->xPosCurrent
            && dword_203FA18->yPosTarget == dword_203FA18->yPosCurrent) {
-        if (v16 < v15) {
-            if (v11 < v10) {
-                if (v16 < v11) {
-                    dword_203FA18->xPosTarget = RandomMinMax(a1, v17 + a1) << 16;
-                    dword_203FA18->yPosTarget = RandomMinMax(a3, a4) << 16;
+        if (xDistanceToMax < xDistanceToMin) {
+            if (yDistanceToMin < yDistanceToMax) {
+                if (xDistanceToMax < yDistanceToMin) {
+                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMin + xClearance) << FX32_SHIFT;
+                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    dword_203FA18->xPosTarget = RandomMinMax(a1, a2) << 16;
-                    dword_203FA18->yPosTarget = RandomMinMax(a4 - v18, a4) << 16;
+                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
+                    dword_203FA18->yPosTarget = RandomMinMax(yMax - yClearance, yMax) << FX32_SHIFT;
                 }
             } else {
-                if (v16 < v10) {
-                    dword_203FA18->xPosTarget = RandomMinMax(a1, v17 + a1) << 16;
-                    dword_203FA18->yPosTarget = RandomMinMax(a3, a4) << 16;
+                if (xDistanceToMax < yDistanceToMax) {
+                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMin + xClearance) << FX32_SHIFT;
+                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    dword_203FA18->xPosTarget = RandomMinMax(a1, a2) << 16;
-                    dword_203FA18->yPosTarget = RandomMinMax(a3, a3 + v18) << 16;
+                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
+                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMin + yClearance) << FX32_SHIFT;
                 }
             }
         } else {
-            if (v11 < v10) {
-                if (v15 < v11) {
-                    dword_203FA18->xPosTarget = RandomMinMax(a2 - v17, a2) << 16;
-                    dword_203FA18->yPosTarget = RandomMinMax(a3, a4) << 16;
+            if (yDistanceToMin < yDistanceToMax) {
+                if (xDistanceToMin < yDistanceToMin) {
+                    dword_203FA18->xPosTarget = RandomMinMax(xMax - xClearance, xMax) << FX32_SHIFT;
+                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    dword_203FA18->xPosTarget = RandomMinMax(a1, a2) << 16;
-                    dword_203FA18->yPosTarget = RandomMinMax(a4 - v18, a4) << 16;
+                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
+                    dword_203FA18->yPosTarget = RandomMinMax(yMax - yClearance, yMax) << FX32_SHIFT;
                 }
             } else {
-                if (v15 < v10) {
-                    dword_203FA18->xPosTarget = RandomMinMax(a2 - v17, a2) << 16;
-                    dword_203FA18->yPosTarget = RandomMinMax(a3, a4) << 16;
+                if (xDistanceToMin < yDistanceToMax) {
+                    dword_203FA18->xPosTarget = RandomMinMax(xMax - xClearance, xMax) << FX32_SHIFT;
+                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    dword_203FA18->xPosTarget = RandomMinMax(a1, a2) << 16;
-                    dword_203FA18->yPosTarget = RandomMinMax(a3, a3 + v18) << 16;
+                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
+                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMin + yClearance) << FX32_SHIFT;
                 }
             }
         }
