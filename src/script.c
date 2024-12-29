@@ -586,3 +586,91 @@ void end_all_scripts(int a1) {
 
     sub_805D568();
 }
+
+void sub_0805E270(int a1, int a2, int a3, int a4) {
+    u8 v10;
+    u8 v11;
+    u8 v15;
+    u8 v16;
+    int v17;
+    int v18;
+
+    ASSERT(a1 < a2 && a3 < a4);
+
+    v17 = (a2 - a1) >> 2;
+    v18 = (a4 - a3) >> 2;
+    v16 = a2 - (dword_203FA18->xPosCurrent >> 16);
+    v15 = (dword_203FA18->xPosCurrent >> 16) - a1;
+    v10 = a4 - (dword_203FA18->yPosCurrent >> 16);
+    v11 = (dword_203FA18->yPosCurrent >> 16) - a3;
+
+    while (dword_203FA18->xPosTarget == dword_203FA18->xPosCurrent
+           && dword_203FA18->yPosTarget == dword_203FA18->yPosCurrent) {
+        if (v16 < v15) {
+            if (v11 < v10) {
+                if (v16 < v11) {
+                    dword_203FA18->xPosTarget = RandomMinMax(a1, v17 + a1) << 16;
+                    dword_203FA18->yPosTarget = RandomMinMax(a3, a4) << 16;
+                } else {
+                    dword_203FA18->xPosTarget = RandomMinMax(a1, a2) << 16;
+                    dword_203FA18->yPosTarget = RandomMinMax(a4 - v18, a4) << 16;
+                }
+            } else {
+                if (v16 < v10) {
+                    dword_203FA18->xPosTarget = RandomMinMax(a1, v17 + a1) << 16;
+                    dword_203FA18->yPosTarget = RandomMinMax(a3, a4) << 16;
+                } else {
+                    dword_203FA18->xPosTarget = RandomMinMax(a1, a2) << 16;
+                    dword_203FA18->yPosTarget = RandomMinMax(a3, a3 + v18) << 16;
+                }
+            }
+        } else {
+            if (v11 < v10) {
+                if (v15 < v11) {
+                    dword_203FA18->xPosTarget = RandomMinMax(a2 - v17, a2) << 16;
+                    dword_203FA18->yPosTarget = RandomMinMax(a3, a4) << 16;
+                } else {
+                    dword_203FA18->xPosTarget = RandomMinMax(a1, a2) << 16;
+                    dword_203FA18->yPosTarget = RandomMinMax(a4 - v18, a4) << 16;
+                }
+            } else {
+                if (v15 < v10) {
+                    dword_203FA18->xPosTarget = RandomMinMax(a2 - v17, a2) << 16;
+                    dword_203FA18->yPosTarget = RandomMinMax(a3, a4) << 16;
+                } else {
+                    dword_203FA18->xPosTarget = RandomMinMax(a1, a2) << 16;
+                    dword_203FA18->yPosTarget = RandomMinMax(a3, a3 + v18) << 16;
+                }
+            }
+        }
+    }
+}
+
+int sub_805E3CC(fx32 a1) {
+    if (a1 < 0) {
+        a1 += FX32_CONST(22.5);
+    }
+
+    if ((a1 - (u32)FX32_CONST(22.5)) > FX32_CONST(315)) {
+        return 2;
+    }
+    if (a1 < FX32_CONST(67.5)) {
+        return 3;
+    }
+    if (a1 < FX32_CONST(112.5)) {
+        return 4;
+    }
+    if (a1 < FX32_CONST(157.5)) {
+        return 5;
+    }
+    if (a1 < FX32_CONST(202.5)) {
+        return 6;
+    }
+    if (a1 < FX32_CONST(247.5)) {
+        return 7;
+    }
+    if (a1 < FX32_CONST(292.5)) {
+        return 0;
+    }
+    return 1;
+}
