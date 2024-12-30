@@ -294,7 +294,7 @@ static void sub_8016890() {
     dword_20021D8 = PLAY_SFX(173);
     sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
     sub_8016790(0, gPlayerSprite.direction);
-    gPlayerIsTransparent = 0;
+    gPlayerIsTransparent = FALSE;
     gPlayerSprite.objMode = ST_OAM_OBJ_NORMAL;
     byte_200108E = 0;
 }
@@ -1632,7 +1632,7 @@ void sub_80192D4(int a1, int a2, int a3) {
             }
         }
     } else {
-        gPlayerIsTransparent = 1;
+        gPlayerIsTransparent = TRUE;
         gHurtTransparencyTimer = 120;
         gPlayerSprite.objMode = ST_OAM_OBJ_BLEND;
         byte_200108E = 1;

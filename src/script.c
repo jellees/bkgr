@@ -5,6 +5,7 @@
 #include "player.h"
 #include "main.h"
 #include "alloc.h"
+#include "player_defs.h"
 
 #define MAX_SCRIPTS 2
 
@@ -846,5 +847,128 @@ bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
         script_cmd_store_camera_position(0, 0, 0, 0);
     }
 
-    return 1;
+    return TRUE;
+}
+
+bool32 script_cmd_jump(int scriptIdx, int cmdIdx, int _, int __) {
+    gCurrentScript->scriptIdx = scriptIdx;
+    gCurrentScript->cmdIdx = cmdIdx - 1;
+    return TRUE;
+}
+
+int script_cmd_jump_cond(int condition, int scriptIdx, int cmdIdx, int _) {
+    bool32 shouldJump = FALSE;
+
+    switch (condition) {
+        case 0:
+        case 1:
+            break;
+
+        case 2:
+            if (is_game_complete()) {
+                shouldJump = TRUE;
+            }
+            break;
+
+        case 3:
+            if (gTransformation != TRANSFORMATION_BANJO) {
+                shouldJump = TRUE;
+            }
+            break;
+
+        case 4:
+            if (!gUnlockedMoves[MOVE_SHOCK_JUMP]) {
+                shouldJump = TRUE;
+            }
+            break;
+
+        case 5:
+            if (!gUnlockedMoves[MOVE_WONDERWING]) {
+                shouldJump = TRUE;
+            }
+            break;
+    }
+
+    if (shouldJump) {
+        gCurrentScript->scriptIdx = scriptIdx;
+        gCurrentScript->cmdIdx = cmdIdx - 1;
+    }
+
+    return TRUE;
+}
+
+bool32 script_cmd_hide_player(bool32 hidePlayer, int _, int __, int ___) {
+    if (hidePlayer) {
+        gPlayerIsTransparent = TRUE;
+    } else {
+        gPlayerIsTransparent = FALSE;
+        ;
+        gPlayerSprite.objMode = ST_OAM_OBJ_NORMAL;
+    }
+    gHidePlayer = hidePlayer;
+    return TRUE;
+}
+
+bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
+    SetSprite(&gCurrentScript->actors[actorIdx].sprite, 0x451u, 0, 0, 1, 0xF0u, 0xC8u, 2);
+    gCurrentScript->actors[actorIdx].isVisible = TRUE;
+    gCurrentScript->actors[actorIdx].isMoving = FALSE;
+    gCurrentScript->actors[actorIdx].field_58 = 0;
+    gCurrentScript->actors[actorIdx].field_59 = 0;
+    gCurrentScript->actors[actorIdx].isPositionAbsolute = FALSE;
+    gCurrentScript->actors[actorIdx].xPos =
+        (gCameraPixelX + gCurrentScript->actors[actorIdx].sprite.xPos) << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPos =
+        (gCameraPixelY + gCurrentScript->actors[actorIdx].sprite.yPos) << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].xDistance = 0;
+    gCurrentScript->actors[actorIdx].yDistance = 0;
+    gCurrentScript->actors[actorIdx].moveSpeed = 0;
+    gCurrentScript->actors[actorIdx].calcIdx = -1;
+    gCurrentScript->actors[actorIdx].field_5B = 0;
+    gCurrentScript->actors[actorIdx].field_38 = 0;
+    gCurrentScript->actors[actorIdx].field_3C = 0x1000000;
+    gCurrentScript->actors[actorIdx].field_40 = 0x1000000;
+    gCurrentScript->actors[actorIdx].field_44 = 0;
+    gCurrentScript->actors[actorIdx].field_54 = 0;
+    gCurrentScript->actors[actorIdx].field_50 = 0;
+    gCurrentScript->actors[actorIdx].field_48 = 0;
+    gCurrentScript->actors[actorIdx].field_4C = 0;
+    gCurrentScript->actors[actorIdx].field_5C = 0;
+    gActorCount++;
+    sub_805D614(gCurrentScript, actorIdx);
+    return TRUE;
+}
+
+bool32 script_cmd_actor_disable(int actorIdx, int _, int __, int ___) {
+    if (gCurrentScript->actors[actorIdx].isVisible) {
+        gActorCount--;
+        if (gCurrentScript->actors[actorIdx].calcIdx != -1) {
+            sub_8003864(gCurrentScript->actors[actorIdx].calcIdx);
+            gCurrentScript->actors[actorIdx].calcIdx = -1;
+        }
+    }
+
+    gCurrentScript->actors[actorIdx].isVisible = FALSE;
+    gCurrentScript->actors[actorIdx].isMoving = FALSE;
+    gCurrentScript->actors[actorIdx].field_58 = 0;
+    gCurrentScript->actors[actorIdx].field_59 = 0;
+    gCurrentScript->actors[actorIdx].xPosTarget = gCurrentScript->actors[actorIdx].xPos;
+    gCurrentScript->actors[actorIdx].yPosTarget = gCurrentScript->actors[actorIdx].yPos;
+    gCurrentScript->actors[actorIdx].sprite.attr0Flag9 = 1;
+
+    return TRUE;
+}
+
+bool32 script_cmd_actor_enable(int actorIdx, int _, int __, int ___) {
+    if (!gCurrentScript->actors[actorIdx].isVisible) {
+        gActorCount++;
+    }
+    gCurrentScript->actors[actorIdx].isVisible = TRUE;
+    gCurrentScript->actors[actorIdx].sprite.attr0Flag9 = 0;
+    return TRUE;
+}
+
+bool32 script_cmd_actor_set_anim(int actorIdx, int spriteIdx, bool32 maxAnimRepeats, int _) {
+    sprite_set_anim(&gCurrentScript->actors[actorIdx].sprite, spriteIdx, 0, maxAnimRepeats);
+    return TRUE;
 }

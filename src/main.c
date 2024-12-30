@@ -75,7 +75,7 @@ u16 gLoadedRoomLevel;
 u16 gLoadedRoomBgm;
 fx32 dword_2001088;
 s8 gSelectedEgg;
-u8 gPlayerIsTransparent;
+bool8 gPlayerIsTransparent;
 u8 byte_200108E;
 u16 gHurtTransparencyTimer;
 u16 word_2001092;
@@ -1028,7 +1028,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
             sub_80192D4(gFloorPlaneResult.field_4E, -1, 1);
             byte_200108E = 1;
             word_2001092 = gFloorPlaneResult.field_4F;
-            gPlayerIsTransparent = 1;
+            gPlayerIsTransparent = TRUE;
             gHurtTransparencyTimer = gFloorPlaneResult.field_4F;
             gPlayerSprite.objMode = ST_OAM_OBJ_BLEND;
 
@@ -2602,7 +2602,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
     sub_8018BB0(&gPlayerSprite);
     load_transformation_palette();
-    gPlayerIsTransparent = 0;
+    gPlayerIsTransparent = FALSE;
     gPlayerSprite.objMode = ST_OAM_OBJ_NORMAL;
     byte_200108E = 0;
     EnableBGAlphaBlending();
@@ -2643,7 +2643,7 @@ void sub_800D8E8(int a1, char a2, char a3) {
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
     EnableBGAlphaBlending();
     init_room_name();
-    gPlayerIsTransparent = 0;
+    gPlayerIsTransparent = FALSE;
     gPlayerSprite.objMode = ST_OAM_OBJ_NORMAL;
     byte_200108E = 0;
     sub_800EF6C(dword_203FA90);
@@ -2852,7 +2852,7 @@ static void sub_800DF34() {
 
     if (gPlayerIsTransparent) {
         if (gHurtTransparencyTimer == 0) {
-            gPlayerIsTransparent = 0;
+            gPlayerIsTransparent = FALSE;
             gPlayerSprite.objMode = ST_OAM_OBJ_NORMAL;
         } else {
             gHurtTransparencyTimer--;

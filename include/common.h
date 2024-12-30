@@ -398,8 +398,7 @@ struct SpriteDMATableEntry {
     u32 count;
 };
 
-struct struc_203F98C
-{
+struct struc_203F98C {
     u16 input;
     u16 count;
 };
@@ -456,9 +455,9 @@ extern void DmaTransferBGPalette(void*, int, int);
 extern void DmaMoveObjPalette(int, int);
 extern void CheckStacks(void);
 
-extern void sprite_set_anim(struct Sprite* sprite, int idx, bool8 loopFrame, bool8 maxAnimRepeats);
+extern void sprite_set_anim(struct Sprite* sprite, int idx, bool8 loopFrame, u32 maxAnimRepeats);
 extern void sprite_set_anim_without_reset(struct Sprite* sprite, int idx, bool8 loopFrame,
-                                          bool8 maxAnimRepeats);
+                                          u32 maxAnimRepeats);
 extern void sprite_render_ex(struct Sprite* sprite, int* a2);
 extern void sprite_render(struct Sprite* sprite);
 // extern void sprite_render_frame(); // This is a private function.
