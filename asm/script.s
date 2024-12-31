@@ -1,281 +1,6 @@
     .syntax unified
     .text
 
-	.thumb
-sub_805EB10: @ 0x0805EB10
-	push {r4, lr}
-	adds r4, r0, #0
-	adds r2, r1, #0
-	ldr r1, _0805EB2C
-	ldrb r1, [r1]
-	cmp r1, #0
-	bne _0805EB54
-	cmp r2, #1
-	beq _0805EB48
-	cmp r2, #1
-	bgt _0805EB30
-	cmp r2, #0
-	beq _0805EB36
-	b _0805ED14
-	.align 2, 0
-_0805EB2C: .4byte gTransformation
-_0805EB30:
-	cmp r2, #2
-	beq _0805EB4E
-	b _0805ED14
-_0805EB36:
-	ldr r1, _0805EB44
-	adds r0, r4, #0
-	movs r2, #1
-	movs r3, #0
-	bl script_cmd_actor_set_anim
-	b _0805ED14
-	.align 2, 0
-_0805EB44: .4byte 0x000004EA
-_0805EB48:
-	adds r0, r4, #0
-	movs r1, #9
-	b _0805ECE0
-_0805EB4E:
-	adds r0, r4, #0
-	movs r1, #1
-	b _0805ED00
-_0805EB54:
-	cmp r1, #1
-	bne _0805EBB8
-	cmp r2, #1
-	beq _0805EBA8
-	cmp r2, #1
-	bgt _0805EB66
-	cmp r2, #0
-	beq _0805EB6C
-	b _0805ED14
-_0805EB66:
-	cmp r2, #2
-	beq _0805EBB0
-	b _0805ED14
-_0805EB6C:
-	ldr r1, _0805EBA0
-	adds r0, r4, #0
-	movs r2, #1
-	movs r3, #0
-	bl script_cmd_actor_set_anim
-	adds r0, r4, #0
-	movs r1, #6
-	movs r2, #0
-	movs r3, #0
-	bl script_cmd_actor_set_direction
-	adds r0, r4, #0
-	movs r1, #5
-	movs r2, #0
-	movs r3, #0
-	bl sub_805F0A8
-	adds r0, r4, #0
-	movs r1, #5
-	movs r2, #0
-	movs r3, #0
-	bl sub_805F0E8
-	ldr r0, _0805EBA4
-	b _0805ECCA
-	.align 2, 0
-_0805EBA0: .4byte 0x00000141
-_0805EBA4: .4byte 0x083FD734
-_0805EBA8:
-	ldr r1, _0805EBAC
-	b _0805ECDE
-	.align 2, 0
-_0805EBAC: .4byte 0x00000131
-_0805EBB0:
-	ldr r1, _0805EBB4
-	b _0805ECFE
-	.align 2, 0
-_0805EBB4: .4byte 0x00000149
-_0805EBB8:
-	cmp r1, #2
-	bne _0805EC1C
-	cmp r2, #1
-	beq _0805EC0C
-	cmp r2, #1
-	bgt _0805EBCA
-	cmp r2, #0
-	beq _0805EBD0
-	b _0805ED14
-_0805EBCA:
-	cmp r2, #2
-	beq _0805EC14
-	b _0805ED14
-_0805EBD0:
-	ldr r1, _0805EC04
-	adds r0, r4, #0
-	movs r2, #1
-	movs r3, #0
-	bl script_cmd_actor_set_anim
-	adds r0, r4, #0
-	movs r1, #5
-	movs r2, #0
-	movs r3, #0
-	bl script_cmd_actor_set_direction
-	adds r0, r4, #0
-	movs r1, #8
-	movs r2, #0
-	movs r3, #0
-	bl sub_805F0A8
-	adds r0, r4, #0
-	movs r1, #8
-	movs r2, #0
-	movs r3, #0
-	bl sub_805F0E8
-	ldr r0, _0805EC08
-	b _0805ECCA
-	.align 2, 0
-_0805EC04: .4byte 0x00000169
-_0805EC08: .4byte 0x083FD754
-_0805EC0C:
-	ldr r1, _0805EC10
-	b _0805ECDE
-	.align 2, 0
-_0805EC10: .4byte 0x00000181
-_0805EC14:
-	ldr r1, _0805EC18
-	b _0805ECFE
-	.align 2, 0
-_0805EC18: .4byte 0x00000171
-_0805EC1C:
-	cmp r1, #4
-	bne _0805EC80
-	cmp r2, #1
-	beq _0805EC70
-	cmp r2, #1
-	bgt _0805EC2E
-	cmp r2, #0
-	beq _0805EC34
-	b _0805ED14
-_0805EC2E:
-	cmp r2, #2
-	beq _0805EC78
-	b _0805ED14
-_0805EC34:
-	ldr r1, _0805EC68
-	adds r0, r4, #0
-	movs r2, #1
-	movs r3, #0
-	bl script_cmd_actor_set_anim
-	adds r0, r4, #0
-	movs r1, #5
-	movs r2, #0
-	movs r3, #0
-	bl script_cmd_actor_set_direction
-	adds r0, r4, #0
-	movs r1, #3
-	movs r2, #0
-	movs r3, #0
-	bl sub_805F0A8
-	adds r0, r4, #0
-	movs r1, #3
-	movs r2, #0
-	movs r3, #0
-	bl sub_805F0E8
-	ldr r0, _0805EC6C
-	b _0805ECCA
-	.align 2, 0
-_0805EC68: .4byte 0x000001D1
-_0805EC6C: .4byte 0x083FD794
-_0805EC70:
-	ldr r1, _0805EC74
-	b _0805ECDE
-	.align 2, 0
-_0805EC74: .4byte 0x000001B1
-_0805EC78:
-	ldr r1, _0805EC7C
-	b _0805ECFE
-	.align 2, 0
-_0805EC7C: .4byte 0x000001A9
-_0805EC80:
-	cmp r1, #3
-	bne _0805ED1C
-	cmp r2, #1
-	beq _0805ECDC
-	cmp r2, #1
-	bgt _0805EC92
-	cmp r2, #0
-	beq _0805EC98
-	b _0805ED14
-_0805EC92:
-	cmp r2, #2
-	beq _0805ECFC
-	b _0805ED14
-_0805EC98:
-	ldr r1, _0805ECD4
-	adds r0, r4, #0
-	movs r2, #1
-	movs r3, #0
-	bl script_cmd_actor_set_anim
-	adds r0, r4, #0
-	movs r1, #5
-	movs r2, #0
-	movs r3, #0
-	bl script_cmd_actor_set_direction
-	adds r0, r4, #0
-	movs r1, #9
-	movs r2, #0
-	movs r3, #0
-	bl sub_805F0A8
-	adds r0, r4, #0
-	movs r1, #9
-	movs r2, #0
-	movs r3, #0
-	bl sub_805F0E8
-	ldr r0, _0805ECD8
-_0805ECCA:
-	movs r1, #7
-	movs r2, #7
-	bl DmaTransferObjPalette
-	b _0805ED14
-	.align 2, 0
-_0805ECD4: .4byte 0x00000191
-_0805ECD8: .4byte 0x083FD774
-_0805ECDC:
-	ldr r1, _0805ECF8
-_0805ECDE:
-	adds r0, r4, #0
-_0805ECE0:
-	movs r2, #1
-	movs r3, #0
-	bl script_cmd_actor_set_anim
-	adds r0, r4, #0
-	movs r1, #6
-	movs r2, #0
-	movs r3, #0
-	bl script_cmd_actor_set_direction
-	b _0805ED14
-	.align 2, 0
-_0805ECF8: .4byte 0x000001A1
-_0805ECFC:
-	ldr r1, _0805ED18
-_0805ECFE:
-	adds r0, r4, #0
-_0805ED00:
-	movs r2, #0
-	movs r3, #0
-	bl script_cmd_actor_set_anim
-	adds r0, r4, #0
-	movs r1, #6
-	movs r2, #0
-	movs r3, #0
-	bl script_cmd_actor_set_direction
-_0805ED14:
-	movs r0, #1
-	b _0805ED20
-	.align 2, 0
-_0805ED18: .4byte 0x00000191
-_0805ED1C:
-	.2byte 0xEE00, 0xEE00
-_0805ED20:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-
     .thumb
 script_cmd_actor_set_position: @ 0x0805ED28
 	push {r4, r5, r6, lr}
@@ -558,6 +283,7 @@ _0805EF54: .4byte gPlayerShadowPos
 _0805EF58: .4byte gMapPixelSizeY
 
     .thumb
+	.global script_cmd_actor_set_direction
 script_cmd_actor_set_direction: @ 0x0805EF5C
 	push {r4, r5, lr}
 	adds r5, r1, #0
@@ -734,6 +460,7 @@ script_cmd_actor_set_palette: @ 0x0805F080
 _0805F0A4: .4byte 0x0203F9F4
 
     .thumb
+	.global sub_805F0A8
 sub_805F0A8: @ 0x0805F0A8
 	push {lr}
 	ldr r2, _0805F0C4
@@ -768,6 +495,7 @@ script_cmd_actor_unlock_anim: @ 0x0805F0C8
 _0805F0E4: .4byte 0x0203F9F4
 
     .thumb
+	.global sub_805F0E8
 sub_805F0E8: @ 0x0805F0E8
 	push {lr}
 	ldr r2, _0805F104

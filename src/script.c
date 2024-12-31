@@ -85,7 +85,10 @@ extern fx32 dword_203FA1C;
 extern fx32 dword_203FA20;
 
 bool32 script_cmd_actor_set_anim(int, int, bool32, int);
+bool32 script_cmd_actor_set_direction(int, int, int, int);
 bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
+bool32 sub_805F0A8(int, int, int, int);
+bool32 sub_805F0E8(int, int, int, int);
 bool32 script_cmd_actor_move(int, int, int, fx32);
 bool32 script_cmd_store_camera_position(int, int, int, int);
 bool32 sub_0805F8DC(int, int, int, int);
@@ -910,7 +913,7 @@ bool32 script_cmd_hide_player(bool32 hidePlayer, int _, int __, int ___) {
 }
 
 bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
-    SetSprite(&gCurrentScript->actors[actorIdx].sprite, 0x451u, 0, 0, 1, 0xF0u, 0xC8u, 2);
+    SetSprite(&gCurrentScript->actors[actorIdx].sprite, 0x451u, FALSE, 0, 1, 240, 200, 2);
     gCurrentScript->actors[actorIdx].isVisible = TRUE;
     gCurrentScript->actors[actorIdx].isMoving = FALSE;
     gCurrentScript->actors[actorIdx].field_58 = 0;
@@ -969,6 +972,113 @@ bool32 script_cmd_actor_enable(int actorIdx, int _, int __, int ___) {
 }
 
 bool32 script_cmd_actor_set_anim(int actorIdx, int spriteIdx, bool32 maxAnimRepeats, int _) {
-    sprite_set_anim(&gCurrentScript->actors[actorIdx].sprite, spriteIdx, 0, maxAnimRepeats);
+    sprite_set_anim(&gCurrentScript->actors[actorIdx].sprite, spriteIdx, FALSE, maxAnimRepeats);
     return TRUE;
+}
+
+bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
+    if (gTransformation == TRANSFORMATION_BANJO) {
+        switch (a2) {
+            case 0:
+                script_cmd_actor_set_anim(actorIdx, 1258, 1, 0);
+                break;
+
+            case 1:
+                script_cmd_actor_set_anim(actorIdx, 9, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+
+            case 2:
+                script_cmd_actor_set_anim(actorIdx, 1, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+        }
+        return TRUE;
+    } else if (gTransformation == TRANSFORMATION_MOUSE) {
+        switch (a2) {
+            case 0:
+                script_cmd_actor_set_anim(actorIdx, 321, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                sub_805F0A8(actorIdx, 5, 0, 0);
+                sub_805F0E8(actorIdx, 5, 0, 0);
+                DmaTransferObjPalette(&unk_83FD734, 7, 7);
+                break;
+
+            case 1:
+                script_cmd_actor_set_anim(actorIdx, 305, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+
+            case 2:
+                script_cmd_actor_set_anim(actorIdx, 329, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+        }
+        return TRUE;
+    } else if (gTransformation == TRANSFORMATION_CANDLE) {
+        switch (a2) {
+            case 0:
+                script_cmd_actor_set_anim(actorIdx, 361, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
+                sub_805F0A8(actorIdx, 8, 0, 0);
+                sub_805F0E8(actorIdx, 8, 0, 0);
+                DmaTransferObjPalette(&unk_83FD754, 7, 7);
+                break;
+
+            case 1:
+                script_cmd_actor_set_anim(actorIdx, 385, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+
+            case 2:
+                script_cmd_actor_set_anim(actorIdx, 369, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+        }
+        return TRUE;
+    } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
+        switch (a2) {
+            case 0:
+                script_cmd_actor_set_anim(actorIdx, 465, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
+                sub_805F0A8(actorIdx, 3, 0, 0);
+                sub_805F0E8(actorIdx, 3, 0, 0);
+                DmaTransferObjPalette(&unk_83FD794, 7, 7);
+                break;
+
+            case 1:
+                script_cmd_actor_set_anim(actorIdx, 433, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+
+            case 2:
+                script_cmd_actor_set_anim(actorIdx, 425, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+        }
+        return TRUE;
+    } else if (gTransformation == TRANSFORMATION_TANK) {
+        switch (a2) {
+            case 0:
+                script_cmd_actor_set_anim(actorIdx, 401, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
+                sub_805F0A8(actorIdx, 9, 0, 0);
+                sub_805F0E8(actorIdx, 9, 0, 0);
+                DmaTransferObjPalette(&unk_83FD774, 7, 7);
+                break;
+
+            case 1:
+                script_cmd_actor_set_anim(actorIdx, 417, 1, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+
+            case 2:
+                script_cmd_actor_set_anim(actorIdx, 401, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                break;
+        }
+        return TRUE;
+    }
+
+    ASSERT(0);
 }
