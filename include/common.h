@@ -462,7 +462,7 @@ extern void sprite_render_ex(struct Sprite* sprite, int* a2);
 extern void sprite_render(struct Sprite* sprite);
 // extern void sprite_render_frame(); // This is a private function.
 extern bool32 sprite_is_anim_done_once(struct Sprite* sprite);
-extern void sprite_lock_anim_on_frame(struct Sprite* sprite, u8 frame);
+extern void sprite_lock_anim_on_frame(struct Sprite* sprite, int frame);
 extern void sprite_lock_anim(struct Sprite* sprite);
 extern void sprite_unlock_anim(struct Sprite* sprite);
 extern bool32 sub_80037A8(struct Sprite* sprite);
@@ -470,19 +470,21 @@ extern void sprite_set_priority(struct Sprite* sprite, int priority);
 extern void sprite_set_palette(struct Sprite* sprite, int palette);
 extern void sprite_set_locked_frame(struct Sprite* sprite, int frame);
 extern void sub_8003808(struct Sprite* sprite, int a2);
-extern void sub_8003820(struct Sprite* sprite, int a2, u8 a3);
+extern void sub_8003820(struct Sprite* sprite, int a2, int a3);
 
 extern void audio_pause(void);
 extern void audio_set_tune_vol(int);
 extern void audio_set_fx_vol(int);
 extern bool32 audio_fx_still_active(int);
-extern void audio_halt_fx(int);
+extern bool32 audio_halt_fx(int);
 extern void audio_start_tune(int);
 extern void audio_halt_all_fx(void);
+extern void audio_halt_tune(void);
 extern void audio_init(void);
 extern void audio_vsync_asm(void);
 extern void audio_asmprocess(void);
 
+extern int sub_8003854(int);
 extern void sub_8003864(u32);
 extern void CallARM_store_jump_and_other_value(u32, fx32, fx32);
 extern void sub_800387C(u32);
@@ -505,6 +507,8 @@ extern bool32 sub_8003974(int*, int*, int*, int*);
 extern bool32 sub_800397C(int*, int*, int*);
 extern fx32 CallARM_VecFX_Mul16(struct Vec3fx*, fx32);
 extern fx32 CallARM_VecFX_Mul8(struct Vec3fx*, fx32);
+extern fx32 sub_80039AC(fx32, fx32);
+extern fx32 sub_80039B4(fx32, fx32);
 extern fx32 sub_80039C4(struct Vec3fx*, u32, u32, u32);
 extern void sub_80039CC(char*, struct Vec3fx*, struct Vec3fx*, int);
 extern void CallARM_SetOamMatrices(u32*, u32);
@@ -555,13 +559,15 @@ extern void sub_8026234(void);
 extern void sub_802625C(void);
 extern void sub_80265D8(void);
 extern u32 sub_80266A8(void);
-extern void sub_80266C8(u16, u8, u16);
+extern void sub_80266C8(u16, s16, u16);
 extern void sub_80266B4(void);
 extern void sub_8026714(void);
 extern void sub_802672C(void);
 extern void SetObjectsFullAlpha(void);
 extern void FadeOutObjects(int, int);
 extern void sub_08026BA8(int, int);
+extern void sub_8026C24(int);
+extern void sub_8026C8C(void);
 extern void sub_8026CC8(int, int);
 extern void sub_8026D20(int, int, int, int);
 extern void sub_8026D84(void);
@@ -584,7 +590,7 @@ extern void sub_802ADB0(u32**, u32*);
 extern bool32 sub_802ADE8(struct Vec3fx*);
 extern void sub_0802D0A0(int, struct Vec3fx*, u8);
 extern u8 sub_0802E080(void);
-extern void sub_0802FEDC(int);
+extern int sub_0802FEDC(int);
 extern bool32 sub_802FDC8(void);
 
 extern int sub_8030A88(void);
@@ -767,6 +773,8 @@ extern fx32 dword_203F9FC;
 extern u8 byte_203F9A1;
 extern bool8 gHidePlayer;
 
+extern fx32 dword_203FA08;
+extern fx32 dword_203FA0C;
 extern u16 word_203FA10;
 
 extern u8 byte_203FA12;
@@ -775,6 +783,9 @@ extern u8 byte_203FA14;
 extern u8 byte_203FA15;
 extern u8 byte_203FA16;
 extern u8 byte_203FA16_2;
+
+extern u32 dword_203FA24;
+extern u32 dword_203FA28;
 
 extern u8 byte_203FA35; // possibly bool8
 

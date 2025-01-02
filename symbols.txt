@@ -1,10 +1,15 @@
 byte_203E137 = 0x203E137;
 word_203F990 = 0x203F990;
+gScriptSavedPosX = 0x203F994;
+gScriptSavedPosY = 0x203F996;
+gScriptSavedPriority = 0x203F99D;
 gActorCount = 0x203F9A0;
 gScripts = 0x203F9A4;
 gCurrentScript = 0x203F9F4;
 dword_203F9F8 = 0x203F9F8;
 dword_203F9FC = 0x203F9FC;
+dword_203FA08 = 0x203FA08;
+dword_203FA0C = 0x203FA0C;
 word_203FA10 = 0x203FA10;
 byte_203FA12 = 0x203FA12;
 byte_203FA13 = 0x203FA13;
@@ -15,6 +20,8 @@ byte_203FA16_2 = 0x203FA16;
 dword_203FA18 = 0x203FA18;
 dword_203FA1C = 0x203FA1C;
 dword_203FA20 = 0x203FA20;
+dword_203FA24 = 0x203FA24;
+dword_203FA28 = 0x203FA28;
 
 gKeyInput = 0x30032CA;
 

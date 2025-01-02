@@ -6,6 +6,7 @@
 #include "main.h"
 #include "alloc.h"
 #include "player_defs.h"
+#include "audio_b.h"
 
 #define MAX_SCRIPTS 2
 
@@ -35,7 +36,7 @@ struct Actor {
     fx32 xDistance;
     fx32 yDistance;
     u32 field_38;
-    u32 field_3C;
+    s32 field_3C;
     s32 field_40;
     s32 field_44;
     s32 field_48;
@@ -69,12 +70,17 @@ struct Script {
     bool8 isActive;
     u8 field_23;
     bool8 field_24;
-    s8 activeSfx;
+    u8 activeSfx;
     u8 field_26;
     u8 field_27;
 };
 
 // Part of this file.
+extern s16 gScriptSavedPosX;
+extern s16 gScriptSavedPosY;
+
+extern u8 gScriptSavedPriority;
+
 extern u8 gActorCount;
 extern u8 byte_203F9A1;
 extern bool8 gHidePlayer;
@@ -87,6 +93,8 @@ extern fx32 dword_203FA20;
 bool32 script_cmd_actor_set_anim(int, int, bool32, int);
 bool32 script_cmd_actor_set_direction(int, int, int, int);
 bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
+bool32 script_cmd_actor_set_priority(int, int, int, int);
+bool32 sub_805F04C(int, int, int, int);
 bool32 sub_805F0A8(int, int, int, int);
 bool32 sub_805F0E8(int, int, int, int);
 bool32 script_cmd_actor_move(int, int, int, fx32);
@@ -355,7 +363,7 @@ void sub_805D8D8(struct Script* script) {
                 }
             }
 
-            sub_8025718(actor->field_54, (u8)(actor->field_50 >> 16), actor->field_3C >> 16);
+            sub_8025718(actor->field_54, (u8)(actor->field_50 >> 16), (u32)actor->field_3C >> 16);
         }
 
         if (actor->isPositionAbsolute) {
@@ -764,7 +772,7 @@ bool32 script_cmd_load_and_store_room(int room, int warp, bool32 a3, bool32 chan
     return TRUE;
 }
 
-bool32 script_cmd_load_room(int room, int warp, int a3, bool32 changeMusic) {
+bool32 script_cmd_load_room(int room, int warp, bool32 a3, bool32 changeMusic) {
     audio_halt_all_fx();
 
     if (a3) {
@@ -1081,4 +1089,560 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
     }
 
     ASSERT(0);
+}
+
+bool32 script_cmd_actor_set_position(int actorIdx, int xPos, int yPos, int _) {
+    gCurrentScript->actors[actorIdx].xPos = xPos << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPos = yPos << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].xPosTarget = xPos << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPosTarget = yPos << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].isMoving = FALSE;
+    gCurrentScript->actors[actorIdx].moveSpeed = 0;
+    gCurrentScript->actors[actorIdx].sprite.xPos = xPos - gCameraPixelX;
+    gCurrentScript->actors[actorIdx].sprite.yPos = yPos - gCameraPixelY;
+    gCurrentScript->actors[actorIdx].isPositionAbsolute = FALSE;
+    return TRUE;
+}
+
+bool32 sub_805ED94(int actorIdx, int xPos, int yPos, int _) {
+    return script_cmd_actor_set_position(actorIdx, gScriptSavedPosX + xPos, gScriptSavedPosY + yPos, 0);
+}
+
+bool32 script_cmd_actor_set_position_from_cam(int actorIdx, int xPos, int yPos, int _) {
+    gCurrentScript->actors[actorIdx].xPos = (gCameraPixelX + xPos) << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPos = (gCameraPixelY + yPos) << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].xPosTarget = (gCameraPixelX + xPos) << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPosTarget = (gCameraPixelY + yPos) << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].isMoving = FALSE;
+    gCurrentScript->actors[actorIdx].moveSpeed = 0;
+    gCurrentScript->actors[actorIdx].sprite.xPos = xPos;
+    gCurrentScript->actors[actorIdx].sprite.yPos = yPos;
+    gCurrentScript->actors[actorIdx].isPositionAbsolute = FALSE;
+    return TRUE;
+}
+
+bool32 script_cmd_actor_set_position_absolute(int actorIdx, int xPos, int yPos, int _) {
+    gCurrentScript->actors[actorIdx].xPos = xPos << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPos = yPos << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].xPosTarget = xPos << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPosTarget = yPos << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].isMoving = FALSE;
+    gCurrentScript->actors[actorIdx].moveSpeed = 0;
+    gCurrentScript->actors[actorIdx].sprite.xPos = xPos;
+    gCurrentScript->actors[actorIdx].sprite.yPos = yPos;
+    gCurrentScript->actors[actorIdx].isPositionAbsolute = TRUE;
+    return TRUE;
+}
+
+bool32 script_cmd_actor_save_position(int actordIdx, int _, int __, int ___) {
+    gScriptSavedPosX = gCurrentScript->actors[actordIdx].sprite.xPos;
+    gScriptSavedPosY = gCurrentScript->actors[actordIdx].sprite.yPos;
+    gScriptSavedPriority = 3 - gCurrentScript->actors[actordIdx].sprite.priority;
+    return TRUE;
+}
+
+bool32 sub_805EEBC(int actorIdx, int _, int __, int ___) {
+    script_cmd_actor_set_position(actorIdx, gPlayerPos.x >> FX32_SHIFT,
+                                  gMapPixelSizeY - ((gPlayerPos.y + gPlayerPos.z) >> FX32_SHIFT), 0);
+    script_cmd_actor_set_priority(actorIdx, 3 - sub_800C50C(), 0, 0);
+    sub_805F04C(actorIdx, gPlayerPos.y, 0, 0);
+    return TRUE;
+}
+
+bool32 sub_805EF0C(int actorIdx, int _, int __, int ___) {
+    script_cmd_actor_set_position(
+        actorIdx, gPlayerShadowPos.x >> FX32_SHIFT,
+        gMapPixelSizeY - ((gPlayerShadowPos.y + gPlayerShadowPos.z) >> FX32_SHIFT), 0);
+    script_cmd_actor_set_priority(actorIdx, 3 - sub_800C50C(), 0, 0);
+    sub_805F04C(actorIdx, gPlayerShadowPos.y, 0, 0);
+    return TRUE;
+}
+
+bool32 script_cmd_actor_set_direction(int actorIdx, int direction, int _, int __) {
+    u16 idx = gCurrentScript->actors[actorIdx].sprite.index
+              - gCurrentScript->actors[actorIdx].sprite.direction;
+    gCurrentScript->actors[actorIdx].sprite.direction = direction;
+    sprite_set_anim(&gCurrentScript->actors[actorIdx].sprite, idx, 0,
+                    gCurrentScript->actors[actorIdx].sprite.maxAnimRepeats);
+    return TRUE;
+}
+
+bool32 sub_805EF94(int actorIdx, int _, int __, int ___) {
+    fx32 xDistance, yDistance;
+    fx32 angle;
+
+    ASSERT(gCurrentScript->actors[actorIdx].xDistance != 0
+           || gCurrentScript->actors[actorIdx].yDistance != 0);
+
+    xDistance = gCurrentScript->actors[actorIdx].xPosTarget - gCurrentScript->actors[actorIdx].xPos;
+    yDistance = gCurrentScript->actors[actorIdx].yPosTarget - gCurrentScript->actors[actorIdx].yPos;
+
+    if (Abs(xDistance) > Abs(yDistance)) {
+        angle = sub_80039AC(yDistance, xDistance);
+    } else {
+        angle = sub_80039B4(xDistance, yDistance);
+    }
+
+    return script_cmd_actor_set_direction(actorIdx, sub_805E3CC(angle), 0, 0);
+}
+
+bool32 script_cmd_actor_set_priority(int actorIdx, int priority, int _, int __) {
+    sprite_set_priority(&gCurrentScript->actors[actorIdx].sprite, 3 - priority);
+    return TRUE;
+}
+
+bool32 sub_805F034(int actorIdx, int _, int __, int ___) {
+    return script_cmd_actor_set_priority(actorIdx, gScriptSavedPriority, 0, 0);
+}
+
+bool32 sub_805F04C(int actorIdx, int a2, int _, int __) {
+    gCurrentScript->actors[actorIdx].field_38 = a2 << 16;
+    return TRUE;
+}
+
+bool32 script_cmd_actor_set_obj_mode(int actorIdx, int objMode, int _, int __) {
+    gCurrentScript->actors[actorIdx].sprite.objMode = objMode;
+    return TRUE;
+}
+
+bool32 script_cmd_actor_set_palette(int actorIdx, int palette, int _, int __) {
+    sprite_set_palette(&gCurrentScript->actors[actorIdx].sprite, palette);
+    gCurrentScript->actors[actorIdx].sprite.alwaysUsePalette0 = TRUE;
+    return TRUE;
+}
+
+bool32 sub_805F0A8(int actorIdx, int frame, int _, int __) {
+    sprite_lock_anim_on_frame(&gCurrentScript->actors[actorIdx].sprite, frame);
+    return TRUE;
+}
+
+bool32 script_cmd_actor_unlock_anim(int actorIdx, int _, int __, int ___) {
+    sprite_unlock_anim(&gCurrentScript->actors[actorIdx].sprite);
+    return TRUE;
+}
+
+bool32 sub_805F0E8(int actorIdx, int frame, int _, int __) {
+    sprite_set_locked_frame(&gCurrentScript->actors[actorIdx].sprite, frame);
+    return TRUE;
+}
+
+bool32 sub_805F108(int actorIdx, int frame, int _, int __) {
+    gCurrentScript->actors[actorIdx].sprite.loopFrame = frame;
+    return TRUE;
+}
+
+bool32 sub_805F120(int actorIdx, int _, int __, int ___) {
+    sub_800E9EC(&gCurrentScript->actors[actorIdx].sprite, 15, 0x1FFF);
+    return TRUE;
+}
+
+bool32 script_cmd_actor_move(int actorIdx, int x, int y, int moveSpeed) {
+    fx32 xDistance, yDistance;
+
+    if (gCurrentScript->actors[actorIdx].calcIdx == -1) {
+        gCurrentScript->actors[actorIdx].calcIdx = sub_8003854(0x4B0000);
+    }
+    sub_800389C(gCurrentScript->actors[actorIdx].calcIdx, dword_80CC844[0]);
+    sub_8003894(gCurrentScript->actors[actorIdx].calcIdx, dword_80CC7EC[0]);
+
+    gCurrentScript->actors[actorIdx].xPosTarget = x << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPosTarget = y << FX32_SHIFT;
+
+    xDistance = (x << FX32_SHIFT) - gCurrentScript->actors[actorIdx].xPos;
+    yDistance = (y << FX32_SHIFT) - gCurrentScript->actors[actorIdx].yPos;
+
+    gCurrentScript->actors[actorIdx].moveSpeed = moveSpeed;
+    gCurrentScript->actors[actorIdx].xDistance = Abs(xDistance);
+    gCurrentScript->actors[actorIdx].yDistance = Abs(yDistance);
+
+    if (Abs(xDistance) > Abs(yDistance)) {
+        sub_8003884(gCurrentScript->actors[actorIdx].calcIdx, moveSpeed,
+                    sub_80039AC(yDistance, xDistance), 0);
+    } else {
+        sub_8003884(gCurrentScript->actors[actorIdx].calcIdx, moveSpeed,
+                    sub_80039B4(xDistance, yDistance), 0);
+    }
+
+    gCurrentScript->actors[actorIdx].isMoving = TRUE;
+
+    return TRUE;
+}
+
+bool32 sub_805F28C(int actorIdx, int moveSpeed, int _, int __) {
+    return script_cmd_actor_move(actorIdx, gScriptSavedPosX, gScriptSavedPosY, moveSpeed);
+}
+
+bool32 sub_805F2B0(int actorIdx, int x, int y, int moveSpeed) {
+    fx32 xDistance, yDistance;
+
+    if (gCurrentScript->actors[actorIdx].calcIdx == -1) {
+        gCurrentScript->actors[actorIdx].calcIdx = sub_8003854(0x4B0000);
+    }
+
+    sub_800389C(gCurrentScript->actors[actorIdx].calcIdx, dword_80CC844[0]);
+    sub_8003894(gCurrentScript->actors[actorIdx].calcIdx, dword_80CC7EC[0]);
+
+    gCurrentScript->actors[actorIdx].xPosTarget = (gCameraPixelX + x) << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].yPosTarget = (gCameraPixelY + y) << FX32_SHIFT;
+
+    xDistance = gCurrentScript->actors[actorIdx].xPosTarget - gCurrentScript->actors[actorIdx].xPos;
+    yDistance = gCurrentScript->actors[actorIdx].yPosTarget - gCurrentScript->actors[actorIdx].yPos;
+
+    gCurrentScript->actors[actorIdx].moveSpeed = moveSpeed;
+    gCurrentScript->actors[actorIdx].xDistance = Abs(xDistance);
+    gCurrentScript->actors[actorIdx].yDistance = Abs(yDistance);
+
+    if (Abs(xDistance) > Abs(yDistance)) {
+        sub_8003884(gCurrentScript->actors[actorIdx].calcIdx, moveSpeed,
+                    sub_80039AC(yDistance, xDistance), 0);
+    } else {
+        sub_8003884(gCurrentScript->actors[actorIdx].calcIdx, moveSpeed,
+                    sub_80039B4(xDistance, yDistance), 0);
+    }
+
+    gCurrentScript->actors[actorIdx].isMoving = TRUE;
+
+    return TRUE;
+}
+
+bool32 sub_805F40C(int actorIdx, int a2, int _, int __) {
+    gCurrentScript->actors[actorIdx].field_5B = a2;
+    return TRUE;
+}
+
+bool32 sub_805F428(int actorIdx, int a2, int _, int __) {
+    gCurrentScript->actors[actorIdx].field_5C = a2;
+    return TRUE;
+}
+
+bool32 script_cmd_alloc_oam_matrices(int count, int _, int __, int ___) {
+    gMatricesCount = count;
+    gMatrices = (u32*)Alloc(16 * count, 5, 3);
+    return TRUE;
+}
+
+bool32 script_cmd_free_oam_matrices(int _, int __, int ___, int ____) {
+    Free(gMatrices, 3);
+    return TRUE;
+}
+
+bool32 sub_805F480(int actorIdx, int a2, int _, int __) {
+    gCurrentScript->actors[actorIdx].field_54 = a2;
+    sub_8003820(&gCurrentScript->actors[actorIdx].sprite, 1, a2);
+    return TRUE;
+}
+
+bool32 sub_805F4B0(int actorIdx, int a2, int a3, int _) {
+    gCurrentScript->actors[actorIdx].field_50 = a2 << 16;
+    gCurrentScript->actors[actorIdx].field_3C = a3 << 16;
+    sub_8025718(gCurrentScript->actors[actorIdx].field_54, a2, a3);
+    return TRUE;
+}
+
+bool32 sub_805F4DC(int actorIdx, int a2, int a3, int _) {
+    struct Actor* actor = &gCurrentScript->actors[actorIdx];
+
+    actor->field_40 = a2 << 16;
+
+    ASSERT(a3 != 0);
+
+    if (actor->field_3C > a2 << 16) {
+        actor->field_44 = -a3;
+    } else {
+        actor->field_44 = a3;
+    }
+
+    actor->field_58 = 1;
+
+    return TRUE;
+}
+
+bool32 sub_805F51C(int actorIdx, int a2, int a3, int a4) {
+    struct Actor* actor = &gCurrentScript->actors[actorIdx];
+
+    actor->field_48 = a2 << 16;
+
+    ASSERT(a3 != 0);
+
+    if (a4) {
+        actor->field_4C = a3;
+    } else {
+        actor->field_4C = -a3;
+    }
+
+    actor->field_59 = 1;
+
+    return TRUE;
+}
+
+bool32 script_cmd_play_bgm(int bgm, int _, int __, int ___) {
+    gLoadedRoomBgm = bgm;
+    if (gCanChangeBgm) {
+        audio_start_tune(bgm);
+    }
+    return TRUE;
+}
+
+bool32 script_cmd_stop_bgm(int _, int __, int ___, int ____) {
+    audio_halt_tune();
+    return TRUE;
+}
+
+bool32 script_cmd_play_sfx(int sfx, bool32 storeSfx, int _, int __) {
+    if (storeSfx) {
+        gCurrentScript->activeSfx = PLAY_SFX(sfx);
+    } else {
+        PLAY_SFX(sfx);
+    }
+    return TRUE;
+}
+
+bool32 script_cmd_stop_sfx(int _, int __, int ___, int ____) {
+    bool8 stopped = gCanPlaySfx ? audio_halt_fx(gCurrentScript->activeSfx) : 0;
+    if (!stopped) {
+        audio_halt_all_fx();
+    }
+    return TRUE;
+}
+
+bool32 script_cmd_stop_all_sfx(int _, int __, int ___, int ____) {
+    audio_halt_all_fx();
+    return TRUE;
+}
+
+bool32 script_cmd_play_bill_drill_sfx(int _, int __, int ___, int ____) {
+    if (gCanPlaySfx) {
+        audio_halt_fx(gBillDrillSfx);
+    }
+    gBillDrillSfx = PLAY_SFX(22);
+    return TRUE;
+}
+
+bool32 script_cmd_stop_bill_drill_sfx(int _, int __, int ___, int ____) {
+    if (gCanPlaySfx) {
+        audio_halt_fx(gBillDrillSfx);
+    }
+    return TRUE;
+}
+
+bool32 script_cmd_set_bgm_volume(int volume, bool32 useGlobal, int _, int __) {
+    if (useGlobal) {
+        audio_set_tune_vol(dVolumes[gBgmMainVolume]);
+    } else {
+        audio_set_tune_vol(dVolumes[volume]);
+    }
+    return TRUE;
+}
+
+bool32 script_cmd_set_bgm_volume_if_louder(int volume, bool32 useGlobal, int _, int __) {
+    if (useGlobal) {
+        audio_set_tune_vol(dVolumes[gBgmMainVolume]);
+    } else if (gBgmMainVolume > volume) {
+        audio_set_tune_vol(dVolumes[volume]);
+    }
+    return TRUE;
+}
+
+bool32 sub_805F768(int volume, bool32 useGlobal) {
+    if (useGlobal) {
+        audio_set_fx_vol(dVolumes[gSfxMainVolume]);
+    } else {
+        audio_set_fx_vol(dVolumes[volume]);
+    }
+    return TRUE;
+}
+
+bool32 sub_805F7A4(bool32 useGlobal, int _, int __, int ___) {
+    if (useGlobal) {
+        audio_set_tune_vol(dVolumes[gBgmMainVolume]);
+    } else {
+        audio_set_tune_vol(dVolumes[0]);
+    }
+    return TRUE;
+}
+
+bool32 sub_805F7D8(int a1, int _, int __, int ___) {
+    ASSERT(!byte_203F99F);
+    if (sub_0802FEDC(a1)) {
+        byte_203F99F = 1;
+    } else {
+        ASSERT(0);
+    }
+    return TRUE;
+}
+
+bool32 sub_805F808(int a1, int _, int __, int ___) {
+    ASSERT(!byte_203F9A1);
+    gCurrentScript->isActive = FALSE;
+    gCurrentScript->field_24 = TRUE;
+    word_203FA10 = 0;
+    if (a1) {
+        word_203F990 = 0;
+    } else {
+        word_203F990 = word_203F992 - 1;
+    }
+    byte_203FA13 = a1;
+    return TRUE;
+}
+
+bool32 script_cmd_store_camera_position(int _, int __, int ___, int ____) {
+    ASSERT(!byte_203FA15);
+    dword_203FA18 = (struct ScriptCamera*)Alloc(sizeof(struct ScriptCamera), 5, 3);
+    dword_203FA18->isMoving = FALSE;
+    dword_203FA18->xPosOriginal = (gCameraPixelX + 120) << FX32_SHIFT;
+    dword_203FA18->yPosOriginal = (gCameraPixelY + 80) << FX32_SHIFT;
+    dword_203FA18->xPosCurrent = dword_203FA18->xPosOriginal;
+    dword_203FA18->yPosCurrent = dword_203FA18->yPosOriginal;
+    dword_203FA18->xPosTarget = dword_203FA18->xPosOriginal;
+    dword_203FA18->yPosTarget = dword_203FA18->yPosOriginal;
+    dword_203FA18->xDistance = 0;
+    dword_203FA18->yDistance = 0;
+    dword_203FA18->moveSpeed = 0;
+    dword_203FA18->field_26 = 0;
+    dword_203FA18->field_24 = -1;
+    byte_203FA15 = 1;
+    return TRUE;
+}
+
+bool32 sub_0805F8DC(int _, int __, int ___, int ____) {
+    ASSERT(byte_203FA15);
+    if (dword_203FA18->field_24 != -1) {
+        sub_8003864(dword_203FA18->field_24);
+        dword_203FA18->field_24 = -1;
+    }
+    Free(dword_203FA18, 3);
+    byte_203FA15 = 0;
+    return 1;
+}
+
+bool32 script_cmd_move_camera(int x, int y, int moveSpeed, int _) {
+    fx32 xDistance, yDistance;
+
+    ASSERT(byte_203FA15);
+
+    if (dword_203FA18->field_24 == -1) {
+        dword_203FA18->field_24 = sub_8003854(4915200);
+    }
+
+    sub_800389C(dword_203FA18->field_24, dword_80CC844[0]);
+    sub_8003894(dword_203FA18->field_24, dword_80CC7EC[0]);
+
+    if (x == 0 && y == 0) {
+        sub_0805E270(120, gMapPixelSizeX - 120, 80, gMapPixelSizeY - 80);
+    } else {
+        if (x > (u32)gMapPixelSizeX - 120) {
+            x = gMapPixelSizeX - 120;
+        }
+        if (x < 120)
+            x = 120;
+        if (y > (u32)gMapPixelSizeY - 80) {
+            y = gMapPixelSizeY - 80;
+        }
+        if (y < 80)
+            y = 80;
+        dword_203FA18->xPosTarget = x << FX32_SHIFT;
+        dword_203FA18->yPosTarget = y << FX32_SHIFT;
+    }
+
+    xDistance = dword_203FA18->xPosTarget - dword_203FA18->xPosCurrent;
+    yDistance = dword_203FA18->yPosTarget - dword_203FA18->yPosCurrent;
+
+    dword_203FA18->xDistance = Abs(xDistance);
+    dword_203FA18->yDistance = Abs(yDistance);
+
+    ASSERT(xDistance != 0 || yDistance != 0);
+
+    dword_203FA1C = dword_203FA18->xDistance;
+    dword_203FA20 = dword_203FA18->yDistance;
+    dword_203FA24 = dword_203FA18->xPosCurrent;
+    dword_203FA28 = dword_203FA18->yPosCurrent;
+
+    if (Abs(xDistance) > Abs(yDistance)) {
+        sub_8003884(dword_203FA18->field_24, moveSpeed, sub_80039AC(yDistance, xDistance), 0);
+    } else {
+        sub_8003884(dword_203FA18->field_24, moveSpeed, sub_80039B4(xDistance, yDistance), 0);
+    }
+
+    sub_800386C(dword_203FA18->field_24, 0, 0);
+    dword_203FA18->moveSpeed = moveSpeed;
+    dword_203FA18->isMoving = TRUE;
+
+    return 1;
+}
+
+bool32 script_cmd_move_camera_to_actor_position(int moveSpeed, int _, int __, int ___) {
+    return script_cmd_move_camera(gScriptSavedPosX, gScriptSavedPosY, moveSpeed, 0);
+}
+
+bool32 sub_805FAF4(int moveSpeed, int _, int __, int ___) {
+    return script_cmd_move_camera(dword_203FA08 >> FX32_SHIFT, dword_203FA0C >> FX32_SHIFT, moveSpeed,
+                                  0);
+}
+
+bool32 sub_805FB18(int _, int __, int ___, int ____) {
+    dword_203FA08 = dword_203FA18->xPosCurrent;
+    dword_203FA0C = dword_203FA18->yPosCurrent;
+    return TRUE;
+}
+
+bool32 sub_805FB38(int a1, int _, int __, int ___) {
+    dword_203FA18->field_26 = a1;
+    return TRUE;
+}
+
+bool32 script_cmd_return_camera(int moveSpeed, int _, int __, int ___) {
+    ASSERT(byte_203FA15);
+    if (moveSpeed == 0) {
+        moveSpeed = dword_203FA18->moveSpeed;
+    }
+    script_cmd_move_camera(dword_203FA18->xPosOriginal >> FX32_SHIFT,
+                           dword_203FA18->yPosOriginal >> FX32_SHIFT, moveSpeed, 0);
+    return TRUE;
+}
+
+bool32 sub_805FB80(int _, int __, int ___, int ____) {
+    byte_203FA14 = 1;
+    sub_80266C8(2, gCameraPixelY, 2);
+    return TRUE;
+}
+
+bool32 sub_805FBA4(int _, int __, int ___, int ____) {
+    byte_203FA14 = 2;
+    return TRUE;
+}
+
+bool32 sub_805FBB4(int a1, int a2, int _, int __) {
+    switch (a1) {
+        case 0:
+            sub_80270AC(4095, a2);
+            break;
+
+        case 1:
+            sub_80271A4(4095, a2);
+            break;
+
+        case 2:
+            sub_8026C24(4095);
+            break;
+    }
+
+    return TRUE;
+}
+
+bool32 sub_805FBF4(int a1, int a2, int _, int __) {
+    switch (a1) {
+        case 0:
+            sub_8026E48(4095, a2, 1);
+            break;
+
+        case 1:
+            sub_8026F78(4095, a2, 1);
+            break;
+
+        case 2:
+            sub_8026C8C();
+            break;
+    }
+
+    return TRUE;
 }
