@@ -1405,7 +1405,7 @@ void sub_801126C(void) {
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (u32*)0x6014000;
+        gOBJTileFramePtr = (u32*)OBJ_VRAM1;
         gOBJTileCount = 512;
         sub_8011428();
         FlushMenuToTextBuffer();
@@ -2213,7 +2213,7 @@ void display_error_message(char* type, char* message) {
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (void*)0x6014000;
+        gOBJTileFramePtr = (void*)OBJ_VRAM1;
         gOBJTileCount = 512;
 
         gDebugTextBox5.xPosition = 16;

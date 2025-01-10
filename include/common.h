@@ -892,7 +892,7 @@ extern u32 dword_80CC8F4;
 extern struct SoundEffect dSoundEffects[];
 
 extern u16 dLightningPalette[];
-extern void* dLavaPaletteAnims[];
+extern u16* dLavaPaletteAnims[];
 
 // More strings.
 extern char dword_8065F60[];
@@ -1058,5 +1058,20 @@ extern char char_08065304[];
 extern u8 unk_83FD454[];
 
 extern s16 dword_80B1AE4[];
+
+extern char dword_808D5D8[];
+extern char dword_808DBE8[];
+extern char dword_808E944[];
+extern char dword_808E2F8[];
+extern char dword_808EF84[];
+
+extern char dword_808D5E8[];
+extern char dword_808DC00[];
+extern char dword_808E954[];
+extern char dword_808E30C[];
+extern char dword_808EF98[];
+
+extern u32 dLicenceBitmap[];
+extern u32 unk_83FC514[];
 
 #endif

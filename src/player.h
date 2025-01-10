@@ -36,7 +36,7 @@ void set_player_in_climb_state(void);
 void sub_8017F14(void);
 void sub_80181B8(fx32* height);
 int start_npc_dialogue(int a1);
-void sub_08018A94(int a1);
+void set_player_direction(int direction);
 bool32 sub_8018BB0(const struct Sprite* playerSprite);
 void sub_80192D4(int a1, int a2, int a3);
 void sub_801990C(void);

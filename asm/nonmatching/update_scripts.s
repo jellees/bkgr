@@ -1,6 +1,4 @@
-    .syntax unified
     .text
-
     .thumb
     .global update_scripts
 update_scripts: @ 0x0805DD7C

@@ -1646,3 +1646,712 @@ bool32 sub_805FBF4(int a1, int a2, int _, int __) {
 
     return TRUE;
 }
+
+bool32 sub_805FC34(int a1, int _, int __, int ___) {
+    if (a1 && byte_203F99C) {
+        return FALSE;
+    }
+
+    byte_203F99C = a1;
+    gCurrentScript->field_23 = a1;
+
+    if (a1) {
+        word_203F998 = gCurrentScript->field_1A;
+        if (word_203F99A == gCurrentScript->field_1A) {
+            word_203F99A = -1;
+        }
+    } else {
+        word_203F99A = gCurrentScript->field_1A;
+        if (word_203F998 == gCurrentScript->field_1A) {
+            word_203F998 = -1;
+        }
+    }
+
+    return TRUE;
+}
+
+bool32 script_cmd_wait_frames(int frames, int _, int __, int ___) {
+    gCurrentScript->waitFrames = frames;
+    return TRUE;
+}
+
+bool32 sub_805FCB0(int a1, int a2, int _, int __) {
+    dword_203F9F8 = a1 << FX32_SHIFT;
+    dword_203F9FC = (gMapPixelSizeY - a2) << FX32_SHIFT;
+    byte_203F9A1 = 1;
+    gKeyInput = KEYS_MASK;
+    return TRUE;
+}
+
+bool32 sub_805FCEC(int a1, int a2, int a3, int a4) {
+    if (gMapPixelSizeY - ((gPlayerShadowPos.z + gPlayerShadowPos.y) >> FX32_SHIFT) >= a3) {
+        return sub_805FCB0(a1, a4, 0, 0);
+    }
+    return sub_805FCB0(a1, a2, 0, 0);
+}
+
+bool32 sub_805FD2C(int direction, int _, int __, int ___) {
+    set_player_direction(direction);
+    return TRUE;
+}
+
+bool32 sub_805FD38(int condition, int actorIdx, int _, int __) {
+    bool32 advance = FALSE;
+
+    switch (condition) {
+        case 0:
+            if (gCurrentScript->waitFrames == 0) {
+                advance = TRUE;
+            }
+            break;
+
+        case 1:
+            if (!gCurrentScript->actors[actorIdx].isMoving) {
+                advance = TRUE;
+            }
+            break;
+
+        case 2:
+            if (!gCurrentScript->actors[actorIdx].field_58) {
+                advance = TRUE;
+            }
+            break;
+
+        case 3:
+            if (!gCurrentScript->actors[actorIdx].field_59) {
+                advance = TRUE;
+            }
+            break;
+
+        case 4:
+            if (sprite_is_anim_done_once(&gCurrentScript->actors[actorIdx].sprite)) {
+                advance = TRUE;
+            }
+            break;
+
+        case 5:
+            if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
+                byte_203F99F = 0;
+                advance = TRUE;
+            }
+            break;
+
+        case 6: {
+            bool32 shouldAdvance = FALSE;
+            if (byte_203F9A1 == 0) {
+                shouldAdvance = TRUE;
+            }
+            advance = shouldAdvance;
+            break;
+        }
+
+        case 7:
+            if (!dword_203FA18->isMoving) {
+                advance = TRUE;
+            }
+            break;
+
+        case 8:
+            if (!byte_203FA14) {
+                advance = TRUE;
+            }
+            break;
+
+        case 9:
+            if (sub_805DB38()) {
+                advance = TRUE;
+            }
+            break;
+
+        case 10:
+            if (gCurrentScript->waitFrames != 0
+                || (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_NOT_MOVING)
+                    && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)
+                    && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING))) {
+                byte_203F9A1 = 1;
+                gKeyInput = KEYS_MASK;
+                advance = FALSE;
+            } else {
+                byte_203F9A1 = 0;
+                advance = TRUE;
+            }
+            break;
+
+        case 11:
+            if (gCurrentScript->waitFrames == 0 && !sub_80038AC(dword_2000FC8)) {
+                byte_203F9A1 = 0;
+                advance = TRUE;
+            } else {
+                byte_203F9A1 = 1;
+                gKeyInput = KEYS_MASK;
+                advance = FALSE;
+            }
+            break;
+
+        case 12:
+            if (!audio_fx_still_active(gCurrentScript->activeSfx)) {
+                advance = TRUE;
+            }
+            break;
+
+        case 13:
+            if (sub_80037A8(&gCurrentScript->actors[actorIdx].sprite)) {
+                advance = TRUE;
+            }
+            break;
+
+        case 14:
+            if (sub_805DD20()) {
+                byte_203F99F = 0;
+                advance = TRUE;
+            }
+            break;
+
+        case 15:
+            if (!gIsPaletteEffectsActive) {
+                advance = TRUE;
+            }
+            break;
+
+        case 16:
+            if (sub_0804207C(0)) {
+                advance = TRUE;
+            }
+            break;
+
+        default:
+            ASSERT(0);
+            break;
+    }
+
+    if (advance) {
+        gCurrentScript->cmdIdx++;
+    }
+
+    return FALSE;
+}
+
+bool32 script_cmd_end(int _, int __, int ___, int ____) {
+    gCurrentScript->endScript = TRUE;
+    return FALSE;
+}
+
+bool32 sub_805FF80(int a1, int _, int __, int ___) {
+    struct TextBox textBox;
+    char* text;
+    int frames;
+    int textSize;
+    bool32 fadeOut;
+
+    sub_80270AC(4095, 0);
+    DmaFill32(0, (void*)BG_PLTT, BG_PLTT_SIZE / 4);
+
+    textBox.letterSpacing = -2;
+    textBox.field_12 = 0;
+    textBox.field_A = 2;
+    textBox.size = 240;
+    textBox.palette = 1;
+    textBox.stringOffset = 0;
+    textBox.field_11 = 6;
+    textBox.font = &font_80B01A8[2];
+
+    text = NULL;
+
+    switch (a1) {
+        default:
+            ASSERT(0);
+            break;
+
+        case 0:
+            switch (gPauseMenuLanguage) {
+                case 0:
+                    text = dword_808D5D8;
+                    break;
+
+                case 1:
+                    text = dword_808DBE8;
+                    break;
+
+                case 3:
+                    text = dword_808E2F8;
+                    break;
+
+                case 2:
+                    text = dword_808E944;
+                    break;
+
+                case 4:
+                    text = dword_808EF84;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        case 1:
+            switch (gPauseMenuLanguage) {
+                case 0:
+                    text = dword_808D5E8;
+                    break;
+
+                case 1:
+                    text = dword_808DC00;
+                    break;
+
+                case 3:
+                    text = dword_808E30C;
+                    break;
+
+                case 2:
+                    text = dword_808E954;
+                    break;
+
+                case 4:
+                    text = dword_808EF98;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+    }
+
+    textSize = sub_8025870(text, &textBox);
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM1;
+    gOBJTileCount = 512;
+    SyncVblank();
+    update_video();
+    SkipVblank();
+    SetObjectsFullAlpha();
+
+    fadeOut = TRUE;
+    frames = 90;
+
+    while (frames != 0) {
+        if (byte_20021F8) {
+            ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+            if (gKeysDown & B_BUTTON) {
+                byte_2000F55 = 1;
+                frames = 1;
+            }
+        }
+
+        frames--;
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferEnd = gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM1;
+        gOBJTileCount = 512;
+        textBox.xPosition = (240 - textSize) >> 1;
+        textBox.yPosition = 72;
+        textBox.stringOffset = 0;
+        AddStringToBuffer(&textBox, text);
+        RenderText();
+        CheckStacks();
+        SyncVblank();
+        update_video();
+        SkipVblank();
+
+        if (fadeOut) {
+            sub_08026BA8(2, 0);
+            fadeOut = FALSE;
+        }
+    }
+
+    FadeOutObjects(2, 0);
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM1;
+    gOBJTileCount = 512;
+    SyncVblank();
+    update_video();
+    SkipVblank();
+    REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
+
+    return 1;
+}
+
+// https://decomp.me/scratch/5oOP5
+#ifndef NONMATCHING
+asm_unified(".include \"asm/nonmatching/show_time_travel_scene.s\"");
+#else
+static inline void ab(int a1, int v9, int a, int b) {
+    if (a1)
+        sub_8025718(0, v9, b - a + 128);
+    else
+        sub_8025718(0, v9, a + 128);
+}
+
+bool32 show_time_travel_scene(int a1) {
+    int* source;
+    struct Sprite symbol;
+    u32 frames;
+    u16 v10;
+    int v11;
+    u8 v8;
+    u8 v9;
+    s16 v13;
+    s16 v15;
+
+    gDisplayControl = REG_DISPCNT;
+    gBG0Control = REG_BG0CNT;
+    gBG1Control = REG_BG1CNT;
+    gBG2Control = REG_BG2CNT;
+    gBG3Control = REG_BG3CNT;
+
+    sub_80271A4(4095, 0);
+
+    if (gCanChangeBgm)
+        audio_start_tune(17);
+
+    gLoadedTileAnimCount = 0;
+    gTileAnimQueueIndex = 0;
+    REG_DISPCNT = 5188;
+    REG_BG2CNT = 0;
+    DmaFill32(0, (void*)0x6000000, 20480);
+    DmaFill32(0, (void*)0x5000000, 128);
+    RoomObjPaletteToVram(12);
+    DmaTransferBGPalette(&unk_83FD1D4, 0, 4);
+
+    source = Alloc(0x9600u, 13, 1);
+
+    sub_8003A0C();
+    DmaTransfer16(source, (void*)0x6000000, 19200);
+    sub_8026F78(4095, 0, 1);
+    SetSprite(&symbol, 0x4AFu, 0, 0, 0, 0xF0u, 0xF0u, 2);
+    sprite_set_priority(&symbol, 0);
+    gMatricesCount = 1;
+    gMatrices = (int*)Alloc(0x10u, 5, 3);
+    sub_8003820(&symbol, 1, 0);
+    sub_8003808(&symbol, 1);
+
+    frames = 0;
+    v8 = 0;
+    v9 = 0;
+
+    while (frames < 580) {
+        if (byte_20021F8) {
+            ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+            if (gKeysDown & 2) {
+                byte_2000F55 = 1;
+                frames = 580;
+            }
+        }
+
+        if (gIsPaletteEffectsActive)
+            sub_8026DC0();
+
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM1;
+        gOBJTileCount = 512;
+
+        v10 = sub_8003934(frames << 8, 148480);
+
+        if (!a1) {
+            v10 = 256 - v10;
+            v11 = dword_80B1AE4[64 + v8];
+        } else {
+            v11 = -dword_80B1AE4[64 + v8];
+        }
+
+        v13 = CallARM_FX_Mul8(CallARM_FX_Mul8(v10, v11), 100);
+        v15 = CallARM_FX_Mul8(CallARM_FX_Mul8(v10, dword_80B1AE4[v8]), 100);
+        symbol.xPos = v13 + 104;
+        symbol.yPos = v15 + 64;
+
+        if (v13 <= 127 && v15 <= 87 && v13 > -127 && v15 > -88 && !byte_2000F55) {
+            sprite_render(&symbol);
+            ab(a1, v9, frames >> 1, 290);
+        }
+        CheckStacks();
+        SyncVblank();
+        update_video();
+        sub_8003A14();
+        SkipVblank();
+
+        frames++;
+        v8 -= 3;
+        v9 += 5;
+    }
+
+    sub_80271A4(4095, 1);
+    Free(gMatrices, 3);
+    Free(source, 1);
+    REG_DISPCNT = gDisplayControl;
+    REG_BG0CNT = gBG0Control;
+    REG_BG1CNT = gBG1Control;
+    REG_BG2CNT = gBG2Control;
+    REG_BG3CNT = gBG3Control;
+
+    return 1;
+}
+#endif
+
+// https://decomp.me/scratch/p6AiR
+#ifndef NONMATCHING
+asm_unified(".include \"asm/nonmatching/sub_8060568.s\"");
+#else
+bool32 sub_8060568(int _, int __, int ___, int ____) {
+    int v5;
+    struct TextBox font;
+    struct TextBox v18;
+    char* v6;
+    char* string;
+    int v20;
+    int v8;
+    int v21;
+    struct Sprite* sprite;
+    int i;
+    int v9;
+    int v10;
+    int v13;
+
+    gDisplayControl = REG_DISPCNT;
+    gBG0Control = REG_BG0CNT;
+    gBG1Control = REG_BG1CNT;
+    gBG2Control = REG_BG2CNT;
+    gBG3Control = REG_BG3CNT;
+
+    sub_80270AC(4095, 0);
+    gLoadedTileAnimCount = 0;
+    gTileAnimQueueIndex = 0;
+    REG_DISPCNT = 5188;
+    REG_BG2CNT = 0;
+    DmaFill32(0, (void*)0x6000000, 20480);
+    SyncVblank();
+    LZ77UnCompReadNormalWrite16bit(&unk_87E233C, (void*)0x6000000);
+    DmaTransfer32(&unk_83FC314, (void*)0x5000000, 128);
+    DmaTransfer32(byte_83FD254, (void*)0x5000200, 128);
+
+    v5 = 1;
+    if (gGameStatus.totalJiggies[0] == stru_80CC8C4.totalJiggies[0]) {
+        v5++;
+    }
+    if (gGameStatus.totalNotes == stru_80CC8C4.totalNotes) {
+        v5++;
+    }
+    if (gGameStatus.totalJiggies[1] == stru_80CC8C4.totalJiggies[1]) {
+        v5++;
+    }
+    if (60 * gGameStatus.clockHour + gGameStatus.clockMinute
+        <= 60 * stru_80CC8C4.clockHour + stru_80CC8C4.clockMinute) {
+        v5++;
+    }
+
+    font.letterSpacing = -2;
+    font.field_12 = 0;
+    font.field_A = 1;
+    font.size = 240;
+    font.palette = 1;
+    font.stringOffset = 0;
+    font.field_11 = 6;
+    font.font = &font_80B01A8[2];
+    v18.letterSpacing = -2;
+    v18.field_12 = 0;
+    v18.field_A = 1;
+    v18.size = 240;
+    v18.palette = 1;
+    v18.stringOffset = 0;
+    v18.field_11 = 6;
+    v18.font = &font_80B01A8[2];
+
+    v6 = 0;
+    string = 0;
+
+    switch (gPauseMenuLanguage) {
+        case 0:
+            string = aRank;
+            v6 = dword_86AD47C[v5 - 1];
+            break;
+
+        case 1:
+            string = dword_8065E78;
+            v6 = dword_86AD490[v5 - 1];
+            break;
+
+        case 3:
+            string = dword_8065ECC;
+            v6 = dword_86AD4A4[v5 - 1];
+            break;
+
+        case 2:
+            string = dword_8065F14;
+            v6 = dword_86AD4B8[v5 - 1];
+            break;
+
+        case 4:
+            string = dword_8065F58;
+            v6 = dword_86AD4CC[v5 - 1];
+            break;
+    }
+
+    v20 = sub_8025870(v6, &font);
+    v8 = sub_8025870(string, &v18);
+
+    sprite = (struct Sprite*)Alloc(0x8Cu, 20, 4);
+    v9 = v8 + 24;
+    v10 = 0;
+
+    for (i = 0; i < 5; i++) {
+        SetSprite(&sprite[i], 0x226u, 0, 0, 0, v9, 0x91u, 2);
+        if (v10 < v5) {
+            v10++;
+        } else {
+            sprite[i].objMode = 1;
+        }
+        v9 += 32;
+    }
+
+    SetTextSpriteCount(0);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM1;
+    gOBJTileCount = 512;
+    SyncVblank();
+    update_video();
+    SkipVblank();
+    sub_8026E48(4095, 0, 1);
+    SetObjectsFullAlpha();
+
+    v21 = 1;
+    v13 = 1200;
+
+    while (v13 != 0) {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+        if (gKeysDown & 8) {
+            v13 = 1;
+        }
+
+        if (gIsPaletteEffectsActive)
+            sub_8026DC0();
+        else
+            v13--;
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM1;
+        gOBJTileCount = 512;
+
+        font.xPosition = (240 - v20) >> 1;
+        font.yPosition = 8;
+        font.stringOffset = 0;
+        AddStringToBuffer(&font, v6);
+        v18.xPosition = 16;
+        v18.yPosition = 105;
+        v18.stringOffset = 0;
+        AddStringToBuffer(&v18, string);
+        RenderText();
+
+        for (i = 0; i < 5; i++) {
+            sprite_render(&sprite[i]);
+        }
+
+        CheckStacks();
+        SyncVblank();
+        update_video();
+        SkipVblank();
+
+        if (v21) {
+            sub_08026BA8(2, 0);
+            v21 = 0;
+        }
+    }
+
+    sub_80270AC(4095, 1);
+    Free(sprite, 4);
+
+    REG_DISPCNT = gDisplayControl;
+    REG_BG0CNT = gBG0Control;
+    REG_BG1CNT = gBG1Control;
+    REG_BG2CNT = gBG2Control;
+    REG_BG3CNT = gBG3Control;
+
+    return 1;
+}
+#endif
+
+bool32 show_licence_screen() {
+    int frames;
+
+    gDisplayControl = REG_DISPCNT;
+    gBG0Control = REG_BG0CNT;
+    gBG1Control = REG_BG1CNT;
+    gBG2Control = REG_BG2CNT;
+    gBG3Control = REG_BG3CNT;
+
+    sub_80270AC(4095, 0);
+    gLoadedTileAnimCount = 0;
+    gTileAnimQueueIndex = 0;
+    REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_4;
+    REG_BG2CNT = 0;
+    DmaFill32(0, (void*)BG_VRAM, 0x5000);
+    SyncVblank();
+    LZ77UnCompReadNormalWrite16bit(&dLicenceBitmap, (void*)BG_VRAM);
+    DmaTransfer32(&unk_83FC514, (void*)BG_PLTT, 128);
+    DmaFill32(170, gOAMBuffer1, 256);
+    gOAMBufferFramePtr = gOAMBuffer1;
+    gOAMBufferEnd = &gOAMBuffer1[0x100];
+    gOBJTileFramePtr = (u32*)OBJ_VRAM1;
+    gOBJTileCount = 512;
+    SyncVblank();
+    update_video();
+    SkipVblank();
+    sub_8026E48(4095, 0, 0);
+
+    frames = 180;
+
+    while (frames != 0) {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+        if (gIsPaletteEffectsActive) {
+            sub_8026DC0();
+        } else {
+            frames--;
+        }
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM1;
+        gOBJTileCount = 512;
+        CheckStacks();
+        SyncVblank();
+        update_video();
+        SkipVblank();
+    }
+
+    sub_80270AC(4095, 0);
+
+    REG_DISPCNT = gDisplayControl;
+    REG_BG0CNT = gBG0Control;
+    REG_BG1CNT = gBG1Control;
+    REG_BG2CNT = gBG2Control;
+    REG_BG3CNT = gBG3Control;
+
+    DmaFill32(0, (void*)BG_VRAM, 0x5000);
+
+    gLoadedRoomBgm = 0;
+    if (gCanChangeBgm) {
+        audio_start_tune(0);
+    }
+
+    sub_8026E48(4095, 0, 0);
+    DmaTransfer32(&unk_83FC514, (void*)BG_PLTT, 128);
+
+    return TRUE;
+}

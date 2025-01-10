@@ -1225,37 +1225,37 @@ static void sub_08018824() {
     sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
 }
 
-void sub_08018A94(int a1) {
+void set_player_direction(int direction) {
     if (gTransformation == TRANSFORMATION_BANJO) {
         if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
-            gPlayerSprite.direction = a1;
+            gPlayerSprite.direction = direction;
             sprite_set_anim(&gPlayerSprite, 105, 0, 0);
         } else if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) {
-            gPlayerSprite.direction = a1;
+            gPlayerSprite.direction = direction;
             sprite_lock_anim_on_frame(&gPlayerSprite, 6);
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
         } else if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) {
-            gPlayerSprite.direction = a1;
+            gPlayerSprite.direction = direction;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
         } else {
-            gPlayerSprite.direction = a1;
+            gPlayerSprite.direction = direction;
             sprite_set_anim(&gPlayerSprite, 25, 0, 0);
         }
     } else if (gTransformation == TRANSFORMATION_MOUSE) {
-        gPlayerSprite.direction = a1;
+        gPlayerSprite.direction = direction;
         sprite_set_anim(&gPlayerSprite, 321, 0, 0);
     } else if (gTransformation == TRANSFORMATION_CANDLE) {
-        gPlayerSprite.direction = a1;
+        gPlayerSprite.direction = direction;
         sprite_set_anim(&gPlayerSprite, 377, 0, 0);
     } else if (gTransformation == TRANSFORMATION_TANK) {
-        gPlayerSprite.direction = a1;
+        gPlayerSprite.direction = direction;
         sprite_set_anim(&gPlayerSprite, 417, 0, 0);
     } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
         if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
-            gPlayerSprite.direction = a1;
+            gPlayerSprite.direction = direction;
             sprite_set_anim(&gPlayerSprite, 473, 0, 0);
         } else {
-            gPlayerSprite.direction = a1;
+            gPlayerSprite.direction = direction;
             sprite_set_anim(&gPlayerSprite, 465, 0, 0);
         }
     } else {

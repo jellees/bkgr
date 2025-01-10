@@ -39,7 +39,7 @@ void sub_80629E8() {
     DmaFill32(170, gOAMBuffer1, 256);
     gOAMBufferFramePtr = gOAMBuffer1;
     gOAMBufferEnd = &gOAMBuffer1[0x100];
-    gOBJTileFramePtr = (void*)0x6014000;
+    gOBJTileFramePtr = (void*)OBJ_VRAM1;
     gOBJTileCount = 512;
 
     if (!byte_20010B0) {
@@ -88,8 +88,10 @@ void sub_80629E8() {
     dword_203DFDC = 0;
     byte_20021C4 = 1;
     sub_800BFA0(gRoomGoal, gWarpGoal, 1);
-    if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_NOT_MOVING))
+    
+    if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_NOT_MOVING)) {
         sub_8016C78(0);
+    }
 }
 
 static void show_gameover_screen(void) {
@@ -203,7 +205,7 @@ static void sub_8062D04(void) {
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBufferFramePtr[0x100];
-        gOBJTileFramePtr = (void*)0x6014000;
+        gOBJTileFramePtr = (void*)OBJ_VRAM1;
         gOBJTileCount = 512;
         update_scripts();
         render_scripts_direct();

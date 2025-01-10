@@ -713,7 +713,7 @@ void ShowEraseData(void) {
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (void*)0x6014000;
+        gOBJTileFramePtr = (void*)OBJ_VRAM1;
         gOBJTileCount = 512;
 
         tb1.xPosition = 16;
@@ -824,7 +824,7 @@ static void ShowFlashscreens(void) {
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
-        gOBJTileFramePtr = (void*)0x6014000;
+        gOBJTileFramePtr = (void*)OBJ_VRAM1;
         gOBJTileCount = 512;
 
         update_scripts();
