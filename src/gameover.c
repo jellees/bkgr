@@ -88,7 +88,7 @@ void sub_80629E8() {
     dword_203DFDC = 0;
     byte_20021C4 = 1;
     sub_800BFA0(gRoomGoal, gWarpGoal, 1);
-    
+
     if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_NOT_MOVING)) {
         sub_8016C78(0);
     }
