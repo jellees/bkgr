@@ -86,7 +86,7 @@ extern u8 byte_203F9A1;
 extern bool8 gHidePlayer;
 extern struct Script gScripts[MAX_SCRIPTS];
 extern struct Script* gCurrentScript;
-extern struct ScriptCamera* dword_203FA18;
+extern struct ScriptCamera* gScriptCamera;
 extern fx32 dword_203FA1C;
 extern fx32 dword_203FA20;
 
@@ -230,24 +230,24 @@ void sub_0805D6B0(void) {
     fx32 xPrev, yPrev;
     bool32 var1;
 
-    if (byte_203FA15 && dword_203FA18->isMoving) {
+    if (byte_203FA15 && gScriptCamera->isMoving) {
 
         ASSERT(byte_203F99C);
 
-        sub_80038A4(dword_203FA18->field_24);
-        sub_80038C4(dword_203FA18->field_24, &pos.x, &pos.y, &pos.z);
+        sub_80038A4(gScriptCamera->field_24);
+        sub_80038C4(gScriptCamera->field_24, &pos.x, &pos.y, &pos.z);
 
-        xPrev = dword_203FA18->xPosCurrent;
-        yPrev = dword_203FA18->yPosCurrent;
-        dword_203FA18->xPosCurrent += pos.x;
-        dword_203FA18->yPosCurrent += pos.z;
+        xPrev = gScriptCamera->xPosCurrent;
+        yPrev = gScriptCamera->yPosCurrent;
+        gScriptCamera->xPosCurrent += pos.x;
+        gScriptCamera->yPosCurrent += pos.z;
 
-        xDelta = dword_203FA18->xPosTarget - dword_203FA18->xPosCurrent;
-        yDelta = dword_203FA18->yPosTarget - dword_203FA18->yPosCurrent;
+        xDelta = gScriptCamera->xPosTarget - gScriptCamera->xPosCurrent;
+        yDelta = gScriptCamera->yPosTarget - gScriptCamera->yPosCurrent;
 
         var1 = FALSE;
 
-        if (dword_203FA18->xDistance > dword_203FA18->yDistance) {
+        if (gScriptCamera->xDistance > gScriptCamera->yDistance) {
             if ((pos.x > 0 && xDelta <= 0) || (pos.x <= 0 && xDelta >= 0)) {
                 var1 = TRUE;
             }
@@ -258,30 +258,30 @@ void sub_0805D6B0(void) {
         }
 
         if (var1) {
-            dword_203FA18->isMoving = FALSE;
-            if (!dword_203FA18->field_26) {
-                dword_203FA18->xPosCurrent = dword_203FA18->xPosTarget;
-                dword_203FA18->yPosCurrent = dword_203FA18->yPosTarget;
-                sub_8003864(dword_203FA18->field_24);
-                dword_203FA18->field_24 = -1;
+            gScriptCamera->isMoving = FALSE;
+            if (!gScriptCamera->field_26) {
+                gScriptCamera->xPosCurrent = gScriptCamera->xPosTarget;
+                gScriptCamera->yPosCurrent = gScriptCamera->yPosTarget;
+                sub_8003864(gScriptCamera->field_24);
+                gScriptCamera->field_24 = -1;
             }
         }
 
-        if (dword_203FA18->isMoving) {
-            ASSERT((u32)dword_203FA18->xPosCurrent <= (u32)gMapPixelSizeX << FX32_SHIFT
-                   && dword_203FA18->xPosCurrent >= 0
-                   && (u32)dword_203FA18->yPosCurrent <= (u32)gMapPixelSizeY << FX32_SHIFT
-                   && dword_203FA18->yPosCurrent >= 0);
+        if (gScriptCamera->isMoving) {
+            ASSERT((u32)gScriptCamera->xPosCurrent <= (u32)gMapPixelSizeX << FX32_SHIFT
+                   && gScriptCamera->xPosCurrent >= 0
+                   && (u32)gScriptCamera->yPosCurrent <= (u32)gMapPixelSizeY << FX32_SHIFT
+                   && gScriptCamera->yPosCurrent >= 0);
 
             dword_203FA1C = xDelta;
             dword_203FA20 = yDelta;
         }
 
-        sub_800B958(dword_203FA18->xPosCurrent, dword_203FA18->yPosCurrent, xPrev, yPrev, TRUE);
+        sub_800B958(gScriptCamera->xPosCurrent, gScriptCamera->yPosCurrent, xPrev, yPrev, TRUE);
     }
 
     if (byte_203FA14) {
-        ASSERT(!byte_203FA15 || !dword_203FA18->isMoving);
+        ASSERT(!byte_203FA15 || !gScriptCamera->isMoving);
         ASSERT(byte_203F99C);
 
         sub_802672C();
@@ -292,8 +292,8 @@ void sub_0805D6B0(void) {
         }
 
         if (byte_203FA15) {
-            sub_800B958(dword_203FA18->xPosCurrent, dword_203FA18->yPosCurrent,
-                        dword_203FA18->xPosCurrent, dword_203FA18->yPosCurrent, TRUE);
+            sub_800B958(gScriptCamera->xPosCurrent, gScriptCamera->yPosCurrent,
+                        gScriptCamera->xPosCurrent, gScriptCamera->yPosCurrent, TRUE);
         } else {
             sub_800B958((gCameraPixelX + 120) << FX32_SHIFT, (gCameraPixelY + 80) << FX32_SHIFT,
                         (gCameraPixelX + 120) << FX32_SHIFT, (gCameraPixelY + 80) << FX32_SHIFT, TRUE);
@@ -613,80 +613,80 @@ void sub_0805E270(int xMin, int xMax, int yMin, int yMax) {
     xClearance = (xMax - xMin) >> 2;
     yClearance = (yMax - yMin) >> 2;
 
-    xDistanceToMax = xMax - (dword_203FA18->xPosCurrent >> FX32_SHIFT);
-    xDistanceToMin = (dword_203FA18->xPosCurrent >> FX32_SHIFT) - xMin;
-    yDistanceToMax = yMax - (dword_203FA18->yPosCurrent >> FX32_SHIFT);
-    yDistanceToMin = (dword_203FA18->yPosCurrent >> FX32_SHIFT) - yMin;
+    xDistanceToMax = xMax - (gScriptCamera->xPosCurrent >> FX32_SHIFT);
+    xDistanceToMin = (gScriptCamera->xPosCurrent >> FX32_SHIFT) - xMin;
+    yDistanceToMax = yMax - (gScriptCamera->yPosCurrent >> FX32_SHIFT);
+    yDistanceToMin = (gScriptCamera->yPosCurrent >> FX32_SHIFT) - yMin;
 
-    while (dword_203FA18->xPosTarget == dword_203FA18->xPosCurrent
-           && dword_203FA18->yPosTarget == dword_203FA18->yPosCurrent) {
+    while (gScriptCamera->xPosTarget == gScriptCamera->xPosCurrent
+           && gScriptCamera->yPosTarget == gScriptCamera->yPosCurrent) {
         if (xDistanceToMax < xDistanceToMin) {
             if (yDistanceToMin < yDistanceToMax) {
                 if (xDistanceToMax < yDistanceToMin) {
-                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMin + xClearance) << FX32_SHIFT;
-                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMin + xClearance) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
-                    dword_203FA18->yPosTarget = RandomMinMax(yMax - yClearance, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = RandomMinMax(yMax - yClearance, yMax) << FX32_SHIFT;
                 }
             } else {
                 if (xDistanceToMax < yDistanceToMax) {
-                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMin + xClearance) << FX32_SHIFT;
-                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMin + xClearance) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
-                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMin + yClearance) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMin + yClearance) << FX32_SHIFT;
                 }
             }
         } else {
             if (yDistanceToMin < yDistanceToMax) {
                 if (xDistanceToMin < yDistanceToMin) {
-                    dword_203FA18->xPosTarget = RandomMinMax(xMax - xClearance, xMax) << FX32_SHIFT;
-                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = RandomMinMax(xMax - xClearance, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
-                    dword_203FA18->yPosTarget = RandomMinMax(yMax - yClearance, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = RandomMinMax(yMax - yClearance, yMax) << FX32_SHIFT;
                 }
             } else {
                 if (xDistanceToMin < yDistanceToMax) {
-                    dword_203FA18->xPosTarget = RandomMinMax(xMax - xClearance, xMax) << FX32_SHIFT;
-                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = RandomMinMax(xMax - xClearance, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    dword_203FA18->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
-                    dword_203FA18->yPosTarget = RandomMinMax(yMin, yMin + yClearance) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMin + yClearance) << FX32_SHIFT;
                 }
             }
         }
     }
 }
 
-int sub_805E3CC(fx32 a1) {
-    if (a1 < 0) {
-        a1 += FX32_CONST(22.5);
+enum Directions convert_angle_to_direction(fx32 angle) {
+    if (angle < 0) {
+        angle += FX32_CONST(22.5);
     }
 
-    if ((a1 - (u32)FX32_CONST(22.5)) > FX32_CONST(315)) {
-        return 2;
+    if ((angle - (u32)FX32_CONST(22.5)) > FX32_CONST(315)) {
+        return DIRECTION_RIGHT;
     }
-    if (a1 < FX32_CONST(67.5)) {
-        return 3;
+    if (angle < FX32_CONST(67.5)) {
+        return DIRECTION_DOWN_RIGHT;
     }
-    if (a1 < FX32_CONST(112.5)) {
-        return 4;
+    if (angle < FX32_CONST(112.5)) {
+        return DIRECTION_DOWN;
     }
-    if (a1 < FX32_CONST(157.5)) {
-        return 5;
+    if (angle < FX32_CONST(157.5)) {
+        return DIRECTION_DOWN_LEFT;
     }
-    if (a1 < FX32_CONST(202.5)) {
-        return 6;
+    if (angle < FX32_CONST(202.5)) {
+        return DIRECTION_LEFT;
     }
-    if (a1 < FX32_CONST(247.5)) {
-        return 7;
+    if (angle < FX32_CONST(247.5)) {
+        return DIRECTION_UP_LEFT;
     }
-    if (a1 < FX32_CONST(292.5)) {
-        return 0;
+    if (angle < FX32_CONST(292.5)) {
+        return DIRECTION_UP;
     }
-    return 1;
+    return DIRECTION_UP_RIGHT;
 }
 
 /**************************************************************
@@ -1104,7 +1104,8 @@ bool32 script_cmd_actor_set_position(int actorIdx, int xPos, int yPos, int _) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_position_relative_from_saved_position(int actorIdx, int xPos, int yPos, int _) {
+bool32 script_cmd_actor_set_position_relative_from_saved_position(int actorIdx, int xPos, int yPos,
+                                                                  int _) {
     return script_cmd_actor_set_position(actorIdx, gScriptSavedPosX + xPos, gScriptSavedPosY + yPos, 0);
 }
 
@@ -1167,7 +1168,7 @@ bool32 script_cmd_actor_set_direction(int actorIdx, int direction, int _, int __
     return TRUE;
 }
 
-bool32 sub_805EF94(int actorIdx, int _, int __, int ___) {
+bool32 script_cmd_actor_rotate_to_target(int actorIdx, int _, int __, int ___) {
     fx32 xDistance, yDistance;
     fx32 angle;
 
@@ -1183,7 +1184,7 @@ bool32 sub_805EF94(int actorIdx, int _, int __, int ___) {
         angle = sub_80039B4(xDistance, yDistance);
     }
 
-    return script_cmd_actor_set_direction(actorIdx, sub_805E3CC(angle), 0, 0);
+    return script_cmd_actor_set_direction(actorIdx, convert_angle_to_direction(angle), 0, 0);
 }
 
 bool32 script_cmd_actor_set_priority(int actorIdx, int priority, int _, int __) {
@@ -1268,11 +1269,11 @@ bool32 script_cmd_actor_move(int actorIdx, int x, int y, int moveSpeed) {
     return TRUE;
 }
 
-bool32 sub_805F28C(int actorIdx, int moveSpeed, int _, int __) {
+bool32 script_cmd_actor_move_to_saved_position(int actorIdx, int moveSpeed, int _, int __) {
     return script_cmd_actor_move(actorIdx, gScriptSavedPosX, gScriptSavedPosY, moveSpeed);
 }
 
-bool32 sub_805F2B0(int actorIdx, int x, int y, int moveSpeed) {
+bool32 script_cmd_actor_move_from_cam(int actorIdx, int x, int y, int moveSpeed) {
     fx32 xDistance, yDistance;
 
     if (gCurrentScript->actors[actorIdx].calcIdx == -1) {
@@ -1487,30 +1488,30 @@ bool32 sub_805F808(int a1, int _, int __, int ___) {
 
 bool32 script_cmd_store_camera_position(int _, int __, int ___, int ____) {
     ASSERT(!byte_203FA15);
-    dword_203FA18 = (struct ScriptCamera*)Alloc(sizeof(struct ScriptCamera), 5, 3);
-    dword_203FA18->isMoving = FALSE;
-    dword_203FA18->xPosOriginal = (gCameraPixelX + 120) << FX32_SHIFT;
-    dword_203FA18->yPosOriginal = (gCameraPixelY + 80) << FX32_SHIFT;
-    dword_203FA18->xPosCurrent = dword_203FA18->xPosOriginal;
-    dword_203FA18->yPosCurrent = dword_203FA18->yPosOriginal;
-    dword_203FA18->xPosTarget = dword_203FA18->xPosOriginal;
-    dword_203FA18->yPosTarget = dword_203FA18->yPosOriginal;
-    dword_203FA18->xDistance = 0;
-    dword_203FA18->yDistance = 0;
-    dword_203FA18->moveSpeed = 0;
-    dword_203FA18->field_26 = 0;
-    dword_203FA18->field_24 = -1;
+    gScriptCamera = (struct ScriptCamera*)Alloc(sizeof(struct ScriptCamera), 5, 3);
+    gScriptCamera->isMoving = FALSE;
+    gScriptCamera->xPosOriginal = (gCameraPixelX + 120) << FX32_SHIFT;
+    gScriptCamera->yPosOriginal = (gCameraPixelY + 80) << FX32_SHIFT;
+    gScriptCamera->xPosCurrent = gScriptCamera->xPosOriginal;
+    gScriptCamera->yPosCurrent = gScriptCamera->yPosOriginal;
+    gScriptCamera->xPosTarget = gScriptCamera->xPosOriginal;
+    gScriptCamera->yPosTarget = gScriptCamera->yPosOriginal;
+    gScriptCamera->xDistance = 0;
+    gScriptCamera->yDistance = 0;
+    gScriptCamera->moveSpeed = 0;
+    gScriptCamera->field_26 = 0;
+    gScriptCamera->field_24 = -1;
     byte_203FA15 = 1;
     return TRUE;
 }
 
 bool32 sub_0805F8DC(int _, int __, int ___, int ____) {
     ASSERT(byte_203FA15);
-    if (dword_203FA18->field_24 != -1) {
-        sub_8003864(dword_203FA18->field_24);
-        dword_203FA18->field_24 = -1;
+    if (gScriptCamera->field_24 != -1) {
+        sub_8003864(gScriptCamera->field_24);
+        gScriptCamera->field_24 = -1;
     }
-    Free(dword_203FA18, 3);
+    Free(gScriptCamera, 3);
     byte_203FA15 = 0;
     return 1;
 }
@@ -1520,12 +1521,12 @@ bool32 script_cmd_move_camera(int x, int y, int moveSpeed, int _) {
 
     ASSERT(byte_203FA15);
 
-    if (dword_203FA18->field_24 == -1) {
-        dword_203FA18->field_24 = sub_8003854(4915200);
+    if (gScriptCamera->field_24 == -1) {
+        gScriptCamera->field_24 = sub_8003854(4915200);
     }
 
-    sub_800389C(dword_203FA18->field_24, dword_80CC844[0]);
-    sub_8003894(dword_203FA18->field_24, dword_80CC7EC[0]);
+    sub_800389C(gScriptCamera->field_24, dword_80CC844[0]);
+    sub_8003894(gScriptCamera->field_24, dword_80CC7EC[0]);
 
     if (x == 0 && y == 0) {
         sub_0805E270(120, gMapPixelSizeX - 120, 80, gMapPixelSizeY - 80);
@@ -1540,32 +1541,32 @@ bool32 script_cmd_move_camera(int x, int y, int moveSpeed, int _) {
         }
         if (y < 80)
             y = 80;
-        dword_203FA18->xPosTarget = x << FX32_SHIFT;
-        dword_203FA18->yPosTarget = y << FX32_SHIFT;
+        gScriptCamera->xPosTarget = x << FX32_SHIFT;
+        gScriptCamera->yPosTarget = y << FX32_SHIFT;
     }
 
-    xDistance = dword_203FA18->xPosTarget - dword_203FA18->xPosCurrent;
-    yDistance = dword_203FA18->yPosTarget - dword_203FA18->yPosCurrent;
+    xDistance = gScriptCamera->xPosTarget - gScriptCamera->xPosCurrent;
+    yDistance = gScriptCamera->yPosTarget - gScriptCamera->yPosCurrent;
 
-    dword_203FA18->xDistance = Abs(xDistance);
-    dword_203FA18->yDistance = Abs(yDistance);
+    gScriptCamera->xDistance = Abs(xDistance);
+    gScriptCamera->yDistance = Abs(yDistance);
 
     ASSERT(xDistance != 0 || yDistance != 0);
 
-    dword_203FA1C = dword_203FA18->xDistance;
-    dword_203FA20 = dword_203FA18->yDistance;
-    dword_203FA24 = dword_203FA18->xPosCurrent;
-    dword_203FA28 = dword_203FA18->yPosCurrent;
+    dword_203FA1C = gScriptCamera->xDistance;
+    dword_203FA20 = gScriptCamera->yDistance;
+    dword_203FA24 = gScriptCamera->xPosCurrent;
+    dword_203FA28 = gScriptCamera->yPosCurrent;
 
     if (Abs(xDistance) > Abs(yDistance)) {
-        sub_8003884(dword_203FA18->field_24, moveSpeed, sub_80039AC(yDistance, xDistance), 0);
+        sub_8003884(gScriptCamera->field_24, moveSpeed, sub_80039AC(yDistance, xDistance), 0);
     } else {
-        sub_8003884(dword_203FA18->field_24, moveSpeed, sub_80039B4(xDistance, yDistance), 0);
+        sub_8003884(gScriptCamera->field_24, moveSpeed, sub_80039B4(xDistance, yDistance), 0);
     }
 
-    sub_800386C(dword_203FA18->field_24, 0, 0);
-    dword_203FA18->moveSpeed = moveSpeed;
-    dword_203FA18->isMoving = TRUE;
+    sub_800386C(gScriptCamera->field_24, 0, 0);
+    gScriptCamera->moveSpeed = moveSpeed;
+    gScriptCamera->isMoving = TRUE;
 
     return 1;
 }
@@ -1580,23 +1581,23 @@ bool32 sub_805FAF4(int moveSpeed, int _, int __, int ___) {
 }
 
 bool32 sub_805FB18(int _, int __, int ___, int ____) {
-    dword_203FA08 = dword_203FA18->xPosCurrent;
-    dword_203FA0C = dword_203FA18->yPosCurrent;
+    dword_203FA08 = gScriptCamera->xPosCurrent;
+    dword_203FA0C = gScriptCamera->yPosCurrent;
     return TRUE;
 }
 
 bool32 sub_805FB38(int a1, int _, int __, int ___) {
-    dword_203FA18->field_26 = a1;
+    gScriptCamera->field_26 = a1;
     return TRUE;
 }
 
 bool32 script_cmd_return_camera(int moveSpeed, int _, int __, int ___) {
     ASSERT(byte_203FA15);
     if (moveSpeed == 0) {
-        moveSpeed = dword_203FA18->moveSpeed;
+        moveSpeed = gScriptCamera->moveSpeed;
     }
-    script_cmd_move_camera(dword_203FA18->xPosOriginal >> FX32_SHIFT,
-                           dword_203FA18->yPosOriginal >> FX32_SHIFT, moveSpeed, 0);
+    script_cmd_move_camera(gScriptCamera->xPosOriginal >> FX32_SHIFT,
+                           gScriptCamera->yPosOriginal >> FX32_SHIFT, moveSpeed, 0);
     return TRUE;
 }
 
@@ -1746,7 +1747,7 @@ bool32 sub_805FD38(int condition, int actorIdx, int _, int __) {
         }
 
         case 7:
-            if (!dword_203FA18->isMoving) {
+            if (!gScriptCamera->isMoving) {
                 advance = TRUE;
             }
             break;
@@ -2497,7 +2498,7 @@ static bool32 (*const gFunctionList[89])(int, int, int, int) = {
     sub_805EEBC,
     sub_805EF0C,
     script_cmd_actor_set_direction,
-    sub_805EF94,
+    script_cmd_actor_rotate_to_target,
     script_cmd_actor_set_priority,
     script_cmd_actor_revert_priority,
     sub_805F04C,
@@ -2509,8 +2510,8 @@ static bool32 (*const gFunctionList[89])(int, int, int, int) = {
     script_cmd_actor_set_frame,
     sub_805F120,
     script_cmd_actor_move,
-    sub_805F28C,
-    sub_805F2B0,
+    script_cmd_actor_move_to_saved_position,
+    script_cmd_actor_move_from_cam,
     sub_805F40C,
     sub_805F428,
     script_cmd_alloc_oam_matrices,
