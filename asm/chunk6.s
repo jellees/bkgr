@@ -803,9 +803,9 @@ _08028304:
 	bl _08028E0E
 	.align 2, 0
 _08028344: .4byte dword_2000FC8
-_08028348: .4byte 0x080CC844
+_08028348: .4byte dword_80CC844
 _0802834C: .4byte gRoomHeader
-_08028350: .4byte 0x080CC7EC
+_08028350: .4byte dword_80CC7EC
 _08028354:
 	ldr r0, _08028670
 	movs r5, #0
@@ -1246,9 +1246,9 @@ _080286F0: .4byte byte_2000332
 _080286F4: .4byte byte_2000333
 _080286F8: .4byte byte_2000334
 _080286FC: .4byte dword_2000FC8
-_08028700: .4byte 0x080CC844
+_08028700: .4byte dword_80CC844
 _08028704: .4byte gRoomHeader
-_08028708: .4byte 0x080CC7EC
+_08028708: .4byte dword_80CC7EC
 _0802870C:
 	ldr r4, _080287FC
 	mov r7, sl
@@ -2430,8 +2430,8 @@ _08029040: .4byte 0x080CC938
 _08029044: .4byte 0x0203E010
 _08029048: .4byte gCameraPixelX
 _0802904C: .4byte gCameraPixelY
-_08029050: .4byte 0x080CEBC4
-_08029054: .4byte 0x080CEB84
+_08029050: .4byte dword_80CEBC4
+_08029054: .4byte byte_80CEB84
 _08029058:
 	movs r1, #5
 _0802905A:
@@ -3556,8 +3556,8 @@ _080298F4: .4byte 0x080CC938
 _080298F8: .4byte 0x0203E010
 _080298FC: .4byte gCameraPixelX
 _08029900: .4byte gCameraPixelY
-_08029904: .4byte 0x080CEBC4
-_08029908: .4byte 0x080CEB84
+_08029904: .4byte dword_80CEBC4
+_08029908: .4byte byte_80CEB84
 _0802990C:
 	movs r1, #5
 _0802990E:
@@ -9469,9 +9469,9 @@ _0802C7C4:
 	b _0802C870
 	.align 2, 0
 _0802C808: .4byte 0x080CC78C
-_0802C80C: .4byte 0x080CC844
+_0802C80C: .4byte dword_80CC844
 _0802C810: .4byte gRoomHeader
-_0802C814: .4byte 0x080CC818
+_0802C814: .4byte dword_80CC818
 _0802C818:
 	ldr r0, [sp, #0x1c]
 	cmp r0, #2
@@ -9558,8 +9558,8 @@ _0802C870:
 	.align 2, 0
 _0802C8C0: .4byte gCameraPixelX
 _0802C8C4: .4byte gCameraPixelY
-_0802C8C8: .4byte 0x080CEBC4
-_0802C8CC: .4byte 0x080CEB84
+_0802C8C8: .4byte dword_80CEBC4
+_0802C8CC: .4byte byte_80CEB84
 _0802C8D0:
 	movs r1, #5
 _0802C8D2:
@@ -10358,8 +10358,8 @@ _0802CEDE:
 	b _0802CF16
 	.align 2, 0
 _0802CF08: .4byte 0x2FFFF000
-_0802CF0C: .4byte 0x080CEBC4
-_0802CF10: .4byte 0x080CEB84
+_0802CF0C: .4byte dword_80CEBC4
+_0802CF10: .4byte byte_80CEB84
 _0802CF14:
 	movs r1, #5
 _0802CF16:
@@ -11484,9 +11484,9 @@ _0802D818: .4byte 0x080CC78C
 _0802D81C: .4byte 0x00000105
 _0802D820: .4byte gMapPixelSizeY
 _0802D824: .4byte 0x0000FFFF
-_0802D828: .4byte 0x080CC844
+_0802D828: .4byte dword_80CC844
 _0802D82C: .4byte gRoomHeader
-_0802D830: .4byte 0x080CC818
+_0802D830: .4byte dword_80CC818
 _0802D834: .4byte dword_80CC290
 _0802D838: .4byte gCameraPixelX
 _0802D83C: .4byte gCameraPixelY
@@ -11717,9 +11717,9 @@ _0802D984:
 	b _0802DAF0
 	.align 2, 0
 _0802D9F4: .4byte 0x080CB964
-_0802D9F8: .4byte 0x080CC844
+_0802D9F8: .4byte dword_80CC844
 _0802D9FC: .4byte gRoomHeader
-_0802DA00: .4byte 0x080CC818
+_0802DA00: .4byte dword_80CC818
 _0802DA04:
 	movs r0, #0x74
 	strh r0, [r6]
@@ -11775,9 +11775,9 @@ _0802DA04:
 	b _0802DAF0
 	.align 2, 0
 _0802DA74: .4byte 0x080CB964
-_0802DA78: .4byte 0x080CC844
+_0802DA78: .4byte dword_80CC844
 _0802DA7C: .4byte gRoomHeader
-_0802DA80: .4byte 0x080CC818
+_0802DA80: .4byte dword_80CC818
 _0802DA84:
 	movs r0, #0x75
 	strh r0, [r6]
@@ -11838,9 +11838,9 @@ _0802DAF0:
 	b _0802DB10
 	.align 2, 0
 _0802DAFC: .4byte 0x080CB964
-_0802DB00: .4byte 0x080CC844
+_0802DB00: .4byte dword_80CC844
 _0802DB04: .4byte gRoomHeader
-_0802DB08: .4byte 0x080CC818
+_0802DB08: .4byte dword_80CC818
 _0802DB0C:
 	.2byte 0xEE00, 0xEE00
 _0802DB10:
@@ -17880,7 +17880,7 @@ _08031034: .4byte 0x0203E950
 _08031038: .4byte 0x0203E967
 _0803103C: .4byte 0x0203E170
 _08031040: .4byte 0x0203E440
-_08031044: .4byte 0x080CF4EC
+_08031044: .4byte dRoomIndexes
 _08031048: .4byte 0x0203E9B0
 _0803104C: .4byte 0x0203E0FC
 _08031050: .4byte 0x0203E964
@@ -21380,7 +21380,7 @@ _08032CCC:
 	.align 2, 0
 _08032CD4: .4byte 0x0203E440
 _08032CD8: .4byte 0x0203E8D8
-_08032CDC: .4byte 0x080CF4EC
+_08032CDC: .4byte dRoomIndexes
 _08032CE0: .4byte 0x0203E4D0
 _08032CE4: .4byte 0x080CC2B0
 _08032CE8:
@@ -21863,7 +21863,7 @@ _080330CE:
 	.align 2, 0
 _080330E8: .4byte 0x0203E440
 _080330EC: .4byte 0x0203E4D0
-_080330F0: .4byte 0x080CF4EC
+_080330F0: .4byte dRoomIndexes
 _080330F4: .4byte 0x080CC2B0
 
     .thumb
@@ -41877,7 +41877,7 @@ _0803CBB8: .4byte 0x0203E440
 _0803CBBC: .4byte gLoadedRoomLevel
 _0803CBC0: .4byte 0x00000101
 _0803CBC4: .4byte gLoadedRoomBgm
-_0803CBC8: .4byte 0x080CF4EC
+_0803CBC8: .4byte dRoomIndexes
 _0803CBCC: .4byte gLoadedRoomIndex
 _0803CBD0: .4byte 0x0203EA88
 

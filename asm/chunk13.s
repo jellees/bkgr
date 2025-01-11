@@ -2673,9 +2673,9 @@ _080623CC:
 	b _08062420
 	.align 2, 0
 _080623E8: .4byte 0x0203FA5C
-_080623EC: .4byte 0x080CC844
+_080623EC: .4byte dword_80CC844
 _080623F0: .4byte gRoomHeader
-_080623F4: .4byte 0x080CC818
+_080623F4: .4byte dword_80CC818
 _080623F8: .4byte 0x030028FC
 _080623FC: .4byte gMapPixelSizeY
 _08062400: .4byte 0x0203FA60
@@ -2683,8 +2683,8 @@ _08062404: .4byte 0x0203FA64
 _08062408: .4byte gCameraPixelX
 _0806240C: .4byte gCameraPixelY
 _08062410: .4byte 0x00000221
-_08062414: .4byte 0x080CEBC4
-_08062418: .4byte 0x080CEB84
+_08062414: .4byte dword_80CEBC4
+_08062418: .4byte byte_80CEB84
 _0806241C:
 	ldr r0, _08062440
 	adds r0, r3, r0
@@ -2703,7 +2703,7 @@ _08062420:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062440: .4byte 0x080CEB84
+_08062440: .4byte byte_80CEB84
 
     .thumb
 	.global sub_8062444
@@ -3343,8 +3343,8 @@ _080628C4:
 	b _08062940
 	.align 2, 0
 _08062930: .4byte gMapPixelSizeY
-_08062934: .4byte 0x080CEBC4
-_08062938: .4byte 0x080CEB84
+_08062934: .4byte dword_80CEBC4
+_08062938: .4byte byte_80CEB84
 _0806293C:
 	ldr r0, _080629E4
 	adds r0, r1, r0
@@ -3427,4 +3427,4 @@ _080629D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080629E4: .4byte 0x080CEB84
+_080629E4: .4byte byte_80CEB84

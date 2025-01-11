@@ -5381,6 +5381,6 @@ RoomObjPaletteToVram: @ 0x08016414
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801642C: .4byte 0x080CF4EC
+_0801642C: .4byte dRoomIndexes
 _08016430: .4byte 0x05000200
 

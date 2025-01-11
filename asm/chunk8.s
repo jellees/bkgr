@@ -2015,17 +2015,17 @@ _08048588: .4byte 0x080CF140
 _0804858C: .4byte 0x080B0FDA
 _08048590: .4byte 0x087DFA9C
 _08048594: .4byte 0x080B100C
-_08048598: .4byte 0x080CC844
+_08048598: .4byte dword_80CC844
 _0804859C: .4byte gRoomHeader
-_080485A0: .4byte 0x080CC818
+_080485A0: .4byte dword_80CC818
 _080485A4: .4byte 0x030028FC
 _080485A8: .4byte 0x0203F8C0
 _080485AC: .4byte 0x0203F8C4
 _080485B0: .4byte gCameraPixelX
 _080485B4: .4byte gCameraPixelY
 _080485B8: .4byte gMapPixelSizeY
-_080485BC: .4byte 0x080CEBC4
-_080485C0: .4byte 0x080CEB84
+_080485BC: .4byte dword_80CEBC4
+_080485C0: .4byte byte_80CEB84
 _080485C4:
 	ldr r0, _080485FC
 	adds r0, r1, r0
@@ -2054,7 +2054,7 @@ _080485F2:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080485FC: .4byte 0x080CEB84
+_080485FC: .4byte byte_80CEB84
 _08048600: .4byte 0x08048604
 _08048604: @ jump table
 	.4byte _08048870 @ case 0
@@ -2564,8 +2564,8 @@ _08048A50: .4byte 0x087DFA9C
 _08048A54: .4byte gCameraPixelX
 _08048A58: .4byte gCameraPixelY
 _08048A5C: .4byte gMapPixelSizeY
-_08048A60: .4byte 0x080CEBC4
-_08048A64: .4byte 0x080CEB84
+_08048A60: .4byte dword_80CEBC4
+_08048A64: .4byte byte_80CEB84
 _08048A68:
 	ldr r0, _08048ACC
 	adds r0, r1, r0
@@ -2615,7 +2615,7 @@ _08048AB8:
 	beq _08048AFC
 	b _08048B0A
 	.align 2, 0
-_08048ACC: .4byte 0x080CEB84
+_08048ACC: .4byte byte_80CEB84
 _08048AD0: .4byte 0x0203F8B0
 _08048AD4: .4byte 0x00000446
 _08048AD8: .4byte 0x0203F8BD
@@ -5963,8 +5963,8 @@ _0804A4C2:
 	b _0804A52A
 	.align 2, 0
 _0804A518: .4byte gMapPixelSizeY
-_0804A51C: .4byte 0x080CEBC4
-_0804A520: .4byte 0x080CEB84
+_0804A51C: .4byte dword_80CEBC4
+_0804A520: .4byte byte_80CEB84
 _0804A524:
 	ldr r0, _0804A5B4
 	adds r0, r2, r0
@@ -6036,7 +6036,7 @@ _0804A546:
 	strh r1, [r0]
 	b _0804A99C
 	.align 2, 0
-_0804A5B4: .4byte 0x080CEB84
+_0804A5B4: .4byte byte_80CEB84
 _0804A5B8: .4byte 0x0077FFFF
 _0804A5BC: .4byte 0x080B12D0
 _0804A5C0: .4byte 0x080B19E0
@@ -6166,8 +6166,8 @@ _0804A6AE:
 _0804A6C8: .4byte gPlayerShadowPos
 _0804A6CC: .4byte 0x080B12D0
 _0804A6D0: .4byte gMapPixelSizeY
-_0804A6D4: .4byte 0x080CEBC4
-_0804A6D8: .4byte 0x080CEB84
+_0804A6D4: .4byte dword_80CEBC4
+_0804A6D8: .4byte byte_80CEB84
 _0804A6DC:
 	ldr r0, _0804A75C
 	adds r0, r2, r0
@@ -6228,7 +6228,7 @@ _0804A720:
 	bl CallARM_store_jump_and_other_value
 	b _0804A99C
 	.align 2, 0
-_0804A75C: .4byte 0x080CEB84
+_0804A75C: .4byte byte_80CEB84
 _0804A760: .4byte gCanPlaySfx
 _0804A764: .4byte 0x080B12D0
 _0804A768: .4byte dword_80CC290
@@ -6278,8 +6278,8 @@ _0804A770:
 	b _0804A7DA
 	.align 2, 0
 _0804A7C8: .4byte gMapPixelSizeY
-_0804A7CC: .4byte 0x080CEBC4
-_0804A7D0: .4byte 0x080CEB84
+_0804A7CC: .4byte dword_80CEBC4
+_0804A7D0: .4byte byte_80CEB84
 _0804A7D4:
 	ldr r0, _0804A864
 	adds r0, r2, r0
@@ -6354,7 +6354,7 @@ _0804A82A:
 	bl audio_new_fx
 	b _0804A888
 	.align 2, 0
-_0804A864: .4byte 0x080CEB84
+_0804A864: .4byte byte_80CEB84
 _0804A868: .4byte gCanPlaySfx
 _0804A86C: .4byte 0x080CE440
 _0804A870: .4byte gSfxVolume
@@ -6821,8 +6821,8 @@ _0804AC5C:
 	b _0804AC86
 	.align 2, 0
 _0804AC74: .4byte gMapPixelSizeY
-_0804AC78: .4byte 0x080CEBC4
-_0804AC7C: .4byte 0x080CEB84
+_0804AC78: .4byte dword_80CEBC4
+_0804AC7C: .4byte byte_80CEB84
 _0804AC80:
 	ldr r0, _0804ACEC
 	adds r0, r2, r0
@@ -6876,7 +6876,7 @@ _0804ACCA:
 	bl CallARM_store_jump_and_other_value
 	b _0804AF44
 	.align 2, 0
-_0804ACEC: .4byte 0x080CEB84
+_0804ACEC: .4byte byte_80CEB84
 _0804ACF0: .4byte gCanPlaySfx
 _0804ACF4: .4byte 0x080B12D0
 _0804ACF8: .4byte 0xFFFB0000
@@ -6945,8 +6945,8 @@ _0804AD62:
 	b _0804AD8E
 	.align 2, 0
 _0804AD7C: .4byte gMapPixelSizeY
-_0804AD80: .4byte 0x080CEBC4
-_0804AD84: .4byte 0x080CEB84
+_0804AD80: .4byte dword_80CEBC4
+_0804AD84: .4byte byte_80CEB84
 _0804AD88:
 	ldr r0, _0804AE60
 	adds r0, r2, r0
@@ -7054,7 +7054,7 @@ _0804ADF8:
 	bl audio_new_fx
 	b _0804AE8C
 	.align 2, 0
-_0804AE60: .4byte 0x080CEB84
+_0804AE60: .4byte byte_80CEB84
 _0804AE64: .4byte gCanPlaySfx
 _0804AE68: .4byte 0x080CE440
 _0804AE6C: .4byte gSfxVolume
@@ -7611,8 +7611,8 @@ _0804B2CE:
 	b _0804B336
 	.align 2, 0
 _0804B324: .4byte gMapPixelSizeY
-_0804B328: .4byte 0x080CEBC4
-_0804B32C: .4byte 0x080CEB84
+_0804B328: .4byte dword_80CEBC4
+_0804B32C: .4byte byte_80CEB84
 _0804B330:
 	ldr r0, _0804B3C0
 	adds r0, r2, r0
@@ -7684,7 +7684,7 @@ _0804B352:
 	strh r1, [r0]
 	b _0804B74C
 	.align 2, 0
-_0804B3C0: .4byte 0x080CEB84
+_0804B3C0: .4byte byte_80CEB84
 _0804B3C4: .4byte 0x0077FFFF
 _0804B3C8: .4byte 0x080B1350
 _0804B3CC: .4byte 0x080B19E0
@@ -7810,8 +7810,8 @@ _0804B4B2:
 _0804B4CC: .4byte gPlayerShadowPos
 _0804B4D0: .4byte 0x080B1350
 _0804B4D4: .4byte gMapPixelSizeY
-_0804B4D8: .4byte 0x080CEBC4
-_0804B4DC: .4byte 0x080CEB84
+_0804B4D8: .4byte dword_80CEBC4
+_0804B4DC: .4byte byte_80CEB84
 _0804B4E0:
 	ldr r0, _0804B560
 	adds r0, r2, r0
@@ -7873,7 +7873,7 @@ _0804B556:
 	bl CallARM_store_jump_and_other_value
 	b _0804B74C
 	.align 2, 0
-_0804B560: .4byte 0x080CEB84
+_0804B560: .4byte byte_80CEB84
 _0804B564: .4byte gCanPlaySfx
 _0804B568: .4byte 0x080B12D0
 _0804B56C: .4byte dword_80CC290
@@ -7923,8 +7923,8 @@ _0804B574:
 	b _0804B5DE
 	.align 2, 0
 _0804B5CC: .4byte gMapPixelSizeY
-_0804B5D0: .4byte 0x080CEBC4
-_0804B5D4: .4byte 0x080CEB84
+_0804B5D0: .4byte dword_80CEBC4
+_0804B5D4: .4byte byte_80CEB84
 _0804B5D8:
 	ldr r0, _0804B650
 	adds r0, r2, r0
@@ -7986,7 +7986,7 @@ _0804B5EE:
 	bl audio_new_fx
 	b _0804B66C
 	.align 2, 0
-_0804B650: .4byte 0x080CEB84
+_0804B650: .4byte byte_80CEB84
 _0804B654: .4byte gCanPlaySfx
 _0804B658: .4byte 0x080CE440
 _0804B65C: .4byte gSfxVolume
@@ -9640,8 +9640,8 @@ _0804C422:
 	b _0804C496
 	.align 2, 0
 _0804C484: .4byte gMapPixelSizeY
-_0804C488: .4byte 0x080CEBC4
-_0804C48C: .4byte 0x080CEB84
+_0804C488: .4byte dword_80CEBC4
+_0804C48C: .4byte byte_80CEB84
 _0804C490:
 	ldr r0, _0804C52C
 	adds r0, r2, r0
@@ -9716,7 +9716,7 @@ _0804C4B2:
 	strh r1, [r0]
 	b _0804CAA0
 	.align 2, 0
-_0804C52C: .4byte 0x080CEB84
+_0804C52C: .4byte byte_80CEB84
 _0804C530: .4byte 0x0063FFFF
 _0804C534: .4byte 0x080B13D0
 _0804C538: .4byte 0x080B19E0
@@ -9935,8 +9935,8 @@ _0804C6E8:
 	b _0804C71A
 	.align 2, 0
 _0804C708: .4byte gMapPixelSizeY
-_0804C70C: .4byte 0x080CEBC4
-_0804C710: .4byte 0x080CEB84
+_0804C70C: .4byte dword_80CEBC4
+_0804C710: .4byte byte_80CEB84
 _0804C714:
 	ldr r0, _0804C7A8
 	adds r0, r2, r0
@@ -10016,7 +10016,7 @@ _0804C79C:
 	blo _0804C75E
 	b _0804CAA0
 	.align 2, 0
-_0804C7A8: .4byte 0x080CEB84
+_0804C7A8: .4byte byte_80CEB84
 _0804C7AC: .4byte 0x0203F91E
 _0804C7B0: .4byte 0x0203F90C
 _0804C7B4:
@@ -10033,8 +10033,8 @@ _0804C7B4:
 	ldrb r0, [r1]
 	b _0804C7DA
 	.align 2, 0
-_0804C7CC: .4byte 0x080CEBC4
-_0804C7D0: .4byte 0x080CEB84
+_0804C7CC: .4byte dword_80CEBC4
+_0804C7D0: .4byte byte_80CEB84
 _0804C7D4:
 	ldr r0, _0804C82C
 	adds r0, r2, r0
@@ -10077,7 +10077,7 @@ _0804C7DA:
 	bl CallARM_store_jump_and_other_value
 	b _0804CAA0
 	.align 2, 0
-_0804C82C: .4byte 0x080CEB84
+_0804C82C: .4byte byte_80CEB84
 _0804C830: .4byte 0x080B13D0
 _0804C834: .4byte dword_80CC290
 _0804C838: .4byte 0xFFFB0000
@@ -10137,8 +10137,8 @@ _0804C842:
 	b _0804C8BA
 	.align 2, 0
 _0804C8A8: .4byte gMapPixelSizeY
-_0804C8AC: .4byte 0x080CEBC4
-_0804C8B0: .4byte 0x080CEB84
+_0804C8AC: .4byte dword_80CEBC4
+_0804C8B0: .4byte byte_80CEB84
 _0804C8B4:
 	ldr r0, _0804C8E4
 	adds r0, r2, r0
@@ -10166,8 +10166,8 @@ _0804C8CA:
 	ldrb r0, [r1]
 	b _0804C8F0
 	.align 2, 0
-_0804C8E4: .4byte 0x080CEB84
-_0804C8E8: .4byte 0x080CEBC4
+_0804C8E4: .4byte byte_80CEB84
+_0804C8E8: .4byte dword_80CEBC4
 _0804C8EC:
 	ldr r0, _0804C960
 	ldrb r0, [r0]
@@ -10228,7 +10228,7 @@ _0804C930:
 	bl audio_new_fx
 	b _0804C980
 	.align 2, 0
-_0804C960: .4byte 0x080CEB84
+_0804C960: .4byte byte_80CEB84
 _0804C964: .4byte gCanPlaySfx
 _0804C968: .4byte 0x080CE440
 _0804C96C: .4byte gSfxVolume
@@ -17282,8 +17282,8 @@ sub_80502F4: @ 0x080502F4
 	b _0805036C
 	.align 2, 0
 _0805035C: .4byte gMapPixelSizeY
-_08050360: .4byte 0x080CEBC4
-_08050364: .4byte 0x080CEB84
+_08050360: .4byte dword_80CEBC4
+_08050364: .4byte byte_80CEB84
 _08050368:
 	ldr r0, _080503A0
 	adds r0, r1, r0
@@ -17311,7 +17311,7 @@ _0805036C:
 	bl sub_8047430
 	b _080503BE
 	.align 2, 0
-_080503A0: .4byte 0x080CEB84
+_080503A0: .4byte byte_80CEB84
 _080503A4: .4byte 0x0027FFFF
 _080503A8:
 	adds r0, r4, #0
@@ -17383,8 +17383,8 @@ sub_80503C8: @ 0x080503C8
 	b _08050440
 	.align 2, 0
 _08050430: .4byte gMapPixelSizeY
-_08050434: .4byte 0x080CEBC4
-_08050438: .4byte 0x080CEB84
+_08050434: .4byte dword_80CEBC4
+_08050438: .4byte byte_80CEB84
 _0805043C:
 	ldr r0, _08050470
 	adds r0, r1, r0
@@ -17410,7 +17410,7 @@ _08050440:
 	bl sub_800387C
 	b _0805048A
 	.align 2, 0
-_08050470: .4byte 0x080CEB84
+_08050470: .4byte byte_80CEB84
 _08050474:
 	adds r0, r4, #0
 	movs r1, #2
@@ -17525,8 +17525,8 @@ _08050510:
 	b _08050568
 	.align 2, 0
 _08050558: .4byte gMapPixelSizeY
-_0805055C: .4byte 0x080CEBC4
-_08050560: .4byte 0x080CEB84
+_0805055C: .4byte dword_80CEBC4
+_08050560: .4byte byte_80CEB84
 _08050564:
 	ldr r0, _080505A0
 	adds r0, r1, r0
@@ -17554,7 +17554,7 @@ _08050568:
 	bl sub_800387C
 	b _080505BA
 	.align 2, 0
-_080505A0: .4byte 0x080CEB84
+_080505A0: .4byte byte_80CEB84
 _080505A4:
 	adds r0, r5, #0
 	movs r1, #3
@@ -17610,8 +17610,8 @@ _080505F4:
 	adds r0, r0, r1
 	b _08050618
 	.align 2, 0
-_0805060C: .4byte 0x080CEBC4
-_08050610: .4byte 0x080CEB84
+_0805060C: .4byte dword_80CEBC4
+_08050610: .4byte byte_80CEB84
 _08050614:
 	ldr r0, _08050628
 	adds r0, r1, r0
@@ -17623,7 +17623,7 @@ _08050618:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050628: .4byte 0x080CEB84
+_08050628: .4byte byte_80CEB84
 
 	.thumb
 sub_805062C: @ 0x0805062C
@@ -17671,8 +17671,8 @@ sub_805062C: @ 0x0805062C
 	b _08050694
 	.align 2, 0
 _08050684: .4byte gMapPixelSizeY
-_08050688: .4byte 0x080CEBC4
-_0805068C: .4byte 0x080CEB84
+_08050688: .4byte dword_80CEBC4
+_0805068C: .4byte byte_80CEB84
 _08050690:
 	ldr r0, _080506CC
 	adds r0, r1, r0
@@ -17702,7 +17702,7 @@ _080506B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080506CC: .4byte 0x080CEB84
+_080506CC: .4byte byte_80CEB84
 
 	.thumb
 sub_80506D0: @ 0x080506D0
@@ -18203,8 +18203,8 @@ _08050AB0:
 	.align 2, 0
 _08050AC8: .4byte 0x002FFFFF
 _08050ACC: .4byte gMapPixelSizeY
-_08050AD0: .4byte 0x080CEBC4
-_08050AD4: .4byte 0x080CEB84
+_08050AD0: .4byte dword_80CEBC4
+_08050AD4: .4byte byte_80CEB84
 _08050AD8:
 	ldr r0, _08050AEC
 	adds r0, r1, r0
@@ -18218,7 +18218,7 @@ _08050AE4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08050AEC: .4byte 0x080CEB84
+_08050AEC: .4byte byte_80CEB84
 
 	.thumb
 sub_8050AF0: @ 0x08050AF0
@@ -18280,8 +18280,8 @@ _08050B10:
 	b _08050B74
 	.align 2, 0
 _08050B64: .4byte gPlayerPos
-_08050B68: .4byte 0x080CEBC4
-_08050B6C: .4byte 0x080CEB84
+_08050B68: .4byte dword_80CEBC4
+_08050B6C: .4byte byte_80CEB84
 _08050B70:
 	ldr r0, _08050BDC
 	adds r0, r1, r0
@@ -18336,9 +18336,9 @@ _08050BAC:
 	adds r0, r0, r1
 	b _08050BEC
 	.align 2, 0
-_08050BDC: .4byte 0x080CEB84
+_08050BDC: .4byte byte_80CEB84
 _08050BE0: .4byte gMapPixelSizeY
-_08050BE4: .4byte 0x080CEBC4
+_08050BE4: .4byte dword_80CEBC4
 _08050BE8:
 	ldr r0, _08050C08
 	adds r0, r1, r0
@@ -18354,7 +18354,7 @@ _08050BEC:
 	bl sub_8049810
 	b _08050C38
 	.align 2, 0
-_08050C08: .4byte 0x080CEB84
+_08050C08: .4byte byte_80CEB84
 _08050C0C:
 	adds r0, r5, #0
 	movs r1, #0
@@ -20999,8 +20999,8 @@ _080520BC:
 	.align 2, 0
 _0805210C: .4byte 0x0203DFE4
 _08052110: .4byte gMapPixelSizeY
-_08052114: .4byte 0x080CEBC4
-_08052118: .4byte 0x080CEB84
+_08052114: .4byte dword_80CEBC4
+_08052118: .4byte byte_80CEB84
 _0805211C:
 	ldr r0, _08052164
 	adds r0, r1, r0
@@ -21035,8 +21035,8 @@ _08052120:
 	adds r0, r0, r1
 	b _08052170
 	.align 2, 0
-_08052164: .4byte 0x080CEB84
-_08052168: .4byte 0x080CEBC4
+_08052164: .4byte byte_80CEB84
+_08052168: .4byte dword_80CEBC4
 _0805216C:
 	ldr r0, _08052180
 	adds r0, r1, r0
@@ -21050,7 +21050,7 @@ _08052178:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052180: .4byte 0x080CEB84
+_08052180: .4byte byte_80CEB84
 
 	.thumb
 sub_8052184: @ 0x08052184
@@ -21070,8 +21070,8 @@ sub_8052184: @ 0x08052184
 	adds r0, r0, r1
 	b _080521B0
 	.align 2, 0
-_080521A4: .4byte 0x080CEBC4
-_080521A8: .4byte 0x080CEB84
+_080521A4: .4byte dword_80CEBC4
+_080521A8: .4byte byte_80CEB84
 _080521AC:
 	ldr r0, _080521C0
 	adds r0, r1, r0
@@ -21083,7 +21083,7 @@ _080521B0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080521C0: .4byte 0x080CEB84
+_080521C0: .4byte byte_80CEB84
 
     .thumb
 sub_80521C4: @ 0x080521C4
