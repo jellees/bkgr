@@ -90,14 +90,14 @@ extern struct ScriptCamera* dword_203FA18;
 extern fx32 dword_203FA1C;
 extern fx32 dword_203FA20;
 
-bool32 script_cmd_actor_set_anim(int, int, bool32, int);
+bool32 script_cmd_actor_set_anim(int, int, int, int);
 bool32 script_cmd_actor_set_direction(int, int, int, int);
 bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
 bool32 script_cmd_actor_set_priority(int, int, int, int);
 bool32 sub_805F04C(int, int, int, int);
 bool32 sub_805F0A8(int, int, int, int);
 bool32 sub_805F0E8(int, int, int, int);
-bool32 script_cmd_actor_move(int, int, int, fx32);
+bool32 script_cmd_actor_move(int, int, int, int);
 bool32 script_cmd_store_camera_position(int, int, int, int);
 bool32 sub_0805F8DC(int, int, int, int);
 
@@ -713,7 +713,7 @@ bool32 script_cmd_alloc_actors(int count, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_load_and_store_room(int room, int warp, bool32 a3, bool32 changeMusic) {
+bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int changeMusic) {
     audio_halt_all_fx();
 
     gCurrentScript->loadedRoomIdx = gLoadedRoomIndex;
@@ -772,7 +772,7 @@ bool32 script_cmd_load_and_store_room(int room, int warp, bool32 a3, bool32 chan
     return TRUE;
 }
 
-bool32 script_cmd_load_room(int room, int warp, bool32 a3, bool32 changeMusic) {
+bool32 script_cmd_load_room(int room, int warp, int a3, int changeMusic) {
     audio_halt_all_fx();
 
     if (a3) {
@@ -867,7 +867,7 @@ bool32 script_cmd_jump(int scriptIdx, int cmdIdx, int _, int __) {
     return TRUE;
 }
 
-int script_cmd_jump_cond(int condition, int scriptIdx, int cmdIdx, int _) {
+bool32 script_cmd_jump_cond(int condition, int scriptIdx, int cmdIdx, int _) {
     bool32 shouldJump = FALSE;
 
     switch (condition) {
@@ -908,7 +908,7 @@ int script_cmd_jump_cond(int condition, int scriptIdx, int cmdIdx, int _) {
     return TRUE;
 }
 
-bool32 script_cmd_hide_player(bool32 hidePlayer, int _, int __, int ___) {
+bool32 script_cmd_hide_player(int hidePlayer, int _, int __, int ___) {
     if (hidePlayer) {
         gPlayerIsTransparent = TRUE;
     } else {
@@ -979,7 +979,7 @@ bool32 script_cmd_actor_enable(int actorIdx, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_anim(int actorIdx, int spriteIdx, bool32 maxAnimRepeats, int _) {
+bool32 script_cmd_actor_set_anim(int actorIdx, int spriteIdx, int maxAnimRepeats, int _) {
     sprite_set_anim(&gCurrentScript->actors[actorIdx].sprite, spriteIdx, FALSE, maxAnimRepeats);
     return TRUE;
 }
@@ -1388,7 +1388,7 @@ bool32 script_cmd_stop_bgm(int _, int __, int ___, int ____) {
     return TRUE;
 }
 
-bool32 script_cmd_play_sfx(int sfx, bool32 storeSfx, int _, int __) {
+bool32 script_cmd_play_sfx(int sfx, int storeSfx, int _, int __) {
     if (storeSfx) {
         gCurrentScript->activeSfx = PLAY_SFX(sfx);
     } else {
@@ -1425,7 +1425,7 @@ bool32 script_cmd_stop_bill_drill_sfx(int _, int __, int ___, int ____) {
     return TRUE;
 }
 
-bool32 script_cmd_set_bgm_volume(int volume, bool32 useGlobal, int _, int __) {
+bool32 script_cmd_set_bgm_volume(int volume, int useGlobal, int _, int __) {
     if (useGlobal) {
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
     } else {
@@ -1434,7 +1434,7 @@ bool32 script_cmd_set_bgm_volume(int volume, bool32 useGlobal, int _, int __) {
     return TRUE;
 }
 
-bool32 script_cmd_set_bgm_volume_if_louder(int volume, bool32 useGlobal, int _, int __) {
+bool32 script_cmd_set_bgm_volume_if_louder(int volume, int useGlobal, int _, int __) {
     if (useGlobal) {
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
     } else if (gBgmMainVolume > volume) {
@@ -1443,7 +1443,7 @@ bool32 script_cmd_set_bgm_volume_if_louder(int volume, bool32 useGlobal, int _, 
     return TRUE;
 }
 
-bool32 sub_805F768(int volume, bool32 useGlobal) {
+bool32 sub_805F768(int volume, int useGlobal, int _, int __) {
     if (useGlobal) {
         audio_set_fx_vol(dVolumes[gSfxMainVolume]);
     } else {
@@ -1452,7 +1452,7 @@ bool32 sub_805F768(int volume, bool32 useGlobal) {
     return TRUE;
 }
 
-bool32 sub_805F7A4(bool32 useGlobal, int _, int __, int ___) {
+bool32 sub_805F7A4(int useGlobal, int _, int __, int ___) {
     if (useGlobal) {
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
     } else {
@@ -1982,7 +1982,9 @@ bool32 sub_805FF80(int a1, int _, int __, int ___) {
 
 // https://decomp.me/scratch/5oOP5
 #ifndef NONMATCHING
-asm_unified(".include \"asm/nonmatching/show_time_travel_scene.s\"");
+NAKED bool32 show_time_travel_scene(int a1, int _, int __, int ___) {
+    asm_unified(".include \"asm/nonmatching/show_time_travel_scene.s\"");
+}
 #else
 static inline void ab(int a1, int v9, int a, int b) {
     if (a1)
@@ -2100,7 +2102,9 @@ bool32 show_time_travel_scene(int a1) {
 
 // https://decomp.me/scratch/p6AiR
 #ifndef NONMATCHING
-asm_unified(".include \"asm/nonmatching/sub_8060568.s\"");
+NAKED bool32 sub_8060568(int _, int __, int ___, int ____) {
+    asm_unified(".include \"asm/nonmatching/sub_8060568.s\"");
+}
 #else
 bool32 sub_8060568(int _, int __, int ___, int ____) {
     int v5;
@@ -2471,3 +2475,95 @@ bool32 sub_8060D90(int _, int __, int ___, int ____) {
 
     //! @bug Forgot return.
 }
+
+static bool32 (*const gFunctionList[89])(int, int, int, int) = {
+    script_cmd_alloc_actors,
+    script_cmd_load_and_store_room,
+    script_cmd_load_room,
+    script_cmd_restore_room,
+    script_cmd_jump,
+    script_cmd_jump_cond,
+    script_cmd_hide_player,
+    script_cmd_actor_init,
+    script_cmd_actor_disable,
+    script_cmd_actor_enable,
+    script_cmd_actor_set_anim,
+    sub_805EB10,
+    script_cmd_actor_set_position,
+    sub_805ED94,
+    script_cmd_actor_set_position_from_cam,
+    script_cmd_actor_set_position_absolute,
+    script_cmd_actor_save_position,
+    sub_805EEBC,
+    sub_805EF0C,
+    script_cmd_actor_set_direction,
+    sub_805EF94,
+    script_cmd_actor_set_priority,
+    sub_805F034,
+    sub_805F04C,
+    script_cmd_actor_set_obj_mode,
+    script_cmd_actor_set_palette,
+    sub_805F0A8,
+    script_cmd_actor_unlock_anim,
+    sub_805F0E8,
+    sub_805F108,
+    sub_805F120,
+    script_cmd_actor_move,
+    sub_805F28C,
+    sub_805F2B0,
+    sub_805F40C,
+    sub_805F428,
+    script_cmd_alloc_oam_matrices,
+    script_cmd_free_oam_matrices,
+    sub_805F480,
+    sub_805F4B0,
+    sub_805F4DC,
+    sub_805F51C,
+    script_cmd_play_bgm,
+    script_cmd_stop_bgm,
+    script_cmd_play_sfx,
+    script_cmd_stop_sfx,
+    script_cmd_stop_all_sfx,
+    script_cmd_play_bill_drill_sfx,
+    script_cmd_stop_bill_drill_sfx,
+    script_cmd_set_bgm_volume,
+    script_cmd_set_bgm_volume_if_louder,
+    sub_805F768,
+    sub_805F7A4,
+    sub_805F7D8,
+    sub_805F808,
+    script_cmd_store_camera_position,
+    sub_0805F8DC,
+    script_cmd_move_camera,
+    script_cmd_move_camera_to_actor_position,
+    sub_805FAF4,
+    sub_805FB18,
+    sub_805FB38,
+    script_cmd_return_camera,
+    sub_805FB80,
+    sub_805FBA4,
+    sub_805FBB4,
+    sub_805FBF4,
+    sub_805FC34,
+    script_cmd_wait_frames,
+    sub_805FCB0,
+    sub_805FCEC,
+    sub_805FD2C,
+    sub_805FD38,
+    script_cmd_end,
+    sub_805FF80,
+    show_time_travel_scene,
+    sub_8060568,
+    show_licence_screen,
+    sub_8060B90,
+    sub_8060BC4,
+    sub_8060C10,
+    sub_8060C34,
+    sub_8060C4C,
+    sub_8060C78,
+    sub_8060CB8,
+    sub_8060CC4,
+    sub_8060D74,
+    sub_8060D80,
+    sub_8060D90,
+};
