@@ -810,8 +810,8 @@ extern fx32 dword_203F9FC;
 extern u8 byte_203F9A1;
 extern bool8 gHidePlayer;
 
-extern fx32 dword_203FA08;
-extern fx32 dword_203FA0C;
+extern fx32 gScriptCameraSavePosX;
+extern fx32 gScriptCameraSavePosY;
 extern u16 word_203FA10;
 
 extern u8 byte_203FA12;
