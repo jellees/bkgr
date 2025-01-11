@@ -2284,7 +2284,7 @@ bool32 sub_8060568(int _, int __, int ___, int ____) {
 }
 #endif
 
-bool32 show_licence_screen() {
+bool32 show_licence_screen(int _, int __, int ___, int ____) {
     int frames;
 
     gDisplayControl = REG_DISPCNT;
@@ -2354,4 +2354,120 @@ bool32 show_licence_screen() {
     DmaTransfer32(&unk_83FC514, (void*)BG_PLTT, 128);
 
     return TRUE;
+}
+
+bool32 sub_8060B90(int _, int __, int ___, int ____) {
+    gScriptSavedPosX = (*dword_203F8B4)->field_2;
+    gScriptSavedPosY = (*dword_203F8B4)->field_4;
+    gScriptSavedPriority = 3 - (*dword_203F8B4)->field_A4;
+    return TRUE;
+}
+
+bool32 sub_8060BC4(int _, int __, int ___, int ____) {
+    gScriptSavedPosX = gPlayerPos.x >> FX32_SHIFT;
+    gScriptSavedPosY = gMapPixelSizeY - ((gPlayerPos.z + gPlayerPos.y) >> FX32_SHIFT);
+    gScriptSavedPriority = 3 - gPlayerSprite.priority;
+    return TRUE;
+}
+
+bool32 sub_8060C10(int _, int __, int ___, int ____) {
+    ASSERT(gCurrentScript->field_23);
+    end_all_scripts(1);
+    return TRUE;
+}
+
+bool32 sub_8060C34(int room, int _, int __, int ___) {
+    SyncVblank();
+    RoomObjPaletteToVram(room);
+    return TRUE;
+}
+
+bool32 sub_8060C4C(int a1, int a2, int a3, int _) {
+    SyncVblank();
+    if (!a1) {
+        DmaTransferObjPalette(unk_83FD834, a2, a3);
+    } else {
+        ASSERT(0);
+    }
+    return TRUE;
+}
+
+bool32 sub_8060C78(int _, int __, int ___, int ____) {
+    if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_PACK_WACK)
+        && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE)
+        && gTransformation != TRANSFORMATION_TANK && gTransformation != TRANSFORMATION_OCTOPUS) {
+        sub_801990C();
+    }
+    return TRUE;
+}
+
+bool32 sub_8060CB8(int a1, int _, int __, int ___) {
+    byte_203FA58 = a1;
+    return TRUE;
+}
+
+bool32 sub_8060CC4(int a1, int _, int __, int ___) {
+    fx32 v8;
+    u8 v2;
+    bool32 v3;
+    fx32 v5;
+    fx32 v6;
+
+    v8 = (gMapPixelSizeY << FX32_SHIFT) - (gPlayerPos.z + gPlayerPos.y);
+
+    v2 = 0;
+    v3 = FALSE;
+
+    while (1) {
+        v5 = word_80B21D4[v2].field_0 << FX32_SHIFT;
+        v6 = word_80B21D4[v2].field_2 << FX32_SHIFT;
+
+        if (Abs(gPlayerPos.x - v5) < FX32_CONST(48) && Abs(v8 - v6) < FX32_CONST(48)) {
+            v3 = TRUE;
+            script_cmd_actor_set_position(a1, v5 >> FX32_SHIFT, v6 >> FX32_SHIFT, 0);
+            script_cmd_actor_set_priority(a1, word_80B21D4[v2].field_4, 0, 0);
+            sub_805F04C(a1, word_80B21D4[v2].field_6, 0, 0);
+        }
+
+        v2++;
+
+        if (v3) {
+            break;
+        }
+
+        if (v2 > 5) {
+            ASSERT(0);
+            break;
+        }
+    }
+
+    return TRUE;
+}
+
+bool32 sub_8060D74(int _, int __, int ___, int ____) {
+    sub_8041E58();
+    return TRUE;
+}
+
+bool32 sub_8060D80(int _, int __, int ___, int ____) {
+    byte_203E138 = 1;
+    return TRUE;
+}
+
+bool32 sub_8060D90(int _, int __, int ___, int ____) {
+    switch ((u32)RandomMinMax(0, 2)) {
+        case 0:
+            script_cmd_play_sfx(223, FALSE, 0, 0);
+            break;
+
+        case 1:
+            script_cmd_play_sfx(224, FALSE, 0, 0);
+            break;
+
+        case 2:
+            script_cmd_play_sfx(225, FALSE, 0, 0);
+            break;
+    }
+
+    //! @bug Forgot return.
 }

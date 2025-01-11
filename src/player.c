@@ -353,7 +353,7 @@ void sub_8016B44(void) {
 
 void sub_8016BD0(int a1) {
     if (!a1) {
-        sub_804888C(dword_203DFB8[(*dword_203F8B4)[15]]);
+        sub_804888C(dword_203DFB8[(*dword_203F8B4)->field_1E]);
     }
 
     if (gCanChangeBgm) {

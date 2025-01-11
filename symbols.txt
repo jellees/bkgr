@@ -1,4 +1,5 @@
 byte_203E137 = 0x203E137;
+byte_203E138 = 0x203E138;
 word_203F990 = 0x203F990;
 gScriptSavedPosX = 0x203F994;
 gScriptSavedPosY = 0x203F996;
@@ -22,6 +23,7 @@ dword_203FA1C = 0x203FA1C;
 dword_203FA20 = 0x203FA20;
 dword_203FA24 = 0x203FA24;
 dword_203FA28 = 0x203FA28;
+byte_203FA58 = 0x203FA58;
 
 
 gKeyInput = 0x30032CA;
@@ -51,6 +53,8 @@ dword_80660B0 = 0x80660B0;
 dword_80660B8 = 0x80660B8;
 
 dword_80B1AE4 = 0x80B1AE4;
+
+word_80B21D4 = 0x80B21D4;
 
 dword_80CB9F0 = 0x80CB9F0;
 dword_80CBCD0 = 0x80CBCD0;
@@ -119,7 +123,7 @@ dword_808E30C = 0x808E30C;
 dword_808EF98 = 0x808EF98;
 
 unk_83FD454 = 0x83FD454;
-
+unk_83FD834 = 0x83FD834;
 
 dLicenceBitmap = 0x87E61A8;
 unk_83FC514 = 0x83FC514;

@@ -301,7 +301,6 @@ SECTIONS
         src/pause_menu.o(.text);
         asm/chunk8.o(.text);
         src/script.o(.text);
-        asm/script.o(.text);
         asm/chunk13.o(.text);
         src/gameover.o(.text);
         asm/chunk12.o(.text);

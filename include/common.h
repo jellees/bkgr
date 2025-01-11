@@ -434,6 +434,30 @@ struct struc_200032C {
     u32 field_6C;
 };
 
+struct struc_51
+{
+    u16 field_0;
+    u16 field_2;
+    u16 field_4;
+
+    u8 padding0[24];
+
+    u16 field_1E;
+
+    u8 padding1[132];
+
+    u8 field_A4;
+};
+
+struct struc_80B21D4
+{
+    u16 field_0;
+    u16 field_2;
+    u8 field_4;
+    u8 field_5;
+    u16 field_6;
+};
+
 // Struct forward declarations
 struct Sprite;
 struct TextBox;
@@ -538,6 +562,7 @@ extern void UpdateMapLeft(fx32);
 extern void UpdateMapRight(fx32);
 extern void sub_8015FD4(void);
 extern void sub_080161CC(u8);
+extern void RoomObjPaletteToVram(int);
 
 // Part of pregame.c?
 extern void sub_8025278(void);
@@ -746,12 +771,13 @@ extern bool8 byte_203DFE9;
 extern u8 byte_203E10F;
 
 extern u8 byte_203E137;
+extern u8 byte_203E138;
 
 extern u8 byte_203E16A;
 extern u8 byte_203E16B;
 extern u8 byte_203E16C;
 
-extern u16** dword_203F8B4; // A pointer to a pointer to a struct.
+extern struct struc_51** dword_203F8B4; // A pointer to a pointer to a struct.
 
 extern struct struc_203F98C* dword_203F98C;
 
@@ -789,6 +815,7 @@ extern u32 dword_203FA28;
 
 extern u8 byte_203FA35; // possibly bool8
 
+extern u8 byte_203FA58;
 extern struct struc_46* dword_203FA5C;
 
 extern u8* dword_203FA7C;
@@ -881,6 +908,8 @@ extern u32 Abs(u32); // return type is u32, can tell by the branch instruction
 extern u32 dword_80CC290[8];
 extern u32 dword_80AF4F0[4];
 extern struct Font font_80B01A8[3];
+
+extern struct struc_80B21D4 word_80B21D4[];
 
 extern struct RoomIndex dRoomIndexes[38];
 extern struct GameStatus stru_80CC8C4;
@@ -1035,6 +1064,8 @@ extern u32 byte_80CEBC8[];
 
 extern struct struc_203F98C unk_80B21B4[];
 extern u32 dword_80B21B8;
+
+extern u32 unk_83FD834[];
 
 extern u8 unk_83FD734;
 extern u8 unk_83FD754;
