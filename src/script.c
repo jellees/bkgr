@@ -985,29 +985,29 @@ bool32 script_cmd_actor_set_anim(int actorIdx, int spriteIdx, int maxAnimRepeats
     return TRUE;
 }
 
-bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
+bool32 script_cmd_actor_set_gameover_anim(int actorIdx, int anim, int _, int __) {
     if (gTransformation == TRANSFORMATION_BANJO) {
-        switch (a2) {
+        switch (anim) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 1258, 1, 0);
                 break;
 
             case 1:
                 script_cmd_actor_set_anim(actorIdx, 9, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
 
             case 2:
                 script_cmd_actor_set_anim(actorIdx, 1, 0, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
         }
         return TRUE;
     } else if (gTransformation == TRANSFORMATION_MOUSE) {
-        switch (a2) {
+        switch (anim) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 321, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 script_cmd_actor_lock_anim_on_frame(actorIdx, 5, 0, 0);
                 script_cmd_actor_set_locked_frame(actorIdx, 5, 0, 0);
                 DmaTransferObjPalette(&unk_83FD734, 7, 7);
@@ -1015,20 +1015,20 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
 
             case 1:
                 script_cmd_actor_set_anim(actorIdx, 305, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
 
             case 2:
                 script_cmd_actor_set_anim(actorIdx, 329, 0, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
         }
         return TRUE;
     } else if (gTransformation == TRANSFORMATION_CANDLE) {
-        switch (a2) {
+        switch (anim) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 361, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_DOWN_LEFT, 0, 0);
                 script_cmd_actor_lock_anim_on_frame(actorIdx, 8, 0, 0);
                 script_cmd_actor_set_locked_frame(actorIdx, 8, 0, 0);
                 DmaTransferObjPalette(&unk_83FD754, 7, 7);
@@ -1036,20 +1036,20 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
 
             case 1:
                 script_cmd_actor_set_anim(actorIdx, 385, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
 
             case 2:
                 script_cmd_actor_set_anim(actorIdx, 369, 0, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
         }
         return TRUE;
     } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
-        switch (a2) {
+        switch (anim) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 465, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_DOWN_LEFT, 0, 0);
                 script_cmd_actor_lock_anim_on_frame(actorIdx, 3, 0, 0);
                 script_cmd_actor_set_locked_frame(actorIdx, 3, 0, 0);
                 DmaTransferObjPalette(&unk_83FD794, 7, 7);
@@ -1057,20 +1057,20 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
 
             case 1:
                 script_cmd_actor_set_anim(actorIdx, 433, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
 
             case 2:
                 script_cmd_actor_set_anim(actorIdx, 425, 0, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
         }
         return TRUE;
     } else if (gTransformation == TRANSFORMATION_TANK) {
-        switch (a2) {
+        switch (anim) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 401, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_DOWN_LEFT, 0, 0);
                 script_cmd_actor_lock_anim_on_frame(actorIdx, 9, 0, 0);
                 script_cmd_actor_set_locked_frame(actorIdx, 9, 0, 0);
                 DmaTransferObjPalette(&unk_83FD774, 7, 7);
@@ -1078,12 +1078,12 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
 
             case 1:
                 script_cmd_actor_set_anim(actorIdx, 417, 1, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
 
             case 2:
                 script_cmd_actor_set_anim(actorIdx, 401, 0, 0);
-                script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
+                script_cmd_actor_set_direction(actorIdx, DIRECTION_LEFT, 0, 0);
                 break;
         }
         return TRUE;
@@ -2482,7 +2482,7 @@ bool32 sub_8060D90(int _, int __, int ___, int ____) {
     //! @bug Forgot return.
 }
 
-static bool32 (*const gFunctionList[CMD_COUNT])(int, int, int, int) = {
+static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_alloc_actors,
     script_cmd_load_and_store_room,
     script_cmd_load_room,
@@ -2494,7 +2494,7 @@ static bool32 (*const gFunctionList[CMD_COUNT])(int, int, int, int) = {
     script_cmd_actor_disable,
     script_cmd_actor_enable,
     script_cmd_actor_set_anim,
-    sub_805EB10,
+    script_cmd_actor_set_gameover_anim,
     script_cmd_actor_set_position,
     script_cmd_actor_set_position_relative_from_saved_position,
     script_cmd_actor_set_position_from_cam,
