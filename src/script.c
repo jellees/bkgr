@@ -95,8 +95,8 @@ bool32 script_cmd_actor_set_direction(int, int, int, int);
 bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
 bool32 script_cmd_actor_set_priority(int, int, int, int);
 bool32 sub_805F04C(int, int, int, int);
-bool32 sub_805F0A8(int, int, int, int);
-bool32 sub_805F0E8(int, int, int, int);
+bool32 script_cmd_actor_lock_anim_on_frame(int, int, int, int);
+bool32 script_cmd_actor_set_locked_frame(int, int, int, int);
 bool32 script_cmd_actor_move(int, int, int, int);
 bool32 script_cmd_store_camera_position(int, int, int, int);
 bool32 sub_0805F8DC(int, int, int, int);
@@ -1007,8 +1007,8 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 321, 1, 0);
                 script_cmd_actor_set_direction(actorIdx, 6, 0, 0);
-                sub_805F0A8(actorIdx, 5, 0, 0);
-                sub_805F0E8(actorIdx, 5, 0, 0);
+                script_cmd_actor_lock_anim_on_frame(actorIdx, 5, 0, 0);
+                script_cmd_actor_set_locked_frame(actorIdx, 5, 0, 0);
                 DmaTransferObjPalette(&unk_83FD734, 7, 7);
                 break;
 
@@ -1028,8 +1028,8 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 361, 1, 0);
                 script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
-                sub_805F0A8(actorIdx, 8, 0, 0);
-                sub_805F0E8(actorIdx, 8, 0, 0);
+                script_cmd_actor_lock_anim_on_frame(actorIdx, 8, 0, 0);
+                script_cmd_actor_set_locked_frame(actorIdx, 8, 0, 0);
                 DmaTransferObjPalette(&unk_83FD754, 7, 7);
                 break;
 
@@ -1049,8 +1049,8 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 465, 1, 0);
                 script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
-                sub_805F0A8(actorIdx, 3, 0, 0);
-                sub_805F0E8(actorIdx, 3, 0, 0);
+                script_cmd_actor_lock_anim_on_frame(actorIdx, 3, 0, 0);
+                script_cmd_actor_set_locked_frame(actorIdx, 3, 0, 0);
                 DmaTransferObjPalette(&unk_83FD794, 7, 7);
                 break;
 
@@ -1070,8 +1070,8 @@ bool32 sub_805EB10(int actorIdx, int a2, int _, int __) {
             case 0:
                 script_cmd_actor_set_anim(actorIdx, 401, 1, 0);
                 script_cmd_actor_set_direction(actorIdx, 5, 0, 0);
-                sub_805F0A8(actorIdx, 9, 0, 0);
-                sub_805F0E8(actorIdx, 9, 0, 0);
+                script_cmd_actor_lock_anim_on_frame(actorIdx, 9, 0, 0);
+                script_cmd_actor_set_locked_frame(actorIdx, 9, 0, 0);
                 DmaTransferObjPalette(&unk_83FD774, 7, 7);
                 break;
 
@@ -1104,7 +1104,7 @@ bool32 script_cmd_actor_set_position(int actorIdx, int xPos, int yPos, int _) {
     return TRUE;
 }
 
-bool32 sub_805ED94(int actorIdx, int xPos, int yPos, int _) {
+bool32 script_cmd_actor_set_position_relative_from_saved_position(int actorIdx, int xPos, int yPos, int _) {
     return script_cmd_actor_set_position(actorIdx, gScriptSavedPosX + xPos, gScriptSavedPosY + yPos, 0);
 }
 
@@ -1191,7 +1191,7 @@ bool32 script_cmd_actor_set_priority(int actorIdx, int priority, int _, int __) 
     return TRUE;
 }
 
-bool32 sub_805F034(int actorIdx, int _, int __, int ___) {
+bool32 script_cmd_actor_revert_priority(int actorIdx, int _, int __, int ___) {
     return script_cmd_actor_set_priority(actorIdx, gScriptSavedPriority, 0, 0);
 }
 
@@ -1211,7 +1211,7 @@ bool32 script_cmd_actor_set_palette(int actorIdx, int palette, int _, int __) {
     return TRUE;
 }
 
-bool32 sub_805F0A8(int actorIdx, int frame, int _, int __) {
+bool32 script_cmd_actor_lock_anim_on_frame(int actorIdx, int frame, int _, int __) {
     sprite_lock_anim_on_frame(&gCurrentScript->actors[actorIdx].sprite, frame);
     return TRUE;
 }
@@ -1221,12 +1221,12 @@ bool32 script_cmd_actor_unlock_anim(int actorIdx, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 sub_805F0E8(int actorIdx, int frame, int _, int __) {
+bool32 script_cmd_actor_set_locked_frame(int actorIdx, int frame, int _, int __) {
     sprite_set_locked_frame(&gCurrentScript->actors[actorIdx].sprite, frame);
     return TRUE;
 }
 
-bool32 sub_805F108(int actorIdx, int frame, int _, int __) {
+bool32 script_cmd_actor_set_frame(int actorIdx, int frame, int _, int __) {
     gCurrentScript->actors[actorIdx].sprite.loopFrame = frame;
     return TRUE;
 }
@@ -2490,7 +2490,7 @@ static bool32 (*const gFunctionList[89])(int, int, int, int) = {
     script_cmd_actor_set_anim,
     sub_805EB10,
     script_cmd_actor_set_position,
-    sub_805ED94,
+    script_cmd_actor_set_position_relative_from_saved_position,
     script_cmd_actor_set_position_from_cam,
     script_cmd_actor_set_position_absolute,
     script_cmd_actor_save_position,
@@ -2499,14 +2499,14 @@ static bool32 (*const gFunctionList[89])(int, int, int, int) = {
     script_cmd_actor_set_direction,
     sub_805EF94,
     script_cmd_actor_set_priority,
-    sub_805F034,
+    script_cmd_actor_revert_priority,
     sub_805F04C,
     script_cmd_actor_set_obj_mode,
     script_cmd_actor_set_palette,
-    sub_805F0A8,
+    script_cmd_actor_lock_anim_on_frame,
     script_cmd_actor_unlock_anim,
-    sub_805F0E8,
-    sub_805F108,
+    script_cmd_actor_set_locked_frame,
+    script_cmd_actor_set_frame,
     sub_805F120,
     script_cmd_actor_move,
     sub_805F28C,
