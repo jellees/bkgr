@@ -458,7 +458,7 @@ bool32 sub_805DD20(void) {
     sub_8025718(0, 0, dword_80B1AE4[0x80 - ((u8)a / 2)] + 0x180);
     sub_805DC28(1);
     sub_805DC28(3);
-    return (gPlayerStateFlags[gPlayerState] & 0x800) == 0;
+    return !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE);
 }
 
 // https://decomp.me/scratch/BrRUy
@@ -872,29 +872,29 @@ bool32 script_cmd_jump_cond(int condition, int scriptIdx, int cmdIdx, int _) {
     bool32 shouldJump = FALSE;
 
     switch (condition) {
-        case 0:
-        case 1:
+        case SCRIPT_JUMP_COND_NONE:
+        case SCRIPT_JUMP_COND_NONE_EX:
             break;
 
-        case 2:
+        case SCRIPT_JUMP_COND_GAME_COMPLETE:
             if (is_game_complete()) {
                 shouldJump = TRUE;
             }
             break;
 
-        case 3:
+        case SCRIPT_JUMP_COND_TRANSFORMED:
             if (gTransformation != TRANSFORMATION_BANJO) {
                 shouldJump = TRUE;
             }
             break;
 
-        case 4:
+        case SCRIPT_JUMP_COND_SHOCK_JUMP_LOCKED:
             if (!gUnlockedMoves[MOVE_SHOCK_JUMP]) {
                 shouldJump = TRUE;
             }
             break;
 
-        case 5:
+        case SCRIPT_JUMP_COND_WONDERWING_LOCKED:
             if (!gUnlockedMoves[MOVE_WONDERWING]) {
                 shouldJump = TRUE;
             }
@@ -1672,7 +1672,7 @@ bool32 sub_805FC34(int a1, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_wait_frames(int frames, int _, int __, int ___) {
+bool32 script_cmd_set_wait_frames(int frames, int _, int __, int ___) {
     gCurrentScript->waitFrames = frames;
     return TRUE;
 }
@@ -1701,44 +1701,44 @@ bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
     bool32 advance = FALSE;
 
     switch (condition) {
-        case 0:
+        case SCRIPT_WAIT_COND_FRAMES:
             if (gCurrentScript->waitFrames == 0) {
                 advance = TRUE;
             }
             break;
 
-        case 1:
+        case SCRIPT_WAIT_COND_ACTOR_NOT_MOVING:
             if (!gCurrentScript->actors[actorIdx].isMoving) {
                 advance = TRUE;
             }
             break;
 
-        case 2:
+        case SCRIPT_WAIT_COND_2:
             if (!gCurrentScript->actors[actorIdx].field_58) {
                 advance = TRUE;
             }
             break;
 
-        case 3:
+        case SCRIPT_WAIT_COND_3:
             if (!gCurrentScript->actors[actorIdx].field_59) {
                 advance = TRUE;
             }
             break;
 
-        case 4:
+        case SCRIPT_WAIT_COND_ACTOR_ANIM_DONE:
             if (sprite_is_anim_done_once(&gCurrentScript->actors[actorIdx].sprite)) {
                 advance = TRUE;
             }
             break;
 
-        case 5:
+        case SCRIPT_WAIT_COND_NOT_IN_DIALOGUE:
             if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
                 byte_203F99F = 0;
                 advance = TRUE;
             }
             break;
 
-        case 6: {
+        case SCRIPT_WAIT_COND_6: {
             bool32 shouldAdvance = FALSE;
             if (byte_203F9A1 == 0) {
                 shouldAdvance = TRUE;
@@ -1747,25 +1747,25 @@ bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
             break;
         }
 
-        case 7:
+        case SCRIPT_WAIT_COND_CAMERA_NOT_MOVING:
             if (!gScriptCamera->isMoving) {
                 advance = TRUE;
             }
             break;
 
-        case 8:
+        case SCRIPT_WAIT_COND_8:
             if (!byte_203FA14) {
                 advance = TRUE;
             }
             break;
 
-        case 9:
+        case SCRIPT_WAIT_COND_9:
             if (sub_805DB38()) {
                 advance = TRUE;
             }
             break;
 
-        case 10:
+        case SCRIPT_WAIT_COND_10:
             if (gCurrentScript->waitFrames != 0
                 || (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_NOT_MOVING)
                     && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)
@@ -1779,7 +1779,7 @@ bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
             }
             break;
 
-        case 11:
+        case SCRIPT_WAIT_COND_11:
             if (gCurrentScript->waitFrames == 0 && !sub_80038AC(dword_2000FC8)) {
                 byte_203F9A1 = 0;
                 advance = TRUE;
@@ -1790,32 +1790,32 @@ bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
             }
             break;
 
-        case 12:
+        case SCRIPT_WAIT_COND_SFX_DONE:
             if (!audio_fx_still_active(gCurrentScript->activeSfx)) {
                 advance = TRUE;
             }
             break;
 
-        case 13:
+        case SCRIPT_WAIT_COND_13:
             if (sub_80037A8(&gCurrentScript->actors[actorIdx].sprite)) {
                 advance = TRUE;
             }
             break;
 
-        case 14:
+        case SCRIPT_WAIT_COND_14:
             if (sub_805DD20()) {
                 byte_203F99F = 0;
                 advance = TRUE;
             }
             break;
 
-        case 15:
+        case SCRIPT_WAIT_COND_15:
             if (!gIsPaletteEffectsActive) {
                 advance = TRUE;
             }
             break;
 
-        case 16:
+        case SCRIPT_WAIT_COND_16:
             if (sub_0804207C(0)) {
                 advance = TRUE;
             }
@@ -2551,7 +2551,7 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     sub_805FBB4,
     sub_805FBF4,
     sub_805FC34,
-    script_cmd_wait_frames,
+    script_cmd_set_wait_frames,
     sub_805FCB0,
     sub_805FCEC,
     script_cmd_set_player_direction,
