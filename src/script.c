@@ -57,7 +57,7 @@ struct Actor {
     u8 field_5F;
 };
 
-struct Script {
+struct ScriptState {
     struct Actor* actors;
     u8 loadedRoomIdx;
     struct Vec3fx playerPos;
@@ -85,8 +85,8 @@ extern u8 gScriptSavedPriority;
 extern u8 gActorCount;
 extern u8 byte_203F9A1;
 extern bool8 gHidePlayer;
-extern struct Script gScripts[MAX_SCRIPTS];
-extern struct Script* gCurrentScript;
+extern struct ScriptState gScripts[MAX_SCRIPTS];
+extern struct ScriptState* gCurrentScript;
 extern struct ScriptCamera* gScriptCamera;
 extern fx32 dword_203FA1C;
 extern fx32 dword_203FA20;
@@ -209,7 +209,7 @@ void sub_805D568(void) {
 #define IS_IN_VIEW_ABSOLUTE(x, y)                                                                      \
     (x)<FX32_CONST(260) && (x)> FX32_CONST(-20) && (y)<FX32_CONST(180) && (y)> FX32_CONST(-20)
 
-void sub_805D614(struct Script* script, int actorIdx) {
+void sub_805D614(struct ScriptState* script, int actorIdx) {
     struct Actor* actor = &script->actors[actorIdx];
 
     if (actor->field_5C) {
@@ -306,7 +306,7 @@ void sub_0805D6B0(void) {
     }
 }
 
-void sub_805D8D8(struct Script* script) {
+void sub_805D8D8(struct ScriptState* script) {
     u8 i;
 
     if (script->waitFrames != 0) {
@@ -474,7 +474,7 @@ void render_scripts(u32** a1, u32* a2) {
     }
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
-        struct Script* script = &gScripts[i];
+        struct ScriptState* script = &gScripts[i];
 
         if (script->isActive && (script->field_23 || !byte_203FA16)) {
             int actorIdx;
@@ -514,7 +514,7 @@ void render_scripts_direct(void) {
     int actorIdx;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
-        struct Script* script = &gScripts[i];
+        struct ScriptState* script = &gScripts[i];
         for (actorIdx = 0; actorIdx < script->actorCount; actorIdx++) {
             if (script->actors[actorIdx].isVisible) {
                 sprite_render(&script->actors[actorIdx].sprite);
@@ -523,7 +523,7 @@ void render_scripts_direct(void) {
     }
 }
 
-void remove_actors(struct Script* script) {
+void remove_actors(struct ScriptState* script) {
     u8 i;
 
     if (script->actorCount == 0) {
@@ -544,7 +544,7 @@ void remove_actors(struct Script* script) {
     script->actorCount = 0;
 }
 
-void end_script(struct Script* script) {
+void end_script(struct ScriptState* script) {
     remove_actors(script);
     script->endScript = TRUE;
 
@@ -1697,7 +1697,7 @@ bool32 script_cmd_set_player_direction(int direction, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 sub_805FD38(int condition, int actorIdx, int _, int __) {
+bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
     bool32 advance = FALSE;
 
     switch (condition) {
@@ -2555,7 +2555,7 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     sub_805FCB0,
     sub_805FCEC,
     script_cmd_set_player_direction,
-    sub_805FD38,
+    script_cmd_wait_for_cond,
     script_cmd_end,
     script_cmd_display_scene_transition,
     show_time_travel_scene,
