@@ -297,9 +297,9 @@ enum ScriptWaitCond {
 
 #define Sub805FBA4 SCRIPT_CMD(SCRIPT_CMD_sub_805FBA4, 0, 0, 0, 0)
 
-#define Sub805FBB4(unknown1, unknown2) SCRIPT_CMD(SCRIPT_CMD_sub_805FBB4, unknown1, unknown2 0, 0)
+#define Sub805FBB4(unknown1, unknown2) SCRIPT_CMD(SCRIPT_CMD_sub_805FBB4, unknown1, unknown2, 0, 0)
 
-#define Sub805FBF4(unknown1, unknown2) SCRIPT_CMD(SCRIPT_CMD_sub_805FBF4, unknown1, unknown2 0, 0)
+#define Sub805FBF4(unknown1, unknown2) SCRIPT_CMD(SCRIPT_CMD_sub_805FBF4, unknown1, unknown2, 0, 0)
 
 #define Sub805FC34(unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805FC34, unknown, 0, 0, 0)
 
