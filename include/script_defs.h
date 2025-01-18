@@ -1,5 +1,5 @@
 
-#include "global.h"
+#include "gba/types.h"
 
 struct ScriptCommand {
     u32 idx;
@@ -141,7 +141,7 @@ enum ScriptWaitCond {
  */
 #define SCRIPT_CMD(idx, arg0, arg1, arg2, arg3) { (idx), (arg0), (arg1), (arg2), (arg3) },
 
-#define AllocActors(count) SCRIPT_CMD(SCRIPT_CMD_ALLOC_ACTORS, 0, 0, 0, 0)
+#define AllocActors(count) SCRIPT_CMD(SCRIPT_CMD_ALLOC_ACTORS, count, 0, 0, 0)
 
 #define LoadAndStoreRoom(room, warp, unknown, changeMusic)                                             \
     SCRIPT_CMD(SCRIPT_CMD_LOAD_AND_STORE_ROOM, room, warp, unknown, changeMusic)
