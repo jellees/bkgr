@@ -1,5 +1,5 @@
 
-#include "gba/types.h"
+#include "global.h"
 
 struct ScriptCommand {
     u32 idx;

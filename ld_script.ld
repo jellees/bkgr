@@ -299,6 +299,7 @@ SECTIONS
         asm/data_text.o(.rodata);
         asm/data.o(.rodata);
         src/script.o(.rodata);
+        src/scripts.o(.rodata);
         asm/data2.o(.rodata);
         asm/eeprom.o(.rodata);
         asm/data1.o(.rodata);
