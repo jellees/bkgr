@@ -2417,12 +2417,12 @@ bool32 sub_8060CB8(int a1, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 sub_8060CC4(int a1, int _, int __, int ___) {
+bool32 sub_8060CC4(int actorIdx, int _, int __, int ___) {
     fx32 v8;
     u8 v2;
     bool32 v3;
-    fx32 v5;
-    fx32 v6;
+    fx32 xPos;
+    fx32 yPos;
 
     v8 = (gMapPixelSizeY << FX32_SHIFT) - (gPlayerPos.z + gPlayerPos.y);
 
@@ -2430,14 +2430,14 @@ bool32 sub_8060CC4(int a1, int _, int __, int ___) {
     v3 = FALSE;
 
     while (1) {
-        v5 = word_80B21D4[v2].field_0 << FX32_SHIFT;
-        v6 = word_80B21D4[v2].field_2 << FX32_SHIFT;
+        xPos = word_80B21D4[v2].xPos << FX32_SHIFT;
+        yPos = word_80B21D4[v2].yPos << FX32_SHIFT;
 
-        if (Abs(gPlayerPos.x - v5) < FX32_CONST(48) && Abs(v8 - v6) < FX32_CONST(48)) {
+        if (Abs(gPlayerPos.x - xPos) < FX32_CONST(48) && Abs(v8 - yPos) < FX32_CONST(48)) {
             v3 = TRUE;
-            script_cmd_actor_set_position(a1, v5 >> FX32_SHIFT, v6 >> FX32_SHIFT, 0);
-            script_cmd_actor_set_priority(a1, word_80B21D4[v2].field_4, 0, 0);
-            sub_805F04C(a1, word_80B21D4[v2].field_6, 0, 0);
+            script_cmd_actor_set_position(actorIdx, xPos >> FX32_SHIFT, yPos >> FX32_SHIFT, 0);
+            script_cmd_actor_set_priority(actorIdx, word_80B21D4[v2].priority, 0, 0);
+            sub_805F04C(actorIdx, word_80B21D4[v2].field_6, 0, 0);
         }
 
         v2++;
@@ -2585,3 +2585,12 @@ const u32 dword_80B21C8 = 3;
 
 const struct InputRecord struc_80B21CC[] = { { KEYS_MASK ^ DPAD_UP, 49 } };
 const u32 dword_80B21D0 = 1;
+
+const struct struc_80B21D4 word_80B21D4[] = {
+    { .xPos = 182, .yPos = 240, .priority = 1, .field_6 = 384 },
+    { .xPos = 177, .yPos = 425, .priority = 2, .field_6 = 384 },
+    { .xPos = 872, .yPos = 440, .priority = 2, .field_6 = 384 },
+    { .xPos = 1085, .yPos = 282, .priority = 3, .field_6 = 384 },
+    { .xPos = 536, .yPos = 552, .priority = 1, .field_6 = 256 },
+    { .xPos = 544, .yPos = 384, .priority = 0, .field_6 = 256 },
+};

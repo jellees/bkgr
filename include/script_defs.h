@@ -340,7 +340,7 @@ enum ScriptWaitCond {
 
 #define Sub8060CB8(unknown) SCRIPT_CMD(SCRIPT_CMD_sub_8060CB8, unknown, 0, 0, 0)
 
-#define Sub8060CC4(unknown) SCRIPT_CMD(SCRIPT_CMD_sub_8060CC4, unknown, 0, 0, 0)
+#define Sub8060CC4(actorIdx) SCRIPT_CMD(SCRIPT_CMD_sub_8060CC4, actorIdx, 0, 0, 0)
 
 #define Sub8060D74 SCRIPT_CMD(SCRIPT_CMD_sub_8060D74, 0, 0, 0, 0)
 

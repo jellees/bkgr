@@ -462,10 +462,9 @@ struct struc_51
 
 struct struc_80B21D4
 {
-    u16 field_0;
-    u16 field_2;
-    u8 field_4;
-    u8 field_5;
+    u16 xPos;
+    u16 yPos;
+    u8 priority;
     u16 field_6;
 };
 
@@ -920,7 +919,7 @@ extern u32 dword_80CC290[8];
 extern u32 dword_80AF4F0[4];
 extern struct Font font_80B01A8[3];
 
-extern struct struc_80B21D4 word_80B21D4[];
+extern const struct struc_80B21D4 word_80B21D4[];
 
 extern struct RoomIndex dRoomIndexes[38];
 extern struct GameStatus stru_80CC8C4;
