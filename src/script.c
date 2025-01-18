@@ -91,95 +91,95 @@ extern struct ScriptCamera* gScriptCamera;
 extern fx32 dword_203FA1C;
 extern fx32 dword_203FA20;
 
-bool32 script_cmd_alloc_actors(int, int, int, int);
-bool32 script_cmd_load_and_store_room(int, int, int, int);
-bool32 script_cmd_load_room(int, int, int, int);
-bool32 script_cmd_restore_room(int, int, int, int);
-bool32 script_cmd_jump(int, int, int, int);
-bool32 script_cmd_jump_cond(int, int, int, int);
-bool32 script_cmd_hide_player(int, int, int, int);
-bool32 script_cmd_actor_init(int, int, int, int);
-bool32 script_cmd_actor_disable(int, int, int, int);
-bool32 script_cmd_actor_enable(int, int, int, int);
-bool32 script_cmd_actor_set_anim(int, int, int, int);
-bool32 script_cmd_actor_set_gameover_anim(int, int, int, int);
-bool32 script_cmd_actor_set_position(int, int, int, int);
-bool32 script_cmd_actor_set_position_relative_from_saved_position(int, int, int, int);
-bool32 script_cmd_actor_set_position_from_cam(int, int, int, int);
-bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
-bool32 script_cmd_actor_save_position(int, int, int, int);
-bool32 sub_805EEBC(int, int, int, int);
-bool32 sub_805EF0C(int, int, int, int);
-bool32 script_cmd_actor_set_direction(int, int, int, int);
-bool32 script_cmd_actor_rotate_to_target(int, int, int, int);
-bool32 script_cmd_actor_set_priority(int, int, int, int);
-bool32 script_cmd_actor_revert_priority(int, int, int, int);
-bool32 sub_805F04C(int, int, int, int);
-bool32 script_cmd_actor_set_obj_mode(int, int, int, int);
-bool32 script_cmd_actor_set_palette(int, int, int, int);
-bool32 script_cmd_actor_lock_anim_on_frame(int, int, int, int);
-bool32 script_cmd_actor_unlock_anim(int, int, int, int);
-bool32 script_cmd_actor_set_locked_frame(int, int, int, int);
-bool32 script_cmd_actor_set_frame(int, int, int, int);
-bool32 sub_805F120(int, int, int, int);
-bool32 script_cmd_actor_move(int, int, int, int);
-bool32 script_cmd_actor_move_to_saved_position(int, int, int, int);
-bool32 script_cmd_actor_move_from_cam(int, int, int, int);
-bool32 sub_805F40C(int, int, int, int);
-bool32 sub_805F428(int, int, int, int);
-bool32 script_cmd_alloc_oam_matrices(int, int, int, int);
-bool32 script_cmd_free_oam_matrices(int, int, int, int);
-bool32 sub_805F480(int, int, int, int);
-bool32 sub_805F4B0(int, int, int, int);
-bool32 sub_805F4DC(int, int, int, int);
-bool32 sub_805F51C(int, int, int, int);
-bool32 script_cmd_play_bgm(int, int, int, int);
-bool32 script_cmd_stop_bgm(int, int, int, int);
-bool32 script_cmd_play_sfx(int, int, int, int);
-bool32 script_cmd_stop_sfx(int, int, int, int);
-bool32 script_cmd_stop_all_sfx(int, int, int, int);
-bool32 script_cmd_play_bill_drill_sfx(int, int, int, int);
-bool32 script_cmd_stop_bill_drill_sfx(int, int, int, int);
-bool32 script_cmd_set_bgm_volume(int, int, int, int);
-bool32 script_cmd_set_bgm_volume_if_louder(int, int, int, int);
-bool32 script_cmd_set_sfx_volume(int, int, int, int);
-bool32 script_cmd_set_bgm_volume_global_or_mute(int, int, int, int);
-bool32 sub_805F7D8(int, int, int, int);
-bool32 sub_805F808(int, int, int, int);
-bool32 script_cmd_camera_alloc(int, int, int, int);
-bool32 script_cmd_camera_free(int, int, int, int);
-bool32 script_cmd_camera_move(int, int, int, int);
-bool32 script_cmd_camera_move_to_actor_position(int, int, int, int);
-bool32 script_cmd_camera_move_to_saved_position(int, int, int, int);
-bool32 script_cmd_camera_save_position(int, int, int, int);
-bool32 sub_805FB38(int, int, int, int);
-bool32 script_cmd_camera_return_prescene(int, int, int, int);
-bool32 sub_805FB80(int, int, int, int);
-bool32 sub_805FBA4(int, int, int, int);
-bool32 sub_805FBB4(int, int, int, int);
-bool32 sub_805FBF4(int, int, int, int);
-bool32 sub_805FC34(int, int, int, int);
-bool32 script_cmd_set_wait_frames(int, int, int, int);
-bool32 sub_805FCB0(int, int, int, int);
-bool32 sub_805FCEC(int, int, int, int);
-bool32 script_cmd_set_player_direction(int, int, int, int);
-bool32 script_cmd_wait_for_cond(int, int, int, int);
-bool32 script_cmd_end(int, int, int, int);
-bool32 script_cmd_display_scene_transition(int, int, int, int);
-bool32 show_time_travel_scene(int, int, int, int);
-bool32 sub_8060568(int, int, int, int);
-bool32 script_cmd_display_license_screen(int, int, int, int);
-bool32 sub_8060B90(int, int, int, int);
-bool32 script_cmd_player_save_position(int, int, int, int);
-bool32 script_cmd_end_all_scripts(int, int, int, int);
-bool32 script_cmd_load_room_obj_palette(int, int, int, int);
-bool32 sub_8060C4C(int, int, int, int);
-bool32 sub_8060C78(int, int, int, int);
-bool32 sub_8060CB8(int, int, int, int);
-bool32 sub_8060CC4(int, int, int, int);
-bool32 sub_8060D74(int, int, int, int);
-bool32 sub_8060D80(int, int, int, int);
-bool32 sub_8060D90(int, int, int, int);
+static bool32 script_cmd_alloc_actors(int, int, int, int);
+static bool32 script_cmd_load_and_store_room(int, int, int, int);
+static bool32 script_cmd_load_room(int, int, int, int);
+static bool32 script_cmd_restore_room(int, int, int, int);
+static bool32 script_cmd_jump(int, int, int, int);
+static bool32 script_cmd_jump_cond(int, int, int, int);
+static bool32 script_cmd_hide_player(int, int, int, int);
+static bool32 script_cmd_actor_init(int, int, int, int);
+static bool32 script_cmd_actor_disable(int, int, int, int);
+static bool32 script_cmd_actor_enable(int, int, int, int);
+static bool32 script_cmd_actor_set_anim(int, int, int, int);
+static bool32 script_cmd_actor_set_gameover_anim(int, int, int, int);
+static bool32 script_cmd_actor_set_position(int, int, int, int);
+static bool32 script_cmd_actor_set_position_relative_from_saved_position(int, int, int, int);
+static bool32 script_cmd_actor_set_position_from_cam(int, int, int, int);
+static bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
+static bool32 script_cmd_actor_save_position(int, int, int, int);
+static bool32 sub_805EEBC(int, int, int, int);
+static bool32 sub_805EF0C(int, int, int, int);
+static bool32 script_cmd_actor_set_direction(int, int, int, int);
+static bool32 script_cmd_actor_rotate_to_target(int, int, int, int);
+static bool32 script_cmd_actor_set_priority(int, int, int, int);
+static bool32 script_cmd_actor_revert_priority(int, int, int, int);
+static bool32 sub_805F04C(int, int, int, int);
+static bool32 script_cmd_actor_set_obj_mode(int, int, int, int);
+static bool32 script_cmd_actor_set_palette(int, int, int, int);
+static bool32 script_cmd_actor_lock_anim_on_frame(int, int, int, int);
+static bool32 script_cmd_actor_unlock_anim(int, int, int, int);
+static bool32 script_cmd_actor_set_locked_frame(int, int, int, int);
+static bool32 script_cmd_actor_set_frame(int, int, int, int);
+static bool32 sub_805F120(int, int, int, int);
+static bool32 script_cmd_actor_move(int, int, int, int);
+static bool32 script_cmd_actor_move_to_saved_position(int, int, int, int);
+static bool32 script_cmd_actor_move_from_cam(int, int, int, int);
+static bool32 sub_805F40C(int, int, int, int);
+static bool32 sub_805F428(int, int, int, int);
+static bool32 script_cmd_alloc_oam_matrices(int, int, int, int);
+static bool32 script_cmd_free_oam_matrices(int, int, int, int);
+static bool32 sub_805F480(int, int, int, int);
+static bool32 sub_805F4B0(int, int, int, int);
+static bool32 sub_805F4DC(int, int, int, int);
+static bool32 sub_805F51C(int, int, int, int);
+static bool32 script_cmd_play_bgm(int, int, int, int);
+static bool32 script_cmd_stop_bgm(int, int, int, int);
+static bool32 script_cmd_play_sfx(int, int, int, int);
+static bool32 script_cmd_stop_sfx(int, int, int, int);
+static bool32 script_cmd_stop_all_sfx(int, int, int, int);
+static bool32 script_cmd_play_bill_drill_sfx(int, int, int, int);
+static bool32 script_cmd_stop_bill_drill_sfx(int, int, int, int);
+static bool32 script_cmd_set_bgm_volume(int, int, int, int);
+static bool32 script_cmd_set_bgm_volume_if_louder(int, int, int, int);
+static bool32 script_cmd_set_sfx_volume(int, int, int, int);
+static bool32 script_cmd_set_bgm_volume_global_or_mute(int, int, int, int);
+static bool32 sub_805F7D8(int, int, int, int);
+static bool32 sub_805F808(int, int, int, int);
+static bool32 script_cmd_camera_alloc(int, int, int, int);
+static bool32 script_cmd_camera_free(int, int, int, int);
+static bool32 script_cmd_camera_move(int, int, int, int);
+static bool32 script_cmd_camera_move_to_actor_position(int, int, int, int);
+static bool32 script_cmd_camera_move_to_saved_position(int, int, int, int);
+static bool32 script_cmd_camera_save_position(int, int, int, int);
+static bool32 sub_805FB38(int, int, int, int);
+static bool32 script_cmd_camera_return_prescene(int, int, int, int);
+static bool32 sub_805FB80(int, int, int, int);
+static bool32 sub_805FBA4(int, int, int, int);
+static bool32 sub_805FBB4(int, int, int, int);
+static bool32 sub_805FBF4(int, int, int, int);
+static bool32 sub_805FC34(int, int, int, int);
+static bool32 script_cmd_set_wait_frames(int, int, int, int);
+static bool32 sub_805FCB0(int, int, int, int);
+static bool32 sub_805FCEC(int, int, int, int);
+static bool32 script_cmd_set_player_direction(int, int, int, int);
+static bool32 script_cmd_wait_for_cond(int, int, int, int);
+static bool32 script_cmd_end(int, int, int, int);
+static bool32 script_cmd_display_scene_transition(int, int, int, int);
+static bool32 show_time_travel_scene(int, int, int, int);
+static bool32 sub_8060568(int, int, int, int);
+static bool32 script_cmd_display_license_screen(int, int, int, int);
+static bool32 sub_8060B90(int, int, int, int);
+static bool32 script_cmd_player_save_position(int, int, int, int);
+static bool32 script_cmd_end_all_scripts(int, int, int, int);
+static bool32 script_cmd_load_room_obj_palette(int, int, int, int);
+static bool32 sub_8060C4C(int, int, int, int);
+static bool32 sub_8060C78(int, int, int, int);
+static bool32 sub_8060CB8(int, int, int, int);
+static bool32 sub_8060CC4(int, int, int, int);
+static bool32 sub_8060D74(int, int, int, int);
+static bool32 sub_8060D80(int, int, int, int);
+static bool32 sub_8060D90(int, int, int, int);
 
 static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_alloc_actors,
@@ -284,7 +284,7 @@ const u32 dword_80B21C8 = 3;
 const struct InputRecord struc_80B21CC[] = { { KEYS_MASK ^ DPAD_UP, 49 } };
 const u32 dword_80B21D0 = 1;
 
-const struct struc_80B21D4 word_80B21D4[] = {
+static const struct struc_80B21D4 word_80B21D4[] = {
     { .xPos = 182, .yPos = 240, .priority = 1, .field_6 = 384 },
     { .xPos = 177, .yPos = 425, .priority = 2, .field_6 = 384 },
     { .xPos = 872, .yPos = 440, .priority = 2, .field_6 = 384 },
@@ -886,7 +886,7 @@ enum Directions convert_angle_to_direction(fx32 angle) {
  *                  SCRIPT COMMAND FUNCTIONS                  *
  **************************************************************/
 
-bool32 script_cmd_alloc_actors(int count, int _, int __, int ___) {
+static bool32 script_cmd_alloc_actors(int count, int _, int __, int ___) {
     u8 i;
 
     gCurrentScript->actorCount = count;
@@ -906,7 +906,7 @@ bool32 script_cmd_alloc_actors(int count, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int changeMusic) {
+static bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int changeMusic) {
     audio_halt_all_fx();
 
     gCurrentScript->loadedRoomIdx = gLoadedRoomIndex;
@@ -965,7 +965,7 @@ bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int changeMusi
     return TRUE;
 }
 
-bool32 script_cmd_load_room(int room, int warp, int a3, int changeMusic) {
+static bool32 script_cmd_load_room(int room, int warp, int a3, int changeMusic) {
     audio_halt_all_fx();
 
     if (a3) {
@@ -1012,7 +1012,7 @@ bool32 script_cmd_load_room(int room, int warp, int a3, int changeMusic) {
     return TRUE;
 }
 
-bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
+static bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
     bool32 isMusicChanged;
 
     if (byte_203FA15) {
@@ -1054,13 +1054,13 @@ bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_jump(int scriptIdx, int cmdIdx, int _, int __) {
+static bool32 script_cmd_jump(int scriptIdx, int cmdIdx, int _, int __) {
     gCurrentScript->scriptIdx = scriptIdx;
     gCurrentScript->cmdIdx = cmdIdx - 1;
     return TRUE;
 }
 
-bool32 script_cmd_jump_cond(int condition, int scriptIdx, int cmdIdx, int _) {
+static bool32 script_cmd_jump_cond(int condition, int scriptIdx, int cmdIdx, int _) {
     bool32 shouldJump = FALSE;
 
     switch (condition) {
@@ -1101,7 +1101,7 @@ bool32 script_cmd_jump_cond(int condition, int scriptIdx, int cmdIdx, int _) {
     return TRUE;
 }
 
-bool32 script_cmd_hide_player(int hidePlayer, int _, int __, int ___) {
+static bool32 script_cmd_hide_player(int hidePlayer, int _, int __, int ___) {
     if (hidePlayer) {
         gPlayerIsTransparent = TRUE;
     } else {
@@ -1113,7 +1113,7 @@ bool32 script_cmd_hide_player(int hidePlayer, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
+static bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
     SetSprite(&gCurrentScript->actors[actorIdx].sprite, 0x451u, FALSE, 0, 1, 240, 200, 2);
     gCurrentScript->actors[actorIdx].isVisible = TRUE;
     gCurrentScript->actors[actorIdx].isMoving = FALSE;
@@ -1143,7 +1143,7 @@ bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_disable(int actorIdx, int _, int __, int ___) {
+static bool32 script_cmd_actor_disable(int actorIdx, int _, int __, int ___) {
     if (gCurrentScript->actors[actorIdx].isVisible) {
         gActorCount--;
         if (gCurrentScript->actors[actorIdx].calcIdx != -1) {
@@ -1163,7 +1163,7 @@ bool32 script_cmd_actor_disable(int actorIdx, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_enable(int actorIdx, int _, int __, int ___) {
+static bool32 script_cmd_actor_enable(int actorIdx, int _, int __, int ___) {
     if (!gCurrentScript->actors[actorIdx].isVisible) {
         gActorCount++;
     }
@@ -1172,12 +1172,12 @@ bool32 script_cmd_actor_enable(int actorIdx, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_anim(int actorIdx, int spriteIdx, int maxAnimRepeats, int _) {
+static bool32 script_cmd_actor_set_anim(int actorIdx, int spriteIdx, int maxAnimRepeats, int _) {
     sprite_set_anim(&gCurrentScript->actors[actorIdx].sprite, spriteIdx, FALSE, maxAnimRepeats);
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_gameover_anim(int actorIdx, int anim, int _, int __) {
+static bool32 script_cmd_actor_set_gameover_anim(int actorIdx, int anim, int _, int __) {
     if (gTransformation == TRANSFORMATION_BANJO) {
         switch (anim) {
             case 0:
@@ -1284,7 +1284,7 @@ bool32 script_cmd_actor_set_gameover_anim(int actorIdx, int anim, int _, int __)
     ASSERT(0);
 }
 
-bool32 script_cmd_actor_set_position(int actorIdx, int xPos, int yPos, int _) {
+static bool32 script_cmd_actor_set_position(int actorIdx, int xPos, int yPos, int _) {
     gCurrentScript->actors[actorIdx].xPos = xPos << FX32_SHIFT;
     gCurrentScript->actors[actorIdx].yPos = yPos << FX32_SHIFT;
     gCurrentScript->actors[actorIdx].xPosTarget = xPos << FX32_SHIFT;
@@ -1297,12 +1297,12 @@ bool32 script_cmd_actor_set_position(int actorIdx, int xPos, int yPos, int _) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_position_relative_from_saved_position(int actorIdx, int xPos, int yPos,
+static bool32 script_cmd_actor_set_position_relative_from_saved_position(int actorIdx, int xPos, int yPos,
                                                                   int _) {
     return script_cmd_actor_set_position(actorIdx, gScriptSavedPosX + xPos, gScriptSavedPosY + yPos, 0);
 }
 
-bool32 script_cmd_actor_set_position_from_cam(int actorIdx, int xPos, int yPos, int _) {
+static bool32 script_cmd_actor_set_position_from_cam(int actorIdx, int xPos, int yPos, int _) {
     gCurrentScript->actors[actorIdx].xPos = (gCameraPixelX + xPos) << FX32_SHIFT;
     gCurrentScript->actors[actorIdx].yPos = (gCameraPixelY + yPos) << FX32_SHIFT;
     gCurrentScript->actors[actorIdx].xPosTarget = (gCameraPixelX + xPos) << FX32_SHIFT;
@@ -1315,7 +1315,7 @@ bool32 script_cmd_actor_set_position_from_cam(int actorIdx, int xPos, int yPos, 
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_position_absolute(int actorIdx, int xPos, int yPos, int _) {
+static bool32 script_cmd_actor_set_position_absolute(int actorIdx, int xPos, int yPos, int _) {
     gCurrentScript->actors[actorIdx].xPos = xPos << FX32_SHIFT;
     gCurrentScript->actors[actorIdx].yPos = yPos << FX32_SHIFT;
     gCurrentScript->actors[actorIdx].xPosTarget = xPos << FX32_SHIFT;
@@ -1328,14 +1328,14 @@ bool32 script_cmd_actor_set_position_absolute(int actorIdx, int xPos, int yPos, 
     return TRUE;
 }
 
-bool32 script_cmd_actor_save_position(int actordIdx, int _, int __, int ___) {
+static bool32 script_cmd_actor_save_position(int actordIdx, int _, int __, int ___) {
     gScriptSavedPosX = gCurrentScript->actors[actordIdx].sprite.xPos;
     gScriptSavedPosY = gCurrentScript->actors[actordIdx].sprite.yPos;
     gScriptSavedPriority = 3 - gCurrentScript->actors[actordIdx].sprite.priority;
     return TRUE;
 }
 
-bool32 sub_805EEBC(int actorIdx, int _, int __, int ___) {
+static bool32 sub_805EEBC(int actorIdx, int _, int __, int ___) {
     script_cmd_actor_set_position(actorIdx, gPlayerPos.x >> FX32_SHIFT,
                                   gMapPixelSizeY - ((gPlayerPos.y + gPlayerPos.z) >> FX32_SHIFT), 0);
     script_cmd_actor_set_priority(actorIdx, 3 - sub_800C50C(), 0, 0);
@@ -1343,7 +1343,7 @@ bool32 sub_805EEBC(int actorIdx, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 sub_805EF0C(int actorIdx, int _, int __, int ___) {
+static bool32 sub_805EF0C(int actorIdx, int _, int __, int ___) {
     script_cmd_actor_set_position(
         actorIdx, gPlayerShadowPos.x >> FX32_SHIFT,
         gMapPixelSizeY - ((gPlayerShadowPos.y + gPlayerShadowPos.z) >> FX32_SHIFT), 0);
@@ -1352,7 +1352,7 @@ bool32 sub_805EF0C(int actorIdx, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_direction(int actorIdx, int direction, int _, int __) {
+static bool32 script_cmd_actor_set_direction(int actorIdx, int direction, int _, int __) {
     u16 idx = gCurrentScript->actors[actorIdx].sprite.index
               - gCurrentScript->actors[actorIdx].sprite.direction;
     gCurrentScript->actors[actorIdx].sprite.direction = direction;
@@ -1361,7 +1361,7 @@ bool32 script_cmd_actor_set_direction(int actorIdx, int direction, int _, int __
     return TRUE;
 }
 
-bool32 script_cmd_actor_rotate_to_target(int actorIdx, int _, int __, int ___) {
+static bool32 script_cmd_actor_rotate_to_target(int actorIdx, int _, int __, int ___) {
     fx32 xDistance, yDistance;
     fx32 angle;
 
@@ -1380,57 +1380,57 @@ bool32 script_cmd_actor_rotate_to_target(int actorIdx, int _, int __, int ___) {
     return script_cmd_actor_set_direction(actorIdx, convert_angle_to_direction(angle), 0, 0);
 }
 
-bool32 script_cmd_actor_set_priority(int actorIdx, int priority, int _, int __) {
+static bool32 script_cmd_actor_set_priority(int actorIdx, int priority, int _, int __) {
     sprite_set_priority(&gCurrentScript->actors[actorIdx].sprite, 3 - priority);
     return TRUE;
 }
 
-bool32 script_cmd_actor_revert_priority(int actorIdx, int _, int __, int ___) {
+static bool32 script_cmd_actor_revert_priority(int actorIdx, int _, int __, int ___) {
     return script_cmd_actor_set_priority(actorIdx, gScriptSavedPriority, 0, 0);
 }
 
-bool32 sub_805F04C(int actorIdx, int a2, int _, int __) {
+static bool32 sub_805F04C(int actorIdx, int a2, int _, int __) {
     gCurrentScript->actors[actorIdx].field_38 = a2 << 16;
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_obj_mode(int actorIdx, int objMode, int _, int __) {
+static bool32 script_cmd_actor_set_obj_mode(int actorIdx, int objMode, int _, int __) {
     gCurrentScript->actors[actorIdx].sprite.objMode = objMode;
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_palette(int actorIdx, int palette, int _, int __) {
+static bool32 script_cmd_actor_set_palette(int actorIdx, int palette, int _, int __) {
     sprite_set_palette(&gCurrentScript->actors[actorIdx].sprite, palette);
     gCurrentScript->actors[actorIdx].sprite.alwaysUsePalette0 = TRUE;
     return TRUE;
 }
 
-bool32 script_cmd_actor_lock_anim_on_frame(int actorIdx, int frame, int _, int __) {
+static bool32 script_cmd_actor_lock_anim_on_frame(int actorIdx, int frame, int _, int __) {
     sprite_lock_anim_on_frame(&gCurrentScript->actors[actorIdx].sprite, frame);
     return TRUE;
 }
 
-bool32 script_cmd_actor_unlock_anim(int actorIdx, int _, int __, int ___) {
+static bool32 script_cmd_actor_unlock_anim(int actorIdx, int _, int __, int ___) {
     sprite_unlock_anim(&gCurrentScript->actors[actorIdx].sprite);
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_locked_frame(int actorIdx, int frame, int _, int __) {
+static bool32 script_cmd_actor_set_locked_frame(int actorIdx, int frame, int _, int __) {
     sprite_set_locked_frame(&gCurrentScript->actors[actorIdx].sprite, frame);
     return TRUE;
 }
 
-bool32 script_cmd_actor_set_frame(int actorIdx, int frame, int _, int __) {
+static bool32 script_cmd_actor_set_frame(int actorIdx, int frame, int _, int __) {
     gCurrentScript->actors[actorIdx].sprite.loopFrame = frame;
     return TRUE;
 }
 
-bool32 sub_805F120(int actorIdx, int _, int __, int ___) {
+static bool32 sub_805F120(int actorIdx, int _, int __, int ___) {
     sub_800E9EC(&gCurrentScript->actors[actorIdx].sprite, 15, 0x1FFF);
     return TRUE;
 }
 
-bool32 script_cmd_actor_move(int actorIdx, int x, int y, int moveSpeed) {
+static bool32 script_cmd_actor_move(int actorIdx, int x, int y, int moveSpeed) {
     fx32 xDistance, yDistance;
 
     if (gCurrentScript->actors[actorIdx].calcIdx == -1) {
@@ -1462,11 +1462,11 @@ bool32 script_cmd_actor_move(int actorIdx, int x, int y, int moveSpeed) {
     return TRUE;
 }
 
-bool32 script_cmd_actor_move_to_saved_position(int actorIdx, int moveSpeed, int _, int __) {
+static bool32 script_cmd_actor_move_to_saved_position(int actorIdx, int moveSpeed, int _, int __) {
     return script_cmd_actor_move(actorIdx, gScriptSavedPosX, gScriptSavedPosY, moveSpeed);
 }
 
-bool32 script_cmd_actor_move_from_cam(int actorIdx, int x, int y, int moveSpeed) {
+static bool32 script_cmd_actor_move_from_cam(int actorIdx, int x, int y, int moveSpeed) {
     fx32 xDistance, yDistance;
 
     if (gCurrentScript->actors[actorIdx].calcIdx == -1) {
@@ -1499,41 +1499,41 @@ bool32 script_cmd_actor_move_from_cam(int actorIdx, int x, int y, int moveSpeed)
     return TRUE;
 }
 
-bool32 sub_805F40C(int actorIdx, int a2, int _, int __) {
+static bool32 sub_805F40C(int actorIdx, int a2, int _, int __) {
     gCurrentScript->actors[actorIdx].field_5B = a2;
     return TRUE;
 }
 
-bool32 sub_805F428(int actorIdx, int a2, int _, int __) {
+static bool32 sub_805F428(int actorIdx, int a2, int _, int __) {
     gCurrentScript->actors[actorIdx].field_5C = a2;
     return TRUE;
 }
 
-bool32 script_cmd_alloc_oam_matrices(int count, int _, int __, int ___) {
+static bool32 script_cmd_alloc_oam_matrices(int count, int _, int __, int ___) {
     gMatricesCount = count;
     gMatrices = (u32*)Alloc(16 * count, 5, 3);
     return TRUE;
 }
 
-bool32 script_cmd_free_oam_matrices(int _, int __, int ___, int ____) {
+static bool32 script_cmd_free_oam_matrices(int _, int __, int ___, int ____) {
     Free(gMatrices, 3);
     return TRUE;
 }
 
-bool32 sub_805F480(int actorIdx, int a2, int _, int __) {
+static bool32 sub_805F480(int actorIdx, int a2, int _, int __) {
     gCurrentScript->actors[actorIdx].field_54 = a2;
     sub_8003820(&gCurrentScript->actors[actorIdx].sprite, 1, a2);
     return TRUE;
 }
 
-bool32 sub_805F4B0(int actorIdx, int a2, int a3, int _) {
+static bool32 sub_805F4B0(int actorIdx, int a2, int a3, int _) {
     gCurrentScript->actors[actorIdx].field_50 = a2 << 16;
     gCurrentScript->actors[actorIdx].field_3C = a3 << 16;
     sub_8025718(gCurrentScript->actors[actorIdx].field_54, a2, a3);
     return TRUE;
 }
 
-bool32 sub_805F4DC(int actorIdx, int a2, int a3, int _) {
+static bool32 sub_805F4DC(int actorIdx, int a2, int a3, int _) {
     struct Actor* actor = &gCurrentScript->actors[actorIdx];
 
     actor->field_40 = a2 << 16;
@@ -1551,7 +1551,7 @@ bool32 sub_805F4DC(int actorIdx, int a2, int a3, int _) {
     return TRUE;
 }
 
-bool32 sub_805F51C(int actorIdx, int a2, int a3, int a4) {
+static bool32 sub_805F51C(int actorIdx, int a2, int a3, int a4) {
     struct Actor* actor = &gCurrentScript->actors[actorIdx];
 
     actor->field_48 = a2 << 16;
@@ -1569,7 +1569,7 @@ bool32 sub_805F51C(int actorIdx, int a2, int a3, int a4) {
     return TRUE;
 }
 
-bool32 script_cmd_play_bgm(int bgm, int _, int __, int ___) {
+static bool32 script_cmd_play_bgm(int bgm, int _, int __, int ___) {
     gLoadedRoomBgm = bgm;
     if (gCanChangeBgm) {
         audio_start_tune(bgm);
@@ -1577,12 +1577,12 @@ bool32 script_cmd_play_bgm(int bgm, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_stop_bgm(int _, int __, int ___, int ____) {
+static bool32 script_cmd_stop_bgm(int _, int __, int ___, int ____) {
     audio_halt_tune();
     return TRUE;
 }
 
-bool32 script_cmd_play_sfx(int sfx, int storeSfx, int _, int __) {
+static bool32 script_cmd_play_sfx(int sfx, int storeSfx, int _, int __) {
     if (storeSfx) {
         gCurrentScript->activeSfx = PLAY_SFX(sfx);
     } else {
@@ -1591,7 +1591,7 @@ bool32 script_cmd_play_sfx(int sfx, int storeSfx, int _, int __) {
     return TRUE;
 }
 
-bool32 script_cmd_stop_sfx(int _, int __, int ___, int ____) {
+static bool32 script_cmd_stop_sfx(int _, int __, int ___, int ____) {
     bool8 stopped = gCanPlaySfx ? audio_halt_fx(gCurrentScript->activeSfx) : 0;
     if (!stopped) {
         audio_halt_all_fx();
@@ -1599,12 +1599,12 @@ bool32 script_cmd_stop_sfx(int _, int __, int ___, int ____) {
     return TRUE;
 }
 
-bool32 script_cmd_stop_all_sfx(int _, int __, int ___, int ____) {
+static bool32 script_cmd_stop_all_sfx(int _, int __, int ___, int ____) {
     audio_halt_all_fx();
     return TRUE;
 }
 
-bool32 script_cmd_play_bill_drill_sfx(int _, int __, int ___, int ____) {
+static bool32 script_cmd_play_bill_drill_sfx(int _, int __, int ___, int ____) {
     if (gCanPlaySfx) {
         audio_halt_fx(gBillDrillSfx);
     }
@@ -1612,14 +1612,14 @@ bool32 script_cmd_play_bill_drill_sfx(int _, int __, int ___, int ____) {
     return TRUE;
 }
 
-bool32 script_cmd_stop_bill_drill_sfx(int _, int __, int ___, int ____) {
+static bool32 script_cmd_stop_bill_drill_sfx(int _, int __, int ___, int ____) {
     if (gCanPlaySfx) {
         audio_halt_fx(gBillDrillSfx);
     }
     return TRUE;
 }
 
-bool32 script_cmd_set_bgm_volume(int volume, int useGlobal, int _, int __) {
+static bool32 script_cmd_set_bgm_volume(int volume, int useGlobal, int _, int __) {
     if (useGlobal) {
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
     } else {
@@ -1628,7 +1628,7 @@ bool32 script_cmd_set_bgm_volume(int volume, int useGlobal, int _, int __) {
     return TRUE;
 }
 
-bool32 script_cmd_set_bgm_volume_if_louder(int volume, int useGlobal, int _, int __) {
+static bool32 script_cmd_set_bgm_volume_if_louder(int volume, int useGlobal, int _, int __) {
     if (useGlobal) {
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
     } else if (gBgmMainVolume > volume) {
@@ -1637,7 +1637,7 @@ bool32 script_cmd_set_bgm_volume_if_louder(int volume, int useGlobal, int _, int
     return TRUE;
 }
 
-bool32 script_cmd_set_sfx_volume(int volume, int useGlobal, int _, int __) {
+static bool32 script_cmd_set_sfx_volume(int volume, int useGlobal, int _, int __) {
     if (useGlobal) {
         audio_set_fx_vol(dVolumes[gSfxMainVolume]);
     } else {
@@ -1646,7 +1646,7 @@ bool32 script_cmd_set_sfx_volume(int volume, int useGlobal, int _, int __) {
     return TRUE;
 }
 
-bool32 script_cmd_set_bgm_volume_global_or_mute(int useGlobal, int _, int __, int ___) {
+static bool32 script_cmd_set_bgm_volume_global_or_mute(int useGlobal, int _, int __, int ___) {
     if (useGlobal) {
         audio_set_tune_vol(dVolumes[gBgmMainVolume]);
     } else {
@@ -1655,7 +1655,7 @@ bool32 script_cmd_set_bgm_volume_global_or_mute(int useGlobal, int _, int __, in
     return TRUE;
 }
 
-bool32 sub_805F7D8(int a1, int _, int __, int ___) {
+static bool32 sub_805F7D8(int a1, int _, int __, int ___) {
     ASSERT(!byte_203F99F);
     if (sub_0802FEDC(a1)) {
         byte_203F99F = 1;
@@ -1665,7 +1665,7 @@ bool32 sub_805F7D8(int a1, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 sub_805F808(int forward, int _, int __, int ___) {
+static bool32 sub_805F808(int forward, int _, int __, int ___) {
     ASSERT(!gReadKeysFromDemoInput);
     gCurrentScript->isActive = FALSE;
     gCurrentScript->playInputDemo = TRUE;
@@ -1679,7 +1679,7 @@ bool32 sub_805F808(int forward, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_camera_alloc(int _, int __, int ___, int ____) {
+static bool32 script_cmd_camera_alloc(int _, int __, int ___, int ____) {
     ASSERT(!byte_203FA15);
     gScriptCamera = (struct ScriptCamera*)Alloc(sizeof(struct ScriptCamera), 5, 3);
     gScriptCamera->isMoving = FALSE;
@@ -1698,7 +1698,7 @@ bool32 script_cmd_camera_alloc(int _, int __, int ___, int ____) {
     return TRUE;
 }
 
-bool32 script_cmd_camera_free(int _, int __, int ___, int ____) {
+static bool32 script_cmd_camera_free(int _, int __, int ___, int ____) {
     ASSERT(byte_203FA15);
     if (gScriptCamera->field_24 != -1) {
         sub_8003864(gScriptCamera->field_24);
@@ -1709,7 +1709,7 @@ bool32 script_cmd_camera_free(int _, int __, int ___, int ____) {
     return 1;
 }
 
-bool32 script_cmd_camera_move(int x, int y, int moveSpeed, int _) {
+static bool32 script_cmd_camera_move(int x, int y, int moveSpeed, int _) {
     fx32 xDistance, yDistance;
 
     ASSERT(byte_203FA15);
@@ -1764,27 +1764,27 @@ bool32 script_cmd_camera_move(int x, int y, int moveSpeed, int _) {
     return 1;
 }
 
-bool32 script_cmd_camera_move_to_actor_position(int moveSpeed, int _, int __, int ___) {
+static bool32 script_cmd_camera_move_to_actor_position(int moveSpeed, int _, int __, int ___) {
     return script_cmd_camera_move(gScriptSavedPosX, gScriptSavedPosY, moveSpeed, 0);
 }
 
-bool32 script_cmd_camera_move_to_saved_position(int moveSpeed, int _, int __, int ___) {
+static bool32 script_cmd_camera_move_to_saved_position(int moveSpeed, int _, int __, int ___) {
     return script_cmd_camera_move(gScriptCameraSavePosX >> FX32_SHIFT,
                                   gScriptCameraSavePosY >> FX32_SHIFT, moveSpeed, 0);
 }
 
-bool32 script_cmd_camera_save_position(int _, int __, int ___, int ____) {
+static bool32 script_cmd_camera_save_position(int _, int __, int ___, int ____) {
     gScriptCameraSavePosX = gScriptCamera->xPosCurrent;
     gScriptCameraSavePosY = gScriptCamera->yPosCurrent;
     return TRUE;
 }
 
-bool32 sub_805FB38(int a1, int _, int __, int ___) {
+static bool32 sub_805FB38(int a1, int _, int __, int ___) {
     gScriptCamera->field_26 = a1;
     return TRUE;
 }
 
-bool32 script_cmd_camera_return_prescene(int moveSpeed, int _, int __, int ___) {
+static bool32 script_cmd_camera_return_prescene(int moveSpeed, int _, int __, int ___) {
     ASSERT(byte_203FA15);
     if (moveSpeed == 0) {
         moveSpeed = gScriptCamera->moveSpeed;
@@ -1794,18 +1794,18 @@ bool32 script_cmd_camera_return_prescene(int moveSpeed, int _, int __, int ___) 
     return TRUE;
 }
 
-bool32 sub_805FB80(int _, int __, int ___, int ____) {
+static bool32 sub_805FB80(int _, int __, int ___, int ____) {
     byte_203FA14 = 1;
     sub_80266C8(2, gCameraPixelY, 2);
     return TRUE;
 }
 
-bool32 sub_805FBA4(int _, int __, int ___, int ____) {
+static bool32 sub_805FBA4(int _, int __, int ___, int ____) {
     byte_203FA14 = 2;
     return TRUE;
 }
 
-bool32 sub_805FBB4(int a1, int a2, int _, int __) {
+static bool32 sub_805FBB4(int a1, int a2, int _, int __) {
     switch (a1) {
         case 0:
             sub_80270AC(4095, a2);
@@ -1823,7 +1823,7 @@ bool32 sub_805FBB4(int a1, int a2, int _, int __) {
     return TRUE;
 }
 
-bool32 sub_805FBF4(int a1, int a2, int _, int __) {
+static bool32 sub_805FBF4(int a1, int a2, int _, int __) {
     switch (a1) {
         case 0:
             sub_8026E48(4095, a2, 1);
@@ -1841,7 +1841,7 @@ bool32 sub_805FBF4(int a1, int a2, int _, int __) {
     return TRUE;
 }
 
-bool32 sub_805FC34(int a1, int _, int __, int ___) {
+static bool32 sub_805FC34(int a1, int _, int __, int ___) {
     if (a1 && byte_203F99C) {
         return FALSE;
     }
@@ -1864,12 +1864,12 @@ bool32 sub_805FC34(int a1, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 script_cmd_set_wait_frames(int frames, int _, int __, int ___) {
+static bool32 script_cmd_set_wait_frames(int frames, int _, int __, int ___) {
     gCurrentScript->waitFrames = frames;
     return TRUE;
 }
 
-bool32 sub_805FCB0(int a1, int a2, int _, int __) {
+static bool32 sub_805FCB0(int a1, int a2, int _, int __) {
     dword_203F9F8 = a1 << FX32_SHIFT;
     dword_203F9FC = (gMapPixelSizeY - a2) << FX32_SHIFT;
     gReadKeysFromDemoInput = TRUE;
@@ -1877,19 +1877,19 @@ bool32 sub_805FCB0(int a1, int a2, int _, int __) {
     return TRUE;
 }
 
-bool32 sub_805FCEC(int a1, int a2, int a3, int a4) {
+static bool32 sub_805FCEC(int a1, int a2, int a3, int a4) {
     if (gMapPixelSizeY - ((gPlayerShadowPos.z + gPlayerShadowPos.y) >> FX32_SHIFT) >= a3) {
         return sub_805FCB0(a1, a4, 0, 0);
     }
     return sub_805FCB0(a1, a2, 0, 0);
 }
 
-bool32 script_cmd_set_player_direction(int direction, int _, int __, int ___) {
+static bool32 script_cmd_set_player_direction(int direction, int _, int __, int ___) {
     set_player_direction(direction);
     return TRUE;
 }
 
-bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
+static bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
     bool32 advance = FALSE;
 
     switch (condition) {
@@ -2025,7 +2025,7 @@ bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
     return FALSE;
 }
 
-bool32 script_cmd_end(int _, int __, int ___, int ____) {
+static bool32 script_cmd_end(int _, int __, int ___, int ____) {
     gCurrentScript->endScript = TRUE;
     return FALSE;
 }
@@ -2034,7 +2034,7 @@ bool32 script_cmd_end(int _, int __, int ___, int ____) {
  * Displays a screen transition for the intro scene. Either displays "Meanwhile" or "Back at Banjo's
  * house..." depending on the parameter.
  */
-bool32 script_cmd_display_scene_transition(int textType, int _, int __, int ___) {
+static bool32 script_cmd_display_scene_transition(int textType, int _, int __, int ___) {
     struct TextBox textBox;
     char* text;
     int frames;
@@ -2180,7 +2180,7 @@ bool32 script_cmd_display_scene_transition(int textType, int _, int __, int ___)
 
 // https://decomp.me/scratch/5oOP5
 #ifndef NONMATCHING
-NAKED bool32 show_time_travel_scene(int a1, int _, int __, int ___) {
+NAKED static bool32 show_time_travel_scene(int a1, int _, int __, int ___) {
     asm_unified(".include \"asm/nonmatching/show_time_travel_scene.s\"");
 }
 #else
@@ -2191,7 +2191,7 @@ static inline void ab(int a1, int v9, int a, int b) {
         sub_8025718(0, v9, a + 128);
 }
 
-bool32 show_time_travel_scene(int a1) {
+static bool32 show_time_travel_scene(int a1) {
     int* source;
     struct Sprite symbol;
     u32 frames;
@@ -2300,11 +2300,11 @@ bool32 show_time_travel_scene(int a1) {
 
 // https://decomp.me/scratch/p6AiR
 #ifndef NONMATCHING
-NAKED bool32 sub_8060568(int _, int __, int ___, int ____) {
+NAKED static bool32 sub_8060568(int _, int __, int ___, int ____) {
     asm_unified(".include \"asm/nonmatching/sub_8060568.s\"");
 }
 #else
-bool32 sub_8060568(int _, int __, int ___, int ____) {
+static bool32 sub_8060568(int _, int __, int ___, int ____) {
     int v5;
     struct TextBox font;
     struct TextBox v18;
@@ -2486,7 +2486,7 @@ bool32 sub_8060568(int _, int __, int ___, int ____) {
 }
 #endif
 
-bool32 script_cmd_display_license_screen(int _, int __, int ___, int ____) {
+static bool32 script_cmd_display_license_screen(int _, int __, int ___, int ____) {
     int frames;
 
     gDisplayControl = REG_DISPCNT;
@@ -2558,33 +2558,33 @@ bool32 script_cmd_display_license_screen(int _, int __, int ___, int ____) {
     return TRUE;
 }
 
-bool32 sub_8060B90(int _, int __, int ___, int ____) {
+static bool32 sub_8060B90(int _, int __, int ___, int ____) {
     gScriptSavedPosX = (*dword_203F8B4)->field_2;
     gScriptSavedPosY = (*dword_203F8B4)->field_4;
     gScriptSavedPriority = 3 - (*dword_203F8B4)->field_A4;
     return TRUE;
 }
 
-bool32 script_cmd_player_save_position(int _, int __, int ___, int ____) {
+static bool32 script_cmd_player_save_position(int _, int __, int ___, int ____) {
     gScriptSavedPosX = gPlayerPos.x >> FX32_SHIFT;
     gScriptSavedPosY = gMapPixelSizeY - ((gPlayerPos.z + gPlayerPos.y) >> FX32_SHIFT);
     gScriptSavedPriority = 3 - gPlayerSprite.priority;
     return TRUE;
 }
 
-bool32 script_cmd_end_all_scripts(int _, int __, int ___, int ____) {
+static bool32 script_cmd_end_all_scripts(int _, int __, int ___, int ____) {
     ASSERT(gCurrentScript->field_23);
     end_all_scripts(1);
     return TRUE;
 }
 
-bool32 script_cmd_load_room_obj_palette(int room, int _, int __, int ___) {
+static bool32 script_cmd_load_room_obj_palette(int room, int _, int __, int ___) {
     SyncVblank();
     RoomObjPaletteToVram(room);
     return TRUE;
 }
 
-bool32 sub_8060C4C(int a1, int a2, int a3, int _) {
+static bool32 sub_8060C4C(int a1, int a2, int a3, int _) {
     SyncVblank();
     if (!a1) {
         DmaTransferObjPalette(unk_83FD834, a2, a3);
@@ -2594,7 +2594,7 @@ bool32 sub_8060C4C(int a1, int a2, int a3, int _) {
     return TRUE;
 }
 
-bool32 sub_8060C78(int _, int __, int ___, int ____) {
+static bool32 sub_8060C78(int _, int __, int ___, int ____) {
     if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_PACK_WACK)
         && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE)
         && gTransformation != TRANSFORMATION_TANK && gTransformation != TRANSFORMATION_OCTOPUS) {
@@ -2603,12 +2603,12 @@ bool32 sub_8060C78(int _, int __, int ___, int ____) {
     return TRUE;
 }
 
-bool32 sub_8060CB8(int a1, int _, int __, int ___) {
+static bool32 sub_8060CB8(int a1, int _, int __, int ___) {
     byte_203FA58 = a1;
     return TRUE;
 }
 
-bool32 sub_8060CC4(int actorIdx, int _, int __, int ___) {
+static bool32 sub_8060CC4(int actorIdx, int _, int __, int ___) {
     fx32 v8;
     u8 v2;
     bool32 v3;
@@ -2646,17 +2646,17 @@ bool32 sub_8060CC4(int actorIdx, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 sub_8060D74(int _, int __, int ___, int ____) {
+static bool32 sub_8060D74(int _, int __, int ___, int ____) {
     sub_8041E58();
     return TRUE;
 }
 
-bool32 sub_8060D80(int _, int __, int ___, int ____) {
+static bool32 sub_8060D80(int _, int __, int ___, int ____) {
     byte_203E138 = 1;
     return TRUE;
 }
 
-bool32 sub_8060D90(int _, int __, int ___, int ____) {
+static bool32 sub_8060D90(int _, int __, int ___, int ____) {
     switch ((u32)RandomMinMax(0, 2)) {
         case 0:
             script_cmd_play_sfx(223, FALSE, 0, 0);

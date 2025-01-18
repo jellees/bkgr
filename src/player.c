@@ -6,6 +6,7 @@
 #include "debug.h"
 #include "room.h"
 #include "sprite.h"
+#include "script.h"
 #include "player_defs.h"
 
 u16 gPreviousPlayerState;

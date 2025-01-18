@@ -919,8 +919,6 @@ extern u32 dword_80CC290[8];
 extern u32 dword_80AF4F0[4];
 extern struct Font font_80B01A8[3];
 
-extern const struct struc_80B21D4 word_80B21D4[];
-
 extern struct RoomIndex dRoomIndexes[38];
 extern struct GameStatus stru_80CC8C4;
 
@@ -1071,11 +1069,6 @@ extern u8 byte_80CB992[3];
 extern u8 dword_80CB9A9[][3];
 
 extern u32 byte_80CEBC8[];
-
-extern const struct InputRecord unk_80B21B4[];
-extern const u32 dword_80B21B8;
-extern const struct InputRecord stru_80B21BC[];
-extern const u32 dword_80B21C8;
 
 extern u32 unk_83FD834[];
 
