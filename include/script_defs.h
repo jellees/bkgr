@@ -233,22 +233,22 @@ enum ScriptWaitCond {
 
 #define AllocOamMatrices(count) SCRIPT_CMD(SCRIPT_CMD_ALLOC_OAM_MATRICES, count, 0, 0, 0)
 
-#define FreeOamMatrices(count) SCRIPT_CMD(SCRIPT_CMD_FREE_OAM_MATRICES, 0, 0, 0, 0)
+#define FreeOamMatrices SCRIPT_CMD(SCRIPT_CMD_FREE_OAM_MATRICES, 0, 0, 0, 0)
 
-#define Sub805F480(count, unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F480, unknown, 0, 0, 0)
+#define Sub805F480(actorIdx, unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F480, actorIdx, unknown, 0, 0)
 
-#define Sub805F4B0(count, unknown1, unknown2)                                                          \
-    SCRIPT_CMD(SCRIPT_CMD_sub_805F4B0, unknown1, unknown2, 0, 0)
+#define Sub805F4B0(actorIdx, unknown1, unknown2)                                                       \
+    SCRIPT_CMD(SCRIPT_CMD_sub_805F4B0, actorIdx, unknown1, unknown2, 0)
 
-#define Sub805F4DC(count, unknown1, unknown2)                                                          \
-    SCRIPT_CMD(SCRIPT_CMD_sub_805F4DC, unknown1, unknown2, 0, 0)
+#define Sub805F4DC(actorIdx, unknown1, unknown2)                                                       \
+    SCRIPT_CMD(SCRIPT_CMD_sub_805F4DC, actorIdx, unknown1, unknown2, 0)
 
-#define Sub805F51C(count, unknown1, unknown2)                                                          \
-    SCRIPT_CMD(SCRIPT_CMD_sub_805F51C, unknown1, unknown2, 0, 0)
+#define Sub805F51C(actorIdx, unknown1, unknown2, unknown3)                                             \
+    SCRIPT_CMD(SCRIPT_CMD_sub_805F51C, actorIdx, unknown1, unknown2, unknown3)
 
 #define PlayBgm(bgm) SCRIPT_CMD(SCRIPT_CMD_PLAY_BGM, bgm, 0, 0, 0)
 
-#define StopBgm SCRIPT_CMD(SCRIPT_CMD_PLAY_BGM, 0, 0, 0, 0)
+#define StopBgm SCRIPT_CMD(SCRIPT_CMD_STOP_BGM, 0, 0, 0, 0)
 
 #define PlaySfx(sfx, storeSfx) SCRIPT_CMD(SCRIPT_CMD_PLAY_SFX, sfx, storeSfx, 0, 0)
 
@@ -325,7 +325,7 @@ enum ScriptWaitCond {
 
 #define DisplayLicenseScreen SCRIPT_CMD(SCRIPT_CMD_DISPLAY_LICENSE_SCREEN, 0, 0, 0, 0)
 
-#define Sub8060B90 SCRIPT_CMD(SCRIPT_CMD_sub_8060B90, 0, 0, 0, 0)
+#define Sub8060B90(unused) SCRIPT_CMD(SCRIPT_CMD_sub_8060B90, unused, 0, 0, 0)
 
 #define PlayerSavePosition SCRIPT_CMD(SCRIPT_CMD_PLAYER_SAVE_POSITION, 0, 0, 0, 0)
 
