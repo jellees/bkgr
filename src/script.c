@@ -400,7 +400,7 @@ void sub_805D568(void) {
 #define IS_IN_VIEW_ABSOLUTE(x, y)                                                                      \
     (x)<FX32_CONST(260) && (x)> FX32_CONST(-20) && (y)<FX32_CONST(180) && (y)> FX32_CONST(-20)
 
-void sub_805D614(struct ScriptState* script, int actorIdx) {
+static void sub_805D614(struct ScriptState* script, int actorIdx) {
     struct Actor* actor = &script->actors[actorIdx];
 
     if (actor->field_5C) {
@@ -595,7 +595,7 @@ void play_input_demo(void) {
     }
 }
 
-bool32 sub_805DB38(void) {
+static bool32 sub_805DB38(void) {
     fx32 var1 = dword_203F9FC - gPlayerShadowPos.y;
     fx32 var2 = Abs(dword_200032C[dword_2000FC8].field_20);
     gKeyInput = KEYS_MASK;
@@ -623,9 +623,9 @@ bool32 sub_805DB38(void) {
     return FALSE;
 }
 
-void sub_805DC28(int actorIdx) {
+static void sub_805DC28(int actorIdx) {
     if (!gCurrentScript->actors[actorIdx].isMoving) {
-        script_cmd_actor_set_anim(actorIdx, 1215, TRUE, 0);
+        script_cmd_actor_set_anim(actorIdx, 1215, 1, 0);
 
         if (!RandomMinMax(FALSE, TRUE)) {
             script_cmd_actor_set_position_absolute(actorIdx, RandomMinMax(100, 120),
@@ -643,7 +643,7 @@ void sub_805DC28(int actorIdx) {
     }
 }
 
-bool32 sub_805DD20(void) {
+static bool32 sub_805DD20(void) {
     //! Possible fake match.
     // https://decomp.me/scratch/0dBNg
     u32 a = byte_203FA12 += 5;
@@ -715,7 +715,7 @@ void render_scripts_direct(void) {
     }
 }
 
-void remove_actors(struct ScriptState* script) {
+static void remove_actors(struct ScriptState* script) {
     u8 i;
 
     if (script->actorCount == 0) {
@@ -793,7 +793,7 @@ void end_all_scripts(int a1) {
     sub_805D568();
 }
 
-void sub_0805E270(int xMin, int xMax, int yMin, int yMax) {
+static void sub_0805E270(int xMin, int xMax, int yMin, int yMax) {
     u8 yDistanceToMax;
     u8 yDistanceToMin;
     u8 xDistanceToMin;
@@ -853,7 +853,7 @@ void sub_0805E270(int xMin, int xMax, int yMin, int yMax) {
     }
 }
 
-enum Directions convert_angle_to_direction(fx32 angle) {
+static enum Directions convert_angle_to_direction(fx32 angle) {
     if (angle < 0) {
         angle += FX32_CONST(22.5);
     }
