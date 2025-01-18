@@ -91,16 +91,207 @@ extern struct ScriptCamera* gScriptCamera;
 extern fx32 dword_203FA1C;
 extern fx32 dword_203FA20;
 
+bool32 script_cmd_alloc_actors(int, int, int, int);
+bool32 script_cmd_load_and_store_room(int, int, int, int);
+bool32 script_cmd_load_room(int, int, int, int);
+bool32 script_cmd_restore_room(int, int, int, int);
+bool32 script_cmd_jump(int, int, int, int);
+bool32 script_cmd_jump_cond(int, int, int, int);
+bool32 script_cmd_hide_player(int, int, int, int);
+bool32 script_cmd_actor_init(int, int, int, int);
+bool32 script_cmd_actor_disable(int, int, int, int);
+bool32 script_cmd_actor_enable(int, int, int, int);
 bool32 script_cmd_actor_set_anim(int, int, int, int);
-bool32 script_cmd_actor_set_direction(int, int, int, int);
+bool32 script_cmd_actor_set_gameover_anim(int, int, int, int);
+bool32 script_cmd_actor_set_position(int, int, int, int);
+bool32 script_cmd_actor_set_position_relative_from_saved_position(int, int, int, int);
+bool32 script_cmd_actor_set_position_from_cam(int, int, int, int);
 bool32 script_cmd_actor_set_position_absolute(int, int, int, int);
+bool32 script_cmd_actor_save_position(int, int, int, int);
+bool32 sub_805EEBC(int, int, int, int);
+bool32 sub_805EF0C(int, int, int, int);
+bool32 script_cmd_actor_set_direction(int, int, int, int);
+bool32 script_cmd_actor_rotate_to_target(int, int, int, int);
 bool32 script_cmd_actor_set_priority(int, int, int, int);
+bool32 script_cmd_actor_revert_priority(int, int, int, int);
 bool32 sub_805F04C(int, int, int, int);
+bool32 script_cmd_actor_set_obj_mode(int, int, int, int);
+bool32 script_cmd_actor_set_palette(int, int, int, int);
 bool32 script_cmd_actor_lock_anim_on_frame(int, int, int, int);
+bool32 script_cmd_actor_unlock_anim(int, int, int, int);
 bool32 script_cmd_actor_set_locked_frame(int, int, int, int);
+bool32 script_cmd_actor_set_frame(int, int, int, int);
+bool32 sub_805F120(int, int, int, int);
 bool32 script_cmd_actor_move(int, int, int, int);
+bool32 script_cmd_actor_move_to_saved_position(int, int, int, int);
+bool32 script_cmd_actor_move_from_cam(int, int, int, int);
+bool32 sub_805F40C(int, int, int, int);
+bool32 sub_805F428(int, int, int, int);
+bool32 script_cmd_alloc_oam_matrices(int, int, int, int);
+bool32 script_cmd_free_oam_matrices(int, int, int, int);
+bool32 sub_805F480(int, int, int, int);
+bool32 sub_805F4B0(int, int, int, int);
+bool32 sub_805F4DC(int, int, int, int);
+bool32 sub_805F51C(int, int, int, int);
+bool32 script_cmd_play_bgm(int, int, int, int);
+bool32 script_cmd_stop_bgm(int, int, int, int);
+bool32 script_cmd_play_sfx(int, int, int, int);
+bool32 script_cmd_stop_sfx(int, int, int, int);
+bool32 script_cmd_stop_all_sfx(int, int, int, int);
+bool32 script_cmd_play_bill_drill_sfx(int, int, int, int);
+bool32 script_cmd_stop_bill_drill_sfx(int, int, int, int);
+bool32 script_cmd_set_bgm_volume(int, int, int, int);
+bool32 script_cmd_set_bgm_volume_if_louder(int, int, int, int);
+bool32 script_cmd_set_sfx_volume(int, int, int, int);
+bool32 script_cmd_set_bgm_volume_global_or_mute(int, int, int, int);
+bool32 sub_805F7D8(int, int, int, int);
+bool32 sub_805F808(int, int, int, int);
 bool32 script_cmd_camera_alloc(int, int, int, int);
 bool32 script_cmd_camera_free(int, int, int, int);
+bool32 script_cmd_camera_move(int, int, int, int);
+bool32 script_cmd_camera_move_to_actor_position(int, int, int, int);
+bool32 script_cmd_camera_move_to_saved_position(int, int, int, int);
+bool32 script_cmd_camera_save_position(int, int, int, int);
+bool32 sub_805FB38(int, int, int, int);
+bool32 script_cmd_camera_return_prescene(int, int, int, int);
+bool32 sub_805FB80(int, int, int, int);
+bool32 sub_805FBA4(int, int, int, int);
+bool32 sub_805FBB4(int, int, int, int);
+bool32 sub_805FBF4(int, int, int, int);
+bool32 sub_805FC34(int, int, int, int);
+bool32 script_cmd_set_wait_frames(int, int, int, int);
+bool32 sub_805FCB0(int, int, int, int);
+bool32 sub_805FCEC(int, int, int, int);
+bool32 script_cmd_set_player_direction(int, int, int, int);
+bool32 script_cmd_wait_for_cond(int, int, int, int);
+bool32 script_cmd_end(int, int, int, int);
+bool32 script_cmd_display_scene_transition(int, int, int, int);
+bool32 show_time_travel_scene(int, int, int, int);
+bool32 sub_8060568(int, int, int, int);
+bool32 script_cmd_display_license_screen(int, int, int, int);
+bool32 sub_8060B90(int, int, int, int);
+bool32 script_cmd_player_save_position(int, int, int, int);
+bool32 script_cmd_end_all_scripts(int, int, int, int);
+bool32 script_cmd_load_room_obj_palette(int, int, int, int);
+bool32 sub_8060C4C(int, int, int, int);
+bool32 sub_8060C78(int, int, int, int);
+bool32 sub_8060CB8(int, int, int, int);
+bool32 sub_8060CC4(int, int, int, int);
+bool32 sub_8060D74(int, int, int, int);
+bool32 sub_8060D80(int, int, int, int);
+bool32 sub_8060D90(int, int, int, int);
+
+static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
+    script_cmd_alloc_actors,
+    script_cmd_load_and_store_room,
+    script_cmd_load_room,
+    script_cmd_restore_room,
+    script_cmd_jump,
+    script_cmd_jump_cond,
+    script_cmd_hide_player,
+    script_cmd_actor_init,
+    script_cmd_actor_disable,
+    script_cmd_actor_enable,
+    script_cmd_actor_set_anim,
+    script_cmd_actor_set_gameover_anim,
+    script_cmd_actor_set_position,
+    script_cmd_actor_set_position_relative_from_saved_position,
+    script_cmd_actor_set_position_from_cam,
+    script_cmd_actor_set_position_absolute,
+    script_cmd_actor_save_position,
+    sub_805EEBC,
+    sub_805EF0C,
+    script_cmd_actor_set_direction,
+    script_cmd_actor_rotate_to_target,
+    script_cmd_actor_set_priority,
+    script_cmd_actor_revert_priority,
+    sub_805F04C,
+    script_cmd_actor_set_obj_mode,
+    script_cmd_actor_set_palette,
+    script_cmd_actor_lock_anim_on_frame,
+    script_cmd_actor_unlock_anim,
+    script_cmd_actor_set_locked_frame,
+    script_cmd_actor_set_frame,
+    sub_805F120,
+    script_cmd_actor_move,
+    script_cmd_actor_move_to_saved_position,
+    script_cmd_actor_move_from_cam,
+    sub_805F40C,
+    sub_805F428,
+    script_cmd_alloc_oam_matrices,
+    script_cmd_free_oam_matrices,
+    sub_805F480,
+    sub_805F4B0,
+    sub_805F4DC,
+    sub_805F51C,
+    script_cmd_play_bgm,
+    script_cmd_stop_bgm,
+    script_cmd_play_sfx,
+    script_cmd_stop_sfx,
+    script_cmd_stop_all_sfx,
+    script_cmd_play_bill_drill_sfx,
+    script_cmd_stop_bill_drill_sfx,
+    script_cmd_set_bgm_volume,
+    script_cmd_set_bgm_volume_if_louder,
+    script_cmd_set_sfx_volume,
+    script_cmd_set_bgm_volume_global_or_mute,
+    sub_805F7D8,
+    sub_805F808,
+    script_cmd_camera_alloc,
+    script_cmd_camera_free,
+    script_cmd_camera_move,
+    script_cmd_camera_move_to_actor_position,
+    script_cmd_camera_move_to_saved_position,
+    script_cmd_camera_save_position,
+    sub_805FB38,
+    script_cmd_camera_return_prescene,
+    sub_805FB80,
+    sub_805FBA4,
+    sub_805FBB4,
+    sub_805FBF4,
+    sub_805FC34,
+    script_cmd_set_wait_frames,
+    sub_805FCB0,
+    sub_805FCEC,
+    script_cmd_set_player_direction,
+    script_cmd_wait_for_cond,
+    script_cmd_end,
+    script_cmd_display_scene_transition,
+    show_time_travel_scene,
+    sub_8060568,
+    script_cmd_display_license_screen,
+    sub_8060B90,
+    script_cmd_player_save_position,
+    script_cmd_end_all_scripts,
+    script_cmd_load_room_obj_palette,
+    sub_8060C4C,
+    sub_8060C78,
+    sub_8060CB8,
+    sub_8060CC4,
+    sub_8060D74,
+    sub_8060D80,
+    sub_8060D90,
+};
+
+const struct InputRecord unk_80B21B4[] = { { KEYS_MASK ^ DPAD_DOWN, 159 } };
+const u32 dword_80B21B8 = 1;
+
+const struct InputRecord stru_80B21BC[] = { { KEYS_MASK ^ (DPAD_DOWN | DPAD_LEFT), 28 },
+                                            { KEYS_MASK ^ DPAD_LEFT, 38 },
+                                            { KEYS_MASK ^ DPAD_DOWN, 1 } };
+const u32 dword_80B21C8 = 3;
+
+const struct InputRecord struc_80B21CC[] = { { KEYS_MASK ^ DPAD_UP, 49 } };
+const u32 dword_80B21D0 = 1;
+
+const struct struc_80B21D4 word_80B21D4[] = {
+    { .xPos = 182, .yPos = 240, .priority = 1, .field_6 = 384 },
+    { .xPos = 177, .yPos = 425, .priority = 2, .field_6 = 384 },
+    { .xPos = 872, .yPos = 440, .priority = 2, .field_6 = 384 },
+    { .xPos = 1085, .yPos = 282, .priority = 3, .field_6 = 384 },
+    { .xPos = 536, .yPos = 552, .priority = 1, .field_6 = 256 },
+    { .xPos = 544, .yPos = 384, .priority = 0, .field_6 = 256 },
+};
 
 void sub_805D158(void) {
     u8 i = 0;
@@ -2482,115 +2673,3 @@ bool32 sub_8060D90(int _, int __, int ___, int ____) {
 
     //! @bug Forgot return.
 }
-
-static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
-    script_cmd_alloc_actors,
-    script_cmd_load_and_store_room,
-    script_cmd_load_room,
-    script_cmd_restore_room,
-    script_cmd_jump,
-    script_cmd_jump_cond,
-    script_cmd_hide_player,
-    script_cmd_actor_init,
-    script_cmd_actor_disable,
-    script_cmd_actor_enable,
-    script_cmd_actor_set_anim,
-    script_cmd_actor_set_gameover_anim,
-    script_cmd_actor_set_position,
-    script_cmd_actor_set_position_relative_from_saved_position,
-    script_cmd_actor_set_position_from_cam,
-    script_cmd_actor_set_position_absolute,
-    script_cmd_actor_save_position,
-    sub_805EEBC,
-    sub_805EF0C,
-    script_cmd_actor_set_direction,
-    script_cmd_actor_rotate_to_target,
-    script_cmd_actor_set_priority,
-    script_cmd_actor_revert_priority,
-    sub_805F04C,
-    script_cmd_actor_set_obj_mode,
-    script_cmd_actor_set_palette,
-    script_cmd_actor_lock_anim_on_frame,
-    script_cmd_actor_unlock_anim,
-    script_cmd_actor_set_locked_frame,
-    script_cmd_actor_set_frame,
-    sub_805F120,
-    script_cmd_actor_move,
-    script_cmd_actor_move_to_saved_position,
-    script_cmd_actor_move_from_cam,
-    sub_805F40C,
-    sub_805F428,
-    script_cmd_alloc_oam_matrices,
-    script_cmd_free_oam_matrices,
-    sub_805F480,
-    sub_805F4B0,
-    sub_805F4DC,
-    sub_805F51C,
-    script_cmd_play_bgm,
-    script_cmd_stop_bgm,
-    script_cmd_play_sfx,
-    script_cmd_stop_sfx,
-    script_cmd_stop_all_sfx,
-    script_cmd_play_bill_drill_sfx,
-    script_cmd_stop_bill_drill_sfx,
-    script_cmd_set_bgm_volume,
-    script_cmd_set_bgm_volume_if_louder,
-    script_cmd_set_sfx_volume,
-    script_cmd_set_bgm_volume_global_or_mute,
-    sub_805F7D8,
-    sub_805F808,
-    script_cmd_camera_alloc,
-    script_cmd_camera_free,
-    script_cmd_camera_move,
-    script_cmd_camera_move_to_actor_position,
-    script_cmd_camera_move_to_saved_position,
-    script_cmd_camera_save_position,
-    sub_805FB38,
-    script_cmd_camera_return_prescene,
-    sub_805FB80,
-    sub_805FBA4,
-    sub_805FBB4,
-    sub_805FBF4,
-    sub_805FC34,
-    script_cmd_set_wait_frames,
-    sub_805FCB0,
-    sub_805FCEC,
-    script_cmd_set_player_direction,
-    script_cmd_wait_for_cond,
-    script_cmd_end,
-    script_cmd_display_scene_transition,
-    show_time_travel_scene,
-    sub_8060568,
-    script_cmd_display_license_screen,
-    sub_8060B90,
-    script_cmd_player_save_position,
-    script_cmd_end_all_scripts,
-    script_cmd_load_room_obj_palette,
-    sub_8060C4C,
-    sub_8060C78,
-    sub_8060CB8,
-    sub_8060CC4,
-    sub_8060D74,
-    sub_8060D80,
-    sub_8060D90,
-};
-
-const struct InputRecord unk_80B21B4[] = { { KEYS_MASK ^ DPAD_DOWN, 159 } };
-const u32 dword_80B21B8 = 1;
-
-const struct InputRecord stru_80B21BC[] = { { KEYS_MASK ^ (DPAD_DOWN | DPAD_LEFT), 28 },
-                                            { KEYS_MASK ^ DPAD_LEFT, 38 },
-                                            { KEYS_MASK ^ DPAD_DOWN, 1 } };
-const u32 dword_80B21C8 = 3;
-
-const struct InputRecord struc_80B21CC[] = { { KEYS_MASK ^ DPAD_UP, 49 } };
-const u32 dword_80B21D0 = 1;
-
-const struct struc_80B21D4 word_80B21D4[] = {
-    { .xPos = 182, .yPos = 240, .priority = 1, .field_6 = 384 },
-    { .xPos = 177, .yPos = 425, .priority = 2, .field_6 = 384 },
-    { .xPos = 872, .yPos = 440, .priority = 2, .field_6 = 384 },
-    { .xPos = 1085, .yPos = 282, .priority = 3, .field_6 = 384 },
-    { .xPos = 536, .yPos = 552, .priority = 1, .field_6 = 256 },
-    { .xPos = 544, .yPos = 384, .priority = 0, .field_6 = 256 },
-};
