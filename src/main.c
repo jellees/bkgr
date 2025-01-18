@@ -12,6 +12,7 @@
 #include "pregame.h"
 #include "menu.h"
 #include "random.h"
+#include "script.h"
 
 enum EnvironmentEffects { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 

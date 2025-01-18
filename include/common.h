@@ -789,40 +789,6 @@ extern u8 byte_203E16C;
 
 extern struct struc_51** dword_203F8B4; // A pointer to a pointer to a struct.
 
-extern const struct InputRecord* gInputDemoRecords;
-
-extern u16 gInputDemoStep;
-extern u16 gInputDemoRecordCount;
-
-extern s16 word_203F998;
-extern s16 word_203F99A;
-extern u8 byte_203F99C; // possibly bool8
-extern u8 byte_203F99D; // possibly bool8
-extern bool8 byte_203F99E;
-
-extern u8 byte_203F99F; // possibly bool8
-
-extern fx32 dword_203F9F8;
-extern fx32 dword_203F9FC;
-
-// REMOVE THIS AT SOME POINT.
-extern bool8 gReadKeysFromDemoInput;
-extern bool8 gHidePlayer;
-
-extern fx32 gScriptCameraSavePosX;
-extern fx32 gScriptCameraSavePosY;
-extern u16 gInputDemoFrames;
-
-extern u8 byte_203FA12;
-extern bool8 gInputDemoIsForward;
-extern u8 byte_203FA14;
-extern u8 byte_203FA15;
-extern u8 byte_203FA16;
-extern u8 byte_203FA16_2;
-
-extern u32 dword_203FA24;
-extern u32 dword_203FA28;
-
 extern u8 byte_203FA35; // possibly bool8
 
 extern u8 byte_203FA58;

@@ -76,20 +76,40 @@ struct ScriptState {
     u8 field_27;
 };
 
-// Part of this file.
-extern s16 gScriptSavedPosX;
-extern s16 gScriptSavedPosY;
-
-extern u8 gScriptSavedPriority;
-
-extern u8 gActorCount;
-extern u8 gReadKeysFromDemoInput;
-extern bool8 gHidePlayer;
-extern struct ScriptState gScripts[MAX_SCRIPTS];
-extern struct ScriptState* gCurrentScript;
-extern struct ScriptCamera* gScriptCamera;
-extern fx32 dword_203FA1C;
-extern fx32 dword_203FA20;
+const struct InputRecord* gInputDemoRecords;
+u16 gInputDemoStep;
+u16 gInputDemoRecordCount;
+s16 gScriptSavedPosX;
+s16 gScriptSavedPosY;
+s16 word_203F998;
+s16 word_203F99A;
+u8 byte_203F99C;
+u8 gScriptSavedPriority;
+bool8 byte_203F99E;
+u8 byte_203F99F;
+u8 gActorCount;
+bool8 gReadKeysFromDemoInput;
+bool8 gHidePlayer;
+struct ScriptState gScripts[MAX_SCRIPTS];
+struct ScriptState* gCurrentScript;
+fx32 dword_203F9F8;
+fx32 dword_203F9FC;
+u32 dword_0203FA00; // Unused.
+u32 dword_0203FA04; // Unused.
+fx32 gScriptCameraSavePosX;
+fx32 gScriptCameraSavePosY;
+u16 gInputDemoFrames;
+u8 byte_203FA12;
+bool8 gInputDemoIsForward;
+u8 byte_203FA14;
+u8 byte_203FA15;
+u8 byte_203FA16;
+u8 byte_203FA16_2;
+struct ScriptCamera* gScriptCamera;
+fx32 dword_203FA1C;
+fx32 dword_203FA20;
+u32 dword_203FA24;
+u32 dword_203FA28;
 
 static bool32 script_cmd_alloc_actors(int, int, int, int);
 static bool32 script_cmd_load_and_store_room(int, int, int, int);

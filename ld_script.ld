@@ -108,25 +108,8 @@ SECTIONS
         dword_203F8B4 = .; . += 4;
 
         . = 0x0003F98C;
-        gInputDemoRecords = .; . += 4;
-
-        . = 0x0003F992;
-        gInputDemoRecordCount = .; . += 2;
-
-        . = 0x0003F998;
-        word_203F998 = .; . += 2;
-        word_203F99A = .; . += 2;
-        byte_203F99C = .; . += 1;
-        byte_203F99D = .; . += 1;
-        byte_203F99E = .; . += 1;
-
-        . = 0x0003F99F;
-        byte_203F99F = .; . += 1;
-
-        . = 0x0003F9A1;
-        gReadKeysFromDemoInput = .; . += 1;
-        gHidePlayer = .; . += 1;
-
+        src/script.o(.bss);
+        
         . = 0x0003FA35;
         byte_203FA35 = .; . += 1;
 
