@@ -229,3 +229,40 @@ const Script script_80B268C = {
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     End
 };
+
+const Script script_80B31CC = {
+    Sub805FC34(1)
+    Sub805FBB4(0, 0)
+    WaitForCond(SCRIPT_WAIT_COND_15, 0)
+    AllocActors(1)
+    ActorInit(0)
+    ActorSetAnim(0, 1231, 0)
+    ActorSetPositionAbsolute(0, 120, 80)
+    ActorSetPriority(0, 1)
+    Sub805FBF4(0, 0)
+    WaitForCond(SCRIPT_WAIT_COND_15, 0)
+    SetWaitFrames(120)
+    WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
+    Sub805FBB4(0, 0)
+    WaitForCond(SCRIPT_WAIT_COND_15, 0)
+    End
+};
+
+const Script script_80B32F8 = {
+    Sub8060568
+    End
+};
+
+const Script script_80B3320 = {
+    Sub805FC34(1)
+    CameraAlloc
+    Jump(11, 0)
+};
+
+const Script script_80B335C = {
+    CameraMove(0, 0, FX32_CONST(0.375))
+    WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
+    SetWaitFrames(8)
+    WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
+    Jump(11, 0)
+};
