@@ -1,28 +1,11 @@
 byte_203E137 = 0x203E137;
 byte_203E138 = 0x203E138;
-gInputDemoStep = 0x203F990;
-gScriptSavedPosX = 0x203F994;
-gScriptSavedPosY = 0x203F996;
-gScriptSavedPriority = 0x203F99D;
-gActorCount = 0x203F9A0;
-gScripts = 0x203F9A4;
-gCurrentScript = 0x203F9F4;
-dword_203F9F8 = 0x203F9F8;
-dword_203F9FC = 0x203F9FC;
-gScriptCameraSavePosX = 0x203FA08;
-gScriptCameraSavePosY = 0x203FA0C;
-gInputDemoFrames = 0x203FA10;
-byte_203FA12 = 0x203FA12;
-gInputDemoIsForward = 0x203FA13;
-byte_203FA14 = 0x203FA14;
-byte_203FA15 = 0x203FA15;
-byte_203FA16 = 0x203FA16;
+
+# This variable shares the same space with another variable.
+# Not sure how this is possible. For now hardcoded address is
+# needed.
 byte_203FA16_2 = 0x203FA16;
-gScriptCamera = 0x203FA18;
-dword_203FA1C = 0x203FA1C;
-dword_203FA20 = 0x203FA20;
-dword_203FA24 = 0x203FA24;
-dword_203FA28 = 0x203FA28;
+
 byte_203FA58 = 0x203FA58;
 
 

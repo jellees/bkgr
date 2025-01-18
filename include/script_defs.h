@@ -347,11 +347,3 @@ enum ScriptWaitCond {
 #define Sub8060D80 SCRIPT_CMD(SCRIPT_CMD_sub_8060D80, 0, 0, 0, 0)
 
 #define Sub8060D90 SCRIPT_CMD(SCRIPT_CMD_sub_8060D90, 0, 0, 0, 0)
-
-// Script commands = {
-//     AllocActors(1)
-//     DisplayLicenseScreen
-//     EndAllScripts
-//     SetPlayerDirection(5)
-//     PlayerSavePosition
-// };
