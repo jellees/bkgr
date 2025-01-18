@@ -66,7 +66,7 @@ enum ScriptCommands {
     SCRIPT_CMD_SET_SFX_VOLUME,
     SCRIPT_CMD_SET_BGM_VOLUME_GLOBAL_OR_MUTE,
     SCRIPT_CMD_sub_805F7D8,
-    SCRIPT_CMD_sub_805F808,
+    SCRIPT_CMD_START_INPUT_DEMO,
     SCRIPT_CMD_CAMERA_ALLOC,
     SCRIPT_CMD_CAMERA_FREE,
     SCRIPT_CMD_CAMERA_MOVE,
@@ -87,7 +87,7 @@ enum ScriptCommands {
     SCRIPT_CMD_WAIT_FOR_COND,
     SCRIPT_CMD_END,
     SCRIPT_CMD_DISPLAY_SCENE_TRANSITION,
-    SCRIPT_CMD_show_time_travel_scene,
+    SCRIPT_CMD_DISPLAY_TIME_TRAVEL_SCENE,
     SCRIPT_CMD_sub_8060568,
     SCRIPT_CMD_DISPLAY_LICENSE_SCREEN,
     SCRIPT_CMD_sub_8060B90,
@@ -272,7 +272,7 @@ enum ScriptWaitCond {
 
 #define Sub805F7D8(unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F7D8, unknown, 0, 0, 0)
 
-#define Sub805F808(forward) SCRIPT_CMD(SCRIPT_CMD_sub_805F808, forward, 0, 0, 0)
+#define StartInputDemo(forward) SCRIPT_CMD(SCRIPT_CMD_START_INPUT_DEMO, forward, 0, 0, 0)
 
 #define CameraAlloc SCRIPT_CMD(SCRIPT_CMD_CAMERA_ALLOC, 0, 0, 0, 0)
 
@@ -319,7 +319,7 @@ enum ScriptWaitCond {
 #define DisplaySceneTransition(textType)                                                               \
     SCRIPT_CMD(SCRIPT_CMD_DISPLAY_SCENE_TRANSITION, textType, 0, 0, 0)
 
-#define ShowTimeTravelScene(unknown) SCRIPT_CMD(SCRIPT_CMD_show_time_travel_scene, unknown, 0, 0, 0)
+#define DisplayTimeTravelScene(unknown) SCRIPT_CMD(SCRIPT_CMD_DISPLAY_TIME_TRAVEL_SCENE, unknown, 0, 0, 0)
 
 #define Sub8060568 SCRIPT_CMD(SCRIPT_CMD_sub_8060568, 0, 0, 0, 0)
 

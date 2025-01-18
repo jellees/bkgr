@@ -165,7 +165,7 @@ static bool32 script_cmd_set_bgm_volume_if_louder(int, int, int, int);
 static bool32 script_cmd_set_sfx_volume(int, int, int, int);
 static bool32 script_cmd_set_bgm_volume_global_or_mute(int, int, int, int);
 static bool32 sub_805F7D8(int, int, int, int);
-static bool32 sub_805F808(int, int, int, int);
+static bool32 script_cmd_start_input_demo(int, int, int, int);
 static bool32 script_cmd_camera_alloc(int, int, int, int);
 static bool32 script_cmd_camera_free(int, int, int, int);
 static bool32 script_cmd_camera_move(int, int, int, int);
@@ -186,7 +186,7 @@ static bool32 script_cmd_set_player_direction(int, int, int, int);
 static bool32 script_cmd_wait_for_cond(int, int, int, int);
 static bool32 script_cmd_end(int, int, int, int);
 static bool32 script_cmd_display_scene_transition(int, int, int, int);
-static bool32 show_time_travel_scene(int, int, int, int);
+static bool32 script_cmd_display_time_travel_scene(int, int, int, int);
 static bool32 sub_8060568(int, int, int, int);
 static bool32 script_cmd_display_license_screen(int, int, int, int);
 static bool32 sub_8060B90(int, int, int, int);
@@ -256,7 +256,7 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_set_sfx_volume,
     script_cmd_set_bgm_volume_global_or_mute,
     sub_805F7D8,
-    sub_805F808,
+    script_cmd_start_input_demo,
     script_cmd_camera_alloc,
     script_cmd_camera_free,
     script_cmd_camera_move,
@@ -277,7 +277,7 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_wait_for_cond,
     script_cmd_end,
     script_cmd_display_scene_transition,
-    show_time_travel_scene,
+    script_cmd_display_time_travel_scene,
     sub_8060568,
     script_cmd_display_license_screen,
     sub_8060B90,
@@ -1685,7 +1685,7 @@ static bool32 sub_805F7D8(int a1, int _, int __, int ___) {
     return TRUE;
 }
 
-static bool32 sub_805F808(int forward, int _, int __, int ___) {
+static bool32 script_cmd_start_input_demo(int forward, int _, int __, int ___) {
     ASSERT(!gReadKeysFromDemoInput);
     gCurrentScript->isActive = FALSE;
     gCurrentScript->playInputDemo = TRUE;
@@ -2200,7 +2200,7 @@ static bool32 script_cmd_display_scene_transition(int textType, int _, int __, i
 
 // https://decomp.me/scratch/5oOP5
 #ifndef NONMATCHING
-NAKED static bool32 show_time_travel_scene(int a1, int _, int __, int ___) {
+NAKED static bool32 script_cmd_display_time_travel_scene(int a1, int _, int __, int ___) {
     asm_unified(".include \"asm/nonmatching/show_time_travel_scene.s\"");
 }
 #else
@@ -2211,7 +2211,7 @@ static inline void ab(int a1, int v9, int a, int b) {
         sub_8025718(0, v9, a + 128);
 }
 
-static bool32 show_time_travel_scene(int a1) {
+static bool32 script_cmd_display_time_travel_scene(int a1) {
     int* source;
     struct Sprite symbol;
     u32 frames;
