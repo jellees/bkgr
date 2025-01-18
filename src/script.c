@@ -1317,8 +1317,8 @@ static bool32 script_cmd_actor_set_position(int actorIdx, int xPos, int yPos, in
     return TRUE;
 }
 
-static bool32 script_cmd_actor_set_position_relative_from_saved_position(int actorIdx, int xPos, int yPos,
-                                                                  int _) {
+static bool32 script_cmd_actor_set_position_relative_from_saved_position(int actorIdx, int xPos,
+                                                                         int yPos, int _) {
     return script_cmd_actor_set_position(actorIdx, gScriptSavedPosX + xPos, gScriptSavedPosY + yPos, 0);
 }
 
