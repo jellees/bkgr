@@ -70,7 +70,7 @@ struct ScriptState {
     bool8 endScript;
     bool8 isActive;
     u8 field_23;
-    bool8 field_24;
+    bool8 playInputDemo;
     u8 activeSfx;
     u8 field_26;
     u8 field_27;
@@ -83,7 +83,7 @@ extern s16 gScriptSavedPosY;
 extern u8 gScriptSavedPriority;
 
 extern u8 gActorCount;
-extern u8 byte_203F9A1;
+extern u8 gReadKeysFromDemoInput;
 extern bool8 gHidePlayer;
 extern struct ScriptState gScripts[MAX_SCRIPTS];
 extern struct ScriptState* gCurrentScript;
@@ -111,7 +111,7 @@ void sub_805D158(void) {
     byte_203F99C = 0;
     word_203F998 = -1;
     word_203F99A = -1;
-    byte_203F9A1 = 0;
+    gReadKeysFromDemoInput = FALSE;
     byte_203FA14 = 0;
     gActorCount = 0;
     byte_203F99F = 0;
@@ -144,7 +144,7 @@ void start_script(int idx) {
     gCurrentScript->isActive = TRUE;
     gCurrentScript->waitFrames = 0;
     gCurrentScript->actorCount = 0;
-    gCurrentScript->field_24 = 0;
+    gCurrentScript->playInputDemo = FALSE;
     gCurrentScript->activeSfx = -1;
     byte_203F99E = TRUE;
     byte_203F99C = 1;
@@ -182,7 +182,7 @@ void sub_805D568(void) {
     byte_203F99C = 0;
     word_203F998 = -1;
     word_203F99A = -1;
-    byte_203F9A1 = 0;
+    gReadKeysFromDemoInput = FALSE;
     byte_203F99E = FALSE;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
@@ -196,8 +196,8 @@ void sub_805D568(void) {
             }
         }
 
-        if (gScripts[i].field_24) {
-            byte_203F9A1 = 1;
+        if (gScripts[i].playInputDemo) {
+            gReadKeysFromDemoInput = TRUE;
         }
     }
 }
@@ -381,24 +381,25 @@ void sub_805D8D8(struct ScriptState* script) {
     }
 }
 
-void sub_805DA94(void) {
-    if (word_203FA10 != 0) {
-        word_203FA10--;
+void play_input_demo(void) {
+    if (gInputDemoFrames != 0) {
+        gInputDemoFrames--;
         return;
     }
 
-    if ((byte_203FA13 && word_203F990 == word_203F992) || (!byte_203FA13 && word_203F990 == 0)) {
-        gCurrentScript->field_24 = 0;
+    if ((gInputDemoIsForward && gInputDemoStep == gInputDemoRecordCount)
+        || (!gInputDemoIsForward && gInputDemoStep == 0)) {
+        gCurrentScript->playInputDemo = FALSE;
         return;
     }
 
-    gKeyInput = dword_203F98C[word_203F990].input;
-    word_203FA10 = dword_203F98C[word_203F990].count;
+    gKeyInput = gInputDemoRecords[gInputDemoStep].input;
+    gInputDemoFrames = gInputDemoRecords[gInputDemoStep].frames;
 
-    if (byte_203FA13) {
-        word_203F990++;
+    if (gInputDemoIsForward) {
+        gInputDemoStep++;
     } else {
-        word_203F990--;
+        gInputDemoStep--;
         gKeyInput ^= DPAD_ANY;
     }
 }
@@ -423,11 +424,11 @@ bool32 sub_805DB38(void) {
 
     if ((Abs(gPlayerShadowPos.x - dword_203F9F8) <= var2 && Abs(gPlayerShadowPos.z - var1) <= var2)
         || (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) != 0) {
-        byte_203F9A1 = 0;
+        gReadKeysFromDemoInput = FALSE;
         return TRUE;
     }
 
-    byte_203F9A1 = 1;
+    gReadKeysFromDemoInput = TRUE;
     return FALSE;
 }
 
@@ -1473,17 +1474,17 @@ bool32 sub_805F7D8(int a1, int _, int __, int ___) {
     return TRUE;
 }
 
-bool32 sub_805F808(int a1, int _, int __, int ___) {
-    ASSERT(!byte_203F9A1);
+bool32 sub_805F808(int forward, int _, int __, int ___) {
+    ASSERT(!gReadKeysFromDemoInput);
     gCurrentScript->isActive = FALSE;
-    gCurrentScript->field_24 = TRUE;
-    word_203FA10 = 0;
-    if (a1) {
-        word_203F990 = 0;
+    gCurrentScript->playInputDemo = TRUE;
+    gInputDemoFrames = 0;
+    if (forward) {
+        gInputDemoStep = 0;
     } else {
-        word_203F990 = word_203F992 - 1;
+        gInputDemoStep = gInputDemoRecordCount - 1;
     }
-    byte_203FA13 = a1;
+    gInputDemoIsForward = forward;
     return TRUE;
 }
 
@@ -1680,7 +1681,7 @@ bool32 script_cmd_set_wait_frames(int frames, int _, int __, int ___) {
 bool32 sub_805FCB0(int a1, int a2, int _, int __) {
     dword_203F9F8 = a1 << FX32_SHIFT;
     dword_203F9FC = (gMapPixelSizeY - a2) << FX32_SHIFT;
-    byte_203F9A1 = 1;
+    gReadKeysFromDemoInput = TRUE;
     gKeyInput = KEYS_MASK;
     return TRUE;
 }
@@ -1740,7 +1741,7 @@ bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
 
         case SCRIPT_WAIT_COND_6: {
             bool32 shouldAdvance = FALSE;
-            if (byte_203F9A1 == 0) {
+            if (gReadKeysFromDemoInput == 0) {
                 shouldAdvance = TRUE;
             }
             advance = shouldAdvance;
@@ -1770,21 +1771,21 @@ bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int __) {
                 || (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_NOT_MOVING)
                     && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)
                     && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING))) {
-                byte_203F9A1 = 1;
+                gReadKeysFromDemoInput = TRUE;
                 gKeyInput = KEYS_MASK;
                 advance = FALSE;
             } else {
-                byte_203F9A1 = 0;
+                gReadKeysFromDemoInput = FALSE;
                 advance = TRUE;
             }
             break;
 
         case SCRIPT_WAIT_COND_11:
             if (gCurrentScript->waitFrames == 0 && !sub_80038AC(dword_2000FC8)) {
-                byte_203F9A1 = 0;
+                gReadKeysFromDemoInput = FALSE;
                 advance = TRUE;
             } else {
-                byte_203F9A1 = 1;
+                gReadKeysFromDemoInput = TRUE;
                 gKeyInput = KEYS_MASK;
                 advance = FALSE;
             }
@@ -2573,3 +2574,14 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     sub_8060D80,
     sub_8060D90,
 };
+
+const struct InputRecord unk_80B21B4[] = { { KEYS_MASK ^ DPAD_DOWN, 159 } };
+const u32 dword_80B21B8 = 1;
+
+const struct InputRecord stru_80B21BC[] = { { KEYS_MASK ^ (DPAD_DOWN | DPAD_LEFT), 28 },
+                                            { KEYS_MASK ^ DPAD_LEFT, 38 },
+                                            { KEYS_MASK ^ DPAD_DOWN, 1 } };
+const u32 dword_80B21C8 = 3;
+
+const struct InputRecord struc_80B21CC[] = { { KEYS_MASK ^ DPAD_UP, 49 } };
+const u32 dword_80B21D0 = 1;

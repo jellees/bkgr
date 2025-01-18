@@ -8,11 +8,6 @@
 #include "player.h"
 #include "room.h"
 
-struct InputRecord {
-    s16 keys;
-    s16 count;
-};
-
 u8 byte_2001200;
 u8 gMainFrameCounter;
 u8 gDebugFPS;
@@ -2116,15 +2111,15 @@ void sub_80120DC(int a1, int a2, int a3, int a4) {
 #define MAX_INPUT_RECORDINGS 256
 
 void debug_record_input(void) {
-    s16 keys = REG_KEYINPUT & KEYS_MASK;
+    u16 input = REG_KEYINPUT & KEYS_MASK;
 
-    if (keys != gPreviousInput) {
+    if (input != gPreviousInput) {
         ASSERT(++gInputRecordCount != MAX_INPUT_RECORDINGS);
-        gInputRecords[gInputRecordCount].keys = keys;
-        gPreviousInput = keys;
-        gInputRecords[gInputRecordCount].count = 0;
+        gInputRecords[gInputRecordCount].input = input;
+        gPreviousInput = input;
+        gInputRecords[gInputRecordCount].frames = 0;
     } else {
-        gInputRecords[gInputRecordCount].count++;
+        gInputRecords[gInputRecordCount].frames++;
     }
 }
 

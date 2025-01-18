@@ -409,9 +409,9 @@ struct SpriteDMATableEntry {
     u32 count;
 };
 
-struct struc_203F98C {
+struct InputRecord {
     u16 input;
-    u16 count;
+    u16 frames;
 };
 
 struct struc_200032C {
@@ -790,10 +790,10 @@ extern u8 byte_203E16C;
 
 extern struct struc_51** dword_203F8B4; // A pointer to a pointer to a struct.
 
-extern struct struc_203F98C* dword_203F98C;
+extern const struct InputRecord* gInputDemoRecords;
 
-extern u16 word_203F990;
-extern u16 word_203F992;
+extern u16 gInputDemoStep;
+extern u16 gInputDemoRecordCount;
 
 extern s16 word_203F998;
 extern s16 word_203F99A;
@@ -807,15 +807,15 @@ extern fx32 dword_203F9F8;
 extern fx32 dword_203F9FC;
 
 // REMOVE THIS AT SOME POINT.
-extern u8 byte_203F9A1;
+extern bool8 gReadKeysFromDemoInput;
 extern bool8 gHidePlayer;
 
 extern fx32 gScriptCameraSavePosX;
 extern fx32 gScriptCameraSavePosY;
-extern u16 word_203FA10;
+extern u16 gInputDemoFrames;
 
 extern u8 byte_203FA12;
-extern u8 byte_203FA13;
+extern bool8 gInputDemoIsForward;
 extern u8 byte_203FA14;
 extern u8 byte_203FA15;
 extern u8 byte_203FA16;
@@ -1073,8 +1073,10 @@ extern u8 dword_80CB9A9[][3];
 
 extern u32 byte_80CEBC8[];
 
-extern struct struc_203F98C unk_80B21B4[];
-extern u32 dword_80B21B8;
+extern const struct InputRecord unk_80B21B4[];
+extern const u32 dword_80B21B8;
+extern const struct InputRecord stru_80B21BC[];
+extern const u32 dword_80B21C8;
 
 extern u32 unk_83FD834[];
 

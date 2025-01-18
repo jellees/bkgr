@@ -248,7 +248,7 @@ static void update_game(void) {
 
     sub_80344DC();
 
-    if (!byte_203F9A1) {
+    if (!gReadKeysFromDemoInput) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
         if (gRecordInput) {
             debug_record_input();
@@ -332,7 +332,7 @@ static void update_game(void) {
         sub_8062484();
     }
 
-    if ((!byte_203F99C || byte_203F9A1) && !byte_203FA35) {
+    if ((!byte_203F99C || gReadKeysFromDemoInput) && !byte_203FA35) {
         if (!(gKeysPressed & word_20010AC)) {
             word_20010AC = 0;
             if (!gIsSlideMiniGame) {

@@ -108,10 +108,10 @@ SECTIONS
         dword_203F8B4 = .; . += 4;
 
         . = 0x0003F98C;
-        dword_203F98C = .; . += 4;
+        gInputDemoRecords = .; . += 4;
 
         . = 0x0003F992;
-        word_203F992 = .; . += 2;
+        gInputDemoRecordCount = .; . += 2;
 
         . = 0x0003F998;
         word_203F998 = .; . += 2;
@@ -124,7 +124,7 @@ SECTIONS
         byte_203F99F = .; . += 1;
 
         . = 0x0003F9A1;
-        byte_203F9A1 = .; . += 1;
+        gReadKeysFromDemoInput = .; . += 1;
         gHidePlayer = .; . += 1;
 
         . = 0x0003FA35;

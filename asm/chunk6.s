@@ -24303,7 +24303,7 @@ _0803458C:
 	ldr r0, _08034590
 	b _0803456E
 	.align 2, 0
-_08034590: .4byte byte_203F9A1
+_08034590: .4byte gReadKeysFromDemoInput
 _08034594:
 	ldr r0, _080345A0
 	ldrb r0, [r0]
@@ -24312,7 +24312,7 @@ _08034594:
 	ldr r0, _080345A4
 	b _0803456E
 	.align 2, 0
-_080345A0: .4byte byte_203F9A1
+_080345A0: .4byte gReadKeysFromDemoInput
 _080345A4: .4byte byte_203F99E
 _080345A8:
 	mov r1, r8
@@ -40210,7 +40210,7 @@ sub_803BEE0: @ 0x0803BEE0
 	b _0803BF34
 	.align 2, 0
 _0803BF14: .4byte 0x0203E16A
-_0803BF18: .4byte byte_203F9A1
+_0803BF18: .4byte gReadKeysFromDemoInput
 _0803BF1C: .4byte gKeyInput
 _0803BF20: .4byte 0x000003FF
 _0803BF24: .4byte 0x0203E984
@@ -41087,9 +41087,9 @@ _0803C5C6:
 	.align 2, 0
 _0803C5CC: .4byte 0x0203E953
 _0803C5D0: .4byte 0x0203F98C
-_0803C5D4: .4byte 0x080B21BC
+_0803C5D4: .4byte stru_80B21BC
 _0803C5D8: .4byte 0x0203F992
-_0803C5DC: .4byte 0x080B21C8
+_0803C5DC: .4byte dword_80B21C8
 _0803C5E0: .4byte 0x083FD654
 _0803C5E4: .4byte gLoadedRoomBgm
 _0803C5E8: .4byte 0x0203EA88

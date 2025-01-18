@@ -108,7 +108,7 @@ _0805DE00:
 	b _0805DE00
 	.align 2, 0
 _0805DE48: .4byte byte_203F99E
-_0805DE4C: .4byte byte_203F9A1
+_0805DE4C: .4byte gReadKeysFromDemoInput
 _0805DE50: .4byte byte_203F99C
 _0805DE54: .4byte word_203F998
 _0805DE58: .4byte word_203F99A
@@ -169,7 +169,7 @@ _0805DEC6:
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _0805DF62
-	bl sub_805DA94
+	bl play_input_demo
 	ldr r4, _0805DF34
 	str r5, [r4]
 	adds r0, r5, #0
@@ -252,5 +252,5 @@ _0805DF70:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DF80: .4byte byte_203F9A1
+_0805DF80: .4byte gReadKeysFromDemoInput
 

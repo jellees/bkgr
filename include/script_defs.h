@@ -272,7 +272,7 @@ enum ScriptWaitCond {
 
 #define Sub805F7D8(unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F7D8, unknown, 0, 0, 0)
 
-#define Sub805F808(unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F808, unknown, 0, 0, 0)
+#define Sub805F808(forward) SCRIPT_CMD(SCRIPT_CMD_sub_805F808, forward, 0, 0, 0)
 
 #define CameraAlloc SCRIPT_CMD(SCRIPT_CMD_CAMERA_ALLOC, 0, 0, 0, 0)
 
