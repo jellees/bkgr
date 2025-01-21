@@ -96,9 +96,9 @@ u8 gContinueGame;
 u8 byte_20010AF;
 u8 byte_20010B0;
 u8 byte_20010B1;
-char gSaveFileString1[0x1A];
-char gSaveFileString2[0x1A];
-char gSaveFileString3[0x1A];
+char gSaveFileString1[26];
+char gSaveFileString2[26];
+char gSaveFileString3[26];
 u8 gTextSpeed;
 u32 dword_2001104;
 u32 dword_2001108;
@@ -2003,7 +2003,7 @@ int sub_800C50C() {
         return stru_3002950.playerSpritePriority;
     }
 
-    if (pos >> 16 >= stru_3002950.field_48) {
+    if (pos >> FX32_SHIFT >= stru_3002950.field_48) {
         return stru_3002950.field_6;
     }
 

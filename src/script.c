@@ -676,6 +676,75 @@ static bool32 sub_805DD20(void) {
 // https://decomp.me/scratch/BrRUy
 #ifndef NONMATCHING
 asm_unified(".include \"asm/nonmatching/update_scripts.s\"");
+#else
+void update_scripts(void) {
+    u8 i;
+
+    if (!byte_203F99E && !byte_203F9A1) {
+        return;
+    }
+
+    sub_0805D6B0();
+    byte_203F99C = 0;
+    word_203F998 = -1;
+    word_203F99A = -1;
+    byte_203F9A1 = 0;
+    byte_203F99E = 0;
+
+    for (i = 0; i < 2; i++) {
+        if (gScripts[i].isActive && (gScripts[i].field_23 || !byte_203FA16)) {
+            gCurrentScript = &gScripts[i];
+            while (1) {
+                struct Command* cmd = &dScripts[gCurrentScript->scriptIdx][gCurrentScript->cmdIdx];
+                int idx = cmd->idx;
+                int arg1 = cmd->arg1;
+                int arg2 = cmd->arg2;
+                int arg3 = cmd->arg3;
+                int arg4 = cmd->arg4;
+                if (!gFunctionList[idx](arg1, arg2, arg3, arg4)) {
+                    break;
+                }
+                gCurrentScript->cmdIdx++;
+            }
+            sub_805D8D8(gCurrentScript);
+            if (gCurrentScript->endScript) {
+                end_script(gCurrentScript);
+            }
+            if (gCurrentScript->isActive) {
+                byte_203F99E = 1;
+                if (gCurrentScript->field_23) {
+                    byte_203F99C = 1;
+                    word_203F998 = gCurrentScript->field_1A;
+                } else {
+                    word_203F99A = gCurrentScript->field_1A;
+                }
+            }
+        }
+        if (gScripts[i].field_24) {
+            sub_805DA94();
+            gCurrentScript = &gScripts[i];
+            sub_805D8D8(gCurrentScript);
+            while (1) {
+                struct Command* cmd = &dScripts[gCurrentScript->scriptIdx][gCurrentScript->cmdIdx];
+                int idx = cmd->idx;
+                int arg1 = cmd->arg1;
+                int arg2 = cmd->arg2;
+                int arg3 = cmd->arg3;
+                int arg4 = cmd->arg4;
+                if (!gFunctionList[idx](arg1, arg2, arg3, arg4)) {
+                    break;
+                }
+                gCurrentScript->cmdIdx++;
+            }
+            if (gCurrentScript->endScript) {
+                end_script(gCurrentScript);
+            }
+            if (gCurrentScript->field_24) {
+                byte_203F9A1 = 1;
+            }
+        }
+    }
+}
 #endif
 
 void render_scripts(u32** a1, u32* a2) {
