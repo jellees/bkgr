@@ -1134,7 +1134,7 @@ _08006E50:
 	ldrb r0, [r5, #0x18]
 	movs r2, #0x16
 	ldrsh r1, [r5, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08006E8E
 	ldrb r0, [r5, #0x19]
@@ -3027,7 +3027,7 @@ _08007D1E:
 	ldrb r0, [r5, #0x18]
 	movs r2, #0x16
 	ldrsh r1, [r5, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08007D60
 	ldrb r0, [r5, #0x19]
@@ -4014,7 +4014,7 @@ _080084AA:
 	ldrb r0, [r5, #0x18]
 	movs r2, #0x16
 	ldrsh r1, [r5, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _080084E8
 	ldrb r0, [r5, #0x19]
@@ -4990,7 +4990,7 @@ _08008C10:
 	ldrb r0, [r5, #0x18]
 	movs r3, #0x16
 	ldrsh r1, [r5, r3]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08008C4E
 	ldrb r0, [r5, #0x19]
@@ -5850,7 +5850,7 @@ _08009294:
 	ldrb r0, [r5, #0x18]
 	movs r2, #0x16
 	ldrsh r1, [r5, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _080092D6
 	ldrb r0, [r5, #0x19]

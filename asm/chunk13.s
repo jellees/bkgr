@@ -2781,7 +2781,7 @@ _0806249A:
 	ldrh r0, [r1]
 	movs r2, #0x1c
 	ldrsh r1, [r1, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _080624F4
 	ldr r0, _08062514

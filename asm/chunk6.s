@@ -1068,7 +1068,7 @@ _08028544:
 	bls _08028564
 	movs r4, #6
 	ldrsh r1, [r7, r4]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08028564
 	ldr r5, [sp, #0xc]
@@ -1324,7 +1324,7 @@ _08028798:
 	ldrh r0, [r7, #2]
 	movs r2, #6
 	ldrsh r1, [r7, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080287AA
@@ -2233,7 +2233,7 @@ _08028EB2:
 	ldrh r0, [r3, #2]
 	movs r2, #6
 	ldrsh r1, [r3, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08028EC4
 	b _08029374
@@ -2589,7 +2589,7 @@ _0802917E:
 _08029180:
 	movs r0, #0xcd
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _080291A4
 	adds r4, r5, #0
@@ -2623,7 +2623,7 @@ _080291C0: .4byte 0x00000221
 _080291C4:
 	movs r0, #0xcd
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _080291EC
 	adds r4, r5, #0
@@ -3352,7 +3352,7 @@ _08029754:
 	ldrh r0, [r3, #2]
 	movs r2, #6
 	ldrsh r1, [r3, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08029766
 	b _08029BE2
@@ -3720,7 +3720,7 @@ _08029A16:
 _08029A3A:
 	movs r0, #0xcd
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08029A5C
 	adds r0, r5, #0
@@ -3752,7 +3752,7 @@ _08029A74: .4byte 0x00000221
 _08029A78:
 	movs r0, #0xcd
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08029A9C
 	adds r0, r5, #0
@@ -4427,7 +4427,7 @@ _08029FA8:
 	ldrh r0, [r4]
 	movs r2, #0x1c
 	ldrsh r1, [r4, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08029FD6
 	adds r0, r4, #0
@@ -4577,7 +4577,7 @@ _0802A0D8:
 	ldrh r0, [r4]
 	movs r2, #0x1c
 	ldrsh r1, [r4, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802A106
 	adds r0, r4, #0
@@ -4723,7 +4723,7 @@ _0802A1FC:
 	ldrh r0, [r4]
 	movs r2, #0x1c
 	ldrsh r1, [r4, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802A22A
 	adds r0, r4, #0
@@ -4833,7 +4833,7 @@ _0802A2E8:
 	movs r2, #0x1c
 	ldrsh r1, [r4, r2]
 	str r3, [sp]
-	bl sub_80342CC
+	bl is_obj_disabled
 	ldr r3, [sp]
 	cmp r0, #0
 	beq _0802A324
@@ -5715,7 +5715,7 @@ _0802A9B2:
 	movs r3, #0x1c
 	ldrsh r1, [r7, r3]
 	adds r0, r2, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802A9EC
 _0802A9CE:
@@ -6212,8 +6212,8 @@ sub_802ADB0: @ 0x0802ADB0
 	bx r0
 
     .thumb
-	.global sub_802ADE8
-sub_802ADE8: @ 0x0802ADE8
+	.global handle_obj_interactions
+handle_obj_interactions: @ 0x0802ADE8
 	push {r4, r5, r6, lr}
 	sub sp, #0x18
 	adds r5, r0, #0
@@ -6630,7 +6630,7 @@ _0802B108:
 	ldrh r0, [r5]
 	movs r4, #0x1c
 	ldrsh r1, [r5, r4]
-	bl sub_80342F8
+	bl run_obj_behavior
 	b _0802B43C
 	.align 2, 0
 _0802B148: .4byte 0x080CC938
@@ -6657,7 +6657,7 @@ _0802B16C:
 	ldrh r0, [r5]
 	movs r2, #0x1c
 	ldrsh r1, [r5, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802B17C
 	b _0802B422
@@ -6849,7 +6849,7 @@ _0802B2DE:
 	cmp r0, #0xcd
 	bne _0802B300
 	ldrh r1, [r5, #0x1e]
-	bl sub_80342F8
+	bl run_obj_behavior
 	b _0802B422
 	.align 2, 0
 _0802B2F8: .4byte 0x0203DFB8
@@ -6923,7 +6923,7 @@ _0802B37C:
 	ldrh r0, [r5]
 	movs r4, #0x1c
 	ldrsh r1, [r5, r4]
-	bl sub_80342F8
+	bl run_obj_behavior
 	ldrh r0, [r5]
 	lsls r0, r0, #3
 	add r0, r8
@@ -7015,7 +7015,7 @@ _0802B450: .4byte 0x0203DFD6
 _0802B454: .4byte 0x0203E00D
 
     .thumb
-sub_802B458: @ 0x0802B458
+talk_with_npc: @ 0x0802B458
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -7131,7 +7131,7 @@ _0802B544: .4byte dword_203DFDC
 _0802B548: .4byte dword_203DFE0
 
     .thumb
-sub_802B54C: @ 0x0802B54C
+pick_up_collectable: @ 0x0802B54C
 	push {r4, r5, lr}
 	adds r5, r1, #0
 	adds r1, #0x64
@@ -7168,7 +7168,7 @@ _0802B562:
 	ldrh r0, [r5]
 	movs r2, #0x1c
 	ldrsh r1, [r5, r2]
-	bl sub_80342F8
+	bl run_obj_behavior
 	movs r0, #1
 _0802B5A0:
 	pop {r4, r5}
@@ -7245,7 +7245,7 @@ _0802B636:
 	bx r1
 
     .thumb
-sub_802B63C: @ 0x0802B63C
+handle_static_enemy: @ 0x0802B63C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -7322,7 +7322,7 @@ _0802B6D0:
 	ldrh r0, [r6]
 	movs r2, #0x1c
 	ldrsh r1, [r6, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802B6F0
 	adds r0, r6, #0
@@ -7393,7 +7393,7 @@ _0802B75A:
 	ldrh r0, [r6]
 	movs r2, #0x1c
 	ldrsh r1, [r6, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802B76A
 	b _0802B96C
@@ -7469,7 +7469,7 @@ _0802B7F0:
 	ldrh r0, [r6]
 	movs r2, #0x1c
 	ldrsh r1, [r6, r2]
-	bl sub_80342F8
+	bl run_obj_behavior
 	movs r0, #1
 	adds r1, r6, #0
 	bl sub_802E024
@@ -7478,7 +7478,7 @@ _0802B804:
 	movs r4, #0x1c
 	ldrsh r1, [r6, r4]
 	movs r0, #0x66
-	bl sub_80342F8
+	bl run_obj_behavior
 	mov r0, sb
 	cmp r0, #0
 	beq _0802B816
@@ -7488,7 +7488,7 @@ _0802B816:
 	rsbs r1, r1, #0
 	movs r0, #1
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _0802B822:
 	movs r0, #1
 	b _0802B970
@@ -7503,7 +7503,7 @@ _0802B834:
 	movs r4, #0x1c
 	ldrsh r1, [r6, r4]
 	movs r0, #0xb
-	bl sub_80342F8
+	bl run_obj_behavior
 	ldr r4, _0802B85C
 	movs r0, #0
 	movs r1, #0x27
@@ -7522,7 +7522,7 @@ _0802B860:
 	ldrh r0, [r6]
 	movs r2, #0x1c
 	ldrsh r1, [r6, r2]
-	bl sub_80342F8
+	bl run_obj_behavior
 	b _0802B96C
 _0802B86C:
 	movs r0, #0x1c
@@ -7607,7 +7607,7 @@ _0802B8C0:
 	rsbs r7, r7, #0
 	adds r1, r7, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	ldrh r0, [r6]
 	cmp r0, #0x91
 	beq _0802B922
@@ -7790,7 +7790,7 @@ _0802BA6C: @ jump table
 _0802BA8C:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_802B458
+	bl talk_with_npc
 _0802BA94:
 	cmp r0, #0
 	beq _0802BB04
@@ -7812,7 +7812,7 @@ _0802BA9A:
 	ldrh r0, [r4]
 	movs r2, #0x1c
 	ldrsh r1, [r4, r2]
-	bl sub_80342F8
+	bl run_obj_behavior
 	b _0802BB16
 	.align 2, 0
 _0802BAC4: .4byte gTransformation
@@ -7823,13 +7823,13 @@ _0802BAD0:
 	adds r1, r4, #0
 	mov r2, sl
 	mov r3, sb
-	bl sub_802B54C
+	bl pick_up_collectable
 	b _0802BA94
 _0802BADE:
 	adds r0, r4, #0
 	mov r1, sp
 	mov r2, r8
-	bl sub_802B63C
+	bl handle_static_enemy
 	cmp r0, #0
 	blt _0802BB04
 	b _0802BB18
@@ -7985,7 +7985,7 @@ _0802BC14:
 _0802BC1E:
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_802B458
+	bl talk_with_npc
 _0802BC26:
 	cmp r0, #0
 	beq _0802BC96
@@ -8019,7 +8019,7 @@ _0802BC60:
 	adds r1, r4, #0
 	mov r2, sl
 	adds r3, r7, #0
-	bl sub_802B54C
+	bl pick_up_collectable
 	b _0802BC26
 _0802BC6E:
 	adds r0, r6, #0
@@ -8032,7 +8032,7 @@ _0802BC7C:
 	adds r0, r4, #0
 	mov r1, sp
 	mov r2, sb
-	bl sub_802B63C
+	bl handle_static_enemy
 	cmp r0, #0
 	blt _0802BC96
 	b _0802BCAC
@@ -8124,7 +8124,7 @@ _0802BD24:
 _0802BD2E:
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_802B458
+	bl talk_with_npc
 	cmp r0, #0
 	beq _0802BD7A
 	b _0802BD8C
@@ -8255,7 +8255,7 @@ _0802BDC6:
 	ldrh r0, [r4]
 	movs r2, #0x1c
 	ldrsh r1, [r4, r2]
-	bl sub_80342F8
+	bl run_obj_behavior
 	b _0802BE6A
 	.align 2, 0
 _0802BE44: .4byte 0x0203DFD3
@@ -12968,14 +12968,14 @@ _0802E0B0: @ jump table
 _0802E6F4:
 	movs r0, #0xd9
 	movs r1, #0x10
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802E75C
 	movs r4, #0xd1
 	lsls r4, r4, #1
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802E744
 	ldr r1, _0802E738
@@ -13016,12 +13016,12 @@ _0802E75C:
 	lsls r4, r4, #1
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802E774
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802E774:
 	ldr r1, _0802E784
 	movs r0, #1
@@ -13129,24 +13129,24 @@ _0802E85C:
 	movs r0, #0x86
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802E8D4
 	ldr r4, _0802E8AC
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802E880
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802E880:
 	movs r4, #0x85
 	lsls r4, r4, #1
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802E8B8
@@ -13180,7 +13180,7 @@ _0802E8D4:
 	ldr r4, _0802E908
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802E918
 	ldr r1, _0802E90C
@@ -13244,13 +13244,13 @@ _0802E960: .4byte dword_203DFDC
 _0802E964:
 	movs r0, #0xd9
 	movs r1, #9
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802E9CC
 	ldr r4, _0802E9A4
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802E9B4
 	ldr r1, _0802E9A8
@@ -13291,12 +13291,12 @@ _0802E9CC:
 	ldr r4, _0802E9F4
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802E9E2
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802E9E2:
 	ldr r1, _0802E9F8
 	movs r0, #1
@@ -13999,12 +13999,12 @@ _0802EFAC:
 	lsls r4, r4, #1
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802EFC4
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802EFC4:
 	ldr r1, _0802EFD4
 	movs r0, #0
@@ -14020,12 +14020,12 @@ _0802EFDC:
 	ldr r4, _0802F004
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802EFF2
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802EFF2:
 	ldr r1, _0802F008
 	movs r0, #0
@@ -14110,7 +14110,7 @@ _0802F0AA:
 	ldr r4, _0802F0CC
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802F0BC
 	bl _0802FDA8
@@ -14155,17 +14155,17 @@ _0802F110: .4byte 0x02002E4E
 _0802F114:
 	movs r0, #0xef
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802F158
 	movs r0, #0xf0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F134
 	movs r0, #0xf0
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802F134:
 	ldr r1, _0802F150
 	movs r0, #0
@@ -14185,7 +14185,7 @@ _0802F154: .4byte dword_203DFDC
 _0802F158:
 	movs r0, #0xf0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F188
@@ -14234,7 +14234,7 @@ _0802F1C8:
 	movs r0, #0xc1
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F1F0
 	ldr r1, _0802F1E8
@@ -14272,23 +14272,23 @@ _0802F220: .4byte dword_203DFDC
 _0802F224:
 	movs r0, #0xf5
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _0802F2C0
 	ldr r0, _0802F26C
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802F278
 	movs r0, #0xec
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F252
 	movs r0, #0xec
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802F252:
 	ldr r0, _0802F270
 	strb r4, [r0]
@@ -14308,7 +14308,7 @@ _0802F274: .4byte dword_203DFDC
 _0802F278:
 	movs r0, #0xec
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F2A8
@@ -14351,22 +14351,22 @@ _0802F2D8: .4byte dword_203DFDC
 _0802F2DC:
 	movs r0, #0x37
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802F32C
 	movs r0, #0x38
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0802F32C
 	movs r0, #0xe9
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F308
 	movs r0, #0xe9
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802F308:
 	ldr r1, _0802F324
 	movs r0, #0
@@ -14386,7 +14386,7 @@ _0802F328: .4byte dword_203DFDC
 _0802F32C:
 	movs r0, #0xe9
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F358
@@ -14416,7 +14416,7 @@ _0802F36C: .4byte dword_203DFDC
 _0802F370:
 	movs r0, #0xe8
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F3BC
@@ -14429,10 +14429,10 @@ _0802F370:
 	bl sub_8025EF4
 	movs r0, #0xe8
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 	movs r0, #0xea
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F3A6
 	bl _0802FDA8
@@ -14447,7 +14447,7 @@ _0802F3B8: .4byte 0x0000017D
 _0802F3BC:
 	movs r0, #0xea
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F3E0
 	ldr r1, _0802F3D8
@@ -14479,7 +14479,7 @@ _0802F400: .4byte dword_203DFDC
 _0802F404:
 	movs r0, #0xe7
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F44C
@@ -14492,10 +14492,10 @@ _0802F404:
 	bl sub_8025EF4
 	movs r0, #0xe7
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 	movs r0, #0xe6
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F43A
 	bl _0802FDA8
@@ -14510,7 +14510,7 @@ _0802F448: .4byte dword_203DFDC
 _0802F44C:
 	movs r0, #0xe6
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F470
 	ldr r1, _0802F468
@@ -14542,7 +14542,7 @@ _0802F490: .4byte dword_203DFDC
 _0802F494:
 	movs r0, #0xe6
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F4C4
@@ -14600,7 +14600,7 @@ _0802F508:
 	ldr r4, _0802F540
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F550
@@ -14676,7 +14676,7 @@ _0802F5C8: .4byte 0x0000015F
 _0802F5CC:
 	movs r0, #0x2a
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r4, r0, #0
 	cmp r4, #0
 	beq _0802F5F4
@@ -14756,7 +14756,7 @@ _0802F67C: .4byte dword_203DFDC
 _0802F680:
 	movs r0, #0xeb
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F6EC
@@ -14868,7 +14868,7 @@ _0802F780:
 	movs r0, #0x89
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802F800
@@ -15070,13 +15070,13 @@ _0802F930: .4byte dword_203DFDC
 _0802F934:
 	movs r0, #0xda
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F99C
 	ldr r4, _0802F974
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F984
 	ldr r1, _0802F978
@@ -15118,19 +15118,19 @@ _0802F99C:
 	lsls r6, r6, #1
 	adds r0, r6, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _0802F9E8
 	ldr r5, _0802F9DC
 	adds r0, r5, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802F9C4
 	adds r0, r5, #0
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802F9C4:
 	ldr r0, _0802F9E0
 	strb r4, [r0]
@@ -15161,12 +15161,12 @@ _0802F9FC: .4byte dword_203DFDC
 _0802FA00:
 	movs r0, #0xe1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802FA54
 	movs r0, #0xe0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _0802FA3C
@@ -15180,7 +15180,7 @@ _0802FA00:
 	movs r0, #0xe0
 _0802FA2C:
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 	b _0802FDA8
 	.align 2, 0
 _0802FA34: .4byte 0x02002E4E
@@ -15201,18 +15201,18 @@ _0802FA54:
 	lsls r5, r5, #1
 	adds r0, r5, #0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _0802FA9C
 	movs r0, #0xe0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0802FA7A
 	movs r0, #0xe0
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 _0802FA7A:
 	ldr r0, _0802FA94
 	strb r4, [r0]
@@ -16987,12 +16987,12 @@ sub_8030934: @ 0x08030934
 	bne _0803095C
 	movs r0, #0xa1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0803095C
 	movs r0, #0xa1
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 	ldr r0, _080309D0
 	bl sub_0802FEDC
 _0803095C:
@@ -17002,12 +17002,12 @@ _0803095C:
 	bne _08030980
 	movs r0, #0xa2
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08030980
 	movs r0, #0xa2
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 	movs r0, #0xcd
 	lsls r0, r0, #1
 	bl sub_0802FEDC
@@ -17018,12 +17018,12 @@ _08030980:
 	bne _080309A2
 	movs r0, #0xa3
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _080309A2
 	movs r0, #0xa3
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 	ldr r0, _080309D4
 	bl sub_0802FEDC
 _080309A2:
@@ -17033,12 +17033,12 @@ _080309A2:
 	bne _080309C6
 	movs r0, #0xa4
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _080309C6
 	movs r0, #0xa4
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 	movs r0, #0xce
 	lsls r0, r0, #1
 	bl sub_0802FEDC
@@ -22314,7 +22314,7 @@ _080334E8:
 	bne _0803351C
 	ldrh r0, [r4, #6]
 	ldrh r1, [r4, #8]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0803351C
 	movs r0, #1
@@ -23000,7 +23000,7 @@ _08033B16:
 	beq _08033B96
 	ldrh r0, [r5, #6]
 	ldrh r1, [r5, #8]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033B8C
 	ldrb r1, [r5, #4]
@@ -23266,7 +23266,7 @@ _08033D74: .4byte gGameStatus
 _08033D78:
 	movs r0, #0xeb
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033D86
 	b _08033FA2
@@ -23297,21 +23297,21 @@ _08033DB4: .4byte 0x080CC8E4
 _08033DB8:
 	movs r0, #0xec
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033DC6
 	b _08033FA2
 _08033DC6:
 	movs r0, #0xf5
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033DD4
 	b _08033F9E
 _08033DD4:
 	ldr r0, _08033DE0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	b _08033D6C
 	.align 2, 0
 _08033DE0: .4byte 0x00000175
@@ -23342,14 +23342,14 @@ _08033E10: .4byte 0x080CEFA4
 _08033E14:
 	ldr r0, _08033E38
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033E22
 	b _08033FA2
 _08033E22:
 	movs r0, #0xda
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033E30
 	b _08033F9E
@@ -23367,7 +23367,7 @@ _08033E40: .4byte 0x00000179
 _08033E44:
 	ldr r0, _08033E68
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033E52
 	b _08033FA2
@@ -23375,7 +23375,7 @@ _08033E52:
 	movs r0, #0x86
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033E62
 	b _08033F9E
@@ -23388,14 +23388,14 @@ _08033E68: .4byte 0x00000177
 _08033E6C:
 	movs r0, #0xe0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033E7A
 	b _08033FA2
 _08033E7A:
 	movs r0, #0xe1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08033E88
 	b _08033F9E
@@ -23429,17 +23429,17 @@ _08033EBC: .4byte 0x080CC8EC
 _08033EC0:
 	movs r0, #0xe9
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033FA2
 	movs r0, #0x37
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033F9E
 	movs r0, #0x38
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033F9E
 	movs r0, #0xf6
@@ -23447,12 +23447,12 @@ _08033EC0:
 _08033EE8:
 	movs r0, #0xe8
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033FA2
 	movs r0, #0xea
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033F9E
 	movs r0, #0x37
@@ -23460,12 +23460,12 @@ _08033EE8:
 _08033F04:
 	movs r0, #0xe7
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033FA2
 	movs r0, #0xe6
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033F9E
 	movs r0, #0x38
@@ -23476,23 +23476,23 @@ _08033F20:
 _08033F24:
 	movs r0, #0xf0
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033FA2
 	movs r0, #0xef
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033F9E
 	movs r0, #0xf2
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	b _08033D6C
 _08033F46:
 	movs r0, #0x89
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033FA2
 	ldr r0, _08033F80
@@ -23526,7 +23526,7 @@ _08033F90:
 	lsls r0, r0, #1
 _08033F94:
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _08033FA2
 _08033F9E:
@@ -23661,7 +23661,7 @@ _080340A4:
 _080340BA:
 	movs r0, #0xf5
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _080340C8
 	b _080342C6
@@ -23738,7 +23738,7 @@ _0803414C:
 	movs r0, #0x82
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0803415C
 	b _080342C6
@@ -23774,7 +23774,7 @@ _08034192:
 	movs r0, #0x85
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _080341A2
 	b _080342C6
@@ -23809,7 +23809,7 @@ _080341D4:
 	movs r0, #0x83
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _080342C6
 	ldr r0, _080341F0
@@ -23873,7 +23873,7 @@ _08034246:
 _0803425A:
 	movs r0, #0xf1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _080342C6
 	ldr r0, _08034274
@@ -23904,7 +23904,7 @@ _08034296:
 	movs r0, #0x88
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _080342C6
 	movs r0, #0x31
@@ -23930,8 +23930,8 @@ _080342C6:
 	bx r0
 
     .thumb
-    .global sub_80342CC
-sub_80342CC: @ 0x080342CC
+    .global is_obj_disabled
+is_obj_disabled: @ 0x080342CC
 	push {r4, lr}
 	adds r3, r0, #0
 	adds r4, r1, #0
@@ -23957,8 +23957,8 @@ _080342EE:
 _080342F4: .4byte 0x080A7FA0
 
     .thumb
-    .global sub_80342F8
-sub_80342F8: @ 0x080342F8
+    .global run_obj_behavior
+run_obj_behavior: @ 0x080342F8
 	push {lr}
 	ldr r3, _0803430C
 	lsls r2, r0, #2
@@ -24332,7 +24332,7 @@ _080345A8:
 	adds r1, #8
 	adds r1, r4, r1
 	ldr r1, [r1]
-	bl sub_80342F8
+	bl run_obj_behavior
 	adds r1, r4, r5
 	movs r0, #0
 	str r0, [r1]
@@ -24361,7 +24361,7 @@ _080345F2:
 	adds r1, #8
 	adds r1, r4, r1
 	ldr r1, [r1]
-	bl sub_80342F8
+	bl run_obj_behavior
 	adds r4, r4, r5
 	str r6, [r4]
 _0803460C:
@@ -34446,7 +34446,7 @@ _080396B0:
 	ldrh r0, [r1, #2]
 	movs r2, #6
 	ldrsh r1, [r1, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	b _080396CC
 _080396CA:
 	movs r0, #0
@@ -34472,7 +34472,7 @@ _080396DC:
 	ldrh r0, [r1, #2]
 	movs r2, #6
 	ldrsh r1, [r1, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	b _080396F8
 _080396F6:
 	movs r0, #0
@@ -34498,7 +34498,7 @@ _08039708:
 	ldrh r0, [r1, #2]
 	movs r2, #6
 	ldrsh r1, [r1, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	b _08039724
 _08039722:
 	movs r0, #0
@@ -34524,7 +34524,7 @@ _08039734:
 	ldrh r0, [r1, #2]
 	movs r2, #6
 	ldrsh r1, [r1, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	b _08039750
 _0803974E:
 	movs r0, #0
@@ -38421,7 +38421,7 @@ _0803B27C: .4byte 0x0203E440
 _0803B280: .4byte gLoadedRoomLevel
 
 	.thumb
-sub_803B284: @ 0x0803B284
+obj_disabled_silver_coin: @ 0x0803B284
 	ldr r3, _0803B29C
 	ldr r0, _0803B2A0
 	ldrh r2, [r0]
@@ -39095,7 +39095,7 @@ _0803B708:
 	.align 2, 0
 
 	.thumb
-sub_803B710: @ 0x0803B710
+obj_disabled_shell_counter: @ 0x0803B710
 	push {r4, lr}
 	movs r2, #0
 	ldr r4, _0803B740
@@ -39262,7 +39262,7 @@ _0803B830: .4byte 0x0203E170
 _0803B834: .4byte gLoadedRoomLevel
 
 	.thumb
-sub_803B838: @ 0x0803B838
+obj_disabled_notes: @ 0x0803B838
 	ldr r3, _0803B850
 	ldr r0, _0803B854
 	ldrh r2, [r0]
@@ -40412,7 +40412,7 @@ sub_803C08C: @ 0x0803C08C
 	rsbs r1, r1, #0
 	movs r0, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	ldr r0, _0803C0C0
 	strb r4, [r0]
 	pop {r4}
@@ -40673,7 +40673,7 @@ _0803C288:
 	strb r0, [r2]
 	ldr r0, _0803C2A8
 	movs r1, #0
-	bl sub_80342F8
+	bl run_obj_behavior
 	movs r0, #0x6c
 	bl sub_8029C30
 	b _0803C320
@@ -41296,7 +41296,7 @@ _0803C742:
 	movs r0, #0x86
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0803C764
 	movs r0, #0xcc
@@ -41414,7 +41414,7 @@ sub_803C7C8: @ 0x0803C7C8
 _0803C838:
 	movs r0, #0xef
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0803C84A
 	movs r0, #0x90
@@ -42036,7 +42036,7 @@ sub_803CC80: @ 0x0803CC80
 _0803CCF0:
 	ldr r0, _0803CD28
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0803CD02
 	movs r0, #0x82
@@ -42115,7 +42115,7 @@ sub_803CD2C: @ 0x0803CD2C
 _0803CD9C:
 	movs r0, #0xda
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0803CDAE
 	movs r0, #0x56
@@ -42241,7 +42241,7 @@ sub_803CE24: @ 0x0803CE24
 _0803CE94:
 	movs r0, #0xe1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0803CEA6
 	movs r0, #0x47
@@ -42700,7 +42700,7 @@ _0803D1EC:
 	bl sub_08040204
 	ldr r0, _0803D238
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	beq _0803D27C
 	movs r0, #0x36
@@ -42913,7 +42913,7 @@ _0803D3A8:
 	ldrsh r1, [r0, r2]
 _0803D3B8:
 	movs r0, #0x27
-	bl sub_80342F8
+	bl run_obj_behavior
 	b _0803D3DE
 	.align 2, 0
 _0803D3C0: .4byte 0x0203E93A
@@ -42928,7 +42928,7 @@ _0803D3C8:
 	movs r2, #0xc
 	ldrsh r1, [r0, r2]
 	movs r0, #0x27
-	bl sub_80342F8
+	bl run_obj_behavior
 _0803D3DE:
 	pop {r0}
 	bx r0
@@ -43918,7 +43918,7 @@ _0803DB9E:
 	movs r0, #0x88
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0803DBFA
 	ldr r0, _0803DC40
@@ -44063,7 +44063,7 @@ _0803DCE2:
 	movs r0, #0x88
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0803DD3E
 	ldr r0, _0803DD84
@@ -44208,7 +44208,7 @@ _0803DE26:
 	movs r0, #0x88
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0803DE82
 	ldr r0, _0803DEC8
@@ -44353,7 +44353,7 @@ _0803DF6A:
 	movs r0, #0x88
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0803DFC6
 	ldr r0, _0803E00C
@@ -44498,7 +44498,7 @@ _0803E0AE:
 	movs r0, #0x88
 	lsls r0, r0, #1
 	movs r1, #0
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _0803E10A
 	ldr r0, _0803E150

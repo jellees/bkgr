@@ -178,12 +178,12 @@ bool32 sub_0800BCD4(struct struc_44* a1);
 int sub_800C50C();
 bool32 sub_800DE04();
 void sub_800DE9C();
-void sub_800EB14();
+void sub_800EB14(void);
 void sub_800ECB4();
 void init_room_name();
 void hide_room_name();
 void init_efx();
-void pause_efx();
+void pause_efx(void);
 static void update_game(void);
 static void sub_8009D2C();
 static void init_memory();
@@ -205,12 +205,12 @@ static void sub_800E61C();
 static void sub_800E6D0();
 static void sub_800E7A0();
 static void sub_800EA9C();
-static void sub_800EACC();
+static void sub_800EACC(void);
 static void sub_800EB58(bool32 a1);
-static void show_room_name();
+static void show_room_name(void);
 static void sub_800EF6C(int warp);
-static void sub_800F430();
-static void update_efx();
+static void sub_800F430(void);
+static void update_efx(void);
 
 int AgbMain() {
     init_memory();
@@ -925,7 +925,7 @@ static bool32 sub_800A974() {
 
     if (gFloorPlaneResult.floorType == 2 && stru_3002950.floorType == 2) {
         if (gTransformation != TRANSFORMATION_BANJO && gTransformation != TRANSFORMATION_OCTOPUS) {
-            sub_80192D4(16, -1, 0);
+            hurt_player(16, -1, 0);
             return FALSE;
         }
 
@@ -1017,7 +1017,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
         if (gFloorPlaneResult.floorType == 2 && gTransformation != TRANSFORMATION_BANJO
             && gTransformation != TRANSFORMATION_OCTOPUS && gGameStatus.health != 0) {
             if (!byte_20020BC) {
-                sub_80192D4(16, -1, 0);
+                hurt_player(16, -1, 0);
             }
 
             return FALSE;
@@ -1026,7 +1026,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
         if (gFloorPlaneResult.field_4E && !byte_200108E && gTransformation != TRANSFORMATION_OCTOPUS
             && gTransformation != TRANSFORMATION_TANK
             && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
-            sub_80192D4(gFloorPlaneResult.field_4E, -1, 1);
+            hurt_player(gFloorPlaneResult.field_4E, -1, 1);
             byte_200108E = 1;
             word_2001092 = gFloorPlaneResult.field_4F;
             gPlayerIsTransparent = TRUE;
@@ -1277,7 +1277,7 @@ static void update_player() {
 
     sub_800AA6C(&gPlayerPosTemp, &gPlayerShadowPosTemp, &vec3, &vec1);
 
-    if (sub_802ADE8(&gPlayerPosTemp)) {
+    if (handle_obj_interactions(&gPlayerPosTemp)) {
         return;
     }
 
@@ -1960,7 +1960,7 @@ void sub_0800C388(int a1, int a2) {
     sub_8039210();
     gPlayerSprite.attr0Flag9 = 0;
 
-    if (gLoadedRoomIndex == ROOM_UNDERCORAL && !sub_80342CC(94, 0)) {
+    if (gLoadedRoomIndex == ROOM_UNDERCORAL && !is_obj_disabled(94, 0)) {
         start_script(80);
     }
 
@@ -2082,7 +2082,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_BEACHSHOOT:
-            if (!gUnlockedMoves[MOVE_EGG_BLUE] || sub_80342CC(217, 10)) {
+            if (!gUnlockedMoves[MOVE_EGG_BLUE] || is_obj_disabled(217, 10)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2103,7 +2103,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_GRUNTYSHOOT:
-            if (sub_80342CC(205, 0)) {
+            if (is_obj_disabled(205, 0)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2124,7 +2124,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_SKIDOOS:
-            if (sub_80342CC(217, 14)) {
+            if (is_obj_disabled(217, 14)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2145,7 +2145,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_BOATFIGHT:
-            if (sub_80342CC(217, 11)) {
+            if (is_obj_disabled(217, 11)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2168,7 +2168,7 @@ static int sub_0800C63C(int room, u32 warp) {
         case ROOM_SHEEPDIP:
             switch (gLoadedRoomIndex) {
                 case ROOM_UPPERFARM:
-                    if (sub_80342CC(217, 15)) {
+                    if (is_obj_disabled(217, 15)) {
                         return 2;
                     }
                     audio_halt_all_fx();
@@ -2189,7 +2189,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     return 1;
 
                 case ROOM_BOARDWALK:
-                    if (sub_80342CC(217, 17)) {
+                    if (is_obj_disabled(217, 17)) {
                         return 2;
                     }
                     pause_efx();
@@ -2211,7 +2211,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     return 1;
 
                 case ROOM_FJORD:
-                    if (sub_80342CC(217, 18)) {
+                    if (is_obj_disabled(217, 18)) {
                         return 2;
                     }
                     audio_halt_all_fx();
@@ -2481,7 +2481,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
     switch (a1) {
         case 9:
             room = ROOM_LOWERFARM;
-            if (sub_80342CC(0xD9, 0x10)) {
+            if (is_obj_disabled(0xD9, 0x10)) {
                 script = 0;
             } else if (a2) {
                 sub_8034460(217, 16, 0, 0);
@@ -2493,7 +2493,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 0:
             room = ROOM_BEACHSTART;
-            if (sub_80342CC(0xD9, 9)) {
+            if (is_obj_disabled(0xD9, 9)) {
                 script = 0;
             } else if (a2) {
                 sub_8034460(0xD9, 9, 0, 0);
@@ -2505,7 +2505,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 5:
             room = ROOM_SANDAREA;
-            if (sub_80342CC(0xD9, 0xD)) {
+            if (is_obj_disabled(0xD9, 0xD)) {
                 script = 0;
             } else if (a2) {
                 sub_8034460(0xD9, 0xD, 0, 0);
@@ -2517,7 +2517,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 1:
             room = ROOM_BEACHSTART;
-            if (a2 && !sub_80342CC(0xD9, 0xA)) {
+            if (a2 && !is_obj_disabled(0xD9, 0xA)) {
                 sub_8034460(0xD9, 0xA, 0, 0);
                 script = 78;
                 break;
@@ -2528,7 +2528,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 2:
             room = ROOM_HARBOUR;
-            if (a2 && !sub_80342CC(0xCD, 0)) {
+            if (a2 && !is_obj_disabled(0xCD, 0)) {
                 sub_8034460(0xCD, 0, 0, 0);
                 script = 129;
                 break;
@@ -2539,8 +2539,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 3:
             room = ROOM_BEACHSTART;
-            if (a2 && !sub_80342CC(0xD9, 0xB)) {
-                sub_80342F8(0xD9, 0xB);
+            if (a2 && !is_obj_disabled(0xD9, 0xB)) {
+                run_obj_behavior(0xD9, 0xB);
                 script = 0;
                 break;
             } else {
@@ -2550,8 +2550,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 4:
             room = ROOM_FJORD;
-            if (a2 && !sub_80342CC(0xD9, 0xE)) {
-                sub_80342F8(0xD9, 0xE);
+            if (a2 && !is_obj_disabled(0xD9, 0xE)) {
+                run_obj_behavior(0xD9, 0xE);
                 script = 0;
                 break;
             } else {
@@ -2561,7 +2561,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 6:
             room = ROOM_UPPERFARM;
-            if (a2 && !sub_80342CC(0xD9, 0xF)) {
+            if (a2 && !is_obj_disabled(0xD9, 0xF)) {
                 sub_8034460(0xD9, 0xF, 0, 0);
                 script = 72;
             } else {
@@ -2571,7 +2571,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 7:
             room = ROOM_BOARDWALK;
-            if (a2 && !sub_80342CC(0xD9, 0x11)) {
+            if (a2 && !is_obj_disabled(0xD9, 0x11)) {
                 sub_8034460(0xD9, 0x11, 0, 0);
                 script = 103;
             } else {
@@ -2581,7 +2581,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 8:
             room = ROOM_FJORD;
-            if (a2 && !sub_80342CC(0xD9, 0x12)) {
+            if (a2 && !is_obj_disabled(0xD9, 0x12)) {
                 sub_8034460(0xD9, 0x12, 0, 0);
                 script = 147;
             } else {
@@ -2845,7 +2845,7 @@ static void sub_800DF34() {
     if (gPoisonEffectEnabled && !byte_203F99C && gGameStatus.health != 0) {
         if (gPoisonHitTimer == 0) {
             gPoisonHitTimer = 240;
-            sub_80192D4(dword_20011F8, -1, 1);
+            hurt_player(dword_20011F8, -1, 1);
         } else {
             gPoisonHitTimer--;
         }
@@ -2930,12 +2930,12 @@ static void sub_800DF34() {
     }
 }
 
-void decrease_player_health(int a1) {
-    if (a1 == 0) {
+void decrease_player_health(int amount) {
+    if (amount == 0) {
         return;
     }
 
-    if (gGameStatus.health <= a1) {
+    if (gGameStatus.health <= amount) {
         gGameStatus.health = 0;
         sub_08040204(56, 0);
         PLAY_SFX(79);
@@ -2943,7 +2943,7 @@ void decrease_player_health(int a1) {
             byte_20010B0 = 1;
         }
     } else {
-        gGameStatus.health -= a1;
+        gGameStatus.health -= amount;
         sub_08040204(56, gGameStatus.health);
     }
 }
@@ -3332,7 +3332,7 @@ static void sub_800EA9C() {
     sub_80275CC(dword_2001164);
 }
 
-static void sub_800EACC() {
+static void sub_800EACC(void) {
     if (byte_200116C) {
         if (stru_20076C4[dword_2001164].field_0) {
             sub_802742C(dword_2001164, unk_2002EC4, unk_20046C4);
@@ -3342,7 +3342,7 @@ static void sub_800EACC() {
     }
 }
 
-void sub_800EB14() {
+void sub_800EB14(void) {
     if (gLoadedRoomIndex == ROOM_DIVESPOT || gLoadedRoomIndex == ROOM_UNDERCORAL) {
         if (!byte_20010B1) {
             sub_800EB58(1);
@@ -3470,7 +3470,7 @@ void init_room_name() {
     }
 }
 
-static void show_room_name() {
+static void show_room_name(void) {
     if (gShowRoomName) {
         if (gRoomNameApparenceTimer == 0) {
             gShowRoomName = 0;
@@ -3763,7 +3763,7 @@ void sub_0800F02C(int* a1, int a2, int a3) {
     dword_20011C4 = FX32_CONST(-byte_200111B);
 }
 
-static void sub_800F430() {
+static void sub_800F430(void) {
     if (byte_200110C == 0) {
         return;
     }
@@ -3891,7 +3891,7 @@ static void sub_800F430() {
     }
 }
 
-void restore_full_health() {
+void restore_full_health(void) {
     if (gGameStatus.health < gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1)) {
         gGameStatus.health = gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1);
         sub_08040204(56, gGameStatus.health);
@@ -3899,7 +3899,7 @@ void restore_full_health() {
     }
 }
 
-bool32 is_game_complete() {
+bool32 is_game_complete(void) {
     bool32 complete = FALSE;
     if (gGameStatus.totalNotes == stru_80CC8C4.totalNotes
         && gGameStatus.totalJiggies == stru_80CC8C4.totalJiggies) {
@@ -3908,7 +3908,7 @@ bool32 is_game_complete() {
     return complete;
 }
 
-void init_efx() {
+void init_efx(void) {
     gEnvironmentEffects = EFX_NONE;
 
     switch (gLoadedRoomIndex) {
@@ -3930,7 +3930,7 @@ void init_efx() {
     }
 }
 
-static void update_efx() {
+static void update_efx(void) {
     if (gIsPaletteEffectsActive) {
         return;
     }
@@ -3969,16 +3969,16 @@ static void update_efx() {
     }
 }
 
-void pause_efx() {
+void pause_efx(void) {
     gEnvironmentEffectsTemp = gEnvironmentEffects;
     gEnvironmentEffects = 0;
 }
 
-void resume_efx() {
+void resume_efx(void) {
     gEnvironmentEffects = gEnvironmentEffectsTemp;
 }
 
-void sub_800FA58() {
+void sub_800FA58(void) {
     gGameStatus.eggs[0] = stru_80CC8C4.eggs[0];
     gGameStatus.eggs[1] = stru_80CC8C4.eggs[1];
     gGameStatus.eggs[3] = stru_80CC8C4.eggs[3];

@@ -1773,7 +1773,7 @@ bool32 sub_8011540(void) {
                         gUnlockedMoves[i] = TRUE;
                     }
                     for (i = 0; i < gTotalAmountOfLevels; i++) {
-                        sub_80342F8(223, i);
+                        run_obj_behavior(223, i);
                     }
                     gUnlockedLevels = gTotalAmountOfLevels;
                     sub_80388E0();

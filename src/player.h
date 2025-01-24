@@ -38,7 +38,7 @@ void sub_80181B8(fx32* height);
 int start_npc_dialogue(int a1);
 void set_player_direction(int direction);
 bool32 sub_8018BB0(const struct Sprite* playerSprite);
-void sub_80192D4(int a1, int a2, int a3);
+void hurt_player(int amount, int a2, int a3);
 void sub_801990C(void);
 void sub_08019FCC(u32 transformation);
 void load_transformation_palette(void);

@@ -244,7 +244,7 @@ static void sub_8016790(int a1, int a2) {
     }
 }
 
-static void sub_8016890() {
+static void set_player_in_die_state() {
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) {
         sub_800DE9C();
     }
@@ -303,16 +303,16 @@ static void sub_8016890() {
 int sub_8016A5C(int a1) {
     switch (a1) {
         case 1:
-            return sub_80342CC(219, 0);
+            return is_obj_disabled(219, 0);
 
         case 2:
-            return sub_80342CC(220, 0);
+            return is_obj_disabled(220, 0);
 
         case 3:
-            return sub_80342CC(221, 0);
+            return is_obj_disabled(221, 0);
 
         case 4:
-            return sub_80342CC(222, 0);
+            return is_obj_disabled(222, 0);
     }
 
     return 0;
@@ -488,16 +488,16 @@ static bool32 interact_with_object() {
                 sub_800386C(dword_2000FC8, 0, 0);
                 sub_8016C78(0);
                 sub_8016670();
-                if (!sub_80342CC(328, 0)) {
-                    sub_80342F8(328, 0);
+                if (!is_obj_disabled(328, 0)) {
+                    run_obj_behavior(328, 0);
                 } else {
-                    sub_80342F8(329, 0);
+                    run_obj_behavior(329, 0);
                 }
             }
             break;
 
         case 108:
-            if (sub_80342CC(205, 0)) {
+            if (is_obj_disabled(205, 0)) {
                 didInteract = FALSE;
                 break;
             }
@@ -506,7 +506,7 @@ static bool32 interact_with_object() {
             break;
 
         case 109:
-            if (!sub_80342CC(205, 0)) {
+            if (!is_obj_disabled(205, 0)) {
                 didInteract = FALSE;
                 break;
             }
@@ -517,7 +517,7 @@ static bool32 interact_with_object() {
         case 43:
             if (byte_203E10F) {
                 byte_20020B2 = 1;
-                sub_80342F8(223, gUnlockedLevels);
+                run_obj_behavior(223, gUnlockedLevels);
                 gInputDemoRecords = unk_80B21B4;
                 gInputDemoRecordCount = dword_80B21B8;
                 start_script(byte_80CEBC8[gUnlockedLevels++]);
@@ -1282,7 +1282,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
     if (gGameStatus.health == 0) {
         if (!byte_2001370) {
             sub_800387C(dword_2000FC8);
-            sub_8016890();
+            set_player_in_die_state();
             return FALSE;
         }
         restore_full_health();
@@ -1462,7 +1462,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
     return TRUE;
 }
 
-void sub_80192D4(int a1, int a2, int a3) {
+void hurt_player(int amount, int a2, int a3) {
     if (gGameStatus.health == 0) {
         return;
     }
@@ -1472,13 +1472,13 @@ void sub_80192D4(int a1, int a2, int a3) {
     if (gIsSlideMiniGame || gPlayerState == PLAYER_STATE_35) {
         PLAY_SFX(RandomMinMax(4, 5));
 
-        decrease_player_health(a1);
+        decrease_player_health(amount);
         if (gGameStatus.health == 0) {
             if (a3 == 0) {
                 if (byte_2001370) {
                     restore_full_health();
                 } else {
-                    sub_8016890();
+                    set_player_in_die_state();
                 }
             }
         }
@@ -1623,13 +1623,13 @@ void sub_80192D4(int a1, int a2, int a3) {
         }
     }
 
-    decrease_player_health(a1);
+    decrease_player_health(amount);
     if (gGameStatus.health == 0) {
         if (a3 == 0) {
             if (byte_2001370) {
                 restore_full_health();
             } else {
-                sub_8016890();
+                set_player_in_die_state();
             }
         }
     } else {
@@ -3093,7 +3093,7 @@ static void state_kazooie_hurt(s32 keyPressed, s32 keyDown) {
         } else {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_800387C(dword_2000FC8);
-            sub_8016890();
+            set_player_in_die_state();
         }
     } else {
         gPreviousPlayerState = gPlayerState;
@@ -4387,7 +4387,7 @@ static void state_dive_hurt(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
                 sub_8016790(0, gPlayerSprite.direction);
             } else {
-                sub_8016890();
+                set_player_in_die_state();
             }
         } else {
             gPreviousPlayerState = gPlayerState;
@@ -7467,7 +7467,7 @@ static void state_octopus_dive_hurt(s32 keyPressed, s32 keyDown) {
                 sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
                 sub_8016790(0, gPlayerSprite.direction);
             } else {
-                sub_8016890();
+                set_player_in_die_state();
             }
         } else {
             gPreviousPlayerState = gPlayerState;

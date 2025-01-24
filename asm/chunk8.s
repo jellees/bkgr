@@ -2953,7 +2953,7 @@ _08048D5E:
 	ldrh r0, [r4]
 	movs r2, #0x1c
 	ldrsh r1, [r4, r2]
-	bl sub_80342CC
+	bl is_obj_disabled
 	cmp r0, #0
 	bne _08048DF8
 	adds r0, r4, #0
@@ -10663,7 +10663,7 @@ _0804CCF4:
 	rsbs r1, r1, #0
 	movs r0, #2
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	movs r6, #0
 	ldr r0, _0804CD3C
 	mov r5, r8
@@ -15104,7 +15104,7 @@ _0804F280:
 	ldrb r0, [r0]
 	ldrb r1, [r4, #0xb]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	adds r0, r5, #0
 	bl sub_8049A04
 _0804F296:
@@ -15129,7 +15129,7 @@ _0804F2A8:
 	mov r1, sp
 	ldrb r1, [r1]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	b _0804F2E8
 	.align 2, 0
 _0804F2C8: .4byte 0x080CC6B0
@@ -15145,7 +15145,7 @@ _0804F2CC:
 	mov r1, sp
 	ldrb r1, [r1]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _0804F2E8:
 	add sp, #4
 	pop {r4, r5, r6}
@@ -16288,7 +16288,7 @@ sub_804FBA0: @ 0x0804FBA0
 	ldrb r0, [r0]
 	ldrb r1, [r4, #0xb]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	b _0804FC16
 	.align 2, 0
 _0804FBF4: .4byte 0x03003578
@@ -16303,7 +16303,7 @@ _0804FC04:
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _0804FC16:
 	adds r0, r4, #0
 	adds r0, #0x38
@@ -16476,7 +16476,7 @@ sub_804FCFC: @ 0x0804FCFC
 	ldrb r0, [r0]
 	ldrb r1, [r4, #0xb]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	b _0804FD5E
 	.align 2, 0
 _0804FD44: .4byte gPlayerPos
@@ -16489,7 +16489,7 @@ _0804FD4C:
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _0804FD5E:
 	adds r1, r4, #0
 	adds r1, #0x3c
@@ -16614,7 +16614,7 @@ sub_804FDEC: @ 0x0804FDEC
 	ldrb r0, [r0]
 	ldrb r1, [r4, #0xb]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	b _0804FE62
 	.align 2, 0
 _0804FE40: .4byte 0x03003578
@@ -16629,7 +16629,7 @@ _0804FE50:
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _0804FE62:
 	adds r0, r6, #0
 	movs r1, #3
@@ -16754,7 +16754,7 @@ sub_804FEF4: @ 0x0804FEF4
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _0804FF40:
 	pop {r4}
 	pop {r0}
@@ -16858,7 +16858,7 @@ sub_804FFC0: @ 0x0804FFC0
 	ldrb r0, [r0]
 	ldrb r1, [r4, #0xb]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	b _0805002E
 	.align 2, 0
 _0805000C: .4byte 0x03006EF1
@@ -16873,7 +16873,7 @@ _0805001C:
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _0805002E:
 	adds r0, r5, #0
 	bl sub_80498D0
@@ -17159,7 +17159,7 @@ sub_8050210: @ 0x08050210
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _08050268:
 	pop {r4}
 	pop {r0}
@@ -17816,7 +17816,7 @@ sub_8050758: @ 0x08050758
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _080507A4:
 	pop {r4}
 	pop {r0}
@@ -18068,7 +18068,7 @@ sub_8050970: @ 0x08050970
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _080509B0:
 	pop {r4}
 	pop {r0}
@@ -18860,7 +18860,7 @@ _08050FDE:
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #0
-	bl sub_80192D4
+	bl hurt_player
 	ldr r0, [r7, #0x28]
 	ldrh r0, [r0, #6]
 	strh r0, [r6]
@@ -19010,7 +19010,7 @@ sub_80510F0: @ 0x080510F0
 	lsls r0, r0, #1
 	ldrb r1, [r4, #0xb]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	b _08051180
 	.align 2, 0
 _08051154: .4byte 0x03006EF1
@@ -19028,7 +19028,7 @@ _0805116C:
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _08051180:
 	adds r1, r4, #0
 	adds r1, #0x3c
@@ -19167,7 +19167,7 @@ sub_8051204: @ 0x08051204
 	ldrb r0, [r0]
 	ldrb r1, [r5, #0xb]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _08051296:
 	movs r1, #0
 	strb r1, [r5, #0xb]
@@ -19822,7 +19822,7 @@ sub_8051794: @ 0x08051794
 	mov r1, sp
 	ldrb r1, [r1]
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	b _08051804
 	.align 2, 0
 _080517D0: .4byte byte_203F99C
@@ -19845,7 +19845,7 @@ _080517E0:
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _08051804:
 	add sp, #4
 	pop {r4}
@@ -20099,7 +20099,7 @@ sub_80519B8: @ 0x080519B8
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 	ldr r0, [r5, #0x1c]
 	str r0, [r6]
 	adds r1, r4, #0
@@ -20711,7 +20711,7 @@ sub_8051E84: @ 0x08051E84
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _08051ED6:
 	adds r0, r4, #0
 	movs r1, #2
@@ -20911,7 +20911,7 @@ sub_8052018: @ 0x08052018
 	movs r1, #1
 	rsbs r1, r1, #0
 	movs r2, #2
-	bl sub_80192D4
+	bl hurt_player
 _08052068:
 	ldr r0, [r5, #0x2c]
 	bl sub_800387C
@@ -23276,7 +23276,7 @@ _08053426:
 	rsbs r1, r1, #0
 	movs r0, #1
 	movs r2, #0
-	bl sub_80192D4
+	bl hurt_player
 	ldr r0, _080534B8
 	ldr r1, [r0]
 	movs r0, #1
@@ -41145,7 +41145,7 @@ sub_805C3C8: @ 0x0805C3C8
 	rsbs r1, r1, #0
 	movs r0, #1
 	movs r2, #0
-	bl sub_80192D4
+	bl hurt_player
 	ldr r0, _0805C468
 	ldr r1, [r0]
 	movs r0, #1
