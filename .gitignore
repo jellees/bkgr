@@ -1,5 +1,78 @@
-
-/build
+# build artifacts
+src/*.s
+build/
+cmake-build-*
 *.elf
+*.exe
 *.gba
+*.i
+*.o
 *.map
+*.pcm
+
+# tools
+tools/agbcc
+tools/binutils
+
+# scripts
+*.py
+*.pl
+
+# graphics
+*.1bpp
+*.4bpp
+*.8bpp
+*.fwjpnfont
+*.sgm
+*.sa1
+*.sg1
+*.gbapal
+*.hwjpnfont
+*.latfont
+*.lz
+
+# system files
+*.DS_Store
+
+# IDE
+.vscode/settings.json
+.vscode/c_cpp_properties.json
+.vscode/tasks.json
+.vscode/launch.json
+*.code-workspace
+.idea/
+
+# misc
+.fuse_hidden*
+*.bak
+*.bat
+*.diff
+*.dump
+*.id0
+*.id1
+*.id2
+*.idb
+*.dmp
+*.nam
+*.rl
+*.s.old
+*.s.old2
+*.sa*
+*.swo
+*.swp
+*.til
+*.ss1
+*.ss2
+*.ss3
+*.ss4
+*.ss5
+*.ss6
+*.ss7
+*.ss8
+*.ss9
+Thumbs.db
+tags
+types_*.taghl
+*.zip
+*.sna
+__pycache__
