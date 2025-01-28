@@ -2,6 +2,13 @@
 
 This project is only tested in WSL2.
 
+Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) and add its environment variables.
+
+	export DEVKITPRO=/opt/devkitpro
+	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+	export DEVKITARM=$DEVKITPRO/devkitARM
+	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
+
 # Installation
 
 To set up the repository:
