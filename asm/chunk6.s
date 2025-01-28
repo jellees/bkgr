@@ -39226,7 +39226,7 @@ _0803B7F0: .4byte 0x0203E170
 _0803B7F4: .4byte gLoadedRoomLevel
 
 	.thumb
-sub_803B7F8: @ 0x0803B7F8
+obj_disabled_jiggy: @ 0x0803B7F8
 	ldr r3, _0803B810
 	ldr r0, _0803B814
 	ldrh r2, [r0]
@@ -39244,7 +39244,7 @@ _0803B810: .4byte 0x0203E170
 _0803B814: .4byte gLoadedRoomLevel
 
 	.thumb
-sub_803B818: @ 0x0803B818
+obj_disabled_extra_honeycomb_piece: @ 0x0803B818
 	ldr r3, _0803B830
 	ldr r0, _0803B834
 	ldrh r2, [r0]
@@ -39262,7 +39262,7 @@ _0803B830: .4byte 0x0203E170
 _0803B834: .4byte gLoadedRoomLevel
 
 	.thumb
-obj_disabled_notes: @ 0x0803B838
+obj_disabled_note: @ 0x0803B838
 	ldr r3, _0803B850
 	ldr r0, _0803B854
 	ldrh r2, [r0]
@@ -39396,7 +39396,7 @@ _0803B91C: .4byte 0x0203E170
 _0803B920: .4byte gLoadedRoomLevel
 
 	.thumb
-sub_803B924: @ 0x0803B924
+obj_disabled_honeycomb: @ 0x0803B924
 	ldr r3, _0803B93C
 	ldr r0, _0803B940
 	ldrh r2, [r0]
@@ -39656,7 +39656,7 @@ _0803BAE6:
 _0803BAEC: .4byte 0x0203E948
 
 	.thumb
-sub_803BAF0: @ 0x0803BAF0
+obj_disabled_none: @ 0x0803BAF0
 	movs r0, #0
 	bx lr
 
