@@ -14,7 +14,7 @@
 #include "random.h"
 #include "script.h"
 
-enum EnvironmentEffects { EFX_NONE, EFX_LAVA, EFX_THUNDER };
+enum EnvironmentEffect { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 
 static const int dThunderSfxIds[3] = { 211, 212, 213 };
 
@@ -80,17 +80,17 @@ bool8 gPlayerIsTransparent;
 u8 byte_200108E;
 u16 gHurtTransparencyTimer;
 u16 word_2001092;
-u8 byte_2001094;
-fx32 dword_2001098;
-fx32 dword_200109C;
-fx32 dword_20010A0;
+u8 gPrediveRoomIdx;
+fx32 gPredivePosX;
+fx32 gPredivePosY;
+fx32 gPredivePosZ;
 u8 byte_20010A4;
 u8 byte_20010A5;
 u8 gRoomNameNumber;
 u8 byte_20010A7;
 u8 gRoomGoal;
 u8 gWarpGoal;
-u8 byte_20010AA;
+u8 gRoomLevelSaved;
 u16 word_20010AC;
 u8 gContinueGame;
 u8 byte_20010AF;
@@ -607,9 +607,9 @@ static void start_game() {
     REG_BG1CNT |= BGCNT_PRIORITY(2);
 
     if (!gContinueGame) {
-        gRoomGoal = 0;
+        gRoomGoal = ROOM_SPIRALBOTTOM;
         gWarpGoal = 0;
-        byte_20010AA = 0;
+        gRoomLevelSaved = LEVEL_SPIRAL_MOUNTAIN;
         sub_8025E44(0);
         sprite_set_priority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         SetSprite(&gPlayerSprite, 0x1D, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
@@ -619,7 +619,7 @@ static void start_game() {
         gPlayerShadowSprite.attr0Flag9 = 0;
 
         if (gTransformation != TRANSFORMATION_BANJO) {
-            sub_08019FCC(gTransformation);
+            set_transformation(gTransformation);
         }
 
         sub_8044DFC();
@@ -630,7 +630,7 @@ static void start_game() {
         SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
 
         if (gLoadedRoomIndex == ROOM_MUMBOHUT) {
-            gLoadedRoomLevel = byte_20010AA;
+            gLoadedRoomLevel = gRoomLevelSaved;
         }
 
         sub_8025E44(gLoadedRoomLevel);
@@ -649,7 +649,7 @@ static void start_game() {
         gPlayerShadowSprite.attr0Flag9 = 0;
 
         if (gTransformation != TRANSFORMATION_BANJO) {
-            sub_08019FCC(gTransformation);
+            set_transformation(gTransformation);
             load_transformation_palette();
         }
 
@@ -818,7 +818,7 @@ void sub_800A710(u16 level) {
     ASSERT(level < LEVEL_COUNT || level == LEVEL_NONE);
 
     gLoadedRoomLevel = level;
-    byte_20010AA = level;
+    gRoomLevelSaved = level;
     sub_8040178();
     sub_8039234();
 }
@@ -1778,7 +1778,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
     return TRUE;
 }
 
-void sub_800BFA0(int room, int warp, int a3) {
+void load_room_directly(int room, int warp, bool32 setGoal) {
     bool32 isMusicChanged;
     u32 level;
 
@@ -1799,7 +1799,7 @@ void sub_800BFA0(int room, int warp, int a3) {
         sub_80270AC(4095, isMusicChanged);
 
         if ((dword_80CEE5C[gLoadedRoomLevel] != room || dword_80CEE74[gLoadedRoomLevel] != warp)
-            && a3) {
+            && setGoal) {
             if (room != ROOM_MUMBOHUT) {
                 gRoomGoal = room;
                 gWarpGoal = warp;
@@ -1852,7 +1852,7 @@ void sub_800BFA0(int room, int warp, int a3) {
     gPlayerSprite.attr0Flag9 = 0;
 }
 
-void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
+void sub_800C1E8(int room, fx32 xPos, fx32 yPos, fx32 zPos, int a5, u32 a6) {
     bool32 isMusicChanged;
     u32 level;
 
@@ -1868,7 +1868,7 @@ void sub_800C1E8(int room, int a2, int a3, int a4, int a5, u32 a6) {
     isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
 
     sub_80270AC(4095, isMusicChanged);
-    sub_08013378(room, a2, a3, a4, a6);
+    sub_08013378(room, xPos, yPos, zPos, a6);
     sub_8025E44(gLoadedRoomLevel);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
@@ -2010,11 +2010,11 @@ int sub_800C50C() {
     return stru_3002950.playerSpritePriority;
 }
 
-void sub_800C604() {
-    byte_2001094 = gLoadedRoomIndex;
-    dword_2001098 = gPlayerPos.x;
-    dword_200109C = gPlayerPos.y;
-    dword_20010A0 = gPlayerPos.z;
+void save_predive_position(void) {
+    gPrediveRoomIdx = gLoadedRoomIndex;
+    gPredivePosX = gPlayerPos.x;
+    gPredivePosY = gPlayerPos.y;
+    gPredivePosZ = gPlayerPos.z;
 }
 
 static int sub_0800C63C(int room, u32 warp) {
@@ -2879,7 +2879,7 @@ static void sub_800DF34() {
             sub_800E7A0();
 
             if (gGameStatus.health != 0) {
-                sub_800BFA0(dword_80CEBF8[gLoadedRoomLevel], dword_80CEBE0[gLoadedRoomLevel], 1);
+                load_room_directly(dword_80CEBF8[gLoadedRoomLevel], dword_80CEBE0[gLoadedRoomLevel], TRUE);
             }
         }
 
@@ -2993,25 +2993,25 @@ void sub_800E204(u8* buffer, s32* a2, u32* a3) {
     r6 += buffer[r5++];
     buffer[r5] = gUnlockedLevels;
     r6 += buffer[r5++];
-    buffer[r5] = byte_20010AA;
+    buffer[r5] = gRoomLevelSaved;
     r6 += buffer[r5++];
     buffer[r5] = gRoomGoal;
     r6 += buffer[r5++];
     buffer[r5] = gWarpGoal;
     r6 += buffer[r5++];
-    buffer[r5] = byte_2001094;
+    buffer[r5] = gPrediveRoomIdx;
     r6 += buffer[r5++];
-    buffer[r5] = (dword_2001098 & 0xFF0000) >> 16;
+    buffer[r5] = (gPredivePosX & 0xFF0000) >> 16;
     r6 += buffer[r5++];
-    buffer[r5] = dword_2001098 >> 24;
+    buffer[r5] = gPredivePosX >> 24;
     r6 += buffer[r5++];
-    buffer[r5] = (dword_200109C & 0xFF0000) >> 16;
+    buffer[r5] = (gPredivePosY & 0xFF0000) >> 16;
     r6 += buffer[r5++];
-    buffer[r5] = dword_200109C >> 24;
+    buffer[r5] = gPredivePosY >> 24;
     r6 += buffer[r5++];
-    buffer[r5] = (dword_20010A0 & 0xFF0000) >> 16;
+    buffer[r5] = (gPredivePosZ & 0xFF0000) >> 16;
     r6 += buffer[r5++];
-    buffer[r5] = dword_20010A0 >> 24;
+    buffer[r5] = gPredivePosZ >> 24;
     r6 += buffer[r5++];
     buffer[r5] = gTextSpeed;
     r6 += buffer[r5++];
@@ -3070,21 +3070,21 @@ void sub_800E408(u8* buffer, s32* a2, u32* a3) {
     r6 += buffer[r5++];
     gUnlockedLevels = buffer[r5];
     r6 += buffer[r5++];
-    byte_20010AA = buffer[r5];
+    gRoomLevelSaved = buffer[r5];
     r6 += buffer[r5++];
     gRoomGoal = buffer[r5];
     r6 += buffer[r5++];
     gWarpGoal = buffer[r5];
     r6 += buffer[r5++];
-    byte_2001094 = buffer[r5];
+    gPrediveRoomIdx = buffer[r5];
     r6 += buffer[r5++];
-    dword_2001098 = buffer[r5] << 16 | buffer[r5 + 1] << 24;
-    r6 += buffer[r5++];
-    r6 += buffer[r5++];
-    dword_200109C = buffer[r5] << 16 | buffer[r5 + 1] << 24;
+    gPredivePosX = buffer[r5] << 16 | buffer[r5 + 1] << 24;
     r6 += buffer[r5++];
     r6 += buffer[r5++];
-    dword_20010A0 = buffer[r5] << 16 | buffer[r5 + 1] << 24;
+    gPredivePosY = buffer[r5] << 16 | buffer[r5 + 1] << 24;
+    r6 += buffer[r5++];
+    r6 += buffer[r5++];
+    gPredivePosZ = buffer[r5] << 16 | buffer[r5 + 1] << 24;
     r6 += buffer[r5++];
     r6 += buffer[r5++];
     gTextSpeed = buffer[r5];

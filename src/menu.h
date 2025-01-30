@@ -3,7 +3,7 @@
 
 #include "sprite.h"
 
-enum Menus {
+enum MenuState {
     MENU_GAME_OR_CONTINUE,
     MENU_PAUSE_MAIN,
     MENU_PAUSE_SAVE_GAME,

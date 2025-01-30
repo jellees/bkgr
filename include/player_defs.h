@@ -1,7 +1,7 @@
 #ifndef GUARD_PLAYER_DEFS_H
 #define GUARD_PLAYER_DEFS_H
 
-enum Transformations {
+enum Transformation {
     TRANSFORMATION_BANJO,
     TRANSFORMATION_MOUSE,
     TRANSFORMATION_CANDLE,
@@ -9,7 +9,7 @@ enum Transformations {
     TRANSFORMATION_OCTOPUS,
 };
 
-enum Moves {
+enum Move {
     MOVE_0,
     MOVE_PACK_WACK,
     MOVE_FORWARD_ROLL,
@@ -37,7 +37,7 @@ enum Moves {
     MOVE_COUNT
 };
 
-enum PlayerStates {
+enum PlayerState {
     PLAYER_STATE_IDLE,
     PLAYER_STATE_JUMP,
     PLAYER_STATE_CROUCH,

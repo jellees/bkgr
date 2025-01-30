@@ -62,6 +62,6 @@ void display_error_message(char* type, char* message);
 extern u8 byte_2001200;
 extern u8 gMainFrameCounter;
 extern u8 gDebugFPS;
-extern u8 byte_2001370;
+extern bool8 gDebugGodMode;
 
 #endif

@@ -3,7 +3,7 @@
 
 // Enums
 
-enum Rooms {
+enum Room {
     ROOM_SPIRALBOTTOM,
     ROOM_SPIRALMIDDLE,
     ROOM_SPIRALTOP,
@@ -46,7 +46,7 @@ enum Rooms {
     ROOM_COUNT
 };
 
-enum Levels {
+enum Level {
     LEVEL_SPIRAL_MOUNTAIN,
     LEVEL_CLIFF_FARM,
     LEVEL_BREEGULL_BEACH,
@@ -58,7 +58,7 @@ enum Levels {
     LEVEL_NONE = 255
 };
 
-enum MiniGames {
+enum MiniGame {
     MINI_GAME_CHUBBY_CHUTE,
     MINI_GAME_UNKNOWN_1,
     MINI_GAME_UNKNOWN_2,
@@ -73,9 +73,9 @@ enum MiniGames {
     MINI_GAME_COUNT
 };
 
-enum Eggs { EGG_BLUE, EGG_ELECTRIC, EGG_ICE, EGG_FIRE };
+enum Egg { EGG_BLUE, EGG_ELECTRIC, EGG_ICE, EGG_FIRE };
 
-enum Directions {
+enum Direction {
     DIRECTION_UP,
     DIRECTION_UP_RIGHT,
     DIRECTION_RIGHT,

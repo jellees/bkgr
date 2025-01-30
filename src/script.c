@@ -942,7 +942,7 @@ static void sub_0805E270(int xMin, int xMax, int yMin, int yMax) {
     }
 }
 
-static enum Directions convert_angle_to_direction(fx32 angle) {
+static enum Direction convert_angle_to_direction(fx32 angle) {
     if (angle < 0) {
         angle += FX32_CONST(22.5);
     }

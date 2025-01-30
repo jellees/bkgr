@@ -40084,7 +40084,7 @@ sub_803BE18: @ 0x0803BE18
 	movs r0, #4
 	movs r1, #4
 	movs r2, #1
-	bl sub_800BFA0
+	bl load_room_directly
 _0803BE2C:
 	pop {r0}
 	bx r0
@@ -40119,7 +40119,7 @@ sub_803BE58: @ 0x0803BE58
 	movs r0, #0xd
 	movs r1, #1
 	movs r2, #1
-	bl sub_800BFA0
+	bl load_room_directly
 _0803BE6C:
 	pop {r0}
 	bx r0
@@ -40154,7 +40154,7 @@ sub_803BE98: @ 0x0803BE98
 	movs r0, #0x1b
 	movs r1, #4
 	movs r2, #1
-	bl sub_800BFA0
+	bl load_room_directly
 _0803BEAC:
 	pop {r0}
 	bx r0
@@ -40379,7 +40379,7 @@ sub_803C040: @ 0x0803C040
 	adds r1, r1, r2
 	ldr r1, [r1]
 	movs r2, #0
-	bl sub_800BFA0
+	bl load_room_directly
 	ldr r1, _0803C084
 	movs r0, #1
 	strb r0, [r1]

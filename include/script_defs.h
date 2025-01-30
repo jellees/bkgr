@@ -1,7 +1,7 @@
 
 #include "gba/types.h"
 
-struct ScriptCommand {
+struct ScriptInstruction {
     u32 idx;
     u32 arg0;
     u32 arg1;
@@ -9,9 +9,9 @@ struct ScriptCommand {
     u32 arg3;
 };
 
-typedef struct ScriptCommand Script[];
+typedef struct ScriptInstruction Script[];
 
-enum ScriptCommands {
+enum ScriptCommand {
     SCRIPT_CMD_ALLOC_ACTORS,
     SCRIPT_CMD_LOAD_AND_STORE_ROOM,
     SCRIPT_CMD_LOAD_ROOM,

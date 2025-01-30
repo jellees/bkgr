@@ -749,7 +749,7 @@ static void do_dive() {
     sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
     PLAY_SFX(12);
     sub_8016790(0, gPlayerSprite.direction);
-    sub_800C604();
+    save_predive_position();
 }
 
 void sub_8017A54(void) {
@@ -1153,7 +1153,7 @@ static void sub_8018810() {
     gPlayerState = PLAYER_STATE_DIALOGUE_END;
 }
 
-static void sub_08018824() {
+static void sub_08018824(void) {
     if (gGameStatus.health == 0) {
         gPlayerState = gPreviousPlayerState;
         return;
@@ -1226,7 +1226,7 @@ static void sub_08018824() {
     sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
 }
 
-void set_player_direction(int direction) {
+void set_player_direction(enum Direction direction) {
     if (gTransformation == TRANSFORMATION_BANJO) {
         if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
             gPlayerSprite.direction = direction;
@@ -1280,7 +1280,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
     }
 
     if (gGameStatus.health == 0) {
-        if (!byte_2001370) {
+        if (!gDebugGodMode) {
             sub_800387C(dword_2000FC8);
             set_player_in_die_state();
             return FALSE;
@@ -1475,7 +1475,7 @@ void hurt_player(int amount, int a2, int a3) {
         decrease_player_health(amount);
         if (gGameStatus.health == 0) {
             if (a3 == 0) {
-                if (byte_2001370) {
+                if (gDebugGodMode) {
                     restore_full_health();
                 } else {
                     set_player_in_die_state();
@@ -1626,7 +1626,7 @@ void hurt_player(int amount, int a2, int a3) {
     decrease_player_health(amount);
     if (gGameStatus.health == 0) {
         if (a3 == 0) {
-            if (byte_2001370) {
+            if (gDebugGodMode) {
                 restore_full_health();
             } else {
                 set_player_in_die_state();
@@ -1839,7 +1839,7 @@ static void sub_08019AAC(int a1, int a2) {
     }
 }
 
-void sub_08019FCC(u32 transformation) {
+void set_transformation(u32 transformation) {
     switch (transformation) {
         case TRANSFORMATION_BANJO:
             gPreviousPlayerState = gPlayerState;
@@ -3082,7 +3082,7 @@ static void state_kazooie_hurt(s32 keyPressed, s32 keyDown) {
     }
 
     if (gGameStatus.health == 0) {
-        if (byte_2001370) {
+        if (gDebugGodMode) {
             restore_full_health();
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_IDLE;
@@ -4364,7 +4364,7 @@ static void state_dive_surface(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
-        sub_800C1E8(byte_2001094, dword_2001098, dword_200109C, dword_20010A0, 1, 0);
+        sub_800C1E8(gPrediveRoomIdx, gPredivePosX, gPredivePosY, gPredivePosZ, 1, 0);
         sub_8017C50();
         sub_0804200C(57);
         if (gGameStatus.oxygen != gGameStatus.maxOxygen) {
@@ -4379,7 +4379,7 @@ static void state_dive_surface(s32 keyPressed, s32 keyDown) {
 static void state_dive_hurt(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         if (gGameStatus.health == 0) {
-            if (byte_2001370) {
+            if (gDebugGodMode) {
                 restore_full_health();
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = PLAYER_STATE_DIVE_SINK;
@@ -7083,7 +7083,7 @@ static void state_octopus_dive_surface(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_OCTOPUS_IDLE;
-        sub_800C1E8(byte_2001094, dword_2001098, dword_200109C, dword_20010A0, 1, 0);
+        sub_800C1E8(gPrediveRoomIdx, gPredivePosX, gPredivePosY, gPredivePosZ, 1, 0);
         sub_8017C50();
         sub_800387C(dword_2000FC8);
     }
@@ -7459,7 +7459,7 @@ static void sub_8023A40(s32 keyPressed, s32 keyDown) {
 static void state_octopus_dive_hurt(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         if (gGameStatus.health == 0) {
-            if (byte_2001370) {
+            if (gDebugGodMode) {
                 restore_full_health();
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = PLAYER_STATE_OCTOPUS_DIVE_SINK;

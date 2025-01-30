@@ -36,11 +36,11 @@ void set_player_in_climb_state(void);
 void sub_8017F14(void);
 void sub_80181B8(fx32* height);
 int start_npc_dialogue(int a1);
-void set_player_direction(int direction);
+void set_player_direction(enum Direction direction);
 bool32 sub_8018BB0(const struct Sprite* playerSprite);
 void hurt_player(int amount, int a2, int a3);
 void sub_801990C(void);
-void sub_08019FCC(u32 transformation);
+void set_transformation(u32 transformation);
 void load_transformation_palette(void);
 void update_player_state_machine(s32 keyPressed, s32 keyDown);
 

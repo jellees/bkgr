@@ -1858,7 +1858,7 @@ _08061D32:
 	ldrb r0, [r0]
 	adds r0, r0, r1
 	ldrb r0, [r0]
-	bl sub_08019FCC
+	bl set_transformation
 	movs r0, #3
 	strb r0, [r4]
 	ldr r1, _08061D60

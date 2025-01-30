@@ -8,6 +8,14 @@
 #include "player.h"
 #include "room.h"
 
+enum DebugAI
+{
+    DEBUG_AI_NORMAL,
+    DEBUG_AI_NO_AI,
+    DEBUG_AI_NO_HARM,
+    DEBUG_AI_NO_AI_HARM
+};
+
 u8 byte_2001200;
 u8 gMainFrameCounter;
 u8 gDebugFPS;
@@ -103,7 +111,7 @@ u32 dword_2001360;
 u32 dword_2001364;
 u32 dword_2001368;
 u32 dword_200136C;
-u8 byte_2001370;
+u8 gDebugGodMode;
 char gDebugString[23];
 u8 gDebugInfoIndex;
 u8 gDebugMESN;
@@ -120,11 +128,11 @@ struct TextBox gDebugTextBox5;
 struct TextBox gDebugTextBox6;
 struct TextBox gDebugTextBox7;
 struct TextBox gDebugTextBox8;
-u8 byte_200143C;
-u8 byte_200143D;
-u8 byte_200143E;
-u8 byte_200143F;
-u8 byte_2001440;
+bool8 gDebugGameLocked;
+u8 gDebugAI;
+bool8 gDebugDoWarp;
+u8 gDebugWarpRoomIdx;
+u8 gDebugWarpIdx;
 u8 byte_2001441;
 u8 byte_2001442;
 u8 byte_2001443;
@@ -145,7 +153,7 @@ void sub_801126C(void);
 void sub_8011428(void);
 bool32 sub_8011540(void);
 
-static void sub_800FA58(void) {
+static void set_full_eggs_and_feathers(void) {
     gGameStatus.eggs[0] = stru_80CC8C4.eggs[0];
     gGameStatus.eggs[1] = stru_80CC8C4.eggs[1];
     gGameStatus.eggs[3] = stru_80CC8C4.eggs[3];
@@ -227,9 +235,9 @@ void init_debug(void) {
     gDebugTextBox1.palette = 10;
     gDebugTextBox1.stringOffset = 0;
     gDebugTextBox1.font = &font_80B01A8[0];
-    byte_200143C = 1;
-    byte_2001370 = 0;
-    byte_200143D = 0;
+    gDebugGameLocked = TRUE;
+    gDebugGodMode = FALSE;
+    gDebugAI = DEBUG_AI_NORMAL;
     gDebugInfoIndex = 0;
     byte_2001442 = 0;
 }
@@ -1082,7 +1090,7 @@ void sub_8010BA8(int a1) {
         dword_203DFDC = 0;
         gLoadedRoomBgm = -1;
         sub_800C1E8(byte_2001443, dword_2001444, dword_2001448, dword_200144C, 1, 0);
-    } else if (!byte_200143E) {
+    } else if (!gDebugDoWarp) {
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -1118,7 +1126,7 @@ void sub_8010BA8(int a1) {
         gInInteractionArea = FALSE;
         dword_203DFDC = 0;
         gLoadedRoomBgm = -1;
-        sub_800BFA0(byte_200143F, byte_2001440, 1);
+        load_room_directly(gDebugWarpRoomIdx, gDebugWarpIdx, TRUE);
     }
 }
 
@@ -1314,7 +1322,7 @@ void sub_8011158(void) {
 }
 
 void sub_801126C(void) {
-    byte_200143E = 0;
+    gDebugDoWarp = FALSE;
     byte_2001441 = 0;
 
     while (1) {
@@ -1434,7 +1442,7 @@ void sub_8011428(void) {
     gDebugTextBox3.xPosition = 16;
     gDebugTextBox3.yPosition = 24;
     gDebugTextBox3.stringOffset = 0;
-    if (byte_200143C) {
+    if (gDebugGameLocked) {
         AddStringToBuffer(&gDebugTextBox3, aLocked);
     } else {
         AddStringToBuffer(&gDebugTextBox3, aUnlocked);
@@ -1443,7 +1451,7 @@ void sub_8011428(void) {
     gDebugTextBox4.xPosition = 16;
     gDebugTextBox4.yPosition = 32;
     gDebugTextBox4.stringOffset = 0;
-    if (byte_2001370) {
+    if (gDebugGodMode) {
         AddStringToBuffer(&gDebugTextBox4, aGod);
     } else {
         AddStringToBuffer(&gDebugTextBox4, aMortal);
@@ -1745,11 +1753,11 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_GOD_MODE:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_2001370 = 1;
+                    gDebugGodMode = TRUE;
                     return 0;
 
                 case 1:
-                    byte_2001370 = 0;
+                    gDebugGodMode = FALSE;
                     return 0;
             }
             break;
@@ -1757,19 +1765,19 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_AI:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_200143D = 0;
+                    gDebugAI = DEBUG_AI_NORMAL;
                     return 0;
 
                 case 1:
-                    byte_200143D = 1;
+                    gDebugAI = DEBUG_AI_NO_AI;
                     return 0;
 
                 case 2:
-                    byte_200143D = 2;
+                    gDebugAI = DEBUG_AI_NO_HARM;
                     return 0;
 
                 case 3:
-                    byte_200143D = 3;
+                    gDebugAI = DEBUG_AI_NO_AI_HARM;
                     return 0;
             }
             break;
@@ -1777,7 +1785,7 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_CHEATS:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_200143C = 0;
+                    gDebugGameLocked = FALSE;
                     for (i = 0; i < MOVE_COUNT; i++) {
                         gUnlockedMoves[i] = TRUE;
                     }
@@ -1795,11 +1803,11 @@ bool32 sub_8011540(void) {
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_GOD_MODE;
                     InitMenu(gMenuId, 0);
-                    SetMenuEntry(byte_2001370 ? 0 : 1);
+                    SetMenuEntry(gDebugGodMode ? 0 : 1);
                     break;
 
                 case 3:
-                    sub_800FA58();
+                    set_full_eggs_and_feathers();
                     return TRUE;
             }
             break;
@@ -1807,23 +1815,23 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_TRANSFORM:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    sub_08019FCC(0);
+                    set_transformation(TRANSFORMATION_BANJO);
                     return TRUE;
 
                 case 1:
-                    sub_08019FCC(1);
+                    set_transformation(TRANSFORMATION_MOUSE);
                     return TRUE;
 
                 case 2:
-                    sub_08019FCC(2);
+                    set_transformation(TRANSFORMATION_CANDLE);
                     return TRUE;
 
                 case 3:
-                    sub_08019FCC(3);
+                    set_transformation(TRANSFORMATION_TANK);
                     return TRUE;
 
                 case 4:
-                    sub_08019FCC(4);
+                    set_transformation(TRANSFORMATION_OCTOPUS);
                     return TRUE;
 
                 case 5:
@@ -1834,33 +1842,33 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_WARP_1:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_200143E = 1;
-                    byte_200143F = 0;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_SPIRALBOTTOM;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 1:
-                    byte_200143E = 1;
-                    byte_200143F = 1;
-                    byte_2001440 = 3;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_SPIRALMIDDLE;
+                    gDebugWarpIdx = 3;
                     return TRUE;
 
                 case 2:
-                    byte_200143E = 1;
-                    byte_200143F = 1;
-                    byte_2001440 = 2;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_SPIRALMIDDLE;
+                    gDebugWarpIdx = 2;
                     return TRUE;
 
                 case 3:
-                    byte_200143E = 1;
-                    byte_200143F = 2;
-                    byte_2001440 = 1;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_SPIRALTOP;
+                    gDebugWarpIdx = 1;
                     return TRUE;
 
                 case 4:
-                    byte_200143E = 1;
-                    byte_200143F = 29;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_JIGGYTEMPLE;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 5:
@@ -1877,34 +1885,34 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_WARP_2:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_200143E = 1;
-                    byte_200143F = 4;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_LOWERFARM;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 1:
-                    byte_200143E = 1;
-                    byte_200143F = 5;
-                    byte_2001440 = 1;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_UPPERFARM;
+                    gDebugWarpIdx = 1;
                     return TRUE;
 
                 case 2:
-                    byte_200143E = 1;
-                    byte_200143F = 11;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_COWBOSS;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 3:
-                    byte_200143E = 1;
-                    byte_200143F = 11;
-                    byte_2001440 = 5;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_COWBOSS;
+                    gDebugWarpIdx = 5;
                     return TRUE;
 
                 case 4:
-                    byte_200143E = 1;
-                    byte_200143F = gLoadedRoomIndex;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
-                    gLoadedRoomLevel = 1;
+                    gLoadedRoomLevel = LEVEL_CLIFF_FARM;
                     sub_8040178();
                     return TRUE;
 
@@ -1922,40 +1930,40 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_WARP_3:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_200143E = 1;
-                    byte_200143F = 8;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_BEACHSTART;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 1:
-                    byte_200143E = 1;
-                    byte_200143F = 3;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_QUARRY;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 2:
-                    byte_200143E = 1;
-                    byte_200143F = 3;
-                    byte_2001440 = 2;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_QUARRY;
+                    gDebugWarpIdx = 2;
                     return TRUE;
 
                 case 3:
-                    byte_200143E = 1;
-                    byte_200143F = 9;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_UNDERCORAL;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 4:
-                    byte_200143E = 1;
-                    byte_200143F = 13;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_BEACHTOP;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 5:
-                    byte_200143E = 1;
-                    byte_200143F = gLoadedRoomIndex;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
-                    gLoadedRoomLevel = 2;
+                    gLoadedRoomLevel = LEVEL_BREEGULL_BEACH;
                     sub_8040178();
                     return TRUE;
 
@@ -1970,34 +1978,34 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_WARP_4:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_200143E = 1;
-                    byte_200143F = 20;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_BOARDWALK;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 1:
-                    byte_200143E = 1;
-                    byte_200143F = 19;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_HOUSEROOMS;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 2:
-                    byte_200143E = 1;
-                    byte_200143F = 31;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_CANDLEPUZ;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 3:
-                    byte_200143E = 1;
-                    byte_200143F = 33;
-                    byte_2001440 = 1;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_SWAMPGAS;
+                    gDebugWarpIdx = 1;
                     return TRUE;
 
                 case 4:
-                    byte_200143E = 1;
-                    byte_200143F = gLoadedRoomIndex;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
-                    gLoadedRoomLevel = 3;
+                    gLoadedRoomLevel = LEVEL_BAD_MAGIC_BAYOU;
                     sub_8040178();
                     return TRUE;
 
@@ -2015,40 +2023,40 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_WARP_5:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_200143E = 1;
-                    byte_200143F = 22;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_HARBOUR;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 1:
-                    byte_200143E = 1;
-                    byte_200143F = 26;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_SANDAREA;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 2:
-                    byte_200143E = 1;
-                    byte_200143F = 23;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_CASTLEINNER;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 3:
-                    byte_200143E = 1;
-                    byte_200143F = 27;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_VILLAGE;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 4:
-                    byte_200143E = 1;
-                    byte_200143F = 24;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_INSIDES;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 5:
-                    byte_200143E = 1;
-                    byte_200143F = gLoadedRoomIndex;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
-                    gLoadedRoomLevel = 4;
+                    gLoadedRoomLevel = LEVEL_SPILLERS_HARBOR;
                     sub_8040178();
                     return TRUE;
 
@@ -2063,40 +2071,40 @@ bool32 sub_8011540(void) {
         case MENU_DEBUG_WARP_6:
             switch (GetCurrentMenuEntry()) {
                 case 0:
-                    byte_200143E = 1;
-                    byte_200143F = 15;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_FJORD;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 1:
-                    byte_200143E = 1;
-                    byte_200143F = 36;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_FJORDCAVERN;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 2:
-                    byte_200143E = 1;
-                    byte_200143F = 17;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_FURNSECTION;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 3:
-                    byte_200143E = 1;
-                    byte_200143F = 21;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_FURNSTORE;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 4:
-                    byte_200143E = 1;
-                    byte_200143F = 32;
-                    byte_2001440 = 0;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = ROOM_POISONROOM;
+                    gDebugWarpIdx = 0;
                     return TRUE;
 
                 case 5:
-                    byte_200143E = 1;
-                    byte_200143F = gLoadedRoomIndex;
+                    gDebugDoWarp = TRUE;
+                    gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
-                    gLoadedRoomLevel = 5;
+                    gLoadedRoomLevel = LEVEL_FREEZING_FURNACE;
                     sub_8040178();
                     return TRUE;
 
