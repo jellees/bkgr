@@ -145,6 +145,15 @@ void sub_801126C(void);
 void sub_8011428(void);
 bool32 sub_8011540(void);
 
+static void sub_800FA58(void) {
+    gGameStatus.eggs[0] = stru_80CC8C4.eggs[0];
+    gGameStatus.eggs[1] = stru_80CC8C4.eggs[1];
+    gGameStatus.eggs[3] = stru_80CC8C4.eggs[3];
+    gGameStatus.eggs[2] = stru_80CC8C4.eggs[2];
+    gGameStatus.goldenFeathers = stru_80CC8C4.goldenFeathers;
+    sub_803FE78();
+}
+
 void init_debug(void) {
     gDebugESNSum = 0;
     dword_2001398 = 0;

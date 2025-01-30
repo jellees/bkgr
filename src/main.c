@@ -3977,12 +3977,3 @@ void pause_efx(void) {
 void resume_efx(void) {
     gEnvironmentEffects = gEnvironmentEffectsTemp;
 }
-
-void sub_800FA58(void) {
-    gGameStatus.eggs[0] = stru_80CC8C4.eggs[0];
-    gGameStatus.eggs[1] = stru_80CC8C4.eggs[1];
-    gGameStatus.eggs[3] = stru_80CC8C4.eggs[3];
-    gGameStatus.eggs[2] = stru_80CC8C4.eggs[2];
-    gGameStatus.goldenFeathers = stru_80CC8C4.goldenFeathers;
-    sub_803FE78();
-}
