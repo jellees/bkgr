@@ -27,7 +27,7 @@ struct ScriptCamera {
     u8 field_27;
 };
 
-struct Actor {
+struct ScriptActor {
     struct Sprite sprite;
     fx32 xPos;
     fx32 yPos;
@@ -58,7 +58,7 @@ struct Actor {
 };
 
 struct ScriptState {
-    struct Actor* actors;
+    struct ScriptActor* actors;
     u8 loadedRoomIdx;
     struct Vec3fx playerPos;
     u32 field_14;
@@ -421,7 +421,7 @@ void sub_805D568(void) {
     (x)<FX32_CONST(260) && (x)> FX32_CONST(-20) && (y)<FX32_CONST(180) && (y)> FX32_CONST(-20)
 
 static void sub_805D614(struct ScriptState* script, int actorIdx) {
-    struct Actor* actor = &script->actors[actorIdx];
+    struct ScriptActor* actor = &script->actors[actorIdx];
 
     if (actor->field_5C) {
         actor->sprite.attr0Flag9 = 0;
@@ -527,7 +527,7 @@ void sub_805D8D8(struct ScriptState* script) {
     script->field_14++;
 
     for (i = 0; i < script->actorCount; i++) {
-        struct Actor* actor = &script->actors[i];
+        struct ScriptActor* actor = &script->actors[i];
         if (actor->isMoving) {
             fx32 xDist, yDist;
             struct Vec3fx vel;
@@ -981,7 +981,7 @@ static bool32 script_cmd_alloc_actors(int count, int _, int __, int ___) {
     gCurrentScript->actorCount = count;
 
     if (count != 0) {
-        gCurrentScript->actors = Alloc(sizeof(struct Actor) * count, 5, 3);
+        gCurrentScript->actors = Alloc(sizeof(struct ScriptActor) * count, 5, 3);
 
         for (i = 0; i < gCurrentScript->actorCount; i++) {
             gCurrentScript->actors[i].isVisible = FALSE;
@@ -1623,7 +1623,7 @@ static bool32 sub_805F4B0(int actorIdx, int a2, int a3, int _) {
 }
 
 static bool32 sub_805F4DC(int actorIdx, int a2, int a3, int _) {
-    struct Actor* actor = &gCurrentScript->actors[actorIdx];
+    struct ScriptActor* actor = &gCurrentScript->actors[actorIdx];
 
     actor->field_40 = a2 << 16;
 
@@ -1641,7 +1641,7 @@ static bool32 sub_805F4DC(int actorIdx, int a2, int a3, int _) {
 }
 
 static bool32 sub_805F51C(int actorIdx, int a2, int a3, int a4) {
-    struct Actor* actor = &gCurrentScript->actors[actorIdx];
+    struct ScriptActor* actor = &gCurrentScript->actors[actorIdx];
 
     actor->field_48 = a2 << 16;
 
