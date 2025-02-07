@@ -73,7 +73,7 @@ enum ScriptCommand {
     SCRIPT_CMD_CAMERA_MOVE_TO_ACTOR_POSITION,
     SCRIPT_CMD_CAMERA_MOVE_TO_SAVED_POSITION,
     SCRIPT_CMD_CAMERA_SAVE_POSITION,
-    SCRIPT_CMD_sub_805FB38,
+    SCRIPT_CMD_CAMERA_DO_NOT_SNAP,
     SCRIPT_CMD_CAMERA_RETURN_PRESCENE,
     SCRIPT_CMD_sub_805FB80,
     SCRIPT_CMD_sub_805FBA4,
@@ -288,7 +288,7 @@ enum ScriptWaitCond {
 
 #define CameraSavePosition SCRIPT_CMD(SCRIPT_CMD_CAMERA_SAVE_POSITION, 0, 0, 0, 0)
 
-#define Sub805FB38(unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805FB38, unknown, 0, 0, 0)
+#define CameraDoNotSnap(doNotSnap) SCRIPT_CMD(SCRIPT_CMD_CAMERA_DO_NOT_SNAP, doNotSnap, 0, 0, 0)
 
 #define CameraReturnPrescene(moveSpeed)                                                                \
     SCRIPT_CMD(SCRIPT_CMD_CAMERA_RETURN_PRESCENE, moveSpeed, 0, 0, 0)

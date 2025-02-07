@@ -23,8 +23,7 @@ struct ScriptCamera {
     fx32 moveSpeed;
     s8 field_24;
     bool8 isMoving;
-    u8 field_26;
-    u8 field_27;
+    bool8 doNotSnap;
 };
 
 struct ScriptActor {
@@ -61,7 +60,7 @@ struct ScriptState {
     struct ScriptActor* actors;
     u8 loadedRoomIdx;
     struct Vec3fx playerPos;
-    u32 field_14;
+    u32 actorUpdateCounter;
     u16 scriptIdx;
     u16 field_1A;
     u16 cmdIdx;
@@ -72,8 +71,6 @@ struct ScriptState {
     u8 field_23;
     bool8 playInputDemo;
     u8 activeSfx;
-    u8 field_26;
-    u8 field_27;
 };
 
 const struct InputRecord* gInputDemoRecords;
@@ -172,7 +169,7 @@ static bool32 script_cmd_camera_move(int, int, int, int);
 static bool32 script_cmd_camera_move_to_actor_position(int, int, int, int);
 static bool32 script_cmd_camera_move_to_saved_position(int, int, int, int);
 static bool32 script_cmd_camera_save_position(int, int, int, int);
-static bool32 sub_805FB38(int, int, int, int);
+static bool32 script_cmd_camera_do_not_snap(int, int, int, int);
 static bool32 script_cmd_camera_return_prescene(int, int, int, int);
 static bool32 sub_805FB80(int, int, int, int);
 static bool32 sub_805FBA4(int, int, int, int);
@@ -263,7 +260,7 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_camera_move_to_actor_position,
     script_cmd_camera_move_to_saved_position,
     script_cmd_camera_save_position,
-    sub_805FB38,
+    script_cmd_camera_do_not_snap,
     script_cmd_camera_return_prescene,
     sub_805FB80,
     sub_805FBA4,
@@ -347,7 +344,7 @@ void start_script(int idx) {
 
     ASSERT(foundScript);
 
-    gCurrentScript->field_14 = 0;
+    gCurrentScript->actorUpdateCounter = 0;
     gCurrentScript->scriptIdx = idx;
     gCurrentScript->field_1A = idx;
     gCurrentScript->cmdIdx = 0;
@@ -437,41 +434,41 @@ static void sub_805D614(struct ScriptState* script, int actorIdx) {
 }
 
 void sub_0805D6B0(void) {
-    struct Vec3fx pos;
+    struct Vec3fx velocity;
     fx32 xDelta, yDelta;
     fx32 xPrev, yPrev;
-    bool32 var1;
+    bool32 stopMoving;
 
     if (byte_203FA15 && gScriptCamera->isMoving) {
 
         ASSERT(byte_203F99C);
 
         sub_80038A4(gScriptCamera->field_24);
-        sub_80038C4(gScriptCamera->field_24, &pos.x, &pos.y, &pos.z);
+        sub_80038C4(gScriptCamera->field_24, &velocity.x, &velocity.y, &velocity.z);
 
         xPrev = gScriptCamera->xPosCurrent;
         yPrev = gScriptCamera->yPosCurrent;
-        gScriptCamera->xPosCurrent += pos.x;
-        gScriptCamera->yPosCurrent += pos.z;
+        gScriptCamera->xPosCurrent += velocity.x;
+        gScriptCamera->yPosCurrent += velocity.z;
 
         xDelta = gScriptCamera->xPosTarget - gScriptCamera->xPosCurrent;
         yDelta = gScriptCamera->yPosTarget - gScriptCamera->yPosCurrent;
 
-        var1 = FALSE;
+        stopMoving = FALSE;
 
         if (gScriptCamera->xDistance > gScriptCamera->yDistance) {
-            if ((pos.x > 0 && xDelta <= 0) || (pos.x <= 0 && xDelta >= 0)) {
-                var1 = TRUE;
+            if ((velocity.x > 0 && xDelta <= 0) || (velocity.x <= 0 && xDelta >= 0)) {
+                stopMoving = TRUE;
             }
         } else {
-            if ((pos.z > 0 && yDelta <= 0) || (pos.z <= 0 && yDelta >= 0)) {
-                var1 = TRUE;
+            if ((velocity.z > 0 && yDelta <= 0) || (velocity.z <= 0 && yDelta >= 0)) {
+                stopMoving = TRUE;
             }
         }
 
-        if (var1) {
+        if (stopMoving) {
             gScriptCamera->isMoving = FALSE;
-            if (!gScriptCamera->field_26) {
+            if (!gScriptCamera->doNotSnap) {
                 gScriptCamera->xPosCurrent = gScriptCamera->xPosTarget;
                 gScriptCamera->yPosCurrent = gScriptCamera->yPosTarget;
                 sub_8003864(gScriptCamera->field_24);
@@ -524,7 +521,7 @@ void sub_805D8D8(struct ScriptState* script) {
         script->waitFrames--;
     }
 
-    script->field_14++;
+    script->actorUpdateCounter++;
 
     for (i = 0; i < script->actorCount; i++) {
         struct ScriptActor* actor = &script->actors[i];
@@ -1781,7 +1778,7 @@ static bool32 script_cmd_camera_alloc(int _, int __, int ___, int ____) {
     gScriptCamera->xDistance = 0;
     gScriptCamera->yDistance = 0;
     gScriptCamera->moveSpeed = 0;
-    gScriptCamera->field_26 = 0;
+    gScriptCamera->doNotSnap = FALSE;
     gScriptCamera->field_24 = -1;
     byte_203FA15 = 1;
     return TRUE;
@@ -1868,8 +1865,8 @@ static bool32 script_cmd_camera_save_position(int _, int __, int ___, int ____) 
     return TRUE;
 }
 
-static bool32 sub_805FB38(int a1, int _, int __, int ___) {
-    gScriptCamera->field_26 = a1;
+static bool32 script_cmd_camera_do_not_snap(int doNotSnap, int _, int __, int ___) {
+    gScriptCamera->doNotSnap = doNotSnap;
     return TRUE;
 }
 
