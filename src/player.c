@@ -1978,64 +1978,64 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 9, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 9, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 9, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 9, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 9, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 9, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 9, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 9, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -2068,64 +2068,64 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 17, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 17, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 17, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 17, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 17, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 17, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 17, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 17, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -2191,7 +2191,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 1, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2200,7 +2200,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 1, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2209,7 +2209,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 1, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2218,7 +2218,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 1, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2227,7 +2227,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 1, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2236,7 +2236,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 1, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2245,7 +2245,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 1, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2254,7 +2254,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 1, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2301,8 +2301,8 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 1, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             }
@@ -2312,8 +2312,8 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 1, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             }
@@ -2323,8 +2323,8 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 1, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             }
@@ -2334,8 +2334,8 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 1, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             }
@@ -2345,8 +2345,8 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 1, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             }
@@ -2356,8 +2356,8 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 1, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             }
@@ -2367,8 +2367,8 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 1, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             }
@@ -2378,8 +2378,8 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 1, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             }
@@ -2526,49 +2526,49 @@ static void state_crouch(s32 keyPressed, s32 keyDown) {
     if (keyPressed & L_BUTTON) {
         switch (keyPressed & DPAD_ANY) {
             case DPAD_RIGHT | DPAD_UP:
-                gPlayerSprite.direction = 1;
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x21, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
 
             case DPAD_RIGHT | DPAD_DOWN:
-                gPlayerSprite.direction = 3;
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x21, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
 
             case DPAD_LEFT | DPAD_DOWN:
-                gPlayerSprite.direction = 5;
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x21, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
 
             case DPAD_LEFT | DPAD_UP:
-                gPlayerSprite.direction = 7;
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x21, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
 
             case DPAD_UP:
-                gPlayerSprite.direction = 0;
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x21, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
 
             case DPAD_DOWN:
-                gPlayerSprite.direction = 4;
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x21, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
 
             case DPAD_LEFT:
-                gPlayerSprite.direction = 6;
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x21, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
 
             case DPAD_RIGHT:
-                gPlayerSprite.direction = 2;
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x21, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
@@ -2612,8 +2612,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
             }
@@ -2622,8 +2622,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             }
             break;
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
             }
@@ -2632,8 +2632,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             }
             break;
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
             }
@@ -2642,8 +2642,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             }
             break;
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
             }
@@ -2652,8 +2652,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             }
             break;
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
             }
@@ -2662,8 +2662,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             }
             break;
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
             }
@@ -2672,8 +2672,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             }
             break;
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
             }
@@ -2682,8 +2682,8 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             }
             break;
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 0x31, 7, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0, 0);
             }
@@ -2745,7 +2745,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
@@ -2758,7 +2758,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
@@ -2771,7 +2771,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
@@ -2784,7 +2784,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
@@ -2797,7 +2797,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
@@ -2810,7 +2810,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
@@ -2823,7 +2823,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
@@ -2836,7 +2836,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim_without_reset(&gPlayerSprite, 49, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8003884(dword_2000FC8, 0x28000, 0, 0);
@@ -2876,64 +2876,64 @@ static void state_kazooie_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 193, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 193, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 193, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 193, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 193, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 193, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 193, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 193, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -2958,64 +2958,64 @@ static void state_kazooie_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 201, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 201, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 201, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 201, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 201, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 201, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 201, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 201, 0, 1);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -3097,64 +3097,64 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 81, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 81, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 81, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 81, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 81, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 81, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 81, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 81, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -3178,64 +3178,64 @@ static void state_feathery_flap(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 89, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 89, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 89, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 89, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim_without_reset(&gPlayerSprite, 89, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim_without_reset(&gPlayerSprite, 89, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 89, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 89, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -3272,64 +3272,64 @@ static void state_air_attack(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 169, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 169, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 169, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 169, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim_without_reset(&gPlayerSprite, 169, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim_without_reset(&gPlayerSprite, 169, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 169, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 169, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -3370,7 +3370,7 @@ static void state_bill_drill_hit(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite) && word_2002EC2 == word_2002EC0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_BILL_DRILL_END;
-        gPlayerSprite.direction = 4;
+        gPlayerSprite.direction = DIRECTION_DOWN;
         sprite_set_anim(&gPlayerSprite, 137, 0, 1);
         sub_8026714();
         if (gBillDrillSfx != -1) {
@@ -3393,64 +3393,64 @@ static void state_climb(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_unlock_anim(&gPlayerSprite);
                 sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_unlock_anim(&gPlayerSprite);
                 sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_unlock_anim(&gPlayerSprite);
                 sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_unlock_anim(&gPlayerSprite);
                 sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_unlock_anim(&gPlayerSprite);
                 sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_unlock_anim(&gPlayerSprite);
                 sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_unlock_anim(&gPlayerSprite);
                 sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_unlock_anim(&gPlayerSprite);
                 sub_8003884(dword_2000FC8, 0x13333, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -3479,8 +3479,8 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 41, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x2D0000, 0);
             }
@@ -3489,8 +3489,8 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 41, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x13B0000, 0);
             }
@@ -3499,8 +3499,8 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 41, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0xE10000, 0);
             }
@@ -3509,8 +3509,8 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 41, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x870000, 0);
             }
@@ -3519,8 +3519,8 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 41, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x5A0000, 0);
             }
@@ -3529,8 +3529,8 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 41, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x10E0000, 0);
             }
@@ -3539,8 +3539,8 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 41, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0xB40000, 0);
             }
@@ -3549,8 +3549,8 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 41, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0, 0);
             }
@@ -3590,7 +3590,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 41, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -3599,7 +3599,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 41, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -3608,7 +3608,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 41, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -3617,7 +3617,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 41, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -3626,7 +3626,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 41, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -3635,7 +3635,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 41, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -3644,7 +3644,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 41, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -3653,7 +3653,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 41, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -3844,64 +3844,64 @@ static void state_shock_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 233, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 233, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 233, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 233, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim_without_reset(&gPlayerSprite, 233, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim_without_reset(&gPlayerSprite, 233, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 233, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 233, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -3928,64 +3928,64 @@ static void state_shock_jump_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 17, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 17, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 17, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 17, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim_without_reset(&gPlayerSprite, 17, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim_without_reset(&gPlayerSprite, 17, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 17, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim_without_reset(&gPlayerSprite, 17, 0, 1);
                 sub_8003884(dword_2000FC8, 0x10000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -4067,9 +4067,9 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 1) {
-                    gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x2D0000, 0);
@@ -4077,9 +4077,9 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 3) {
-                    gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x13B0000, 0);
@@ -4087,9 +4087,9 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 5) {
-                    gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0xE10000, 0);
@@ -4097,9 +4097,9 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 7) {
-                    gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_UP_LEFT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x870000, 0);
@@ -4107,9 +4107,9 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 0) {
-                    gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP) {
+                    gPlayerSprite.direction = DIRECTION_UP;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x5A0000, 0);
@@ -4117,9 +4117,9 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 4) {
-                    gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                    gPlayerSprite.direction = DIRECTION_DOWN;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x10E0000, 0);
@@ -4127,9 +4127,9 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 6) {
-                    gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_LEFT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0xB40000, 0);
@@ -4137,9 +4137,9 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 2) {
-                    gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0, 0);
@@ -4194,9 +4194,9 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 1) {
-                    gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x2D0000, 0);
@@ -4204,9 +4204,9 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 3) {
-                    gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x13B0000, 0);
@@ -4214,9 +4214,9 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 5) {
-                    gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0xE10000, 0);
@@ -4224,9 +4224,9 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 7) {
-                    gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_UP_LEFT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x870000, 0);
@@ -4234,9 +4234,9 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 0) {
-                    gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP) {
+                    gPlayerSprite.direction = DIRECTION_UP;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x5A0000, 0);
@@ -4244,9 +4244,9 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 4) {
-                    gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                    gPlayerSprite.direction = DIRECTION_DOWN;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x10E0000, 0);
@@ -4254,9 +4254,9 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 6) {
-                    gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_LEFT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0xB40000, 0);
@@ -4264,9 +4264,9 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 2) {
-                    gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 57, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0, 0);
@@ -4361,8 +4361,8 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 329, 0, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
                 sub_8016790(0, gPlayerSprite.direction);
@@ -4374,8 +4374,8 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 329, 0, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
                 sub_8016790(0, gPlayerSprite.direction);
@@ -4387,8 +4387,8 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 329, 0, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
                 sub_8016790(0, gPlayerSprite.direction);
@@ -4400,8 +4400,8 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 329, 0, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
                 sub_8016790(0, gPlayerSprite.direction);
@@ -4413,8 +4413,8 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 329, 0, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
                 sub_8016790(0, gPlayerSprite.direction);
@@ -4426,8 +4426,8 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 329, 0, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
                 sub_8016790(0, gPlayerSprite.direction);
@@ -4439,8 +4439,8 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 329, 0, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
                 sub_8016790(0, gPlayerSprite.direction);
@@ -4452,8 +4452,8 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 329, 0, 0);
                 sub_8003884(dword_2000FC8, 0x28000, 0, 0);
                 sub_8016790(0, gPlayerSprite.direction);
@@ -4497,7 +4497,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 329, 0, 0);
             sub_8003884(dword_2000FC8, 0x28000, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4506,7 +4506,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 329, 0, 0);
             sub_8003884(dword_2000FC8, 0x28000, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4515,7 +4515,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 329, 0, 0);
             sub_8003884(dword_2000FC8, 0x28000, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4524,7 +4524,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 329, 0, 0);
             sub_8003884(dword_2000FC8, 0x28000, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4533,7 +4533,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 329, 0, 0);
             sub_8003884(dword_2000FC8, 0x28000, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4542,7 +4542,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 329, 0, 0);
             sub_8003884(dword_2000FC8, 0x28000, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4551,7 +4551,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 329, 0, 0);
             sub_8003884(dword_2000FC8, 0x28000, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4560,7 +4560,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_MOUSE_WALK;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 329, 0, 0);
             sub_8003884(dword_2000FC8, 0x28000, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4580,64 +4580,64 @@ static void state_mouse_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 305, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 305, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 305, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 305, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 305, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 305, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 305, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 305, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -4657,64 +4657,64 @@ static void state_mouse_jump_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 313, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 313, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 313, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 313, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 313, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 313, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 313, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 313, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -4834,8 +4834,8 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 369, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             }
@@ -4845,8 +4845,8 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 369, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             }
@@ -4856,8 +4856,8 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 369, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             }
@@ -4867,8 +4867,8 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 369, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             }
@@ -4878,8 +4878,8 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 369, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             }
@@ -4889,8 +4889,8 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 369, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             }
@@ -4900,8 +4900,8 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 369, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             }
@@ -4911,8 +4911,8 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 369, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             }
@@ -4950,7 +4950,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 369, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4959,7 +4959,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 369, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4968,7 +4968,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 369, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4977,7 +4977,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 369, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4986,7 +4986,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 369, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -4995,7 +4995,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 369, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5004,7 +5004,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 369, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5013,7 +5013,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CANDLE_WALK;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 369, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5043,64 +5043,64 @@ static void state_candle_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 385, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 385, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 385, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 385, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 385, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 385, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 385, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 385, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -5130,64 +5130,64 @@ static void state_candle_jump_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 393, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 393, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 393, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 393, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 393, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 393, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 393, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 393, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -5258,7 +5258,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             sub_8016790(5, gPlayerSprite.direction);
@@ -5267,7 +5267,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             sub_8016790(5, gPlayerSprite.direction);
@@ -5276,7 +5276,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             sub_8016790(5, gPlayerSprite.direction);
@@ -5285,7 +5285,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             sub_8016790(5, gPlayerSprite.direction);
@@ -5294,7 +5294,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             sub_8016790(5, gPlayerSprite.direction);
@@ -5303,7 +5303,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             sub_8016790(5, gPlayerSprite.direction);
@@ -5312,7 +5312,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             sub_8016790(5, gPlayerSprite.direction);
@@ -5321,7 +5321,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 521, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             sub_8016790(5, gPlayerSprite.direction);
@@ -5355,8 +5355,8 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 521, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             }
@@ -5366,8 +5366,8 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 521, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             }
@@ -5377,8 +5377,8 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 521, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             }
@@ -5388,8 +5388,8 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 521, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             }
@@ -5399,8 +5399,8 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 521, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             }
@@ -5410,8 +5410,8 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 521, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             }
@@ -5421,8 +5421,8 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 521, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             }
@@ -5432,8 +5432,8 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_WALK;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 521, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             }
@@ -5465,64 +5465,64 @@ static void state_wonderwing_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -5545,64 +5545,64 @@ static void state_wonderwing_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 513, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -5689,8 +5689,8 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 249, 0, 0);
                 sub_8003884(dword_2000FC8, 0x14CCD, 0x2D0000, 0);
             }
@@ -5700,8 +5700,8 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 249, 0, 0);
                 sub_8003884(dword_2000FC8, 0x14CCD, 0x13B0000, 0);
             }
@@ -5711,8 +5711,8 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 249, 0, 0);
                 sub_8003884(dword_2000FC8, 0x14CCD, 0xE10000, 0);
             }
@@ -5722,8 +5722,8 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 249, 0, 0);
                 sub_8003884(dword_2000FC8, 0x14CCD, 0x870000, 0);
             }
@@ -5733,8 +5733,8 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 249, 0, 0);
                 sub_8003884(dword_2000FC8, 0x14CCD, 0x5A0000, 0);
             }
@@ -5744,8 +5744,8 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 249, 0, 0);
                 sub_8003884(dword_2000FC8, 0x14CCD, 0x10E0000, 0);
             }
@@ -5755,8 +5755,8 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 249, 0, 0);
                 sub_8003884(dword_2000FC8, 0x14CCD, 0xB40000, 0);
             }
@@ -5766,8 +5766,8 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 249, 0, 0);
                 sub_8003884(dword_2000FC8, 0x14CCD, 0, 0);
             }
@@ -5817,7 +5817,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 249, 0, 0);
             sub_8003884(dword_2000FC8, 0x14CCD, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5826,7 +5826,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 249, 0, 0);
             sub_8003884(dword_2000FC8, 0x14CCD, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5835,7 +5835,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 249, 0, 0);
             sub_8003884(dword_2000FC8, 0x14CCD, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5844,7 +5844,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 249, 0, 0);
             sub_8003884(dword_2000FC8, 0x14CCD, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5853,7 +5853,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 249, 0, 0);
             sub_8003884(dword_2000FC8, 0x14CCD, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5862,7 +5862,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 249, 0, 0);
             sub_8003884(dword_2000FC8, 0x14CCD, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5871,7 +5871,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 249, 0, 0);
             sub_8003884(dword_2000FC8, 0x14CCD, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5880,7 +5880,7 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SHOOTER_WALK;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 249, 0, 0);
             sub_8003884(dword_2000FC8, 0x14CCD, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -5927,64 +5927,64 @@ static void state_shooter_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 273, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 273, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 273, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 273, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 273, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 273, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 273, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 273, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -6013,64 +6013,64 @@ static void state_shooter_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 281, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 281, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 281, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 281, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 281, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 281, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 281, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 281, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -6097,8 +6097,8 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 401, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             }
@@ -6108,8 +6108,8 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 401, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             }
@@ -6119,8 +6119,8 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 401, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             }
@@ -6130,8 +6130,8 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 401, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             }
@@ -6141,8 +6141,8 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 401, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             }
@@ -6152,8 +6152,8 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 401, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             }
@@ -6163,8 +6163,8 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 401, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             }
@@ -6174,8 +6174,8 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 401, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             }
@@ -6218,7 +6218,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6231,7 +6231,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6244,7 +6244,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6257,7 +6257,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6270,7 +6270,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6283,7 +6283,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6296,7 +6296,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6309,7 +6309,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_TANK_RIDE;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 401, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6381,7 +6381,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6390,7 +6390,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6399,7 +6399,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6408,7 +6408,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6417,7 +6417,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6426,7 +6426,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6435,7 +6435,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6444,7 +6444,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 425, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6477,7 +6477,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 449, 0, 0);
             sub_8003884(dword_2000FC8, 0x1CCCD, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6486,7 +6486,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 449, 0, 0);
             sub_8003884(dword_2000FC8, 0x1CCCD, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6495,7 +6495,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 449, 0, 0);
             sub_8003884(dword_2000FC8, 0x1CCCD, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6504,7 +6504,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 449, 0, 0);
             sub_8003884(dword_2000FC8, 0x1CCCD, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6513,7 +6513,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 449, 0, 0);
             sub_8003884(dword_2000FC8, 0x1CCCD, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6522,7 +6522,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 449, 0, 0);
             sub_8003884(dword_2000FC8, 0x1CCCD, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6531,7 +6531,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 449, 0, 0);
             sub_8003884(dword_2000FC8, 0x1CCCD, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6540,7 +6540,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 449, 0, 0);
             sub_8003884(dword_2000FC8, 0x1CCCD, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -6565,8 +6565,8 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 425, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             }
@@ -6576,8 +6576,8 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 425, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             }
@@ -6587,8 +6587,8 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 425, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             }
@@ -6598,8 +6598,8 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 425, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             }
@@ -6609,8 +6609,8 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 425, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             }
@@ -6620,8 +6620,8 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 425, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             }
@@ -6631,8 +6631,8 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 425, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             }
@@ -6642,8 +6642,8 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_WALK;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 425, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             }
@@ -6681,8 +6681,8 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            if (gPlayerSprite.direction != 1) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 449, 0, 0);
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x2D0000, 0);
             }
@@ -6691,8 +6691,8 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            if (gPlayerSprite.direction != 3) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 449, 0, 0);
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x13B0000, 0);
             }
@@ -6701,8 +6701,8 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            if (gPlayerSprite.direction != 5) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 449, 0, 0);
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0xE10000, 0);
             }
@@ -6711,8 +6711,8 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            if (gPlayerSprite.direction != 7) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 449, 0, 0);
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x870000, 0);
             }
@@ -6721,8 +6721,8 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            if (gPlayerSprite.direction != 0) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 449, 0, 0);
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x5A0000, 0);
             }
@@ -6731,8 +6731,8 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            if (gPlayerSprite.direction != 4) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 449, 0, 0);
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x10E0000, 0);
             }
@@ -6741,8 +6741,8 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            if (gPlayerSprite.direction != 6) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 449, 0, 0);
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0xB40000, 0);
             }
@@ -6751,8 +6751,8 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_OCTOPUS_SWIM;
-            if (gPlayerSprite.direction != 2) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 449, 0, 0);
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0, 0);
             }
@@ -6805,9 +6805,9 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 1) {
-                    gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x2D0000, 0);
@@ -6815,9 +6815,9 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 3) {
-                    gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x13B0000, 0);
@@ -6825,9 +6825,9 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 5) {
-                    gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0xE10000, 0);
@@ -6835,9 +6835,9 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 7) {
-                    gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_UP_LEFT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x870000, 0);
@@ -6845,9 +6845,9 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 0) {
-                    gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP) {
+                    gPlayerSprite.direction = DIRECTION_UP;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x5A0000, 0);
@@ -6855,9 +6855,9 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 4) {
-                    gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                    gPlayerSprite.direction = DIRECTION_DOWN;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x10E0000, 0);
@@ -6865,9 +6865,9 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 6) {
-                    gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_LEFT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0xB40000, 0);
@@ -6875,9 +6875,9 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 2) {
-                    gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0, 0);
@@ -6919,9 +6919,9 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 1) {
-                    gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x2D0000, 0);
@@ -6929,9 +6929,9 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 3) {
-                    gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x13B0000, 0);
@@ -6939,9 +6939,9 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 5) {
-                    gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0xE10000, 0);
@@ -6949,9 +6949,9 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 7) {
-                    gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_UP_LEFT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x870000, 0);
@@ -6959,9 +6959,9 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 0) {
-                    gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_UP) {
+                    gPlayerSprite.direction = DIRECTION_UP;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x5A0000, 0);
@@ -6969,9 +6969,9 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 4) {
-                    gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_DOWN) {
+                    gPlayerSprite.direction = DIRECTION_DOWN;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0x10E0000, 0);
@@ -6979,9 +6979,9 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 6) {
-                    gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_LEFT) {
+                    gPlayerSprite.direction = DIRECTION_LEFT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0xB40000, 0);
@@ -6989,9 +6989,9 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                if (gPlayerSprite.direction != 2) {
-                    gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                if (gPlayerSprite.direction != DIRECTION_RIGHT) {
+                    gPlayerSprite.direction = DIRECTION_RIGHT;
                     sprite_set_anim(&gPlayerSprite, 457, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1CCCD, 0, 0);
@@ -7034,64 +7034,64 @@ static void state_octopus_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -7117,64 +7117,64 @@ static void state_octopus_jump_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -7206,64 +7206,64 @@ static void state_octopus_water_jump(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 433, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -7288,64 +7288,64 @@ static void state_octopus_water_jump_fall(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            if (gPlayerSprite.direction != 1 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 1;
+            if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 3 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 3;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            if (gPlayerSprite.direction != 5 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 5;
+            if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            if (gPlayerSprite.direction != 7 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 7;
+            if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP_LEFT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_UP:
-            if (gPlayerSprite.direction != 0 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 0;
+            if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_UP;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_DOWN:
-            if (gPlayerSprite.direction != 4 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 4;
+            if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_DOWN;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_LEFT:
-            if (gPlayerSprite.direction != 6 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 6;
+            if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_LEFT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
 
         case DPAD_RIGHT:
-            if (gPlayerSprite.direction != 2 || !sub_80038AC(dword_2000FC8)) {
-                gPlayerSprite.direction = 2;
+            if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
+                gPlayerSprite.direction = DIRECTION_RIGHT;
                 sprite_set_anim(&gPlayerSprite, 441, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
@@ -7446,49 +7446,49 @@ static void sub_8023C94(s32 keyPressed, s32 keyDown) {
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
-            gPlayerSprite.direction = 1;
+            gPlayerSprite.direction = DIRECTION_UP_RIGHT;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
 
         case DPAD_RIGHT | DPAD_DOWN:
-            gPlayerSprite.direction = 3;
+            gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
 
         case DPAD_LEFT | DPAD_DOWN:
-            gPlayerSprite.direction = 5;
+            gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
 
         case DPAD_LEFT | DPAD_UP:
-            gPlayerSprite.direction = 7;
+            gPlayerSprite.direction = DIRECTION_UP_LEFT;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
 
         case DPAD_UP:
-            gPlayerSprite.direction = 0;
+            gPlayerSprite.direction = DIRECTION_UP;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
 
         case DPAD_DOWN:
-            gPlayerSprite.direction = 4;
+            gPlayerSprite.direction = DIRECTION_DOWN;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
 
         case DPAD_LEFT:
-            gPlayerSprite.direction = 6;
+            gPlayerSprite.direction = DIRECTION_LEFT;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
 
         case DPAD_RIGHT:
-            gPlayerSprite.direction = 2;
+            gPlayerSprite.direction = DIRECTION_RIGHT;
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
