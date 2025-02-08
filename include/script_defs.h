@@ -50,8 +50,8 @@ enum ScriptCommand {
     SCRIPT_CMD_ACTOR_ALWAYS_VISIBLE,
     SCRIPT_CMD_ALLOC_OAM_MATRICES,
     SCRIPT_CMD_FREE_OAM_MATRICES,
-    SCRIPT_CMD_sub_805F480,
-    SCRIPT_CMD_sub_805F4B0,
+    SCRIPT_CMD_ACTOR_SET_MATRIX_IDX,
+    SCRIPT_CMD_ACTOR_SET_AFFINE,
     SCRIPT_CMD_ACTOR_START_SCALING,
     SCRIPT_CMD_ACTOR_START_ROTATION,
     SCRIPT_CMD_PLAY_BGM,
@@ -237,10 +237,11 @@ enum ScriptWaitCond {
 
 #define FreeOamMatrices SCRIPT_CMD(SCRIPT_CMD_FREE_OAM_MATRICES, 0, 0, 0, 0)
 
-#define Sub805F480(actorIdx, unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F480, actorIdx, unknown, 0, 0)
+#define ActorSetMatrixIdx(actorIdx, matrixIdx)                                                         \
+    SCRIPT_CMD(SCRIPT_CMD_ACTOR_SET_MATRIX_IDX, actorIdx, matrixIdx, 0, 0)
 
-#define Sub805F4B0(actorIdx, unknown1, unknown2)                                                       \
-    SCRIPT_CMD(SCRIPT_CMD_sub_805F4B0, actorIdx, unknown1, unknown2, 0)
+#define ActorSetAffine(actorIdx, rotation, scale)                                                      \
+    SCRIPT_CMD(SCRIPT_CMD_ACTOR_SET_AFFINE, actorIdx, rotation, scale, 0)
 
 #define ActorStartScaling(actorIdx, goal, speed)                                                       \
     SCRIPT_CMD(SCRIPT_CMD_ACTOR_START_SCALING, actorIdx, goal, speed, 0)

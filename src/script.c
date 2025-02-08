@@ -143,10 +143,10 @@ static bool32 script_cmd_actor_do_not_snap(int, int, int, int);
 static bool32 script_cmd_actor_always_visible(int, int, int, int);
 static bool32 script_cmd_alloc_oam_matrices(int, int, int, int);
 static bool32 script_cmd_free_oam_matrices(int, int, int, int);
-static bool32 sub_805F480(int, int, int, int);
-static bool32 sub_805F4B0(int, int, int, int);
-static bool32 script_actor_start_scaling(int, int, int, int);
-static bool32 script_actor_start_rotation(int, int, int, int);
+static bool32 script_cmd_actor_set_matrix_idx(int, int, int, int);
+static bool32 script_cmd_actor_set_affine(int, int, int, int);
+static bool32 script_cmd_actor_start_scaling(int, int, int, int);
+static bool32 script_cmd_actor_start_rotation(int, int, int, int);
 static bool32 script_cmd_play_bgm(int, int, int, int);
 static bool32 script_cmd_stop_bgm(int, int, int, int);
 static bool32 script_cmd_play_sfx(int, int, int, int);
@@ -234,10 +234,10 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_actor_always_visible,
     script_cmd_alloc_oam_matrices,
     script_cmd_free_oam_matrices,
-    sub_805F480,
-    sub_805F4B0,
-    script_actor_start_scaling,
-    script_actor_start_rotation,
+    script_cmd_actor_set_matrix_idx,
+    script_cmd_actor_set_affine,
+    script_cmd_actor_start_scaling,
+    script_cmd_actor_start_rotation,
     script_cmd_play_bgm,
     script_cmd_stop_bgm,
     script_cmd_play_sfx,
@@ -1608,20 +1608,20 @@ static bool32 script_cmd_free_oam_matrices(int _, int __, int ___, int ____) {
     return TRUE;
 }
 
-static bool32 sub_805F480(int actorIdx, int a2, int _, int __) {
-    gCurrentScript->actors[actorIdx].matrixIdx = a2;
-    sub_8003820(&gCurrentScript->actors[actorIdx].sprite, 1, a2);
+static bool32 script_cmd_actor_set_matrix_idx(int actorIdx, int matrixIdx, int _, int __) {
+    gCurrentScript->actors[actorIdx].matrixIdx = matrixIdx;
+    sub_8003820(&gCurrentScript->actors[actorIdx].sprite, 1, matrixIdx);
     return TRUE;
 }
 
-static bool32 sub_805F4B0(int actorIdx, int a2, int a3, int _) {
-    gCurrentScript->actors[actorIdx].rotation = a2 << 16;
-    gCurrentScript->actors[actorIdx].scale = a3 << 16;
-    sprite_set_affine(gCurrentScript->actors[actorIdx].matrixIdx, a2, a3);
+static bool32 script_cmd_actor_set_affine(int actorIdx, int rotation, int scale, int _) {
+    gCurrentScript->actors[actorIdx].rotation = rotation << FX32_SHIFT;
+    gCurrentScript->actors[actorIdx].scale = scale << FX32_SHIFT;
+    sprite_set_affine(gCurrentScript->actors[actorIdx].matrixIdx, rotation, scale);
     return TRUE;
 }
 
-static bool32 script_actor_start_scaling(int actorIdx, int goal, int speed, int _) {
+static bool32 script_cmd_actor_start_scaling(int actorIdx, int goal, int speed, int _) {
     struct ScriptActor* actor = &gCurrentScript->actors[actorIdx];
     actor->scaleGoal = goal << FX32_SHIFT;
 
@@ -1638,7 +1638,7 @@ static bool32 script_actor_start_scaling(int actorIdx, int goal, int speed, int 
     return TRUE;
 }
 
-static bool32 script_actor_start_rotation(int actorIdx, int goal, int speed, int clockwise) {
+static bool32 script_cmd_actor_start_rotation(int actorIdx, int goal, int speed, int clockwise) {
     struct ScriptActor* actor = &gCurrentScript->actors[actorIdx];
     actor->rotationGoal = goal << FX32_SHIFT;
 
