@@ -286,7 +286,7 @@ static void update_game(void) {
             sub_80409DC();
 
             if (gKazooieSfx != -1) {
-                    STOP_SFX(gKazooieSfx);
+                STOP_SFX(gKazooieSfx);
                 gKazooieSfx = -1;
             }
 
@@ -2877,7 +2877,8 @@ static void sub_800DF34() {
             sub_800E7A0();
 
             if (gGameStatus.health != 0) {
-                load_room_directly(dword_80CEBF8[gLoadedRoomLevel], dword_80CEBE0[gLoadedRoomLevel], TRUE);
+                load_room_directly(dword_80CEBF8[gLoadedRoomLevel], dword_80CEBE0[gLoadedRoomLevel],
+                                   TRUE);
             }
         }
 
