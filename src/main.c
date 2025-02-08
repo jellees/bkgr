@@ -286,14 +286,12 @@ static void update_game(void) {
             sub_80409DC();
 
             if (gKazooieSfx != -1) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gKazooieSfx);
-                }
+                    STOP_SFX(gKazooieSfx);
                 gKazooieSfx = -1;
             }
 
-            if (audio_fx_still_active(gBillDrillSfx) && gCanPlaySfx) {
-                audio_halt_fx(gBillDrillSfx);
+            if (audio_fx_still_active(gBillDrillSfx)) {
+                STOP_SFX(gBillDrillSfx);
             }
 
             if (gPlayerState == PLAYER_STATE_35) {
@@ -1045,8 +1043,8 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
         a.z = a1->z;
         if (sub_800953C(&a)) {
             if (sub_8018BB0(&gPlayerSprite)) {
-                if (audio_fx_still_active(gBillDrillSfx) && gCanPlaySfx) {
-                    audio_halt_fx(gBillDrillSfx);
+                if (audio_fx_still_active(gBillDrillSfx)) {
+                    STOP_SFX(gBillDrillSfx);
                 }
 
                 set_player_in_climb_state();
@@ -2727,8 +2725,8 @@ void select_next_available_egg(bool32 a1) {
     sub_08041FA4(gSelectedEgg + 9);
     sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
 
-    if (audio_fx_still_active(dword_2001124) && gCanPlaySfx) {
-        audio_halt_fx(dword_2001124);
+    if (audio_fx_still_active(dword_2001124)) {
+        STOP_SFX(dword_2001124);
     }
 
     dword_2001124 = PLAY_SFX(39);

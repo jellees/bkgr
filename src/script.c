@@ -1678,7 +1678,7 @@ static bool32 script_cmd_play_sfx(int sfx, int storeSfx, int _, int __) {
 }
 
 static bool32 script_cmd_stop_sfx(int _, int __, int ___, int ____) {
-    bool8 stopped = gCanPlaySfx ? audio_halt_fx(gCurrentScript->activeSfx) : 0;
+    bool8 stopped = STOP_SFX(gCurrentScript->activeSfx);
     if (!stopped) {
         audio_halt_all_fx();
     }
@@ -1691,17 +1691,13 @@ static bool32 script_cmd_stop_all_sfx(int _, int __, int ___, int ____) {
 }
 
 static bool32 script_cmd_play_bill_drill_sfx(int _, int __, int ___, int ____) {
-    if (gCanPlaySfx) {
-        audio_halt_fx(gBillDrillSfx);
-    }
+    STOP_SFX(gBillDrillSfx);
     gBillDrillSfx = PLAY_SFX(22);
     return TRUE;
 }
 
 static bool32 script_cmd_stop_bill_drill_sfx(int _, int __, int ___, int ____) {
-    if (gCanPlaySfx) {
-        audio_halt_fx(gBillDrillSfx);
-    }
+    STOP_SFX(gBillDrillSfx);
     return TRUE;
 }
 

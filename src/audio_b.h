@@ -11,6 +11,7 @@ extern void init_audio_and_reset_volume(void);
 extern void reset_volume(void);
 
 extern int audio_new_fx(int, int, int);
+extern bool32 audio_halt_fx(int);
 
 #define AUDIO_NEW_SFX(idx, volume, pitch) (gCanPlaySfx ? audio_new_fx(idx, volume, pitch) : -1)
 
@@ -20,5 +21,7 @@ extern int audio_new_fx(int, int, int);
 
 #define PLAY_SFX_PITCH(idx, base)                                                                      \
     AUDIO_NEW_SFX(dSoundEffects[idx].index, dSoundEffects[idx].volumes[gSfxVolume], base)
+
+#define STOP_SFX(idx) (gCanPlaySfx ? audio_halt_fx(idx) : FALSE)
 
 #endif

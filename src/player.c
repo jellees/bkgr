@@ -266,8 +266,8 @@ static void set_player_in_die_state() {
             sprite_set_anim(&gPlayerSprite, 345, 0, 1);
         }
     } else if (gTransformation == TRANSFORMATION_TANK) {
-        if (audio_fx_still_active(gTankSfx) && gCanPlaySfx) {
-            audio_halt_fx(gTankSfx);
+        if (audio_fx_still_active(gTankSfx)) {
+            STOP_SFX(gTankSfx);
         }
         gPlayerState = PLAYER_STATE_TANK_DIE;
         if (byte_20020B3) {
@@ -429,9 +429,7 @@ void sub_8016C78(u8 a1) {
             sprite_lock_anim_on_frame(&gPlayerSprite, 6);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             if (gKazooieSfx != -1) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gKazooieSfx);
-                }
+                STOP_SFX(gKazooieSfx);
                 gKazooieSfx = -1;
             }
             sub_8016790(15, gPlayerSprite.direction);
@@ -467,9 +465,7 @@ static bool32 interact_with_object() {
     didInteract = TRUE;
 
     if (gKazooieSfx != -1) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gKazooieSfx);
-        }
+        STOP_SFX(gKazooieSfx);
         gKazooieSfx = -1;
     }
 
@@ -630,9 +626,7 @@ static void do_kazooie_jump() {
     CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(4), 0xFFFFE000);
     byte_20021CB = 1;
     if (gKazooieSfx != -1) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gKazooieSfx);
-        }
+        STOP_SFX(gKazooieSfx);
         gKazooieSfx = -1;
     }
     PLAY_SFX(20);
@@ -830,16 +824,12 @@ void sub_8017C50(void) {
     gPlayerShadowSprite.attr0Flag9 = 1;
 
     if (gKazooieSfx != -1) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gKazooieSfx);
-        }
+        STOP_SFX(gKazooieSfx);
         gKazooieSfx = -1;
     }
 
     if (audio_fx_still_active(gBillDrillSfx)) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gBillDrillSfx);
-        }
+        STOP_SFX(gBillDrillSfx);
     }
 
     PLAY_SFX(12);
@@ -893,9 +883,7 @@ void set_player_in_climb_state(void) {
     gPlayerState = PLAYER_STATE_CLIMB;
     sprite_set_anim(&gPlayerSprite, 121, 0, 0);
     if (gKazooieSfx != -1) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gKazooieSfx);
-        }
+        STOP_SFX(gKazooieSfx);
         gKazooieSfx = -1;
     }
     sub_8016790(0, gPlayerSprite.direction);
@@ -954,9 +942,7 @@ void sub_80181B8(fx32* height) {
     }
 
     if (audio_fx_still_active(gBillDrillSfx)) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gBillDrillSfx);
-        }
+        STOP_SFX(gBillDrillSfx);
     }
 
     sub_8017D9C();
@@ -1051,9 +1037,7 @@ void sub_80181B8(fx32* height) {
             sprite_set_anim(&gPlayerSprite, 201, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             if (gKazooieSfx != -1) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gKazooieSfx);
-                }
+                STOP_SFX(gKazooieSfx);
                 gKazooieSfx = -1;
             }
             sub_8016790(15, gPlayerSprite.direction);
@@ -1119,16 +1103,12 @@ bool32 start_npc_dialogue(int a1) {
     }
 
     if (gKazooieSfx != -1) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gKazooieSfx);
-        }
+        STOP_SFX(gKazooieSfx);
         gKazooieSfx = -1;
     }
 
     if (audio_fx_still_active(gBillDrillSfx)) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gBillDrillSfx);
-        }
+        STOP_SFX(gBillDrillSfx);
         gBillDrillSfx = -1;
     }
 
@@ -1274,9 +1254,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
     }
 
     if (audio_fx_still_active(gBillDrillSfx)) {
-        if (gCanPlaySfx) {
-            audio_halt_fx(gBillDrillSfx);
-        }
+        STOP_SFX(gBillDrillSfx);
     }
 
     if (gGameStatus.health == 0) {
@@ -1296,9 +1274,7 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
             sprite_set_anim_without_reset(&gPlayerSprite, 153, 0, 2);
             sub_80266C8(3, gBGOffsetVertical, 2);
             if (audio_fx_still_active(gBillDrillSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gBillDrillSfx);
-                }
+                STOP_SFX(gBillDrillSfx);
             }
             gBillDrillSfx = PLAY_SFX(22);
             sub_8016790(4, gPlayerSprite.direction);
@@ -1580,9 +1556,7 @@ void hurt_player(int amount, int a2, int a3) {
         PLAY_SFX(RandomMinMax(4, 5));
 
         if (gKazooieSfx != -1) {
-            if (gCanPlaySfx) {
-                audio_halt_fx(gKazooieSfx);
-            }
+            STOP_SFX(gKazooieSfx);
             gKazooieSfx = -1;
         }
     } else {
@@ -1616,9 +1590,7 @@ void hurt_player(int amount, int a2, int a3) {
         PLAY_SFX(RandomMinMax(4, 5));
 
         if (gBillDrillSfx != -1) {
-            if (gCanPlaySfx) {
-                audio_halt_fx(gBillDrillSfx);
-            }
+            STOP_SFX(gBillDrillSfx);
             gBillDrillSfx = -1;
         }
     }
@@ -1670,15 +1642,11 @@ void sub_801990C(void) {
         sprite_set_anim(&gPlayerSprite, 161, 0, 1);
         sub_8016790(0, gPlayerSprite.direction);
         if (gKazooieSfx != -1) {
-            if (gCanPlaySfx) {
-                audio_halt_fx(gKazooieSfx);
-            }
+            STOP_SFX(gKazooieSfx);
             gKazooieSfx = -1;
         }
         if (gBillDrillSfx != -1) {
-            if (gCanPlaySfx) {
-                audio_halt_fx(gBillDrillSfx);
-            }
+            STOP_SFX(gBillDrillSfx);
             gBillDrillSfx = -1;
         }
     }
@@ -1743,9 +1711,7 @@ static void sub_08019AAC(int a1, int a2) {
 
         sub_8016790(0, gPlayerSprite.direction);
         if (audio_fx_still_active(dword_20021D4)) {
-            if (gCanPlaySfx) {
-                audio_halt_fx(dword_20021D4);
-            }
+            STOP_SFX(dword_20021D4);
         }
         PLAY_SFX_PITCH(RandomMinMax(4, 5), 0x18000);
     } else if (gTransformation == TRANSFORMATION_TANK) {
@@ -1851,9 +1817,7 @@ void set_transformation(u32 transformation) {
             dword_3003308 = 0x240000;
             dword_3003304 = 0x180000;
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             break;
 
@@ -1868,9 +1832,7 @@ void set_transformation(u32 transformation) {
             dword_3003308 = 0x100000;
             dword_3003304 = 0x100000;
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             break;
 
@@ -1885,9 +1847,7 @@ void set_transformation(u32 transformation) {
             dword_3003308 = 0x180000;
             dword_3003304 = 0x180000;
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             break;
 
@@ -1915,9 +1875,7 @@ void set_transformation(u32 transformation) {
             dword_3003308 = 0x100000;
             dword_3003304 = 0x180000;
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             break;
 
@@ -2644,8 +2602,7 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
 
             if (gKazooieSfx != -1) {
-                if (gCanPlaySfx)
-                    audio_halt_fx(gKazooieSfx);
+                STOP_SFX(gKazooieSfx);
                 gKazooieSfx = -1;
             }
 
@@ -2742,8 +2699,7 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
 
             if (gKazooieSfx != -1) {
-                if (gCanPlaySfx)
-                    audio_halt_fx(gKazooieSfx);
+                STOP_SFX(gKazooieSfx);
                 gKazooieSfx = -1;
             }
 
@@ -2777,8 +2733,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
 
             if (gKazooieSfx != -1) {
-                if (gCanPlaySfx)
-                    audio_halt_fx(gKazooieSfx);
+                STOP_SFX(gKazooieSfx);
                 gKazooieSfx = -1;
             }
 
@@ -3306,9 +3261,7 @@ static void state_air_attack(s32 keyPressed, s32 keyDown) {
             case 2:
                 if (sprite_is_anim_done_once(&gPlayerSprite)) {
                     if (audio_fx_still_active(dword_20021D0)) {
-                        if (gCanPlaySfx) {
-                            audio_halt_fx(dword_20021D0);
-                        }
+                        STOP_SFX(dword_20021D0);
                     }
                     sub_80181B8(&gPlayerPos.y);
                     return;
@@ -3421,9 +3374,7 @@ static void state_bill_drill_hit(s32 keyPressed, s32 keyDown) {
         sprite_set_anim(&gPlayerSprite, 137, 0, 1);
         sub_8026714();
         if (gBillDrillSfx != -1) {
-            if (gCanPlaySfx) {
-                audio_halt_fx(gBillDrillSfx);
-            }
+            STOP_SFX(gBillDrillSfx);
             gBillDrillSfx = -1;
         }
     } else {
@@ -3830,9 +3781,7 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
             } else if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) {
                 sprite_lock_anim_on_frame(&gPlayerSprite, 6);
                 if (gKazooieSfx != -1) {
-                    if (gCanPlaySfx) {
-                        audio_halt_fx(gKazooieSfx);
-                    }
+                    STOP_SFX(gKazooieSfx);
                     gKazooieSfx = -1;
                 }
             } else if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) {
@@ -6240,9 +6189,7 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(194);
             break;
@@ -6256,9 +6203,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
         case A_BUTTON:
             if (gInInteractionArea) {
                 if (audio_fx_still_active(gTankSfx)) {
-                    if (gCanPlaySfx) {
-                        audio_halt_fx(gTankSfx);
-                    }
+                    STOP_SFX(gTankSfx);
                 }
                 start_npc_dialogue(0);
             }
@@ -6278,9 +6223,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(195);
             break;
@@ -6293,9 +6236,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(195);
             break;
@@ -6308,9 +6249,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(195);
             break;
@@ -6323,9 +6262,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(195);
             break;
@@ -6338,9 +6275,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(195);
             break;
@@ -6353,9 +6288,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(195);
             break;
@@ -6368,9 +6301,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(195);
             break;
@@ -6383,9 +6314,7 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             if (audio_fx_still_active(gTankSfx)) {
-                if (gCanPlaySfx) {
-                    audio_halt_fx(gTankSfx);
-                }
+                STOP_SFX(gTankSfx);
             }
             gTankSfx = PLAY_SFX(195);
             break;
@@ -6425,9 +6354,7 @@ static void state_tank_hurt(s32 keyPressed, s32 keyDown) {
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
         sub_8016790(0, gPlayerSprite.direction);
         if (audio_fx_still_active(gTankSfx)) {
-            if (gCanPlaySfx) {
-                audio_halt_fx(gTankSfx);
-            }
+            STOP_SFX(gTankSfx);
         }
         gTankSfx = PLAY_SFX(194);
     }
