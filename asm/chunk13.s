@@ -480,7 +480,7 @@ _08061104:
 	adds r0, r6, #0
 	movs r1, #0
 	lsrs r2, r2, #0x10
-	bl sub_8025718
+	bl sprite_set_affine
 _0806116A:
 	adds r0, r6, #1
 	lsls r0, r0, #0x18
@@ -940,7 +940,7 @@ _0806154A:
 	movs r1, #0
 	movs r2, #0x80
 	lsls r2, r2, #1
-	bl sub_8025718
+	bl sprite_set_affine
 	adds r0, r6, #1
 	lsls r0, r0, #0x18
 	lsrs r6, r0, #0x18
@@ -1495,7 +1495,7 @@ _0806199E:
 	lsls r3, r3, #1
 	adds r2, r2, r3
 	movs r1, #0
-	bl sub_8025718
+	bl sprite_set_affine
 	mov r4, r8
 	ldrb r0, [r4]
 	cmp r0, #0x10
@@ -1552,7 +1552,7 @@ _08061A5C:
 	ldrb r0, [r5]
 	movs r2, #0xc0
 	lsls r2, r2, #2
-	bl sub_8025718
+	bl sprite_set_affine
 	ldrb r1, [r5]
 	ldr r2, [r4]
 	lsls r0, r1, #3
@@ -1602,7 +1602,7 @@ _08061AD4:
 	subs r2, r2, r0
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_8025718
+	bl sprite_set_affine
 	movs r0, #0
 	ldrsb r0, [r7, r0]
 	cmp r0, #0
@@ -1632,7 +1632,7 @@ _08061B0C:
 	movs r2, #0x80
 	lsls r2, r2, #1
 	movs r1, #0
-	bl sub_8025718
+	bl sprite_set_affine
 	ldrb r1, [r6]
 	ldr r2, [r4]
 	lsls r0, r1, #3

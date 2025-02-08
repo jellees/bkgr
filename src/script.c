@@ -36,24 +36,21 @@ struct ScriptActor {
     fx32 xDistance;
     fx32 yDistance;
     u32 field_38;
-    s32 field_3C;
-    s32 field_40;
-    s32 field_44;
-    s32 field_48;
-    s32 field_4C;
-    s32 field_50;
-    u8 field_54;
+    fx32 scale;
+    fx32 scaleGoal;
+    fx32 scaleSpeed;
+    fx32 rotationGoal;
+    fx32 rotationSpeed;
+    fx32 rotation;
+    u8 matrixIdx;
     s8 calcIdx;
     bool8 isVisible;
     bool8 isMoving;
-    u8 field_58;
-    u8 field_59;
+    bool8 isUpdatingScale;
+    bool8 isUpdatingRotation;
     bool8 isPositionAbsolute;
-    u8 field_5B;
-    u8 field_5C;
-    u8 field_5D;
-    u8 field_5E;
-    u8 field_5F;
+    bool8 doNotSnap;
+    bool8 alwaysVisible;
 };
 
 struct ScriptState {
@@ -142,14 +139,14 @@ static bool32 sub_805F120(int, int, int, int);
 static bool32 script_cmd_actor_move(int, int, int, int);
 static bool32 script_cmd_actor_move_to_saved_position(int, int, int, int);
 static bool32 script_cmd_actor_move_from_cam(int, int, int, int);
-static bool32 sub_805F40C(int, int, int, int);
-static bool32 sub_805F428(int, int, int, int);
+static bool32 script_cmd_actor_do_not_snap(int, int, int, int);
+static bool32 script_cmd_actor_always_visible(int, int, int, int);
 static bool32 script_cmd_alloc_oam_matrices(int, int, int, int);
 static bool32 script_cmd_free_oam_matrices(int, int, int, int);
 static bool32 sub_805F480(int, int, int, int);
 static bool32 sub_805F4B0(int, int, int, int);
-static bool32 sub_805F4DC(int, int, int, int);
-static bool32 sub_805F51C(int, int, int, int);
+static bool32 script_actor_start_scaling(int, int, int, int);
+static bool32 script_actor_start_rotation(int, int, int, int);
 static bool32 script_cmd_play_bgm(int, int, int, int);
 static bool32 script_cmd_stop_bgm(int, int, int, int);
 static bool32 script_cmd_play_sfx(int, int, int, int);
@@ -233,14 +230,14 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_actor_move,
     script_cmd_actor_move_to_saved_position,
     script_cmd_actor_move_from_cam,
-    sub_805F40C,
-    sub_805F428,
+    script_cmd_actor_do_not_snap,
+    script_cmd_actor_always_visible,
     script_cmd_alloc_oam_matrices,
     script_cmd_free_oam_matrices,
     sub_805F480,
     sub_805F4B0,
-    sub_805F4DC,
-    sub_805F51C,
+    script_actor_start_scaling,
+    script_actor_start_rotation,
     script_cmd_play_bgm,
     script_cmd_stop_bgm,
     script_cmd_play_sfx,
@@ -310,7 +307,7 @@ static const struct struc_80B21D4 word_80B21D4[] = {
     { .xPos = 544, .yPos = 384, .priority = 0, .field_6 = 256 },
 };
 
-void sub_805D158(void) {
+void init_script_engine(void) {
     u8 i = 0;
     for (i = 0; i < MAX_SCRIPTS; i++) {
         byte_203FA16_2 = 0;
@@ -417,10 +414,14 @@ void sub_805D568(void) {
 #define IS_IN_VIEW_ABSOLUTE(x, y)                                                                      \
     (x)<FX32_CONST(260) && (x)> FX32_CONST(-20) && (y)<FX32_CONST(180) && (y)> FX32_CONST(-20)
 
-static void sub_805D614(struct ScriptState* script, int actorIdx) {
+/**
+ * Calculates whether the actor is in view. Enables or disables sprite based on outcome by setting bit 9
+ * for attribute 0.
+ */
+static void update_script_actor_visibility(struct ScriptState* script, int actorIdx) {
     struct ScriptActor* actor = &script->actors[actorIdx];
 
-    if (actor->field_5C) {
+    if (actor->alwaysVisible) {
         actor->sprite.attr0Flag9 = 0;
         return;
     }
@@ -433,8 +434,8 @@ static void sub_805D614(struct ScriptState* script, int actorIdx) {
     }
 }
 
-void sub_0805D6B0(void) {
-    struct Vec3fx velocity;
+void update_script_camera(void) {
+    struct Vec3fx vel;
     fx32 xDelta, yDelta;
     fx32 xPrev, yPrev;
     bool32 stopMoving;
@@ -444,12 +445,12 @@ void sub_0805D6B0(void) {
         ASSERT(byte_203F99C);
 
         sub_80038A4(gScriptCamera->field_24);
-        sub_80038C4(gScriptCamera->field_24, &velocity.x, &velocity.y, &velocity.z);
+        sub_80038C4(gScriptCamera->field_24, &vel.x, &vel.y, &vel.z);
 
         xPrev = gScriptCamera->xPosCurrent;
         yPrev = gScriptCamera->yPosCurrent;
-        gScriptCamera->xPosCurrent += velocity.x;
-        gScriptCamera->yPosCurrent += velocity.z;
+        gScriptCamera->xPosCurrent += vel.x;
+        gScriptCamera->yPosCurrent += vel.z;
 
         xDelta = gScriptCamera->xPosTarget - gScriptCamera->xPosCurrent;
         yDelta = gScriptCamera->yPosTarget - gScriptCamera->yPosCurrent;
@@ -457,11 +458,11 @@ void sub_0805D6B0(void) {
         stopMoving = FALSE;
 
         if (gScriptCamera->xDistance > gScriptCamera->yDistance) {
-            if ((velocity.x > 0 && xDelta <= 0) || (velocity.x <= 0 && xDelta >= 0)) {
+            if ((vel.x > 0 && xDelta <= 0) || (vel.x <= 0 && xDelta >= 0)) {
                 stopMoving = TRUE;
             }
         } else {
-            if ((velocity.z > 0 && yDelta <= 0) || (velocity.z <= 0 && yDelta >= 0)) {
+            if ((vel.z > 0 && yDelta <= 0) || (vel.z <= 0 && yDelta >= 0)) {
                 stopMoving = TRUE;
             }
         }
@@ -514,7 +515,7 @@ void sub_0805D6B0(void) {
     }
 }
 
-void sub_805D8D8(struct ScriptState* script) {
+void update_script_actor_position(struct ScriptState* script) {
     u8 i;
 
     if (script->waitFrames != 0) {
@@ -539,8 +540,8 @@ void sub_805D8D8(struct ScriptState* script) {
 
             if ((actor->xDistance > actor->yDistance && xDist < Abs(vel.x))
                 || (actor->yDistance >= actor->xDistance && yDist < Abs(vel.z))) {
-                actor->isMoving = 0;
-                if (!actor->field_5B) {
+                actor->isMoving = FALSE;
+                if (!actor->doNotSnap) {
                     actor->xPos = actor->xPosTarget;
                     actor->yPos = actor->yPosTarget;
                     sub_8003864(actor->calcIdx);
@@ -549,30 +550,31 @@ void sub_805D8D8(struct ScriptState* script) {
             }
         }
 
-        if (actor->field_58 || actor->field_59) {
-            if (actor->field_58) {
-                s32 var1 = actor->field_3C + actor->field_44;
-                if ((actor->field_44 >= 0 && var1 >= actor->field_40)
-                    || (actor->field_44 < 0 && var1 <= actor->field_40)) {
-                    actor->field_3C = actor->field_40;
-                    actor->field_58 = 0;
+        if (actor->isUpdatingScale || actor->isUpdatingRotation) {
+            if (actor->isUpdatingScale) {
+                fx32 scale = actor->scale + actor->scaleSpeed;
+                if ((actor->scaleSpeed >= 0 && scale >= actor->scaleGoal)
+                    || (actor->scaleSpeed < 0 && scale <= actor->scaleGoal)) {
+                    actor->scale = actor->scaleGoal;
+                    actor->isUpdatingScale = FALSE;
                 } else {
-                    actor->field_3C = var1;
+                    actor->scale = scale;
                 }
             }
 
-            if (actor->field_59) {
-                s32 var1 = actor->field_50 + actor->field_4C;
-                if ((actor->field_4C >= 0 && var1 >= actor->field_48)
-                    || (actor->field_4C < 0 && var1 <= actor->field_48)) {
-                    actor->field_50 = actor->field_48;
-                    actor->field_59 = 0;
+            if (actor->isUpdatingRotation) {
+                fx32 rotation = actor->rotation + actor->rotationSpeed;
+                if ((actor->rotationSpeed >= 0 && rotation >= actor->rotationGoal)
+                    || (actor->rotationSpeed < 0 && rotation <= actor->rotationGoal)) {
+                    actor->rotation = actor->rotationGoal;
+                    actor->isUpdatingRotation = FALSE;
                 } else {
-                    actor->field_50 = var1;
+                    actor->rotation = rotation;
                 }
             }
 
-            sub_8025718(actor->field_54, (u8)(actor->field_50 >> 16), (u32)actor->field_3C >> 16);
+            sprite_set_affine(actor->matrixIdx, (u8)(actor->rotation >> FX32_SHIFT),
+                              (u32)actor->scale >> FX32_SHIFT);
         }
 
         if (actor->isPositionAbsolute) {
@@ -584,7 +586,7 @@ void sub_805D8D8(struct ScriptState* script) {
         }
 
         if (actor->isVisible) {
-            sub_805D614(script, i);
+            update_script_actor_visibility(script, i);
         }
     }
 }
@@ -655,8 +657,8 @@ static void sub_805DC28(int actorIdx) {
                                   FX32_CONST(6));
         }
 
-        sub_8025718(gCurrentScript->actors[actorIdx].field_54, RandomMinMax(0, 64),
-                    RandomMinMax(256, 768));
+        sprite_set_affine(gCurrentScript->actors[actorIdx].matrixIdx, RandomMinMax(0, 64),
+                          RandomMinMax(256, 768));
     }
 }
 
@@ -664,7 +666,7 @@ static bool32 sub_805DD20(void) {
     //! Possible fake match.
     // https://decomp.me/scratch/0dBNg
     u32 a = byte_203FA12 += 5;
-    sub_8025718(0, 0, dword_80B1AE4[0x80 - ((u8)a / 2)] + 0x180);
+    sprite_set_affine(0, 0, dword_80B1AE4[0x80 - ((u8)a / 2)] + 0x180);
     sub_805DC28(1);
     sub_805DC28(3);
     return !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE);
@@ -681,7 +683,7 @@ void update_scripts(void) {
         return;
     }
 
-    sub_0805D6B0();
+    update_script_camera();
     byte_203F99C = 0;
     word_203F998 = -1;
     word_203F99A = -1;
@@ -703,7 +705,7 @@ void update_scripts(void) {
                 }
                 gCurrentScript->cmdIdx++;
             }
-            sub_805D8D8(gCurrentScript);
+            update_script_actor_position(gCurrentScript);
             if (gCurrentScript->endScript) {
                 end_script(gCurrentScript);
             }
@@ -720,7 +722,7 @@ void update_scripts(void) {
         if (gScripts[i].field_24) {
             sub_805DA94();
             gCurrentScript = &gScripts[i];
-            sub_805D8D8(gCurrentScript);
+            update_script_actor_position(gCurrentScript);
             while (1) {
                 struct Command* cmd = &dScripts[gCurrentScript->scriptIdx][gCurrentScript->cmdIdx];
                 int idx = cmd->idx;
@@ -879,7 +881,7 @@ void end_all_scripts(int a1) {
     sub_805D568();
 }
 
-static void sub_0805E270(int xMin, int xMax, int yMin, int yMax) {
+static void set_random_camera_position(int xMin, int xMax, int yMin, int yMax) {
     u8 yDistanceToMax;
     u8 yDistanceToMin;
     u8 xDistanceToMin;
@@ -983,8 +985,8 @@ static bool32 script_cmd_alloc_actors(int count, int _, int __, int ___) {
         for (i = 0; i < gCurrentScript->actorCount; i++) {
             gCurrentScript->actors[i].isVisible = FALSE;
             gCurrentScript->actors[i].isMoving = FALSE;
-            gCurrentScript->actors[i].field_58 = 0;
-            gCurrentScript->actors[i].field_59 = 0;
+            gCurrentScript->actors[i].isUpdatingScale = FALSE;
+            gCurrentScript->actors[i].isUpdatingRotation = FALSE;
             gCurrentScript->actors[i].calcIdx = -1;
         }
     }
@@ -1203,8 +1205,8 @@ static bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
     SetSprite(&gCurrentScript->actors[actorIdx].sprite, 0x451u, FALSE, 0, 1, 240, 200, 2);
     gCurrentScript->actors[actorIdx].isVisible = TRUE;
     gCurrentScript->actors[actorIdx].isMoving = FALSE;
-    gCurrentScript->actors[actorIdx].field_58 = 0;
-    gCurrentScript->actors[actorIdx].field_59 = 0;
+    gCurrentScript->actors[actorIdx].isUpdatingScale = FALSE;
+    gCurrentScript->actors[actorIdx].isUpdatingRotation = FALSE;
     gCurrentScript->actors[actorIdx].isPositionAbsolute = FALSE;
     gCurrentScript->actors[actorIdx].xPos =
         (gCameraPixelX + gCurrentScript->actors[actorIdx].sprite.xPos) << FX32_SHIFT;
@@ -1214,18 +1216,18 @@ static bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
     gCurrentScript->actors[actorIdx].yDistance = 0;
     gCurrentScript->actors[actorIdx].moveSpeed = 0;
     gCurrentScript->actors[actorIdx].calcIdx = -1;
-    gCurrentScript->actors[actorIdx].field_5B = 0;
+    gCurrentScript->actors[actorIdx].doNotSnap = FALSE;
     gCurrentScript->actors[actorIdx].field_38 = 0;
-    gCurrentScript->actors[actorIdx].field_3C = 0x1000000;
-    gCurrentScript->actors[actorIdx].field_40 = 0x1000000;
-    gCurrentScript->actors[actorIdx].field_44 = 0;
-    gCurrentScript->actors[actorIdx].field_54 = 0;
-    gCurrentScript->actors[actorIdx].field_50 = 0;
-    gCurrentScript->actors[actorIdx].field_48 = 0;
-    gCurrentScript->actors[actorIdx].field_4C = 0;
-    gCurrentScript->actors[actorIdx].field_5C = 0;
+    gCurrentScript->actors[actorIdx].scale = 0x1000000;
+    gCurrentScript->actors[actorIdx].scaleGoal = 0x1000000;
+    gCurrentScript->actors[actorIdx].scaleSpeed = 0;
+    gCurrentScript->actors[actorIdx].matrixIdx = 0;
+    gCurrentScript->actors[actorIdx].rotation = 0;
+    gCurrentScript->actors[actorIdx].rotationGoal = 0;
+    gCurrentScript->actors[actorIdx].rotationSpeed = 0;
+    gCurrentScript->actors[actorIdx].alwaysVisible = FALSE;
     gActorCount++;
-    sub_805D614(gCurrentScript, actorIdx);
+    update_script_actor_visibility(gCurrentScript, actorIdx);
     return TRUE;
 }
 
@@ -1240,8 +1242,8 @@ static bool32 script_cmd_actor_disable(int actorIdx, int _, int __, int ___) {
 
     gCurrentScript->actors[actorIdx].isVisible = FALSE;
     gCurrentScript->actors[actorIdx].isMoving = FALSE;
-    gCurrentScript->actors[actorIdx].field_58 = 0;
-    gCurrentScript->actors[actorIdx].field_59 = 0;
+    gCurrentScript->actors[actorIdx].isUpdatingScale = FALSE;
+    gCurrentScript->actors[actorIdx].isUpdatingRotation = FALSE;
     gCurrentScript->actors[actorIdx].xPosTarget = gCurrentScript->actors[actorIdx].xPos;
     gCurrentScript->actors[actorIdx].yPosTarget = gCurrentScript->actors[actorIdx].yPos;
     gCurrentScript->actors[actorIdx].sprite.attr0Flag9 = 1;
@@ -1585,13 +1587,13 @@ static bool32 script_cmd_actor_move_from_cam(int actorIdx, int x, int y, int mov
     return TRUE;
 }
 
-static bool32 sub_805F40C(int actorIdx, int a2, int _, int __) {
-    gCurrentScript->actors[actorIdx].field_5B = a2;
+static bool32 script_cmd_actor_do_not_snap(int actorIdx, int doNotSnap, int _, int __) {
+    gCurrentScript->actors[actorIdx].doNotSnap = doNotSnap;
     return TRUE;
 }
 
-static bool32 sub_805F428(int actorIdx, int a2, int _, int __) {
-    gCurrentScript->actors[actorIdx].field_5C = a2;
+static bool32 script_cmd_actor_always_visible(int actorIdx, int alwaysVisible, int _, int __) {
+    gCurrentScript->actors[actorIdx].alwaysVisible = alwaysVisible;
     return TRUE;
 }
 
@@ -1607,50 +1609,48 @@ static bool32 script_cmd_free_oam_matrices(int _, int __, int ___, int ____) {
 }
 
 static bool32 sub_805F480(int actorIdx, int a2, int _, int __) {
-    gCurrentScript->actors[actorIdx].field_54 = a2;
+    gCurrentScript->actors[actorIdx].matrixIdx = a2;
     sub_8003820(&gCurrentScript->actors[actorIdx].sprite, 1, a2);
     return TRUE;
 }
 
 static bool32 sub_805F4B0(int actorIdx, int a2, int a3, int _) {
-    gCurrentScript->actors[actorIdx].field_50 = a2 << 16;
-    gCurrentScript->actors[actorIdx].field_3C = a3 << 16;
-    sub_8025718(gCurrentScript->actors[actorIdx].field_54, a2, a3);
+    gCurrentScript->actors[actorIdx].rotation = a2 << 16;
+    gCurrentScript->actors[actorIdx].scale = a3 << 16;
+    sprite_set_affine(gCurrentScript->actors[actorIdx].matrixIdx, a2, a3);
     return TRUE;
 }
 
-static bool32 sub_805F4DC(int actorIdx, int a2, int a3, int _) {
+static bool32 script_actor_start_scaling(int actorIdx, int goal, int speed, int _) {
     struct ScriptActor* actor = &gCurrentScript->actors[actorIdx];
+    actor->scaleGoal = goal << FX32_SHIFT;
 
-    actor->field_40 = a2 << 16;
+    ASSERT(speed != 0);
 
-    ASSERT(a3 != 0);
-
-    if (actor->field_3C > a2 << 16) {
-        actor->field_44 = -a3;
+    if (actor->scale > goal << FX32_SHIFT) {
+        actor->scaleSpeed = -speed;
     } else {
-        actor->field_44 = a3;
+        actor->scaleSpeed = speed;
     }
 
-    actor->field_58 = 1;
+    actor->isUpdatingScale = TRUE;
 
     return TRUE;
 }
 
-static bool32 sub_805F51C(int actorIdx, int a2, int a3, int a4) {
+static bool32 script_actor_start_rotation(int actorIdx, int goal, int speed, int clockwise) {
     struct ScriptActor* actor = &gCurrentScript->actors[actorIdx];
+    actor->rotationGoal = goal << FX32_SHIFT;
 
-    actor->field_48 = a2 << 16;
+    ASSERT(speed != 0);
 
-    ASSERT(a3 != 0);
-
-    if (a4) {
-        actor->field_4C = a3;
+    if (clockwise) {
+        actor->rotationSpeed = speed;
     } else {
-        actor->field_4C = -a3;
+        actor->rotationSpeed = -speed;
     }
 
-    actor->field_59 = 1;
+    actor->isUpdatingRotation = TRUE;
 
     return TRUE;
 }
@@ -1808,7 +1808,7 @@ static bool32 script_cmd_camera_move(int x, int y, int moveSpeed, int _) {
     sub_8003894(gScriptCamera->field_24, dword_80CC7EC[0]);
 
     if (x == 0 && y == 0) {
-        sub_0805E270(120, gMapPixelSizeX - 120, 80, gMapPixelSizeY - 80);
+        set_random_camera_position(120, gMapPixelSizeX - 120, 80, gMapPixelSizeY - 80);
     } else {
         if (x > (u32)gMapPixelSizeX - 120) {
             x = gMapPixelSizeX - 120;
@@ -1991,14 +1991,14 @@ static bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int _
             }
             break;
 
-        case SCRIPT_WAIT_COND_2:
-            if (!gCurrentScript->actors[actorIdx].field_58) {
+        case SCRIPT_WAIT_COND_ACTOR_SCALING_DONE:
+            if (!gCurrentScript->actors[actorIdx].isUpdatingScale) {
                 advance = TRUE;
             }
             break;
 
-        case SCRIPT_WAIT_COND_3:
-            if (!gCurrentScript->actors[actorIdx].field_59) {
+        case SCRIPT_WAIT_COND_ACTOR_ROTATING_DONE:
+            if (!gCurrentScript->actors[actorIdx].isUpdatingRotation) {
                 advance = TRUE;
             }
             break;
@@ -2016,9 +2016,9 @@ static bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int _
             }
             break;
 
-        case SCRIPT_WAIT_COND_6: {
+        case SCRIPT_WAIT_COND_INPUT_DEMO_DONE: {
             bool32 shouldAdvance = FALSE;
-            if (gReadKeysFromDemoInput == 0) {
+            if (!gReadKeysFromDemoInput) {
                 shouldAdvance = TRUE;
             }
             advance = shouldAdvance;
@@ -2272,9 +2272,9 @@ NAKED static bool32 script_cmd_display_time_travel_scene(int a1, int _, int __, 
 #else
 static inline void ab(int a1, int v9, int a, int b) {
     if (a1)
-        sub_8025718(0, v9, b - a + 128);
+        sprite_set_affine(0, v9, b - a + 128);
     else
-        sub_8025718(0, v9, a + 128);
+        sprite_set_affine(0, v9, a + 128);
 }
 
 static bool32 script_cmd_display_time_travel_scene(int a1) {

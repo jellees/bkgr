@@ -445,8 +445,7 @@ struct struc_200032C {
     u32 field_6C;
 };
 
-struct struc_51
-{
+struct struc_51 {
     u16 field_0;
     u16 field_2;
     u16 field_4;
@@ -460,8 +459,7 @@ struct struc_51
     u8 field_A4;
 };
 
-struct struc_80B21D4
-{
+struct struc_80B21D4 {
     u16 xPos;
     u16 yPos;
     u8 priority;
@@ -581,7 +579,7 @@ extern void SetTextSpriteCount(int);
 extern void RenderText(void);
 extern void AddStringToBuffer(struct TextBox*, char*);
 extern void sub_80254E0(void);
-extern void sub_8025718(u8, u32, u32);
+extern void sprite_set_affine(u8, u32, u32);
 extern void sub_8025798(u8*, u32);
 extern int sub_8025870(char*, struct TextBox*);
 extern void sub_8025948(int);
@@ -687,7 +685,7 @@ extern void sub_08055A14(int, int);
 extern void sub_080593D0(int, int);
 extern void sub_0805BA1C(int, int);
 
-extern void sub_805D158(void);
+extern void init_script_engine(void);
 extern void start_script(int);
 extern void update_scripts(void);
 extern void render_scripts(u32**, u32*);

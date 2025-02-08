@@ -18,7 +18,7 @@ update_scripts: @ 0x0805DD7C
 	bne _0805DD9A
 	b _0805DF70
 _0805DD9A:
-	bl sub_0805D6B0
+	bl update_script_camera
 	ldr r0, _0805DE50
 	movs r2, #0
 	strb r2, [r0]
@@ -119,7 +119,7 @@ _0805DE68: .4byte 0x087DFF54
 _0805DE6C: .4byte 0x080B2050
 _0805DE70:
 	ldr r0, [r7]
-	bl sub_805D8D8
+	bl update_script_actor_position
 	ldr r1, [r7]
 	adds r0, r1, #0
 	adds r0, #0x21
@@ -173,7 +173,7 @@ _0805DEC6:
 	ldr r4, _0805DF34
 	str r5, [r4]
 	adds r0, r5, #0
-	bl sub_805D8D8
+	bl update_script_actor_position
 	ldr r0, _0805DF38
 	mov r8, r0
 	adds r7, r4, #0

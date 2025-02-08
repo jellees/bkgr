@@ -286,7 +286,7 @@ _0806042A:
 	adds r2, #0x80
 	movs r0, #0
 	mov r1, r8
-	bl sub_8025718
+	bl sprite_set_affine
 	b _080604C2
 	.align 2, 0
 _080604B4: .4byte byte_2000F55
@@ -294,7 +294,7 @@ _080604B8:
 	adds r2, #0x80
 	movs r0, #0
 	mov r1, r8
-	bl sub_8025718
+	bl sprite_set_affine
 _080604C2:
 	bl CheckStacks
 	bl SyncVblank

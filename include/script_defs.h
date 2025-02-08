@@ -46,14 +46,14 @@ enum ScriptCommand {
     SCRIPT_CMD_ACTOR_MOVE,
     SCRIPT_CMD_ACTOR_MOVE_TO_SAVED_POSITION,
     SCRIPT_CMD_ACTOR_MOVE_FROM_CAM,
-    SCRIPT_CMD_sub_805F40C,
-    SCRIPT_CMD_sub_805F428,
+    SCRIPT_CMD_ACTOR_DO_NOT_SNAP,
+    SCRIPT_CMD_ACTOR_ALWAYS_VISIBLE,
     SCRIPT_CMD_ALLOC_OAM_MATRICES,
     SCRIPT_CMD_FREE_OAM_MATRICES,
     SCRIPT_CMD_sub_805F480,
     SCRIPT_CMD_sub_805F4B0,
-    SCRIPT_CMD_sub_805F4DC,
-    SCRIPT_CMD_sub_805F51C,
+    SCRIPT_CMD_ACTOR_START_SCALING,
+    SCRIPT_CMD_ACTOR_START_ROTATION,
     SCRIPT_CMD_PLAY_BGM,
     SCRIPT_CMD_STOP_BGM,
     SCRIPT_CMD_PLAY_SFX,
@@ -117,11 +117,11 @@ enum ScriptJumpCond {
 enum ScriptWaitCond {
     SCRIPT_WAIT_COND_FRAMES,
     SCRIPT_WAIT_COND_ACTOR_NOT_MOVING,
-    SCRIPT_WAIT_COND_2,
-    SCRIPT_WAIT_COND_3,
+    SCRIPT_WAIT_COND_ACTOR_SCALING_DONE,
+    SCRIPT_WAIT_COND_ACTOR_ROTATING_DONE,
     SCRIPT_WAIT_COND_ACTOR_ANIM_DONE,
     SCRIPT_WAIT_COND_NOT_IN_DIALOGUE,
-    SCRIPT_WAIT_COND_6,
+    SCRIPT_WAIT_COND_INPUT_DEMO_DONE,
     SCRIPT_WAIT_COND_CAMERA_NOT_MOVING,
     SCRIPT_WAIT_COND_8,
     SCRIPT_WAIT_COND_9,
@@ -227,9 +227,11 @@ enum ScriptWaitCond {
 #define ActorMoveFromCam(actorIdx, x, y, moveSpeed)                                                    \
     SCRIPT_CMD(SCRIPT_CMD_ACTOR_MOVE_FROM_CAM, actorIdx, x, y, moveSpeed)
 
-#define Sub805F40C(actorIdx, unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F40C, actorIdx, unknown, 0, 0)
+#define ActorDoNotSnap(actorIdx, doNotSnap)                                                            \
+    SCRIPT_CMD(SCRIPT_CMD_ACTOR_DO_NOT_SNAP, actorIdx, doNotSnap, 0, 0)
 
-#define Sub805F428(actorIdx, unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F428, actorIdx, unknown, 0, 0)
+#define ActorAlwaysVisible(actorIdx, alwaysVisible)                                                    \
+    SCRIPT_CMD(SCRIPT_CMD_ACTOR_ALWAYS_VISIBLE, actorIdx, alwaysVisible, 0, 0)
 
 #define AllocOamMatrices(count) SCRIPT_CMD(SCRIPT_CMD_ALLOC_OAM_MATRICES, count, 0, 0, 0)
 
@@ -240,11 +242,11 @@ enum ScriptWaitCond {
 #define Sub805F4B0(actorIdx, unknown1, unknown2)                                                       \
     SCRIPT_CMD(SCRIPT_CMD_sub_805F4B0, actorIdx, unknown1, unknown2, 0)
 
-#define Sub805F4DC(actorIdx, unknown1, unknown2)                                                       \
-    SCRIPT_CMD(SCRIPT_CMD_sub_805F4DC, actorIdx, unknown1, unknown2, 0)
+#define ActorStartScaling(actorIdx, goal, speed)                                                       \
+    SCRIPT_CMD(SCRIPT_CMD_ACTOR_START_SCALING, actorIdx, goal, speed, 0)
 
-#define Sub805F51C(actorIdx, unknown1, unknown2, unknown3)                                             \
-    SCRIPT_CMD(SCRIPT_CMD_sub_805F51C, actorIdx, unknown1, unknown2, unknown3)
+#define ActorStartRotation(actorIdx, goal, speed, clockwise)                                           \
+    SCRIPT_CMD(SCRIPT_CMD_ACTOR_START_ROTATION, actorIdx, goal, speed, clockwise)
 
 #define PlayBgm(bgm) SCRIPT_CMD(SCRIPT_CMD_PLAY_BGM, bgm, 0, 0, 0)
 
@@ -319,7 +321,8 @@ enum ScriptWaitCond {
 #define DisplaySceneTransition(textType)                                                               \
     SCRIPT_CMD(SCRIPT_CMD_DISPLAY_SCENE_TRANSITION, textType, 0, 0, 0)
 
-#define DisplayTimeTravelScene(unknown) SCRIPT_CMD(SCRIPT_CMD_DISPLAY_TIME_TRAVEL_SCENE, unknown, 0, 0, 0)
+#define DisplayTimeTravelScene(unknown)                                                                \
+    SCRIPT_CMD(SCRIPT_CMD_DISPLAY_TIME_TRAVEL_SCENE, unknown, 0, 0, 0)
 
 #define Sub8060568 SCRIPT_CMD(SCRIPT_CMD_sub_8060568, 0, 0, 0, 0)
 

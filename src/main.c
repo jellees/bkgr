@@ -579,7 +579,7 @@ static void start_game() {
     sub_800A5F4();
     sub_08030C68();
     sub_08047504();
-    sub_805D158();
+    init_script_engine();
     sub_08063234();
     sub_8044DFC();
 

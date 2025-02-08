@@ -872,8 +872,8 @@ _080256E6:
 	bx r0
 
     .thumb
-	.global sub_8025718
-sub_8025718: @ 0x08025718
+	.global sprite_set_affine
+sprite_set_affine: @ 0x08025718
 	push {r4, r5, r6, lr}
 	mov r6, sl
 	mov r5, sb
