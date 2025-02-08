@@ -1413,7 +1413,7 @@ _08063C90: .4byte gLoadedRoomIndex
 _08063C94: .4byte 0x0203FB20
 _08063C98: .4byte 0x0203FACC
 _08063C9C: .4byte 0x0203FB10
-_08063CA0: .4byte byte_203F99E
+_08063CA0: .4byte gIsAnyScriptActive
 _08063CA4: .4byte 0x02001118
 _08063CA8: .4byte 0x02001119
 _08063CAC: .4byte 0x02000320
@@ -2175,7 +2175,7 @@ _08064320:
 	b _0806436E
 	.align 2, 0
 _08064334: .4byte gLoadedRoomIndex
-_08064338: .4byte byte_203F99E
+_08064338: .4byte gIsAnyScriptActive
 _0806433C: .4byte 0x0203FA9A
 _08064340: .4byte 0x0203FB14
 _08064344:

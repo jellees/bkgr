@@ -6,7 +6,7 @@ extern u16 gInputDemoRecordCount;
 extern s16 word_203F998;
 extern s16 word_203F99A;
 extern u8 byte_203F99C;
-extern bool8 byte_203F99E;
+extern bool8 gIsAnyScriptActive;
 extern u8 byte_203F99F;
 extern bool8 gReadKeysFromDemoInput;
 extern bool8 gHidePlayer;

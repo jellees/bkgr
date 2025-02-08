@@ -107,7 +107,7 @@ _0805DE00:
 	ldr r7, _0805DE64
 	b _0805DE00
 	.align 2, 0
-_0805DE48: .4byte byte_203F99E
+_0805DE48: .4byte gIsAnyScriptActive
 _0805DE4C: .4byte gReadKeysFromDemoInput
 _0805DE50: .4byte byte_203F99C
 _0805DE54: .4byte word_203F998
@@ -151,7 +151,7 @@ _0805DE88:
 	b _0805DEC2
 	.align 2, 0
 _0805DEB0: .4byte 0x0203F9A4
-_0805DEB4: .4byte byte_203F99E
+_0805DEB4: .4byte gIsAnyScriptActive
 _0805DEB8: .4byte byte_203F99C
 _0805DEBC: .4byte word_203F998
 _0805DEC0:

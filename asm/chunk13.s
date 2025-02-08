@@ -690,7 +690,7 @@ _08061334:
 	strb r0, [r1]
 	bl _08061F68
 	.align 2, 0
-_08061344: .4byte byte_203F99E
+_08061344: .4byte gIsAnyScriptActive
 _08061348: .4byte byte_203FA35
 _0806134C:
 	movs r0, #3

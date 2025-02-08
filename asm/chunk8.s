@@ -4991,7 +4991,7 @@ _08049CB6:
 	bl sub_8047BEC
 	b _08049CD0
 	.align 2, 0
-_08049CC4: .4byte byte_203F99E
+_08049CC4: .4byte gIsAnyScriptActive
 _08049CC8: .4byte 0x0203DFE4
 _08049CCC:
 	.2byte 0xEE00, 0xEE00
@@ -13758,7 +13758,7 @@ _0804E736:
 	strh r0, [r5]
 	b _0804E774
 	.align 2, 0
-_0804E73C: .4byte byte_203F99E
+_0804E73C: .4byte gIsAnyScriptActive
 _0804E740: .4byte 0x080B1550
 _0804E744: .4byte dword_80CC290
 _0804E748: .4byte 0x0203F918

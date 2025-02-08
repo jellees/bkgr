@@ -24293,7 +24293,7 @@ _0803457C:
 	ldr r0, _08034580
 	b _0803456E
 	.align 2, 0
-_08034580: .4byte byte_203F99E
+_08034580: .4byte gIsAnyScriptActive
 _08034584:
 	ldr r0, _08034588
 	b _0803456E
@@ -24313,7 +24313,7 @@ _08034594:
 	b _0803456E
 	.align 2, 0
 _080345A0: .4byte gReadKeysFromDemoInput
-_080345A4: .4byte byte_203F99E
+_080345A4: .4byte gIsAnyScriptActive
 _080345A8:
 	mov r1, r8
 	adds r0, r4, r1

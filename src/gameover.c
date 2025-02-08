@@ -198,7 +198,7 @@ static void sub_8062D04(void) {
                     AdvanceMenuEntryDown();
                 }
             }
-        } else if (!byte_203F99E) {
+        } else if (!gIsAnyScriptActive) {
             break;
         }
 

@@ -794,7 +794,7 @@ static void ShowFlashscreens(void) {
     maxTime = 670;
     canSkip = FALSE;
 
-    while (byte_203F99E) {
+    while (gIsAnyScriptActive) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
         if (canSkip && gKeysDown & START_BUTTON) {

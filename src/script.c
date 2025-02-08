@@ -59,7 +59,7 @@ struct ScriptState {
     struct Vec3fx playerPos;
     u32 actorUpdateCounter;
     u16 scriptIdx;
-    u16 field_1A;
+    u16 startScriptIdx;
     u16 cmdIdx;
     u16 waitFrames;
     u8 actorCount;
@@ -79,7 +79,7 @@ s16 word_203F998;
 s16 word_203F99A;
 u8 byte_203F99C;
 u8 gScriptSavedPriority;
-bool8 byte_203F99E;
+bool8 gIsAnyScriptActive;
 u8 byte_203F99F;
 u8 gActorCount;
 bool8 gReadKeysFromDemoInput;
@@ -96,7 +96,7 @@ u16 gInputDemoFrames;
 u8 byte_203FA12;
 bool8 gInputDemoIsForward;
 u8 byte_203FA14;
-u8 byte_203FA15;
+bool8 gIsScriptCameraInitialised;
 u8 byte_203FA16;
 u8 byte_203FA16_2;
 struct ScriptCamera* gScriptCamera;
@@ -320,7 +320,7 @@ void init_script_engine(void) {
     byte_203FA14 = 0;
     gActorCount = 0;
     byte_203F99F = 0;
-    byte_203FA15 = 0;
+    gIsScriptCameraInitialised = FALSE;
     gHidePlayer = FALSE;
     byte_203FA16 = 0;
     byte_203FA16 = 0;
@@ -343,7 +343,7 @@ void start_script(int idx) {
 
     gCurrentScript->actorUpdateCounter = 0;
     gCurrentScript->scriptIdx = idx;
-    gCurrentScript->field_1A = idx;
+    gCurrentScript->startScriptIdx = idx;
     gCurrentScript->cmdIdx = 0;
     gCurrentScript->endScript = FALSE;
     gCurrentScript->isActive = TRUE;
@@ -351,7 +351,7 @@ void start_script(int idx) {
     gCurrentScript->actorCount = 0;
     gCurrentScript->playInputDemo = FALSE;
     gCurrentScript->activeSfx = -1;
-    byte_203F99E = TRUE;
+    gIsAnyScriptActive = TRUE;
     byte_203F99C = 1;
 
     switch (idx) {
@@ -388,16 +388,16 @@ void sub_805D568(void) {
     word_203F998 = -1;
     word_203F99A = -1;
     gReadKeysFromDemoInput = FALSE;
-    byte_203F99E = FALSE;
+    gIsAnyScriptActive = FALSE;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if (gScripts[i].isActive) {
-            byte_203F99E = TRUE;
+            gIsAnyScriptActive = TRUE;
             if (gScripts[i].field_23) {
                 byte_203F99C = 1;
-                word_203F998 = gScripts[i].field_1A;
+                word_203F998 = gScripts[i].startScriptIdx;
             } else {
-                word_203F99A = gScripts[i].field_1A;
+                word_203F99A = gScripts[i].startScriptIdx;
             }
         }
 
@@ -440,7 +440,7 @@ void update_script_camera(void) {
     fx32 xPrev, yPrev;
     bool32 stopMoving;
 
-    if (byte_203FA15 && gScriptCamera->isMoving) {
+    if (gIsScriptCameraInitialised && gScriptCamera->isMoving) {
 
         ASSERT(byte_203F99C);
 
@@ -491,7 +491,7 @@ void update_script_camera(void) {
     }
 
     if (byte_203FA14) {
-        ASSERT(!byte_203FA15 || !gScriptCamera->isMoving);
+        ASSERT(!gIsScriptCameraInitialised || !gScriptCamera->isMoving);
         ASSERT(byte_203F99C);
 
         sub_802672C();
@@ -501,7 +501,7 @@ void update_script_camera(void) {
             byte_203FA14 = 0;
         }
 
-        if (byte_203FA15) {
+        if (gIsScriptCameraInitialised) {
             sub_800B958(gScriptCamera->xPosCurrent, gScriptCamera->yPosCurrent,
                         gScriptCamera->xPosCurrent, gScriptCamera->yPosCurrent, TRUE);
         } else {
@@ -679,7 +679,7 @@ asm_unified(".include \"asm/nonmatching/update_scripts.s\"");
 void update_scripts(void) {
     u8 i;
 
-    if (!byte_203F99E && !byte_203F9A1) {
+    if (!gIsAnyScriptActive && !byte_203F9A1) {
         return;
     }
 
@@ -688,7 +688,7 @@ void update_scripts(void) {
     word_203F998 = -1;
     word_203F99A = -1;
     byte_203F9A1 = 0;
-    byte_203F99E = 0;
+    gIsAnyScriptActive = 0;
 
     for (i = 0; i < 2; i++) {
         if (gScripts[i].isActive && (gScripts[i].field_23 || !byte_203FA16)) {
@@ -710,7 +710,7 @@ void update_scripts(void) {
                 end_script(gCurrentScript);
             }
             if (gCurrentScript->isActive) {
-                byte_203F99E = 1;
+                gIsAnyScriptActive = 1;
                 if (gCurrentScript->field_23) {
                     byte_203F99C = 1;
                     word_203F998 = gCurrentScript->field_1A;
@@ -749,7 +749,7 @@ void update_scripts(void) {
 void render_scripts(u32** a1, u32* a2) {
     u8 i;
 
-    if (!byte_203F99E) {
+    if (!gIsAnyScriptActive) {
         return;
     }
 
@@ -834,18 +834,18 @@ void end_script(struct ScriptState* script) {
         word_203F99A = -1;
         script->field_23 = 0;
         byte_203FA14 = 0;
-        ASSERT(!byte_203FA15);
+        ASSERT(!gIsScriptCameraInitialised);
     }
 
     script->isActive = FALSE;
     sub_805D568();
-    ASSERT(byte_203F99E || !DoesMemBlockExistById(3, 5));
+    ASSERT(gIsAnyScriptActive || !DoesMemBlockExistById(3, 5));
 }
 
 void end_all_scripts(int a1) {
     u8 i;
 
-    if (byte_203FA15) {
+    if (gIsScriptCameraInitialised) {
         switch (a1) {
             case 0:
             case 2:
@@ -1008,13 +1008,13 @@ static bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int cha
         sub_80270AC(4095, changeMusic);
     }
 
-    if (byte_203FA15) {
+    if (gIsScriptCameraInitialised) {
         script_cmd_camera_free(0, 0, 0, 0);
     }
 
     remove_actors(gCurrentScript);
 
-    if (byte_203FA15) {
+    if (gIsScriptCameraInitialised) {
         script_cmd_camera_free(0, 0, 0, 0);
     }
 
@@ -1044,7 +1044,7 @@ static bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int cha
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
 
-    if (byte_203FA15) {
+    if (gIsScriptCameraInitialised) {
         script_cmd_camera_alloc(0, 0, 0, 0);
     }
 
@@ -1062,13 +1062,13 @@ static bool32 script_cmd_load_room(int room, int warp, int a3, int changeMusic) 
         sub_80270AC(4095, changeMusic);
     }
 
-    if (byte_203FA15) {
+    if (gIsScriptCameraInitialised) {
         script_cmd_camera_free(0, 0, 0, 0);
     }
 
     remove_actors(gCurrentScript);
 
-    if (byte_203FA15) {
+    if (gIsScriptCameraInitialised) {
         script_cmd_camera_free(0, 0, 0, 0);
     }
 
@@ -1103,7 +1103,7 @@ static bool32 script_cmd_load_room(int room, int warp, int a3, int changeMusic) 
 static bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
     bool32 isMusicChanged;
 
-    if (byte_203FA15) {
+    if (gIsScriptCameraInitialised) {
         script_cmd_camera_free(0, 0, 0, 0);
     }
 
@@ -1135,7 +1135,7 @@ static bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
     }
 
     byte_203FA16 = 0;
-    if (byte_203FA15) {
+    if (gIsScriptCameraInitialised) {
         script_cmd_camera_alloc(0, 0, 0, 0);
     }
 
@@ -1202,7 +1202,7 @@ static bool32 script_cmd_hide_player(int hidePlayer, int _, int __, int ___) {
 }
 
 static bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
-    SetSprite(&gCurrentScript->actors[actorIdx].sprite, 0x451u, FALSE, 0, 1, 240, 200, 2);
+    SetSprite(&gCurrentScript->actors[actorIdx].sprite, 1105, FALSE, 0, 1, 240, 200, 2);
     gCurrentScript->actors[actorIdx].isVisible = TRUE;
     gCurrentScript->actors[actorIdx].isMoving = FALSE;
     gCurrentScript->actors[actorIdx].isUpdatingScale = FALSE;
@@ -1218,8 +1218,8 @@ static bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
     gCurrentScript->actors[actorIdx].calcIdx = -1;
     gCurrentScript->actors[actorIdx].doNotSnap = FALSE;
     gCurrentScript->actors[actorIdx].field_38 = 0;
-    gCurrentScript->actors[actorIdx].scale = 0x1000000;
-    gCurrentScript->actors[actorIdx].scaleGoal = 0x1000000;
+    gCurrentScript->actors[actorIdx].scale = FX32_CONST(256);
+    gCurrentScript->actors[actorIdx].scaleGoal = FX32_CONST(256);
     gCurrentScript->actors[actorIdx].scaleSpeed = 0;
     gCurrentScript->actors[actorIdx].matrixIdx = 0;
     gCurrentScript->actors[actorIdx].rotation = 0;
@@ -1766,7 +1766,7 @@ static bool32 script_cmd_start_input_demo(int forward, int _, int __, int ___) {
 }
 
 static bool32 script_cmd_camera_alloc(int _, int __, int ___, int ____) {
-    ASSERT(!byte_203FA15);
+    ASSERT(!gIsScriptCameraInitialised);
     gScriptCamera = (struct ScriptCamera*)Alloc(sizeof(struct ScriptCamera), 5, 3);
     gScriptCamera->isMoving = FALSE;
     gScriptCamera->xPosOriginal = (gCameraPixelX + 120) << FX32_SHIFT;
@@ -1780,25 +1780,25 @@ static bool32 script_cmd_camera_alloc(int _, int __, int ___, int ____) {
     gScriptCamera->moveSpeed = 0;
     gScriptCamera->doNotSnap = FALSE;
     gScriptCamera->field_24 = -1;
-    byte_203FA15 = 1;
+    gIsScriptCameraInitialised = TRUE;
     return TRUE;
 }
 
 static bool32 script_cmd_camera_free(int _, int __, int ___, int ____) {
-    ASSERT(byte_203FA15);
+    ASSERT(gIsScriptCameraInitialised);
     if (gScriptCamera->field_24 != -1) {
         sub_8003864(gScriptCamera->field_24);
         gScriptCamera->field_24 = -1;
     }
     Free(gScriptCamera, 3);
-    byte_203FA15 = 0;
+    gIsScriptCameraInitialised = FALSE;
     return 1;
 }
 
 static bool32 script_cmd_camera_move(int x, int y, int moveSpeed, int _) {
     fx32 xDistance, yDistance;
 
-    ASSERT(byte_203FA15);
+    ASSERT(gIsScriptCameraInitialised);
 
     if (gScriptCamera->field_24 == -1) {
         gScriptCamera->field_24 = sub_8003854(4915200);
@@ -1871,7 +1871,7 @@ static bool32 script_cmd_camera_do_not_snap(int doNotSnap, int _, int __, int __
 }
 
 static bool32 script_cmd_camera_return_prescene(int moveSpeed, int _, int __, int ___) {
-    ASSERT(byte_203FA15);
+    ASSERT(gIsScriptCameraInitialised);
     if (moveSpeed == 0) {
         moveSpeed = gScriptCamera->moveSpeed;
     }
@@ -1936,13 +1936,13 @@ static bool32 sub_805FC34(int a1, int _, int __, int ___) {
     gCurrentScript->field_23 = a1;
 
     if (a1) {
-        word_203F998 = gCurrentScript->field_1A;
-        if (word_203F99A == gCurrentScript->field_1A) {
+        word_203F998 = gCurrentScript->startScriptIdx;
+        if (word_203F99A == gCurrentScript->startScriptIdx) {
             word_203F99A = -1;
         }
     } else {
-        word_203F99A = gCurrentScript->field_1A;
-        if (word_203F998 == gCurrentScript->field_1A) {
+        word_203F99A = gCurrentScript->startScriptIdx;
+        if (word_203F998 == gCurrentScript->startScriptIdx) {
             word_203F998 = -1;
         }
     }
