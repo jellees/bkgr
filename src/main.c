@@ -163,7 +163,7 @@ bool32 gLightningActive;
 u32 gThunderTimer;
 bool32 gPoisonEffectEnabled;
 int gPoisonHitTimer;
-u32 dword_20011F8;
+u32 gPoisonHurtAmount;
 s32 dword_20011FC;
 
 // Forward declarations.
@@ -2826,7 +2826,7 @@ static void enable_poison_effect() {
         case ROOM_SWAMPGAS:
             if (gTransformation != TRANSFORMATION_TANK) {
                 gPoisonEffectEnabled = TRUE;
-                dword_20011F8 = 1;
+                gPoisonHurtAmount = 1;
                 gPoisonHitTimer = 240;
             }
             break;
@@ -2843,7 +2843,7 @@ static void sub_800DF34() {
     if (gPoisonEffectEnabled && !byte_203F99C && gGameStatus.health != 0) {
         if (gPoisonHitTimer == 0) {
             gPoisonHitTimer = 240;
-            hurt_player(dword_20011F8, -1, 1);
+            hurt_player(gPoisonHurtAmount, -1, 1);
         } else {
             gPoisonHitTimer--;
         }
@@ -3106,7 +3106,7 @@ static void sub_800E61C() {
         v0 = FALSE;
 
         if (gFloorPlaneResult.field_50) {
-            v0 = 1;
+            v0 = TRUE;
             if (!byte_200112A && gTransformation == TRANSFORMATION_MOUSE) {
                 sub_800E6D0();
             }

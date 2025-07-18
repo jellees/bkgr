@@ -200,7 +200,7 @@ SECTIONS
         gTileSetBG = .; . += 4 * 4;
         gMapPixelSizeX = .; . += 2;
         gMapPixelSizeY = .; . += 2;
-        stru_3003578 = .; . += 0x10;
+        gPlayerAttackState = .; . += 0x10;
         byte_3003588 = .; . += 1;
         . += 3; /* padding */
         gOAMBuffer2 = .; . += 0x400;

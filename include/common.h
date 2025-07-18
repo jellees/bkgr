@@ -334,10 +334,8 @@ struct struc_49 {
 };
 
 struct struc_50 {
-    int field_0;
-    int field_4;
-    int field_8;
-    u16 field_C;
+    struct Vec3fx offset;
+    u16 attackFlag;
     u8 field_E;
     u8 field_F;
 };
@@ -854,7 +852,7 @@ extern u16 gEnabledBGs;
 extern u16* gTileSetBG[4];
 extern u16 gMapPixelSizeX;
 extern u16 gMapPixelSizeY;
-extern struct struc_50 stru_3003578;
+extern struct struc_50 gPlayerAttackState;
 
 extern u8 byte_3003588;
 extern u32 gOAMBuffer2[];

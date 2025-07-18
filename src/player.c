@@ -217,14 +217,14 @@ static bool32 sub_8016710(s32* keyPressed, s32* keyDown) {
     return TRUE;
 }
 
-static void sub_8016790(int a1, int a2) {
+static void sub_8016790(int a1, int direction) {
     u8 v1;
 
-    stru_3003578.field_0 = dword_80CB9F0[a1][a2] << 16;
-    stru_3003578.field_4 = dword_80CBCD0[a1][a2] << 16;
-    stru_3003578.field_8 = dword_80CBFB0[a1][a2] << 16;
-    stru_3003578.field_E = byte_80CB94C[a1];
-    stru_3003578.field_C = word_80CB964[a1];
+    gPlayerAttackState.offset.x = dword_80CB9F0[a1][direction] << 16;
+    gPlayerAttackState.offset.y = dword_80CBCD0[a1][direction] << 16;
+    gPlayerAttackState.offset.z = dword_80CBFB0[a1][direction] << 16;
+    gPlayerAttackState.field_E = byte_80CB94C[a1];
+    gPlayerAttackState.attackFlag = word_80CB964[a1];
 
     v1 = byte_80CB992[a1];
     if (v1 != byte_3003588) {
