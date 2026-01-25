@@ -70,8 +70,8 @@ SECTIONS
         word_203DFCA = .; . += 2;
 
         . = 0x0003DFD4;
-        byte_203DFD4 = .; . += 1;
-        byte_203DFD5 = .; . += 1;
+        gCurrentProjectileCount = .; . += 1;
+        gMaxProjectileCount = .; . += 1;
 
         . = 0x0003DFD7;
         gInInteractionArea = .; . += 1;

@@ -10563,8 +10563,8 @@ _0802D098: .4byte 0x0203E000
 _0802D09C: .4byte 0x0203DFD3
 
 	.thumb
-    .global sub_0802D0A0
-sub_0802D0A0: @ 0x0802D0A0
+    .global spawn_player_projectile
+spawn_player_projectile: @ 0x0802D0A0
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -11529,8 +11529,8 @@ _0802D884: .4byte 0x00000221
 
 
 	.thumb
-    .global sub_802D888
-sub_802D888: @ 0x0802D888
+    .global spawn_projectile
+spawn_projectile: @ 0x0802D888
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -17133,8 +17133,8 @@ _08030A80:
 	.align 2, 0
 
     .thumb
-    .global sub_8030A88
-sub_8030A88: @ 0x08030A88
+    .global count_active_player_projectiles
+count_active_player_projectiles: @ 0x08030A88
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

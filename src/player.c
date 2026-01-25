@@ -1083,15 +1083,15 @@ static void do_candle_attack() {
 }
 
 static void shoot_tank_projectile() {
-    if (byte_203DFD4 != byte_203DFD5 && sub_8030A88() == 0) {
-        sub_0802D0A0(5, &gPlayerPos, stru_3002950.playerSpritePriority);
+    if (gCurrentProjectileCount != gMaxProjectileCount && count_active_player_projectiles() == 0) {
+        spawn_player_projectile(5, &gPlayerPos, stru_3002950.playerSpritePriority);
         PLAY_SFX(187);
     }
 }
 
 static void shoot_octopus_projectile() {
-    if (byte_203DFD4 != byte_203DFD5 && sub_8030A88() <= 1) {
-        sub_0802D0A0(6, &gPlayerPos, stru_3002950.playerSpritePriority);
+    if (gCurrentProjectileCount != gMaxProjectileCount && count_active_player_projectiles() < 2) {
+        spawn_player_projectile(6, &gPlayerPos, stru_3002950.playerSpritePriority);
         PLAY_SFX(184);
     }
 }
@@ -1921,7 +1921,7 @@ static bool32 update_wonderwing() {
 }
 
 static void shoot_egg(bool32 selectNextAvailableEgg) {
-    if (byte_203DFD4 == byte_203DFD5 || sub_8030A88() > 1) {
+    if (gCurrentProjectileCount == gMaxProjectileCount || count_active_player_projectiles() > 1) {
         return;
     }
 
@@ -1938,7 +1938,7 @@ static void shoot_egg(bool32 selectNextAvailableEgg) {
         }
     }
 
-    sub_0802D0A0(gSelectedEgg, &gPlayerPos, stru_3002950.playerSpritePriority);
+    spawn_player_projectile(gSelectedEgg, &gPlayerPos, stru_3002950.playerSpritePriority);
     decrease_eggs(1, selectNextAvailableEgg);
     PLAY_SFX(24);
 }

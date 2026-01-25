@@ -7386,7 +7386,7 @@ _0804B132:
 	ldrb r3, [r0, #8]
 	movs r0, #7
 	adds r1, r4, #0
-	bl sub_802D888
+	bl spawn_projectile
 	ldr r0, _0804B17C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -10992,7 +10992,7 @@ _0804CFA0:
 	movs r0, #0xa
 	adds r1, r4, #0
 	adds r2, r7, #0
-	bl sub_802D888
+	bl spawn_projectile
 _0804CFDE:
 	movs r0, #6
 	adds r1, r6, #0
@@ -11841,7 +11841,7 @@ _0804D6E0:
 	movs r0, #0xa
 	adds r1, r7, #0
 	adds r2, r4, #0
-	bl sub_802D888
+	bl spawn_projectile
 _0804D71C:
 	movs r0, #6
 	adds r1, r5, #0
@@ -12766,7 +12766,7 @@ _0804DEC2:
 	movs r0, #0xa
 	adds r1, r5, #0
 	adds r2, r4, #0
-	bl sub_802D888
+	bl spawn_projectile
 _0804DEFE:
 	movs r0, #6
 	adds r1, r6, #0
@@ -14001,7 +14001,7 @@ _0804E926:
 	movs r0, #0xa
 	adds r1, r5, #0
 	adds r2, r4, #0
-	bl sub_802D888
+	bl spawn_projectile
 _0804E962:
 	movs r0, #6
 	adds r1, r6, #0
@@ -19944,7 +19944,7 @@ _080518C0:
 	ldrb r3, [r0, #8]
 	movs r0, #8
 	adds r1, r5, #0
-	bl sub_802D888
+	bl spawn_projectile
 	mov r0, sb
 	movs r1, #0
 	movs r2, #1

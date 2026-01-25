@@ -73,7 +73,7 @@ enum MiniGame {
     MINI_GAME_COUNT
 };
 
-enum Egg { EGG_BLUE, EGG_ELECTRIC, EGG_ICE, EGG_FIRE };
+enum Egg { EGG_BLUE, EGG_ELECTRIC, EGG_ICE, EGG_FIRE, EGG_COUNT };
 
 enum Direction {
     DIRECTION_UP,
@@ -353,7 +353,7 @@ struct GameStatus {
     u8 clockSecond;
     u8 field_B;
     u16 totalNotes;
-    s8 eggs[4];
+    s8 eggs[EGG_COUNT];
     s8 goldenFeathers;
     u8 health;
     bool8 enableExtraHealth;
@@ -619,12 +619,12 @@ extern void s_load_object(fx32, fx32);
 extern void sub_8029DA8(int);
 extern void sub_802ADB0(u32**, u32*);
 extern bool32 handle_obj_interactions(struct Vec3fx*);
-extern void sub_0802D0A0(int, struct Vec3fx*, u8);
+extern void spawn_player_projectile(int, struct Vec3fx*, u8);
 extern u8 sub_0802E080(void);
 extern int sub_0802FEDC(int);
 extern bool32 sub_802FDC8(void);
 
-extern int sub_8030A88(void);
+extern int count_active_player_projectiles(void);
 extern void sub_8030C54(void);
 extern void sub_08030C68(void);
 extern int is_obj_disabled(int, int);
@@ -759,8 +759,8 @@ extern struct Entity_rt* dword_203DFC4;
 extern u8 byte_203DFC8;
 extern u16 word_203DFCA;
 
-extern u8 byte_203DFD4;
-extern u8 byte_203DFD5;
+extern u8 gCurrentProjectileCount;
+extern u8 gMaxProjectileCount;
 
 extern bool8 gInInteractionArea;
 extern bool8 byte_203DFD8;
