@@ -280,7 +280,7 @@ static void update_game(void) {
         if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
             if (byte_20020BC) {
                 sub_8016B0C();
-                sub_804087C();
+                update_hud();
             }
 
             sub_80409DC();
@@ -315,7 +315,7 @@ static void update_game(void) {
 
             if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING
                 && gTransformation != TRANSFORMATION_OCTOPUS) {
-                sub_08040204(57, gGameStatus.oxygen);
+                set_hud_number(57, gGameStatus.oxygen);
                 sub_08041FA4(57);
             }
 
@@ -368,7 +368,7 @@ static void update_game(void) {
         sub_8048C78();
     }
 
-    sub_804087C();
+    update_hud();
 
     if (!gIsSlideMiniGame) {
         s16 r1;
@@ -405,7 +405,7 @@ static void update_game(void) {
     exec_arcade_menu();
     sub_8025278();
     show_room_name();
-    sub_804095C();
+    render_hud_elements();
 
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) {
         if (byte_2000F5D) {
@@ -572,7 +572,7 @@ static void start_game() {
     ResetMenuEx();
     ResetTileAnimCount();
     sub_80266B4();
-    sub_80400B4();
+    init_hud_elements();
     sub_080281A8();
     sub_800A5F4();
     sub_08030C68();
@@ -633,7 +633,7 @@ static void start_game() {
 
         sub_8025E44(gLoadedRoomLevel);
         sub_80409DC();
-        sub_803FE78();
+        reset_hud_elements();
         sprite_set_priority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
         EnableBGAlphaBlending();
@@ -817,7 +817,7 @@ void sub_800A710(u16 level) {
 
     gLoadedRoomLevel = level;
     gRoomLevelSaved = level;
-    sub_8040178();
+    update_hud_collectables();
     sub_8039234();
 }
 
@@ -1690,7 +1690,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
         gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
         gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
         SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
-        sub_803FE78();
+        reset_hud_elements();
     } else {
         switch (sub_0800C63C(room, a1->warpDestWarp)) {
             case 1:
@@ -1753,7 +1753,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
     sub_8041E88();
 
     if (level != gLoadedRoomLevel) {
-        sub_8040178();
+        update_hud_collectables();
     }
 
     if (byte_20010A4) {
@@ -1791,7 +1791,7 @@ void load_room_directly(int room, int warp, bool32 setGoal) {
         gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
         gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
         SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
-        sub_803FE78();
+        reset_hud_elements();
     } else {
         isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
         sub_80270AC(4095, isMusicChanged);
@@ -1830,7 +1830,7 @@ void load_room_directly(int room, int warp, bool32 setGoal) {
     sub_8041E88();
 
     if (level != gLoadedRoomLevel) {
-        sub_8040178();
+        update_hud_collectables();
     }
 
     if (byte_20010A4) {
@@ -1894,11 +1894,11 @@ void sub_800C1E8(int room, fx32 xPos, fx32 yPos, fx32 zPos, int a5, u32 a6) {
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
 
-    sub_803FE78();
+    reset_hud_elements();
     sub_8041E88();
 
     if (level != gLoadedRoomLevel) {
-        sub_8040178();
+        update_hud_collectables();
     }
 
     sub_8039210();
@@ -1948,11 +1948,11 @@ void sub_0800C388(int a1, int a2) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    sub_803FE78();
+    reset_hud_elements();
     sub_8041E88();
 
     if (level != gLoadedRoomLevel) {
-        sub_8040178();
+        update_hud_collectables();
     }
 
     sub_8039210();
@@ -2618,8 +2618,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    sub_803FE78();
-    sub_8040178();
+    reset_hud_elements();
+    update_hud_collectables();
     if (byte_20010A4) {
         sub_8016C78(byte_20010A5);
         word_20010AC = gKeysPressed & KEYS_MASK;
@@ -2650,8 +2650,8 @@ void sub_800D8E8(int a1, char a2, char a3) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    sub_803FE78();
-    sub_8040178();
+    reset_hud_elements();
+    update_hud_collectables();
     sub_80409DC();
     sub_8063178();
     dword_2001110 = 136 - gCameraPixelX;
@@ -2675,8 +2675,8 @@ void sub_800DA04(int a1, int a2, int a3) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    sub_803FE78();
-    sub_8040178();
+    reset_hud_elements();
+    update_hud_collectables();
     sub_80409DC();
     sub_8063178();
     sub_8047000(a3);
@@ -2693,7 +2693,7 @@ void select_next_available_egg(bool32 a1) {
     if (!a1 && !sub_0804207C(gSelectedEgg + 9)) {
         if (!sub_080420E8(gSelectedEgg + 9)) {
             sub_08041FA4(gSelectedEgg + 9);
-            sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+            set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
         }
         return;
     }
@@ -2717,13 +2717,13 @@ void select_next_available_egg(bool32 a1) {
     }
 
     if (a1) {
-        sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+        set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 
     sub_0804200C(gSelectedEgg + 9);
     gSelectedEgg = nextEgg;
     sub_08041FA4(gSelectedEgg + 9);
-    sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+    set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
 
     if (audio_fx_still_active(dword_2001124)) {
         STOP_SFX(dword_2001124);
@@ -2741,7 +2741,7 @@ void decrease_eggs(int eggs, bool32 selectNextAvailableEgg) {
                 select_next_available_egg(TRUE);
             }
         }
-        sub_08040204(9, gGameStatus.eggs[EGG_BLUE]);
+        set_hud_number(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] -= eggs;
         if (gGameStatus.eggs[gSelectedEgg] <= 0) {
@@ -2750,7 +2750,7 @@ void decrease_eggs(int eggs, bool32 selectNextAvailableEgg) {
                 select_next_available_egg(TRUE);
             }
         }
-        sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+        set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 }
 
@@ -2760,13 +2760,13 @@ void increase_eggs(int eggs) {
         if (gGameStatus.eggs[EGG_BLUE] > stru_80CC8C4.eggs[EGG_BLUE]) {
             gGameStatus.eggs[EGG_BLUE] = stru_80CC8C4.eggs[EGG_BLUE];
         }
-        sub_08040204(9, gGameStatus.eggs[EGG_BLUE]);
+        set_hud_number(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] += eggs;
         if (gGameStatus.eggs[gSelectedEgg] > stru_80CC8C4.eggs[gSelectedEgg]) {
             gGameStatus.eggs[gSelectedEgg] = stru_80CC8C4.eggs[gSelectedEgg];
         }
-        sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+        set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 }
 
@@ -2776,13 +2776,13 @@ void set_eggs(int eggs) {
         if (gGameStatus.eggs[EGG_BLUE] > stru_80CC8C4.eggs[EGG_BLUE]) {
             gGameStatus.eggs[EGG_BLUE] = stru_80CC8C4.eggs[EGG_BLUE];
         }
-        sub_08040204(9, gGameStatus.eggs[EGG_BLUE]);
+        set_hud_number(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] = eggs;
         if (gGameStatus.eggs[gSelectedEgg] > stru_80CC8C4.eggs[gSelectedEgg]) {
             gGameStatus.eggs[gSelectedEgg] = stru_80CC8C4.eggs[gSelectedEgg];
         }
-        sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+        set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 }
 
@@ -2806,7 +2806,7 @@ bool32 sub_800DE04() {
     sub_08041F3C(11, 0x70000);
     sub_08041F3C(12, 0x70000);
     sub_08041FA4(gSelectedEgg + 9);
-    sub_08040204(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+    set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     return TRUE;
 }
 
@@ -2936,14 +2936,14 @@ void decrease_player_health(int amount) {
 
     if (gGameStatus.health <= amount) {
         gGameStatus.health = 0;
-        sub_08040204(56, 0);
+        set_hud_number(56, 0);
         PLAY_SFX(79);
         if (gIsSlideMiniGame) {
             byte_20010B0 = 1;
         }
     } else {
         gGameStatus.health -= amount;
-        sub_08040204(56, gGameStatus.health);
+        set_hud_number(56, gGameStatus.health);
     }
 }
 
@@ -3277,7 +3277,7 @@ void init_save_files() {
     sub_800A5E8();
     sub_8016434();
     sub_8038A34();
-    sub_803FE78();
+    reset_hud_elements();
 }
 
 void reset_save_files() {
@@ -3893,7 +3893,7 @@ static void sub_800F430(void) {
 void restore_full_health(void) {
     if (gGameStatus.health < gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1)) {
         gGameStatus.health = gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1);
-        sub_08040204(56, gGameStatus.health);
+        set_hud_number(56, gGameStatus.health);
         PLAY_SFX(40);
     }
 }

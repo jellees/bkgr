@@ -892,7 +892,7 @@ _08047C38:
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	adds r0, r5, #0
-	bl sub_08040204
+	bl set_hud_number
 	adds r0, r5, #0
 	bl sub_08041FA4
 _08047C58:
@@ -2678,7 +2678,7 @@ sub_8048B1C: @ 0x08048B1C
 	adds r1, r0, #0
 	asrs r1, r1, #8
 	movs r0, #0x35
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x35
 	bl sub_08041FA4
 	ldr r0, [r5]
@@ -4535,7 +4535,7 @@ _08049938:
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #3
-	bl sub_08040204
+	bl set_hud_number
 	ldr r1, [r4]
 	movs r2, #1
 	rsbs r2, r2, #0
@@ -19728,7 +19728,7 @@ _080516E8:
 	adds r1, r0, #0
 	asrs r1, r1, #8
 	movs r0, #0x35
-	bl sub_08040204
+	bl set_hud_number
 	adds r0, r6, #0
 	bl sub_804995C
 	adds r0, r5, #0
@@ -21544,7 +21544,7 @@ _08052570:
 	bl sub_08040AD0
 	movs r0, #0x32
 	adds r1, r4, #0
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x32
 	bl sub_08041FA4
 	b _0805278E
@@ -21615,7 +21615,7 @@ _080525FC:
 	bl sub_08040AD0
 	movs r0, #0x33
 	adds r1, r4, #0
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x33
 	bl sub_08041FA4
 	b _0805278E
@@ -21664,7 +21664,7 @@ _0805265C:
 	bl sub_08040AD0
 	movs r0, #0xd
 	adds r1, r4, #0
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0xd
 	bl sub_08041FA4
 	b _0805278E
@@ -21713,7 +21713,7 @@ _080526BC:
 	bl sub_08040AD0
 	movs r0, #0x34
 	adds r1, r4, #0
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x34
 	bl sub_08041FA4
 	b _0805278E
@@ -21740,7 +21740,7 @@ _080526F4:
 	adds r0, #0x56
 	ldrb r1, [r0]
 	movs r0, #0x25
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x25
 	bl sub_08041FA4
 	b _0805278E
@@ -21763,7 +21763,7 @@ _08052710:
 	bl sub_08040AD0
 	movs r0, #0x37
 	adds r1, r4, #0
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x37
 	bl sub_08041FA4
 	b _0805278E
@@ -24307,7 +24307,7 @@ _08053C24:
 	movs r1, #0xe
 	ldrsb r1, [r2, r1]
 	movs r0, #9
-	bl sub_08040204
+	bl set_hud_number
 	b _08053C5E
 	.align 2, 0
 _08053C30: .4byte gGameStatus
@@ -24331,7 +24331,7 @@ _08053C54:
 	movs r1, #0x10
 	ldrsb r1, [r2, r1]
 	movs r0, #0xb
-	bl sub_08040204
+	bl set_hud_number
 _08053C5E:
 	ldr r0, _08053CEC
 	ldrb r0, [r0]

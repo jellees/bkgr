@@ -437,7 +437,7 @@ static void exec_pause_menu(void) {
             loadMenu = FALSE;
         }
 
-        sub_804087C();
+        update_hud();
 
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
@@ -446,7 +446,7 @@ static void exec_pause_menu(void) {
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
 
-        sub_804095C();
+        render_hud_elements();
         FlushMenuToTextBuffer();
         RenderText();
         sub_80408F0();
@@ -578,14 +578,14 @@ static void exec_totals_menu(void) {
     bool32 fadeIn;
 
     while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
-        sub_804087C();
+        update_hud();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        sub_804095C();
+        render_hud_elements();
         FlushMenuToTextBuffer();
         RenderText();
         sub_80408F0();
@@ -692,7 +692,7 @@ static void exec_totals_menu(void) {
             fadeIn = TRUE;
         }
 
-        sub_804087C();
+        update_hud();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -700,7 +700,7 @@ static void exec_totals_menu(void) {
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
         draw_page_name(page);
-        sub_804095C();
+        render_hud_elements();
         RenderText();
         sub_80408F0();
         render_controls();
@@ -762,14 +762,14 @@ static bool32 exec_save_menu(void) {
     textbox.font = &font_80B01A8[1];
 
     while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
-        sub_804087C();
+        update_hud();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        sub_804095C();
+        render_hud_elements();
         FlushMenuToTextBuffer();
         RenderText();
         sub_80408F0();
@@ -1094,14 +1094,14 @@ static void exec_options_menu(void) {
     sfxText[5] = -1;
 
     while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
-        sub_804087C();
+        update_hud();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        sub_804095C();
+        render_hud_elements();
         FlushMenuToTextBuffer();
         RenderText();
         sub_80408F0();
@@ -1440,7 +1440,7 @@ void init_arcade_menu(void) {
     set_player_state_to_none();
     byte_2000F56 = 1;
     gKeysDown = 0;
-    sub_08040204(55, byte_203E16C);
+    set_hud_number(55, byte_203E16C);
     sub_08041FA4(55);
 
     dword_203F4F4 = Alloc(sizeof(struct Sprite) * 3, 25, 4);
@@ -1487,7 +1487,7 @@ void sub_8047000(bool32 a1) {
     set_player_state_to_none();
     byte_2000F56 = 1;
     gKeysDown = 0;
-    sub_08040204(55, byte_203E16C);
+    set_hud_number(55, byte_203E16C);
     sub_08041FA4(55);
 }
 

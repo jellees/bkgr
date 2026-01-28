@@ -321,7 +321,7 @@ int sub_8016A5C(int a1) {
 void sub_8016A94(int a1) {
     if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_HURTING) && gGameStatus.health != 0
         && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
-        sub_08040204(56, a1);
+        set_hud_number(56, a1);
         byte_20020BC = 1;
         byte_200108E = 1;
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
@@ -544,7 +544,7 @@ static bool32 interact_with_object() {
                 break;
             }
             if (!gGameStatus.goldenFeathers) {
-                sub_08040204(3, gGameStatus.goldenFeathers);
+                set_hud_number(3, gGameStatus.goldenFeathers);
                 didInteract = FALSE;
                 break;
             }
@@ -757,7 +757,7 @@ void sub_8017A54(void) {
         sub_0804200C(57);
         if (gGameStatus.oxygen != gGameStatus.maxOxygen) {
             gGameStatus.oxygen = gGameStatus.maxOxygen;
-            sub_08040204(57, gGameStatus.oxygen);
+            set_hud_number(57, gGameStatus.oxygen);
             PLAY_SFX(124);
         }
     }
@@ -780,7 +780,7 @@ void sub_8017B34(int a1) {
         gOxygenTime = 600;
         gOxygenTimer = 600;
         if (!sub_080420E8(56)) {
-            sub_08040204(57, gGameStatus.oxygen);
+            set_hud_number(57, gGameStatus.oxygen);
             sub_08041FA4(57);
         }
     } else {
@@ -1156,7 +1156,7 @@ static void sub_08018824(void) {
         } else if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IN_WONDERWING_MODE) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WONDERWING_IDLE;
-            sub_08040204(3, gGameStatus.goldenFeathers);
+            set_hud_number(3, gGameStatus.goldenFeathers);
             sub_08041FA4(3);
             sub_8016790(5, gPlayerSprite.direction);
         } else if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IS_DIVING) {
@@ -1911,7 +1911,7 @@ static bool32 update_wonderwing() {
         }
         gFeatherTimer = gFeatherTime;
         gGameStatus.goldenFeathers--;
-        sub_08040204(3, gGameStatus.goldenFeathers);
+        set_hud_number(3, gGameStatus.goldenFeathers);
         sub_08041FA4(3);
     } else {
         gFeatherTimer--;
@@ -4013,7 +4013,7 @@ static void state_dive(s32 keyPressed, s32 keyDown) {
         gOxygenTimer = 600;
 
         if (!sub_080420E8(56)) {
-            sub_08040204(57, gGameStatus.oxygen);
+            set_hud_number(57, gGameStatus.oxygen);
             sub_08041FA4(57);
         }
     }
@@ -4058,7 +4058,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
     if (gOxygenTimer == 0) {
         gOxygenTimer = gOxygenTime;
         gGameStatus.oxygen--;
-        sub_08040204(57, gGameStatus.oxygen);
+        set_hud_number(57, gGameStatus.oxygen);
         sub_08041FA4(57);
         PLAY_SFX(123);
     } else {
@@ -4161,7 +4161,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
         } else {
             gOxygenTimer = gOxygenTime;
             gGameStatus.oxygen--;
-            sub_08040204(57, gGameStatus.oxygen);
+            set_hud_number(57, gGameStatus.oxygen);
             sub_08041FA4(57);
             PLAY_SFX(123);
         }
@@ -4293,7 +4293,7 @@ static void sub_801E0F4(s32 keyPressed, s32 keyDown) {
     if (gOxygenTimer == 0) {
         gOxygenTimer = gOxygenTime;
         gGameStatus.oxygen--;
-        sub_08040204(57, gGameStatus.oxygen);
+        set_hud_number(57, gGameStatus.oxygen);
         sub_08041FA4(57);
         PLAY_SFX(123);
     } else {
@@ -4318,7 +4318,7 @@ static void state_dive_surface(s32 keyPressed, s32 keyDown) {
         sub_0804200C(57);
         if (gGameStatus.oxygen != gGameStatus.maxOxygen) {
             gGameStatus.oxygen = gGameStatus.maxOxygen;
-            sub_08040204(57, gGameStatus.oxygen);
+            set_hud_number(57, gGameStatus.oxygen);
             PLAY_SFX(124);
         }
         sub_800387C(dword_2000FC8);
@@ -5630,7 +5630,7 @@ static void state_wonderwing_start(s32 keyPressed, s32 keyDown) {
         sprite_set_anim(&gPlayerSprite, 505, 0, 0);
         sub_8016790(5, gPlayerSprite.direction);
         gGameStatus.goldenFeathers--;
-        sub_08040204(3, gGameStatus.goldenFeathers);
+        set_hud_number(3, gGameStatus.goldenFeathers);
         sub_08041FA4(3);
     }
 }

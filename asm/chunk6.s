@@ -3957,8 +3957,8 @@ _08029BFE:
 	b _080296DC
 _08029C0A:
 	bl sub_802C968
-	bl sub_802DCB8
-	bl sub_80309D8
+	bl despawn_aged_projectiles
+	bl play_jinjo_sounds
 	add sp, #0x30
 	pop {r3, r4, r5}
 	mov r8, r3
@@ -6194,7 +6194,7 @@ sub_802ADB0: @ 0x0802ADB0
 	bl sub_802C9F8
 	adds r0, r4, #0
 	adds r1, r5, #0
-	bl sub_802DD54
+	bl update_projectiles
 	adds r0, r4, #0
 	adds r1, r5, #0
 	bl sub_802A3B8
@@ -7227,7 +7227,7 @@ sub_802B5AC: @ 0x0802B5AC
 	bl sub_8039650
 	adds r1, r0, #0
 	movs r0, #0x36
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x36
 	bl sub_08041FA4
 	strb r6, [r4]
@@ -7630,7 +7630,7 @@ _0802B93A:
 	movs r1, #0x12
 	ldrsb r1, [r4, r1]
 	movs r0, #3
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #2
 	adds r1, r6, #0
 	adds r2, r7, #0
@@ -12056,7 +12056,7 @@ _0802DCB4: .4byte 0x080CC2B0
 
 
     .thumb
-sub_802DCB8: @ 0x0802DCB8
+despawn_aged_projectiles: @ 0x0802DCB8
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -12138,7 +12138,7 @@ _0802DD44:
 _0802DD50: .4byte 0x0203DFD5
 
     .thumb
-sub_802DD54: @ 0x0802DD54
+update_projectiles: @ 0x0802DD54
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -17051,7 +17051,7 @@ _080309D0: .4byte 0x00000199
 _080309D4: .4byte 0x0000019B
 
     .thumb
-sub_80309D8: @ 0x080309D8
+play_jinjo_sounds: @ 0x080309D8
 	push {r4, r5, r6, r7, lr}
 	ldr r4, _08030A54
 	ldrb r0, [r4]
@@ -23631,7 +23631,7 @@ _08034078:
 	adds r0, r2, r7
 	ldrb r1, [r0]
 	movs r0, #0x28
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x28
 	b _080342AE
 	.align 2, 0
@@ -23669,7 +23669,7 @@ _080340C8:
 	ldr r0, _080340D8
 	ldrb r1, [r0, #0x1d]
 	movs r0, #0x2c
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x2c
 	b _080342AE
 	.align 2, 0
@@ -23706,14 +23706,14 @@ _0803410A:
 	adds r0, r0, r1
 	ldr r1, [r0]
 	movs r0, #0x27
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x27
 	b _080342AE
 	.align 2, 0
 _0803411C: .4byte 0x0203E0FC
 _08034120: .4byte 0x080CEFA4
 _08034124:
-	bl sub_8040094
+	bl update_hud_total_notes
 	b _080342C6
 _0803412A:
 	ldrb r0, [r5]
@@ -23746,7 +23746,7 @@ _0803415C:
 	ldr r0, _0803416C
 	ldrb r1, [r0, #0x18]
 	movs r0, #0x2d
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x2d
 	b _080342AE
 	.align 2, 0
@@ -23782,7 +23782,7 @@ _080341A2:
 	ldr r0, _080341B0
 	ldrb r1, [r0, #0x1a]
 	movs r0, #0x2e
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x2e
 	b _080342AE
 	.align 2, 0
@@ -23815,7 +23815,7 @@ _080341D4:
 	ldr r0, _080341F0
 	ldrb r1, [r0, #0x19]
 	movs r0, #0x2f
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x2f
 	b _080342AE
 	.align 2, 0
@@ -23847,7 +23847,7 @@ _08034212:
 	adds r0, r0, r1
 	ldrb r1, [r0]
 	movs r0, #0x29
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x29
 	b _080342AE
 	.align 2, 0
@@ -23879,7 +23879,7 @@ _0803425A:
 	ldr r0, _08034274
 	ldrb r1, [r0, #0x1e]
 	movs r0, #0x30
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x30
 	b _080342AE
 	.align 2, 0
@@ -23909,7 +23909,7 @@ _08034296:
 	bne _080342C6
 	movs r0, #0x31
 	movs r1, #5
-	bl sub_08040204
+	bl set_hud_number
 	movs r0, #0x31
 _080342AE:
 	bl sub_08041FA4
@@ -24714,7 +24714,7 @@ _080348DC:
 	strb r0, [r4, #7]
 	ldrb r1, [r4, #7]
 	movs r0, #4
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _08034964
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -24749,7 +24749,7 @@ _08034936:
 	strb r1, [r4, #0x13]
 	ldrb r1, [r4, #0x13]
 	movs r0, #0x38
-	bl sub_08040204
+	bl set_hud_number
 _0803494E:
 	pop {r4, r5}
 	pop {r0}
@@ -39761,7 +39761,7 @@ sub_803BB94: @ 0x0803BB94
 	strb r1, [r3, #0x13]
 	ldrb r1, [r3, #0x13]
 	movs r0, #0x38
-	bl sub_08040204
+	bl set_hud_number
 _0803BBCE:
 	pop {r0}
 	bx r0
@@ -41126,7 +41126,7 @@ sub_803C60E: @ 0x0803C60E
 	ldr r0, _0803C620
 	ldrh r1, [r0, #0xc]
 	movs r0, #0x13
-	bl sub_08040204
+	bl set_hud_number
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -41266,7 +41266,7 @@ sub_803C6D4: @ 0x0803C6D4
 	strb r0, [r1, #0x1a]
 	ldrb r1, [r1, #0x1a]
 	movs r0, #0xe
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803C780
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41387,7 +41387,7 @@ sub_803C7C8: @ 0x0803C7C8
 	strb r0, [r1, #0x1e]
 	ldrb r1, [r1, #0x1e]
 	movs r0, #0x12
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803C864
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42009,7 +42009,7 @@ sub_803CC80: @ 0x0803CC80
 	strb r0, [r1, #0x1d]
 	ldrb r1, [r1, #0x1d]
 	movs r0, #0x11
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803CD1C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42088,7 +42088,7 @@ sub_803CD2C: @ 0x0803CD2C
 	strb r0, [r1, #0x18]
 	ldrb r1, [r1, #0x18]
 	movs r0, #5
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803CDC8
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42214,7 +42214,7 @@ sub_803CE24: @ 0x0803CE24
 	strb r0, [r1, #0x19]
 	ldrb r1, [r1, #0x19]
 	movs r0, #8
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803CEC0
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42325,7 +42325,7 @@ sub_803CF00: @ 0x0803CF00
 	strb r0, [r1, #0x1c]
 	ldrb r1, [r1, #0x1c]
 	movs r0, #0x10
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803CF8C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42488,7 +42488,7 @@ sub_803D034: @ 0x0803D034
 	strb r0, [r1, #0x1b]
 	ldrb r1, [r1, #0x1b]
 	movs r0, #0xf
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803D0B0
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42697,7 +42697,7 @@ _0803D1EC:
 	ldrb r0, [r4]
 	subs r1, r1, r0
 	movs r0, #0x36
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803D238
 	movs r1, #0
 	bl is_obj_disabled
@@ -43135,7 +43135,7 @@ _0803D55C:
 	ldr r0, _0803D590
 	ldrb r1, [r0, #0x13]
 	movs r0, #0x38
-	bl sub_08040204
+	bl set_hud_number
 	ldr r2, _0803D588
 	strb r4, [r2]
 	ldr r1, _0803D58C
@@ -43149,7 +43149,7 @@ _0803D55C:
 	adds r1, r1, r0
 	ldrb r1, [r1]
 	movs r0, #0x28
-	bl sub_08040204
+	bl set_hud_number
 	b _0803D59E
 	.align 2, 0
 _0803D588: .4byte 0x0200107C
@@ -43376,7 +43376,7 @@ sub_803D710: @ 0x0803D710
 	adds r0, r0, r2
 	ldrb r1, [r0]
 	movs r0, #1
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803D7B8
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -43482,7 +43482,7 @@ _0803D806:
 	strb r0, [r1, #1]
 	ldrb r1, [r1, #1]
 	movs r0, #6
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803D890
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -43559,7 +43559,7 @@ sub_803D89C: @ 0x0803D89C
 	adds r0, r0, r4
 	ldrh r1, [r0, #6]
 	movs r0, #0
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803D954
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -43653,7 +43653,7 @@ sub_803D968: @ 0x0803D968
 	adds r0, r0, r4
 	ldrh r1, [r0, #6]
 	movs r0, #0
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803DA20
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -43747,7 +43747,7 @@ sub_803DA34: @ 0x0803DA34
 	adds r0, r0, r4
 	ldrh r1, [r0, #6]
 	movs r0, #0
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803DAEC
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -43852,7 +43852,7 @@ _0803DB20:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl sub_08040204
+	bl set_hud_number
 	ldr r4, _0803DC1C
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -43997,7 +43997,7 @@ _0803DC64:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl sub_08040204
+	bl set_hud_number
 	ldr r4, _0803DD60
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -44142,7 +44142,7 @@ _0803DDA8:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl sub_08040204
+	bl set_hud_number
 	ldr r4, _0803DEA4
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -44287,7 +44287,7 @@ _0803DEEC:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl sub_08040204
+	bl set_hud_number
 	ldr r4, _0803DFE8
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -44432,7 +44432,7 @@ _0803E030:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl sub_08040204
+	bl set_hud_number
 	ldr r4, _0803E12C
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -44577,7 +44577,7 @@ _0803E176:
 	strb r0, [r1, #6]
 	ldrb r1, [r1, #6]
 	movs r0, #0x16
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E20C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -44669,7 +44669,7 @@ _0803E23E:
 	strb r0, [r1, #6]
 	ldrb r1, [r1, #6]
 	movs r0, #0x16
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E2D4
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -44761,7 +44761,7 @@ _0803E306:
 	strb r0, [r1, #6]
 	ldrb r1, [r1, #6]
 	movs r0, #0x16
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E39C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -44853,7 +44853,7 @@ _0803E3CE:
 	strb r0, [r1, #6]
 	ldrb r1, [r1, #6]
 	movs r0, #0x16
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E464
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -44933,7 +44933,7 @@ _0803E4B0:
 	movs r1, #0x12
 	ldrsb r1, [r2, r1]
 	movs r0, #3
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E508
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -45008,7 +45008,7 @@ _0803E550:
 	movs r1, #0xe
 	ldrsb r1, [r2, r1]
 	movs r0, #9
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E5A8
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -45083,7 +45083,7 @@ _0803E5F0:
 	movs r1, #0xf
 	ldrsb r1, [r2, r1]
 	movs r0, #0xa
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E648
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -45158,7 +45158,7 @@ _0803E690:
 	movs r1, #0x11
 	ldrsb r1, [r2, r1]
 	movs r0, #0xc
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E6E8
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -45233,7 +45233,7 @@ _0803E730:
 	movs r1, #0x10
 	ldrsb r1, [r2, r1]
 	movs r0, #0xb
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E788
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -45325,7 +45325,7 @@ _0803E7F0:
 	movs r1, #0x12
 	ldrsb r1, [r2, r1]
 	movs r0, #3
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E84C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -45418,7 +45418,7 @@ _0803E8B4:
 	movs r1, #0xe
 	ldrsb r1, [r2, r1]
 	movs r0, #9
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E910
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -45517,7 +45517,7 @@ _0803E96A:
 _0803E986:
 	ldrb r1, [r2, #0x13]
 	movs r0, #0x38
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803E9DC
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -45649,7 +45649,7 @@ _0803EAA4:
 _0803EAA6:
 	ldrb r1, [r1, #0x13]
 	movs r0, #0x38
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803EAE0
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -46054,7 +46054,7 @@ sub_803EDE4: @ 0x0803EDE4
 	strb r2, [r1, #0x16]
 	ldrb r1, [r1, #0x16]
 	movs r0, #0x39
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803EE3C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -46122,7 +46122,7 @@ sub_803EE6C: @ 0x0803EE6C
 	strb r0, [r1, #6]
 	movs r0, #0x16
 	movs r1, #0
-	bl sub_08040204
+	bl set_hud_number
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -46139,7 +46139,7 @@ sub_803EE84: @ 0x0803EE84
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #9
-	bl sub_08040204
+	bl set_hud_number
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -46157,7 +46157,7 @@ sub_803EEA8: @ 0x0803EEA8
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #0xa
-	bl sub_08040204
+	bl set_hud_number
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -46175,7 +46175,7 @@ sub_803EECC: @ 0x0803EECC
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #0xb
-	bl sub_08040204
+	bl set_hud_number
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -46193,7 +46193,7 @@ sub_803EEF0: @ 0x0803EEF0
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #0xc
-	bl sub_08040204
+	bl set_hud_number
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -46206,7 +46206,7 @@ sub_803EF14: @ 0x0803EF14
 	ldr r0, _0803EF58
 	ldrb r1, [r0, #7]
 	movs r0, #4
-	bl sub_08040204
+	bl set_hud_number
 	ldr r0, _0803EF5C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -46251,7 +46251,7 @@ sub_803EF68: @ 0x0803EF68
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #3
-	bl sub_08040204
+	bl set_hud_number
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -48368,8 +48368,8 @@ _0803FE6E:
 	bx r1
 
     .thumb
-    .global sub_803FE78
-sub_803FE78: @ 0x0803FE78
+    .global reset_hud_elements
+reset_hud_elements: @ 0x0803FE78
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -48639,7 +48639,7 @@ _0804008C: .4byte gLoadedRoomLevel
 _08040090: .4byte 0x02000FCC
 
     .thumb
-sub_8040094: @ 0x08040094
+update_hud_total_notes: @ 0x08040094
 	ldr r0, _080400AC
 	ldr r1, [r0]
 	movs r0, #0x9c
@@ -48656,8 +48656,8 @@ _080400AC: .4byte 0x0203EA7C
 _080400B0: .4byte gGameStatus
 
     .thumb
-    .global sub_80400B4
-sub_80400B4: @ 0x080400B4
+    .global init_hud_elements
+init_hud_elements: @ 0x080400B4
 	push {r4, r5, r6, r7, lr}
 	ldr r1, _08040160
 	movs r0, #0
@@ -48738,7 +48738,7 @@ _080400DC:
 	adds r6, #1
 	cmp r6, #0x3b
 	ble _080400DC
-	bl sub_803FE78
+	bl reset_hud_elements
 	pop {r4, r5, r6, r7}
 	pop {r0}
 	bx r0
@@ -48751,8 +48751,8 @@ _08040170: .4byte 0x0002CCCC
 _08040174: .4byte 0x080B01B0
 
     .thumb
-	.global sub_8040178
-sub_8040178: @ 0x08040178
+	.global update_hud_collectables
+update_hud_collectables: @ 0x08040178
 	push {r4, r5, lr}
 	ldr r0, _080401F4
 	ldr r2, [r0]
@@ -48822,8 +48822,8 @@ _080401FC: .4byte gLoadedRoomLevel
 _08040200: .4byte 0x02000FCC
 
     .thumb
-    .global sub_08040204
-sub_08040204: @ 0x08040204
+    .global set_hud_number
+set_hud_number: @ 0x08040204
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -49031,7 +49031,7 @@ _08040400:
 	b _08040776
 _08040410:
 	movs r0, #0x28
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _08040418: .4byte 0x0203EA7C
@@ -49055,7 +49055,7 @@ _08040430:
 	b _08040776
 _08040440:
 	movs r0, #0x27
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _08040448: .4byte 0x0203EA7C
@@ -49079,7 +49079,7 @@ _08040460:
 	b _08040776
 _08040470:
 	movs r0, #0x29
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _08040478: .4byte 0x0203EA7C
@@ -49133,7 +49133,7 @@ _080404C8:
 	b _08040776
 _080404D8:
 	movs r0, #0x2d
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _080404E0: .4byte 0x0203EA7C
@@ -49157,7 +49157,7 @@ _080404F8:
 	b _08040776
 _08040508:
 	movs r0, #0x31
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _08040510: .4byte 0x0203EA7C
@@ -49181,7 +49181,7 @@ _08040528:
 	b _08040776
 _08040538:
 	movs r0, #0x2f
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _08040540: .4byte 0x0203EA7C
@@ -49205,7 +49205,7 @@ _08040558:
 	b _08040776
 _08040568:
 	movs r0, #0x2e
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _08040570: .4byte 0x0203EA7C
@@ -49257,7 +49257,7 @@ _080405C0:
 	b _08040776
 _080405D0:
 	movs r0, #0x2c
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _080405D8: .4byte 0x0203EA7C
@@ -49281,7 +49281,7 @@ _080405F0:
 	b _08040776
 _08040600:
 	movs r0, #0x30
-	bl sub_08040204
+	bl set_hud_number
 	b _08040776
 	.align 2, 0
 _08040608: .4byte 0x0203EA7C
@@ -49620,8 +49620,8 @@ _08040872:
 _08040878: .4byte 0x080AF314
 
     .thumb
-    .global sub_804087C
-sub_804087C: @ 0x0804087C
+    .global update_hud
+update_hud: @ 0x0804087C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -49741,8 +49741,8 @@ _08040944:
 _08040958: .4byte 0x0203EA7C
 
     .thumb
-    .global sub_804095C
-sub_804095C: @ 0x0804095C
+    .global render_hud_elements
+render_hud_elements: @ 0x0804095C
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	ldr r2, _080409A8
@@ -50006,7 +50006,7 @@ sub_8040B3C: @ 0x08040B3C
 	mov r7, r8
 	push {r7}
 	mov r8, r0
-	bl sub_803FE78
+	bl reset_hud_elements
 	ldr r0, _08040D3C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -50412,7 +50412,7 @@ sub_8040E74: @ 0x08040E74
 	movs r0, #0
 	strb r0, [r1]
 	bl sub_8041E58
-	bl sub_8040178
+	bl update_hud_collectables
 	pop {r0}
 	bx r0
 	.align 2, 0

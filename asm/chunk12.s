@@ -213,7 +213,7 @@ _08063220:
 	bne _0806322E
 	ldrh r1, [r1, #6]
 	movs r0, #0x24
-	bl sub_08040204
+	bl set_hud_number
 _0806322E:
 	pop {r4, r5}
 	pop {r0}

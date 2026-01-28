@@ -77,7 +77,7 @@ void sub_80629E8() {
     sub_8038FA0(gLoadedRoomLevel);
     sub_8039234();
     sub_80409DC();
-    sub_803FE78();
+    reset_hud_elements();
 
     byte_20020B3 = 0;
     dword_2001104 = 0;
