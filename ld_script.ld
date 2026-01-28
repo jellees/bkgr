@@ -274,6 +274,7 @@ SECTIONS
         asm/chunk9.o(.text);
         src/alloc.o(.text);
         asm/chunk6.o(.text);
+        asm/hud.o(.text);
         src/audio_b.o(.text);
         src/menu.o(.text);
         asm/menu.o(.text);
