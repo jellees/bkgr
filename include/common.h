@@ -783,6 +783,8 @@ extern u8 byte_203E16A;
 extern u8 byte_203E16B;
 extern u8 byte_203E16C;
 
+extern u8 byte_203EA80;
+
 extern struct struc_51** dword_203F8B4; // A pointer to a pointer to a struct.
 
 extern u8 byte_203FA35; // possibly bool8

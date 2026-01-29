@@ -132,3 +132,130 @@ static int sub_803F0D4(struct HudElement* element, int _, int __, int ___) {
     return 2;
 }
 
+static int sub_803F0D8(struct HudElement* element, int _, int __, int ___) {
+    if (element->counter == element->number) {
+        return 2;
+    }
+
+    element->timer--;
+
+    if (element->timer != 0)
+        return 1;
+
+    element->timer = 10;
+
+    if (element->counter < element->number) {
+        element->counter++;
+    } else if (element->counter > element->number) {
+        element->counter--;
+    }
+
+    if (element->counter < 10) {
+        element->text[1] = 0xff;
+        IntegerToAsciiBw(element->counter, element->text);
+    } else if (element->counter < 100) {
+        element->text[2] = 0xff;
+        IntegerToAsciiBw(element->counter, &element->text[1]);
+    } else {
+        element->text[3] = 0xff;
+        IntegerToAsciiBw(element->counter, &element->text[2]);
+    }
+
+    if (element->counter != element->number) {
+        return 1;
+    }
+
+    return 2;
+}
+
+static int sub_803F14C(struct HudElement* element, int _, int __, int ___) {
+    if (element->counter == element->number) {
+        return 2;
+    }
+
+    element->timer--;
+
+    if (element->timer != 0)
+        return 1;
+
+    element->timer = 10;
+
+    element->counter++;
+
+    if (element->counter < 10) {
+        element->text[1] = 0xff;
+        IntegerToAsciiBw(element->counter, element->text);
+    } else if (element->counter < 100) {
+        element->text[2] = 0xff;
+        IntegerToAsciiBw(element->counter, &element->text[1]);
+    } else {
+        element->text[3] = 0xff;
+        IntegerToAsciiBw(element->counter, &element->text[2]);
+    }
+
+    if (element->counter != element->number) {
+        return 1;
+    }
+
+    return 2;
+}
+
+static int sub_803F1B4(struct HudElement* element, int _, int __, int ___) {
+    if (element->counter == element->number) {
+        return 2;
+    }
+
+    element->timer--;
+
+    if (element->timer != 0)
+        return 1;
+
+    element->timer = 10;
+
+    element->counter--;
+
+    if (element->counter < 10) {
+        element->text[1] = 0xff;
+        IntegerToAsciiBw(element->counter, element->text);
+    } else if (element->counter < 100) {
+        element->text[2] = 0xff;
+        IntegerToAsciiBw(element->counter, &element->text[1]);
+    } else {
+        element->text[3] = 0xff;
+        IntegerToAsciiBw(element->counter, &element->text[2]);
+    }
+
+    if (element->counter != element->number) {
+        return 1;
+    }
+
+    return 2;
+}
+
+static int sub_803F21C(struct HudElement* element, int _, int __, int ___) {
+    if (!element->field_2A) {
+        if (element->timer != 0) {
+            element->timer--;
+        }
+
+        if (element->timer == 0 && byte_203EA80 == 0) {
+            return 2;
+        }
+    }
+
+    return 1;
+}
+
+static int sub_803F250(struct HudElement* element, int _, int __, int ___) {
+    if (!element->field_2A) {
+        if (element->timer != 0) {
+            element->timer--;
+        }
+
+        if (element->timer == 0 && byte_203EA80 == 0) {
+            return 2;
+        }
+    }
+
+    return 1;
+}

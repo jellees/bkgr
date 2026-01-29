@@ -1,5 +1,6 @@
 byte_203E137 = 0x203E137;
 byte_203E138 = 0x203E138;
+byte_203EA80 = 0x203EA80;
 
 # This variable shares the same space with another variable.
 # Not sure how this is possible. For now hardcoded address is
