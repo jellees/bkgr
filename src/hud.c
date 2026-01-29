@@ -259,3 +259,21 @@ static int sub_803F250(struct HudElement* element, int _, int __, int ___) {
 
     return 1;
 }
+
+static inline void setObjMode(struct Sprite* sprite, int mode) {
+    vu8* objMode = &sprite->objMode;
+    *objMode;
+    *objMode = mode;
+}
+
+static int sub_803F284(struct HudElement* element, int a2, int a3, int a4) {
+    SetSprite(&element->graphic[a2].sprite, a3, 0, 0, 0, element->graphic[a2].sprite.xPos,
+              element->graphic[a2].sprite.yPos, 2);
+    element->graphic[a2].field_35 = 1;
+
+    if (a4 == 1) {
+        setObjMode(&element->graphic[a2].sprite, 1);
+    }
+
+    return 2;
+}

@@ -4,47 +4,6 @@
     .text
 
 	.thumb
-sub_803F284: @ 0x0803F284
-	push {r4, r5, r6, lr}
-	sub sp, #0x10
-	adds r5, r0, #0
-	adds r6, r3, #0
-	lsls r0, r1, #3
-	subs r0, r0, r1
-	lsls r4, r0, #3
-	ldr r0, [r5]
-	adds r0, r0, r4
-	movs r1, #0
-	str r1, [sp]
-	ldrh r1, [r0, #6]
-	str r1, [sp, #4]
-	ldrb r1, [r0, #8]
-	str r1, [sp, #8]
-	movs r1, #2
-	str r1, [sp, #0xc]
-	adds r1, r2, #0
-	movs r2, #0
-	movs r3, #0
-	bl SetSprite
-	ldr r0, [r5]
-	adds r0, r4, r0
-	adds r0, #0x35
-	movs r1, #1
-	strb r1, [r0]
-	cmp r6, #1
-	bne _0803F2C6
-	ldr r0, [r5]
-	adds r0, r4, r0
-	ldrb r1, [r0, #0x10]
-	strb r6, [r0, #0x10]
-_0803F2C6:
-	movs r0, #2
-	add sp, #0x10
-	pop {r4, r5, r6}
-	pop {r1}
-	bx r1
-
-	.thumb
 sub_803F2D0: @ 0x0803F2D0
 	push {lr}
 	adds r2, r0, #0
