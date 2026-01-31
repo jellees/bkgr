@@ -4,29 +4,6 @@
     .text
 
 	.thumb
-sub_803F410: @ 0x0803F410
-	push {r4, r5, lr}
-	ldr r5, [r0]
-	lsls r4, r1, #3
-	subs r4, r4, r1
-	lsls r4, r4, #3
-	adds r5, r4, r5
-	lsls r1, r2, #0x10
-	str r1, [r5, #0x1c]
-	lsls r1, r3, #0x10
-	str r1, [r5, #0x20]
-	ldrh r1, [r5, #6]
-	strh r2, [r5, #6]
-	ldr r0, [r0]
-	adds r4, r4, r0
-	ldrb r0, [r4, #8]
-	strb r3, [r4, #8]
-	movs r0, #2
-	pop {r4, r5}
-	pop {r1}
-	bx r1
-
-	.thumb
 sub_803F438: @ 0x0803F438
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
