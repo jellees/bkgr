@@ -360,7 +360,7 @@ void Debug_ShowInfo(void) {
             gDebugString[7] = '0';
             gDebugString[8] = '0';
             gDebugString[9] = '0';
-            gDebugString[10] = -1;
+            gDebugString[10] = STRING_TERMINATOR;
             if (!byte_200138A) {
                 byte_200138A = 8;
                 sub_8010744(dword_20012E4 - dword_20012E0 + 1);
@@ -386,7 +386,7 @@ void Debug_ShowInfo(void) {
             gDebugString[7] = '0';
             gDebugString[8] = '0';
             gDebugString[9] = '0';
-            gDebugString[10] = -1;
+            gDebugString[10] = STRING_TERMINATOR;
             if (!byte_200138A) {
                 byte_200138A = 8;
                 sub_8010744(dword_20012E4 - dword_20012E0 + 1);
@@ -415,7 +415,7 @@ void Debug_ShowInfo(void) {
             gDebugString[8] = '0';
             gDebugString[9] = '0';
             gDebugString[10] = '0';
-            gDebugString[11] = -1;
+            gDebugString[11] = STRING_TERMINATOR;
             if (!byte_200138A) {
                 byte_200138A = 8;
                 sub_8010744(dword_20012E4 - dword_20012E0 + 1);
@@ -444,7 +444,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -471,7 +471,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -497,7 +497,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -523,7 +523,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -549,7 +549,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -575,7 +575,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -601,7 +601,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -627,7 +627,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -653,7 +653,7 @@ void Debug_ShowInfo(void) {
                 gDebugString[i] = '0';
             }
 
-            gDebugString[21] = -1;
+            gDebugString[21] = STRING_TERMINATOR;
 
             if (!byte_200138A) {
                 byte_200138A = 8;
@@ -1208,7 +1208,7 @@ void sub_8010E40(int a1) {
 
         IntegerToAsciiBw(x, &text[3]);
         IntegerToAsciiBw(y, &text[8]);
-        text[9] = -1;
+        text[9] = STRING_TERMINATOR;
         AddStringToBuffer(&gDebugTextBox6, text);
 
         RenderText();
@@ -1469,7 +1469,7 @@ void sub_8011428(void) {
 
     IntegerToAsciiBw(x, &text[3]);
     IntegerToAsciiBw(y, &text[8]);
-    text[9] = -1;
+    text[9] = STRING_TERMINATOR;
     AddStringToBuffer(&gDebugTextBox6, text);
 }
 
@@ -2245,7 +2245,7 @@ void display_error_message(char* type, char* message) {
 
         IntegerToAsciiBw(x, &posText[3]);
         IntegerToAsciiBw(y, &posText[8]);
-        posText[9] = -1;
+        posText[9] = STRING_TERMINATOR;
         AddStringToBuffer(&gDebugTextBox6, posText);
         AddStringToBuffer(&gDebugTextBox7, type);
         AddStringToBuffer(&gDebugTextBox8, message);
@@ -2282,7 +2282,7 @@ void sub_801243C(void) {
         string[7] = '0';
         string[8] = '0';
         string[9] = '0';
-        string[10] = -1;
+        string[10] = STRING_TERMINATOR;
     } while (0);
 
     textBox1.xPosition = 8;

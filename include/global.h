@@ -13,6 +13,9 @@ typedef s32 fx32;
 #define HANG asm(".word 0xEE00EE00")
 #define ASSERT(expr) do { if (!(expr)) HANG; } while (0)
 
+// String terminator instead of \0.
+#define STRING_TERMINATOR 0xff
+
 // Puts 0xFF after a string.
 #define FORMAT(s) s"\xff"
 

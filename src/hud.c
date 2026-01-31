@@ -97,13 +97,13 @@ static int sub_803F03C(struct HudElement* element, int a2, int a3, int a4) {
     }
 
     if (element->counter < 10) {
-        element->text[1] = 0xff;
+        element->text[1] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, element->text);
     } else if (element->counter < 100) {
-        element->text[2] = 0xff;
+        element->text[2] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, &element->text[1]);
     } else {
-        element->text[3] = 0xff;
+        element->text[3] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, &element->text[2]);
     }
 
@@ -151,13 +151,13 @@ static int sub_803F0D8(struct HudElement* element, int _, int __, int ___) {
     }
 
     if (element->counter < 10) {
-        element->text[1] = 0xff;
+        element->text[1] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, element->text);
     } else if (element->counter < 100) {
-        element->text[2] = 0xff;
+        element->text[2] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, &element->text[1]);
     } else {
-        element->text[3] = 0xff;
+        element->text[3] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, &element->text[2]);
     }
 
@@ -183,13 +183,13 @@ static int sub_803F14C(struct HudElement* element, int _, int __, int ___) {
     element->counter++;
 
     if (element->counter < 10) {
-        element->text[1] = 0xff;
+        element->text[1] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, element->text);
     } else if (element->counter < 100) {
-        element->text[2] = 0xff;
+        element->text[2] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, &element->text[1]);
     } else {
-        element->text[3] = 0xff;
+        element->text[3] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, &element->text[2]);
     }
 
@@ -215,13 +215,13 @@ static int sub_803F1B4(struct HudElement* element, int _, int __, int ___) {
     element->counter--;
 
     if (element->counter < 10) {
-        element->text[1] = 0xff;
+        element->text[1] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, element->text);
     } else if (element->counter < 100) {
-        element->text[2] = 0xff;
+        element->text[2] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, &element->text[1]);
     } else {
-        element->text[3] = 0xff;
+        element->text[3] = STRING_TERMINATOR;
         IntegerToAsciiBw(element->counter, &element->text[2]);
     }
 
@@ -272,7 +272,28 @@ static int sub_803F284(struct HudElement* element, int a2, int a3, int a4) {
     element->graphic[a2].field_35 = 1;
 
     if (a4 == 1) {
+        //! Possible fake match.
         setObjMode(&element->graphic[a2].sprite, 1);
+    }
+
+    return 2;
+}
+
+static int sub_803F2D0(struct HudElement* element, int a2, int _, int __) {
+    element->renderState = a2;
+
+    switch (a2) {
+        case 5:
+            element->timer = element->field_E;
+            break;
+
+        case 3:
+            element->text[0] = STRING_TERMINATOR;
+            break;
+
+        case 4:
+            element->text[0] = STRING_TERMINATOR;
+            break;
     }
 
     return 2;

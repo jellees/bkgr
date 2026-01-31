@@ -4,34 +4,6 @@
     .text
 
 	.thumb
-sub_803F2D0: @ 0x0803F2D0
-	push {lr}
-	adds r2, r0, #0
-	strb r1, [r2, #0x1f]
-	cmp r1, #4
-	beq _0803F2EE
-	cmp r1, #4
-	bgt _0803F2E4
-	cmp r1, #3
-	beq _0803F2EE
-	b _0803F2F6
-_0803F2E4:
-	cmp r1, #5
-	bne _0803F2F6
-	ldrh r0, [r2, #0xe]
-	strh r0, [r2, #0x18]
-	b _0803F2F6
-_0803F2EE:
-	adds r1, r2, #0
-	adds r1, #0x20
-	movs r0, #0xff
-	strb r0, [r1]
-_0803F2F6:
-	movs r0, #2
-	pop {r1}
-	bx r1
-
-	.thumb
 sub_803F2FC: @ 0x0803F2FC
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0

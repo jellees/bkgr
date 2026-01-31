@@ -342,7 +342,7 @@ static int ShowPressStart(void) {
     s1[23] = 'E';
     s1[24] = 'D';
     s1[25] = '.';
-    s1[26] = -1;
+    s1[26] = STRING_TERMINATOR;
 
     s2[0] = 'A';
     s2[1] = 'L';
@@ -364,7 +364,7 @@ static int ShowPressStart(void) {
     s2[17] = 'E';
     s2[18] = 'D';
     s2[19] = '.';
-    s2[20] = -1;
+    s2[20] = STRING_TERMINATOR;
 
     s3[0] = 'L';
     s3[1] = 'I';
@@ -386,7 +386,7 @@ static int ShowPressStart(void) {
     s3[17] = 'N';
     s3[18] = 'D';
     s3[19] = 'O';
-    s3[20] = -1;
+    s3[20] = STRING_TERMINATOR;
 
     v2.letterSpacing = 254;
     v2.field_12 = 0;

@@ -130,7 +130,7 @@ static void sub_8062D04(void) {
     string[6] = 'V';
     string[7] = 'E';
     string[8] = 'R';
-    string[9] = -1;
+    string[9] = STRING_TERMINATOR;
 
     textbox.letterSpacing = -2;
     textbox.field_12 = 0;
@@ -170,7 +170,7 @@ static void sub_8062D04(void) {
                             string[6] = 'V';
                             string[7] = 'E';
                             string[8] = 'R';
-                            string[9] = -1;
+                            string[9] = STRING_TERMINATOR;
                             objCount = sub_8025870(string, &textbox);
                             break;
 
@@ -255,7 +255,7 @@ static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount) 
                     string[10] = 'R';
                     string[11] = 'E';
                     string[12] = '?';
-                    string[13] = -1;
+                    string[13] = STRING_TERMINATOR;
                     *objCount = sub_8025870(string, textbox);
                     break;
             }
@@ -281,7 +281,7 @@ static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount) 
                     string[6] = 'V';
                     string[7] = 'E';
                     string[8] = 'R';
-                    string[9] = -1;
+                    string[9] = STRING_TERMINATOR;
                     *objCount = sub_8025870(string, textbox);
                     break;
             }

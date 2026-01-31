@@ -477,7 +477,7 @@ void draw_time(void) {
     gTimeText[5] = ':';
     gTimeText[6] = '0';
     gTimeText[7] = '0';
-    gTimeText[8] = -1;
+    gTimeText[8] = STRING_TERMINATOR;
     IntegerToAsciiBw(gGameStatus.clockHour, &gTimeText[1]);
     IntegerToAsciiBw(gGameStatus.clockMinute, &gTimeText[4]);
     IntegerToAsciiBw(gGameStatus.clockSecond, &gTimeText[7]);
@@ -1084,14 +1084,14 @@ static void exec_options_menu(void) {
     IntegerToAsciiBw(gBgmMainVolume, &bgmText[2]);
     bgmText[3] = ' ';
     bgmText[4] = '}';
-    bgmText[5] = -1;
+    bgmText[5] = STRING_TERMINATOR;
 
     sfxText[0] = '{';
     sfxText[1] = ' ';
     IntegerToAsciiBw(gSfxMainVolume, &sfxText[2]);
     sfxText[3] = ' ';
     sfxText[4] = '}';
-    sfxText[5] = -1;
+    sfxText[5] = STRING_TERMINATOR;
 
     while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
         update_hud();
