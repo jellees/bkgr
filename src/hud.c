@@ -6,12 +6,12 @@
 
 struct HudGraphic {
     volatile struct Sprite sprite;
-    u32 field_1C;
-    u32 field_20;
-    u32 field_24;
-    u32 field_28;
-    u32 field_2C;
-    u32 field_30;
+    s32 field_1C;
+    s32 field_20;
+    s32 field_24;
+    s32 field_28;
+    s32 field_2C;
+    s32 field_30;
     u8 field_34;
     u8 field_35;
     u8 field_36;
@@ -262,8 +262,8 @@ static int sub_803F250(struct HudElement* element, int _, int __, int ___) {
 }
 
 static int sub_803F284(struct HudElement* element, int a2, int a3, int a4) {
-    SetSprite((struct Sprite*)&element->graphic[a2].sprite, a3, 0, 0, 0, element->graphic[a2].sprite.xPos,
-              element->graphic[a2].sprite.yPos, 2);
+    SetSprite((struct Sprite*)&element->graphic[a2].sprite, a3, 0, 0, 0,
+              element->graphic[a2].sprite.xPos, element->graphic[a2].sprite.yPos, 2);
     element->graphic[a2].field_35 = 1;
 
     if (a4 == 1) {
@@ -331,10 +331,78 @@ static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
 }
 
 static int sub_803F410(struct HudElement* element, int a2, int a3, int a4) {
-  element->graphic[a2].field_1C = a3 << 16;
-  element->graphic[a2].field_20 = a4 << 16;
-  element->graphic[a2].sprite.xPos = a3;
-  element->graphic[a2].sprite.yPos = a4;
+    element->graphic[a2].field_1C = a3 << 16;
+    element->graphic[a2].field_20 = a4 << 16;
+    element->graphic[a2].sprite.xPos = a3;
+    element->graphic[a2].sprite.yPos = a4;
 
-  return 2;
+    return 2;
+}
+
+static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
+    int i;
+
+    bool32 r7 = TRUE;
+
+    for (i = 0; i < element->graphicCount; i++) {
+        switch (element->graphic[i].field_34) {
+            case 0:
+                r7 = FALSE;
+                element->graphic[i].field_20 -= element->field_10;
+                if (element->graphic[i].field_20 <= element->graphic[i].field_28) {
+                    element->graphic[i].field_20 = element->graphic[i].field_28;
+                    element->graphic[i].field_34 = -1;
+                    if (a2 == 1) {
+                        element->graphic[i].field_30 = element->graphic[i].field_20;
+                    }
+                }
+                element->graphic[i].sprite.yPos = element->graphic[i].field_20 >> 16;
+                break;
+
+            case 4:
+                r7 = FALSE;
+                element->graphic[i].field_20 += element->field_10;
+                if (element->graphic[i].field_20 >= element->graphic[i].field_28) {
+                    element->graphic[i].field_20 = element->graphic[i].field_28;
+                    element->graphic[i].field_34 = -1;
+                    if (a2 == 1) {
+                        element->graphic[i].field_30 = element->graphic[i].field_20;
+                    }
+                }
+                element->graphic[i].sprite.yPos = element->graphic[i].field_20 >> 16;
+                break;
+
+            case 6:
+                r7 = FALSE;
+                element->graphic[i].field_1C -= element->field_10;
+                if (element->graphic[i].field_1C <= element->graphic[i].field_24) {
+                    element->graphic[i].field_1C = element->graphic[i].field_24;
+                    element->graphic[i].field_34 = -1;
+                    if (a2 == 1) {
+                        element->graphic[i].field_2C = element->graphic[i].field_1C;
+                    }
+                }
+                element->graphic[i].sprite.xPos = (element->graphic[i].field_1C >> 16) & 0x1FF;
+                break;
+
+            case 2:
+                r7 = FALSE;
+                element->graphic[i].field_1C += element->field_10;
+                if (element->graphic[i].field_1C >= element->graphic[i].field_24) {
+                    element->graphic[i].field_1C = element->graphic[i].field_24;
+                    element->graphic[i].field_34 = -1;
+                    if (a2 == 1) {
+                        element->graphic[i].field_2C = element->graphic[i].field_1C;
+                    }
+                }
+                element->graphic[i].sprite.xPos = (element->graphic[i].field_1C >> 16) & 0x1FF;
+                break;
+        }
+    }
+
+    if (r7) {
+        return 2;
+    }
+
+    return 1;
 }
