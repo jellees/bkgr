@@ -1,6 +1,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "alloc.h"
+#include "main.h"
 #include "common.h"
 
 struct HudGraphic {
@@ -294,6 +295,43 @@ static int sub_803F2D0(struct HudElement* element, int a2, int _, int __) {
         case 4:
             element->text[0] = STRING_TERMINATOR;
             break;
+    }
+
+    return 2;
+}
+
+static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
+    int i;
+
+    switch (a3) {
+        case 0:
+            ASSERT(a2 != 0);
+            element->graphic = Alloc(sizeof(struct HudGraphic) * a2, 23, 4);
+            element->graphicCount = a2;
+            for (i = 0; i < element->graphicCount; i++) {
+                element->graphic[i].field_34 = -1;
+                element->graphic[i].field_35 = 0;
+            }
+            break;
+
+        case 1:
+            element->graphic = Alloc(sizeof(struct HudGraphic) * (a2 + stru_80CC8C4.maxHealth), 23, 4);
+            element->graphicCount = gGameStatus.maxHealth + a2;
+            for (i = 0; i < element->graphicCount; i++) {
+                element->graphic[i].field_34 = -1;
+                element->graphic[i].field_35 = 0;
+            }
+            element->text[0] = STRING_TERMINATOR;
+            break;
+
+        case 2:
+            element->graphic = Alloc(sizeof(struct HudGraphic) * (a2 + gGameStatus.maxOxygen), 24, 4);
+            element->graphicCount = gGameStatus.maxOxygen + a2;
+            for (i = 0; i < element->graphicCount; i++) {
+                element->graphic[i].field_34 = -1;
+                element->graphic[i].field_35 = 0;
+            }
+            element->text[0] = STRING_TERMINATOR;
     }
 
     return 2;

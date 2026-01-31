@@ -6,6 +6,7 @@ struct GameStatus;
 struct SaveFile;
 struct level_struc;
 struct SpriteDMATableEntry;
+struct struc_44;
 
 extern s32 dword_2000318;
 extern s32 dword_200031C;
