@@ -414,3 +414,11 @@ NAKED static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4)
 NAKED static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
     asm_unified(".include \"asm/nonmatching/sub_803F5AC.s\"");
 }
+
+NAKED static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
+    asm_unified(".include \"asm/nonmatching/sub_803F62C.s\"");
+}
+
+NAKED static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
+    asm_unified(".include \"asm/nonmatching/sub_803F6C4.s\"");
+}
