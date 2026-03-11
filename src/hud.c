@@ -406,3 +406,11 @@ static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
 
     return 1;
 }
+
+NAKED static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
+    asm_unified(".include \"asm/nonmatching/sub_803F52C.s\"");
+}
+
+NAKED static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
+    asm_unified(".include \"asm/nonmatching/sub_803F5AC.s\"");
+}
