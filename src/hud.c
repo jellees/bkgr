@@ -422,3 +422,30 @@ NAKED static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4)
 NAKED static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
     asm_unified(".include \"asm/nonmatching/sub_803F6C4.s\"");
 }
+
+NAKED static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
+    asm_unified(".include \"asm/nonmatching/sub_803F75C.s\"");
+}
+/* C draft — loop body matches, pre-loop ptr register differs (adds r0 vs adds r7):
+static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
+    int i;
+    u8 *ptr = &byte_80A8CF6[element->counter * 8];
+
+    for (i = a2; i < element->graphicCount; i++) {
+        element->graphic[i].field_1C = a3 << 16;
+        element->graphic[i].field_20 = a4 << 16;
+        element->graphic[i].sprite.xPos = a3;
+        element->graphic[i].sprite.yPos = a4;
+        word_80A8CF0[*ptr] += 0;
+        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[*ptr], 0, 0, 0, a3, a4, 2);
+        element->graphic[i].field_35 = 1;
+        ptr++;
+    }
+
+    element->timer = 10;
+    return 2;
+} */
+
+NAKED static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
+    asm_unified(".include \"asm/nonmatching/sub_803F800.s\"");
+}

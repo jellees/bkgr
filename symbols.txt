@@ -106,3 +106,5 @@ unk_83FD834 = 0x83FD834;
 
 dLicenceBitmap = 0x87E61A8;
 unk_83FC514 = 0x83FC514;
+word_80A8CF0 = 0x80A8CF0;
+byte_80A8CF6 = 0x80A8CF6;

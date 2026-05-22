@@ -1074,4 +1074,7 @@ extern char dword_808EF98[];
 extern u32 dLicenceBitmap[];
 extern u32 unk_83FC514[];
 
+extern u16 word_80A8CF0[];
+extern u8 byte_80A8CF6[];
+
 #endif
