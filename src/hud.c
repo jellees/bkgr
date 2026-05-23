@@ -485,3 +485,40 @@ static int sub_803F914(struct HudElement* element, int a2, int a3, int a4) {
 
     return 2;
 }
+
+static int sub_803F980(struct HudElement* element, int a2, int a3, int a4) {
+    int i;
+
+    if (a3 == 1) {
+        for (i = a2; i < element->graphicCount; i++) {
+            element->graphic[i].field_28 = element->graphic[i].field_20 - ((i - a2) * 0xC0000);
+            element->graphic[i].field_34 = 0;
+        }
+    } else {
+        for (i = a2; i < element->graphicCount; i++) {
+            element->graphic[i].field_28 = element->graphic[i].field_20 - (a4 << 16);
+            element->graphic[i].field_34 = 0;
+        }
+    }
+
+    return 2;
+}
+
+static int sub_803F9EC(struct HudElement* element, int a2, int a3, int a4) {
+    int i;
+
+    if (a3 == 1) {
+        for (i = a2; i < element->graphicCount; i++) {
+            element->graphic[i].field_28 = element->graphic[i].field_20 + ((i - a2) * 0xC0000);
+            element->graphic[i].field_34 = 4;
+        }
+    } else {
+        for (i = a2; i < element->graphicCount; i++) {
+            element->graphic[i].field_28 = element->graphic[i].field_20 + (a4 << 16);
+            element->graphic[i].field_34 = 4;
+        }
+    }
+
+    return 2;
+}
+
