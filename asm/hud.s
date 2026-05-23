@@ -4,67 +4,6 @@
     .text
 
 	.thumb
-sub_803F8A8: @ 0x0803F8A8
-	push {r4, r5, r6, r7, lr}
-	adds r4, r0, #0
-	cmp r2, #1
-	bne _0803F8E2
-	adds r2, r1, #0
-	ldrh r0, [r4, #4]
-	cmp r2, r0
-	bge _0803F90C
-	movs r7, #6
-	movs r5, #0
-	lsls r0, r2, #3
-	subs r0, r0, r2
-	lsls r3, r0, #3
-	movs r6, #0xc0
-	lsls r6, r6, #0xc
-_0803F8C6:
-	ldr r1, [r4]
-	adds r1, r3, r1
-	ldr r0, [r1, #0x1c]
-	subs r0, r0, r5
-	str r0, [r1, #0x24]
-	adds r1, #0x34
-	strb r7, [r1]
-	adds r5, r5, r6
-	adds r3, #0x38
-	adds r2, #1
-	ldrh r0, [r4, #4]
-	cmp r2, r0
-	blt _0803F8C6
-	b _0803F90C
-_0803F8E2:
-	adds r2, r1, #0
-	ldrh r0, [r4, #4]
-	cmp r2, r0
-	bge _0803F90C
-	lsls r5, r3, #0x10
-	movs r6, #6
-	lsls r0, r2, #3
-	subs r0, r0, r2
-	lsls r3, r0, #3
-_0803F8F4:
-	ldr r1, [r4]
-	adds r1, r3, r1
-	ldr r0, [r1, #0x1c]
-	subs r0, r0, r5
-	str r0, [r1, #0x24]
-	adds r1, #0x34
-	strb r6, [r1]
-	adds r3, #0x38
-	adds r2, #1
-	ldrh r0, [r4, #4]
-	cmp r2, r0
-	blt _0803F8F4
-_0803F90C:
-	movs r0, #2
-	pop {r4, r5, r6, r7}
-	pop {r1}
-	bx r1
-
-	.thumb
 sub_803F914: @ 0x0803F914
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0

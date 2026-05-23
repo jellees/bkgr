@@ -449,3 +449,21 @@ static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
 NAKED static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
     asm_unified(".include \"asm/nonmatching/sub_803F800.s\"");
 }
+
+static int sub_803F8A8(struct HudElement* element, int a2, int a3, int a4) {
+    int i;
+
+    if (a3 == 1) {
+        for (i = a2; i < element->graphicCount; i++) {
+            element->graphic[i].field_24 = element->graphic[i].field_1C - ((i - a2) * 0xC0000);
+            element->graphic[i].field_34 = 6;
+        }
+    } else {
+        for (i = a2; i < element->graphicCount; i++) {
+            element->graphic[i].field_24 = element->graphic[i].field_1C - (a4 << 16);
+            element->graphic[i].field_34 = 6;
+        }
+    }
+
+    return 2;
+}
