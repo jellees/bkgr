@@ -1,6 +1,8 @@
 byte_203E137 = 0x203E137;
 byte_203E138 = 0x203E138;
 byte_203EA80 = 0x203EA80;
+byte_203EA81 = 0x203EA81;
+dword_203EA84 = 0x203EA84;
 
 # This variable shares the same space with another variable.
 # Not sure how this is possible. For now hardcoded address is
@@ -59,6 +61,9 @@ dword_80CEE74 = 0x80CEE74;
 dword_80CEF78 = 0x80CEF78;
 
 dword_80CC844 = 0x80CC844;
+
+unk_80CF330 = 0x80CF330;
+unk_80CF348 = 0x80CF348;
 
 unk_83FCF14 = 0x83FCF14;
 

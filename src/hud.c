@@ -1,8 +1,10 @@
 #include "global.h"
+#include "common.h"
 #include "sprite.h"
 #include "alloc.h"
 #include "main.h"
-#include "common.h"
+#include "player.h"
+#include "audio_b.h"
 
 struct HudGraphic {
     volatile struct Sprite sprite;
@@ -31,7 +33,7 @@ struct HudElement {
     u16 timer;
     u16 field_1A;
     u8 field_1C;
-    u8 field_1D;
+    s8 field_1D;
     u8 field_1E;
     u8 renderState;
     char text[8];
@@ -522,3 +524,135 @@ static int sub_803F9EC(struct HudElement* element, int a2, int a3, int a4) {
     return 2;
 }
 
+static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
+    int i;
+
+    switch (element->number) {
+        case 17:
+            if (!element->field_1A || byte_203EA81) {
+                if (element->field_1D < 0) {
+                    element->field_1D = 0;
+                }
+                element->counter = 0;
+                if (!gGameStatus.enableExtraHealth) {
+                    element->number = element->field_1D + 1;
+                } else {
+                    element->number = element->field_1D + 9;
+                }
+                gGameStatus.health = element->number;
+                element->field_1D = 0;
+                sub_8016B0C();
+                byte_20020BC = 0;
+                sub_8063178();
+                byte_200108E = 0;
+            } else {
+                element->field_1A--;
+                if (element->field_1C != 0) {
+                    element->field_1C--;
+                    return 1;
+                }
+                PLAY_SFX(170);
+                if (element->field_1E) {
+                    sprite_set_anim((struct Sprite*)&element->graphic[element->field_1D + a2].sprite,
+                                    word_80A8CF0[0], 0, 1);
+                } else {
+                    element->field_1E = 1;
+                    for (i = a2; i < element->graphicCount; i++) {
+                        sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[0], 0,
+                                        1);
+                    }
+                }
+                element->field_1D++;
+                if (element->field_1D + a2 >= element->graphicCount) {
+                    element->field_1D = 0;
+                }
+                sprite_set_anim((struct Sprite*)&element->graphic[element->field_1D + a2].sprite,
+                                word_80A8CF0[1], 0, 1);
+                element->field_1C = unk_80CF330[gLoadedRoomLevel];
+                return 1;
+            }
+            break;
+
+        case 18:
+            if (!element->field_1A || byte_203EA81) {
+                if (element->field_1D < 0) {
+                    element->field_1D = 0;
+                }
+                element->counter = 0;
+                if (!gGameStatus.enableExtraHealth) {
+                    element->number = element->field_1D + 1;
+                } else {
+                    element->number = element->field_1D + 9;
+                }
+                gGameStatus.health = element->number;
+                element->field_1D = 0;
+                sub_8016B0C();
+                byte_20020BC = 0;
+                sub_8063178();
+                byte_200108E = 0;
+            } else {
+                int v10;
+
+                element->field_1A--;
+                if (element->field_1C != 0) {
+                    element->field_1C--;
+                    return 1;
+                }
+
+                PLAY_SFX(170);
+                v10 = element->field_1D;
+                if (element->field_1E) {
+                    sprite_set_anim((struct Sprite*)&element->graphic[element->field_1D + a2].sprite,
+                                    word_80A8CF0[0], 0, 1);
+                } else {
+                    element->field_1E = 1;
+                    for (i = a2; i < element->graphicCount; i++) {
+                        sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[0], 0,
+                                        1);
+                    }
+                }
+
+                while (v10 == element->field_1D) {
+                    element->field_1D = RandomMinMax(a2, element->graphicCount - 1) - a2;
+                }
+
+                sprite_set_anim((struct Sprite*)&element->graphic[element->field_1D + a2].sprite,
+                                word_80A8CF0[1], 0, 1);
+                element->field_1C = unk_80CF348[gLoadedRoomLevel];
+                return 1;
+            }
+            break;
+    }
+
+    if (element->counter == element->number) {
+        return 2;
+    }
+
+    element->timer--;
+
+    if (element->timer == 0) {
+        u8* v1;
+
+        element->timer = 10;
+
+        if (element->counter < element->number) {
+            element->counter++;
+            dword_203EA84 = PLAY_SFX(200);
+        } else if (element->counter > element->number) {
+            element->counter--;
+        }
+
+        v1 = &byte_80A8CF6[8 * element->counter];
+        for (i = a2; i < element->graphicCount; i++) {
+            sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[v1[i - a2]], 0,
+                            1);
+            element->graphic[i].field_35 = 1;
+        }
+
+        if (element->counter == element->number) {
+            return 2;
+        }
+    }
+
+    return 1;
+}

@@ -784,6 +784,8 @@ extern u8 byte_203E16B;
 extern u8 byte_203E16C;
 
 extern u8 byte_203EA80;
+extern u8 byte_203EA81;
+extern u32 dword_203EA84;
 
 extern struct struc_51** dword_203F8B4; // A pointer to a pointer to a struct.
 
@@ -1034,6 +1036,9 @@ extern u8 dword_80CB9A9[][3];
 
 extern u32 byte_80CEBC8[];
 
+extern u32 unk_80CF330[];
+extern u32 unk_80CF348[];
+
 extern u32 unk_83FD834[];
 
 extern u8 unk_83FD734;
@@ -1074,7 +1079,7 @@ extern char dword_808EF98[];
 extern u32 dLicenceBitmap[];
 extern u32 unk_83FC514[];
 
-extern u16 word_80A8CF0[];
+extern const u16 word_80A8CF0[];
 extern u8 byte_80A8CF6[];
 
 #endif
