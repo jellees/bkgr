@@ -425,6 +425,7 @@ NAKED static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4)
     asm_unified(".include \"asm/nonmatching/sub_803F6C4.s\"");
 }
 
+// https://decomp.me/scratch/5LtNd
 NAKED static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
     asm_unified(".include \"asm/nonmatching/sub_803F75C.s\"");
 }
@@ -645,6 +646,40 @@ static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
         v1 = &byte_80A8CF6[8 * element->counter];
         for (i = a2; i < element->graphicCount; i++) {
             sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[v1[i - a2]], 0,
+                            1);
+            element->graphic[i].field_35 = 1;
+        }
+
+        if (element->counter == element->number) {
+            return 2;
+        }
+    }
+
+    return 1;
+}
+
+static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
+    u8* v1;
+    int i;
+
+    if (element->counter == element->number) {
+        return 2;
+    }
+
+    element->timer--;
+
+    if (element->timer == 0) {
+        element->timer = 10;
+
+        if (element->counter < element->number) {
+            element->counter++;
+        } else if (element->counter > element->number) {
+            element->counter--;
+        }
+
+        v1 = &byte_80A8D92[5 * element->counter];
+        for (i = a2; i < element->graphicCount; i++) {
+            sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[v1[i - a2]], 0,
                             1);
             element->graphic[i].field_35 = 1;
         }
