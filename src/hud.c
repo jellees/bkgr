@@ -44,6 +44,8 @@ struct HudElement {
     struct TextBox textBox;
 };
 
+extern struct HudElement* gHudElements;
+
 void sub_80421C4(int, int, char*); // Static.
 
 static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
@@ -690,4 +692,106 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
     }
 
     return 1;
+}
+
+void reset_hud_elements(void) {
+    gHudElements[19].field_A = stru_80CC8C4.totalNotes;
+    gHudElements[19].counter = gGameStatus.totalNotes;
+    gHudElements[19].number = gHudElements[19].counter;
+
+    gHudElements[20].field_A = stru_80CC8C4.totalJiggies;
+    gHudElements[20].counter = gGameStatus.totalJiggies;
+    gHudElements[20].number = gHudElements[20].counter;
+
+    gHudElements[9].field_A = stru_80CC8C4.eggs[0];
+    gHudElements[9].counter = gGameStatus.eggs[0];
+    gHudElements[9].number = gHudElements[9].counter;
+
+    gHudElements[10].field_A = stru_80CC8C4.eggs[1];
+    gHudElements[10].counter = gGameStatus.eggs[1];
+    gHudElements[10].number = gHudElements[10].counter;
+
+    gHudElements[12].field_A = stru_80CC8C4.eggs[3];
+    gHudElements[12].counter = gGameStatus.eggs[3];
+    gHudElements[12].number = gHudElements[12].counter;
+
+    gHudElements[11].field_A = stru_80CC8C4.eggs[2];
+    gHudElements[11].counter = gGameStatus.eggs[2];
+    gHudElements[11].number = gHudElements[11].counter;
+
+    gHudElements[3].field_A = stru_80CC8C4.goldenFeathers;
+    gHudElements[3].counter = gGameStatus.goldenFeathers;
+    gHudElements[3].number = gHudElements[3].counter;
+
+    gHudElements[42].field_A = stru_80CC8C4.goldenFeathers;
+    gHudElements[42].counter = gGameStatus.goldenFeathers;
+    gHudElements[42].number = gHudElements[42].counter;
+
+    gHudElements[22].field_A = gGameStatus.field_6;
+    gHudElements[22].counter = gGameStatus.field_6;
+    gHudElements[22].number = gHudElements[22].counter;
+
+    gHudElements[43].field_A = gGameStatus.field_6;
+    gHudElements[43].counter = gGameStatus.field_6;
+    gHudElements[43].number = gHudElements[22].counter;
+
+    gHudElements[4].field_A = stru_80CC8C4.field_7;
+    gHudElements[4].counter = gGameStatus.field_7;
+    gHudElements[4].number = gHudElements[4].counter;
+
+    gHudElements[5].field_A = stru_80CC84C[gLoadedRoomLevel].shellCount;
+    gHudElements[5].counter = byte_2000FCC[gLoadedRoomLevel].shellCount;
+    gHudElements[5].number = gHudElements[5].counter;
+
+    gHudElements[8].field_A = stru_80CC84C[gLoadedRoomLevel].chickCount;
+    gHudElements[8].counter = byte_2000FCC[gLoadedRoomLevel].chickCount;
+    gHudElements[8].number = gHudElements[8].counter;
+
+    gHudElements[6].field_A = stru_80CC8C4.field_1;
+    gHudElements[6].counter = gGameStatus.field_1;
+    gHudElements[6].number = gHudElements[6].counter;
+
+    gHudElements[21].field_A = stru_80CC8C4.field_B;
+    gHudElements[21].counter = gGameStatus.field_B;
+    gHudElements[21].number = gHudElements[21].counter;
+
+    gHudElements[14].field_A = stru_80CC8C4.field_1A;
+    gHudElements[14].counter = gGameStatus.field_1A;
+    gHudElements[14].number = gHudElements[14].counter;
+
+    gHudElements[17].field_A = stru_80CC8C4.silverCoins;
+    gHudElements[17].counter = gGameStatus.silverCoins;
+    gHudElements[17].number = gHudElements[17].counter;
+
+    gHudElements[16].field_A = stru_80CC8C4.field_1C;
+    gHudElements[16].counter = gGameStatus.field_1C;
+    gHudElements[16].number = gHudElements[16].counter;
+
+    gHudElements[15].field_A = stru_80CC8C4.field_1B;
+    gHudElements[15].counter = gGameStatus.field_1B;
+    gHudElements[15].number = gHudElements[15].counter;
+
+    gHudElements[18].field_A = stru_80CC8C4.field_1E;
+    gHudElements[18].counter = gGameStatus.field_1E;
+    gHudElements[18].number = gHudElements[18].counter;
+
+    if (gHudElements[58].renderState == 0) {
+        gHudElements[58].field_A = stru_80CC8C4.health;
+        gHudElements[58].counter = gGameStatus.health;
+        gHudElements[58].number = gHudElements[58].counter;
+    }
+
+    if (gHudElements[59].renderState == 0) {
+        gHudElements[59].field_A = stru_80CC8C4.health;
+        gHudElements[59].counter = gGameStatus.health;
+        gHudElements[59].number = gHudElements[59].counter;
+    }
+
+    gHudElements[56].field_A = stru_80CC8C4.oxygen;
+    gHudElements[56].counter = gGameStatus.oxygen;
+    gHudElements[56].number = gHudElements[56].counter;
+
+    gHudElements[57].field_A = stru_80CC8C4.oxygen;
+    gHudElements[57].counter = gGameStatus.oxygen;
+    gHudElements[57].number = gHudElements[57].counter;
 }

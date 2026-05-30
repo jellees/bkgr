@@ -994,7 +994,7 @@ static bool32 exec_save_menu(void) {
             gSaveFiles[gameIdx].hour = gGameStatus.clockHour;
             gSaveFiles[gameIdx].minute = gGameStatus.clockMinute;
             gSaveFiles[gameIdx].second = gGameStatus.clockSecond;
-            gSaveFiles[gameIdx].jiggies = (u8)gGameStatus.totalJiggies;
+            gSaveFiles[gameIdx].jiggies = gGameStatus.totalJiggies;
             gSaveFiles[gameIdx].notes = gGameStatus.totalNotes;
             gSaveFiles[gameIdx].empty = 0;
             setup_save_file_strings();

@@ -37,6 +37,7 @@ extern u8 byte_2000F57;
 extern struct Sprite gPlayerSprite;
 extern struct Sprite gPlayerShadowSprite;
 extern u32 dword_2000FC8;
+extern struct level_struc byte_2000FCC[6];
 extern struct GameStatus gGameStatus;
 extern struct SaveFile gSaveFiles[3];
 extern u8 gUnlockedLevels;

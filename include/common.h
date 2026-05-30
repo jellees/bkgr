@@ -341,7 +341,8 @@ struct struc_50 {
 };
 
 struct GameStatus {
-    u16 totalJiggies;
+    u8 totalJiggies;
+    u8 field_1;
     u8 field_2;
     u8 field_3;
     u8 field_4;
@@ -366,7 +367,7 @@ struct GameStatus {
     u8 field_1B;
     u8 field_1C;
     u8 silverCoins;
-    u8 field_1F;
+    u8 field_1E;
 };
 
 struct SaveFile {
@@ -886,7 +887,7 @@ extern u32 dword_80AF4F0[4];
 extern struct Font font_80B01A8[3];
 
 extern struct RoomIndex dRoomIndexes[38];
-extern struct GameStatus stru_80CC8C4;
+extern const struct GameStatus stru_80CC8C4;
 
 extern u32 dword_80CC7EC[];
 extern u32 dword_80CC818[];
@@ -1007,6 +1008,7 @@ extern u32 dword_80CEE5C[6];
 extern u32 dword_80CEE74[6];
 
 extern u32 dword_80CC844[2];
+extern struct level_struc stru_80CC84C[6];
 
 extern u16 unk_83FCF14;
 

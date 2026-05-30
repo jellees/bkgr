@@ -3258,7 +3258,7 @@ void init_save_files() {
                 gSaveFiles[i].hour = gGameStatus.clockHour;
                 gSaveFiles[i].minute = gGameStatus.clockMinute;
                 gSaveFiles[i].second = gGameStatus.clockSecond;
-                gSaveFiles[i].jiggies = (u8)gGameStatus.totalJiggies;
+                gSaveFiles[i].jiggies = gGameStatus.totalJiggies;
                 gSaveFiles[i].notes = gGameStatus.totalNotes;
                 gSaveFiles[i].empty = FALSE;
 
@@ -3901,7 +3901,8 @@ void restore_full_health(void) {
 bool32 is_game_complete(void) {
     bool32 complete = FALSE;
     if (gGameStatus.totalNotes == stru_80CC8C4.totalNotes
-        && gGameStatus.totalJiggies == stru_80CC8C4.totalJiggies) {
+        && gGameStatus.totalJiggies == stru_80CC8C4.totalJiggies
+        && gGameStatus.field_1 == stru_80CC8C4.field_1) {
         complete = TRUE;
     }
     return complete;
