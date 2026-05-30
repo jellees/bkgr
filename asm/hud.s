@@ -4,24 +4,6 @@
     .text
 
     .thumb
-    .global update_hud_total_notes
-update_hud_total_notes: @ 0x08040094
-	ldr r0, _080400AC
-	ldr r1, [r0]
-	movs r0, #0x9c
-	lsls r0, r0, #4
-	adds r1, r1, r0
-	ldr r2, _080400B0
-	ldrh r0, [r2, #0xc]
-	strh r0, [r1, #6]
-	ldrh r0, [r2, #0xc]
-	strh r0, [r1, #8]
-	bx lr
-	.align 2, 0
-_080400AC: .4byte 0x0203EA7C
-_080400B0: .4byte gGameStatus
-
-    .thumb
     .global init_hud_elements
 init_hud_elements: @ 0x080400B4
 	push {r4, r5, r6, r7, lr}

@@ -795,3 +795,8 @@ void reset_hud_elements(void) {
     gHudElements[57].counter = gGameStatus.oxygen;
     gHudElements[57].number = gHudElements[57].counter;
 }
+
+void update_hud_total_notes(void) {
+    gHudElements[39].counter = gGameStatus.totalNotes;
+    gHudElements[39].number = gGameStatus.totalNotes;
+}
