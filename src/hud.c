@@ -6,6 +6,70 @@
 #include "player.h"
 #include "audio_b.h"
 
+enum HudElementIdx {
+    HUD_ELEMENT_0,
+    HUD_ELEMENT_1,
+    HUD_ELEMENT_2,
+    HUD_ELEMENT_3,
+    HUD_ELEMENT_4,
+    HUD_ELEMENT_5,
+    HUD_ELEMENT_6,
+    HUD_ELEMENT_7,
+    HUD_ELEMENT_8,
+    HUD_ELEMENT_9,
+    HUD_ELEMENT_10,
+    HUD_ELEMENT_11,
+    HUD_ELEMENT_12,
+    HUD_ELEMENT_13,
+    HUD_ELEMENT_14,
+    HUD_ELEMENT_15,
+    HUD_ELEMENT_16,
+    HUD_ELEMENT_17,
+    HUD_ELEMENT_18,
+    HUD_ELEMENT_19,
+    HUD_ELEMENT_20,
+    HUD_ELEMENT_21,
+    HUD_ELEMENT_22,
+    HUD_ELEMENT_23,
+    HUD_ELEMENT_24,
+    HUD_ELEMENT_25,
+    HUD_ELEMENT_26,
+    HUD_ELEMENT_27,
+    HUD_ELEMENT_28,
+    HUD_ELEMENT_29,
+    HUD_ELEMENT_30,
+    HUD_ELEMENT_31,
+    HUD_ELEMENT_32,
+    HUD_ELEMENT_33,
+    HUD_ELEMENT_34,
+    HUD_ELEMENT_35,
+    HUD_ELEMENT_36,
+    HUD_ELEMENT_37,
+    HUD_ELEMENT_38,
+    HUD_ELEMENT_39,
+    HUD_ELEMENT_40,
+    HUD_ELEMENT_41,
+    HUD_ELEMENT_42,
+    HUD_ELEMENT_43,
+    HUD_ELEMENT_44,
+    HUD_ELEMENT_45,
+    HUD_ELEMENT_46,
+    HUD_ELEMENT_47,
+    HUD_ELEMENT_48,
+    HUD_ELEMENT_49,
+    HUD_ELEMENT_50,
+    HUD_ELEMENT_51,
+    HUD_ELEMENT_52,
+    HUD_ELEMENT_53,
+    HUD_ELEMENT_54,
+    HUD_ELEMENT_55,
+    HUD_ELEMENT_56,
+    HUD_ELEMENT_57,
+    HUD_ELEMENT_58,
+    HUD_ELEMENT_59,
+    HUD_ELEMENT_60
+};
+
 struct HudGraphic {
     volatile struct Sprite sprite;
     s32 field_1C;
@@ -695,108 +759,108 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
 }
 
 void reset_hud_elements(void) {
-    gHudElements[19].field_A = stru_80CC8C4.totalNotes;
-    gHudElements[19].counter = gGameStatus.totalNotes;
-    gHudElements[19].number = gHudElements[19].counter;
+    gHudElements[HUD_ELEMENT_19].field_A = stru_80CC8C4.totalNotes;
+    gHudElements[HUD_ELEMENT_19].counter = gGameStatus.totalNotes;
+    gHudElements[HUD_ELEMENT_19].number = gHudElements[HUD_ELEMENT_19].counter;
 
-    gHudElements[20].field_A = stru_80CC8C4.totalJiggies;
-    gHudElements[20].counter = gGameStatus.totalJiggies;
-    gHudElements[20].number = gHudElements[20].counter;
+    gHudElements[HUD_ELEMENT_20].field_A = stru_80CC8C4.totalJiggies;
+    gHudElements[HUD_ELEMENT_20].counter = gGameStatus.totalJiggies;
+    gHudElements[HUD_ELEMENT_20].number = gHudElements[HUD_ELEMENT_20].counter;
 
-    gHudElements[9].field_A = stru_80CC8C4.eggs[0];
-    gHudElements[9].counter = gGameStatus.eggs[0];
-    gHudElements[9].number = gHudElements[9].counter;
+    gHudElements[HUD_ELEMENT_9].field_A = stru_80CC8C4.eggs[0];
+    gHudElements[HUD_ELEMENT_9].counter = gGameStatus.eggs[0];
+    gHudElements[HUD_ELEMENT_9].number = gHudElements[HUD_ELEMENT_9].counter;
 
-    gHudElements[10].field_A = stru_80CC8C4.eggs[1];
-    gHudElements[10].counter = gGameStatus.eggs[1];
-    gHudElements[10].number = gHudElements[10].counter;
+    gHudElements[HUD_ELEMENT_10].field_A = stru_80CC8C4.eggs[1];
+    gHudElements[HUD_ELEMENT_10].counter = gGameStatus.eggs[1];
+    gHudElements[HUD_ELEMENT_10].number = gHudElements[HUD_ELEMENT_10].counter;
 
-    gHudElements[12].field_A = stru_80CC8C4.eggs[3];
-    gHudElements[12].counter = gGameStatus.eggs[3];
-    gHudElements[12].number = gHudElements[12].counter;
+    gHudElements[HUD_ELEMENT_12].field_A = stru_80CC8C4.eggs[3];
+    gHudElements[HUD_ELEMENT_12].counter = gGameStatus.eggs[3];
+    gHudElements[HUD_ELEMENT_12].number = gHudElements[HUD_ELEMENT_12].counter;
 
-    gHudElements[11].field_A = stru_80CC8C4.eggs[2];
-    gHudElements[11].counter = gGameStatus.eggs[2];
-    gHudElements[11].number = gHudElements[11].counter;
+    gHudElements[HUD_ELEMENT_11].field_A = stru_80CC8C4.eggs[2];
+    gHudElements[HUD_ELEMENT_11].counter = gGameStatus.eggs[2];
+    gHudElements[HUD_ELEMENT_11].number = gHudElements[HUD_ELEMENT_11].counter;
 
-    gHudElements[3].field_A = stru_80CC8C4.goldenFeathers;
-    gHudElements[3].counter = gGameStatus.goldenFeathers;
-    gHudElements[3].number = gHudElements[3].counter;
+    gHudElements[HUD_ELEMENT_3].field_A = stru_80CC8C4.goldenFeathers;
+    gHudElements[HUD_ELEMENT_3].counter = gGameStatus.goldenFeathers;
+    gHudElements[HUD_ELEMENT_3].number = gHudElements[HUD_ELEMENT_3].counter;
 
-    gHudElements[42].field_A = stru_80CC8C4.goldenFeathers;
-    gHudElements[42].counter = gGameStatus.goldenFeathers;
-    gHudElements[42].number = gHudElements[42].counter;
+    gHudElements[HUD_ELEMENT_42].field_A = stru_80CC8C4.goldenFeathers;
+    gHudElements[HUD_ELEMENT_42].counter = gGameStatus.goldenFeathers;
+    gHudElements[HUD_ELEMENT_42].number = gHudElements[HUD_ELEMENT_42].counter;
 
-    gHudElements[22].field_A = gGameStatus.field_6;
-    gHudElements[22].counter = gGameStatus.field_6;
-    gHudElements[22].number = gHudElements[22].counter;
+    gHudElements[HUD_ELEMENT_22].field_A = gGameStatus.field_6;
+    gHudElements[HUD_ELEMENT_22].counter = gGameStatus.field_6;
+    gHudElements[HUD_ELEMENT_22].number = gHudElements[HUD_ELEMENT_22].counter;
 
-    gHudElements[43].field_A = gGameStatus.field_6;
-    gHudElements[43].counter = gGameStatus.field_6;
-    gHudElements[43].number = gHudElements[22].counter;
+    gHudElements[HUD_ELEMENT_43].field_A = gGameStatus.field_6;
+    gHudElements[HUD_ELEMENT_43].counter = gGameStatus.field_6;
+    gHudElements[HUD_ELEMENT_43].number = gHudElements[HUD_ELEMENT_22].counter;
 
-    gHudElements[4].field_A = stru_80CC8C4.field_7;
-    gHudElements[4].counter = gGameStatus.field_7;
-    gHudElements[4].number = gHudElements[4].counter;
+    gHudElements[HUD_ELEMENT_4].field_A = stru_80CC8C4.field_7;
+    gHudElements[HUD_ELEMENT_4].counter = gGameStatus.field_7;
+    gHudElements[HUD_ELEMENT_4].number = gHudElements[HUD_ELEMENT_4].counter;
 
-    gHudElements[5].field_A = stru_80CC84C[gLoadedRoomLevel].shellCount;
-    gHudElements[5].counter = byte_2000FCC[gLoadedRoomLevel].shellCount;
-    gHudElements[5].number = gHudElements[5].counter;
+    gHudElements[HUD_ELEMENT_5].field_A = stru_80CC84C[gLoadedRoomLevel].shellCount;
+    gHudElements[HUD_ELEMENT_5].counter = byte_2000FCC[gLoadedRoomLevel].shellCount;
+    gHudElements[HUD_ELEMENT_5].number = gHudElements[HUD_ELEMENT_5].counter;
 
-    gHudElements[8].field_A = stru_80CC84C[gLoadedRoomLevel].chickCount;
-    gHudElements[8].counter = byte_2000FCC[gLoadedRoomLevel].chickCount;
-    gHudElements[8].number = gHudElements[8].counter;
+    gHudElements[HUD_ELEMENT_8].field_A = stru_80CC84C[gLoadedRoomLevel].chickCount;
+    gHudElements[HUD_ELEMENT_8].counter = byte_2000FCC[gLoadedRoomLevel].chickCount;
+    gHudElements[HUD_ELEMENT_8].number = gHudElements[HUD_ELEMENT_8].counter;
 
-    gHudElements[6].field_A = stru_80CC8C4.field_1;
-    gHudElements[6].counter = gGameStatus.field_1;
-    gHudElements[6].number = gHudElements[6].counter;
+    gHudElements[HUD_ELEMENT_6].field_A = stru_80CC8C4.field_1;
+    gHudElements[HUD_ELEMENT_6].counter = gGameStatus.field_1;
+    gHudElements[HUD_ELEMENT_6].number = gHudElements[HUD_ELEMENT_6].counter;
 
-    gHudElements[21].field_A = stru_80CC8C4.field_B;
-    gHudElements[21].counter = gGameStatus.field_B;
-    gHudElements[21].number = gHudElements[21].counter;
+    gHudElements[HUD_ELEMENT_21].field_A = stru_80CC8C4.field_B;
+    gHudElements[HUD_ELEMENT_21].counter = gGameStatus.field_B;
+    gHudElements[HUD_ELEMENT_21].number = gHudElements[HUD_ELEMENT_21].counter;
 
-    gHudElements[14].field_A = stru_80CC8C4.field_1A;
-    gHudElements[14].counter = gGameStatus.field_1A;
-    gHudElements[14].number = gHudElements[14].counter;
+    gHudElements[HUD_ELEMENT_14].field_A = stru_80CC8C4.field_1A;
+    gHudElements[HUD_ELEMENT_14].counter = gGameStatus.field_1A;
+    gHudElements[HUD_ELEMENT_14].number = gHudElements[HUD_ELEMENT_14].counter;
 
-    gHudElements[17].field_A = stru_80CC8C4.silverCoins;
-    gHudElements[17].counter = gGameStatus.silverCoins;
-    gHudElements[17].number = gHudElements[17].counter;
+    gHudElements[HUD_ELEMENT_17].field_A = stru_80CC8C4.silverCoins;
+    gHudElements[HUD_ELEMENT_17].counter = gGameStatus.silverCoins;
+    gHudElements[HUD_ELEMENT_17].number = gHudElements[HUD_ELEMENT_17].counter;
 
-    gHudElements[16].field_A = stru_80CC8C4.field_1C;
-    gHudElements[16].counter = gGameStatus.field_1C;
-    gHudElements[16].number = gHudElements[16].counter;
+    gHudElements[HUD_ELEMENT_16].field_A = stru_80CC8C4.field_1C;
+    gHudElements[HUD_ELEMENT_16].counter = gGameStatus.field_1C;
+    gHudElements[HUD_ELEMENT_16].number = gHudElements[HUD_ELEMENT_16].counter;
 
-    gHudElements[15].field_A = stru_80CC8C4.field_1B;
-    gHudElements[15].counter = gGameStatus.field_1B;
-    gHudElements[15].number = gHudElements[15].counter;
+    gHudElements[HUD_ELEMENT_15].field_A = stru_80CC8C4.field_1B;
+    gHudElements[HUD_ELEMENT_15].counter = gGameStatus.field_1B;
+    gHudElements[HUD_ELEMENT_15].number = gHudElements[HUD_ELEMENT_15].counter;
 
-    gHudElements[18].field_A = stru_80CC8C4.field_1E;
-    gHudElements[18].counter = gGameStatus.field_1E;
-    gHudElements[18].number = gHudElements[18].counter;
+    gHudElements[HUD_ELEMENT_18].field_A = stru_80CC8C4.field_1E;
+    gHudElements[HUD_ELEMENT_18].counter = gGameStatus.field_1E;
+    gHudElements[HUD_ELEMENT_18].number = gHudElements[HUD_ELEMENT_18].counter;
 
-    if (gHudElements[58].renderState == 0) {
-        gHudElements[58].field_A = stru_80CC8C4.health;
-        gHudElements[58].counter = gGameStatus.health;
-        gHudElements[58].number = gHudElements[58].counter;
+    if (gHudElements[HUD_ELEMENT_58].renderState == 0) {
+        gHudElements[HUD_ELEMENT_58].field_A = stru_80CC8C4.health;
+        gHudElements[HUD_ELEMENT_58].counter = gGameStatus.health;
+        gHudElements[HUD_ELEMENT_58].number = gHudElements[HUD_ELEMENT_58].counter;
     }
 
-    if (gHudElements[59].renderState == 0) {
-        gHudElements[59].field_A = stru_80CC8C4.health;
-        gHudElements[59].counter = gGameStatus.health;
-        gHudElements[59].number = gHudElements[59].counter;
+    if (gHudElements[HUD_ELEMENT_59].renderState == 0) {
+        gHudElements[HUD_ELEMENT_59].field_A = stru_80CC8C4.health;
+        gHudElements[HUD_ELEMENT_59].counter = gGameStatus.health;
+        gHudElements[HUD_ELEMENT_59].number = gHudElements[HUD_ELEMENT_59].counter;
     }
 
-    gHudElements[56].field_A = stru_80CC8C4.oxygen;
-    gHudElements[56].counter = gGameStatus.oxygen;
-    gHudElements[56].number = gHudElements[56].counter;
+    gHudElements[HUD_ELEMENT_56].field_A = stru_80CC8C4.oxygen;
+    gHudElements[HUD_ELEMENT_56].counter = gGameStatus.oxygen;
+    gHudElements[HUD_ELEMENT_56].number = gHudElements[HUD_ELEMENT_56].counter;
 
-    gHudElements[57].field_A = stru_80CC8C4.oxygen;
-    gHudElements[57].counter = gGameStatus.oxygen;
-    gHudElements[57].number = gHudElements[57].counter;
+    gHudElements[HUD_ELEMENT_57].field_A = stru_80CC8C4.oxygen;
+    gHudElements[HUD_ELEMENT_57].counter = gGameStatus.oxygen;
+    gHudElements[HUD_ELEMENT_57].number = gHudElements[HUD_ELEMENT_57].counter;
 }
 
 void update_hud_total_notes(void) {
-    gHudElements[39].counter = gGameStatus.totalNotes;
-    gHudElements[39].number = gGameStatus.totalNotes;
+    gHudElements[HUD_ELEMENT_39].counter = gGameStatus.totalNotes;
+    gHudElements[HUD_ELEMENT_39].number = gGameStatus.totalNotes;
 }
