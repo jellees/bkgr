@@ -873,7 +873,7 @@ void init_hud_elements(void) {
     dword_203EA84 = -1;
     gHudElements = Alloc(sizeof(struct HudElement) * HUD_ELEMENT_COUNT, 3, 4);
 
-    for (i = 0; i < HUD_ELEMENT_COUNT; ++i) {
+    for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         gHudElements[i].renderState = 0;
         gHudElements[i].field_29 = 0;
         gHudElements[i].state = 0;
@@ -896,4 +896,18 @@ void init_hud_elements(void) {
     }
 
     reset_hud_elements();
+}
+
+void update_hud_collectables(void) {
+    gHudElements[HUD_ELEMENT_0].field_A = stru_80CC84C[gLoadedRoomLevel].noteCount;
+    gHudElements[HUD_ELEMENT_0].counter = byte_2000FCC[gLoadedRoomLevel].noteCount;
+    gHudElements[HUD_ELEMENT_0].number = gHudElements[HUD_ELEMENT_0].counter;
+
+    gHudElements[HUD_ELEMENT_1].field_A = stru_80CC84C[gLoadedRoomLevel].jiggyCount;
+    gHudElements[HUD_ELEMENT_1].counter = byte_2000FCC[gLoadedRoomLevel].jiggyCount;
+    gHudElements[HUD_ELEMENT_1].number = gHudElements[HUD_ELEMENT_1].counter;
+
+    gHudElements[HUD_ELEMENT_7].field_A = stru_80CC84C[gLoadedRoomLevel].jinjoCount;
+    gHudElements[HUD_ELEMENT_7].counter = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
+    gHudElements[HUD_ELEMENT_7].number = gHudElements[HUD_ELEMENT_7].counter;
 }

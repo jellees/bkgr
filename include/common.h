@@ -386,8 +386,7 @@ struct level_struc {
     u8 shellCount;
     u8 chickCount;
     u8 jinjoCount;
-    u8 noteCount;
-    u8 field_7;
+    u16 noteCount;
     u8 bozzeyeCount;
     u8 field_9;
     u8 field_A;
