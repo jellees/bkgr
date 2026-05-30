@@ -67,7 +67,8 @@ enum HudElementIdx {
     HUD_ELEMENT_57,
     HUD_ELEMENT_58,
     HUD_ELEMENT_59,
-    HUD_ELEMENT_60
+
+    HUD_ELEMENT_COUNT
 };
 
 struct HudGraphic {
@@ -863,4 +864,36 @@ void reset_hud_elements(void) {
 void update_hud_total_notes(void) {
     gHudElements[HUD_ELEMENT_39].counter = gGameStatus.totalNotes;
     gHudElements[HUD_ELEMENT_39].number = gGameStatus.totalNotes;
+}
+
+void init_hud_elements(void) {
+    int i;
+
+    byte_203EA80 = 0;
+    dword_203EA84 = -1;
+    gHudElements = Alloc(sizeof(struct HudElement) * HUD_ELEMENT_COUNT, 3, 4);
+
+    for (i = 0; i < HUD_ELEMENT_COUNT; ++i) {
+        gHudElements[i].renderState = 0;
+        gHudElements[i].field_29 = 0;
+        gHudElements[i].state = 0;
+        gHudElements[i].graphicCount = 0;
+        gHudElements[i].field_E = word_80A8E28[i];
+        gHudElements[i].field_10 = 0x2CCCC;
+        gHudElements[i].field_2A = 0;
+        gHudElements[i].field_1D = 0;
+        gHudElements[i].field_1C = 0;
+        gHudElements[i].field_1A = 0;
+        gHudElements[i].field_1E = 0;
+        gHudElements[i].textBox.letterSpacing = 1;
+        gHudElements[i].textBox.field_11 = 6;
+        gHudElements[i].textBox.field_12 = 0;
+        gHudElements[i].textBox.field_A = 1;
+        gHudElements[i].textBox.size = 240;
+        gHudElements[i].textBox.palette = 10;
+        gHudElements[i].textBox.stringOffset = 0;
+        gHudElements[i].textBox.font = &font_80B01A8[1];
+    }
+
+    reset_hud_elements();
 }

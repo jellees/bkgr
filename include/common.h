@@ -1083,6 +1083,7 @@ extern u32 unk_83FC514[];
 
 extern const u16 word_80A8CF0[];
 extern u8 byte_80A8CF6[];
+extern const u16 word_80A8E28[];
 extern const u16 word_80A8D8E[];
 extern u8 byte_80A8D92[];
 
