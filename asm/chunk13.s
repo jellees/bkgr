@@ -714,7 +714,7 @@ _0806136C:
 	strb r0, [r1]
 	bl _08061F68
 	.align 2, 0
-_0806137C: .4byte byte_203F99C
+_0806137C: .4byte gIsPriorityScriptActive
 _08061380: .4byte 0x0203FA34
 _08061384:
 	ldr r4, _080613B4
@@ -2035,7 +2035,7 @@ _08061EB0: .4byte 0x0203FA4E
 _08061EB4: .4byte 0x0203FA51
 _08061EB8: .4byte 0x0203FA38
 _08061EBC: .4byte 0x0203FA48
-_08061EC0: .4byte byte_203F99C
+_08061EC0: .4byte gIsPriorityScriptActive
 _08061EC4: .4byte gBGOffsetHorizontal
 _08061EC8: .4byte 0x0203FA4F
 _08061ECC: .4byte gBGOffsetVertical
@@ -2084,7 +2084,7 @@ _08061F38:
 	strb r0, [r1]
 	b _08061F68
 	.align 2, 0
-_08061F48: .4byte byte_203F99C
+_08061F48: .4byte gIsPriorityScriptActive
 _08061F4C: .4byte 0x0203FA34
 _08061F50:
 	movs r0, #0x13

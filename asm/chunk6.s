@@ -24298,7 +24298,7 @@ _08034584:
 	ldr r0, _08034588
 	b _0803456E
 	.align 2, 0
-_08034588: .4byte byte_203F99C
+_08034588: .4byte gIsPriorityScriptActive
 _0803458C:
 	ldr r0, _08034590
 	b _0803456E
@@ -35299,8 +35299,8 @@ _08039C7C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039C84: .4byte word_203F998
-_08039C88: .4byte word_203F99A
+_08039C84: .4byte gPriorityScriptIdx
+_08039C88: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039C8C: @ 0x08039C8C
@@ -35350,8 +35350,8 @@ _08039CDA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039CE4: .4byte word_203F998
-_08039CE8: .4byte word_203F99A
+_08039CE4: .4byte gPriorityScriptIdx
+_08039CE8: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039CEC: @ 0x08039CEC
@@ -35399,8 +35399,8 @@ _08039D36:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039D40: .4byte word_203F998
-_08039D44: .4byte word_203F99A
+_08039D40: .4byte gPriorityScriptIdx
+_08039D44: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039D48: @ 0x08039D48
@@ -35453,8 +35453,8 @@ _08039D9E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039DA8: .4byte word_203F998
-_08039DAC: .4byte word_203F99A
+_08039DA8: .4byte gPriorityScriptIdx
+_08039DAC: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039DB0: @ 0x08039DB0
@@ -35492,8 +35492,8 @@ _08039DEE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039DF8: .4byte word_203F998
-_08039DFC: .4byte word_203F99A
+_08039DF8: .4byte gPriorityScriptIdx
+_08039DFC: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039E00: @ 0x08039E00
@@ -35526,8 +35526,8 @@ _08039E32:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039E3C: .4byte word_203F998
-_08039E40: .4byte word_203F99A
+_08039E3C: .4byte gPriorityScriptIdx
+_08039E40: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039E44: @ 0x08039E44
@@ -35585,8 +35585,8 @@ _08039EA6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039EB0: .4byte word_203F998
-_08039EB4: .4byte word_203F99A
+_08039EB0: .4byte gPriorityScriptIdx
+_08039EB4: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039EB8: @ 0x08039EB8
@@ -35629,8 +35629,8 @@ _08039F02:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039F0C: .4byte word_203F998
-_08039F10: .4byte word_203F99A
+_08039F0C: .4byte gPriorityScriptIdx
+_08039F10: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039F14: @ 0x08039F14
@@ -35663,8 +35663,8 @@ _08039F46:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039F50: .4byte word_203F998
-_08039F54: .4byte word_203F99A
+_08039F50: .4byte gPriorityScriptIdx
+_08039F54: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039F58: @ 0x08039F58
@@ -35727,8 +35727,8 @@ _08039FC6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08039FD0: .4byte word_203F998
-_08039FD4: .4byte word_203F99A
+_08039FD0: .4byte gPriorityScriptIdx
+_08039FD4: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_8039FD8: @ 0x08039FD8
@@ -35776,8 +35776,8 @@ _0803A02E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A038: .4byte word_203F998
-_0803A03C: .4byte word_203F99A
+_0803A038: .4byte gPriorityScriptIdx
+_0803A03C: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A040: @ 0x0803A040
@@ -35810,8 +35810,8 @@ _0803A072:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A07C: .4byte word_203F998
-_0803A080: .4byte word_203F99A
+_0803A07C: .4byte gPriorityScriptIdx
+_0803A080: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A084: @ 0x0803A084
@@ -35869,8 +35869,8 @@ _0803A0D6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A0E0: .4byte word_203F998
-_0803A0E4: .4byte word_203F99A
+_0803A0E0: .4byte gPriorityScriptIdx
+_0803A0E4: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A0E8: @ 0x0803A0E8
@@ -35933,8 +35933,8 @@ _0803A146:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A150: .4byte word_203F998
-_0803A154: .4byte word_203F99A
+_0803A150: .4byte gPriorityScriptIdx
+_0803A154: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A158: @ 0x0803A158
@@ -35967,8 +35967,8 @@ _0803A18A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A194: .4byte word_203F998
-_0803A198: .4byte word_203F99A
+_0803A194: .4byte gPriorityScriptIdx
+_0803A198: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A19C: @ 0x0803A19C
@@ -36031,8 +36031,8 @@ _0803A1FA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A204: .4byte word_203F998
-_0803A208: .4byte word_203F99A
+_0803A204: .4byte gPriorityScriptIdx
+_0803A208: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A20C: @ 0x0803A20C
@@ -36065,8 +36065,8 @@ _0803A23E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A248: .4byte word_203F998
-_0803A24C: .4byte word_203F99A
+_0803A248: .4byte gPriorityScriptIdx
+_0803A24C: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A250: @ 0x0803A250
@@ -36129,8 +36129,8 @@ _0803A2AE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A2B8: .4byte word_203F998
-_0803A2BC: .4byte word_203F99A
+_0803A2B8: .4byte gPriorityScriptIdx
+_0803A2BC: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A2C0: @ 0x0803A2C0
@@ -36173,8 +36173,8 @@ _0803A308:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A310: .4byte word_203F998
-_0803A314: .4byte word_203F99A
+_0803A310: .4byte gPriorityScriptIdx
+_0803A314: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A318: @ 0x0803A318
@@ -36212,8 +36212,8 @@ _0803A356:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A360: .4byte word_203F998
-_0803A364: .4byte word_203F99A
+_0803A360: .4byte gPriorityScriptIdx
+_0803A364: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A368: @ 0x0803A368
@@ -36256,8 +36256,8 @@ _0803A3B0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A3B8: .4byte word_203F998
-_0803A3BC: .4byte word_203F99A
+_0803A3B8: .4byte gPriorityScriptIdx
+_0803A3BC: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A3C0: @ 0x0803A3C0
@@ -36295,8 +36295,8 @@ _0803A3FE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A408: .4byte word_203F998
-_0803A40C: .4byte word_203F99A
+_0803A408: .4byte gPriorityScriptIdx
+_0803A40C: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A410: @ 0x0803A410
@@ -36339,8 +36339,8 @@ _0803A458:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A460: .4byte word_203F998
-_0803A464: .4byte word_203F99A
+_0803A460: .4byte gPriorityScriptIdx
+_0803A464: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A468: @ 0x0803A468
@@ -36378,8 +36378,8 @@ _0803A4A6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A4B0: .4byte word_203F998
-_0803A4B4: .4byte word_203F99A
+_0803A4B0: .4byte gPriorityScriptIdx
+_0803A4B4: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A4B8: @ 0x0803A4B8
@@ -36422,8 +36422,8 @@ _0803A500:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A508: .4byte word_203F998
-_0803A50C: .4byte word_203F99A
+_0803A508: .4byte gPriorityScriptIdx
+_0803A50C: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A510: @ 0x0803A510
@@ -36461,8 +36461,8 @@ _0803A54E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A558: .4byte word_203F998
-_0803A55C: .4byte word_203F99A
+_0803A558: .4byte gPriorityScriptIdx
+_0803A55C: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A560: @ 0x0803A560
@@ -36505,8 +36505,8 @@ _0803A5A8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A5B0: .4byte word_203F998
-_0803A5B4: .4byte word_203F99A
+_0803A5B0: .4byte gPriorityScriptIdx
+_0803A5B4: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A5B8: @ 0x0803A5B8
@@ -36544,8 +36544,8 @@ _0803A5F6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A600: .4byte word_203F998
-_0803A604: .4byte word_203F99A
+_0803A600: .4byte gPriorityScriptIdx
+_0803A604: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A608: @ 0x0803A608
@@ -36588,8 +36588,8 @@ _0803A650:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A658: .4byte word_203F998
-_0803A65C: .4byte word_203F99A
+_0803A658: .4byte gPriorityScriptIdx
+_0803A65C: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A660: @ 0x0803A660
@@ -36627,8 +36627,8 @@ _0803A69E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A6A8: .4byte word_203F998
-_0803A6AC: .4byte word_203F99A
+_0803A6A8: .4byte gPriorityScriptIdx
+_0803A6AC: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A6B0: @ 0x0803A6B0
@@ -36671,8 +36671,8 @@ _0803A6F8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A700: .4byte word_203F998
-_0803A704: .4byte word_203F99A
+_0803A700: .4byte gPriorityScriptIdx
+_0803A704: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A708: @ 0x0803A708
@@ -36710,8 +36710,8 @@ _0803A746:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A750: .4byte word_203F998
-_0803A754: .4byte word_203F99A
+_0803A750: .4byte gPriorityScriptIdx
+_0803A754: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A758: @ 0x0803A758
@@ -36754,8 +36754,8 @@ _0803A7A0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803A7A8: .4byte word_203F998
-_0803A7AC: .4byte word_203F99A
+_0803A7A8: .4byte gPriorityScriptIdx
+_0803A7AC: .4byte gBackgroundScriptIdx
 
 	.thumb
 sub_803A7B0: @ 0x0803A7B0

@@ -3667,12 +3667,12 @@ static void state_hurt(s32 keyPressed, s32 keyDown) {
 
 static void state_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
-        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (!audio_fx_still_active(dword_20021D8) && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     } else {
         if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8)
-            && !byte_203F99C) {
+            && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     }
@@ -4745,11 +4745,11 @@ static void state_mouse_mouse_nibble(s32 keyPressed, s32 keyDown) {
 
 static void state_mouse_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
-        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (!audio_fx_still_active(dword_20021D8) && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     } else if (sprite_is_anim_done_once(&gPlayerSprite)) {
-        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (!audio_fx_still_active(dword_20021D8) && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     }
@@ -4769,11 +4769,11 @@ static void state_mouse_hurt(s32 keyPressed, s32 keyDown) {
 
 static void state_candle_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
-        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (!audio_fx_still_active(dword_20021D8) && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     } else if (sprite_is_anim_done_once(&gPlayerSprite)) {
-        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (!audio_fx_still_active(dword_20021D8) && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     }
@@ -6329,12 +6329,12 @@ static void state_tank_idle(s32 keyPressed, s32 keyDown) {
 
 static void state_tank_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
-        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (!audio_fx_still_active(dword_20021D8) && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     } else {
         if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8)
-            && !byte_203F99C) {
+            && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     }
@@ -7408,12 +7408,12 @@ static void state_octopus_dive_hurt(s32 keyPressed, s32 keyDown) {
 
 static void state_octopus_die(s32 keyPressed, s32 keyDown) {
     if (byte_20020B3) {
-        if (!audio_fx_still_active(dword_20021D8) && !byte_203F99C) {
+        if (!audio_fx_still_active(dword_20021D8) && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     } else {
         if (sprite_is_anim_done_once(&gPlayerSprite) && !audio_fx_still_active(dword_20021D8)
-            && !byte_203F99C) {
+            && !gIsPriorityScriptActive) {
             sub_80629E8();
         }
     }

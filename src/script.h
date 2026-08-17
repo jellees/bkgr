@@ -3,9 +3,9 @@
 
 extern const struct InputRecord* gInputDemoRecords;
 extern u16 gInputDemoRecordCount;
-extern s16 word_203F998;
-extern s16 word_203F99A;
-extern u8 byte_203F99C;
+extern s16 gPriorityScriptIdx;
+extern s16 gBackgroundScriptIdx;
+extern u8 gIsPriorityScriptActive;
 extern bool8 gIsAnyScriptActive;
 extern u8 byte_203F99F;
 extern bool8 gReadKeysFromDemoInput;

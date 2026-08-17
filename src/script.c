@@ -65,7 +65,7 @@ struct ScriptState {
     u8 actorCount;
     bool8 endScript;
     bool8 isActive;
-    u8 field_23;
+    u8 isPriority;
     bool8 playInputDemo;
     u8 activeSfx;
 };
@@ -75,9 +75,9 @@ u16 gInputDemoStep;
 u16 gInputDemoRecordCount;
 s16 gScriptSavedPosX;
 s16 gScriptSavedPosY;
-s16 word_203F998;
-s16 word_203F99A;
-u8 byte_203F99C;
+s16 gPriorityScriptIdx;
+s16 gBackgroundScriptIdx;
+bool8 gIsPriorityScriptActive;
 u8 gScriptSavedPriority;
 bool8 gIsAnyScriptActive;
 u8 byte_203F99F;
@@ -172,7 +172,7 @@ static bool32 sub_805FB80(int, int, int, int);
 static bool32 sub_805FBA4(int, int, int, int);
 static bool32 sub_805FBB4(int, int, int, int);
 static bool32 sub_805FBF4(int, int, int, int);
-static bool32 sub_805FC34(int, int, int, int);
+static bool32 script_cmd_set_priority(int, int, int, int);
 static bool32 script_cmd_set_wait_frames(int, int, int, int);
 static bool32 sub_805FCB0(int, int, int, int);
 static bool32 sub_805FCEC(int, int, int, int);
@@ -263,7 +263,7 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     sub_805FBA4,
     sub_805FBB4,
     sub_805FBF4,
-    sub_805FC34,
+    script_cmd_set_priority,
     script_cmd_set_wait_frames,
     sub_805FCB0,
     sub_805FCEC,
@@ -313,9 +313,9 @@ void init_script_engine(void) {
         byte_203FA16_2 = 0;
     }
 
-    byte_203F99C = 0;
-    word_203F998 = -1;
-    word_203F99A = -1;
+    gIsPriorityScriptActive = 0;
+    gPriorityScriptIdx = -1;
+    gBackgroundScriptIdx = -1;
     gReadKeysFromDemoInput = FALSE;
     byte_203FA14 = 0;
     gActorCount = 0;
@@ -352,7 +352,7 @@ void start_script(int idx) {
     gCurrentScript->playInputDemo = FALSE;
     gCurrentScript->activeSfx = -1;
     gIsAnyScriptActive = TRUE;
-    byte_203F99C = 1;
+    gIsPriorityScriptActive = 1;
 
     switch (idx) {
         case 3:
@@ -384,20 +384,20 @@ void start_script(int idx) {
 void sub_805D568(void) {
     u8 i;
 
-    byte_203F99C = 0;
-    word_203F998 = -1;
-    word_203F99A = -1;
+    gIsPriorityScriptActive = 0;
+    gPriorityScriptIdx = -1;
+    gBackgroundScriptIdx = -1;
     gReadKeysFromDemoInput = FALSE;
     gIsAnyScriptActive = FALSE;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if (gScripts[i].isActive) {
             gIsAnyScriptActive = TRUE;
-            if (gScripts[i].field_23) {
-                byte_203F99C = 1;
-                word_203F998 = gScripts[i].startScriptIdx;
+            if (gScripts[i].isPriority) {
+                gIsPriorityScriptActive = 1;
+                gPriorityScriptIdx = gScripts[i].startScriptIdx;
             } else {
-                word_203F99A = gScripts[i].startScriptIdx;
+                gBackgroundScriptIdx = gScripts[i].startScriptIdx;
             }
         }
 
@@ -442,7 +442,7 @@ void update_script_camera(void) {
 
     if (gIsScriptCameraInitialised && gScriptCamera->isMoving) {
 
-        ASSERT(byte_203F99C);
+        ASSERT(gIsPriorityScriptActive);
 
         sub_80038A4(gScriptCamera->field_24);
         sub_80038C4(gScriptCamera->field_24, &vel.x, &vel.y, &vel.z);
@@ -492,7 +492,7 @@ void update_script_camera(void) {
 
     if (byte_203FA14) {
         ASSERT(!gIsScriptCameraInitialised || !gScriptCamera->isMoving);
-        ASSERT(byte_203F99C);
+        ASSERT(gIsPriorityScriptActive);
 
         sub_802672C();
 
@@ -684,14 +684,14 @@ void update_scripts(void) {
     }
 
     update_script_camera();
-    byte_203F99C = 0;
-    word_203F998 = -1;
-    word_203F99A = -1;
+    gIsPriorityScriptActive = 0;
+    gPriorityScriptIdx = -1;
+    gBackgroundScriptIdx = -1;
     byte_203F9A1 = 0;
     gIsAnyScriptActive = 0;
 
     for (i = 0; i < 2; i++) {
-        if (gScripts[i].isActive && (gScripts[i].field_23 || !byte_203FA16)) {
+        if (gScripts[i].isActive && (gScripts[i].isPriority || !byte_203FA16)) {
             gCurrentScript = &gScripts[i];
             while (1) {
                 struct Command* cmd = &dScripts[gCurrentScript->scriptIdx][gCurrentScript->cmdIdx];
@@ -711,11 +711,11 @@ void update_scripts(void) {
             }
             if (gCurrentScript->isActive) {
                 gIsAnyScriptActive = 1;
-                if (gCurrentScript->field_23) {
-                    byte_203F99C = 1;
-                    word_203F998 = gCurrentScript->field_1A;
+                if (gCurrentScript->isPriority) {
+                    gIsPriorityScriptActive = 1;
+                    gPriorityScriptIdx = gCurrentScript->field_1A;
                 } else {
-                    word_203F99A = gCurrentScript->field_1A;
+                    gBackgroundScriptIdx = gCurrentScript->field_1A;
                 }
             }
         }
@@ -756,7 +756,7 @@ void render_scripts(u32** a1, u32* a2) {
     for (i = 0; i < MAX_SCRIPTS; i++) {
         struct ScriptState* script = &gScripts[i];
 
-        if (script->isActive && (script->field_23 || !byte_203FA16)) {
+        if (script->isActive && (script->isPriority || !byte_203FA16)) {
             int actorIdx;
             for (actorIdx = 0; actorIdx < script->actorCount; actorIdx++) {
                 if (script->actors[actorIdx].isVisible && !script->actors[actorIdx].sprite.attr0Flag9) {
@@ -828,11 +828,11 @@ void end_script(struct ScriptState* script) {
     remove_actors(script);
     script->endScript = TRUE;
 
-    if (script->field_23) {
-        byte_203F99C = 0;
-        word_203F998 = -1;
-        word_203F99A = -1;
-        script->field_23 = 0;
+    if (script->isPriority) {
+        gIsPriorityScriptActive = 0;
+        gPriorityScriptIdx = -1;
+        gBackgroundScriptIdx = -1;
+        script->isPriority = 0;
         byte_203FA14 = 0;
         ASSERT(!gIsScriptCameraInitialised);
     }
@@ -861,13 +861,13 @@ void end_all_scripts(int a1) {
 
         switch (a1) {
             case 0:
-                if (gCurrentScript->field_23) {
+                if (gCurrentScript->isPriority) {
                     end_script(&gScripts[i]);
                 }
                 break;
 
             case 1:
-                if (!gCurrentScript->field_23) {
+                if (!gCurrentScript->isPriority) {
                     end_script(&gScripts[i]);
                 }
                 break;
@@ -1923,23 +1923,23 @@ static bool32 sub_805FBF4(int a1, int a2, int _, int __) {
     return TRUE;
 }
 
-static bool32 sub_805FC34(int a1, int _, int __, int ___) {
-    if (a1 && byte_203F99C) {
+static bool32 script_cmd_set_priority(int setPriority, int _, int __, int ___) {
+    if (setPriority && gIsPriorityScriptActive) {
         return FALSE;
     }
 
-    byte_203F99C = a1;
-    gCurrentScript->field_23 = a1;
+    gIsPriorityScriptActive = setPriority;
+    gCurrentScript->isPriority = setPriority;
 
-    if (a1) {
-        word_203F998 = gCurrentScript->startScriptIdx;
-        if (word_203F99A == gCurrentScript->startScriptIdx) {
-            word_203F99A = -1;
+    if (setPriority) {
+        gPriorityScriptIdx = gCurrentScript->startScriptIdx;
+        if (gBackgroundScriptIdx == gCurrentScript->startScriptIdx) {
+            gBackgroundScriptIdx = -1;
         }
     } else {
-        word_203F99A = gCurrentScript->startScriptIdx;
-        if (word_203F998 == gCurrentScript->startScriptIdx) {
-            word_203F998 = -1;
+        gBackgroundScriptIdx = gCurrentScript->startScriptIdx;
+        if (gPriorityScriptIdx == gCurrentScript->startScriptIdx) {
+            gPriorityScriptIdx = -1;
         }
     }
 
@@ -2655,7 +2655,7 @@ static bool32 script_cmd_player_save_position(int _, int __, int ___, int ____) 
 }
 
 static bool32 script_cmd_end_all_scripts(int _, int __, int ___, int ____) {
-    ASSERT(gCurrentScript->field_23);
+    ASSERT(gCurrentScript->isPriority);
     end_all_scripts(1);
     return TRUE;
 }

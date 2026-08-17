@@ -879,7 +879,7 @@ _08047C16:
 	b _08047C58
 	.align 2, 0
 _08047C2C: .4byte 0x03006EF3
-_08047C30: .4byte byte_203F99C
+_08047C30: .4byte gIsPriorityScriptActive
 _08047C34: .4byte 0x0203F8B4
 _08047C38:
 	movs r2, #0
@@ -2912,7 +2912,7 @@ _08048CFC: .4byte 0x0200108E
 _08048D00: .4byte gPlayerStateFlags
 _08048D04: .4byte gPlayerState
 _08048D08: .4byte gGameStatus
-_08048D0C: .4byte byte_203F99C
+_08048D0C: .4byte gIsPriorityScriptActive
 _08048D10: .4byte 0x03006EF2
 _08048D14: .4byte 0x0203DFE4
 _08048D18:
@@ -3009,7 +3009,7 @@ _08048DAA:
 	b _08048DF8
 	.align 2, 0
 _08048DD8: .4byte 0x0203F8B0
-_08048DDC: .4byte byte_203F99C
+_08048DDC: .4byte gIsPriorityScriptActive
 _08048DE0: .4byte 0x080B0E04
 _08048DE4: .4byte 0x087DF9E0
 _08048DE8:
@@ -4054,7 +4054,7 @@ _080495A2:
 	.align 2, 0
 _080495A8: .4byte gPlayerShadowPos
 _080495AC: .4byte 0x03006EF1
-_080495B0: .4byte byte_203F99C
+_080495B0: .4byte gIsPriorityScriptActive
 _080495B4:
 	ldr r4, _08049610
 	adds r0, r7, #0
@@ -18584,7 +18584,7 @@ sub_8050D38: @ 0x08050D38
 	bl sub_8049810
 	b _08050DF0
 	.align 2, 0
-_08050DE0: .4byte byte_203F99C
+_08050DE0: .4byte gIsPriorityScriptActive
 _08050DE4: .4byte gPlayerPos
 _08050DE8: .4byte gMapPixelSizeY
 _08050DEC:
@@ -18953,7 +18953,7 @@ _080510D0: .4byte 0xFFFF0000
 _080510D4: .4byte gPlayerSprite
 _080510D8: .4byte gMapPixelSizeY
 _080510DC: .4byte gGameStatus
-_080510E0: .4byte byte_203F99C
+_080510E0: .4byte gIsPriorityScriptActive
 
 	.thumb
 sub_80510E4: @ 0x080510E4
@@ -19185,7 +19185,7 @@ _080512B0: .4byte gPlayerShadowPos
 _080512B4: .4byte 0x0200108D
 _080512B8: .4byte 0x0200108E
 _080512BC: .4byte gGameStatus
-_080512C0: .4byte byte_203F99C
+_080512C0: .4byte gIsPriorityScriptActive
 _080512C4: .4byte gPlayerStateFlags
 _080512C8: .4byte gPlayerState
 _080512CC: .4byte 0x080CC6B0
@@ -19825,7 +19825,7 @@ sub_8051794: @ 0x08051794
 	bl hurt_player
 	b _08051804
 	.align 2, 0
-_080517D0: .4byte byte_203F99C
+_080517D0: .4byte gIsPriorityScriptActive
 _080517D4: .4byte 0x03006EF1
 _080517D8: .4byte 0x03003578
 _080517DC: .4byte 0x080CC6B0

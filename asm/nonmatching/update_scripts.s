@@ -109,9 +109,9 @@ _0805DE00:
 	.align 2, 0
 _0805DE48: .4byte gIsAnyScriptActive
 _0805DE4C: .4byte gReadKeysFromDemoInput
-_0805DE50: .4byte byte_203F99C
-_0805DE54: .4byte word_203F998
-_0805DE58: .4byte word_203F99A
+_0805DE50: .4byte gIsPriorityScriptActive
+_0805DE54: .4byte gPriorityScriptIdx
+_0805DE58: .4byte gBackgroundScriptIdx
 _0805DE5C: .4byte 0x0203F9A4
 _0805DE60: .4byte 0x0203FA16
 _0805DE64: .4byte 0x0203F9F4
@@ -152,8 +152,8 @@ _0805DE88:
 	.align 2, 0
 _0805DEB0: .4byte 0x0203F9A4
 _0805DEB4: .4byte gIsAnyScriptActive
-_0805DEB8: .4byte byte_203F99C
-_0805DEBC: .4byte word_203F998
+_0805DEB8: .4byte gIsPriorityScriptActive
+_0805DEBC: .4byte gPriorityScriptIdx
 _0805DEC0:
 	ldr r1, _0805DF30
 _0805DEC2:
@@ -212,7 +212,7 @@ _0805DEEC:
 	strh r0, [r1, #0x1c]
 	b _0805DEEC
 	.align 2, 0
-_0805DF30: .4byte word_203F99A
+_0805DF30: .4byte gBackgroundScriptIdx
 _0805DF34: .4byte 0x0203F9F4
 _0805DF38: .4byte 0x087DFF54
 _0805DF3C: .4byte 0x080B2050

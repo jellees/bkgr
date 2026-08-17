@@ -261,7 +261,7 @@ static void update_game(void) {
     gNullsub_3();
     sub_806127C();
 
-    if (word_203F998 == 12 && byte_20021F8
+    if (gPriorityScriptIdx == 12 && byte_20021F8
         && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
         if (byte_2000F55 || gKeysDown & B_BUTTON) {
             sub_80271A4(0xFFF, 1);
@@ -275,7 +275,7 @@ static void update_game(void) {
     }
 
     if (gKeysDown & START_BUTTON && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)
-        && !byte_20021F0 && !byte_203F99C && gGameStatus.health != 0 && !gIsPaletteEffectsActive
+        && !byte_20021F0 && !gIsPriorityScriptActive && gGameStatus.health != 0 && !gIsPaletteEffectsActive
         && !byte_203FA35) {
         if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
             if (byte_20020BC) {
@@ -331,7 +331,7 @@ static void update_game(void) {
         sub_8062484();
     }
 
-    if ((!byte_203F99C || gReadKeysFromDemoInput) && !byte_203FA35) {
+    if ((!gIsPriorityScriptActive || gReadKeysFromDemoInput) && !byte_203FA35) {
         if (!(gKeysPressed & word_20010AC)) {
             word_20010AC = 0;
             if (!gIsSlideMiniGame) {
@@ -2840,7 +2840,7 @@ static void enable_poison_effect() {
 }
 
 static void sub_800DF34() {
-    if (gPoisonEffectEnabled && !byte_203F99C && gGameStatus.health != 0) {
+    if (gPoisonEffectEnabled && !gIsPriorityScriptActive && gGameStatus.health != 0) {
         if (gPoisonHitTimer == 0) {
             gPoisonHitTimer = 240;
             hurt_player(gPoisonHurtAmount, -1, 1);
