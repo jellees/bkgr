@@ -35,7 +35,7 @@ enum ScriptCommand {
     SCRIPT_CMD_ACTOR_ROTATE_TO_TARGET,
     SCRIPT_CMD_ACTOR_SET_PRIORITY,
     SCRIPT_CMD_ACTOR_REVERT_PRIORITY,
-    SCRIPT_CMD_sub_805F04C,
+    SCRIPT_CMD_ACTOR_SET_SORT_OFFSET,
     SCRIPT_CMD_ACTOR_SET_OBJ_MODE,
     SCRIPT_CMD_ACTOR_SET_PALETTE,
     SCRIPT_CMD_ACTOR_LOCK_ANIM_ON_FRAME,
@@ -79,7 +79,7 @@ enum ScriptCommand {
     SCRIPT_CMD_sub_805FBA4,
     SCRIPT_CMD_sub_805FBB4,
     SCRIPT_CMD_sub_805FBF4,
-    SCRIPT_CMD_sub_805FC34,
+    SCRIPT_CMD_SET_PRIORITY,
     SCRIPT_CMD_SET_WAIT_FRAMES,
     SCRIPT_CMD_sub_805FCB0,
     SCRIPT_CMD_sub_805FCEC,
@@ -198,7 +198,7 @@ enum ScriptWaitCond {
 
 #define ActorRevertPriority(actorIdx) SCRIPT_CMD(SCRIPT_CMD_ACTOR_REVERT_PRIORITY, actorIdx, 0, 0, 0)
 
-#define Sub805F04C(actorIdx, unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805F04C, actorIdx, unknown, 0, 0)
+#define ActorSetSortOffset(actorIdx, unknown) SCRIPT_CMD(SCRIPT_CMD_ACTOR_SET_SORT_OFFSET, actorIdx, unknown, 0, 0)
 
 #define ActorSetObjMode(actorIdx, objMode)                                                             \
     SCRIPT_CMD(SCRIPT_CMD_ACTOR_SET_OBJ_MODE, actorIdx, objMode, 0, 0)
@@ -304,7 +304,7 @@ enum ScriptWaitCond {
 
 #define Sub805FBF4(unknown1, unknown2) SCRIPT_CMD(SCRIPT_CMD_sub_805FBF4, unknown1, unknown2, 0, 0)
 
-#define Sub805FC34(unknown) SCRIPT_CMD(SCRIPT_CMD_sub_805FC34, unknown, 0, 0, 0)
+#define SetPriority(unknown) SCRIPT_CMD(SCRIPT_CMD_SET_PRIORITY, unknown, 0, 0, 0)
 
 #define SetWaitFrames(frames) SCRIPT_CMD(SCRIPT_CMD_SET_WAIT_FRAMES, frames, 0, 0, 0)
 

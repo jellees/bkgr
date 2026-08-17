@@ -10,7 +10,7 @@ const Script script_80B2204 = {
 };
 
 const Script script_80B222C = {
-    Sub805FC34(0)
+    SetPriority(FALSE)
     StartInputDemo(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_INPUT_DEMO_DONE, 0)
     End
@@ -23,18 +23,18 @@ const Script script_80B227C = {
 };
 
 const Script script_80B22B8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 1217, 0)
     ActorSetPosition(0, 129, 224)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 129, 224)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorSetObjMode(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorMove(0, 152, 288, FX32_CONST(0.6875))
@@ -47,7 +47,7 @@ const Script script_80B22B8 = {
 };
 
 const Script script_80B245C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub805FCB0(129, 305)
     WaitForCond(SCRIPT_WAIT_COND_9, 0)
     SetPlayerDirection(DIRECTION_UP)
@@ -63,18 +63,18 @@ const Script script_80B24E8 = {
 };
 
 const Script script_80B2524 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 1216, 0)
     ActorSetPosition(0, 152, 288)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 152, 288)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorSetObjMode(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorMove(0, 129, 200, FX32_CONST(0.6875))
@@ -84,7 +84,7 @@ const Script script_80B2524 = {
 };
 
 const Script script_80B268C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     DisplayLicenseScreen
     AllocActors(6)
     ActorInit(0)
@@ -231,7 +231,7 @@ const Script script_80B268C = {
 };
 
 const Script script_80B31CC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub805FBB4(0, 0)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     AllocActors(1)
@@ -254,7 +254,7 @@ const Script script_80B32F8 = {
 };
 
 const Script script_80B3320 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     CameraAlloc
     Jump(11, 0)
 };
@@ -268,7 +268,7 @@ const Script script_80B335C = {
 };
 
 const Script script_80B33C0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     HidePlayer(TRUE)
     CameraAlloc
     CameraMove(120, 80, FX32_CONST(3))
@@ -658,14 +658,14 @@ const Script script_80B33C0 = {
 };
 
 const Script script_80B51FC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(180)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     End
 };
 
 const Script script_80B524C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetGameOverAnim(0, 0)
@@ -698,7 +698,7 @@ const Script script_80B53B4 = {
 };
 
 const Script script_80B542C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     HidePlayer(TRUE)
     AllocActors(1)
     ActorInit(0)
@@ -775,7 +775,7 @@ const Script script_80B5814 = {
     ActorSetAnim(0, 589, 0)
     ActorSetPosition(0, 128, 136)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     Sub805FCB0(128, 412)
     WaitForCond(SCRIPT_WAIT_COND_9, 0)
     End
@@ -863,7 +863,7 @@ const Script script_80B5DC8 = {
 };
 
 const Script script_80B5E40 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(120)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -874,26 +874,26 @@ const Script script_80B5E40 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1256, 213)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1256, 213)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     ActorDisable(1)
     Jump(24, 0)
 };
 
 const Script script_80B5FD0 = {
-    Sub805FC34(1)
-    Sub805FC34(1)
+    SetPriority(TRUE)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 628, 0)
     ActorSetPosition(0, 1360, 530)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorLockAnimOnFrame(0, 0)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
@@ -909,13 +909,13 @@ const Script script_80B5FD0 = {
 };
 
 const Script script_80B6160 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 1220, 0)
     ActorSetPosition(0, 128, 136)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     PlaySfx(197, FALSE)
     SetWaitFrames(120)
@@ -930,7 +930,7 @@ const Script script_80B6160 = {
     ActorSetAnim(0, 608, 0)
     ActorSetPosition(0, 192, 368)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 128)
+    ActorSetSortOffset(0, 128)
     CameraAlloc
     CameraMove(738, 685, FX32_CONST(3))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -940,13 +940,13 @@ const Script script_80B6160 = {
 };
 
 const Script script_80B6390 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 1220, 0)
     ActorSetPosition(0, 128, 136)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     PlaySfx(197, FALSE)
     SetWaitFrames(120)
@@ -961,7 +961,7 @@ const Script script_80B6390 = {
     ActorSetAnim(0, 608, 0)
     ActorSetPosition(0, 992, 424)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     CameraAlloc
     CameraMove(991, 455, FX32_CONST(3))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -969,13 +969,13 @@ const Script script_80B6390 = {
 };
 
 const Script script_80B6598 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 1220, 0)
     ActorSetPosition(0, 128, 136)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     PlaySfx(197, FALSE)
     SetWaitFrames(120)
@@ -996,7 +996,7 @@ const Script script_80B6598 = {
     ActorSetAnim(0, 608, 0)
     ActorSetPosition(0, 1601, 91)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     CameraAlloc
     CameraMove(1601, 120, FX32_CONST(3))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -1004,13 +1004,13 @@ const Script script_80B6598 = {
 };
 
 const Script script_80B6818 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 1220, 0)
     ActorSetPosition(0, 128, 136)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     PlaySfx(197, FALSE)
     SetWaitFrames(120)
@@ -1031,7 +1031,7 @@ const Script script_80B6818 = {
     ActorSetAnim(0, 608, 0)
     ActorSetPosition(0, 188, 522)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     CameraAlloc
     CameraMove(188, 522, FX32_CONST(3))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -1039,13 +1039,13 @@ const Script script_80B6818 = {
 };
 
 const Script script_80B6A98 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 1220, 0)
     ActorSetPosition(0, 128, 136)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     PlaySfx(197, FALSE)
     SetWaitFrames(120)
@@ -1074,7 +1074,7 @@ const Script script_80B6A98 = {
     ActorSetAnim(0, 608, 0)
     ActorSetPosition(0, 216, 328)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     CameraAlloc
     CameraMove(215, 360, FX32_CONST(3))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -1082,7 +1082,7 @@ const Script script_80B6A98 = {
 };
 
 const Script script_80B6DB8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -1095,12 +1095,12 @@ const Script script_80B6DB8 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1600, 496)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 202)
+    ActorSetSortOffset(0, 202)
     ActorMove(0, 1600, 436, FX32_CONST(3.5))
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1600, 496)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 128)
+    ActorSetSortOffset(1, 128)
     ActorSetObjMode(1, 1)
     ActorLockAnimOnFrame(1, 4)
     SetBgmVolume(0, FALSE)
@@ -1119,13 +1119,13 @@ const Script script_80B6DB8 = {
 };
 
 const Script script_80B7060 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 1220, 0)
     ActorSetPosition(0, 128, 136)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     PlaySfx(197, FALSE)
     SetWaitFrames(120)
@@ -1151,7 +1151,7 @@ const Script script_80B7060 = {
     ActorSetAnim(0, 608, 0)
     ActorSetPosition(0, 608, 144)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     CameraAlloc
     CameraMove(610, 167, FX32_CONST(3))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -1164,7 +1164,7 @@ const Script script_80B7344 = {
     ActorSetAnim(0, 550, 0)
     ActorSetPosition(0, 256, 168)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 224)
+    ActorSetSortOffset(0, 224)
     SetBgmVolume(0, FALSE)
     PlaySfx(73, FALSE)
     ActorMove(0, 256, 116, FX32_CONST(1.4375))
@@ -1176,7 +1176,7 @@ const Script script_80B7344 = {
 };
 
 const Script script_80B745C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorInit(1)
@@ -1185,22 +1185,22 @@ const Script script_80B745C = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 383, 607)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 8)
+    ActorSetSortOffset(0, 8)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 383, 607)
     ActorSetPriority(1, 1)
-    Sub805F04C(0, 8)
+    ActorSetSortOffset(0, 8)
     Jump(19, 0)
 };
 
 const Script script_80B7588 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 628, 0)
     ActorSetPosition(0, 128, 327)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     CameraAlloc
     CameraMove(128, 320, FX32_CONST(1))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -1220,7 +1220,7 @@ const Script script_80B7588 = {
 };
 
 const Script script_80B7754 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub805FCB0(383, 564)
     WaitForCond(SCRIPT_WAIT_COND_9, 0)
     SetPlayerDirection(DIRECTION_UP)
@@ -1230,7 +1230,7 @@ const Script script_80B7754 = {
 };
 
 const Script script_80B77E0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     LoadRoom(0, 0, 1, 1)
     HidePlayer(FALSE)
     PlaySfx(219, FALSE)
@@ -1239,7 +1239,7 @@ const Script script_80B77E0 = {
     ActorSetAnim(0, 696, 1)
     ActorSetPositionFromCam(0, 120, 65)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorMoveFromCam(0, 120, 0, FX32_CONST(1))
     SetWaitFrames(8)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -1247,7 +1247,7 @@ const Script script_80B77E0 = {
     ActorSetAnim(1, 696, 1)
     ActorSetPositionFromCam(1, 130, 70)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorMoveFromCam(1, 120, 0, FX32_CONST(1))
     SetWaitFrames(8)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -1255,7 +1255,7 @@ const Script script_80B77E0 = {
     ActorSetAnim(2, 696, 1)
     ActorSetPositionFromCam(2, 135, 80)
     ActorSetPriority(2, 1)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorMoveFromCam(2, 120, 0, FX32_CONST(1))
     SetWaitFrames(8)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -1263,7 +1263,7 @@ const Script script_80B77E0 = {
     ActorSetAnim(3, 696, 1)
     ActorSetPositionFromCam(3, 130, 90)
     ActorSetPriority(3, 3)
-    Sub805F04C(3, 1)
+    ActorSetSortOffset(3, 1)
     ActorMoveFromCam(3, 120, 0, FX32_CONST(1))
     SetWaitFrames(8)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -1271,7 +1271,7 @@ const Script script_80B77E0 = {
     ActorSetAnim(4, 696, 1)
     ActorSetPositionFromCam(4, 120, 95)
     ActorSetPriority(4, 3)
-    Sub805F04C(4, 1)
+    ActorSetSortOffset(4, 1)
     ActorMoveFromCam(4, 120, 0, FX32_CONST(1))
     SetWaitFrames(8)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -1279,7 +1279,7 @@ const Script script_80B77E0 = {
     ActorSetAnim(5, 696, 1)
     ActorSetPositionFromCam(5, 110, 90)
     ActorSetPriority(5, 3)
-    Sub805F04C(5, 1)
+    ActorSetSortOffset(5, 1)
     ActorMoveFromCam(5, 120, 0, FX32_CONST(1))
     SetWaitFrames(8)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -1287,7 +1287,7 @@ const Script script_80B77E0 = {
     ActorSetAnim(6, 696, 1)
     ActorSetPositionFromCam(6, 105, 80)
     ActorSetPriority(6, 3)
-    Sub805F04C(6, 1)
+    ActorSetSortOffset(6, 1)
     ActorMoveFromCam(6, 120, 0, FX32_CONST(1))
     SetWaitFrames(8)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -1295,7 +1295,7 @@ const Script script_80B77E0 = {
     ActorSetAnim(7, 696, 1)
     ActorSetPositionFromCam(7, 110, 70)
     ActorSetPriority(7, 3)
-    Sub805F04C(7, 1)
+    ActorSetSortOffset(7, 1)
     ActorMoveFromCam(7, 120, 0, FX32_CONST(1))
     SetWaitFrames(40)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -1305,7 +1305,7 @@ const Script script_80B77E0 = {
 };
 
 const Script script_80B7D80 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     WaitForCond(SCRIPT_WAIT_COND_11, 0)
     PlayBgm(14)
@@ -1314,14 +1314,14 @@ const Script script_80B7D80 = {
     ActorSetAnim(0, 814, 0)
     ActorSetPosition(0, 256, 590)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorAlwaysVisible(0, TRUE)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 256, 590)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     CameraAlloc
@@ -1346,7 +1346,7 @@ const Script script_80B7D80 = {
 };
 
 const Script script_80B8078 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060D74
     AllocActors(3)
     ActorInit(0)
@@ -1354,19 +1354,19 @@ const Script script_80B8078 = {
     Sub8060B90(0)
     ActorSetPositionRelativeFromSavedPosition(0, 0, 0)
     ActorRevertPriority(0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPositionRelativeFromSavedPosition(1, 0, 0)
     ActorRevertPriority(1)
-    Sub805F04C(1, 2)
+    ActorSetSortOffset(1, 2)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorInit(2)
     ActorSetAnim(2, 592, 0)
     ActorSetPosition(2, 256, 336)
     ActorSetPriority(2, 1)
-    Sub805F04C(2, 2)
+    ActorSetSortOffset(2, 2)
     SetWaitFrames(1)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     Sub805F120(0)
@@ -1397,13 +1397,13 @@ const Script script_80B8078 = {
     CameraReturnPrescene(FX32_CONST(0))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
     CameraFree
-    Sub805FC34(0)
+    SetPriority(FALSE)
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
     End
 };
 
 const Script script_80B84B0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     WaitForCond(SCRIPT_WAIT_COND_11, 0)
     PlayBgm(14)
@@ -1412,7 +1412,7 @@ const Script script_80B84B0 = {
     ActorSetAnim(0, 741, 0)
     ActorSetPosition(0, 256, 490)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetDirection(0, DIRECTION_DOWN)
     ActorAlwaysVisible(0, TRUE)
     ActorDisable(0)
@@ -1420,14 +1420,14 @@ const Script script_80B84B0 = {
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 256, 490)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorInit(2)
     ActorSetAnim(2, 822, 0)
     ActorSetPosition(2, 256, 450)
     ActorSetPriority(2, 1)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorSetDirection(2, DIRECTION_DOWN)
     ActorAlwaysVisible(2, TRUE)
     ActorDisable(2)
@@ -1435,7 +1435,7 @@ const Script script_80B84B0 = {
     ActorSetAnim(3, 0, 1)
     ActorSetPosition(3, 256, 450)
     ActorSetPriority(3, 1)
-    Sub805F04C(3, 1)
+    ActorSetSortOffset(3, 1)
     ActorLockAnimOnFrame(3, 0)
     ActorSetObjMode(3, 1)
     CameraAlloc
@@ -1473,7 +1473,7 @@ const Script script_80B84B0 = {
 };
 
 const Script script_80B89EC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060D74
     AllocActors(2)
     ActorInit(0)
@@ -1481,12 +1481,12 @@ const Script script_80B89EC = {
     Sub8060B90(0)
     ActorSetPositionRelativeFromSavedPosition(0, 0, 0)
     ActorRevertPriority(0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 256, 336)
     ActorRevertPriority(1)
-    Sub805F04C(1, 2)
+    ActorSetSortOffset(1, 2)
     SetWaitFrames(1)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     Sub805F120(0)
@@ -1514,12 +1514,12 @@ const Script script_80B89EC = {
     CameraReturnPrescene(FX32_CONST(0))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
     CameraFree
-    Sub805FC34(0)
+    SetPriority(FALSE)
     End
 };
 
 const Script script_80B8D48 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     WaitForCond(SCRIPT_WAIT_COND_11, 0)
     PlayBgm(14)
@@ -1528,14 +1528,14 @@ const Script script_80B8D48 = {
     ActorSetAnim(0, 741, 0)
     ActorSetPosition(0, 768, 165)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetDirection(0, DIRECTION_DOWN)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 768, 245)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 5)
     ActorSetObjMode(1, 1)
     ActorDisable(1)
@@ -1567,7 +1567,7 @@ const Script script_80B8D48 = {
 };
 
 const Script script_80B90CC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060B90(0)
     AllocActors(6)
     ActorInit(0)
@@ -1575,12 +1575,12 @@ const Script script_80B90CC = {
     Sub8060B90(0)
     ActorSetPositionRelativeFromSavedPosition(0, 0, 0)
     ActorRevertPriority(0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPositionRelativeFromSavedPosition(1, 0, 0)
     ActorRevertPriority(1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorInit(2)
@@ -1588,28 +1588,28 @@ const Script script_80B90CC = {
     Sub8060B90(2)
     ActorSetPositionRelativeFromSavedPosition(2, 0, 0)
     ActorSetPriority(2, 2)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorDisable(2)
     ActorInit(3)
     ActorSetAnim(3, 703, 0)
     Sub8060B90(3)
     ActorSetPositionRelativeFromSavedPosition(3, 0, -40)
     ActorSetPriority(3, 2)
-    Sub805F04C(3, 1)
+    ActorSetSortOffset(3, 1)
     ActorDisable(3)
     ActorInit(4)
     ActorSetAnim(4, 703, 0)
     Sub8060B90(4)
     ActorSetPositionRelativeFromSavedPosition(4, -30, -20)
     ActorSetPriority(4, 2)
-    Sub805F04C(4, 1)
+    ActorSetSortOffset(4, 1)
     ActorDisable(4)
     ActorInit(5)
     ActorSetAnim(5, 703, 0)
     Sub8060B90(5)
     ActorSetPositionRelativeFromSavedPosition(5, 30, -20)
     ActorSetPriority(5, 2)
-    Sub805F04C(5, 1)
+    ActorSetSortOffset(5, 1)
     ActorDisable(5)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     WaitForCond(SCRIPT_WAIT_COND_11, 0)
@@ -1657,7 +1657,7 @@ const Script script_80B90CC = {
 };
 
 const Script script_80B9798 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060D74
     AllocActors(4)
     ActorInit(0)
@@ -1665,24 +1665,24 @@ const Script script_80B9798 = {
     Sub8060B90(0)
     ActorSetPositionRelativeFromSavedPosition(0, 0, 0)
     ActorRevertPriority(0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 1215, 1)
     ActorSetPositionRelativeFromSavedPosition(1, 0, 0)
     ActorRevertPriority(1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorDisable(1)
     ActorInit(2)
     ActorSetAnim(2, 700, 1)
     ActorSetPosition(2, 768, 288)
     ActorSetPriority(2, 1)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorDisable(2)
     ActorInit(3)
     ActorSetAnim(3, 1215, 1)
     ActorSetPositionRelativeFromSavedPosition(3, 0, 0)
     ActorRevertPriority(3)
-    Sub805F04C(3, 1)
+    ActorSetSortOffset(3, 1)
     ActorDisable(3)
     AllocOamMatrices(3)
     ActorSetMatrixIdx(0, 0)
@@ -1952,12 +1952,12 @@ const Script script_80B9798 = {
     ActorSetAnim(0, 1217, 0)
     ActorSetPosition(0, 129, 224)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 129, 224)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorSetObjMode(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorMove(0, 152, 288, FX32_CONST(0.6875))
@@ -2392,7 +2392,7 @@ const Script script_80BBB38 = {
 };
 
 const Script script_80BD08C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(105)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -2403,7 +2403,7 @@ const Script script_80BD08C = {
     ActorSetAnim(0, 567, 0)
     ActorSetPosition(0, 568, 751)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetFrame(0, 20)
     ActorSetLockedFrame(0, 20)
     Sub805F7D8(338)
@@ -2418,7 +2418,7 @@ const Script script_80BD08C = {
 };
 
 const Script script_80BD258 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(75)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -2429,7 +2429,7 @@ const Script script_80BD258 = {
     ActorSetAnim(0, 567, 0)
     ActorSetPosition(0, 568, 751)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetFrame(0, 20)
     ActorSetLockedFrame(0, 20)
     Sub805F7D8(339)
@@ -2440,7 +2440,7 @@ const Script script_80BD258 = {
 };
 
 const Script script_80BD3D4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(90)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -2451,7 +2451,7 @@ const Script script_80BD3D4 = {
     ActorSetAnim(0, 567, 0)
     ActorSetPosition(0, 568, 751)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetFrame(0, 20)
     ActorSetLockedFrame(0, 20)
     Sub805F7D8(340)
@@ -2462,7 +2462,7 @@ const Script script_80BD3D4 = {
 };
 
 const Script script_80BD550 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(120)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -2473,7 +2473,7 @@ const Script script_80BD550 = {
     ActorSetAnim(0, 567, 0)
     ActorSetPosition(0, 568, 751)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetFrame(0, 20)
     ActorSetLockedFrame(0, 20)
     Sub805F7D8(341)
@@ -2484,7 +2484,7 @@ const Script script_80BD550 = {
 };
 
 const Script script_80BD6CC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -2495,7 +2495,7 @@ const Script script_80BD6CC = {
     ActorSetAnim(0, 567, 0)
     ActorSetPosition(0, 568, 751)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetFrame(0, 20)
     ActorSetLockedFrame(0, 20)
     Sub805F7D8(342)
@@ -2506,7 +2506,7 @@ const Script script_80BD6CC = {
 };
 
 const Script script_80BD848 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -2517,7 +2517,7 @@ const Script script_80BD848 = {
     ActorSetAnim(0, 567, 0)
     ActorSetPosition(0, 568, 751)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetFrame(0, 20)
     ActorSetLockedFrame(0, 20)
     Sub805F7D8(343)
@@ -2528,7 +2528,7 @@ const Script script_80BD848 = {
 };
 
 const Script script_80BD9C4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     LoadAndStoreRoom(0, 21, 0, 0)
     HidePlayer(TRUE)
     Sub805F7D8(389)
@@ -2543,7 +2543,7 @@ const Script script_80BD9C4 = {
 };
 
 const Script script_80BDAB4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(75)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -2555,7 +2555,7 @@ const Script script_80BDAB4 = {
     ActorSetAnim(0, 567, 0)
     ActorSetPosition(0, 568, 751)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetFrame(0, 20)
     ActorSetLockedFrame(0, 20)
     Sub805F7D8(392)
@@ -2575,7 +2575,7 @@ const Script script_80BDC44 = {
     ActorSetAnim(0, 567, 0)
     ActorSetPosition(0, 568, 751)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetFrame(0, 20)
     ActorSetLockedFrame(0, 20)
     Sub805F7D8(415)
@@ -2586,20 +2586,20 @@ const Script script_80BDC44 = {
 };
 
 const Script script_80BDD98 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     JumpCond(SCRIPT_JUMP_COND_SHOCK_JUMP_LOCKED, 60, 0)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 565, 0)
     ActorSetPosition(0, 1632, 224)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 1632, 224)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(1632, 224, FX32_CONST(3))
@@ -2607,7 +2607,7 @@ const Script script_80BDD98 = {
 };
 
 const Script script_80BDF00 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     CameraAlloc
     CameraMove(433, 731, FX32_CONST(2))
@@ -2619,16 +2619,16 @@ const Script script_80BDF00 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 433, 731)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 433, 731)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 64)
+    ActorSetSortOffset(1, 64)
     Jump(18, 0)
 };
 
 const Script script_80BE068 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(120)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -2639,86 +2639,86 @@ const Script script_80BE068 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 816, 1224)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 816, 1224)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorDisable(1)
     Jump(24, 0)
 };
 
 const Script script_80BE1F8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorInit(1)
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 816, 1244)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 816, 1244)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Jump(19, 0)
 };
 
 const Script script_80BE2FC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(8)
     ActorInit(0)
     ActorSetAnim(0, 1022, 0)
     ActorSetPosition(0, 984, 552)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 224)
+    ActorSetSortOffset(0, 224)
     ActorSetDirection(0, DIRECTION_RIGHT)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 984, 552)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 224)
+    ActorSetSortOffset(1, 224)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorInit(2)
     ActorSetAnim(2, 1022, 0)
     ActorSetPosition(2, 969, 567)
     ActorSetPriority(2, 0)
-    Sub805F04C(2, 224)
+    ActorSetSortOffset(2, 224)
     ActorSetDirection(2, DIRECTION_LEFT)
     ActorInit(3)
     ActorSetAnim(3, 0, 1)
     ActorSetPosition(3, 969, 567)
     ActorSetPriority(3, 0)
-    Sub805F04C(3, 224)
+    ActorSetSortOffset(3, 224)
     ActorLockAnimOnFrame(3, 0)
     ActorSetObjMode(3, 1)
     ActorInit(4)
     ActorSetAnim(4, 1022, 0)
     ActorSetPosition(4, 1001, 568)
     ActorSetPriority(4, 0)
-    Sub805F04C(4, 224)
+    ActorSetSortOffset(4, 224)
     ActorSetDirection(4, DIRECTION_RIGHT)
     ActorInit(5)
     ActorSetAnim(5, 0, 1)
     ActorSetPosition(5, 1001, 568)
     ActorSetPriority(5, 0)
-    Sub805F04C(5, 224)
+    ActorSetSortOffset(5, 224)
     ActorLockAnimOnFrame(5, 0)
     ActorSetObjMode(5, 1)
     ActorInit(6)
     ActorSetAnim(6, 1022, 0)
     ActorSetPosition(6, 984, 583)
     ActorSetPriority(6, 0)
-    Sub805F04C(6, 224)
+    ActorSetSortOffset(6, 224)
     ActorSetDirection(6, DIRECTION_RIGHT)
     ActorInit(7)
     ActorSetAnim(7, 0, 1)
     ActorSetPosition(7, 984, 583)
     ActorSetPriority(7, 0)
-    Sub805F04C(7, 224)
+    ActorSetSortOffset(7, 224)
     ActorLockAnimOnFrame(7, 0)
     ActorSetObjMode(7, 1)
     PlaySfx(73, FALSE)
@@ -2748,58 +2748,58 @@ const Script script_80BE8C4 = {
     ActorInit(0)
     ActorSetAnim(0, 870, 0)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 64)
+    ActorSetSortOffset(1, 64)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorInit(2)
     ActorSetAnim(2, 870, 0)
     ActorSetPriority(2, 2)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorDisable(2)
     ActorInit(3)
     ActorSetAnim(3, 0, 0)
     ActorSetPriority(3, 2)
-    Sub805F04C(3, 64)
+    ActorSetSortOffset(3, 64)
     ActorLockAnimOnFrame(3, 0)
     ActorSetObjMode(3, 1)
     ActorDisable(3)
     ActorInit(4)
     ActorSetAnim(4, 870, 0)
     ActorSetPriority(4, 2)
-    Sub805F04C(4, 64)
+    ActorSetSortOffset(4, 64)
     ActorDisable(4)
     ActorInit(5)
     ActorSetAnim(5, 0, 0)
     ActorSetPriority(5, 2)
-    Sub805F04C(5, 64)
+    ActorSetSortOffset(5, 64)
     ActorLockAnimOnFrame(5, 0)
     ActorSetObjMode(5, 1)
     ActorDisable(5)
     ActorInit(6)
     ActorSetAnim(6, 870, 0)
     ActorSetPriority(6, 2)
-    Sub805F04C(6, 64)
+    ActorSetSortOffset(6, 64)
     ActorDisable(6)
     ActorInit(7)
     ActorSetAnim(7, 0, 0)
     ActorSetPriority(7, 2)
-    Sub805F04C(7, 64)
+    ActorSetSortOffset(7, 64)
     ActorLockAnimOnFrame(7, 0)
     ActorSetObjMode(7, 1)
     ActorDisable(7)
     ActorInit(8)
     ActorSetAnim(8, 870, 0)
     ActorSetPriority(8, 2)
-    Sub805F04C(8, 64)
+    ActorSetSortOffset(8, 64)
     ActorDisable(8)
     ActorInit(9)
     ActorSetAnim(9, 0, 0)
     ActorSetPriority(9, 2)
-    Sub805F04C(9, 64)
+    ActorSetSortOffset(9, 64)
     ActorLockAnimOnFrame(9, 0)
     ActorSetObjMode(9, 1)
     ActorDisable(9)
@@ -2896,7 +2896,7 @@ const Script script_80BE8C4 = {
 };
 
 const Script script_80BF468 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     WaitForCond(SCRIPT_WAIT_COND_11, 0)
     PlayBgm(14)
@@ -2905,12 +2905,12 @@ const Script script_80BF468 = {
     ActorSetAnim(0, 822, 0)
     ActorSetPosition(0, 1248, 291)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 1248, 291)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     CameraAlloc
@@ -2948,7 +2948,7 @@ const Script script_80BF468 = {
 };
 
 const Script script_80BF83C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060D74
     Sub8060B90(0)
     AllocActors(2)
@@ -2956,12 +2956,12 @@ const Script script_80BF83C = {
     ActorSetAnim(0, 822, 0)
     ActorSetPositionRelativeFromSavedPosition(0, 0, 0)
     ActorRevertPriority(0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPositionRelativeFromSavedPosition(1, 0, 0)
     ActorRevertPriority(1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     SetWaitFrames(1)
@@ -2997,13 +2997,13 @@ const Script script_80BF83C = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 239, 316)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 239, 316)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorDisable(1)
@@ -3011,25 +3011,25 @@ const Script script_80BF83C = {
     ActorSetAnim(2, 580, 0)
     ActorSetPosition(2, 239, 316)
     ActorSetPriority(2, 1)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorDisable(2)
     ActorInit(3)
     ActorSetAnim(3, 700, 1)
     ActorSetPosition(3, 221, 345)
     ActorSetPriority(3, 2)
-    Sub805F04C(3, 1)
+    ActorSetSortOffset(3, 1)
     ActorInit(4)
     ActorSetAnim(4, 0, 1)
     ActorSetPosition(4, 221, 345)
     ActorSetPriority(4, 2)
-    Sub805F04C(4, 1)
+    ActorSetSortOffset(4, 1)
     ActorLockAnimOnFrame(4, 0)
     ActorSetObjMode(4, 1)
     ActorInit(5)
     ActorSetAnim(5, 0, 1)
     ActorSetPosition(5, 205, 308)
     ActorSetPriority(5, 1)
-    Sub805F04C(5, 1)
+    ActorSetSortOffset(5, 1)
     ActorLockAnimOnFrame(5, 6)
     ActorSetObjMode(5, 1)
     ActorDisable(5)
@@ -3071,7 +3071,7 @@ const Script script_80BF83C = {
 };
 
 const Script script_80C019C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(4)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     LoadAndStoreRoom(4, 3, 0, 0)
@@ -3085,17 +3085,17 @@ const Script script_80C019C = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 208, 496)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 320)
+    ActorSetSortOffset(0, 320)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 208, 496)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 320)
+    ActorSetSortOffset(1, 320)
     Jump(20, 0)
 };
 
 const Script script_80C0340 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(4)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     LoadAndStoreRoom(4, 3, 0, 0)
@@ -3108,7 +3108,7 @@ const Script script_80C0340 = {
 };
 
 const Script script_80C0408 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -3122,7 +3122,7 @@ const Script script_80C0408 = {
 };
 
 const Script script_80C04E4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -3135,28 +3135,28 @@ const Script script_80C04E4 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1040, 570)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 128)
+    ActorSetSortOffset(0, 128)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1040, 570)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 128)
+    ActorSetSortOffset(1, 128)
     Jump(18, 0)
 };
 
 const Script script_80C0660 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 653, 0)
     ActorSetPosition(0, 221, 345)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 659, 0)
     ActorSetPosition(1, 221, 345)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(221, 345, FX32_CONST(2))
@@ -3164,7 +3164,7 @@ const Script script_80C0660 = {
 };
 
 const Script script_80C07B4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorInit(1)
@@ -3173,32 +3173,32 @@ const Script script_80C07B4 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 464, 736)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 464, 736)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 64)
+    ActorSetSortOffset(1, 64)
     Jump(19, 0)
 };
 
 const Script script_80C08E0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorInit(1)
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 324, 988)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 324, 988)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 64)
+    ActorSetSortOffset(1, 64)
     Jump(19, 0)
 };
 
 const Script script_80C09E4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(120)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -3209,35 +3209,35 @@ const Script script_80C09E4 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 160, 612)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 160, 612)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     ActorDisable(1)
     Jump(24, 0)
 };
 
 const Script script_80C0B74 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorInit(1)
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 162, 649)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 162, 649)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     Jump(19, 0)
 };
 
 const Script script_80C0C78 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     ActorInit(0)
@@ -3247,23 +3247,23 @@ const Script script_80C0C78 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1377, 668)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1377, 668)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 64)
+    ActorSetSortOffset(1, 64)
     Jump(19, 0)
 };
 
 const Script script_80C0DB8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 1066, 0)
     ActorSetPosition(0, 480, 1344)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     CameraAlloc
     ActorMove(0, 500, 1486, FX32_CONST(0.92501))
     CameraMove(500, 1486, FX32_CONST(0.92501))
@@ -3284,13 +3284,13 @@ const Script script_80C0F48 = {
     ActorSetAnim(0, 1062, 0)
     ActorSetPosition(0, 209, 765)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     ActorSetDirection(0, DIRECTION_LEFT)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     ActorSetDirection(0, DIRECTION_RIGHT)
     ActorMove(0, 346, 852, FX32_CONST(0.92501))
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
     ActorMove(0, 608, 871, FX32_CONST(0.92501))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
@@ -3305,12 +3305,12 @@ const Script script_80C0F48 = {
     ActorSetDirection(0, DIRECTION_RIGHT)
     ActorMove(0, 774, 1155, FX32_CONST(0.92501))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorMove(0, 1120, 1241, FX32_CONST(0.92501))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
     ActorSetDirection(0, DIRECTION_LEFT)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     ActorMove(0, 1088, 1186, FX32_CONST(0.92501))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
     ActorSetDirection(0, DIRECTION_UP)
@@ -3320,10 +3320,10 @@ const Script script_80C0F48 = {
     ActorSetPriority(0, 2)
     ActorMove(0, 1058, 1068, FX32_CONST(0.92501))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorMove(0, 1084, 972, FX32_CONST(0.625))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     ActorSetDirection(0, DIRECTION_UP)
     ActorSetPriority(0, 1)
     ActorMove(0, 1087, 788, FX32_CONST(0.92501))
@@ -3331,10 +3331,10 @@ const Script script_80C0F48 = {
     ActorSetPriority(0, 2)
     ActorMove(0, 1230, 568, FX32_CONST(0.92501))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorMove(0, 1230, 519, FX32_CONST(0.625))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     ActorSetPriority(0, 0)
     ActorMove(0, 1230, 420, FX32_CONST(0.92501))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
@@ -3372,7 +3372,7 @@ const Script script_80C14D4 = {
 };
 
 const Script script_80C1614 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     WaitForCond(SCRIPT_WAIT_COND_11, 0)
     PlayBgm(14)
@@ -3381,25 +3381,25 @@ const Script script_80C1614 = {
     ActorSetAnim(0, 741, 0)
     ActorSetPosition(0, 1248, 1215)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetDirection(0, DIRECTION_DOWN)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 1248, 1215)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorInit(2)
     ActorSetAnim(2, 822, 0)
     ActorSetPosition(2, 1240, 1233)
     ActorSetPriority(2, 1)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorInit(3)
     ActorSetAnim(3, 0, 1)
     ActorSetPosition(3, 1240, 1233)
     ActorSetPriority(3, 1)
-    Sub805F04C(3, 1)
+    ActorSetSortOffset(3, 1)
     ActorLockAnimOnFrame(3, 0)
     ActorSetObjMode(3, 1)
     CameraAlloc
@@ -3431,7 +3431,7 @@ const Script script_80C1614 = {
 };
 
 const Script script_80C1A74 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060D74
     AllocActors(3)
     ActorInit(0)
@@ -3439,17 +3439,17 @@ const Script script_80C1A74 = {
     Sub8060B90(0)
     ActorSetPositionRelativeFromSavedPosition(0, 0, 0)
     ActorRevertPriority(0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 614, 0)
     ActorSetPosition(1, 1221, 1138)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorInit(2)
     ActorSetAnim(2, 590, 0)
     ActorSetPosition(2, 1216, 1136)
     ActorSetPriority(2, 0)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     SetWaitFrames(1)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     Sub805F120(0)
@@ -3466,7 +3466,7 @@ const Script script_80C1A74 = {
     SetWaitFrames(16)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 200)
+    ActorSetSortOffset(0, 200)
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
     ActorDisable(0)
     LoadAndStoreRoom(3, 4, 0, 0)
@@ -3478,14 +3478,14 @@ const Script script_80C1A74 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 513, 947)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 513, 947)
     ActorSetPriority(1, 2)
     ActorSetObjMode(1, 1)
     ActorLockAnimOnFrame(1, 0)
-    Sub805F04C(1, 64)
+    ActorSetSortOffset(1, 64)
     SetBgmVolume(0, FALSE)
     PlaySfx(73, FALSE)
     PlayBgm(2)
@@ -3504,12 +3504,12 @@ const Script script_80C1A74 = {
     ActorSetAnim(0, 614, 0)
     ActorSetPosition(0, 1221, 1138)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 590, 0)
     ActorSetPosition(1, 1216, 1136)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     CameraAlloc
     CameraMove(1221, 1138, FX32_CONST(2))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -3548,7 +3548,7 @@ const Script script_80C1A74 = {
 };
 
 const Script script_80C235C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     Sub805F7D8(324)
     WaitForCond(SCRIPT_WAIT_COND_NOT_IN_DIALOGUE, 0)
@@ -3558,16 +3558,16 @@ const Script script_80C235C = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1563, 157)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1563, 157)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     Jump(19, 0)
 };
 
 const Script script_80C249C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     Sub805F7D8(325)
     WaitForCond(SCRIPT_WAIT_COND_NOT_IN_DIALOGUE, 0)
@@ -3575,7 +3575,7 @@ const Script script_80C249C = {
 };
 
 const Script script_80C2500 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -3589,7 +3589,7 @@ const Script script_80C2500 = {
 };
 
 const Script script_80C25DC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(30)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -3603,19 +3603,19 @@ const Script script_80C25DC = {
 };
 
 const Script script_80C26B8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 653, 0)
     ActorSetPosition(0, 570, 1140)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 659, 0)
     ActorSetPosition(1, 570, 1140)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 64)
+    ActorSetSortOffset(1, 64)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(570, 1140, FX32_CONST(2))
@@ -3623,7 +3623,7 @@ const Script script_80C26B8 = {
 };
 
 const Script script_80C280C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 738, 1)
@@ -3638,7 +3638,7 @@ const Script script_80C280C = {
 };
 
 const Script script_80C28FC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(120)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -3649,56 +3649,56 @@ const Script script_80C28FC = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 552, 1254)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 552, 1254)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorDisable(1)
     Jump(24, 0)
 };
 
 const Script script_80C2A8C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorInit(1)
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 552, 1304)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 552, 1304)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Jump(19, 0)
 };
 
 const Script script_80C2B90 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(4)
     ActorInit(0)
     ActorSetAnim(0, 550, 0)
     ActorSetPosition(0, 1528, 376)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     ActorInit(1)
     ActorSetAnim(1, 998, 0)
     ActorSetPosition(1, 1456, 432)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 32)
+    ActorSetSortOffset(1, 32)
     ActorInit(2)
     ActorSetAnim(2, 998, 0)
     ActorSetPosition(2, 1528, 496)
     ActorSetPriority(2, 0)
-    Sub805F04C(2, 32)
+    ActorSetSortOffset(2, 32)
     ActorInit(3)
     ActorSetAnim(3, 721, 0)
     ActorSetPosition(3, 1464, 624)
     ActorSetPriority(3, 0)
-    Sub805F04C(3, 32)
+    ActorSetSortOffset(3, 32)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(1503, 439, FX32_CONST(3.5))
@@ -3722,23 +3722,23 @@ const Script script_80C2B90 = {
 };
 
 const Script script_80C2ED8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(3)
     ActorInit(0)
     ActorSetAnim(0, 550, 0)
     ActorSetPosition(0, 1456, 432)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     ActorInit(1)
     ActorSetAnim(1, 998, 0)
     ActorSetPosition(1, 1528, 496)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 32)
+    ActorSetSortOffset(1, 32)
     ActorInit(2)
     ActorSetAnim(2, 721, 0)
     ActorSetPosition(2, 1464, 624)
     ActorSetPriority(2, 0)
-    Sub805F04C(2, 32)
+    ActorSetSortOffset(2, 32)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(1484, 464, FX32_CONST(3.5))
@@ -3759,13 +3759,13 @@ const Script script_80C2ED8 = {
 };
 
 const Script script_80C3180 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 550, 0)
     ActorSetPosition(0, 1528, 496)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(1487, 525, FX32_CONST(3.5))
@@ -3796,7 +3796,7 @@ const Script script_80C33C4 = {
     ActorSetAnim(0, 617, 0)
     ActorSetPosition(0, 1227, 190)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 384)
+    ActorSetSortOffset(0, 384)
     ActorMove(0, 1215, 181, FX32_CONST(1.4375))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
     ActorMove(0, 1203, 181, FX32_CONST(2.0625))
@@ -3807,25 +3807,25 @@ const Script script_80C33C4 = {
 };
 
 const Script script_80C34C8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(3)
     ActorInit(0)
     ActorSetAnim(0, 724, 1)
     ActorSetPosition(0, 1169, 470)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorLockAnimOnFrame(0, 0)
     ActorInit(1)
     ActorSetAnim(1, 548, 0)
     ActorSetPosition(1, 1169, 470)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorInit(2)
     ActorSetAnim(2, 0, 1)
     ActorSetPosition(2, 1168, 552)
     ActorSetPriority(2, 1)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorLockAnimOnFrame(2, 0)
     ActorSetObjMode(2, 1)
     ActorDisable(2)
@@ -3848,14 +3848,14 @@ const Script script_80C34C8 = {
 };
 
 const Script script_80C37C0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     PlaySfx(210, FALSE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 700, 1)
     ActorSetPosition(0, 1568, 1144)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 24)
+    ActorSetSortOffset(0, 24)
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_ANIM_DONE, 0)
     ActorDisable(0)
     Sub805FCB0(1472, 1232)
@@ -3865,7 +3865,7 @@ const Script script_80C37C0 = {
 };
 
 const Script script_80C38D8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -3878,16 +3878,16 @@ const Script script_80C38D8 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1568, 1144)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 24)
+    ActorSetSortOffset(0, 24)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1568, 1144)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 24)
+    ActorSetSortOffset(1, 24)
     Jump(18, 0)
 };
 
 const Script script_80C3A54 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     LoadAndStoreRoom(31, 3, 0, 0)
     AllocActors(2)
@@ -3899,16 +3899,16 @@ const Script script_80C3A54 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 611, 586)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 611, 586)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Jump(20, 0)
 };
 
 const Script script_80C3BBC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     WaitForCond(SCRIPT_WAIT_COND_11, 0)
     PlayBgm(14)
@@ -3917,12 +3917,12 @@ const Script script_80C3BBC = {
     ActorSetAnim(0, 814, 0)
     ActorSetPosition(0, 1968, 296)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 1968, 296)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     CameraAlloc
@@ -4022,7 +4022,7 @@ const Script script_80C3BBC = {
 };
 
 const Script script_80C4468 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060D74
     Sub8060B90(0)
     AllocActors(2)
@@ -4030,12 +4030,12 @@ const Script script_80C4468 = {
     ActorSetAnim(0, 822, 0)
     ActorSetPositionRelativeFromSavedPosition(0, 0, 0)
     ActorRevertPriority(0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPositionRelativeFromSavedPosition(1, 0, 0)
     ActorRevertPriority(1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     SetWaitFrames(1)
@@ -4071,13 +4071,13 @@ const Script script_80C4468 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1984, 624)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 1984, 624)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorDisable(1)
@@ -4085,25 +4085,25 @@ const Script script_80C4468 = {
     ActorSetAnim(2, 581, 0)
     ActorSetPosition(2, 1984, 624)
     ActorSetPriority(2, 2)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorDisable(2)
     ActorInit(3)
     ActorSetAnim(3, 700, 1)
     ActorSetPosition(3, 1968, 648)
     ActorSetPriority(3, 2)
-    Sub805F04C(3, 1)
+    ActorSetSortOffset(3, 1)
     ActorInit(4)
     ActorSetAnim(4, 0, 1)
     ActorSetPosition(4, 1968, 648)
     ActorSetPriority(4, 2)
-    Sub805F04C(4, 1)
+    ActorSetSortOffset(4, 1)
     ActorLockAnimOnFrame(4, 0)
     ActorSetObjMode(4, 1)
     ActorInit(5)
     ActorSetAnim(5, 0, 1)
     ActorSetPosition(5, 1955, 617)
     ActorSetPriority(5, 2)
-    Sub805F04C(5, 1)
+    ActorSetSortOffset(5, 1)
     ActorLockAnimOnFrame(5, 6)
     ActorSetObjMode(5, 1)
     ActorDisable(5)
@@ -4145,7 +4145,7 @@ const Script script_80C4468 = {
 };
 
 const Script script_80C4DC8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(1664, 448, FX32_CONST(3.5))
@@ -4160,7 +4160,7 @@ const Script script_80C4DC8 = {
 };
 
 const Script script_80C4EB8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     ActorInit(0)
@@ -4170,16 +4170,16 @@ const Script script_80C4EB8 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 850, 1080)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 850, 1080)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Jump(19, 0)
 };
 
 const Script script_80C4FF8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -4192,28 +4192,28 @@ const Script script_80C4FF8 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 160, 96)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 160, 96)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 64)
+    ActorSetSortOffset(1, 64)
     Jump(18, 0)
 };
 
 const Script script_80C5174 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 653, 0)
     ActorSetPosition(0, 1968, 648)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 659, 0)
     ActorSetPosition(1, 1968, 648)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(1968, 648, FX32_CONST(2))
@@ -4221,20 +4221,20 @@ const Script script_80C5174 = {
 };
 
 const Script script_80C52C8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     JumpCond(SCRIPT_JUMP_COND_SHOCK_JUMP_LOCKED, 60, 0)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 565, 0)
     ActorSetPosition(0, 463, 399)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 463, 399)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(463, 399, FX32_CONST(3))
@@ -4242,20 +4242,20 @@ const Script script_80C52C8 = {
 };
 
 const Script script_80C5430 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     JumpCond(SCRIPT_JUMP_COND_SHOCK_JUMP_LOCKED, 60, 0)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 565, 0)
     ActorSetPosition(0, 391, 236)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 391, 236)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(391, 236, FX32_CONST(3))
@@ -4263,20 +4263,20 @@ const Script script_80C5430 = {
 };
 
 const Script script_80C5598 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     JumpCond(SCRIPT_JUMP_COND_SHOCK_JUMP_LOCKED, 60, 0)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 565, 0)
     ActorSetPosition(0, 292, 606)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 292, 606)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(292, 606, FX32_CONST(3))
@@ -4284,20 +4284,20 @@ const Script script_80C5598 = {
 };
 
 const Script script_80C5700 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     JumpCond(SCRIPT_JUMP_COND_SHOCK_JUMP_LOCKED, 60, 0)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 565, 0)
     ActorSetPosition(0, 162, 293)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 162, 293)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(162, 293, FX32_CONST(3))
@@ -4305,7 +4305,7 @@ const Script script_80C5700 = {
 };
 
 const Script script_80C5868 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(120)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -4316,46 +4316,46 @@ const Script script_80C5868 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1328, 548)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1328, 548)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorDisable(1)
     Jump(24, 0)
 };
 
 const Script script_80C59F8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorInit(1)
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1328, 595)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1328, 595)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Jump(19, 0)
 };
 
 const Script script_80C5AFC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 600, 0)
     ActorSetPosition(0, 1073, 391)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorInit(1)
     ActorSetAnim(1, 607, 0)
     ActorSetPosition(1, 1073, 391)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Sub805FCB0(1106, 429)
     WaitForCond(SCRIPT_WAIT_COND_9, 0)
     SetPlayerDirection(DIRECTION_LEFT)
@@ -4376,13 +4376,13 @@ const Script script_80C5AFC = {
 };
 
 const Script script_80C5D40 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 601, 0)
     ActorSetPosition(0, 448, 933)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 52)
+    ActorSetSortOffset(0, 52)
     ActorDoNotSnap(0, TRUE)
     ActorMove(0, 412, 933, FX32_CONST(1))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
@@ -4412,7 +4412,7 @@ const Script script_80C5D40 = {
 };
 
 const Script script_80C5FD4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(3)
     ActorInit(0)
     ActorInit(1)
@@ -4420,7 +4420,7 @@ const Script script_80C5FD4 = {
     ActorSetAnim(2, 599, 0)
     ActorSetPosition(2, 835, 378)
     ActorSetPriority(2, 0)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     Sub805FCB0(871, 391)
     WaitForCond(SCRIPT_WAIT_COND_9, 0)
     SetPlayerDirection(DIRECTION_LEFT)
@@ -4432,23 +4432,23 @@ const Script script_80C5FD4 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 804, 398)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 804, 398)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Jump(19, 0)
 };
 
 const Script script_80C61DC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 1254, 1)
     ActorSetPosition(0, 693, 510)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorDisable(0)
     CameraAlloc
     CameraMove(693, 510, FX32_CONST(1.5))
@@ -4468,7 +4468,7 @@ const Script script_80C61DC = {
 };
 
 const Script script_80C63BC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -4481,22 +4481,22 @@ const Script script_80C63BC = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 658, 430)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 658, 430)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Jump(18, 0)
 };
 
 const Script script_80C6538 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 608, 0)
     ActorSetPosition(0, 763, 136)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 64)
+    ActorSetSortOffset(0, 64)
     CameraAlloc
     CameraMove(763, 136, FX32_CONST(3.5))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -4512,7 +4512,7 @@ const Script script_80C6538 = {
 };
 
 const Script script_80C66B4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(4)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
@@ -4526,16 +4526,16 @@ const Script script_80C66B4 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 624, 360)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 624, 360)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 32)
+    ActorSetSortOffset(1, 32)
     Jump(18, 0)
 };
 
 const Script script_80C6844 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(4)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     LoadAndStoreRoom(27, 2, 0, 0)
@@ -4548,13 +4548,13 @@ const Script script_80C6844 = {
 };
 
 const Script script_80C690C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 609, 0)
     ActorSetPosition(0, 928, 792)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     SetWaitFrames(10)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
@@ -4573,7 +4573,7 @@ const Script script_80C690C = {
 };
 
 const Script script_80C6AC4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(10)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(1)
@@ -4581,7 +4581,7 @@ const Script script_80C6AC4 = {
     ActorSetAnim(0, 609, 0)
     ActorSetPosition(0, 642, 977)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     CameraAlloc
     CameraMove(642, 977, FX32_CONST(3.5))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
@@ -4598,20 +4598,20 @@ const Script script_80C6AC4 = {
 };
 
 const Script script_80C6C7C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     JumpCond(SCRIPT_JUMP_COND_WONDERWING_LOCKED, 60, 0)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 566, 0)
     ActorSetPosition(0, 800, 675)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 800, 675)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(800, 675, FX32_CONST(6))
@@ -4619,20 +4619,20 @@ const Script script_80C6C7C = {
 };
 
 const Script script_80C6DE4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     JumpCond(SCRIPT_JUMP_COND_SHOCK_JUMP_LOCKED, 60, 0)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 565, 0)
     ActorSetPosition(0, 800, 675)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 800, 675)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(800, 675, FX32_CONST(5))
@@ -4640,7 +4640,7 @@ const Script script_80C6DE4 = {
 };
 
 const Script script_80C6F4C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -4653,16 +4653,16 @@ const Script script_80C6F4C = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1153, 227)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 136)
+    ActorSetSortOffset(0, 136)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 1153, 227)
     ActorSetPriority(1, 0)
-    Sub805F04C(0, 136)
+    ActorSetSortOffset(0, 136)
     Jump(18, 0)
 };
 
 const Script script_80C70C8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(3)
     CameraAlloc
@@ -4672,22 +4672,22 @@ const Script script_80C70C8 = {
     ActorSetAnim(0, 604, 0)
     ActorSetPosition(0, 824, 688)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 31)
+    ActorSetSortOffset(0, 31)
     ActorInit(1)
     ActorSetAnim(1, 604, 0)
     ActorSetPosition(1, 824, 720)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 31)
+    ActorSetSortOffset(1, 31)
     ActorInit(2)
     ActorSetAnim(2, 604, 0)
     ActorSetPosition(2, 824, 752)
     ActorSetPriority(2, 2)
-    Sub805F04C(2, 31)
+    ActorSetSortOffset(2, 31)
     Jump(23, 0)
 };
 
 const Script script_80C7280 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(3)
     CameraAlloc
@@ -4697,22 +4697,22 @@ const Script script_80C7280 = {
     ActorSetAnim(0, 604, 0)
     ActorSetPosition(0, 336, 752)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 31)
+    ActorSetSortOffset(0, 31)
     ActorInit(1)
     ActorSetAnim(1, 604, 0)
     ActorSetPosition(1, 336, 784)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 31)
+    ActorSetSortOffset(1, 31)
     ActorInit(2)
     ActorSetAnim(2, 604, 0)
     ActorSetPosition(2, 336, 816)
     ActorSetPriority(2, 2)
-    Sub805F04C(2, 31)
+    ActorSetSortOffset(2, 31)
     Jump(23, 0)
 };
 
 const Script script_80C7438 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(3)
     CameraAlloc
@@ -4722,22 +4722,22 @@ const Script script_80C7438 = {
     ActorSetAnim(0, 603, 0)
     ActorSetPosition(0, 240, 304)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 31)
+    ActorSetSortOffset(0, 31)
     ActorInit(1)
     ActorSetAnim(1, 603, 0)
     ActorSetPosition(1, 272, 304)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 31)
+    ActorSetSortOffset(1, 31)
     ActorInit(2)
     ActorSetAnim(2, 603, 0)
     ActorSetPosition(2, 304, 304)
     ActorSetPriority(2, 3)
-    Sub805F04C(2, 31)
+    ActorSetSortOffset(2, 31)
     Jump(23, 0)
 };
 
 const Script script_80C75F0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(3)
     CameraAlloc
@@ -4747,34 +4747,34 @@ const Script script_80C75F0 = {
     ActorSetAnim(0, 604, 0)
     ActorSetPosition(0, 944, 368)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 31)
+    ActorSetSortOffset(0, 31)
     ActorInit(1)
     ActorSetAnim(1, 604, 0)
     ActorSetPosition(1, 944, 400)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 31)
+    ActorSetSortOffset(1, 31)
     ActorInit(2)
     ActorSetAnim(2, 604, 0)
     ActorSetPosition(2, 944, 432)
     ActorSetPriority(2, 2)
-    Sub805F04C(2, 31)
+    ActorSetSortOffset(2, 31)
     Jump(23, 0)
 };
 
 const Script script_80C77A8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(4)
     ActorInit(0)
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 1184, 759)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 1184, 759)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     ActorSetObjMode(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorDisable(1)
@@ -4782,13 +4782,13 @@ const Script script_80C77A8 = {
     ActorSetAnim(2, 583, 0)
     ActorSetPosition(2, 1184, 759)
     ActorSetPriority(2, 3)
-    Sub805F04C(2, 96)
+    ActorSetSortOffset(2, 96)
     ActorDisable(2)
     ActorInit(3)
     ActorSetAnim(3, 0, 1)
     ActorSetPosition(3, 1158, 751)
     ActorSetPriority(3, 3)
-    Sub805F04C(3, 96)
+    ActorSetSortOffset(3, 96)
     ActorLockAnimOnFrame(3, 6)
     ActorSetObjMode(3, 1)
     ActorDisable(3)
@@ -4821,7 +4821,7 @@ const Script script_80C77A8 = {
 };
 
 const Script script_80C7C08 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -4835,19 +4835,19 @@ const Script script_80C7C08 = {
 };
 
 const Script script_80C7CE4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 653, 0)
     ActorSetPosition(0, 1168, 779)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 659, 0)
     ActorSetPosition(1, 1168, 779)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(1168, 779, FX32_CONST(2))
@@ -4855,18 +4855,18 @@ const Script script_80C7CE4 = {
 };
 
 const Script script_80C7E38 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(4)
     ActorInit(0)
     ActorSetAnim(0, 621, 0)
     ActorSetPosition(0, 701, 443)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 256)
+    ActorSetSortOffset(0, 256)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 701, 443)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 256)
+    ActorSetSortOffset(1, 256)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     CameraAlloc
@@ -4882,12 +4882,12 @@ const Script script_80C7E38 = {
     ActorSetAnim(2, 620, 0)
     ActorSetPosition(2, 816, 400)
     ActorSetPriority(2, 1)
-    Sub805F04C(2, 224)
+    ActorSetSortOffset(2, 224)
     ActorInit(3)
     ActorSetAnim(3, 620, 0)
     ActorSetPosition(3, 816, 400)
     ActorSetPriority(3, 1)
-    Sub805F04C(3, 224)
+    ActorSetSortOffset(3, 224)
     CameraMove(816, 493, FX32_CONST(1))
     ActorMove(2, 816, 460, FX32_CONST(2.5))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 2)
@@ -4935,7 +4935,7 @@ const Script script_80C7E38 = {
     ActorMove(1, 687, 443, FX32_CONST(1))
     WaitForCond(SCRIPT_WAIT_COND_CAMERA_NOT_MOVING, 0)
     CameraFree
-    Sub805FC34(0)
+    SetPriority(FALSE)
     ActorDisable(2)
     ActorDisable(3)
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
@@ -4950,7 +4950,7 @@ const Script script_80C7E38 = {
 };
 
 const Script script_80C8568 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     PlaySfx(199, FALSE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
@@ -4958,13 +4958,13 @@ const Script script_80C8568 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 733, 625)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 32)
+    ActorSetSortOffset(0, 32)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 733, 625)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 32)
+    ActorSetSortOffset(1, 32)
     ActorDisable(1)
     CameraAlloc
     CameraMove(733, 625, FX32_CONST(2.25))
@@ -4977,20 +4977,20 @@ const Script script_80C8568 = {
 };
 
 const Script script_80C8748 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     JumpCond(SCRIPT_JUMP_COND_SHOCK_JUMP_LOCKED, 60, 0)
     AllocActors(2)
     ActorInit(0)
     ActorSetAnim(0, 565, 0)
     ActorSetPosition(0, 648, 954)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 128)
+    ActorSetSortOffset(0, 128)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 592, 0)
     ActorSetPosition(1, 648, 954)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 128)
+    ActorSetSortOffset(1, 128)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(648, 954, FX32_CONST(5))
@@ -4998,7 +4998,7 @@ const Script script_80C8748 = {
 };
 
 const Script script_80C88B0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(120)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5009,30 +5009,30 @@ const Script script_80C88B0 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 440, 576)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 440, 576)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorDisable(1)
     Jump(24, 0)
 };
 
 const Script script_80C8A40 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     AllocActors(2)
     ActorInit(0)
     ActorInit(1)
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 440, 632)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 440, 632)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     Jump(19, 0)
 };
 
@@ -5042,7 +5042,7 @@ const Script script_80C8B44 = {
     ActorSetAnim(0, 617, 0)
     ActorSetPosition(0, 920, 81)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 228)
+    ActorSetSortOffset(0, 228)
     ActorDoNotSnap(0, TRUE)
     ActorMove(0, 930, 75, FX32_CONST(1.4375))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
@@ -5055,7 +5055,7 @@ const Script script_80C8B44 = {
 };
 
 const Script script_80C8C70 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -5070,16 +5070,16 @@ const Script script_80C8C70 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 628, 280)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 224)
+    ActorSetSortOffset(0, 224)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 628, 280)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 224)
+    ActorSetSortOffset(1, 224)
     Jump(18, 0)
 };
 
 const Script script_80C8E14 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(496, 688, FX32_CONST(3.5))
@@ -5094,7 +5094,7 @@ const Script script_80C8E14 = {
 };
 
 const Script script_80C8F04 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     WaitForCond(SCRIPT_WAIT_COND_11, 0)
     PlayBgm(14)
@@ -5103,12 +5103,12 @@ const Script script_80C8F04 = {
     ActorSetAnim(0, 822, 0)
     ActorSetPosition(0, 256, 175)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 128)
+    ActorSetSortOffset(0, 128)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 256, 175)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 128)
+    ActorSetSortOffset(1, 128)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     CameraAlloc
@@ -5129,7 +5129,7 @@ const Script script_80C8F04 = {
 };
 
 const Script script_80C9184 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060D74
     Sub8060B90(0)
     AllocActors(2)
@@ -5137,12 +5137,12 @@ const Script script_80C9184 = {
     ActorSetAnim(0, 822, 0)
     ActorSetPositionRelativeFromSavedPosition(0, 0, 0)
     ActorRevertPriority(0)
-    Sub805F04C(0, 128)
+    ActorSetSortOffset(0, 128)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPositionRelativeFromSavedPosition(1, 0, 0)
     ActorRevertPriority(1)
-    Sub805F04C(1, 128)
+    ActorSetSortOffset(1, 128)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     SetWaitFrames(1)
@@ -5175,13 +5175,13 @@ const Script script_80C9184 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 270, 952)
     ActorSetPriority(0, 0)
-    Sub805F04C(0, 1)
+    ActorSetSortOffset(0, 1)
     ActorDisable(0)
     ActorInit(1)
     ActorSetAnim(1, 0, 1)
     ActorSetPosition(1, 270, 952)
     ActorSetPriority(1, 0)
-    Sub805F04C(1, 1)
+    ActorSetSortOffset(1, 1)
     ActorLockAnimOnFrame(1, 0)
     ActorSetObjMode(1, 1)
     ActorDisable(1)
@@ -5189,25 +5189,25 @@ const Script script_80C9184 = {
     ActorSetAnim(2, 582, 0)
     ActorSetPosition(2, 270, 952)
     ActorSetPriority(2, 2)
-    Sub805F04C(2, 1)
+    ActorSetSortOffset(2, 1)
     ActorDisable(2)
     ActorInit(3)
     ActorSetAnim(3, 700, 1)
     ActorSetPosition(3, 256, 976)
     ActorSetPriority(3, 0)
-    Sub805F04C(3, 1)
+    ActorSetSortOffset(3, 1)
     ActorInit(4)
     ActorSetAnim(4, 0, 1)
     ActorSetPosition(4, 256, 976)
     ActorSetPriority(4, 0)
-    Sub805F04C(4, 1)
+    ActorSetSortOffset(4, 1)
     ActorLockAnimOnFrame(4, 0)
     ActorSetObjMode(4, 1)
     ActorInit(5)
     ActorSetAnim(5, 0, 1)
     ActorSetPosition(5, 244, 944)
     ActorSetPriority(5, 2)
-    Sub805F04C(5, 1)
+    ActorSetSortOffset(5, 1)
     ActorLockAnimOnFrame(5, 6)
     ActorSetObjMode(5, 1)
     ActorDisable(5)
@@ -5249,7 +5249,7 @@ const Script script_80C9184 = {
 };
 
 const Script script_80C9AA8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
     CameraMove(1230, 482, FX32_CONST(3.5))
@@ -5264,14 +5264,14 @@ const Script script_80C9AA8 = {
 };
 
 const Script script_80C9B98 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     Sub8060CB8(1)
     AllocActors(1)
     ActorInit(0)
     ActorSetAnim(0, 691, 0)
     ActorSetPosition(0, 292, 722)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 112)
+    ActorSetSortOffset(0, 112)
     PlaySfx(199, FALSE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     CameraAlloc
@@ -5293,7 +5293,7 @@ const Script script_80C9B98 = {
 };
 
 const Script script_80C9DA0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5312,12 +5312,12 @@ const Script script_80C9E7C = {
     ActorSetAnim(0, 1006, 0)
     ActorSetPosition(0, 150, 168)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 128)
+    ActorSetSortOffset(0, 128)
     ActorInit(1)
     ActorSetAnim(1, 1006, 0)
     ActorSetPosition(1, 354, 168)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 128)
+    ActorSetSortOffset(1, 128)
     ActorMove(0, 216, 241, FX32_CONST(1.5))
     ActorMove(1, 296, 241, FX32_CONST(1.5))
     WaitForCond(SCRIPT_WAIT_COND_ACTOR_NOT_MOVING, 0)
@@ -5330,22 +5330,22 @@ const Script script_80C9FA8 = {
     ActorSetAnim(0, 1006, 0)
     ActorSetPosition(0, 150, 168)
     ActorSetPriority(0, 2)
-    Sub805F04C(0, 128)
+    ActorSetSortOffset(0, 128)
     ActorInit(1)
     ActorSetAnim(1, 1006, 0)
     ActorSetPosition(1, 354, 168)
     ActorSetPriority(1, 2)
-    Sub805F04C(1, 128)
+    ActorSetSortOffset(1, 128)
     ActorInit(2)
     ActorSetAnim(2, 1006, 0)
     ActorSetPosition(2, 150, 291)
     ActorSetPriority(2, 2)
-    Sub805F04C(2, 128)
+    ActorSetSortOffset(2, 128)
     ActorInit(3)
     ActorSetAnim(3, 1006, 0)
     ActorSetPosition(3, 354, 291)
     ActorSetPriority(3, 2)
-    Sub805F04C(3, 128)
+    ActorSetSortOffset(3, 128)
     ActorMove(0, 216, 241, FX32_CONST(1.5))
     ActorMove(1, 296, 241, FX32_CONST(1.5))
     ActorMove(2, 216, 272, FX32_CONST(1.5))
@@ -5356,7 +5356,7 @@ const Script script_80C9FA8 = {
 };
 
 const Script script_80CA1D8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -5369,16 +5369,16 @@ const Script script_80CA1D8 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 403, 447)
     ActorSetPriority(0, 3)
-    Sub805F04C(0, 224)
+    ActorSetSortOffset(0, 224)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 403, 447)
     ActorSetPriority(1, 3)
-    Sub805F04C(1, 224)
+    ActorSetSortOffset(1, 224)
     Jump(18, 0)
 };
 
 const Script script_80CA354 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     CameraAlloc
@@ -5391,16 +5391,16 @@ const Script script_80CA354 = {
     ActorSetAnim(0, 707, 1)
     ActorSetPosition(0, 256, 288)
     ActorSetPriority(0, 1)
-    Sub805F04C(0, 96)
+    ActorSetSortOffset(0, 96)
     ActorSetAnim(1, 0, 0)
     ActorSetPosition(1, 256, 288)
     ActorSetPriority(1, 1)
-    Sub805F04C(1, 96)
+    ActorSetSortOffset(1, 96)
     Jump(18, 0)
 };
 
 const Script script_80CA4D0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(5)
     AllocActors(1)
@@ -5411,7 +5411,7 @@ const Script script_80CA4D0 = {
 };
 
 const Script script_80CA570 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(13)
     AllocActors(1)
@@ -5422,7 +5422,7 @@ const Script script_80CA570 = {
 };
 
 const Script script_80CA610 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(27)
     AllocActors(1)
@@ -5433,7 +5433,7 @@ const Script script_80CA610 = {
 };
 
 const Script script_80CA6B0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(17)
     AllocActors(1)
@@ -5444,7 +5444,7 @@ const Script script_80CA6B0 = {
 };
 
 const Script script_80CA750 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(20)
     AllocActors(1)
@@ -5455,7 +5455,7 @@ const Script script_80CA750 = {
 };
 
 const Script script_80CA7F0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(15)
     AllocActors(1)
@@ -5466,7 +5466,7 @@ const Script script_80CA7F0 = {
 };
 
 const Script script_80CA890 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(31)
     AllocActors(1)
@@ -5477,7 +5477,7 @@ const Script script_80CA890 = {
 };
 
 const Script script_80CA930 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(17)
     AllocActors(1)
@@ -5488,7 +5488,7 @@ const Script script_80CA930 = {
 };
 
 const Script script_80CA9D0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_15, 0)
     LoadRoomObjPalette(22)
     AllocActors(1)
@@ -5499,7 +5499,7 @@ const Script script_80CA9D0 = {
 };
 
 const Script script_80CAA70 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeGlobalOrMute(FALSE)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5509,7 +5509,7 @@ const Script script_80CAA70 = {
 };
 
 const Script script_80CAAFC = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeGlobalOrMute(FALSE)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5519,7 +5519,7 @@ const Script script_80CAAFC = {
 };
 
 const Script script_80CAB88 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeGlobalOrMute(FALSE)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5529,7 +5529,7 @@ const Script script_80CAB88 = {
 };
 
 const Script script_80CAC14 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeGlobalOrMute(FALSE)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5539,7 +5539,7 @@ const Script script_80CAC14 = {
 };
 
 const Script script_80CACA0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeGlobalOrMute(FALSE)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5549,7 +5549,7 @@ const Script script_80CACA0 = {
 };
 
 const Script script_80CAD2C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeGlobalOrMute(FALSE)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5559,7 +5559,7 @@ const Script script_80CAD2C = {
 };
 
 const Script script_80CADB8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeGlobalOrMute(FALSE)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5569,7 +5569,7 @@ const Script script_80CADB8 = {
 };
 
 const Script script_80CAE44 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeGlobalOrMute(FALSE)
     SetWaitFrames(60)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
@@ -5579,7 +5579,7 @@ const Script script_80CAE44 = {
 };
 
 const Script script_80CAED0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeIfLouder(2, FALSE)
     SetSfxVolume(9, FALSE)
     SetWaitFrames(30)
@@ -5590,7 +5590,7 @@ const Script script_80CAED0 = {
 };
 
 const Script script_80CAF70 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeIfLouder(2, FALSE)
     SetSfxVolume(9, FALSE)
     SetWaitFrames(30)
@@ -5601,7 +5601,7 @@ const Script script_80CAF70 = {
 };
 
 const Script script_80CB010 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeIfLouder(2, FALSE)
     SetSfxVolume(9, FALSE)
     SetWaitFrames(30)
@@ -5621,7 +5621,7 @@ const Script script_80CB010 = {
 };
 
 const Script script_80CB164 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeIfLouder(2, FALSE)
     SetSfxVolume(9, FALSE)
     SetWaitFrames(30)
@@ -5632,7 +5632,7 @@ const Script script_80CB164 = {
 };
 
 const Script script_80CB204 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeIfLouder(2, FALSE)
     SetSfxVolume(9, FALSE)
     SetWaitFrames(30)
@@ -5643,7 +5643,7 @@ const Script script_80CB204 = {
 };
 
 const Script script_80CB2A4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetBgmVolumeIfLouder(2, FALSE)
     SetSfxVolume(9, FALSE)
     SetWaitFrames(30)
@@ -5654,7 +5654,7 @@ const Script script_80CB2A4 = {
 };
 
 const Script script_80CB344 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(90)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     LoadAndStoreRoom(2, 6, 0, 0)
@@ -5662,7 +5662,7 @@ const Script script_80CB344 = {
 };
 
 const Script script_80CB3A8 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(90)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     LoadAndStoreRoom(30, 2, 0, 0)
@@ -5670,7 +5670,7 @@ const Script script_80CB3A8 = {
 };
 
 const Script script_80CB40C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(90)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     LoadAndStoreRoom(3, 5, 0, 0)
@@ -5678,7 +5678,7 @@ const Script script_80CB40C = {
 };
 
 const Script script_80CB470 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(90)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     LoadAndStoreRoom(20, 9, 0, 0)
@@ -5686,7 +5686,7 @@ const Script script_80CB470 = {
 };
 
 const Script script_80CB4D4 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(90)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     LoadAndStoreRoom(26, 3, 0, 0)
@@ -5694,7 +5694,7 @@ const Script script_80CB4D4 = {
 };
 
 const Script script_80CB538 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     SetWaitFrames(90)
     WaitForCond(SCRIPT_WAIT_COND_FRAMES, 0)
     LoadAndStoreRoom(17, 6, 0, 0)
@@ -5702,7 +5702,7 @@ const Script script_80CB538 = {
 };
 
 const Script script_80CB59C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     ActorInit(0)
@@ -5722,7 +5722,7 @@ const Script script_80CB59C = {
 };
 
 const Script script_80CB6F0 = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     CameraAlloc
     CameraSavePosition
     CameraMove(256, 80, FX32_CONST(6.625))
@@ -5732,7 +5732,7 @@ const Script script_80CB6F0 = {
 };
 
 const Script script_80CB77C = {
-    Sub805FC34(1)
+    SetPriority(TRUE)
     WaitForCond(SCRIPT_WAIT_COND_10, 0)
     AllocActors(2)
     ActorInit(0)

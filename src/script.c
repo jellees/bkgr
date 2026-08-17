@@ -35,7 +35,7 @@ struct ScriptActor {
     fx32 moveSpeed;
     fx32 xDistance;
     fx32 yDistance;
-    u32 field_38;
+    u32 ySortOffset;
     fx32 scale;
     fx32 scaleGoal;
     fx32 scaleSpeed;
@@ -65,7 +65,7 @@ struct ScriptState {
     u8 actorCount;
     bool8 endScript;
     bool8 isActive;
-    u8 isPriority;
+    bool8 isPriority;
     bool8 playInputDemo;
     u8 activeSfx;
 };
@@ -128,7 +128,7 @@ static bool32 script_cmd_actor_set_direction(int, int, int, int);
 static bool32 script_cmd_actor_rotate_to_target(int, int, int, int);
 static bool32 script_cmd_actor_set_priority(int, int, int, int);
 static bool32 script_cmd_actor_revert_priority(int, int, int, int);
-static bool32 sub_805F04C(int, int, int, int);
+static bool32 script_cmd_actor_set_sort_offset(int, int, int, int);
 static bool32 script_cmd_actor_set_obj_mode(int, int, int, int);
 static bool32 script_cmd_actor_set_palette(int, int, int, int);
 static bool32 script_cmd_actor_lock_anim_on_frame(int, int, int, int);
@@ -219,7 +219,7 @@ static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_actor_rotate_to_target,
     script_cmd_actor_set_priority,
     script_cmd_actor_revert_priority,
-    sub_805F04C,
+    script_cmd_actor_set_sort_offset,
     script_cmd_actor_set_obj_mode,
     script_cmd_actor_set_palette,
     script_cmd_actor_lock_anim_on_frame,
@@ -768,7 +768,7 @@ void render_scripts(u32** a1, u32* a2) {
                         u32* var1 = *a1;
                         u32 priority = script->actors[actorIdx].sprite.priority << 30;
                         v10 = (((gMapPixelSizeY << 16) - script->actors[actorIdx].yPos
-                                - script->actors[actorIdx].field_38)
+                                - script->actors[actorIdx].ySortOffset)
                                >> 4)
                               | 0x10000000;
                         *var1 = priority | v10;
@@ -776,7 +776,7 @@ void render_scripts(u32** a1, u32* a2) {
                         u32* var1 = *a1;
                         u32 priority = script->actors[actorIdx].sprite.priority << 30;
                         v10 = ((gMapPixelSizeY << 16) - script->actors[actorIdx].yPos
-                               - script->actors[actorIdx].field_38)
+                               - script->actors[actorIdx].ySortOffset)
                               >> 4;
                         *var1 = priority | v10;
                     }
@@ -1217,7 +1217,7 @@ static bool32 script_cmd_actor_init(int actorIdx, int _, int __, int ___) {
     gCurrentScript->actors[actorIdx].moveSpeed = 0;
     gCurrentScript->actors[actorIdx].calcIdx = -1;
     gCurrentScript->actors[actorIdx].doNotSnap = FALSE;
-    gCurrentScript->actors[actorIdx].field_38 = 0;
+    gCurrentScript->actors[actorIdx].ySortOffset = 0;
     gCurrentScript->actors[actorIdx].scale = FX32_CONST(256);
     gCurrentScript->actors[actorIdx].scaleGoal = FX32_CONST(256);
     gCurrentScript->actors[actorIdx].scaleSpeed = 0;
@@ -1427,7 +1427,7 @@ static bool32 sub_805EEBC(int actorIdx, int _, int __, int ___) {
     script_cmd_actor_set_position(actorIdx, gPlayerPos.x >> FX32_SHIFT,
                                   gMapPixelSizeY - ((gPlayerPos.y + gPlayerPos.z) >> FX32_SHIFT), 0);
     script_cmd_actor_set_priority(actorIdx, 3 - sub_800C50C(), 0, 0);
-    sub_805F04C(actorIdx, gPlayerPos.y, 0, 0);
+    script_cmd_actor_set_sort_offset(actorIdx, gPlayerPos.y, 0, 0);
     return TRUE;
 }
 
@@ -1436,7 +1436,7 @@ static bool32 sub_805EF0C(int actorIdx, int _, int __, int ___) {
         actorIdx, gPlayerShadowPos.x >> FX32_SHIFT,
         gMapPixelSizeY - ((gPlayerShadowPos.y + gPlayerShadowPos.z) >> FX32_SHIFT), 0);
     script_cmd_actor_set_priority(actorIdx, 3 - sub_800C50C(), 0, 0);
-    sub_805F04C(actorIdx, gPlayerShadowPos.y, 0, 0);
+    script_cmd_actor_set_sort_offset(actorIdx, gPlayerShadowPos.y, 0, 0);
     return TRUE;
 }
 
@@ -1477,8 +1477,8 @@ static bool32 script_cmd_actor_revert_priority(int actorIdx, int _, int __, int 
     return script_cmd_actor_set_priority(actorIdx, gScriptSavedPriority, 0, 0);
 }
 
-static bool32 sub_805F04C(int actorIdx, int a2, int _, int __) {
-    gCurrentScript->actors[actorIdx].field_38 = a2 << 16;
+static bool32 script_cmd_actor_set_sort_offset(int actorIdx, int a2, int _, int __) {
+    gCurrentScript->actors[actorIdx].ySortOffset = a2 << 16;
     return TRUE;
 }
 
@@ -2710,7 +2710,7 @@ static bool32 sub_8060CC4(int actorIdx, int _, int __, int ___) {
             v3 = TRUE;
             script_cmd_actor_set_position(actorIdx, xPos >> FX32_SHIFT, yPos >> FX32_SHIFT, 0);
             script_cmd_actor_set_priority(actorIdx, word_80B21D4[v2].priority, 0, 0);
-            sub_805F04C(actorIdx, word_80B21D4[v2].field_6, 0, 0);
+            script_cmd_actor_set_sort_offset(actorIdx, word_80B21D4[v2].field_6, 0, 0);
         }
 
         v2++;
