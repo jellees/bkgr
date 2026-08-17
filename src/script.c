@@ -313,7 +313,7 @@ void init_script_engine(void) {
         byte_203FA16_2 = 0;
     }
 
-    gIsPriorityScriptActive = 0;
+    gIsPriorityScriptActive = FALSE;
     gPriorityScriptIdx = -1;
     gBackgroundScriptIdx = -1;
     gReadKeysFromDemoInput = FALSE;
@@ -352,7 +352,7 @@ void start_script(int idx) {
     gCurrentScript->playInputDemo = FALSE;
     gCurrentScript->activeSfx = -1;
     gIsAnyScriptActive = TRUE;
-    gIsPriorityScriptActive = 1;
+    gIsPriorityScriptActive = TRUE;
 
     switch (idx) {
         case 3:
@@ -384,7 +384,7 @@ void start_script(int idx) {
 void sub_805D568(void) {
     u8 i;
 
-    gIsPriorityScriptActive = 0;
+    gIsPriorityScriptActive = FALSE;
     gPriorityScriptIdx = -1;
     gBackgroundScriptIdx = -1;
     gReadKeysFromDemoInput = FALSE;
@@ -394,7 +394,7 @@ void sub_805D568(void) {
         if (gScripts[i].isActive) {
             gIsAnyScriptActive = TRUE;
             if (gScripts[i].isPriority) {
-                gIsPriorityScriptActive = 1;
+                gIsPriorityScriptActive = TRUE;
                 gPriorityScriptIdx = gScripts[i].startScriptIdx;
             } else {
                 gBackgroundScriptIdx = gScripts[i].startScriptIdx;
@@ -684,7 +684,7 @@ void update_scripts(void) {
     }
 
     update_script_camera();
-    gIsPriorityScriptActive = 0;
+    gIsPriorityScriptActive = FALSE;
     gPriorityScriptIdx = -1;
     gBackgroundScriptIdx = -1;
     byte_203F9A1 = 0;
@@ -712,7 +712,7 @@ void update_scripts(void) {
             if (gCurrentScript->isActive) {
                 gIsAnyScriptActive = 1;
                 if (gCurrentScript->isPriority) {
-                    gIsPriorityScriptActive = 1;
+                    gIsPriorityScriptActive = TRUE;
                     gPriorityScriptIdx = gCurrentScript->field_1A;
                 } else {
                     gBackgroundScriptIdx = gCurrentScript->field_1A;
@@ -829,7 +829,7 @@ void end_script(struct ScriptState* script) {
     script->endScript = TRUE;
 
     if (script->isPriority) {
-        gIsPriorityScriptActive = 0;
+        gIsPriorityScriptActive = FALSE;
         gPriorityScriptIdx = -1;
         gBackgroundScriptIdx = -1;
         script->isPriority = 0;
