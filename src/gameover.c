@@ -26,7 +26,7 @@ void sub_80629E8() {
     gLoadedTileAnimCount = 0;
     gTileAnimQueueIndex = 0;
     sub_80409DC();
-    sub_8016B0C();
+    end_stop_honeycomb();
     byte_200108E = 0;
     end_all_scripts(1);
     byte_203F4E0 = 0;

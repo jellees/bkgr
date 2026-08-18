@@ -21,7 +21,7 @@ u8 byte_20020B2;
 u8 byte_20020B3;
 int gBillDrillSfx;
 int gKazooieSfx;
-u8 byte_20020BC;
+bool8 gIsStopHoneycombActive;
 u16 gPlayerStateFlags[PLAYER_STATE_COUNT];
 u8 byte_20021BE;
 u32 dword_20021C0;
@@ -47,7 +47,7 @@ static void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
 static const u16 sPlayerStateFlags[PLAYER_STATE_COUNT];
 
 void sub_8016440(void);
-void sub_8016B0C(void);
+void end_stop_honeycomb(void);
 void sub_8017D9C(void);
 bool32 start_npc_dialogue(int);
 static void sub_08019AAC(int, int);
@@ -59,7 +59,7 @@ void sub_8016434(void) {
 void sub_8016440(void) {
     int i;
 
-    byte_20020BC = 0;
+    gIsStopHoneycombActive = 0;
     byte_20021C5 = 0;
     byte_20021C6 = 0;
     byte_20021C7 = 0;
@@ -199,13 +199,21 @@ void sub_80166A0(void) {
     }
 }
 
-static bool32 sub_8016710(s32* keyPressed, s32* keyDown) {
-    if (!byte_20020BC) {
+/**
+ * Gates player input while a Stop Honeycomb sequence is active (health bar
+ * flashing across segments). Pressing A ends the sequence.
+ *
+ * \param keyPressed    Pointer to the frame's pressed-key bitmask; zeroed while a sequence is active.
+ * \param keyDown       Pointer to the frame's held-key bitmask; zeroed while a sequence is active.
+ * \return TRUE if input was gated (blocked) this frame, FALSE otherwise.
+ */
+static bool32 gate_input_during_stop_honeycomb(s32* keyPressed, s32* keyDown) {
+    if (!gIsStopHoneycombActive) {
         return FALSE;
     }
 
     if ((*keyDown & JOY_EXCL_DPAD) == A_BUTTON) {
-        sub_8016B0C();
+        end_stop_honeycomb();
         PLAY_SFX(42);
         *keyPressed = 0;
         *keyDown = 0;
@@ -322,13 +330,13 @@ void sub_8016A94(int a1) {
     if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_HURTING) && gGameStatus.health != 0
         && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
         set_hud_number(56, a1);
-        byte_20020BC = 1;
+        gIsStopHoneycombActive = 1;
         byte_200108E = 1;
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
     }
 }
 
-void sub_8016B0C(void) {
+void end_stop_honeycomb(void) {
     sub_8042250();
 }
 
@@ -1953,7 +1961,7 @@ static void state_none(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -2050,7 +2058,7 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_jump_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -2140,7 +2148,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -2158,7 +2166,7 @@ static void state_ledge_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         default:
@@ -2263,7 +2271,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_walk(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -2397,7 +2405,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_forward_roll(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -2430,7 +2438,7 @@ static void state_forward_roll_ledge_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_pack_wack_start(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -2444,7 +2452,7 @@ static void state_pack_wack_start(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_pack_wack_hit(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -2455,7 +2463,7 @@ static void state_pack_wack_hit(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_crouch(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (!sprite_is_anim_done_once(&gPlayerSprite))
         return;
@@ -2583,7 +2591,7 @@ static void state_crouch(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (!sub_80037A8(&gPlayerSprite))
         return;
@@ -2709,7 +2717,7 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (!sub_80037A8(&gPlayerSprite))
         return;
@@ -2859,7 +2867,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_kazooie_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -2948,7 +2956,7 @@ static void state_kazooie_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_kazooie_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
@@ -3030,7 +3038,7 @@ static void state_kazooie_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_kazooie_hurt(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (!sprite_is_anim_done_once(&gPlayerSprite)) {
         return;
@@ -3061,7 +3069,7 @@ static void state_kazooie_hurt(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_kazooie_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
@@ -3071,7 +3079,7 @@ static void state_kazooie_ledge_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_flap_flip(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case L_BUTTON:
@@ -3087,7 +3095,7 @@ static void state_flap_flip(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case L_BUTTON:
@@ -3163,7 +3171,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_feathery_flap(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         sub_80181B8(&gPlayerPos.y);
@@ -3244,7 +3252,7 @@ static void state_feathery_flap(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_air_attack(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (!audio_fx_still_active(dword_20021D0)) {
         switch (byte_20021C8) {
@@ -3338,7 +3346,7 @@ static void state_air_attack(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_bill_drill_start(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -3350,7 +3358,7 @@ static void state_bill_drill_start(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_bill_drill_end(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -3361,11 +3369,11 @@ static void state_bill_drill_end(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_bill_drill_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_bill_drill_hit(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite) && word_2002EC2 == word_2002EC0) {
         gPreviousPlayerState = gPlayerState;
@@ -3383,7 +3391,7 @@ static void state_bill_drill_hit(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_climb(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -3463,7 +3471,7 @@ static void state_climb(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_swim(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -3566,11 +3574,11 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
 }
 
 static void sub_801CD74(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_swim_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -3662,7 +3670,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_hurt(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_die(s32 keyPressed, s32 keyDown) {
@@ -3823,7 +3831,7 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shock_jump_start(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sub_80037A8(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -3833,7 +3841,7 @@ static void state_shock_jump_start(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shock_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sub_80038BC(dword_2000FC8)) {
         gPreviousPlayerState = gPlayerState;
@@ -3910,7 +3918,7 @@ static void state_shock_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shock_jump_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -3994,7 +4002,7 @@ static void state_shock_jump_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_dive(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         sub_0800C388(dword_20021E8, dword_20021EC);
@@ -4020,7 +4028,7 @@ static void state_dive(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_dive_sink(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (gPlayerPos.y == gPlayerShadowPos.y) {
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
@@ -4153,7 +4161,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_dive_rise(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (gGameStatus.oxygen) {
         if (gOxygenTimer != 0) {
@@ -4308,7 +4316,7 @@ static void sub_801E0F4(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_dive_surface(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -4349,7 +4357,7 @@ static void state_dive_hurt(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -4473,7 +4481,7 @@ static void state_mouse_walk(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -4569,7 +4577,7 @@ static void state_mouse_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_mouse_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     if (sub_80038BC(dword_2000FC8)) {
@@ -4652,7 +4660,7 @@ static void state_mouse_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_mouse_jump_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyPressed & DPAD_ANY) {
@@ -4729,11 +4737,11 @@ static void state_mouse_jump_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_mouse_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_mouse_mouse_nibble(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -4756,7 +4764,7 @@ static void state_mouse_die(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_mouse_hurt(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -4780,7 +4788,7 @@ static void state_candle_die(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_attack(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -4793,7 +4801,7 @@ static void state_candle_attack(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_attack_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -4806,7 +4814,7 @@ static void state_candle_attack_ledge_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_hurt(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -4818,7 +4826,7 @@ static void state_candle_hurt(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_walk(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -4930,7 +4938,7 @@ static void state_candle_walk(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -5022,7 +5030,7 @@ static void state_candle_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -5115,7 +5123,7 @@ static void state_candle_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_jump_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -5202,11 +5210,11 @@ static void state_candle_jump_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_candle_jump_attack_start(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sub_80038BC(dword_2000FC8)) {
         gPreviousPlayerState = gPlayerState;
@@ -5222,7 +5230,7 @@ static void state_candle_jump_attack_start(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_candle_jump_attack_end(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -5233,7 +5241,7 @@ static void state_candle_jump_attack_end(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -5330,7 +5338,7 @@ static void state_wonderwing_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -5451,7 +5459,7 @@ static void state_wonderwing_walk(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_wonderwing_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     if (sub_80038BC(dword_2000FC8)) {
@@ -5537,7 +5545,7 @@ static void state_wonderwing_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_wonderwing_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (update_wonderwing()) {
         return;
@@ -5617,12 +5625,12 @@ static void state_wonderwing_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_wonderwing_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     update_wonderwing();
 }
 
 static void state_wonderwing_start(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -5636,7 +5644,7 @@ static void state_wonderwing_start(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_wonderwing_end(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -5648,7 +5656,7 @@ static void state_wonderwing_end(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shooter_start(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -5659,7 +5667,7 @@ static void state_shooter_start(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -5785,7 +5793,7 @@ static void state_shooter_walk(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -5889,15 +5897,15 @@ static void state_shooter_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shooter_hurt(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_shooter_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_shooter_end(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_800DE9C();
     gPreviousPlayerState = gPlayerState;
     gPlayerState = PLAYER_STATE_IDLE;
@@ -5906,7 +5914,7 @@ static void state_shooter_end(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shooter_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     if (sub_80038BC(dword_2000FC8)) {
@@ -5999,7 +6007,7 @@ static void state_shooter_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_shooter_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
@@ -6085,7 +6093,7 @@ static void state_shooter_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_tank_ride(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
@@ -6197,7 +6205,7 @@ static void state_tank_ride(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_tank_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -6341,11 +6349,11 @@ static void state_tank_die(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_tank_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_tank_hurt(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -6361,7 +6369,7 @@ static void state_tank_hurt(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -6453,7 +6461,7 @@ static void state_octopus_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -6549,7 +6557,7 @@ static void state_octopus_swim_idle(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -6661,7 +6669,7 @@ static void state_octopus_walk(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -6770,7 +6778,7 @@ static void state_octopus_swim(s32 keyPressed, s32 keyDown) {
 static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
     fx32 x, y, z;
 
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (gPlayerPos.y == gPlayerShadowPos.y) {
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
@@ -6891,7 +6899,7 @@ static void state_octopus_dive_sink(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
@@ -7005,7 +7013,7 @@ static void state_octopus_dive_rise(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_dive_surface(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -7017,7 +7025,7 @@ static void state_octopus_dive_surface(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -7106,7 +7114,7 @@ static void state_octopus_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_jump_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
     sub_8016624(keyPressed, keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
@@ -7189,7 +7197,7 @@ static void state_octopus_jump_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_water_jump(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
@@ -7278,7 +7286,7 @@ static void state_octopus_water_jump(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_water_jump_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case B_BUTTON:
@@ -7360,7 +7368,7 @@ static void state_octopus_water_jump_fall(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_hurt(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite) && gGameStatus.health != 0) {
         gPreviousPlayerState = gPlayerState;
@@ -7372,7 +7380,7 @@ static void state_octopus_hurt(s32 keyPressed, s32 keyDown) {
 }
 
 static void sub_8023A40(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
@@ -7420,7 +7428,7 @@ static void state_octopus_die(s32 keyPressed, s32 keyDown) {
 }
 
 static void state_octopus_ledge_fall(s32 keyPressed, s32 keyDown) {
-    sub_8016710(&keyPressed, &keyDown);
+    gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 }
 
 static void state_octopus_dive(s32 keyPressed, s32 keyDown) {

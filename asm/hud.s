@@ -4190,6 +4190,6 @@ _08042270:
 	bx r0
 	.align 2, 0
 _0804227C: .4byte 0x0203EA7C
-_08042280: .4byte byte_20020BC
+_08042280: .4byte gIsStopHoneycombActive
 _08042284: .4byte 0x0200108E
 _08042288: .4byte 0x0203EA81

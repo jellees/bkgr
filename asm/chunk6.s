@@ -33826,7 +33826,7 @@ _08039226:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803922C: .4byte byte_20020BC
+_0803922C: .4byte gIsStopHoneycombActive
 _08039230: .4byte 0x0203E137
 
     .thumb
@@ -45549,7 +45549,7 @@ _0803E9C8: .4byte 0x0203E134
 _0803E9CC: .4byte gLoadedRoomLevel
 _0803E9D0: .4byte 0x03006EF3
 _0803E9D4: .4byte 0x0203E170
-_0803E9D8: .4byte byte_20020BC
+_0803E9D8: .4byte gIsStopHoneycombActive
 _0803E9DC: .4byte gCanPlaySfx
 _0803E9E0: .4byte 0x080CE440
 _0803E9E4: .4byte gSfxVolume
@@ -45643,7 +45643,7 @@ _0803EA90: .4byte 0x0203E134
 _0803EA94: .4byte gLoadedRoomLevel
 _0803EA98: .4byte 0x03006EF3
 _0803EA9C: .4byte 0x0203E170
-_0803EAA0: .4byte byte_20020BC
+_0803EAA0: .4byte gIsStopHoneycombActive
 _0803EAA4:
 	strb r2, [r1, #0x13]
 _0803EAA6:

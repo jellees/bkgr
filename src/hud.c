@@ -609,8 +609,8 @@ static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
                 }
                 gGameStatus.health = element->number;
                 element->field_1D = 0;
-                sub_8016B0C();
-                byte_20020BC = 0;
+                end_stop_honeycomb();
+                gIsStopHoneycombActive = FALSE;
                 sub_8063178();
                 byte_200108E = 0;
             } else {
@@ -654,8 +654,8 @@ static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
                 }
                 gGameStatus.health = element->number;
                 element->field_1D = 0;
-                sub_8016B0C();
-                byte_20020BC = 0;
+                end_stop_honeycomb();
+                gIsStopHoneycombActive = FALSE;
                 sub_8063178();
                 byte_200108E = 0;
             } else {

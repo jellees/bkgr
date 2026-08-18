@@ -278,8 +278,8 @@ static void update_game(void) {
         && !byte_20021F0 && !gIsPriorityScriptActive && gGameStatus.health != 0 && !gIsPaletteEffectsActive
         && !byte_203FA35) {
         if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
-            if (byte_20020BC) {
-                sub_8016B0C();
+            if (gIsStopHoneycombActive) {
+                end_stop_honeycomb();
                 update_hud();
             }
 
@@ -1014,7 +1014,7 @@ static bool32 sub_800ABD4(struct Vec3fx* a1, struct Vec3fx* a2) {
     if (gFloorPlaneResult.isColliding) {
         if (gFloorPlaneResult.floorType == 2 && gTransformation != TRANSFORMATION_BANJO
             && gTransformation != TRANSFORMATION_OCTOPUS && gGameStatus.health != 0) {
-            if (!byte_20020BC) {
+            if (!gIsStopHoneycombActive) {
                 hurt_player(16, -1, 0);
             }
 
@@ -2859,7 +2859,7 @@ static void sub_800DF34() {
     }
 
     if (byte_200108E) {
-        if (word_2001092 == 0 && !byte_20020BC) {
+        if (word_2001092 == 0 && !gIsStopHoneycombActive) {
             byte_200108E = 0;
         } else {
             word_2001092--;
