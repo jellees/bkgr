@@ -111,7 +111,23 @@ struct HudElement {
 
 extern struct HudElement* gHudElements;
 
+struct struc_60 {
+    u32 funcIdx;
+    u32 arg1;
+    u32 arg2;
+    u32 arg3;
+};
+
+struct struc_59 {
+    u32 length;
+    struct struc_60* states;
+};
+
+extern struct struc_59 stru_80AF310[];
+
 void sub_80421C4(int, int, char*); // Static.
+int sub_08042150(int); // Static.
+int sub_80630C0(int, int);
 
 static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
     if (element->graphicCount != 0) {
@@ -910,4 +926,9 @@ void update_hud_collectables(void) {
     gHudElements[HUD_ELEMENT_7].field_A = stru_80CC84C[gLoadedRoomLevel].jinjoCount;
     gHudElements[HUD_ELEMENT_7].counter = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
     gHudElements[HUD_ELEMENT_7].number = gHudElements[HUD_ELEMENT_7].counter;
+}
+
+// https://decomp.me/scratch/JTlEO
+NAKED void set_hud_number(int a1, int a2) {
+    asm_unified(".include \"asm/nonmatching/set_hud_number.s\"");
 }
