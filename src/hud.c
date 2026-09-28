@@ -126,7 +126,7 @@ struct struc_59 {
 extern struct struc_59 stru_80AF310[];
 
 void sub_80421C4(int, int, char*); // Static.
-int sub_08042150(int); // Static.
+int sub_08042150(int);             // Static.
 int sub_80630C0(int, int);
 
 static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
@@ -931,4 +931,33 @@ void update_hud_collectables(void) {
 // https://decomp.me/scratch/JTlEO
 NAKED void set_hud_number(int a1, int a2) {
     asm_unified(".include \"asm/nonmatching/set_hud_number.s\"");
+}
+
+void sub_80407F8(void) {
+    int funcIdx, arg1;
+    int element;
+    
+    element = gHudElements[HUD_ELEMENT_57].renderState ? HUD_ELEMENT_58 : HUD_ELEMENT_59;
+
+    if (gHudElements[element].renderState != 0) {
+        gHudElements[element].graphicCount++;
+    }
+
+    switch (gHudElements[element].renderState) {
+        case 0:
+            gHudElements[element].renderState = 1;
+            break;
+
+        case 6:
+            gHudElements[element].field_29 = 1;
+            break;
+
+        case 5:
+            do {
+                gHudElements[element].state--;
+                funcIdx = stru_80AF310[element].states[gHudElements[element].state].funcIdx;
+                arg1 = stru_80AF310[element].states[gHudElements[element].state].arg1;
+            } while (funcIdx != 11 || arg1 != 3);
+            break;
+    }
 }
