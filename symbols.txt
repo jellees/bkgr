@@ -119,3 +119,5 @@ word_80A8E28 = 0x80A8E28;
 word_80A8D8E = 0x80A8D8E;
 byte_80A8D92 = 0x80A8D92;
 stru_80AF310 = 0x80AF310;
+
+dHudFunctions = 0x80A8DB0;

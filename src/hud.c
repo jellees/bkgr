@@ -125,6 +125,8 @@ struct struc_59 {
 
 extern struct struc_59 stru_80AF310[];
 
+extern int (*dHudFunctions[])(struct HudElement*, u32, u32, u32); // This needs to be a static const.
+
 void sub_80421C4(int, int, char*); // Static.
 int sub_08042150(int);             // Static.
 int sub_80630C0(int, int);
@@ -936,7 +938,7 @@ NAKED void set_hud_number(int a1, int a2) {
 void sub_80407F8(void) {
     int funcIdx, arg1;
     int element;
-    
+
     element = gHudElements[HUD_ELEMENT_57].renderState ? HUD_ELEMENT_58 : HUD_ELEMENT_59;
 
     if (gHudElements[element].renderState != 0) {
@@ -959,5 +961,25 @@ void sub_80407F8(void) {
                 arg1 = stru_80AF310[element].states[gHudElements[element].state].arg1;
             } while (funcIdx != 11 || arg1 != 3);
             break;
+    }
+}
+
+void update_hud(void) {
+    int i;
+
+    for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
+        if (gHudElements[i].renderState) {
+            u16 idx = gHudElements[i].state;
+            struct struc_60* states = stru_80AF310[i].states;
+
+            u32 funcIdx = states[idx].funcIdx;
+            u32 arg1 = states[idx].arg1;
+            u32 arg2 = states[idx].arg2;
+            u32 arg3 = states[idx].arg3;
+
+            if (dHudFunctions[funcIdx](&gHudElements[i], arg1, arg2, arg3) == 2) {
+                gHudElements[i].state++;
+            }
+        }
     }
 }

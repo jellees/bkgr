@@ -4,67 +4,6 @@
     .text
 
     .thumb
-    .global update_hud
-update_hud: @ 0x0804087C
-	push {r4, r5, r6, r7, lr}
-	mov r7, sb
-	mov r6, r8
-	push {r6, r7}
-	movs r7, #0
-	ldr r0, _080408E4
-	mov sb, r0
-	ldr r0, _080408E8
-	adds r0, #4
-	mov r8, r0
-_08040890:
-	mov r1, sb
-	ldr r0, [r1]
-	lsls r6, r7, #6
-	adds r5, r6, r0
-	ldrb r0, [r5, #0x1f]
-	cmp r0, #0
-	beq _080408CE
-	ldrh r0, [r5, #0xc]
-	mov r2, r8
-	ldr r1, [r2]
-	lsls r0, r0, #4
-	adds r0, r0, r1
-	ldr r4, [r0]
-	ldr r1, [r0, #4]
-	ldr r2, [r0, #8]
-	ldr r3, [r0, #0xc]
-	ldr r0, _080408EC
-	lsls r4, r4, #2
-	adds r4, r4, r0
-	ldr r4, [r4]
-	adds r0, r5, #0
-	bl _call_via_r4
-	cmp r0, #2
-	bne _080408CE
-	mov r0, sb
-	ldr r1, [r0]
-	adds r1, r6, r1
-	ldrh r0, [r1, #0xc]
-	adds r0, #1
-	strh r0, [r1, #0xc]
-_080408CE:
-	movs r1, #8
-	add r8, r1
-	adds r7, #1
-	cmp r7, #0x3b
-	ble _08040890
-	pop {r3, r4}
-	mov r8, r3
-	mov sb, r4
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080408E4: .4byte 0x0203EA7C
-_080408E8: .4byte 0x080AF310
-_080408EC: .4byte 0x080A8DB0
-
-    .thumb
     .global sub_80408F0
 sub_80408F0: @ 0x080408F0
 	push {r4, r5, r6, r7, lr}
