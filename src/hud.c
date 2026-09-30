@@ -1815,7 +1815,8 @@ void show_pause_page_counters(u32 level) {
             if (byte_203E128)
                 SET_HUD_COUNTER(HUD_ELEMENT_24, stru_80CC8C4.totalJiggies, gGameStatus.totalJiggies);
             if (byte_203E129)
-                SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_JINJOS, stru_80CC8C4.totalJinjos, gGameStatus.totalJinjos);
+                SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_JINJOS, stru_80CC8C4.totalJinjos,
+                                gGameStatus.totalJinjos);
             if (byte_203E12B)
                 SET_HUD_COUNTER(HUD_ELEMENT_26,
                                 stru_80CC8C4.field_2 + stru_80CC8C4.field_3 + stru_80CC8C4.field_4
