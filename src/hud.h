@@ -10,7 +10,7 @@ enum HudMeter {
 };
 
 void reset_hud_elements(void);
-void update_hud_total_notes(void);
+void update_bozzeye_notes_counter(void);
 void init_hud_elements(void);
 void update_hud_collectables(void);
 void set_hud_number(u32 element, int value);

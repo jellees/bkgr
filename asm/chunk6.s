@@ -23713,7 +23713,7 @@ _0803410A:
 _0803411C: .4byte 0x0203E0FC
 _08034120: .4byte 0x080CEFA4
 _08034124:
-	bl update_hud_total_notes
+	bl update_bozzeye_notes_counter
 	b _080342C6
 _0803412A:
 	ldrb r0, [r5]
