@@ -127,8 +127,8 @@ extern struct struc_59 stru_80AF310[];
 
 extern int (*dHudFunctions[])(struct HudElement*, u32, u32, u32); // This needs to be a static const.
 
-void sub_80421C4(int, int, char*); // Static.
-int sub_08042150(int);             // Static.
+static void sub_80421C4(int, int, char*);
+static int sub_08042150(u32);
 int sub_80630C0(int, int);
 
 static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
@@ -1077,14 +1077,12 @@ void sub_08040A38(u32 element) {
     }
 }
 
-void sub_08040AD0(u32 element, int value)
-{
+void sub_08040AD0(u32 element, int value) {
     u8 renderState;
 
     ASSERT(element <= HUD_ELEMENT_57);
 
-    switch (element)
-    {
+    switch (element) {
         case HUD_ELEMENT_56:
             renderState = gHudElements[HUD_ELEMENT_57].renderState;
             element = HUD_ELEMENT_59;
@@ -1102,4 +1100,663 @@ void sub_08040AD0(u32 element, int value)
     gHudElements[element].counter = value;
     gHudElements[element].number = value;
     gHudElements[element].field_A = value;
+}
+
+#define SHOW_HUD_ELEMENT(element)                                                                      \
+    {                                                                                                  \
+        gHudElements[element].renderState = 1;                                                         \
+        gHudElements[element].field_14 = gHudElements[element].field_10;                               \
+        gHudElements[element].field_10 = 0x40000;                                                      \
+        gHudElements[element].field_2B = gHudElements[element].field_2A;                               \
+        gHudElements[element].field_2A = 0;                                                            \
+    }
+
+void sub_8040B3C(int isDiving) {
+    reset_hud_elements();
+
+    if (byte_203E127)
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_19);
+    if (byte_203E128)
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_20);
+    if (byte_203E12B)
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_43);
+    if (byte_203E12A)
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_42);
+    if (byte_203E12C)
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_4);
+    if (byte_203E129)
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_21);
+    if (byte_203E126)
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_6);
+
+    SHOW_HUD_ELEMENT(HUD_ELEMENT_59);
+
+    if (isDiving) {
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_56);
+    } else {
+        if (byte_203E122)
+            SHOW_HUD_ELEMENT(HUD_ELEMENT_9);
+        if (byte_203E123)
+            SHOW_HUD_ELEMENT(HUD_ELEMENT_10);
+        if (byte_203E125)
+            SHOW_HUD_ELEMENT(HUD_ELEMENT_12);
+        if (byte_203E124)
+            SHOW_HUD_ELEMENT(HUD_ELEMENT_11);
+    }
+
+    byte_203EA80 = 1;
+}
+
+void sub_8040E74(void) {
+    byte_203EA80 = 0;
+    sub_8041E58();
+    update_hud_collectables();
+}
+
+bool32 sub_8040E8C(int isDiving) {
+    bool32 done = TRUE;
+
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_19].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_20].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_21].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_43].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E12A && gHudElements[HUD_ELEMENT_42].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E12C && gHudElements[HUD_ELEMENT_4].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_6].renderState != 5) {
+        done = FALSE;
+    }
+
+    //! Possible fake match.
+    if ((*(struct HudElement* volatile*)&gHudElements)[HUD_ELEMENT_59].renderState != 5) {
+        done = FALSE;
+    }
+
+    if (isDiving) {
+        if ((*(struct HudElement* volatile*)&gHudElements)[HUD_ELEMENT_56].renderState != 5) {
+            done = FALSE;
+        }
+    } else {
+        if (byte_203E122 && gHudElements[HUD_ELEMENT_9].renderState != 5) {
+            done = FALSE;
+        }
+        if (byte_203E123 && gHudElements[HUD_ELEMENT_10].renderState != 5) {
+            done = FALSE;
+        }
+        if (byte_203E124 && gHudElements[HUD_ELEMENT_11].renderState != 5) {
+            done = FALSE;
+        }
+        if (byte_203E125 && gHudElements[HUD_ELEMENT_12].renderState != 5) {
+            done = FALSE;
+        }
+    }
+
+    return done;
+}
+
+#define RESTORE_HUD_ELEMENT(element)                                                                   \
+    {                                                                                                  \
+        gHudElements[element].field_10 = gHudElements[element].field_14;                               \
+        gHudElements[element].field_2A = gHudElements[element].field_2B;                               \
+    }
+
+#ifdef NONMATCHING
+bool32 sub_8040FF4(int isDiving) {
+    bool32 done = TRUE;
+
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_19].renderState != 0)
+        done = FALSE;
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_20].renderState != 0)
+        done = FALSE;
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_21].renderState != 0)
+        done = FALSE;
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_43].renderState != 0)
+        done = FALSE;
+    if (byte_203E12A && gHudElements[HUD_ELEMENT_42].renderState != 0)
+        done = FALSE;
+    if (byte_203E12C && gHudElements[HUD_ELEMENT_4].renderState != 0)
+        done = FALSE;
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_6].renderState != 0)
+        done = FALSE;
+    if (gHudElements[HUD_ELEMENT_59].renderState != 0)
+        done = FALSE;
+
+    if (isDiving) {
+        if (gHudElements[HUD_ELEMENT_56].renderState != 0)
+            done = FALSE;
+    } else {
+        if (byte_203E122 && gHudElements[HUD_ELEMENT_9].renderState != 0)
+            done = FALSE;
+        if (byte_203E123 && gHudElements[HUD_ELEMENT_10].renderState != 0)
+            done = FALSE;
+        if (byte_203E124 && gHudElements[HUD_ELEMENT_11].renderState != 0)
+            done = FALSE;
+        if (byte_203E125 && gHudElements[HUD_ELEMENT_12].renderState != 0)
+            done = FALSE;
+    }
+
+    if (done) {
+        if (isDiving) {
+            if (byte_203E127)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_19);
+            if (byte_203E128)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_20);
+            if (byte_203E12B)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_43);
+            if (byte_203E12A)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_42);
+            if (byte_203E12C)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_4);
+            if (byte_203E129)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_21);
+            if (byte_203E126)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_6);
+            RESTORE_HUD_ELEMENT(HUD_ELEMENT_59);
+            RESTORE_HUD_ELEMENT(HUD_ELEMENT_56);
+        } else {
+            if (byte_203E127)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_19);
+            if (byte_203E128)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_20);
+            if (byte_203E12B)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_43);
+            if (byte_203E12A)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_42);
+            if (byte_203E12C)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_4);
+            if (byte_203E129)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_21);
+            if (byte_203E126)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_6);
+            RESTORE_HUD_ELEMENT(HUD_ELEMENT_59);
+            if (byte_203E122)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_9);
+            if (byte_203E123)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_10);
+            if (byte_203E125)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_12);
+            if (byte_203E124)
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_11);
+        }
+    }
+
+    return done;
+}
+#else
+NAKED bool32 sub_8040FF4(int isDiving) {
+    asm_unified(".include \"asm/nonmatching/sub_8040FF4.s\"");
+}
+#endif
+
+#define SET_HUD_COUNTER(element, max, value)                                                           \
+    {                                                                                                  \
+        gHudElements[element].field_A = max;                                                           \
+        gHudElements[element].counter = value;                                                         \
+        gHudElements[element].number = gHudElements[element].counter;                                  \
+    }
+
+#define SHOW_LEVEL_COUNTER(element, field)                                                             \
+    {                                                                                                  \
+        SET_HUD_COUNTER(element, stru_80CC84C[level].field, byte_2000FCC[level].field);                \
+        SHOW_HUD_ELEMENT(element);                                                                     \
+    }
+
+void sub_0804147C(u32 level) {
+    if (byte_203E127)
+        SHOW_LEVEL_COUNTER(HUD_ELEMENT_23, noteCount);
+    if (byte_203E128)
+        SHOW_LEVEL_COUNTER(HUD_ELEMENT_24, jiggyCount);
+    if (byte_203E129)
+        SHOW_LEVEL_COUNTER(HUD_ELEMENT_25, jinjoCount);
+
+    if (byte_203E12B) {
+        SET_HUD_COUNTER(HUD_ELEMENT_26,
+                        stru_80CC84C[level].field_9 + stru_80CC84C[level].field_A
+                            + stru_80CC84C[level].field_B + stru_80CC84C[level].field_C,
+                        byte_2000FCC[level].field_9 + byte_2000FCC[level].field_A
+                            + byte_2000FCC[level].field_B + byte_2000FCC[level].field_C);
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_26);
+    }
+
+    if (byte_203E12C)
+        SHOW_LEVEL_COUNTER(HUD_ELEMENT_27, bozzeyeCount);
+    if (byte_203E126)
+        SHOW_LEVEL_COUNTER(HUD_ELEMENT_28, honeycombCount);
+
+    switch (level) {
+        case 0:
+        case 3:
+            break;
+
+        case 1:
+            if (byte_203E12D)
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_29, chickCount);
+            break;
+
+        case 2:
+            if (byte_203E12E)
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_30, shellCount);
+            if (byte_203E12F)
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_33, field_2);
+            break;
+
+        case 4:
+            if (byte_203E130)
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_31, silverCoinCount);
+            if (byte_203E131)
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_34, field_E);
+            if (byte_203E132)
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_35, field_D);
+            break;
+
+        case 5:
+            if (byte_203E133)
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_32, field_10);
+            break;
+
+        case 6:
+            if (byte_203E127)
+                SET_HUD_COUNTER(HUD_ELEMENT_23, stru_80CC8C4.totalNotes, gGameStatus.totalNotes);
+            if (byte_203E128)
+                SET_HUD_COUNTER(HUD_ELEMENT_24, stru_80CC8C4.totalJiggies, gGameStatus.totalJiggies);
+            if (byte_203E129)
+                SET_HUD_COUNTER(HUD_ELEMENT_25, stru_80CC8C4.field_B, gGameStatus.field_B);
+            if (byte_203E12B)
+                SET_HUD_COUNTER(HUD_ELEMENT_26,
+                                stru_80CC8C4.field_2 + stru_80CC8C4.field_3 + stru_80CC8C4.field_4
+                                    + stru_80CC8C4.field_5,
+                                gGameStatus.field_2 + gGameStatus.field_3 + gGameStatus.field_4
+                                    + gGameStatus.field_5);
+            if (byte_203E12C)
+                SET_HUD_COUNTER(HUD_ELEMENT_27, stru_80CC8C4.field_7, gGameStatus.field_7);
+            if (byte_203E126)
+                SET_HUD_COUNTER(HUD_ELEMENT_28, stru_80CC8C4.field_1, gGameStatus.field_1);
+            break;
+
+        default:
+            HANG;
+    }
+
+    byte_203EA80 = 1;
+}
+
+void sub_8041AAC(int page) {
+    byte_203EA80 = 0;
+    sub_8041E58();
+}
+
+bool32 sub_08041AC0(int page) {
+    bool32 done = TRUE;
+
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_23].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_24].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_25].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_26].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E12C && gHudElements[HUD_ELEMENT_27].renderState != 5) {
+        done = FALSE;
+    }
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_28].renderState != 5) {
+        done = FALSE;
+    }
+
+    switch (page) {
+        case 0:
+        case 3:
+        case 6:
+            break;
+
+        case 1:
+            if (byte_203E12D && gHudElements[HUD_ELEMENT_29].renderState != 5) {
+                done = FALSE;
+            }
+            return done;
+
+        case 2:
+            if (byte_203E12E && gHudElements[HUD_ELEMENT_30].renderState != 5) {
+                done = FALSE;
+            }
+            if (byte_203E12F && gHudElements[HUD_ELEMENT_33].renderState != 5) {
+                done = FALSE;
+            }
+            return done;
+
+        case 4:
+            if (byte_203E130 && gHudElements[HUD_ELEMENT_31].renderState != 5) {
+                done = FALSE;
+            }
+            if (byte_203E131 && gHudElements[HUD_ELEMENT_34].renderState != 5) {
+                done = FALSE;
+            }
+            if (byte_203E132 && gHudElements[HUD_ELEMENT_35].renderState != 5) {
+                done = FALSE;
+            }
+            return done;
+
+        case 5:
+            if (byte_203E133 && gHudElements[HUD_ELEMENT_32].renderState != 5) {
+                done = FALSE;
+            }
+            return done;
+
+        default:
+            HANG;
+    }
+
+    return done;
+}
+
+bool32 sub_08041C8C(int page) {
+    bool32 done = TRUE;
+
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_23].renderState != 0) {
+        done = FALSE;
+    }
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_24].renderState != 0) {
+        done = FALSE;
+    }
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_25].renderState != 0) {
+        done = FALSE;
+    }
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_26].renderState != 0) {
+        done = FALSE;
+    }
+    if (byte_203E12C && gHudElements[HUD_ELEMENT_27].renderState != 0) {
+        done = FALSE;
+    }
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_28].renderState != 0) {
+        done = FALSE;
+    }
+
+    switch (page) {
+        case 0:
+        case 3:
+        case 6:
+            break;
+
+        case 1:
+            if (byte_203E12D && gHudElements[HUD_ELEMENT_29].renderState != 0) {
+                done = FALSE;
+            }
+            return done;
+
+        case 2:
+            if (byte_203E12E && gHudElements[HUD_ELEMENT_30].renderState != 0) {
+                done = FALSE;
+            }
+            if (byte_203E12F && gHudElements[HUD_ELEMENT_33].renderState != 0) {
+                done = FALSE;
+            }
+            return done;
+
+        case 4:
+            if (byte_203E130 && gHudElements[HUD_ELEMENT_31].renderState != 0) {
+                done = FALSE;
+            }
+            if (byte_203E131 && gHudElements[HUD_ELEMENT_34].renderState != 0) {
+                done = FALSE;
+            }
+            if (byte_203E132 && gHudElements[HUD_ELEMENT_35].renderState != 0) {
+                done = FALSE;
+            }
+            return done;
+
+        case 5:
+            if (byte_203E133 && gHudElements[HUD_ELEMENT_32].renderState != 0) {
+                done = FALSE;
+            }
+            return done;
+
+        default:
+            HANG;
+    }
+
+    return done;
+}
+
+void sub_8041E58(void) {
+    int i;
+
+    for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
+        if (gHudElements[i].renderState) {
+            gHudElements[i].timer = 1;
+            gHudElements[i].field_2A = 0;
+        }
+    }
+}
+
+void sub_8041E88(void) {
+    gHudElements[HUD_ELEMENT_39].timer = 0;
+    gHudElements[HUD_ELEMENT_39].field_2A = 0;
+    gHudElements[HUD_ELEMENT_40].timer = 0;
+    gHudElements[HUD_ELEMENT_40].field_2A = 0;
+    gHudElements[HUD_ELEMENT_41].timer = 0;
+    gHudElements[HUD_ELEMENT_41].field_2A = 0;
+    gHudElements[HUD_ELEMENT_44].timer = 0;
+    gHudElements[HUD_ELEMENT_44].field_2A = 0;
+    gHudElements[HUD_ELEMENT_45].timer = 0;
+    gHudElements[HUD_ELEMENT_45].field_2A = 0;
+    gHudElements[HUD_ELEMENT_46].timer = 0;
+    gHudElements[HUD_ELEMENT_46].field_2A = 0;
+    gHudElements[HUD_ELEMENT_47].timer = 0;
+    gHudElements[HUD_ELEMENT_47].field_2A = 0;
+    gHudElements[HUD_ELEMENT_48].timer = 0;
+    gHudElements[HUD_ELEMENT_48].field_2A = 0;
+    gHudElements[HUD_ELEMENT_49].timer = 0;
+    gHudElements[HUD_ELEMENT_49].field_2A = 0;
+}
+
+void sub_08041F3C(u32 element, int value) {
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element) {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_58;
+            break;
+
+        case HUD_ELEMENT_57:
+            renderState = gHudElements[HUD_ELEMENT_59].renderState;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_56;
+            break;
+    }
+
+    gHudElements[element].field_10 = value;
+}
+
+void sub_08041FA4(u32 element) {
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element) {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_58;
+            break;
+
+        case HUD_ELEMENT_57:
+            if (gHudElements[HUD_ELEMENT_59].renderState != 0
+                && gHudElements[HUD_ELEMENT_59].renderState != 6)
+                element = HUD_ELEMENT_56;
+            break;
+    }
+
+    gHudElements[element].field_2A = 1;
+}
+
+void sub_0804200C(u32 element) {
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element) {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_58;
+            break;
+
+        case HUD_ELEMENT_57:
+            renderState = gHudElements[HUD_ELEMENT_59].renderState;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_56;
+            break;
+    }
+
+    gHudElements[element].field_2A = 0;
+    gHudElements[element].timer = 1;
+}
+
+bool32 sub_0804207C(u32 element) {
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element) {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_58;
+            break;
+
+        case HUD_ELEMENT_57:
+            if (gHudElements[HUD_ELEMENT_59].renderState != 0
+                && gHudElements[HUD_ELEMENT_59].renderState != 6)
+                element = HUD_ELEMENT_56;
+            break;
+    }
+
+    return gHudElements[element].renderState == 5;
+}
+
+bool32 sub_080420E8(u32 element) {
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element) {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_58;
+            break;
+
+        case HUD_ELEMENT_57:
+            if (gHudElements[HUD_ELEMENT_59].renderState != 0
+                && gHudElements[HUD_ELEMENT_59].renderState != 6)
+                element = HUD_ELEMENT_56;
+            break;
+    }
+
+    return gHudElements[element].renderState != 0;
+}
+
+static int sub_08042150(u32 element) {
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element) {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_58;
+            break;
+
+        case HUD_ELEMENT_57:
+            if (gHudElements[HUD_ELEMENT_59].renderState != 0
+                && gHudElements[HUD_ELEMENT_59].renderState != 6)
+                element = HUD_ELEMENT_56;
+            break;
+    }
+
+    if (gHudElements[element].renderState != 6 && gHudElements[element].renderState != 0) {
+        return gHudElements[element].field_A;
+    }
+
+    return -1;
+}
+
+static void sub_80421C4(int value, int max, char* buf) {
+    int valueLen;
+    int maxLen;
+    char* end;
+
+    if (value <= 9) {
+        valueLen = 1;
+        IntegerToAsciiBw(value, buf);
+    } else if (value <= 99) {
+        valueLen = 2;
+        IntegerToAsciiBw(value, buf + 1);
+    } else {
+        valueLen = 3;
+        IntegerToAsciiBw(value, buf + 2);
+    }
+
+    buf[valueLen] = '/';
+
+    if (max <= 9) {
+        maxLen = 1;
+    } else if (max <= 99) {
+        maxLen = 2;
+    } else {
+        maxLen = 3;
+    }
+
+    end = buf + (valueLen + maxLen);
+    IntegerToAsciiBw(max, end);
+    end[1] = 0xFF;
+}
+
+bool32 sub_8042218(int value) {
+    if (gHudElements[HUD_ELEMENT_36].renderState != 0) {
+        gHudElements[HUD_ELEMENT_36].timer = 0;
+        return FALSE;
+    }
+
+    gHudElements[HUD_ELEMENT_36].counter = value;
+    gHudElements[HUD_ELEMENT_36].number = value;
+    gHudElements[HUD_ELEMENT_36].renderState = 1;
+    gHudElements[HUD_ELEMENT_36].timer = 10;
+    return TRUE;
+}
+
+void sub_8042250(void) {
+    if (gHudElements[HUD_ELEMENT_59].renderState != 3) {
+        gIsStopHoneycombActive = FALSE;
+        sub_8063178();
+        byte_200108E = 0;
+    }
+
+    byte_203EA81 = 1;
 }

@@ -657,17 +657,17 @@ extern void sub_8040B3C(int);
 extern void sub_8040E74(void);
 extern bool32 sub_8040E8C(int);
 extern bool32 sub_8040FF4(int);
-extern void sub_0804147C(int);
+extern void sub_0804147C(u32);
 extern void sub_8041AAC(int);
 extern bool32 sub_08041AC0(int);
 extern bool32 sub_08041C8C(int);
 extern void sub_8041E58(void);
 extern void sub_8041E88(void);
-extern void sub_08041F3C(int, int);
-extern void sub_08041FA4(int);
-extern void sub_0804200C(int);
-extern bool32 sub_0804207C(int);
-extern bool32 sub_080420E8(int);
+extern void sub_08041F3C(u32, int);
+extern void sub_08041FA4(u32);
+extern void sub_0804200C(u32);
+extern bool32 sub_0804207C(u32);
+extern bool32 sub_080420E8(u32);
 extern void sub_8042250(void);
 
 extern int RandomMinMax(int, int);
@@ -779,6 +779,24 @@ extern bool8 byte_203DFE9;
 
 extern u8 byte_203E10F;
 
+extern u8 byte_203E122;
+extern u8 byte_203E123;
+extern u8 byte_203E124;
+extern u8 byte_203E125;
+extern u8 byte_203E126;
+extern u8 byte_203E127;
+extern u8 byte_203E128;
+extern u8 byte_203E129;
+extern u8 byte_203E12A;
+extern u8 byte_203E12B;
+extern u8 byte_203E12C;
+extern u8 byte_203E12D;
+extern u8 byte_203E12E;
+extern u8 byte_203E12F;
+extern u8 byte_203E130;
+extern u8 byte_203E131;
+extern u8 byte_203E132;
+extern u8 byte_203E133;
 extern u8 byte_203E137;
 extern u8 byte_203E138;
 
