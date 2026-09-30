@@ -13,6 +13,7 @@
 #include "menu.h"
 #include "random.h"
 #include "script.h"
+#include "hud.h"
 
 enum EnvironmentEffect { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 

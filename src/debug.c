@@ -7,6 +7,7 @@
 #include "menu.h"
 #include "player.h"
 #include "room.h"
+#include "hud.h"
 
 enum DebugAI { DEBUG_AI_NORMAL, DEBUG_AI_NO_AI, DEBUG_AI_NO_HARM, DEBUG_AI_NO_AI_HARM };
 

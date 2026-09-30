@@ -8,6 +8,7 @@
 #include "sprite.h"
 #include "script.h"
 #include "player_defs.h"
+#include "hud.h"
 
 u16 gPreviousPlayerState;
 u16 gPlayerState;

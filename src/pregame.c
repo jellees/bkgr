@@ -9,6 +9,7 @@
 #include "audio_b.h"
 #include "alloc.h"
 #include "script.h"
+#include "hud.h"
 
 static void ShowSelectGame(int);
 static bool32 sub_8024200(void);

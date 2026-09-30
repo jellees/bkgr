@@ -8,6 +8,7 @@
 #include "player_defs.h"
 #include "audio_b.h"
 #include "script_defs.h"
+#include "hud.h"
 
 #define MAX_SCRIPTS 2
 

@@ -5,6 +5,7 @@
 #include "main.h"
 #include "player.h"
 #include "audio_b.h"
+#include "hud.h"
 
 enum HudElementIdx {
     HUD_ELEMENT_0,

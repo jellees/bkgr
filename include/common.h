@@ -642,33 +642,6 @@ extern void sub_8038A34(void);
 extern void sub_8038FA0(u16);
 extern void sub_8039210(void);
 extern void sub_8039234(void);
-extern void reset_hud_elements(void);
-
-extern void init_hud_elements(void);
-extern void update_hud_collectables(void);
-extern void set_hud_number(int, int);
-extern void update_hud(void);
-extern void sub_80408F0(void);
-extern void render_hud_elements(void);
-extern void sub_80409DC(void);
-extern void sub_08040A38(u32);
-extern void sub_08040AD0(u32, int);
-extern void sub_8040B3C(int);
-extern void sub_8040E74(void);
-extern bool32 sub_8040E8C(int);
-extern bool32 sub_8040FF4(int);
-extern void sub_0804147C(u32);
-extern void sub_8041AAC(int);
-extern bool32 sub_08041AC0(int);
-extern bool32 sub_08041C8C(int);
-extern void sub_8041E58(void);
-extern void sub_8041E88(void);
-extern void sub_08041F3C(u32, int);
-extern void sub_08041FA4(u32);
-extern void sub_0804200C(u32);
-extern bool32 sub_0804207C(u32);
-extern bool32 sub_080420E8(u32);
-extern void sub_8042250(void);
 
 extern int RandomMinMax(int, int);
 
