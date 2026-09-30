@@ -585,7 +585,7 @@ static void exec_totals_menu(void) {
     bool32 loadNextPage;
     bool32 fadeIn;
 
-    while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+    while (!are_pause_main_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
         update_hud();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
@@ -769,7 +769,7 @@ static bool32 exec_save_menu(void) {
     textbox.field_11 = 6;
     textbox.font = &font_80B01A8[1];
 
-    while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+    while (!are_pause_main_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
         update_hud();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
@@ -1101,7 +1101,7 @@ static void exec_options_menu(void) {
     sfxText[4] = '}';
     sfxText[5] = STRING_TERMINATOR;
 
-    while (!sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+    while (!are_pause_main_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
         update_hud();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);

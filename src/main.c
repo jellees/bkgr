@@ -316,8 +316,8 @@ static void update_game(void) {
 
             if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING
                 && gTransformation != TRANSFORMATION_OCTOPUS) {
-                set_hud_number(57, gGameStatus.oxygen);
-                sub_08041FA4(57);
+                set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
+                sub_08041FA4(HUD_METER_OXYGEN);
             }
 
             if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) {
@@ -1943,7 +1943,7 @@ void sub_0800C388(int a1, int a2) {
     init_efx();
     enable_poison_effect();
     init_room_name();
-    sub_08040A38(56);
+    sub_08040A38(HUD_METER_HEALTH);
     sub_8026E48(4095, isMusicChanged, 1);
     gPlayerSprite.xPos = gPlayerInitPixelPosX;
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
@@ -2937,14 +2937,14 @@ void decrease_player_health(int amount) {
 
     if (gGameStatus.health <= amount) {
         gGameStatus.health = 0;
-        set_hud_number(56, 0);
+        set_hud_number(HUD_METER_HEALTH, 0);
         PLAY_SFX(79);
         if (gIsSlideMiniGame) {
             byte_20010B0 = 1;
         }
     } else {
         gGameStatus.health -= amount;
-        set_hud_number(56, gGameStatus.health);
+        set_hud_number(HUD_METER_HEALTH, gGameStatus.health);
     }
 }
 
@@ -3894,7 +3894,7 @@ static void sub_800F430(void) {
 void restore_full_health(void) {
     if (gGameStatus.health < gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1)) {
         gGameStatus.health = gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1);
-        set_hud_number(56, gGameStatus.health);
+        set_hud_number(HUD_METER_HEALTH, gGameStatus.health);
         PLAY_SFX(40);
     }
 }

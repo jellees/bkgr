@@ -330,7 +330,7 @@ int sub_8016A5C(int a1) {
 void sub_8016A94(int a1) {
     if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_HURTING) && gGameStatus.health != 0
         && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
-        set_hud_number(56, a1);
+        set_hud_number(HUD_METER_HEALTH, a1);
         gIsStopHoneycombActive = 1;
         byte_200108E = 1;
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
@@ -763,10 +763,10 @@ void sub_8017A54(void) {
     } else {
         gPlayerState = PLAYER_STATE_IDLE;
         sprite_set_anim(&gPlayerSprite, 25, 0, 0);
-        sub_0804200C(57);
+        sub_0804200C(HUD_METER_OXYGEN);
         if (gGameStatus.oxygen != gGameStatus.maxOxygen) {
             gGameStatus.oxygen = gGameStatus.maxOxygen;
-            set_hud_number(57, gGameStatus.oxygen);
+            set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
             PLAY_SFX(124);
         }
     }
@@ -788,9 +788,9 @@ void sub_8017B34(int a1) {
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
         gOxygenTime = 600;
         gOxygenTimer = 600;
-        if (!sub_080420E8(56)) {
-            set_hud_number(57, gGameStatus.oxygen);
-            sub_08041FA4(57);
+        if (!sub_080420E8(HUD_METER_HEALTH)) {
+            set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
+            sub_08041FA4(HUD_METER_OXYGEN);
         }
     } else {
         if (byte_20010A4) {
@@ -4021,9 +4021,9 @@ static void state_dive(s32 keyPressed, s32 keyDown) {
         gOxygenTime = 600;
         gOxygenTimer = 600;
 
-        if (!sub_080420E8(56)) {
-            set_hud_number(57, gGameStatus.oxygen);
-            sub_08041FA4(57);
+        if (!sub_080420E8(HUD_METER_HEALTH)) {
+            set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
+            sub_08041FA4(HUD_METER_OXYGEN);
         }
     }
 }
@@ -4067,8 +4067,8 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
     if (gOxygenTimer == 0) {
         gOxygenTimer = gOxygenTime;
         gGameStatus.oxygen--;
-        set_hud_number(57, gGameStatus.oxygen);
-        sub_08041FA4(57);
+        set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
+        sub_08041FA4(HUD_METER_OXYGEN);
         PLAY_SFX(123);
     } else {
         gOxygenTimer--;
@@ -4170,8 +4170,8 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
         } else {
             gOxygenTimer = gOxygenTime;
             gGameStatus.oxygen--;
-            set_hud_number(57, gGameStatus.oxygen);
-            sub_08041FA4(57);
+            set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
+            sub_08041FA4(HUD_METER_OXYGEN);
             PLAY_SFX(123);
         }
     } else {
@@ -4302,8 +4302,8 @@ static void sub_801E0F4(s32 keyPressed, s32 keyDown) {
     if (gOxygenTimer == 0) {
         gOxygenTimer = gOxygenTime;
         gGameStatus.oxygen--;
-        set_hud_number(57, gGameStatus.oxygen);
-        sub_08041FA4(57);
+        set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
+        sub_08041FA4(HUD_METER_OXYGEN);
         PLAY_SFX(123);
     } else {
         gOxygenTimer--;
@@ -4324,10 +4324,10 @@ static void state_dive_surface(s32 keyPressed, s32 keyDown) {
         gPlayerState = PLAYER_STATE_IDLE;
         sub_800C1E8(gPrediveRoomIdx, gPredivePosX, gPredivePosY, gPredivePosZ, 1, 0);
         sub_8017C50();
-        sub_0804200C(57);
+        sub_0804200C(HUD_METER_OXYGEN);
         if (gGameStatus.oxygen != gGameStatus.maxOxygen) {
             gGameStatus.oxygen = gGameStatus.maxOxygen;
-            set_hud_number(57, gGameStatus.oxygen);
+            set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
             PLAY_SFX(124);
         }
         sub_800387C(dword_2000FC8);
