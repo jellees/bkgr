@@ -198,7 +198,8 @@ enum ScriptWaitCond {
 
 #define ActorRevertPriority(actorIdx) SCRIPT_CMD(SCRIPT_CMD_ACTOR_REVERT_PRIORITY, actorIdx, 0, 0, 0)
 
-#define ActorSetSortOffset(actorIdx, unknown) SCRIPT_CMD(SCRIPT_CMD_ACTOR_SET_SORT_OFFSET, actorIdx, unknown, 0, 0)
+#define ActorSetSortOffset(actorIdx, unknown)                                                          \
+    SCRIPT_CMD(SCRIPT_CMD_ACTOR_SET_SORT_OFFSET, actorIdx, unknown, 0, 0)
 
 #define ActorSetObjMode(actorIdx, objMode)                                                             \
     SCRIPT_CMD(SCRIPT_CMD_ACTOR_SET_OBJ_MODE, actorIdx, objMode, 0, 0)

@@ -276,8 +276,8 @@ static void update_game(void) {
     }
 
     if (gKeysDown & START_BUTTON && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)
-        && !byte_20021F0 && !gIsPriorityScriptActive && gGameStatus.health != 0 && !gIsPaletteEffectsActive
-        && !byte_203FA35) {
+        && !byte_20021F0 && !gIsPriorityScriptActive && gGameStatus.health != 0
+        && !gIsPaletteEffectsActive && !byte_203FA35) {
         if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
             if (gIsStopHoneycombActive) {
                 end_stop_honeycomb();

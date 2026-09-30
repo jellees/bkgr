@@ -5,19 +5,23 @@
 
 // Fixed point 32-bit 16.16
 typedef s32 fx32;
-#define FX32_SHIFT 16
+#define FX32_SHIFT    16
 #define FX32_CONST(x) ((fx32)((x) * (1 << FX32_SHIFT)))
-#define FX32_ONE FX32_CONST(1)
+#define FX32_ONE      FX32_CONST(1)
 
 // Game specific assert.
 #define HANG asm(".word 0xEE00EE00")
-#define ASSERT(expr) do { if (!(expr)) HANG; } while (0)
+#define ASSERT(expr)                                                                                   \
+    do {                                                                                               \
+        if (!(expr))                                                                                   \
+            HANG;                                                                                      \
+    } while (0)
 
 // String terminator instead of \0.
 #define STRING_TERMINATOR 0xff
 
 // Puts 0xFF after a string.
-#define FORMAT(s) s"\xff"
+#define FORMAT(s) s "\xff"
 
 // To help with decompiling.
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
