@@ -325,7 +325,7 @@ void open_pause_menu(void) {
 }
 
 static void init(void) {
-    sub_8040B3C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
+    show_pause_main_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
 
     InitMenu(MENU_PAUSE_MAIN, gPauseMenuLanguage);
     gMenuId = MENU_PAUSE_MAIN;
@@ -372,8 +372,10 @@ static void exec_pause_menu(void) {
     while (1) {
         if (gMenuId == 1) {
             byte_203F54C =
-                sub_8040E8C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) && !loadMenu ? 1
-                                                                                                   : 0;
+                are_pause_main_counters_shown(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)
+                        && !loadMenu
+                    ? 1
+                    : 0;
         } else {
             byte_203F54C = !loadMenu ? 1 : 0;
         }
@@ -382,13 +384,15 @@ static void exec_pause_menu(void) {
             ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
             if (gKeysDown & START_BUTTON) {
-                if (sub_8040E8C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+                if (are_pause_main_counters_shown(gPlayerStateFlags[gPlayerState]
+                                                  & PLAYER_FLAGS_IS_DIVING)) {
                     loadMenu = TRUE;
                     sub_8040E74();
                 }
             } else if (gKeysDown & B_BUTTON) {
                 if (gMenuParentId == 0xFF) {
-                    if (sub_8040E8C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+                    if (are_pause_main_counters_shown(gPlayerStateFlags[gPlayerState]
+                                                      & PLAYER_FLAGS_IS_DIVING)) {
                         loadMenu = TRUE;
                         sub_8040E74();
                     }
@@ -398,7 +402,8 @@ static void exec_pause_menu(void) {
                     switch (gMenuId) {
                         case MENU_PAUSE_MAIN:
                             gMenuParentId = 0xFF;
-                            sub_8040B3C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
+                            show_pause_main_counters(gPlayerStateFlags[gPlayerState]
+                                                     & PLAYER_FLAGS_IS_DIVING);
                             break;
 
                         default:
@@ -417,7 +422,7 @@ static void exec_pause_menu(void) {
                 if (changeMenu) {
                     changeMenu = FALSE;
                     InitMenu(gMenuId, gPauseMenuLanguage);
-                    sub_8040B3C(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
+                    show_pause_main_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
                     SetObjectsFullAlpha();
                     fadeIn = 1;
                 }
@@ -430,7 +435,9 @@ static void exec_pause_menu(void) {
             }
         }
 
-        if (loadMenu && sub_8040FF4(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+        if (loadMenu
+            && are_pause_main_counters_hidden(gPlayerStateFlags[gPlayerState]
+                                              & PLAYER_FLAGS_IS_DIVING)) {
             if (gMenuId == MENU_PAUSE_MAIN)
                 break;
 
@@ -614,7 +621,7 @@ static void exec_totals_menu(void) {
     page = gLoadedRoomLevel;
     nextPage = -1;
 
-    sub_0804147C(page);
+    show_pause_page_counters(page);
     load_jinjo_palette(page);
 
     loadNextPage = FALSE;
@@ -624,11 +631,11 @@ static void exec_totals_menu(void) {
     fadeIn = TRUE;
 
     while (1) {
-        if (sub_08041AC0(page) && !loadNextPage) {
+        if (are_page_counters_shown(page) && !loadNextPage) {
             ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
             if (gKeysDown & B_BUTTON) {
-                if (sub_08041AC0(page)) {
+                if (are_page_counters_shown(page)) {
                     loadNextPage = TRUE;
                     nextPage = -1;
                     sub_8041AAC(page);
@@ -664,7 +671,7 @@ static void exec_totals_menu(void) {
             }
         }
 
-        if (loadNextPage && sub_08041C8C(page)) {
+        if (loadNextPage && are_page_counters_hidden(page)) {
             load_jinjo_palette(6);
             FadeOutObjects(2, 0);
             SetTextSpriteCount(0);
@@ -684,7 +691,7 @@ static void exec_totals_menu(void) {
 
             page = nextPage;
 
-            sub_0804147C(page);
+            show_pause_page_counters(page);
             load_jinjo_palette(page);
 
             loadNextPage = FALSE;

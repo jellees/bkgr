@@ -1550,7 +1550,7 @@ void sub_08040AD0(u32 element, int value) {
         gHudElements[element].field_2A = 0;                                                            \
     }
 
-void sub_8040B3C(int isDiving) {
+void show_pause_main_counters(int isDiving) {
     reset_hud_elements();
 
     if (byte_203E127)
@@ -1592,7 +1592,7 @@ void sub_8040E74(void) {
     update_hud_collectables();
 }
 
-bool32 sub_8040E8C(int isDiving) {
+bool32 are_pause_main_counters_shown(int isDiving) {
     bool32 done = TRUE;
 
     if (byte_203E127 && gHudElements[HUD_ELEMENT_19].renderState != 5) {
@@ -1651,7 +1651,7 @@ bool32 sub_8040E8C(int isDiving) {
     }
 
 #ifdef NONMATCHING
-bool32 sub_8040FF4(int isDiving) {
+bool32 are_pause_main_counters_hidden(int isDiving) {
     bool32 done = TRUE;
 
     if (byte_203E127 && gHudElements[HUD_ELEMENT_19].renderState != 0)
@@ -1733,7 +1733,7 @@ bool32 sub_8040FF4(int isDiving) {
     return done;
 }
 #else
-NAKED bool32 sub_8040FF4(int isDiving) {
+NAKED bool32 are_pause_main_counters_hidden(int isDiving) {
     asm_unified(".include \"asm/nonmatching/sub_8040FF4.s\"");
 }
 #endif
@@ -1751,7 +1751,7 @@ NAKED bool32 sub_8040FF4(int isDiving) {
         SHOW_HUD_ELEMENT(element);                                                                     \
     }
 
-void sub_0804147C(u32 level) {
+void show_pause_page_counters(u32 level) {
     if (byte_203E127)
         SHOW_LEVEL_COUNTER(HUD_ELEMENT_23, noteCount);
     if (byte_203E128)
@@ -1835,7 +1835,7 @@ void sub_8041AAC(int page) {
     sub_8041E58();
 }
 
-bool32 sub_08041AC0(int page) {
+bool32 are_page_counters_shown(int page) {
     bool32 done = TRUE;
 
     if (byte_203E127 && gHudElements[HUD_ELEMENT_23].renderState != 5) {
@@ -1903,7 +1903,7 @@ bool32 sub_08041AC0(int page) {
     return done;
 }
 
-bool32 sub_08041C8C(int page) {
+bool32 are_page_counters_hidden(int page) {
     bool32 done = TRUE;
 
     if (byte_203E127 && gHudElements[HUD_ELEMENT_23].renderState != 0) {
