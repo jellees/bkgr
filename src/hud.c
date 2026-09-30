@@ -983,3 +983,123 @@ void update_hud(void) {
         }
     }
 }
+
+void sub_80408F0(void) {
+    int i;
+    int j;
+
+    for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
+        if (gHudElements[i].renderState) {
+            for (j = 0; j < gHudElements[i].graphicCount; j++) {
+                if (gHudElements[i].graphic[j].field_35) {
+                    sprite_render((struct Sprite*)&gHudElements[i].graphic[j].sprite);
+                }
+            }
+        }
+    }
+}
+
+void render_hud_elements(void) {
+    int i;
+    vu16 x, y;
+
+    for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
+        if (gHudElements[i].renderState == 0) {
+            continue;
+        }
+
+        if ((u8)(gHudElements[i].renderState - 3) <= 2) {
+            gHudElements[i].textBox.stringOffset = 0;
+            x = gHudElements[i].textBox.xPosition;
+            y = gHudElements[i].textBox.yPosition;
+
+            if (gHudElements[i].field_28) {
+                sub_08025C30(&gHudElements[i].textBox, gHudElements[i].text);
+            } else {
+                AddStringToBuffer(&gHudElements[i].textBox, gHudElements[i].text);
+            }
+
+            gHudElements[i].textBox.xPosition = x;
+            gHudElements[i].textBox.yPosition = y;
+        }
+    }
+}
+
+void sub_80409DC(void) {
+    int i;
+
+    for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
+        if (gHudElements[i].renderState) {
+            gHudElements[i].renderState = 0;
+            gHudElements[i].counter = gHudElements[i].number;
+            gHudElements[i].field_29 = 0;
+            gHudElements[i].state = 0;
+
+            if (gHudElements[i].graphicCount) {
+                Free(gHudElements[i].graphic, 4);
+                gHudElements[i].graphicCount = 0;
+            }
+        }
+    }
+}
+
+void sub_08040A38(u32 element) {
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element) {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6) {
+                element = HUD_ELEMENT_58;
+            }
+            break;
+
+        case HUD_ELEMENT_57:
+            renderState = gHudElements[HUD_ELEMENT_59].renderState;
+            if (renderState != 0 && renderState != 6) {
+                element = HUD_ELEMENT_56;
+            }
+            break;
+    }
+
+    gHudElements[element].counter = gHudElements[element].number;
+    gHudElements[element].field_29 = 0;
+    gHudElements[element].state = 0;
+    if (gHudElements[element].renderState) {
+        gHudElements[element].renderState = 0;
+        if (gHudElements[element].graphicCount) {
+            Free(gHudElements[element].graphic, 4);
+            gHudElements[element].graphicCount = 0;
+        }
+    }
+}
+
+void sub_08040AD0(u32 element, int value)
+{
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element)
+    {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_58;
+            break;
+
+        case HUD_ELEMENT_57:
+            renderState = gHudElements[HUD_ELEMENT_59].renderState;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_56;
+            break;
+    }
+
+    gHudElements[element].counter = value;
+    gHudElements[element].number = value;
+    gHudElements[element].field_A = value;
+}

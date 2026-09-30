@@ -582,6 +582,8 @@ extern void sub_8025798(u8*, u32);
 extern int sub_8025870(char*, struct TextBox*);
 extern void sub_8025948(int);
 
+void sub_08025C30(struct TextBox*, char*);
+
 extern void sub_8025E44(int);
 extern void sub_8025FBC(void);
 extern bool32 sub_8025FF8(void);
@@ -649,7 +651,8 @@ extern void update_hud(void);
 extern void sub_80408F0(void);
 extern void render_hud_elements(void);
 extern void sub_80409DC(void);
-extern void sub_08040A38(int);
+extern void sub_08040A38(u32);
+extern void sub_08040AD0(u32, int);
 extern void sub_8040B3C(int);
 extern void sub_8040E74(void);
 extern bool32 sub_8040E8C(int);
