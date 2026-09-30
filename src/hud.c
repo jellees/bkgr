@@ -695,14 +695,15 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
 
 static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
     int i;
-    u8 *ptr = &byte_80A8CF6[element->counter * 8];
+    u8* ptr = &byte_80A8CF6[element->counter * 8];
 
     for (i = a2; i < element->graphicCount; i++) {
         element->graphic[i].field_1C = a3 << 16;
         element->graphic[i].field_20 = a4 << 16;
         element->graphic[i].sprite.xPos = a3;
         element->graphic[i].sprite.yPos = a4;
-        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[ptr[i - a2]], 0, 0, 0, a3, a4, 2);
+        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[ptr[i - a2]], 0, 0, 0, a3,
+                  a4, 2);
         element->graphic[i].field_35 = 1;
     }
 
@@ -712,14 +713,15 @@ static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
 
 static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
     int i;
-    u8 *ptr = &byte_80A8D92[element->counter * 5];
+    u8* ptr = &byte_80A8D92[element->counter * 5];
 
     for (i = a2; i < element->graphicCount; i++) {
         element->graphic[i].field_1C = a3 << 16;
         element->graphic[i].field_20 = a4 << 16;
         element->graphic[i].sprite.xPos = a3;
         element->graphic[i].sprite.yPos = a4;
-        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[ptr[i - a2]], 0, 0, 0, a3, a4, 2);
+        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[ptr[i - a2]], 0, 0, 0, a3,
+                  a4, 2);
         element->graphic[i].field_35 = 1;
     }
 
