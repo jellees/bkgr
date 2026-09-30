@@ -495,27 +495,204 @@ static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
     return 1;
 }
 
-NAKED static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
-    asm_unified(".include \"asm/nonmatching/sub_803F52C.s\"");
+static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
+    s32 target;
+    s32 offset;
+    //! Possible fake match.
+    register u32 number asm("r0");
+
+    if (a3 != 3) {
+        switch (a3) {
+            case 1:
+                number = element->number;
+                if (number < element->counter)
+                    return 2;
+                break;
+            case 2:
+                number = element->number;
+                if (number > element->counter)
+                    return 2;
+                break;
+            default:
+                number = element->number;
+                break;
+        }
+
+        number = (u16)number;
+        offset = 0xC0000;
+        if (number >= 10) {
+            offset = 0x1C0000;
+            if (number < 100)
+                offset = 0x140000;
+        }
+
+        target = element->graphic[a2].field_2C - offset;
+    } else {
+        target = element->graphic[a2].field_2C;
+    }
+
+    element->graphic[a2].field_24 = target;
+    if (target > element->graphic[a2].field_1C)
+        element->graphic[a2].field_34 = 2;
+    else
+        element->graphic[a2].field_34 = 6;
+
+    return 2;
 }
 
-NAKED static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
-    asm_unified(".include \"asm/nonmatching/sub_803F5AC.s\"");
+static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
+    s32 target;
+    s32 offset;
+    //! Possible fake match.
+    register u32 number asm("r0");
+
+    if (a3 != 3) {
+        switch (a3) {
+            case 1:
+                number = element->number;
+                if (number < element->counter)
+                    return 2;
+                break;
+            case 2:
+                number = element->number;
+                if (number > element->counter)
+                    return 2;
+                break;
+            default:
+                number = element->number;
+                break;
+        }
+
+        number = (u16)number;
+        offset = 0xC0000;
+        if (number >= 10) {
+            offset = 0x1C0000;
+            if (number < 100)
+                offset = 0x140000;
+        }
+
+        target = element->graphic[a2].field_2C + offset;
+    } else {
+        target = element->graphic[a2].field_2C;
+    }
+
+    element->graphic[a2].field_24 = target;
+    if (target < element->graphic[a2].field_1C)
+        element->graphic[a2].field_34 = 6;
+    else
+        element->graphic[a2].field_34 = 2;
+
+    return 2;
 }
 
-NAKED static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
-    asm_unified(".include \"asm/nonmatching/sub_803F62C.s\"");
+static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
+    s32 target;
+    s32 offset;
+    s32 offset2;
+    //! Possible fake match.
+    register u32 number asm("r0");
+
+    if (a3 != 3) {
+        switch (a3) {
+            case 1:
+                number = element->number;
+                if (number < element->counter)
+                    return 2;
+                break;
+            case 2:
+                number = element->number;
+                if (number > element->counter)
+                    return 2;
+                break;
+            default:
+                number = element->number;
+                break;
+        }
+
+        number = (u16)number;
+        offset = 0xC0000;
+        if (number >= 10) {
+            offset = 0x1C0000;
+            if (number < 100)
+                offset = 0x140000;
+        }
+
+        number = element->field_A;
+        offset2 = 0xC0000;
+        if (number >= 10) {
+            offset2 = 0x1C0000;
+            if (number < 100)
+                offset2 = 0x140000;
+        }
+
+        target = element->graphic[a2].field_2C - offset - offset2;
+    } else {
+        target = element->graphic[a2].field_2C;
+    }
+
+    element->graphic[a2].field_24 = target;
+    if (target > element->graphic[a2].field_1C)
+        element->graphic[a2].field_34 = 2;
+    else
+        element->graphic[a2].field_34 = 6;
+
+    return 2;
 }
 
-NAKED static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
-    asm_unified(".include \"asm/nonmatching/sub_803F6C4.s\"");
+static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
+    s32 target;
+    s32 offset;
+    s32 offset2;
+    //! Possible fake match.
+    register u32 number asm("r0");
+
+    if (a3 != 3) {
+        switch (a3) {
+            case 1:
+                number = element->number;
+                if (number < element->counter)
+                    return 2;
+                break;
+            case 2:
+                number = element->number;
+                if (number > element->counter)
+                    return 2;
+                break;
+            default:
+                number = element->number;
+                break;
+        }
+
+        number = (u16)number;
+        offset = 0xC0000;
+        if (number >= 10) {
+            offset = 0x1C0000;
+            if (number < 100)
+                offset = 0x140000;
+        }
+
+        number = element->field_A;
+        offset2 = 0xC0000;
+        if (number >= 10) {
+            offset2 = 0x1C0000;
+            if (number < 100)
+                offset2 = 0x140000;
+        }
+
+        target = element->graphic[a2].field_2C + offset + offset2;
+    } else {
+        target = element->graphic[a2].field_2C;
+    }
+
+    element->graphic[a2].field_24 = target;
+    if (target < element->graphic[a2].field_1C)
+        element->graphic[a2].field_34 = 6;
+    else
+        element->graphic[a2].field_34 = 2;
+
+    return 2;
 }
 
-// https://decomp.me/scratch/5LtNd
-NAKED static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
-    asm_unified(".include \"asm/nonmatching/sub_803F75C.s\"");
-}
-/* C draft — loop body matches, pre-loop ptr register differs (adds r0 vs adds r7):
 static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
     int i;
     u8 *ptr = &byte_80A8CF6[element->counter * 8];
@@ -525,18 +702,29 @@ static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
         element->graphic[i].field_20 = a4 << 16;
         element->graphic[i].sprite.xPos = a3;
         element->graphic[i].sprite.yPos = a4;
-        word_80A8CF0[*ptr] += 0;
-        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[*ptr], 0, 0, 0, a3, a4, 2);
+        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[ptr[i - a2]], 0, 0, 0, a3, a4, 2);
         element->graphic[i].field_35 = 1;
-        ptr++;
     }
 
     element->timer = 10;
     return 2;
-} */
+}
 
-NAKED static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
-    asm_unified(".include \"asm/nonmatching/sub_803F800.s\"");
+static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
+    int i;
+    u8 *ptr = &byte_80A8D92[element->counter * 5];
+
+    for (i = a2; i < element->graphicCount; i++) {
+        element->graphic[i].field_1C = a3 << 16;
+        element->graphic[i].field_20 = a4 << 16;
+        element->graphic[i].sprite.xPos = a3;
+        element->graphic[i].sprite.yPos = a4;
+        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[ptr[i - a2]], 0, 0, 0, a3, a4, 2);
+        element->graphic[i].field_35 = 1;
+    }
+
+    element->timer = 10;
+    return 2;
 }
 
 static int sub_803F8A8(struct HudElement* element, int a2, int a3, int a4) {
@@ -931,9 +1119,257 @@ void update_hud_collectables(void) {
     gHudElements[HUD_ELEMENT_7].number = gHudElements[HUD_ELEMENT_7].counter;
 }
 
-// https://decomp.me/scratch/JTlEO
-NAKED void set_hud_number(int a1, int a2) {
-    asm_unified(".include \"asm/nonmatching/set_hud_number.s\"");
+void set_hud_number(u32 element, int value) {
+    int n;
+    int funcIdx, arg1;
+    u8 renderState;
+
+    ASSERT(element <= HUD_ELEMENT_57);
+
+    switch (element) {
+        case HUD_ELEMENT_56:
+            renderState = gHudElements[HUD_ELEMENT_57].renderState;
+            element = HUD_ELEMENT_59;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_58;
+            gHudElements[element].timer = 10;
+            if (value == 17) {
+                gHudElements[element].field_1A = 600;
+                gHudElements[element].field_1C = 0;
+                gHudElements[element].field_1E = 0;
+                sub_80630C0(600, 0);
+                gHudElements[element].counter = value;
+                gHudElements[element].field_1D = -1;
+                byte_203EA81 = 0;
+            } else if (value == 18) {
+                gHudElements[element].field_1A = 600;
+                gHudElements[element].field_1C = 0;
+                gHudElements[element].field_1E = 0;
+                sub_80630C0(600, 0);
+                gHudElements[element].counter = value;
+                byte_203EA81 = 0;
+            }
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_57:
+            renderState = gHudElements[HUD_ELEMENT_59].renderState;
+            element = HUD_ELEMENT_57;
+            if (renderState != 0 && renderState != 6)
+                element = HUD_ELEMENT_56;
+            gHudElements[element].timer = 10;
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_55:
+            gHudElements[element].number = value;
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = value;
+            break;
+
+        case HUD_ELEMENT_6:
+            ASSERT(gHudElements[element].counter <= value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_40);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_40, n);
+            break;
+
+        case HUD_ELEMENT_0:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_39);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_39, n);
+            break;
+
+        case HUD_ELEMENT_1:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_41);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_41, n);
+            break;
+
+        case HUD_ELEMENT_2:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_4:
+            ASSERT(gHudElements[element].counter <= value);
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_5:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_45);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_45, n);
+            break;
+
+        case HUD_ELEMENT_7:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_49);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_49, n);
+            break;
+
+        case HUD_ELEMENT_8:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_47);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_47, n);
+            break;
+
+        case HUD_ELEMENT_14:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_46);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_46, n);
+            break;
+
+        case HUD_ELEMENT_15:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_16:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_17:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_44);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_44, n);
+            break;
+
+        case HUD_ELEMENT_18:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+            n = sub_08042150(HUD_ELEMENT_48);
+            if (n >= 0)
+                set_hud_number(HUD_ELEMENT_48, n);
+            break;
+
+        case HUD_ELEMENT_36:
+            gHudElements[element].counter = value;
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_19:
+            gHudElements[element].counter = value;
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_39:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = gGameStatus.totalNotes;
+            gHudElements[element].number = gGameStatus.totalNotes;
+            break;
+
+        case HUD_ELEMENT_40:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = gGameStatus.field_1;
+            gHudElements[element].number = gGameStatus.field_1;
+            break;
+
+        case HUD_ELEMENT_41:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = gGameStatus.totalJiggies;
+            gHudElements[element].number = gGameStatus.totalJiggies;
+            break;
+
+        case HUD_ELEMENT_44:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = gGameStatus.silverCoins;
+            gHudElements[element].number = gGameStatus.silverCoins;
+            break;
+
+        case HUD_ELEMENT_45:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = gGameStatus.shells;
+            gHudElements[element].number = gGameStatus.shells;
+            break;
+
+        case HUD_ELEMENT_46:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = gGameStatus.field_1A;
+            gHudElements[element].number = gGameStatus.field_1A;
+            break;
+
+        case HUD_ELEMENT_47:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = gGameStatus.field_19;
+            gHudElements[element].number = gGameStatus.field_19;
+            break;
+
+        case HUD_ELEMENT_48:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = gGameStatus.field_1E;
+            gHudElements[element].number = gGameStatus.field_1E;
+            break;
+
+        case HUD_ELEMENT_49:
+            gHudElements[element].field_A = value;
+            gHudElements[element].counter = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
+            gHudElements[element].number = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
+            break;
+
+        case HUD_ELEMENT_3:
+        case HUD_ELEMENT_9:
+        case HUD_ELEMENT_10:
+        case HUD_ELEMENT_11:
+        case HUD_ELEMENT_12:
+        case HUD_ELEMENT_13:
+        case HUD_ELEMENT_22:
+        case HUD_ELEMENT_37:
+        case HUD_ELEMENT_38:
+        case HUD_ELEMENT_42:
+        case HUD_ELEMENT_50:
+        case HUD_ELEMENT_51:
+        case HUD_ELEMENT_52:
+        case HUD_ELEMENT_53:
+        case HUD_ELEMENT_54:
+            gHudElements[element].number = value;
+            break;
+
+        case HUD_ELEMENT_43:
+            ASSERT(gHudElements[element].counter < value);
+            gHudElements[element].number = value;
+        default:
+            HANG;
+            break;
+    }
+
+    switch (gHudElements[element].renderState) {
+        case 0:
+            gHudElements[element].renderState = 1;
+            break;
+
+        case 6:
+            gHudElements[element].field_29 = 1;
+            break;
+
+        case 3:
+        case 4:
+        case 5:
+            funcIdx = stru_80AF310[element].states[gHudElements[element].state].funcIdx;
+            arg1 = stru_80AF310[element].states[gHudElements[element].state].arg1;
+            while (funcIdx != 11 || (arg1 != 3 && arg1 != 4)) {
+                gHudElements[element].state--;
+                funcIdx = stru_80AF310[element].states[gHudElements[element].state].funcIdx;
+                arg1 = stru_80AF310[element].states[gHudElements[element].state].arg1;
+            }
+            break;
+    }
 }
 
 void sub_80407F8(void) {

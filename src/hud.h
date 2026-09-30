@@ -5,7 +5,7 @@ void reset_hud_elements(void);
 void update_hud_total_notes(void);
 void init_hud_elements(void);
 void update_hud_collectables(void);
-void set_hud_number(int a1, int a2);
+void set_hud_number(u32 element, int value);
 void sub_80407F8(void);
 void update_hud(void);
 void sub_80408F0(void);
