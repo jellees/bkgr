@@ -352,7 +352,7 @@ struct GameStatus {
     u8 clockHour;
     u8 clockMinute;
     u8 clockSecond;
-    u8 field_B;
+    u8 totalJinjos;
     u16 totalNotes;
     s8 eggs[EGG_COUNT];
     s8 goldenFeathers;

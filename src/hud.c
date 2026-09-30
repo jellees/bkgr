@@ -29,7 +29,7 @@ enum HudElementIdx {
     HUD_ELEMENT_18,
     HUD_ELEMENT_TOTAL_NOTES,
     HUD_ELEMENT_TOTAL_JIGGIES,
-    HUD_ELEMENT_21,
+    HUD_ELEMENT_TOTAL_JINJOS,
     HUD_ELEMENT_22,
     HUD_ELEMENT_23,
     HUD_ELEMENT_24,
@@ -1027,9 +1027,9 @@ void reset_hud_elements(void) {
     gHudElements[HUD_ELEMENT_6].counter = gGameStatus.field_1;
     gHudElements[HUD_ELEMENT_6].number = gHudElements[HUD_ELEMENT_6].counter;
 
-    gHudElements[HUD_ELEMENT_21].field_A = stru_80CC8C4.field_B;
-    gHudElements[HUD_ELEMENT_21].counter = gGameStatus.field_B;
-    gHudElements[HUD_ELEMENT_21].number = gHudElements[HUD_ELEMENT_21].counter;
+    gHudElements[HUD_ELEMENT_TOTAL_JINJOS].field_A = stru_80CC8C4.totalJinjos;
+    gHudElements[HUD_ELEMENT_TOTAL_JINJOS].counter = gGameStatus.totalJinjos;
+    gHudElements[HUD_ELEMENT_TOTAL_JINJOS].number = gHudElements[HUD_ELEMENT_TOTAL_JINJOS].counter;
 
     gHudElements[HUD_ELEMENT_14].field_A = stru_80CC8C4.field_1A;
     gHudElements[HUD_ELEMENT_14].counter = gGameStatus.field_1A;
@@ -1569,7 +1569,7 @@ void show_pause_main_counters(int isDiving) {
     if (byte_203E12C)
         SHOW_HUD_ELEMENT(HUD_ELEMENT_4);
     if (byte_203E129)
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_21);
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_TOTAL_JINJOS);
     if (byte_203E126)
         SHOW_HUD_ELEMENT(HUD_ELEMENT_6);
 
@@ -1606,7 +1606,7 @@ bool32 are_pause_main_counters_shown(int isDiving) {
     if (byte_203E128 && gHudElements[HUD_ELEMENT_TOTAL_JIGGIES].renderState != 5) {
         done = FALSE;
     }
-    if (byte_203E129 && gHudElements[HUD_ELEMENT_21].renderState != 5) {
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_TOTAL_JINJOS].renderState != 5) {
         done = FALSE;
     }
     if (byte_203E12B && gHudElements[HUD_ELEMENT_43].renderState != 5) {
@@ -1663,7 +1663,7 @@ bool32 are_pause_main_counters_hidden(int isDiving) {
         done = FALSE;
     if (byte_203E128 && gHudElements[HUD_ELEMENT_20].renderState != 0)
         done = FALSE;
-    if (byte_203E129 && gHudElements[HUD_ELEMENT_21].renderState != 0)
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_TOTAL_JINJOS].renderState != 0)
         done = FALSE;
     if (byte_203E12B && gHudElements[HUD_ELEMENT_43].renderState != 0)
         done = FALSE;
@@ -1703,7 +1703,7 @@ bool32 are_pause_main_counters_hidden(int isDiving) {
             if (byte_203E12C)
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_4);
             if (byte_203E129)
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_21);
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_TOTAL_JINJOS);
             if (byte_203E126)
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_6);
             RESTORE_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
@@ -1720,7 +1720,7 @@ bool32 are_pause_main_counters_hidden(int isDiving) {
             if (byte_203E12C)
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_4);
             if (byte_203E129)
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_21);
+                RESTORE_HUD_ELEMENT(HUD_ELEMENT_TOTAL_JINJOS);
             if (byte_203E126)
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_6);
             RESTORE_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
@@ -1815,7 +1815,7 @@ void show_pause_page_counters(u32 level) {
             if (byte_203E128)
                 SET_HUD_COUNTER(HUD_ELEMENT_24, stru_80CC8C4.totalJiggies, gGameStatus.totalJiggies);
             if (byte_203E129)
-                SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_JINJOS, stru_80CC8C4.field_B, gGameStatus.field_B);
+                SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_JINJOS, stru_80CC8C4.totalJinjos, gGameStatus.totalJinjos);
             if (byte_203E12B)
                 SET_HUD_COUNTER(HUD_ELEMENT_26,
                                 stru_80CC8C4.field_2 + stru_80CC8C4.field_3 + stru_80CC8C4.field_4
