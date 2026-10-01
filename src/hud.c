@@ -14,7 +14,7 @@ enum HudElementIdx {
     HUD_ELEMENT_GOLDEN_FEATHERS,
     HUD_ELEMENT_4,
     HUD_ELEMENT_SHELLS,
-    HUD_ELEMENT_6,
+    HUD_ELEMENT_TOTAL_HONEYCOMBS,
     HUD_ELEMENT_LEVEL_JINJOS,
     HUD_ELEMENT_CHICKS,
     HUD_ELEMENT_BLUE_EGGS,
@@ -51,7 +51,7 @@ enum HudElementIdx {
     HUD_ELEMENT_40,
     HUD_ELEMENT_41,
     HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS,
-    HUD_ELEMENT_43,
+    HUD_ELEMENT_MUMBO_TOKENS,
     HUD_ELEMENT_44,
     HUD_ELEMENT_45,
     HUD_ELEMENT_46,
@@ -1007,9 +1007,9 @@ void reset_hud_elements(void) {
     gHudElements[HUD_ELEMENT_22].counter = gGameStatus.field_6;
     gHudElements[HUD_ELEMENT_22].number = gHudElements[HUD_ELEMENT_22].counter;
 
-    gHudElements[HUD_ELEMENT_43].field_A = gGameStatus.field_6;
-    gHudElements[HUD_ELEMENT_43].counter = gGameStatus.field_6;
-    gHudElements[HUD_ELEMENT_43].number = gHudElements[HUD_ELEMENT_22].counter;
+    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].field_A = gGameStatus.field_6;
+    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].counter = gGameStatus.field_6;
+    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].number = gHudElements[HUD_ELEMENT_22].counter;
 
     gHudElements[HUD_ELEMENT_4].field_A = stru_80CC8C4.field_7;
     gHudElements[HUD_ELEMENT_4].counter = gGameStatus.field_7;
@@ -1023,9 +1023,9 @@ void reset_hud_elements(void) {
     gHudElements[HUD_ELEMENT_CHICKS].counter = byte_2000FCC[gLoadedRoomLevel].chickCount;
     gHudElements[HUD_ELEMENT_CHICKS].number = gHudElements[HUD_ELEMENT_CHICKS].counter;
 
-    gHudElements[HUD_ELEMENT_6].field_A = stru_80CC8C4.field_1;
-    gHudElements[HUD_ELEMENT_6].counter = gGameStatus.field_1;
-    gHudElements[HUD_ELEMENT_6].number = gHudElements[HUD_ELEMENT_6].counter;
+    gHudElements[HUD_ELEMENT_TOTAL_HONEYCOMBS].field_A = stru_80CC8C4.totalHoneycombs;
+    gHudElements[HUD_ELEMENT_TOTAL_HONEYCOMBS].counter = gGameStatus.totalHoneycombs;
+    gHudElements[HUD_ELEMENT_TOTAL_HONEYCOMBS].number = gHudElements[HUD_ELEMENT_TOTAL_HONEYCOMBS].counter;
 
     gHudElements[HUD_ELEMENT_TOTAL_JINJOS].field_A = stru_80CC8C4.totalJinjos;
     gHudElements[HUD_ELEMENT_TOTAL_JINJOS].counter = gGameStatus.totalJinjos;
@@ -1173,7 +1173,7 @@ void set_hud_number(u32 element, int value) {
             gHudElements[element].counter = value;
             break;
 
-        case HUD_ELEMENT_6:
+        case HUD_ELEMENT_TOTAL_HONEYCOMBS:
             ASSERT(gHudElements[element].counter <= value);
             gHudElements[element].number = value;
             n = get_hud_element_max(HUD_ELEMENT_40);
@@ -1283,8 +1283,8 @@ void set_hud_number(u32 element, int value) {
 
         case HUD_ELEMENT_40:
             gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.field_1;
-            gHudElements[element].number = gGameStatus.field_1;
+            gHudElements[element].counter = gGameStatus.totalHoneycombs;
+            gHudElements[element].number = gGameStatus.totalHoneycombs;
             break;
 
         case HUD_ELEMENT_41:
@@ -1347,7 +1347,7 @@ void set_hud_number(u32 element, int value) {
             gHudElements[element].number = value;
             break;
 
-        case HUD_ELEMENT_43:
+        case HUD_ELEMENT_MUMBO_TOKENS:
             ASSERT(gHudElements[element].counter < value);
             gHudElements[element].number = value;
         default:
@@ -1563,7 +1563,7 @@ void show_pause_main_counters(int isDiving) {
     if (byte_203E128)
         SHOW_HUD_ELEMENT(HUD_ELEMENT_TOTAL_JIGGIES);
     if (byte_203E12B)
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_43);
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_MUMBO_TOKENS);
     if (byte_203E12A)
         SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS);
     if (byte_203E12C)
@@ -1571,7 +1571,7 @@ void show_pause_main_counters(int isDiving) {
     if (byte_203E129)
         SHOW_HUD_ELEMENT(HUD_ELEMENT_TOTAL_JINJOS);
     if (byte_203E126)
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_6);
+        SHOW_HUD_ELEMENT(HUD_ELEMENT_TOTAL_HONEYCOMBS);
 
     SHOW_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
 
@@ -1609,7 +1609,7 @@ bool32 are_pause_main_counters_shown(int isDiving) {
     if (byte_203E129 && gHudElements[HUD_ELEMENT_TOTAL_JINJOS].renderState != 5) {
         done = FALSE;
     }
-    if (byte_203E12B && gHudElements[HUD_ELEMENT_43].renderState != 5) {
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_MUMBO_TOKENS].renderState != 5) {
         done = FALSE;
     }
     if (byte_203E12A && gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].renderState != 5) {
@@ -1618,7 +1618,7 @@ bool32 are_pause_main_counters_shown(int isDiving) {
     if (byte_203E12C && gHudElements[HUD_ELEMENT_4].renderState != 5) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_6].renderState != 5) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTAL_HONEYCOMBS].renderState != 5) {
         done = FALSE;
     }
 
@@ -1826,7 +1826,7 @@ void show_pause_page_counters(u32 level) {
             if (byte_203E12C)
                 SET_HUD_COUNTER(HUD_ELEMENT_27, stru_80CC8C4.field_7, gGameStatus.field_7);
             if (byte_203E126)
-                SET_HUD_COUNTER(HUD_ELEMENT_28, stru_80CC8C4.field_1, gGameStatus.field_1);
+                SET_HUD_COUNTER(HUD_ELEMENT_28, stru_80CC8C4.totalHoneycombs, gGameStatus.totalHoneycombs);
             break;
 
         default:

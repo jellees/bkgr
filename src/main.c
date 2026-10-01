@@ -3903,7 +3903,7 @@ bool32 is_game_complete(void) {
     bool32 complete = FALSE;
     if (gGameStatus.totalNotes == stru_80CC8C4.totalNotes
         && gGameStatus.totalJiggies == stru_80CC8C4.totalJiggies
-        && gGameStatus.field_1 == stru_80CC8C4.field_1) {
+        && gGameStatus.totalHoneycombs == stru_80CC8C4.totalHoneycombs) {
         complete = TRUE;
     }
     return complete;

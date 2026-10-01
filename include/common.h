@@ -342,7 +342,7 @@ struct struc_50 {
 
 struct GameStatus {
     u8 totalJiggies;
-    u8 field_1;
+    u8 totalHoneycombs;
     u8 field_2;
     u8 field_3;
     u8 field_4;
