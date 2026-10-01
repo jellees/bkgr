@@ -1035,7 +1035,8 @@ void reset_hud_elements(void) {
 
     gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].field_A = stru_80CC8C4.captiveBreegulls;
     gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].counter = gGameStatus.captiveBreegulls;
-    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].number = gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].counter;
+    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].number =
+        gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].counter;
 
     gHudElements[HUD_ELEMENT_SILVER_COINS].field_A = stru_80CC8C4.silverCoins;
     gHudElements[HUD_ELEMENT_SILVER_COINS].counter = gGameStatus.silverCoins;
@@ -1890,7 +1891,8 @@ bool32 are_page_counters_shown(int page) {
             if (byte_203E12E && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_SHELLS].renderState != 5) {
                 done = FALSE;
             }
-            if (byte_203E12F && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS].renderState != 5) {
+            if (byte_203E12F
+                && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS].renderState != 5) {
                 done = FALSE;
             }
             return done;
@@ -1959,7 +1961,8 @@ bool32 are_page_counters_hidden(int page) {
             if (byte_203E12E && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_SHELLS].renderState != 0) {
                 done = FALSE;
             }
-            if (byte_203E12F && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS].renderState != 0) {
+            if (byte_203E12F
+                && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS].renderState != 0) {
                 done = FALSE;
             }
             return done;
