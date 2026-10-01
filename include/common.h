@@ -348,7 +348,7 @@ struct GameStatus {
     u8 mumboTokensFreezingFurnace;
     u8 mumboTokensSpillersHarbor;
     u8 mumboTokens;
-    u8 field_7;
+    u8 movesLearned;
     u8 clockHour;
     u8 clockMinute;
     u8 clockSecond;
@@ -387,7 +387,7 @@ struct level_struc {
     u8 chickCount;
     u8 jinjoCount;
     u16 noteCount;
-    u8 bozzeyeCount;
+    u8 movesLearned;
     u8 mumboTokensCliffFarm;
     u8 mumboTokensBadMagicBayou;
     u8 mumboTokensFreezingFurnace;
@@ -762,7 +762,7 @@ extern u8 byte_203E128;
 extern u8 byte_203E129;
 extern u8 byte_203E12A;
 extern u8 byte_203E12B;
-extern u8 byte_203E12C;
+extern u8 gShowMovesLearnedCounter;
 extern u8 byte_203E12D;
 extern u8 byte_203E12E;
 extern u8 byte_203E12F;
