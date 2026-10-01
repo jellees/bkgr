@@ -363,7 +363,7 @@ struct GameStatus {
     u8 maxOxygen;
     u8 shells;
     u8 field_19;
-    u8 field_1A;
+    u8 captiveBreegulls;
     u8 field_1B;
     u8 field_1C;
     u8 silverCoins;
@@ -382,7 +382,7 @@ struct SaveFile {
 struct level_struc {
     u8 jiggyCount;
     u8 honeycombCount;
-    u8 field_2;
+    u8 captiveBreegulls;
     u8 shellCount;
     u8 chickCount;
     u8 jinjoCount;

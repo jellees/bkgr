@@ -22,7 +22,7 @@ enum HudElementIdx {
     HUD_ELEMENT_ICE_EGGS,
     HUD_ELEMENT_FIRE_EGGS,
     HUD_ELEMENT_13,
-    HUD_ELEMENT_14,
+    HUD_ELEMENT_CAPTIVE_BREEGULLS,
     HUD_ELEMENT_15,
     HUD_ELEMENT_16,
     HUD_ELEMENT_SILVER_COINS,
@@ -41,7 +41,7 @@ enum HudElementIdx {
     HUD_ELEMENT_30,
     HUD_ELEMENT_31,
     HUD_ELEMENT_32,
-    HUD_ELEMENT_33,
+    HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS,
     HUD_ELEMENT_34,
     HUD_ELEMENT_35,
     HUD_ELEMENT_36,
@@ -54,7 +54,7 @@ enum HudElementIdx {
     HUD_ELEMENT_PAUSE_MUMBO_TOKENS,
     HUD_ELEMENT_44,
     HUD_ELEMENT_45,
-    HUD_ELEMENT_46,
+    HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS,
     HUD_ELEMENT_47,
     HUD_ELEMENT_48,
     HUD_ELEMENT_JINJO_ORACLE_JINJOS,
@@ -1033,9 +1033,9 @@ void reset_hud_elements(void) {
     gHudElements[HUD_ELEMENT_TOTAL_JINJOS].counter = gGameStatus.totalJinjos;
     gHudElements[HUD_ELEMENT_TOTAL_JINJOS].number = gHudElements[HUD_ELEMENT_TOTAL_JINJOS].counter;
 
-    gHudElements[HUD_ELEMENT_14].field_A = stru_80CC8C4.field_1A;
-    gHudElements[HUD_ELEMENT_14].counter = gGameStatus.field_1A;
-    gHudElements[HUD_ELEMENT_14].number = gHudElements[HUD_ELEMENT_14].counter;
+    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].field_A = stru_80CC8C4.captiveBreegulls;
+    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].counter = gGameStatus.captiveBreegulls;
+    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].number = gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].counter;
 
     gHudElements[HUD_ELEMENT_SILVER_COINS].field_A = stru_80CC8C4.silverCoins;
     gHudElements[HUD_ELEMENT_SILVER_COINS].counter = gGameStatus.silverCoins;
@@ -1233,12 +1233,12 @@ void set_hud_number(u32 element, int value) {
                 set_hud_number(HUD_ELEMENT_47, n);
             break;
 
-        case HUD_ELEMENT_14:
+        case HUD_ELEMENT_CAPTIVE_BREEGULLS:
             ASSERT(gHudElements[element].counter < value);
             gHudElements[element].number = value;
-            n = get_hud_element_max(HUD_ELEMENT_46);
+            n = get_hud_element_max(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS);
             if (n >= 0)
-                set_hud_number(HUD_ELEMENT_46, n);
+                set_hud_number(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS, n);
             break;
 
         case HUD_ELEMENT_15:
@@ -1307,10 +1307,10 @@ void set_hud_number(u32 element, int value) {
             gHudElements[element].number = gGameStatus.shells;
             break;
 
-        case HUD_ELEMENT_46:
+        case HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS:
             gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.field_1A;
-            gHudElements[element].number = gGameStatus.field_1A;
+            gHudElements[element].counter = gGameStatus.captiveBreegulls;
+            gHudElements[element].number = gGameStatus.captiveBreegulls;
             break;
 
         case HUD_ELEMENT_47:
@@ -1797,7 +1797,7 @@ void show_pause_page_counters(u32 level) {
             if (byte_203E12E)
                 SHOW_LEVEL_COUNTER(HUD_ELEMENT_30, shellCount);
             if (byte_203E12F)
-                SHOW_LEVEL_COUNTER(HUD_ELEMENT_33, field_2);
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS, captiveBreegulls);
             break;
 
         case 4:
@@ -1890,7 +1890,7 @@ bool32 are_page_counters_shown(int page) {
             if (byte_203E12E && gHudElements[HUD_ELEMENT_30].renderState != 5) {
                 done = FALSE;
             }
-            if (byte_203E12F && gHudElements[HUD_ELEMENT_33].renderState != 5) {
+            if (byte_203E12F && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS].renderState != 5) {
                 done = FALSE;
             }
             return done;
@@ -1959,7 +1959,7 @@ bool32 are_page_counters_hidden(int page) {
             if (byte_203E12E && gHudElements[HUD_ELEMENT_30].renderState != 0) {
                 done = FALSE;
             }
-            if (byte_203E12F && gHudElements[HUD_ELEMENT_33].renderState != 0) {
+            if (byte_203E12F && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS].renderState != 0) {
                 done = FALSE;
             }
             return done;
@@ -2011,8 +2011,8 @@ void sub_8041E88(void) {
     gHudElements[HUD_ELEMENT_44].field_2A = 0;
     gHudElements[HUD_ELEMENT_45].timer = 0;
     gHudElements[HUD_ELEMENT_45].field_2A = 0;
-    gHudElements[HUD_ELEMENT_46].timer = 0;
-    gHudElements[HUD_ELEMENT_46].field_2A = 0;
+    gHudElements[HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS].timer = 0;
+    gHudElements[HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS].field_2A = 0;
     gHudElements[HUD_ELEMENT_47].timer = 0;
     gHudElements[HUD_ELEMENT_47].field_2A = 0;
     gHudElements[HUD_ELEMENT_48].timer = 0;
