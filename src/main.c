@@ -2963,7 +2963,7 @@ void sub_800E204(u8* buffer, s32* a2, u32* a3) {
         r6 += buffer[r5++];
     }
 
-    buffer[r5] = gGameStatus.field_6;
+    buffer[r5] = gGameStatus.mumboTokens;
     r6 += buffer[r5++];
     buffer[r5] = gGameStatus.clockHour;
     r6 += buffer[r5++];
@@ -3041,7 +3041,7 @@ void sub_800E408(u8* buffer, s32* a2, u32* a3) {
         r6 += buffer[r5++];
     }
 
-    gGameStatus.field_6 = buffer[r5];
+    gGameStatus.mumboTokens = buffer[r5];
     r6 += buffer[r5++];
     gGameStatus.clockHour = buffer[r5];
     r6 += buffer[r5++];

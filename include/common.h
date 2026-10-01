@@ -347,7 +347,7 @@ struct GameStatus {
     u8 field_3;
     u8 field_4;
     u8 field_5;
-    u8 field_6;
+    u8 mumboTokens;
     u8 field_7;
     u8 clockHour;
     u8 clockMinute;

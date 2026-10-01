@@ -1003,12 +1003,12 @@ void reset_hud_elements(void) {
     gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].number =
         gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].counter;
 
-    gHudElements[HUD_ELEMENT_22].field_A = gGameStatus.field_6;
-    gHudElements[HUD_ELEMENT_22].counter = gGameStatus.field_6;
+    gHudElements[HUD_ELEMENT_22].field_A = gGameStatus.mumboTokens;
+    gHudElements[HUD_ELEMENT_22].counter = gGameStatus.mumboTokens;
     gHudElements[HUD_ELEMENT_22].number = gHudElements[HUD_ELEMENT_22].counter;
 
-    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].field_A = gGameStatus.field_6;
-    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].counter = gGameStatus.field_6;
+    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].field_A = gGameStatus.mumboTokens;
+    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].counter = gGameStatus.mumboTokens;
     gHudElements[HUD_ELEMENT_MUMBO_TOKENS].number = gHudElements[HUD_ELEMENT_22].counter;
 
     gHudElements[HUD_ELEMENT_4].field_A = stru_80CC8C4.field_7;
