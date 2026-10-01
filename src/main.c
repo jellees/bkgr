@@ -2959,7 +2959,7 @@ void sub_800E204(u8* buffer, s32* a2, u32* a3) {
     for (i = 0; i < 6; i++) {
         buffer[r5] = byte_2000FCC[i].movesLearned;
         r6 += buffer[r5++];
-        buffer[r5] = byte_2000FCC[i].field_D;
+        buffer[r5] = byte_2000FCC[i].iceCreams;
         r6 += buffer[r5++];
     }
 
@@ -2975,7 +2975,7 @@ void sub_800E204(u8* buffer, s32* a2, u32* a3) {
     r6 += buffer[r5++];
     buffer[r5] = gGameStatus.movesLearned;
     r6 += buffer[r5++];
-    buffer[r5] = gGameStatus.field_1B;
+    buffer[r5] = gGameStatus.iceCreams;
     r6 += buffer[r5++];
 
     for (i = 0; i <= 3; i++) {
@@ -3037,7 +3037,7 @@ void sub_800E408(u8* buffer, s32* a2, u32* a3) {
     for (i = 0; i < 6; i++) {
         byte_2000FCC[i].movesLearned = buffer[r5];
         r6 += buffer[r5++];
-        byte_2000FCC[i].field_D = buffer[r5];
+        byte_2000FCC[i].iceCreams = buffer[r5];
         r6 += buffer[r5++];
     }
 
@@ -3053,7 +3053,7 @@ void sub_800E408(u8* buffer, s32* a2, u32* a3) {
     r6 += buffer[r5++];
     gGameStatus.movesLearned = buffer[r5];
     r6 += buffer[r5++];
-    gGameStatus.field_1B = buffer[r5];
+    gGameStatus.iceCreams = buffer[r5];
     r6 += buffer[r5++];
 
     for (i = 0; i <= 3; i++) {

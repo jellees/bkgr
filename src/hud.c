@@ -23,10 +23,10 @@ enum HudElementIdx {
     HUD_ELEMENT_FIRE_EGGS,
     HUD_ELEMENT_13,
     HUD_ELEMENT_CAPTIVE_BREEGULLS,
-    HUD_ELEMENT_15,
-    HUD_ELEMENT_16,
+    HUD_ELEMENT_ICE_CREAMS,
+    HUD_ELEMENT_TOY_SPACESHIPS,
     HUD_ELEMENT_SILVER_COINS,
-    HUD_ELEMENT_18,
+    HUD_ELEMENT_GOLD_NUGGETS,
     HUD_ELEMENT_TOTAL_NOTES,
     HUD_ELEMENT_TOTAL_JIGGIES,
     HUD_ELEMENT_TOTAL_JINJOS,
@@ -37,13 +37,13 @@ enum HudElementIdx {
     HUD_ELEMENT_PAUSE_LEVEL_MUMBO_TOKENS,
     HUD_ELEMENT_PAUSE_LEVEL_MOVES_LEARNED,
     HUD_ELEMENT_28,
-    HUD_ELEMENT_29,
-    HUD_ELEMENT_30,
-    HUD_ELEMENT_31,
-    HUD_ELEMENT_32,
+    HUD_ELEMENT_PAUSE_LEVEL_CHICKS,
+    HUD_ELEMENT_PAUSE_LEVEL_SHELLS,
+    HUD_ELEMENT_PAUSE_LEVEL_SILVER_COINS,
+    HUD_ELEMENT_PAUSE_LEVEL_GOLD_NUGGETS,
     HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS,
-    HUD_ELEMENT_34,
-    HUD_ELEMENT_35,
+    HUD_ELEMENT_PAUSE_LEVEL_TOY_SPACESHIPS,
+    HUD_ELEMENT_PAUSE_LEVEL_ICE_CREAMS,
     HUD_ELEMENT_36,
     HUD_ELEMENT_37,
     HUD_ELEMENT_38,
@@ -52,11 +52,11 @@ enum HudElementIdx {
     HUD_ELEMENT_41,
     HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS,
     HUD_ELEMENT_PAUSE_MUMBO_TOKENS,
-    HUD_ELEMENT_44,
-    HUD_ELEMENT_45,
+    HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS,
+    HUD_ELEMENT_MR_RIPOVSKI_SHELLS,
     HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS,
-    HUD_ELEMENT_47,
-    HUD_ELEMENT_48,
+    HUD_ELEMENT_MOMMA_CLUCKER_CHICKS,
+    HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS,
     HUD_ELEMENT_JINJO_ORACLE_JINJOS,
     HUD_ELEMENT_50,
     HUD_ELEMENT_51,
@@ -1041,17 +1041,17 @@ void reset_hud_elements(void) {
     gHudElements[HUD_ELEMENT_SILVER_COINS].counter = gGameStatus.silverCoins;
     gHudElements[HUD_ELEMENT_SILVER_COINS].number = gHudElements[HUD_ELEMENT_SILVER_COINS].counter;
 
-    gHudElements[HUD_ELEMENT_16].field_A = stru_80CC8C4.field_1C;
-    gHudElements[HUD_ELEMENT_16].counter = gGameStatus.field_1C;
-    gHudElements[HUD_ELEMENT_16].number = gHudElements[HUD_ELEMENT_16].counter;
+    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].field_A = stru_80CC8C4.toySpaceships;
+    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].counter = gGameStatus.toySpaceships;
+    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].number = gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].counter;
 
-    gHudElements[HUD_ELEMENT_15].field_A = stru_80CC8C4.field_1B;
-    gHudElements[HUD_ELEMENT_15].counter = gGameStatus.field_1B;
-    gHudElements[HUD_ELEMENT_15].number = gHudElements[HUD_ELEMENT_15].counter;
+    gHudElements[HUD_ELEMENT_ICE_CREAMS].field_A = stru_80CC8C4.iceCreams;
+    gHudElements[HUD_ELEMENT_ICE_CREAMS].counter = gGameStatus.iceCreams;
+    gHudElements[HUD_ELEMENT_ICE_CREAMS].number = gHudElements[HUD_ELEMENT_ICE_CREAMS].counter;
 
-    gHudElements[HUD_ELEMENT_18].field_A = stru_80CC8C4.field_1E;
-    gHudElements[HUD_ELEMENT_18].counter = gGameStatus.field_1E;
-    gHudElements[HUD_ELEMENT_18].number = gHudElements[HUD_ELEMENT_18].counter;
+    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].field_A = stru_80CC8C4.goldNuggets;
+    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].counter = gGameStatus.goldNuggets;
+    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].number = gHudElements[HUD_ELEMENT_GOLD_NUGGETS].counter;
 
     if (gHudElements[HUD_ELEMENT_HEALTH].renderState == 0) {
         gHudElements[HUD_ELEMENT_HEALTH].field_A = stru_80CC8C4.health;
@@ -1212,9 +1212,9 @@ void set_hud_number(u32 element, int value) {
         case HUD_ELEMENT_SHELLS:
             ASSERT(gHudElements[element].counter < value);
             gHudElements[element].number = value;
-            n = get_hud_element_max(HUD_ELEMENT_45);
+            n = get_hud_element_max(HUD_ELEMENT_MR_RIPOVSKI_SHELLS);
             if (n >= 0)
-                set_hud_number(HUD_ELEMENT_45, n);
+                set_hud_number(HUD_ELEMENT_MR_RIPOVSKI_SHELLS, n);
             break;
 
         case HUD_ELEMENT_LEVEL_JINJOS:
@@ -1228,9 +1228,9 @@ void set_hud_number(u32 element, int value) {
         case HUD_ELEMENT_CHICKS:
             ASSERT(gHudElements[element].counter < value);
             gHudElements[element].number = value;
-            n = get_hud_element_max(HUD_ELEMENT_47);
+            n = get_hud_element_max(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS);
             if (n >= 0)
-                set_hud_number(HUD_ELEMENT_47, n);
+                set_hud_number(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS, n);
             break;
 
         case HUD_ELEMENT_CAPTIVE_BREEGULLS:
@@ -1241,12 +1241,12 @@ void set_hud_number(u32 element, int value) {
                 set_hud_number(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS, n);
             break;
 
-        case HUD_ELEMENT_15:
+        case HUD_ELEMENT_ICE_CREAMS:
             ASSERT(gHudElements[element].counter < value);
             gHudElements[element].number = value;
             break;
 
-        case HUD_ELEMENT_16:
+        case HUD_ELEMENT_TOY_SPACESHIPS:
             ASSERT(gHudElements[element].counter < value);
             gHudElements[element].number = value;
             break;
@@ -1254,17 +1254,17 @@ void set_hud_number(u32 element, int value) {
         case HUD_ELEMENT_SILVER_COINS:
             ASSERT(gHudElements[element].counter < value);
             gHudElements[element].number = value;
-            n = get_hud_element_max(HUD_ELEMENT_44);
+            n = get_hud_element_max(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS);
             if (n >= 0)
-                set_hud_number(HUD_ELEMENT_44, n);
+                set_hud_number(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS, n);
             break;
 
-        case HUD_ELEMENT_18:
+        case HUD_ELEMENT_GOLD_NUGGETS:
             ASSERT(gHudElements[element].counter < value);
             gHudElements[element].number = value;
-            n = get_hud_element_max(HUD_ELEMENT_48);
+            n = get_hud_element_max(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS);
             if (n >= 0)
-                set_hud_number(HUD_ELEMENT_48, n);
+                set_hud_number(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS, n);
             break;
 
         case HUD_ELEMENT_36:
@@ -1295,13 +1295,13 @@ void set_hud_number(u32 element, int value) {
             gHudElements[element].number = gGameStatus.totalJiggies;
             break;
 
-        case HUD_ELEMENT_44:
+        case HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS:
             gHudElements[element].field_A = value;
             gHudElements[element].counter = gGameStatus.silverCoins;
             gHudElements[element].number = gGameStatus.silverCoins;
             break;
 
-        case HUD_ELEMENT_45:
+        case HUD_ELEMENT_MR_RIPOVSKI_SHELLS:
             gHudElements[element].field_A = value;
             gHudElements[element].counter = gGameStatus.shells;
             gHudElements[element].number = gGameStatus.shells;
@@ -1313,16 +1313,16 @@ void set_hud_number(u32 element, int value) {
             gHudElements[element].number = gGameStatus.captiveBreegulls;
             break;
 
-        case HUD_ELEMENT_47:
+        case HUD_ELEMENT_MOMMA_CLUCKER_CHICKS:
             gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.field_19;
-            gHudElements[element].number = gGameStatus.field_19;
+            gHudElements[element].counter = gGameStatus.chicks;
+            gHudElements[element].number = gGameStatus.chicks;
             break;
 
-        case HUD_ELEMENT_48:
+        case HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS:
             gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.field_1E;
-            gHudElements[element].number = gGameStatus.field_1E;
+            gHudElements[element].counter = gGameStatus.goldNuggets;
+            gHudElements[element].number = gGameStatus.goldNuggets;
             break;
 
         case HUD_ELEMENT_JINJO_ORACLE_JINJOS:
@@ -1790,28 +1790,28 @@ void show_pause_page_counters(u32 level) {
 
         case 1:
             if (byte_203E12D)
-                SHOW_LEVEL_COUNTER(HUD_ELEMENT_29, chickCount);
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_CHICKS, chickCount);
             break;
 
         case 2:
             if (byte_203E12E)
-                SHOW_LEVEL_COUNTER(HUD_ELEMENT_30, shellCount);
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_SHELLS, shellCount);
             if (byte_203E12F)
                 SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS, captiveBreegulls);
             break;
 
         case 4:
             if (byte_203E130)
-                SHOW_LEVEL_COUNTER(HUD_ELEMENT_31, silverCoinCount);
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_SILVER_COINS, silverCoinCount);
             if (byte_203E131)
-                SHOW_LEVEL_COUNTER(HUD_ELEMENT_34, field_E);
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_TOY_SPACESHIPS, toySpaceships);
             if (byte_203E132)
-                SHOW_LEVEL_COUNTER(HUD_ELEMENT_35, field_D);
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_ICE_CREAMS, iceCreams);
             break;
 
         case 5:
             if (byte_203E133)
-                SHOW_LEVEL_COUNTER(HUD_ELEMENT_32, field_10);
+                SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_GOLD_NUGGETS, goldNuggets);
             break;
 
         case 6:
@@ -1881,13 +1881,13 @@ bool32 are_page_counters_shown(int page) {
             break;
 
         case 1:
-            if (byte_203E12D && gHudElements[HUD_ELEMENT_29].renderState != 5) {
+            if (byte_203E12D && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CHICKS].renderState != 5) {
                 done = FALSE;
             }
             return done;
 
         case 2:
-            if (byte_203E12E && gHudElements[HUD_ELEMENT_30].renderState != 5) {
+            if (byte_203E12E && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_SHELLS].renderState != 5) {
                 done = FALSE;
             }
             if (byte_203E12F && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS].renderState != 5) {
@@ -1896,19 +1896,19 @@ bool32 are_page_counters_shown(int page) {
             return done;
 
         case 4:
-            if (byte_203E130 && gHudElements[HUD_ELEMENT_31].renderState != 5) {
+            if (byte_203E130 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_SILVER_COINS].renderState != 5) {
                 done = FALSE;
             }
-            if (byte_203E131 && gHudElements[HUD_ELEMENT_34].renderState != 5) {
+            if (byte_203E131 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_TOY_SPACESHIPS].renderState != 5) {
                 done = FALSE;
             }
-            if (byte_203E132 && gHudElements[HUD_ELEMENT_35].renderState != 5) {
+            if (byte_203E132 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_ICE_CREAMS].renderState != 5) {
                 done = FALSE;
             }
             return done;
 
         case 5:
-            if (byte_203E133 && gHudElements[HUD_ELEMENT_32].renderState != 5) {
+            if (byte_203E133 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_GOLD_NUGGETS].renderState != 5) {
                 done = FALSE;
             }
             return done;
@@ -1950,13 +1950,13 @@ bool32 are_page_counters_hidden(int page) {
             break;
 
         case 1:
-            if (byte_203E12D && gHudElements[HUD_ELEMENT_29].renderState != 0) {
+            if (byte_203E12D && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CHICKS].renderState != 0) {
                 done = FALSE;
             }
             return done;
 
         case 2:
-            if (byte_203E12E && gHudElements[HUD_ELEMENT_30].renderState != 0) {
+            if (byte_203E12E && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_SHELLS].renderState != 0) {
                 done = FALSE;
             }
             if (byte_203E12F && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_CAPTIVE_BREEGULLS].renderState != 0) {
@@ -1965,19 +1965,19 @@ bool32 are_page_counters_hidden(int page) {
             return done;
 
         case 4:
-            if (byte_203E130 && gHudElements[HUD_ELEMENT_31].renderState != 0) {
+            if (byte_203E130 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_SILVER_COINS].renderState != 0) {
                 done = FALSE;
             }
-            if (byte_203E131 && gHudElements[HUD_ELEMENT_34].renderState != 0) {
+            if (byte_203E131 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_TOY_SPACESHIPS].renderState != 0) {
                 done = FALSE;
             }
-            if (byte_203E132 && gHudElements[HUD_ELEMENT_35].renderState != 0) {
+            if (byte_203E132 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_ICE_CREAMS].renderState != 0) {
                 done = FALSE;
             }
             return done;
 
         case 5:
-            if (byte_203E133 && gHudElements[HUD_ELEMENT_32].renderState != 0) {
+            if (byte_203E133 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_GOLD_NUGGETS].renderState != 0) {
                 done = FALSE;
             }
             return done;
@@ -2007,16 +2007,16 @@ void sub_8041E88(void) {
     gHudElements[HUD_ELEMENT_40].field_2A = 0;
     gHudElements[HUD_ELEMENT_41].timer = 0;
     gHudElements[HUD_ELEMENT_41].field_2A = 0;
-    gHudElements[HUD_ELEMENT_44].timer = 0;
-    gHudElements[HUD_ELEMENT_44].field_2A = 0;
-    gHudElements[HUD_ELEMENT_45].timer = 0;
-    gHudElements[HUD_ELEMENT_45].field_2A = 0;
+    gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS].timer = 0;
+    gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS].field_2A = 0;
+    gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SHELLS].timer = 0;
+    gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SHELLS].field_2A = 0;
     gHudElements[HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS].timer = 0;
     gHudElements[HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS].field_2A = 0;
-    gHudElements[HUD_ELEMENT_47].timer = 0;
-    gHudElements[HUD_ELEMENT_47].field_2A = 0;
-    gHudElements[HUD_ELEMENT_48].timer = 0;
-    gHudElements[HUD_ELEMENT_48].field_2A = 0;
+    gHudElements[HUD_ELEMENT_MOMMA_CLUCKER_CHICKS].timer = 0;
+    gHudElements[HUD_ELEMENT_MOMMA_CLUCKER_CHICKS].field_2A = 0;
+    gHudElements[HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS].timer = 0;
+    gHudElements[HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS].field_2A = 0;
     gHudElements[HUD_ELEMENT_JINJO_ORACLE_JINJOS].timer = 0;
     gHudElements[HUD_ELEMENT_JINJO_ORACLE_JINJOS].field_2A = 0;
 }

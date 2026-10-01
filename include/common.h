@@ -362,12 +362,12 @@ struct GameStatus {
     u8 oxygen;
     u8 maxOxygen;
     u8 shells;
-    u8 field_19;
+    u8 chicks;
     u8 captiveBreegulls;
-    u8 field_1B;
-    u8 field_1C;
+    u8 iceCreams;
+    u8 toySpaceships;
     u8 silverCoins;
-    u8 field_1E;
+    u8 goldNuggets;
 };
 
 struct SaveFile {
@@ -392,10 +392,10 @@ struct level_struc {
     u8 mumboTokensBadMagicBayou;
     u8 mumboTokensFreezingFurnace;
     u8 mumboTokensSpillersHarbor;
-    u8 field_D;
-    u8 field_E;
+    u8 iceCreams;
+    u8 toySpaceships;
     u8 silverCoinCount;
-    u8 field_10;
+    u8 goldNuggets;
     u8 field_11;
     u8 field_12;
     u8 field_13;
