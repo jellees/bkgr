@@ -343,10 +343,10 @@ struct struc_50 {
 struct GameStatus {
     u8 totalJiggies;
     u8 totalHoneycombs;
-    u8 field_2;
-    u8 field_3;
-    u8 field_4;
-    u8 field_5;
+    u8 mumboTokensCliffFarm;
+    u8 mumboTokensBadMagicBayou;
+    u8 mumboTokensFreezingFurnace;
+    u8 mumboTokensSpillersHarbor;
     u8 mumboTokens;
     u8 field_7;
     u8 clockHour;
@@ -388,10 +388,10 @@ struct level_struc {
     u8 jinjoCount;
     u16 noteCount;
     u8 bozzeyeCount;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
-    u8 field_C;
+    u8 mumboTokensCliffFarm;
+    u8 mumboTokensBadMagicBayou;
+    u8 mumboTokensFreezingFurnace;
+    u8 mumboTokensSpillersHarbor;
     u8 field_D;
     u8 field_E;
     u8 silverCoinCount;
