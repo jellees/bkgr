@@ -31,12 +31,12 @@ enum HudElementIdx {
     HUD_ELEMENT_TOTAL_JIGGIES,
     HUD_ELEMENT_TOTAL_JINJOS,
     HUD_ELEMENT_MUMBO_TOKENS,
-    HUD_ELEMENT_23,
-    HUD_ELEMENT_24,
+    HUD_ELEMENT_PAUSE_LEVEL_NOTES,
+    HUD_ELEMENT_PAUSE_LEVEL_JIGGIES,
     HUD_ELEMENT_PAUSE_LEVEL_JINJOS,
     HUD_ELEMENT_PAUSE_LEVEL_MUMBO_TOKENS,
     HUD_ELEMENT_PAUSE_LEVEL_MOVES_LEARNED,
-    HUD_ELEMENT_28,
+    HUD_ELEMENT_PAUSE_LEVEL_HONEYCOMBS,
     HUD_ELEMENT_PAUSE_LEVEL_CHICKS,
     HUD_ELEMENT_PAUSE_LEVEL_SHELLS,
     HUD_ELEMENT_PAUSE_LEVEL_SILVER_COINS,
@@ -1869,9 +1869,9 @@ NAKED bool32 are_pause_main_counters_hidden(int isDiving) {
 
 void show_pause_page_counters(u32 level) {
     if (byte_203E127)
-        SHOW_LEVEL_COUNTER(HUD_ELEMENT_23, noteCount);
+        SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_NOTES, noteCount);
     if (byte_203E128)
-        SHOW_LEVEL_COUNTER(HUD_ELEMENT_24, jiggyCount);
+        SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_JIGGIES, jiggyCount);
     if (byte_203E129)
         SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_JINJOS, jinjoCount);
 
@@ -1890,7 +1890,7 @@ void show_pause_page_counters(u32 level) {
     if (gShowMovesLearnedCounter)
         SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_MOVES_LEARNED, movesLearned);
     if (byte_203E126)
-        SHOW_LEVEL_COUNTER(HUD_ELEMENT_28, honeycombCount);
+        SHOW_LEVEL_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_HONEYCOMBS, honeycombCount);
 
     switch (level) {
         case 0:
@@ -1925,9 +1925,9 @@ void show_pause_page_counters(u32 level) {
 
         case 6:
             if (byte_203E127)
-                SET_HUD_COUNTER(HUD_ELEMENT_23, stru_80CC8C4.totalNotes, gGameStatus.totalNotes);
+                SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_NOTES, stru_80CC8C4.totalNotes, gGameStatus.totalNotes);
             if (byte_203E128)
-                SET_HUD_COUNTER(HUD_ELEMENT_24, stru_80CC8C4.totalJiggies, gGameStatus.totalJiggies);
+                SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_JIGGIES, stru_80CC8C4.totalJiggies, gGameStatus.totalJiggies);
             if (byte_203E129)
                 SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_JINJOS, stru_80CC8C4.totalJinjos,
                                 gGameStatus.totalJinjos);
@@ -1944,7 +1944,7 @@ void show_pause_page_counters(u32 level) {
                 SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_MOVES_LEARNED, stru_80CC8C4.movesLearned,
                                 gGameStatus.movesLearned);
             if (byte_203E126)
-                SET_HUD_COUNTER(HUD_ELEMENT_28, stru_80CC8C4.totalHoneycombs,
+                SET_HUD_COUNTER(HUD_ELEMENT_PAUSE_LEVEL_HONEYCOMBS, stru_80CC8C4.totalHoneycombs,
                                 gGameStatus.totalHoneycombs);
             break;
 
@@ -1963,10 +1963,10 @@ void sub_8041AAC(int page) {
 bool32 are_page_counters_shown(int page) {
     bool32 done = TRUE;
 
-    if (byte_203E127 && gHudElements[HUD_ELEMENT_23].renderState != 5) {
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_NOTES].renderState != 5) {
         done = FALSE;
     }
-    if (byte_203E128 && gHudElements[HUD_ELEMENT_24].renderState != 5) {
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_JIGGIES].renderState != 5) {
         done = FALSE;
     }
     if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_JINJOS].renderState != 5) {
@@ -1979,7 +1979,7 @@ bool32 are_page_counters_shown(int page) {
         && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_MOVES_LEARNED].renderState != 5) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_28].renderState != 5) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_HONEYCOMBS].renderState != 5) {
         done = FALSE;
     }
 
@@ -2033,10 +2033,10 @@ bool32 are_page_counters_shown(int page) {
 bool32 are_page_counters_hidden(int page) {
     bool32 done = TRUE;
 
-    if (byte_203E127 && gHudElements[HUD_ELEMENT_23].renderState != 0) {
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_NOTES].renderState != 0) {
         done = FALSE;
     }
-    if (byte_203E128 && gHudElements[HUD_ELEMENT_24].renderState != 0) {
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_JIGGIES].renderState != 0) {
         done = FALSE;
     }
     if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_JINJOS].renderState != 0) {
@@ -2049,7 +2049,7 @@ bool32 are_page_counters_hidden(int page) {
         && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_MOVES_LEARNED].renderState != 0) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_28].renderState != 0) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_PAUSE_LEVEL_HONEYCOMBS].renderState != 0) {
         done = FALSE;
     }
 
