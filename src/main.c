@@ -8,7 +8,7 @@
 #include "room.h"
 #include "debug.h"
 #include "player.h"
-#include "alloc.h"
+#include "heap.h"
 #include "pregame.h"
 #include "menu.h"
 #include "random.h"

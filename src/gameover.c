@@ -6,7 +6,7 @@
 #include "room.h"
 #include "player.h"
 #include "audio_b.h"
-#include "alloc.h"
+#include "heap.h"
 #include "script.h"
 #include "hud.h"
 #include "sprite.h"

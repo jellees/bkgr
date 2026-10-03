@@ -1,6 +1,6 @@
 #include "global.h"
 #include "common.h"
-#include "alloc.h"
+#include "heap.h"
 
 #define HEAP_1_LENGTH 64000
 #define HEAP_2_LENGTH 90000

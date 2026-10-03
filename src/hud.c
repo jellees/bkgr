@@ -1,7 +1,7 @@
 #include "global.h"
 #include "common.h"
 #include "sprite.h"
-#include "alloc.h"
+#include "heap.h"
 #include "main.h"
 #include "player.h"
 #include "audio_b.h"

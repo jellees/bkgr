@@ -1,5 +1,5 @@
-#ifndef GUARD_ALLOC_H
-#define GUARD_ALLOC_H
+#ifndef GUARD_HEAP_H
+#define GUARD_HEAP_H
 
 // How Alloc searches a heap for a free block.
 enum AllocStrategy {

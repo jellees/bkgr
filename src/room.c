@@ -2,7 +2,7 @@
 #include "common.h"
 #include "audio_b.h"
 #include "main.h"
-#include "alloc.h"
+#include "heap.h"
 
 u16 word_200145C;
 u16 word_200145E;

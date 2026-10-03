@@ -2,7 +2,7 @@
 #include "common.h"
 #include "sprite.h"
 #include "menu.h"
-#include "alloc.h"
+#include "heap.h"
 #include "save.h"
 #include "audio_b.h"
 #include "player.h"

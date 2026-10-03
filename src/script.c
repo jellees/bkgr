@@ -4,7 +4,7 @@
 #include "room.h"
 #include "player.h"
 #include "main.h"
-#include "alloc.h"
+#include "heap.h"
 #include "player_defs.h"
 #include "audio_b.h"
 #include "script_defs.h"

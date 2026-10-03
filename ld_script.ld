@@ -55,7 +55,7 @@ SECTIONS
         gIsPaletteEffectsActive = .; . += 1;
 
         . = 0x0000DCE0;
-        src/alloc.o(.bss);
+        src/heap.o(.bss);
 
         gEntitySection = .; . += 4;
 
@@ -273,7 +273,7 @@ SECTIONS
         src/player.o(.text);
         src/pregame.o(.text);
         asm/chunk9.o(.text);
-        src/alloc.o(.text);
+        src/heap.o(.text);
         asm/chunk6.o(.text);
         src/hud.o(.text);
         src/audio_b.o(.text);

@@ -7,7 +7,7 @@
 #include "main.h"
 #include "room.h"
 #include "audio_b.h"
-#include "alloc.h"
+#include "heap.h"
 #include "script.h"
 #include "hud.h"
 

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "common.h"
-#include "alloc.h"
+#include "heap.h"
 #include "sprite.h"
 #include "main.h"
 #include "audio_b.h"
