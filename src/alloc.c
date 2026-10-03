@@ -1,5 +1,13 @@
 #include "global.h"
 #include "common.h"
+#include "alloc.h"
+
+#define HEAP_1_LENGTH 64000
+#define HEAP_2_LENGTH 90000
+#define HEAP_3_LENGTH 4160
+#define HEAP_4_LENGTH 4096
+#define HEAP_5_LENGTH 32880
+#define HEAP_6_LENGTH 2048
 
 struct Heap {
     u32 length;
@@ -7,7 +15,7 @@ struct Heap {
     struct MemoryBlock* last;
     struct MemoryBlock* first;
     struct MemoryBlock* end;
-    u32 field_14;
+    u32 allocStrategy;
 };
 
 struct MemoryBlock {
@@ -18,106 +26,104 @@ struct MemoryBlock {
     u8 data[0];
 };
 
-u8 gHeap3[0x1040];
-struct Heap gHeaps[6];
-u8 gHeap1[64000];
-u8 gHeap2[90000];
-u8 gHeap4[0x1000];
-u8 gHeap5[0x8070];
-u8 gHeap6[0x800];
-
-void InitHeap(u32 heap);
-void Free(void* pointer, u32 heap);
+u8 gHeap3[HEAP_3_LENGTH];
+struct Heap gHeaps[HEAP_COUNT];
+u8 gHeap1[HEAP_1_LENGTH];
+u8 gHeap2[HEAP_2_LENGTH];
+u8 gHeap4[HEAP_4_LENGTH];
+u8 gHeap5[HEAP_5_LENGTH];
+u8 gHeap6[HEAP_6_LENGTH];
 
 void sub_8027600(u32 heap) {
     struct MemoryBlock* block = gHeaps[heap].start;
     do {
+        // There was most likely a debug print here.
         block = block->next;
     } while (block);
 }
 
 void InitAllHeaps() {
     int i;
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < HEAP_COUNT; i++) {
         InitHeap(i);
     }
 }
 
 void InitHeap(u32 heap) {
     switch (heap) {
-        case 0:
-            gHeaps[heap].length = 64000;
+        case HEAP_1:
+            gHeaps[heap].length = HEAP_1_LENGTH;
             gHeaps[heap].first = (struct MemoryBlock*)gHeap1;
-            gHeaps[heap].end = (struct MemoryBlock*)&gHeap1[63999];
+            gHeaps[heap].end = (struct MemoryBlock*)&gHeap1[HEAP_1_LENGTH - 1];
             gHeaps[heap].start = (struct MemoryBlock*)gHeap1;
             gHeaps[heap].last = (struct MemoryBlock*)gHeap1;
-            gHeaps[heap].field_14 = 0;
-            ((struct MemoryBlock*)gHeap1)->length = 64000;
+            gHeaps[heap].allocStrategy = ALLOC_FIRST_FIT;
+            ((struct MemoryBlock*)gHeap1)->length = HEAP_1_LENGTH;
             ((struct MemoryBlock*)gHeap1)->allocId = 0;
             ((struct MemoryBlock*)gHeap1)->next = 0;
             ((struct MemoryBlock*)gHeap1)->previous = 0;
             break;
 
-        case 1:
-            gHeaps[heap].length = 90000;
+        case HEAP_2:
+            gHeaps[heap].length = HEAP_2_LENGTH;
             gHeaps[heap].first = (struct MemoryBlock*)gHeap2;
-            gHeaps[heap].end = (struct MemoryBlock*)&gHeap2[89999];
+            gHeaps[heap].end = (struct MemoryBlock*)&gHeap2[HEAP_2_LENGTH - 1];
             gHeaps[heap].start = (struct MemoryBlock*)gHeap2;
             gHeaps[heap].last = (struct MemoryBlock*)gHeap2;
-            gHeaps[heap].field_14 = 0;
-            ((struct MemoryBlock*)gHeap2)->length = 90000;
+            gHeaps[heap].allocStrategy = ALLOC_FIRST_FIT;
+            ((struct MemoryBlock*)gHeap2)->length = HEAP_2_LENGTH;
             ((struct MemoryBlock*)gHeap2)->allocId = 0;
             ((struct MemoryBlock*)gHeap2)->next = 0;
             ((struct MemoryBlock*)gHeap2)->previous = 0;
             break;
 
-        case 2:
-            gHeaps[heap].length = 4160;
+        case HEAP_3:
+            gHeaps[heap].length = HEAP_3_LENGTH;
             gHeaps[heap].first = (struct MemoryBlock*)gHeap3;
-            gHeaps[heap].end = (struct MemoryBlock*)&gHeap3[4159];
+            gHeaps[heap].end = (struct MemoryBlock*)&gHeap3[HEAP_3_LENGTH - 1];
             gHeaps[heap].start = (struct MemoryBlock*)gHeap3;
             gHeaps[heap].last = (struct MemoryBlock*)gHeap3;
-            gHeaps[heap].field_14 = 0;
-            ((struct MemoryBlock*)gHeap3)->length = 4160;
+            gHeaps[heap].allocStrategy = ALLOC_FIRST_FIT;
+            ((struct MemoryBlock*)gHeap3)->length = HEAP_3_LENGTH;
             ((struct MemoryBlock*)gHeap3)->allocId = 0;
             ((struct MemoryBlock*)gHeap3)->next = 0;
             ((struct MemoryBlock*)gHeap3)->previous = 0;
             break;
 
-        case 3:
-            gHeaps[heap].length = 4096;
+        case HEAP_4:
+            gHeaps[heap].length = HEAP_4_LENGTH;
             gHeaps[heap].first = (struct MemoryBlock*)gHeap4;
-            gHeaps[heap].end = (struct MemoryBlock*)&gHeap4[4095];
+            gHeaps[heap].end = (struct MemoryBlock*)&gHeap4[HEAP_4_LENGTH - 1];
             gHeaps[heap].start = (struct MemoryBlock*)gHeap4;
             gHeaps[heap].last = (struct MemoryBlock*)gHeap4;
-            gHeaps[heap].field_14 = 0;
-            ((struct MemoryBlock*)gHeap4)->length = 4096;
+            gHeaps[heap].allocStrategy = ALLOC_FIRST_FIT;
+            ((struct MemoryBlock*)gHeap4)->length = HEAP_4_LENGTH;
             ((struct MemoryBlock*)gHeap4)->allocId = 0;
             ((struct MemoryBlock*)gHeap4)->next = 0;
             ((struct MemoryBlock*)gHeap4)->previous = 0;
             break;
 
-        case 4:
-            gHeaps[heap].length = 32880;
+        case HEAP_5:
+            gHeaps[heap].length = HEAP_5_LENGTH;
             gHeaps[heap].first = (struct MemoryBlock*)gHeap5;
-            gHeaps[heap].end = (struct MemoryBlock*)&gHeap5[32879];
+            gHeaps[heap].end = (struct MemoryBlock*)&gHeap5[HEAP_5_LENGTH - 1];
             gHeaps[heap].start = (struct MemoryBlock*)gHeap5;
             gHeaps[heap].last = (struct MemoryBlock*)gHeap5;
-            gHeaps[heap].field_14 = 0;
-            ((struct MemoryBlock*)gHeap5)->length = 32880;
+            gHeaps[heap].allocStrategy = ALLOC_FIRST_FIT;
+            ((struct MemoryBlock*)gHeap5)->length = HEAP_5_LENGTH;
             ((struct MemoryBlock*)gHeap5)->allocId = 0;
             ((struct MemoryBlock*)gHeap5)->next = 0;
             ((struct MemoryBlock*)gHeap5)->previous = 0;
             break;
 
-        case 5:
-            gHeaps[heap].length = 2048;
+        case HEAP_6:
+            gHeaps[heap].length = HEAP_6_LENGTH;
             gHeaps[heap].first = (struct MemoryBlock*)gHeap6;
-            gHeaps[heap].end = (struct MemoryBlock*)&gHeap6[2047];
+            gHeaps[heap].end = (struct MemoryBlock*)&gHeap6[HEAP_6_LENGTH - 1];
             gHeaps[heap].start = (struct MemoryBlock*)gHeap6;
             gHeaps[heap].last = (struct MemoryBlock*)gHeap6;
-            gHeaps[heap].field_14 = 0;
-            ((struct MemoryBlock*)gHeap6)->length = 2048;
+            gHeaps[heap].allocStrategy = ALLOC_FIRST_FIT;
+            ((struct MemoryBlock*)gHeap6)->length = HEAP_6_LENGTH;
             ((struct MemoryBlock*)gHeap6)->allocId = 0;
             ((struct MemoryBlock*)gHeap6)->next = 0;
             ((struct MemoryBlock*)gHeap6)->previous = 0;
@@ -128,12 +134,12 @@ void InitHeap(u32 heap) {
     }
 }
 
-void sub_80277D0(u32 heap, u32 a2) {
-    ASSERT(a2 < 2);
+void SetHeapAllocStrategy(u32 heap, u32 strategy) {
+    ASSERT(strategy <= ALLOC_BEST_FIT);
 
-    ASSERT(heap < 6);
+    ASSERT(heap < HEAP_COUNT);
 
-    gHeaps[heap].field_14 = a2;
+    gHeaps[heap].allocStrategy = strategy;
 }
 
 void* Alloc(u32 size, u32 allocId, u32 heap) {
@@ -142,7 +148,7 @@ void* Alloc(u32 size, u32 allocId, u32 heap) {
     struct MemoryBlock* newBlock;
     u32 bestLength;
 
-    ASSERT(heap < 6);
+    ASSERT(heap < HEAP_COUNT);
     ASSERT(size != 0);
     ASSERT(allocId != 0);
 
@@ -152,8 +158,8 @@ void* Alloc(u32 size, u32 allocId, u32 heap) {
     }
     size += 16;
 
-    switch (gHeaps[heap].field_14) {
-        case 0:
+    switch (gHeaps[heap].allocStrategy) {
+        case ALLOC_FIRST_FIT:
             node = gHeaps[heap].start;
             do {
                 if (node->allocId == 0 && node->length >= size) {
@@ -190,7 +196,7 @@ void* Alloc(u32 size, u32 allocId, u32 heap) {
             ASSERT(0);
             return 0;
 
-        case 1:
+        case ALLOC_BEST_FIT:
             node = gHeaps[heap].start;
             bestLength = -1;
             block = 0;
@@ -244,7 +250,7 @@ void* Alloc(u32 size, u32 allocId, u32 heap) {
 void FreeEx(void* pointer) {
     int i;
 
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < HEAP_COUNT; i++) {
         if (pointer >= (void*)gHeaps[i].first && pointer <= (void*)gHeaps[i].end) {
             Free(pointer, i);
             return;
@@ -257,7 +263,7 @@ void FreeEx(void* pointer) {
 void Free(void* pointer, u32 heap) {
     struct MemoryBlock* block = (struct MemoryBlock*)((int)pointer - sizeof(struct MemoryBlock));
 
-    ASSERT(block->allocId - 1 <= 0x18);
+    ASSERT(block->allocId - 1 <= 24);
 
     block->allocId = 0;
 
