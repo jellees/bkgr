@@ -7,8 +7,7 @@ enum AllocStrategy {
     ALLOC_BEST_FIT,  // Smallest free block that is large enough.
 };
 
-enum Heaps
-{
+enum Heaps {
     HEAP_1,
     HEAP_2,
     HEAP_3,

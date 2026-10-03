@@ -198,7 +198,7 @@ static const u16 word_80A8E28[HUD_ELEMENT_COUNT] = {
 
 static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
     if (element->graphicCount != 0) {
-        Free(element->graphic, 4);
+        Free(element->graphic, HEAP_5);
         element->graphicCount = 0;
     }
 
@@ -454,7 +454,7 @@ static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
     switch (a3) {
         case 0:
             ASSERT(a2 != 0);
-            element->graphic = Alloc(sizeof(struct HudGraphic) * a2, 23, 4);
+            element->graphic = Alloc(sizeof(struct HudGraphic) * a2, 23, HEAP_5);
             element->graphicCount = a2;
             for (i = 0; i < element->graphicCount; i++) {
                 element->graphic[i].field_34 = -1;
@@ -463,7 +463,8 @@ static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
             break;
 
         case 1:
-            element->graphic = Alloc(sizeof(struct HudGraphic) * (a2 + stru_80CC8C4.maxHealth), 23, 4);
+            element->graphic =
+                Alloc(sizeof(struct HudGraphic) * (a2 + stru_80CC8C4.maxHealth), 23, HEAP_5);
             element->graphicCount = gGameStatus.maxHealth + a2;
             for (i = 0; i < element->graphicCount; i++) {
                 element->graphic[i].field_34 = -1;
@@ -473,7 +474,8 @@ static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
             break;
 
         case 2:
-            element->graphic = Alloc(sizeof(struct HudGraphic) * (a2 + gGameStatus.maxOxygen), 24, 4);
+            element->graphic =
+                Alloc(sizeof(struct HudGraphic) * (a2 + gGameStatus.maxOxygen), 24, HEAP_5);
             element->graphicCount = gGameStatus.maxOxygen + a2;
             for (i = 0; i < element->graphicCount; i++) {
                 element->graphic[i].field_34 = -1;
@@ -1184,7 +1186,7 @@ void init_hud_elements(void) {
 
     byte_203EA80 = 0;
     dword_203EA84 = -1;
-    gHudElements = Alloc(sizeof(struct HudElement) * HUD_ELEMENT_COUNT, 3, 4);
+    gHudElements = Alloc(sizeof(struct HudElement) * HUD_ELEMENT_COUNT, 3, HEAP_5);
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         gHudElements[i].renderState = 0;
@@ -1594,7 +1596,7 @@ void sub_80409DC(void) {
             gHudElements[i].scriptStep = 0;
 
             if (gHudElements[i].graphicCount) {
-                Free(gHudElements[i].graphic, 4);
+                Free(gHudElements[i].graphic, HEAP_5);
                 gHudElements[i].graphicCount = 0;
             }
         }
@@ -1629,7 +1631,7 @@ void sub_08040A38(u32 element) {
     if (gHudElements[element].renderState) {
         gHudElements[element].renderState = 0;
         if (gHudElements[element].graphicCount) {
-            Free(gHudElements[element].graphic, 4);
+            Free(gHudElements[element].graphic, HEAP_5);
             gHudElements[element].graphicCount = 0;
         }
     }

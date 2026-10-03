@@ -16,7 +16,7 @@ u8 byte_203EAE3;
 static void create_eeprom_buffer(void) {
     IdentifyEeprom(64);
     SetEepromTimerIntr(3, &gFunctionArray[6]);
-    gBuffer = (u8*)Alloc(BUFFER_SIZE, 9, 4);
+    gBuffer = (u8*)Alloc(BUFFER_SIZE, 9, HEAP_5);
     DmaFill32(0, gBuffer, 510);
     REG_IME = 0;
     SyncVblank();
@@ -28,7 +28,7 @@ static void create_eeprom_buffer(void) {
 
 static void remove_eeprom_buffer(void) {
     gFunctionArray[6] = nullsub_15;
-    Free(gBuffer, 4);
+    Free(gBuffer, HEAP_5);
     REG_IME = 1;
     gIsSavingGame = FALSE;
 }

@@ -75,7 +75,7 @@ void sub_80629E8() {
     gGameStatus.oxygen = gGameStatus.maxOxygen;
 
     end_all_scripts(2);
-    InitHeap(3);
+    InitHeap(HEAP_4);
     sub_8038FA0(gLoadedRoomLevel);
     sub_8039234();
     sub_80409DC();
