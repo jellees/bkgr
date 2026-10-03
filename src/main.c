@@ -587,7 +587,7 @@ static void start_game() {
 
     byte_2000F5D = 0;
 
-    dword_2000F60 = (u32*)Alloc(0x400, 19, HEAP_5);
+    dword_2000F60 = (u32*)Alloc(0x400, 19, HEAP_GENERAL);
     dword_2000F64 = 0;
 
     setup_interrupts();

@@ -1044,9 +1044,9 @@ void sub_8010BA8(int a1) {
     audio_set_tune_vol(dVolumes[gBgmMainVolume / 2]);
     sub_8011158();
     sub_801126C();
-    FreeById(HEAP_5, 15);
+    FreeById(HEAP_GENERAL, 15);
     ResetMenu();
-    ASSERT(!DoesMemBlockExistById(HEAP_5, 15));
+    ASSERT(!DoesMemBlockExistById(HEAP_GENERAL, 15));
 
     if (byte_200145A) {
         SetTextSpriteCount(0);
@@ -2149,7 +2149,7 @@ void free_input_record_memory(void) {
             count--;
         }
     }
-    Free(gInputRecords, HEAP_5);
+    Free(gInputRecords, HEAP_GENERAL);
 }
 
 void display_error_message(char* type, char* message) {

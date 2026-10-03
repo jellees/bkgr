@@ -12,7 +12,7 @@ enum Heaps {
     HEAP_2,
     HEAP_3,
     HEAP_4,
-    HEAP_5,
+    HEAP_GENERAL,
     HEAP_6,
 
     HEAP_COUNT

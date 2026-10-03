@@ -6,7 +6,7 @@
 #define HEAP_2_LENGTH 90000
 #define HEAP_3_LENGTH 4160
 #define HEAP_4_LENGTH 4096
-#define HEAP_5_LENGTH 32880
+#define HEAP_GENERAL_LENGTH 32880
 #define HEAP_6_LENGTH 2048
 
 struct Heap {
@@ -31,7 +31,7 @@ struct Heap gHeaps[HEAP_COUNT];
 u8 gHeap1[HEAP_1_LENGTH];
 u8 gHeap2[HEAP_2_LENGTH];
 u8 gHeap4[HEAP_4_LENGTH];
-u8 gHeap5[HEAP_5_LENGTH];
+u8 gHeapGeneral[HEAP_GENERAL_LENGTH];
 u8 gHeap6[HEAP_6_LENGTH];
 
 void sub_8027600(u32 heap) {
@@ -103,17 +103,17 @@ void InitHeap(u32 heap) {
             ((struct MemoryBlock*)gHeap4)->previous = 0;
             break;
 
-        case HEAP_5:
-            gHeaps[heap].length = HEAP_5_LENGTH;
-            gHeaps[heap].first = (struct MemoryBlock*)gHeap5;
-            gHeaps[heap].end = (struct MemoryBlock*)&gHeap5[HEAP_5_LENGTH - 1];
-            gHeaps[heap].start = (struct MemoryBlock*)gHeap5;
-            gHeaps[heap].last = (struct MemoryBlock*)gHeap5;
+        case HEAP_GENERAL:
+            gHeaps[heap].length = HEAP_GENERAL_LENGTH;
+            gHeaps[heap].first = (struct MemoryBlock*)gHeapGeneral;
+            gHeaps[heap].end = (struct MemoryBlock*)&gHeapGeneral[HEAP_GENERAL_LENGTH - 1];
+            gHeaps[heap].start = (struct MemoryBlock*)gHeapGeneral;
+            gHeaps[heap].last = (struct MemoryBlock*)gHeapGeneral;
             gHeaps[heap].allocStrategy = ALLOC_FIRST_FIT;
-            ((struct MemoryBlock*)gHeap5)->length = HEAP_5_LENGTH;
-            ((struct MemoryBlock*)gHeap5)->allocId = 0;
-            ((struct MemoryBlock*)gHeap5)->next = 0;
-            ((struct MemoryBlock*)gHeap5)->previous = 0;
+            ((struct MemoryBlock*)gHeapGeneral)->length = HEAP_GENERAL_LENGTH;
+            ((struct MemoryBlock*)gHeapGeneral)->allocId = 0;
+            ((struct MemoryBlock*)gHeapGeneral)->next = 0;
+            ((struct MemoryBlock*)gHeapGeneral)->previous = 0;
             break;
 
         case HEAP_6:

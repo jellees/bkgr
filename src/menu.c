@@ -311,12 +311,12 @@ void InitMenu(int menu, int language) {
     int i;
 
     if (gMenu.texts) {
-        Free(gMenu.texts, HEAP_5);
+        Free(gMenu.texts, HEAP_GENERAL);
         gMenu.texts = NULL;
     }
 
     if (gMenu.useSpriteBuffer && gMenu.spriteBuffer) {
-        Free(gMenu.spriteBuffer, HEAP_5);
+        Free(gMenu.spriteBuffer, HEAP_GENERAL);
         gMenu.spriteBuffer = NULL;
     }
 
@@ -345,7 +345,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 5;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 16;
@@ -382,7 +382,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 2;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 16;
@@ -439,7 +439,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 3;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 20;
@@ -501,13 +501,13 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 4;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
-            gMenu.spriteBuffer = Alloc(sizeof(struct Sprite) * gMenu.entryCount, 15, HEAP_5);
+            gMenu.spriteBuffer = Alloc(sizeof(struct Sprite) * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
             SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
@@ -581,13 +581,13 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 2;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
-            gMenu.spriteBuffer = Alloc(28 * gMenu.entryCount, 15, HEAP_5);
+            gMenu.spriteBuffer = Alloc(28 * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
             SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
@@ -645,13 +645,13 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 2;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
-            gMenu.spriteBuffer = Alloc(28 * gMenu.entryCount, 15, HEAP_5);
+            gMenu.spriteBuffer = Alloc(28 * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
             SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
@@ -709,13 +709,13 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 2;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
-            gMenu.spriteBuffer = Alloc(28 * gMenu.entryCount, 15, HEAP_5);
+            gMenu.spriteBuffer = Alloc(28 * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
             SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
@@ -773,7 +773,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 2;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 16;
@@ -807,7 +807,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 3;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 32;
@@ -842,13 +842,13 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 3;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 20;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
-            gMenu.spriteBuffer = Alloc(28 * gMenu.entryCount, 15, HEAP_5);
+            gMenu.spriteBuffer = Alloc(28 * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
             SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
@@ -887,7 +887,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 5;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 20;
@@ -1044,7 +1044,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[1];
             gMenu.entryCount = 5;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 20;
@@ -1201,7 +1201,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 7;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1240,7 +1240,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 4;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1276,7 +1276,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 6;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1314,7 +1314,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 6;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1352,7 +1352,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 6;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1390,7 +1390,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 6;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1428,7 +1428,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 4;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1464,7 +1464,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 2;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1498,7 +1498,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 6;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1536,7 +1536,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 7;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1575,7 +1575,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 7;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1614,7 +1614,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 7;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1653,7 +1653,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 7;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1692,7 +1692,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 7;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
@@ -1731,7 +1731,7 @@ void InitMenu(int menu, int language) {
             gMenu.selected.palette = 10;
             gMenu.selected.font = (void*)&font_80B01A8[0];
             gMenu.entryCount = 7;
-            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_5);
+            gMenu.texts = Alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
             gMenu.field_3A = 1;
             gMenu.lineHeight = 8;
