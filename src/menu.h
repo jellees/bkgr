@@ -1,8 +1,6 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
-#include "sprite.h"
-
 enum MenuState {
     MENU_GAME_OR_CONTINUE,
     MENU_PAUSE_MAIN,
@@ -34,21 +32,6 @@ enum MenuState {
     MENU_DEBUG_WARP_6,
 };
 
-struct Menu {
-    u16 xPosition;
-    u16 yPosition;
-    u16 lineHeight;
-    u16 horizontalPadding;
-    struct TextBox unselected;
-    struct TextBox selected;
-    u32 entryCount;
-    u8** texts;
-    u16 curEntry;
-    u8 field_3A;
-    bool8 useSpriteBuffer;
-    struct Sprite* spriteBuffer;
-};
-
 void ResetMenuEx(void);
 void ResetMenu(void);
 void InitMenu(int menu, int language);
@@ -61,7 +44,5 @@ void SetMenuEntry(int entry);
 
 extern u8 gMenuId;
 extern u8 gMenuParentId;
-// This can be make static.
-extern struct Menu gMenu;
 
 #endif

@@ -174,8 +174,8 @@ void open_pause_menu(void) {
         case 0:
             gLevelNameTexts = &unk_86AD9E0;
             dword_203F554 = &str_08067DC0;
-            gSaveGameTexts[0] = &str_08068058;
-            gSaveGameTexts[1] = &str_08068064;
+            gSaveGameTexts[0] = str_08068058;
+            gSaveGameTexts[1] = str_08068064;
             gSaveGameTexts[2] = &str_08068074;
             gSaveGameTexts[3] = &str_08068084;
             gSaveGameTexts[4] = &str_080680B0;
@@ -188,8 +188,8 @@ void open_pause_menu(void) {
         case 1:
             gLevelNameTexts = &unk_86ADAA8;
             dword_203F554 = &str_08067E58;
-            gSaveGameTexts[0] = &str_080680E8;
-            gSaveGameTexts[1] = &str_080680FC;
+            gSaveGameTexts[0] = str_080680E8;
+            gSaveGameTexts[1] = str_080680FC;
             gSaveGameTexts[2] = &str_0806810C;
             gSaveGameTexts[3] = &str_08068120;
             gSaveGameTexts[4] = &str_08068148;
@@ -202,8 +202,8 @@ void open_pause_menu(void) {
         case 2:
             gLevelNameTexts = &unk_86ADC38;
             dword_203F554 = &str_08067FB0;
-            gSaveGameTexts[0] = &str_08068244;
-            gSaveGameTexts[1] = &str_08068258;
+            gSaveGameTexts[0] = str_08068244;
+            gSaveGameTexts[1] = str_08068258;
             gSaveGameTexts[2] = &str_08068264;
             gSaveGameTexts[3] = &str_08068274;
             gSaveGameTexts[4] = &str_08068298;
@@ -216,8 +216,8 @@ void open_pause_menu(void) {
         case 4:
             gLevelNameTexts = &unk_86ADD00;
             dword_203F554 = &str_0806803C;
-            gSaveGameTexts[0] = &str_080682E4;
-            gSaveGameTexts[1] = &str_080682F4;
+            gSaveGameTexts[0] = str_080682E4;
+            gSaveGameTexts[1] = str_080682F4;
             gSaveGameTexts[2] = &str_08068304;
             gSaveGameTexts[3] = &str_08068314;
             gSaveGameTexts[4] = &str_0806833C;
@@ -230,8 +230,8 @@ void open_pause_menu(void) {
         case 3:
             gLevelNameTexts = &unk_86ADB70;
             dword_203F554 = &str_08067F08;
-            gSaveGameTexts[0] = &str_08068190;
-            gSaveGameTexts[1] = &str_080681A4;
+            gSaveGameTexts[0] = str_08068190;
+            gSaveGameTexts[1] = str_080681A4;
             gSaveGameTexts[2] = &str_080681B8;
             gSaveGameTexts[3] = &str_080681CC;
             gSaveGameTexts[4] = &str_08068208;
@@ -437,8 +437,9 @@ static void exec_pause_menu(void) {
 
         if (loadMenu
             && are_pause_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
-            if (gMenuId == MENU_PAUSE_MAIN)
+            if (gMenuId == MENU_PAUSE_MAIN) {
                 break;
+            }
 
             InitMenu(gMenuId, gPauseMenuLanguage);
             loadMenu = FALSE;
@@ -685,8 +686,9 @@ static void exec_totals_menu(void) {
             REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
             REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
 
-            if (nextPage < 0)
+            if (nextPage < 0) {
                 break;
+            }
 
             page = nextPage;
 

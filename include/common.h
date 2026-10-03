@@ -785,9 +785,9 @@ extern u8 byte_203FA35; // possibly bool8
 extern u8 byte_203FA58;
 extern struct struc_46* dword_203FA5C;
 
-extern u8* dword_203FA7C;
-extern u8* dword_203FA80;
-extern u8* dword_203FA84;
+extern char* dword_203FA7C;
+extern char* dword_203FA80;
+extern char* dword_203FA84;
 extern u8 byte_203FA88;
 
 extern u32 dword_203FA8C;
@@ -913,8 +913,8 @@ extern char dword_80660B8[];
 // Some strings used by pause menu
 extern char* unk_86AD9E0;
 extern u8 str_08067DC0;
-extern u8 str_08068058;
-extern u8 str_08068064;
+extern char str_08068058[];
+extern char str_08068064[];
 extern u8 str_08068074;
 extern u8 str_08068084;
 extern u8 str_080680B0;
@@ -925,8 +925,8 @@ extern u8 str_08067D9C;
 
 extern char* unk_86ADAA8;
 extern u8 str_08067E58;
-extern u8 str_080680E8;
-extern u8 str_080680FC;
+extern char str_080680E8[];
+extern char str_080680FC[];
 extern u8 str_0806810C;
 extern u8 str_08068120;
 extern u8 str_08068148;
@@ -937,8 +937,8 @@ extern u8 str_08067E30;
 
 extern char* unk_86ADC38;
 extern u8 str_08067FB0;
-extern u8 str_08068244;
-extern u8 str_08068258;
+extern char str_08068244[];
+extern char str_08068258[];
 extern u8 str_08068264;
 extern u8 str_08068274;
 extern u8 str_08068298;
@@ -949,8 +949,8 @@ extern u8 str_08067F8C;
 
 extern char* unk_86ADB70;
 extern u8 str_08067F08;
-extern u8 str_08068190;
-extern u8 str_080681A4;
+extern char str_08068190[];
+extern char str_080681A4[];
 extern u8 str_080681B8;
 extern u8 str_080681CC;
 extern u8 str_08068208;
@@ -961,8 +961,8 @@ extern u8 str_08067EE0;
 
 extern char* unk_86ADD00;
 extern u8 str_0806803C;
-extern u8 str_080682E4;
-extern u8 str_080682F4;
+extern char str_080682E4[];
+extern char str_080682F4[];
 extern u8 str_08068304;
 extern u8 str_08068314;
 extern u8 str_0806833C;
