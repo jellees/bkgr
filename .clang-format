@@ -17,3 +17,4 @@ IndentCaseLabels: true
 AlignTrailingComments: true
 UseTab: Never
 AlignConsecutiveMacros: true
+InsertBraces: true

@@ -671,13 +671,15 @@ static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
         switch (a3) {
             case 1:
                 number = element->targetValue;
-                if (number < element->displayValue)
+                if (number < element->displayValue) {
                     return 2;
+                }
                 break;
             case 2:
                 number = element->targetValue;
-                if (number > element->displayValue)
+                if (number > element->displayValue) {
                     return 2;
+                }
                 break;
             default:
                 number = element->targetValue;
@@ -688,16 +690,18 @@ static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
         offset = 0xC0000;
         if (number >= 10) {
             offset = 0x1C0000;
-            if (number < 100)
+            if (number < 100) {
                 offset = 0x140000;
+            }
         }
 
         number = element->maxValue;
         offset2 = 0xC0000;
         if (number >= 10) {
             offset2 = 0x1C0000;
-            if (number < 100)
+            if (number < 100) {
                 offset2 = 0x140000;
+            }
         }
 
         target = element->graphic[a2].field_2C - offset - offset2;
@@ -706,10 +710,11 @@ static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
     }
 
     element->graphic[a2].field_24 = target;
-    if (target > element->graphic[a2].field_1C)
+    if (target > element->graphic[a2].field_1C) {
         element->graphic[a2].field_34 = 2;
-    else
+    } else {
         element->graphic[a2].field_34 = 6;
+    }
 
     return 2;
 }
@@ -725,13 +730,15 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
         switch (a3) {
             case 1:
                 number = element->targetValue;
-                if (number < element->displayValue)
+                if (number < element->displayValue) {
                     return 2;
+                }
                 break;
             case 2:
                 number = element->targetValue;
-                if (number > element->displayValue)
+                if (number > element->displayValue) {
                     return 2;
+                }
                 break;
             default:
                 number = element->targetValue;
@@ -742,16 +749,18 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
         offset = 0xC0000;
         if (number >= 10) {
             offset = 0x1C0000;
-            if (number < 100)
+            if (number < 100) {
                 offset = 0x140000;
+            }
         }
 
         number = element->maxValue;
         offset2 = 0xC0000;
         if (number >= 10) {
             offset2 = 0x1C0000;
-            if (number < 100)
+            if (number < 100) {
                 offset2 = 0x140000;
+            }
         }
 
         target = element->graphic[a2].field_2C + offset + offset2;
@@ -760,10 +769,11 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
     }
 
     element->graphic[a2].field_24 = target;
-    if (target < element->graphic[a2].field_1C)
+    if (target < element->graphic[a2].field_1C) {
         element->graphic[a2].field_34 = 6;
-    else
+    } else {
         element->graphic[a2].field_34 = 2;
+    }
 
     return 2;
 }
@@ -1229,8 +1239,9 @@ void set_hud_number(u32 element, int value) {
         case HUD_METER_HEALTH:
             renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_HEALTH;
+            }
             gHudElements[element].timer = 10;
             if (value == 17) {
                 gHudElements[element].rouletteTime = 600;
@@ -1254,8 +1265,9 @@ void set_hud_number(u32 element, int value) {
         case HUD_METER_OXYGEN:
             renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
             element = HUD_ELEMENT_OXYGEN_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_OXYGEN;
+            }
             gHudElements[element].timer = 10;
             gHudElements[element].targetValue = value;
             break;
@@ -1270,24 +1282,27 @@ void set_hud_number(u32 element, int value) {
             ASSERT(gHudElements[element].displayValue <= value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_40);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_40, n);
+            }
             break;
 
         case HUD_ELEMENT_LEVEL_NOTES:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_BOZZEYE_NOTES);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_BOZZEYE_NOTES, n);
+            }
             break;
 
         case HUD_ELEMENT_LEVEL_JIGGIES:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_41);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_41, n);
+            }
             break;
 
         case HUD_ELEMENT_2:
@@ -1304,32 +1319,36 @@ void set_hud_number(u32 element, int value) {
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_MR_RIPOVSKI_SHELLS);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_MR_RIPOVSKI_SHELLS, n);
+            }
             break;
 
         case HUD_ELEMENT_LEVEL_JINJOS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_JINJO_ORACLE_JINJOS);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_JINJO_ORACLE_JINJOS, n);
+            }
             break;
 
         case HUD_ELEMENT_CHICKS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS, n);
+            }
             break;
 
         case HUD_ELEMENT_CAPTIVE_BREEGULLS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS, n);
+            }
             break;
 
         case HUD_ELEMENT_ICE_CREAMS:
@@ -1346,16 +1365,18 @@ void set_hud_number(u32 element, int value) {
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS, n);
+            }
             break;
 
         case HUD_ELEMENT_GOLD_NUGGETS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS);
-            if (n >= 0)
+            if (n >= 0) {
                 set_hud_number(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS, n);
+            }
             break;
 
         case HUD_ELEMENT_36:
@@ -1623,14 +1644,16 @@ void sub_08040AD0(u32 element, int value) {
         case HUD_METER_HEALTH:
             renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_HEALTH;
+            }
             break;
 
         case HUD_METER_OXYGEN:
             renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_OXYGEN;
+            }
             break;
     }
 
@@ -1651,34 +1674,45 @@ void sub_08040AD0(u32 element, int value) {
 void show_pause_counters(int isDiving) {
     reset_hud_elements();
 
-    if (byte_203E127)
+    if (byte_203E127) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_NOTES);
-    if (byte_203E128)
+    }
+    if (byte_203E128) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_JIGGIES);
-    if (byte_203E12B)
+    }
+    if (byte_203E12B) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_MUMBO_TOKENS);
-    if (byte_203E12A)
+    }
+    if (byte_203E12A) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS);
-    if (gShowMovesLearnedCounter)
+    }
+    if (gShowMovesLearnedCounter) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_MOVES_LEARNED);
-    if (byte_203E129)
+    }
+    if (byte_203E129) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_JINJOS);
-    if (byte_203E126)
+    }
+    if (byte_203E126) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_HONEYCOMBS);
+    }
 
     SHOW_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
 
     if (isDiving) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_OXYGEN);
     } else {
-        if (byte_203E122)
+        if (byte_203E122) {
             SHOW_HUD_ELEMENT(HUD_ELEMENT_BLUE_EGGS);
-        if (byte_203E123)
+        }
+        if (byte_203E123) {
             SHOW_HUD_ELEMENT(HUD_ELEMENT_ELECTRIC_EGGS);
-        if (byte_203E125)
+        }
+        if (byte_203E125) {
             SHOW_HUD_ELEMENT(HUD_ELEMENT_FIRE_EGGS);
-        if (byte_203E124)
+        }
+        if (byte_203E124) {
             SHOW_HUD_ELEMENT(HUD_ELEMENT_ICE_EGGS);
+        }
     }
 
     byte_203EA80 = 1;
@@ -1752,79 +1786,110 @@ bool32 are_pause_counters_shown(int isDiving) {
 bool32 are_pause_counters_hidden(int isDiving) {
     bool32 done = TRUE;
 
-    if (byte_203E127 && gHudElements[HUD_ELEMENT_19].renderState != 0)
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_19].renderState != 0) {
         done = FALSE;
-    if (byte_203E128 && gHudElements[HUD_ELEMENT_20].renderState != 0)
+    }
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_20].renderState != 0) {
         done = FALSE;
-    if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_JINJOS].renderState != 0)
+    }
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_JINJOS].renderState != 0) {
         done = FALSE;
-    if (byte_203E12B && gHudElements[HUD_ELEMENT_43].renderState != 0)
+    }
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_43].renderState != 0) {
         done = FALSE;
-    if (byte_203E12A && gHudElements[HUD_ELEMENT_42].renderState != 0)
+    }
+    if (byte_203E12A && gHudElements[HUD_ELEMENT_42].renderState != 0) {
         done = FALSE;
-    if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].renderState != 0)
+    }
+    if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].renderState != 0) {
         done = FALSE;
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_6].renderState != 0)
+    }
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_6].renderState != 0) {
         done = FALSE;
-    if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0)
+    }
+    if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0) {
         done = FALSE;
+    }
 
     if (isDiving) {
-        if (gHudElements[HUD_ELEMENT_56].renderState != 0)
+        if (gHudElements[HUD_ELEMENT_56].renderState != 0) {
             done = FALSE;
+        }
     } else {
-        if (byte_203E122 && gHudElements[HUD_ELEMENT_9].renderState != 0)
+        if (byte_203E122 && gHudElements[HUD_ELEMENT_9].renderState != 0) {
             done = FALSE;
-        if (byte_203E123 && gHudElements[HUD_ELEMENT_10].renderState != 0)
+        }
+        if (byte_203E123 && gHudElements[HUD_ELEMENT_10].renderState != 0) {
             done = FALSE;
-        if (byte_203E124 && gHudElements[HUD_ELEMENT_11].renderState != 0)
+        }
+        if (byte_203E124 && gHudElements[HUD_ELEMENT_11].renderState != 0) {
             done = FALSE;
-        if (byte_203E125 && gHudElements[HUD_ELEMENT_12].renderState != 0)
+        }
+        if (byte_203E125 && gHudElements[HUD_ELEMENT_12].renderState != 0) {
             done = FALSE;
+        }
     }
 
     if (done) {
         if (isDiving) {
-            if (byte_203E127)
+            if (byte_203E127) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_19);
-            if (byte_203E128)
+            }
+            if (byte_203E128) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_20);
-            if (byte_203E12B)
+            }
+            if (byte_203E12B) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_43);
-            if (byte_203E12A)
+            }
+            if (byte_203E12A) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_42);
-            if (gShowMovesLearnedCounter)
+            }
+            if (gShowMovesLearnedCounter) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_MOVES_LEARNED);
-            if (byte_203E129)
+            }
+            if (byte_203E129) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_PAUSE_JINJOS);
-            if (byte_203E126)
+            }
+            if (byte_203E126) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_6);
+            }
             RESTORE_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
             RESTORE_HUD_ELEMENT(HUD_ELEMENT_56);
         } else {
-            if (byte_203E127)
+            if (byte_203E127) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_19);
-            if (byte_203E128)
+            }
+            if (byte_203E128) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_20);
-            if (byte_203E12B)
+            }
+            if (byte_203E12B) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_43);
-            if (byte_203E12A)
+            }
+            if (byte_203E12A) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_42);
-            if (gShowMovesLearnedCounter)
+            }
+            if (gShowMovesLearnedCounter) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_MOVES_LEARNED);
-            if (byte_203E129)
+            }
+            if (byte_203E129) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_PAUSE_JINJOS);
-            if (byte_203E126)
+            }
+            if (byte_203E126) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_6);
+            }
             RESTORE_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
-            if (byte_203E122)
+            if (byte_203E122) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_9);
-            if (byte_203E123)
+            }
+            if (byte_203E123) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_10);
-            if (byte_203E125)
+            }
+            if (byte_203E125) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_12);
-            if (byte_203E124)
+            }
+            if (byte_203E124) {
                 RESTORE_HUD_ELEMENT(HUD_ELEMENT_11);
+            }
         }
     }
 
@@ -1850,12 +1915,15 @@ NAKED bool32 are_pause_counters_hidden(int isDiving) {
     }
 
 void show_totals_counters(u32 page) {
-    if (byte_203E127)
+    if (byte_203E127) {
         SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_NOTES, noteCount);
-    if (byte_203E128)
+    }
+    if (byte_203E128) {
         SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_JIGGIES, jiggyCount);
-    if (byte_203E129)
+    }
+    if (byte_203E129) {
         SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_JINJOS, jinjoCount);
+    }
 
     if (byte_203E12B) {
         SET_HUD_COUNTER(
@@ -1869,10 +1937,12 @@ void show_totals_counters(u32 page) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_TOTALS_MUMBO_TOKENS);
     }
 
-    if (gShowMovesLearnedCounter)
+    if (gShowMovesLearnedCounter) {
         SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_MOVES_LEARNED, movesLearned);
-    if (byte_203E126)
+    }
+    if (byte_203E126) {
         SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_HONEYCOMBS, honeycombCount);
+    }
 
     switch (page) {
         case 0:
@@ -1880,42 +1950,52 @@ void show_totals_counters(u32 page) {
             break;
 
         case 1:
-            if (byte_203E12D)
+            if (byte_203E12D) {
                 SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_CHICKS, chickCount);
+            }
             break;
 
         case 2:
-            if (byte_203E12E)
+            if (byte_203E12E) {
                 SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_SHELLS, shellCount);
-            if (byte_203E12F)
+            }
+            if (byte_203E12F) {
                 SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS, captiveBreegulls);
+            }
             break;
 
         case 4:
-            if (byte_203E130)
+            if (byte_203E130) {
                 SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_SILVER_COINS, silverCoinCount);
-            if (byte_203E131)
+            }
+            if (byte_203E131) {
                 SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_TOY_SPACESHIPS, toySpaceships);
-            if (byte_203E132)
+            }
+            if (byte_203E132) {
                 SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_ICE_CREAMS, iceCreams);
+            }
             break;
 
         case 5:
-            if (byte_203E133)
+            if (byte_203E133) {
                 SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_GOLD_NUGGETS, goldNuggets);
+            }
             break;
 
         case 6:
-            if (byte_203E127)
+            if (byte_203E127) {
                 SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_NOTES, stru_80CC8C4.totalNotes,
                                 gGameStatus.totalNotes);
-            if (byte_203E128)
+            }
+            if (byte_203E128) {
                 SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_JIGGIES, stru_80CC8C4.totalJiggies,
                                 gGameStatus.totalJiggies);
-            if (byte_203E129)
+            }
+            if (byte_203E129) {
                 SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_JINJOS, stru_80CC8C4.totalJinjos,
                                 gGameStatus.totalJinjos);
-            if (byte_203E12B)
+            }
+            if (byte_203E12B) {
                 SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_MUMBO_TOKENS,
                                 stru_80CC8C4.mumboTokensCliffFarm
                                     + stru_80CC8C4.mumboTokensBadMagicBayou
@@ -1924,12 +2004,15 @@ void show_totals_counters(u32 page) {
                                 gGameStatus.mumboTokensCliffFarm + gGameStatus.mumboTokensBadMagicBayou
                                     + gGameStatus.mumboTokensFreezingFurnace
                                     + gGameStatus.mumboTokensSpillersHarbor);
-            if (gShowMovesLearnedCounter)
+            }
+            if (gShowMovesLearnedCounter) {
                 SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_MOVES_LEARNED, stru_80CC8C4.movesLearned,
                                 gGameStatus.movesLearned);
-            if (byte_203E126)
+            }
+            if (byte_203E126) {
                 SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_HONEYCOMBS, stru_80CC8C4.totalHoneycombs,
                                 gGameStatus.totalHoneycombs);
+            }
             break;
 
         default:
@@ -2121,14 +2204,16 @@ void sub_08041F3C(u32 element, int value) {
         case HUD_METER_HEALTH:
             renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_HEALTH;
+            }
             break;
 
         case HUD_METER_OXYGEN:
             renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_OXYGEN;
+            }
             break;
     }
 
@@ -2144,14 +2229,16 @@ void keep_hud_element_shown(u32 element) {
         case HUD_METER_HEALTH:
             renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_HEALTH;
+            }
             break;
 
         case HUD_METER_OXYGEN:
             if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0
-                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6)
+                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6) {
                 element = HUD_ELEMENT_OXYGEN;
+            }
             break;
     }
 
@@ -2167,14 +2254,16 @@ void release_hud_element(u32 element) {
         case HUD_METER_HEALTH:
             renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_HEALTH;
+            }
             break;
 
         case HUD_METER_OXYGEN:
             renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_OXYGEN;
+            }
             break;
     }
 
@@ -2191,14 +2280,16 @@ bool32 sub_0804207C(u32 element) {
         case HUD_METER_HEALTH:
             renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_HEALTH;
+            }
             break;
 
         case HUD_METER_OXYGEN:
             if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0
-                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6)
+                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6) {
                 element = HUD_ELEMENT_OXYGEN;
+            }
             break;
     }
 
@@ -2214,14 +2305,16 @@ bool32 sub_080420E8(u32 element) {
         case HUD_METER_HEALTH:
             renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_HEALTH;
+            }
             break;
 
         case HUD_METER_OXYGEN:
             if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0
-                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6)
+                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6) {
                 element = HUD_ELEMENT_OXYGEN;
+            }
             break;
     }
 
@@ -2237,14 +2330,16 @@ static int get_hud_element_max(u32 element) {
         case HUD_METER_HEALTH:
             renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6)
+            if (renderState != 0 && renderState != 6) {
                 element = HUD_ELEMENT_HEALTH;
+            }
             break;
 
         case HUD_METER_OXYGEN:
             if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0
-                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6)
+                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6) {
                 element = HUD_ELEMENT_OXYGEN;
+            }
             break;
     }
 
