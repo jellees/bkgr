@@ -672,6 +672,7 @@ extern void sub_8061F80(void);
 extern void sub_8062444(u8, fx32*, fx32*, fx32*);
 extern void sub_8062484(void);
 extern void sub_80629E8(void);
+extern int sub_80630C0(int, int);
 extern void sub_8063178(void);
 extern void sub_8063188(void);
 extern void sub_8063194(void);
@@ -1074,10 +1075,5 @@ extern char dword_808EF98[];
 extern u32 dLicenceBitmap[];
 extern u32 unk_83FC514[];
 
-extern const u16 word_80A8CF0[];
-extern u8 byte_80A8CF6[];
-extern const u16 word_80A8E28[];
-extern const u16 word_80A8D8E[];
-extern u8 byte_80A8D92[];
 
 #endif

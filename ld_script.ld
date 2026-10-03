@@ -299,6 +299,8 @@ SECTIONS
         asm/data_playerBehavior.o(.rodata);
         asm/data_text.o(.rodata);
         asm/data.o(.rodata);
+        src/hud.o(.rodata);
+        asm/data3.o(.rodata);
         src/script.o(.rodata);
         src/scripts.o(.rodata);
         asm/data2.o(.rodata);

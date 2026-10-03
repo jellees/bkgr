@@ -110,8 +110,6 @@ struct HudElement {
     struct TextBox textBox;
 };
 
-extern struct HudElement* gHudElements;
-
 struct struc_60 {
     u32 funcIdx;
     u32 arg1;
@@ -124,13 +122,121 @@ struct struc_59 {
     struct struc_60* states;
 };
 
-extern struct struc_59 stru_80AF310[];
+// Variables should go here.
+extern struct HudElement* gHudElements;
 
-extern int (*dHudFunctions[])(struct HudElement*, u32, u32, u32); // This needs to be a static const.
+extern struct struc_59 stru_80AF310[]; // This is the hud script table. Move this to its own file.
+
+static int sub_803EF90(struct HudElement*, int, int, int);
+static int sub_803EFCC(struct HudElement*, int, int, int);
+static int sub_803EFE8(struct HudElement*, int, int, int);
+static int sub_803F004(struct HudElement*, int, int, int);
+static int sub_803F020(struct HudElement*, int, int, int);
+static int sub_803F03C(struct HudElement*, int, int, int);
+static int sub_803F0D4(struct HudElement*, int, int, int);
+static int sub_803F14C(struct HudElement*, int, int, int);
+static int sub_803F1B4(struct HudElement*, int, int, int);
+static int sub_803F21C(struct HudElement*, int, int, int);
+static int sub_803F284(struct HudElement*, int, int, int);
+static int sub_803F2D0(struct HudElement*, int, int, int);
+static int sub_803F2FC(struct HudElement*, int, int, int);
+static int sub_803F410(struct HudElement*, int, int, int);
+static int sub_803F438(struct HudElement*, int, int, int);
+static int sub_803F52C(struct HudElement*, int, int, int);
+static int sub_803F5AC(struct HudElement*, int, int, int);
+static int sub_803F75C(struct HudElement*, int, int, int);
+static int sub_803F8A8(struct HudElement*, int, int, int);
+static int sub_803F914(struct HudElement*, int, int, int);
+static int sub_803F980(struct HudElement*, int, int, int);
+static int sub_803F9EC(struct HudElement*, int, int, int);
+static int sub_803F800(struct HudElement*, int, int, int);
+static int sub_803FA58(struct HudElement*, int, int, int);
+static int sub_803F0D8(struct HudElement*, int, int, int);
+static int sub_803FDDC(struct HudElement*, int, int, int);
+static int sub_803F250(struct HudElement*, int, int, int);
+static int sub_803F62C(struct HudElement*, int, int, int);
+static int sub_803F6C4(struct HudElement*, int, int, int);
+static int sub_803F09C(struct HudElement*, int, int, int);
 
 static void sub_80421C4(int, int, char*);
 static int get_hud_element_max(u32);
-int sub_80630C0(int, int);
+
+static const u16 word_80A8CF0[] = { 0x473, 0x474, 0x475 };
+
+static const u8 byte_80A8CF6[][8] = {
+    { 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 1, 0, 0, 0, 0, 0, 0, 0 },
+    { 1, 1, 0, 0, 0, 0, 0, 0 },
+    { 1, 1, 1, 0, 0, 0, 0, 0 },
+    { 1, 1, 1, 1, 0, 0, 0, 0 },
+    { 1, 1, 1, 1, 1, 0, 0, 0 },
+    { 1, 1, 1, 1, 1, 1, 0, 0 },
+    { 1, 1, 1, 1, 1, 1, 1, 0 },
+    { 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 2, 1, 1, 1, 1, 1, 1, 1 },
+    { 2, 2, 1, 1, 1, 1, 1, 1 },
+    { 2, 2, 2, 1, 1, 1, 1, 1 },
+    { 2, 2, 2, 2, 1, 1, 1, 1 },
+    { 2, 2, 2, 2, 2, 1, 1, 1 },
+    { 2, 2, 2, 2, 2, 2, 1, 1 },
+    { 2, 2, 2, 2, 2, 2, 2, 1 },
+    { 2, 2, 2, 2, 2, 2, 2, 2 },
+    { 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0 },
+};
+
+static const u16 word_80A8D8E[] = { 0x461, 0x462 };
+
+static const u8 byte_80A8D92[][5] = {
+    { 0, 0, 0, 0, 0 },
+    { 1, 0, 0, 0, 0 },
+    { 1, 1, 0, 0, 0 },
+    { 1, 1, 1, 0, 0 },
+    { 1, 1, 1, 1, 0 },
+    { 1, 1, 1, 1, 1 },
+};
+
+static int (*const dHudFunctions[])(struct HudElement*, int, int, int) = {
+    sub_803EF90,
+    sub_803EFCC,
+    sub_803EFE8,
+    sub_803F004,
+    sub_803F020,
+    sub_803F03C,
+    sub_803F0D4,
+    sub_803F14C,
+    sub_803F1B4,
+    sub_803F21C,
+    sub_803F284,
+    sub_803F2D0,
+    sub_803F2FC,
+    sub_803F410,
+    sub_803F438,
+    sub_803F52C,
+    sub_803F5AC,
+    sub_803F75C,
+    sub_803F8A8,
+    sub_803F914,
+    sub_803F980,
+    sub_803F9EC,
+    sub_803F800,
+    sub_803FA58,
+    sub_803F0D8,
+    sub_803FDDC,
+    sub_803F250,
+    sub_803F62C,
+    sub_803F6C4,
+    sub_803F09C,
+};
+
+static const u16 word_80A8E28[HUD_ELEMENT_COUNT] = {
+    120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
+    120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
+    120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
+    120, 120, 120, 120, 120, 120, 70, 60, 60, 1,
+    1, 1, 120, 120, 1, 1, 1, 1, 1, 1,
+    120, 120, 120, 120, 60, 120, 120, 120, 120, 120,
+};
 
 static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
     if (element->graphicCount != 0) {
@@ -168,7 +274,7 @@ static int sub_803F004(struct HudElement* element, int a2, int a3, int _) {
     return 2;
 }
 
-static int sub_803F020(struct HudElement* element, int a2, int a3) {
+static int sub_803F020(struct HudElement* element, int a2, int a3, int _) {
     element->graphic[a2].field_28 = element->graphic[a2].field_20 + (a3 << 16);
     element->graphic[a2].field_34 = 4;
     return 2;
@@ -695,7 +801,7 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
 
 static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
     int i;
-    u8* ptr = &byte_80A8CF6[element->counter * 8];
+    const u8* ptr = byte_80A8CF6[element->counter];
 
     for (i = a2; i < element->graphicCount; i++) {
         element->graphic[i].field_1C = a3 << 16;
@@ -713,7 +819,7 @@ static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
 
 static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
     int i;
-    u8* ptr = &byte_80A8D92[element->counter * 5];
+    const u8* ptr = byte_80A8D92[element->counter];
 
     for (i = a2; i < element->graphicCount; i++) {
         element->graphic[i].field_1C = a3 << 16;
@@ -908,7 +1014,7 @@ static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
     element->timer--;
 
     if (element->timer == 0) {
-        u8* v1;
+        const u8* v1;
 
         element->timer = 10;
 
@@ -919,7 +1025,7 @@ static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
             element->counter--;
         }
 
-        v1 = &byte_80A8CF6[8 * element->counter];
+        v1 = byte_80A8CF6[element->counter];
         for (i = a2; i < element->graphicCount; i++) {
             sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[v1[i - a2]], 0,
                             1);
@@ -935,7 +1041,7 @@ static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
 }
 
 static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
-    u8* v1;
+    const u8* v1;
     int i;
 
     if (element->counter == element->number) {
@@ -953,7 +1059,7 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
             element->counter--;
         }
 
-        v1 = &byte_80A8D92[5 * element->counter];
+        v1 = byte_80A8D92[element->counter];
         for (i = a2; i < element->graphicCount; i++) {
             sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[v1[i - a2]], 0,
                             1);
