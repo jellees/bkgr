@@ -89,24 +89,24 @@ struct HudGraphic {
 struct HudElement {
     struct HudGraphic* graphic;
     u16 graphicCount;
-    u16 counter;
-    u16 number;
-    u16 field_A;
-    u16 state;
-    u16 field_E;
-    int field_10;
-    int field_14;
+    u16 displayValue;
+    u16 targetValue;
+    u16 maxValue;
+    u16 scriptStep; // Rename this to something else. Like cmdIdx or something.
+    u16 displayTime;
+    int slideSpeed;
+    int savedSlideSpeed;
     u16 timer;
-    u16 field_1A;
-    u8 field_1C;
-    s8 field_1D;
-    u8 field_1E;
+    u16 rouletteTime;
+    u8 rouletteStepDelay;
+    s8 rouletteIndex;
+    bool8 rouletteStarted;
     u8 renderState;
     char text[8];
-    u8 field_28;
-    u8 field_29;
-    u8 field_2A;
-    u8 field_2B;
+    bool8 rightAlignText;
+    bool8 reshow;
+    bool8 keepShown;
+    bool8 savedKeepShown;
     struct TextBox textBox;
 };
 
@@ -152,7 +152,7 @@ static int sub_803F914(struct HudElement*, int, int, int);
 static int sub_803F980(struct HudElement*, int, int, int);
 static int sub_803F9EC(struct HudElement*, int, int, int);
 static int sub_803F800(struct HudElement*, int, int, int);
-static int sub_803FA58(struct HudElement*, int, int, int);
+static int hud_health_roulette(struct HudElement*, int, int, int);
 static int sub_803F0D8(struct HudElement*, int, int, int);
 static int sub_803FDDC(struct HudElement*, int, int, int);
 static int sub_803F250(struct HudElement*, int, int, int);
@@ -186,7 +186,7 @@ static int (*const dHudFunctions[])(struct HudElement*, int, int, int) = {
     sub_803EF90, sub_803EFCC, sub_803EFE8, sub_803F004, sub_803F020, sub_803F03C,
     sub_803F0D4, sub_803F14C, sub_803F1B4, sub_803F21C, sub_803F284, sub_803F2D0,
     sub_803F2FC, sub_803F410, sub_803F438, sub_803F52C, sub_803F5AC, sub_803F75C,
-    sub_803F8A8, sub_803F914, sub_803F980, sub_803F9EC, sub_803F800, sub_803FA58,
+    sub_803F8A8, sub_803F914, sub_803F980, sub_803F9EC, sub_803F800, hud_health_roulette,
     sub_803F0D8, sub_803FDDC, sub_803F250, sub_803F62C, sub_803F6C4, sub_803F09C,
 };
 
@@ -202,15 +202,15 @@ static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
         element->graphicCount = 0;
     }
 
-    if (element->field_29 != 0) {
-        element->field_29 = 0;
+    if (element->reshow) {
+        element->reshow = FALSE;
         element->renderState = 1;
-        element->state = 0;
+        element->scriptStep = 0;
         return 4;
     }
 
     element->renderState = 0;
-    element->state = 0;
+    element->scriptStep = 0;
     return 3;
 }
 
@@ -244,20 +244,20 @@ static int sub_803F03C(struct HudElement* element, int a2, int a3, int a4) {
     element->textBox.stringOffset = 0;
 
     if (a4 == 1) {
-        element->field_28 = 1;
+        element->rightAlignText = TRUE;
     } else {
-        element->field_28 = 0;
+        element->rightAlignText = FALSE;
     }
 
-    if (element->counter < 10) {
+    if (element->displayValue < 10) {
         element->text[1] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, element->text);
-    } else if (element->counter < 100) {
+        IntegerToAsciiBw(element->displayValue, element->text);
+    } else if (element->displayValue < 100) {
         element->text[2] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, &element->text[1]);
+        IntegerToAsciiBw(element->displayValue, &element->text[1]);
     } else {
         element->text[3] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, &element->text[2]);
+        IntegerToAsciiBw(element->displayValue, &element->text[2]);
     }
 
     element->timer = 10;
@@ -270,12 +270,12 @@ static int sub_803F09C(struct HudElement* element, int a2, int a3, int a4) {
     element->textBox.stringOffset = 0;
 
     if (a4 == 1) {
-        element->field_28 = 1;
+        element->rightAlignText = TRUE;
     } else {
-        element->field_28 = 0;
+        element->rightAlignText = FALSE;
     }
 
-    sub_80421C4(element->counter, element->field_A, element->text);
+    sub_80421C4(element->displayValue, element->maxValue, element->text);
 
     element->timer = 10;
     return 2;
@@ -286,35 +286,36 @@ static int sub_803F0D4(struct HudElement* element, int _, int __, int ___) {
 }
 
 static int sub_803F0D8(struct HudElement* element, int _, int __, int ___) {
-    if (element->counter == element->number) {
+    if (element->displayValue == element->targetValue) {
         return 2;
     }
 
     element->timer--;
 
-    if (element->timer != 0)
+    if (element->timer != 0) {
         return 1;
+    }
 
     element->timer = 10;
 
-    if (element->counter < element->number) {
-        element->counter++;
-    } else if (element->counter > element->number) {
-        element->counter--;
+    if (element->displayValue < element->targetValue) {
+        element->displayValue++;
+    } else if (element->displayValue > element->targetValue) {
+        element->displayValue--;
     }
 
-    if (element->counter < 10) {
+    if (element->displayValue < 10) {
         element->text[1] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, element->text);
-    } else if (element->counter < 100) {
+        IntegerToAsciiBw(element->displayValue, element->text);
+    } else if (element->displayValue < 100) {
         element->text[2] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, &element->text[1]);
+        IntegerToAsciiBw(element->displayValue, &element->text[1]);
     } else {
         element->text[3] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, &element->text[2]);
+        IntegerToAsciiBw(element->displayValue, &element->text[2]);
     }
 
-    if (element->counter != element->number) {
+    if (element->displayValue != element->targetValue) {
         return 1;
     }
 
@@ -322,31 +323,32 @@ static int sub_803F0D8(struct HudElement* element, int _, int __, int ___) {
 }
 
 static int sub_803F14C(struct HudElement* element, int _, int __, int ___) {
-    if (element->counter == element->number) {
+    if (element->displayValue == element->targetValue) {
         return 2;
     }
 
     element->timer--;
 
-    if (element->timer != 0)
+    if (element->timer != 0) {
         return 1;
+    }
 
     element->timer = 10;
 
-    element->counter++;
+    element->displayValue++;
 
-    if (element->counter < 10) {
+    if (element->displayValue < 10) {
         element->text[1] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, element->text);
-    } else if (element->counter < 100) {
+        IntegerToAsciiBw(element->displayValue, element->text);
+    } else if (element->displayValue < 100) {
         element->text[2] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, &element->text[1]);
+        IntegerToAsciiBw(element->displayValue, &element->text[1]);
     } else {
         element->text[3] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, &element->text[2]);
+        IntegerToAsciiBw(element->displayValue, &element->text[2]);
     }
 
-    if (element->counter != element->number) {
+    if (element->displayValue != element->targetValue) {
         return 1;
     }
 
@@ -354,31 +356,32 @@ static int sub_803F14C(struct HudElement* element, int _, int __, int ___) {
 }
 
 static int sub_803F1B4(struct HudElement* element, int _, int __, int ___) {
-    if (element->counter == element->number) {
+    if (element->displayValue == element->targetValue) {
         return 2;
     }
 
     element->timer--;
 
-    if (element->timer != 0)
+    if (element->timer != 0) {
         return 1;
+    }
 
     element->timer = 10;
 
-    element->counter--;
+    element->displayValue--;
 
-    if (element->counter < 10) {
+    if (element->displayValue < 10) {
         element->text[1] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, element->text);
-    } else if (element->counter < 100) {
+        IntegerToAsciiBw(element->displayValue, element->text);
+    } else if (element->displayValue < 100) {
         element->text[2] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, &element->text[1]);
+        IntegerToAsciiBw(element->displayValue, &element->text[1]);
     } else {
         element->text[3] = STRING_TERMINATOR;
-        IntegerToAsciiBw(element->counter, &element->text[2]);
+        IntegerToAsciiBw(element->displayValue, &element->text[2]);
     }
 
-    if (element->counter != element->number) {
+    if (element->displayValue != element->targetValue) {
         return 1;
     }
 
@@ -386,7 +389,7 @@ static int sub_803F1B4(struct HudElement* element, int _, int __, int ___) {
 }
 
 static int sub_803F21C(struct HudElement* element, int _, int __, int ___) {
-    if (!element->field_2A) {
+    if (!element->keepShown) {
         if (element->timer != 0) {
             element->timer--;
         }
@@ -400,7 +403,7 @@ static int sub_803F21C(struct HudElement* element, int _, int __, int ___) {
 }
 
 static int sub_803F250(struct HudElement* element, int _, int __, int ___) {
-    if (!element->field_2A) {
+    if (!element->keepShown) {
         if (element->timer != 0) {
             element->timer--;
         }
@@ -430,7 +433,7 @@ static int sub_803F2D0(struct HudElement* element, int a2, int _, int __) {
 
     switch (a2) {
         case 5:
-            element->timer = element->field_E;
+            element->timer = element->displayTime;
             break;
 
         case 3:
@@ -500,7 +503,7 @@ static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
         switch (element->graphic[i].field_34) {
             case 0:
                 r7 = FALSE;
-                element->graphic[i].field_20 -= element->field_10;
+                element->graphic[i].field_20 -= element->slideSpeed;
                 if (element->graphic[i].field_20 <= element->graphic[i].field_28) {
                     element->graphic[i].field_20 = element->graphic[i].field_28;
                     element->graphic[i].field_34 = -1;
@@ -513,7 +516,7 @@ static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
 
             case 4:
                 r7 = FALSE;
-                element->graphic[i].field_20 += element->field_10;
+                element->graphic[i].field_20 += element->slideSpeed;
                 if (element->graphic[i].field_20 >= element->graphic[i].field_28) {
                     element->graphic[i].field_20 = element->graphic[i].field_28;
                     element->graphic[i].field_34 = -1;
@@ -526,7 +529,7 @@ static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
 
             case 6:
                 r7 = FALSE;
-                element->graphic[i].field_1C -= element->field_10;
+                element->graphic[i].field_1C -= element->slideSpeed;
                 if (element->graphic[i].field_1C <= element->graphic[i].field_24) {
                     element->graphic[i].field_1C = element->graphic[i].field_24;
                     element->graphic[i].field_34 = -1;
@@ -539,7 +542,7 @@ static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
 
             case 2:
                 r7 = FALSE;
-                element->graphic[i].field_1C += element->field_10;
+                element->graphic[i].field_1C += element->slideSpeed;
                 if (element->graphic[i].field_1C >= element->graphic[i].field_24) {
                     element->graphic[i].field_1C = element->graphic[i].field_24;
                     element->graphic[i].field_34 = -1;
@@ -568,17 +571,19 @@ static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
     if (a3 != 3) {
         switch (a3) {
             case 1:
-                number = element->number;
-                if (number < element->counter)
+                number = element->targetValue;
+                if (number < element->displayValue) {
                     return 2;
+                }
                 break;
             case 2:
-                number = element->number;
-                if (number > element->counter)
+                number = element->targetValue;
+                if (number > element->displayValue) {
                     return 2;
+                }
                 break;
             default:
-                number = element->number;
+                number = element->targetValue;
                 break;
         }
 
@@ -586,8 +591,9 @@ static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
         offset = 0xC0000;
         if (number >= 10) {
             offset = 0x1C0000;
-            if (number < 100)
+            if (number < 100) {
                 offset = 0x140000;
+            }
         }
 
         target = element->graphic[a2].field_2C - offset;
@@ -596,10 +602,11 @@ static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
     }
 
     element->graphic[a2].field_24 = target;
-    if (target > element->graphic[a2].field_1C)
+    if (target > element->graphic[a2].field_1C) {
         element->graphic[a2].field_34 = 2;
-    else
+    } else {
         element->graphic[a2].field_34 = 6;
+    }
 
     return 2;
 }
@@ -613,17 +620,19 @@ static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
     if (a3 != 3) {
         switch (a3) {
             case 1:
-                number = element->number;
-                if (number < element->counter)
+                number = element->targetValue;
+                if (number < element->displayValue) {
                     return 2;
+                }
                 break;
             case 2:
-                number = element->number;
-                if (number > element->counter)
+                number = element->targetValue;
+                if (number > element->displayValue) {
                     return 2;
+                }
                 break;
             default:
-                number = element->number;
+                number = element->targetValue;
                 break;
         }
 
@@ -631,8 +640,9 @@ static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
         offset = 0xC0000;
         if (number >= 10) {
             offset = 0x1C0000;
-            if (number < 100)
+            if (number < 100) {
                 offset = 0x140000;
+            }
         }
 
         target = element->graphic[a2].field_2C + offset;
@@ -641,10 +651,11 @@ static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
     }
 
     element->graphic[a2].field_24 = target;
-    if (target < element->graphic[a2].field_1C)
+    if (target < element->graphic[a2].field_1C) {
         element->graphic[a2].field_34 = 6;
-    else
+    } else {
         element->graphic[a2].field_34 = 2;
+    }
 
     return 2;
 }
@@ -659,17 +670,17 @@ static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
     if (a3 != 3) {
         switch (a3) {
             case 1:
-                number = element->number;
-                if (number < element->counter)
+                number = element->targetValue;
+                if (number < element->displayValue)
                     return 2;
                 break;
             case 2:
-                number = element->number;
-                if (number > element->counter)
+                number = element->targetValue;
+                if (number > element->displayValue)
                     return 2;
                 break;
             default:
-                number = element->number;
+                number = element->targetValue;
                 break;
         }
 
@@ -681,7 +692,7 @@ static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
                 offset = 0x140000;
         }
 
-        number = element->field_A;
+        number = element->maxValue;
         offset2 = 0xC0000;
         if (number >= 10) {
             offset2 = 0x1C0000;
@@ -713,17 +724,17 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
     if (a3 != 3) {
         switch (a3) {
             case 1:
-                number = element->number;
-                if (number < element->counter)
+                number = element->targetValue;
+                if (number < element->displayValue)
                     return 2;
                 break;
             case 2:
-                number = element->number;
-                if (number > element->counter)
+                number = element->targetValue;
+                if (number > element->displayValue)
                     return 2;
                 break;
             default:
-                number = element->number;
+                number = element->targetValue;
                 break;
         }
 
@@ -735,7 +746,7 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
                 offset = 0x140000;
         }
 
-        number = element->field_A;
+        number = element->maxValue;
         offset2 = 0xC0000;
         if (number >= 10) {
             offset2 = 0x1C0000;
@@ -759,7 +770,7 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
 
 static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
     int i;
-    const u8* ptr = byte_80A8CF6[element->counter];
+    const u8* ptr = byte_80A8CF6[element->displayValue];
 
     for (i = a2; i < element->graphicCount; i++) {
         element->graphic[i].field_1C = a3 << 16;
@@ -777,7 +788,7 @@ static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
 
 static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
     int i;
-    const u8* ptr = byte_80A8D92[element->counter];
+    const u8* ptr = byte_80A8D92[element->displayValue];
 
     for (i = a2; i < element->graphicCount; i++) {
         element->graphic[i].field_1C = a3 << 16;
@@ -865,68 +876,69 @@ static int sub_803F9EC(struct HudElement* element, int a2, int a3, int a4) {
     return 2;
 }
 
-static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a4) {
     int i;
 
-    switch (element->number) {
+    switch (element->targetValue) {
         case 17:
-            if (!element->field_1A || byte_203EA81) {
-                if (element->field_1D < 0) {
-                    element->field_1D = 0;
+            if (!element->rouletteTime || byte_203EA81) {
+                if (element->rouletteIndex < 0) {
+                    element->rouletteIndex = 0;
                 }
-                element->counter = 0;
+                element->displayValue = 0;
                 if (!gGameStatus.enableExtraHealth) {
-                    element->number = element->field_1D + 1;
+                    element->targetValue = element->rouletteIndex + 1;
                 } else {
-                    element->number = element->field_1D + 9;
+                    element->targetValue = element->rouletteIndex + 9;
                 }
-                gGameStatus.health = element->number;
-                element->field_1D = 0;
+                gGameStatus.health = element->targetValue;
+                element->rouletteIndex = 0;
                 end_stop_honeycomb();
                 gIsStopHoneycombActive = FALSE;
                 sub_8063178();
                 byte_200108E = 0;
             } else {
-                element->field_1A--;
-                if (element->field_1C != 0) {
-                    element->field_1C--;
+                element->rouletteTime--;
+                if (element->rouletteStepDelay != 0) {
+                    element->rouletteStepDelay--;
                     return 1;
                 }
                 PLAY_SFX(170);
-                if (element->field_1E) {
-                    sprite_set_anim((struct Sprite*)&element->graphic[element->field_1D + a2].sprite,
-                                    word_80A8CF0[0], 0, 1);
+                if (element->rouletteStarted) {
+                    sprite_set_anim(
+                        (struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
+                        word_80A8CF0[0], 0, 1);
                 } else {
-                    element->field_1E = 1;
+                    element->rouletteStarted = TRUE;
                     for (i = a2; i < element->graphicCount; i++) {
                         sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[0], 0,
                                         1);
                     }
                 }
-                element->field_1D++;
-                if (element->field_1D + a2 >= element->graphicCount) {
-                    element->field_1D = 0;
+                element->rouletteIndex++;
+                if (element->rouletteIndex + a2 >= element->graphicCount) {
+                    element->rouletteIndex = 0;
                 }
-                sprite_set_anim((struct Sprite*)&element->graphic[element->field_1D + a2].sprite,
+                sprite_set_anim((struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
                                 word_80A8CF0[1], 0, 1);
-                element->field_1C = unk_80CF330[gLoadedRoomLevel];
+                element->rouletteStepDelay = unk_80CF330[gLoadedRoomLevel];
                 return 1;
             }
             break;
 
         case 18:
-            if (!element->field_1A || byte_203EA81) {
-                if (element->field_1D < 0) {
-                    element->field_1D = 0;
+            if (!element->rouletteTime || byte_203EA81) {
+                if (element->rouletteIndex < 0) {
+                    element->rouletteIndex = 0;
                 }
-                element->counter = 0;
+                element->displayValue = 0;
                 if (!gGameStatus.enableExtraHealth) {
-                    element->number = element->field_1D + 1;
+                    element->targetValue = element->rouletteIndex + 1;
                 } else {
-                    element->number = element->field_1D + 9;
+                    element->targetValue = element->rouletteIndex + 9;
                 }
-                gGameStatus.health = element->number;
-                element->field_1D = 0;
+                gGameStatus.health = element->targetValue;
+                element->rouletteIndex = 0;
                 end_stop_honeycomb();
                 gIsStopHoneycombActive = FALSE;
                 sub_8063178();
@@ -934,38 +946,39 @@ static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
             } else {
                 int v10;
 
-                element->field_1A--;
-                if (element->field_1C != 0) {
-                    element->field_1C--;
+                element->rouletteTime--;
+                if (element->rouletteStepDelay != 0) {
+                    element->rouletteStepDelay--;
                     return 1;
                 }
 
                 PLAY_SFX(170);
-                v10 = element->field_1D;
-                if (element->field_1E) {
-                    sprite_set_anim((struct Sprite*)&element->graphic[element->field_1D + a2].sprite,
-                                    word_80A8CF0[0], 0, 1);
+                v10 = element->rouletteIndex;
+                if (element->rouletteStarted) {
+                    sprite_set_anim(
+                        (struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
+                        word_80A8CF0[0], 0, 1);
                 } else {
-                    element->field_1E = 1;
+                    element->rouletteStarted = TRUE;
                     for (i = a2; i < element->graphicCount; i++) {
                         sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[0], 0,
                                         1);
                     }
                 }
 
-                while (v10 == element->field_1D) {
-                    element->field_1D = RandomMinMax(a2, element->graphicCount - 1) - a2;
+                while (v10 == element->rouletteIndex) {
+                    element->rouletteIndex = RandomMinMax(a2, element->graphicCount - 1) - a2;
                 }
 
-                sprite_set_anim((struct Sprite*)&element->graphic[element->field_1D + a2].sprite,
+                sprite_set_anim((struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
                                 word_80A8CF0[1], 0, 1);
-                element->field_1C = unk_80CF348[gLoadedRoomLevel];
+                element->rouletteStepDelay = unk_80CF348[gLoadedRoomLevel];
                 return 1;
             }
             break;
     }
 
-    if (element->counter == element->number) {
+    if (element->displayValue == element->targetValue) {
         return 2;
     }
 
@@ -976,21 +989,21 @@ static int sub_803FA58(struct HudElement* element, int a2, int a3, int a4) {
 
         element->timer = 10;
 
-        if (element->counter < element->number) {
-            element->counter++;
+        if (element->displayValue < element->targetValue) {
+            element->displayValue++;
             dword_203EA84 = PLAY_SFX(200);
-        } else if (element->counter > element->number) {
-            element->counter--;
+        } else if (element->displayValue > element->targetValue) {
+            element->displayValue--;
         }
 
-        v1 = byte_80A8CF6[element->counter];
+        v1 = byte_80A8CF6[element->displayValue];
         for (i = a2; i < element->graphicCount; i++) {
             sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[v1[i - a2]], 0,
                             1);
             element->graphic[i].field_35 = 1;
         }
 
-        if (element->counter == element->number) {
+        if (element->displayValue == element->targetValue) {
             return 2;
         }
     }
@@ -1002,7 +1015,7 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
     const u8* v1;
     int i;
 
-    if (element->counter == element->number) {
+    if (element->displayValue == element->targetValue) {
         return 2;
     }
 
@@ -1011,20 +1024,20 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
     if (element->timer == 0) {
         element->timer = 10;
 
-        if (element->counter < element->number) {
-            element->counter++;
-        } else if (element->counter > element->number) {
-            element->counter--;
+        if (element->displayValue < element->targetValue) {
+            element->displayValue++;
+        } else if (element->displayValue > element->targetValue) {
+            element->displayValue--;
         }
 
-        v1 = byte_80A8D92[element->counter];
+        v1 = byte_80A8D92[element->displayValue];
         for (i = a2; i < element->graphicCount; i++) {
             sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[v1[i - a2]], 0,
                             1);
             element->graphic[i].field_35 = 1;
         }
 
-        if (element->counter == element->number) {
+        if (element->displayValue == element->targetValue) {
             return 2;
         }
     }
@@ -1033,116 +1046,127 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
 }
 
 void reset_hud_elements(void) {
-    gHudElements[HUD_ELEMENT_PAUSE_NOTES].field_A = stru_80CC8C4.totalNotes;
-    gHudElements[HUD_ELEMENT_PAUSE_NOTES].counter = gGameStatus.totalNotes;
-    gHudElements[HUD_ELEMENT_PAUSE_NOTES].number = gHudElements[HUD_ELEMENT_PAUSE_NOTES].counter;
+    gHudElements[HUD_ELEMENT_PAUSE_NOTES].maxValue = stru_80CC8C4.totalNotes;
+    gHudElements[HUD_ELEMENT_PAUSE_NOTES].displayValue = gGameStatus.totalNotes;
+    gHudElements[HUD_ELEMENT_PAUSE_NOTES].targetValue =
+        gHudElements[HUD_ELEMENT_PAUSE_NOTES].displayValue;
 
-    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].field_A = stru_80CC8C4.totalJiggies;
-    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].counter = gGameStatus.totalJiggies;
-    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].number = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].counter;
+    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].maxValue = stru_80CC8C4.totalJiggies;
+    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].displayValue = gGameStatus.totalJiggies;
+    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].targetValue =
+        gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].displayValue;
 
-    gHudElements[HUD_ELEMENT_BLUE_EGGS].field_A = stru_80CC8C4.eggs[EGG_BLUE];
-    gHudElements[HUD_ELEMENT_BLUE_EGGS].counter = gGameStatus.eggs[EGG_BLUE];
-    gHudElements[HUD_ELEMENT_BLUE_EGGS].number = gHudElements[HUD_ELEMENT_BLUE_EGGS].counter;
+    gHudElements[HUD_ELEMENT_BLUE_EGGS].maxValue = stru_80CC8C4.eggs[EGG_BLUE];
+    gHudElements[HUD_ELEMENT_BLUE_EGGS].displayValue = gGameStatus.eggs[EGG_BLUE];
+    gHudElements[HUD_ELEMENT_BLUE_EGGS].targetValue = gHudElements[HUD_ELEMENT_BLUE_EGGS].displayValue;
 
-    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].field_A = stru_80CC8C4.eggs[EGG_ELECTRIC];
-    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].counter = gGameStatus.eggs[EGG_ELECTRIC];
-    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].number = gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].counter;
+    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].maxValue = stru_80CC8C4.eggs[EGG_ELECTRIC];
+    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].displayValue = gGameStatus.eggs[EGG_ELECTRIC];
+    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].targetValue =
+        gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].displayValue;
 
-    gHudElements[HUD_ELEMENT_FIRE_EGGS].field_A = stru_80CC8C4.eggs[EGG_FIRE];
-    gHudElements[HUD_ELEMENT_FIRE_EGGS].counter = gGameStatus.eggs[EGG_FIRE];
-    gHudElements[HUD_ELEMENT_FIRE_EGGS].number = gHudElements[HUD_ELEMENT_FIRE_EGGS].counter;
+    gHudElements[HUD_ELEMENT_FIRE_EGGS].maxValue = stru_80CC8C4.eggs[EGG_FIRE];
+    gHudElements[HUD_ELEMENT_FIRE_EGGS].displayValue = gGameStatus.eggs[EGG_FIRE];
+    gHudElements[HUD_ELEMENT_FIRE_EGGS].targetValue = gHudElements[HUD_ELEMENT_FIRE_EGGS].displayValue;
 
-    gHudElements[HUD_ELEMENT_ICE_EGGS].field_A = stru_80CC8C4.eggs[EGG_ICE];
-    gHudElements[HUD_ELEMENT_ICE_EGGS].counter = gGameStatus.eggs[EGG_ICE];
-    gHudElements[HUD_ELEMENT_ICE_EGGS].number = gHudElements[HUD_ELEMENT_ICE_EGGS].counter;
+    gHudElements[HUD_ELEMENT_ICE_EGGS].maxValue = stru_80CC8C4.eggs[EGG_ICE];
+    gHudElements[HUD_ELEMENT_ICE_EGGS].displayValue = gGameStatus.eggs[EGG_ICE];
+    gHudElements[HUD_ELEMENT_ICE_EGGS].targetValue = gHudElements[HUD_ELEMENT_ICE_EGGS].displayValue;
 
-    gHudElements[HUD_ELEMENT_GOLDEN_FEATHERS].field_A = stru_80CC8C4.goldenFeathers;
-    gHudElements[HUD_ELEMENT_GOLDEN_FEATHERS].counter = gGameStatus.goldenFeathers;
-    gHudElements[HUD_ELEMENT_GOLDEN_FEATHERS].number =
-        gHudElements[HUD_ELEMENT_GOLDEN_FEATHERS].counter;
+    gHudElements[HUD_ELEMENT_GOLDEN_FEATHERS].maxValue = stru_80CC8C4.goldenFeathers;
+    gHudElements[HUD_ELEMENT_GOLDEN_FEATHERS].displayValue = gGameStatus.goldenFeathers;
+    gHudElements[HUD_ELEMENT_GOLDEN_FEATHERS].targetValue =
+        gHudElements[HUD_ELEMENT_GOLDEN_FEATHERS].displayValue;
 
-    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].field_A = stru_80CC8C4.goldenFeathers;
-    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].counter = gGameStatus.goldenFeathers;
-    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].number =
-        gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].counter;
+    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].maxValue = stru_80CC8C4.goldenFeathers;
+    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].displayValue = gGameStatus.goldenFeathers;
+    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].targetValue =
+        gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].displayValue;
 
-    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].field_A = gGameStatus.mumboTokens;
-    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].counter = gGameStatus.mumboTokens;
-    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].number = gHudElements[HUD_ELEMENT_MUMBO_TOKENS].counter;
+    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].maxValue = gGameStatus.mumboTokens;
+    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].displayValue = gGameStatus.mumboTokens;
+    gHudElements[HUD_ELEMENT_MUMBO_TOKENS].targetValue =
+        gHudElements[HUD_ELEMENT_MUMBO_TOKENS].displayValue;
 
-    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].field_A = gGameStatus.mumboTokens;
-    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].counter = gGameStatus.mumboTokens;
-    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].number =
-        gHudElements[HUD_ELEMENT_MUMBO_TOKENS].counter;
+    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].maxValue = gGameStatus.mumboTokens;
+    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].displayValue = gGameStatus.mumboTokens;
+    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].targetValue =
+        gHudElements[HUD_ELEMENT_MUMBO_TOKENS].displayValue;
 
-    gHudElements[HUD_ELEMENT_MOVES_LEARNED].field_A = stru_80CC8C4.movesLearned;
-    gHudElements[HUD_ELEMENT_MOVES_LEARNED].counter = gGameStatus.movesLearned;
-    gHudElements[HUD_ELEMENT_MOVES_LEARNED].number = gHudElements[HUD_ELEMENT_MOVES_LEARNED].counter;
+    gHudElements[HUD_ELEMENT_MOVES_LEARNED].maxValue = stru_80CC8C4.movesLearned;
+    gHudElements[HUD_ELEMENT_MOVES_LEARNED].displayValue = gGameStatus.movesLearned;
+    gHudElements[HUD_ELEMENT_MOVES_LEARNED].targetValue =
+        gHudElements[HUD_ELEMENT_MOVES_LEARNED].displayValue;
 
-    gHudElements[HUD_ELEMENT_SHELLS].field_A = stru_80CC84C[gLoadedRoomLevel].shellCount;
-    gHudElements[HUD_ELEMENT_SHELLS].counter = byte_2000FCC[gLoadedRoomLevel].shellCount;
-    gHudElements[HUD_ELEMENT_SHELLS].number = gHudElements[HUD_ELEMENT_SHELLS].counter;
+    gHudElements[HUD_ELEMENT_SHELLS].maxValue = stru_80CC84C[gLoadedRoomLevel].shellCount;
+    gHudElements[HUD_ELEMENT_SHELLS].displayValue = byte_2000FCC[gLoadedRoomLevel].shellCount;
+    gHudElements[HUD_ELEMENT_SHELLS].targetValue = gHudElements[HUD_ELEMENT_SHELLS].displayValue;
 
-    gHudElements[HUD_ELEMENT_CHICKS].field_A = stru_80CC84C[gLoadedRoomLevel].chickCount;
-    gHudElements[HUD_ELEMENT_CHICKS].counter = byte_2000FCC[gLoadedRoomLevel].chickCount;
-    gHudElements[HUD_ELEMENT_CHICKS].number = gHudElements[HUD_ELEMENT_CHICKS].counter;
+    gHudElements[HUD_ELEMENT_CHICKS].maxValue = stru_80CC84C[gLoadedRoomLevel].chickCount;
+    gHudElements[HUD_ELEMENT_CHICKS].displayValue = byte_2000FCC[gLoadedRoomLevel].chickCount;
+    gHudElements[HUD_ELEMENT_CHICKS].targetValue = gHudElements[HUD_ELEMENT_CHICKS].displayValue;
 
-    gHudElements[HUD_ELEMENT_HONEYCOMBS].field_A = stru_80CC8C4.totalHoneycombs;
-    gHudElements[HUD_ELEMENT_HONEYCOMBS].counter = gGameStatus.totalHoneycombs;
-    gHudElements[HUD_ELEMENT_HONEYCOMBS].number = gHudElements[HUD_ELEMENT_HONEYCOMBS].counter;
+    gHudElements[HUD_ELEMENT_HONEYCOMBS].maxValue = stru_80CC8C4.totalHoneycombs;
+    gHudElements[HUD_ELEMENT_HONEYCOMBS].displayValue = gGameStatus.totalHoneycombs;
+    gHudElements[HUD_ELEMENT_HONEYCOMBS].targetValue =
+        gHudElements[HUD_ELEMENT_HONEYCOMBS].displayValue;
 
-    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].field_A = stru_80CC8C4.totalJinjos;
-    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].counter = gGameStatus.totalJinjos;
-    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].number = gHudElements[HUD_ELEMENT_PAUSE_JINJOS].counter;
+    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].maxValue = stru_80CC8C4.totalJinjos;
+    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].displayValue = gGameStatus.totalJinjos;
+    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].targetValue =
+        gHudElements[HUD_ELEMENT_PAUSE_JINJOS].displayValue;
 
-    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].field_A = stru_80CC8C4.captiveBreegulls;
-    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].counter = gGameStatus.captiveBreegulls;
-    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].number =
-        gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].counter;
+    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].maxValue = stru_80CC8C4.captiveBreegulls;
+    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].displayValue = gGameStatus.captiveBreegulls;
+    gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].targetValue =
+        gHudElements[HUD_ELEMENT_CAPTIVE_BREEGULLS].displayValue;
 
-    gHudElements[HUD_ELEMENT_SILVER_COINS].field_A = stru_80CC8C4.silverCoins;
-    gHudElements[HUD_ELEMENT_SILVER_COINS].counter = gGameStatus.silverCoins;
-    gHudElements[HUD_ELEMENT_SILVER_COINS].number = gHudElements[HUD_ELEMENT_SILVER_COINS].counter;
+    gHudElements[HUD_ELEMENT_SILVER_COINS].maxValue = stru_80CC8C4.silverCoins;
+    gHudElements[HUD_ELEMENT_SILVER_COINS].displayValue = gGameStatus.silverCoins;
+    gHudElements[HUD_ELEMENT_SILVER_COINS].targetValue =
+        gHudElements[HUD_ELEMENT_SILVER_COINS].displayValue;
 
-    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].field_A = stru_80CC8C4.toySpaceships;
-    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].counter = gGameStatus.toySpaceships;
-    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].number = gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].counter;
+    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].maxValue = stru_80CC8C4.toySpaceships;
+    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].displayValue = gGameStatus.toySpaceships;
+    gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].targetValue =
+        gHudElements[HUD_ELEMENT_TOY_SPACESHIPS].displayValue;
 
-    gHudElements[HUD_ELEMENT_ICE_CREAMS].field_A = stru_80CC8C4.iceCreams;
-    gHudElements[HUD_ELEMENT_ICE_CREAMS].counter = gGameStatus.iceCreams;
-    gHudElements[HUD_ELEMENT_ICE_CREAMS].number = gHudElements[HUD_ELEMENT_ICE_CREAMS].counter;
+    gHudElements[HUD_ELEMENT_ICE_CREAMS].maxValue = stru_80CC8C4.iceCreams;
+    gHudElements[HUD_ELEMENT_ICE_CREAMS].displayValue = gGameStatus.iceCreams;
+    gHudElements[HUD_ELEMENT_ICE_CREAMS].targetValue =
+        gHudElements[HUD_ELEMENT_ICE_CREAMS].displayValue;
 
-    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].field_A = stru_80CC8C4.goldNuggets;
-    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].counter = gGameStatus.goldNuggets;
-    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].number = gHudElements[HUD_ELEMENT_GOLD_NUGGETS].counter;
+    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].maxValue = stru_80CC8C4.goldNuggets;
+    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].displayValue = gGameStatus.goldNuggets;
+    gHudElements[HUD_ELEMENT_GOLD_NUGGETS].targetValue =
+        gHudElements[HUD_ELEMENT_GOLD_NUGGETS].displayValue;
 
     if (gHudElements[HUD_ELEMENT_HEALTH].renderState == 0) {
-        gHudElements[HUD_ELEMENT_HEALTH].field_A = stru_80CC8C4.health;
-        gHudElements[HUD_ELEMENT_HEALTH].counter = gGameStatus.health;
-        gHudElements[HUD_ELEMENT_HEALTH].number = gHudElements[HUD_ELEMENT_HEALTH].counter;
+        gHudElements[HUD_ELEMENT_HEALTH].maxValue = stru_80CC8C4.health;
+        gHudElements[HUD_ELEMENT_HEALTH].displayValue = gGameStatus.health;
+        gHudElements[HUD_ELEMENT_HEALTH].targetValue = gHudElements[HUD_ELEMENT_HEALTH].displayValue;
     }
 
     if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState == 0) {
-        gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].field_A = stru_80CC8C4.health;
-        gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].counter = gGameStatus.health;
-        gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].number =
-            gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].counter;
+        gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].maxValue = stru_80CC8C4.health;
+        gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].displayValue = gGameStatus.health;
+        gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].targetValue =
+            gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].displayValue;
     }
 
-    gHudElements[HUD_ELEMENT_OXYGEN].field_A = stru_80CC8C4.oxygen;
-    gHudElements[HUD_ELEMENT_OXYGEN].counter = gGameStatus.oxygen;
-    gHudElements[HUD_ELEMENT_OXYGEN].number = gHudElements[HUD_ELEMENT_OXYGEN].counter;
+    gHudElements[HUD_ELEMENT_OXYGEN].maxValue = stru_80CC8C4.oxygen;
+    gHudElements[HUD_ELEMENT_OXYGEN].displayValue = gGameStatus.oxygen;
+    gHudElements[HUD_ELEMENT_OXYGEN].targetValue = gHudElements[HUD_ELEMENT_OXYGEN].displayValue;
 
-    gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].field_A = stru_80CC8C4.oxygen;
-    gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].counter = gGameStatus.oxygen;
-    gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].number =
-        gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].counter;
+    gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].maxValue = stru_80CC8C4.oxygen;
+    gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].displayValue = gGameStatus.oxygen;
+    gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].targetValue =
+        gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].displayValue;
 }
 
 void update_bozzeye_notes_counter(void) {
-    gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].counter = gGameStatus.totalNotes;
-    gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].number = gGameStatus.totalNotes;
+    gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].displayValue = gGameStatus.totalNotes;
+    gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].targetValue = gGameStatus.totalNotes;
 }
 
 void init_hud_elements(void) {
@@ -1154,16 +1178,16 @@ void init_hud_elements(void) {
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         gHudElements[i].renderState = 0;
-        gHudElements[i].field_29 = 0;
-        gHudElements[i].state = 0;
+        gHudElements[i].reshow = FALSE;
+        gHudElements[i].scriptStep = 0;
         gHudElements[i].graphicCount = 0;
-        gHudElements[i].field_E = word_80A8E28[i];
-        gHudElements[i].field_10 = 0x2CCCC;
-        gHudElements[i].field_2A = 0;
-        gHudElements[i].field_1D = 0;
-        gHudElements[i].field_1C = 0;
-        gHudElements[i].field_1A = 0;
-        gHudElements[i].field_1E = 0;
+        gHudElements[i].displayTime = word_80A8E28[i];
+        gHudElements[i].slideSpeed = 0x2CCCC;
+        gHudElements[i].keepShown = FALSE;
+        gHudElements[i].rouletteIndex = 0;
+        gHudElements[i].rouletteStepDelay = 0;
+        gHudElements[i].rouletteTime = 0;
+        gHudElements[i].rouletteStarted = FALSE;
         gHudElements[i].textBox.letterSpacing = 1;
         gHudElements[i].textBox.field_11 = 6;
         gHudElements[i].textBox.field_12 = 0;
@@ -1178,17 +1202,20 @@ void init_hud_elements(void) {
 }
 
 void update_hud_collectables(void) {
-    gHudElements[HUD_ELEMENT_LEVEL_NOTES].field_A = stru_80CC84C[gLoadedRoomLevel].noteCount;
-    gHudElements[HUD_ELEMENT_LEVEL_NOTES].counter = byte_2000FCC[gLoadedRoomLevel].noteCount;
-    gHudElements[HUD_ELEMENT_LEVEL_NOTES].number = gHudElements[HUD_ELEMENT_LEVEL_NOTES].counter;
+    gHudElements[HUD_ELEMENT_LEVEL_NOTES].maxValue = stru_80CC84C[gLoadedRoomLevel].noteCount;
+    gHudElements[HUD_ELEMENT_LEVEL_NOTES].displayValue = byte_2000FCC[gLoadedRoomLevel].noteCount;
+    gHudElements[HUD_ELEMENT_LEVEL_NOTES].targetValue =
+        gHudElements[HUD_ELEMENT_LEVEL_NOTES].displayValue;
 
-    gHudElements[HUD_ELEMENT_LEVEL_JIGGIES].field_A = stru_80CC84C[gLoadedRoomLevel].jiggyCount;
-    gHudElements[HUD_ELEMENT_LEVEL_JIGGIES].counter = byte_2000FCC[gLoadedRoomLevel].jiggyCount;
-    gHudElements[HUD_ELEMENT_LEVEL_JIGGIES].number = gHudElements[HUD_ELEMENT_LEVEL_JIGGIES].counter;
+    gHudElements[HUD_ELEMENT_LEVEL_JIGGIES].maxValue = stru_80CC84C[gLoadedRoomLevel].jiggyCount;
+    gHudElements[HUD_ELEMENT_LEVEL_JIGGIES].displayValue = byte_2000FCC[gLoadedRoomLevel].jiggyCount;
+    gHudElements[HUD_ELEMENT_LEVEL_JIGGIES].targetValue =
+        gHudElements[HUD_ELEMENT_LEVEL_JIGGIES].displayValue;
 
-    gHudElements[HUD_ELEMENT_LEVEL_JINJOS].field_A = stru_80CC84C[gLoadedRoomLevel].jinjoCount;
-    gHudElements[HUD_ELEMENT_LEVEL_JINJOS].counter = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
-    gHudElements[HUD_ELEMENT_LEVEL_JINJOS].number = gHudElements[HUD_ELEMENT_LEVEL_JINJOS].counter;
+    gHudElements[HUD_ELEMENT_LEVEL_JINJOS].maxValue = stru_80CC84C[gLoadedRoomLevel].jinjoCount;
+    gHudElements[HUD_ELEMENT_LEVEL_JINJOS].displayValue = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
+    gHudElements[HUD_ELEMENT_LEVEL_JINJOS].targetValue =
+        gHudElements[HUD_ELEMENT_LEVEL_JINJOS].displayValue;
 }
 
 void set_hud_number(u32 element, int value) {
@@ -1206,22 +1233,22 @@ void set_hud_number(u32 element, int value) {
                 element = HUD_ELEMENT_HEALTH;
             gHudElements[element].timer = 10;
             if (value == 17) {
-                gHudElements[element].field_1A = 600;
-                gHudElements[element].field_1C = 0;
-                gHudElements[element].field_1E = 0;
+                gHudElements[element].rouletteTime = 600;
+                gHudElements[element].rouletteStepDelay = 0;
+                gHudElements[element].rouletteStarted = FALSE;
                 sub_80630C0(600, 0);
-                gHudElements[element].counter = value;
-                gHudElements[element].field_1D = -1;
+                gHudElements[element].displayValue = value;
+                gHudElements[element].rouletteIndex = -1;
                 byte_203EA81 = 0;
             } else if (value == 18) {
-                gHudElements[element].field_1A = 600;
-                gHudElements[element].field_1C = 0;
-                gHudElements[element].field_1E = 0;
+                gHudElements[element].rouletteTime = 600;
+                gHudElements[element].rouletteStepDelay = 0;
+                gHudElements[element].rouletteStarted = FALSE;
                 sub_80630C0(600, 0);
-                gHudElements[element].counter = value;
+                gHudElements[element].displayValue = value;
                 byte_203EA81 = 0;
             }
-            gHudElements[element].number = value;
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_METER_OXYGEN:
@@ -1230,169 +1257,169 @@ void set_hud_number(u32 element, int value) {
             if (renderState != 0 && renderState != 6)
                 element = HUD_ELEMENT_OXYGEN;
             gHudElements[element].timer = 10;
-            gHudElements[element].number = value;
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_ELEMENT_55:
-            gHudElements[element].number = value;
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = value;
+            gHudElements[element].targetValue = value;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = value;
             break;
 
         case HUD_ELEMENT_HONEYCOMBS:
-            ASSERT(gHudElements[element].counter <= value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue <= value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_40);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_40, n);
             break;
 
         case HUD_ELEMENT_LEVEL_NOTES:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_BOZZEYE_NOTES);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_BOZZEYE_NOTES, n);
             break;
 
         case HUD_ELEMENT_LEVEL_JIGGIES:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_41);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_41, n);
             break;
 
         case HUD_ELEMENT_2:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_ELEMENT_MOVES_LEARNED:
-            ASSERT(gHudElements[element].counter <= value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue <= value);
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_ELEMENT_SHELLS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_MR_RIPOVSKI_SHELLS);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_MR_RIPOVSKI_SHELLS, n);
             break;
 
         case HUD_ELEMENT_LEVEL_JINJOS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_JINJO_ORACLE_JINJOS);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_JINJO_ORACLE_JINJOS, n);
             break;
 
         case HUD_ELEMENT_CHICKS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS, n);
             break;
 
         case HUD_ELEMENT_CAPTIVE_BREEGULLS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS, n);
             break;
 
         case HUD_ELEMENT_ICE_CREAMS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_ELEMENT_TOY_SPACESHIPS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_ELEMENT_SILVER_COINS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS, n);
             break;
 
         case HUD_ELEMENT_GOLD_NUGGETS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
             n = get_hud_element_max(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS);
             if (n >= 0)
                 set_hud_number(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS, n);
             break;
 
         case HUD_ELEMENT_36:
-            gHudElements[element].counter = value;
-            gHudElements[element].number = value;
+            gHudElements[element].displayValue = value;
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_ELEMENT_PAUSE_NOTES:
-            gHudElements[element].counter = value;
-            gHudElements[element].number = value;
+            gHudElements[element].displayValue = value;
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_ELEMENT_BOZZEYE_NOTES:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.totalNotes;
-            gHudElements[element].number = gGameStatus.totalNotes;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = gGameStatus.totalNotes;
+            gHudElements[element].targetValue = gGameStatus.totalNotes;
             break;
 
         case HUD_ELEMENT_40:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.totalHoneycombs;
-            gHudElements[element].number = gGameStatus.totalHoneycombs;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = gGameStatus.totalHoneycombs;
+            gHudElements[element].targetValue = gGameStatus.totalHoneycombs;
             break;
 
         case HUD_ELEMENT_41:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.totalJiggies;
-            gHudElements[element].number = gGameStatus.totalJiggies;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = gGameStatus.totalJiggies;
+            gHudElements[element].targetValue = gGameStatus.totalJiggies;
             break;
 
         case HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.silverCoins;
-            gHudElements[element].number = gGameStatus.silverCoins;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = gGameStatus.silverCoins;
+            gHudElements[element].targetValue = gGameStatus.silverCoins;
             break;
 
         case HUD_ELEMENT_MR_RIPOVSKI_SHELLS:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.shells;
-            gHudElements[element].number = gGameStatus.shells;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = gGameStatus.shells;
+            gHudElements[element].targetValue = gGameStatus.shells;
             break;
 
         case HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.captiveBreegulls;
-            gHudElements[element].number = gGameStatus.captiveBreegulls;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = gGameStatus.captiveBreegulls;
+            gHudElements[element].targetValue = gGameStatus.captiveBreegulls;
             break;
 
         case HUD_ELEMENT_MOMMA_CLUCKER_CHICKS:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.chicks;
-            gHudElements[element].number = gGameStatus.chicks;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = gGameStatus.chicks;
+            gHudElements[element].targetValue = gGameStatus.chicks;
             break;
 
         case HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = gGameStatus.goldNuggets;
-            gHudElements[element].number = gGameStatus.goldNuggets;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = gGameStatus.goldNuggets;
+            gHudElements[element].targetValue = gGameStatus.goldNuggets;
             break;
 
         case HUD_ELEMENT_JINJO_ORACLE_JINJOS:
-            gHudElements[element].field_A = value;
-            gHudElements[element].counter = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
-            gHudElements[element].number = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
+            gHudElements[element].maxValue = value;
+            gHudElements[element].displayValue = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
+            gHudElements[element].targetValue = byte_2000FCC[gLoadedRoomLevel].jinjoCount;
             break;
 
         case HUD_ELEMENT_GOLDEN_FEATHERS:
@@ -1410,12 +1437,12 @@ void set_hud_number(u32 element, int value) {
         case HUD_ELEMENT_52:
         case HUD_ELEMENT_53:
         case HUD_ELEMENT_54:
-            gHudElements[element].number = value;
+            gHudElements[element].targetValue = value;
             break;
 
         case HUD_ELEMENT_PAUSE_MUMBO_TOKENS:
-            ASSERT(gHudElements[element].counter < value);
-            gHudElements[element].number = value;
+            ASSERT(gHudElements[element].displayValue < value);
+            gHudElements[element].targetValue = value;
         default:
             HANG;
             break;
@@ -1427,18 +1454,18 @@ void set_hud_number(u32 element, int value) {
             break;
 
         case 6:
-            gHudElements[element].field_29 = 1;
+            gHudElements[element].reshow = TRUE;
             break;
 
         case 3:
         case 4:
         case 5:
-            funcIdx = stru_80AF310[element].states[gHudElements[element].state].funcIdx;
-            arg1 = stru_80AF310[element].states[gHudElements[element].state].arg1;
+            funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
+            arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
             while (funcIdx != 11 || (arg1 != 3 && arg1 != 4)) {
-                gHudElements[element].state--;
-                funcIdx = stru_80AF310[element].states[gHudElements[element].state].funcIdx;
-                arg1 = stru_80AF310[element].states[gHudElements[element].state].arg1;
+                gHudElements[element].scriptStep--;
+                funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
+                arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
             }
             break;
     }
@@ -1461,14 +1488,14 @@ void sub_80407F8(void) {
             break;
 
         case 6:
-            gHudElements[element].field_29 = 1;
+            gHudElements[element].reshow = TRUE;
             break;
 
         case 5:
             do {
-                gHudElements[element].state--;
-                funcIdx = stru_80AF310[element].states[gHudElements[element].state].funcIdx;
-                arg1 = stru_80AF310[element].states[gHudElements[element].state].arg1;
+                gHudElements[element].scriptStep--;
+                funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
+                arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
             } while (funcIdx != 11 || arg1 != 3);
             break;
     }
@@ -1479,7 +1506,7 @@ void update_hud(void) {
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         if (gHudElements[i].renderState) {
-            u16 idx = gHudElements[i].state;
+            u16 idx = gHudElements[i].scriptStep;
             struct struc_60* states = stru_80AF310[i].states;
 
             u32 funcIdx = states[idx].funcIdx;
@@ -1488,7 +1515,7 @@ void update_hud(void) {
             u32 arg3 = states[idx].arg3;
 
             if (dHudFunctions[funcIdx](&gHudElements[i], arg1, arg2, arg3) == 2) {
-                gHudElements[i].state++;
+                gHudElements[i].scriptStep++;
             }
         }
     }
@@ -1523,7 +1550,7 @@ void render_hud_elements(void) {
             x = gHudElements[i].textBox.xPosition;
             y = gHudElements[i].textBox.yPosition;
 
-            if (gHudElements[i].field_28) {
+            if (gHudElements[i].rightAlignText) {
                 sub_08025C30(&gHudElements[i].textBox, gHudElements[i].text);
             } else {
                 AddStringToBuffer(&gHudElements[i].textBox, gHudElements[i].text);
@@ -1541,9 +1568,9 @@ void sub_80409DC(void) {
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         if (gHudElements[i].renderState) {
             gHudElements[i].renderState = 0;
-            gHudElements[i].counter = gHudElements[i].number;
-            gHudElements[i].field_29 = 0;
-            gHudElements[i].state = 0;
+            gHudElements[i].displayValue = gHudElements[i].targetValue;
+            gHudElements[i].reshow = FALSE;
+            gHudElements[i].scriptStep = 0;
 
             if (gHudElements[i].graphicCount) {
                 Free(gHudElements[i].graphic, 4);
@@ -1575,9 +1602,9 @@ void sub_08040A38(u32 element) {
             break;
     }
 
-    gHudElements[element].counter = gHudElements[element].number;
-    gHudElements[element].field_29 = 0;
-    gHudElements[element].state = 0;
+    gHudElements[element].displayValue = gHudElements[element].targetValue;
+    gHudElements[element].reshow = FALSE;
+    gHudElements[element].scriptStep = 0;
     if (gHudElements[element].renderState) {
         gHudElements[element].renderState = 0;
         if (gHudElements[element].graphicCount) {
@@ -1607,18 +1634,18 @@ void sub_08040AD0(u32 element, int value) {
             break;
     }
 
-    gHudElements[element].counter = value;
-    gHudElements[element].number = value;
-    gHudElements[element].field_A = value;
+    gHudElements[element].displayValue = value;
+    gHudElements[element].targetValue = value;
+    gHudElements[element].maxValue = value;
 }
 
 #define SHOW_HUD_ELEMENT(element)                                                                      \
     {                                                                                                  \
         gHudElements[element].renderState = 1;                                                         \
-        gHudElements[element].field_14 = gHudElements[element].field_10;                               \
-        gHudElements[element].field_10 = 0x40000;                                                      \
-        gHudElements[element].field_2B = gHudElements[element].field_2A;                               \
-        gHudElements[element].field_2A = 0;                                                            \
+        gHudElements[element].savedSlideSpeed = gHudElements[element].slideSpeed;                      \
+        gHudElements[element].slideSpeed = 0x40000;                                                    \
+        gHudElements[element].savedKeepShown = gHudElements[element].keepShown;                        \
+        gHudElements[element].keepShown = FALSE;                                                       \
     }
 
 void show_pause_counters(int isDiving) {
@@ -1717,8 +1744,8 @@ bool32 are_pause_counters_shown(int isDiving) {
 
 #define RESTORE_HUD_ELEMENT(element)                                                                   \
     {                                                                                                  \
-        gHudElements[element].field_10 = gHudElements[element].field_14;                               \
-        gHudElements[element].field_2A = gHudElements[element].field_2B;                               \
+        gHudElements[element].slideSpeed = gHudElements[element].savedSlideSpeed;                      \
+        gHudElements[element].keepShown = gHudElements[element].savedKeepShown;                        \
     }
 
 #ifdef NONMATCHING
@@ -1811,9 +1838,9 @@ NAKED bool32 are_pause_counters_hidden(int isDiving) {
 
 #define SET_HUD_COUNTER(element, max, value)                                                           \
     {                                                                                                  \
-        gHudElements[element].field_A = max;                                                           \
-        gHudElements[element].counter = value;                                                         \
-        gHudElements[element].number = gHudElements[element].counter;                                  \
+        gHudElements[element].maxValue = max;                                                          \
+        gHudElements[element].displayValue = value;                                                    \
+        gHudElements[element].targetValue = gHudElements[element].displayValue;                        \
     }
 
 #define SHOW_TOTALS_COUNTER(element, field)                                                            \
@@ -2059,30 +2086,30 @@ void dismiss_hud_elements(void) {
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         if (gHudElements[i].renderState) {
             gHudElements[i].timer = 1;
-            gHudElements[i].field_2A = 0;
+            gHudElements[i].keepShown = FALSE;
         }
     }
 }
 
 void sub_8041E88(void) {
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].timer = 0;
-    gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].field_2A = 0;
+    gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_40].timer = 0;
-    gHudElements[HUD_ELEMENT_40].field_2A = 0;
+    gHudElements[HUD_ELEMENT_40].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_41].timer = 0;
-    gHudElements[HUD_ELEMENT_41].field_2A = 0;
+    gHudElements[HUD_ELEMENT_41].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS].timer = 0;
-    gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS].field_2A = 0;
+    gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SHELLS].timer = 0;
-    gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SHELLS].field_2A = 0;
+    gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SHELLS].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS].timer = 0;
-    gHudElements[HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS].field_2A = 0;
+    gHudElements[HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_MOMMA_CLUCKER_CHICKS].timer = 0;
-    gHudElements[HUD_ELEMENT_MOMMA_CLUCKER_CHICKS].field_2A = 0;
+    gHudElements[HUD_ELEMENT_MOMMA_CLUCKER_CHICKS].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS].timer = 0;
-    gHudElements[HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS].field_2A = 0;
+    gHudElements[HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_JINJO_ORACLE_JINJOS].timer = 0;
-    gHudElements[HUD_ELEMENT_JINJO_ORACLE_JINJOS].field_2A = 0;
+    gHudElements[HUD_ELEMENT_JINJO_ORACLE_JINJOS].keepShown = FALSE;
 }
 
 void sub_08041F3C(u32 element, int value) {
@@ -2105,10 +2132,10 @@ void sub_08041F3C(u32 element, int value) {
             break;
     }
 
-    gHudElements[element].field_10 = value;
+    gHudElements[element].slideSpeed = value;
 }
 
-void sub_08041FA4(u32 element) {
+void keep_hud_element_shown(u32 element) {
     u8 renderState;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -2128,10 +2155,10 @@ void sub_08041FA4(u32 element) {
             break;
     }
 
-    gHudElements[element].field_2A = 1;
+    gHudElements[element].keepShown = TRUE;
 }
 
-void sub_0804200C(u32 element) {
+void release_hud_element(u32 element) {
     u8 renderState;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -2151,7 +2178,7 @@ void sub_0804200C(u32 element) {
             break;
     }
 
-    gHudElements[element].field_2A = 0;
+    gHudElements[element].keepShown = FALSE;
     gHudElements[element].timer = 1;
 }
 
@@ -2222,7 +2249,7 @@ static int get_hud_element_max(u32 element) {
     }
 
     if (gHudElements[element].renderState != 6 && gHudElements[element].renderState != 0) {
-        return gHudElements[element].field_A;
+        return gHudElements[element].maxValue;
     }
 
     return -1;
@@ -2265,8 +2292,8 @@ bool32 sub_8042218(int value) {
         return FALSE;
     }
 
-    gHudElements[HUD_ELEMENT_36].counter = value;
-    gHudElements[HUD_ELEMENT_36].number = value;
+    gHudElements[HUD_ELEMENT_36].displayValue = value;
+    gHudElements[HUD_ELEMENT_36].targetValue = value;
     gHudElements[HUD_ELEMENT_36].renderState = 1;
     gHudElements[HUD_ELEMENT_36].timer = 10;
     return TRUE;

@@ -874,7 +874,7 @@ _08047C16:
 	cmp r4, #0
 	bne _08047C38
 	adds r0, r5, #0
-	bl sub_0804200C
+	bl release_hud_element
 	strb r4, [r7]
 	b _08047C58
 	.align 2, 0
@@ -894,7 +894,7 @@ _08047C38:
 	adds r0, r5, #0
 	bl set_hud_number
 	adds r0, r5, #0
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 _08047C58:
 	pop {r4, r5, r6, r7}
 	pop {r0}
@@ -2680,7 +2680,7 @@ sub_8048B1C: @ 0x08048B1C
 	movs r0, #0x35
 	bl set_hud_number
 	movs r0, #0x35
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	ldr r0, [r5]
 	movs r1, #5
 	movs r2, #1
@@ -19621,7 +19621,7 @@ sub_805160C: @ 0x0805160C
 	cmp r0, #0xff
 	bne _08051640
 	movs r0, #0x35
-	bl sub_0804200C
+	bl release_hud_element
 	movs r0, #0
 	bl sub_8016BD0
 	adds r0, r4, #0
@@ -19694,7 +19694,7 @@ sub_80516A4: @ 0x080516A4
 	cmp r0, #3
 	bgt _080516E8
 	movs r0, #0x35
-	bl sub_0804200C
+	bl release_hud_element
 	movs r0, #1
 	bl sub_8016BD0
 	ldr r0, [r5, #0x2c]
@@ -21546,7 +21546,7 @@ _08052570:
 	adds r1, r4, #0
 	bl set_hud_number
 	movs r0, #0x32
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	b _0805278E
 	.align 2, 0
 _08052588: .4byte 0x0203F93A
@@ -21576,7 +21576,7 @@ _080525B0:
 _080525B8:
 	movs r0, #0x33
 _080525BA:
-	bl sub_0804200C
+	bl release_hud_element
 	bl dismiss_hud_elements
 	bl sub_8063178
 	b _0805278E
@@ -21617,7 +21617,7 @@ _080525FC:
 	adds r1, r4, #0
 	bl set_hud_number
 	movs r0, #0x33
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	b _0805278E
 	.align 2, 0
 _08052614: .4byte 0x0203F93A
@@ -21627,7 +21627,7 @@ _08052618:
 	cmp r0, #1
 	bls _0805262C
 	movs r0, #0xd
-	bl sub_0804200C
+	bl release_hud_element
 	b _0805278E
 	.align 2, 0
 _08052628: .4byte 0x0203F93D
@@ -21666,7 +21666,7 @@ _0805265C:
 	adds r1, r4, #0
 	bl set_hud_number
 	movs r0, #0xd
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	b _0805278E
 	.align 2, 0
 _08052674: .4byte 0x0203F93A
@@ -21676,7 +21676,7 @@ _08052678:
 	cmp r0, #1
 	bls _0805268C
 	movs r0, #0x34
-	bl sub_0804200C
+	bl release_hud_element
 	b _0805278E
 	.align 2, 0
 _08052688: .4byte 0x0203F93D
@@ -21715,7 +21715,7 @@ _080526BC:
 	adds r1, r4, #0
 	bl set_hud_number
 	movs r0, #0x34
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	b _0805278E
 	.align 2, 0
 _080526D4: .4byte 0x0203F93A
@@ -21728,7 +21728,7 @@ _080526D8:
 	cmp r0, #0
 	bne _080526F4
 	movs r0, #0x25
-	bl sub_0804200C
+	bl release_hud_element
 	b _0805278E
 	.align 2, 0
 _080526F0: .4byte 0x0203F960
@@ -21742,7 +21742,7 @@ _080526F4:
 	movs r0, #0x25
 	bl set_hud_number
 	movs r0, #0x25
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	b _0805278E
 _08052710:
 	ldr r0, _08052744
@@ -21765,7 +21765,7 @@ _08052710:
 	adds r1, r4, #0
 	bl set_hud_number
 	movs r0, #0x37
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	b _0805278E
 	.align 2, 0
 _08052744: .4byte 0x0203E16C
@@ -21800,7 +21800,7 @@ _08052754:
 	bl audio_new_fx
 _08052788:
 	movs r0, #0x37
-	bl sub_0804200C
+	bl release_hud_element
 _0805278E:
 	pop {r4}
 	pop {r0}

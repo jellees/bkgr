@@ -7229,7 +7229,7 @@ sub_802B5AC: @ 0x0802B5AC
 	movs r0, #0x36
 	bl set_hud_number
 	movs r0, #0x36
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	strb r6, [r4]
 _0802B626:
 	movs r0, #1
@@ -23912,7 +23912,7 @@ _08034296:
 	bl set_hud_number
 	movs r0, #0x31
 _080342AE:
-	bl sub_08041FA4
+	bl keep_hud_element_shown
 	movs r0, #1
 	strb r0, [r5]
 	b _080342C6
@@ -23922,7 +23922,7 @@ _080342B8:
 	beq _080342C6
 	movs r0, #0x31
 _080342C0:
-	bl sub_0804200C
+	bl release_hud_element
 	strb r4, [r5]
 _080342C6:
 	pop {r4, r5, r6, r7}
@@ -33530,7 +33530,7 @@ _08038FD4:
 	blt _08038FD4
 _08038FEC:
 	movs r0, #0x36
-	bl sub_0804200C
+	bl release_hud_element
 	movs r2, #0
 	ldr r4, _080391E4
 	movs r0, #0xc4
@@ -42704,7 +42704,7 @@ _0803D1EC:
 	cmp r0, #0
 	beq _0803D27C
 	movs r0, #0x36
-	bl sub_0804200C
+	bl release_hud_element
 	ldrh r0, [r5]
 	cmp r0, #3
 	beq _0803D23C
@@ -43158,7 +43158,7 @@ _0803D590: .4byte gGameStatus
 _0803D594: .4byte 0x080CC8E4
 _0803D598:
 	movs r0, #0x28
-	bl sub_0804200C
+	bl release_hud_element
 _0803D59E:
 	ldr r0, _0803D5D8
 	ldrb r0, [r0]

@@ -1448,7 +1448,7 @@ void init_arcade_menu(void) {
     byte_2000F56 = 1;
     gKeysDown = 0;
     set_hud_number(55, byte_203E16C);
-    sub_08041FA4(55);
+    keep_hud_element_shown(55);
 
     dword_203F4F4 = Alloc(sizeof(struct Sprite) * 3, 25, 4);
     dword_203F4F8 = Alloc(3, 25, 4);
@@ -1495,7 +1495,7 @@ void sub_8047000(bool32 a1) {
     byte_2000F56 = 1;
     gKeysDown = 0;
     set_hud_number(55, byte_203E16C);
-    sub_08041FA4(55);
+    keep_hud_element_shown(55);
 }
 
 void exec_arcade_menu(void) {
@@ -1560,7 +1560,7 @@ void exec_arcade_menu(void) {
 
             DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
             DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);
-            sub_0804200C(55);
+            release_hud_element(55);
             sub_80409DC();
             FreeById(4, 25);
             ResetMenu();

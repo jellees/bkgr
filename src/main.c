@@ -317,7 +317,7 @@ static void update_game(void) {
             if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING
                 && gTransformation != TRANSFORMATION_OCTOPUS) {
                 set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
-                sub_08041FA4(HUD_METER_OXYGEN);
+                keep_hud_element_shown(HUD_METER_OXYGEN);
             }
 
             if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) {
@@ -2693,7 +2693,7 @@ void select_next_available_egg(bool32 a1) {
 
     if (!a1 && !sub_0804207C(gSelectedEgg + 9)) {
         if (!sub_080420E8(gSelectedEgg + 9)) {
-            sub_08041FA4(gSelectedEgg + 9);
+            keep_hud_element_shown(gSelectedEgg + 9);
             set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
         }
         return;
@@ -2721,9 +2721,9 @@ void select_next_available_egg(bool32 a1) {
         set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 
-    sub_0804200C(gSelectedEgg + 9);
+    release_hud_element(gSelectedEgg + 9);
     gSelectedEgg = nextEgg;
-    sub_08041FA4(gSelectedEgg + 9);
+    keep_hud_element_shown(gSelectedEgg + 9);
     set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
 
     if (audio_fx_still_active(dword_2001124)) {
@@ -2806,7 +2806,7 @@ bool32 sub_800DE04() {
     sub_08041F3C(10, 0x70000);
     sub_08041F3C(11, 0x70000);
     sub_08041F3C(12, 0x70000);
-    sub_08041FA4(gSelectedEgg + 9);
+    keep_hud_element_shown(gSelectedEgg + 9);
     set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     return TRUE;
 }
@@ -2817,7 +2817,7 @@ void sub_800DE9C() {
         sub_08041F3C(10, 0x2CCCC);
         sub_08041F3C(11, 0x2CCCC);
         sub_08041F3C(12, 0x2CCCC);
-        sub_0804200C(gSelectedEgg + 9);
+        release_hud_element(gSelectedEgg + 9);
     }
 }
 
