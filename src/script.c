@@ -1049,7 +1049,7 @@ static bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int cha
         script_cmd_camera_alloc(0, 0, 0, 0);
     }
 
-    sub_8041E58();
+    dismiss_hud_elements();
 
     return TRUE;
 }
@@ -2730,7 +2730,7 @@ static bool32 sub_8060CC4(int actorIdx, int _, int __, int ___) {
 }
 
 static bool32 sub_8060D74(int _, int __, int ___, int ____) {
-    sub_8041E58();
+    dismiss_hud_elements();
     return TRUE;
 }
 

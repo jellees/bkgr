@@ -21577,7 +21577,7 @@ _080525B8:
 	movs r0, #0x33
 _080525BA:
 	bl sub_0804200C
-	bl sub_8041E58
+	bl dismiss_hud_elements
 	bl sub_8063178
 	b _0805278E
 	.align 2, 0
@@ -23467,7 +23467,7 @@ sub_8053588: @ 0x08053588
 	ldr r0, _080535BC
 	ands r0, r1
 	strh r0, [r2]
-	bl sub_8041E58
+	bl dismiss_hud_elements
 	ldr r1, _080535C0
 	movs r0, #5
 	b _080535D2
@@ -24046,7 +24046,7 @@ _080539DC:
 	cmp r0, #2
 	bne _08053A18
 	bl sub_800DE9C
-	bl sub_8041E58
+	bl dismiss_hud_elements
 	ldr r0, _08053A28
 	bl sub_0802FEDC
 	ldr r1, _08053A2C
@@ -29384,7 +29384,7 @@ _08056560: @ jump table
 	.4byte _08056950 @ case 4
 	.4byte _08056A60 @ case 5
 _08056578:
-	bl sub_8041E58
+	bl dismiss_hud_elements
 	bl sub_8063178
 	ldr r0, _08056594
 	ldr r0, [r0]
@@ -35067,7 +35067,7 @@ _08059230:
 	lsrs r4, r0, #0x18
 	cmp r4, #3
 	bls _080591F4
-	bl sub_8041E58
+	bl dismiss_hud_elements
 	bl sub_8063178
 	b _080593C8
 	.align 2, 0
@@ -42597,7 +42597,7 @@ _0805CEE4: .4byte 0x0203F93C
 _0805CEE8:
 	.2byte 0xEE00, 0xEE00
 _0805CEEC:
-	bl sub_8041E58
+	bl dismiss_hud_elements
 	bl sub_8063178
 	bl sub_80524D8
 	b _0805D150
@@ -42751,7 +42751,7 @@ _0805D01E:
 	bl sub_8052894
 	b _0805D150
 _0805D028:
-	bl sub_8041E58
+	bl dismiss_hud_elements
 	bl sub_8063178
 	ldr r0, _0805D0A0
 	ldr r0, [r0]
