@@ -1810,13 +1810,15 @@ static bool32 script_cmd_camera_move(int x, int y, int moveSpeed, int _) {
         if (x > (u32)gMapPixelSizeX - 120) {
             x = gMapPixelSizeX - 120;
         }
-        if (x < 120)
+        if (x < 120) {
             x = 120;
+        }
         if (y > (u32)gMapPixelSizeY - 80) {
             y = gMapPixelSizeY - 80;
         }
-        if (y < 80)
+        if (y < 80) {
             y = 80;
+        }
         gScriptCamera->xPosTarget = x << FX32_SHIFT;
         gScriptCamera->yPosTarget = y << FX32_SHIFT;
     }
@@ -2268,10 +2270,11 @@ NAKED static bool32 script_cmd_display_time_travel_scene(int a1, int _, int __, 
 }
 #else
 static inline void ab(int a1, int v9, int a, int b) {
-    if (a1)
+    if (a1) {
         sprite_set_affine(0, v9, b - a + 128);
-    else
+    } else {
         sprite_set_affine(0, v9, a + 128);
+    }
 }
 
 static bool32 script_cmd_display_time_travel_scene(int a1) {
@@ -2293,8 +2296,9 @@ static bool32 script_cmd_display_time_travel_scene(int a1) {
 
     sub_80271A4(4095, 0);
 
-    if (gCanChangeBgm)
+    if (gCanChangeBgm) {
         audio_start_tune(17);
+    }
 
     gLoadedTileAnimCount = 0;
     gTileAnimQueueIndex = 0;
@@ -2330,8 +2334,9 @@ static bool32 script_cmd_display_time_travel_scene(int a1) {
             }
         }
 
-        if (gIsPaletteEffectsActive)
+        if (gIsPaletteEffectsActive) {
             sub_8026DC0();
+        }
 
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -2519,10 +2524,11 @@ static bool32 sub_8060568(int _, int __, int ___, int ____) {
             v13 = 1;
         }
 
-        if (gIsPaletteEffectsActive)
+        if (gIsPaletteEffectsActive) {
             sub_8026DC0();
-        else
+        } else {
             v13--;
+        }
 
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);

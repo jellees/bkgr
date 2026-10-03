@@ -37,8 +37,9 @@ void sub_8044E5C() {
     u32* ptr1 = &gSeedTable[2];
     u32* ptr2 = &gSeedTable[397];
 
-    if (gSeed == -1)
+    if (gSeed == -1) {
         sub_8044E28(dword_203F4B0 + 4357);
+    }
 
     gSeed = 0x26F;
     gSeedTablePtr = &gSeedTable[1];
@@ -51,8 +52,9 @@ void sub_8044E5C() {
         u32 v7 = *ptr2++;
         u32* v8 = ptr0++;
         u32 v9 = v7 ^ v6;
-        if (v2 & 1)
+        if (v2 & 1) {
             v9 ^= 0x9908B0DF;
+        }
         *v8 = v9;
         v1 = v2;
         ptr1++;
@@ -66,8 +68,9 @@ void sub_8044E5C() {
         u32 v7 = *ptr2++;
         u32* v8 = ptr0++;
         u32 v9 = v7 ^ v6;
-        if (v2 & 1)
+        if (v2 & 1) {
             v9 ^= 0x9908B0DF;
+        }
         *v8 = v9;
         v1 = v2;
         ptr1++;
@@ -76,8 +79,9 @@ void sub_8044E5C() {
 
     v3 = gSeedTable[0];
     *ptr0 = *ptr2 ^ ((gSeedTable[0] & 0x7FFFFFFF | v1 & 0x80000000) >> 1);
-    if (v3 & 1)
+    if (v3 & 1) {
         *ptr0 = *ptr0 ^ 0x9908B0DF;
+    }
 
     v18 = v3 ^ (v3 >> 11) ^ ((v3 ^ (v3 >> 11)) << 7) & 0x9D2C5680;
     return v18 ^ (v18 << 15) & 0xEFC60000 ^ ((v18 ^ (v18 << 15) & 0xEFC60000) >> 18);

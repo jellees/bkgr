@@ -9,6 +9,7 @@
 #include "alloc.h"
 #include "script.h"
 #include "hud.h"
+#include "sprite.h"
 
 static void show_gameover_screen(void);
 static void sub_8062D04(void);

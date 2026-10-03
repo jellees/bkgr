@@ -138,18 +138,22 @@ void sub_80277D0(u32 heap, u32 a2) {
 
 #ifdef NONMATCHING
 void* Alloc(u32 size, u32 allocId, u32 heap) {
-    if (heap > 5)
+    if (heap > 5) {
         HANG;
+    }
 
-    if (size == 0)
+    if (size == 0) {
         HANG;
+    }
 
-    if (allocId == 0)
+    if (allocId == 0) {
         HANG;
+    }
 
     size = (size + 3) & -4;
-    if (size < 8)
+    if (size < 8) {
         size = 8;
+    }
     size += 0x10;
 
     switch (gHeaps[heap].field_14) {
@@ -474,8 +478,9 @@ void FreeEx(void* pointer) {
 void Free(void* pointer, u32 heap) {
     struct MemoryBlock* block = (struct MemoryBlock*)((int)pointer - sizeof(struct MemoryBlock));
 
-    if (block->allocId - 1 > 0x18)
+    if (block->allocId - 1 > 0x18) {
         HANG;
+    }
 
     block->allocId = 0;
 

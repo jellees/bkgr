@@ -119,8 +119,9 @@ static void ShowSelectGame(int a1) {
                 InitMenu(id2, gPauseMenuLanguage);
             }
         } else if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON) {
-            if (sub_8024200())
+            if (sub_8024200()) {
                 break;
+            }
             SetTextSpriteCount(0);
             DmaFill32(170, gOAMBuffer1, 256);
             gOAMBufferFramePtr = gOAMBuffer1;
@@ -193,8 +194,9 @@ static bool32 sub_8024200(void) {
                 case 1:
                     FadeOutObjects(2, 2);
                     REG_BG1CNT |= 3;
-                    if (sub_80246C8())
+                    if (sub_80246C8()) {
                         return 1;
+                    }
                     InitMenu(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
                     gMenuId = MENU_GAME_OR_CONTINUE;
                     gMenuParentId = -1;
@@ -593,8 +595,9 @@ static void ShowLanguageSelect(void) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
         if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON) {
-            if (sub_8024200())
+            if (sub_8024200()) {
                 break;
+            }
         }
 
         if (!(gKeysDown & JOY_EXCL_DPAD)) {
@@ -745,8 +748,9 @@ void ShowEraseData(void) {
                 AddStringToBuffer(&tb2, char_08065304);
         }
 
-        if (renderMenu)
+        if (renderMenu) {
             FlushMenuToTextBuffer();
+        }
 
         RenderText();
         CheckStacks();

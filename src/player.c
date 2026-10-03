@@ -165,8 +165,9 @@ static void sub_8016624(s32 keyPressed, s32 keyDown) {
     if (byte_20021CB) {
         if ((keyPressed & 1)) {
             dword_20021E0 += 0x600;
-            if (dword_20021E0 > 0x1000)
+            if (dword_20021E0 > 0x1000) {
                 dword_20021E0 = 0x1000;
+            }
             CallARM_store_jump_value(dword_2000FC8, dword_20021E0);
         } else {
             byte_20021CB = 0;
@@ -959,8 +960,9 @@ void sub_80181B8(fx32* height) {
     if (byte_203DFE8) {
         byte_203DFE8 = 0;
         *height -= FX32_CONST(5);
-        if (*height < 0)
+        if (*height < 0) {
             *height = 0;
+        }
     }
 
     gPreviousPlayerState = gPlayerState;
@@ -2276,8 +2278,9 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            if (interact_with_object())
+            if (interact_with_object()) {
                 return;
+            }
             do_jump();
             return;
 
@@ -2410,13 +2413,15 @@ static void state_forward_roll(s32 keyPressed, s32 keyDown) {
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            if (!interact_with_object())
+            if (!interact_with_object()) {
                 do_jump();
+            }
             break;
 
         default:
-            if (!sprite_is_anim_done_once(&gPlayerSprite))
+            if (!sprite_is_anim_done_once(&gPlayerSprite)) {
                 return;
+            }
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_IDLE;
             sprite_set_anim(&gPlayerSprite, 25, 0, 0);
@@ -2466,8 +2471,9 @@ static void state_pack_wack_hit(s32 keyPressed, s32 keyDown) {
 static void state_crouch(s32 keyPressed, s32 keyDown) {
     gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
-    if (!sprite_is_anim_done_once(&gPlayerSprite))
+    if (!sprite_is_anim_done_once(&gPlayerSprite)) {
         return;
+    }
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
@@ -2498,8 +2504,9 @@ static void state_crouch(s32 keyPressed, s32 keyDown) {
 
                 sub_8016790(0, gPlayerSprite.direction);
 
-                if (gFloorPlaneResult.field_2C == 0x5A0000)
+                if (gFloorPlaneResult.field_2C == 0x5A0000) {
                     return;
+                }
 
                 gPlayerPos.y += 0x30000;
             }
@@ -2594,13 +2601,15 @@ static void state_crouch(s32 keyPressed, s32 keyDown) {
 static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
     gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
-    if (!sub_80037A8(&gPlayerSprite))
+    if (!sub_80037A8(&gPlayerSprite)) {
         return;
+    }
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:
-            if (!interact_with_object())
+            if (!interact_with_object()) {
                 do_kazooie_jump();
+            }
             return;
 
         case L_BUTTON:
@@ -2720,8 +2729,9 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
 static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
     gate_input_during_stop_honeycomb(&keyPressed, &keyDown);
 
-    if (!sub_80037A8(&gPlayerSprite))
+    if (!sub_80037A8(&gPlayerSprite)) {
         return;
+    }
 
     switch (keyDown & JOY_EXCL_DPAD) {
         case A_BUTTON:

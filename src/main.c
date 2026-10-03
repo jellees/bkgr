@@ -715,8 +715,9 @@ static void sub_800A37C() {
         }
     } else {
         byte_2000F5A--;
-        if (byte_2000F5A == 0)
+        if (byte_2000F5A == 0) {
             byte_2000F59 = 0;
+        }
     }
 }
 
@@ -962,8 +963,9 @@ static void sub_800AA6C(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a3,
 
     if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING)) {
         a1->y = gPlayerPos.y + a.y;
-        if (a1->y >= dword_2001088)
+        if (a1->y >= dword_2001088) {
             a1->y = gPlayerPos.y;
+        }
         a2->y = gPlayerShadowPos.y;
         a1->z = gPlayerPos.z + a.z;
         a2->z = gPlayerShadowPos.z + a.z;
@@ -1091,8 +1093,9 @@ static bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a
         if (stru_3002950.field_2C != 0x5A0000 && Abs(a1->y - a2->y) < 0x50000) {
             a1->y = a2->y;
             sub_800A9F0();
-            if (!sub_800A974() || sub_0800A8B4())
+            if (!sub_800A974() || sub_0800A8B4()) {
                 return FALSE;
+            }
         } else {
             a = a1->y;
             a1->y = sub_80039C4(a1, gFloorPlaneResult.field_1C, gFloorPlaneResult.field_20,
@@ -1113,18 +1116,21 @@ static bool32 sub_800ADAC(struct Vec3fx* a1, struct Vec3fx* a2, struct Vec3fx* a
             if (Abs(a - a1->y) > 0x50000) {
                 a1->y = a;
                 sub_800A9F0();
-                if (!sub_800A974() || sub_0800A8B4())
+                if (!sub_800A974() || sub_0800A8B4()) {
                     return FALSE;
+                }
             } else if (a1->y < a2->y) {
                 a1->y = a2->y;
                 sub_800A9F0();
-                if (!sub_800A974() || sub_0800A8B4())
+                if (!sub_800A974() || sub_0800A8B4()) {
                     return FALSE;
+                }
             } else {
                 a3->y = a1->y - a;
                 sub_800A9F0();
-                if (!sub_800A974() || sub_0800A8B4())
+                if (!sub_800A974() || sub_0800A8B4()) {
                     return FALSE;
+                }
             }
         }
     } else {
@@ -3944,8 +3950,9 @@ static void update_efx(void) {
             if (--gLavaTimer == 0) {
                 gLavaTimer = RandomMinMax(8, 24);
                 DmaTransferBGPalette(dLavaPaletteAnims[gLavaPaletteIndex], 0, 0);
-                if (++gLavaPaletteIndex == 6)
+                if (++gLavaPaletteIndex == 6) {
                     gLavaPaletteIndex = 0;
+                }
             }
             break;
 

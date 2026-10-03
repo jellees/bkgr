@@ -485,8 +485,9 @@ void sub_08012E90(u32 room) {
 
     if (gLoadedRoomBgm != dRoomIndexes[room].music) {
         gLoadedRoomBgm = dRoomIndexes[room].music;
-        if (gCanChangeBgm)
+        if (gCanChangeBgm) {
             audio_start_tune(gLoadedRoomBgm);
+        }
     }
 
     DmaTransfer32(dRoomIndexes[room].room, &gRoomHeader, 25);
