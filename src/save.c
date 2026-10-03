@@ -137,13 +137,13 @@ bool32 save_game(u32 game, bool32 a2) {
         buffer[7] = v2 >> 8;
 
         if (ProgramEepromDword(0, (u16*)gBuffer)) {
-            HANG;
+            ASSERT(0);
             remove_eeprom_buffer();
             return FALSE;
         }
 
         if (VerifyEepromDword(0, (u16*)gBuffer)) {
-            HANG;
+            ASSERT(0);
             remove_eeprom_buffer();
             return FALSE;
         }
@@ -177,7 +177,7 @@ bool32 save_game(u32 game, bool32 a2) {
     v9 = dword_80AF4F0[byte_203EAE3];
     for (i = 0; i < BUFFER_SIZE / 8; i++) {
         if (ProgramEepromDword(v9 + i, (u16*)&gBuffer[8 * i])) {
-            HANG;
+            ASSERT(0);
             remove_eeprom_buffer();
             return FALSE;
         }
@@ -185,7 +185,7 @@ bool32 save_game(u32 game, bool32 a2) {
 
     for (i = 0; i < BUFFER_SIZE / 8; i++) {
         if (VerifyEepromDword(v9 + i, (u16*)&gBuffer[8 * i])) {
-            HANG;
+            ASSERT(0);
             remove_eeprom_buffer();
             return FALSE;
         }
@@ -200,13 +200,13 @@ bool32 save_game(u32 game, bool32 a2) {
     buffer[3] = byte_203EAE0[3];
 
     if (ProgramEepromDword(1, (u16*)gBuffer)) {
-        HANG;
+        ASSERT(0);
         remove_eeprom_buffer();
         return FALSE;
     }
 
     if (VerifyEepromDword(1, (u16*)gBuffer)) {
-        HANG;
+        ASSERT(0);
         remove_eeprom_buffer();
         return FALSE;
     }
@@ -231,7 +231,7 @@ bool32 load_game(int game) {
     v9 = dword_80AF4F0[byte_203EAE0[game]];
     for (i = 0; i < 0xFF; i++) {
         if (ReadEepromDword(v9 + i, (u16*)&gBuffer[8 * i])) {
-            HANG;
+            ASSERT(0);
             remove_eeprom_buffer();
             return FALSE;
         }

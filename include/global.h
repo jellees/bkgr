@@ -12,10 +12,10 @@ typedef s32 fx32;
 // Game specific assert.
 #define HANG asm(".word 0xEE00EE00")
 #define ASSERT(expr)                                                                                   \
-    do {                                                                                               \
-        if (!(expr))                                                                                   \
-            HANG;                                                                                      \
-    } while (0)
+    if (!(expr)) {                                                                                     \
+        HANG;                                                                                          \
+    } else                                                                                             \
+        ((void)0)
 
 // String terminator instead of \0.
 #define STRING_TERMINATOR 0xff

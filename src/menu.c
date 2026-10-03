@@ -410,7 +410,7 @@ void InitMenu(int menu, int language) {
                     gMenu.texts[1] = str_080684A0; // FORMAT("FORTSETZEN");
                     break;
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             break;
@@ -472,7 +472,7 @@ void InitMenu(int menu, int language) {
                     gMenu.texts[2] = str_08067EC0; // FORMAT("EFFEKT-LAUTSTÄRKE");
                     break;
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             break;
@@ -552,7 +552,7 @@ void InitMenu(int menu, int language) {
                     gMenu.texts[3] = str_08067E88; // FORMAT("SPEICHERN");
                     break;
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             break;
@@ -616,7 +616,7 @@ void InitMenu(int menu, int language) {
                     gMenu.texts[1] = str_080681A4; // FORMAT("BIST DU SICHER?");
                     break;
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             break;
@@ -680,7 +680,7 @@ void InitMenu(int menu, int language) {
                     gMenu.texts[1] = str_080683B8; // FORMAT("VERLASSEN");
                     break;
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             break;
@@ -744,7 +744,7 @@ void InitMenu(int menu, int language) {
                     gMenu.texts[1] = str_0806841C; // FORMAT("NEIN");
                     break;
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             break;
@@ -1015,7 +1015,7 @@ void InitMenu(int menu, int language) {
                     gMenu.texts[i] = str_08065A4C; // "NÄCHSTES"
                     break;
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             break;
@@ -1172,7 +1172,7 @@ void InitMenu(int menu, int language) {
                     gMenu.texts[i] = str_08065A58; // "VORHERIGES"
                     break;
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             break;
@@ -1748,6 +1748,6 @@ void InitMenu(int menu, int language) {
 
         case 21:
         default:
-            HANG;
+            ASSERT(0);
     }
 }

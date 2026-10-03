@@ -158,7 +158,7 @@ static void sub_8062D04(void) {
                     gMenuId = gMenuParentId;
                     switch (gMenuParentId) {
                         default:
-                            HANG;
+                            ASSERT(0);
                             break;
 
                         case MENU_CONTINUE_OR_QUIT:

@@ -2081,7 +2081,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     break;
 
                 default:
-                    HANG;
+                    ASSERT(0);
                     break;
             }
             return 1;
@@ -2349,7 +2349,7 @@ void sub_0800CD94(int a1) {
             break;
 
         default:
-            HANG;
+            ASSERT(0);
             break;
     }
 }
@@ -2469,7 +2469,7 @@ void load_mini_game_from_arcade(int miniGame) {
             break;
 
         default:
-            HANG;
+            ASSERT(0);
             break;
     }
 }
@@ -2595,7 +2595,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
             break;
 
         default:
-            HANG;
+            ASSERT(0);
             break;
     }
 
@@ -3470,7 +3470,7 @@ void init_room_name() {
                 break;
 
             default:
-                HANG;
+                ASSERT(0);
                 break;
         }
     }
@@ -3481,7 +3481,7 @@ static void show_room_name(void) {
         if (gRoomNameApparenceTimer == 0) {
             gShowRoomName = 0;
         } else {
-            --gRoomNameApparenceTimer;
+            gRoomNameApparenceTimer--;
         }
         gRoomNameTextBox.xPosition = (240 - sub_8025870(gRoomName, &gRoomNameTextBox)) >> 1;
         gRoomNameTextBox.yPosition = 120;

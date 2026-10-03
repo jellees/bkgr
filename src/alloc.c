@@ -138,49 +138,41 @@ void sub_80277D0(u32 heap, u32 a2) {
 
 void* Alloc(u32 size, u32 allocId, u32 heap) {
     struct MemoryBlock* node;
-    struct MemoryBlock* v2;
-    struct MemoryBlock* v3;
-    u32 v1;
+    struct MemoryBlock* block;
+    struct MemoryBlock* newBlock;
+    u32 bestLength;
 
-    if (heap > 5) {
-        HANG;
-    }
-
-    if (size == 0) {
-        HANG;
-    }
-
-    if (allocId == 0) {
-        HANG;
-    }
+    ASSERT(heap < 6);
+    ASSERT(size != 0);
+    ASSERT(allocId != 0);
 
     size = (size + 3) & -4;
     if (size < 8) {
         size = 8;
     }
-    size += 0x10;
+    size += 16;
 
     switch (gHeaps[heap].field_14) {
         case 0:
             node = gHeaps[heap].start;
             do {
                 if (node->allocId == 0 && node->length >= size) {
-                    if (node->length - size >= 0x18) {
-                        v3 = (struct MemoryBlock*)(((u8*)node) + ((size >> 2) << 2));
+                    if (node->length - size >= 24) {
+                        newBlock = (struct MemoryBlock*)(((u8*)node) + ((size >> 2) << 2));
                         if (node->next) {
-                            v2 = node->next;
-                            node->next = v3;
-                            v3->next = v2;
-                            v2 = v2->previous;
-                            node->next->next->previous = v3;
-                            node->next->previous = v2;
+                            block = node->next;
+                            node->next = newBlock;
+                            newBlock->next = block;
+                            block = block->previous;
+                            node->next->next->previous = newBlock;
+                            node->next->previous = block;
                             node->next->allocId = node->allocId;
                             node->next->length = node->length - size;
                             node->allocId = allocId;
                             node->length = size;
                             return node->data;
                         } else {
-                            node->next = v3;
+                            node->next = newBlock;
                             node->next->next = 0;
                             node->next->previous = node;
                             node->next->allocId = 0;
@@ -195,56 +187,56 @@ void* Alloc(u32 size, u32 allocId, u32 heap) {
                     return node->data;
                 }
             } while ((node = node->next));
-            HANG;
+            ASSERT(0);
             return 0;
 
         case 1:
             node = gHeaps[heap].start;
-            v1 = -1;
-            v2 = 0;
+            bestLength = -1;
+            block = 0;
             do {
-                if (node->allocId == 0 && node->length >= size && node->length < v1) {
-                    v2 = node;
-                    v1 = node->length;
-                    if (v1 - size < 0x18) {
-                        v2->allocId = allocId;
-                        return v2->data;
+                if (node->allocId == 0 && node->length >= size && node->length < bestLength) {
+                    block = node;
+                    bestLength = node->length;
+                    if (bestLength - size < 24) {
+                        block->allocId = allocId;
+                        return block->data;
                     }
                 }
             } while ((node = node->next));
-            if (v2 == 0) {
-                HANG;
+            if (block == 0) {
+                ASSERT(0);
                 return 0;
             } else {
-                node = v2;
-                v3 = (struct MemoryBlock*)(((u8*)node) + ((size >> 2) << 2));
+                node = block;
+                newBlock = (struct MemoryBlock*)(((u8*)node) + ((size >> 2) << 2));
                 if (node->next) {
-                    v2 = node->next;
-                    node->next = v3;
-                    v3->next = v2;
-                    v2 = v2->previous;
-                    node->next->next->previous = v3;
-                    node->next->previous = v2;
+                    block = node->next;
+                    node->next = newBlock;
+                    newBlock->next = block;
+                    block = block->previous;
+                    node->next->next->previous = newBlock;
+                    node->next->previous = block;
                     node->next->allocId = 0;
                     node->next->length = node->length - size;
                     node->allocId = allocId;
                     node->length = size;
                     return node->data;
                 } else {
-                    v2->next = v3;
-                    v2->next->next = 0;
-                    v2->next->previous = v2;
-                    v2->next->allocId = 0;
-                    v2->next->length = v2->length - size;
-                    v2->allocId = allocId;
-                    v2->length = size;
-                    gHeaps[heap].last = v2->next;
-                    return v2->data;
+                    block->next = newBlock;
+                    block->next->next = 0;
+                    block->next->previous = block;
+                    block->next->allocId = 0;
+                    block->next->length = block->length - size;
+                    block->allocId = allocId;
+                    block->length = size;
+                    gHeaps[heap].last = block->next;
+                    return block->data;
                 }
             }
 
         default:
-            HANG;
+            ASSERT(0);
             return 0;
     }
 }
@@ -259,15 +251,13 @@ void FreeEx(void* pointer) {
         }
     }
 
-    HANG;
+    ASSERT(0);
 }
 
 void Free(void* pointer, u32 heap) {
     struct MemoryBlock* block = (struct MemoryBlock*)((int)pointer - sizeof(struct MemoryBlock));
 
-    if (block->allocId - 1 > 0x18) {
-        HANG;
-    }
+    ASSERT(block->allocId - 1 <= 0x18);
 
     block->allocId = 0;
 
@@ -325,9 +315,7 @@ u32 CheckHeap(u32 heap) {
 
     freeMemory = gHeaps[heap].length - allocatedLength;
 
-    if (unallocatedLength != freeMemory) {
-        HANG;
-    }
+    ASSERT(unallocatedLength == freeMemory);
 
     return freeMemory;
 }

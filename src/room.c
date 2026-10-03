@@ -255,9 +255,7 @@ void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4) {
 
     gEnabledBGs = gRoomHeader.enabledBGs;
 
-    if (*gRoomHeader.unknown3 > 255) {
-        HANG;
-    }
+    ASSERT(*gRoomHeader.unknown3 <= 255);
 
     gMapPixelSizeX = 32 * gRoomHeader.mapSizeX;
     gMapPixelSizeY = 32 * gRoomHeader.mapSizeY;
@@ -494,9 +492,7 @@ void sub_08012E90(u32 room) {
 
     gEnabledBGs = gRoomHeader.enabledBGs;
 
-    if (*gRoomHeader.unknown3 > 255) {
-        HANG;
-    }
+    ASSERT(*gRoomHeader.unknown3 <= 255);
 
     FreeById(1, 21);
     gEntitySection = 0;
@@ -736,9 +732,7 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5) {
 
     gEnabledBGs = gRoomHeader.enabledBGs;
 
-    if (*gRoomHeader.unknown3 > 255) {
-        HANG;
-    }
+    ASSERT(*gRoomHeader.unknown3 <= 255);
 
     gMapPixelSizeX = 32 * gRoomHeader.mapSizeX;
     gMapPixelSizeY = 32 * gRoomHeader.mapSizeY;

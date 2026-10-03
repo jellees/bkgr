@@ -112,7 +112,7 @@ static void ShowSelectGame(int a1) {
                 if (id == MENU_GAME_OR_CONTINUE) {
                     gMenuParentId = -1;
                 } else {
-                    HANG;
+                    ASSERT(0);
                 }
 
                 id2 = gMenuId;
@@ -218,7 +218,7 @@ static bool32 sub_8024200(void) {
                         reset_hud_elements();
                         dword_203F4DC = 0;
                     } else {
-                        HANG;
+                        ASSERT(0);
                     }
                     return TRUE;
 
@@ -232,7 +232,7 @@ static bool32 sub_8024200(void) {
                         reset_hud_elements();
                         dword_203F4DC = 1;
                     } else {
-                        HANG;
+                        ASSERT(0);
                     }
                     return TRUE;
 
@@ -246,7 +246,7 @@ static bool32 sub_8024200(void) {
                         reset_hud_elements();
                         dword_203F4DC = 2;
                     } else {
-                        HANG;
+                        ASSERT(0);
                     }
                     return TRUE;
 
@@ -496,7 +496,7 @@ static int sub_80246C8(void) {
     } else if (!gSaveFiles[2].empty) {
         SetMenuEntry(2);
     } else {
-        HANG;
+        ASSERT(0);
     }
 
     SetTextSpriteCount(0);

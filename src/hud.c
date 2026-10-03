@@ -1465,7 +1465,7 @@ void set_hud_number(u32 element, int value) {
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
         default:
-            HANG;
+            ASSERT(0);
             break;
     }
 
@@ -2016,7 +2016,7 @@ void show_totals_counters(u32 page) {
             break;
 
         default:
-            HANG;
+            ASSERT(0);
     }
 
     byte_203EA80 = 1;
@@ -2089,7 +2089,7 @@ bool32 are_totals_counters_shown(int page) {
             return done;
 
         default:
-            HANG;
+            ASSERT(0);
     }
 
     return done;
@@ -2157,7 +2157,7 @@ bool32 are_totals_counters_hidden(int page) {
             return done;
 
         default:
-            HANG;
+            ASSERT(0);
     }
 
     return done;
