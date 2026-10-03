@@ -18,10 +18,6 @@ byte_203E132 = 0x203E132;
 byte_203E133 = 0x203E133;
 byte_203E137 = 0x203E137;
 byte_203E138 = 0x203E138;
-gHudElements = 0x203EA7C;
-byte_203EA80 = 0x203EA80;
-byte_203EA81 = 0x203EA81;
-dword_203EA84 = 0x203EA84;
 
 # This variable shares the same space with another variable.
 # Not sure how this is possible. For now hardcoded address is

@@ -122,8 +122,10 @@ struct struc_59 {
     struct struc_60* states;
 };
 
-// Variables should go here.
-extern struct HudElement* gHudElements;
+struct HudElement* gHudElements;
+u8 byte_203EA80;
+u8 byte_203EA81;
+u32 dword_203EA84;
 
 extern struct struc_59 stru_80AF310[]; // This is the hud script table. Move this to its own file.
 
