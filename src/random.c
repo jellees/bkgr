@@ -1,3 +1,9 @@
+/**
+ * \file random.c
+ * This file seems to be a modified version of cokus.
+ * See https://github.com/blei-lab/lda-c/blob/master/cokus.c
+ */
+
 #include "global.h"
 #include "common.h"
 #include "random.h"
@@ -76,6 +82,9 @@ u32 random_reload(void) {
     return s1 ^ (s1 >> 18);
 }
 
+/**
+ * This function seems to be randomMT.
+ */
 static inline u32 random_next(void) {
     u32 y;
 
