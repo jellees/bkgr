@@ -40,7 +40,7 @@ SetSprite: @ 0x08025694
 	ldrb r1, [r6, #3]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	b _080256E6
 	.align 2, 0
 _080256E0: .4byte 0x086AD304
@@ -1868,7 +1868,7 @@ _0802656C:
 	ldrh r0, [r1]
 	ldr r2, _080265B8
 	ldrh r1, [r2]
-	bl RandomMinMax
+	bl random_range
 	adds r1, r0, #0
 	str r1, [r4]
 	ldr r5, _080265BC
@@ -1961,7 +1961,7 @@ _08026632:
 _08026636:
 	ldrh r0, [r6]
 	ldrh r1, [r5]
-	bl RandomMinMax
+	bl random_range
 	adds r4, r0, #0
 	ldr r1, _08026688
 	ldr r0, [r1]

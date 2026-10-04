@@ -638,14 +638,13 @@ extern void sub_8034970(u8*, s32*, u32*);
 extern void sub_8036138(u8*, s32*, u32*);
 extern bool32 sub_8037C08(u8*, u32*);
 extern void sub_800386C(u32, u32, u32);
-extern u32 sub_80039DC(u32*, u32, u32);
+extern u32 sub_80039DC(const u32*, u32, u32);
 extern void sub_80388E0(void);
 extern void sub_8038A34(void);
 extern void sub_8038FA0(u16);
 extern void sub_8039210(void);
 extern void sub_8039234(void);
 
-extern int RandomMinMax(int, int);
 
 extern void sub_08047504(void);
 extern void sub_8047BEC(void);
@@ -870,7 +869,6 @@ extern u32 dword_3007FFC;
 
 // ROM
 extern int dVolumes[20];
-extern u32 dword_80AF500[];
 extern u8 byte_80CEB84[];
 extern s32 dword_80CEBC4;
 

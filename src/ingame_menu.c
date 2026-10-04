@@ -8,6 +8,7 @@
 #include "player.h"
 #include "main.h"
 #include "room.h"
+#include "random.h"
 #include "hud.h"
 
 u8 gClockStatus;
@@ -965,7 +966,7 @@ static bool32 exec_save_menu(void) {
                     int r5 = var_30 - 1;
                     int newIdx;
                     do {
-                        newIdx = RandomMinMax(min, max);
+                        newIdx = random_range(min, max);
                     } while (newIdx == currentSfxIdx);
                     currentSfxIdx = newIdx;
                     sfxId = PLAY_SFX(newIdx);

@@ -951,7 +951,7 @@ _08047CB0:
 	movs r1, #0xb4
 	lsls r1, r1, #0x10
 _08047CB8:
-	bl RandomMinMax
+	bl random_range
 	pop {r1}
 	bx r1
 
@@ -3135,7 +3135,7 @@ _08048EC0:
 _08048EC4:
 	movs r0, #0
 	movs r1, #3
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #1
 	beq _08048F02
 	cmp r0, #1
@@ -3153,7 +3153,7 @@ _08048EE8:
 	ldrsh r0, [r4, r1]
 	ldr r1, [r4, #0x40]
 	asrs r1, r1, #0x10
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #0x10
 	str r0, [r4, #4]
 	ldr r0, [r4, #0x4c]
@@ -3166,7 +3166,7 @@ _08048F02:
 	asrs r0, r0, #0x10
 	movs r2, #0x36
 	ldrsh r1, [r4, r2]
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #0x10
 	str r0, [r4, #4]
 	ldr r0, [r4, #0x48]
@@ -3179,7 +3179,7 @@ _08048F1C:
 	asrs r0, r0, #0x10
 	movs r2, #0x36
 	ldrsh r1, [r4, r2]
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #0x10
 	str r0, [r4, #4]
 	movs r1, #0x3e
@@ -3191,7 +3191,7 @@ _08048F34:
 	ldrsh r0, [r4, r2]
 	ldr r1, [r4, #0x44]
 	asrs r1, r1, #0x10
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #0x10
 	str r0, [r4, #4]
 	movs r1, #0x3e
@@ -3200,7 +3200,7 @@ _08048F34:
 _08048F4A:
 	asrs r1, r1, #0x10
 _08048F4C:
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #0x10
 	str r0, [r4, #0xc]
 _08048F54:
@@ -5253,7 +5253,7 @@ _08049EF4:
 	strb r0, [r1]
 	movs r0, #0x87
 	movs r1, #0xe1
-	bl RandomMinMax
+	bl random_range
 	ldr r1, _08049F90
 	lsls r0, r0, #0x10
 	ldr r4, [r1]
@@ -14816,7 +14816,7 @@ _0804F038:
 	str r0, [r6, #0x58]
 	movs r0, #0
 	movs r1, #1
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #0
 	beq _0804F04C
 	cmp r0, #1
@@ -20414,7 +20414,7 @@ _08051C70:
 	bl sub_8047430
 	ldr r1, _08051CA8
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r4, r0, #0
 	bl sub_8048E0C
 	adds r1, r0, #0
@@ -24903,7 +24903,7 @@ sub_80540E8: @ 0x080540E8
 	lsls r0, r0, #6
 	movs r1, #0xc8
 	lsls r1, r1, #8
-	bl RandomMinMax
+	bl random_range
 	ldr r4, _08054128
 	ldr r1, [r4]
 	str r0, [r1, #0x18]
@@ -24917,7 +24917,7 @@ sub_80540E8: @ 0x080540E8
 	bgt _08054118
 	movs r0, #0
 	movs r1, #1
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #0
 	beq _08054120
 _08054118:
@@ -25052,14 +25052,14 @@ _080541EE:
 	bgt _0805424A
 	movs r0, #0
 	movs r1, #0x9c
-	bl RandomMinMax
+	bl random_range
 	ldr r1, [r6]
 	subs r0, #0x5a
 	lsls r0, r0, #0x10
 	str r0, [r1, #0x10]
 	movs r0, #0
 	movs r1, #0x28
-	bl RandomMinMax
+	bl random_range
 	ldr r1, [r6]
 	subs r0, #0x28
 	lsls r0, r0, #0x10
@@ -26254,7 +26254,7 @@ sub_8054B50: @ 0x08054B50
 _08054B6C:
 	movs r0, #0
 	movs r1, #1
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #0x18
 	lsrs r7, r0, #0x18
 	movs r0, #0
@@ -26336,7 +26336,7 @@ _08054BAE:
 	str r0, [r2, #0x20]
 	movs r0, #0
 	movs r1, #0xf0
-	bl RandomMinMax
+	bl random_range
 	adds r4, r0, #0
 	lsls r4, r4, #0x10
 	mov r1, r8
@@ -28643,7 +28643,7 @@ _08055F3E:
 	bl sub_8056B34
 	movs r0, #0
 	mov r1, sl
-	bl RandomMinMax
+	bl random_range
 	adds r1, r0, #0
 	ldr r0, [r6]
 	adds r0, r5, r0
@@ -28698,7 +28698,7 @@ _08055F3E:
 	bl sub_8003820
 	movs r0, #0
 	movs r1, #0xff
-	bl RandomMinMax
+	bl random_range
 	adds r1, r0, #0
 	ldr r0, [r6]
 	adds r0, r5, r0
@@ -30082,7 +30082,7 @@ sub_8056B34: @ 0x08056B34
 	adds r6, r0, #0
 	movs r0, #0x14
 	movs r1, #0xeb
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #8
 	movs r5, #0
 	movs r1, #0
@@ -30092,17 +30092,17 @@ sub_8056B34: @ 0x08056B34
 	lsls r4, r4, #2
 	movs r0, #0
 	adds r1, r4, #0
-	bl RandomMinMax
+	bl random_range
 	ldr r1, _08056B8C
 	adds r0, r0, r1
 	strh r0, [r6, #0x3c]
 	movs r0, #0x80
 	adds r1, r4, #0
-	bl RandomMinMax
+	bl random_range
 	strh r0, [r6, #0x3e]
 	movs r0, #0x1e
 	movs r1, #0xe1
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #8
 	adds r1, r6, #0
 	adds r1, #0x40
@@ -32958,13 +32958,13 @@ sub_8058198: @ 0x08058198
 	bne _080581F0
 	movs r0, #0x3c
 	movs r1, #0xf0
-	bl RandomMinMax
+	bl random_range
 	ldr r1, [r4]
 	adds r1, #0x7c
 	strb r0, [r1]
 	movs r0, #0
 	movs r1, #2
-	bl RandomMinMax
+	bl random_range
 	ldr r1, [r4]
 	adds r1, #0x7d
 	strb r0, [r1]
@@ -33395,7 +33395,7 @@ _08058510:
 	blt _08058540
 	movs r0, #0
 	movs r1, #3
-	bl RandomMinMax
+	bl random_range
 	movs r1, #0
 	cmp r0, #0
 	bne _08058528
@@ -36963,7 +36963,7 @@ sub_805A1EC: @ 0x0805A1EC
 _0805A206:
 	movs r0, #0
 	movs r1, #1
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #0
 	beq _0805A220
 	cmp r0, #1
@@ -40827,7 +40827,7 @@ sub_805C178: @ 0x0805C178
 	adds r5, r0, #0
 	movs r0, #0
 	movs r1, #2
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #1
 	beq _0805C1E2
 	cmp r0, #1
@@ -40962,7 +40962,7 @@ _0805C26E:
 _0805C27E:
 	movs r0, #0
 	movs r1, #1
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #0
 	beq _0805C294
 	cmp r0, #1
@@ -40987,7 +40987,7 @@ _0805C2A8:
 _0805C2AC:
 	movs r0, #0
 	movs r1, #1
-	bl RandomMinMax
+	bl random_range
 	movs r1, #0
 	cmp r0, #0
 	bne _0805C2BC
@@ -40998,13 +40998,13 @@ _0805C2BC:
 	strb r1, [r0]
 	movs r0, #0x14
 	movs r1, #0x28
-	bl RandomMinMax
+	bl random_range
 	adds r1, r5, #0
 	adds r1, #0x49
 	strb r0, [r1]
 	movs r0, #0x14
 	movs r1, #0xaa
-	bl RandomMinMax
+	bl random_range
 	adds r1, r5, #0
 	adds r1, #0x44
 	movs r2, #0
@@ -41024,7 +41024,7 @@ sub_805C2F0: @ 0x0805C2F0
 	adds r4, r0, #0
 	movs r0, #0
 	movs r1, #2
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #1
 	beq _0805C336
 	cmp r0, #1
@@ -41100,7 +41100,7 @@ _0805C384:
 _0805C38C:
 	movs r0, #0
 	movs r1, #1
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #0
 	beq _0805C39E
 	cmp r0, #1
@@ -41120,7 +41120,7 @@ _0805C3AC:
 _0805C3B0:
 	movs r0, #0x14
 	movs r1, #0xaa
-	bl RandomMinMax
+	bl random_range
 	adds r1, r4, #0
 	adds r1, #0x44
 	strh r0, [r1]
@@ -41824,7 +41824,7 @@ _0805C902:
 	strb r2, [r5]
 	movs r0, #0x14
 	movs r1, #0x28
-	bl RandomMinMax
+	bl random_range
 	strb r0, [r6]
 	b _0805C918
 _0805C910:
@@ -41857,7 +41857,7 @@ _0805C93E:
 	strb r2, [r5]
 	movs r0, #0x14
 	movs r1, #0x28
-	bl RandomMinMax
+	bl random_range
 	strb r0, [r6]
 	b _0805C954
 _0805C94C:

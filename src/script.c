@@ -8,6 +8,7 @@
 #include "player_defs.h"
 #include "audio_b.h"
 #include "script_defs.h"
+#include "random.h"
 #include "hud.h"
 
 #define MAX_SCRIPTS 2
@@ -647,19 +648,19 @@ static void sub_805DC28(int actorIdx) {
     if (!gCurrentScript->actors[actorIdx].isMoving) {
         script_cmd_actor_set_anim(actorIdx, 1215, 1, 0);
 
-        if (!RandomMinMax(FALSE, TRUE)) {
-            script_cmd_actor_set_position_absolute(actorIdx, RandomMinMax(100, 120),
-                                                   RandomMinMax(70, 90), 0);
-            script_cmd_actor_move(actorIdx, RandomMinMax(50, 60), RandomMinMax(40, 120), FX32_CONST(6));
+        if (!random_range(FALSE, TRUE)) {
+            script_cmd_actor_set_position_absolute(actorIdx, random_range(100, 120),
+                                                   random_range(70, 90), 0);
+            script_cmd_actor_move(actorIdx, random_range(50, 60), random_range(40, 120), FX32_CONST(6));
         } else {
-            script_cmd_actor_set_position_absolute(actorIdx, RandomMinMax(120, 140),
-                                                   RandomMinMax(70, 90), 0);
-            script_cmd_actor_move(actorIdx, RandomMinMax(180, 190), RandomMinMax(40, 120),
+            script_cmd_actor_set_position_absolute(actorIdx, random_range(120, 140),
+                                                   random_range(70, 90), 0);
+            script_cmd_actor_move(actorIdx, random_range(180, 190), random_range(40, 120),
                                   FX32_CONST(6));
         }
 
-        sprite_set_affine(gCurrentScript->actors[actorIdx].matrixIdx, RandomMinMax(0, 64),
-                          RandomMinMax(256, 768));
+        sprite_set_affine(gCurrentScript->actors[actorIdx].matrixIdx, random_range(0, 64),
+                          random_range(256, 768));
     }
 }
 
@@ -905,37 +906,37 @@ static void set_random_camera_position(int xMin, int xMax, int yMin, int yMax) {
         if (xDistanceToMax < xDistanceToMin) {
             if (yDistanceToMin < yDistanceToMax) {
                 if (xDistanceToMax < yDistanceToMin) {
-                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMin + xClearance) << FX32_SHIFT;
-                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = random_range(xMin, xMin + xClearance) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = random_range(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
-                    gScriptCamera->yPosTarget = RandomMinMax(yMax - yClearance, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = random_range(xMin, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = random_range(yMax - yClearance, yMax) << FX32_SHIFT;
                 }
             } else {
                 if (xDistanceToMax < yDistanceToMax) {
-                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMin + xClearance) << FX32_SHIFT;
-                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = random_range(xMin, xMin + xClearance) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = random_range(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
-                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMin + yClearance) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = random_range(xMin, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = random_range(yMin, yMin + yClearance) << FX32_SHIFT;
                 }
             }
         } else {
             if (yDistanceToMin < yDistanceToMax) {
                 if (xDistanceToMin < yDistanceToMin) {
-                    gScriptCamera->xPosTarget = RandomMinMax(xMax - xClearance, xMax) << FX32_SHIFT;
-                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = random_range(xMax - xClearance, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = random_range(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
-                    gScriptCamera->yPosTarget = RandomMinMax(yMax - yClearance, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = random_range(xMin, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = random_range(yMax - yClearance, yMax) << FX32_SHIFT;
                 }
             } else {
                 if (xDistanceToMin < yDistanceToMax) {
-                    gScriptCamera->xPosTarget = RandomMinMax(xMax - xClearance, xMax) << FX32_SHIFT;
-                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMax) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = random_range(xMax - xClearance, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = random_range(yMin, yMax) << FX32_SHIFT;
                 } else {
-                    gScriptCamera->xPosTarget = RandomMinMax(xMin, xMax) << FX32_SHIFT;
-                    gScriptCamera->yPosTarget = RandomMinMax(yMin, yMin + yClearance) << FX32_SHIFT;
+                    gScriptCamera->xPosTarget = random_range(xMin, xMax) << FX32_SHIFT;
+                    gScriptCamera->yPosTarget = random_range(yMin, yMin + yClearance) << FX32_SHIFT;
                 }
             }
         }
@@ -2746,7 +2747,7 @@ static bool32 sub_8060D80(int _, int __, int ___, int ____) {
 }
 
 static bool32 sub_8060D90(int _, int __, int ___, int ____) {
-    switch ((u32)RandomMinMax(0, 2)) {
+    switch ((u32)random_range(0, 2)) {
         case 0:
             script_cmd_play_sfx(223, FALSE, 0, 0);
             break;

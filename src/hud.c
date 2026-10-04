@@ -5,6 +5,7 @@
 #include "main.h"
 #include "player.h"
 #include "audio_b.h"
+#include "random.h"
 #include "hud.h"
 
 enum HudElementIdx {
@@ -979,7 +980,7 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
                 }
 
                 while (v10 == element->rouletteIndex) {
-                    element->rouletteIndex = RandomMinMax(a2, element->graphicCount - 1) - a2;
+                    element->rouletteIndex = random_range(a2, element->graphicCount - 1) - a2;
                 }
 
                 sprite_set_anim((struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,

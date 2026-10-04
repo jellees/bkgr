@@ -8,6 +8,7 @@
 #include "sprite.h"
 #include "script.h"
 #include "player_defs.h"
+#include "random.h"
 #include "hud.h"
 
 u16 gPreviousPlayerState;
@@ -599,7 +600,7 @@ static void do_jump() {
     dword_20021E0 = 0xFFFFE000;
     CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(4), 0xFFFFE000);
     byte_20021CB = 1;
-    PLAY_SFX(RandomMinMax(0, 2));
+    PLAY_SFX(random_range(0, 2));
     sub_8016790(0, gPlayerSprite.direction);
     if (gFloorPlaneResult.field_2C != FX32_CONST(90)) {
         gPlayerPos.y += FX32_CONST(3);
@@ -617,7 +618,7 @@ static void do_shooter_jump() {
     dword_20021E0 = 0xFFFFE000;
     CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(4), 0xFFFFE000);
     byte_20021CB = 1;
-    PLAY_SFX(RandomMinMax(0, 2));
+    PLAY_SFX(random_range(0, 2));
     sub_8016790(0, gPlayerSprite.direction);
     if (gFloorPlaneResult.field_2C != FX32_CONST(90)) {
         gPlayerPos.y += FX32_CONST(3);
@@ -658,7 +659,7 @@ static void do_wonderwing_jump() {
     dword_20021E0 = 0xFFFFE000;
     CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(4), 0xFFFFE000);
     byte_20021CB = 1;
-    PLAY_SFX(RandomMinMax(0, 2));
+    PLAY_SFX(random_range(0, 2));
     sub_8016790(5, gPlayerSprite.direction);
     if (gFloorPlaneResult.field_2C != FX32_CONST(90)) {
         gPlayerPos.y += FX32_CONST(3);
@@ -676,7 +677,7 @@ static void do_mouse_jump() {
     dword_20021E0 = 0xFFFFE000;
     CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(3.25), 0xFFFFE000);
     byte_20021CB = 1;
-    PLAY_SFX_PITCH(RandomMinMax(0, 2), 0x18000);
+    PLAY_SFX_PITCH(random_range(0, 2), 0x18000);
     sub_8016790(0, gPlayerSprite.direction);
     if (gFloorPlaneResult.field_2C != FX32_CONST(90)) {
         gPlayerPos.y += FX32_CONST(3);
@@ -694,7 +695,7 @@ static void do_candle_jump() {
     dword_20021E0 = 0xFFFFE000;
     CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(4), 0xFFFFE000);
     byte_20021CB = 1;
-    PLAY_SFX_PITCH(RandomMinMax(0, 2), 0x18000);
+    PLAY_SFX_PITCH(random_range(0, 2), 0x18000);
     sub_8016790(0, gPlayerSprite.direction);
     if (gFloorPlaneResult.field_2C != FX32_CONST(90)) {
         gPlayerPos.y += FX32_CONST(3);
@@ -1457,7 +1458,7 @@ void hurt_player(int amount, int a2, int a3) {
     word_20010AC = 0;
 
     if (gIsSlideMiniGame || gPlayerState == PLAYER_STATE_35) {
-        PLAY_SFX(RandomMinMax(4, 5));
+        PLAY_SFX(random_range(4, 5));
 
         decrease_player_health(amount);
         if (gGameStatus.health == 0) {
@@ -1507,7 +1508,7 @@ void hurt_player(int amount, int a2, int a3) {
 
         sprite_set_anim(&gPlayerSprite, 537, 0, 1);
         sub_8016790(0, gPlayerSprite.direction);
-        PLAY_SFX(RandomMinMax(4, 5));
+        PLAY_SFX(random_range(4, 5));
     } else if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) {
         switch (a3) {
             case 2:
@@ -1535,7 +1536,7 @@ void hurt_player(int amount, int a2, int a3) {
         }
 
         sub_8016790(0, gPlayerSprite.direction);
-        PLAY_SFX(RandomMinMax(4, 5));
+        PLAY_SFX(random_range(4, 5));
     } else if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) {
         switch (a3) {
             case 2:
@@ -1564,7 +1565,7 @@ void hurt_player(int amount, int a2, int a3) {
         }
 
         sub_8016790(0, gPlayerSprite.direction);
-        PLAY_SFX(RandomMinMax(4, 5));
+        PLAY_SFX(random_range(4, 5));
 
         if (gKazooieSfx != -1) {
             STOP_SFX(gKazooieSfx);
@@ -1598,7 +1599,7 @@ void hurt_player(int amount, int a2, int a3) {
         }
 
         sub_8016790(0, gPlayerSprite.direction);
-        PLAY_SFX(RandomMinMax(4, 5));
+        PLAY_SFX(random_range(4, 5));
 
         if (gBillDrillSfx != -1) {
             STOP_SFX(gBillDrillSfx);
@@ -1692,7 +1693,7 @@ static void sub_08019AAC(int a1, int a2) {
         }
 
         sub_8016790(0, gPlayerSprite.direction);
-        PLAY_SFX_PITCH(RandomMinMax(4, 5), 0x18000);
+        PLAY_SFX_PITCH(random_range(4, 5), 0x18000);
     } else if (gTransformation == TRANSFORMATION_CANDLE) {
         switch (a2) {
             case 2:
@@ -1724,7 +1725,7 @@ static void sub_08019AAC(int a1, int a2) {
         if (audio_fx_still_active(dword_20021D4)) {
             STOP_SFX(dword_20021D4);
         }
-        PLAY_SFX_PITCH(RandomMinMax(4, 5), 0x18000);
+        PLAY_SFX_PITCH(random_range(4, 5), 0x18000);
     } else if (gTransformation == TRANSFORMATION_TANK) {
         switch (a2) {
             case 2:
@@ -1753,7 +1754,7 @@ static void sub_08019AAC(int a1, int a2) {
         }
 
         sub_8016790(0, gPlayerSprite.direction);
-        PLAY_SFX(RandomMinMax(4, 5));
+        PLAY_SFX(random_range(4, 5));
     } else if (gTransformation == TRANSFORMATION_OCTOPUS) {
         if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING) {
             switch (a2) {
@@ -1780,7 +1781,7 @@ static void sub_08019AAC(int a1, int a2) {
             }
 
             sub_8016790(0, gPlayerSprite.direction);
-            PLAY_SFX_PITCH(RandomMinMax(4, 5), 0x18000);
+            PLAY_SFX_PITCH(random_range(4, 5), 0x18000);
         } else {
             switch (a2) {
                 case 2:
@@ -1809,7 +1810,7 @@ static void sub_08019AAC(int a1, int a2) {
             }
 
             sub_8016790(0, gPlayerSprite.direction);
-            PLAY_SFX_PITCH(RandomMinMax(4, 5), 0x18000);
+            PLAY_SFX_PITCH(random_range(4, 5), 0x18000);
         }
     } else {
         ASSERT(0);

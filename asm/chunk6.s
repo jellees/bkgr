@@ -7507,7 +7507,7 @@ _0802B834:
 	ldr r4, _0802B85C
 	movs r0, #0
 	movs r1, #0x27
-	bl RandomMinMax
+	bl random_range
 	adds r0, r0, r4
 	ldrb r0, [r0]
 	movs r2, #1
@@ -9397,7 +9397,7 @@ _0802C55C:
 	bge _0802C7A4
 	movs r0, #0
 	movs r1, #7
-	bl RandomMinMax
+	bl random_range
 	mov sl, r0
 	ldr r2, _0802C7A0
 	lsls r0, r0, #1
@@ -12497,7 +12497,7 @@ sub_802E024: @ 0x0802E024
 	adds r5, r1, #0
 	movs r0, #0
 	movs r1, #2
-	bl RandomMinMax
+	bl random_range
 	adds r4, r0, #0
 	cmp r4, #1
 	bne _0802E07A
@@ -12508,7 +12508,7 @@ sub_802E024: @ 0x0802E024
 _0802E040:
 	movs r0, #0
 	movs r1, #0x13
-	bl RandomMinMax
+	bl random_range
 	adds r0, r0, r7
 	ldrb r1, [r0]
 	ldrh r0, [r5]
@@ -17065,7 +17065,7 @@ play_jinjo_sounds: @ 0x080309D8
 	ldrb r0, [r0]
 	ldr r1, _08030A60
 	ldrb r1, [r1]
-	bl RandomMinMax
+	bl random_range
 	strb r0, [r4]
 	ldr r4, _08030A64
 	ldr r0, [r4]
@@ -17080,13 +17080,13 @@ play_jinjo_sounds: @ 0x080309D8
 	ldr r4, _08030A6C
 	movs r0, #0x1f
 	movs r1, #0x20
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #3
 	adds r0, r0, r4
 	ldrh r6, [r0]
 	movs r0, #0x1f
 	movs r1, #0x20
-	bl RandomMinMax
+	bl random_range
 	ldr r1, _08030A70
 	lsls r0, r0, #3
 	ldrb r1, [r1]
@@ -17096,7 +17096,7 @@ play_jinjo_sounds: @ 0x080309D8
 	ldrb r5, [r0]
 	movs r0, #0x1f
 	movs r1, #0x20
-	bl RandomMinMax
+	bl random_range
 	lsls r0, r0, #3
 	adds r4, #4
 	adds r0, r0, r4

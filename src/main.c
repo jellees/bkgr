@@ -580,7 +580,7 @@ static void start_game() {
     sub_08047504();
     init_script_engine();
     sub_08063234();
-    sub_8044DFC();
+    random_init();
 
     gClockFrameCounter = 0;
     gClockEnabled = 0;
@@ -621,7 +621,7 @@ static void start_game() {
             set_transformation(gTransformation);
         }
 
-        sub_8044DFC();
+        random_init();
         start_script(12);
         gClockEnabled = 1;
     } else {
@@ -654,7 +654,7 @@ static void start_game() {
 
         sub_8026E48(4095, 1, 1);
         sub_8013DD4(21, 32);
-        sub_8044DFC();
+        random_init();
         gClockEnabled = 1;
     }
 }
@@ -2925,7 +2925,7 @@ static void sub_800DF34() {
     if (!audio_fx_still_active(dword_2001138)) {
         int sfx;
         while (1) {
-            int candidate = RandomMinMax(67, 69);
+            int candidate = random_range(67, 69);
             if (candidate != byte_200113C) {
                 sfx = candidate;
                 break;
@@ -3155,7 +3155,7 @@ static void sub_800E6D0() {
     word_2001130 = 10;
     word_2001134 = 10;
     SetSprite(&sprite_2000FAC, 0x4CB, 0, 0, 0, gPlayerSprite.xPos, gPlayerSprite.yPos, 2);
-    byte_200113C = RandomMinMax(67, 69);
+    byte_200113C = random_range(67, 69);
     dword_2001138 = PLAY_SFX(byte_200113C);
 }
 
@@ -3924,16 +3924,16 @@ void init_efx(void) {
         case ROOM_POISONROOM:
             gEnvironmentEffects = EFX_LAVA;
             gLavaPaletteIndex = 0;
-            gLavaTimer = RandomMinMax(8, 24);
+            gLavaTimer = random_range(8, 24);
             break;
 
         case ROOM_BOARDWALK:
             gEnvironmentEffects = EFX_THUNDER;
             gLightningPalette = dLightningPalette;
             gBackupBGPalette = gRoomHeader.backgroundPalette;
-            gLightningTimer = RandomMinMax(5, 240);
+            gLightningTimer = random_range(5, 240);
             gLightningActive = FALSE;
-            gThunderTimer = RandomMinMax(180, 300);
+            gThunderTimer = random_range(180, 300);
     }
 }
 
@@ -3948,7 +3948,7 @@ static void update_efx(void) {
 
         case EFX_LAVA:
             if (--gLavaTimer == 0) {
-                gLavaTimer = RandomMinMax(8, 24);
+                gLavaTimer = random_range(8, 24);
                 DmaTransferBGPalette(dLavaPaletteAnims[gLavaPaletteIndex], 0, 0);
                 if (++gLavaPaletteIndex == 6) {
                     gLavaPaletteIndex = 0;
@@ -3961,17 +3961,17 @@ static void update_efx(void) {
                 if (!gLightningActive) {
                     gLightningActive = 1;
                     DmaTransferBGPalette(gLightningPalette, 0, 15);
-                    gLightningTimer = RandomMinMax(2, 5);
+                    gLightningTimer = random_range(2, 5);
                 } else {
                     gLightningActive = FALSE;
                     DmaTransferBGPalette(gBackupBGPalette, 0, 15);
-                    gLightningTimer = RandomMinMax(5, 240);
+                    gLightningTimer = random_range(5, 240);
                 }
             }
 
             if (--gThunderTimer == 0) {
-                gThunderTimer = RandomMinMax(180, 300);
-                PLAY_SFX(dThunderSfxIds[RandomMinMax(0, 2)]);
+                gThunderTimer = random_range(180, 300);
+                PLAY_SFX(dThunderSfxIds[random_range(0, 2)]);
             }
             break;
     }

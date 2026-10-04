@@ -708,7 +708,7 @@ _0806368C:
 	ldr r4, _080636AC
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	add r0, sp
 	ldrb r0, [r0]
 	str r0, [r4]
@@ -953,7 +953,7 @@ _080638D8:
 	bls _080638F4
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	add r0, sp
 	b _080638F6
 	.align 2, 0
@@ -981,7 +981,7 @@ sub_08063904: @ 0x08063904
 	ldr r4, _0806393C
 	movs r0, #0
 	movs r1, #2
-	bl RandomMinMax
+	bl random_range
 	adds r3, r0, #0
 	str r3, [r4]
 	lsls r0, r3, #2
@@ -1025,7 +1025,7 @@ _08063964: .4byte 0x0203FACC
 _08063968:
 	movs r0, #0
 	movs r1, #2
-	bl RandomMinMax
+	bl random_range
 _08063970:
 	cmp r0, #1
 	beq _080639D8
@@ -1045,7 +1045,7 @@ _08063986:
 	ldr r1, [r4]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r3, r0, #0
 	adds r5, r3, #0
 	lsls r6, r6, #2
@@ -1054,7 +1054,7 @@ _0806399A:
 	ldr r1, [r4]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r3, r0, #0
 	cmp r3, r5
 	beq _0806399A
@@ -1082,7 +1082,7 @@ _080639D4: .4byte 0x0203FAEC
 _080639D8:
 	movs r0, #0
 	movs r1, #1
-	bl RandomMinMax
+	bl random_range
 	cmp r0, #0
 	bne _08063A4C
 	lsls r6, r6, #2
@@ -1095,7 +1095,7 @@ _080639EE:
 	ldrb r1, [r0]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r5, r0, #0
 	ldr r0, [r4]
 	cmp r5, r0
@@ -1104,7 +1104,7 @@ _080639EE:
 	ldr r1, [r0]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r3, r0, #0
 	ldr r0, _08063A3C
 	ldr r0, [r0]
@@ -1136,7 +1136,7 @@ _08063A4C:
 	ldr r1, [r0]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r5, r0, #0
 	lsls r6, r6, #2
 	lsls r7, r7, #2
@@ -1148,7 +1148,7 @@ _08063A64:
 	ldrb r1, [r0]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r3, r0, #0
 	ldr r0, [r4]
 	cmp r3, r0
@@ -1189,7 +1189,7 @@ _08063ABE:
 	ldrb r1, [r0]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r5, r0, #0
 	ldr r0, [r4]
 	cmp r5, r0
@@ -1204,7 +1204,7 @@ _08063ADC:
 	ldrb r1, [r0]
 	subs r1, #1
 	movs r0, #0
-	bl RandomMinMax
+	bl random_range
 	adds r3, r0, #0
 	ldr r0, [r4]
 	cmp r3, r0
