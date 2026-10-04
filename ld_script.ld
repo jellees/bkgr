@@ -278,7 +278,6 @@ SECTIONS
         src/hud.o(.text);
         src/audio_b.o(.text);
         src/menu.o(.text);
-        asm/menu.o(.text);
         src/save.o(.text);
         src/random.o(.text);
         asm/random.o(.text);
