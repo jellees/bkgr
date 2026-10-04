@@ -32,15 +32,15 @@ enum MenuState {
     MENU_DEBUG_WARP_6,
 };
 
-void ResetMenuEx(void);
-void ResetMenu(void);
-void InitMenu(int menu, int language);
-void AdvanceMenuEntryDown(void);
-void AdvanceMenuEntryUp(void);
-void FlushMenuToTextBuffer(void);
-void RenderMenuSprites(void);
-int GetCurrentMenuEntry(void);
-void SetMenuEntry(int entry);
+void menu_init(void);
+void menu_reset(void);
+void menu_load(int menu, int language);
+void menu_cursor_down(void);
+void menu_cursor_up(void);
+void menu_render_text(void);
+void menu_render_sprites(void);
+int menu_get_cursor(void);
+void menu_set_cursor(int entry);
 
 extern u8 gMenuId;
 extern u8 gMenuParentId;

@@ -1404,7 +1404,7 @@ _08063C6E:
 	ldr r0, _08063CAC
 	ldrb r1, [r0]
 	movs r0, #9
-	bl InitMenu
+	bl menu_load
 	ldr r1, _08063CB0
 	movs r0, #3
 	b _08064228
@@ -1427,7 +1427,7 @@ _08063CB4:
 	ldr r0, _08063CD8
 	ldrb r1, [r0]
 	movs r0, #9
-	bl InitMenu
+	bl menu_load
 _08063CCC:
 	ldr r0, _08063CDC
 	strb r4, [r0]
@@ -1482,7 +1482,7 @@ _08063D28:
 	adds r1, r1, r2
 	ldr r1, [r1]
 	bl AddStringToBuffer
-	bl FlushMenuToTextBuffer
+	bl menu_render_text
 	ldr r0, _08063DC8
 	ldrh r1, [r0]
 	movs r0, #1
@@ -1491,7 +1491,7 @@ _08063D28:
 	bne _08063D5A
 	b _08063F24
 _08063D5A:
-	bl GetCurrentMenuEntry
+	bl menu_get_cursor
 	ldr r1, _08063DCC
 	ldr r1, [r1]
 	cmp r0, r1
@@ -1719,7 +1719,7 @@ _08063F24:
 	adds r2, r2, r3
 	bl audio_new_fx
 _08063F5A:
-	bl AdvanceMenuEntryUp
+	bl menu_cursor_up
 	b _0806422A
 	.align 2, 0
 _08063F60: .4byte gCanPlaySfx
@@ -1757,7 +1757,7 @@ _08063F7E:
 	adds r2, r2, r4
 	bl audio_new_fx
 _08063FAC:
-	bl AdvanceMenuEntryDown
+	bl menu_cursor_down
 	b _0806422A
 	.align 2, 0
 _08063FB4: .4byte gCanPlaySfx
@@ -2154,7 +2154,7 @@ _080642FC:
 	cmp r0, #0
 	beq _0806436E
 _0806430C:
-	bl RenderMenuSprites
+	bl menu_render_sprites
 	movs r4, #0
 	ldr r0, _0806433C
 	ldrb r1, [r0]
@@ -2237,7 +2237,7 @@ sub_806438C: @ 0x0806438C
 	ldr r0, _080643C0
 	ldrb r1, [r0]
 	movs r0, #9
-	bl InitMenu
+	bl menu_load
 _080643AE:
 	pop {r0}
 	bx r0

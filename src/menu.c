@@ -24,7 +24,7 @@ EWRAM_DATA u8 gMenuId;
 EWRAM_DATA u8 gMenuParentId;
 EWRAM_DATA struct Menu gMenu;
 
-void ResetMenuEx() {
+void menu_init() {
     gMenuId = -1;
     gMenuParentId = -1;
     gMenu.useSpriteBuffer = FALSE;
@@ -32,7 +32,7 @@ void ResetMenuEx() {
     gMenu.spriteBuffer = NULL;
 }
 
-void ResetMenu() {
+void menu_reset() {
     gMenuId = -1;
     gMenuParentId = -1;
     gMenu.useSpriteBuffer = FALSE;
@@ -40,7 +40,7 @@ void ResetMenu() {
     gMenu.spriteBuffer = NULL;
 }
 
-void InitMenu(int menu, int language) {
+void menu_load(int menu, int language) {
     int i;
 
     if (gMenu.texts) {
@@ -1485,7 +1485,7 @@ void InitMenu(int menu, int language) {
     }
 }
 
-void AdvanceMenuEntryDown(void) {
+void menu_cursor_down(void) {
     if (gMenu.useSpriteBuffer) {
         sprite_lock_anim_on_frame(&gMenu.spriteBuffer[gMenu.curEntry], 0);
     }
@@ -1503,7 +1503,7 @@ void AdvanceMenuEntryDown(void) {
     }
 }
 
-void AdvanceMenuEntryUp(void) {
+void menu_cursor_up(void) {
     if (gMenu.useSpriteBuffer) {
         sprite_lock_anim_on_frame(&gMenu.spriteBuffer[gMenu.curEntry], 0);
     }
@@ -1521,7 +1521,7 @@ void AdvanceMenuEntryUp(void) {
     }
 }
 
-void FlushMenuToTextBuffer(void) {
+void menu_render_text(void) {
     int i;
 
     for (i = 0; i < gMenu.entryCount; i++) {
@@ -1539,7 +1539,7 @@ void FlushMenuToTextBuffer(void) {
     }
 }
 
-void RenderMenuSprites(void) {
+void menu_render_sprites(void) {
     int i;
 
     if (gMenu.useSpriteBuffer) {
@@ -1549,11 +1549,11 @@ void RenderMenuSprites(void) {
     }
 }
 
-int GetCurrentMenuEntry() {
+int menu_get_cursor() {
     return gMenu.curEntry;
 }
 
-void SetMenuEntry(int entry) {
+void menu_set_cursor(int entry) {
     ASSERT(entry >= 0 && entry < gMenu.entryCount);
 
     gMenu.curEntry = entry;

@@ -1045,7 +1045,7 @@ void sub_8010BA8(int a1) {
     sub_8011158();
     sub_801126C();
     heap_free_by_tag(HEAP_GENERAL, 15);
-    ResetMenu();
+    menu_reset();
     ASSERT(!heap_has_tag(HEAP_GENERAL, 15));
 
     if (byte_200145A) {
@@ -1251,7 +1251,7 @@ void sub_8010E40(int a1) {
 
 void sub_8011158(void) {
     DmaTransfer32(byte_83FD254, (void*)OBJ_PLTT, 128);
-    InitMenu(MENU_DEBUG_MAIN, 0);
+    menu_load(MENU_DEBUG_MAIN, 0);
     gMenuId = MENU_DEBUG_MAIN;
     gMenuParentId = -1;
 
@@ -1392,7 +1392,7 @@ void sub_801126C(void) {
                 }
             } while (0);
 
-            InitMenu(gMenuId, 0);
+            menu_load(gMenuId, 0);
         } else if (gKeysDown & A_BUTTON) {
             if (sub_8011540()) {
                 SetTextSpriteCount(0);
@@ -1402,9 +1402,9 @@ void sub_801126C(void) {
 
         if (!(gKeysDown & JOY_EXCL_DPAD)) {
             if (gKeysDown & DPAD_UP) {
-                AdvanceMenuEntryUp();
+                menu_cursor_up();
             } else if (gKeysDown & DPAD_DOWN) {
-                AdvanceMenuEntryDown();
+                menu_cursor_down();
             }
         }
 
@@ -1415,7 +1415,7 @@ void sub_801126C(void) {
         gOBJTileFramePtr = (u32*)OBJ_VRAM1;
         gOBJTileCount = 512;
         sub_8011428();
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
         CheckStacks();
         SyncVblank();
@@ -1479,11 +1479,11 @@ bool32 sub_8011540(void) {
 
     switch (gMenuId) {
         case MENU_DEBUG_MAIN:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_WARP_1;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
 
                 case 1:
@@ -1496,19 +1496,19 @@ bool32 sub_8011540(void) {
                 case 2:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_INFO_1;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
 
                 case 3:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_CHEATS;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
 
                 case 4:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_TRANSFORM;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
 
                 case 6:
@@ -1518,7 +1518,7 @@ bool32 sub_8011540(void) {
             break;
 
         case MENU_DEBUG_INFO_1:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugInfoIndex = 0;
                     return TRUE;
@@ -1562,13 +1562,13 @@ bool32 sub_8011540(void) {
                 case 5:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_INFO_2;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
             }
             break;
 
         case MENU_DEBUG_INFO_2:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugInfoIndex = 5;
                     gDebugESNSum = 0;
@@ -1633,13 +1633,13 @@ bool32 sub_8011540(void) {
                 case 5:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_INFO_3;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
             }
             break;
 
         case MENU_DEBUG_INFO_3:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugInfoIndex = 10;
                     byte_200138A = 0;
@@ -1688,13 +1688,13 @@ bool32 sub_8011540(void) {
                 case 5:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_INFO_4;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
             }
             break;
 
         case MENU_DEBUG_INFO_4:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugInfoIndex = 15;
                     byte_200138A = 0;
@@ -1746,7 +1746,7 @@ bool32 sub_8011540(void) {
             break;
 
         case MENU_DEBUG_GOD_MODE:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugGodMode = TRUE;
                     return 0;
@@ -1758,7 +1758,7 @@ bool32 sub_8011540(void) {
             break;
 
         case MENU_DEBUG_AI:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugAI = DEBUG_AI_NORMAL;
                     return 0;
@@ -1778,7 +1778,7 @@ bool32 sub_8011540(void) {
             break;
 
         case MENU_DEBUG_CHEATS:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugGameLocked = FALSE;
                     for (i = 0; i < MOVE_COUNT; i++) {
@@ -1797,8 +1797,8 @@ bool32 sub_8011540(void) {
                 case 2:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_GOD_MODE;
-                    InitMenu(gMenuId, 0);
-                    SetMenuEntry(gDebugGodMode ? 0 : 1);
+                    menu_load(gMenuId, 0);
+                    menu_set_cursor(gDebugGodMode ? 0 : 1);
                     break;
 
                 case 3:
@@ -1808,7 +1808,7 @@ bool32 sub_8011540(void) {
             break;
 
         case MENU_DEBUG_TRANSFORM:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     set_transformation(TRANSFORMATION_BANJO);
                     return TRUE;
@@ -1835,7 +1835,7 @@ bool32 sub_8011540(void) {
             break;
 
         case MENU_DEBUG_WARP_1:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugDoWarp = TRUE;
                     gDebugWarpRoomIdx = ROOM_SPIRALBOTTOM;
@@ -1872,13 +1872,13 @@ bool32 sub_8011540(void) {
                 case 6:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_WARP_2;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
             }
             break;
 
         case MENU_DEBUG_WARP_2:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugDoWarp = TRUE;
                     gDebugWarpRoomIdx = ROOM_LOWERFARM;
@@ -1917,13 +1917,13 @@ bool32 sub_8011540(void) {
                 case 6:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_WARP_3;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
             }
             break;
 
         case MENU_DEBUG_WARP_3:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugDoWarp = TRUE;
                     gDebugWarpRoomIdx = ROOM_BEACHSTART;
@@ -1965,13 +1965,13 @@ bool32 sub_8011540(void) {
                 case 6:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_WARP_4;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
             }
             break;
 
         case MENU_DEBUG_WARP_4:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugDoWarp = TRUE;
                     gDebugWarpRoomIdx = ROOM_BOARDWALK;
@@ -2010,13 +2010,13 @@ bool32 sub_8011540(void) {
                 case 6:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_WARP_5;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
             }
             break;
 
         case MENU_DEBUG_WARP_5:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugDoWarp = TRUE;
                     gDebugWarpRoomIdx = ROOM_HARBOUR;
@@ -2058,13 +2058,13 @@ bool32 sub_8011540(void) {
                 case 6:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_DEBUG_WARP_6;
-                    InitMenu(gMenuId, 0);
+                    menu_load(gMenuId, 0);
                     break;
             }
             break;
 
         case MENU_DEBUG_WARP_6:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gDebugDoWarp = TRUE;
                     gDebugWarpRoomIdx = ROOM_FJORD;

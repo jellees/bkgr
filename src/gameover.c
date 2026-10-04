@@ -33,7 +33,7 @@ void sub_80629E8() {
     end_all_scripts(1);
     byte_203F4E0 = 0;
     show_gameover_screen();
-    InitMenu(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
+    menu_load(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
     gMenuId = MENU_CONTINUE_OR_QUIT;
     gMenuParentId = -1;
     sub_8062D04();
@@ -181,7 +181,7 @@ static void sub_8062D04(void) {
                             break;
                     }
 
-                    InitMenu(gMenuId, gPauseMenuLanguage);
+                    menu_load(gMenuId, gPauseMenuLanguage);
                 }
             } else if (gKeysDown & A_BUTTON) {
                 if (sub_8062FC4(&textbox, string, &objCount)) {
@@ -194,10 +194,10 @@ static void sub_8062D04(void) {
             if (!(gKeysDown & JOY_EXCL_DPAD)) {
                 if (gKeysDown & DPAD_UP) {
                     PLAY_SFX(204);
-                    AdvanceMenuEntryUp();
+                    menu_cursor_up();
                 } else if (gKeysDown & DPAD_DOWN) {
                     PLAY_SFX(204);
-                    AdvanceMenuEntryDown();
+                    menu_cursor_down();
                 }
             }
         } else if (!gIsAnyScriptActive) {
@@ -216,9 +216,9 @@ static void sub_8062D04(void) {
         textbox.yPosition = 20;
         textbox.stringOffset = 0;
         AddStringToBuffer(&textbox, string);
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
-        RenderMenuSprites();
+        menu_render_sprites();
         CheckStacks();
         SyncVblank();
         update_video();
@@ -236,14 +236,14 @@ static void sub_8062D04(void) {
 static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount) {
     switch (gMenuId) {
         case MENU_CONTINUE_OR_QUIT:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     return TRUE;
 
                 case 1:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_YES_NO;
-                    InitMenu(MENU_YES_NO, gPauseMenuLanguage);
+                    menu_load(MENU_YES_NO, gPauseMenuLanguage);
                     string[0] = 'A';
                     string[1] = 'R';
                     string[2] = 'E';
@@ -264,7 +264,7 @@ static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount) 
             break;
 
         case MENU_YES_NO:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     sub_80271A4(4095, 1);
                     sub_080643D0(0xFF);
@@ -273,7 +273,7 @@ static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount) 
                 case 1:
                     gMenuParentId = -1;
                     gMenuId = MENU_CONTINUE_OR_QUIT;
-                    InitMenu(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
+                    menu_load(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
                     string[0] = 'G';
                     string[1] = 'A';
                     string[2] = 'M';

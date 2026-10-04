@@ -62,7 +62,7 @@ void ExecutePregame(void) {
     }
 
     heap_free_by_tag(HEAP_GENERAL, 15);
-    ResetMenu();
+    menu_reset();
 
     ASSERT(heap_has_tag(HEAP_GENERAL, 15) == FALSE);
 }
@@ -77,12 +77,12 @@ static void ShowSelectGame(int a1) {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
 
-    InitMenu(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
+    menu_load(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
     gMenuId = MENU_GAME_OR_CONTINUE;
     gMenuParentId = -1;
 
     if (!byte_20021F9) {
-        AdvanceMenuEntryDown();
+        menu_cursor_down();
     }
 
     SyncVblank();
@@ -116,7 +116,7 @@ static void ShowSelectGame(int a1) {
                 }
 
                 id2 = gMenuId;
-                InitMenu(id2, gPauseMenuLanguage);
+                menu_load(id2, gPauseMenuLanguage);
             }
         } else if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON) {
             if (sub_8024200()) {
@@ -142,11 +142,11 @@ static void ShowSelectGame(int a1) {
             if (gKeysDown & DPAD_UP) {
                 if (!byte_20021F9) {
                     PLAY_SFX(204);
-                    AdvanceMenuEntryUp();
+                    menu_cursor_up();
                 }
             } else if (gKeysDown & DPAD_DOWN && !byte_20021F9) {
                 PLAY_SFX(204);
-                AdvanceMenuEntryDown();
+                menu_cursor_down();
             }
         }
 
@@ -157,9 +157,9 @@ static void ShowSelectGame(int a1) {
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
-        RenderMenuSprites();
+        menu_render_sprites();
         CheckStacks();
         SyncVblank();
         update_video();
@@ -180,7 +180,7 @@ static void ShowSelectGame(int a1) {
 static bool32 sub_8024200(void) {
     switch (gMenuId) {
         case MENU_GAME_OR_CONTINUE:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     FadeOutObjects(2, 2);
                     REG_BG1CNT |= 3;
@@ -197,17 +197,17 @@ static bool32 sub_8024200(void) {
                     if (sub_80246C8()) {
                         return 1;
                     }
-                    InitMenu(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
+                    menu_load(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
                     gMenuId = MENU_GAME_OR_CONTINUE;
                     gMenuParentId = -1;
-                    AdvanceMenuEntryDown();
+                    menu_cursor_down();
                     break;
             }
 
             return FALSE;
 
         case MENU_FILE_SELECT:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     if (byte_20021F9) {
                         break;
@@ -256,7 +256,7 @@ static bool32 sub_8024200(void) {
             return TRUE;
 
         case MENU_LANGUAGE:
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     gPauseMenuLanguage = 0;
                     return TRUE;
@@ -485,16 +485,16 @@ static int sub_80246C8(void) {
 
     v3 = sub_8025870(text, &textbox);
 
-    InitMenu(MENU_FILE_SELECT, gPauseMenuLanguage);
+    menu_load(MENU_FILE_SELECT, gPauseMenuLanguage);
     gMenuParentId = gMenuId;
     gMenuId = MENU_FILE_SELECT;
 
     if (!gSaveFiles[0].empty) {
-        SetMenuEntry(0);
+        menu_set_cursor(0);
     } else if (!gSaveFiles[1].empty) {
-        SetMenuEntry(1);
+        menu_set_cursor(1);
     } else if (!gSaveFiles[2].empty) {
-        SetMenuEntry(2);
+        menu_set_cursor(2);
     } else {
         ASSERT(0);
     }
@@ -534,14 +534,14 @@ static int sub_80246C8(void) {
                 PLAY_SFX(204);
 
                 do {
-                    AdvanceMenuEntryUp();
-                } while (gSaveFiles[GetCurrentMenuEntry()].empty);
+                    menu_cursor_up();
+                } while (gSaveFiles[menu_get_cursor()].empty);
             } else if (gKeysDown & DPAD_DOWN) {
                 PLAY_SFX(204);
 
                 do {
-                    AdvanceMenuEntryDown();
-                } while (gSaveFiles[GetCurrentMenuEntry()].empty);
+                    menu_cursor_down();
+                } while (gSaveFiles[menu_get_cursor()].empty);
             }
         }
 
@@ -556,9 +556,9 @@ static int sub_80246C8(void) {
         textbox.yPosition = 8;
         textbox.stringOffset = 0;
         AddStringToBuffer(&textbox, text);
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
-        RenderMenuSprites();
+        menu_render_sprites();
         CheckStacks();
         SyncVblank();
         update_video();
@@ -574,7 +574,7 @@ static int sub_80246C8(void) {
 static void ShowLanguageSelect(void) {
     bool32 v0;
 
-    InitMenu(MENU_LANGUAGE, 0);
+    menu_load(MENU_LANGUAGE, 0);
     gMenuId = MENU_LANGUAGE;
     gMenuParentId = -1;
 
@@ -604,11 +604,11 @@ static void ShowLanguageSelect(void) {
             if (gKeysDown & DPAD_UP) {
                 PLAY_SFX(204);
 
-                AdvanceMenuEntryUp();
+                menu_cursor_up();
             } else if (gKeysDown & DPAD_DOWN) {
                 PLAY_SFX(204);
 
-                AdvanceMenuEntryDown();
+                menu_cursor_down();
             }
         }
 
@@ -618,7 +618,7 @@ static void ShowLanguageSelect(void) {
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (void*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
         CheckStacks();
         SyncVblank();
@@ -672,7 +672,7 @@ void ShowEraseData(void) {
     tb2.field_11 = 6;
     tb2.font = &font_80B01A8[1];
 
-    InitMenu(MENU_YES_NO_ENGLISH, 0);
+    menu_load(MENU_YES_NO_ENGLISH, 0);
     gMenuId = MENU_YES_NO_ENGLISH;
     gMenuParentId = -1;
 
@@ -687,7 +687,7 @@ void ShowEraseData(void) {
             ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
             if (gKeysDown & A_BUTTON) {
-                switch (GetCurrentMenuEntry()) {
+                switch (menu_get_cursor()) {
                     case 0:
                         allowInput = FALSE;
                         action = 1;
@@ -706,10 +706,10 @@ void ShowEraseData(void) {
             if (!(gKeysDown & JOY_EXCL_DPAD)) {
                 if (gKeysDown & DPAD_UP) {
                     PLAY_SFX(204);
-                    AdvanceMenuEntryUp();
+                    menu_cursor_up();
                 } else if (gKeysDown & DPAD_DOWN) {
                     PLAY_SFX(204);
-                    AdvanceMenuEntryDown();
+                    menu_cursor_down();
                 }
             }
         }
@@ -749,7 +749,7 @@ void ShowEraseData(void) {
         }
 
         if (renderMenu) {
-            FlushMenuToTextBuffer();
+            menu_render_text();
         }
 
         RenderText();

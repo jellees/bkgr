@@ -315,7 +315,7 @@ void open_pause_menu(void) {
     sub_8047BEC();
     sub_80524D8();
     heap_free_by_tag(HEAP_GENERAL, 15);
-    ResetMenu();
+    menu_reset();
 
     ASSERT(heap_has_tag(HEAP_GENERAL, 15) == FALSE);
 
@@ -327,7 +327,7 @@ void open_pause_menu(void) {
 static void init(void) {
     show_pause_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
 
-    InitMenu(MENU_PAUSE_MAIN, gPauseMenuLanguage);
+    menu_load(MENU_PAUSE_MAIN, gPauseMenuLanguage);
     gMenuId = MENU_PAUSE_MAIN;
     gMenuParentId = -1;
 
@@ -411,7 +411,7 @@ static void exec_pause_menu(void) {
                             break;
                     }
 
-                    InitMenu(gMenuId, gPauseMenuLanguage);
+                    menu_load(gMenuId, gPauseMenuLanguage);
                 }
             } else if (gKeysDown & A_BUTTON) {
                 if (choose_sub_menu(&changeMenu)) {
@@ -421,17 +421,17 @@ static void exec_pause_menu(void) {
 
                 if (changeMenu) {
                     changeMenu = FALSE;
-                    InitMenu(gMenuId, gPauseMenuLanguage);
+                    menu_load(gMenuId, gPauseMenuLanguage);
                     show_pause_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
                     SetObjectsFullAlpha();
                     fadeIn = 1;
                 }
             } else if (gKeysDown & DPAD_UP) {
                 PLAY_SFX(204);
-                AdvanceMenuEntryUp();
+                menu_cursor_up();
             } else if (gKeysDown & DPAD_DOWN) {
                 PLAY_SFX(204);
-                AdvanceMenuEntryDown();
+                menu_cursor_down();
             }
         }
 
@@ -441,7 +441,7 @@ static void exec_pause_menu(void) {
                 break;
             }
 
-            InitMenu(gMenuId, gPauseMenuLanguage);
+            menu_load(gMenuId, gPauseMenuLanguage);
             loadMenu = FALSE;
         }
 
@@ -455,10 +455,10 @@ static void exec_pause_menu(void) {
         gOBJTileCount = 0;
 
         render_hud_elements();
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
         sub_80408F0();
-        RenderMenuSprites();
+        menu_render_sprites();
         render_controls();
         heap_check(HEAP_GENERAL);
         CheckStacks();
@@ -500,7 +500,7 @@ static bool32 choose_sub_menu(bool32* changeMenu) {
         return FALSE;
     }
 
-    switch (GetCurrentMenuEntry()) {
+    switch (menu_get_cursor()) {
         case 0: // Continue
             return TRUE;
 
@@ -594,10 +594,10 @@ static void exec_totals_menu(void) {
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
         render_hud_elements();
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
         sub_80408F0();
-        RenderMenuSprites();
+        menu_render_sprites();
         render_controls();
         CheckStacks();
         SyncVblank();
@@ -779,10 +779,10 @@ static bool32 exec_save_menu(void) {
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
         render_hud_elements();
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
         sub_80408F0();
-        RenderMenuSprites();
+        menu_render_sprites();
         render_controls();
         CheckStacks();
         SyncVblank();
@@ -803,12 +803,12 @@ static bool32 exec_save_menu(void) {
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
 
-    InitMenu(MENU_FILE_SELECT, gPauseMenuLanguage);
+    menu_load(MENU_FILE_SELECT, gPauseMenuLanguage);
     gMenuParentId = gMenuId;
     gMenuId = MENU_FILE_SELECT;
 
     for (i = 0; i < dword_203F4DC; ++i) {
-        AdvanceMenuEntryDown();
+        menu_cursor_down();
     }
 
     state = SHOW_SAVE_GAMES;
@@ -831,7 +831,7 @@ static bool32 exec_save_menu(void) {
             switch (state) {
                 case SHOW_SAVE_GAMES:
                     state = MOVE_TEXT;
-                    switch (GetCurrentMenuEntry()) {
+                    switch (menu_get_cursor()) {
                         case 0:
                             xPos = 16;
                             yPos = FX32_CONST(40);
@@ -871,10 +871,10 @@ static bool32 exec_save_menu(void) {
             }
         } else if (gKeysDown & DPAD_UP) {
             PLAY_SFX(204);
-            AdvanceMenuEntryUp();
+            menu_cursor_up();
         } else if (gKeysDown & DPAD_DOWN) {
             PLAY_SFX(204);
-            AdvanceMenuEntryDown();
+            menu_cursor_down();
         }
 
         if (isCancelled) {
@@ -906,9 +906,9 @@ static bool32 exec_save_menu(void) {
 
         switch (state) {
             case SHOW_SAVE_GAMES:
-                FlushMenuToTextBuffer();
+                menu_render_text();
                 RenderText();
-                RenderMenuSprites();
+                menu_render_sprites();
                 render_controls();
                 break;
 
@@ -1111,10 +1111,10 @@ static void exec_options_menu(void) {
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
         render_hud_elements();
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
         sub_80408F0();
-        RenderMenuSprites();
+        menu_render_sprites();
         render_controls();
         CheckStacks();
         SyncVblank();
@@ -1135,7 +1135,7 @@ static void exec_options_menu(void) {
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
 
-    InitMenu(MENU_PAUSE_OPTIONS, gPauseMenuLanguage);
+    menu_load(MENU_PAUSE_OPTIONS, gPauseMenuLanguage);
     gMenuParentId = gMenuId;
     gMenuId = MENU_PAUSE_OPTIONS;
 
@@ -1155,7 +1155,7 @@ static void exec_options_menu(void) {
             break;
 #endif
         } else if (gKeysDown & DPAD_LEFT) {
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     if (gTextSpeed != 0) {
                         gTextSpeed--;
@@ -1191,7 +1191,7 @@ static void exec_options_menu(void) {
                     break;
             }
         } else if (gKeysDown & DPAD_RIGHT) {
-            switch (GetCurrentMenuEntry()) {
+            switch (menu_get_cursor()) {
                 case 0:
                     if (gTextSpeed < 2) {
                         gTextSpeed++;
@@ -1228,10 +1228,10 @@ static void exec_options_menu(void) {
             }
         } else if (gKeysDown & DPAD_UP) {
             PLAY_SFX(204);
-            AdvanceMenuEntryUp();
+            menu_cursor_up();
         } else if (gKeysDown & DPAD_DOWN) {
             PLAY_SFX(204);
-            AdvanceMenuEntryDown();
+            menu_cursor_down();
         }
 
         if (exit) {
@@ -1254,7 +1254,7 @@ static void exec_options_menu(void) {
                 gTextSpeedTextBoxes[0].xPosition = 120;
                 gTextSpeedTextBoxes[0].yPosition = 36;
                 gTextSpeedTextBoxes[0].stringOffset = 0;
-                if (GetCurrentMenuEntry() == 0) {
+                if (menu_get_cursor() == 0) {
                     gTextSpeedTextBoxes[0].palette = 10;
                 } else {
                     gTextSpeedTextBoxes[0].palette = 15;
@@ -1266,7 +1266,7 @@ static void exec_options_menu(void) {
                 gTextSpeedTextBoxes[1].xPosition = 120;
                 gTextSpeedTextBoxes[1].yPosition = 36;
                 gTextSpeedTextBoxes[1].stringOffset = 0;
-                if (GetCurrentMenuEntry() == 0) {
+                if (menu_get_cursor() == 0) {
                     gTextSpeedTextBoxes[1].palette = 10;
                 } else {
                     gTextSpeedTextBoxes[1].palette = 15;
@@ -1278,7 +1278,7 @@ static void exec_options_menu(void) {
                 gTextSpeedTextBoxes[2].xPosition = 120;
                 gTextSpeedTextBoxes[2].yPosition = 36;
                 gTextSpeedTextBoxes[2].stringOffset = 0;
-                if (GetCurrentMenuEntry() == 0) {
+                if (menu_get_cursor() == 0) {
                     gTextSpeedTextBoxes[2].palette = 10;
                 } else {
                     gTextSpeedTextBoxes[2].palette = 15;
@@ -1294,7 +1294,7 @@ static void exec_options_menu(void) {
         bgmVolumeTextBox.xPosition = 120;
         bgmVolumeTextBox.yPosition = 56;
         bgmVolumeTextBox.stringOffset = 0;
-        if (GetCurrentMenuEntry() == 1) {
+        if (menu_get_cursor() == 1) {
             bgmVolumeTextBox.palette = 10;
         } else {
             bgmVolumeTextBox.palette = 15;
@@ -1304,16 +1304,16 @@ static void exec_options_menu(void) {
         sfxVolumeTextBox.xPosition = 120;
         sfxVolumeTextBox.yPosition = 76;
         sfxVolumeTextBox.stringOffset = 0;
-        if (GetCurrentMenuEntry() == 2) {
+        if (menu_get_cursor() == 2) {
             sfxVolumeTextBox.palette = 10;
         } else {
             sfxVolumeTextBox.palette = 15;
         }
         AddStringToBuffer(&sfxVolumeTextBox, sfxText);
 
-        FlushMenuToTextBuffer();
+        menu_render_text();
         RenderText();
-        RenderMenuSprites();
+        menu_render_sprites();
         render_controls();
         heap_check(HEAP_GENERAL);
         CheckStacks();
@@ -1438,7 +1438,7 @@ void init_arcade_menu(void) {
     DmaTransfer32(&unk_83FD254, (void*)OBJ_PLTT, 128);
     DmaTransferObjPalette(&unk_83FD974, 5, 5);
 
-    InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
+    menu_load(MENU_ARCADE_1, gPauseMenuLanguage);
     gMenuId = MENU_ARCADE_1;
     gMenuParentId = -1;
 
@@ -1480,7 +1480,7 @@ void sub_8047000(bool32 a1) {
     DmaTransfer32(&unk_83FD254, (void*)OBJ_PLTT, 128);
     DmaTransferObjPalette(&unk_83FD974, 5, 5);
 
-    InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
+    menu_load(MENU_ARCADE_1, gPauseMenuLanguage);
     gMenuId = MENU_ARCADE_1;
     gMenuParentId = -1;
 
@@ -1519,17 +1519,17 @@ void exec_arcade_menu(void) {
     gArcadeTextBox.stringOffset = 0;
     AddStringToBuffer(&gArcadeTextBox, gArcadeText);
 
-    FlushMenuToTextBuffer();
+    menu_render_text();
 
     if (gKeysDown & A_BUTTON) {
         u32 arcadePage = gMenuId != MENU_ARCADE_1 ? 1 : 0;
-        int entry = GetCurrentMenuEntry();
+        int entry = menu_get_cursor();
         if (entry == 4) {
             if (gMenuId == MENU_ARCADE_1) {
-                InitMenu(MENU_ARCADE_2, gPauseMenuLanguage);
+                menu_load(MENU_ARCADE_2, gPauseMenuLanguage);
                 gMenuId = MENU_ARCADE_2;
             } else {
-                InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
+                menu_load(MENU_ARCADE_1, gPauseMenuLanguage);
                 gMenuId = MENU_ARCADE_1;
             }
         } else {
@@ -1551,7 +1551,7 @@ void exec_arcade_menu(void) {
         }
     } else if (gKeysDown & B_BUTTON) {
         if (gMenuId == MENU_ARCADE_2) {
-            InitMenu(MENU_ARCADE_1, gPauseMenuLanguage);
+            menu_load(MENU_ARCADE_1, gPauseMenuLanguage);
             gMenuId = MENU_ARCADE_1;
         } else {
             sub_80270AC(4095, 1);
@@ -1565,7 +1565,7 @@ void exec_arcade_menu(void) {
             release_hud_element(55);
             sub_80409DC();
             heap_free_by_tag(HEAP_GENERAL, 25);
-            ResetMenu();
+            menu_reset();
             ASSERT(heap_has_tag(HEAP_GENERAL, 25) == FALSE);
             sub_8026E48(4095, 1, 1);
             sub_8016C78(0);
@@ -1573,10 +1573,10 @@ void exec_arcade_menu(void) {
         }
     } else if (gKeysDown & DPAD_UP) {
         PLAY_SFX(204);
-        AdvanceMenuEntryUp();
+        menu_cursor_up();
     } else if (gKeysDown & DPAD_DOWN) {
         PLAY_SFX(204);
-        AdvanceMenuEntryDown();
+        menu_cursor_down();
     }
 }
 
@@ -1589,7 +1589,7 @@ void draw_arcade_menu(void) {
         return;
     }
 
-    RenderMenuSprites();
+    menu_render_sprites();
     draw_arcade_menu_sprites();
 
     if (gArcadeFadeIn) {

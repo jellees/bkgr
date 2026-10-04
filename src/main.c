@@ -570,7 +570,7 @@ static void start_game() {
     sub_800A344();
     sub_8016440();
     init_audio_and_reset_volume();
-    ResetMenuEx();
+    menu_init();
     ResetTileAnimCount();
     sub_80266B4();
     init_hud_elements();
