@@ -61,10 +61,10 @@ void ExecutePregame(void) {
         sub_80270AC(4095, 1);
     }
 
-    FreeById(HEAP_GENERAL, 15);
+    heap_free_by_tag(HEAP_GENERAL, 15);
     ResetMenu();
 
-    ASSERT(DoesMemBlockExistById(HEAP_GENERAL, 15) == FALSE);
+    ASSERT(heap_has_tag(HEAP_GENERAL, 15) == FALSE);
 }
 
 static void ShowSelectGame(int a1) {
@@ -784,7 +784,7 @@ static void ShowFlashscreens(void) {
     DmaTransfer32(unk_83FD454, (void*)OBJ_PLTT, 128);
     sub_8026E48(4095, 0, 0);
 
-    dword_200032C = Alloc(0x460u, 11, HEAP_GENERAL);
+    dword_200032C = heap_alloc(0x460u, 11, HEAP_GENERAL);
     DmaFill32(0, dword_200032C, 280);
 
     byte_2000331 = 0;
@@ -853,7 +853,7 @@ static void ShowFlashscreens(void) {
 // extern u32* dword_20021FC;
 // extern u32 dword_2002200;
 
-// extern void *Alloc(u32 size, u32 allocId, u32 heap);
+// extern void *heap_alloc(u32 size, u32 tag, u32 heap);
 
 // void sub_8025000()
 // {
@@ -889,7 +889,7 @@ static void ShowFlashscreens(void) {
 //     while(r4 == 0);
 
 //     dword_2002200 = r1;
-//     dword_20021FC = Alloc(r1 * 40, 0x11, HEAP_5);
+//     dword_20021FC = heap_alloc(r1 * 40, 0x11, HEAP_5);
 
 //     buffer = &dword_86AD314[0];
 

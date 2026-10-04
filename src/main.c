@@ -566,7 +566,7 @@ static void start_game() {
     gIsSlideMiniGame = 0;
 
     sub_8003884(dword_2000FC8, 0, 0, 0);
-    InitAllHeaps();
+    heap_init_all();
     sub_800A344();
     sub_8016440();
     init_audio_and_reset_volume();
@@ -587,7 +587,7 @@ static void start_game() {
 
     byte_2000F5D = 0;
 
-    dword_2000F60 = (u32*)Alloc(0x400, 19, HEAP_GENERAL);
+    dword_2000F60 = (u32*)heap_alloc(0x400, 19, HEAP_GENERAL);
     dword_2000F64 = 0;
 
     setup_interrupts();

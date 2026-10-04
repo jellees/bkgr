@@ -471,13 +471,13 @@ sub_8063468: @ 0x08063468
 	lsls r0, r0, #2
 	movs r1, #2
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	str r0, [r6]
 	ldr r5, _08063554
 	ldrb r0, [r4]
 	movs r1, #2
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	str r0, [r5]
 	ldr r2, _08063558
 	ldrb r1, [r4]
@@ -571,11 +571,11 @@ sub_8063578: @ 0x08063578
 	ldr r0, _08063594
 	ldr r0, [r0]
 	movs r1, #4
-	bl Free
+	bl heap_free
 	ldr r0, _08063598
 	ldr r0, [r0]
 	movs r1, #4
-	bl Free
+	bl heap_free
 	pop {r0}
 	bx r0
 	.align 2, 0

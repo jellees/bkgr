@@ -17,12 +17,12 @@ initialize_collision: @ 0x0800659C
 _080065B0:
 	movs r0, #1
 	movs r1, #0x15
-	bl FreeById
+	bl heap_free_by_tag
 	ldr r7, _0800667C
 	ldr r0, [r5, #0x20]
 	movs r1, #0x15
 	movs r2, #1
-	bl Alloc
+	bl heap_alloc
 	adds r1, r0, #0
 	str r1, [r7]
 	ldr r2, [r5, #0x20]

@@ -821,7 +821,7 @@ static void remove_actors(struct ScriptState* script) {
         }
     }
 
-    Free(script->actors, HEAP_4);
+    heap_free(script->actors, HEAP_4);
     script->actorCount = 0;
 }
 
@@ -840,7 +840,7 @@ void end_script(struct ScriptState* script) {
 
     script->isActive = FALSE;
     sub_805D568();
-    ASSERT(gIsAnyScriptActive || !DoesMemBlockExistById(HEAP_4, 5));
+    ASSERT(gIsAnyScriptActive || !heap_has_tag(HEAP_4, 5));
 }
 
 void end_all_scripts(int a1) {
@@ -981,7 +981,7 @@ static bool32 script_cmd_alloc_actors(int count, int _, int __, int ___) {
     gCurrentScript->actorCount = count;
 
     if (count != 0) {
-        gCurrentScript->actors = Alloc(sizeof(struct ScriptActor) * count, 5, HEAP_4);
+        gCurrentScript->actors = heap_alloc(sizeof(struct ScriptActor) * count, 5, HEAP_4);
 
         for (i = 0; i < gCurrentScript->actorCount; i++) {
             gCurrentScript->actors[i].isVisible = FALSE;
@@ -1600,12 +1600,12 @@ static bool32 script_cmd_actor_always_visible(int actorIdx, int alwaysVisible, i
 
 static bool32 script_cmd_alloc_oam_matrices(int count, int _, int __, int ___) {
     gMatricesCount = count;
-    gMatrices = (u32*)Alloc(16 * count, 5, HEAP_4);
+    gMatrices = (u32*)heap_alloc(16 * count, 5, HEAP_4);
     return TRUE;
 }
 
 static bool32 script_cmd_free_oam_matrices(int _, int __, int ___, int ____) {
-    Free(gMatrices, HEAP_4);
+    heap_free(gMatrices, HEAP_4);
     return TRUE;
 }
 
@@ -1764,7 +1764,7 @@ static bool32 script_cmd_start_input_demo(int forward, int _, int __, int ___) {
 
 static bool32 script_cmd_camera_alloc(int _, int __, int ___, int ____) {
     ASSERT(!gIsScriptCameraInitialised);
-    gScriptCamera = (struct ScriptCamera*)Alloc(sizeof(struct ScriptCamera), 5, HEAP_4);
+    gScriptCamera = (struct ScriptCamera*)heap_alloc(sizeof(struct ScriptCamera), 5, HEAP_4);
     gScriptCamera->isMoving = FALSE;
     gScriptCamera->xPosOriginal = (gCameraPixelX + 120) << FX32_SHIFT;
     gScriptCamera->yPosOriginal = (gCameraPixelY + 80) << FX32_SHIFT;
@@ -1787,7 +1787,7 @@ static bool32 script_cmd_camera_free(int _, int __, int ___, int ____) {
         sub_8003864(gScriptCamera->field_24);
         gScriptCamera->field_24 = -1;
     }
-    Free(gScriptCamera, HEAP_4);
+    heap_free(gScriptCamera, HEAP_4);
     gIsScriptCameraInitialised = FALSE;
     return 1;
 }
@@ -2309,7 +2309,7 @@ static bool32 script_cmd_display_time_travel_scene(int a1) {
     RoomObjPaletteToVram(12);
     DmaTransferBGPalette(&unk_83FD1D4, 0, 4);
 
-    source = Alloc(0x9600u, 13, HEAP_2);
+    source = heap_alloc(0x9600u, 13, HEAP_2);
 
     sub_8003A0C();
     DmaTransfer16(source, (void*)0x6000000, 19200);
@@ -2317,7 +2317,7 @@ static bool32 script_cmd_display_time_travel_scene(int a1) {
     SetSprite(&symbol, 0x4AFu, 0, 0, 0, 0xF0u, 0xF0u, 2);
     sprite_set_priority(&symbol, 0);
     gMatricesCount = 1;
-    gMatrices = (int*)Alloc(0x10u, 5, HEAP_4);
+    gMatrices = (int*)heap_alloc(0x10u, 5, HEAP_4);
     sub_8003820(&symbol, 1, 0);
     sub_8003808(&symbol, 1);
 
@@ -2374,8 +2374,8 @@ static bool32 script_cmd_display_time_travel_scene(int a1) {
     }
 
     sub_80271A4(4095, 1);
-    Free(gMatrices, HEAP_4);
-    Free(source, HEAP_2);
+    heap_free(gMatrices, HEAP_4);
+    heap_free(source, HEAP_2);
     REG_DISPCNT = gDisplayControl;
     REG_BG0CNT = gBG0Control;
     REG_BG1CNT = gBG1Control;
@@ -2489,7 +2489,7 @@ static bool32 sub_8060568(int _, int __, int ___, int ____) {
     v20 = sub_8025870(v6, &font);
     v8 = sub_8025870(string, &v18);
 
-    sprite = (struct Sprite*)Alloc(0x8Cu, 20, HEAP_5);
+    sprite = (struct Sprite*)heap_alloc(0x8Cu, 20, HEAP_5);
     v9 = v8 + 24;
     v10 = 0;
 
@@ -2563,7 +2563,7 @@ static bool32 sub_8060568(int _, int __, int ___, int ____) {
     }
 
     sub_80270AC(4095, 1);
-    Free(sprite, HEAP_5);
+    heap_free(sprite, HEAP_5);
 
     REG_DISPCNT = gDisplayControl;
     REG_BG0CNT = gBG0Control;

@@ -180,7 +180,7 @@ sub_8027C8C: @ 0x08027C8C
 	movs r0, #0
 	movs r1, #6
 	movs r2, #0x12
-	bl ReplaceMemBlockId
+	bl heap_retag
 	ldr r0, _08027E44
 	ldr r0, [r0]
 	bl sub_8009D7C
@@ -402,7 +402,7 @@ sub_8027F14: @ 0x08027F14
 	movs r0, #0
 	movs r1, #0x12
 	movs r2, #6
-	bl ReplaceMemBlockId
+	bl heap_retag
 	ldr r4, _080280D8
 	bl sub_8009DAC
 	strh r0, [r4]
@@ -543,7 +543,7 @@ sub_8027F14: @ 0x08027F14
 	cmp r0, #0
 	beq _0802809A
 	movs r1, #4
-	bl Free
+	bl heap_free
 	movs r0, #0
 	str r0, [r4]
 _0802809A:
@@ -650,7 +650,7 @@ _080281CE:
 	movs r0, #0
 	strb r0, [r1]
 	movs r0, #0
-	bl InitHeap
+	bl heap_init
 	ldr r1, _08028254
 	movs r0, #0
 	str r0, [r1]
@@ -765,7 +765,7 @@ _080282E0:
 	str r4, [r0]
 	movs r0, #0
 	movs r1, #6
-	bl FreeById
+	bl heap_free_by_tag
 	b _08028354
 	.align 2, 0
 _080282F0: .4byte 0x0203DFB0
@@ -779,7 +779,7 @@ _08028300: .4byte 0x0203DFB0
 _08028304:
 	movs r0, #0
 	movs r1, #6
-	bl FreeById
+	bl heap_free_by_tag
 	movs r0, #0
 	movs r1, #2
 	bl sub_8062064
@@ -842,7 +842,7 @@ _08028354:
 	muls r0, r4, r0
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	ldr r1, _08028698
 	str r0, [r1]
 	ldr r6, _0802869C
@@ -851,7 +851,7 @@ _08028354:
 	muls r0, r4, r0
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	str r0, [r6]
 	ldr r6, _080286A0
 	mov r3, sb
@@ -859,7 +859,7 @@ _08028354:
 	muls r0, r4, r0
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	str r0, [r6]
 	ldr r4, _080286A4
 	mov r6, sl
@@ -868,7 +868,7 @@ _08028354:
 	muls r0, r1, r0
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _080286A8
 	ldr r0, _08028694
@@ -878,7 +878,7 @@ _08028354:
 	lsls r0, r0, #3
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r0, _080286AC
 	strb r5, [r0]
@@ -1011,7 +1011,7 @@ _080284D8:
 	ldrh r0, [r0, #0xa]
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	mov r1, r8
 	str r0, [r1]
 	movs r2, #0
@@ -1145,7 +1145,7 @@ _080285AC:
 	cmp r0, #0
 	beq _080285EA
 	movs r1, #4
-	bl Free
+	bl heap_free
 	movs r0, #0
 	str r0, [r6]
 _080285EA:
@@ -1160,7 +1160,7 @@ _080285EA:
 	adds r0, r4, #0
 	movs r1, #0xb
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r0, #0
 	str r1, [r6]
 	lsrs r4, r4, #2
@@ -1257,14 +1257,14 @@ _0802870C:
 	muls r0, r1, r0
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08028800
 	mov r0, r8
 	adds r0, #1
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 _08028730:
 	ldr r0, [sp, #0x10]
@@ -1277,14 +1277,14 @@ _08028730:
 	muls r0, r1, r0
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _0802880C
 	mov r0, sb
 	adds r0, #1
 	movs r1, #6
 	movs r2, #0
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 _0802875A:
 	movs r1, #0
@@ -17378,7 +17378,7 @@ sub_8030C54: @ 0x08030C54
 	push {lr}
 	movs r0, #4
 	movs r1, #0xe
-	bl FreeById
+	bl heap_free_by_tag
 	bl sub_08030C68
 	pop {r0}
 	bx r0
@@ -19253,7 +19253,7 @@ sub_08031CB8: @ 0x08031CB8
 	adds r0, r5, #0
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	ldr r1, _08031F18
 	add r1, sb
 	str r0, [r1]
@@ -19277,7 +19277,7 @@ _08031CE6:
 	adds r0, r5, #0
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	ldr r1, _08031F1C
 	add r1, sb
 	str r0, [r1]
@@ -19304,7 +19304,7 @@ _08031D18:
 	beq _08031D4E
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x24
 	add r1, sb
@@ -19332,7 +19332,7 @@ _08031D4E:
 	beq _08031D84
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x28
 	add r1, sb
@@ -19360,7 +19360,7 @@ _08031D84:
 	beq _08031DBA
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x2c
 	add r1, sb
@@ -19388,7 +19388,7 @@ _08031DBA:
 	beq _08031DF0
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x30
 	add r1, sb
@@ -19416,7 +19416,7 @@ _08031DF0:
 	beq _08031E26
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x34
 	add r1, sb
@@ -19444,7 +19444,7 @@ _08031E26:
 	beq _08031E5C
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x38
 	add r1, sb
@@ -19472,7 +19472,7 @@ _08031E5C:
 	beq _08031E92
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x3c
 	add r1, sb
@@ -19500,7 +19500,7 @@ _08031E92:
 	beq _08031EC8
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x40
 	add r1, sb
@@ -19528,7 +19528,7 @@ _08031EC8:
 	beq _08031EFE
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x44
 	add r1, sb
@@ -19566,7 +19566,7 @@ _08031F20:
 	beq _08031F54
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x48
 	add r1, sb
@@ -19594,7 +19594,7 @@ _08031F54:
 	beq _08031F8A
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x4c
 	add r1, sb
@@ -19622,7 +19622,7 @@ _08031F8A:
 	beq _08031FC0
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x50
 	add r1, sb
@@ -19650,7 +19650,7 @@ _08031FC0:
 	beq _08031FF6
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x54
 	add r1, sb
@@ -19678,7 +19678,7 @@ _08031FF6:
 	beq _0803202C
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x58
 	add r1, sb
@@ -19706,7 +19706,7 @@ _0803202C:
 	beq _08032062
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x5c
 	add r1, sb
@@ -19734,7 +19734,7 @@ _08032062:
 	beq _08032098
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x60
 	add r1, sb
@@ -19762,7 +19762,7 @@ _08032098:
 	beq _080320CE
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x64
 	add r1, sb
@@ -19790,7 +19790,7 @@ _080320CE:
 	beq _08032104
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x68
 	add r1, sb
@@ -19818,7 +19818,7 @@ _08032104:
 	beq _0803213A
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r4, #0
 	adds r1, #0x6c
 	add r1, sb
@@ -19847,7 +19847,7 @@ _0803213A:
 	lsls r0, r0, #4
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x90
 	adds r1, r6, r2
@@ -19890,7 +19890,7 @@ _08032190:
 	beq _080321CA
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x44
 	mov r3, r8
@@ -19920,7 +19920,7 @@ _080321CA:
 	beq _08032204
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x48
 	mov r3, r8
@@ -19950,7 +19950,7 @@ _08032204:
 	beq _0803223E
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x4c
 	mov r3, r8
@@ -19980,7 +19980,7 @@ _0803223E:
 	beq _08032278
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x50
 	mov r3, r8
@@ -20015,7 +20015,7 @@ _08032288:
 	beq _080322BC
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x54
 	mov r3, r8
@@ -20045,7 +20045,7 @@ _080322BC:
 	beq _080322F6
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x58
 	mov r3, r8
@@ -20075,7 +20075,7 @@ _080322F6:
 	beq _08032330
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x40
 	mov r3, r8
@@ -20105,7 +20105,7 @@ _08032330:
 	beq _0803236A
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x28
 	mov r3, r8
@@ -20135,7 +20135,7 @@ _0803236A:
 	beq _080323A4
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x2c
 	mov r3, r8
@@ -20165,7 +20165,7 @@ _080323A4:
 	beq _080323DE
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x30
 	mov r3, r8
@@ -20195,7 +20195,7 @@ _080323DE:
 	beq _08032418
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x34
 	mov r3, r8
@@ -20225,7 +20225,7 @@ _08032418:
 	beq _08032452
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x38
 	mov r3, r8
@@ -20255,7 +20255,7 @@ _08032452:
 	beq _0803248C
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x94
 	mov r3, r8
@@ -20285,7 +20285,7 @@ _0803248C:
 	beq _080324C6
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x98
 	mov r3, r8
@@ -20315,7 +20315,7 @@ _080324C6:
 	beq _08032500
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x9c
 	mov r3, r8
@@ -20345,7 +20345,7 @@ _08032500:
 	beq _0803253A
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x3c
 	mov r3, r8
@@ -20375,7 +20375,7 @@ _0803253A:
 	beq _08032574
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x5c
 	mov r3, r8
@@ -20405,7 +20405,7 @@ _08032574:
 	beq _080325AE
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xa0
 	mov r3, r8
@@ -20435,7 +20435,7 @@ _080325AE:
 	beq _080325E8
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xa4
 	mov r3, r8
@@ -20469,7 +20469,7 @@ _080325E8:
 	.align 2, 0
 _080325FC: .4byte 0x0203E440
 _08032600:
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xa8
 	mov r3, r8
@@ -20499,7 +20499,7 @@ _0803262A:
 	beq _08032664
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x60
 	mov r3, r8
@@ -20529,7 +20529,7 @@ _08032664:
 	beq _0803269E
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x64
 	mov r3, r8
@@ -20559,7 +20559,7 @@ _0803269E:
 	beq _080326D8
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x68
 	mov r3, r8
@@ -20589,7 +20589,7 @@ _080326D8:
 	beq _08032712
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x6c
 	mov r3, r8
@@ -20619,7 +20619,7 @@ _08032712:
 	beq _0803274C
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xac
 	mov r3, r8
@@ -20649,7 +20649,7 @@ _0803274C:
 	beq _08032786
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xb0
 	mov r3, r8
@@ -20679,7 +20679,7 @@ _08032786:
 	beq _080327C0
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xb4
 	mov r3, r8
@@ -20709,7 +20709,7 @@ _080327C0:
 	beq _080327FA
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xb8
 	mov r3, r8
@@ -20739,7 +20739,7 @@ _080327FA:
 	beq _08032834
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x70
 	mov r3, r8
@@ -20771,7 +20771,7 @@ _08032834:
 	beq _08032872
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x8c
 	mov r3, r8
@@ -20803,7 +20803,7 @@ _08032872:
 	beq _080328B0
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x7c
 	mov r3, r8
@@ -20835,7 +20835,7 @@ _080328B0:
 	beq _080328EE
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x80
 	mov r3, r8
@@ -20867,7 +20867,7 @@ _080328EE:
 	beq _0803292C
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x84
 	mov r3, r8
@@ -20899,7 +20899,7 @@ _0803292C:
 	beq _08032972
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x88
 	mov r3, r8
@@ -20933,7 +20933,7 @@ _08032972:
 	beq _080329AC
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xbc
 	mov r3, r8
@@ -20963,7 +20963,7 @@ _080329AC:
 	beq _080329E6
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0xc0
 	mov r3, r8
@@ -20995,7 +20995,7 @@ _080329E6:
 	beq _08032A24
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r4, #0
 	adds r2, #0x74
 	mov r3, r8
@@ -21029,7 +21029,7 @@ _08032A24:
 	adds r0, r1, #0
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	mov r2, sl
 	adds r2, #0x78
 	mov r3, r8
@@ -21059,7 +21059,7 @@ _08032A66:
 	beq _08032AA0
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r6, #4
 	ldr r3, [sp, #0x18]
 	adds r1, r3, r2
@@ -21089,7 +21089,7 @@ _08032AA0:
 	beq _08032ADC
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r6, #0
 	adds r2, #8
 	ldr r3, [sp, #0x18]
@@ -21120,7 +21120,7 @@ _08032ADC:
 	beq _08032B18
 	movs r1, #0xe
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r2, r6, #0
 	adds r2, #0xc
 	ldr r3, [sp, #0x18]
@@ -21313,7 +21313,7 @@ _08032C52:
 	movs r1, #0xe
 	movs r2, #4
 	str r3, [sp, #0x44]
-	bl Alloc
+	bl heap_alloc
 	ldr r1, [r6]
 	adds r1, r5, r1
 	str r0, [r1, #0xc]

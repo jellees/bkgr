@@ -227,7 +227,7 @@ _0806074A:
 	movs r0, #0x8c
 	movs r1, #0x14
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	str r0, [sp, #0x44]
 	adds r4, #0x18
 	movs r7, #0
@@ -407,7 +407,7 @@ _080608F0:
 	bl sub_80270AC
 	ldr r0, [sp, #0x44]
 	movs r1, #4
-	bl Free
+	bl heap_free
 	movs r1, #0x80
 	lsls r1, r1, #0x13
 	ldr r0, _08060964

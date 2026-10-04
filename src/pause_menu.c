@@ -254,8 +254,8 @@ void open_pause_menu(void) {
     gSaveGameTextOffsets[5] = sub_8025870(gSaveGameTexts[5], &gSaveGameTextBoxes[5]);
 
     dword_203F558 = sub_8025870(dword_203F554, &gOptionsTextBox);
-    gPauseMenuControlsSprites = Alloc(sizeof(struct Sprite) * 3, 15, HEAP_GENERAL);
-    dword_203F4F0 = Alloc(3, 15, HEAP_GENERAL);
+    gPauseMenuControlsSprites = heap_alloc(sizeof(struct Sprite) * 3, 15, HEAP_GENERAL);
+    dword_203F4F0 = heap_alloc(3, 15, HEAP_GENERAL);
 
     for (i = 0; i < 3; i++) {
         dword_203F4F0[i] = 0;
@@ -314,10 +314,10 @@ void open_pause_menu(void) {
 
     sub_8047BEC();
     sub_80524D8();
-    FreeById(HEAP_GENERAL, 15);
+    heap_free_by_tag(HEAP_GENERAL, 15);
     ResetMenu();
 
-    ASSERT(DoesMemBlockExistById(HEAP_GENERAL, 15) == FALSE);
+    ASSERT(heap_has_tag(HEAP_GENERAL, 15) == FALSE);
 
     gClockStatus = 0;
     sub_80528D8(0);
@@ -460,7 +460,7 @@ static void exec_pause_menu(void) {
         sub_80408F0();
         RenderMenuSprites();
         render_controls();
-        CheckHeap(HEAP_GENERAL);
+        heap_check(HEAP_GENERAL);
         CheckStacks();
         SyncVblank();
         update_video();
@@ -713,7 +713,7 @@ static void exec_totals_menu(void) {
         RenderText();
         sub_80408F0();
         render_controls();
-        CheckHeap(HEAP_GENERAL);
+        heap_check(HEAP_GENERAL);
         CheckStacks();
         SyncVblank();
         update_video();
@@ -986,7 +986,7 @@ static bool32 exec_save_menu(void) {
                 break;
         }
 
-        CheckHeap(HEAP_GENERAL);
+        heap_check(HEAP_GENERAL);
         CheckStacks();
         SyncVblank();
         update_video();
@@ -1008,8 +1008,8 @@ static bool32 exec_save_menu(void) {
             gSaveFiles[gameIdx].empty = 0;
             setup_save_file_strings();
             save_game(gameIdx, byte_2000335);
-            CheckHeap(HEAP_GENERAL);
-            ASSERT(DoesMemBlockExistById(HEAP_GENERAL, 9) == FALSE);
+            heap_check(HEAP_GENERAL);
+            ASSERT(heap_has_tag(HEAP_GENERAL, 9) == FALSE);
 
             state = GAME_SAVED;
             saveGameWaitCounter = 40;
@@ -1315,7 +1315,7 @@ static void exec_options_menu(void) {
         RenderText();
         RenderMenuSprites();
         render_controls();
-        CheckHeap(HEAP_GENERAL);
+        heap_check(HEAP_GENERAL);
         CheckStacks();
         SyncVblank();
         update_video();
@@ -1452,8 +1452,8 @@ void init_arcade_menu(void) {
     set_hud_number(55, byte_203E16C);
     keep_hud_element_shown(55);
 
-    dword_203F4F4 = Alloc(sizeof(struct Sprite) * 3, 25, HEAP_GENERAL);
-    dword_203F4F8 = Alloc(3, 25, HEAP_GENERAL);
+    dword_203F4F4 = heap_alloc(sizeof(struct Sprite) * 3, 25, HEAP_GENERAL);
+    dword_203F4F8 = heap_alloc(3, 25, HEAP_GENERAL);
 
     for (i = 0; i < 3; i++) {
         dword_203F4F8[i] = 0;
@@ -1564,9 +1564,9 @@ void exec_arcade_menu(void) {
             DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);
             release_hud_element(55);
             sub_80409DC();
-            FreeById(HEAP_GENERAL, 25);
+            heap_free_by_tag(HEAP_GENERAL, 25);
             ResetMenu();
-            ASSERT(DoesMemBlockExistById(HEAP_GENERAL, 25) == FALSE);
+            ASSERT(heap_has_tag(HEAP_GENERAL, 25) == FALSE);
             sub_8026E48(4095, 1, 1);
             sub_8016C78(0);
             byte_2000F56 = 0;

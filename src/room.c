@@ -494,7 +494,7 @@ void sub_08012E90(u32 room) {
 
     ASSERT(*gRoomHeader.unknown3 <= 255);
 
-    FreeById(HEAP_2, 21);
+    heap_free_by_tag(HEAP_2, 21);
     gEntitySection = 0;
 
     DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);

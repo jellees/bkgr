@@ -71,7 +71,7 @@ _08060260:
 	lsls r0, r0, #8
 	movs r1, #0xd
 	movs r2, #1
-	bl Alloc
+	bl heap_alloc
 	str r0, [sp, #0x2c]
 	bl sub_8003A0C
 	movs r2, #0x96
@@ -104,7 +104,7 @@ _08060260:
 	movs r0, #0x10
 	movs r1, #5
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	add r0, sp, #0x10
 	movs r1, #1
@@ -321,10 +321,10 @@ _080604F0:
 	ldr r0, _08060550
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, [sp, #0x2c]
 	movs r1, #1
-	bl Free
+	bl heap_free
 	movs r1, #0x80
 	lsls r1, r1, #0x13
 	ldr r0, _08060554

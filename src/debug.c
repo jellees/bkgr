@@ -1044,9 +1044,9 @@ void sub_8010BA8(int a1) {
     audio_set_tune_vol(dVolumes[gBgmMainVolume / 2]);
     sub_8011158();
     sub_801126C();
-    FreeById(HEAP_GENERAL, 15);
+    heap_free_by_tag(HEAP_GENERAL, 15);
     ResetMenu();
-    ASSERT(!DoesMemBlockExistById(HEAP_GENERAL, 15));
+    ASSERT(!heap_has_tag(HEAP_GENERAL, 15));
 
     if (byte_200145A) {
         SetTextSpriteCount(0);
@@ -2137,7 +2137,7 @@ void debug_record_input(void) {
 
 void init_input_recording(void) {
     gInputRecords =
-        (struct InputRecord*)Alloc(sizeof(struct InputRecord) * MAX_INPUT_RECORDINGS, 8, HEAP_6);
+        (struct InputRecord*)heap_alloc(sizeof(struct InputRecord) * MAX_INPUT_RECORDINGS, 8, HEAP_6);
     gInputRecordCount = 0;
     gPreviousInput = REG_KEYINPUT & KEYS_MASK;
 }
@@ -2149,7 +2149,8 @@ void free_input_record_memory(void) {
             count--;
         }
     }
-    Free(gInputRecords, HEAP_GENERAL);
+    //! @bug gInputRecords was allocated from HEAP_6, but is freed with HEAP_GENERAL.
+    heap_free(gInputRecords, HEAP_GENERAL);
 }
 
 void display_error_message(char* type, char* message) {

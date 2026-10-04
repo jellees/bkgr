@@ -11,7 +11,7 @@ sub_8060DCC: @ 0x08060DCC
 	movs r0, #0x50
 	movs r1, #7
 	movs r2, #5
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	movs r2, #0
 	movs r3, #0
@@ -57,12 +57,12 @@ _08060E26:
 	beq _08060E46
 	ldr r0, [r0, #8]
 	movs r1, #5
-	bl Free
+	bl heap_free
 	ldr r0, [r6]
 	adds r0, r4, r0
 	ldr r0, [r0]
 	movs r1, #5
-	bl Free
+	bl heap_free
 _08060E46:
 	adds r5, #1
 	cmp r5, #0x13
@@ -70,7 +70,7 @@ _08060E46:
 	ldr r0, _08060E60
 	ldr r0, [r0]
 	movs r1, #5
-	bl Free
+	bl heap_free
 	bl sub_8060DCC
 	pop {r4, r5, r6}
 	pop {r0}
@@ -110,7 +110,7 @@ _08060E6E:
 	bls _08060EE8
 	ldr r0, [r1, #8]
 	movs r1, #5
-	bl Free
+	bl heap_free
 	ldr r0, [r7]
 	adds r0, r4, r0
 	ldr r0, [r0]
@@ -118,7 +118,7 @@ _08060E6E:
 	lsls r0, r0, #2
 	movs r1, #7
 	movs r2, #5
-	bl Alloc
+	bl heap_alloc
 	ldr r1, [r7]
 	adds r1, r4, r1
 	ldr r1, [r1]
@@ -179,7 +179,7 @@ _08060F10:
 	movs r0, #0xc
 	movs r1, #7
 	movs r2, #5
-	bl Alloc
+	bl heap_alloc
 	ldr r1, [r6]
 	adds r1, r5, r1
 	str r0, [r1]
@@ -204,7 +204,7 @@ _08060F10:
 	lsls r0, r0, #2
 	movs r1, #7
 	movs r2, #5
-	bl Alloc
+	bl heap_alloc
 	ldr r1, [r6]
 	adds r1, r5, r1
 	ldr r1, [r1]
@@ -267,12 +267,12 @@ _08060FBC:
 	ldr r0, [r0]
 	ldr r0, [r0, #8]
 	movs r1, #5
-	bl Free
+	bl heap_free
 	ldr r0, [r5]
 	adds r0, r4, r0
 	ldr r0, [r0]
 	movs r1, #5
-	bl Free
+	bl heap_free
 	ldr r0, [r5]
 	adds r4, r4, r0
 	movs r0, #0
@@ -511,7 +511,7 @@ sub_8061190: @ 0x08061190
 	movs r0, #0x38
 	movs r1, #1
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r1, _08061234
 	movs r2, #0
@@ -587,7 +587,7 @@ sub_8061244: @ 0x08061244
 	ldr r0, _0806125C
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r1, _08061260
 	movs r0, #0
 	strb r0, [r1]
@@ -721,13 +721,13 @@ _08061384:
 	movs r0, #0x8c
 	movs r1, #1
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _080613B8
 	movs r0, #0x50
 	movs r1, #1
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	movs r0, #4
 	mov sb, r0
@@ -2056,11 +2056,11 @@ _08061F04:
 	ldr r0, _08061F28
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _08061F2C
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _08061F30
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -2241,7 +2241,7 @@ _0806207E:
 	cmp r0, #0
 	beq _08062090
 	movs r1, #2
-	bl Free
+	bl heap_free
 	movs r0, #0
 	str r0, [r5]
 _08062090:
@@ -2252,7 +2252,7 @@ _08062090:
 	lsls r0, r0, #4
 	movs r1, #0xc
 	movs r2, #2
-	bl Alloc
+	bl heap_alloc
 	str r0, [r5]
 _080620A4:
 	ldr r0, _080620B8

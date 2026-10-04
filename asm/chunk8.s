@@ -155,7 +155,7 @@ sub_8047554: @ 0x08047554
 	lsls r0, r0, #5
 	movs r1, #0xa
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	adds r1, r0, #0
 	str r1, [r4]
 	ldr r0, _0804766C
@@ -300,7 +300,7 @@ sub_80476E8: @ 0x080476E8
 	bl DmaTransfer32
 	ldr r0, [r4]
 	movs r1, #4
-	bl Free
+	bl heap_free
 	ldr r4, _08047800
 	bl sub_8009DAC
 	strb r0, [r4]
@@ -450,7 +450,7 @@ _08047892:
 	cmp r0, #0
 	beq _080478A4
 	movs r1, #2
-	bl Free
+	bl heap_free
 	movs r0, #0
 	str r0, [r5]
 _080478A4:
@@ -460,7 +460,7 @@ _080478A4:
 	muls r0, r4, r0
 	movs r1, #0xa
 	movs r2, #2
-	bl Alloc
+	bl heap_alloc
 	str r0, [r5]
 _080478B6:
 	ldr r0, _08047910
@@ -22267,7 +22267,7 @@ sub_08052B58: @ 0x08052B58
 	movs r0, #0x30
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r6]
 	ldr r3, _08052BB4
 	strb r4, [r3]
@@ -22326,13 +22326,13 @@ _08052BEA:
 	movs r0, #0x1c
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08052C40
 	lsls r0, r5, #4
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08052C44
 	ldr r6, _08052C48
@@ -22342,7 +22342,7 @@ _08052BEA:
 	lsls r0, r0, #5
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r0, _08052C4C
 	ldrb r5, [r0]
@@ -22367,19 +22367,19 @@ _08052C50:
 	movs r0, #0xac
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08052CE0
 	movs r0, #0xd8
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08052CE4
 	movs r0, #0x40
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r0, [r6]
 	adds r0, #0x2a
@@ -22441,31 +22441,31 @@ _08052CF4:
 	movs r0, #0x58
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08052DE0
 	movs r0, #0x90
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08052DE4
 	movs r0, #0x10
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08052DE8
 	movs r0, #0xf0
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08052DEC
 	movs r0, #0x40
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r0, [r6]
 	adds r0, #0x2a
@@ -27720,19 +27720,19 @@ _08055736:
 	ldr r0, _0805576C
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _08055770
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _08055774
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _08055778
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805577C
 	ldrb r0, [r0]
 	cmp r0, #1
@@ -27750,15 +27750,15 @@ _08055780:
 	ldr r0, _080557CC
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _080557D0
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _080557D4
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r1, _080557D8
 	ldr r5, _080557DC
 	adds r0, r5, #0
@@ -27803,23 +27803,23 @@ _080557F8:
 	strb r2, [r3]
 	adds r0, r1, #0
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _080558A0
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _080558A4
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _080558A8
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _080558AC
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _080558B0
 	movs r1, #1
 	bl sub_80270AC
@@ -28066,27 +28066,27 @@ _08055A2C:
 	movs r0, #0x84
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08055AB0
 	movs r0, #0x88
 	lsls r0, r0, #2
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08055AB4
 	movs r0, #0x80
 	lsls r0, r0, #2
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r4, _08055AB8
 	movs r0, #0x1c
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldrb r0, [r5]
 	cmp r0, #3
@@ -28119,7 +28119,7 @@ _08055AC8:
 _08055ACE:
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 _08055AD8:
 	movs r1, #0x80
@@ -35097,7 +35097,7 @@ _0805927C:
 	ldr r0, _08059298
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805929C
 	ldrb r0, [r0]
 	cmp r0, #3
@@ -35113,7 +35113,7 @@ _080592A0:
 	ldr r0, _080592AC
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	b _080592BA
 	.align 2, 0
 _080592AC: .4byte 0x0203F970
@@ -35121,20 +35121,20 @@ _080592B0:
 	ldr r0, _0805931C
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 _080592BA:
 	ldr r0, _08059320
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _08059324
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _08059328
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805932C
 	movs r1, #1
 	bl sub_80270AC
@@ -35268,27 +35268,27 @@ _080593E6:
 	movs r0, #0x88
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r6]
 	ldr r5, _08059534
 	movs r0, #0x1c
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r5]
 	ldr r5, _08059538
 	movs r0, #0x80
 	lsls r0, r0, #2
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r5]
 	ldr r5, _0805953C
 	movs r0, #0xfc
 	lsls r0, r0, #2
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r5]
 	movs r1, #0x20
 	ldr r0, _08059540
@@ -37912,7 +37912,7 @@ _0805A970:
 	movs r0, #0x24
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	mov r8, r0
 	mov r1, r8
 	ldr r0, [r4]
@@ -37962,7 +37962,7 @@ _0805A990:
 	stm r1!, {r2, r4, r7}
 	mov r0, r8
 	movs r1, #3
-	bl Free
+	bl heap_free
 	movs r2, #0xc0
 	lsls r2, r2, #2
 	movs r0, #0x1c
@@ -39811,19 +39811,19 @@ _0805B8C0:
 	ldr r0, _0805B92C
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805B930
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805B934
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805B938
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r1, _0805B93C
 	ldr r0, _0805B940
 	str r0, [r1]
@@ -39971,13 +39971,13 @@ sub_0805BA1C: @ 0x0805BA1C
 	movs r0, #0x4c
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r6]
 	ldr r4, _0805BB20
 	movs r0, #0x1c
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	ldr r1, _0805BB24
 	movs r2, #1
@@ -40162,7 +40162,7 @@ _0805BBC0:
 	lsls r0, r0, #4
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r5]
 	movs r2, #0
 	mov r8, r2
@@ -40317,7 +40317,7 @@ _0805BCD0:
 	lsls r0, r0, #4
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	movs r0, #0
 	mov r8, r0
@@ -40511,7 +40511,7 @@ _0805BE70:
 	lsls r0, r0, #4
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	movs r0, #0
 	mov r8, r0
@@ -40738,7 +40738,7 @@ _0805C094:
 	lsls r0, r0, #4
 	movs r1, #4
 	movs r2, #3
-	bl Alloc
+	bl heap_alloc
 	str r0, [r4]
 	bl sub_80409DC
 	bl sub_8063178
@@ -42756,19 +42756,19 @@ _0805D028:
 	ldr r0, _0805D0A0
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805D0A4
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805D0A8
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805D0AC
 	ldr r0, [r0]
 	movs r1, #3
-	bl Free
+	bl heap_free
 	ldr r0, _0805D0B0
 	movs r2, #0
 	strb r2, [r0]

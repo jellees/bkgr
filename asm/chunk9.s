@@ -60,7 +60,7 @@ _0802505A:
 	lsls r0, r0, #3
 	movs r1, #0x11
 	movs r2, #4
-	bl Alloc
+	bl heap_alloc
 	str r0, [r6]
 	movs r7, #0
 	ldr r0, [r5]
