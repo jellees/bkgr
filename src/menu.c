@@ -15,7 +15,7 @@ struct Menu {
     int entryCount;
     char** texts;
     u16 curEntry;
-    u8 field_3A;
+    bool8 wrapAround;
     bool8 useSpriteBuffer;
     struct Sprite* spriteBuffer;
 };
@@ -80,7 +80,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 5;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 16;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -117,7 +117,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 2;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 16;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -174,7 +174,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 3;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 20;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -236,7 +236,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 4;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
@@ -316,7 +316,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 2;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
@@ -380,7 +380,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 2;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
@@ -444,7 +444,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 2;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 24;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
@@ -508,7 +508,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 2;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 16;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -542,7 +542,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 3;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 32;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -577,7 +577,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 3;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 20;
             gMenu.horizontalPadding = 20;
             gMenu.useSpriteBuffer = 1;
@@ -622,7 +622,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 5;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 20;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -779,7 +779,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 5;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 20;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -936,7 +936,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 7;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -975,7 +975,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 4;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1011,7 +1011,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 6;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1049,7 +1049,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 6;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1087,7 +1087,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 6;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1125,7 +1125,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 6;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1163,7 +1163,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 4;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1199,7 +1199,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 2;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1233,7 +1233,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 6;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1271,7 +1271,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 7;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1310,7 +1310,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 7;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1349,7 +1349,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 7;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1388,7 +1388,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 7;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1427,7 +1427,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 7;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1466,7 +1466,7 @@ void InitMenu(int menu, int language) {
             gMenu.entryCount = 7;
             gMenu.texts = heap_alloc(gMenu.entryCount * sizeof(char*), 15, HEAP_GENERAL);
             gMenu.curEntry = 0;
-            gMenu.field_3A = 1;
+            gMenu.wrapAround = TRUE;
             gMenu.lineHeight = 8;
             gMenu.horizontalPadding = 0;
             gMenu.useSpriteBuffer = 0;
@@ -1491,7 +1491,7 @@ void AdvanceMenuEntryDown(void) {
     }
 
     if (gMenu.curEntry == gMenu.entryCount - 1) {
-        if (gMenu.field_3A) {
+        if (gMenu.wrapAround) {
             gMenu.curEntry = 0;
         }
     } else {
@@ -1509,7 +1509,7 @@ void AdvanceMenuEntryUp(void) {
     }
 
     if (gMenu.curEntry == 0) {
-        if (gMenu.field_3A) {
+        if (gMenu.wrapAround) {
             gMenu.curEntry = gMenu.entryCount - 1;
         }
     } else {
