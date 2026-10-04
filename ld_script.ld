@@ -280,7 +280,6 @@ SECTIONS
         src/menu.o(.text);
         src/save.o(.text);
         src/random.o(.text);
-        asm/random.o(.text);
         src/audio_a.o(.text);
         src/ingame_menu.o(.text);
         asm/chunk8.o(.text);
