@@ -129,3 +129,11 @@ dLicenceBitmap = 0x87E61A8;
 unk_83FC514 = 0x83FC514;
 stru_80AF310 = 0x80AF310;
 
+gCreditsCongratsLine = 0x2002204;
+gCreditsScrollSpeed = 0x200222C;
+dCreditsTexts = 0x86AD314;
+str_0806844C = 0x806844C;
+str_08068480 = 0x8068480;
+str_080684AC = 0x80684AC;
+str_080684E0 = 0x80684E0;
+str_0806850C = 0x806850C;

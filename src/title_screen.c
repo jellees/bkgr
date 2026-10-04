@@ -11,6 +11,27 @@
 #include "script.h"
 #include "hud.h"
 
+struct CreditsLine {
+    bool8 active;
+    u8 width;
+    fx32 delay;
+    fx32 timer;
+    fx32 y;
+    char* text;
+    struct TextBox textBox;
+};
+
+extern struct CreditsLine* dword_20021FC;
+extern int dword_2002200;
+extern struct CreditsLine gCreditsCongratsLine;
+extern fx32 gCreditsScrollSpeed;
+extern char* dCreditsTexts[];
+extern char str_0806844C[];
+extern char str_08068480[];
+extern char str_080684AC[];
+extern char str_080684E0[];
+extern char str_0806850C[];
+
 static void ShowSelectGame(int);
 static bool32 sub_8024200(void);
 static int ShowPressStart(void);
@@ -845,67 +866,144 @@ static void ShowFlashscreens(void) {
     SetTextSpriteCount(0);
 }
 
-/**
- * Finish this later.
- */
+// https://decomp.me/scratch/gsXI5
+#ifndef NONMATCHING
+NAKED void sub_8025000(void) {
+    asm_unified(".include \"asm/nonmatching/sub_8025000.s\"");
+}
+#else
+void sub_8025000(void) {
+    int done;
+    int count;
+    int i;
+    int j;
+    char* text;
+    int delay;
 
-// extern char* dword_86AD314[115]; // array of strings
-// extern u32* dword_20021FC;
-// extern u32 dword_2002200;
+    if (byte_20021F0) {
+        return;
+    }
 
-// extern void *heap_alloc(u32 size, u32 tag, u32 heap);
+    done = FALSE;
+    count = 0;
+    i = 0;
 
-// void sub_8025000()
-// {
-//     int r4;
-//     int r1;
-//     int r7;
-//     char** buffer;
+    do {
+        text = dCreditsTexts[i];
 
-//     if (byte_20021F0)
-//         return;
+        switch (*text) {
+            case 0xFF:
+                done = TRUE;
+                break;
 
-//     r4 = 0;
-//     r1 = 0;
-//     r7 = 0;
+            case 0xFE:
+            case 0xFB:
+                i++;
+                break;
 
-//     do
-//     {
-//         switch(*dword_86AD314[r7])
-//         {
-//             case 0xFF:
-//                 r4 = 1;
-//                 break;
-//             case 0xFE:
-//             case 0xFB:
-//                 r7++;
-//                 break;
-//             default:
-//                 r7++;
-//                 r1++;
-//                 break;
-//         }
-//     }
-//     while(r4 == 0);
+            default:
+                i++;
+                count++;
+                break;
+        }
+    } while (!done);
 
-//     dword_2002200 = r1;
-//     dword_20021FC = heap_alloc(r1 * 40, 0x11, HEAP_5);
+    dword_2002200 = count;
+    dword_20021FC = heap_alloc(count * sizeof(struct CreditsLine), 17, HEAP_GENERAL);
 
-//     buffer = &dword_86AD314[0];
+    j = 0;
 
-//     if (dword_2002200 > 0)
-//     {
-//         u32 v1 = 0x24;
+    for (i = 0; i < dword_2002200; i++) {
+        text = dCreditsTexts[j];
+        delay = 36;
 
-//         if (**buffer == 0xFB)
-//         {
-//             buffer++;
-//         }
+        if (*text == 0xFB) {
+            j++;
+            text = dCreditsTexts[j];
+            dword_20021FC[i].textBox.letterSpacing = -2;
+            dword_20021FC[i].textBox.field_12 = 0;
+            dword_20021FC[i].textBox.field_A = 1;
+            dword_20021FC[i].textBox.size = 240;
+            dword_20021FC[i].textBox.palette = 1;
+            dword_20021FC[i].textBox.stringOffset = 0;
+            dword_20021FC[i].textBox.field_11 = 6;
+            dword_20021FC[i].textBox.font = &font_80B01A8[2];
+        } else {
+            if (*text == 0xFE) {
+                j++;
+                text = dCreditsTexts[j];
+                delay = 70;
+            }
 
-//         // do
-//         // {
+            dword_20021FC[i].textBox.letterSpacing = 1;
+            dword_20021FC[i].textBox.field_12 = 0;
+            dword_20021FC[i].textBox.field_A = 1;
+            dword_20021FC[i].textBox.size = 240;
+            dword_20021FC[i].textBox.palette = 10;
+            dword_20021FC[i].textBox.stringOffset = 0;
+            dword_20021FC[i].textBox.field_11 = 6;
+            dword_20021FC[i].textBox.font = &font_80B01A8[1];
+        }
 
-//         // }
-//         // while();
-//     }
-// }
+        dword_20021FC[i].active = TRUE;
+        dword_20021FC[i].text = text;
+        dword_20021FC[i].timer = 0;
+        dword_20021FC[i].delay = delay << 16;
+        dword_20021FC[i].width = sub_8025870(text, &dword_20021FC[i].textBox);
+        dword_20021FC[i].textBox.xPosition = (240 - dword_20021FC[i].width) >> 1;
+        dword_20021FC[i].textBox.yPosition = 170;
+        dword_20021FC[i].y = 170 << 16;
+        j++;
+    }
+
+    gCreditsScrollSpeed = 0x6000;
+
+    gCreditsCongratsLine.textBox.letterSpacing = -2;
+    gCreditsCongratsLine.textBox.field_12 = 0;
+    gCreditsCongratsLine.textBox.field_A = 1;
+    gCreditsCongratsLine.textBox.size = 240;
+    gCreditsCongratsLine.textBox.palette = 1;
+    gCreditsCongratsLine.textBox.stringOffset = 0;
+    gCreditsCongratsLine.textBox.field_11 = 6;
+    gCreditsCongratsLine.textBox.font = &font_80B01A8[2];
+    gCreditsCongratsLine.active = TRUE;
+
+    switch (gLanguage) {
+        case 0:
+            gCreditsCongratsLine.text = str_0806844C;
+            break;
+
+        case 1:
+            gCreditsCongratsLine.text = str_08068480;
+            break;
+
+        case 3:
+            gCreditsCongratsLine.text = str_080684AC;
+            break;
+
+        case 2:
+            gCreditsCongratsLine.text = str_080684E0;
+            break;
+
+        case 4:
+            gCreditsCongratsLine.text = str_0806850C;
+            break;
+    }
+
+    gCreditsCongratsLine.timer = 0;
+    gCreditsCongratsLine.delay = 0;
+    gCreditsCongratsLine.width = sub_8025870(gCreditsCongratsLine.text, &gCreditsCongratsLine.textBox);
+    gCreditsCongratsLine.textBox.xPosition = (240 - gCreditsCongratsLine.width) >> 1;
+    gCreditsCongratsLine.textBox.yPosition = 170;
+    gCreditsCongratsLine.y = 170 << 16;
+
+    byte_20021F0 = TRUE;
+    sub_080593D0(10, 0);
+
+    if (gCanChangeBgm) {
+        audio_start_tune(15);
+    }
+
+    sub_8026E48(4095, 1, 1);
+}
+#endif
