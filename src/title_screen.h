@@ -1,8 +1,7 @@
-#ifndef GUARD_PREGAME_H
-#define GUARD_PREGAME_H
+#ifndef GUARD_TITLE_SCREEN_H
+#define GUARD_TITLE_SCREEN_H
 
-void InitPregame(void);
-void ExecutePregame(void);
+void title_screen_run(void);
 void ShowEraseData(void);
 
 #endif

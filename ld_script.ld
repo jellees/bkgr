@@ -103,7 +103,7 @@ SECTIONS
         src/save.o(.bss);
         src/random.o(.bss);
         src/audio_a.o(.bss);
-        src/pause_menu.o(.bss);
+        src/ingame_menu.o(.bss);
 
         . = 0x0003F8B4;
         dword_203F8B4 = .; . += 4;
@@ -271,7 +271,7 @@ SECTIONS
         src/room.o(.text);
         asm/room.o(.text);
         src/player.o(.text);
-        src/pregame.o(.text);
+        src/title_screen.o(.text);
         asm/chunk9.o(.text);
         src/heap.o(.text);
         asm/chunk6.o(.text);
@@ -282,7 +282,7 @@ SECTIONS
         src/random.o(.text);
         asm/random.o(.text);
         src/audio_a.o(.text);
-        src/pause_menu.o(.text);
+        src/ingame_menu.o(.text);
         asm/chunk8.o(.text);
         src/script.o(.text);
         asm/chunk13.o(.text);

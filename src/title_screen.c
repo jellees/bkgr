@@ -2,7 +2,7 @@
 #include "common.h"
 #include "sprite.h"
 #include "menu.h"
-#include "pause_menu.h"
+#include "ingame_menu.h"
 #include "save.h"
 #include "main.h"
 #include "room.h"
@@ -18,7 +18,7 @@ static int sub_80246C8(void);
 static void ShowLanguageSelect(void);
 static void ShowFlashscreens(void);
 
-void InitPregame(void) {
+static void title_screen_init_display(void) {
     byte_20021F0 = 0;
     dword_20021F4 = 0x10000;
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP | DISPCNT_MODE_4;
@@ -28,13 +28,13 @@ void InitPregame(void) {
     DmaTransfer32(byte_83FD254, (void*)OBJ_PLTT, 128);
 }
 
-void ExecutePregame(void) {
+void title_screen_run(void) {
     byte_2000335 = 0;
     byte_20021F9 = 0;
     dword_203F4DC = 0;
 
     if (!load_save_header()) {
-        gPauseMenuLanguage = 0;
+        gLanguage = 0;
         byte_2000335 = 1;
         byte_20021F9 = 1;
         byte_20021F8 = 0;
@@ -51,7 +51,7 @@ void ExecutePregame(void) {
         }
     }
 
-    InitPregame();
+    title_screen_init_display();
     reset_volume();
     ShowFlashscreens();
     ShowSelectGame(ShowPressStart());
@@ -77,7 +77,7 @@ static void ShowSelectGame(int a1) {
     gOBJTileFramePtr = (u32*)OBJ_VRAM0;
     gOBJTileCount = 0;
 
-    menu_load(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
+    menu_load(MENU_GAME_OR_CONTINUE, gLanguage);
     gMenuId = MENU_GAME_OR_CONTINUE;
     gMenuParentId = -1;
 
@@ -116,7 +116,7 @@ static void ShowSelectGame(int a1) {
                 }
 
                 id2 = gMenuId;
-                menu_load(id2, gPauseMenuLanguage);
+                menu_load(id2, gLanguage);
             }
         } else if (gKeysDown & A_BUTTON || gKeysDown & START_BUTTON) {
             if (sub_8024200()) {
@@ -197,7 +197,7 @@ static bool32 sub_8024200(void) {
                     if (sub_80246C8()) {
                         return 1;
                     }
-                    menu_load(MENU_GAME_OR_CONTINUE, gPauseMenuLanguage);
+                    menu_load(MENU_GAME_OR_CONTINUE, gLanguage);
                     gMenuId = MENU_GAME_OR_CONTINUE;
                     gMenuParentId = -1;
                     menu_cursor_down();
@@ -258,23 +258,23 @@ static bool32 sub_8024200(void) {
         case MENU_LANGUAGE:
             switch (menu_get_cursor()) {
                 case 0:
-                    gPauseMenuLanguage = 0;
+                    gLanguage = 0;
                     return TRUE;
 
                 case 1:
-                    gPauseMenuLanguage = 1;
+                    gLanguage = 1;
                     return TRUE;
 
                 case 2:
-                    gPauseMenuLanguage = 2;
+                    gLanguage = 2;
                     return TRUE;
 
                 case 3:
-                    gPauseMenuLanguage = 3;
+                    gLanguage = 3;
                     return TRUE;
 
                 case 4:
-                    gPauseMenuLanguage = 4;
+                    gLanguage = 4;
                     return TRUE;
 
                 default:
@@ -408,7 +408,7 @@ static int ShowPressStart(void) {
         ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
         if (gKeysDown & START_BUTTON || gKeysDown & A_BUTTON) {
-            if (gPauseMenuLanguage == 0xFF) {
+            if (gLanguage == 0xFF) {
                 FadeOutObjects(2, 2);
                 REG_BG1CNT |= BGCNT_PRIORITY(3);
                 SetTextSpriteCount(0);
@@ -461,7 +461,7 @@ static int sub_80246C8(void) {
 
     text = NULL;
 
-    switch (gPauseMenuLanguage) {
+    switch (gLanguage) {
         case 0:
             text = (u8*)0x8068048;
             break;
@@ -485,7 +485,7 @@ static int sub_80246C8(void) {
 
     v3 = sub_8025870(text, &textbox);
 
-    menu_load(MENU_FILE_SELECT, gPauseMenuLanguage);
+    menu_load(MENU_FILE_SELECT, gLanguage);
     gMenuParentId = gMenuId;
     gMenuId = MENU_FILE_SELECT;
 
@@ -652,7 +652,7 @@ void ShowEraseData(void) {
     REG_BG2PC = 0;
     REG_BG2PA = 256;
     REG_BG2PD = 256;
-    InitPregame();
+    title_screen_init_display();
 
     tb1.letterSpacing = 1;
     tb1.field_12 = 0;

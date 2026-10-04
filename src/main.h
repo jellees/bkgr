@@ -10,7 +10,7 @@ struct struc_44;
 
 extern s32 dword_2000318;
 extern s32 dword_200031C;
-extern u8 gPauseMenuLanguage;
+extern u8 gLanguage;
 extern u32* gMatrices;
 extern u32 gMatricesCount;
 extern struct struc_200032C* dword_200032C;

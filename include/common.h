@@ -570,7 +570,7 @@ extern void sub_8015FD4(void);
 extern void sub_080161CC(u8);
 extern void RoomObjPaletteToVram(int);
 
-// Part of pregame.c?
+// Part of title_screen.c?
 extern void sub_8025278(void);
 
 extern void SetTextSpriteCount(int);

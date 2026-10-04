@@ -2146,7 +2146,7 @@ static bool32 script_cmd_display_scene_transition(int textType, int _, int __, i
             break;
 
         case 0:
-            switch (gPauseMenuLanguage) {
+            switch (gLanguage) {
                 case 0:
                     text = dword_808D5D8;
                     break;
@@ -2173,7 +2173,7 @@ static bool32 script_cmd_display_scene_transition(int textType, int _, int __, i
             break;
 
         case 1:
-            switch (gPauseMenuLanguage) {
+            switch (gLanguage) {
                 case 0:
                     text = dword_808D5E8;
                     break;
@@ -2459,7 +2459,7 @@ static bool32 sub_8060568(int _, int __, int ___, int ____) {
     v6 = 0;
     string = 0;
 
-    switch (gPauseMenuLanguage) {
+    switch (gLanguage) {
         case 0:
             string = aRank;
             v6 = dword_86AD47C[v5 - 1];

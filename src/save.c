@@ -77,7 +77,7 @@ bool32 load_save_header(void) {
         return FALSE;
     }
 
-    gPauseMenuLanguage = buffer[5];
+    gLanguage = buffer[5];
 
     if (ReadEepromDword(1, (u16*)gBuffer)) {
         ASSERT(0);
@@ -130,7 +130,7 @@ bool32 save_game(u32 game, bool32 a2) {
         buffer[4] = word_203EAD6 >> 8;
         v2 += buffer[4];
 
-        buffer[5] = gPauseMenuLanguage;
+        buffer[5] = gLanguage;
         v2 += buffer[5];
 
         buffer[6] = v2;

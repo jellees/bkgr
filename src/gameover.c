@@ -1,7 +1,7 @@
 #include "global.h"
 #include "common.h"
 #include "menu.h"
-#include "pause_menu.h"
+#include "ingame_menu.h"
 #include "main.h"
 #include "room.h"
 #include "player.h"
@@ -33,7 +33,7 @@ void sub_80629E8() {
     end_all_scripts(1);
     byte_203F4E0 = 0;
     show_gameover_screen();
-    menu_load(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
+    menu_load(MENU_CONTINUE_OR_QUIT, gLanguage);
     gMenuId = MENU_CONTINUE_OR_QUIT;
     gMenuParentId = -1;
     sub_8062D04();
@@ -181,7 +181,7 @@ static void sub_8062D04(void) {
                             break;
                     }
 
-                    menu_load(gMenuId, gPauseMenuLanguage);
+                    menu_load(gMenuId, gLanguage);
                 }
             } else if (gKeysDown & A_BUTTON) {
                 if (sub_8062FC4(&textbox, string, &objCount)) {
@@ -243,7 +243,7 @@ static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount) 
                 case 1:
                     gMenuParentId = gMenuId;
                     gMenuId = MENU_YES_NO;
-                    menu_load(MENU_YES_NO, gPauseMenuLanguage);
+                    menu_load(MENU_YES_NO, gLanguage);
                     string[0] = 'A';
                     string[1] = 'R';
                     string[2] = 'E';
@@ -273,7 +273,7 @@ static bool32 sub_8062FC4(struct TextBox* textbox, char* string, int* objCount) 
                 case 1:
                     gMenuParentId = -1;
                     gMenuId = MENU_CONTINUE_OR_QUIT;
-                    menu_load(MENU_CONTINUE_OR_QUIT, gPauseMenuLanguage);
+                    menu_load(MENU_CONTINUE_OR_QUIT, gLanguage);
                     string[0] = 'G';
                     string[1] = 'A';
                     string[2] = 'M';

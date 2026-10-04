@@ -2,7 +2,7 @@
 #include "common.h"
 #include "main.h"
 #include "audio_b.h"
-#include "pause_menu.h"
+#include "ingame_menu.h"
 #include "debug.h"
 #include "room.h"
 #include "sprite.h"

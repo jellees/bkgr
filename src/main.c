@@ -3,13 +3,13 @@
 #include "sprite.h"
 #include "audio_a.h"
 #include "audio_b.h"
-#include "pause_menu.h"
+#include "ingame_menu.h"
 #include "save.h"
 #include "room.h"
 #include "debug.h"
 #include "player.h"
 #include "heap.h"
-#include "pregame.h"
+#include "title_screen.h"
 #include "menu.h"
 #include "random.h"
 #include "script.h"
@@ -22,7 +22,7 @@ static const int dThunderSfxIds[3] = { 211, 212, 213 };
 u8 byte_2000314;
 s32 dword_2000318;
 s32 dword_200031C;
-u8 gPauseMenuLanguage;
+u8 gLanguage;
 u32* gMatrices;
 u32 gMatricesCount;
 struct struc_200032C* dword_200032C;
@@ -597,7 +597,7 @@ static void start_game() {
         ShowEraseData();
     }
 
-    ExecutePregame();
+    title_screen_run();
 
     DmaFill32(170, (void*)OAM, 256);
     REG_BLDCNT = gColorSpecEffectsSel;
@@ -3025,7 +3025,7 @@ void sub_800E204(u8* buffer, s32* a2, u32* a3) {
     r6 += buffer[r5++];
     buffer[r5] = gSfxMainVolume;
     r6 += buffer[r5++];
-    buffer[r5] = gPauseMenuLanguage;
+    buffer[r5] = gLanguage;
     r6 += buffer[r5++];
 
     *a2 = r5;
@@ -3099,7 +3099,7 @@ void sub_800E408(u8* buffer, s32* a2, u32* a3) {
     r6 += buffer[r5++];
     gSfxMainVolume = buffer[r5];
     r6 += buffer[r5++];
-    gPauseMenuLanguage = buffer[r5];
+    gLanguage = buffer[r5];
     r6 += buffer[r5++];
 
     *a2 = r5;
@@ -3448,7 +3448,7 @@ void init_room_name() {
         gRoomNameTextBox.stringOffset = 0;
         gRoomNameTextBox.field_11 = 6;
         gRoomNameTextBox.font = &font_80B01A8[2];
-        switch (gPauseMenuLanguage) {
+        switch (gLanguage) {
             case 0:
                 gRoomName = unk_86AD9FC[gRoomNameNumber - 1];
                 break;
@@ -3570,7 +3570,7 @@ void sub_0800F02C(int* a1, int a2, int a3) {
             break;
     }
 
-    switch (gPauseMenuLanguage) {
+    switch (gLanguage) {
         case 0:
             switch (a3) {
                 case 0:

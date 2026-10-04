@@ -170,7 +170,7 @@ void open_pause_menu(void) {
     gSaveGameTextBoxes[5].field_11 = 6;
     gSaveGameTextBoxes[5].font = &font_80B01A8[1];
 
-    switch (gPauseMenuLanguage) {
+    switch (gLanguage) {
         case 0:
             gLevelNameTexts = &unk_86AD9E0;
             dword_203F554 = &str_08067DC0;
@@ -327,7 +327,7 @@ void open_pause_menu(void) {
 static void init(void) {
     show_pause_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
 
-    menu_load(MENU_PAUSE_MAIN, gPauseMenuLanguage);
+    menu_load(MENU_PAUSE_MAIN, gLanguage);
     gMenuId = MENU_PAUSE_MAIN;
     gMenuParentId = -1;
 
@@ -411,7 +411,7 @@ static void exec_pause_menu(void) {
                             break;
                     }
 
-                    menu_load(gMenuId, gPauseMenuLanguage);
+                    menu_load(gMenuId, gLanguage);
                 }
             } else if (gKeysDown & A_BUTTON) {
                 if (choose_sub_menu(&changeMenu)) {
@@ -421,7 +421,7 @@ static void exec_pause_menu(void) {
 
                 if (changeMenu) {
                     changeMenu = FALSE;
-                    menu_load(gMenuId, gPauseMenuLanguage);
+                    menu_load(gMenuId, gLanguage);
                     show_pause_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
                     SetObjectsFullAlpha();
                     fadeIn = 1;
@@ -441,7 +441,7 @@ static void exec_pause_menu(void) {
                 break;
             }
 
-            menu_load(gMenuId, gPauseMenuLanguage);
+            menu_load(gMenuId, gLanguage);
             loadMenu = FALSE;
         }
 
@@ -803,7 +803,7 @@ static bool32 exec_save_menu(void) {
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
 
-    menu_load(MENU_FILE_SELECT, gPauseMenuLanguage);
+    menu_load(MENU_FILE_SELECT, gLanguage);
     gMenuParentId = gMenuId;
     gMenuId = MENU_FILE_SELECT;
 
@@ -1135,7 +1135,7 @@ static void exec_options_menu(void) {
     REG_BLDCNT = BLDCNT_TGT2_ALL | BLDCNT_EFFECT_NONE;
     REG_BLDALPHA = BLDALPHA_BLEND(7, 9);
 
-    menu_load(MENU_PAUSE_OPTIONS, gPauseMenuLanguage);
+    menu_load(MENU_PAUSE_OPTIONS, gLanguage);
     gMenuParentId = gMenuId;
     gMenuId = MENU_PAUSE_OPTIONS;
 
@@ -1180,8 +1180,8 @@ static void exec_options_menu(void) {
                     break;
 
                 case 3:
-                    if (gPauseMenuLanguage != 0) {
-                        gPauseMenuLanguage--;
+                    if (gLanguage != 0) {
+                        gLanguage--;
                         sub_8025E44(gLoadedRoomLevel);
                     }
                     break;
@@ -1216,8 +1216,8 @@ static void exec_options_menu(void) {
                     break;
 
                 case 3:
-                    if (gPauseMenuLanguage < 4) {
-                        gPauseMenuLanguage++;
+                    if (gLanguage < 4) {
+                        gLanguage++;
                         sub_8025E44(gLoadedRoomLevel);
                     }
                     break;
@@ -1384,7 +1384,7 @@ void init_arcade_menu(void) {
     gArcadeTextBox.field_11 = 6;
     gArcadeTextBox.font = &font_80B01A8[2];
 
-    switch (gPauseMenuLanguage) {
+    switch (gLanguage) {
         case 0:
             gNKreditzText = str_806579C;
             gArcadeText = str_80657A8;
@@ -1438,7 +1438,7 @@ void init_arcade_menu(void) {
     DmaTransfer32(&unk_83FD254, (void*)OBJ_PLTT, 128);
     DmaTransferObjPalette(&unk_83FD974, 5, 5);
 
-    menu_load(MENU_ARCADE_1, gPauseMenuLanguage);
+    menu_load(MENU_ARCADE_1, gLanguage);
     gMenuId = MENU_ARCADE_1;
     gMenuParentId = -1;
 
@@ -1480,7 +1480,7 @@ void sub_8047000(bool32 a1) {
     DmaTransfer32(&unk_83FD254, (void*)OBJ_PLTT, 128);
     DmaTransferObjPalette(&unk_83FD974, 5, 5);
 
-    menu_load(MENU_ARCADE_1, gPauseMenuLanguage);
+    menu_load(MENU_ARCADE_1, gLanguage);
     gMenuId = MENU_ARCADE_1;
     gMenuParentId = -1;
 
@@ -1526,10 +1526,10 @@ void exec_arcade_menu(void) {
         int entry = menu_get_cursor();
         if (entry == 4) {
             if (gMenuId == MENU_ARCADE_1) {
-                menu_load(MENU_ARCADE_2, gPauseMenuLanguage);
+                menu_load(MENU_ARCADE_2, gLanguage);
                 gMenuId = MENU_ARCADE_2;
             } else {
-                menu_load(MENU_ARCADE_1, gPauseMenuLanguage);
+                menu_load(MENU_ARCADE_1, gLanguage);
                 gMenuId = MENU_ARCADE_1;
             }
         } else {
@@ -1551,7 +1551,7 @@ void exec_arcade_menu(void) {
         }
     } else if (gKeysDown & B_BUTTON) {
         if (gMenuId == MENU_ARCADE_2) {
-            menu_load(MENU_ARCADE_1, gPauseMenuLanguage);
+            menu_load(MENU_ARCADE_1, gLanguage);
             gMenuId = MENU_ARCADE_1;
         } else {
             sub_80270AC(4095, 1);

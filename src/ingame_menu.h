@@ -1,5 +1,5 @@
-#ifndef GUARD_PAUSE_MENU_H
-#define GUARD_PAUSE_MENU_H
+#ifndef GUARD_INGAME_MENU_H
+#define GUARD_INGAME_MENU_H
 
 extern u8 gClockStatus;
 extern s32 dword_203F4DC;
