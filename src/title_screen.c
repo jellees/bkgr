@@ -1013,7 +1013,7 @@ void sub_8025000(void) {
 }
 #endif
 
-// https://decomp.me/scratch/ilNJ5 
+// https://decomp.me/scratch/ilNJ5
 #ifndef NONMATCHING
 NAKED void sub_8025278(void) {
     asm_unified(".include \"asm/nonmatching/sub_8025278.s\"");
