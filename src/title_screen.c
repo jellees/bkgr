@@ -31,6 +31,11 @@ extern char str_08068480[];
 extern char str_080684AC[];
 extern char str_080684E0[];
 extern char str_0806850C[];
+extern char str_0808D604[];
+extern char str_0808DC20[];
+extern char str_0808E328[];
+extern char str_0808E970[];
+extern char str_0808EFB0[];
 
 static void ShowSelectGame(int);
 static bool32 sub_8024200(void);
@@ -1007,3 +1012,229 @@ void sub_8025000(void) {
     sub_8026E48(4095, 1, 1);
 }
 #endif
+
+// https://decomp.me/scratch/ilNJ5 
+#ifndef NONMATCHING
+NAKED void sub_8025278(void) {
+    asm_unified(".include \"asm/nonmatching/sub_8025278.s\"");
+}
+#else
+void sub_8025278(void) {
+    fx32 step;
+    bool32 finished;
+    int i;
+
+    if (!byte_20021F0) {
+        return;
+    }
+
+    step = CallARM_FX_Mul16(gCreditsScrollSpeed, dword_20021F4);
+    finished = TRUE;
+
+    for (i = 0; i < dword_2002200; i++) {
+        if (dword_20021FC[i].active) {
+            finished = FALSE;
+            dword_20021FC[i].y -= step;
+
+            if (dword_20021FC[i].y <= FX32_CONST(-18)) {
+                dword_20021FC[i].active = FALSE;
+            } else {
+                dword_20021FC[i].textBox.yPosition = dword_20021FC[i].y >> 16;
+                dword_20021FC[i].textBox.xPosition = (240 - dword_20021FC[i].width) >> 1;
+                dword_20021FC[i].textBox.stringOffset = 0;
+                AddStringToBuffer(&dword_20021FC[i].textBox, dword_20021FC[i].text);
+
+                if (dword_20021FC[i].timer < dword_20021FC[i].delay) {
+                    dword_20021FC[i].timer += step;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (finished) {
+        gCreditsCongratsLine.y -= gCreditsScrollSpeed;
+
+        if (gCreditsCongratsLine.y <= FX32_CONST(72)) {
+            gCreditsScrollSpeed = 0;
+            sub_805B278();
+        }
+
+        gCreditsCongratsLine.textBox.yPosition = gCreditsCongratsLine.y >> 16;
+        gCreditsCongratsLine.textBox.xPosition = (240 - gCreditsCongratsLine.width) >> 1;
+        gCreditsCongratsLine.textBox.stringOffset = 0;
+        AddStringToBuffer(&gCreditsCongratsLine.textBox, gCreditsCongratsLine.text);
+    }
+}
+#endif
+
+void sub_8025368(void) {
+    struct TextBox textBox;
+    char* text;
+    bool32 fadeIn;
+    int frames;
+
+    textBox.letterSpacing = 1;
+    textBox.field_12 = 0;
+    textBox.field_A = 2;
+    textBox.size = 208;
+    textBox.palette = 10;
+    textBox.stringOffset = 0;
+    textBox.field_11 = 6;
+    textBox.font = &font_80B01A8[1];
+    textBox.field_13 = 0;
+    text = NULL;
+
+    switch (gLanguage) {
+        case 0:
+            text = (char*)&str_08068084;
+            break;
+
+        case 1:
+            text = (char*)&str_08068120;
+            break;
+
+        case 3:
+            text = (char*)&str_080681CC;
+            break;
+
+        case 2:
+            text = (char*)&str_08068274;
+            break;
+
+        case 4:
+            text = (char*)&str_08068314;
+            break;
+    }
+
+    SetObjectsFullAlpha();
+    fadeIn = TRUE;
+    frames = 3;
+
+    do {
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+
+        textBox.xPosition = 16;
+        textBox.yPosition = 60;
+        textBox.stringOffset = 0;
+        AddStringToBuffer(&textBox, text);
+
+        RenderText();
+        CheckStacks();
+        SyncVblank();
+        update_video();
+        SkipVblank();
+
+        if (fadeIn) {
+            sub_08026BA8(2, 0);
+            fadeIn = FALSE;
+        }
+    } while (--frames != 0);
+
+    sub_80330F8();
+    save_game(dword_203F4DC, byte_2000335);
+    audio_set_tune_vol(dVolumes[0]);
+    gIsSavingGame = TRUE;
+    sub_80271A4(4095, 0);
+    sub_800A594();
+}
+
+void sub_80254E0(void) {
+    struct TextBox textBox;
+    bool32 fadeIn;
+    char* text;
+    u16 offset;
+    u16 nextOffset;
+    int timer;
+
+    textBox.letterSpacing = 1;
+    textBox.field_12 = 0;
+    textBox.field_A = 4;
+    textBox.size = 220;
+    textBox.palette = 10;
+    textBox.stringOffset = 0;
+    textBox.field_11 = 6;
+    textBox.font = &font_80B01A8[1];
+    textBox.field_13 = 0;
+    text = NULL;
+
+    switch (gLanguage) {
+        case 0:
+            text = str_0808D604;
+            break;
+
+        case 1:
+            text = str_0808DC20;
+            break;
+
+        case 3:
+            text = str_0808E328;
+            break;
+
+        case 2:
+            text = str_0808E970;
+            break;
+
+        case 4:
+            text = str_0808EFB0;
+            break;
+    }
+
+    SetObjectsFullAlpha();
+    fadeIn = TRUE;
+    offset = 0;
+    nextOffset = 0;
+    timer = 420;
+
+    while (TRUE) {
+        ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
+
+        if (byte_20021F8 && (gKeysDown & B_BUTTON)) {
+            FadeOutObjects(2, 0);
+            SetTextSpriteCount(0);
+            byte_2000F55 = TRUE;
+            return;
+        }
+
+        SetTextSpriteCount(0);
+        DmaFill32(170, gOAMBuffer1, 256);
+        gOAMBufferFramePtr = gOAMBuffer1;
+        gOAMBufferEnd = &gOAMBuffer1[0x100];
+        gOBJTileFramePtr = (u32*)OBJ_VRAM0;
+        gOBJTileCount = 0;
+
+        if (--timer == 0 || (gKeysDown & A_BUTTON)) {
+            timer = 420;
+            FadeOutObjects(2, 0);
+            fadeIn = TRUE;
+
+            if (textBox.field_13) {
+                return;
+            }
+
+            offset = nextOffset;
+        }
+
+        textBox.xPosition = 10;
+        textBox.yPosition = 50;
+        textBox.stringOffset = offset;
+        AddStringToBuffer(&textBox, text);
+        nextOffset = textBox.stringOffset;
+
+        RenderText();
+        CheckStacks();
+        SyncVblank();
+        update_video();
+        SkipVblank();
+
+        if (fadeIn) {
+            sub_08026BA8(2, 0);
+            fadeIn = FALSE;
+        }
+    }
+}

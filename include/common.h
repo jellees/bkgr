@@ -629,6 +629,7 @@ extern bool32 sub_802FDC8(void);
 extern int count_active_player_projectiles(void);
 extern void sub_8030C54(void);
 extern void sub_08030C68(void);
+extern void sub_80330F8(void);
 extern int is_obj_disabled(int, int);
 extern void run_obj_behavior(int, int);
 extern void sub_8034460(int, int, int, int);
@@ -654,6 +655,7 @@ extern void sub_8049A1C(void);
 
 extern void sub_80524D8(void);
 extern void sub_80528D8(int);
+extern void sub_805B278(void);
 extern void sub_08052B58(int, int);
 extern void sub_08055A14(int, int);
 extern void sub_080593D0(int, int);
