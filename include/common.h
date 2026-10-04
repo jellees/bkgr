@@ -1335,8 +1335,4 @@ extern char str_RM_POISONROOM[];
 extern char str_RM_MUMBO_FURN[];
 extern char str_RM_NEXT_8[];
 
-extern char gSaveFileString1[];
-extern char gSaveFileString2[];
-extern char gSaveFileString3[];
-
 #endif

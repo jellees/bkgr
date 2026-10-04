@@ -4,6 +4,7 @@
 #include "heap.h"
 #include "sprite.h"
 #include "menu.h"
+#include "main.h"
 
 struct Menu {
     u16 xPosition;
