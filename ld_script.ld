@@ -300,6 +300,7 @@ SECTIONS
         asm/data.o(.rodata);
         src/hud.o(.rodata);
         asm/data3.o(.rodata);
+        src/save.o(.rodata);
         src/random.o(.rodata);
         asm/data4.o(.rodata);
         src/script.o(.rodata);

@@ -1008,7 +1008,7 @@ static bool32 exec_save_menu(void) {
             gSaveFiles[gameIdx].notes = gGameStatus.totalNotes;
             gSaveFiles[gameIdx].empty = 0;
             setup_save_file_strings();
-            save_game(gameIdx, byte_2000335);
+            save_game(gameIdx, gSaveHeaderDirty);
             heap_check(HEAP_GENERAL);
             ASSERT(heap_has_tag(HEAP_GENERAL, 9) == FALSE);
 

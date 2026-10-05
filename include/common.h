@@ -875,7 +875,6 @@ extern s32 dword_80CEBC4;
 extern u32 Abs(u32); // return type is u32, can tell by the branch instruction
 
 extern u32 dword_80CC290[8];
-extern u32 dword_80AF4F0[4];
 extern struct Font font_80B01A8[3];
 
 extern struct RoomIndex dRoomIndexes[38];

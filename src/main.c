@@ -31,7 +31,7 @@ u8 byte_2000331;
 u8 byte_2000332;
 u8 byte_2000333;
 u8 byte_2000334;
-u8 byte_2000335;
+bool8 gSaveHeaderDirty;
 u16 gColorSpecEffectsSel;
 u16 gDisplayControl;
 u16 gBG0Control;
@@ -547,7 +547,7 @@ static void start_game() {
     gClockStatus = 0;
     byte_2000F55 = 0;
     byte_2000F57 = 0;
-    gIsSavingGame = 0;
+    gAudioSuspended = FALSE;
     gMatricesCount = 0;
     gMatrices = NULL;
 
@@ -672,7 +672,7 @@ static void sub_800A37C() {
     ASSERT(dword_2000F6C == 0);
     dword_2000F6C++;
 
-    if (!gIsSavingGame) {
+    if (!gAudioSuspended) {
         sub_8045044();
     }
 
@@ -748,7 +748,7 @@ static void sub_800A528() {
     ASSERT(dword_2000F68 == 0);
     dword_2000F68++;
 
-    if (!gIsSavingGame) {
+    if (!gAudioSuspended) {
         seq_update_p();
     }
 
@@ -3258,7 +3258,7 @@ void init_save_files() {
         gSaveFiles[i].notes = 0;
         gSaveFiles[i].empty = TRUE;
 
-        if (sub_8044D70(i) == 1) {
+        if (check_saved_game(i) == SAVED_GAME_OK) {
             v0 = 1;
             if (load_game(i)) {
                 sub_8038A34();
@@ -3276,8 +3276,8 @@ void init_save_files() {
     }
 
     if (!v0) {
-        word_203EAD6++;
-        byte_2000335 = 1;
+        gSaveId++;
+        gSaveHeaderDirty = TRUE;
     }
 
     sub_8030C54();

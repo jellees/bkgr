@@ -55,13 +55,13 @@ static void title_screen_init_display(void) {
 }
 
 void title_screen_run(void) {
-    byte_2000335 = 0;
+    gSaveHeaderDirty = FALSE;
     byte_20021F9 = 0;
     dword_203F4DC = 0;
 
     if (!load_save_header()) {
         gLanguage = 0;
-        byte_2000335 = 1;
+        gSaveHeaderDirty = TRUE;
         byte_20021F9 = 1;
         byte_20021F8 = 0;
         reset_save_files();
@@ -71,7 +71,7 @@ void title_screen_run(void) {
         setup_save_file_strings();
         byte_20021F8 = 1;
 
-        if ((gSaveFiles[0].empty && gSaveFiles[1].empty && gSaveFiles[2].empty) || byte_2000335) {
+        if ((gSaveFiles[0].empty && gSaveFiles[1].empty && gSaveFiles[2].empty) || gSaveHeaderDirty) {
             byte_20021F9 = 1;
             byte_20021F8 = 0;
         }
@@ -1137,9 +1137,9 @@ void sub_8025368(void) {
     } while (--frames != 0);
 
     sub_80330F8();
-    save_game(dword_203F4DC, byte_2000335);
+    save_game(dword_203F4DC, gSaveHeaderDirty);
     audio_set_tune_vol(dVolumes[0]);
-    gIsSavingGame = TRUE;
+    gAudioSuspended = TRUE;
     sub_80271A4(4095, 0);
     sub_800A594();
 }

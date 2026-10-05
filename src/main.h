@@ -19,7 +19,7 @@ extern u8 byte_2000331;
 extern u8 byte_2000332;
 extern u8 byte_2000333;
 extern u8 byte_2000334;
-extern u8 byte_2000335;
+extern bool8 gSaveHeaderDirty;
 extern u16 gColorSpecEffectsSel;
 extern u16 gDisplayControl;
 extern u16 gBG0Control;
