@@ -230,7 +230,7 @@ void EnableBackgrounds(void) {
 
 #define CHARBASE_MASK ~BGCNT_CHARBASE(3)
 
-void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4) {
+void SetupRoom(u32 room, u32 warp, bool32 changeMusic, enum RoomLoadMode mode) {
     u16 displayBGFlag = 0;
 
     ASSERT(room < ROOM_COUNT);
@@ -266,7 +266,7 @@ void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4) {
 
     setup_collision_warp(gRoomHeader.collision, warp);
     sub_8038FA0(gLoadedRoomLevel);
-    setup_entities(room, a4, gRoomHeader.entities);
+    setup_entities(room, mode, gRoomHeader.entities);
     DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
     DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);
 
@@ -707,7 +707,7 @@ void sub_08012E90(u32 room) {
     gBGControlActions = 0;
 }
 
-void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5) {
+void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, enum RoomLoadMode mode) {
     u16 displayBGFlag = 0;
 
     ASSERT(room < ROOM_COUNT);
@@ -743,7 +743,7 @@ void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5) {
 
     setup_collision_xyz(gRoomHeader.collision, a2, a3, a4);
     sub_8038FA0(gLoadedRoomLevel);
-    setup_entities(room, a5, gRoomHeader.entities);
+    setup_entities(room, mode, gRoomHeader.entities);
 
     DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
     DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);

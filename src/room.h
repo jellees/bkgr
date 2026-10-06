@@ -18,9 +18,9 @@ void ResetTileAnimCount(void);
 void EnableBGAlphaBlending(void);
 void DisableBackgrounds(void);
 void EnableBackgrounds(void);
-void SetupRoom(u32 room, u32 warp, bool32 changeMusic, u32 a4);
+void SetupRoom(u32 room, u32 warp, bool32 changeMusic, enum RoomLoadMode mode);
 void sub_08012E90(u32 room);
-void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, u32 a5);
+void sub_08013378(u32 room, u32 a2, u32 a3, u32 a4, enum RoomLoadMode mode);
 void sub_801392C(void);
 void sub_80139F0(s32 a1);
 

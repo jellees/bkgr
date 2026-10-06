@@ -176,3 +176,7 @@ byte_30043A5 = 0x30043A5;
 dword_80CC788 = 0x80CC788;
 dword_80CCFF8 = 0x80CCFF8;
 dword_80CE43C = 0x80CE43C;
+dActorPoolSizes = 0x80A7474;
+dActorTypeFlags = 0x80CC2B0;
+dActorTypeInfo = 0x80CC938;
+dActorHitboxes = 0x80CCFFC;

@@ -64,7 +64,7 @@ bool8 gRecordInput;
 struct Sprite gPlayerSprite;
 struct Sprite gPlayerShadowSprite;
 struct Sprite sprite_2000FAC;
-u32 dword_2000FC8;
+s32 dword_2000FC8;
 struct level_struc byte_2000FCC[6];
 struct GameStatus gGameStatus;
 struct SaveFile gSaveFiles[3];
@@ -626,7 +626,7 @@ static void start_game() {
         gClockEnabled = 1;
     } else {
         gLoadedRoomLevel = LEVEL_NONE;
-        SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
+        SetupRoom(gRoomGoal, gWarpGoal, 1, ROOM_LOAD_NORMAL);
 
         if (gLoadedRoomIndex == ROOM_MUMBOHUT) {
             gLoadedRoomLevel = gRoomLevelSaved;
@@ -1696,7 +1696,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
         sub_80270AC(4095, 1);
         gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
         gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
-        SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
+        SetupRoom(gRoomGoal, gWarpGoal, 1, ROOM_LOAD_NORMAL);
         reset_hud_elements();
     } else {
         switch (sub_0800C63C(room, a1->warpDestWarp)) {
@@ -1725,7 +1725,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
                         }
                     }
                 }
-                SetupRoom(room, a1->warpDestWarp, 1, 0);
+                SetupRoom(room, a1->warpDestWarp, 1, ROOM_LOAD_NORMAL);
                 break;
         }
     }
@@ -1797,7 +1797,7 @@ void load_room_directly(int room, int warp, bool32 setGoal) {
         sub_80270AC(4095, 1);
         gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
         gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
-        SetupRoom(gRoomGoal, gWarpGoal, 1, 0);
+        SetupRoom(gRoomGoal, gWarpGoal, 1, ROOM_LOAD_NORMAL);
         reset_hud_elements();
     } else {
         isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
@@ -1814,7 +1814,7 @@ void load_room_directly(int room, int warp, bool32 setGoal) {
             }
         }
 
-        SetupRoom(room, warp, 1, 0);
+        SetupRoom(room, warp, 1, ROOM_LOAD_NORMAL);
     }
 
     sub_8025E44(gLoadedRoomLevel);
@@ -1857,14 +1857,14 @@ void load_room_directly(int room, int warp, bool32 setGoal) {
     gPlayerSprite.attr0Flag9 = 0;
 }
 
-void sub_800C1E8(int room, fx32 xPos, fx32 yPos, fx32 zPos, int a5, u32 a6) {
+void sub_800C1E8(int room, fx32 xPos, fx32 yPos, fx32 zPos, int a5, enum RoomLoadMode mode) {
     bool32 isMusicChanged;
     u32 level;
 
     gShowRoomName = 0;
     level = gLoadedRoomLevel;
 
-    if (a6 != 2) {
+    if (mode != ROOM_LOAD_RESTORE) {
         end_all_scripts(1);
     }
 
@@ -1873,7 +1873,7 @@ void sub_800C1E8(int room, fx32 xPos, fx32 yPos, fx32 zPos, int a5, u32 a6) {
     isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
 
     sub_80270AC(4095, isMusicChanged);
-    sub_08013378(room, xPos, yPos, zPos, a6);
+    sub_08013378(room, xPos, yPos, zPos, mode);
     sub_8025E44(gLoadedRoomLevel);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
@@ -1934,7 +1934,7 @@ void sub_0800C388(int a1, int a2) {
     isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
 
     sub_80270AC(4095, isMusicChanged);
-    SetupRoom(room, a2, 1, 0);
+    SetupRoom(room, a2, 1, ROOM_LOAD_NORMAL);
     sub_8025E44(gLoadedRoomLevel);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
@@ -2602,7 +2602,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
     gRoomGoal = room;
     gWarpGoal = word_2001128;
 
-    SetupRoom(room, gWarpGoal, 1, 0);
+    SetupRoom(room, gWarpGoal, 1, ROOM_LOAD_NORMAL);
     sub_8025E44(gLoadedRoomLevel);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
@@ -2643,7 +2643,7 @@ void sub_800D8E8(int a1, char a2, char a3) {
     byte_203FA95 = 0;
     byte_203FA94 = a2;
     byte_203FA96 = a3;
-    SetupRoom(dword_203FA8C, dword_203FA90, 1, 0);
+    SetupRoom(dword_203FA8C, dword_203FA90, 1, ROOM_LOAD_NORMAL);
     sub_8025E44(gLoadedRoomLevel);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
@@ -2668,7 +2668,7 @@ void sub_800D8E8(int a1, char a2, char a3) {
 void sub_800DA04(int a1, int a2, int a3) {
     byte_20010B0 = 0;
     byte_203F4E0 = 0;
-    SetupRoom(dword_203F4E4, dword_203F4E8, 1, 0);
+    SetupRoom(dword_203F4E4, dword_203F4E8, 1, ROOM_LOAD_NORMAL);
 
     if (gCanChangeBgm) {
         audio_start_tune(15);

@@ -151,7 +151,7 @@ void sub_8027F14(void) {
     gActorPool1 = (struct Actor*)sub_8009DAC();
     gActorPool0 = (struct Actor*)sub_8009DAC();
     dword_203DFF0 = (void*)sub_8009DAC();
-    gEntitySection = (u32*)sub_8009DAC();
+    gEntitySection = (struct MapActorSection*)sub_8009DAC();
     if (dword_200032C) {
         heap_free(dword_200032C, 4);
         dword_200032C = NULL;
@@ -162,7 +162,7 @@ void sub_8027F14(void) {
     byte_2000332 = sub_8009DAC();
     byte_2000330 = sub_8009DAC();
     byte_2000331 = sub_8009DAC();
-    dword_2000FC8 = (u32)(void*)sub_8009DAC();
+    dword_2000FC8 = sub_8009DAC();
 }
 
 void sub_080281A8(void) {
@@ -193,4 +193,310 @@ void sub_080281A8(void) {
     byte_30043A5 = 0;
     DmaFill32(0, &stru_203E01C, sizeof(struct Actor) / 4);
     stru_203E01C.interactionKind = 2;
+}
+
+void setup_entities(u32 room, int mode, struct MapActorSection* section) {
+    int i;
+    int j;
+    int count1;
+    int count2;
+    int index;
+    int maxUid1;
+    int maxUid2;
+    u32 size;
+    struct MapActor* mapActor;
+    struct Actor* actor;
+
+    byte_203DFE8 = 0;
+    sub_8030C30();
+
+    switch (mode) {
+        case ROOM_LOAD_NORMAL:
+            gEntitySection = section;
+            heap_free_by_tag(0, 6);
+            break;
+        case ROOM_LOAD_STORE:
+            sub_8027C8C();
+            gEntitySection = section;
+            break;
+        case ROOM_LOAD_RESTORE:
+            heap_free_by_tag(0, 6);
+            sub_8062064(0, ROOM_LOAD_RESTORE);
+            sub_8047878(0, ROOM_LOAD_RESTORE);
+            sub_8027F14();
+            sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+            sub_8003894(dword_2000FC8, dword_80CC7EC[0]);
+            return;
+    }
+
+    dword_203DFB4 = NULL;
+    dword_203DFB8 = NULL;
+    dword_203DFBC = NULL;
+    dword_203DFC0 = NULL;
+
+    gActorPool0Capacity = dActorPoolSizes[room].pool0;
+    gActorPool1Capacity = dActorPoolSizes[room].pool1;
+    gActorPool2Capacity = dActorPoolSizes[room].pool2;
+    byte_203E00C = dActorPoolSizes[room].field_3;
+    gMaxProjectileCount = dActorPoolSizes[room].projectiles;
+
+    gActorPool0 = heap_alloc(gActorPool0Capacity * sizeof(struct Actor), 6, 0);
+    gActorPool1 = heap_alloc(gActorPool1Capacity * sizeof(struct Actor), 6, 0);
+    gActorPool2 = heap_alloc(gActorPool2Capacity * sizeof(struct Actor), 6, 0);
+    dword_203E000 = heap_alloc(byte_203E00C * sizeof(struct struc_203E000), 6, 0);
+    gProjectiles = heap_alloc(gMaxProjectileCount * sizeof(struct Projectile), 6, 0);
+
+    gActorPool0Count = 0;
+    gActorPool1Count = 0;
+    gActorPool2Count = 0;
+    byte_203DFD3 = 0;
+    gCurrentProjectileCount = 0;
+
+    for (i = 0; i < gActorPool0Capacity; i++) {
+        gActorPool0[i].isActive = FALSE;
+    }
+    for (i = 0; i < gActorPool1Capacity; i++) {
+        gActorPool1[i].isActive = FALSE;
+    }
+    for (i = 0; i < gActorPool2Capacity; i++) {
+        gActorPool2[i].isActive = FALSE;
+    }
+    for (i = 0; i < byte_203E00C; i++) {
+        dword_203E000[i].isActive = FALSE;
+    }
+    for (i = 0; i < gMaxProjectileCount; i++) {
+        gProjectiles[i].isActive = FALSE;
+    }
+
+    dword_203E010 = heap_alloc(gEntitySection->uidCount, 6, 0);
+    for (i = 0; i < gEntitySection->uidCount; i++) {
+        dword_203E010[i] = 0;
+    }
+
+    count1 = 0;
+    maxUid1 = 0;
+    count2 = 0;
+    maxUid2 = 0;
+    for (i = 0; i < gEntitySection->groupCount; i++) {
+        mapActor = gEntitySection->groups[i].actors;
+        for (j = 0; j < gEntitySection->groups[i].count; mapActor++, j++) {
+            if (mapActor->type > 0xA8 && !is_obj_disabled(mapActor->type, mapActor->param)) {
+                count1++;
+                if (mapActor->field_8 > maxUid1) {
+                    maxUid1 = mapActor->field_8;
+                }
+            }
+            if (dActorTypeFlags[mapActor->type] & 4) {
+                count2++;
+                if (mapActor->field_8 > maxUid2) {
+                    maxUid2 = mapActor->field_8;
+                }
+            }
+        }
+    }
+
+    byte_203DFD6 = count1;
+    byte_203E00D = count1;
+    byte_203DFE4 = 0;
+    byte_203E008 = count2;
+    byte_203E00E = count2;
+    byte_203DFE5 = 0;
+
+    if (dword_200032C) {
+        heap_free(dword_200032C, 4);
+        dword_200032C = NULL;
+    }
+    size = (count1 + count2 + 10) * 0x70;
+    dword_200032C = heap_alloc(size, 0xB, 4);
+    DmaFill32(0, dword_200032C, size / 4);
+    byte_2000331 = count1 + count2;
+    byte_2000330 = count1 + count2;
+    byte_2000332 = 0;
+    byte_2000333 = 10;
+    byte_2000334 = count1 + count2;
+
+    dword_2000FC8 = sub_8003854(0x4B0000);
+    sub_800389C(dword_2000FC8, dword_80CC844[gRoomHeader.unknown1]);
+    sub_8003894(dword_2000FC8, dword_80CC7EC[0]);
+    sub_8047878(count1, mode);
+    sub_8062064(count2, mode);
+
+    if (count1 != 0 || count2 != 0) {
+        if (count1 != 0) {
+            dword_203DFB4 = heap_alloc(byte_203E00D * sizeof(struct Actor), 6, 0);
+            dword_203DFB8 = heap_alloc(maxUid1 + 1, 6, 0);
+        }
+        if (count2 != 0) {
+            dword_203DFBC = heap_alloc(byte_203E00E * sizeof(struct Actor), 6, 0);
+            dword_203DFC0 = heap_alloc(maxUid2 + 1, 6, 0);
+        }
+
+        count1 = 0;
+        count2 = 0;
+        index = 0;
+        for (i = 0; i < gEntitySection->groupCount; i++) {
+            mapActor = gEntitySection->groups[i].actors;
+            for (j = 0; j < gEntitySection->groups[i].count; mapActor++, j++) {
+                if (is_obj_disabled(mapActor->type, mapActor->param)) {
+                    continue;
+                }
+                if (mapActor->type > 0xA8) {
+                    fx32 halfX;
+                    fx32 halfZ;
+
+                    dword_203DFB8[mapActor->field_8] = count1;
+                    actor = &dword_203DFB4[count1];
+                    actor->isActive = TRUE;
+                    actor->field_48 = 0;
+                    if (gEntitySection->axis == 1) {
+                        actor->xPosition = gEntitySection->groupCoords[i];
+                        actor->yPosition = mapActor->field_0;
+                    } else {
+                        actor->xPosition = mapActor->field_0;
+                        actor->yPosition = gEntitySection->groupCoords[i];
+                    }
+                    actor->field_6 = mapActor->field_4;
+                    actor->field_8 = mapActor->field_A;
+                    actor->type = mapActor->type;
+                    actor->field_46 = dActorTypeInfo[mapActor->type].field_2;
+                    actor->field_9 = mapActor->field_B;
+                    actor->field_A = mapActor->conditionId;
+                    actor->field_B = mapActor->field_D;
+                    actor->field_C = mapActor->field_E;
+                    actor->field_10 = mapActor->field_F;
+                    actor->field_14 = mapActor->field_11;
+                    actor->field_18 = mapActor->field_12;
+                    actor->field_24 = mapActor->field_13;
+                    actor->field_28 = mapActor->field_14;
+                    actor->interactionKind = mapActor->interactionKind;
+                    actor->field_1C = mapActor->param;
+                    actor->field_1E = mapActor->field_8;
+                    actor->field_20 = 0;
+                    actor->field_3C = 0;
+                    actor->field_2F = mapActor->field_15;
+                    actor->field_30 = mapActor->field_16;
+                    actor->field_38 = mapActor->field_18;
+                    actor->field_34 = mapActor->field_17;
+                    actor->field_40 = mapActor->field_1A;
+                    actor->field_44 = 0;
+                    actor->field_4C = dActorHitboxes[actor->type].size[0] << 16;
+                    actor->field_50 = dActorHitboxes[actor->type].size[1] << 16;
+                    actor->field_54 = dActorHitboxes[actor->type].size[2] << 16;
+                    actor->field_58 = dActorHitboxes[actor->type].size[3] << 16;
+                    actor->field_5C = dActorHitboxes[actor->type].size[4] << 16;
+                    actor->field_60 = dActorHitboxes[actor->type].size[5] << 16;
+                    actor->field_94 = actor->xPosition << 16;
+                    actor->field_98 = (actor->field_6 + actor->field_9) << 16;
+                    actor->field_9C =
+                        ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16) - actor->field_98;
+                    halfX = actor->field_4C >> 1;
+                    actor->field_64 =
+                        actor->field_94 - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+                    actor->field_68 = actor->field_98 + (dActorHitboxes[actor->type].offset[1] << 16);
+                    halfZ = actor->field_54 >> 1;
+                    actor->field_6C =
+                        actor->field_9C - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+                    actor->field_70 =
+                        actor->field_94 + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+                    actor->field_74 = actor->field_98 + actor->field_50
+                                      + (dActorHitboxes[actor->type].offset[1] << 16);
+                    actor->field_78 =
+                        actor->field_9C + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+                    actor->field_7C = actor->field_94 - (actor->field_58 >> 1)
+                                      + (dActorHitboxes[actor->type].offset[3] << 16);
+                    actor->field_80 = actor->field_98 + (dActorHitboxes[actor->type].offset[4] << 16);
+                    actor->field_84 = actor->field_9C - (actor->field_60 >> 1)
+                                      + (dActorHitboxes[actor->type].offset[5] << 16);
+                    actor->field_88 = actor->field_94 + (actor->field_58 >> 1)
+                                      + (dActorHitboxes[actor->type].offset[3] << 16);
+                    actor->field_8C = actor->field_98 + actor->field_5C
+                                      + (dActorHitboxes[actor->type].offset[4] << 16);
+                    actor->field_90 = actor->field_9C + (actor->field_60 >> 1)
+                                      + (dActorHitboxes[actor->type].offset[5] << 16);
+                    sub_0804835C(actor, count1, index);
+                    count1++;
+                    index++;
+                    ASSERT(count1 <= byte_203E00D);
+                } else if (dActorTypeFlags[mapActor->type] & 4) {
+                    fx32 halfX;
+                    fx32 halfZ;
+
+                    dword_203DFC0[mapActor->field_8] = count2;
+                    actor = &dword_203DFBC[count2];
+                    actor->isActive = TRUE;
+                    actor->field_48 = 0;
+                    if (gEntitySection->axis == 1) {
+                        actor->xPosition = gEntitySection->groupCoords[i];
+                        actor->yPosition = mapActor->field_0;
+                    } else {
+                        actor->xPosition = mapActor->field_0;
+                        actor->yPosition = gEntitySection->groupCoords[i];
+                    }
+                    actor->field_6 = mapActor->field_4;
+                    actor->field_8 = mapActor->field_A;
+                    actor->type = mapActor->type;
+                    actor->field_46 = dActorTypeInfo[mapActor->type].field_2;
+                    actor->field_9 = mapActor->field_B;
+                    actor->field_A = mapActor->conditionId;
+                    actor->field_B = mapActor->field_D;
+                    actor->field_C = mapActor->field_E;
+                    actor->field_10 = mapActor->field_F;
+                    actor->field_14 = mapActor->field_11;
+                    actor->field_18 = mapActor->field_12;
+                    actor->field_24 = mapActor->field_13;
+                    actor->field_28 = mapActor->field_14;
+                    actor->interactionKind = mapActor->interactionKind;
+                    actor->field_1C = mapActor->param;
+                    actor->field_1E = mapActor->field_8;
+                    actor->field_20 = 0;
+                    actor->field_3C = 0;
+                    actor->field_2F = mapActor->field_15;
+                    actor->field_30 = mapActor->field_16;
+                    actor->field_38 = mapActor->field_18;
+                    actor->field_34 = mapActor->field_17;
+                    actor->field_40 = mapActor->field_1A;
+                    actor->field_44 = 0;
+                    actor->field_4C = dActorHitboxes[actor->type].size[0] << 16;
+                    actor->field_50 = dActorHitboxes[actor->type].size[1] << 16;
+                    actor->field_54 = dActorHitboxes[actor->type].size[2] << 16;
+                    actor->field_58 = dActorHitboxes[actor->type].size[3] << 16;
+                    actor->field_5C = dActorHitboxes[actor->type].size[4] << 16;
+                    actor->field_60 = dActorHitboxes[actor->type].size[5] << 16;
+                    actor->field_94 = actor->xPosition << 16;
+                    actor->field_98 = (actor->field_6 + actor->field_9) << 16;
+                    actor->field_9C =
+                        ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16) - actor->field_98;
+                    halfX = actor->field_4C >> 1;
+                    actor->field_64 =
+                        actor->field_94 - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+                    actor->field_68 = actor->field_98 + (dActorHitboxes[actor->type].offset[1] << 16);
+                    halfZ = actor->field_54 >> 1;
+                    actor->field_6C =
+                        actor->field_9C - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+                    actor->field_70 =
+                        actor->field_94 + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+                    actor->field_74 = actor->field_98 + actor->field_50
+                                      + (dActorHitboxes[actor->type].offset[1] << 16);
+                    actor->field_78 =
+                        actor->field_9C + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+                    actor->field_7C = actor->field_94 - (actor->field_58 >> 1)
+                                      + (dActorHitboxes[actor->type].offset[3] << 16);
+                    actor->field_80 = actor->field_98 + (dActorHitboxes[actor->type].offset[4] << 16);
+                    actor->field_84 = actor->field_9C - (actor->field_60 >> 1)
+                                      + (dActorHitboxes[actor->type].offset[5] << 16);
+                    actor->field_88 = actor->field_94 + (actor->field_58 >> 1)
+                                      + (dActorHitboxes[actor->type].offset[3] << 16);
+                    actor->field_8C = actor->field_98 + actor->field_5C
+                                      + (dActorHitboxes[actor->type].offset[4] << 16);
+                    actor->field_90 = actor->field_9C + (actor->field_60 >> 1)
+                                      + (dActorHitboxes[actor->type].offset[5] << 16);
+                    sub_0806220C(actor, count2, index);
+                    count2++;
+                    index++;
+                    ASSERT(count2 <= byte_203E00E);
+                }
+            }
+        }
+    }
+    sub_8028E30();
 }

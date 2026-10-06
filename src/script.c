@@ -1021,7 +1021,7 @@ static bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int cha
     }
 
     byte_203FA16 = 1;
-    SetupRoom(room, warp, changeMusic, 1);
+    SetupRoom(room, warp, changeMusic, ROOM_LOAD_STORE);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     EnableBGAlphaBlending();
     sub_800EB14();
@@ -1074,7 +1074,7 @@ static bool32 script_cmd_load_room(int room, int warp, int a3, int changeMusic) 
         script_cmd_camera_free(0, 0, 0, 0);
     }
 
-    SetupRoom(room, warp, changeMusic, 0);
+    SetupRoom(room, warp, changeMusic, ROOM_LOAD_NORMAL);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
     EnableBGAlphaBlending();
     sub_800EB14();
@@ -1113,7 +1113,7 @@ static bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
     isMusicChanged = gLoadedRoomBgm != dRoomIndexes[gCurrentScript->loadedRoomIdx].music;
 
     sub_800C1E8(gCurrentScript->loadedRoomIdx, gCurrentScript->playerPos.x, gCurrentScript->playerPos.y,
-                gCurrentScript->playerPos.z, 0, 2);
+                gCurrentScript->playerPos.z, 0, ROOM_LOAD_RESTORE);
 
     if (sub_80631A0()) {
         byte_203E137 = 0;

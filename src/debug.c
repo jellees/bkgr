@@ -1084,7 +1084,7 @@ void sub_8010BA8(int a1) {
         gInInteractionArea = FALSE;
         dword_203DFDC = 0;
         gLoadedRoomBgm = -1;
-        sub_800C1E8(byte_2001443, dword_2001444, dword_2001448, dword_200144C, 1, 0);
+        sub_800C1E8(byte_2001443, dword_2001444, dword_2001448, dword_200144C, 1, ROOM_LOAD_NORMAL);
     } else if (!gDebugDoWarp) {
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);

@@ -327,7 +327,7 @@ static int ShowPressStart(void) {
     REG_BG2PC = 0;
     REG_BG2PA = 256;
     REG_BG2PD = 256;
-    SetupRoom(ROOM_FRONTEND, 0, TRUE, 0);
+    SetupRoom(ROOM_FRONTEND, 0, TRUE, ROOM_LOAD_NORMAL);
     sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
 
     EnableBGAlphaBlending();

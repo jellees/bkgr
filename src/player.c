@@ -4333,7 +4333,7 @@ static void state_dive_surface(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
-        sub_800C1E8(gPrediveRoomIdx, gPredivePosX, gPredivePosY, gPredivePosZ, 1, 0);
+        sub_800C1E8(gPrediveRoomIdx, gPredivePosX, gPredivePosY, gPredivePosZ, 1, ROOM_LOAD_NORMAL);
         sub_8017C50();
         release_hud_element(HUD_METER_OXYGEN);
         if (gGameStatus.oxygen != gGameStatus.maxOxygen) {
@@ -7030,7 +7030,7 @@ static void state_octopus_dive_surface(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_OCTOPUS_IDLE;
-        sub_800C1E8(gPrediveRoomIdx, gPredivePosX, gPredivePosY, gPredivePosZ, 1, 0);
+        sub_800C1E8(gPrediveRoomIdx, gPredivePosX, gPredivePosY, gPredivePosZ, 1, ROOM_LOAD_NORMAL);
         sub_8017C50();
         sub_800387C(dword_2000FC8);
     }

@@ -86,6 +86,12 @@ enum Direction {
     DIRECTION_UP_LEFT,
 };
 
+enum RoomLoadMode {
+    ROOM_LOAD_NORMAL,
+    ROOM_LOAD_STORE,
+    ROOM_LOAD_RESTORE,
+};
+
 // Structs
 
 struct Vec3fx {
@@ -236,33 +242,32 @@ struct Actor {
     u8 field_43;
     u8 field_44;
     u8 interactionKind;
-    u8 field_46;
-    u8 field_47;
+    u16 field_46;
     u8 field_48;
     u8 field_49;
     u8 field_4A;
     u8 field_4B;
-    u32 field_4C;
-    u32 field_50;
-    u32 field_54;
-    u32 field_58;
-    u32 field_5C;
-    u32 field_60;
-    u32 field_64;
-    u32 field_68;
-    u32 field_6C;
-    u32 field_70;
-    u32 field_74;
-    u32 field_78;
-    u32 field_7C;
-    u32 field_80;
-    u32 field_84;
-    u32 field_88;
-    u32 field_8C;
-    u32 field_90;
-    u32 field_94;
-    u32 field_98;
-    u32 field_9C;
+    fx32 field_4C;
+    fx32 field_50;
+    fx32 field_54;
+    fx32 field_58;
+    fx32 field_5C;
+    fx32 field_60;
+    fx32 field_64;
+    fx32 field_68;
+    fx32 field_6C;
+    fx32 field_70;
+    fx32 field_74;
+    fx32 field_78;
+    fx32 field_7C;
+    fx32 field_80;
+    fx32 field_84;
+    fx32 field_88;
+    fx32 field_8C;
+    fx32 field_90;
+    fx32 field_94;
+    fx32 field_98;
+    fx32 field_9C;
     u32 field_A0;
     u32 field_A4;
     u32 field_A8;
@@ -277,6 +282,42 @@ struct Actor {
     u32 field_CC;
     u32 field_D0;
     u32 field_D4;
+};
+
+struct Projectile {
+    u8 field_0[0x2E];
+    bool8 isActive;
+    u8 field_2F[0xD9];
+};
+
+struct struc_203E000 {
+    u8 field_0[0x2E];
+    bool8 isActive;
+    u8 field_2F[0xB9];
+};
+
+// Per-type collision data: offsets and sizes of two boxes, in pixels.
+struct ActorHitbox {
+    s16 offset[6];
+    u16 size[6];
+};
+
+struct ActorTypeInfo {
+    u16 field_0;
+    u8 field_2;
+    u8 field_3;
+    u16 anim;
+    u16 field_6;
+};
+
+// Pool capacities, one entry per room.
+struct ActorPoolSizes {
+    u8 pool0;
+    u8 pool1;
+    u8 pool2;
+    u8 field_3;
+    u8 projectiles;
+    u8 field_5[3];
 };
 
 // An actor placement in the map data. The live Actor is created from it.
@@ -303,6 +344,20 @@ struct MapActor {
     u8 field_18;
     u8 field_19;
     u16 field_1A;
+};
+
+struct MapActorGroup {
+    struct MapActor* actors;
+    u16 count;
+};
+
+// The actors of a room, split into groups along one axis.
+struct MapActorSection {
+    u32* groupCoords;
+    struct MapActorGroup* groups;
+    u16 groupCount;
+    u16 uidCount;
+    u8 axis;
 };
 
 struct struc_44 {
@@ -642,7 +697,13 @@ extern void sub_80274A4(s32, s32, u32*, u32*);
 extern void sub_80275A4(void);
 extern void sub_80275CC(s32);
 extern void sub_080281A8(void);
-extern void setup_entities(u32, u32, void*);
+extern void setup_entities(u32 room, int mode, struct MapActorSection* section);
+extern void sub_8030C30(void);
+extern void sub_8028E30(void);
+extern void sub_8047878(u32, u32);
+extern void sub_8062064(u32, u32);
+extern void sub_0804835C(struct Actor*, u32, u32);
+extern void sub_0806220C(struct Actor*, u32, u32);
 extern void s_load_object(fx32, fx32);
 extern void sub_8029DA8(int);
 extern void sub_802ADB0(u32**, u32*);
@@ -670,7 +731,6 @@ extern void sub_8038A34(void);
 extern void sub_8038FA0(u16);
 extern void sub_8039210(void);
 extern void sub_8039234(void);
-
 
 extern void sub_08047504(void);
 extern void sub_8047BEC(void);
@@ -755,7 +815,7 @@ extern struct struc_49 stru_20076C4[15];
 
 extern bool8 gIsPaletteEffectsActive;
 
-extern u32* gEntitySection;
+extern struct MapActorSection* gEntitySection;
 
 extern u8* dword_203DFB8;
 
@@ -775,8 +835,8 @@ extern void* dword_203DFF0;
 extern struct Actor* gActorPool0;
 extern struct Actor* gActorPool1;
 extern struct Actor* gActorPool2;
-extern void* dword_203E000;
-extern void* gProjectiles;
+extern struct struc_203E000* dword_203E000;
+extern struct Projectile* gProjectiles;
 extern u8 byte_203E008;
 extern u8 gActorPool0Capacity;
 extern u8 gActorPool1Capacity;
@@ -795,6 +855,10 @@ extern u8 byte_30043A5;
 extern const u32 dword_80CC788;
 extern const u32 dword_80CCFF8;
 extern const u32 dword_80CE43C;
+extern const struct ActorPoolSizes dActorPoolSizes[];
+extern const u32 dActorTypeFlags[];
+extern const struct ActorTypeInfo dActorTypeInfo[];
+extern const struct ActorHitbox dActorHitboxes[];
 extern u8 byte_203DFC8;
 extern u16 word_203DFCA;
 
