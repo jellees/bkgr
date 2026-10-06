@@ -274,6 +274,7 @@ SECTIONS
         src/title_screen.o(.text);
         asm/chunk9.o(.text);
         src/heap.o(.text);
+        src/actor.o(.text);
         asm/chunk6.o(.text);
         src/hud.o(.text);
         src/audio_b.o(.text);

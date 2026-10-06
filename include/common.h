@@ -173,8 +173,8 @@ struct TileAnimQueueIndex {
     u8* field_4;
 };
 
-struct Entity_rt {
-    u16 behavior;
+struct Actor {
+    u16 type;
     u16 xPosition;
     u16 yPosition;
     u16 field_6;
@@ -213,7 +213,7 @@ struct Entity_rt {
     u8 field_2B;
     u8 field_2C;
     u8 field_2D;
-    u8 field_2E;
+    bool8 isActive;
     u8 field_2F;
     u8 field_30;
     u8 field_31;
@@ -235,7 +235,7 @@ struct Entity_rt {
     u8 field_42;
     u8 field_43;
     u8 field_44;
-    u8 field_45;
+    u8 interactionKind;
     u8 field_46;
     u8 field_47;
     u8 field_48;
@@ -277,6 +277,32 @@ struct Entity_rt {
     u32 field_CC;
     u32 field_D0;
     u32 field_D4;
+};
+
+// An actor placement in the map data. The live Actor is created from it.
+struct MapActor {
+    u16 field_0;
+    u16 type;
+    u16 field_4;
+    s16 param;
+    u16 field_8;
+    u8 field_A;
+    u8 field_B;
+    u8 conditionId;
+    u8 field_D;
+    u8 field_E;
+    u8 field_F;
+    u8 interactionKind;
+    u8 field_11;
+    u8 field_12;
+    u8 field_13;
+    u8 field_14;
+    u8 field_15;
+    u8 field_16;
+    u8 field_17;
+    u8 field_18;
+    u8 field_19;
+    u16 field_1A;
 };
 
 struct struc_44 {
@@ -734,7 +760,41 @@ extern u32* gEntitySection;
 extern u8* dword_203DFB8;
 
 extern u8* dword_203DFC0;
-extern struct Entity_rt* dword_203DFC4;
+extern struct Actor* dword_203DFC4;
+extern struct Actor* dword_203DFB4;
+extern struct Actor* dword_203DFBC;
+extern u32 dword_203DFCC;
+extern u8 gActorPool0Count;
+extern u8 gActorPool1Count;
+extern u8 gActorPool2Count;
+extern u8 byte_203DFD3;
+extern u8 byte_203DFD6;
+extern u8 byte_203DFE4;
+extern u8 byte_203DFE5;
+extern void* dword_203DFF0;
+extern struct Actor* gActorPool0;
+extern struct Actor* gActorPool1;
+extern struct Actor* gActorPool2;
+extern void* dword_203E000;
+extern void* gProjectiles;
+extern u8 byte_203E008;
+extern u8 gActorPool0Capacity;
+extern u8 gActorPool1Capacity;
+extern u8 gActorPool2Capacity;
+extern u8 byte_203E00C;
+extern u8 byte_203E00D;
+extern u8 byte_203E00E;
+extern u8* dword_203E010;
+extern u8 byte_203E014;
+extern u8 byte_203E015;
+extern u8 byte_203E016;
+extern u8 byte_203E017;
+extern struct Actor stru_203E01C;
+extern u8 byte_30043A4;
+extern u8 byte_30043A5;
+extern const u32 dword_80CC788;
+extern const u32 dword_80CCFF8;
+extern const u32 dword_80CE43C;
 extern u8 byte_203DFC8;
 extern u16 word_203DFCA;
 
@@ -745,8 +805,8 @@ extern bool8 gInInteractionArea;
 extern bool8 byte_203DFD8;
 extern bool8 byte_203DFD9;
 extern bool8 byte_203DFDA;
-extern u32 dword_203DFDC;
-extern u32 dword_203DFE0;
+extern struct Actor* dword_203DFDC;
+extern struct Actor* dword_203DFE0;
 
 extern bool8 byte_203DFE6;
 extern bool8 byte_203DFE7;

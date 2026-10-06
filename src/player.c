@@ -26,7 +26,7 @@ int gKazooieSfx;
 bool8 gIsStopHoneycombActive;
 u16 gPlayerStateFlags[PLAYER_STATE_COUNT];
 u8 byte_20021BE;
-u32 dword_20021C0;
+struct Actor* dword_20021C0;
 u8 byte_20021C4;
 u8 byte_20021C5;
 u8 byte_20021C6;
