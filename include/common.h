@@ -92,6 +92,8 @@ enum RoomLoadMode {
     ROOM_LOAD_RESTORE,
 };
 
+#include "sprite.h"
+
 // Structs
 
 struct Vec3fx {
@@ -268,20 +270,8 @@ struct Actor {
     fx32 field_94;
     fx32 field_98;
     fx32 field_9C;
-    u32 field_A0;
-    u32 field_A4;
-    u32 field_A8;
-    u32 field_AC;
-    u32 field_B0;
-    u32 field_B4;
-    u32 field_B8;
-    u32 field_BC;
-    u32 field_C0;
-    u32 field_C4;
-    u32 field_C8;
-    u32 field_CC;
-    u32 field_D0;
-    u32 field_D4;
+    struct Sprite sprite;
+    struct Sprite shadowSprite;
 };
 
 struct Projectile {
@@ -704,6 +694,12 @@ extern void sub_8047878(u32, u32);
 extern void sub_8062064(u32, u32);
 extern void sub_0804835C(struct Actor*, u32, u32);
 extern void sub_0806220C(struct Actor*, u32, u32);
+extern bool32 sub_80343F0(struct MapActor* mapActor, int group);
+extern void sub_80293C0(struct Actor* actor);
+extern bool32 sub_8033118(int type, int param, u8 a3);
+extern bool32 sub_8033CCC(struct Actor* actor);
+extern bool32 sub_8003A74(fx32* pos, struct Vec3fx* size, int a3, u32 mapHeight);
+extern bool32 sub_8003A7C(fx32* pos, int a2, u32 mapHeight);
 extern void s_load_object(fx32, fx32);
 extern void sub_8029DA8(int);
 extern void sub_802ADB0(u32**, u32*);
