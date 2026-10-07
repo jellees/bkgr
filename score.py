@@ -12,7 +12,12 @@ def nonmatching_sizes():
         with open(path, "r") as f:
             paths.update(re.findall(r'asm/nonmatching/\w+\.s', f.read()))
 
-    bin_dir = os.path.join(os.environ.get("DEVKITARM", "/opt/devkitpro/devkitARM"), "bin")
+    # Like the Makefile: use $DEVKITARM/bin when set, otherwise the binutils on PATH (as in CI).
+    def tool(name):
+        if os.environ.get("DEVKITARM"):
+            return os.path.join(os.environ["DEVKITARM"], "bin", name)
+        return name
+
     tmp_dir = tempfile.mkdtemp()
     sizes = {}
     try:
@@ -21,9 +26,9 @@ def nonmatching_sizes():
         for path in sorted(paths):
             with open(source, "w") as f:
                 f.write('.syntax unified\n.thumb\n.include "{}"\n'.format(path))
-            subprocess.run([os.path.join(bin_dir, "arm-none-eabi-as"), "-mcpu=arm7tdmi", "-I", "include",
+            subprocess.run([tool("arm-none-eabi-as"), "-mcpu=arm7tdmi", "-I", "include",
                             "-o", obj, source], check=True)
-            output = subprocess.run([os.path.join(bin_dir, "arm-none-eabi-size"), "-A", obj],
+            output = subprocess.run([tool("arm-none-eabi-size"), "-A", obj],
                                     capture_output=True, text=True, check=True).stdout
             sizes[path] = int(re.search(r'^\.text\s+(\d+)', output, re.MULTILINE).group(1))
     finally:
