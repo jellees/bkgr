@@ -710,3 +710,229 @@ void sub_80293C0(struct Actor* actor) {
     actor->field_90 =
         actor->field_9C + (actor->field_60 >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
 }
+
+/**
+ * Spawns the actors of the current section that lie in a window around the
+ * given pixel position and are not already loaded.
+ */
+#ifndef NONMATCHING
+NAKED void s_load_object(int x, int y) {
+    asm_unified(".include \"asm/nonmatching/s_load_object.s\"");
+}
+#else
+void s_load_object(int x, int y) {
+    int min;
+    int max;
+    int minOther;
+    int maxOther;
+    int i;
+    int j;
+    int spriteX;
+    int spriteY;
+    struct MapActor* mapActor;
+    struct Actor* actor;
+
+    if (gEntitySection->axis == 1) {
+        max = x + 160;
+        if (max >= gMapPixelSizeX) {
+            max = gMapPixelSizeX - 1;
+        }
+        min = x - 160;
+        if (min < 0) {
+            max -= min;
+            min = 0;
+        }
+        maxOther = y + 160;
+        if (maxOther >= gMapPixelSizeY) {
+            maxOther = gMapPixelSizeY - 1;
+        }
+        minOther = y - 115;
+        if (minOther < 0) {
+            maxOther -= minOther;
+            minOther = 0;
+        }
+        sub_802A34C(min, max, minOther, maxOther);
+    } else {
+        max = y + 160;
+        if (max >= gMapPixelSizeY) {
+            max = gMapPixelSizeY - 1;
+        }
+        min = y - 115;
+        if (min < 0) {
+            max -= min;
+            min = 0;
+        }
+        maxOther = x + 160;
+        if (maxOther >= gMapPixelSizeX) {
+            maxOther = gMapPixelSizeX - 1;
+        }
+        minOther = x - 160;
+        if (minOther < 0) {
+            maxOther -= minOther;
+            minOther = 0;
+        }
+        sub_802A34C(minOther, maxOther, min, max);
+    }
+
+    min = sub_80039DC(gEntitySection->groupCoords, gEntitySection->groupCount, min);
+    max = sub_80039DC(gEntitySection->groupCoords, gEntitySection->groupCount, max);
+    for (i = min; i <= max; i++) {
+        mapActor = gEntitySection->groups[i].actors;
+        for (j = 0; j < gEntitySection->groups[i].count; mapActor++, j++) {
+            if (mapActor->field_0 < minOther || mapActor->field_0 > maxOther) {
+                continue;
+            }
+            if (mapActor->type > 0xA8) {
+                continue;
+            }
+            if (dActorTypeFlags[mapActor->type] & 4) {
+                continue;
+            }
+            if (dword_203E010[mapActor->field_8]) {
+                continue;
+            }
+            if (!sub_80343F0(mapActor, i)) {
+                continue;
+            }
+            if (is_obj_disabled(mapActor->type, mapActor->param)) {
+                continue;
+            }
+
+            actor = actor_alloc(mapActor);
+            actor->isActive = TRUE;
+            if (gEntitySection->axis == 1) {
+                actor->xPosition = gEntitySection->groupCoords[i];
+                actor->yPosition = mapActor->field_0;
+            } else {
+                actor->xPosition = mapActor->field_0;
+                actor->yPosition = gEntitySection->groupCoords[i];
+            }
+            actor->field_6 = mapActor->field_4;
+            actor->field_8 = mapActor->field_A;
+            actor->type = mapActor->type;
+            actor->field_9 = mapActor->field_B;
+            actor->field_A = mapActor->conditionId;
+            actor->field_B = mapActor->field_D;
+            actor->field_C = mapActor->field_E;
+            actor->field_10 = mapActor->field_F;
+            actor->field_14 = mapActor->field_11;
+            actor->field_18 = mapActor->field_12;
+            actor->field_24 = mapActor->field_13;
+            actor->field_28 = mapActor->field_14;
+            actor->interactionKind = mapActor->interactionKind;
+            actor->field_1C = mapActor->param;
+            actor->field_1E = mapActor->field_8;
+            actor->field_20 = 0;
+            actor->field_44 = 0;
+            actor->field_3C = 0;
+            actor->field_2F = mapActor->field_15;
+            actor->field_49 = 0;
+            actor->field_30 = mapActor->field_16;
+            actor->field_38 = mapActor->field_18;
+            actor->field_34 = mapActor->field_17;
+            actor->field_40 = mapActor->field_1A;
+            if (dActorTypeFlags[actor->type] & 1) {
+                actor->field_46 = actor->field_18;
+            } else {
+                actor->field_46 = dActorTypeInfo[actor->type].field_2;
+            }
+            sub_80293C0(actor);
+            dword_203E010[actor->field_1E] = 1;
+
+            if ((u16)(actor->type - 0x97) <= 0x11) {
+                continue;
+            }
+
+            spriteX = actor->xPosition - gCameraPixelX;
+            spriteY = actor->yPosition - gCameraPixelY;
+            if (actor->field_2F == 0) {
+                SetSprite(&actor->shadowSprite, 0, FALSE, 0, 1, spriteX, spriteY, 2);
+                sprite_set_priority(&actor->shadowSprite, actor->field_8);
+                sprite_set_locked_frame(&actor->shadowSprite, actor->field_9 < dword_80CEBC4
+                                                                  ? byte_80CEB84[actor->field_9]
+                                                                  : 5);
+                sprite_lock_anim(&actor->shadowSprite);
+                actor->shadowSprite.objMode = 1;
+            }
+            spriteY -= actor->field_9;
+
+            if (dActorTypeFlags[actor->type] & 1) {
+                if (sub_8033118(actor->type, (s16)actor->field_1C, actor->field_C)) {
+                    SetSprite(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 0, 1, spriteX,
+                              spriteY, 2);
+                } else {
+                    SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 1, spriteX, spriteY, 2);
+                }
+            } else if (actor->interactionKind == 7) {
+                if (!sub_8033CCC(actor)) {
+                    SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX, spriteY, 2);
+                } else {
+                    SetSprite(&actor->sprite, 0x451, FALSE, 0, 0, spriteX, spriteY, 2);
+                }
+            } else {
+                switch (actor->type) {
+                    case 0x6F:
+                        SetSprite(&actor->sprite, 0x290, FALSE, 0, 0, spriteX, spriteY, 2);
+                        actor->sprite.objMode = 1;
+                        break;
+                    case 0x6C:
+                        if (is_obj_disabled(0xCD, 0)) {
+                            SetSprite(&actor->sprite, 0x2DC, FALSE, 0, 0, spriteX, spriteY, 2);
+                        } else {
+                            SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX,
+                                      spriteY, 2);
+                        }
+                        break;
+                    case 0x6D:
+                        if (is_obj_disabled(0xCD, 0)) {
+                            SetSprite(&actor->sprite, 0x2DB, FALSE, 0, 0, spriteX, spriteY, 2);
+                        } else {
+                            SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX,
+                                      spriteY, 2);
+                        }
+                        break;
+                    case 0x14:
+                        if (!gUnlockedMoves[MOVE_SHOCK_JUMP]) {
+                            SetSprite(&actor->sprite, 0x2D8, FALSE, 0, 0, spriteX, spriteY, 2);
+                        } else {
+                            SetSprite(&actor->sprite, 0x235, FALSE, 0, 0, spriteX, spriteY, 2);
+                        }
+                        break;
+                    case 0x15:
+                        if (!gUnlockedMoves[MOVE_WONDERWING]) {
+                            SetSprite(&actor->sprite, 0x2D9, FALSE, 0, 0, spriteX, spriteY, 2);
+                        } else {
+                            SetSprite(&actor->sprite, 0x236, FALSE, 0, 0, spriteX, spriteY, 2);
+                        }
+                        break;
+                    case 0x16:
+                    case 0x93:
+                        SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX, spriteY,
+                                  2);
+                        actor->sprite.loopFrame = 20;
+                        sprite_lock_anim_on_frame(&actor->sprite, 0);
+                        sprite_set_locked_frame(&actor->sprite, 0);
+                        break;
+                    case 0x17:
+                        SetSprite(&actor->sprite, 0x238, FALSE, 0, 0, spriteX, spriteY, 2);
+                        actor->sprite.loopFrame = 20;
+                        sprite_set_locked_frame(&actor->sprite, 0);
+                        break;
+                    case 0x39:
+                        SetSprite(&actor->sprite, 0x25A, FALSE, 0, 0, spriteX, spriteY, 2);
+                        actor->sprite.loopFrame = 4;
+                        sprite_set_locked_frame(&actor->sprite, 0);
+                        break;
+                    default:
+                        SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX, spriteY,
+                                  2);
+                        break;
+                }
+            }
+        }
+    }
+    sub_802C968();
+    despawn_aged_projectiles();
+    play_jinjo_sounds();
+}
+#endif
