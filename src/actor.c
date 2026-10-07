@@ -677,3 +677,36 @@ void sub_8028E30(void) {
     }
 }
 #endif
+
+void sub_80293C0(struct Actor* actor) {
+    fx32 halfX;
+    fx32 halfZ;
+
+    actor->field_4C = dActorHitboxes[actor->type].size[0] << 16;
+    actor->field_50 = dActorHitboxes[actor->type].size[1] << 16;
+    actor->field_54 = dActorHitboxes[actor->type].size[2] << 16;
+    actor->field_58 = dActorHitboxes[actor->type].size[3] << 16;
+    actor->field_5C = dActorHitboxes[actor->type].size[4] << 16;
+    actor->field_60 = dActorHitboxes[actor->type].size[5] << 16;
+    actor->field_94 = actor->xPosition << 16;
+    actor->field_98 = (actor->field_6 + actor->field_9) << 16;
+    actor->field_9C = ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16) - actor->field_98;
+    halfX = actor->field_4C >> 1;
+    actor->field_64 = actor->field_94 - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+    actor->field_68 = actor->field_98 + (dActorHitboxes[actor->type].offset[1] << 16);
+    halfZ = actor->field_54 >> 1;
+    actor->field_6C = actor->field_9C - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+    actor->field_70 = actor->field_94 + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+    actor->field_74 = actor->field_98 + actor->field_50 + (dActorHitboxes[actor->type].offset[1] << 16);
+    actor->field_78 = actor->field_9C + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+    actor->field_7C =
+        actor->field_94 - (actor->field_58 >> 1) + (dActorHitboxes[actor->type].offset[3] << 16);
+    actor->field_80 = actor->field_98 + (dActorHitboxes[actor->type].offset[4] << 16);
+    actor->field_84 =
+        actor->field_9C - (actor->field_60 >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
+    actor->field_88 =
+        actor->field_94 + (actor->field_58 >> 1) + (dActorHitboxes[actor->type].offset[3] << 16);
+    actor->field_8C = actor->field_98 + actor->field_5C + (dActorHitboxes[actor->type].offset[4] << 16);
+    actor->field_90 =
+        actor->field_9C + (actor->field_60 >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
+}
