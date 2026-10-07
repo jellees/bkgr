@@ -406,7 +406,7 @@ static void update_game(void) {
     exec_arcade_menu();
     sub_8025278();
     show_room_name();
-    render_hud_elements();
+    hud_render_text();
 
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE) {
         if (byte_2000F5D) {
@@ -428,7 +428,7 @@ static void update_game(void) {
     }
 
     sub_8026234();
-    sub_80408F0();
+    hud_render_sprites();
     sub_8061F80();
     sub_8064234();
     draw_arcade_menu();

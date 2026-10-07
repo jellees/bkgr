@@ -455,10 +455,10 @@ static void exec_pause_menu(void) {
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
 
-        render_hud_elements();
+        hud_render_text();
         menu_render_text();
         RenderText();
-        sub_80408F0();
+        hud_render_sprites();
         menu_render_sprites();
         render_controls();
         heap_check(HEAP_GENERAL);
@@ -594,10 +594,10 @@ static void exec_totals_menu(void) {
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        render_hud_elements();
+        hud_render_text();
         menu_render_text();
         RenderText();
-        sub_80408F0();
+        hud_render_sprites();
         menu_render_sprites();
         render_controls();
         CheckStacks();
@@ -710,9 +710,9 @@ static void exec_totals_menu(void) {
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
         draw_page_name(page);
-        render_hud_elements();
+        hud_render_text();
         RenderText();
-        sub_80408F0();
+        hud_render_sprites();
         render_controls();
         heap_check(HEAP_GENERAL);
         CheckStacks();
@@ -779,10 +779,10 @@ static bool32 exec_save_menu(void) {
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        render_hud_elements();
+        hud_render_text();
         menu_render_text();
         RenderText();
-        sub_80408F0();
+        hud_render_sprites();
         menu_render_sprites();
         render_controls();
         CheckStacks();
@@ -1111,10 +1111,10 @@ static void exec_options_menu(void) {
         gOAMBufferEnd = &gOAMBuffer1[0x100];
         gOBJTileFramePtr = (u32*)OBJ_VRAM0;
         gOBJTileCount = 0;
-        render_hud_elements();
+        hud_render_text();
         menu_render_text();
         RenderText();
-        sub_80408F0();
+        hud_render_sprites();
         menu_render_sprites();
         render_controls();
         CheckStacks();

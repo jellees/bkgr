@@ -76,6 +76,7 @@ enum MiniGame {
 enum Egg { EGG_BLUE, EGG_ELECTRIC, EGG_ICE, EGG_FIRE, EGG_COUNT };
 
 enum Direction {
+    DIRECTION_NONE = -1,
     DIRECTION_UP,
     DIRECTION_UP_RIGHT,
     DIRECTION_RIGHT,

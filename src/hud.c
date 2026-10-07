@@ -7,6 +7,7 @@
 #include "audio_b.h"
 #include "random.h"
 #include "hud.h"
+#include "hud_script.h"
 
 enum HudElementIdx {
     HUD_ELEMENT_LEVEL_NOTES,
@@ -75,14 +76,14 @@ enum HudElementIdx {
 
 struct HudGraphic {
     volatile struct Sprite sprite;
-    s32 field_1C;
-    s32 field_20;
-    s32 field_24;
-    s32 field_28;
-    s32 field_2C;
-    s32 field_30;
-    u8 field_34;
-    u8 field_35;
+    fx32 x;
+    fx32 y;
+    fx32 targetX;
+    fx32 targetY;
+    fx32 homeX;
+    fx32 homeY;
+    u8 slideDir;
+    bool8 hasSprite;
     u8 field_36;
     u8 field_37;
 };
@@ -95,14 +96,14 @@ struct HudElement {
     u16 maxValue;
     u16 scriptStep; // Rename this to something else. Like cmdIdx or something.
     u16 displayTime;
-    int slideSpeed;
-    int savedSlideSpeed;
+    fx32 slideSpeed;
+    fx32 savedSlideSpeed;
     u16 timer;
     u16 rouletteTime;
     u8 rouletteStepDelay;
     s8 rouletteIndex;
     bool8 rouletteStarted;
-    u8 renderState;
+    u8 state;
     char text[8];
     bool8 rightAlignText;
     bool8 reshow;
@@ -130,7 +131,7 @@ u32 dword_203EA84;
 
 extern struct struc_59 stru_80AF310[]; // This is the hud script table. Move this to its own file.
 
-static int sub_803EF90(struct HudElement*, int, int, int);
+static int hud_cmd_end(struct HudElement*, int, int, int);
 static int sub_803EFCC(struct HudElement*, int, int, int);
 static int sub_803EFE8(struct HudElement*, int, int, int);
 static int sub_803F004(struct HudElement*, int, int, int);
@@ -141,8 +142,8 @@ static int sub_803F14C(struct HudElement*, int, int, int);
 static int sub_803F1B4(struct HudElement*, int, int, int);
 static int sub_803F21C(struct HudElement*, int, int, int);
 static int sub_803F284(struct HudElement*, int, int, int);
-static int sub_803F2D0(struct HudElement*, int, int, int);
-static int sub_803F2FC(struct HudElement*, int, int, int);
+static int hud_cmd_set_state(struct HudElement*, int, int, int);
+static int hud_cmd_alloc_graphics(struct HudElement*, int, int, int);
 static int sub_803F410(struct HudElement*, int, int, int);
 static int sub_803F438(struct HudElement*, int, int, int);
 static int sub_803F52C(struct HudElement*, int, int, int);
@@ -183,12 +184,37 @@ static const u8 byte_80A8D92[][5] = {
     { 1, 1, 1, 0, 0 }, { 1, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 },
 };
 
-static int (*const dHudFunctions[])(struct HudElement*, int, int, int) = {
-    sub_803EF90, sub_803EFCC, sub_803EFE8, sub_803F004, sub_803F020, sub_803F03C,
-    sub_803F0D4, sub_803F14C, sub_803F1B4, sub_803F21C, sub_803F284, sub_803F2D0,
-    sub_803F2FC, sub_803F410, sub_803F438, sub_803F52C, sub_803F5AC, sub_803F75C,
-    sub_803F8A8, sub_803F914, sub_803F980, sub_803F9EC, sub_803F800, hud_health_roulette,
-    sub_803F0D8, sub_803FDDC, sub_803F250, sub_803F62C, sub_803F6C4, sub_803F09C,
+static int (*const dHudCommands[])(struct HudElement*, int, int, int) = {
+    hud_cmd_end,
+    sub_803EFCC,
+    sub_803EFE8,
+    sub_803F004,
+    sub_803F020,
+    sub_803F03C,
+    sub_803F0D4,
+    sub_803F14C,
+    sub_803F1B4,
+    sub_803F21C,
+    sub_803F284,
+    hud_cmd_set_state,
+    hud_cmd_alloc_graphics,
+    sub_803F410,
+    sub_803F438,
+    sub_803F52C,
+    sub_803F5AC,
+    sub_803F75C,
+    sub_803F8A8,
+    sub_803F914,
+    sub_803F980,
+    sub_803F9EC,
+    sub_803F800,
+    hud_health_roulette,
+    sub_803F0D8,
+    sub_803FDDC,
+    sub_803F250,
+    sub_803F62C,
+    sub_803F6C4,
+    sub_803F09C,
 };
 
 static const u16 word_80A8E28[HUD_ELEMENT_COUNT] = {
@@ -197,7 +223,7 @@ static const u16 word_80A8E28[HUD_ELEMENT_COUNT] = {
     1,   1,   120, 120, 1,   1,   1,   1,   1,   1,   120, 120, 120, 120, 60,  120, 120, 120, 120, 120,
 };
 
-static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
+static int hud_cmd_end(struct HudElement* element, int _, int __, int ___) {
     if (element->graphicCount != 0) {
         heap_free(element->graphic, HEAP_GENERAL);
         element->graphicCount = 0;
@@ -205,38 +231,38 @@ static int sub_803EF90(struct HudElement* element, int _, int __, int ___) {
 
     if (element->reshow) {
         element->reshow = FALSE;
-        element->renderState = 1;
+        element->state = HUD_STATE_START;
         element->scriptStep = 0;
-        return 4;
+        return HUD_SCRIPT_RESTART;
     }
 
-    element->renderState = 0;
+    element->state = HUD_STATE_HIDDEN;
     element->scriptStep = 0;
-    return 3;
+    return HUD_SCRIPT_STOP;
 }
 
 static int sub_803EFCC(struct HudElement* element, int a2, int a3, int _) {
-    element->graphic[a2].field_24 = element->graphic[a2].field_1C - (a3 << 16);
-    element->graphic[a2].field_34 = 6;
-    return 2;
+    element->graphic[a2].targetX = element->graphic[a2].x - (a3 << FX32_SHIFT);
+    element->graphic[a2].slideDir = DIRECTION_LEFT;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803EFE8(struct HudElement* element, int a2, int a3, int _) {
-    element->graphic[a2].field_24 = element->graphic[a2].field_1C + (a3 << 16);
-    element->graphic[a2].field_34 = 2;
-    return 2;
+    element->graphic[a2].targetX = element->graphic[a2].x + (a3 << FX32_SHIFT);
+    element->graphic[a2].slideDir = DIRECTION_RIGHT;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F004(struct HudElement* element, int a2, int a3, int _) {
-    element->graphic[a2].field_28 = element->graphic[a2].field_20 - (a3 << 16);
-    element->graphic[a2].field_34 = 0;
-    return 2;
+    element->graphic[a2].targetY = element->graphic[a2].y - (a3 << FX32_SHIFT);
+    element->graphic[a2].slideDir = DIRECTION_UP;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F020(struct HudElement* element, int a2, int a3, int _) {
-    element->graphic[a2].field_28 = element->graphic[a2].field_20 + (a3 << 16);
-    element->graphic[a2].field_34 = 4;
-    return 2;
+    element->graphic[a2].targetY = element->graphic[a2].y + (a3 << FX32_SHIFT);
+    element->graphic[a2].slideDir = DIRECTION_DOWN;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F03C(struct HudElement* element, int a2, int a3, int a4) {
@@ -262,7 +288,7 @@ static int sub_803F03C(struct HudElement* element, int a2, int a3, int a4) {
     }
 
     element->timer = 10;
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F09C(struct HudElement* element, int a2, int a3, int a4) {
@@ -279,22 +305,22 @@ static int sub_803F09C(struct HudElement* element, int a2, int a3, int a4) {
     sub_80421C4(element->displayValue, element->maxValue, element->text);
 
     element->timer = 10;
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F0D4(struct HudElement* element, int _, int __, int ___) {
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F0D8(struct HudElement* element, int _, int __, int ___) {
     if (element->displayValue == element->targetValue) {
-        return 2;
+        return HUD_SCRIPT_NEXT;
     }
 
     element->timer--;
 
     if (element->timer != 0) {
-        return 1;
+        return HUD_SCRIPT_WAIT;
     }
 
     element->timer = 10;
@@ -317,21 +343,21 @@ static int sub_803F0D8(struct HudElement* element, int _, int __, int ___) {
     }
 
     if (element->displayValue != element->targetValue) {
-        return 1;
+        return HUD_SCRIPT_WAIT;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F14C(struct HudElement* element, int _, int __, int ___) {
     if (element->displayValue == element->targetValue) {
-        return 2;
+        return HUD_SCRIPT_NEXT;
     }
 
     element->timer--;
 
     if (element->timer != 0) {
-        return 1;
+        return HUD_SCRIPT_WAIT;
     }
 
     element->timer = 10;
@@ -350,21 +376,21 @@ static int sub_803F14C(struct HudElement* element, int _, int __, int ___) {
     }
 
     if (element->displayValue != element->targetValue) {
-        return 1;
+        return HUD_SCRIPT_WAIT;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F1B4(struct HudElement* element, int _, int __, int ___) {
     if (element->displayValue == element->targetValue) {
-        return 2;
+        return HUD_SCRIPT_NEXT;
     }
 
     element->timer--;
 
     if (element->timer != 0) {
-        return 1;
+        return HUD_SCRIPT_WAIT;
     }
 
     element->timer = 10;
@@ -383,10 +409,10 @@ static int sub_803F1B4(struct HudElement* element, int _, int __, int ___) {
     }
 
     if (element->displayValue != element->targetValue) {
-        return 1;
+        return HUD_SCRIPT_WAIT;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F21C(struct HudElement* element, int _, int __, int ___) {
@@ -396,11 +422,11 @@ static int sub_803F21C(struct HudElement* element, int _, int __, int ___) {
         }
 
         if (element->timer == 0 && byte_203EA80 == 0) {
-            return 2;
+            return HUD_SCRIPT_NEXT;
         }
     }
 
-    return 1;
+    return HUD_SCRIPT_WAIT;
 }
 
 static int sub_803F250(struct HudElement* element, int _, int __, int ___) {
@@ -410,46 +436,46 @@ static int sub_803F250(struct HudElement* element, int _, int __, int ___) {
         }
 
         if (element->timer == 0 && byte_203EA80 == 0) {
-            return 2;
+            return HUD_SCRIPT_NEXT;
         }
     }
 
-    return 1;
+    return HUD_SCRIPT_WAIT;
 }
 
 static int sub_803F284(struct HudElement* element, int a2, int a3, int a4) {
     SetSprite((struct Sprite*)&element->graphic[a2].sprite, a3, 0, 0, 0,
               element->graphic[a2].sprite.xPos, element->graphic[a2].sprite.yPos, 2);
-    element->graphic[a2].field_35 = 1;
+    element->graphic[a2].hasSprite = TRUE;
 
     if (a4 == 1) {
         element->graphic[a2].sprite.objMode = 1;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F2D0(struct HudElement* element, int a2, int _, int __) {
-    element->renderState = a2;
+static int hud_cmd_set_state(struct HudElement* element, int state, int _, int __) {
+    element->state = state;
 
-    switch (a2) {
-        case 5:
+    switch (state) {
+        case HUD_STATE_SHOWN:
             element->timer = element->displayTime;
             break;
 
-        case 3:
+        case HUD_STATE_UPDATE:
             element->text[0] = STRING_TERMINATOR;
             break;
 
-        case 4:
+        case HUD_STATE_UPDATE_FRACTION:
             element->text[0] = STRING_TERMINATOR;
             break;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
+static int hud_cmd_alloc_graphics(struct HudElement* element, int a2, int a3, int _) {
     int i;
 
     switch (a3) {
@@ -458,8 +484,8 @@ static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
             element->graphic = heap_alloc(sizeof(struct HudGraphic) * a2, 23, HEAP_GENERAL);
             element->graphicCount = a2;
             for (i = 0; i < element->graphicCount; i++) {
-                element->graphic[i].field_34 = -1;
-                element->graphic[i].field_35 = 0;
+                element->graphic[i].slideDir = DIRECTION_NONE;
+                element->graphic[i].hasSprite = FALSE;
             }
             break;
 
@@ -468,8 +494,8 @@ static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
                 heap_alloc(sizeof(struct HudGraphic) * (a2 + stru_80CC8C4.maxHealth), 23, HEAP_GENERAL);
             element->graphicCount = gGameStatus.maxHealth + a2;
             for (i = 0; i < element->graphicCount; i++) {
-                element->graphic[i].field_34 = -1;
-                element->graphic[i].field_35 = 0;
+                element->graphic[i].slideDir = DIRECTION_NONE;
+                element->graphic[i].hasSprite = FALSE;
             }
             element->text[0] = STRING_TERMINATOR;
             break;
@@ -479,22 +505,22 @@ static int sub_803F2FC(struct HudElement* element, int a2, int a3, int _) {
                 heap_alloc(sizeof(struct HudGraphic) * (a2 + gGameStatus.maxOxygen), 24, HEAP_GENERAL);
             element->graphicCount = gGameStatus.maxOxygen + a2;
             for (i = 0; i < element->graphicCount; i++) {
-                element->graphic[i].field_34 = -1;
-                element->graphic[i].field_35 = 0;
+                element->graphic[i].slideDir = DIRECTION_NONE;
+                element->graphic[i].hasSprite = FALSE;
             }
             element->text[0] = STRING_TERMINATOR;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F410(struct HudElement* element, int a2, int a3, int a4) {
-    element->graphic[a2].field_1C = a3 << 16;
-    element->graphic[a2].field_20 = a4 << 16;
+    element->graphic[a2].x = a3 << FX32_SHIFT;
+    element->graphic[a2].y = a4 << FX32_SHIFT;
     element->graphic[a2].sprite.xPos = a3;
     element->graphic[a2].sprite.yPos = a4;
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
@@ -503,71 +529,71 @@ static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
     bool32 r7 = TRUE;
 
     for (i = 0; i < element->graphicCount; i++) {
-        switch (element->graphic[i].field_34) {
-            case 0:
+        switch (element->graphic[i].slideDir) {
+            case DIRECTION_UP:
                 r7 = FALSE;
-                element->graphic[i].field_20 -= element->slideSpeed;
-                if (element->graphic[i].field_20 <= element->graphic[i].field_28) {
-                    element->graphic[i].field_20 = element->graphic[i].field_28;
-                    element->graphic[i].field_34 = -1;
+                element->graphic[i].y -= element->slideSpeed;
+                if (element->graphic[i].y <= element->graphic[i].targetY) {
+                    element->graphic[i].y = element->graphic[i].targetY;
+                    element->graphic[i].slideDir = DIRECTION_NONE;
                     if (a2 == 1) {
-                        element->graphic[i].field_30 = element->graphic[i].field_20;
+                        element->graphic[i].homeY = element->graphic[i].y;
                     }
                 }
-                element->graphic[i].sprite.yPos = element->graphic[i].field_20 >> 16;
+                element->graphic[i].sprite.yPos = element->graphic[i].y >> FX32_SHIFT;
                 break;
 
-            case 4:
+            case DIRECTION_DOWN:
                 r7 = FALSE;
-                element->graphic[i].field_20 += element->slideSpeed;
-                if (element->graphic[i].field_20 >= element->graphic[i].field_28) {
-                    element->graphic[i].field_20 = element->graphic[i].field_28;
-                    element->graphic[i].field_34 = -1;
+                element->graphic[i].y += element->slideSpeed;
+                if (element->graphic[i].y >= element->graphic[i].targetY) {
+                    element->graphic[i].y = element->graphic[i].targetY;
+                    element->graphic[i].slideDir = DIRECTION_NONE;
                     if (a2 == 1) {
-                        element->graphic[i].field_30 = element->graphic[i].field_20;
+                        element->graphic[i].homeY = element->graphic[i].y;
                     }
                 }
-                element->graphic[i].sprite.yPos = element->graphic[i].field_20 >> 16;
+                element->graphic[i].sprite.yPos = element->graphic[i].y >> FX32_SHIFT;
                 break;
 
-            case 6:
+            case DIRECTION_LEFT:
                 r7 = FALSE;
-                element->graphic[i].field_1C -= element->slideSpeed;
-                if (element->graphic[i].field_1C <= element->graphic[i].field_24) {
-                    element->graphic[i].field_1C = element->graphic[i].field_24;
-                    element->graphic[i].field_34 = -1;
+                element->graphic[i].x -= element->slideSpeed;
+                if (element->graphic[i].x <= element->graphic[i].targetX) {
+                    element->graphic[i].x = element->graphic[i].targetX;
+                    element->graphic[i].slideDir = DIRECTION_NONE;
                     if (a2 == 1) {
-                        element->graphic[i].field_2C = element->graphic[i].field_1C;
+                        element->graphic[i].homeX = element->graphic[i].x;
                     }
                 }
-                element->graphic[i].sprite.xPos = (element->graphic[i].field_1C >> 16) & 0x1FF;
+                element->graphic[i].sprite.xPos = (element->graphic[i].x >> FX32_SHIFT) & 0x1FF;
                 break;
 
-            case 2:
+            case DIRECTION_RIGHT:
                 r7 = FALSE;
-                element->graphic[i].field_1C += element->slideSpeed;
-                if (element->graphic[i].field_1C >= element->graphic[i].field_24) {
-                    element->graphic[i].field_1C = element->graphic[i].field_24;
-                    element->graphic[i].field_34 = -1;
+                element->graphic[i].x += element->slideSpeed;
+                if (element->graphic[i].x >= element->graphic[i].targetX) {
+                    element->graphic[i].x = element->graphic[i].targetX;
+                    element->graphic[i].slideDir = DIRECTION_NONE;
                     if (a2 == 1) {
-                        element->graphic[i].field_2C = element->graphic[i].field_1C;
+                        element->graphic[i].homeX = element->graphic[i].x;
                     }
                 }
-                element->graphic[i].sprite.xPos = (element->graphic[i].field_1C >> 16) & 0x1FF;
+                element->graphic[i].sprite.xPos = (element->graphic[i].x >> FX32_SHIFT) & 0x1FF;
                 break;
         }
     }
 
     if (r7) {
-        return 2;
+        return HUD_SCRIPT_NEXT;
     }
 
-    return 1;
+    return HUD_SCRIPT_WAIT;
 }
 
 static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
-    s32 target;
-    s32 offset;
+    fx32 target;
+    fx32 offset;
     //! Possible fake match.
     register u32 number asm("r0");
 
@@ -576,13 +602,13 @@ static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
             case 1:
                 number = element->targetValue;
                 if (number < element->displayValue) {
-                    return 2;
+                    return HUD_SCRIPT_NEXT;
                 }
                 break;
             case 2:
                 number = element->targetValue;
                 if (number > element->displayValue) {
-                    return 2;
+                    return HUD_SCRIPT_NEXT;
                 }
                 break;
             default:
@@ -591,32 +617,32 @@ static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
         }
 
         number = (u16)number;
-        offset = 0xC0000;
+        offset = FX32_CONST(12);
         if (number >= 10) {
-            offset = 0x1C0000;
+            offset = FX32_CONST(28);
             if (number < 100) {
-                offset = 0x140000;
+                offset = FX32_CONST(20);
             }
         }
 
-        target = element->graphic[a2].field_2C - offset;
+        target = element->graphic[a2].homeX - offset;
     } else {
-        target = element->graphic[a2].field_2C;
+        target = element->graphic[a2].homeX;
     }
 
-    element->graphic[a2].field_24 = target;
-    if (target > element->graphic[a2].field_1C) {
-        element->graphic[a2].field_34 = 2;
+    element->graphic[a2].targetX = target;
+    if (target > element->graphic[a2].x) {
+        element->graphic[a2].slideDir = DIRECTION_RIGHT;
     } else {
-        element->graphic[a2].field_34 = 6;
+        element->graphic[a2].slideDir = DIRECTION_LEFT;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
-    s32 target;
-    s32 offset;
+    fx32 target;
+    fx32 offset;
     //! Possible fake match.
     register u32 number asm("r0");
 
@@ -625,13 +651,13 @@ static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
             case 1:
                 number = element->targetValue;
                 if (number < element->displayValue) {
-                    return 2;
+                    return HUD_SCRIPT_NEXT;
                 }
                 break;
             case 2:
                 number = element->targetValue;
                 if (number > element->displayValue) {
-                    return 2;
+                    return HUD_SCRIPT_NEXT;
                 }
                 break;
             default:
@@ -640,33 +666,33 @@ static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
         }
 
         number = (u16)number;
-        offset = 0xC0000;
+        offset = FX32_CONST(12);
         if (number >= 10) {
-            offset = 0x1C0000;
+            offset = FX32_CONST(28);
             if (number < 100) {
-                offset = 0x140000;
+                offset = FX32_CONST(20);
             }
         }
 
-        target = element->graphic[a2].field_2C + offset;
+        target = element->graphic[a2].homeX + offset;
     } else {
-        target = element->graphic[a2].field_2C;
+        target = element->graphic[a2].homeX;
     }
 
-    element->graphic[a2].field_24 = target;
-    if (target < element->graphic[a2].field_1C) {
-        element->graphic[a2].field_34 = 6;
+    element->graphic[a2].targetX = target;
+    if (target < element->graphic[a2].x) {
+        element->graphic[a2].slideDir = DIRECTION_LEFT;
     } else {
-        element->graphic[a2].field_34 = 2;
+        element->graphic[a2].slideDir = DIRECTION_RIGHT;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
-    s32 target;
-    s32 offset;
-    s32 offset2;
+    fx32 target;
+    fx32 offset;
+    fx32 offset2;
     //! Possible fake match.
     register u32 number asm("r0");
 
@@ -675,13 +701,13 @@ static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
             case 1:
                 number = element->targetValue;
                 if (number < element->displayValue) {
-                    return 2;
+                    return HUD_SCRIPT_NEXT;
                 }
                 break;
             case 2:
                 number = element->targetValue;
                 if (number > element->displayValue) {
-                    return 2;
+                    return HUD_SCRIPT_NEXT;
                 }
                 break;
             default:
@@ -690,42 +716,42 @@ static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
         }
 
         number = (u16)number;
-        offset = 0xC0000;
+        offset = FX32_CONST(12);
         if (number >= 10) {
-            offset = 0x1C0000;
+            offset = FX32_CONST(28);
             if (number < 100) {
-                offset = 0x140000;
+                offset = FX32_CONST(20);
             }
         }
 
         number = element->maxValue;
-        offset2 = 0xC0000;
+        offset2 = FX32_CONST(12);
         if (number >= 10) {
-            offset2 = 0x1C0000;
+            offset2 = FX32_CONST(28);
             if (number < 100) {
-                offset2 = 0x140000;
+                offset2 = FX32_CONST(20);
             }
         }
 
-        target = element->graphic[a2].field_2C - offset - offset2;
+        target = element->graphic[a2].homeX - offset - offset2;
     } else {
-        target = element->graphic[a2].field_2C;
+        target = element->graphic[a2].homeX;
     }
 
-    element->graphic[a2].field_24 = target;
-    if (target > element->graphic[a2].field_1C) {
-        element->graphic[a2].field_34 = 2;
+    element->graphic[a2].targetX = target;
+    if (target > element->graphic[a2].x) {
+        element->graphic[a2].slideDir = DIRECTION_RIGHT;
     } else {
-        element->graphic[a2].field_34 = 6;
+        element->graphic[a2].slideDir = DIRECTION_LEFT;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
-    s32 target;
-    s32 offset;
-    s32 offset2;
+    fx32 target;
+    fx32 offset;
+    fx32 offset2;
     //! Possible fake match.
     register u32 number asm("r0");
 
@@ -734,13 +760,13 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
             case 1:
                 number = element->targetValue;
                 if (number < element->displayValue) {
-                    return 2;
+                    return HUD_SCRIPT_NEXT;
                 }
                 break;
             case 2:
                 number = element->targetValue;
                 if (number > element->displayValue) {
-                    return 2;
+                    return HUD_SCRIPT_NEXT;
                 }
                 break;
             default:
@@ -749,36 +775,36 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
         }
 
         number = (u16)number;
-        offset = 0xC0000;
+        offset = FX32_CONST(12);
         if (number >= 10) {
-            offset = 0x1C0000;
+            offset = FX32_CONST(28);
             if (number < 100) {
-                offset = 0x140000;
+                offset = FX32_CONST(20);
             }
         }
 
         number = element->maxValue;
-        offset2 = 0xC0000;
+        offset2 = FX32_CONST(12);
         if (number >= 10) {
-            offset2 = 0x1C0000;
+            offset2 = FX32_CONST(28);
             if (number < 100) {
-                offset2 = 0x140000;
+                offset2 = FX32_CONST(20);
             }
         }
 
-        target = element->graphic[a2].field_2C + offset + offset2;
+        target = element->graphic[a2].homeX + offset + offset2;
     } else {
-        target = element->graphic[a2].field_2C;
+        target = element->graphic[a2].homeX;
     }
 
-    element->graphic[a2].field_24 = target;
-    if (target < element->graphic[a2].field_1C) {
-        element->graphic[a2].field_34 = 6;
+    element->graphic[a2].targetX = target;
+    if (target < element->graphic[a2].x) {
+        element->graphic[a2].slideDir = DIRECTION_LEFT;
     } else {
-        element->graphic[a2].field_34 = 2;
+        element->graphic[a2].slideDir = DIRECTION_RIGHT;
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
@@ -786,17 +812,17 @@ static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
     const u8* ptr = byte_80A8CF6[element->displayValue];
 
     for (i = a2; i < element->graphicCount; i++) {
-        element->graphic[i].field_1C = a3 << 16;
-        element->graphic[i].field_20 = a4 << 16;
+        element->graphic[i].x = a3 << FX32_SHIFT;
+        element->graphic[i].y = a4 << FX32_SHIFT;
         element->graphic[i].sprite.xPos = a3;
         element->graphic[i].sprite.yPos = a4;
         SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[ptr[i - a2]], 0, 0, 0, a3,
                   a4, 2);
-        element->graphic[i].field_35 = 1;
+        element->graphic[i].hasSprite = TRUE;
     }
 
     element->timer = 10;
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
@@ -804,17 +830,17 @@ static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
     const u8* ptr = byte_80A8D92[element->displayValue];
 
     for (i = a2; i < element->graphicCount; i++) {
-        element->graphic[i].field_1C = a3 << 16;
-        element->graphic[i].field_20 = a4 << 16;
+        element->graphic[i].x = a3 << FX32_SHIFT;
+        element->graphic[i].y = a4 << FX32_SHIFT;
         element->graphic[i].sprite.xPos = a3;
         element->graphic[i].sprite.yPos = a4;
         SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[ptr[i - a2]], 0, 0, 0, a3,
                   a4, 2);
-        element->graphic[i].field_35 = 1;
+        element->graphic[i].hasSprite = TRUE;
     }
 
     element->timer = 10;
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F8A8(struct HudElement* element, int a2, int a3, int a4) {
@@ -822,17 +848,17 @@ static int sub_803F8A8(struct HudElement* element, int a2, int a3, int a4) {
 
     if (a3 == 1) {
         for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].field_24 = element->graphic[i].field_1C - ((i - a2) * 0xC0000);
-            element->graphic[i].field_34 = 6;
+            element->graphic[i].targetX = element->graphic[i].x - ((i - a2) * FX32_CONST(12));
+            element->graphic[i].slideDir = DIRECTION_LEFT;
         }
     } else {
         for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].field_24 = element->graphic[i].field_1C - (a4 << 16);
-            element->graphic[i].field_34 = 6;
+            element->graphic[i].targetX = element->graphic[i].x - (a4 << FX32_SHIFT);
+            element->graphic[i].slideDir = DIRECTION_LEFT;
         }
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F914(struct HudElement* element, int a2, int a3, int a4) {
@@ -840,17 +866,17 @@ static int sub_803F914(struct HudElement* element, int a2, int a3, int a4) {
 
     if (a3 == 1) {
         for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].field_24 = element->graphic[i].field_1C + ((i - a2) * 0xC0000);
-            element->graphic[i].field_34 = 2;
+            element->graphic[i].targetX = element->graphic[i].x + ((i - a2) * FX32_CONST(12));
+            element->graphic[i].slideDir = DIRECTION_RIGHT;
         }
     } else {
         for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].field_24 = element->graphic[i].field_1C + (a4 << 16);
-            element->graphic[i].field_34 = 2;
+            element->graphic[i].targetX = element->graphic[i].x + (a4 << FX32_SHIFT);
+            element->graphic[i].slideDir = DIRECTION_RIGHT;
         }
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F980(struct HudElement* element, int a2, int a3, int a4) {
@@ -858,17 +884,17 @@ static int sub_803F980(struct HudElement* element, int a2, int a3, int a4) {
 
     if (a3 == 1) {
         for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].field_28 = element->graphic[i].field_20 - ((i - a2) * 0xC0000);
-            element->graphic[i].field_34 = 0;
+            element->graphic[i].targetY = element->graphic[i].y - ((i - a2) * FX32_CONST(12));
+            element->graphic[i].slideDir = DIRECTION_UP;
         }
     } else {
         for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].field_28 = element->graphic[i].field_20 - (a4 << 16);
-            element->graphic[i].field_34 = 0;
+            element->graphic[i].targetY = element->graphic[i].y - (a4 << FX32_SHIFT);
+            element->graphic[i].slideDir = DIRECTION_UP;
         }
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int sub_803F9EC(struct HudElement* element, int a2, int a3, int a4) {
@@ -876,17 +902,17 @@ static int sub_803F9EC(struct HudElement* element, int a2, int a3, int a4) {
 
     if (a3 == 1) {
         for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].field_28 = element->graphic[i].field_20 + ((i - a2) * 0xC0000);
-            element->graphic[i].field_34 = 4;
+            element->graphic[i].targetY = element->graphic[i].y + ((i - a2) * FX32_CONST(12));
+            element->graphic[i].slideDir = DIRECTION_DOWN;
         }
     } else {
         for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].field_28 = element->graphic[i].field_20 + (a4 << 16);
-            element->graphic[i].field_34 = 4;
+            element->graphic[i].targetY = element->graphic[i].y + (a4 << FX32_SHIFT);
+            element->graphic[i].slideDir = DIRECTION_DOWN;
         }
     }
 
-    return 2;
+    return HUD_SCRIPT_NEXT;
 }
 
 static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a4) {
@@ -914,7 +940,7 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
                 element->rouletteTime--;
                 if (element->rouletteStepDelay != 0) {
                     element->rouletteStepDelay--;
-                    return 1;
+                    return HUD_SCRIPT_WAIT;
                 }
                 PLAY_SFX(170);
                 if (element->rouletteStarted) {
@@ -935,7 +961,7 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
                 sprite_set_anim((struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
                                 word_80A8CF0[1], 0, 1);
                 element->rouletteStepDelay = unk_80CF330[gLoadedRoomLevel];
-                return 1;
+                return HUD_SCRIPT_WAIT;
             }
             break;
 
@@ -962,7 +988,7 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
                 element->rouletteTime--;
                 if (element->rouletteStepDelay != 0) {
                     element->rouletteStepDelay--;
-                    return 1;
+                    return HUD_SCRIPT_WAIT;
                 }
 
                 PLAY_SFX(170);
@@ -986,13 +1012,13 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
                 sprite_set_anim((struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
                                 word_80A8CF0[1], 0, 1);
                 element->rouletteStepDelay = unk_80CF348[gLoadedRoomLevel];
-                return 1;
+                return HUD_SCRIPT_WAIT;
             }
             break;
     }
 
     if (element->displayValue == element->targetValue) {
-        return 2;
+        return HUD_SCRIPT_NEXT;
     }
 
     element->timer--;
@@ -1013,15 +1039,15 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
         for (i = a2; i < element->graphicCount; i++) {
             sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[v1[i - a2]], 0,
                             1);
-            element->graphic[i].field_35 = 1;
+            element->graphic[i].hasSprite = TRUE;
         }
 
         if (element->displayValue == element->targetValue) {
-            return 2;
+            return HUD_SCRIPT_NEXT;
         }
     }
 
-    return 1;
+    return HUD_SCRIPT_WAIT;
 }
 
 static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
@@ -1029,7 +1055,7 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
     int i;
 
     if (element->displayValue == element->targetValue) {
-        return 2;
+        return HUD_SCRIPT_NEXT;
     }
 
     element->timer--;
@@ -1047,15 +1073,15 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
         for (i = a2; i < element->graphicCount; i++) {
             sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[v1[i - a2]], 0,
                             1);
-            element->graphic[i].field_35 = 1;
+            element->graphic[i].hasSprite = TRUE;
         }
 
         if (element->displayValue == element->targetValue) {
-            return 2;
+            return HUD_SCRIPT_NEXT;
         }
     }
 
-    return 1;
+    return HUD_SCRIPT_WAIT;
 }
 
 void reset_hud_elements(void) {
@@ -1154,13 +1180,13 @@ void reset_hud_elements(void) {
     gHudElements[HUD_ELEMENT_GOLD_NUGGETS].targetValue =
         gHudElements[HUD_ELEMENT_GOLD_NUGGETS].displayValue;
 
-    if (gHudElements[HUD_ELEMENT_HEALTH].renderState == 0) {
+    if (gHudElements[HUD_ELEMENT_HEALTH].state == HUD_STATE_HIDDEN) {
         gHudElements[HUD_ELEMENT_HEALTH].maxValue = stru_80CC8C4.health;
         gHudElements[HUD_ELEMENT_HEALTH].displayValue = gGameStatus.health;
         gHudElements[HUD_ELEMENT_HEALTH].targetValue = gHudElements[HUD_ELEMENT_HEALTH].displayValue;
     }
 
-    if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState == 0) {
+    if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state == HUD_STATE_HIDDEN) {
         gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].maxValue = stru_80CC8C4.health;
         gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].displayValue = gGameStatus.health;
         gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].targetValue =
@@ -1190,12 +1216,12 @@ void init_hud_elements(void) {
     gHudElements = heap_alloc(sizeof(struct HudElement) * HUD_ELEMENT_COUNT, 3, HEAP_GENERAL);
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
-        gHudElements[i].renderState = 0;
+        gHudElements[i].state = HUD_STATE_HIDDEN;
         gHudElements[i].reshow = FALSE;
         gHudElements[i].scriptStep = 0;
         gHudElements[i].graphicCount = 0;
         gHudElements[i].displayTime = word_80A8E28[i];
-        gHudElements[i].slideSpeed = 0x2CCCC;
+        gHudElements[i].slideSpeed = FX32_CONST(2.8);
         gHudElements[i].keepShown = FALSE;
         gHudElements[i].rouletteIndex = 0;
         gHudElements[i].rouletteStepDelay = 0;
@@ -1234,15 +1260,15 @@ void update_hud_collectables(void) {
 void set_hud_number(u32 element, int value) {
     int n;
     int funcIdx, arg1;
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             gHudElements[element].timer = 10;
@@ -1266,9 +1292,9 @@ void set_hud_number(u32 element, int value) {
             break;
 
         case HUD_METER_OXYGEN:
-            renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state;
             element = HUD_ELEMENT_OXYGEN_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             gHudElements[element].timer = 10;
@@ -1472,21 +1498,21 @@ void set_hud_number(u32 element, int value) {
             break;
     }
 
-    switch (gHudElements[element].renderState) {
-        case 0:
-            gHudElements[element].renderState = 1;
+    switch (gHudElements[element].state) {
+        case HUD_STATE_HIDDEN:
+            gHudElements[element].state = HUD_STATE_START;
             break;
 
-        case 6:
+        case HUD_STATE_SLIDE_OUT:
             gHudElements[element].reshow = TRUE;
             break;
 
-        case 3:
-        case 4:
-        case 5:
+        case HUD_STATE_UPDATE:
+        case HUD_STATE_UPDATE_FRACTION:
+        case HUD_STATE_SHOWN:
             funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
             arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
-            while (funcIdx != 11 || (arg1 != 3 && arg1 != 4)) {
+            while (funcIdx != 11 || (arg1 != HUD_STATE_UPDATE && arg1 != HUD_STATE_UPDATE_FRACTION)) {
                 gHudElements[element].scriptStep--;
                 funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
                 arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
@@ -1499,28 +1525,28 @@ void sub_80407F8(void) {
     int funcIdx, arg1;
     int element;
 
-    element = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState ? HUD_ELEMENT_HEALTH
-                                                                     : HUD_ELEMENT_HEALTH_WITH_ICON;
+    element = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state ? HUD_ELEMENT_HEALTH
+                                                               : HUD_ELEMENT_HEALTH_WITH_ICON;
 
-    if (gHudElements[element].renderState != 0) {
+    if (gHudElements[element].state != HUD_STATE_HIDDEN) {
         gHudElements[element].graphicCount++;
     }
 
-    switch (gHudElements[element].renderState) {
-        case 0:
-            gHudElements[element].renderState = 1;
+    switch (gHudElements[element].state) {
+        case HUD_STATE_HIDDEN:
+            gHudElements[element].state = HUD_STATE_START;
             break;
 
-        case 6:
+        case HUD_STATE_SLIDE_OUT:
             gHudElements[element].reshow = TRUE;
             break;
 
-        case 5:
+        case HUD_STATE_SHOWN:
             do {
                 gHudElements[element].scriptStep--;
                 funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
                 arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
-            } while (funcIdx != 11 || arg1 != 3);
+            } while (funcIdx != 11 || arg1 != HUD_STATE_UPDATE);
             break;
     }
 }
@@ -1529,7 +1555,7 @@ void update_hud(void) {
     int i;
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
-        if (gHudElements[i].renderState) {
+        if (gHudElements[i].state != HUD_STATE_HIDDEN) {
             u16 idx = gHudElements[i].scriptStep;
             struct struc_60* states = stru_80AF310[i].states;
 
@@ -1538,21 +1564,21 @@ void update_hud(void) {
             u32 arg2 = states[idx].arg2;
             u32 arg3 = states[idx].arg3;
 
-            if (dHudFunctions[funcIdx](&gHudElements[i], arg1, arg2, arg3) == 2) {
+            if (dHudCommands[funcIdx](&gHudElements[i], arg1, arg2, arg3) == HUD_SCRIPT_NEXT) {
                 gHudElements[i].scriptStep++;
             }
         }
     }
 }
 
-void sub_80408F0(void) {
+void hud_render_sprites(void) {
     int i;
     int j;
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
-        if (gHudElements[i].renderState) {
+        if (gHudElements[i].state != HUD_STATE_HIDDEN) {
             for (j = 0; j < gHudElements[i].graphicCount; j++) {
-                if (gHudElements[i].graphic[j].field_35) {
+                if (gHudElements[i].graphic[j].hasSprite) {
                     sprite_render((struct Sprite*)&gHudElements[i].graphic[j].sprite);
                 }
             }
@@ -1560,16 +1586,16 @@ void sub_80408F0(void) {
     }
 }
 
-void render_hud_elements(void) {
+void hud_render_text(void) {
     int i;
     vu16 x, y;
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
-        if (gHudElements[i].renderState == 0) {
+        if (gHudElements[i].state == HUD_STATE_HIDDEN) {
             continue;
         }
 
-        if ((u8)(gHudElements[i].renderState - 3) <= 2) {
+        if (gHudElements[i].state >= HUD_STATE_UPDATE && gHudElements[i].state <= HUD_STATE_SHOWN) {
             gHudElements[i].textBox.stringOffset = 0;
             x = gHudElements[i].textBox.xPosition;
             y = gHudElements[i].textBox.yPosition;
@@ -1590,8 +1616,8 @@ void sub_80409DC(void) {
     int i;
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
-        if (gHudElements[i].renderState) {
-            gHudElements[i].renderState = 0;
+        if (gHudElements[i].state) {
+            gHudElements[i].state = HUD_STATE_HIDDEN;
             gHudElements[i].displayValue = gHudElements[i].targetValue;
             gHudElements[i].reshow = FALSE;
             gHudElements[i].scriptStep = 0;
@@ -1605,22 +1631,22 @@ void sub_80409DC(void) {
 }
 
 void sub_08040A38(u32 element) {
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             break;
 
         case HUD_METER_OXYGEN:
-            renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
-            if (renderState != 0 && renderState != 6) {
+            state = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state;
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             break;
@@ -1629,8 +1655,8 @@ void sub_08040A38(u32 element) {
     gHudElements[element].displayValue = gHudElements[element].targetValue;
     gHudElements[element].reshow = FALSE;
     gHudElements[element].scriptStep = 0;
-    if (gHudElements[element].renderState) {
-        gHudElements[element].renderState = 0;
+    if (gHudElements[element].state) {
+        gHudElements[element].state = HUD_STATE_HIDDEN;
         if (gHudElements[element].graphicCount) {
             heap_free(gHudElements[element].graphic, HEAP_GENERAL);
             gHudElements[element].graphicCount = 0;
@@ -1639,22 +1665,22 @@ void sub_08040A38(u32 element) {
 }
 
 void sub_08040AD0(u32 element, int value) {
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             break;
 
         case HUD_METER_OXYGEN:
-            renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
-            if (renderState != 0 && renderState != 6) {
+            state = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state;
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             break;
@@ -1667,9 +1693,9 @@ void sub_08040AD0(u32 element, int value) {
 
 #define SHOW_HUD_ELEMENT(element)                                                                      \
     {                                                                                                  \
-        gHudElements[element].renderState = 1;                                                         \
+        gHudElements[element].state = HUD_STATE_START;                                                 \
         gHudElements[element].savedSlideSpeed = gHudElements[element].slideSpeed;                      \
-        gHudElements[element].slideSpeed = 0x40000;                                                    \
+        gHudElements[element].slideSpeed = FX32_CONST(4);                                              \
         gHudElements[element].savedKeepShown = gHudElements[element].keepShown;                        \
         gHudElements[element].keepShown = FALSE;                                                       \
     }
@@ -1730,48 +1756,50 @@ void hide_pause_counters(void) {
 bool32 are_pause_counters_shown(int isDiving) {
     bool32 done = TRUE;
 
-    if (byte_203E127 && gHudElements[HUD_ELEMENT_PAUSE_NOTES].renderState != 5) {
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_PAUSE_NOTES].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E128 && gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].renderState != 5) {
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_JINJOS].renderState != 5) {
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_JINJOS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E12B && gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].renderState != 5) {
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E12A && gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].renderState != 5) {
+    if (byte_203E12A && gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].renderState != 5) {
+    if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_HONEYCOMBS].renderState != 5) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_HONEYCOMBS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
 
     //! Possible fake match.
-    if ((*(struct HudElement* volatile*)&gHudElements)[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 5) {
+    if ((*(struct HudElement* volatile*)&gHudElements)[HUD_ELEMENT_HEALTH_WITH_ICON].state
+        != HUD_STATE_SHOWN) {
         done = FALSE;
     }
 
     if (isDiving) {
-        if ((*(struct HudElement* volatile*)&gHudElements)[HUD_ELEMENT_OXYGEN].renderState != 5) {
+        if ((*(struct HudElement* volatile*)&gHudElements)[HUD_ELEMENT_OXYGEN].state
+            != HUD_STATE_SHOWN) {
             done = FALSE;
         }
     } else {
-        if (byte_203E122 && gHudElements[HUD_ELEMENT_BLUE_EGGS].renderState != 5) {
+        if (byte_203E122 && gHudElements[HUD_ELEMENT_BLUE_EGGS].state != HUD_STATE_SHOWN) {
             done = FALSE;
         }
-        if (byte_203E123 && gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].renderState != 5) {
+        if (byte_203E123 && gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].state != HUD_STATE_SHOWN) {
             done = FALSE;
         }
-        if (byte_203E124 && gHudElements[HUD_ELEMENT_ICE_EGGS].renderState != 5) {
+        if (byte_203E124 && gHudElements[HUD_ELEMENT_ICE_EGGS].state != HUD_STATE_SHOWN) {
             done = FALSE;
         }
-        if (byte_203E125 && gHudElements[HUD_ELEMENT_FIRE_EGGS].renderState != 5) {
+        if (byte_203E125 && gHudElements[HUD_ELEMENT_FIRE_EGGS].state != HUD_STATE_SHOWN) {
             done = FALSE;
         }
     }
@@ -1789,46 +1817,46 @@ bool32 are_pause_counters_shown(int isDiving) {
 bool32 are_pause_counters_hidden(int isDiving) {
     bool32 done = TRUE;
 
-    if (byte_203E127 && gHudElements[HUD_ELEMENT_19].renderState != 0) {
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_19].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E128 && gHudElements[HUD_ELEMENT_20].renderState != 0) {
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_20].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_JINJOS].renderState != 0) {
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_JINJOS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E12B && gHudElements[HUD_ELEMENT_43].renderState != 0) {
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_43].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E12A && gHudElements[HUD_ELEMENT_42].renderState != 0) {
+    if (byte_203E12A && gHudElements[HUD_ELEMENT_42].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].renderState != 0) {
+    if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_6].renderState != 0) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_6].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0) {
+    if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
 
     if (isDiving) {
-        if (gHudElements[HUD_ELEMENT_56].renderState != 0) {
+        if (gHudElements[HUD_ELEMENT_56].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
     } else {
-        if (byte_203E122 && gHudElements[HUD_ELEMENT_9].renderState != 0) {
+        if (byte_203E122 && gHudElements[HUD_ELEMENT_9].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
-        if (byte_203E123 && gHudElements[HUD_ELEMENT_10].renderState != 0) {
+        if (byte_203E123 && gHudElements[HUD_ELEMENT_10].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
-        if (byte_203E124 && gHudElements[HUD_ELEMENT_11].renderState != 0) {
+        if (byte_203E124 && gHudElements[HUD_ELEMENT_11].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
-        if (byte_203E125 && gHudElements[HUD_ELEMENT_12].renderState != 0) {
+        if (byte_203E125 && gHudElements[HUD_ELEMENT_12].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
     }
@@ -2033,22 +2061,23 @@ void hide_totals_counters(int page) {
 bool32 are_totals_counters_shown(int page) {
     bool32 done = TRUE;
 
-    if (byte_203E127 && gHudElements[HUD_ELEMENT_TOTALS_NOTES].renderState != 5) {
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_TOTALS_NOTES].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E128 && gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].renderState != 5) {
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E129 && gHudElements[HUD_ELEMENT_TOTALS_JINJOS].renderState != 5) {
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_TOTALS_JINJOS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E12B && gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].renderState != 5) {
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].renderState != 5) {
+    if (gShowMovesLearnedCounter
+        && gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].renderState != 5) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
 
@@ -2059,34 +2088,38 @@ bool32 are_totals_counters_shown(int page) {
             break;
 
         case 1:
-            if (byte_203E12D && gHudElements[HUD_ELEMENT_TOTALS_CHICKS].renderState != 5) {
+            if (byte_203E12D && gHudElements[HUD_ELEMENT_TOTALS_CHICKS].state != HUD_STATE_SHOWN) {
                 done = FALSE;
             }
             return done;
 
         case 2:
-            if (byte_203E12E && gHudElements[HUD_ELEMENT_TOTALS_SHELLS].renderState != 5) {
+            if (byte_203E12E && gHudElements[HUD_ELEMENT_TOTALS_SHELLS].state != HUD_STATE_SHOWN) {
                 done = FALSE;
             }
-            if (byte_203E12F && gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].renderState != 5) {
+            if (byte_203E12F
+                && gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].state != HUD_STATE_SHOWN) {
                 done = FALSE;
             }
             return done;
 
         case 4:
-            if (byte_203E130 && gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].renderState != 5) {
+            if (byte_203E130
+                && gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].state != HUD_STATE_SHOWN) {
                 done = FALSE;
             }
-            if (byte_203E131 && gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].renderState != 5) {
+            if (byte_203E131
+                && gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].state != HUD_STATE_SHOWN) {
                 done = FALSE;
             }
-            if (byte_203E132 && gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].renderState != 5) {
+            if (byte_203E132 && gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].state != HUD_STATE_SHOWN) {
                 done = FALSE;
             }
             return done;
 
         case 5:
-            if (byte_203E133 && gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].renderState != 5) {
+            if (byte_203E133
+                && gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].state != HUD_STATE_SHOWN) {
                 done = FALSE;
             }
             return done;
@@ -2101,22 +2134,23 @@ bool32 are_totals_counters_shown(int page) {
 bool32 are_totals_counters_hidden(int page) {
     bool32 done = TRUE;
 
-    if (byte_203E127 && gHudElements[HUD_ELEMENT_TOTALS_NOTES].renderState != 0) {
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_TOTALS_NOTES].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E128 && gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].renderState != 0) {
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E129 && gHudElements[HUD_ELEMENT_TOTALS_JINJOS].renderState != 0) {
+    if (byte_203E129 && gHudElements[HUD_ELEMENT_TOTALS_JINJOS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E12B && gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].renderState != 0) {
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].renderState != 0) {
+    if (gShowMovesLearnedCounter
+        && gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].renderState != 0) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
 
@@ -2127,34 +2161,38 @@ bool32 are_totals_counters_hidden(int page) {
             break;
 
         case 1:
-            if (byte_203E12D && gHudElements[HUD_ELEMENT_TOTALS_CHICKS].renderState != 0) {
+            if (byte_203E12D && gHudElements[HUD_ELEMENT_TOTALS_CHICKS].state != HUD_STATE_HIDDEN) {
                 done = FALSE;
             }
             return done;
 
         case 2:
-            if (byte_203E12E && gHudElements[HUD_ELEMENT_TOTALS_SHELLS].renderState != 0) {
+            if (byte_203E12E && gHudElements[HUD_ELEMENT_TOTALS_SHELLS].state != HUD_STATE_HIDDEN) {
                 done = FALSE;
             }
-            if (byte_203E12F && gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].renderState != 0) {
+            if (byte_203E12F
+                && gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].state != HUD_STATE_HIDDEN) {
                 done = FALSE;
             }
             return done;
 
         case 4:
-            if (byte_203E130 && gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].renderState != 0) {
+            if (byte_203E130
+                && gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].state != HUD_STATE_HIDDEN) {
                 done = FALSE;
             }
-            if (byte_203E131 && gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].renderState != 0) {
+            if (byte_203E131
+                && gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].state != HUD_STATE_HIDDEN) {
                 done = FALSE;
             }
-            if (byte_203E132 && gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].renderState != 0) {
+            if (byte_203E132 && gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].state != HUD_STATE_HIDDEN) {
                 done = FALSE;
             }
             return done;
 
         case 5:
-            if (byte_203E133 && gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].renderState != 0) {
+            if (byte_203E133
+                && gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].state != HUD_STATE_HIDDEN) {
                 done = FALSE;
             }
             return done;
@@ -2170,7 +2208,7 @@ void dismiss_hud_elements(void) {
     int i;
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
-        if (gHudElements[i].renderState) {
+        if (gHudElements[i].state) {
             gHudElements[i].timer = 1;
             gHudElements[i].keepShown = FALSE;
         }
@@ -2199,22 +2237,22 @@ void sub_8041E88(void) {
 }
 
 void sub_08041F3C(u32 element, int value) {
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             break;
 
         case HUD_METER_OXYGEN:
-            renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
-            if (renderState != 0 && renderState != 6) {
+            state = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state;
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             break;
@@ -2224,22 +2262,22 @@ void sub_08041F3C(u32 element, int value) {
 }
 
 void keep_hud_element_shown(u32 element) {
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             break;
 
         case HUD_METER_OXYGEN:
-            if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0
-                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6) {
+            if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_HIDDEN
+                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             break;
@@ -2249,22 +2287,22 @@ void keep_hud_element_shown(u32 element) {
 }
 
 void release_hud_element(u32 element) {
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             break;
 
         case HUD_METER_OXYGEN:
-            renderState = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState;
-            if (renderState != 0 && renderState != 6) {
+            state = gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state;
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             break;
@@ -2275,78 +2313,79 @@ void release_hud_element(u32 element) {
 }
 
 bool32 sub_0804207C(u32 element) {
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             break;
 
         case HUD_METER_OXYGEN:
-            if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0
-                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6) {
+            if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_HIDDEN
+                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             break;
     }
 
-    return gHudElements[element].renderState == 5;
+    return gHudElements[element].state == HUD_STATE_SHOWN;
 }
 
 bool32 sub_080420E8(u32 element) {
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             break;
 
         case HUD_METER_OXYGEN:
-            if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0
-                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6) {
+            if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_HIDDEN
+                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             break;
     }
 
-    return gHudElements[element].renderState != 0;
+    return gHudElements[element].state != HUD_STATE_HIDDEN;
 }
 
 static int get_hud_element_max(u32 element) {
-    u8 renderState;
+    u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
 
     switch (element) {
         case HUD_METER_HEALTH:
-            renderState = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].renderState;
+            state = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state;
             element = HUD_ELEMENT_HEALTH_WITH_ICON;
-            if (renderState != 0 && renderState != 6) {
+            if (state != HUD_STATE_HIDDEN && state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_HEALTH;
             }
             break;
 
         case HUD_METER_OXYGEN:
-            if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 0
-                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 6) {
+            if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_HIDDEN
+                && gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_SLIDE_OUT) {
                 element = HUD_ELEMENT_OXYGEN;
             }
             break;
     }
 
-    if (gHudElements[element].renderState != 6 && gHudElements[element].renderState != 0) {
+    if (gHudElements[element].state != HUD_STATE_SLIDE_OUT
+        && gHudElements[element].state != HUD_STATE_HIDDEN) {
         return gHudElements[element].maxValue;
     }
 
@@ -2385,20 +2424,20 @@ static void sub_80421C4(int value, int max, char* buf) {
 }
 
 bool32 sub_8042218(int value) {
-    if (gHudElements[HUD_ELEMENT_36].renderState != 0) {
+    if (gHudElements[HUD_ELEMENT_36].state != HUD_STATE_HIDDEN) {
         gHudElements[HUD_ELEMENT_36].timer = 0;
         return FALSE;
     }
 
     gHudElements[HUD_ELEMENT_36].displayValue = value;
     gHudElements[HUD_ELEMENT_36].targetValue = value;
-    gHudElements[HUD_ELEMENT_36].renderState = 1;
+    gHudElements[HUD_ELEMENT_36].state = HUD_STATE_START;
     gHudElements[HUD_ELEMENT_36].timer = 10;
     return TRUE;
 }
 
 void sub_8042250(void) {
-    if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].renderState != 3) {
+    if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_UPDATE) {
         gIsStopHoneycombActive = FALSE;
         sub_8063178();
         byte_200108E = 0;
