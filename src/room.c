@@ -1267,3 +1267,121 @@ void sub_8013DD4(s32 height, s32 width) {
     }
 }
 #endif
+
+void UpdateMapUp(fx32 posY) {
+    s16 y;
+    s16 bottom;
+    u8 oldOffset;
+
+    y = (posY >> 16) - 80;
+    bottom = y + 160;
+    if (y < 0) {
+        gCameraPixelY = 0;
+    } else if (bottom > (s16)gMapPixelSizeY) {
+        gCameraPixelY = gMapPixelSizeY - 160;
+    } else {
+        gCameraPixelY = y;
+    }
+
+    oldOffset = gBGOffsetVertical;
+    gBGOffsetVertical = gCameraPixelY;
+    if (((oldOffset >> 3) & 31) != ((gBGOffsetVertical >> 3) & 31)) {
+        BGFillBufferVertical(gCameraPixelX >> 3, gCameraPixelY >> 3);
+        gBGMapOffsetVertical =
+            (((gBGOffsetVertical >> 3) & 31) * 32 + ((gBGOffsetHorizontal >> 3) & 31)) * 2;
+        gBGControlActions |= 0x24;
+    } else {
+        gBGControlActions |= 4;
+    }
+}
+
+void UpdateMapDown(fx32 posY) {
+    s16 pos;
+    s16 end;
+    u8 oldOffset;
+    u32 mask;
+    u32 screenBase;
+
+    pos = (posY >> 16) - 80;
+    end = pos + 160;
+    if (pos < 0) {
+        gCameraPixelY = 0;
+    } else if (end > (s16)gMapPixelSizeY) {
+        gCameraPixelY = gMapPixelSizeY - 160;
+    } else {
+        gCameraPixelY = pos;
+    }
+
+    oldOffset = gBGOffsetVertical;
+    gBGOffsetVertical = gCameraPixelY;
+    if (((oldOffset >> 3) & 31) != ((gBGOffsetVertical >> 3) & 31)) {
+        BGFillBufferVertical(gCameraPixelX >> 3, (gCameraPixelY + 160) >> 3);
+        gBGMapOffsetVertical =
+            (((gBGOffsetVertical >> 3) & 31) * 32 + ((gBGOffsetHorizontal >> 3) & 31)) * 2;
+        mask = 0xFFFE07FF;
+        screenBase = gBGMapOffsetVertical & 0x1F800;
+        gBGMapOffsetVertical = ((gBGMapOffsetVertical + 0x500) & mask) | screenBase;
+        gBGControlActions |= 0x28;
+    } else {
+        gBGControlActions |= 8;
+    }
+}
+
+void UpdateMapLeft(fx32 posX) {
+    s16 pos;
+    s16 end;
+    u8 oldOffset;
+
+    pos = (posX >> 16) - 120;
+    end = pos + 240;
+    if (pos < 0) {
+        gCameraPixelX = 0;
+    } else if (end > (s16)gMapPixelSizeX) {
+        gCameraPixelX = gMapPixelSizeX - 240;
+    } else {
+        gCameraPixelX = pos;
+    }
+
+    oldOffset = gBGOffsetHorizontal;
+    gBGOffsetHorizontal = gCameraPixelX;
+    if (((oldOffset >> 3) & 31) != ((gBGOffsetHorizontal >> 3) & 31)) {
+        BGFillBufferHorizontal(gCameraPixelX >> 3, gCameraPixelY >> 3);
+        gBGMapOffsetHorizontal =
+            (((gBGOffsetVertical >> 3) & 31) * 32 + ((gBGOffsetHorizontal >> 3) & 31)) * 2;
+        gBGControlActions |= 0x11;
+    } else {
+        gBGControlActions |= 1;
+    }
+}
+
+void UpdateMapRight(fx32 posX) {
+    s16 pos;
+    s16 end;
+    u8 oldOffset;
+    u32 mask;
+    u32 screenBase;
+
+    pos = (posX >> 16) - 120;
+    end = pos + 240;
+    if (pos < 0) {
+        gCameraPixelX = 0;
+    } else if (end > (s16)gMapPixelSizeX) {
+        gCameraPixelX = gMapPixelSizeX - 240;
+    } else {
+        gCameraPixelX = pos;
+    }
+
+    oldOffset = gBGOffsetHorizontal;
+    gBGOffsetHorizontal = gCameraPixelX;
+    if (((oldOffset >> 3) & 31) != ((gBGOffsetHorizontal >> 3) & 31)) {
+        BGFillBufferHorizontal((gCameraPixelX + 240) >> 3, gCameraPixelY >> 3);
+        gBGMapOffsetHorizontal =
+            (((gBGOffsetVertical >> 3) & 31) * 32 + ((gBGOffsetHorizontal >> 3) & 31)) * 2;
+        mask = 0xFFFE003F;
+        screenBase = gBGMapOffsetHorizontal & 0x1FFC0;
+        gBGMapOffsetHorizontal = ((gBGMapOffsetHorizontal + 0x3C) & mask) | screenBase;
+        gBGControlActions |= 0x12;
+    } else {
+        gBGControlActions |= 2;
+    }
+}

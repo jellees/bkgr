@@ -633,6 +633,8 @@ extern void sub_8011158(void);
 extern void sub_801126C(void);
 extern void sub_8013DD4(s32, s32);
 extern void sub_8013A10(s32, s32, s32, s32, s32, s32);
+extern void BGFillBufferVertical(s32, s32);
+extern void BGFillBufferHorizontal(s32, s32);
 extern void UpdateMapUp(fx32);
 extern void UpdateMapDown(fx32);
 extern void UpdateMapLeft(fx32);
@@ -963,6 +965,8 @@ extern struct Vec3fx gPlayerShadowPosTemp;
 extern u8 gBGControlActions;
 extern u8 gBGOffsetHorizontal;
 extern u8 gBGOffsetVertical;
+extern u32 gBGMapOffsetVertical;
+extern u32 gBGMapOffsetHorizontal;
 extern struct RoomHeader gRoomHeader;
 extern u16 gEnabledBGs;
 
