@@ -967,6 +967,14 @@ extern u8 gBGOffsetHorizontal;
 extern u8 gBGOffsetVertical;
 extern u32 gBGMapOffsetVertical;
 extern u32 gBGMapOffsetHorizontal;
+extern u16 gBG0VerticalBuffer[32];
+extern u16 gBG1VerticalBuffer[32];
+extern u16 gBG2VerticalBuffer[32];
+extern u16 gBG3VerticalBuffer[32];
+extern u16 gBG0HorizontalBuffer[22];
+extern u16 gBG1HorizontalBuffer[22];
+extern u16 gBG2HorizontalBuffer[22];
+extern u16 gBG3HorizontalBuffer[22];
 extern struct RoomHeader gRoomHeader;
 extern u16 gEnabledBGs;
 
