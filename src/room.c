@@ -4,6 +4,13 @@
 #include "main.h"
 #include "heap.h"
 
+struct Textbar {
+    u8 unk0;
+    u8 rowCount;
+    u16 fillTile;
+    u16 tiles[1];
+};
+
 u16 word_200145C;
 u16 word_200145E;
 u16 gBGInitOffsetHorizontal;
@@ -21,7 +28,7 @@ u8 byte_2002070;
 u32 dword_2002074;
 u32 dword_2002078;
 u32 dword_200207C;
-u32 dword_2002080;
+struct Textbar* dword_2002080;
 u32 dword_2002084;
 u32 dword_2002088;
 u8 gBG0Static;
@@ -1815,5 +1822,136 @@ void BGFillBufferVertical(s32 x, s32 y) {
 #ifndef NONMATCHING
 NAKED void BGFillBufferHorizontal(s32 x, s32 y) {
     asm_unified(".include \"asm/nonmatching/BGFillBufferHorizontal.s\"");
+}
+#endif
+
+#ifndef NONMATCHING
+NAKED void sub_08015CC0(s32 bg) {
+    asm_unified(".include \"asm/nonmatching/sub_08015CC0.s\"");
+}
+#else
+void sub_08015CC0(s32 bg) {
+    s32 i;
+    u16* dst;
+    struct Textbar* textbar;
+
+    byte_200146C = TRUE;
+    gBGControlActions = 0;
+
+    switch (bg) {
+        case 0:
+            if (gRoomHeader.tilesetBG0 == 0) {
+                dword_2002080 = gRoomHeader.textbarNPC;
+                ASSERT(dword_2002080 != NULL);
+            } else {
+                dword_2002080 = gRoomHeader.textbarBozzeye;
+                ASSERT(dword_2002080 != NULL);
+            }
+            dword_2002088 = (dword_2002080->fillTile << 16) | dword_2002080->fillTile;
+            DmaFill32(dword_2002088, (void*)0x0600E000, 0x140);
+            REG_BG0HOFS = 0;
+            REG_BG0VOFS = 0;
+            dword_2002084 = 0x0600E380;
+            REG_BLDCNT &= gColorSpecEffectsSel;
+            REG_BLDCNT |= BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND;
+            REG_BG0CNT &= 0xFFFC;
+            break;
+        case 1:
+            if (gRoomHeader.tilesetBG1 == 0) {
+                dword_2002080 = gRoomHeader.textbarNPC;
+                ASSERT(dword_2002080 != NULL);
+            } else {
+                dword_2002080 = gRoomHeader.textbarBozzeye;
+                ASSERT(dword_2002080 != NULL);
+            }
+            dword_2002088 = (dword_2002080->fillTile << 16) | dword_2002080->fillTile;
+            DmaFill32(dword_2002088, (void*)0x0600E800, 0x140);
+            REG_BG1HOFS = 0;
+            REG_BG1VOFS = 0;
+            dword_2002084 = 0x0600EB80;
+            REG_BLDCNT &= gColorSpecEffectsSel;
+            REG_BLDCNT |= BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND;
+            REG_BG1CNT &= 0xFFFC;
+            break;
+        case 2:
+            if (gRoomHeader.tilesetBG2 == 0) {
+                dword_2002080 = gRoomHeader.textbarNPC;
+                ASSERT(dword_2002080 != NULL);
+            } else {
+                dword_2002080 = gRoomHeader.textbarBozzeye;
+                ASSERT(dword_2002080 != NULL);
+            }
+            dword_2002088 = (dword_2002080->fillTile << 16) | dword_2002080->fillTile;
+            DmaFill32(dword_2002088, (void*)0x0600F000, 0x140);
+            REG_BG2HOFS = 0;
+            REG_BG2VOFS = 0;
+            dword_2002084 = 0x0600F380;
+            REG_BLDCNT &= gColorSpecEffectsSel;
+            REG_BLDCNT |= BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND;
+            REG_BG2CNT &= 0xFFFC;
+            break;
+        case 3:
+            if (gRoomHeader.tilesetBG3 == 0) {
+                dword_2002080 = gRoomHeader.textbarNPC;
+                ASSERT(dword_2002080 != NULL);
+            } else {
+                dword_2002080 = gRoomHeader.textbarBozzeye;
+                ASSERT(dword_2002080 != NULL);
+            }
+            dword_2002088 = (dword_2002080->fillTile << 16) | dword_2002080->fillTile;
+            DmaFill32(dword_2002088, (void*)0x0600F800, 0x140);
+            REG_BG3HOFS = 0;
+            REG_BG3VOFS = 0;
+            dword_2002084 = 0x0600FB80;
+            REG_BLDCNT &= gColorSpecEffectsSel;
+            REG_BLDCNT |= BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_BLEND;
+            break;
+        default:
+            ASSERT(0);
+            return;
+    }
+
+    i = 0;
+    if (i < dword_2002080->rowCount) {
+        do {
+            dst = (u16*)(i * 64 + dword_2002084);
+            textbar = dword_2002080;
+            dst[0] = textbar->tiles[i * 32];
+            dst[1] = textbar->tiles[i * 32 + 1];
+            dst[2] = textbar->tiles[i * 32 + 2];
+            i++;
+        } while (i < textbar->rowCount);
+    }
+
+    dword_2002074 = 3;
+    dword_2002078 = 27;
+    dword_200207C = 1;
+    dword_2001470 = TRUE;
+}
+#endif
+
+#ifndef NONMATCHING
+NAKED void sub_8015FD4(void) {
+    asm_unified(".include \"asm/nonmatching/sub_8015FD4.s\"");
+}
+#else
+void sub_8015FD4(void) {
+    s32 i;
+    u16* dst;
+    struct Textbar* textbar;
+
+    for (i = 0, textbar = dword_2002080; i < textbar->rowCount; i++) {
+        dst = (u16*)(dword_2002074 * 2 + i * 64 + dword_2002084);
+        textbar = dword_2002080;
+        dst[0] = textbar->tiles[i * 32 + 26];
+        dst[1] = textbar->tiles[i * 32 + 27];
+        dst[2] = textbar->tiles[i * 32 + 28];
+        dst[3] = textbar->tiles[i * 32 + 29];
+    }
+
+    dword_2002074 += dword_200207C;
+    if (dword_2002074 == dword_2002078) {
+        dword_2001470 = 0;
+    }
 }
 #endif
