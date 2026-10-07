@@ -74,7 +74,7 @@ enum HudElementIdx {
     HUD_ELEMENT_COUNT
 };
 
-struct HudGraphic {
+struct HudSprite {
     volatile struct Sprite sprite;
     fx32 x;
     fx32 y;
@@ -83,14 +83,12 @@ struct HudGraphic {
     fx32 homeX;
     fx32 homeY;
     u8 slideDir;
-    bool8 hasSprite;
-    u8 field_36;
-    u8 field_37;
+    bool8 initialized;
 };
 
 struct HudElement {
-    struct HudGraphic* graphic;
-    u16 graphicCount;
+    struct HudSprite* sprites;
+    u16 spriteCount;
     u16 displayValue;
     u16 targetValue;
     u16 maxValue;
@@ -132,35 +130,35 @@ u32 dword_203EA84;
 extern struct struc_59 stru_80AF310[]; // This is the hud script table. Move this to its own file.
 
 static int hud_cmd_end(struct HudElement*, int, int, int);
-static int sub_803EFCC(struct HudElement*, int, int, int);
-static int sub_803EFE8(struct HudElement*, int, int, int);
-static int sub_803F004(struct HudElement*, int, int, int);
-static int sub_803F020(struct HudElement*, int, int, int);
-static int sub_803F03C(struct HudElement*, int, int, int);
-static int sub_803F0D4(struct HudElement*, int, int, int);
-static int sub_803F14C(struct HudElement*, int, int, int);
-static int sub_803F1B4(struct HudElement*, int, int, int);
-static int sub_803F21C(struct HudElement*, int, int, int);
-static int sub_803F284(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_slide_left(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_slide_right(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_slide_up(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_slide_down(struct HudElement*, int, int, int);
+static int hud_cmd_init_number_text(struct HudElement*, int, int, int);
+static int hud_cmd_nop(struct HudElement*, int, int, int);
+static int hud_cmd_count_up(struct HudElement*, int, int, int);
+static int hud_cmd_count_down(struct HudElement*, int, int, int);
+static int hud_cmd_wait_display(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_init(struct HudElement*, int, int, int);
 static int hud_cmd_set_state(struct HudElement*, int, int, int);
-static int hud_cmd_alloc_graphics(struct HudElement*, int, int, int);
-static int sub_803F410(struct HudElement*, int, int, int);
-static int sub_803F438(struct HudElement*, int, int, int);
-static int sub_803F52C(struct HudElement*, int, int, int);
-static int sub_803F5AC(struct HudElement*, int, int, int);
-static int sub_803F75C(struct HudElement*, int, int, int);
-static int sub_803F8A8(struct HudElement*, int, int, int);
-static int sub_803F914(struct HudElement*, int, int, int);
-static int sub_803F980(struct HudElement*, int, int, int);
-static int sub_803F9EC(struct HudElement*, int, int, int);
-static int sub_803F800(struct HudElement*, int, int, int);
-static int hud_health_roulette(struct HudElement*, int, int, int);
-static int sub_803F0D8(struct HudElement*, int, int, int);
-static int sub_803FDDC(struct HudElement*, int, int, int);
-static int sub_803F250(struct HudElement*, int, int, int);
-static int sub_803F62C(struct HudElement*, int, int, int);
-static int sub_803F6C4(struct HudElement*, int, int, int);
-static int sub_803F09C(struct HudElement*, int, int, int);
+static int hud_cmd_alloc_sprites(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_set_position(struct HudElement*, int, int, int);
+static int hud_cmd_update_slides(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_fit_number_left(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_fit_number_right(struct HudElement*, int, int, int);
+static int hud_cmd_bar_init_health(struct HudElement*, int, int, int);
+static int hud_cmd_bar_slide_left(struct HudElement*, int, int, int);
+static int hud_cmd_bar_slide_right(struct HudElement*, int, int, int);
+static int hud_cmd_bar_slide_up(struct HudElement*, int, int, int);
+static int hud_cmd_bar_slide_down(struct HudElement*, int, int, int);
+static int hud_cmd_bar_init_oxygen(struct HudElement*, int, int, int);
+static int hud_cmd_bar_count_health(struct HudElement*, int, int, int);
+static int hud_cmd_count(struct HudElement*, int, int, int);
+static int hud_cmd_bar_count_oxygen(struct HudElement*, int, int, int);
+static int hud_cmd_wait_display_2(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_fit_fraction_left(struct HudElement*, int, int, int);
+static int hud_cmd_sprite_fit_fraction_right(struct HudElement*, int, int, int);
+static int hud_cmd_init_fraction_text(struct HudElement*, int, int, int);
 
 static void sub_80421C4(int, int, char*);
 static int get_hud_element_max(u32);
@@ -186,35 +184,35 @@ static const u8 byte_80A8D92[][5] = {
 
 static int (*const dHudCommands[])(struct HudElement*, int, int, int) = {
     hud_cmd_end,
-    sub_803EFCC,
-    sub_803EFE8,
-    sub_803F004,
-    sub_803F020,
-    sub_803F03C,
-    sub_803F0D4,
-    sub_803F14C,
-    sub_803F1B4,
-    sub_803F21C,
-    sub_803F284,
+    hud_cmd_sprite_slide_left,
+    hud_cmd_sprite_slide_right,
+    hud_cmd_sprite_slide_up,
+    hud_cmd_sprite_slide_down,
+    hud_cmd_init_number_text,
+    hud_cmd_nop,
+    hud_cmd_count_up,
+    hud_cmd_count_down,
+    hud_cmd_wait_display,
+    hud_cmd_sprite_init,
     hud_cmd_set_state,
-    hud_cmd_alloc_graphics,
-    sub_803F410,
-    sub_803F438,
-    sub_803F52C,
-    sub_803F5AC,
-    sub_803F75C,
-    sub_803F8A8,
-    sub_803F914,
-    sub_803F980,
-    sub_803F9EC,
-    sub_803F800,
-    hud_health_roulette,
-    sub_803F0D8,
-    sub_803FDDC,
-    sub_803F250,
-    sub_803F62C,
-    sub_803F6C4,
-    sub_803F09C,
+    hud_cmd_alloc_sprites,
+    hud_cmd_sprite_set_position,
+    hud_cmd_update_slides,
+    hud_cmd_sprite_fit_number_left,
+    hud_cmd_sprite_fit_number_right,
+    hud_cmd_bar_init_health,
+    hud_cmd_bar_slide_left,
+    hud_cmd_bar_slide_right,
+    hud_cmd_bar_slide_up,
+    hud_cmd_bar_slide_down,
+    hud_cmd_bar_init_oxygen,
+    hud_cmd_bar_count_health,
+    hud_cmd_count,
+    hud_cmd_bar_count_oxygen,
+    hud_cmd_wait_display_2,
+    hud_cmd_sprite_fit_fraction_left,
+    hud_cmd_sprite_fit_fraction_right,
+    hud_cmd_init_fraction_text,
 };
 
 static const u16 word_80A8E28[HUD_ELEMENT_COUNT] = {
@@ -224,9 +222,9 @@ static const u16 word_80A8E28[HUD_ELEMENT_COUNT] = {
 };
 
 static int hud_cmd_end(struct HudElement* element, int _, int __, int ___) {
-    if (element->graphicCount != 0) {
-        heap_free(element->graphic, HEAP_GENERAL);
-        element->graphicCount = 0;
+    if (element->spriteCount != 0) {
+        heap_free(element->sprites, HEAP_GENERAL);
+        element->spriteCount = 0;
     }
 
     if (element->reshow) {
@@ -241,36 +239,36 @@ static int hud_cmd_end(struct HudElement* element, int _, int __, int ___) {
     return HUD_SCRIPT_STOP;
 }
 
-static int sub_803EFCC(struct HudElement* element, int a2, int a3, int _) {
-    element->graphic[a2].targetX = element->graphic[a2].x - (a3 << FX32_SHIFT);
-    element->graphic[a2].slideDir = DIRECTION_LEFT;
+static int hud_cmd_sprite_slide_left(struct HudElement* element, int index, int distance, int _) {
+    element->sprites[index].targetX = element->sprites[index].x - (distance << FX32_SHIFT);
+    element->sprites[index].slideDir = DIRECTION_LEFT;
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803EFE8(struct HudElement* element, int a2, int a3, int _) {
-    element->graphic[a2].targetX = element->graphic[a2].x + (a3 << FX32_SHIFT);
-    element->graphic[a2].slideDir = DIRECTION_RIGHT;
+static int hud_cmd_sprite_slide_right(struct HudElement* element, int index, int distance, int _) {
+    element->sprites[index].targetX = element->sprites[index].x + (distance << FX32_SHIFT);
+    element->sprites[index].slideDir = DIRECTION_RIGHT;
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F004(struct HudElement* element, int a2, int a3, int _) {
-    element->graphic[a2].targetY = element->graphic[a2].y - (a3 << FX32_SHIFT);
-    element->graphic[a2].slideDir = DIRECTION_UP;
+static int hud_cmd_sprite_slide_up(struct HudElement* element, int index, int distance, int _) {
+    element->sprites[index].targetY = element->sprites[index].y - (distance << FX32_SHIFT);
+    element->sprites[index].slideDir = DIRECTION_UP;
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F020(struct HudElement* element, int a2, int a3, int _) {
-    element->graphic[a2].targetY = element->graphic[a2].y + (a3 << FX32_SHIFT);
-    element->graphic[a2].slideDir = DIRECTION_DOWN;
+static int hud_cmd_sprite_slide_down(struct HudElement* element, int index, int distance, int _) {
+    element->sprites[index].targetY = element->sprites[index].y + (distance << FX32_SHIFT);
+    element->sprites[index].slideDir = DIRECTION_DOWN;
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F03C(struct HudElement* element, int a2, int a3, int a4) {
-    element->textBox.xPosition = a2;
-    element->textBox.yPosition = a3;
+static int hud_cmd_init_number_text(struct HudElement* element, int x, int y, int rightAlign) {
+    element->textBox.xPosition = x;
+    element->textBox.yPosition = y;
     element->textBox.stringOffset = 0;
 
-    if (a4 == 1) {
+    if (rightAlign == 1) {
         element->rightAlignText = TRUE;
     } else {
         element->rightAlignText = FALSE;
@@ -291,12 +289,12 @@ static int sub_803F03C(struct HudElement* element, int a2, int a3, int a4) {
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F09C(struct HudElement* element, int a2, int a3, int a4) {
-    element->textBox.xPosition = a2;
-    element->textBox.yPosition = a3;
+static int hud_cmd_init_fraction_text(struct HudElement* element, int x, int y, int rightAlign) {
+    element->textBox.xPosition = x;
+    element->textBox.yPosition = y;
     element->textBox.stringOffset = 0;
 
-    if (a4 == 1) {
+    if (rightAlign == 1) {
         element->rightAlignText = TRUE;
     } else {
         element->rightAlignText = FALSE;
@@ -308,11 +306,11 @@ static int sub_803F09C(struct HudElement* element, int a2, int a3, int a4) {
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F0D4(struct HudElement* element, int _, int __, int ___) {
+static int hud_cmd_nop(struct HudElement* element, int _, int __, int ___) {
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F0D8(struct HudElement* element, int _, int __, int ___) {
+static int hud_cmd_count(struct HudElement* element, int _, int __, int ___) {
     if (element->displayValue == element->targetValue) {
         return HUD_SCRIPT_NEXT;
     }
@@ -349,7 +347,7 @@ static int sub_803F0D8(struct HudElement* element, int _, int __, int ___) {
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F14C(struct HudElement* element, int _, int __, int ___) {
+static int hud_cmd_count_up(struct HudElement* element, int _, int __, int ___) {
     if (element->displayValue == element->targetValue) {
         return HUD_SCRIPT_NEXT;
     }
@@ -382,7 +380,7 @@ static int sub_803F14C(struct HudElement* element, int _, int __, int ___) {
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F1B4(struct HudElement* element, int _, int __, int ___) {
+static int hud_cmd_count_down(struct HudElement* element, int _, int __, int ___) {
     if (element->displayValue == element->targetValue) {
         return HUD_SCRIPT_NEXT;
     }
@@ -415,7 +413,7 @@ static int sub_803F1B4(struct HudElement* element, int _, int __, int ___) {
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F21C(struct HudElement* element, int _, int __, int ___) {
+static int hud_cmd_wait_display(struct HudElement* element, int _, int __, int ___) {
     if (!element->keepShown) {
         if (element->timer != 0) {
             element->timer--;
@@ -429,7 +427,7 @@ static int sub_803F21C(struct HudElement* element, int _, int __, int ___) {
     return HUD_SCRIPT_WAIT;
 }
 
-static int sub_803F250(struct HudElement* element, int _, int __, int ___) {
+static int hud_cmd_wait_display_2(struct HudElement* element, int _, int __, int ___) {
     if (!element->keepShown) {
         if (element->timer != 0) {
             element->timer--;
@@ -443,13 +441,13 @@ static int sub_803F250(struct HudElement* element, int _, int __, int ___) {
     return HUD_SCRIPT_WAIT;
 }
 
-static int sub_803F284(struct HudElement* element, int a2, int a3, int a4) {
-    SetSprite((struct Sprite*)&element->graphic[a2].sprite, a3, 0, 0, 0,
-              element->graphic[a2].sprite.xPos, element->graphic[a2].sprite.yPos, 2);
-    element->graphic[a2].hasSprite = TRUE;
+static int hud_cmd_sprite_init(struct HudElement* element, int index, int anim, int semiTransparent) {
+    SetSprite((struct Sprite*)&element->sprites[index].sprite, anim, 0, 0, 0,
+              element->sprites[index].sprite.xPos, element->sprites[index].sprite.yPos, 2);
+    element->sprites[index].initialized = TRUE;
 
-    if (a4 == 1) {
-        element->graphic[a2].sprite.objMode = 1;
+    if (semiTransparent == 1) {
+        element->sprites[index].sprite.objMode = 1;
     }
 
     return HUD_SCRIPT_NEXT;
@@ -475,38 +473,38 @@ static int hud_cmd_set_state(struct HudElement* element, int state, int _, int _
     return HUD_SCRIPT_NEXT;
 }
 
-static int hud_cmd_alloc_graphics(struct HudElement* element, int a2, int a3, int _) {
+static int hud_cmd_alloc_sprites(struct HudElement* element, int count, int kind, int _) {
     int i;
 
-    switch (a3) {
-        case 0:
-            ASSERT(a2 != 0);
-            element->graphic = heap_alloc(sizeof(struct HudGraphic) * a2, 23, HEAP_GENERAL);
-            element->graphicCount = a2;
-            for (i = 0; i < element->graphicCount; i++) {
-                element->graphic[i].slideDir = DIRECTION_NONE;
-                element->graphic[i].hasSprite = FALSE;
+    switch (kind) {
+        case HUD_ALLOC_FIXED:
+            ASSERT(count != 0);
+            element->sprites = heap_alloc(sizeof(struct HudSprite) * count, 23, HEAP_GENERAL);
+            element->spriteCount = count;
+            for (i = 0; i < element->spriteCount; i++) {
+                element->sprites[i].slideDir = DIRECTION_NONE;
+                element->sprites[i].initialized = FALSE;
             }
             break;
 
-        case 1:
-            element->graphic =
-                heap_alloc(sizeof(struct HudGraphic) * (a2 + stru_80CC8C4.maxHealth), 23, HEAP_GENERAL);
-            element->graphicCount = gGameStatus.maxHealth + a2;
-            for (i = 0; i < element->graphicCount; i++) {
-                element->graphic[i].slideDir = DIRECTION_NONE;
-                element->graphic[i].hasSprite = FALSE;
+        case HUD_ALLOC_HEALTH_BAR:
+            element->sprites = heap_alloc(sizeof(struct HudSprite) * (count + stru_80CC8C4.maxHealth),
+                                          23, HEAP_GENERAL);
+            element->spriteCount = gGameStatus.maxHealth + count;
+            for (i = 0; i < element->spriteCount; i++) {
+                element->sprites[i].slideDir = DIRECTION_NONE;
+                element->sprites[i].initialized = FALSE;
             }
             element->text[0] = STRING_TERMINATOR;
             break;
 
-        case 2:
-            element->graphic =
-                heap_alloc(sizeof(struct HudGraphic) * (a2 + gGameStatus.maxOxygen), 24, HEAP_GENERAL);
-            element->graphicCount = gGameStatus.maxOxygen + a2;
-            for (i = 0; i < element->graphicCount; i++) {
-                element->graphic[i].slideDir = DIRECTION_NONE;
-                element->graphic[i].hasSprite = FALSE;
+        case HUD_ALLOC_OXYGEN_BAR:
+            element->sprites = heap_alloc(sizeof(struct HudSprite) * (count + gGameStatus.maxOxygen),
+                                          24, HEAP_GENERAL);
+            element->spriteCount = gGameStatus.maxOxygen + count;
+            for (i = 0; i < element->spriteCount; i++) {
+                element->sprites[i].slideDir = DIRECTION_NONE;
+                element->sprites[i].initialized = FALSE;
             }
             element->text[0] = STRING_TERMINATOR;
     }
@@ -514,103 +512,105 @@ static int hud_cmd_alloc_graphics(struct HudElement* element, int a2, int a3, in
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F410(struct HudElement* element, int a2, int a3, int a4) {
-    element->graphic[a2].x = a3 << FX32_SHIFT;
-    element->graphic[a2].y = a4 << FX32_SHIFT;
-    element->graphic[a2].sprite.xPos = a3;
-    element->graphic[a2].sprite.yPos = a4;
+static int hud_cmd_sprite_set_position(struct HudElement* element, int index, int x, int y) {
+    element->sprites[index].x = x << FX32_SHIFT;
+    element->sprites[index].y = y << FX32_SHIFT;
+    element->sprites[index].sprite.xPos = x;
+    element->sprites[index].sprite.yPos = y;
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F438(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_update_slides(struct HudElement* element, int saveHome, int _, int __) {
     int i;
 
-    bool32 r7 = TRUE;
+    bool32 finished = TRUE;
 
-    for (i = 0; i < element->graphicCount; i++) {
-        switch (element->graphic[i].slideDir) {
+    for (i = 0; i < element->spriteCount; i++) {
+        switch (element->sprites[i].slideDir) {
             case DIRECTION_UP:
-                r7 = FALSE;
-                element->graphic[i].y -= element->slideSpeed;
-                if (element->graphic[i].y <= element->graphic[i].targetY) {
-                    element->graphic[i].y = element->graphic[i].targetY;
-                    element->graphic[i].slideDir = DIRECTION_NONE;
-                    if (a2 == 1) {
-                        element->graphic[i].homeY = element->graphic[i].y;
+                finished = FALSE;
+                element->sprites[i].y -= element->slideSpeed;
+                if (element->sprites[i].y <= element->sprites[i].targetY) {
+                    element->sprites[i].y = element->sprites[i].targetY;
+                    element->sprites[i].slideDir = DIRECTION_NONE;
+                    if (saveHome == 1) {
+                        element->sprites[i].homeY = element->sprites[i].y;
                     }
                 }
-                element->graphic[i].sprite.yPos = element->graphic[i].y >> FX32_SHIFT;
+                element->sprites[i].sprite.yPos = element->sprites[i].y >> FX32_SHIFT;
                 break;
 
             case DIRECTION_DOWN:
-                r7 = FALSE;
-                element->graphic[i].y += element->slideSpeed;
-                if (element->graphic[i].y >= element->graphic[i].targetY) {
-                    element->graphic[i].y = element->graphic[i].targetY;
-                    element->graphic[i].slideDir = DIRECTION_NONE;
-                    if (a2 == 1) {
-                        element->graphic[i].homeY = element->graphic[i].y;
+                finished = FALSE;
+                element->sprites[i].y += element->slideSpeed;
+                if (element->sprites[i].y >= element->sprites[i].targetY) {
+                    element->sprites[i].y = element->sprites[i].targetY;
+                    element->sprites[i].slideDir = DIRECTION_NONE;
+                    if (saveHome == 1) {
+                        element->sprites[i].homeY = element->sprites[i].y;
                     }
                 }
-                element->graphic[i].sprite.yPos = element->graphic[i].y >> FX32_SHIFT;
+                element->sprites[i].sprite.yPos = element->sprites[i].y >> FX32_SHIFT;
                 break;
 
             case DIRECTION_LEFT:
-                r7 = FALSE;
-                element->graphic[i].x -= element->slideSpeed;
-                if (element->graphic[i].x <= element->graphic[i].targetX) {
-                    element->graphic[i].x = element->graphic[i].targetX;
-                    element->graphic[i].slideDir = DIRECTION_NONE;
-                    if (a2 == 1) {
-                        element->graphic[i].homeX = element->graphic[i].x;
+                finished = FALSE;
+                element->sprites[i].x -= element->slideSpeed;
+                if (element->sprites[i].x <= element->sprites[i].targetX) {
+                    element->sprites[i].x = element->sprites[i].targetX;
+                    element->sprites[i].slideDir = DIRECTION_NONE;
+                    if (saveHome == 1) {
+                        element->sprites[i].homeX = element->sprites[i].x;
                     }
                 }
-                element->graphic[i].sprite.xPos = (element->graphic[i].x >> FX32_SHIFT) & 0x1FF;
+                element->sprites[i].sprite.xPos = (element->sprites[i].x >> FX32_SHIFT) & 0x1FF;
                 break;
 
             case DIRECTION_RIGHT:
-                r7 = FALSE;
-                element->graphic[i].x += element->slideSpeed;
-                if (element->graphic[i].x >= element->graphic[i].targetX) {
-                    element->graphic[i].x = element->graphic[i].targetX;
-                    element->graphic[i].slideDir = DIRECTION_NONE;
-                    if (a2 == 1) {
-                        element->graphic[i].homeX = element->graphic[i].x;
+                finished = FALSE;
+                element->sprites[i].x += element->slideSpeed;
+                if (element->sprites[i].x >= element->sprites[i].targetX) {
+                    element->sprites[i].x = element->sprites[i].targetX;
+                    element->sprites[i].slideDir = DIRECTION_NONE;
+                    if (saveHome == 1) {
+                        element->sprites[i].homeX = element->sprites[i].x;
                     }
                 }
-                element->graphic[i].sprite.xPos = (element->graphic[i].x >> FX32_SHIFT) & 0x1FF;
+                element->sprites[i].sprite.xPos = (element->sprites[i].x >> FX32_SHIFT) & 0x1FF;
                 break;
         }
     }
 
-    if (r7) {
+    if (finished) {
         return HUD_SCRIPT_NEXT;
     }
 
     return HUD_SCRIPT_WAIT;
 }
 
-static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_sprite_fit_number_left(struct HudElement* element, int index, int mode, int _) {
     fx32 target;
     fx32 offset;
     //! Possible fake match.
     register u32 number asm("r0");
 
-    if (a3 != 3) {
-        switch (a3) {
-            case 1:
+    if (mode != HUD_FIT_HOME) {
+        switch (mode) {
+            case HUD_FIT_IF_COUNTING_UP:
                 number = element->targetValue;
                 if (number < element->displayValue) {
                     return HUD_SCRIPT_NEXT;
                 }
                 break;
-            case 2:
+
+            case HUD_FIT_IF_COUNTING_DOWN:
                 number = element->targetValue;
                 if (number > element->displayValue) {
                     return HUD_SCRIPT_NEXT;
                 }
                 break;
+
             default:
                 number = element->targetValue;
                 break;
@@ -625,41 +625,43 @@ static int sub_803F52C(struct HudElement* element, int a2, int a3, int a4) {
             }
         }
 
-        target = element->graphic[a2].homeX - offset;
+        target = element->sprites[index].homeX - offset;
     } else {
-        target = element->graphic[a2].homeX;
+        target = element->sprites[index].homeX;
     }
 
-    element->graphic[a2].targetX = target;
-    if (target > element->graphic[a2].x) {
-        element->graphic[a2].slideDir = DIRECTION_RIGHT;
+    element->sprites[index].targetX = target;
+    if (target > element->sprites[index].x) {
+        element->sprites[index].slideDir = DIRECTION_RIGHT;
     } else {
-        element->graphic[a2].slideDir = DIRECTION_LEFT;
+        element->sprites[index].slideDir = DIRECTION_LEFT;
     }
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_sprite_fit_number_right(struct HudElement* element, int index, int mode, int _) {
     fx32 target;
     fx32 offset;
     //! Possible fake match.
     register u32 number asm("r0");
 
-    if (a3 != 3) {
-        switch (a3) {
-            case 1:
+    if (mode != HUD_FIT_HOME) {
+        switch (mode) {
+            case HUD_FIT_IF_COUNTING_UP:
                 number = element->targetValue;
                 if (number < element->displayValue) {
                     return HUD_SCRIPT_NEXT;
                 }
                 break;
-            case 2:
+
+            case HUD_FIT_IF_COUNTING_DOWN:
                 number = element->targetValue;
                 if (number > element->displayValue) {
                     return HUD_SCRIPT_NEXT;
                 }
                 break;
+
             default:
                 number = element->targetValue;
                 break;
@@ -674,42 +676,44 @@ static int sub_803F5AC(struct HudElement* element, int a2, int a3, int a4) {
             }
         }
 
-        target = element->graphic[a2].homeX + offset;
+        target = element->sprites[index].homeX + offset;
     } else {
-        target = element->graphic[a2].homeX;
+        target = element->sprites[index].homeX;
     }
 
-    element->graphic[a2].targetX = target;
-    if (target < element->graphic[a2].x) {
-        element->graphic[a2].slideDir = DIRECTION_LEFT;
+    element->sprites[index].targetX = target;
+    if (target < element->sprites[index].x) {
+        element->sprites[index].slideDir = DIRECTION_LEFT;
     } else {
-        element->graphic[a2].slideDir = DIRECTION_RIGHT;
+        element->sprites[index].slideDir = DIRECTION_RIGHT;
     }
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_sprite_fit_fraction_left(struct HudElement* element, int index, int mode, int _) {
     fx32 target;
     fx32 offset;
     fx32 offset2;
     //! Possible fake match.
     register u32 number asm("r0");
 
-    if (a3 != 3) {
-        switch (a3) {
-            case 1:
+    if (mode != HUD_FIT_HOME) {
+        switch (mode) {
+            case HUD_FIT_IF_COUNTING_UP:
                 number = element->targetValue;
                 if (number < element->displayValue) {
                     return HUD_SCRIPT_NEXT;
                 }
                 break;
-            case 2:
+
+            case HUD_FIT_IF_COUNTING_DOWN:
                 number = element->targetValue;
                 if (number > element->displayValue) {
                     return HUD_SCRIPT_NEXT;
                 }
                 break;
+
             default:
                 number = element->targetValue;
                 break;
@@ -733,42 +737,44 @@ static int sub_803F62C(struct HudElement* element, int a2, int a3, int a4) {
             }
         }
 
-        target = element->graphic[a2].homeX - offset - offset2;
+        target = element->sprites[index].homeX - offset - offset2;
     } else {
-        target = element->graphic[a2].homeX;
+        target = element->sprites[index].homeX;
     }
 
-    element->graphic[a2].targetX = target;
-    if (target > element->graphic[a2].x) {
-        element->graphic[a2].slideDir = DIRECTION_RIGHT;
+    element->sprites[index].targetX = target;
+    if (target > element->sprites[index].x) {
+        element->sprites[index].slideDir = DIRECTION_RIGHT;
     } else {
-        element->graphic[a2].slideDir = DIRECTION_LEFT;
+        element->sprites[index].slideDir = DIRECTION_LEFT;
     }
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_sprite_fit_fraction_right(struct HudElement* element, int index, int mode, int _) {
     fx32 target;
     fx32 offset;
     fx32 offset2;
     //! Possible fake match.
     register u32 number asm("r0");
 
-    if (a3 != 3) {
-        switch (a3) {
-            case 1:
+    if (mode != HUD_FIT_HOME) {
+        switch (mode) {
+            case HUD_FIT_IF_COUNTING_UP:
                 number = element->targetValue;
                 if (number < element->displayValue) {
                     return HUD_SCRIPT_NEXT;
                 }
                 break;
-            case 2:
+
+            case HUD_FIT_IF_COUNTING_DOWN:
                 number = element->targetValue;
                 if (number > element->displayValue) {
                     return HUD_SCRIPT_NEXT;
                 }
                 break;
+
             default:
                 number = element->targetValue;
                 break;
@@ -792,130 +798,130 @@ static int sub_803F6C4(struct HudElement* element, int a2, int a3, int a4) {
             }
         }
 
-        target = element->graphic[a2].homeX + offset + offset2;
+        target = element->sprites[index].homeX + offset + offset2;
     } else {
-        target = element->graphic[a2].homeX;
+        target = element->sprites[index].homeX;
     }
 
-    element->graphic[a2].targetX = target;
-    if (target < element->graphic[a2].x) {
-        element->graphic[a2].slideDir = DIRECTION_LEFT;
+    element->sprites[index].targetX = target;
+    if (target < element->sprites[index].x) {
+        element->sprites[index].slideDir = DIRECTION_LEFT;
     } else {
-        element->graphic[a2].slideDir = DIRECTION_RIGHT;
+        element->sprites[index].slideDir = DIRECTION_RIGHT;
     }
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F75C(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_bar_init_health(struct HudElement* element, int start, int x, int y) {
     int i;
     const u8* ptr = byte_80A8CF6[element->displayValue];
 
-    for (i = a2; i < element->graphicCount; i++) {
-        element->graphic[i].x = a3 << FX32_SHIFT;
-        element->graphic[i].y = a4 << FX32_SHIFT;
-        element->graphic[i].sprite.xPos = a3;
-        element->graphic[i].sprite.yPos = a4;
-        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[ptr[i - a2]], 0, 0, 0, a3,
-                  a4, 2);
-        element->graphic[i].hasSprite = TRUE;
+    for (i = start; i < element->spriteCount; i++) {
+        element->sprites[i].x = x << FX32_SHIFT;
+        element->sprites[i].y = y << FX32_SHIFT;
+        element->sprites[i].sprite.xPos = x;
+        element->sprites[i].sprite.yPos = y;
+        SetSprite((struct Sprite*)&element->sprites[i].sprite, word_80A8CF0[ptr[i - start]], 0, 0, 0, x,
+                  y, 2);
+        element->sprites[i].initialized = TRUE;
     }
 
     element->timer = 10;
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F800(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_bar_init_oxygen(struct HudElement* element, int start, int x, int y) {
     int i;
     const u8* ptr = byte_80A8D92[element->displayValue];
 
-    for (i = a2; i < element->graphicCount; i++) {
-        element->graphic[i].x = a3 << FX32_SHIFT;
-        element->graphic[i].y = a4 << FX32_SHIFT;
-        element->graphic[i].sprite.xPos = a3;
-        element->graphic[i].sprite.yPos = a4;
-        SetSprite((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[ptr[i - a2]], 0, 0, 0, a3,
-                  a4, 2);
-        element->graphic[i].hasSprite = TRUE;
+    for (i = start; i < element->spriteCount; i++) {
+        element->sprites[i].x = x << FX32_SHIFT;
+        element->sprites[i].y = y << FX32_SHIFT;
+        element->sprites[i].sprite.xPos = x;
+        element->sprites[i].sprite.yPos = y;
+        SetSprite((struct Sprite*)&element->sprites[i].sprite, word_80A8D8E[ptr[i - start]], 0, 0, 0, x,
+                  y, 2);
+        element->sprites[i].initialized = TRUE;
     }
 
     element->timer = 10;
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F8A8(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_bar_slide_left(struct HudElement* element, int start, int spread, int distance) {
     int i;
 
-    if (a3 == 1) {
-        for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].targetX = element->graphic[i].x - ((i - a2) * FX32_CONST(12));
-            element->graphic[i].slideDir = DIRECTION_LEFT;
+    if (spread == 1) {
+        for (i = start; i < element->spriteCount; i++) {
+            element->sprites[i].targetX = element->sprites[i].x - ((i - start) * FX32_CONST(12));
+            element->sprites[i].slideDir = DIRECTION_LEFT;
         }
     } else {
-        for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].targetX = element->graphic[i].x - (a4 << FX32_SHIFT);
-            element->graphic[i].slideDir = DIRECTION_LEFT;
+        for (i = start; i < element->spriteCount; i++) {
+            element->sprites[i].targetX = element->sprites[i].x - (distance << FX32_SHIFT);
+            element->sprites[i].slideDir = DIRECTION_LEFT;
         }
     }
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F914(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_bar_slide_right(struct HudElement* element, int start, int spread, int distance) {
     int i;
 
-    if (a3 == 1) {
-        for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].targetX = element->graphic[i].x + ((i - a2) * FX32_CONST(12));
-            element->graphic[i].slideDir = DIRECTION_RIGHT;
+    if (spread == 1) {
+        for (i = start; i < element->spriteCount; i++) {
+            element->sprites[i].targetX = element->sprites[i].x + ((i - start) * FX32_CONST(12));
+            element->sprites[i].slideDir = DIRECTION_RIGHT;
         }
     } else {
-        for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].targetX = element->graphic[i].x + (a4 << FX32_SHIFT);
-            element->graphic[i].slideDir = DIRECTION_RIGHT;
+        for (i = start; i < element->spriteCount; i++) {
+            element->sprites[i].targetX = element->sprites[i].x + (distance << FX32_SHIFT);
+            element->sprites[i].slideDir = DIRECTION_RIGHT;
         }
     }
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F980(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_bar_slide_up(struct HudElement* element, int start, int spread, int distance) {
     int i;
 
-    if (a3 == 1) {
-        for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].targetY = element->graphic[i].y - ((i - a2) * FX32_CONST(12));
-            element->graphic[i].slideDir = DIRECTION_UP;
+    if (spread == 1) {
+        for (i = start; i < element->spriteCount; i++) {
+            element->sprites[i].targetY = element->sprites[i].y - ((i - start) * FX32_CONST(12));
+            element->sprites[i].slideDir = DIRECTION_UP;
         }
     } else {
-        for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].targetY = element->graphic[i].y - (a4 << FX32_SHIFT);
-            element->graphic[i].slideDir = DIRECTION_UP;
+        for (i = start; i < element->spriteCount; i++) {
+            element->sprites[i].targetY = element->sprites[i].y - (distance << FX32_SHIFT);
+            element->sprites[i].slideDir = DIRECTION_UP;
         }
     }
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int sub_803F9EC(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_bar_slide_down(struct HudElement* element, int start, int spread, int distance) {
     int i;
 
-    if (a3 == 1) {
-        for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].targetY = element->graphic[i].y + ((i - a2) * FX32_CONST(12));
-            element->graphic[i].slideDir = DIRECTION_DOWN;
+    if (spread == 1) {
+        for (i = start; i < element->spriteCount; i++) {
+            element->sprites[i].targetY = element->sprites[i].y + ((i - start) * FX32_CONST(12));
+            element->sprites[i].slideDir = DIRECTION_DOWN;
         }
     } else {
-        for (i = a2; i < element->graphicCount; i++) {
-            element->graphic[i].targetY = element->graphic[i].y + (a4 << FX32_SHIFT);
-            element->graphic[i].slideDir = DIRECTION_DOWN;
+        for (i = start; i < element->spriteCount; i++) {
+            element->sprites[i].targetY = element->sprites[i].y + (distance << FX32_SHIFT);
+            element->sprites[i].slideDir = DIRECTION_DOWN;
         }
     }
 
     return HUD_SCRIPT_NEXT;
 }
 
-static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _, int __) {
     int i;
 
     switch (element->targetValue) {
@@ -945,21 +951,22 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
                 PLAY_SFX(170);
                 if (element->rouletteStarted) {
                     sprite_set_anim(
-                        (struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
+                        (struct Sprite*)&element->sprites[element->rouletteIndex + start].sprite,
                         word_80A8CF0[0], 0, 1);
                 } else {
                     element->rouletteStarted = TRUE;
-                    for (i = a2; i < element->graphicCount; i++) {
-                        sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[0], 0,
+                    for (i = start; i < element->spriteCount; i++) {
+                        sprite_set_anim((struct Sprite*)&element->sprites[i].sprite, word_80A8CF0[0], 0,
                                         1);
                     }
                 }
                 element->rouletteIndex++;
-                if (element->rouletteIndex + a2 >= element->graphicCount) {
+                if (element->rouletteIndex + start >= element->spriteCount) {
                     element->rouletteIndex = 0;
                 }
-                sprite_set_anim((struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
-                                word_80A8CF0[1], 0, 1);
+                sprite_set_anim(
+                    (struct Sprite*)&element->sprites[element->rouletteIndex + start].sprite,
+                    word_80A8CF0[1], 0, 1);
                 element->rouletteStepDelay = unk_80CF330[gLoadedRoomLevel];
                 return HUD_SCRIPT_WAIT;
             }
@@ -995,22 +1002,23 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
                 v10 = element->rouletteIndex;
                 if (element->rouletteStarted) {
                     sprite_set_anim(
-                        (struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
+                        (struct Sprite*)&element->sprites[element->rouletteIndex + start].sprite,
                         word_80A8CF0[0], 0, 1);
                 } else {
                     element->rouletteStarted = TRUE;
-                    for (i = a2; i < element->graphicCount; i++) {
-                        sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[0], 0,
+                    for (i = start; i < element->spriteCount; i++) {
+                        sprite_set_anim((struct Sprite*)&element->sprites[i].sprite, word_80A8CF0[0], 0,
                                         1);
                     }
                 }
 
                 while (v10 == element->rouletteIndex) {
-                    element->rouletteIndex = random_range(a2, element->graphicCount - 1) - a2;
+                    element->rouletteIndex = random_range(start, element->spriteCount - 1) - start;
                 }
 
-                sprite_set_anim((struct Sprite*)&element->graphic[element->rouletteIndex + a2].sprite,
-                                word_80A8CF0[1], 0, 1);
+                sprite_set_anim(
+                    (struct Sprite*)&element->sprites[element->rouletteIndex + start].sprite,
+                    word_80A8CF0[1], 0, 1);
                 element->rouletteStepDelay = unk_80CF348[gLoadedRoomLevel];
                 return HUD_SCRIPT_WAIT;
             }
@@ -1036,10 +1044,10 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
         }
 
         v1 = byte_80A8CF6[element->displayValue];
-        for (i = a2; i < element->graphicCount; i++) {
-            sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8CF0[v1[i - a2]], 0,
+        for (i = start; i < element->spriteCount; i++) {
+            sprite_set_anim((struct Sprite*)&element->sprites[i].sprite, word_80A8CF0[v1[i - start]], 0,
                             1);
-            element->graphic[i].hasSprite = TRUE;
+            element->sprites[i].initialized = TRUE;
         }
 
         if (element->displayValue == element->targetValue) {
@@ -1050,7 +1058,7 @@ static int hud_health_roulette(struct HudElement* element, int a2, int a3, int a
     return HUD_SCRIPT_WAIT;
 }
 
-static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
+static int hud_cmd_bar_count_oxygen(struct HudElement* element, int start, int _, int __) {
     const u8* v1;
     int i;
 
@@ -1070,10 +1078,10 @@ static int sub_803FDDC(struct HudElement* element, int a2, int a3, int a4) {
         }
 
         v1 = byte_80A8D92[element->displayValue];
-        for (i = a2; i < element->graphicCount; i++) {
-            sprite_set_anim((struct Sprite*)&element->graphic[i].sprite, word_80A8D8E[v1[i - a2]], 0,
+        for (i = start; i < element->spriteCount; i++) {
+            sprite_set_anim((struct Sprite*)&element->sprites[i].sprite, word_80A8D8E[v1[i - start]], 0,
                             1);
-            element->graphic[i].hasSprite = TRUE;
+            element->sprites[i].initialized = TRUE;
         }
 
         if (element->displayValue == element->targetValue) {
@@ -1219,7 +1227,7 @@ void init_hud_elements(void) {
         gHudElements[i].state = HUD_STATE_HIDDEN;
         gHudElements[i].reshow = FALSE;
         gHudElements[i].scriptStep = 0;
-        gHudElements[i].graphicCount = 0;
+        gHudElements[i].spriteCount = 0;
         gHudElements[i].displayTime = word_80A8E28[i];
         gHudElements[i].slideSpeed = FX32_CONST(2.8);
         gHudElements[i].keepShown = FALSE;
@@ -1529,7 +1537,7 @@ void sub_80407F8(void) {
                                                                : HUD_ELEMENT_HEALTH_WITH_ICON;
 
     if (gHudElements[element].state != HUD_STATE_HIDDEN) {
-        gHudElements[element].graphicCount++;
+        gHudElements[element].spriteCount++;
     }
 
     switch (gHudElements[element].state) {
@@ -1577,9 +1585,9 @@ void hud_render_sprites(void) {
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         if (gHudElements[i].state != HUD_STATE_HIDDEN) {
-            for (j = 0; j < gHudElements[i].graphicCount; j++) {
-                if (gHudElements[i].graphic[j].hasSprite) {
-                    sprite_render((struct Sprite*)&gHudElements[i].graphic[j].sprite);
+            for (j = 0; j < gHudElements[i].spriteCount; j++) {
+                if (gHudElements[i].sprites[j].initialized) {
+                    sprite_render((struct Sprite*)&gHudElements[i].sprites[j].sprite);
                 }
             }
         }
@@ -1622,9 +1630,9 @@ void sub_80409DC(void) {
             gHudElements[i].reshow = FALSE;
             gHudElements[i].scriptStep = 0;
 
-            if (gHudElements[i].graphicCount) {
-                heap_free(gHudElements[i].graphic, HEAP_GENERAL);
-                gHudElements[i].graphicCount = 0;
+            if (gHudElements[i].spriteCount) {
+                heap_free(gHudElements[i].sprites, HEAP_GENERAL);
+                gHudElements[i].spriteCount = 0;
             }
         }
     }
@@ -1657,9 +1665,9 @@ void sub_08040A38(u32 element) {
     gHudElements[element].scriptStep = 0;
     if (gHudElements[element].state) {
         gHudElements[element].state = HUD_STATE_HIDDEN;
-        if (gHudElements[element].graphicCount) {
-            heap_free(gHudElements[element].graphic, HEAP_GENERAL);
-            gHudElements[element].graphicCount = 0;
+        if (gHudElements[element].spriteCount) {
+            heap_free(gHudElements[element].sprites, HEAP_GENERAL);
+            gHudElements[element].spriteCount = 0;
         }
     }
 }

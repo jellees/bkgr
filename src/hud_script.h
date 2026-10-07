@@ -21,4 +21,20 @@ enum HudState {
     HUD_STATE_SLIDE_OUT,       // Sliding off screen; a new value sets reshow instead.
 };
 
+// Mode argument of the hud_cmd_sprite_fit_* commands, which slide a sprite to its home
+// position offset by the width of the element's number text.
+enum HudFitMode {
+    HUD_FIT_ALWAYS,           // Fit to the width of targetValue.
+    HUD_FIT_IF_COUNTING_UP,   // As ALWAYS, but skipped when targetValue < displayValue.
+    HUD_FIT_IF_COUNTING_DOWN, // As ALWAYS, but skipped when targetValue > displayValue.
+    HUD_FIT_HOME,             // Slide back to the home position.
+};
+
+// Kind argument of hud_cmd_alloc_sprites: how many sprites to allocate besides the count passed in.
+enum HudAllocKind {
+    HUD_ALLOC_FIXED,      // Exactly count sprites.
+    HUD_ALLOC_HEALTH_BAR, // count sprites plus one per honeycomb of max health.
+    HUD_ALLOC_OXYGEN_BAR, // count sprites plus one per segment of max oxygen.
+};
+
 #endif
