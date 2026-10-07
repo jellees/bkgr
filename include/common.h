@@ -631,8 +631,8 @@ extern u8 sub_8003A6C(fx32, fx32, u32, u32);
 
 extern void sub_8011158(void);
 extern void sub_801126C(void);
-extern void sub_8013DD4(int, int);
-extern void sub_8013A10(u16, u16, u16, u16, int, int);
+extern void sub_8013DD4(s32, s32);
+extern void sub_8013A10(s32, s32, s32, s32, s32, s32);
 extern void UpdateMapUp(fx32);
 extern void UpdateMapDown(fx32);
 extern void UpdateMapLeft(fx32);

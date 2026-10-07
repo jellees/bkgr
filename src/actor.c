@@ -217,10 +217,12 @@ void setup_entities(u32 room, int mode, struct MapActorSection* section) {
             gEntitySection = section;
             heap_free_by_tag(0, 6);
             break;
+
         case ROOM_LOAD_STORE:
             sub_8027C8C();
             gEntitySection = section;
             break;
+
         case ROOM_LOAD_RESTORE:
             heap_free_by_tag(0, 6);
             sub_8062064(0, ROOM_LOAD_RESTORE);

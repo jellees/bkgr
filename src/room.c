@@ -1001,3 +1001,269 @@ void sub_80139F0(s32 a1) {
         dword_200031C = a1;
     }
 }
+
+#ifndef NONMATCHING
+NAKED void sub_8013A10(s32 x, s32 y, s32 hofs, s32 vofs, s32 height, s32 width) {
+    asm_unified(".include \"asm/nonmatching/sub_8013A10.s\"");
+}
+#else
+void sub_8013A10(s32 x, s32 y, s32 hofs, s32 vofs, s32 height, s32 width) {
+    s32 startY;
+    s32 i;
+    u32 rowBase;
+    u16* rowStart;
+    u16* dst;
+    s32 offset;
+    s32 layer;
+    s32 j;
+    s32 startX;
+    u32 screenBase;
+
+    offset = ((((vofs >> 3) & 31) << 5) + ((hofs >> 3) & 31)) * 2;
+
+    if (gRoomHeader.isStaticBG0) {
+        dst = (u16*)0x0600E000;
+        startX = 0;
+        j = 0;
+    } else {
+        dst = (u16*)(0x0600E000 + offset);
+        startX = x;
+        j = y;
+    }
+    screenBase = (u32)dst & 0x1F800;
+    for (startY = j; j <= startY + height; j++) {
+        rowBase = (u32)dst & 0x1FFC0;
+        rowStart = dst;
+        for (i = startX; i < startX + width; i++) {
+            u16* map;
+            u16* tile;
+
+            layer = 0;
+            map = (u16*)gRoomHeader.map1 + gTilesCount * layer + (j >> 2) * gRoomHeader.mapSizeX
+                  + (i >> 2);
+            tile = gTileSetBG[0] + *map * 16;
+            *dst = *(tile + (j & 3) * 4 + (i & 3));
+            dst++;
+            dst = (u16*)(((u32)dst & 0xFFFE003F) | rowBase);
+        }
+        dst = (u16*)(((u32)(rowStart + 0x20) & 0xFFFE07FF) | screenBase);
+    }
+
+    if (gRoomHeader.enabledBGs == 1) {
+        return;
+    }
+
+    if (gRoomHeader.isStaticBG1) {
+        dst = (u16*)0x0600E800;
+        startX = 0;
+        j = 0;
+    } else {
+        dst = (u16*)(0x0600E800 + offset);
+        startX = x;
+        j = y;
+    }
+    screenBase = (u32)dst & 0x1F800;
+    for (startY = j; j <= startY + height; j++) {
+        rowBase = (u32)dst & 0x1FFC0;
+        rowStart = dst;
+        for (i = startX; i < startX + width; i++) {
+            u16* map;
+            u16* tile;
+
+            layer = 1;
+            map = (u16*)gRoomHeader.map1 + gTilesCount * layer + (j >> 2) * gRoomHeader.mapSizeX
+                  + (i >> 2);
+            tile = gTileSetBG[1] + *map * 16;
+            *dst = *(tile + (j & 3) * 4 + (i & 3));
+            dst++;
+            dst = (u16*)(((u32)dst & 0xFFFE003F) | rowBase);
+        }
+        dst = (u16*)(((u32)(rowStart + 0x20) & 0xFFFE07FF) | screenBase);
+    }
+
+    if (gRoomHeader.enabledBGs == 2) {
+        return;
+    }
+
+    if (gRoomHeader.isStaticBG2) {
+        dst = (u16*)0x0600F000;
+        startX = 0;
+        j = 0;
+    } else {
+        dst = (u16*)(0x0600F000 + offset);
+        startX = x;
+        j = y;
+    }
+    screenBase = (u32)dst & 0x1F800;
+    for (startY = j; j <= startY + height; j++) {
+        rowBase = (u32)dst & 0x1FFC0;
+        rowStart = dst;
+        for (i = startX; i < startX + width; i++) {
+            u16* map;
+            u16* tile;
+
+            layer = 2;
+            map = (u16*)gRoomHeader.map1 + gTilesCount * layer + (j >> 2) * gRoomHeader.mapSizeX
+                  + (i >> 2);
+            tile = gTileSetBG[2] + *map * 16;
+            *dst = *(tile + (j & 3) * 4 + (i & 3));
+            dst++;
+            dst = (u16*)(((u32)dst & 0xFFFE003F) | rowBase);
+        }
+        dst = (u16*)(((u32)(rowStart + 0x20) & 0xFFFE07FF) | screenBase);
+    }
+
+    if (gRoomHeader.enabledBGs == 3) {
+        return;
+    }
+
+    if (gRoomHeader.isStaticBG3) {
+        dst = (u16*)0x0600F800;
+        startX = 0;
+        j = 0;
+    } else {
+        dst = (u16*)(0x0600F800 + offset);
+        startX = x;
+        j = y;
+    }
+    screenBase = (u32)dst & 0x1F800;
+    for (startY = j; j <= startY + height; j++) {
+        rowBase = (u32)dst & 0x1FFC0;
+        rowStart = dst;
+        for (i = startX; i < startX + width; i++) {
+            u16* map;
+            u16* tile;
+
+            layer = 3;
+            map = (u16*)gRoomHeader.map1 + gTilesCount * layer + (j >> 2) * gRoomHeader.mapSizeX
+                  + (i >> 2);
+            tile = gTileSetBG[3] + *map * 16;
+            *dst = *(tile + (j & 3) * 4 + (i & 3));
+            dst++;
+            dst = (u16*)(((u32)dst & 0xFFFE003F) | rowBase);
+        }
+        dst = (u16*)(((u32)(rowStart + 0x20) & 0xFFFE07FF) | screenBase);
+    }
+}
+#endif
+
+#ifndef NONMATCHING
+NAKED void sub_8013DD4(s32 height, s32 width) {
+    asm_unified(".include \"asm/nonmatching/sub_8013DD4.s\"");
+}
+#else
+void sub_8013DD4(s32 height, s32 width) {
+    s32 i;
+    u32 rowBase;
+    u16* rowStart;
+    u16* dst;
+    s32 layer;
+    s32 j;
+    u32 screenBase;
+    s32 startX;
+
+    if (gRoomHeader.isStaticBG0) {
+        dst = (u16*)0x0600E000;
+        screenBase = (u32)dst & 0x1F800;
+        startX = 0;
+        for (j = 0; j <= height; j++) {
+            rowBase = (u32)dst & 0x1FFC0;
+            rowStart = dst;
+            for (i = startX; i < width; i++) {
+                u16* map;
+                u16* tile;
+
+                layer = 0;
+                map = (u16*)gRoomHeader.map1 + gTilesCount * layer + (j >> 2) * gRoomHeader.mapSizeX
+                      + (i >> 2);
+                tile = gTileSetBG[0] + *map * 16;
+                *dst = *(tile + (j & 3) * 4 + (i & 3));
+                dst++;
+                dst = (u16*)(((u32)dst & 0xFFFE003F) | rowBase);
+            }
+            dst = (u16*)(((u32)(rowStart + 0x20) & 0xFFFE07FF) | screenBase);
+        }
+    }
+
+    if (gRoomHeader.enabledBGs == 1) {
+        return;
+    }
+
+    if (gRoomHeader.isStaticBG1) {
+        dst = (u16*)0x0600E800;
+        screenBase = (u32)dst & 0x1F800;
+        startX = 0;
+        for (j = 0; j <= height; j++) {
+            rowBase = (u32)dst & 0x1FFC0;
+            rowStart = dst;
+            for (i = startX; i < width; i++) {
+                u16* map;
+                u16* tile;
+
+                layer = 1;
+                map = (u16*)gRoomHeader.map1 + gTilesCount * layer + (j >> 2) * gRoomHeader.mapSizeX
+                      + (i >> 2);
+                tile = gTileSetBG[1] + *map * 16;
+                *dst = *(tile + (j & 3) * 4 + (i & 3));
+                dst++;
+                dst = (u16*)(((u32)dst & 0xFFFE003F) | rowBase);
+            }
+            dst = (u16*)(((u32)(rowStart + 0x20) & 0xFFFE07FF) | screenBase);
+        }
+    }
+
+    if (gRoomHeader.enabledBGs == 2) {
+        return;
+    }
+
+    if (gRoomHeader.isStaticBG2) {
+        dst = (u16*)0x0600F000;
+        screenBase = (u32)dst & 0x1F800;
+        startX = 0;
+        for (j = 0; j <= height; j++) {
+            rowBase = (u32)dst & 0x1FFC0;
+            rowStart = dst;
+            for (i = startX; i < width; i++) {
+                u16* map;
+                u16* tile;
+
+                layer = 2;
+                map = (u16*)gRoomHeader.map1 + gTilesCount * layer + (j >> 2) * gRoomHeader.mapSizeX
+                      + (i >> 2);
+                tile = gTileSetBG[2] + *map * 16;
+                *dst = *(tile + (j & 3) * 4 + (i & 3));
+                dst++;
+                dst = (u16*)(((u32)dst & 0xFFFE003F) | rowBase);
+            }
+            dst = (u16*)(((u32)(rowStart + 0x20) & 0xFFFE07FF) | screenBase);
+        }
+    }
+
+    if (gRoomHeader.enabledBGs == 3) {
+        return;
+    }
+
+    if (gRoomHeader.isStaticBG3) {
+        dst = (u16*)0x0600F800;
+        screenBase = (u32)dst & 0x1F800;
+        startX = 0;
+        for (j = 0; j <= height; j++) {
+            rowBase = (u32)dst & 0x1FFC0;
+            rowStart = dst;
+            for (i = startX; i < width; i++) {
+                u16* map;
+                u16* tile;
+
+                layer = 3;
+                map = (u16*)gRoomHeader.map1 + gTilesCount * layer + (j >> 2) * gRoomHeader.mapSizeX
+                      + (i >> 2);
+                tile = gTileSetBG[3] + *map * 16;
+                *dst = *(tile + (j & 3) * 4 + (i & 3));
+                dst++;
+                dst = (u16*)(((u32)dst & 0xFFFE003F) | rowBase);
+            }
+            dst = (u16*)(((u32)(rowStart + 0x20) & 0xFFFE07FF) | screenBase);
+        }
+    }
+}
+#endif
