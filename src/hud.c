@@ -45,8 +45,6 @@ struct HudElement {
     struct TextBox textBox;
 };
 
-extern const struct HudScript dHudScripts[]; // This is the hud script table. Move this to its own file.
-
 static int hud_cmd_end(struct HudElement*, int, int, int);
 static int hud_cmd_sprite_slide_left(struct HudElement*, int, int, int);
 static int hud_cmd_sprite_slide_right(struct HudElement*, int, int, int);
@@ -110,7 +108,7 @@ static const u8 byte_80A8D92[][5] = {
     { 1, 1, 1, 0, 0 }, { 1, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 },
 };
 
-static int (*const dHudCommands[HUD_SCRIPT_CMD_TOTAL])(struct HudElement*, int, int, int) = {
+static int (*const dHudCommands[HUD_CMD_TOTAL])(struct HudElement*, int, int, int) = {
     hud_cmd_end,
     hud_cmd_sprite_slide_left,
     hud_cmd_sprite_slide_right,
@@ -1448,7 +1446,7 @@ void hud_set_value(u32 element, int value) {
         case HUD_STATE_SHOWN:
             cmd = dHudScripts[element].instructions[gHudElements[element].cmdIdx].idx;
             arg0 = dHudScripts[element].instructions[gHudElements[element].cmdIdx].arg0;
-            while (cmd != HUD_SCRIPT_CMD_SET_STATE
+            while (cmd != HUD_CMD_SET_STATE
                    || (arg0 != HUD_STATE_UPDATE && arg0 != HUD_STATE_UPDATE_FRACTION)) {
                 gHudElements[element].cmdIdx--;
                 cmd = dHudScripts[element].instructions[gHudElements[element].cmdIdx].idx;
@@ -1483,7 +1481,7 @@ void hud_extend_health_bar(void) {
                 gHudElements[element].cmdIdx--;
                 cmd = dHudScripts[element].instructions[gHudElements[element].cmdIdx].idx;
                 arg0 = dHudScripts[element].instructions[gHudElements[element].cmdIdx].arg0;
-            } while (cmd != HUD_SCRIPT_CMD_SET_STATE || arg0 != HUD_STATE_UPDATE);
+            } while (cmd != HUD_CMD_SET_STATE || arg0 != HUD_STATE_UPDATE);
             break;
     }
 }

@@ -23,38 +23,38 @@ struct HudScript {
 extern const struct HudScript dHudScripts[];
 
 enum HudScriptCommand {
-    HUD_SCRIPT_CMD_END,
-    HUD_SCRIPT_CMD_SPRITE_SLIDE_LEFT,
-    HUD_SCRIPT_CMD_SPRITE_SLIDE_RIGHT,
-    HUD_SCRIPT_CMD_SPRITE_SLIDE_UP,
-    HUD_SCRIPT_CMD_SPRITE_SLIDE_DOWN,
-    HUD_SCRIPT_CMD_INIT_NUMBER_TEXT,
-    HUD_SCRIPT_CMD_NOP,
-    HUD_SCRIPT_CMD_COUNT_UP,
-    HUD_SCRIPT_CMD_COUNT_DOWN,
-    HUD_SCRIPT_CMD_WAIT_DISPLAY,
-    HUD_SCRIPT_CMD_SPRITE_INIT,
-    HUD_SCRIPT_CMD_SET_STATE,
-    HUD_SCRIPT_CMD_ALLOC_SPRITES,
-    HUD_SCRIPT_CMD_SPRITE_SET_POSITION,
-    HUD_SCRIPT_CMD_UPDATE_SLIDES,
-    HUD_SCRIPT_CMD_SPRITE_FIT_NUMBER_LEFT,
-    HUD_SCRIPT_CMD_SPRITE_FIT_NUMBER_RIGHT,
-    HUD_SCRIPT_CMD_BAR_INIT_HEALTH,
-    HUD_SCRIPT_CMD_BAR_SLIDE_LEFT,
-    HUD_SCRIPT_CMD_BAR_SLIDE_RIGHT,
-    HUD_SCRIPT_CMD_BAR_SLIDE_UP,
-    HUD_SCRIPT_CMD_BAR_SLIDE_DOWN,
-    HUD_SCRIPT_CMD_BAR_INIT_OXYGEN,
-    HUD_SCRIPT_CMD_BAR_COUNT_HEALTH,
-    HUD_SCRIPT_CMD_COUNT,
-    HUD_SCRIPT_CMD_BAR_COUNT_OXYGEN,
-    HUD_SCRIPT_CMD_WAIT_DISPLAY_2,
-    HUD_SCRIPT_CMD_SPRITE_FIT_FRACTION_LEFT,
-    HUD_SCRIPT_CMD_SPRITE_FIT_FRACTION_RIGHT,
-    HUD_SCRIPT_CMD_INIT_FRACTION_TEXT,
+    HUD_CMD_END,
+    HUD_CMD_SPRITE_SLIDE_LEFT,
+    HUD_CMD_SPRITE_SLIDE_RIGHT,
+    HUD_CMD_SPRITE_SLIDE_UP,
+    HUD_CMD_SPRITE_SLIDE_DOWN,
+    HUD_CMD_INIT_NUMBER_TEXT,
+    HUD_CMD_NOP,
+    HUD_CMD_COUNT_UP,
+    HUD_CMD_COUNT_DOWN,
+    HUD_CMD_WAIT_DISPLAY,
+    HUD_CMD_SPRITE_INIT,
+    HUD_CMD_SET_STATE,
+    HUD_CMD_ALLOC_SPRITES,
+    HUD_CMD_SPRITE_SET_POSITION,
+    HUD_CMD_UPDATE_SLIDES,
+    HUD_CMD_SPRITE_FIT_NUMBER_LEFT,
+    HUD_CMD_SPRITE_FIT_NUMBER_RIGHT,
+    HUD_CMD_BAR_INIT_HEALTH,
+    HUD_CMD_BAR_SLIDE_LEFT,
+    HUD_CMD_BAR_SLIDE_RIGHT,
+    HUD_CMD_BAR_SLIDE_UP,
+    HUD_CMD_BAR_SLIDE_DOWN,
+    HUD_CMD_BAR_INIT_OXYGEN,
+    HUD_CMD_BAR_COUNT_HEALTH,
+    HUD_CMD_COUNT,
+    HUD_CMD_BAR_COUNT_OXYGEN,
+    HUD_CMD_WAIT_DISPLAY_2,
+    HUD_CMD_SPRITE_FIT_FRACTION_LEFT,
+    HUD_CMD_SPRITE_FIT_FRACTION_RIGHT,
+    HUD_CMD_INIT_FRACTION_TEXT,
 
-    HUD_SCRIPT_CMD_TOTAL
+    HUD_CMD_TOTAL
 };
 
 // Return values of the HUD script commands (hud_cmd_*), handled by hud_update.
@@ -98,82 +98,71 @@ enum HudAllocKind {
 /**
  * This macro expands the command index and arguments into the right structure.
  */
-#define HUD_SCRIPT_CMD(idx, arg0, arg1, arg2) { (idx), (arg0), (arg1), (arg2) },
+#define HUD_CMD(idx, arg0, arg1, arg2) { (idx), (arg0), (arg1), (arg2) },
 
-#define HudEnd HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_END, 0, 0, 0)
+#define HudEnd HUD_CMD(HUD_CMD_END, 0, 0, 0)
 
-#define HudSpriteSlideLeft(index, distance)                                                            \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_SLIDE_LEFT, index, distance, 0)
+#define HudSpriteSlideLeft(index, distance) HUD_CMD(HUD_CMD_SPRITE_SLIDE_LEFT, index, distance, 0)
 
-#define HudSpriteSlideRight(index, distance)                                                           \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_SLIDE_RIGHT, index, distance, 0)
+#define HudSpriteSlideRight(index, distance) HUD_CMD(HUD_CMD_SPRITE_SLIDE_RIGHT, index, distance, 0)
 
-#define HudSpriteSlideUp(index, distance)                                                              \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_SLIDE_UP, index, distance, 0)
+#define HudSpriteSlideUp(index, distance) HUD_CMD(HUD_CMD_SPRITE_SLIDE_UP, index, distance, 0)
 
-#define HudSpriteSlideDown(index, distance)                                                            \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_SLIDE_DOWN, index, distance, 0)
+#define HudSpriteSlideDown(index, distance) HUD_CMD(HUD_CMD_SPRITE_SLIDE_DOWN, index, distance, 0)
 
-#define HudInitNumberText(x, y, rightAlign)                                                            \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_INIT_NUMBER_TEXT, x, y, rightAlign)
+#define HudInitNumberText(x, y, rightAlign) HUD_CMD(HUD_CMD_INIT_NUMBER_TEXT, x, y, rightAlign)
 
-#define HudNop HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_NOP, 0, 0, 0)
+#define HudNop HUD_CMD(HUD_CMD_NOP, 0, 0, 0)
 
-#define HudCountUp HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_COUNT_UP, 0, 0, 0)
+#define HudCountUp HUD_CMD(HUD_CMD_COUNT_UP, 0, 0, 0)
 
-#define HudCountDown HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_COUNT_DOWN, 0, 0, 0)
+#define HudCountDown HUD_CMD(HUD_CMD_COUNT_DOWN, 0, 0, 0)
 
-#define HudWaitDisplay HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_WAIT_DISPLAY, 0, 0, 0)
+#define HudWaitDisplay HUD_CMD(HUD_CMD_WAIT_DISPLAY, 0, 0, 0)
 
 #define HudSpriteInit(index, anim, semiTransparent)                                                    \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_INIT, index, anim, semiTransparent)
+    HUD_CMD(HUD_CMD_SPRITE_INIT, index, anim, semiTransparent)
 
-#define HudSetState(state) HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SET_STATE, state, 0, 0)
+#define HudSetState(state) HUD_CMD(HUD_CMD_SET_STATE, state, 0, 0)
 
-#define HudAllocSprites(count, kind) HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_ALLOC_SPRITES, count, kind, 0)
+#define HudAllocSprites(count, kind) HUD_CMD(HUD_CMD_ALLOC_SPRITES, count, kind, 0)
 
-#define HudSpriteSetPosition(index, x, y)                                                              \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_SET_POSITION, index, x, y)
+#define HudSpriteSetPosition(index, x, y) HUD_CMD(HUD_CMD_SPRITE_SET_POSITION, index, x, y)
 
-#define HudUpdateSlides(saveHome) HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_UPDATE_SLIDES, saveHome, 0, 0)
+#define HudUpdateSlides(saveHome) HUD_CMD(HUD_CMD_UPDATE_SLIDES, saveHome, 0, 0)
 
-#define HudSpriteFitNumberLeft(index, mode)                                                            \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_FIT_NUMBER_LEFT, index, mode, 0)
+#define HudSpriteFitNumberLeft(index, mode) HUD_CMD(HUD_CMD_SPRITE_FIT_NUMBER_LEFT, index, mode, 0)
 
-#define HudSpriteFitNumberRight(index, mode)                                                           \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_FIT_NUMBER_RIGHT, index, mode, 0)
+#define HudSpriteFitNumberRight(index, mode) HUD_CMD(HUD_CMD_SPRITE_FIT_NUMBER_RIGHT, index, mode, 0)
 
-#define HudBarInitHealth(start, x, y) HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_BAR_INIT_HEALTH, start, x, y)
+#define HudBarInitHealth(start, x, y) HUD_CMD(HUD_CMD_BAR_INIT_HEALTH, start, x, y)
 
 #define HudBarSlideLeft(start, spread, distance)                                                       \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_BAR_SLIDE_LEFT, start, spread, distance)
+    HUD_CMD(HUD_CMD_BAR_SLIDE_LEFT, start, spread, distance)
 
 #define HudBarSlideRight(start, spread, distance)                                                      \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_BAR_SLIDE_RIGHT, start, spread, distance)
+    HUD_CMD(HUD_CMD_BAR_SLIDE_RIGHT, start, spread, distance)
 
-#define HudBarSlideUp(start, spread, distance)                                                         \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_BAR_SLIDE_UP, start, spread, distance)
+#define HudBarSlideUp(start, spread, distance) HUD_CMD(HUD_CMD_BAR_SLIDE_UP, start, spread, distance)
 
 #define HudBarSlideDown(start, spread, distance)                                                       \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_BAR_SLIDE_DOWN, start, spread, distance)
+    HUD_CMD(HUD_CMD_BAR_SLIDE_DOWN, start, spread, distance)
 
-#define HudBarInitOxygen(start, x, y) HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_BAR_INIT_OXYGEN, start, x, y)
+#define HudBarInitOxygen(start, x, y) HUD_CMD(HUD_CMD_BAR_INIT_OXYGEN, start, x, y)
 
-#define HudBarCountHealth(start) HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_BAR_COUNT_HEALTH, start, 0, 0)
+#define HudBarCountHealth(start) HUD_CMD(HUD_CMD_BAR_COUNT_HEALTH, start, 0, 0)
 
-#define HudCount HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_COUNT, 0, 0, 0)
+#define HudCount HUD_CMD(HUD_CMD_COUNT, 0, 0, 0)
 
-#define HudBarCountOxygen(start) HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_BAR_COUNT_OXYGEN, start, 0, 0)
+#define HudBarCountOxygen(start) HUD_CMD(HUD_CMD_BAR_COUNT_OXYGEN, start, 0, 0)
 
-#define HudWaitDisplay2 HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_WAIT_DISPLAY_2, 0, 0, 0)
+#define HudWaitDisplay2 HUD_CMD(HUD_CMD_WAIT_DISPLAY_2, 0, 0, 0)
 
-#define HudSpriteFitFractionLeft(index, mode)                                                          \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_FIT_FRACTION_LEFT, index, mode, 0)
+#define HudSpriteFitFractionLeft(index, mode) HUD_CMD(HUD_CMD_SPRITE_FIT_FRACTION_LEFT, index, mode, 0)
 
 #define HudSpriteFitFractionRight(index, mode)                                                         \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_SPRITE_FIT_FRACTION_RIGHT, index, mode, 0)
+    HUD_CMD(HUD_CMD_SPRITE_FIT_FRACTION_RIGHT, index, mode, 0)
 
-#define HudInitFractionText(x, y, rightAlign)                                                          \
-    HUD_SCRIPT_CMD(HUD_SCRIPT_CMD_INIT_FRACTION_TEXT, x, y, rightAlign)
+#define HudInitFractionText(x, y, rightAlign) HUD_CMD(HUD_CMD_INIT_FRACTION_TEXT, x, y, rightAlign)
 
 #endif
