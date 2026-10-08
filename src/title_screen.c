@@ -241,7 +241,7 @@ static bool32 sub_8024200(void) {
                     gContinueGame = load_game(0);
                     if (gContinueGame) {
                         sub_8038A34();
-                        reset_hud_elements();
+                        hud_load_counters();
                         dword_203F4DC = 0;
                     } else {
                         ASSERT(0);
@@ -255,7 +255,7 @@ static bool32 sub_8024200(void) {
                     gContinueGame = load_game(1);
                     if (gContinueGame) {
                         sub_8038A34();
-                        reset_hud_elements();
+                        hud_load_counters();
                         dword_203F4DC = 1;
                     } else {
                         ASSERT(0);
@@ -269,7 +269,7 @@ static bool32 sub_8024200(void) {
                     gContinueGame = load_game(2);
                     if (gContinueGame) {
                         sub_8038A34();
-                        reset_hud_elements();
+                        hud_load_counters();
                         dword_203F4DC = 2;
                     } else {
                         ASSERT(0);

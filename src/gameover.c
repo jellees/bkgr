@@ -27,7 +27,7 @@ void sub_80629E8() {
     sub_80270AC(4095, 1);
     gLoadedTileAnimCount = 0;
     gTileAnimQueueIndex = 0;
-    sub_80409DC();
+    hud_hide_all();
     finish_stop_honeycomb();
     byte_200108E = 0;
     end_all_scripts(1);
@@ -78,8 +78,8 @@ void sub_80629E8() {
     heap_init(HEAP_4);
     sub_8038FA0(gLoadedRoomLevel);
     sub_8039234();
-    sub_80409DC();
-    reset_hud_elements();
+    hud_hide_all();
+    hud_load_counters();
 
     byte_20020B3 = 0;
     dword_2001104 = 0;

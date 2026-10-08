@@ -1,7 +1,7 @@
 #ifndef GUARD_HUD_SCRIPT_H
 #define GUARD_HUD_SCRIPT_H
 
-// Return values of the HUD script commands (hud_cmd_*), handled by update_hud.
+// Return values of the HUD script commands (hud_cmd_*), handled by hud_update.
 enum HudScriptResult {
     HUD_SCRIPT_WAIT = 1,    // Run the same step again next frame.
     HUD_SCRIPT_NEXT = 2,    // Advance to the next step.

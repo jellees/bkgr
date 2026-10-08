@@ -3256,13 +3256,13 @@ sub_802B5AC: @ 0x0802B5AC
 	bl sub_8039650
 	adds r1, r0, #0
 	movs r0, #0x36
-	bl sub_08040AD0
+	bl hud_init_element_value
 	bl sub_8039650
 	adds r1, r0, #0
 	movs r0, #0x36
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x36
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	strb r6, [r4]
 _0802B626:
 	movs r0, #1
@@ -3663,7 +3663,7 @@ _0802B93A:
 	movs r1, #0x12
 	ldrsb r1, [r4, r1]
 	movs r0, #3
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #2
 	adds r1, r6, #0
 	adds r2, r7, #0
@@ -19624,7 +19624,7 @@ _08034020:
 	cmp r0, #0
 	beq _08034036
 	movs r0, #0x28
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	beq _08034036
 	b _080342C6
@@ -19669,7 +19669,7 @@ _08034078:
 	adds r0, r2, r7
 	ldrb r1, [r0]
 	movs r0, #0x28
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x28
 	b _080342AE
 	.align 2, 0
@@ -19692,7 +19692,7 @@ _080340A4:
 	cmp r0, #0
 	beq _080340BA
 	movs r0, #0x2c
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	beq _080340BA
 	b _080342C6
@@ -19707,7 +19707,7 @@ _080340C8:
 	ldr r0, _080340D8
 	ldrb r1, [r0, #0x1d]
 	movs r0, #0x2c
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x2c
 	b _080342AE
 	.align 2, 0
@@ -19724,7 +19724,7 @@ _080340E8:
 	cmp r4, #0
 	beq _0803412A
 	movs r0, #0x27
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	bne _08034124
 	ldrb r0, [r5]
@@ -19744,14 +19744,14 @@ _0803410A:
 	adds r0, r0, r1
 	ldr r1, [r0]
 	movs r0, #0x27
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x27
 	b _080342AE
 	.align 2, 0
 _0803411C: .4byte 0x0203E0FC
 _08034120: .4byte 0x080CEFA4
 _08034124:
-	bl update_bozzeye_notes_counter
+	bl hud_load_bozzeye_notes
 	b _080342C6
 _0803412A:
 	ldrb r0, [r5]
@@ -19768,7 +19768,7 @@ _08034136:
 	cmp r0, #0
 	beq _0803414C
 	movs r0, #0x2d
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	beq _0803414C
 	b _080342C6
@@ -19784,7 +19784,7 @@ _0803415C:
 	ldr r0, _0803416C
 	ldrb r1, [r0, #0x18]
 	movs r0, #0x2d
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x2d
 	b _080342AE
 	.align 2, 0
@@ -19804,7 +19804,7 @@ _0803417C:
 	cmp r0, #0
 	beq _08034192
 	movs r0, #0x2e
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	beq _08034192
 	b _080342C6
@@ -19820,7 +19820,7 @@ _080341A2:
 	ldr r0, _080341B0
 	ldrb r1, [r0, #0x1a]
 	movs r0, #0x2e
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x2e
 	b _080342AE
 	.align 2, 0
@@ -19840,7 +19840,7 @@ _080341C0:
 	cmp r0, #0
 	beq _080341D4
 	movs r0, #0x2f
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	bne _080342C6
 _080341D4:
@@ -19853,7 +19853,7 @@ _080341D4:
 	ldr r0, _080341F0
 	ldrb r1, [r0, #0x19]
 	movs r0, #0x2f
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x2f
 	b _080342AE
 	.align 2, 0
@@ -19871,7 +19871,7 @@ _080341FE:
 	cmp r0, #0
 	beq _08034212
 	movs r0, #0x29
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	bne _080342C6
 _08034212:
@@ -19885,7 +19885,7 @@ _08034212:
 	adds r0, r0, r1
 	ldrb r1, [r0]
 	movs r0, #0x29
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x29
 	b _080342AE
 	.align 2, 0
@@ -19905,7 +19905,7 @@ _08034246:
 	cmp r0, #0
 	beq _0803425A
 	movs r0, #0x30
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	bne _080342C6
 _0803425A:
@@ -19917,7 +19917,7 @@ _0803425A:
 	ldr r0, _08034274
 	ldrb r1, [r0, #0x1e]
 	movs r0, #0x30
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x30
 	b _080342AE
 	.align 2, 0
@@ -19935,7 +19935,7 @@ _08034282:
 	cmp r0, #0
 	beq _08034296
 	movs r0, #0x31
-	bl sub_080420E8
+	bl hud_is_element_active
 	cmp r0, #0
 	bne _080342C6
 _08034296:
@@ -19947,10 +19947,10 @@ _08034296:
 	bne _080342C6
 	movs r0, #0x31
 	movs r1, #5
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x31
 _080342AE:
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	movs r0, #1
 	strb r0, [r5]
 	b _080342C6
@@ -19960,7 +19960,7 @@ _080342B8:
 	beq _080342C6
 	movs r0, #0x31
 _080342C0:
-	bl release_hud_element
+	bl hud_release_element
 	strb r4, [r5]
 _080342C6:
 	pop {r4, r5, r6, r7}
@@ -20753,7 +20753,7 @@ _080348DC:
 	strb r0, [r4, #7]
 	ldrb r1, [r4, #7]
 	movs r0, #4
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _08034964
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -20788,7 +20788,7 @@ _08034936:
 	strb r1, [r4, #0x13]
 	ldrb r1, [r4, #0x13]
 	movs r0, #0x38
-	bl set_hud_number
+	bl hud_set_value
 _0803494E:
 	pop {r4, r5}
 	pop {r0}
@@ -29569,7 +29569,7 @@ _08038FD4:
 	blt _08038FD4
 _08038FEC:
 	movs r0, #0x36
-	bl release_hud_element
+	bl hud_release_element
 	movs r2, #0
 	ldr r4, _080391E4
 	movs r0, #0xc4
@@ -35800,7 +35800,7 @@ sub_803BB94: @ 0x0803BB94
 	strb r1, [r3, #0x13]
 	ldrb r1, [r3, #0x13]
 	movs r0, #0x38
-	bl set_hud_number
+	bl hud_set_value
 _0803BBCE:
 	pop {r0}
 	bx r0
@@ -37165,7 +37165,7 @@ sub_803C60E: @ 0x0803C60E
 	ldr r0, _0803C620
 	ldrh r1, [r0, #0xc]
 	movs r0, #0x13
-	bl set_hud_number
+	bl hud_set_value
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -37305,7 +37305,7 @@ sub_803C6D4: @ 0x0803C6D4
 	strb r0, [r1, #0x1a]
 	ldrb r1, [r1, #0x1a]
 	movs r0, #0xe
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803C780
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -37426,7 +37426,7 @@ sub_803C7C8: @ 0x0803C7C8
 	strb r0, [r1, #0x1e]
 	ldrb r1, [r1, #0x1e]
 	movs r0, #0x12
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803C864
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -38048,7 +38048,7 @@ sub_803CC80: @ 0x0803CC80
 	strb r0, [r1, #0x1d]
 	ldrb r1, [r1, #0x1d]
 	movs r0, #0x11
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803CD1C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -38127,7 +38127,7 @@ sub_803CD2C: @ 0x0803CD2C
 	strb r0, [r1, #0x18]
 	ldrb r1, [r1, #0x18]
 	movs r0, #5
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803CDC8
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -38253,7 +38253,7 @@ sub_803CE24: @ 0x0803CE24
 	strb r0, [r1, #0x19]
 	ldrb r1, [r1, #0x19]
 	movs r0, #8
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803CEC0
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -38364,7 +38364,7 @@ sub_803CF00: @ 0x0803CF00
 	strb r0, [r1, #0x1c]
 	ldrb r1, [r1, #0x1c]
 	movs r0, #0x10
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803CF8C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -38527,7 +38527,7 @@ sub_803D034: @ 0x0803D034
 	strb r0, [r1, #0x1b]
 	ldrb r1, [r1, #0x1b]
 	movs r0, #0xf
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803D0B0
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -38736,14 +38736,14 @@ _0803D1EC:
 	ldrb r0, [r4]
 	subs r1, r1, r0
 	movs r0, #0x36
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803D238
 	movs r1, #0
 	bl is_obj_disabled
 	cmp r0, #0
 	beq _0803D27C
 	movs r0, #0x36
-	bl release_hud_element
+	bl hud_release_element
 	ldrh r0, [r5]
 	cmp r0, #3
 	beq _0803D23C
@@ -39164,7 +39164,7 @@ _0803D532:
 	bge _0803D55C
 	adds r6, r7, #0
 _0803D54E:
-	bl sub_80407F8
+	bl hud_extend_health_bar
 	adds r5, #1
 	ldrb r0, [r6]
 	subs r0, r4, r0
@@ -39174,7 +39174,7 @@ _0803D55C:
 	ldr r0, _0803D590
 	ldrb r1, [r0, #0x13]
 	movs r0, #0x38
-	bl set_hud_number
+	bl hud_set_value
 	ldr r2, _0803D588
 	strb r4, [r2]
 	ldr r1, _0803D58C
@@ -39188,7 +39188,7 @@ _0803D55C:
 	adds r1, r1, r0
 	ldrb r1, [r1]
 	movs r0, #0x28
-	bl set_hud_number
+	bl hud_set_value
 	b _0803D59E
 	.align 2, 0
 _0803D588: .4byte 0x0200107C
@@ -39197,7 +39197,7 @@ _0803D590: .4byte gGameStatus
 _0803D594: .4byte 0x080CC8E4
 _0803D598:
 	movs r0, #0x28
-	bl release_hud_element
+	bl hud_release_element
 _0803D59E:
 	ldr r0, _0803D5D8
 	ldrb r0, [r0]
@@ -39415,7 +39415,7 @@ sub_803D710: @ 0x0803D710
 	adds r0, r0, r2
 	ldrb r1, [r0]
 	movs r0, #1
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803D7B8
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -39521,7 +39521,7 @@ _0803D806:
 	strb r0, [r1, #1]
 	ldrb r1, [r1, #1]
 	movs r0, #6
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803D890
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -39598,7 +39598,7 @@ sub_803D89C: @ 0x0803D89C
 	adds r0, r0, r4
 	ldrh r1, [r0, #6]
 	movs r0, #0
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803D954
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -39692,7 +39692,7 @@ sub_803D968: @ 0x0803D968
 	adds r0, r0, r4
 	ldrh r1, [r0, #6]
 	movs r0, #0
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803DA20
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -39786,7 +39786,7 @@ sub_803DA34: @ 0x0803DA34
 	adds r0, r0, r4
 	ldrh r1, [r0, #6]
 	movs r0, #0
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803DAEC
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -39891,7 +39891,7 @@ _0803DB20:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl set_hud_number
+	bl hud_set_value
 	ldr r4, _0803DC1C
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -40036,7 +40036,7 @@ _0803DC64:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl set_hud_number
+	bl hud_set_value
 	ldr r4, _0803DD60
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -40181,7 +40181,7 @@ _0803DDA8:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl set_hud_number
+	bl hud_set_value
 	ldr r4, _0803DEA4
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -40326,7 +40326,7 @@ _0803DEEC:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl set_hud_number
+	bl hud_set_value
 	ldr r4, _0803DFE8
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -40471,7 +40471,7 @@ _0803E030:
 	adds r0, r0, r3
 	ldrb r1, [r0, #5]
 	movs r0, #7
-	bl set_hud_number
+	bl hud_set_value
 	ldr r4, _0803E12C
 	ldrb r0, [r4]
 	cmp r0, #0
@@ -40616,7 +40616,7 @@ _0803E176:
 	strb r0, [r1, #6]
 	ldrb r1, [r1, #6]
 	movs r0, #0x16
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E20C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -40708,7 +40708,7 @@ _0803E23E:
 	strb r0, [r1, #6]
 	ldrb r1, [r1, #6]
 	movs r0, #0x16
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E2D4
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -40800,7 +40800,7 @@ _0803E306:
 	strb r0, [r1, #6]
 	ldrb r1, [r1, #6]
 	movs r0, #0x16
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E39C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -40892,7 +40892,7 @@ _0803E3CE:
 	strb r0, [r1, #6]
 	ldrb r1, [r1, #6]
 	movs r0, #0x16
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E464
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -40972,7 +40972,7 @@ _0803E4B0:
 	movs r1, #0x12
 	ldrsb r1, [r2, r1]
 	movs r0, #3
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E508
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41047,7 +41047,7 @@ _0803E550:
 	movs r1, #0xe
 	ldrsb r1, [r2, r1]
 	movs r0, #9
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E5A8
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41122,7 +41122,7 @@ _0803E5F0:
 	movs r1, #0xf
 	ldrsb r1, [r2, r1]
 	movs r0, #0xa
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E648
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41197,7 +41197,7 @@ _0803E690:
 	movs r1, #0x11
 	ldrsb r1, [r2, r1]
 	movs r0, #0xc
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E6E8
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41272,7 +41272,7 @@ _0803E730:
 	movs r1, #0x10
 	ldrsb r1, [r2, r1]
 	movs r0, #0xb
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E788
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41364,7 +41364,7 @@ _0803E7F0:
 	movs r1, #0x12
 	ldrsb r1, [r2, r1]
 	movs r0, #3
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E84C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41457,7 +41457,7 @@ _0803E8B4:
 	movs r1, #0xe
 	ldrsb r1, [r2, r1]
 	movs r0, #9
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E910
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41556,7 +41556,7 @@ _0803E96A:
 _0803E986:
 	ldrb r1, [r2, #0x13]
 	movs r0, #0x38
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803E9DC
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -41688,7 +41688,7 @@ _0803EAA4:
 _0803EAA6:
 	ldrb r1, [r1, #0x13]
 	movs r0, #0x38
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803EAE0
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42093,7 +42093,7 @@ sub_803EDE4: @ 0x0803EDE4
 	strb r2, [r1, #0x16]
 	ldrb r1, [r1, #0x16]
 	movs r0, #0x39
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803EE3C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42161,7 +42161,7 @@ sub_803EE6C: @ 0x0803EE6C
 	strb r0, [r1, #6]
 	movs r0, #0x16
 	movs r1, #0
-	bl set_hud_number
+	bl hud_set_value
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -42178,7 +42178,7 @@ sub_803EE84: @ 0x0803EE84
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #9
-	bl set_hud_number
+	bl hud_set_value
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -42196,7 +42196,7 @@ sub_803EEA8: @ 0x0803EEA8
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #0xa
-	bl set_hud_number
+	bl hud_set_value
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -42214,7 +42214,7 @@ sub_803EECC: @ 0x0803EECC
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #0xb
-	bl set_hud_number
+	bl hud_set_value
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -42232,7 +42232,7 @@ sub_803EEF0: @ 0x0803EEF0
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #0xc
-	bl set_hud_number
+	bl hud_set_value
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -42245,7 +42245,7 @@ sub_803EF14: @ 0x0803EF14
 	ldr r0, _0803EF58
 	ldrb r1, [r0, #7]
 	movs r0, #4
-	bl set_hud_number
+	bl hud_set_value
 	ldr r0, _0803EF5C
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -42290,7 +42290,7 @@ sub_803EF68: @ 0x0803EF68
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #3
-	bl set_hud_number
+	bl hud_set_value
 	pop {r0}
 	bx r0
 	.align 2, 0

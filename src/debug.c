@@ -154,7 +154,7 @@ static void set_full_eggs_and_feathers(void) {
     gGameStatus.eggs[3] = stru_80CC8C4.eggs[3];
     gGameStatus.eggs[2] = stru_80CC8C4.eggs[2];
     gGameStatus.goldenFeathers = stru_80CC8C4.goldenFeathers;
-    reset_hud_elements();
+    hud_load_counters();
 }
 
 void init_debug(void) {
@@ -1908,7 +1908,7 @@ bool32 sub_8011540(void) {
                     gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
                     gLoadedRoomLevel = LEVEL_CLIFF_FARM;
-                    update_hud_collectables();
+                    hud_load_level_counters();
                     return TRUE;
 
                 case 5:
@@ -1959,7 +1959,7 @@ bool32 sub_8011540(void) {
                     gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
                     gLoadedRoomLevel = LEVEL_BREEGULL_BEACH;
-                    update_hud_collectables();
+                    hud_load_level_counters();
                     return TRUE;
 
                 case 6:
@@ -2001,7 +2001,7 @@ bool32 sub_8011540(void) {
                     gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
                     gLoadedRoomLevel = LEVEL_BAD_MAGIC_BAYOU;
-                    update_hud_collectables();
+                    hud_load_level_counters();
                     return TRUE;
 
                 case 5:
@@ -2052,7 +2052,7 @@ bool32 sub_8011540(void) {
                     gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
                     gLoadedRoomLevel = LEVEL_SPILLERS_HARBOR;
-                    update_hud_collectables();
+                    hud_load_level_counters();
                     return TRUE;
 
                 case 6:
@@ -2100,7 +2100,7 @@ bool32 sub_8011540(void) {
                     gDebugWarpRoomIdx = gLoadedRoomIndex;
                     gLoadedRoomIndex = ROOM_MUMBOHUT;
                     gLoadedRoomLevel = LEVEL_FREEZING_FURNACE;
-                    update_hud_collectables();
+                    hud_load_level_counters();
                     return TRUE;
 
                 case 6:

@@ -155,8 +155,8 @@ static int hud_cmd_sprite_fit_fraction_left(struct HudElement*, int, int, int);
 static int hud_cmd_sprite_fit_fraction_right(struct HudElement*, int, int, int);
 static int hud_cmd_init_fraction_text(struct HudElement*, int, int, int);
 
-static void sub_80421C4(int, int, char*);
-static int get_hud_element_max(u32);
+static void hud_format_fraction(int, int, char*);
+static int hud_get_element_max(u32);
 
 struct HudElement* gHudElements;
 
@@ -305,7 +305,7 @@ static int hud_cmd_init_fraction_text(struct HudElement* element, int x, int y, 
         element->rightAlignText = FALSE;
     }
 
-    sub_80421C4(element->displayValue, element->maxValue, element->text);
+    hud_format_fraction(element->displayValue, element->maxValue, element->text);
 
     element->timer = 10;
     return HUD_SCRIPT_NEXT;
@@ -1097,7 +1097,7 @@ static int hud_cmd_bar_count_oxygen(struct HudElement* element, int start, int _
     return HUD_SCRIPT_WAIT;
 }
 
-void reset_hud_elements(void) {
+void hud_load_counters(void) {
     gHudElements[HUD_ELEMENT_PAUSE_NOTES].maxValue = stru_80CC8C4.totalNotes;
     gHudElements[HUD_ELEMENT_PAUSE_NOTES].displayValue = gGameStatus.totalNotes;
     gHudElements[HUD_ELEMENT_PAUSE_NOTES].targetValue =
@@ -1216,12 +1216,12 @@ void reset_hud_elements(void) {
         gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].displayValue;
 }
 
-void update_bozzeye_notes_counter(void) {
+void hud_load_bozzeye_notes(void) {
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].displayValue = gGameStatus.totalNotes;
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].targetValue = gGameStatus.totalNotes;
 }
 
-void init_hud_elements(void) {
+void hud_init(void) {
     int i;
 
     gHudCountersVisible = FALSE;
@@ -1250,10 +1250,10 @@ void init_hud_elements(void) {
         gHudElements[i].textBox.font = &font_80B01A8[1];
     }
 
-    reset_hud_elements();
+    hud_load_counters();
 }
 
-void update_hud_collectables(void) {
+void hud_load_level_counters(void) {
     gHudElements[HUD_ELEMENT_LEVEL_NOTES].maxValue = stru_80CC84C[gLoadedRoomLevel].noteCount;
     gHudElements[HUD_ELEMENT_LEVEL_NOTES].displayValue = byte_2000FCC[gLoadedRoomLevel].noteCount;
     gHudElements[HUD_ELEMENT_LEVEL_NOTES].targetValue =
@@ -1270,8 +1270,8 @@ void update_hud_collectables(void) {
         gHudElements[HUD_ELEMENT_LEVEL_JINJOS].displayValue;
 }
 
-void set_hud_number(u32 element, int value) {
-    int n;
+void hud_set_value(u32 element, int value) {
+    int max;
     int funcIdx, arg1;
     u8 state;
 
@@ -1323,27 +1323,27 @@ void set_hud_number(u32 element, int value) {
         case HUD_ELEMENT_HONEYCOMBS:
             ASSERT(gHudElements[element].displayValue <= value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_40);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_40, n);
+            max = hud_get_element_max(HUD_ELEMENT_40);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_40, max);
             }
             break;
 
         case HUD_ELEMENT_LEVEL_NOTES:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_BOZZEYE_NOTES);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_BOZZEYE_NOTES, n);
+            max = hud_get_element_max(HUD_ELEMENT_BOZZEYE_NOTES);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_BOZZEYE_NOTES, max);
             }
             break;
 
         case HUD_ELEMENT_LEVEL_JIGGIES:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_41);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_41, n);
+            max = hud_get_element_max(HUD_ELEMENT_41);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_41, max);
             }
             break;
 
@@ -1360,36 +1360,36 @@ void set_hud_number(u32 element, int value) {
         case HUD_ELEMENT_SHELLS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_MR_RIPOVSKI_SHELLS);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_MR_RIPOVSKI_SHELLS, n);
+            max = hud_get_element_max(HUD_ELEMENT_MR_RIPOVSKI_SHELLS);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_MR_RIPOVSKI_SHELLS, max);
             }
             break;
 
         case HUD_ELEMENT_LEVEL_JINJOS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_JINJO_ORACLE_JINJOS);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_JINJO_ORACLE_JINJOS, n);
+            max = hud_get_element_max(HUD_ELEMENT_JINJO_ORACLE_JINJOS);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_JINJO_ORACLE_JINJOS, max);
             }
             break;
 
         case HUD_ELEMENT_CHICKS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS, n);
+            max = hud_get_element_max(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS, max);
             }
             break;
 
         case HUD_ELEMENT_CAPTIVE_BREEGULLS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS, n);
+            max = hud_get_element_max(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS, max);
             }
             break;
 
@@ -1406,18 +1406,18 @@ void set_hud_number(u32 element, int value) {
         case HUD_ELEMENT_SILVER_COINS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS, n);
+            max = hud_get_element_max(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS, max);
             }
             break;
 
         case HUD_ELEMENT_GOLD_NUGGETS:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            n = get_hud_element_max(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS);
-            if (n >= 0) {
-                set_hud_number(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS, n);
+            max = hud_get_element_max(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS);
+            if (max >= 0) {
+                hud_set_value(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS, max);
             }
             break;
 
@@ -1534,7 +1534,7 @@ void set_hud_number(u32 element, int value) {
     }
 }
 
-void sub_80407F8(void) {
+void hud_extend_health_bar(void) {
     int funcIdx, arg1;
     int element;
 
@@ -1564,7 +1564,7 @@ void sub_80407F8(void) {
     }
 }
 
-void update_hud(void) {
+void hud_update(void) {
     int i;
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
@@ -1625,7 +1625,7 @@ void hud_render_text(void) {
     }
 }
 
-void sub_80409DC(void) {
+void hud_hide_all(void) {
     int i;
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
@@ -1643,7 +1643,7 @@ void sub_80409DC(void) {
     }
 }
 
-void sub_08040A38(u32 element) {
+void hud_hide_element(u32 element) {
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -1677,7 +1677,7 @@ void sub_08040A38(u32 element) {
     }
 }
 
-void sub_08040AD0(u32 element, int value) {
+void hud_init_element_value(u32 element, int value) {
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -1713,8 +1713,8 @@ void sub_08040AD0(u32 element, int value) {
         gHudElements[element].keepShown = FALSE;                                                       \
     }
 
-void show_pause_counters(int isDiving) {
-    reset_hud_elements();
+void hud_show_pause_counters(int isDiving) {
+    hud_load_counters();
 
     if (byte_203E127) {
         SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_NOTES);
@@ -1760,13 +1760,13 @@ void show_pause_counters(int isDiving) {
     gHudCountersVisible = TRUE;
 }
 
-void hide_pause_counters(void) {
+void hud_hide_pause_counters(void) {
     gHudCountersVisible = FALSE;
-    dismiss_hud_elements();
-    update_hud_collectables();
+    hud_dismiss_all();
+    hud_load_level_counters();
 }
 
-bool32 are_pause_counters_shown(int isDiving) {
+bool32 hud_are_pause_counters_shown(int isDiving) {
     bool32 done = TRUE;
 
     if (byte_203E127 && gHudElements[HUD_ELEMENT_PAUSE_NOTES].state != HUD_STATE_SHOWN) {
@@ -1827,7 +1827,7 @@ bool32 are_pause_counters_shown(int isDiving) {
     }
 
 #ifdef NONMATCHING
-bool32 are_pause_counters_hidden(int isDiving) {
+bool32 hud_are_pause_counters_hidden(int isDiving) {
     bool32 done = TRUE;
 
     if (byte_203E127 && gHudElements[HUD_ELEMENT_19].state != HUD_STATE_HIDDEN) {
@@ -1940,7 +1940,7 @@ bool32 are_pause_counters_hidden(int isDiving) {
     return done;
 }
 #else
-NAKED bool32 are_pause_counters_hidden(int isDiving) {
+NAKED bool32 hud_are_pause_counters_hidden(int isDiving) {
     asm_unified(".include \"asm/nonmatching/sub_8040FF4.s\"");
 }
 #endif
@@ -1958,7 +1958,7 @@ NAKED bool32 are_pause_counters_hidden(int isDiving) {
         SHOW_HUD_ELEMENT(element);                                                                     \
     }
 
-void show_totals_counters(u32 page) {
+void hud_show_totals_counters(u32 page) {
     if (byte_203E127) {
         SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_NOTES, noteCount);
     }
@@ -2066,12 +2066,12 @@ void show_totals_counters(u32 page) {
     gHudCountersVisible = TRUE;
 }
 
-void hide_totals_counters(int page) {
+void hud_hide_totals_counters(int page) {
     gHudCountersVisible = FALSE;
-    dismiss_hud_elements();
+    hud_dismiss_all();
 }
 
-bool32 are_totals_counters_shown(int page) {
+bool32 hud_are_totals_counters_shown(int page) {
     bool32 done = TRUE;
 
     if (byte_203E127 && gHudElements[HUD_ELEMENT_TOTALS_NOTES].state != HUD_STATE_SHOWN) {
@@ -2144,7 +2144,7 @@ bool32 are_totals_counters_shown(int page) {
     return done;
 }
 
-bool32 are_totals_counters_hidden(int page) {
+bool32 hud_are_totals_counters_hidden(int page) {
     bool32 done = TRUE;
 
     if (byte_203E127 && gHudElements[HUD_ELEMENT_TOTALS_NOTES].state != HUD_STATE_HIDDEN) {
@@ -2217,7 +2217,7 @@ bool32 are_totals_counters_hidden(int page) {
     return done;
 }
 
-void dismiss_hud_elements(void) {
+void hud_dismiss_all(void) {
     int i;
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
@@ -2228,7 +2228,7 @@ void dismiss_hud_elements(void) {
     }
 }
 
-void sub_8041E88(void) {
+void hud_dismiss_npc_counters(void) {
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].timer = 0;
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_40].timer = 0;
@@ -2249,7 +2249,7 @@ void sub_8041E88(void) {
     gHudElements[HUD_ELEMENT_JINJO_ORACLE_JINJOS].keepShown = FALSE;
 }
 
-void sub_08041F3C(u32 element, int value) {
+void hud_set_element_slide_speed(u32 element, int value) {
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -2274,7 +2274,7 @@ void sub_08041F3C(u32 element, int value) {
     gHudElements[element].slideSpeed = value;
 }
 
-void keep_hud_element_shown(u32 element) {
+void hud_keep_element_shown(u32 element) {
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -2299,7 +2299,7 @@ void keep_hud_element_shown(u32 element) {
     gHudElements[element].keepShown = TRUE;
 }
 
-void release_hud_element(u32 element) {
+void hud_release_element(u32 element) {
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -2325,7 +2325,7 @@ void release_hud_element(u32 element) {
     gHudElements[element].timer = 1;
 }
 
-bool32 sub_0804207C(u32 element) {
+bool32 hud_is_element_shown(u32 element) {
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -2350,7 +2350,7 @@ bool32 sub_0804207C(u32 element) {
     return gHudElements[element].state == HUD_STATE_SHOWN;
 }
 
-bool32 sub_080420E8(u32 element) {
+bool32 hud_is_element_active(u32 element) {
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -2375,7 +2375,7 @@ bool32 sub_080420E8(u32 element) {
     return gHudElements[element].state != HUD_STATE_HIDDEN;
 }
 
-static int get_hud_element_max(u32 element) {
+static int hud_get_element_max(u32 element) {
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -2405,7 +2405,7 @@ static int get_hud_element_max(u32 element) {
     return -1;
 }
 
-static void sub_80421C4(int value, int max, char* buf) {
+static void hud_format_fraction(int value, int max, char* buf) {
     int valueLen;
     int maxLen;
     char* end;

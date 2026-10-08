@@ -1050,7 +1050,7 @@ static bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int cha
         script_cmd_camera_alloc(0, 0, 0, 0);
     }
 
-    dismiss_hud_elements();
+    hud_dismiss_all();
 
     return TRUE;
 }
@@ -2094,7 +2094,7 @@ static bool32 script_cmd_wait_for_cond(int condition, int actorIdx, int _, int _
             break;
 
         case SCRIPT_WAIT_COND_16:
-            if (sub_0804207C(0)) {
+            if (hud_is_element_shown(0)) {
                 advance = TRUE;
             }
             break;
@@ -2737,7 +2737,7 @@ static bool32 sub_8060CC4(int actorIdx, int _, int __, int ___) {
 }
 
 static bool32 sub_8060D74(int _, int __, int ___, int ____) {
-    dismiss_hud_elements();
+    hud_dismiss_all();
     return TRUE;
 }
 

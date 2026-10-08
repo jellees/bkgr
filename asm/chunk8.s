@@ -874,7 +874,7 @@ _08047C16:
 	cmp r4, #0
 	bne _08047C38
 	adds r0, r5, #0
-	bl release_hud_element
+	bl hud_release_element
 	strb r4, [r7]
 	b _08047C58
 	.align 2, 0
@@ -885,16 +885,16 @@ _08047C38:
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	adds r0, r5, #0
-	bl sub_08040AD0
+	bl hud_init_element_value
 	ldr r0, [r6]
 	ldr r0, [r0]
 	adds r0, #0x46
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	adds r0, r5, #0
-	bl set_hud_number
+	bl hud_set_value
 	adds r0, r5, #0
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 _08047C58:
 	pop {r4, r5, r6, r7}
 	pop {r0}
@@ -2670,7 +2670,7 @@ sub_8048B1C: @ 0x08048B1C
 	adds r1, r0, #0
 	asrs r1, r1, #8
 	movs r0, #0x35
-	bl sub_08040AD0
+	bl hud_init_element_value
 	movs r1, #0
 	ldrsh r0, [r4, r1]
 	movs r1, #3
@@ -2678,9 +2678,9 @@ sub_8048B1C: @ 0x08048B1C
 	adds r1, r0, #0
 	asrs r1, r1, #8
 	movs r0, #0x35
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x35
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	ldr r0, [r5]
 	movs r1, #5
 	movs r2, #1
@@ -4535,7 +4535,7 @@ _08049938:
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18
 	movs r0, #3
-	bl set_hud_number
+	bl hud_set_value
 	ldr r1, [r4]
 	movs r2, #1
 	rsbs r2, r2, #0
@@ -19621,7 +19621,7 @@ sub_805160C: @ 0x0805160C
 	cmp r0, #0xff
 	bne _08051640
 	movs r0, #0x35
-	bl release_hud_element
+	bl hud_release_element
 	movs r0, #0
 	bl sub_8016BD0
 	adds r0, r4, #0
@@ -19694,7 +19694,7 @@ sub_80516A4: @ 0x080516A4
 	cmp r0, #3
 	bgt _080516E8
 	movs r0, #0x35
-	bl release_hud_element
+	bl hud_release_element
 	movs r0, #1
 	bl sub_8016BD0
 	ldr r0, [r5, #0x2c]
@@ -19720,7 +19720,7 @@ _080516E8:
 	adds r1, r0, #0
 	asrs r1, r1, #8
 	movs r0, #0x35
-	bl sub_08040AD0
+	bl hud_init_element_value
 	movs r1, #0
 	ldrsh r0, [r4, r1]
 	movs r1, #3
@@ -19728,7 +19728,7 @@ _080516E8:
 	adds r1, r0, #0
 	asrs r1, r1, #8
 	movs r0, #0x35
-	bl set_hud_number
+	bl hud_set_value
 	adds r0, r6, #0
 	bl sub_804995C
 	adds r0, r5, #0
@@ -21541,12 +21541,12 @@ _0805256C:
 _08052570:
 	movs r0, #0x32
 	adds r1, r4, #0
-	bl sub_08040AD0
+	bl hud_init_element_value
 	movs r0, #0x32
 	adds r1, r4, #0
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x32
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	b _0805278E
 	.align 2, 0
 _08052588: .4byte 0x0203F93A
@@ -21576,8 +21576,8 @@ _080525B0:
 _080525B8:
 	movs r0, #0x33
 _080525BA:
-	bl release_hud_element
-	bl dismiss_hud_elements
+	bl hud_release_element
+	bl hud_dismiss_all
 	bl sub_8063178
 	b _0805278E
 	.align 2, 0
@@ -21612,12 +21612,12 @@ _080525F8:
 _080525FC:
 	movs r0, #0x33
 	adds r1, r4, #0
-	bl sub_08040AD0
+	bl hud_init_element_value
 	movs r0, #0x33
 	adds r1, r4, #0
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x33
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	b _0805278E
 	.align 2, 0
 _08052614: .4byte 0x0203F93A
@@ -21627,7 +21627,7 @@ _08052618:
 	cmp r0, #1
 	bls _0805262C
 	movs r0, #0xd
-	bl release_hud_element
+	bl hud_release_element
 	b _0805278E
 	.align 2, 0
 _08052628: .4byte 0x0203F93D
@@ -21661,12 +21661,12 @@ _08052658:
 _0805265C:
 	movs r0, #0xd
 	adds r1, r4, #0
-	bl sub_08040AD0
+	bl hud_init_element_value
 	movs r0, #0xd
 	adds r1, r4, #0
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0xd
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	b _0805278E
 	.align 2, 0
 _08052674: .4byte 0x0203F93A
@@ -21676,7 +21676,7 @@ _08052678:
 	cmp r0, #1
 	bls _0805268C
 	movs r0, #0x34
-	bl release_hud_element
+	bl hud_release_element
 	b _0805278E
 	.align 2, 0
 _08052688: .4byte 0x0203F93D
@@ -21710,12 +21710,12 @@ _080526B8:
 _080526BC:
 	movs r0, #0x34
 	adds r1, r4, #0
-	bl sub_08040AD0
+	bl hud_init_element_value
 	movs r0, #0x34
 	adds r1, r4, #0
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x34
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	b _0805278E
 	.align 2, 0
 _080526D4: .4byte 0x0203F93A
@@ -21728,21 +21728,21 @@ _080526D8:
 	cmp r0, #0
 	bne _080526F4
 	movs r0, #0x25
-	bl release_hud_element
+	bl hud_release_element
 	b _0805278E
 	.align 2, 0
 _080526F0: .4byte 0x0203F960
 _080526F4:
 	ldrb r1, [r1]
 	movs r0, #0x25
-	bl sub_08040AD0
+	bl hud_init_element_value
 	ldr r0, [r4]
 	adds r0, #0x56
 	ldrb r1, [r0]
 	movs r0, #0x25
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x25
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	b _0805278E
 _08052710:
 	ldr r0, _08052744
@@ -21760,12 +21760,12 @@ _08052710:
 	bge _08052754
 	movs r0, #0x37
 	adds r1, r4, #0
-	bl sub_08040AD0
+	bl hud_init_element_value
 	movs r0, #0x37
 	adds r1, r4, #0
-	bl set_hud_number
+	bl hud_set_value
 	movs r0, #0x37
-	bl keep_hud_element_shown
+	bl hud_keep_element_shown
 	b _0805278E
 	.align 2, 0
 _08052744: .4byte 0x0203E16C
@@ -21800,7 +21800,7 @@ _08052754:
 	bl audio_new_fx
 _08052788:
 	movs r0, #0x37
-	bl release_hud_element
+	bl hud_release_element
 _0805278E:
 	pop {r4}
 	pop {r0}
@@ -23147,7 +23147,7 @@ _08053292:
 	bl sub_8054130
 	bl sub_80540E8
 _080532F0:
-	bl sub_80409DC
+	bl hud_hide_all
 	bl sub_8063178
 	bl sub_80552CC
 	ldr r0, _08053384
@@ -23467,7 +23467,7 @@ sub_8053588: @ 0x08053588
 	ldr r0, _080535BC
 	ands r0, r1
 	strh r0, [r2]
-	bl dismiss_hud_elements
+	bl hud_dismiss_all
 	ldr r1, _080535C0
 	movs r0, #5
 	b _080535D2
@@ -24046,7 +24046,7 @@ _080539DC:
 	cmp r0, #2
 	bne _08053A18
 	bl sub_800DE9C
-	bl dismiss_hud_elements
+	bl hud_dismiss_all
 	ldr r0, _08053A28
 	bl sub_0802FEDC
 	ldr r1, _08053A2C
@@ -24307,7 +24307,7 @@ _08053C24:
 	movs r1, #0xe
 	ldrsb r1, [r2, r1]
 	movs r0, #9
-	bl set_hud_number
+	bl hud_set_value
 	b _08053C5E
 	.align 2, 0
 _08053C30: .4byte gGameStatus
@@ -24331,7 +24331,7 @@ _08053C54:
 	movs r1, #0x10
 	ldrsb r1, [r2, r1]
 	movs r0, #0xb
-	bl set_hud_number
+	bl hud_set_value
 _08053C5E:
 	ldr r0, _08053CEC
 	ldrb r0, [r0]
@@ -28721,7 +28721,7 @@ _08055FEC:
 	bls _08055F3E
 _08055FF6:
 	bl sub_8058F9C
-	bl sub_80409DC
+	bl hud_hide_all
 	bl sub_8063178
 	ldr r4, _08056060
 	ldrb r0, [r4]
@@ -29384,7 +29384,7 @@ _08056560: @ jump table
 	.4byte _08056950 @ case 4
 	.4byte _08056A60 @ case 5
 _08056578:
-	bl dismiss_hud_elements
+	bl hud_dismiss_all
 	bl sub_8063178
 	ldr r0, _08056594
 	ldr r0, [r0]
@@ -35067,7 +35067,7 @@ _08059230:
 	lsrs r4, r0, #0x18
 	cmp r4, #3
 	bls _080591F4
-	bl dismiss_hud_elements
+	bl hud_dismiss_all
 	bl sub_8063178
 	b _080593C8
 	.align 2, 0
@@ -36011,7 +36011,7 @@ _08059A32:
 	ldr r1, _08059A74
 	movs r0, #0
 	str r0, [r1]
-	bl sub_80409DC
+	bl hud_hide_all
 	bl sub_8063178
 	ldr r0, _08059A78
 	ldrb r0, [r0]
@@ -40740,7 +40740,7 @@ _0805C094:
 	movs r2, #3
 	bl heap_alloc
 	str r0, [r4]
-	bl sub_80409DC
+	bl hud_hide_all
 	bl sub_8063178
 	ldr r6, _0805C118
 	ldrb r0, [r6]
@@ -42597,7 +42597,7 @@ _0805CEE4: .4byte 0x0203F93C
 _0805CEE8:
 	.2byte 0xEE00, 0xEE00
 _0805CEEC:
-	bl dismiss_hud_elements
+	bl hud_dismiss_all
 	bl sub_8063178
 	bl sub_80524D8
 	b _0805D150
@@ -42751,7 +42751,7 @@ _0805D01E:
 	bl sub_8052894
 	b _0805D150
 _0805D028:
-	bl dismiss_hud_elements
+	bl hud_dismiss_all
 	bl sub_8063178
 	ldr r0, _0805D0A0
 	ldr r0, [r0]

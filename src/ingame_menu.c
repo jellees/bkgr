@@ -326,7 +326,7 @@ void open_pause_menu(void) {
 }
 
 static void init(void) {
-    show_pause_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
+    hud_show_pause_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
 
     menu_load(MENU_PAUSE_MAIN, gLanguage);
     gMenuId = MENU_PAUSE_MAIN;
@@ -373,7 +373,7 @@ static void exec_pause_menu(void) {
     while (1) {
         if (gMenuId == 1) {
             byte_203F54C =
-                are_pause_counters_shown(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)
+                hud_are_pause_counters_shown(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)
                         && !loadMenu
                     ? 1
                     : 0;
@@ -385,17 +385,17 @@ static void exec_pause_menu(void) {
             ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
             if (gKeysDown & START_BUTTON) {
-                if (are_pause_counters_shown(gPlayerStateFlags[gPlayerState]
-                                             & PLAYER_FLAGS_IS_DIVING)) {
+                if (hud_are_pause_counters_shown(gPlayerStateFlags[gPlayerState]
+                                                 & PLAYER_FLAGS_IS_DIVING)) {
                     loadMenu = TRUE;
-                    hide_pause_counters();
+                    hud_hide_pause_counters();
                 }
             } else if (gKeysDown & B_BUTTON) {
                 if (gMenuParentId == 0xFF) {
-                    if (are_pause_counters_shown(gPlayerStateFlags[gPlayerState]
-                                                 & PLAYER_FLAGS_IS_DIVING)) {
+                    if (hud_are_pause_counters_shown(gPlayerStateFlags[gPlayerState]
+                                                     & PLAYER_FLAGS_IS_DIVING)) {
                         loadMenu = TRUE;
-                        hide_pause_counters();
+                        hud_hide_pause_counters();
                     }
                 } else {
                     gMenuId = gMenuParentId;
@@ -403,8 +403,8 @@ static void exec_pause_menu(void) {
                     switch (gMenuId) {
                         case MENU_PAUSE_MAIN:
                             gMenuParentId = 0xFF;
-                            show_pause_counters(gPlayerStateFlags[gPlayerState]
-                                                & PLAYER_FLAGS_IS_DIVING);
+                            hud_show_pause_counters(gPlayerStateFlags[gPlayerState]
+                                                    & PLAYER_FLAGS_IS_DIVING);
                             break;
 
                         default:
@@ -417,13 +417,13 @@ static void exec_pause_menu(void) {
             } else if (gKeysDown & A_BUTTON) {
                 if (choose_sub_menu(&changeMenu)) {
                     loadMenu = TRUE;
-                    hide_pause_counters();
+                    hud_hide_pause_counters();
                 }
 
                 if (changeMenu) {
                     changeMenu = FALSE;
                     menu_load(gMenuId, gLanguage);
-                    show_pause_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
+                    hud_show_pause_counters(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING);
                     SetObjectsFullAlpha();
                     fadeIn = 1;
                 }
@@ -437,7 +437,8 @@ static void exec_pause_menu(void) {
         }
 
         if (loadMenu
-            && are_pause_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+            && hud_are_pause_counters_hidden(gPlayerStateFlags[gPlayerState]
+                                             & PLAYER_FLAGS_IS_DIVING)) {
             if (gMenuId == MENU_PAUSE_MAIN) {
                 break;
             }
@@ -446,7 +447,7 @@ static void exec_pause_menu(void) {
             loadMenu = FALSE;
         }
 
-        update_hud();
+        hud_update();
 
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
@@ -506,13 +507,13 @@ static bool32 choose_sub_menu(bool32* changeMenu) {
             return TRUE;
 
         case 1: // Totals
-            hide_pause_counters();
+            hud_hide_pause_counters();
             exec_totals_menu();
             *changeMenu = TRUE;
             break;
 
         case 2: // Options
-            hide_pause_counters();
+            hud_hide_pause_counters();
             exec_options_menu();
             gMenuId = MENU_PAUSE_MAIN;
             gMenuParentId = 0xFF;
@@ -520,7 +521,7 @@ static bool32 choose_sub_menu(bool32* changeMenu) {
             break;
 
         case 3: // Save
-            hide_pause_counters();
+            hud_hide_pause_counters();
             if (!exec_save_menu()) {
                 gMenuId = MENU_PAUSE_MAIN;
                 gMenuParentId = 0xFF;
@@ -586,8 +587,8 @@ static void exec_totals_menu(void) {
     bool32 loadNextPage;
     bool32 fadeIn;
 
-    while (!are_pause_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
-        update_hud();
+    while (!hud_are_pause_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+        hud_update();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -622,7 +623,7 @@ static void exec_totals_menu(void) {
     page = gLoadedRoomLevel;
     nextPage = -1;
 
-    show_totals_counters(page);
+    hud_show_totals_counters(page);
     load_jinjo_palette(page);
 
     loadNextPage = FALSE;
@@ -632,14 +633,14 @@ static void exec_totals_menu(void) {
     fadeIn = TRUE;
 
     while (1) {
-        if (are_totals_counters_shown(page) && !loadNextPage) {
+        if (hud_are_totals_counters_shown(page) && !loadNextPage) {
             ReadKeys(&gKeysPressed, &gKeysDown, &gPreviousKeys);
 
             if (gKeysDown & B_BUTTON) {
-                if (are_totals_counters_shown(page)) {
+                if (hud_are_totals_counters_shown(page)) {
                     loadNextPage = TRUE;
                     nextPage = -1;
-                    hide_totals_counters(page);
+                    hud_hide_totals_counters(page);
                 }
             } else if (gKeysDown & DPAD_LEFT) {
                 nextPage = page - 1;
@@ -654,7 +655,7 @@ static void exec_totals_menu(void) {
                 }
 
                 loadNextPage = TRUE;
-                hide_totals_counters(page);
+                hud_hide_totals_counters(page);
             } else if (gKeysDown & DPAD_RIGHT) {
                 nextPage = page + 1;
 
@@ -668,11 +669,11 @@ static void exec_totals_menu(void) {
                 }
 
                 loadNextPage = TRUE;
-                hide_totals_counters(page);
+                hud_hide_totals_counters(page);
             }
         }
 
-        if (loadNextPage && are_totals_counters_hidden(page)) {
+        if (loadNextPage && hud_are_totals_counters_hidden(page)) {
             load_jinjo_palette(6);
             FadeOutObjects(2, 0);
             SetTextSpriteCount(0);
@@ -693,7 +694,7 @@ static void exec_totals_menu(void) {
 
             page = nextPage;
 
-            show_totals_counters(page);
+            hud_show_totals_counters(page);
             load_jinjo_palette(page);
 
             loadNextPage = FALSE;
@@ -702,7 +703,7 @@ static void exec_totals_menu(void) {
             fadeIn = TRUE;
         }
 
-        update_hud();
+        hud_update();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -771,8 +772,8 @@ static bool32 exec_save_menu(void) {
     textbox.field_11 = 6;
     textbox.font = &font_80B01A8[1];
 
-    while (!are_pause_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
-        update_hud();
+    while (!hud_are_pause_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+        hud_update();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -1103,8 +1104,8 @@ static void exec_options_menu(void) {
     sfxText[4] = '}';
     sfxText[5] = STRING_TERMINATOR;
 
-    while (!are_pause_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
-        update_hud();
+    while (!hud_are_pause_counters_hidden(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING)) {
+        hud_update();
         SetTextSpriteCount(0);
         DmaFill32(170, gOAMBuffer1, 256);
         gOAMBufferFramePtr = gOAMBuffer1;
@@ -1365,7 +1366,7 @@ void init_arcade_menu(void) {
 
     audio_halt_all_fx();
     sub_8038FA0(gLoadedRoomLevel);
-    sub_80409DC();
+    hud_hide_all();
 
     gNKreditzTextBox.letterSpacing = -2;
     gNKreditzTextBox.field_12 = 0;
@@ -1450,8 +1451,8 @@ void init_arcade_menu(void) {
     set_player_state_to_none();
     byte_2000F56 = 1;
     gKeysDown = 0;
-    set_hud_number(55, byte_203E16C);
-    keep_hud_element_shown(55);
+    hud_set_value(55, byte_203E16C);
+    hud_keep_element_shown(55);
 
     dword_203F4F4 = heap_alloc(sizeof(struct Sprite) * 3, 25, HEAP_GENERAL);
     dword_203F4F8 = heap_alloc(3, 25, HEAP_GENERAL);
@@ -1497,8 +1498,8 @@ void sub_8047000(bool32 a1) {
     set_player_state_to_none();
     byte_2000F56 = 1;
     gKeysDown = 0;
-    set_hud_number(55, byte_203E16C);
-    keep_hud_element_shown(55);
+    hud_set_value(55, byte_203E16C);
+    hud_keep_element_shown(55);
 }
 
 void exec_arcade_menu(void) {
@@ -1563,8 +1564,8 @@ void exec_arcade_menu(void) {
 
             DmaTransfer32(gRoomHeader.spritePalette, (void*)OBJ_PLTT, 128);
             DmaTransfer32(gRoomHeader.backgroundPalette, (void*)BG_PLTT, 128);
-            release_hud_element(55);
-            sub_80409DC();
+            hud_release_element(55);
+            hud_hide_all();
             heap_free_by_tag(HEAP_GENERAL, 25);
             menu_reset();
             ASSERT(heap_has_tag(HEAP_GENERAL, 25) == FALSE);

@@ -281,10 +281,10 @@ static void update_game(void) {
         if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
             if (gIsStopHoneycombActive) {
                 finish_stop_honeycomb();
-                update_hud();
+                hud_update();
             }
 
-            sub_80409DC();
+            hud_hide_all();
 
             if (gKazooieSfx != -1) {
                 STOP_SFX(gKazooieSfx);
@@ -316,8 +316,8 @@ static void update_game(void) {
 
             if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DIVING
                 && gTransformation != TRANSFORMATION_OCTOPUS) {
-                set_hud_number(HUD_METER_OXYGEN, gGameStatus.oxygen);
-                keep_hud_element_shown(HUD_METER_OXYGEN);
+                hud_set_value(HUD_METER_OXYGEN, gGameStatus.oxygen);
+                hud_keep_element_shown(HUD_METER_OXYGEN);
             }
 
             if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE) {
@@ -369,7 +369,7 @@ static void update_game(void) {
         sub_8048C78();
     }
 
-    update_hud();
+    hud_update();
 
     if (!gIsSlideMiniGame) {
         s16 r1;
@@ -573,7 +573,7 @@ static void start_game() {
     menu_init();
     ResetTileAnimCount();
     sub_80266B4();
-    init_hud_elements();
+    hud_init();
     sub_080281A8();
     sub_800A5F4();
     sub_08030C68();
@@ -633,8 +633,8 @@ static void start_game() {
         }
 
         sub_8025E44(gLoadedRoomLevel);
-        sub_80409DC();
-        reset_hud_elements();
+        hud_hide_all();
+        hud_load_counters();
         sprite_set_priority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         sub_8013A10(word_200145C, word_200145E, gBGInitOffsetHorizontal, gBGInitOffsetVertical, 21, 32);
         EnableBGAlphaBlending();
@@ -819,7 +819,7 @@ void sub_800A710(u16 level) {
 
     gLoadedRoomLevel = level;
     gRoomLevelSaved = level;
-    update_hud_collectables();
+    hud_load_level_counters();
     sub_8039234();
 }
 
@@ -1697,7 +1697,7 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
         gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
         gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
         SetupRoom(gRoomGoal, gWarpGoal, 1, ROOM_LOAD_NORMAL);
-        reset_hud_elements();
+        hud_load_counters();
     } else {
         switch (sub_0800C63C(room, a1->warpDestWarp)) {
             case 1:
@@ -1757,10 +1757,10 @@ bool32 sub_0800BCD4(struct struc_44* a1) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    sub_8041E88();
+    hud_dismiss_npc_counters();
 
     if (level != gLoadedRoomLevel) {
-        update_hud_collectables();
+        hud_load_level_counters();
     }
 
     if (byte_20010A4) {
@@ -1798,7 +1798,7 @@ void load_room_directly(int room, int warp, bool32 setGoal) {
         gRoomGoal = dword_80CEBF8[gLoadedRoomLevel];
         gWarpGoal = dword_80CEBE0[gLoadedRoomLevel];
         SetupRoom(gRoomGoal, gWarpGoal, 1, ROOM_LOAD_NORMAL);
-        reset_hud_elements();
+        hud_load_counters();
     } else {
         isMusicChanged = gLoadedRoomBgm != dRoomIndexes[room].music;
         sub_80270AC(4095, isMusicChanged);
@@ -1834,10 +1834,10 @@ void load_room_directly(int room, int warp, bool32 setGoal) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    sub_8041E88();
+    hud_dismiss_npc_counters();
 
     if (level != gLoadedRoomLevel) {
-        update_hud_collectables();
+        hud_load_level_counters();
     }
 
     if (byte_20010A4) {
@@ -1901,11 +1901,11 @@ void sub_800C1E8(int room, fx32 xPos, fx32 yPos, fx32 zPos, int a5, enum RoomLoa
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
 
-    reset_hud_elements();
-    sub_8041E88();
+    hud_load_counters();
+    hud_dismiss_npc_counters();
 
     if (level != gLoadedRoomLevel) {
-        update_hud_collectables();
+        hud_load_level_counters();
     }
 
     sub_8039210();
@@ -1949,17 +1949,17 @@ void sub_0800C388(int a1, int a2) {
     init_efx();
     enable_poison_effect();
     init_room_name();
-    sub_08040A38(HUD_METER_HEALTH);
+    hud_hide_element(HUD_METER_HEALTH);
     sub_8026E48(4095, isMusicChanged, 1);
     gPlayerSprite.xPos = gPlayerInitPixelPosX;
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    reset_hud_elements();
-    sub_8041E88();
+    hud_load_counters();
+    hud_dismiss_npc_counters();
 
     if (level != gLoadedRoomLevel) {
-        update_hud_collectables();
+        hud_load_level_counters();
     }
 
     sub_8039210();
@@ -2625,8 +2625,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    reset_hud_elements();
-    update_hud_collectables();
+    hud_load_counters();
+    hud_load_level_counters();
     if (byte_20010A4) {
         sub_8016C78(byte_20010A5);
         word_20010AC = gKeysPressed & KEYS_MASK;
@@ -2657,9 +2657,9 @@ void sub_800D8E8(int a1, char a2, char a3) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    reset_hud_elements();
-    update_hud_collectables();
-    sub_80409DC();
+    hud_load_counters();
+    hud_load_level_counters();
+    hud_hide_all();
     sub_8063178();
     dword_2001110 = 136 - gCameraPixelX;
     dword_2001114 = gCameraPixelY;
@@ -2682,9 +2682,9 @@ void sub_800DA04(int a1, int a2, int a3) {
     gPlayerSprite.yPos = gPlayerInitPixelPosY;
     gPlayerShadowSprite.xPos = gPlayerInitPixelPosX;
     gPlayerShadowSprite.yPos = gPlayerInitPixelPosY;
-    reset_hud_elements();
-    update_hud_collectables();
-    sub_80409DC();
+    hud_load_counters();
+    hud_load_level_counters();
+    hud_hide_all();
     sub_8063178();
     sub_8047000(a3);
 }
@@ -2697,10 +2697,10 @@ void select_next_available_egg(bool32 a1) {
         display_error_message("GAME\xff", "CHANGE EGG TYPE: CURRENT EGG TYPE IS INVALID\xff");
     }
 
-    if (!a1 && !sub_0804207C(gSelectedEgg + 9)) {
-        if (!sub_080420E8(gSelectedEgg + 9)) {
-            keep_hud_element_shown(gSelectedEgg + 9);
-            set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+    if (!a1 && !hud_is_element_shown(gSelectedEgg + 9)) {
+        if (!hud_is_element_active(gSelectedEgg + 9)) {
+            hud_keep_element_shown(gSelectedEgg + 9);
+            hud_set_value(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
         }
         return;
     }
@@ -2724,13 +2724,13 @@ void select_next_available_egg(bool32 a1) {
     }
 
     if (a1) {
-        set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+        hud_set_value(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 
-    release_hud_element(gSelectedEgg + 9);
+    hud_release_element(gSelectedEgg + 9);
     gSelectedEgg = nextEgg;
-    keep_hud_element_shown(gSelectedEgg + 9);
-    set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+    hud_keep_element_shown(gSelectedEgg + 9);
+    hud_set_value(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
 
     if (audio_fx_still_active(dword_2001124)) {
         STOP_SFX(dword_2001124);
@@ -2748,7 +2748,7 @@ void decrease_eggs(int eggs, bool32 selectNextAvailableEgg) {
                 select_next_available_egg(TRUE);
             }
         }
-        set_hud_number(9, gGameStatus.eggs[EGG_BLUE]);
+        hud_set_value(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] -= eggs;
         if (gGameStatus.eggs[gSelectedEgg] <= 0) {
@@ -2757,7 +2757,7 @@ void decrease_eggs(int eggs, bool32 selectNextAvailableEgg) {
                 select_next_available_egg(TRUE);
             }
         }
-        set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+        hud_set_value(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 }
 
@@ -2767,13 +2767,13 @@ void increase_eggs(int eggs) {
         if (gGameStatus.eggs[EGG_BLUE] > stru_80CC8C4.eggs[EGG_BLUE]) {
             gGameStatus.eggs[EGG_BLUE] = stru_80CC8C4.eggs[EGG_BLUE];
         }
-        set_hud_number(9, gGameStatus.eggs[EGG_BLUE]);
+        hud_set_value(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] += eggs;
         if (gGameStatus.eggs[gSelectedEgg] > stru_80CC8C4.eggs[gSelectedEgg]) {
             gGameStatus.eggs[gSelectedEgg] = stru_80CC8C4.eggs[gSelectedEgg];
         }
-        set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+        hud_set_value(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 }
 
@@ -2783,13 +2783,13 @@ void set_eggs(int eggs) {
         if (gGameStatus.eggs[EGG_BLUE] > stru_80CC8C4.eggs[EGG_BLUE]) {
             gGameStatus.eggs[EGG_BLUE] = stru_80CC8C4.eggs[EGG_BLUE];
         }
-        set_hud_number(9, gGameStatus.eggs[EGG_BLUE]);
+        hud_set_value(9, gGameStatus.eggs[EGG_BLUE]);
     } else {
         gGameStatus.eggs[gSelectedEgg] = eggs;
         if (gGameStatus.eggs[gSelectedEgg] > stru_80CC8C4.eggs[gSelectedEgg]) {
             gGameStatus.eggs[gSelectedEgg] = stru_80CC8C4.eggs[gSelectedEgg];
         }
-        set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+        hud_set_value(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     }
 }
 
@@ -2808,22 +2808,22 @@ bool32 sub_800DE04() {
         }
     }
 
-    sub_08041F3C(9, 0x70000);
-    sub_08041F3C(10, 0x70000);
-    sub_08041F3C(11, 0x70000);
-    sub_08041F3C(12, 0x70000);
-    keep_hud_element_shown(gSelectedEgg + 9);
-    set_hud_number(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
+    hud_set_element_slide_speed(9, 0x70000);
+    hud_set_element_slide_speed(10, 0x70000);
+    hud_set_element_slide_speed(11, 0x70000);
+    hud_set_element_slide_speed(12, 0x70000);
+    hud_keep_element_shown(gSelectedEgg + 9);
+    hud_set_value(gSelectedEgg + 9, gGameStatus.eggs[gSelectedEgg]);
     return TRUE;
 }
 
 void sub_800DE9C() {
     if (gSelectedEgg >= 0) {
-        sub_08041F3C(9, 0x2CCCC);
-        sub_08041F3C(10, 0x2CCCC);
-        sub_08041F3C(11, 0x2CCCC);
-        sub_08041F3C(12, 0x2CCCC);
-        release_hud_element(gSelectedEgg + 9);
+        hud_set_element_slide_speed(9, 0x2CCCC);
+        hud_set_element_slide_speed(10, 0x2CCCC);
+        hud_set_element_slide_speed(11, 0x2CCCC);
+        hud_set_element_slide_speed(12, 0x2CCCC);
+        hud_release_element(gSelectedEgg + 9);
     }
 }
 
@@ -2943,14 +2943,14 @@ void decrease_player_health(int amount) {
 
     if (gGameStatus.health <= amount) {
         gGameStatus.health = 0;
-        set_hud_number(HUD_METER_HEALTH, 0);
+        hud_set_value(HUD_METER_HEALTH, 0);
         PLAY_SFX(79);
         if (gIsSlideMiniGame) {
             byte_20010B0 = 1;
         }
     } else {
         gGameStatus.health -= amount;
-        set_hud_number(HUD_METER_HEALTH, gGameStatus.health);
+        hud_set_value(HUD_METER_HEALTH, gGameStatus.health);
     }
 }
 
@@ -3284,7 +3284,7 @@ void init_save_files() {
     sub_800A5E8();
     sub_8016434();
     sub_8038A34();
-    reset_hud_elements();
+    hud_load_counters();
 }
 
 void reset_save_files() {
@@ -3900,7 +3900,7 @@ static void sub_800F430(void) {
 void restore_full_health(void) {
     if (gGameStatus.health < gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1)) {
         gGameStatus.health = gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1);
-        set_hud_number(HUD_METER_HEALTH, gGameStatus.health);
+        hud_set_value(HUD_METER_HEALTH, gGameStatus.health);
         PLAY_SFX(40);
     }
 }
