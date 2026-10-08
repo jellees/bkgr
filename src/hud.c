@@ -7,7 +7,7 @@
 #include "audio_b.h"
 #include "random.h"
 #include "hud.h"
-#include "hud_script.h"
+#include "hud_scripts.h"
 
 enum HudElementIdx {
     HUD_ELEMENT_LEVEL_NOTES,
