@@ -123,9 +123,14 @@ struct struc_59 {
 };
 
 struct HudElement* gHudElements;
-u8 byte_203EA80;
-u8 byte_203EA81;
-u32 dword_203EA84;
+
+/**
+ * Is set to true when the pause menu is opened so that the hud elements are kept in place until the
+ * player closes the pause menu.
+ */
+bool8 gHudCountersVisible;
+bool8 gHudStopRoulette;
+int gHudHealthFillSfx;
 
 extern struct struc_59 stru_80AF310[]; // This is the hud script table. Move this to its own file.
 
@@ -419,7 +424,7 @@ static int hud_cmd_wait_display(struct HudElement* element, int _, int __, int _
             element->timer--;
         }
 
-        if (element->timer == 0 && byte_203EA80 == 0) {
+        if (element->timer == 0 && !gHudCountersVisible) {
             return HUD_SCRIPT_NEXT;
         }
     }
@@ -433,7 +438,7 @@ static int hud_cmd_wait_display_2(struct HudElement* element, int _, int __, int
             element->timer--;
         }
 
-        if (element->timer == 0 && byte_203EA80 == 0) {
+        if (element->timer == 0 && !gHudCountersVisible) {
             return HUD_SCRIPT_NEXT;
         }
     }
@@ -926,7 +931,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
 
     switch (element->targetValue) {
         case 17:
-            if (!element->rouletteTime || byte_203EA81) {
+            if (!element->rouletteTime || gHudStopRoulette) {
                 if (element->rouletteIndex < 0) {
                     element->rouletteIndex = 0;
                 }
@@ -938,7 +943,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
                 }
                 gGameStatus.health = element->targetValue;
                 element->rouletteIndex = 0;
-                end_stop_honeycomb();
+                finish_stop_honeycomb();
                 gIsStopHoneycombActive = FALSE;
                 sub_8063178();
                 byte_200108E = 0;
@@ -973,7 +978,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
             break;
 
         case 18:
-            if (!element->rouletteTime || byte_203EA81) {
+            if (!element->rouletteTime || gHudStopRoulette) {
                 if (element->rouletteIndex < 0) {
                     element->rouletteIndex = 0;
                 }
@@ -985,7 +990,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
                 }
                 gGameStatus.health = element->targetValue;
                 element->rouletteIndex = 0;
-                end_stop_honeycomb();
+                finish_stop_honeycomb();
                 gIsStopHoneycombActive = FALSE;
                 sub_8063178();
                 byte_200108E = 0;
@@ -1038,7 +1043,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
 
         if (element->displayValue < element->targetValue) {
             element->displayValue++;
-            dword_203EA84 = PLAY_SFX(200);
+            gHudHealthFillSfx = PLAY_SFX(200);
         } else if (element->displayValue > element->targetValue) {
             element->displayValue--;
         }
@@ -1219,8 +1224,8 @@ void update_bozzeye_notes_counter(void) {
 void init_hud_elements(void) {
     int i;
 
-    byte_203EA80 = 0;
-    dword_203EA84 = -1;
+    gHudCountersVisible = FALSE;
+    gHudHealthFillSfx = -1;
     gHudElements = heap_alloc(sizeof(struct HudElement) * HUD_ELEMENT_COUNT, 3, HEAP_GENERAL);
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
@@ -1287,14 +1292,14 @@ void set_hud_number(u32 element, int value) {
                 sub_80630C0(600, 0);
                 gHudElements[element].displayValue = value;
                 gHudElements[element].rouletteIndex = -1;
-                byte_203EA81 = 0;
+                gHudStopRoulette = FALSE;
             } else if (value == 18) {
                 gHudElements[element].rouletteTime = 600;
                 gHudElements[element].rouletteStepDelay = 0;
                 gHudElements[element].rouletteStarted = FALSE;
                 sub_80630C0(600, 0);
                 gHudElements[element].displayValue = value;
-                byte_203EA81 = 0;
+                gHudStopRoulette = FALSE;
             }
             gHudElements[element].targetValue = value;
             break;
@@ -1752,11 +1757,11 @@ void show_pause_counters(int isDiving) {
         }
     }
 
-    byte_203EA80 = 1;
+    gHudCountersVisible = TRUE;
 }
 
 void hide_pause_counters(void) {
-    byte_203EA80 = 0;
+    gHudCountersVisible = FALSE;
     dismiss_hud_elements();
     update_hud_collectables();
 }
@@ -2058,11 +2063,11 @@ void show_totals_counters(u32 page) {
             ASSERT(0);
     }
 
-    byte_203EA80 = 1;
+    gHudCountersVisible = TRUE;
 }
 
 void hide_totals_counters(int page) {
-    byte_203EA80 = 0;
+    gHudCountersVisible = FALSE;
     dismiss_hud_elements();
 }
 
@@ -2444,12 +2449,12 @@ bool32 sub_8042218(int value) {
     return TRUE;
 }
 
-void sub_8042250(void) {
+void hud_stop_health_roulette(void) {
     if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_UPDATE) {
         gIsStopHoneycombActive = FALSE;
         sub_8063178();
         byte_200108E = 0;
     }
 
-    byte_203EA81 = 1;
+    gHudStopRoulette = TRUE;
 }

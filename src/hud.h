@@ -37,6 +37,6 @@ void release_hud_element(u32 element);
 bool32 sub_0804207C(u32 element);
 bool32 sub_080420E8(u32 element);
 bool32 sub_8042218(int value);
-void sub_8042250(void);
+void hud_stop_health_roulette(void);
 
 #endif

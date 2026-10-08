@@ -49,7 +49,7 @@ static void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
 static const u16 sPlayerStateFlags[PLAYER_STATE_COUNT];
 
 void sub_8016440(void);
-void end_stop_honeycomb(void);
+void finish_stop_honeycomb(void);
 void sub_8017D9C(void);
 bool32 start_npc_dialogue(int);
 static void sub_08019AAC(int, int);
@@ -216,7 +216,7 @@ static bool32 gate_input_during_stop_honeycomb(s32* keyPressed, s32* keyDown) {
     }
 
     if ((*keyDown & JOY_EXCL_DPAD) == A_BUTTON) {
-        end_stop_honeycomb();
+        finish_stop_honeycomb();
         PLAY_SFX(42);
         *keyPressed = 0;
         *keyDown = 0;
@@ -339,8 +339,8 @@ void sub_8016A94(int a1) {
     }
 }
 
-void end_stop_honeycomb(void) {
-    sub_8042250();
+void finish_stop_honeycomb(void) {
+    hud_stop_health_roulette();
 }
 
 void sub_8016B18(void) {

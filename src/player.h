@@ -23,7 +23,7 @@ void set_player_state_to_none(void);
 void sub_80166A0(void);
 int sub_8016A5C(int a1);
 void sub_8016A94(int a1);
-void end_stop_honeycomb(void);
+void finish_stop_honeycomb(void);
 void sub_8016B18(void);
 void sub_8016B44(void);
 void sub_8016BD0(int a1);

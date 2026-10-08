@@ -280,7 +280,7 @@ static void update_game(void) {
         && !gIsPaletteEffectsActive && !byte_203FA35) {
         if ((gPlayerState != PLAYER_STATE_NONE || gIsSlideMiniGame) && !byte_2000F57) {
             if (gIsStopHoneycombActive) {
-                end_stop_honeycomb();
+                finish_stop_honeycomb();
                 update_hud();
             }
 
