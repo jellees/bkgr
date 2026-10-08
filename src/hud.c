@@ -1704,56 +1704,123 @@ void hud_init_element_value(u32 element, int value) {
     gHudElements[element].maxValue = value;
 }
 
-#define SHOW_HUD_ELEMENT(element)                                                                      \
-    {                                                                                                  \
-        gHudElements[element].state = HUD_STATE_START;                                                 \
-        gHudElements[element].savedSlideSpeed = gHudElements[element].slideSpeed;                      \
-        gHudElements[element].slideSpeed = FX32_CONST(4);                                              \
-        gHudElements[element].savedKeepShown = gHudElements[element].keepShown;                        \
-        gHudElements[element].keepShown = FALSE;                                                       \
-    }
-
 void hud_show_pause_counters(int isDiving) {
     hud_load_counters();
 
     if (byte_203E127) {
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_NOTES);
+        gHudElements[HUD_ELEMENT_PAUSE_NOTES].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_PAUSE_NOTES].slideSpeed;
+        gHudElements[HUD_ELEMENT_PAUSE_NOTES].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedKeepShown =
+            gHudElements[HUD_ELEMENT_PAUSE_NOTES].keepShown;
+        gHudElements[HUD_ELEMENT_PAUSE_NOTES].keepShown = FALSE;
     }
     if (byte_203E128) {
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_JIGGIES);
+        gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].slideSpeed;
+        gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedKeepShown =
+            gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].keepShown;
+        gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].keepShown = FALSE;
     }
     if (byte_203E12B) {
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_MUMBO_TOKENS);
+        gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].slideSpeed;
+        gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].keepShown;
+        gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].keepShown = FALSE;
     }
     if (byte_203E12A) {
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS);
+        gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].slideSpeed;
+        gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].keepShown;
+        gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].keepShown = FALSE;
     }
     if (gShowMovesLearnedCounter) {
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_MOVES_LEARNED);
+        gHudElements[HUD_ELEMENT_MOVES_LEARNED].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_MOVES_LEARNED].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_MOVES_LEARNED].slideSpeed;
+        gHudElements[HUD_ELEMENT_MOVES_LEARNED].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_MOVES_LEARNED].savedKeepShown =
+            gHudElements[HUD_ELEMENT_MOVES_LEARNED].keepShown;
+        gHudElements[HUD_ELEMENT_MOVES_LEARNED].keepShown = FALSE;
     }
     if (byte_203E129) {
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_PAUSE_JINJOS);
+        gHudElements[HUD_ELEMENT_PAUSE_JINJOS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_PAUSE_JINJOS].slideSpeed;
+        gHudElements[HUD_ELEMENT_PAUSE_JINJOS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_PAUSE_JINJOS].keepShown;
+        gHudElements[HUD_ELEMENT_PAUSE_JINJOS].keepShown = FALSE;
     }
     if (byte_203E126) {
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_HONEYCOMBS);
+        gHudElements[HUD_ELEMENT_HONEYCOMBS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed;
+        gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown;
+        gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown = FALSE;
     }
 
-    SHOW_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
+    gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state = HUD_STATE_START;
+    gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed =
+        gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed;
+    gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed = FX32_CONST(4);
+    gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedKeepShown =
+        gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].keepShown;
+    gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].keepShown = FALSE;
 
     if (isDiving) {
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_OXYGEN);
+        gHudElements[HUD_ELEMENT_OXYGEN].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_OXYGEN].savedSlideSpeed = gHudElements[HUD_ELEMENT_OXYGEN].slideSpeed;
+        gHudElements[HUD_ELEMENT_OXYGEN].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_OXYGEN].savedKeepShown = gHudElements[HUD_ELEMENT_OXYGEN].keepShown;
+        gHudElements[HUD_ELEMENT_OXYGEN].keepShown = FALSE;
     } else {
         if (byte_203E122) {
-            SHOW_HUD_ELEMENT(HUD_ELEMENT_BLUE_EGGS);
+            gHudElements[HUD_ELEMENT_BLUE_EGGS].state = HUD_STATE_START;
+            gHudElements[HUD_ELEMENT_BLUE_EGGS].savedSlideSpeed =
+                gHudElements[HUD_ELEMENT_BLUE_EGGS].slideSpeed;
+            gHudElements[HUD_ELEMENT_BLUE_EGGS].slideSpeed = FX32_CONST(4);
+            gHudElements[HUD_ELEMENT_BLUE_EGGS].savedKeepShown =
+                gHudElements[HUD_ELEMENT_BLUE_EGGS].keepShown;
+            gHudElements[HUD_ELEMENT_BLUE_EGGS].keepShown = FALSE;
         }
         if (byte_203E123) {
-            SHOW_HUD_ELEMENT(HUD_ELEMENT_ELECTRIC_EGGS);
+            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].state = HUD_STATE_START;
+            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedSlideSpeed =
+                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].slideSpeed;
+            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].slideSpeed = FX32_CONST(4);
+            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedKeepShown =
+                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].keepShown;
+            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].keepShown = FALSE;
         }
         if (byte_203E125) {
-            SHOW_HUD_ELEMENT(HUD_ELEMENT_FIRE_EGGS);
+            gHudElements[HUD_ELEMENT_FIRE_EGGS].state = HUD_STATE_START;
+            gHudElements[HUD_ELEMENT_FIRE_EGGS].savedSlideSpeed =
+                gHudElements[HUD_ELEMENT_FIRE_EGGS].slideSpeed;
+            gHudElements[HUD_ELEMENT_FIRE_EGGS].slideSpeed = FX32_CONST(4);
+            gHudElements[HUD_ELEMENT_FIRE_EGGS].savedKeepShown =
+                gHudElements[HUD_ELEMENT_FIRE_EGGS].keepShown;
+            gHudElements[HUD_ELEMENT_FIRE_EGGS].keepShown = FALSE;
         }
         if (byte_203E124) {
-            SHOW_HUD_ELEMENT(HUD_ELEMENT_ICE_EGGS);
+            gHudElements[HUD_ELEMENT_ICE_EGGS].state = HUD_STATE_START;
+            gHudElements[HUD_ELEMENT_ICE_EGGS].savedSlideSpeed =
+                gHudElements[HUD_ELEMENT_ICE_EGGS].slideSpeed;
+            gHudElements[HUD_ELEMENT_ICE_EGGS].slideSpeed = FX32_CONST(4);
+            gHudElements[HUD_ELEMENT_ICE_EGGS].savedKeepShown =
+                gHudElements[HUD_ELEMENT_ICE_EGGS].keepShown;
+            gHudElements[HUD_ELEMENT_ICE_EGGS].keepShown = FALSE;
         }
     }
 
@@ -1820,12 +1887,6 @@ bool32 hud_are_pause_counters_shown(int isDiving) {
     return done;
 }
 
-#define RESTORE_HUD_ELEMENT(element)                                                                   \
-    {                                                                                                  \
-        gHudElements[element].slideSpeed = gHudElements[element].savedSlideSpeed;                      \
-        gHudElements[element].keepShown = gHudElements[element].savedKeepShown;                        \
-    }
-
 #ifdef NONMATCHING
 bool32 hud_are_pause_counters_hidden(int isDiving) {
     bool32 done = TRUE;
@@ -1877,62 +1938,95 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
     if (done) {
         if (isDiving) {
             if (byte_203E127) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_19);
+                gHudElements[HUD_ELEMENT_19].slideSpeed = gHudElements[HUD_ELEMENT_19].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_19].keepShown = gHudElements[HUD_ELEMENT_19].savedKeepShown;
             }
             if (byte_203E128) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_20);
+                gHudElements[HUD_ELEMENT_20].slideSpeed = gHudElements[HUD_ELEMENT_20].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_20].keepShown = gHudElements[HUD_ELEMENT_20].savedKeepShown;
             }
             if (byte_203E12B) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_43);
+                gHudElements[HUD_ELEMENT_43].slideSpeed = gHudElements[HUD_ELEMENT_43].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_43].keepShown = gHudElements[HUD_ELEMENT_43].savedKeepShown;
             }
             if (byte_203E12A) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_42);
+                gHudElements[HUD_ELEMENT_42].slideSpeed = gHudElements[HUD_ELEMENT_42].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_42].keepShown = gHudElements[HUD_ELEMENT_42].savedKeepShown;
             }
             if (gShowMovesLearnedCounter) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_MOVES_LEARNED);
+                gHudElements[HUD_ELEMENT_MOVES_LEARNED].slideSpeed =
+                    gHudElements[HUD_ELEMENT_MOVES_LEARNED].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_MOVES_LEARNED].keepShown =
+                    gHudElements[HUD_ELEMENT_MOVES_LEARNED].savedKeepShown;
             }
             if (byte_203E129) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_PAUSE_JINJOS);
+                gHudElements[HUD_ELEMENT_PAUSE_JINJOS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_JINJOS].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown;
             }
             if (byte_203E126) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_6);
+                gHudElements[HUD_ELEMENT_6].slideSpeed = gHudElements[HUD_ELEMENT_6].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_6].keepShown = gHudElements[HUD_ELEMENT_6].savedKeepShown;
             }
-            RESTORE_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
-            RESTORE_HUD_ELEMENT(HUD_ELEMENT_56);
+            gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed =
+                gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed;
+            gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].keepShown =
+                gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedKeepShown;
+            gHudElements[HUD_ELEMENT_56].slideSpeed = gHudElements[HUD_ELEMENT_56].savedSlideSpeed;
+            gHudElements[HUD_ELEMENT_56].keepShown = gHudElements[HUD_ELEMENT_56].savedKeepShown;
         } else {
             if (byte_203E127) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_19);
+                gHudElements[HUD_ELEMENT_19].slideSpeed = gHudElements[HUD_ELEMENT_19].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_19].keepShown = gHudElements[HUD_ELEMENT_19].savedKeepShown;
             }
             if (byte_203E128) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_20);
+                gHudElements[HUD_ELEMENT_20].slideSpeed = gHudElements[HUD_ELEMENT_20].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_20].keepShown = gHudElements[HUD_ELEMENT_20].savedKeepShown;
             }
             if (byte_203E12B) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_43);
+                gHudElements[HUD_ELEMENT_43].slideSpeed = gHudElements[HUD_ELEMENT_43].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_43].keepShown = gHudElements[HUD_ELEMENT_43].savedKeepShown;
             }
             if (byte_203E12A) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_42);
+                gHudElements[HUD_ELEMENT_42].slideSpeed = gHudElements[HUD_ELEMENT_42].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_42].keepShown = gHudElements[HUD_ELEMENT_42].savedKeepShown;
             }
             if (gShowMovesLearnedCounter) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_MOVES_LEARNED);
+                gHudElements[HUD_ELEMENT_MOVES_LEARNED].slideSpeed =
+                    gHudElements[HUD_ELEMENT_MOVES_LEARNED].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_MOVES_LEARNED].keepShown =
+                    gHudElements[HUD_ELEMENT_MOVES_LEARNED].savedKeepShown;
             }
             if (byte_203E129) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_PAUSE_JINJOS);
+                gHudElements[HUD_ELEMENT_PAUSE_JINJOS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_JINJOS].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown;
             }
             if (byte_203E126) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_6);
+                gHudElements[HUD_ELEMENT_6].slideSpeed = gHudElements[HUD_ELEMENT_6].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_6].keepShown = gHudElements[HUD_ELEMENT_6].savedKeepShown;
             }
-            RESTORE_HUD_ELEMENT(HUD_ELEMENT_HEALTH_WITH_ICON);
+            gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed =
+                gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed;
+            gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].keepShown =
+                gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedKeepShown;
             if (byte_203E122) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_9);
+                gHudElements[HUD_ELEMENT_9].slideSpeed = gHudElements[HUD_ELEMENT_9].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_9].keepShown = gHudElements[HUD_ELEMENT_9].savedKeepShown;
             }
             if (byte_203E123) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_10);
+                gHudElements[HUD_ELEMENT_10].slideSpeed = gHudElements[HUD_ELEMENT_10].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_10].keepShown = gHudElements[HUD_ELEMENT_10].savedKeepShown;
             }
             if (byte_203E125) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_12);
+                gHudElements[HUD_ELEMENT_12].slideSpeed = gHudElements[HUD_ELEMENT_12].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_12].keepShown = gHudElements[HUD_ELEMENT_12].savedKeepShown;
             }
             if (byte_203E124) {
-                RESTORE_HUD_ELEMENT(HUD_ELEMENT_11);
+                gHudElements[HUD_ELEMENT_11].slideSpeed = gHudElements[HUD_ELEMENT_11].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_11].keepShown = gHudElements[HUD_ELEMENT_11].savedKeepShown;
             }
         }
     }
@@ -1945,47 +2039,92 @@ NAKED bool32 hud_are_pause_counters_hidden(int isDiving) {
 }
 #endif
 
-#define SET_HUD_COUNTER(element, max, value)                                                           \
-    {                                                                                                  \
-        gHudElements[element].maxValue = max;                                                          \
-        gHudElements[element].displayValue = value;                                                    \
-        gHudElements[element].targetValue = gHudElements[element].displayValue;                        \
-    }
-
-#define SHOW_TOTALS_COUNTER(element, field)                                                            \
-    {                                                                                                  \
-        SET_HUD_COUNTER(element, stru_80CC84C[page].field, byte_2000FCC[page].field);                  \
-        SHOW_HUD_ELEMENT(element);                                                                     \
-    }
-
 void hud_show_totals_counters(u32 page) {
     if (byte_203E127) {
-        SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_NOTES, noteCount);
+        gHudElements[HUD_ELEMENT_TOTALS_NOTES].maxValue = stru_80CC84C[page].noteCount;
+        gHudElements[HUD_ELEMENT_TOTALS_NOTES].displayValue = byte_2000FCC[page].noteCount;
+        gHudElements[HUD_ELEMENT_TOTALS_NOTES].targetValue =
+            gHudElements[HUD_ELEMENT_TOTALS_NOTES].displayValue;
+        gHudElements[HUD_ELEMENT_TOTALS_NOTES].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_TOTALS_NOTES].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_TOTALS_NOTES].slideSpeed;
+        gHudElements[HUD_ELEMENT_TOTALS_NOTES].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_TOTALS_NOTES].savedKeepShown =
+            gHudElements[HUD_ELEMENT_TOTALS_NOTES].keepShown;
+        gHudElements[HUD_ELEMENT_TOTALS_NOTES].keepShown = FALSE;
     }
     if (byte_203E128) {
-        SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_JIGGIES, jiggyCount);
+        gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].maxValue = stru_80CC84C[page].jiggyCount;
+        gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].displayValue = byte_2000FCC[page].jiggyCount;
+        gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].targetValue =
+            gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].displayValue;
+        gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].slideSpeed;
+        gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].savedKeepShown =
+            gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].keepShown;
+        gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].keepShown = FALSE;
     }
     if (byte_203E129) {
-        SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_JINJOS, jinjoCount);
+        gHudElements[HUD_ELEMENT_TOTALS_JINJOS].maxValue = stru_80CC84C[page].jinjoCount;
+        gHudElements[HUD_ELEMENT_TOTALS_JINJOS].displayValue = byte_2000FCC[page].jinjoCount;
+        gHudElements[HUD_ELEMENT_TOTALS_JINJOS].targetValue =
+            gHudElements[HUD_ELEMENT_TOTALS_JINJOS].displayValue;
+        gHudElements[HUD_ELEMENT_TOTALS_JINJOS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_TOTALS_JINJOS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_TOTALS_JINJOS].slideSpeed;
+        gHudElements[HUD_ELEMENT_TOTALS_JINJOS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_TOTALS_JINJOS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_TOTALS_JINJOS].keepShown;
+        gHudElements[HUD_ELEMENT_TOTALS_JINJOS].keepShown = FALSE;
     }
 
     if (byte_203E12B) {
-        SET_HUD_COUNTER(
-            HUD_ELEMENT_TOTALS_MUMBO_TOKENS,
+        gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].maxValue =
             stru_80CC84C[page].mumboTokensCliffFarm + stru_80CC84C[page].mumboTokensBadMagicBayou
-                + stru_80CC84C[page].mumboTokensFreezingFurnace
-                + stru_80CC84C[page].mumboTokensSpillersHarbor,
+            + stru_80CC84C[page].mumboTokensFreezingFurnace
+            + stru_80CC84C[page].mumboTokensSpillersHarbor;
+        gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].displayValue =
             byte_2000FCC[page].mumboTokensCliffFarm + byte_2000FCC[page].mumboTokensBadMagicBayou
-                + byte_2000FCC[page].mumboTokensFreezingFurnace
-                + byte_2000FCC[page].mumboTokensSpillersHarbor);
-        SHOW_HUD_ELEMENT(HUD_ELEMENT_TOTALS_MUMBO_TOKENS);
+            + byte_2000FCC[page].mumboTokensFreezingFurnace
+            + byte_2000FCC[page].mumboTokensSpillersHarbor;
+        gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].targetValue =
+            gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].displayValue;
+        gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].slideSpeed;
+        gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].keepShown;
+        gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].keepShown = FALSE;
     }
 
     if (gShowMovesLearnedCounter) {
-        SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_MOVES_LEARNED, movesLearned);
+        gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].maxValue = stru_80CC84C[page].movesLearned;
+        gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].displayValue = byte_2000FCC[page].movesLearned;
+        gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].targetValue =
+            gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].displayValue;
+        gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].slideSpeed;
+        gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].savedKeepShown =
+            gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].keepShown;
+        gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].keepShown = FALSE;
     }
     if (byte_203E126) {
-        SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_HONEYCOMBS, honeycombCount);
+        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].maxValue = stru_80CC84C[page].honeycombCount;
+        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].displayValue = byte_2000FCC[page].honeycombCount;
+        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].targetValue =
+            gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].displayValue;
+        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].slideSpeed;
+        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].keepShown;
+        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].keepShown = FALSE;
     }
 
     switch (page) {
@@ -1995,67 +2134,154 @@ void hud_show_totals_counters(u32 page) {
 
         case 1:
             if (byte_203E12D) {
-                SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_CHICKS, chickCount);
+                gHudElements[HUD_ELEMENT_TOTALS_CHICKS].maxValue = stru_80CC84C[page].chickCount;
+                gHudElements[HUD_ELEMENT_TOTALS_CHICKS].displayValue = byte_2000FCC[page].chickCount;
+                gHudElements[HUD_ELEMENT_TOTALS_CHICKS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_CHICKS].displayValue;
+                gHudElements[HUD_ELEMENT_TOTALS_CHICKS].state = HUD_STATE_START;
+                gHudElements[HUD_ELEMENT_TOTALS_CHICKS].savedSlideSpeed =
+                    gHudElements[HUD_ELEMENT_TOTALS_CHICKS].slideSpeed;
+                gHudElements[HUD_ELEMENT_TOTALS_CHICKS].slideSpeed = FX32_CONST(4);
+                gHudElements[HUD_ELEMENT_TOTALS_CHICKS].savedKeepShown =
+                    gHudElements[HUD_ELEMENT_TOTALS_CHICKS].keepShown;
+                gHudElements[HUD_ELEMENT_TOTALS_CHICKS].keepShown = FALSE;
             }
             break;
 
         case 2:
             if (byte_203E12E) {
-                SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_SHELLS, shellCount);
+                gHudElements[HUD_ELEMENT_TOTALS_SHELLS].maxValue = stru_80CC84C[page].shellCount;
+                gHudElements[HUD_ELEMENT_TOTALS_SHELLS].displayValue = byte_2000FCC[page].shellCount;
+                gHudElements[HUD_ELEMENT_TOTALS_SHELLS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_SHELLS].displayValue;
+                gHudElements[HUD_ELEMENT_TOTALS_SHELLS].state = HUD_STATE_START;
+                gHudElements[HUD_ELEMENT_TOTALS_SHELLS].savedSlideSpeed =
+                    gHudElements[HUD_ELEMENT_TOTALS_SHELLS].slideSpeed;
+                gHudElements[HUD_ELEMENT_TOTALS_SHELLS].slideSpeed = FX32_CONST(4);
+                gHudElements[HUD_ELEMENT_TOTALS_SHELLS].savedKeepShown =
+                    gHudElements[HUD_ELEMENT_TOTALS_SHELLS].keepShown;
+                gHudElements[HUD_ELEMENT_TOTALS_SHELLS].keepShown = FALSE;
             }
             if (byte_203E12F) {
-                SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS, captiveBreegulls);
+                gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].maxValue =
+                    stru_80CC84C[page].captiveBreegulls;
+                gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].displayValue =
+                    byte_2000FCC[page].captiveBreegulls;
+                gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].displayValue;
+                gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].state = HUD_STATE_START;
+                gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].savedSlideSpeed =
+                    gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].slideSpeed;
+                gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].slideSpeed = FX32_CONST(4);
+                gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].savedKeepShown =
+                    gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].keepShown;
+                gHudElements[HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS].keepShown = FALSE;
             }
             break;
 
         case 4:
             if (byte_203E130) {
-                SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_SILVER_COINS, silverCoinCount);
+                gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].maxValue =
+                    stru_80CC84C[page].silverCoinCount;
+                gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].displayValue =
+                    byte_2000FCC[page].silverCoinCount;
+                gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].displayValue;
+                gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].state = HUD_STATE_START;
+                gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].savedSlideSpeed =
+                    gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].slideSpeed;
+                gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].slideSpeed = FX32_CONST(4);
+                gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].savedKeepShown =
+                    gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].keepShown;
+                gHudElements[HUD_ELEMENT_TOTALS_SILVER_COINS].keepShown = FALSE;
             }
             if (byte_203E131) {
-                SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_TOY_SPACESHIPS, toySpaceships);
+                gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].maxValue =
+                    stru_80CC84C[page].toySpaceships;
+                gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].displayValue =
+                    byte_2000FCC[page].toySpaceships;
+                gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].displayValue;
+                gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].state = HUD_STATE_START;
+                gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].savedSlideSpeed =
+                    gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].slideSpeed;
+                gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].slideSpeed = FX32_CONST(4);
+                gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].savedKeepShown =
+                    gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].keepShown;
+                gHudElements[HUD_ELEMENT_TOTALS_TOY_SPACESHIPS].keepShown = FALSE;
             }
             if (byte_203E132) {
-                SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_ICE_CREAMS, iceCreams);
+                gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].maxValue = stru_80CC84C[page].iceCreams;
+                gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].displayValue = byte_2000FCC[page].iceCreams;
+                gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].displayValue;
+                gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].state = HUD_STATE_START;
+                gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].savedSlideSpeed =
+                    gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].slideSpeed;
+                gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].slideSpeed = FX32_CONST(4);
+                gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].savedKeepShown =
+                    gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].keepShown;
+                gHudElements[HUD_ELEMENT_TOTALS_ICE_CREAMS].keepShown = FALSE;
             }
             break;
 
         case 5:
             if (byte_203E133) {
-                SHOW_TOTALS_COUNTER(HUD_ELEMENT_TOTALS_GOLD_NUGGETS, goldNuggets);
+                gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].maxValue = stru_80CC84C[page].goldNuggets;
+                gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].displayValue =
+                    byte_2000FCC[page].goldNuggets;
+                gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].displayValue;
+                gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].state = HUD_STATE_START;
+                gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].savedSlideSpeed =
+                    gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].slideSpeed;
+                gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].slideSpeed = FX32_CONST(4);
+                gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].savedKeepShown =
+                    gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].keepShown;
+                gHudElements[HUD_ELEMENT_TOTALS_GOLD_NUGGETS].keepShown = FALSE;
             }
             break;
 
         case 6:
             if (byte_203E127) {
-                SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_NOTES, stru_80CC8C4.totalNotes,
-                                gGameStatus.totalNotes);
+                gHudElements[HUD_ELEMENT_TOTALS_NOTES].maxValue = stru_80CC8C4.totalNotes;
+                gHudElements[HUD_ELEMENT_TOTALS_NOTES].displayValue = gGameStatus.totalNotes;
+                gHudElements[HUD_ELEMENT_TOTALS_NOTES].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_NOTES].displayValue;
             }
             if (byte_203E128) {
-                SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_JIGGIES, stru_80CC8C4.totalJiggies,
-                                gGameStatus.totalJiggies);
+                gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].maxValue = stru_80CC8C4.totalJiggies;
+                gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].displayValue = gGameStatus.totalJiggies;
+                gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_JIGGIES].displayValue;
             }
             if (byte_203E129) {
-                SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_JINJOS, stru_80CC8C4.totalJinjos,
-                                gGameStatus.totalJinjos);
+                gHudElements[HUD_ELEMENT_TOTALS_JINJOS].maxValue = stru_80CC8C4.totalJinjos;
+                gHudElements[HUD_ELEMENT_TOTALS_JINJOS].displayValue = gGameStatus.totalJinjos;
+                gHudElements[HUD_ELEMENT_TOTALS_JINJOS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_JINJOS].displayValue;
             }
             if (byte_203E12B) {
-                SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_MUMBO_TOKENS,
-                                stru_80CC8C4.mumboTokensCliffFarm
-                                    + stru_80CC8C4.mumboTokensBadMagicBayou
-                                    + stru_80CC8C4.mumboTokensFreezingFurnace
-                                    + stru_80CC8C4.mumboTokensSpillersHarbor,
-                                gGameStatus.mumboTokensCliffFarm + gGameStatus.mumboTokensBadMagicBayou
-                                    + gGameStatus.mumboTokensFreezingFurnace
-                                    + gGameStatus.mumboTokensSpillersHarbor);
+                gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].maxValue =
+                    stru_80CC8C4.mumboTokensCliffFarm + stru_80CC8C4.mumboTokensBadMagicBayou
+                    + stru_80CC8C4.mumboTokensFreezingFurnace + stru_80CC8C4.mumboTokensSpillersHarbor;
+                gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].displayValue =
+                    gGameStatus.mumboTokensCliffFarm + gGameStatus.mumboTokensBadMagicBayou
+                    + gGameStatus.mumboTokensFreezingFurnace + gGameStatus.mumboTokensSpillersHarbor;
+                gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_MUMBO_TOKENS].displayValue;
             }
             if (gShowMovesLearnedCounter) {
-                SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_MOVES_LEARNED, stru_80CC8C4.movesLearned,
-                                gGameStatus.movesLearned);
+                gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].maxValue = stru_80CC8C4.movesLearned;
+                gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].displayValue = gGameStatus.movesLearned;
+                gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].displayValue;
             }
             if (byte_203E126) {
-                SET_HUD_COUNTER(HUD_ELEMENT_TOTALS_HONEYCOMBS, stru_80CC8C4.totalHoneycombs,
-                                gGameStatus.totalHoneycombs);
+                gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].maxValue = stru_80CC8C4.totalHoneycombs;
+                gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].displayValue = gGameStatus.totalHoneycombs;
+                gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].displayValue;
             }
             break;
 
