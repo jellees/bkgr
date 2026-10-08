@@ -11,6 +11,15 @@
 #include "random.h"
 #include "hud.h"
 
+static void init(void);
+static void exec_pause_menu(void);
+static bool32 choose_sub_menu(bool32* changeMenu);
+static void exec_totals_menu(void);
+static bool32 exec_save_menu(void);
+static void exec_options_menu(void);
+static void render_controls(void);
+static void draw_arcade_menu_sprites(void);
+
 u8 gClockStatus;
 s32 dword_203F4DC;
 
@@ -60,15 +69,6 @@ struct TextBox gTextSpeedTextBoxes[3];
 bool8 gArcadeFadeIn;
 
 u16 gPaletteCopy[0x100];
-
-static void init(void);
-static void exec_pause_menu(void);
-static bool32 choose_sub_menu(bool32* changeMenu);
-static void exec_totals_menu(void);
-static bool32 exec_save_menu(void);
-static void exec_options_menu(void);
-static void render_controls(void);
-static void draw_arcade_menu_sprites(void);
 
 void open_pause_menu(void) {
     int i;

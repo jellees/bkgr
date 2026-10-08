@@ -11,6 +11,8 @@ struct Textbar {
     u16 tiles[1];
 };
 
+static void SetupAnimationTiles(struct TileAnimSection* animationTiles, u8* destination);
+
 u16 word_200145C;
 u16 word_200145E;
 u16 gBGInitOffsetHorizontal;
@@ -35,8 +37,6 @@ u8 gBG0Static;
 u8 gBG1Static;
 u8 gBG2Static;
 u8 gBG3Static;
-
-static void SetupAnimationTiles(struct TileAnimSection* animationTiles, u8* destination);
 
 void ResetTileAnimCount(void) {
     gLoadedTileAnimCount = 0;

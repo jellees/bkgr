@@ -11,6 +11,14 @@
 
 enum DebugAI { DEBUG_AI_NORMAL, DEBUG_AI_NO_AI, DEBUG_AI_NO_HARM, DEBUG_AI_NO_AI_HARM };
 
+void sub_8010744(u32 a1);
+void sub_80107E8(u32 a1);
+void sub_801088C(u32 a1);
+void sub_8011158(void);
+void sub_801126C(void);
+void sub_8011428(void);
+bool32 sub_8011540(void);
+
 u8 byte_2001200;
 u8 gMainFrameCounter;
 u8 gDebugFPS;
@@ -139,14 +147,6 @@ u32 gInputRecordCount;
 u16 gPreviousInput;
 u8 byte_200145A;
 u8 byte_200145B;
-
-void sub_8010744(u32 a1);
-void sub_80107E8(u32 a1);
-void sub_801088C(u32 a1);
-void sub_8011158(void);
-void sub_801126C(void);
-void sub_8011428(void);
-bool32 sub_8011540(void);
 
 static void set_full_eggs_and_feathers(void) {
     gGameStatus.eggs[0] = stru_80CC8C4.eggs[0];

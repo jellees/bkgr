@@ -122,16 +122,6 @@ struct struc_59 {
     struct struc_60* states;
 };
 
-struct HudElement* gHudElements;
-
-/**
- * Is set to true when the pause menu is opened so that the hud elements are kept in place until the
- * player closes the pause menu.
- */
-bool8 gHudCountersVisible;
-bool8 gHudStopRoulette;
-int gHudHealthFillSfx;
-
 extern struct struc_59 stru_80AF310[]; // This is the hud script table. Move this to its own file.
 
 static int hud_cmd_end(struct HudElement*, int, int, int);
@@ -167,6 +157,16 @@ static int hud_cmd_init_fraction_text(struct HudElement*, int, int, int);
 
 static void sub_80421C4(int, int, char*);
 static int get_hud_element_max(u32);
+
+struct HudElement* gHudElements;
+
+/**
+ * Is set to true when the pause menu is opened so that the hud elements are kept in place until the
+ * player closes the pause menu.
+ */
+bool8 gHudCountersVisible;
+bool8 gHudStopRoulette;
+int gHudHealthFillSfx;
 
 static const u16 word_80A8CF0[] = { 0x473, 0x474, 0x475 };
 

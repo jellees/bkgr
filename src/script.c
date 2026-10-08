@@ -72,41 +72,6 @@ struct ScriptState {
     u8 activeSfx;
 };
 
-const struct InputRecord* gInputDemoRecords;
-u16 gInputDemoStep;
-u16 gInputDemoRecordCount;
-s16 gScriptSavedPosX;
-s16 gScriptSavedPosY;
-s16 gPriorityScriptIdx;
-s16 gBackgroundScriptIdx;
-bool8 gIsPriorityScriptActive;
-u8 gScriptSavedPriority;
-bool8 gIsAnyScriptActive;
-u8 byte_203F99F;
-u8 gActorCount;
-bool8 gReadKeysFromDemoInput;
-bool8 gHidePlayer;
-struct ScriptState gScripts[MAX_SCRIPTS];
-struct ScriptState* gCurrentScript;
-fx32 dword_203F9F8;
-fx32 dword_203F9FC;
-u32 dword_0203FA00; // Unused.
-u32 dword_0203FA04; // Unused.
-fx32 gScriptCameraSavePosX;
-fx32 gScriptCameraSavePosY;
-u16 gInputDemoFrames;
-u8 byte_203FA12;
-bool8 gInputDemoIsForward;
-u8 byte_203FA14;
-bool8 gIsScriptCameraInitialised;
-u8 byte_203FA16;
-u8 byte_203FA16_2;
-struct ScriptCamera* gScriptCamera;
-fx32 dword_203FA1C;
-fx32 dword_203FA20;
-u32 dword_203FA24;
-u32 dword_203FA28;
-
 static bool32 script_cmd_alloc_actors(int, int, int, int);
 static bool32 script_cmd_load_and_store_room(int, int, int, int);
 static bool32 script_cmd_load_room(int, int, int, int);
@@ -196,6 +161,41 @@ static bool32 sub_8060CC4(int, int, int, int);
 static bool32 sub_8060D74(int, int, int, int);
 static bool32 sub_8060D80(int, int, int, int);
 static bool32 sub_8060D90(int, int, int, int);
+
+const struct InputRecord* gInputDemoRecords;
+u16 gInputDemoStep;
+u16 gInputDemoRecordCount;
+s16 gScriptSavedPosX;
+s16 gScriptSavedPosY;
+s16 gPriorityScriptIdx;
+s16 gBackgroundScriptIdx;
+bool8 gIsPriorityScriptActive;
+u8 gScriptSavedPriority;
+bool8 gIsAnyScriptActive;
+u8 byte_203F99F;
+u8 gActorCount;
+bool8 gReadKeysFromDemoInput;
+bool8 gHidePlayer;
+struct ScriptState gScripts[MAX_SCRIPTS];
+struct ScriptState* gCurrentScript;
+fx32 dword_203F9F8;
+fx32 dword_203F9FC;
+u32 dword_0203FA00; // Unused.
+u32 dword_0203FA04; // Unused.
+fx32 gScriptCameraSavePosX;
+fx32 gScriptCameraSavePosY;
+u16 gInputDemoFrames;
+u8 byte_203FA12;
+bool8 gInputDemoIsForward;
+u8 byte_203FA14;
+bool8 gIsScriptCameraInitialised;
+u8 byte_203FA16;
+u8 byte_203FA16_2;
+struct ScriptCamera* gScriptCamera;
+fx32 dword_203FA1C;
+fx32 dword_203FA20;
+u32 dword_203FA24;
+u32 dword_203FA28;
 
 static bool32 (*const gFunctionList[SCRIPT_CMD_COUNT])(int, int, int, int) = {
     script_cmd_alloc_actors,

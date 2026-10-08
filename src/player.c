@@ -11,6 +11,15 @@
 #include "random.h"
 #include "hud.h"
 
+static void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
+static const u16 sPlayerStateFlags[PLAYER_STATE_COUNT];
+
+void sub_8016440(void);
+void finish_stop_honeycomb(void);
+void sub_8017D9C(void);
+bool32 start_npc_dialogue(int);
+static void sub_08019AAC(int, int);
+
 u16 gPreviousPlayerState;
 u16 gPlayerState;
 u8 gFeatherTime;
@@ -44,15 +53,6 @@ s32 dword_20021E0;
 u32 dword_20021E4;
 u32 dword_20021E8;
 u32 dword_20021EC;
-
-static void (*const sPlayerStateFuncs[PLAYER_STATE_COUNT])(s32, s32);
-static const u16 sPlayerStateFlags[PLAYER_STATE_COUNT];
-
-void sub_8016440(void);
-void finish_stop_honeycomb(void);
-void sub_8017D9C(void);
-bool32 start_npc_dialogue(int);
-static void sub_08019AAC(int, int);
 
 void sub_8016434(void) {
     sub_8016440();

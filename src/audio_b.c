@@ -2,13 +2,13 @@
 #include "common.h"
 #include "audio_a.h"
 
+void reset_volume(void);
+
 bool8 gCanChangeBgm;
 bool8 gCanPlaySfx;
 u8 gBgmMainVolume;
 u8 gSfxMainVolume;
 u8 gSfxVolume;
-
-void reset_volume(void);
 
 /**
  * Initialises audio and resets volume to their default values.
