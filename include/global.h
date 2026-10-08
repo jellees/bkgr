@@ -9,6 +9,8 @@ typedef s32 fx32;
 #define FX32_CONST(x) ((fx32)((x) * (1 << FX32_SHIFT)))
 #define FX32_ONE      FX32_CONST(1)
 
+#define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
+
 // Game specific assert.
 #define HANG asm(".word 0xEE00EE00")
 #define ASSERT(expr)                                                                                   \

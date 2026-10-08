@@ -127,7 +127,6 @@ unk_83FD834 = 0x83FD834;
 
 dLicenceBitmap = 0x87E61A8;
 unk_83FC514 = 0x83FC514;
-stru_80AF310 = 0x80AF310;
 
 gCreditsCongratsLine = 0x2002204;
 gCreditsScrollSpeed = 0x200222C;

@@ -9,71 +9,6 @@
 #include "hud.h"
 #include "hud_scripts.h"
 
-enum HudElementIdx {
-    HUD_ELEMENT_LEVEL_NOTES,
-    HUD_ELEMENT_LEVEL_JIGGIES,
-    HUD_ELEMENT_2,
-    HUD_ELEMENT_GOLDEN_FEATHERS,
-    HUD_ELEMENT_MOVES_LEARNED,
-    HUD_ELEMENT_SHELLS,
-    HUD_ELEMENT_HONEYCOMBS,
-    HUD_ELEMENT_LEVEL_JINJOS,
-    HUD_ELEMENT_CHICKS,
-    HUD_ELEMENT_BLUE_EGGS,
-    HUD_ELEMENT_ELECTRIC_EGGS,
-    HUD_ELEMENT_ICE_EGGS,
-    HUD_ELEMENT_FIRE_EGGS,
-    HUD_ELEMENT_13,
-    HUD_ELEMENT_CAPTIVE_BREEGULLS,
-    HUD_ELEMENT_ICE_CREAMS,
-    HUD_ELEMENT_TOY_SPACESHIPS,
-    HUD_ELEMENT_SILVER_COINS,
-    HUD_ELEMENT_GOLD_NUGGETS,
-    HUD_ELEMENT_PAUSE_NOTES,
-    HUD_ELEMENT_PAUSE_JIGGIES,
-    HUD_ELEMENT_PAUSE_JINJOS,
-    HUD_ELEMENT_MUMBO_TOKENS,
-    HUD_ELEMENT_TOTALS_NOTES,
-    HUD_ELEMENT_TOTALS_JIGGIES,
-    HUD_ELEMENT_TOTALS_JINJOS,
-    HUD_ELEMENT_TOTALS_MUMBO_TOKENS,
-    HUD_ELEMENT_TOTALS_MOVES_LEARNED,
-    HUD_ELEMENT_TOTALS_HONEYCOMBS,
-    HUD_ELEMENT_TOTALS_CHICKS,
-    HUD_ELEMENT_TOTALS_SHELLS,
-    HUD_ELEMENT_TOTALS_SILVER_COINS,
-    HUD_ELEMENT_TOTALS_GOLD_NUGGETS,
-    HUD_ELEMENT_TOTALS_CAPTIVE_BREEGULLS,
-    HUD_ELEMENT_TOTALS_TOY_SPACESHIPS,
-    HUD_ELEMENT_TOTALS_ICE_CREAMS,
-    HUD_ELEMENT_36,
-    HUD_ELEMENT_37,
-    HUD_ELEMENT_38,
-    HUD_ELEMENT_BOZZEYE_NOTES,
-    HUD_ELEMENT_40,
-    HUD_ELEMENT_41,
-    HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS,
-    HUD_ELEMENT_PAUSE_MUMBO_TOKENS,
-    HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS,
-    HUD_ELEMENT_MR_RIPOVSKI_SHELLS,
-    HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS,
-    HUD_ELEMENT_MOMMA_CLUCKER_CHICKS,
-    HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS,
-    HUD_ELEMENT_JINJO_ORACLE_JINJOS,
-    HUD_ELEMENT_50,
-    HUD_ELEMENT_51,
-    HUD_ELEMENT_52,
-    HUD_ELEMENT_53,
-    HUD_ELEMENT_54,
-    HUD_ELEMENT_55,
-    HUD_ELEMENT_OXYGEN,
-    HUD_ELEMENT_OXYGEN_WITH_ICON,
-    HUD_ELEMENT_HEALTH,
-    HUD_ELEMENT_HEALTH_WITH_ICON,
-
-    HUD_ELEMENT_COUNT
-};
-
 struct HudSprite {
     volatile struct Sprite sprite;
     fx32 x;
@@ -92,7 +27,7 @@ struct HudElement {
     u16 displayValue;
     u16 targetValue;
     u16 maxValue;
-    u16 scriptStep; // Rename this to something else. Like cmdIdx or something.
+    u16 cmdIdx;
     u16 displayTime;
     fx32 slideSpeed;
     fx32 savedSlideSpeed;
@@ -110,19 +45,7 @@ struct HudElement {
     struct TextBox textBox;
 };
 
-struct struc_60 {
-    u32 funcIdx;
-    u32 arg1;
-    u32 arg2;
-    u32 arg3;
-};
-
-struct struc_59 {
-    u32 length;
-    struct struc_60* states;
-};
-
-extern struct struc_59 stru_80AF310[]; // This is the hud script table. Move this to its own file.
+extern const struct HudScript dHudScripts[]; // This is the hud script table. Move this to its own file.
 
 static int hud_cmd_end(struct HudElement*, int, int, int);
 static int hud_cmd_sprite_slide_left(struct HudElement*, int, int, int);
@@ -187,7 +110,7 @@ static const u8 byte_80A8D92[][5] = {
     { 1, 1, 1, 0, 0 }, { 1, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 },
 };
 
-static int (*const dHudCommands[])(struct HudElement*, int, int, int) = {
+static int (*const dHudCommands[HUD_SCRIPT_CMD_TOTAL])(struct HudElement*, int, int, int) = {
     hud_cmd_end,
     hud_cmd_sprite_slide_left,
     hud_cmd_sprite_slide_right,
@@ -235,12 +158,12 @@ static int hud_cmd_end(struct HudElement* element, int _, int __, int ___) {
     if (element->reshow) {
         element->reshow = FALSE;
         element->state = HUD_STATE_START;
-        element->scriptStep = 0;
+        element->cmdIdx = 0;
         return HUD_SCRIPT_RESTART;
     }
 
     element->state = HUD_STATE_HIDDEN;
-    element->scriptStep = 0;
+    element->cmdIdx = 0;
     return HUD_SCRIPT_STOP;
 }
 
@@ -1231,7 +1154,7 @@ void hud_init(void) {
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         gHudElements[i].state = HUD_STATE_HIDDEN;
         gHudElements[i].reshow = FALSE;
-        gHudElements[i].scriptStep = 0;
+        gHudElements[i].cmdIdx = 0;
         gHudElements[i].spriteCount = 0;
         gHudElements[i].displayTime = word_80A8E28[i];
         gHudElements[i].slideSpeed = FX32_CONST(2.8);
@@ -1272,7 +1195,7 @@ void hud_load_level_counters(void) {
 
 void hud_set_value(u32 element, int value) {
     int max;
-    int funcIdx, arg1;
+    int cmd, arg0;
     u8 state;
 
     ASSERT(element <= HUD_METER_OXYGEN);
@@ -1523,19 +1446,20 @@ void hud_set_value(u32 element, int value) {
         case HUD_STATE_UPDATE:
         case HUD_STATE_UPDATE_FRACTION:
         case HUD_STATE_SHOWN:
-            funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
-            arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
-            while (funcIdx != 11 || (arg1 != HUD_STATE_UPDATE && arg1 != HUD_STATE_UPDATE_FRACTION)) {
-                gHudElements[element].scriptStep--;
-                funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
-                arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
+            cmd = dHudScripts[element].instructions[gHudElements[element].cmdIdx].idx;
+            arg0 = dHudScripts[element].instructions[gHudElements[element].cmdIdx].arg0;
+            while (cmd != HUD_SCRIPT_CMD_SET_STATE
+                   || (arg0 != HUD_STATE_UPDATE && arg0 != HUD_STATE_UPDATE_FRACTION)) {
+                gHudElements[element].cmdIdx--;
+                cmd = dHudScripts[element].instructions[gHudElements[element].cmdIdx].idx;
+                arg0 = dHudScripts[element].instructions[gHudElements[element].cmdIdx].arg0;
             }
             break;
     }
 }
 
 void hud_extend_health_bar(void) {
-    int funcIdx, arg1;
+    int cmd, arg0;
     int element;
 
     element = gHudElements[HUD_ELEMENT_OXYGEN_WITH_ICON].state ? HUD_ELEMENT_HEALTH
@@ -1556,10 +1480,10 @@ void hud_extend_health_bar(void) {
 
         case HUD_STATE_SHOWN:
             do {
-                gHudElements[element].scriptStep--;
-                funcIdx = stru_80AF310[element].states[gHudElements[element].scriptStep].funcIdx;
-                arg1 = stru_80AF310[element].states[gHudElements[element].scriptStep].arg1;
-            } while (funcIdx != 11 || arg1 != HUD_STATE_UPDATE);
+                gHudElements[element].cmdIdx--;
+                cmd = dHudScripts[element].instructions[gHudElements[element].cmdIdx].idx;
+                arg0 = dHudScripts[element].instructions[gHudElements[element].cmdIdx].arg0;
+            } while (cmd != HUD_SCRIPT_CMD_SET_STATE || arg0 != HUD_STATE_UPDATE);
             break;
     }
 }
@@ -1569,16 +1493,16 @@ void hud_update(void) {
 
     for (i = 0; i < HUD_ELEMENT_COUNT; i++) {
         if (gHudElements[i].state != HUD_STATE_HIDDEN) {
-            u16 idx = gHudElements[i].scriptStep;
-            struct struc_60* states = stru_80AF310[i].states;
+            u16 idx = gHudElements[i].cmdIdx;
+            const struct HudScriptInstruction* instructions = dHudScripts[i].instructions;
 
-            u32 funcIdx = states[idx].funcIdx;
-            u32 arg1 = states[idx].arg1;
-            u32 arg2 = states[idx].arg2;
-            u32 arg3 = states[idx].arg3;
+            u32 cmd = instructions[idx].idx;
+            u32 arg0 = instructions[idx].arg0;
+            u32 arg1 = instructions[idx].arg1;
+            u32 arg2 = instructions[idx].arg2;
 
-            if (dHudCommands[funcIdx](&gHudElements[i], arg1, arg2, arg3) == HUD_SCRIPT_NEXT) {
-                gHudElements[i].scriptStep++;
+            if (dHudCommands[cmd](&gHudElements[i], arg0, arg1, arg2) == HUD_SCRIPT_NEXT) {
+                gHudElements[i].cmdIdx++;
             }
         }
     }
@@ -1633,7 +1557,7 @@ void hud_hide_all(void) {
             gHudElements[i].state = HUD_STATE_HIDDEN;
             gHudElements[i].displayValue = gHudElements[i].targetValue;
             gHudElements[i].reshow = FALSE;
-            gHudElements[i].scriptStep = 0;
+            gHudElements[i].cmdIdx = 0;
 
             if (gHudElements[i].spriteCount) {
                 heap_free(gHudElements[i].sprites, HEAP_GENERAL);
@@ -1667,7 +1591,7 @@ void hud_hide_element(u32 element) {
 
     gHudElements[element].displayValue = gHudElements[element].targetValue;
     gHudElements[element].reshow = FALSE;
-    gHudElements[element].scriptStep = 0;
+    gHudElements[element].cmdIdx = 0;
     if (gHudElements[element].state) {
         gHudElements[element].state = HUD_STATE_HIDDEN;
         if (gHudElements[element].spriteCount) {
