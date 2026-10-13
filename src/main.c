@@ -2799,8 +2799,8 @@ bool32 sub_800DE04() {
     if (gSelectedEgg < 0) {
         if (gUnlockedMoves[MOVE_EGG_BLUE]) {
             gSelectedEgg = EGG_BLUE;
-        } else if (gUnlockedMoves[MOVE_EGG_ELECTRIC]) {
-            gSelectedEgg = EGG_ELECTRIC;
+        } else if (gUnlockedMoves[MOVE_EGG_BATTERY]) {
+            gSelectedEgg = EGG_BATTERY;
         } else if (gUnlockedMoves[MOVE_EGG_ICE]) {
             gSelectedEgg = EGG_ICE;
         } else if (gUnlockedMoves[MOVE_EGG_FIRE]) {

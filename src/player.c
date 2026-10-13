@@ -76,12 +76,12 @@ void sub_8016440(void) {
         gUnlockedMoves[i] = FALSE;
     }
 
-    gUnlockedMoves[MOVE_0] = TRUE;
-    gUnlockedMoves[MOVE_16] = TRUE;
-    gUnlockedMoves[MOVE_17] = TRUE;
+    gUnlockedMoves[MOVE_DEFAULT_0] = TRUE;
+    gUnlockedMoves[MOVE_DEFAULT_16] = TRUE;
+    gUnlockedMoves[MOVE_DEFAULT_17] = TRUE;
     gUnlockedMoves[MOVE_CANDLE_ATTACK] = TRUE;
-    gUnlockedMoves[MOVE_14] = TRUE;
-    gUnlockedMoves[MOVE_11] = TRUE;
+    gUnlockedMoves[MOVE_DEFAULT_14] = TRUE;
+    gUnlockedMoves[MOVE_DEFAULT_11] = TRUE;
 
     for (i = 0; i < 128; i++) {
         gPlayerStateFlags[i] = sPlayerStateFlags[i];
@@ -935,7 +935,7 @@ static void do_air_attack() {
 }
 
 static void do_bill_drill() {
-    if (gUnlockedMoves[MOVE_DRILL_BILL] && !byte_20021C5 && gGameStatus.health != 0) {
+    if (gUnlockedMoves[MOVE_BILL_DRILL] && !byte_20021C5 && gGameStatus.health != 0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_BILL_DRILL_START;
         sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_BILL_DRILL_START, 0, 1);

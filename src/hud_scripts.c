@@ -423,11 +423,11 @@ const HudScriptInstructions dHudScriptBlueEggs = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElectricEggs = {
+const HudScriptInstructions dHudScriptBatteryEggs = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, -20, 60)
-    HudSpriteInit(0, SPRITE_ICON_ELECTRIC_EGG, FALSE)
+    HudSpriteInit(0, SPRITE_ICON_BATTERY_EGG, FALSE)
     HudSpriteSetPosition(1, -60, 68)
     HudSpriteInit(1, SPRITE_TEXT_BAR_RIGHT_BIG, TRUE)
     HudSpriteSlideRight(1, 36)
@@ -1809,7 +1809,7 @@ const struct HudScript dHudScripts[HUD_ELEMENT_COUNT] = {
     [HUD_ELEMENT_LEVEL_JINJOS] = { ARRAY_COUNT(dHudScriptLevelJinjos), dHudScriptLevelJinjos },
     [HUD_ELEMENT_CHICKS] = { ARRAY_COUNT(dHudScriptChicks), dHudScriptChicks },
     [HUD_ELEMENT_BLUE_EGGS] = { ARRAY_COUNT(dHudScriptBlueEggs), dHudScriptBlueEggs },
-    [HUD_ELEMENT_ELECTRIC_EGGS] = { ARRAY_COUNT(dHudScriptElectricEggs), dHudScriptElectricEggs },
+    [HUD_ELEMENT_BATTERY_EGGS] = { ARRAY_COUNT(dHudScriptBatteryEggs), dHudScriptBatteryEggs },
     [HUD_ELEMENT_ICE_EGGS] = { ARRAY_COUNT(dHudScriptIceEggs), dHudScriptIceEggs },
     [HUD_ELEMENT_FIRE_EGGS] = { ARRAY_COUNT(dHudScriptFireEggs), dHudScriptFireEggs },
     [HUD_ELEMENT_GRUBBY_CHUTE_GLOW_GRUBS] = { ARRAY_COUNT(dHudScriptGrubbyChuteGlowGrubs),

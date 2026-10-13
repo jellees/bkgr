@@ -1034,10 +1034,10 @@ void hud_load_counters(void) {
     gHudElements[HUD_ELEMENT_BLUE_EGGS].displayValue = gGameStatus.eggs[EGG_BLUE];
     gHudElements[HUD_ELEMENT_BLUE_EGGS].targetValue = gHudElements[HUD_ELEMENT_BLUE_EGGS].displayValue;
 
-    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].maxValue = stru_80CC8C4.eggs[EGG_ELECTRIC];
-    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].displayValue = gGameStatus.eggs[EGG_ELECTRIC];
-    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].targetValue =
-        gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].displayValue;
+    gHudElements[HUD_ELEMENT_BATTERY_EGGS].maxValue = stru_80CC8C4.eggs[EGG_BATTERY];
+    gHudElements[HUD_ELEMENT_BATTERY_EGGS].displayValue = gGameStatus.eggs[EGG_BATTERY];
+    gHudElements[HUD_ELEMENT_BATTERY_EGGS].targetValue =
+        gHudElements[HUD_ELEMENT_BATTERY_EGGS].displayValue;
 
     gHudElements[HUD_ELEMENT_FIRE_EGGS].maxValue = stru_80CC8C4.eggs[EGG_FIRE];
     gHudElements[HUD_ELEMENT_FIRE_EGGS].displayValue = gGameStatus.eggs[EGG_FIRE];
@@ -1409,7 +1409,7 @@ void hud_set_value(u32 element, int value) {
 
         case HUD_ELEMENT_GOLDEN_FEATHERS:
         case HUD_ELEMENT_BLUE_EGGS:
-        case HUD_ELEMENT_ELECTRIC_EGGS:
+        case HUD_ELEMENT_BATTERY_EGGS:
         case HUD_ELEMENT_ICE_EGGS:
         case HUD_ELEMENT_FIRE_EGGS:
         case HUD_ELEMENT_GRUBBY_CHUTE_GLOW_GRUBS:
@@ -1719,13 +1719,13 @@ void hud_show_pause_counters(int isDiving) {
             gHudElements[HUD_ELEMENT_BLUE_EGGS].keepShown = FALSE;
         }
         if (byte_203E123) {
-            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].state = HUD_STATE_START;
-            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedSlideSpeed =
-                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].slideSpeed;
-            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].slideSpeed = FX32_CONST(4);
-            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedKeepShown =
-                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].keepShown;
-            gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].keepShown = FALSE;
+            gHudElements[HUD_ELEMENT_BATTERY_EGGS].state = HUD_STATE_START;
+            gHudElements[HUD_ELEMENT_BATTERY_EGGS].savedSlideSpeed =
+                gHudElements[HUD_ELEMENT_BATTERY_EGGS].slideSpeed;
+            gHudElements[HUD_ELEMENT_BATTERY_EGGS].slideSpeed = FX32_CONST(4);
+            gHudElements[HUD_ELEMENT_BATTERY_EGGS].savedKeepShown =
+                gHudElements[HUD_ELEMENT_BATTERY_EGGS].keepShown;
+            gHudElements[HUD_ELEMENT_BATTERY_EGGS].keepShown = FALSE;
         }
         if (byte_203E125) {
             gHudElements[HUD_ELEMENT_FIRE_EGGS].state = HUD_STATE_START;
@@ -1796,7 +1796,7 @@ bool32 hud_are_pause_counters_shown(int isDiving) {
         if (byte_203E122 && gHudElements[HUD_ELEMENT_BLUE_EGGS].state != HUD_STATE_SHOWN) {
             done = FALSE;
         }
-        if (byte_203E123 && gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].state != HUD_STATE_SHOWN) {
+        if (byte_203E123 && gHudElements[HUD_ELEMENT_BATTERY_EGGS].state != HUD_STATE_SHOWN) {
             done = FALSE;
         }
         if (byte_203E124 && gHudElements[HUD_ELEMENT_ICE_EGGS].state != HUD_STATE_SHOWN) {
@@ -1847,7 +1847,7 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
         if (byte_203E122 && gHudElements[HUD_ELEMENT_BLUE_EGGS].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
-        if (byte_203E123 && gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].state != HUD_STATE_HIDDEN) {
+        if (byte_203E123 && gHudElements[HUD_ELEMENT_BATTERY_EGGS].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
         if (byte_203E124 && gHudElements[HUD_ELEMENT_ICE_EGGS].state != HUD_STATE_HIDDEN) {
@@ -1964,10 +1964,10 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
                     gHudElements[HUD_ELEMENT_BLUE_EGGS].savedKeepShown;
             }
             if (byte_203E123) {
-                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].slideSpeed =
-                    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].keepShown =
-                    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_BATTERY_EGGS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_BATTERY_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_BATTERY_EGGS].keepShown =
+                    gHudElements[HUD_ELEMENT_BATTERY_EGGS].savedKeepShown;
             }
             if (byte_203E125) {
                 gHudElements[HUD_ELEMENT_FIRE_EGGS].slideSpeed =

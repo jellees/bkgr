@@ -10,24 +10,24 @@ enum Transformation {
 };
 
 enum Move {
-    MOVE_0,
+    MOVE_DEFAULT_0, // Unlocked from the start; never checked.
     MOVE_PACK_WACK,
     MOVE_FORWARD_ROLL,
     MOVE_AIR_ATTACK,
-    MOVE_DRILL_BILL,
+    MOVE_BILL_DRILL,
     MOVE_WONDERWING,
     MOVE_EGG_BLUE,
-    MOVE_EGG_ELECTRIC,
+    MOVE_EGG_BATTERY,
     MOVE_EGG_ICE,
     MOVE_EGG_FIRE,
     MOVE_CANDLE_ATTACK,
-    MOVE_11,
-    MOVE_12,
-    MOVE_13,
-    MOVE_14,
+    MOVE_DEFAULT_11, // Unlocked from the start; never checked.
+    MOVE_UNUSED_12,  // Never set or checked.
+    MOVE_UNUSED_13,  // Never set or checked.
+    MOVE_DEFAULT_14, // Unlocked from the start; never checked.
     MOVE_TALON_TROT,
-    MOVE_16,
-    MOVE_17,
+    MOVE_DEFAULT_16, // Unlocked from the start, also taught by lesson 1; never checked.
+    MOVE_DEFAULT_17, // Unlocked from the start; never checked.
     MOVE_CLIMB,
     MOVE_FEATHERY_FLAP,
     MOVE_FLAP_FLIP,
