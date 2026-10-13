@@ -611,8 +611,9 @@ static void start_game() {
         gRoomLevelSaved = LEVEL_SPIRAL_MOUNTAIN;
         sub_8025E44(0);
         sprite_set_priority(&gPlayerSprite, stru_3002950.playerSpritePriority);
-        SetSprite(&gPlayerSprite, 0x1D, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
-        SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerSprite, SPRITE_BANJO_IDLE + DIRECTION_DOWN, 0, DIRECTION_DOWN, 0,
+                  gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerShadowSprite, SPRITE_SHADOW, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         sprite_lock_anim_on_frame(&gPlayerShadowSprite, 0);
         gPlayerShadowSprite.objMode = ST_OAM_OBJ_BLEND;
         gPlayerShadowSprite.attr0Flag9 = 0;
@@ -641,8 +642,9 @@ static void start_game() {
         init_efx();
         enable_poison_effect();
         init_room_name();
-        SetSprite(&gPlayerSprite, 0x1D, 0, 4, 0, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
-        SetSprite(&gPlayerShadowSprite, 0, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerSprite, SPRITE_BANJO_IDLE + DIRECTION_DOWN, 0, DIRECTION_DOWN, 0,
+                  gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerShadowSprite, SPRITE_SHADOW, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
         sprite_lock_anim_on_frame(&gPlayerShadowSprite, 0);
         gPlayerShadowSprite.objMode = ST_OAM_OBJ_BLEND;
         gPlayerShadowSprite.attr0Flag9 = 0;

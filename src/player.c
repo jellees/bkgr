@@ -375,7 +375,7 @@ void sub_8016BD0(int a1) {
     sub_800DE9C();
     gPreviousPlayerState = gPlayerState;
     gPlayerState = PLAYER_STATE_IDLE;
-    sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
     sub_8016790(0, gPlayerSprite.direction);
     byte_2002E4D = a1;
     byte_2002E4C = 1;
@@ -430,7 +430,7 @@ void sub_8016C78(u8 a1) {
         } else if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM_IDLE;
-            sprite_set_anim(&gPlayerSprite, 105, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_IDLE, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_8016790(0, gPlayerSprite.direction);
         } else if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) {
@@ -459,7 +459,7 @@ void sub_8016C78(u8 a1) {
         } else {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_IDLE;
-            sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_8016790(0, gPlayerSprite.direction);
         }
@@ -596,7 +596,7 @@ static void do_jump() {
     sub_8017D9C();
     gPreviousPlayerState = gPlayerState;
     gPlayerState = PLAYER_STATE_JUMP;
-    sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
     dword_20021E0 = 0xFFFFE000;
     CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(4), 0xFFFFE000);
     byte_20021CB = 1;
@@ -744,7 +744,7 @@ static void do_dive() {
     if (gTransformation != TRANSFORMATION_OCTOPUS) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_DIVE;
-        sprite_set_anim(&gPlayerSprite, 113, 0, 1);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_DIVE, 0, 1);
     } else {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_OCTOPUS_DIVE;
@@ -764,7 +764,7 @@ void sub_8017A54(void) {
         sprite_set_anim(&gPlayerSprite, 465, 0, 0);
     } else {
         gPlayerState = PLAYER_STATE_IDLE;
-        sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
         hud_release_element(HUD_METER_OXYGEN);
         if (gGameStatus.oxygen != gGameStatus.maxOxygen) {
             gGameStatus.oxygen = gGameStatus.maxOxygen;
@@ -785,7 +785,7 @@ void sub_8017B34(int a1) {
         }
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_DIVE_SINK;
-        sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
         gPlayerShadowSprite.attr0Flag9 = 0;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 0x3100);
         gOxygenTime = 600;
@@ -828,7 +828,7 @@ void sub_8017C50(void) {
         sprite_set_anim(&gPlayerSprite, 473, 0, 0);
     } else {
         gPlayerState = PLAYER_STATE_SWIM_IDLE;
-        sprite_set_anim(&gPlayerSprite, 105, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_IDLE, 0, 0);
     }
 
     sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
@@ -858,7 +858,7 @@ void sub_8017D9C(void) {
         } else {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
         }
     }
 }
@@ -892,7 +892,7 @@ void set_player_in_climb_state(void) {
 
     gPreviousPlayerState = gPlayerState;
     gPlayerState = PLAYER_STATE_CLIMB;
-    sprite_set_anim(&gPlayerSprite, 121, 0, 0);
+    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_CLIMB, 0, 0);
     if (gKazooieSfx != -1) {
         STOP_SFX(gKazooieSfx);
         gKazooieSfx = -1;
@@ -904,7 +904,7 @@ void sub_8017F14(void) {
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_CLIMBING) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
-        sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
     }
 }
@@ -913,7 +913,7 @@ static void do_feathery_flap() {
     if (gUnlockedMoves[MOVE_FEATHERY_FLAP] && !byte_20021C7 && gGameStatus.health != 0) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_FEATHERY_FLAP;
-        sprite_set_anim(&gPlayerSprite, 89, 0, 1);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FEATHERY_FLAP, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 12288);
         byte_20021C7 = 1;
         PLAY_SFX(19);
@@ -1155,7 +1155,7 @@ static void sub_08018824(void) {
         if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM_IDLE;
-            sprite_set_anim(&gPlayerSprite, 105, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_IDLE, 0, 0);
             sub_8016790(17, gPlayerSprite.direction);
         } else if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) {
             gPreviousPlayerState = gPlayerState;
@@ -1174,7 +1174,7 @@ static void sub_08018824(void) {
         } else if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IS_DIVING) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_DIVE_SINK;
-            sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
             sub_8016790(21, gPlayerSprite.direction);
         } else if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IS_DYING) {
             gPlayerState = gPreviousPlayerState;
@@ -1182,7 +1182,7 @@ static void sub_08018824(void) {
         } else {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_IDLE;
-            sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
         }
     } else if (gTransformation == TRANSFORMATION_MOUSE) {
@@ -1222,7 +1222,7 @@ void set_player_direction(enum Direction direction) {
     if (gTransformation == TRANSFORMATION_BANJO) {
         if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
             gPlayerSprite.direction = direction;
-            sprite_set_anim(&gPlayerSprite, 105, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_IDLE, 0, 0);
         } else if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) {
             gPlayerSprite.direction = direction;
             sprite_lock_anim_on_frame(&gPlayerSprite, 6);
@@ -1232,7 +1232,7 @@ void set_player_direction(enum Direction direction) {
             sprite_set_anim(&gPlayerSprite, 257, 0, 0);
         } else {
             gPlayerSprite.direction = direction;
-            sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
         }
     } else if (gTransformation == TRANSFORMATION_MOUSE) {
         gPlayerSprite.direction = direction;
@@ -1298,12 +1298,12 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
         case PLAYER_STATE_KAZOOIE_HURT:
             if (sub_80038AC(dword_2000FC8)) {
                 gPlayerState = PLAYER_STATE_KAZOOIE_WALK;
-                sprite_set_anim(&gPlayerSprite, 49, 7, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_TALON_TROT, 7, 0);
                 sprite_set_locked_frame(&gPlayerSprite, 6);
                 sub_8003884(dword_2000FC8, 0x28000, dword_80CC290[gPlayerSprite.direction], 0);
             } else {
                 gPlayerState = PLAYER_STATE_KAZOOIE_IDLE;
-                sprite_set_anim(&gPlayerSprite, 49, 7, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_TALON_TROT, 7, 0);
                 sprite_set_locked_frame(&gPlayerSprite, 6);
                 sprite_lock_anim_on_frame(&gPlayerSprite, 6);
             }
@@ -1432,11 +1432,11 @@ bool32 sub_8018BB0(const struct Sprite* playerSprite) {
         default:
             if (sub_80038AC(dword_2000FC8)) {
                 gPlayerState = PLAYER_STATE_WALK;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             } else {
                 gPlayerState = PLAYER_STATE_IDLE;
-                sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -1822,7 +1822,7 @@ void set_transformation(u32 transformation) {
         case TRANSFORMATION_BANJO:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_IDLE;
-            sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_8016790(0, gPlayerSprite.direction);
             dword_3003300 = 0x160000;
@@ -1985,14 +1985,14 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
     if (sub_80038BC(dword_2000FC8)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_JUMP_FALL;
-        sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
     }
 
     switch (keyPressed & DPAD_ANY) {
         case DPAD_RIGHT | DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
@@ -2000,7 +2000,7 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
@@ -2008,7 +2008,7 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-                sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
@@ -2016,7 +2016,7 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP_LEFT;
-                sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
@@ -2024,7 +2024,7 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP;
-                sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
@@ -2032,7 +2032,7 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN;
-                sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
@@ -2040,7 +2040,7 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_LEFT;
-                sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
@@ -2048,7 +2048,7 @@ static void state_jump(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 9, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_JUMP, 0, 1);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             return;
@@ -2082,7 +2082,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -2090,7 +2090,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -2098,7 +2098,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-                sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -2106,7 +2106,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP_LEFT;
-                sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -2114,7 +2114,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP;
-                sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -2122,7 +2122,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN;
-                sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -2130,7 +2130,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_LEFT;
-                sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -2138,7 +2138,7 @@ static void state_jump_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 17, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13000, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -2177,7 +2177,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             if (keyPressed & L_BUTTON) {
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = PLAYER_STATE_CROUCH;
-                sprite_set_anim(&gPlayerSprite, 0x21, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_CROUCH, 0, 1);
                 sub_8016790(0, gPlayerSprite.direction);
                 return;
             }
@@ -2204,7 +2204,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
             gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -2213,7 +2213,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
             gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -2222,7 +2222,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
             gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -2231,7 +2231,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
             gPlayerSprite.direction = DIRECTION_UP_LEFT;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -2240,7 +2240,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
             gPlayerSprite.direction = DIRECTION_UP;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -2249,7 +2249,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
             gPlayerSprite.direction = DIRECTION_DOWN;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -2258,7 +2258,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
             gPlayerSprite.direction = DIRECTION_LEFT;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -2267,7 +2267,7 @@ static void state_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_WALK;
             gPlayerSprite.direction = DIRECTION_RIGHT;
-            sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
             sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -2289,7 +2289,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             if (gUnlockedMoves[MOVE_FORWARD_ROLL]) {
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = PLAYER_STATE_FORWARD_ROLL;
-                sprite_set_anim(&gPlayerSprite, 97, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FORWARD_ROLL, 0, 1);
                 sub_8003884(dword_2000FC8, 0x20000, dword_80CC290[gPlayerSprite.direction], 0);
                 PLAY_SFX(7);
                 sub_8016790(2, gPlayerSprite.direction);
@@ -2304,7 +2304,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         case L_BUTTON:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_CROUCH;
-            sprite_set_anim(&gPlayerSprite, 0x21, 0, 1);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_CROUCH, 0, 1);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_8016790(0, gPlayerSprite.direction);
             return;
@@ -2316,7 +2316,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_WALK;
             if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
                 gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x2D0000, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
@@ -2327,7 +2327,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_WALK;
             if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
                 gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x13B0000, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
@@ -2338,7 +2338,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_WALK;
             if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
                 gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xE10000, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
@@ -2349,7 +2349,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_WALK;
             if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
                 gPlayerSprite.direction = DIRECTION_UP_LEFT;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x870000, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
@@ -2360,7 +2360,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_WALK;
             if (gPlayerSprite.direction != DIRECTION_UP) {
                 gPlayerSprite.direction = DIRECTION_UP;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x5A0000, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
@@ -2371,7 +2371,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_WALK;
             if (gPlayerSprite.direction != DIRECTION_DOWN) {
                 gPlayerSprite.direction = DIRECTION_DOWN;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0x10E0000, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
@@ -2382,7 +2382,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_WALK;
             if (gPlayerSprite.direction != DIRECTION_LEFT) {
                 gPlayerSprite.direction = DIRECTION_LEFT;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0xB40000, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
@@ -2393,7 +2393,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_WALK;
             if (gPlayerSprite.direction != DIRECTION_RIGHT) {
                 gPlayerSprite.direction = DIRECTION_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 1, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_WALK, 0, 0);
                 sub_8003884(dword_2000FC8, 0x19999, 0, 0);
             }
             sub_8016790(0, gPlayerSprite.direction);
@@ -2402,7 +2402,7 @@ static void state_walk(s32 keyPressed, s32 keyDown) {
         default:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_IDLE;
-            sprite_set_anim(&gPlayerSprite, 0x19, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_8016790(0, gPlayerSprite.direction);
             return;
@@ -2425,7 +2425,7 @@ static void state_forward_roll(s32 keyPressed, s32 keyDown) {
             }
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_IDLE;
-            sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             sub_800386C(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction]);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_8016790(0, gPlayerSprite.direction);
@@ -2437,7 +2437,7 @@ static void state_forward_roll_ledge_fall(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
-        sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
         sub_800386C(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction]);
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
         sub_8016790(0, gPlayerSprite.direction);
@@ -2464,7 +2464,7 @@ static void state_pack_wack_hit(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
-        sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
         sub_8016790(0, gPlayerSprite.direction);
     }
 }
@@ -2498,7 +2498,7 @@ static void state_crouch(s32 keyPressed, s32 keyDown) {
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = PLAYER_STATE_FLAP_FLIP;
 
-                sprite_set_anim(&gPlayerSprite, 0x49, 4, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_START, 4, 1);
                 CallARM_store_jump_and_other_value(dword_2000FC8, 0x40000, 0x1A00);
 
                 PLAY_SFX(21);
@@ -2531,7 +2531,7 @@ static void state_crouch(s32 keyPressed, s32 keyDown) {
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = PLAYER_STATE_KAZOOIE_IDLE;
 
-                sprite_set_anim(&gPlayerSprite, 0x31, 7, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_TALON_TROT, 7, 0);
 
                 PLAY_SFX(21);
 
@@ -2594,7 +2594,7 @@ static void state_crouch(s32 keyPressed, s32 keyDown) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
 
-        sprite_set_anim(&gPlayerSprite, 0x19, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
         sub_8016790(0, gPlayerSprite.direction);
     }
 }
@@ -2617,7 +2617,7 @@ static void state_kazooie_walk(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_IDLE;
 
-            sprite_set_anim(&gPlayerSprite, 0x19, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
 
             if (gKazooieSfx != -1) {
@@ -2749,7 +2749,7 @@ static void state_kazooie_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_IDLE;
 
-            sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
 
             if (gKazooieSfx != -1) {
@@ -3061,7 +3061,7 @@ static void state_kazooie_hurt(s32 keyPressed, s32 keyDown) {
             restore_full_health();
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_KAZOOIE_IDLE;
-            sprite_set_anim(&gPlayerSprite, 49, 7, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_TALON_TROT, 7, 0);
             sprite_set_locked_frame(&gPlayerSprite, 7);
             sub_8016790(15, gPlayerSprite.direction);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
@@ -3073,7 +3073,7 @@ static void state_kazooie_hurt(s32 keyPressed, s32 keyDown) {
     } else {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_KAZOOIE_IDLE;
-        sprite_set_anim(&gPlayerSprite, 49, 7, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_TALON_TROT, 7, 0);
         sprite_set_locked_frame(&gPlayerSprite, 7);
         sub_8016790(15, gPlayerSprite.direction);
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
@@ -3102,7 +3102,7 @@ static void state_flap_flip(s32 keyPressed, s32 keyDown) {
     if (sub_80038BC(dword_2000FC8)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_FLAP_FLIP_FALL;
-        sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
     }
 }
 
@@ -3119,7 +3119,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -3127,7 +3127,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT | DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -3135,7 +3135,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-                sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -3143,7 +3143,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT | DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP_LEFT;
-                sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -3151,7 +3151,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_UP:
             if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_UP;
-                sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -3159,7 +3159,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_DOWN:
             if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_DOWN;
-                sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -3167,7 +3167,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_LEFT:
             if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_LEFT;
-                sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -3175,7 +3175,7 @@ static void state_flap_flip_fall(s32 keyPressed, s32 keyDown) {
         case DPAD_RIGHT:
             if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 gPlayerSprite.direction = DIRECTION_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 81, 0, 1);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FLAP_FLIP_END, 0, 1);
                 sub_8003884(dword_2000FC8, 0x19999, dword_80CC290[gPlayerSprite.direction], 0);
             }
             break;
@@ -3375,7 +3375,7 @@ static void state_bill_drill_end(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
-        sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
         sub_8016790(0, gPlayerSprite.direction);
     }
 }
@@ -3501,7 +3501,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_SWIM;
             if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
                 gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x2D0000, 0);
             }
             break;
@@ -3511,7 +3511,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_SWIM;
             if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
                 gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x13B0000, 0);
             }
             break;
@@ -3521,7 +3521,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_SWIM;
             if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
                 gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-                sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0xE10000, 0);
             }
             break;
@@ -3531,7 +3531,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_SWIM;
             if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
                 gPlayerSprite.direction = DIRECTION_UP_LEFT;
-                sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x870000, 0);
             }
             break;
@@ -3541,7 +3541,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_SWIM;
             if (gPlayerSprite.direction != DIRECTION_UP) {
                 gPlayerSprite.direction = DIRECTION_UP;
-                sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x5A0000, 0);
             }
             break;
@@ -3551,7 +3551,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_SWIM;
             if (gPlayerSprite.direction != DIRECTION_DOWN) {
                 gPlayerSprite.direction = DIRECTION_DOWN;
-                sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0x10E0000, 0);
             }
             break;
@@ -3561,7 +3561,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_SWIM;
             if (gPlayerSprite.direction != DIRECTION_LEFT) {
                 gPlayerSprite.direction = DIRECTION_LEFT;
-                sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0xB40000, 0);
             }
             break;
@@ -3571,7 +3571,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
             gPlayerState = PLAYER_STATE_SWIM;
             if (gPlayerSprite.direction != DIRECTION_RIGHT) {
                 gPlayerSprite.direction = DIRECTION_RIGHT;
-                sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
                 sub_8003884(dword_2000FC8, 0x13333, 0, 0);
             }
             break;
@@ -3579,7 +3579,7 @@ static void state_swim(s32 keyPressed, s32 keyDown) {
         default:
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM_IDLE;
-            sprite_set_anim(&gPlayerSprite, 105, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_IDLE, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             break;
     }
@@ -3611,7 +3611,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
             gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-            sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x2D0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -3620,7 +3620,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
             gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-            sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x13B0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -3629,7 +3629,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
             gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-            sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0xE10000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -3638,7 +3638,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
             gPlayerSprite.direction = DIRECTION_UP_LEFT;
-            sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x870000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -3647,7 +3647,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
             gPlayerSprite.direction = DIRECTION_UP;
-            sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x5A0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -3656,7 +3656,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
             gPlayerSprite.direction = DIRECTION_DOWN;
-            sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0x10E0000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -3665,7 +3665,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
             gPlayerSprite.direction = DIRECTION_LEFT;
-            sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0xB40000, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -3674,7 +3674,7 @@ static void state_swim_idle(s32 keyPressed, s32 keyDown) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_SWIM;
             gPlayerSprite.direction = DIRECTION_RIGHT;
-            sprite_set_anim(&gPlayerSprite, 41, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_SURFACE, 0, 0);
             sub_8003884(dword_2000FC8, 0x13333, 0, 0);
             sub_8016790(0, gPlayerSprite.direction);
             break;
@@ -3797,7 +3797,7 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
         if (gTransformation == TRANSFORMATION_BANJO) {
             if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IS_SWIMMING) {
                 gPlayerSprite.direction = v4;
-                sprite_set_anim(&gPlayerSprite, 105, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_IDLE, 0, 0);
             } else if (gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IN_KAZOOIE_MODE) {
                 sprite_lock_anim_on_frame(&gPlayerSprite, 6);
                 if (gKazooieSfx != -1) {
@@ -3812,7 +3812,7 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
                 hud_release_element(3);
             } else if (!(gPlayerStateFlags[gPreviousPlayerState] & PLAYER_FLAGS_IS_DYING)) {
                 gPlayerSprite.direction = v4;
-                sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
             }
         } else if (gTransformation == TRANSFORMATION_MOUSE) {
             gPlayerSprite.direction = v4;
@@ -3858,7 +3858,7 @@ static void state_shock_jump(s32 keyPressed, s32 keyDown) {
     if (sub_80038BC(dword_2000FC8)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_SHOCK_JUMP_FALL;
-        sprite_set_anim(&gPlayerSprite, 17, 0, 1);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_FALL, 0, 1);
         return;
     }
 
@@ -4026,7 +4026,7 @@ static void state_dive(s32 keyPressed, s32 keyDown) {
 
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_DIVE_SINK;
-        sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
         gPlayerShadowSprite.attr0Flag9 = 0;
         CallARM_store_jump_and_other_value(dword_2000FC8, 0, 12544);
         gOxygenTime = 600;
@@ -4056,7 +4056,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
     if ((keyDown & JOY_EXCL_DPAD) == R_BUTTON) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_DIVE_SURFACE;
-        sprite_set_anim(&gPlayerSprite, 65, 0, 1);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UP, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(2), 0x4000);
         return;
     } else {
@@ -4069,7 +4069,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
         if (!gGameStatus.oxygen) {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_DIVE_SURFACE;
-            sprite_set_anim(&gPlayerSprite, 65, 0, 1);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UP, 0, 1);
             CallARM_store_jump_and_other_value(dword_2000FC8, FX32_CONST(2), 0x4000);
             return;
         }
@@ -4090,7 +4090,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
                     gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x2D0000, 0);
             }
@@ -4100,7 +4100,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
                     gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x13B0000, 0);
             }
@@ -4110,7 +4110,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
                     gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0xE10000, 0);
             }
@@ -4120,7 +4120,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
                     gPlayerSprite.direction = DIRECTION_UP_LEFT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x870000, 0);
             }
@@ -4130,7 +4130,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_UP) {
                     gPlayerSprite.direction = DIRECTION_UP;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x5A0000, 0);
             }
@@ -4140,7 +4140,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_DOWN) {
                     gPlayerSprite.direction = DIRECTION_DOWN;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x10E0000, 0);
             }
@@ -4150,7 +4150,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_LEFT) {
                     gPlayerSprite.direction = DIRECTION_LEFT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0xB40000, 0);
             }
@@ -4160,7 +4160,7 @@ static void state_dive_sink(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_RIGHT) {
                     gPlayerSprite.direction = DIRECTION_RIGHT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0, 0);
             }
@@ -4188,7 +4188,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
     } else {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_DIVE_SURFACE;
-        sprite_set_anim(&gPlayerSprite, 65, 0, 1);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UP, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
     }
@@ -4196,7 +4196,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
     if ((keyDown & JOY_EXCL_DPAD) == R_BUTTON) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_DIVE_SURFACE;
-        sprite_set_anim(&gPlayerSprite, 65, 0, 1);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UP, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
     }
@@ -4217,7 +4217,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_UP_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_UP_RIGHT) {
                     gPlayerSprite.direction = DIRECTION_UP_RIGHT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x2D0000, 0);
             }
@@ -4227,7 +4227,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_DOWN_RIGHT) {
                     gPlayerSprite.direction = DIRECTION_DOWN_RIGHT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x13B0000, 0);
             }
@@ -4237,7 +4237,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_DOWN_LEFT) {
                     gPlayerSprite.direction = DIRECTION_DOWN_LEFT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0xE10000, 0);
             }
@@ -4247,7 +4247,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_UP_LEFT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_UP_LEFT) {
                     gPlayerSprite.direction = DIRECTION_UP_LEFT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x870000, 0);
             }
@@ -4257,7 +4257,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_UP || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_UP) {
                     gPlayerSprite.direction = DIRECTION_UP;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x5A0000, 0);
             }
@@ -4267,7 +4267,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_DOWN || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_DOWN) {
                     gPlayerSprite.direction = DIRECTION_DOWN;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0x10E0000, 0);
             }
@@ -4277,7 +4277,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_LEFT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_LEFT) {
                     gPlayerSprite.direction = DIRECTION_LEFT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0xB40000, 0);
             }
@@ -4287,7 +4287,7 @@ static void state_dive_rise(s32 keyPressed, s32 keyDown) {
             if (gPlayerSprite.direction != DIRECTION_RIGHT || !sub_80038AC(dword_2000FC8)) {
                 if (gPlayerSprite.direction != DIRECTION_RIGHT) {
                     gPlayerSprite.direction = DIRECTION_RIGHT;
-                    sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 }
                 sub_8003884(dword_2000FC8, 0x1199A, 0, 0);
             }
@@ -4305,7 +4305,7 @@ static void sub_801E0F4(s32 keyPressed, s32 keyDown) {
     if (!gGameStatus.oxygen) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_DIVE_SURFACE;
-        sprite_set_anim(&gPlayerSprite, 65, 0, 1);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UP, 0, 1);
         CallARM_store_jump_and_other_value(dword_2000FC8, 0x20000, 0x4000);
         return;
     }
@@ -4352,7 +4352,7 @@ static void state_dive_hurt(s32 keyPressed, s32 keyDown) {
                 restore_full_health();
                 gPreviousPlayerState = gPlayerState;
                 gPlayerState = PLAYER_STATE_DIVE_SINK;
-                sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+                sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
                 sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
                 sub_8016790(0, gPlayerSprite.direction);
             } else {
@@ -4361,7 +4361,7 @@ static void state_dive_hurt(s32 keyPressed, s32 keyDown) {
         } else {
             gPreviousPlayerState = gPlayerState;
             gPlayerState = PLAYER_STATE_DIVE_SINK;
-            sprite_set_anim(&gPlayerSprite, 57, 0, 0);
+            sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_SWIM_UNDERWATER, 0, 0);
             sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
             sub_8016790(0, gPlayerSprite.direction);
         }
@@ -5661,7 +5661,7 @@ static void state_wonderwing_end(s32 keyPressed, s32 keyDown) {
     if (sprite_is_anim_done_once(&gPlayerSprite)) {
         gPreviousPlayerState = gPlayerState;
         gPlayerState = PLAYER_STATE_IDLE;
-        sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+        sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
         sub_8016790(0, gPlayerSprite.direction);
     }
@@ -5921,7 +5921,7 @@ static void state_shooter_end(s32 keyPressed, s32 keyDown) {
     sub_800DE9C();
     gPreviousPlayerState = gPlayerState;
     gPlayerState = PLAYER_STATE_IDLE;
-    sprite_set_anim(&gPlayerSprite, 25, 0, 0);
+    sprite_set_anim(&gPlayerSprite, SPRITE_BANJO_IDLE, 0, 0);
     sub_8016790(0, gPlayerSprite.direction);
 }
 

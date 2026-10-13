@@ -3,6 +3,27 @@
 
 // Sprite indices, as passed to SetSprite and sprite_set_anim. Only the known ones are listed.
 enum SpriteIdx {
+    SPRITE_SHADOW = 0,
+
+    // Banjo (with Kazooie). Each is the first of 8 sprites, one per enum Direction;
+    // sprite_set_anim adds sprite->direction to the index.
+    SPRITE_BANJO_WALK = 1,
+    SPRITE_BANJO_JUMP = 9,
+    SPRITE_BANJO_FALL = 17,
+    SPRITE_BANJO_IDLE = 25,
+    SPRITE_BANJO_CROUCH = 33,
+    SPRITE_BANJO_SWIM_SURFACE = 41,
+    SPRITE_BANJO_TALON_TROT = 49,
+    SPRITE_BANJO_SWIM_UNDERWATER = 57,
+    SPRITE_BANJO_SWIM_UP = 65,
+    SPRITE_BANJO_FLAP_FLIP_START = 73,
+    SPRITE_BANJO_FLAP_FLIP_END = 81,
+    SPRITE_BANJO_FEATHERY_FLAP = 89,
+    SPRITE_BANJO_FORWARD_ROLL = 97,
+    SPRITE_BANJO_SWIM_IDLE = 105,
+    SPRITE_BANJO_DIVE = 113,
+    SPRITE_BANJO_CLIMB = 121,
+
     SPRITE_OXYGEN_EMPTY = 1121,
     SPRITE_OXYGEN = 1122,
     SPRITE_ICON_BANJO = 1123, // Shown next to the health and oxygen bars.

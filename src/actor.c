@@ -589,7 +589,7 @@ void sub_8028E30(void) {
             x = actor->xPosition - gCameraPixelX;
             y = actor->yPosition - gCameraPixelY;
             if (actor->field_2F == 0) {
-                SetSprite(&actor->shadowSprite, 0, FALSE, 0, 1, x, y, 2);
+                SetSprite(&actor->shadowSprite, SPRITE_SHADOW, FALSE, 0, 1, x, y, 2);
                 sprite_set_priority(&actor->shadowSprite, actor->field_8);
                 sprite_set_locked_frame(&actor->shadowSprite, actor->field_9 < dword_80CEBC4
                                                                   ? byte_80CEB84[actor->field_9]
@@ -846,7 +846,7 @@ void s_load_object(int x, int y) {
             spriteX = actor->xPosition - gCameraPixelX;
             spriteY = actor->yPosition - gCameraPixelY;
             if (actor->field_2F == 0) {
-                SetSprite(&actor->shadowSprite, 0, FALSE, 0, 1, spriteX, spriteY, 2);
+                SetSprite(&actor->shadowSprite, SPRITE_SHADOW, FALSE, 0, 1, spriteX, spriteY, 2);
                 sprite_set_priority(&actor->shadowSprite, actor->field_8);
                 sprite_set_locked_frame(&actor->shadowSprite, actor->field_9 < dword_80CEBC4
                                                                   ? byte_80CEB84[actor->field_9]
