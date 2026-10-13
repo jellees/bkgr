@@ -37191,7 +37191,7 @@ _0803C638: .4byte 0x0203E951
 	.thumb
 sub_803C63C: @ 0x0803C63C
 	push {lr}
-	bl sub_8016B44
+	bl start_dolphin_feeding
 	pop {r0}
 	bx r0
 	.align 2, 0

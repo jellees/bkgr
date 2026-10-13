@@ -25,7 +25,7 @@ int sub_8016A5C(int a1);
 void sub_8016A94(int a1);
 void finish_stop_honeycomb(void);
 void sub_8016B18(void);
-void sub_8016B44(void);
+void start_dolphin_feeding(void);
 void sub_8016BD0(int a1);
 void sub_8016C78(u8 a1);
 void sub_8017A54(void);
