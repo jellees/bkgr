@@ -1244,9 +1244,9 @@ void hud_set_value(u32 element, int value) {
         case HUD_ELEMENT_HONEYCOMBS:
             ASSERT(gHudElements[element].displayValue <= value);
             gHudElements[element].targetValue = value;
-            max = hud_get_element_max(HUD_ELEMENT_40);
+            max = hud_get_element_max(HUD_ELEMENT_HONEY_B_HONEYCOMBS);
             if (max >= 0) {
-                hud_set_value(HUD_ELEMENT_40, max);
+                hud_set_value(HUD_ELEMENT_HONEY_B_HONEYCOMBS, max);
             }
             break;
 
@@ -1262,9 +1262,9 @@ void hud_set_value(u32 element, int value) {
         case HUD_ELEMENT_LEVEL_JIGGIES:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
-            max = hud_get_element_max(HUD_ELEMENT_41);
+            max = hud_get_element_max(HUD_ELEMENT_JIGGYWIGGY_JIGGIES);
             if (max >= 0) {
-                hud_set_value(HUD_ELEMENT_41, max);
+                hud_set_value(HUD_ELEMENT_JIGGYWIGGY_JIGGIES, max);
             }
             break;
 
@@ -1358,13 +1358,13 @@ void hud_set_value(u32 element, int value) {
             gHudElements[element].targetValue = gGameStatus.totalNotes;
             break;
 
-        case HUD_ELEMENT_40:
+        case HUD_ELEMENT_HONEY_B_HONEYCOMBS:
             gHudElements[element].maxValue = value;
             gHudElements[element].displayValue = gGameStatus.totalHoneycombs;
             gHudElements[element].targetValue = gGameStatus.totalHoneycombs;
             break;
 
-        case HUD_ELEMENT_41:
+        case HUD_ELEMENT_JIGGYWIGGY_JIGGIES:
             gHudElements[element].maxValue = value;
             gHudElements[element].displayValue = gGameStatus.totalJiggies;
             gHudElements[element].targetValue = gGameStatus.totalJiggies;
@@ -1414,13 +1414,13 @@ void hud_set_value(u32 element, int value) {
         case HUD_ELEMENT_GRUBBY_CHUTE_GLOW_GRUBS:
         case HUD_ELEMENT_MUMBO_TOKENS:
         case HUD_ELEMENT_MECHA_GRUNTY_HEALTH:
-        case HUD_ELEMENT_38:
+        case HUD_ELEMENT_KLUNGO_HEALTH:
         case HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS:
         case HUD_ELEMENT_SHEEP_DIP_BLEATERS:
         case HUD_ELEMENT_FISH:
         case HUD_ELEMENT_EGG_SCRAMBLE_EGGS:
-        case HUD_ELEMENT_53:
-        case HUD_ELEMENT_54:
+        case HUD_ELEMENT_DOLPHIN_BLUE_EGGS:
+        case HUD_ELEMENT_LAVA_JETTY_PLATFORMS:
             gHudElements[element].targetValue = value;
             break;
 
@@ -1813,25 +1813,25 @@ bool32 hud_are_pause_counters_shown(int isDiving) {
 bool32 hud_are_pause_counters_hidden(int isDiving) {
     bool32 done = TRUE;
 
-    if (byte_203E127 && gHudElements[HUD_ELEMENT_19].state != HUD_STATE_HIDDEN) {
+    if (byte_203E127 && gHudElements[HUD_ELEMENT_PAUSE_NOTES].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E128 && gHudElements[HUD_ELEMENT_20].state != HUD_STATE_HIDDEN) {
+    if (byte_203E128 && gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
     if (byte_203E129 && gHudElements[HUD_ELEMENT_PAUSE_JINJOS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E12B && gHudElements[HUD_ELEMENT_43].state != HUD_STATE_HIDDEN) {
+    if (byte_203E12B && gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E12A && gHudElements[HUD_ELEMENT_42].state != HUD_STATE_HIDDEN) {
+    if (byte_203E12A && gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
     if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_6].state != HUD_STATE_HIDDEN) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_HONEYCOMBS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
     if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_HIDDEN) {
@@ -1839,20 +1839,20 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
     }
 
     if (isDiving) {
-        if (gHudElements[HUD_ELEMENT_56].state != HUD_STATE_HIDDEN) {
+        if (gHudElements[HUD_ELEMENT_OXYGEN].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
     } else {
-        if (byte_203E122 && gHudElements[HUD_ELEMENT_9].state != HUD_STATE_HIDDEN) {
+        if (byte_203E122 && gHudElements[HUD_ELEMENT_BLUE_EGGS].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
-        if (byte_203E123 && gHudElements[HUD_ELEMENT_10].state != HUD_STATE_HIDDEN) {
+        if (byte_203E123 && gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
-        if (byte_203E124 && gHudElements[HUD_ELEMENT_11].state != HUD_STATE_HIDDEN) {
+        if (byte_203E124 && gHudElements[HUD_ELEMENT_ICE_EGGS].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
-        if (byte_203E125 && gHudElements[HUD_ELEMENT_12].state != HUD_STATE_HIDDEN) {
+        if (byte_203E125 && gHudElements[HUD_ELEMENT_FIRE_EGGS].state != HUD_STATE_HIDDEN) {
             done = FALSE;
         }
     }
@@ -1860,20 +1860,20 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
     if (done) {
         if (isDiving) {
             if (byte_203E127) {
-                gHudElements[HUD_ELEMENT_19].slideSpeed = gHudElements[HUD_ELEMENT_19].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_19].keepShown = gHudElements[HUD_ELEMENT_19].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_NOTES].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_NOTES].keepShown = gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedKeepShown;
             }
             if (byte_203E128) {
-                gHudElements[HUD_ELEMENT_20].slideSpeed = gHudElements[HUD_ELEMENT_20].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_20].keepShown = gHudElements[HUD_ELEMENT_20].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].keepShown = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedKeepShown;
             }
             if (byte_203E12B) {
-                gHudElements[HUD_ELEMENT_43].slideSpeed = gHudElements[HUD_ELEMENT_43].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_43].keepShown = gHudElements[HUD_ELEMENT_43].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].keepShown = gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedKeepShown;
             }
             if (byte_203E12A) {
-                gHudElements[HUD_ELEMENT_42].slideSpeed = gHudElements[HUD_ELEMENT_42].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_42].keepShown = gHudElements[HUD_ELEMENT_42].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].keepShown = gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedKeepShown;
             }
             if (gShowMovesLearnedCounter) {
                 gHudElements[HUD_ELEMENT_MOVES_LEARNED].slideSpeed =
@@ -1888,31 +1888,31 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
                     gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown;
             }
             if (byte_203E126) {
-                gHudElements[HUD_ELEMENT_6].slideSpeed = gHudElements[HUD_ELEMENT_6].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_6].keepShown = gHudElements[HUD_ELEMENT_6].savedKeepShown;
+                gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed = gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown = gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown;
             }
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed;
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].keepShown =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedKeepShown;
-            gHudElements[HUD_ELEMENT_56].slideSpeed = gHudElements[HUD_ELEMENT_56].savedSlideSpeed;
-            gHudElements[HUD_ELEMENT_56].keepShown = gHudElements[HUD_ELEMENT_56].savedKeepShown;
+            gHudElements[HUD_ELEMENT_OXYGEN].slideSpeed = gHudElements[HUD_ELEMENT_OXYGEN].savedSlideSpeed;
+            gHudElements[HUD_ELEMENT_OXYGEN].keepShown = gHudElements[HUD_ELEMENT_OXYGEN].savedKeepShown;
         } else {
             if (byte_203E127) {
-                gHudElements[HUD_ELEMENT_19].slideSpeed = gHudElements[HUD_ELEMENT_19].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_19].keepShown = gHudElements[HUD_ELEMENT_19].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_NOTES].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_NOTES].keepShown = gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedKeepShown;
             }
             if (byte_203E128) {
-                gHudElements[HUD_ELEMENT_20].slideSpeed = gHudElements[HUD_ELEMENT_20].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_20].keepShown = gHudElements[HUD_ELEMENT_20].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].keepShown = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedKeepShown;
             }
             if (byte_203E12B) {
-                gHudElements[HUD_ELEMENT_43].slideSpeed = gHudElements[HUD_ELEMENT_43].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_43].keepShown = gHudElements[HUD_ELEMENT_43].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].keepShown = gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedKeepShown;
             }
             if (byte_203E12A) {
-                gHudElements[HUD_ELEMENT_42].slideSpeed = gHudElements[HUD_ELEMENT_42].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_42].keepShown = gHudElements[HUD_ELEMENT_42].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].keepShown = gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedKeepShown;
             }
             if (gShowMovesLearnedCounter) {
                 gHudElements[HUD_ELEMENT_MOVES_LEARNED].slideSpeed =
@@ -1927,28 +1927,28 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
                     gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown;
             }
             if (byte_203E126) {
-                gHudElements[HUD_ELEMENT_6].slideSpeed = gHudElements[HUD_ELEMENT_6].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_6].keepShown = gHudElements[HUD_ELEMENT_6].savedKeepShown;
+                gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed = gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown = gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown;
             }
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed;
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].keepShown =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedKeepShown;
             if (byte_203E122) {
-                gHudElements[HUD_ELEMENT_9].slideSpeed = gHudElements[HUD_ELEMENT_9].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_9].keepShown = gHudElements[HUD_ELEMENT_9].savedKeepShown;
+                gHudElements[HUD_ELEMENT_BLUE_EGGS].slideSpeed = gHudElements[HUD_ELEMENT_BLUE_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_BLUE_EGGS].keepShown = gHudElements[HUD_ELEMENT_BLUE_EGGS].savedKeepShown;
             }
             if (byte_203E123) {
-                gHudElements[HUD_ELEMENT_10].slideSpeed = gHudElements[HUD_ELEMENT_10].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_10].keepShown = gHudElements[HUD_ELEMENT_10].savedKeepShown;
+                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].slideSpeed = gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].keepShown = gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedKeepShown;
             }
             if (byte_203E125) {
-                gHudElements[HUD_ELEMENT_12].slideSpeed = gHudElements[HUD_ELEMENT_12].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_12].keepShown = gHudElements[HUD_ELEMENT_12].savedKeepShown;
+                gHudElements[HUD_ELEMENT_FIRE_EGGS].slideSpeed = gHudElements[HUD_ELEMENT_FIRE_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_FIRE_EGGS].keepShown = gHudElements[HUD_ELEMENT_FIRE_EGGS].savedKeepShown;
             }
             if (byte_203E124) {
-                gHudElements[HUD_ELEMENT_11].slideSpeed = gHudElements[HUD_ELEMENT_11].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_11].keepShown = gHudElements[HUD_ELEMENT_11].savedKeepShown;
+                gHudElements[HUD_ELEMENT_ICE_EGGS].slideSpeed = gHudElements[HUD_ELEMENT_ICE_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_ICE_EGGS].keepShown = gHudElements[HUD_ELEMENT_ICE_EGGS].savedKeepShown;
             }
         }
     }
@@ -2379,10 +2379,10 @@ void hud_dismiss_all(void) {
 void hud_dismiss_npc_counters(void) {
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].timer = 0;
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].keepShown = FALSE;
-    gHudElements[HUD_ELEMENT_40].timer = 0;
-    gHudElements[HUD_ELEMENT_40].keepShown = FALSE;
-    gHudElements[HUD_ELEMENT_41].timer = 0;
-    gHudElements[HUD_ELEMENT_41].keepShown = FALSE;
+    gHudElements[HUD_ELEMENT_HONEY_B_HONEYCOMBS].timer = 0;
+    gHudElements[HUD_ELEMENT_HONEY_B_HONEYCOMBS].keepShown = FALSE;
+    gHudElements[HUD_ELEMENT_JIGGYWIGGY_JIGGIES].timer = 0;
+    gHudElements[HUD_ELEMENT_JIGGYWIGGY_JIGGIES].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS].timer = 0;
     gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SHELLS].timer = 0;
