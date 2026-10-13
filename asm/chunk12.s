@@ -38,7 +38,7 @@ _080630EC:
 	adds r0, #0x3c
 	strb r0, [r4, #8]
 	ldrh r0, [r4, #6]
-	bl sub_8042218
+	bl hud_show_timer
 	movs r1, #0
 	cmp r0, #0
 	bne _0806310C
@@ -88,7 +88,7 @@ _08063148:
 	adds r0, #0x3c
 	strb r0, [r4, #8]
 	ldrh r0, [r4, #6]
-	bl sub_8042218
+	bl hud_show_timer
 	movs r1, #0
 	cmp r0, #0
 	bne _08063168
@@ -157,7 +157,7 @@ sub_80631AC: @ 0x080631AC
 	cmp r0, #0
 	beq _080631D2
 	ldrh r0, [r4, #6]
-	bl sub_8042218
+	bl hud_show_timer
 	movs r1, #0
 	cmp r0, #0
 	bne _080631D0

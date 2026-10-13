@@ -94,7 +94,7 @@ SECTIONS
         . = 0x0003E16A;
         byte_203E16A = .; . += 1;
         byte_203E16B = .; . += 1;
-        byte_203E16C = .; . += 1;
+        gGoldenCoins = .; . += 1;
 
         . = 0x0003EA7C;
         src/hud.o(.bss);

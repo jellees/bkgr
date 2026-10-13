@@ -2370,7 +2370,7 @@ void load_mini_game_from_arcade(int miniGame) {
             sub_080593D0(9, 2);
             break;
 
-        case MINI_GAME_CHUBBY_CHUTE:
+        case MINI_GAME_GRUBBY_CHUTE:
             audio_halt_all_fx();
             sub_80270AC(4095, 1);
             gShowRoomName = 0;

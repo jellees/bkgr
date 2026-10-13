@@ -59,9 +59,9 @@ enum Level {
 };
 
 enum MiniGame {
-    MINI_GAME_CHUBBY_CHUTE,
-    MINI_GAME_UNKNOWN_1,
-    MINI_GAME_UNKNOWN_2,
+    MINI_GAME_GRUBBY_CHUTE,
+    MINI_GAME_GHOST_PIRATE,
+    MINI_GAME_MECHA_GRUNTY,
     MINI_GAME_BATTLE_BOATS,
     MINI_GAME_SNOWY_SLEDS,
     MINI_GAME_SLIDE_O_FEAR,
@@ -69,6 +69,7 @@ enum MiniGame {
     MINI_GAME_MAGIC_ANGLER,
     MINI_GAME_FROZEN_FISH,
     MINI_GAME_EGG_SCRAMBLE,
+    MINI_GAME_CREDITS,
 
     MINI_GAME_COUNT
 };
@@ -905,7 +906,7 @@ extern u8 byte_203E138;
 
 extern u8 byte_203E16A;
 extern u8 byte_203E16B;
-extern u8 byte_203E16C;
+extern u8 gGoldenCoins;
 
 extern struct struc_51** dword_203F8B4; // A pointer to a pointer to a struct.
 

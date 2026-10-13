@@ -630,22 +630,22 @@ void menu_load(int menu, int language) {
             switch (language) {
                 case 0:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[0]) {
+                    if (gGoldenCoins >= dword_80CF3B0[0]) {
                         gMenu.texts[i++] = str_0806570C; // "EGG SCRAMBLE"
                     } else {
                         gMenu.texts[i++] = str_080657B0; // "????? FOR 20 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[1]) {
+                    if (gGoldenCoins >= dword_80CF3B0[1]) {
                         gMenu.texts[i++] = str_0806571C; // "SHEEP DIP"
                     } else {
                         gMenu.texts[i++] = str_080657C4; // "????? FOR 40 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[2]) {
+                    if (gGoldenCoins >= dword_80CF3B0[2]) {
                         gMenu.texts[i++] = str_08065728; // "BATTLE BOATS"
                     } else {
                         gMenu.texts[i++] = str_080657D8; // "????? FOR 60 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[3]) {
+                    if (gGoldenCoins >= dword_80CF3B0[3]) {
                         gMenu.texts[i++] = str_08065738; // "GRUBBY CHUTE"
                     } else {
                         gMenu.texts[i++] = str_080657EC; // "????? FOR 80 \xfc\x0e"
@@ -654,22 +654,22 @@ void menu_load(int menu, int language) {
                     break;
                 case 1:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[0]) {
+                    if (gGoldenCoins >= dword_80CF3B0[0]) {
                         gMenu.texts[i++] = str_08065850; // "BROUILLEMENT D'ŒUFS"
                     } else {
                         gMenu.texts[i++] = str_08065928; // "????? POUR 20 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[1]) {
+                    if (gGoldenCoins >= dword_80CF3B0[1]) {
                         gMenu.texts[i++] = str_08065868; // "BAIN PARASITICIDE"
                     } else {
                         gMenu.texts[i++] = str_0806593C; // "????? POUR 40 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[2]) {
+                    if (gGoldenCoins >= dword_80CF3B0[2]) {
                         gMenu.texts[i++] = str_0806587C; // "BATEAUX DE BATAILLES"
                     } else {
                         gMenu.texts[i++] = str_08065950; // "????? POUR 60 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[3]) {
+                    if (gGoldenCoins >= dword_80CF3B0[3]) {
                         gMenu.texts[i++] = str_08065894; // "GLISSIÈRE GRAISSEUSE"
                     } else {
                         gMenu.texts[i++] = str_08065964; // "????? POUR 80 \xfc\x0e"
@@ -678,22 +678,22 @@ void menu_load(int menu, int language) {
                     break;
                 case 2:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[0]) {
+                    if (gGoldenCoins >= dword_80CF3B0[0]) {
                         gMenu.texts[i++] = str_08065B1C; // "HUEVO REVUELTO"
                     } else {
                         gMenu.texts[i++] = str_08065BE4; // "????? PARA 20 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[1]) {
+                    if (gGoldenCoins >= dword_80CF3B0[1]) {
                         gMenu.texts[i++] = str_08065B2C; // "BAÑO DESINFECTANTE"
                     } else {
                         gMenu.texts[i++] = str_08065BF8; // "????? PARA 40 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[2]) {
+                    if (gGoldenCoins >= dword_80CF3B0[2]) {
                         gMenu.texts[i++] = str_08065B40; // "BARCOS BATALLA"
                     } else {
                         gMenu.texts[i++] = str_08065C0C; // "????? PARA 60 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[3]) {
+                    if (gGoldenCoins >= dword_80CF3B0[3]) {
                         gMenu.texts[i++] = str_08065B50; // "DESLIZADOR AGUSANADO"
                     } else {
                         gMenu.texts[i++] = str_08065C20; // "????? PARA 80 \xfc\x0e"
@@ -702,22 +702,22 @@ void menu_load(int menu, int language) {
                     break;
                 case 4:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[0]) {
+                    if (gGoldenCoins >= dword_80CF3B0[0]) {
                         gMenu.texts[i++] = str_08065C84; // "UOVA STRAPAZZATE"
                     } else {
                         gMenu.texts[i++] = str_08065D4C; // "????? PER 20 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[1]) {
+                    if (gGoldenCoins >= dword_80CF3B0[1]) {
                         gMenu.texts[i++] = str_08065C98; // "BAGNO ANTIPARASSITARIO"
                     } else {
                         gMenu.texts[i++] = str_08065D60; // "????? PER 40 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[2]) {
+                    if (gGoldenCoins >= dword_80CF3B0[2]) {
                         gMenu.texts[i++] = str_08065CB0; // "NAVI DA GUERRA"
                     } else {
                         gMenu.texts[i++] = str_08065D74; // "????? PER 60 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[3]) {
+                    if (gGoldenCoins >= dword_80CF3B0[3]) {
                         gMenu.texts[i++] = str_08065CC0; // "SCIVOLO SUDICIO"
                     } else {
                         gMenu.texts[i++] = str_08065D88; // "????? PER 80 \xfc\x0e"
@@ -726,22 +726,22 @@ void menu_load(int menu, int language) {
                     break;
                 case 3:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[0]) {
+                    if (gGoldenCoins >= dword_80CF3B0[0]) {
                         gMenu.texts[i++] = str_080659C8; // "EIERJAGD"
                     } else {
                         gMenu.texts[i++] = str_08065A7C; // "????? FÜR 20 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[1]) {
+                    if (gGoldenCoins >= dword_80CF3B0[1]) {
                         gMenu.texts[i++] = str_080659D4; // "SCHAFANGELN"
                     } else {
                         gMenu.texts[i++] = str_08065A90; // "????? FÜR 40 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[2]) {
+                    if (gGoldenCoins >= dword_80CF3B0[2]) {
                         gMenu.texts[i++] = str_080659E4; // "KAMPFBOOT"
                     } else {
                         gMenu.texts[i++] = str_08065AA4; // "????? FÜR 60 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[3]) {
+                    if (gGoldenCoins >= dword_80CF3B0[3]) {
                         gMenu.texts[i++] = str_080659F0; // "WURMJAGD"
                     } else {
                         gMenu.texts[i++] = str_08065AB8; // "????? FÜR 80 \xfc\x0e"
@@ -787,22 +787,22 @@ void menu_load(int menu, int language) {
             switch (language) {
                 case 0:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[4]) {
+                    if (gGoldenCoins >= dword_80CF3B0[4]) {
                         gMenu.texts[i++] = str_08065748; // "AGIC ANGLER"
                     } else {
                         gMenu.texts[i++] = str_08065800; // "????? FOR 100 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[5]) {
+                    if (gGoldenCoins >= dword_80CF3B0[5]) {
                         gMenu.texts[i++] = str_08065758; // "SLIDE O' FEAR"
                     } else {
                         gMenu.texts[i++] = str_08065814; // "????? FOR 120 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[6]) {
+                    if (gGoldenCoins >= dword_80CF3B0[6]) {
                         gMenu.texts[i++] = str_08065768; // "FROZEN FISH"
                     } else {
                         gMenu.texts[i++] = str_08065828; // "????? FOR 140 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[7]) {
+                    if (gGoldenCoins >= dword_80CF3B0[7]) {
                         gMenu.texts[i++] = str_08065778; // "SNOWY SLEDS"
                     } else {
                         gMenu.texts[i++] = str_0806583C; // "????? FOR 160 \xfc\x0e"
@@ -811,22 +811,22 @@ void menu_load(int menu, int language) {
                     break;
                 case 1:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[4]) {
+                    if (gGoldenCoins >= dword_80CF3B0[4]) {
                         gMenu.texts[i++] = str_080658AC; // "PÊCHEUR MAGIQUE"
                     } else {
                         gMenu.texts[i++] = str_08065978; // "????? POUR 100 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[5]) {
+                    if (gGoldenCoins >= dword_80CF3B0[5]) {
                         gMenu.texts[i++] = str_080658C0; // "TERRIBLE TOBOGGAN"
                     } else {
                         gMenu.texts[i++] = str_0806598C; // "????? POUR 120 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[6]) {
+                    if (gGoldenCoins >= dword_80CF3B0[6]) {
                         gMenu.texts[i++] = str_080658D4; // "POISSON EN GLAÇON"
                     } else {
                         gMenu.texts[i++] = str_080659A0; // "????? POUR 140 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[7]) {
+                    if (gGoldenCoins >= dword_80CF3B0[7]) {
                         gMenu.texts[i++] = str_080658E8; // "TRAÎNEAU NEIGEUX"
                     } else {
                         gMenu.texts[i++] = str_080659B4; // "????? POUR 160 \xfc\x0e"
@@ -835,22 +835,22 @@ void menu_load(int menu, int language) {
                     break;
                 case 2:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[4]) {
+                    if (gGoldenCoins >= dword_80CF3B0[4]) {
                         gMenu.texts[i++] = str_08065B68; // "PESCADOR MÁGICO"
                     } else {
                         gMenu.texts[i++] = str_08065C34; // "????? PARA 100 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[5]) {
+                    if (gGoldenCoins >= dword_80CF3B0[5]) {
                         gMenu.texts[i++] = str_08065B7C; // "TOBOGÁN TERRIBLE"
                     } else {
                         gMenu.texts[i++] = str_08065C48; // "????? PARA 120 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[6]) {
+                    if (gGoldenCoins >= dword_80CF3B0[6]) {
                         gMenu.texts[i++] = str_08065B90; // "PESCADO CONGELADO"
                     } else {
                         gMenu.texts[i++] = str_08065C5C; // "????? PARA 140 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[7]) {
+                    if (gGoldenCoins >= dword_80CF3B0[7]) {
                         gMenu.texts[i++] = str_08065BA4; // "TRINEOS NEVADOS"
                     } else {
                         gMenu.texts[i++] = str_08065C70; // "????? PARA 160 \xfc\x0e"
@@ -859,22 +859,22 @@ void menu_load(int menu, int language) {
                     break;
                 case 4:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[4]) {
+                    if (gGoldenCoins >= dword_80CF3B0[4]) {
                         gMenu.texts[i++] = str_08065CD4; // "PESCATORE MAGICO"
                     } else {
                         gMenu.texts[i++] = str_08065D9C; // "????? PER 100 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[5]) {
+                    if (gGoldenCoins >= dword_80CF3B0[5]) {
                         gMenu.texts[i++] = str_08065CE8; // "SCIVOLO DELLA PAURA"
                     } else {
                         gMenu.texts[i++] = str_08065DB0; // "????? PER 120 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[6]) {
+                    if (gGoldenCoins >= dword_80CF3B0[6]) {
                         gMenu.texts[i++] = str_08065D00; // "PESCE CONGELATO"
                     } else {
                         gMenu.texts[i++] = str_08065DC4; // "????? PER 140 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[7]) {
+                    if (gGoldenCoins >= dword_80CF3B0[7]) {
                         gMenu.texts[i++] = str_08065D14; // "SLITTE NEVOSE"
                     } else {
                         gMenu.texts[i++] = str_08065DD8; // "????? PER 160 \xfc\x0e"
@@ -883,22 +883,22 @@ void menu_load(int menu, int language) {
                     break;
                 case 3:
                     i = 0;
-                    if (byte_203E16C >= dword_80CF3B0[4]) {
+                    if (gGoldenCoins >= dword_80CF3B0[4]) {
                         gMenu.texts[i++] = str_080659FC; // "MAGISCHER ANGLER"
                     } else {
                         gMenu.texts[i++] = str_08065ACC; // "????? FÜR 100 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[5]) {
+                    if (gGoldenCoins >= dword_80CF3B0[5]) {
                         gMenu.texts[i++] = str_08065A10; // "RUTSCHE DES GRAUENS"
                     } else {
                         gMenu.texts[i++] = str_08065AE0; // "????? FÜR 120 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[6]) {
+                    if (gGoldenCoins >= dword_80CF3B0[6]) {
                         gMenu.texts[i++] = str_08065A28; // "GEFRORENER FISCH"
                     } else {
                         gMenu.texts[i++] = str_08065AF4; // "????? FÜR 140 \xfc\x0e"
                     }
-                    if (byte_203E16C >= dword_80CF3B0[7]) {
+                    if (gGoldenCoins >= dword_80CF3B0[7]) {
                         gMenu.texts[i++] = str_08065A3C; // "SCHNEEMOBIL"
                     } else {
                         gMenu.texts[i++] = str_08065B08; // "????? FÜR 160 \xfc\x0e"

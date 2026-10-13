@@ -94,7 +94,7 @@ const HudScriptInstructions dHudScriptLevelJinjos = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElement2 = {
+const HudScriptInstructions dHudScriptMumboTokensCollected = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 244, 132)
@@ -482,7 +482,7 @@ const HudScriptInstructions dHudScriptFireEggs = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElement13 = {
+const HudScriptInstructions dHudScriptGrubbyChuteGlowGrubs = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 244, 12)
@@ -1202,7 +1202,7 @@ const HudScriptInstructions dHudScriptTotalsIceCreams = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElement36 = {
+const HudScriptInstructions dHudScriptTimer = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 98, 164)
@@ -1224,7 +1224,7 @@ const HudScriptInstructions dHudScriptElement36 = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElement37 = {
+const HudScriptInstructions dHudScriptMechaGruntyHealth = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 244, 12)
@@ -1614,7 +1614,7 @@ const HudScriptInstructions dHudScriptJinjoOracleJinjos = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElement50 = {
+const HudScriptInstructions dHudScriptSheepDipBleaters = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 244, 12)
@@ -1644,7 +1644,7 @@ const HudScriptInstructions dHudScriptElement50 = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElement51 = {
+const HudScriptInstructions dHudScriptFish = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 244, 12)
@@ -1674,7 +1674,7 @@ const HudScriptInstructions dHudScriptElement51 = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElement52 = {
+const HudScriptInstructions dHudScriptEggScrambleEggs = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 244, 12)
@@ -1764,7 +1764,7 @@ const HudScriptInstructions dHudScriptElement54 = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptElement55 = {
+const HudScriptInstructions dHudScriptGoldenCoins = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 244, 12)
@@ -1799,7 +1799,8 @@ const HudScriptInstructions dHudScriptElement55 = {
 const struct HudScript dHudScripts[HUD_ELEMENT_COUNT] = {
     [HUD_ELEMENT_LEVEL_NOTES] = { ARRAY_COUNT(dHudScriptLevelNotes), dHudScriptLevelNotes },
     [HUD_ELEMENT_LEVEL_JIGGIES] = { ARRAY_COUNT(dHudScriptLevelJiggies), dHudScriptLevelJiggies },
-    [HUD_ELEMENT_2] = { ARRAY_COUNT(dHudScriptElement2), dHudScriptElement2 },
+    [HUD_ELEMENT_MUMBO_TOKENS_COLLECTED] = { ARRAY_COUNT(dHudScriptMumboTokensCollected),
+                                             dHudScriptMumboTokensCollected },
     [HUD_ELEMENT_GOLDEN_FEATHERS] = { ARRAY_COUNT(dHudScriptGoldenFeathers), dHudScriptGoldenFeathers },
     [HUD_ELEMENT_MOVES_LEARNED] = { ARRAY_COUNT(dHudScriptMovesLearned), dHudScriptMovesLearned },
     [HUD_ELEMENT_SHELLS] = { ARRAY_COUNT(dHudScriptShells), dHudScriptShells },
@@ -1810,7 +1811,8 @@ const struct HudScript dHudScripts[HUD_ELEMENT_COUNT] = {
     [HUD_ELEMENT_ELECTRIC_EGGS] = { ARRAY_COUNT(dHudScriptElectricEggs), dHudScriptElectricEggs },
     [HUD_ELEMENT_ICE_EGGS] = { ARRAY_COUNT(dHudScriptIceEggs), dHudScriptIceEggs },
     [HUD_ELEMENT_FIRE_EGGS] = { ARRAY_COUNT(dHudScriptFireEggs), dHudScriptFireEggs },
-    [HUD_ELEMENT_13] = { ARRAY_COUNT(dHudScriptElement13), dHudScriptElement13 },
+    [HUD_ELEMENT_GRUBBY_CHUTE_GLOW_GRUBS] = { ARRAY_COUNT(dHudScriptGrubbyChuteGlowGrubs),
+                                              dHudScriptGrubbyChuteGlowGrubs },
     [HUD_ELEMENT_CAPTIVE_BREEGULLS] = { ARRAY_COUNT(dHudScriptCaptiveBreegulls),
                                         dHudScriptCaptiveBreegulls },
     [HUD_ELEMENT_ICE_CREAMS] = { ARRAY_COUNT(dHudScriptIceCreams), dHudScriptIceCreams },
@@ -1842,8 +1844,9 @@ const struct HudScript dHudScripts[HUD_ELEMENT_COUNT] = {
                                             dHudScriptTotalsToySpaceships },
     [HUD_ELEMENT_TOTALS_ICE_CREAMS] = { ARRAY_COUNT(dHudScriptTotalsIceCreams),
                                         dHudScriptTotalsIceCreams },
-    [HUD_ELEMENT_36] = { ARRAY_COUNT(dHudScriptElement36), dHudScriptElement36 },
-    [HUD_ELEMENT_37] = { ARRAY_COUNT(dHudScriptElement37), dHudScriptElement37 },
+    [HUD_ELEMENT_TIMER] = { ARRAY_COUNT(dHudScriptTimer), dHudScriptTimer },
+    [HUD_ELEMENT_MECHA_GRUNTY_HEALTH] = { ARRAY_COUNT(dHudScriptMechaGruntyHealth),
+                                          dHudScriptMechaGruntyHealth },
     [HUD_ELEMENT_38] = { ARRAY_COUNT(dHudScriptElement38), dHudScriptElement38 },
     [HUD_ELEMENT_BOZZEYE_NOTES] = { ARRAY_COUNT(dHudScriptBozzeyeNotes), dHudScriptBozzeyeNotes },
     [HUD_ELEMENT_40] = { ARRAY_COUNT(dHudScriptElement40), dHudScriptElement40 },
@@ -1865,12 +1868,14 @@ const struct HudScript dHudScripts[HUD_ELEMENT_COUNT] = {
                                                dHudScriptMissBucketGoldNuggets },
     [HUD_ELEMENT_JINJO_ORACLE_JINJOS] = { ARRAY_COUNT(dHudScriptJinjoOracleJinjos),
                                           dHudScriptJinjoOracleJinjos },
-    [HUD_ELEMENT_50] = { ARRAY_COUNT(dHudScriptElement50), dHudScriptElement50 },
-    [HUD_ELEMENT_51] = { ARRAY_COUNT(dHudScriptElement51), dHudScriptElement51 },
-    [HUD_ELEMENT_52] = { ARRAY_COUNT(dHudScriptElement52), dHudScriptElement52 },
+    [HUD_ELEMENT_SHEEP_DIP_BLEATERS] = { ARRAY_COUNT(dHudScriptSheepDipBleaters),
+                                         dHudScriptSheepDipBleaters },
+    [HUD_ELEMENT_FISH] = { ARRAY_COUNT(dHudScriptFish), dHudScriptFish },
+    [HUD_ELEMENT_EGG_SCRAMBLE_EGGS] = { ARRAY_COUNT(dHudScriptEggScrambleEggs),
+                                        dHudScriptEggScrambleEggs },
     [HUD_ELEMENT_53] = { ARRAY_COUNT(dHudScriptElement53), dHudScriptElement53 },
     [HUD_ELEMENT_54] = { ARRAY_COUNT(dHudScriptElement54), dHudScriptElement54 },
-    [HUD_ELEMENT_55] = { ARRAY_COUNT(dHudScriptElement55), dHudScriptElement55 },
+    [HUD_ELEMENT_GOLDEN_COINS] = { ARRAY_COUNT(dHudScriptGoldenCoins), dHudScriptGoldenCoins },
     [HUD_ELEMENT_OXYGEN] = { ARRAY_COUNT(dHudScriptOxygen), dHudScriptOxygen },
     [HUD_ELEMENT_OXYGEN_WITH_ICON] = { ARRAY_COUNT(dHudScriptOxygenWithIcon),
                                        dHudScriptOxygenWithIcon },

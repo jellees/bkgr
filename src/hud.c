@@ -1235,7 +1235,7 @@ void hud_set_value(u32 element, int value) {
             gHudElements[element].targetValue = value;
             break;
 
-        case HUD_ELEMENT_55:
+        case HUD_ELEMENT_GOLDEN_COINS:
             gHudElements[element].targetValue = value;
             gHudElements[element].maxValue = value;
             gHudElements[element].displayValue = value;
@@ -1268,7 +1268,7 @@ void hud_set_value(u32 element, int value) {
             }
             break;
 
-        case HUD_ELEMENT_2:
+        case HUD_ELEMENT_MUMBO_TOKENS_COLLECTED:
             ASSERT(gHudElements[element].displayValue < value);
             gHudElements[element].targetValue = value;
             break;
@@ -1342,7 +1342,7 @@ void hud_set_value(u32 element, int value) {
             }
             break;
 
-        case HUD_ELEMENT_36:
+        case HUD_ELEMENT_TIMER:
             gHudElements[element].displayValue = value;
             gHudElements[element].targetValue = value;
             break;
@@ -1411,14 +1411,14 @@ void hud_set_value(u32 element, int value) {
         case HUD_ELEMENT_ELECTRIC_EGGS:
         case HUD_ELEMENT_ICE_EGGS:
         case HUD_ELEMENT_FIRE_EGGS:
-        case HUD_ELEMENT_13:
+        case HUD_ELEMENT_GRUBBY_CHUTE_GLOW_GRUBS:
         case HUD_ELEMENT_MUMBO_TOKENS:
-        case HUD_ELEMENT_37:
+        case HUD_ELEMENT_MECHA_GRUNTY_HEALTH:
         case HUD_ELEMENT_38:
         case HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS:
-        case HUD_ELEMENT_50:
-        case HUD_ELEMENT_51:
-        case HUD_ELEMENT_52:
+        case HUD_ELEMENT_SHEEP_DIP_BLEATERS:
+        case HUD_ELEMENT_FISH:
+        case HUD_ELEMENT_EGG_SCRAMBLE_EGGS:
         case HUD_ELEMENT_53:
         case HUD_ELEMENT_54:
             gHudElements[element].targetValue = value;
@@ -2584,16 +2584,16 @@ static void hud_format_fraction(int value, int max, char* buf) {
     end[1] = 0xFF;
 }
 
-bool32 sub_8042218(int value) {
-    if (gHudElements[HUD_ELEMENT_36].state != HUD_STATE_HIDDEN) {
-        gHudElements[HUD_ELEMENT_36].timer = 0;
+bool32 hud_show_timer(int value) {
+    if (gHudElements[HUD_ELEMENT_TIMER].state != HUD_STATE_HIDDEN) {
+        gHudElements[HUD_ELEMENT_TIMER].timer = 0;
         return FALSE;
     }
 
-    gHudElements[HUD_ELEMENT_36].displayValue = value;
-    gHudElements[HUD_ELEMENT_36].targetValue = value;
-    gHudElements[HUD_ELEMENT_36].state = HUD_STATE_START;
-    gHudElements[HUD_ELEMENT_36].timer = 10;
+    gHudElements[HUD_ELEMENT_TIMER].displayValue = value;
+    gHudElements[HUD_ELEMENT_TIMER].targetValue = value;
+    gHudElements[HUD_ELEMENT_TIMER].state = HUD_STATE_START;
+    gHudElements[HUD_ELEMENT_TIMER].timer = 10;
     return TRUE;
 }
 

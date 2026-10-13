@@ -1451,8 +1451,8 @@ void init_arcade_menu(void) {
     set_player_state_to_none();
     byte_2000F56 = 1;
     gKeysDown = 0;
-    hud_set_value(55, byte_203E16C);
-    hud_keep_element_shown(55);
+    hud_set_value(HUD_ELEMENT_GOLDEN_COINS, gGoldenCoins);
+    hud_keep_element_shown(HUD_ELEMENT_GOLDEN_COINS);
 
     dword_203F4F4 = heap_alloc(sizeof(struct Sprite) * 3, 25, HEAP_GENERAL);
     dword_203F4F8 = heap_alloc(3, 25, HEAP_GENERAL);
@@ -1498,8 +1498,8 @@ void sub_8047000(bool32 a1) {
     set_player_state_to_none();
     byte_2000F56 = 1;
     gKeysDown = 0;
-    hud_set_value(55, byte_203E16C);
-    hud_keep_element_shown(55);
+    hud_set_value(HUD_ELEMENT_GOLDEN_COINS, gGoldenCoins);
+    hud_keep_element_shown(HUD_ELEMENT_GOLDEN_COINS);
 }
 
 void exec_arcade_menu(void) {
@@ -1536,7 +1536,7 @@ void exec_arcade_menu(void) {
             }
         } else {
             int idx = 4 * arcadePage + entry;
-            if (byte_203E16C >= dword_80CF3B0[idx]) {
+            if (gGoldenCoins >= dword_80CF3B0[idx]) {
                 dword_203F4E4 = ROOM_VILLAGE;
                 dword_203F4E8 = 25;
                 SetTextSpriteCount(0);
