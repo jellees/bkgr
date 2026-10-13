@@ -89,9 +89,10 @@ bool8 gHudCountersVisible;
 bool8 gHudStopRoulette;
 int gHudHealthFillSfx;
 
-static const u16 word_80A8CF0[] = { 0x473, 0x474, 0x475 };
+static const u16 dHealthBarSprites[] = { SPRITE_HONEYCOMB_EMPTY, SPRITE_HONEYCOMB,
+                                         SPRITE_HONEYCOMB_RED };
 
-static const u8 byte_80A8CF6[][8] = {
+static const u8 dHealthBarSegments[][8] = {
     { 0, 0, 0, 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0, 0, 0, 0 }, { 1, 1, 0, 0, 0, 0, 0, 0 },
     { 1, 1, 1, 0, 0, 0, 0, 0 }, { 1, 1, 1, 1, 0, 0, 0, 0 }, { 1, 1, 1, 1, 1, 0, 0, 0 },
     { 1, 1, 1, 1, 1, 1, 0, 0 }, { 1, 1, 1, 1, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -101,9 +102,9 @@ static const u8 byte_80A8CF6[][8] = {
     { 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-static const u16 word_80A8D8E[] = { 0x461, 0x462 };
+static const u16 dOxygenBarSprites[] = { SPRITE_OXYGEN_EMPTY, SPRITE_OXYGEN };
 
-static const u8 byte_80A8D92[][5] = {
+static const u8 dOxygenBarSegments[][5] = {
     { 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 0 }, { 1, 1, 0, 0, 0 },
     { 1, 1, 1, 0, 0 }, { 1, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 },
 };
@@ -741,15 +742,15 @@ static int hud_cmd_sprite_fit_fraction_right(struct HudElement* element, int ind
 
 static int hud_cmd_bar_init_health(struct HudElement* element, int start, int x, int y) {
     int i;
-    const u8* ptr = byte_80A8CF6[element->displayValue];
+    const u8* ptr = dHealthBarSegments[element->displayValue];
 
     for (i = start; i < element->spriteCount; i++) {
         element->sprites[i].x = x << FX32_SHIFT;
         element->sprites[i].y = y << FX32_SHIFT;
         element->sprites[i].sprite.xPos = x;
         element->sprites[i].sprite.yPos = y;
-        SetSprite((struct Sprite*)&element->sprites[i].sprite, word_80A8CF0[ptr[i - start]], 0, 0, 0, x,
-                  y, 2);
+        SetSprite((struct Sprite*)&element->sprites[i].sprite, dHealthBarSprites[ptr[i - start]], 0, 0,
+                  0, x, y, 2);
         element->sprites[i].initialized = TRUE;
     }
 
@@ -759,15 +760,15 @@ static int hud_cmd_bar_init_health(struct HudElement* element, int start, int x,
 
 static int hud_cmd_bar_init_oxygen(struct HudElement* element, int start, int x, int y) {
     int i;
-    const u8* ptr = byte_80A8D92[element->displayValue];
+    const u8* ptr = dOxygenBarSegments[element->displayValue];
 
     for (i = start; i < element->spriteCount; i++) {
         element->sprites[i].x = x << FX32_SHIFT;
         element->sprites[i].y = y << FX32_SHIFT;
         element->sprites[i].sprite.xPos = x;
         element->sprites[i].sprite.yPos = y;
-        SetSprite((struct Sprite*)&element->sprites[i].sprite, word_80A8D8E[ptr[i - start]], 0, 0, 0, x,
-                  y, 2);
+        SetSprite((struct Sprite*)&element->sprites[i].sprite, dOxygenBarSprites[ptr[i - start]], 0, 0,
+                  0, x, y, 2);
         element->sprites[i].initialized = TRUE;
     }
 
@@ -878,12 +879,12 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
                 if (element->rouletteStarted) {
                     sprite_set_anim(
                         (struct Sprite*)&element->sprites[element->rouletteIndex + start].sprite,
-                        word_80A8CF0[0], 0, 1);
+                        dHealthBarSprites[0], 0, 1);
                 } else {
                     element->rouletteStarted = TRUE;
                     for (i = start; i < element->spriteCount; i++) {
-                        sprite_set_anim((struct Sprite*)&element->sprites[i].sprite, word_80A8CF0[0], 0,
-                                        1);
+                        sprite_set_anim((struct Sprite*)&element->sprites[i].sprite,
+                                        dHealthBarSprites[0], 0, 1);
                     }
                 }
                 element->rouletteIndex++;
@@ -892,7 +893,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
                 }
                 sprite_set_anim(
                     (struct Sprite*)&element->sprites[element->rouletteIndex + start].sprite,
-                    word_80A8CF0[1], 0, 1);
+                    dHealthBarSprites[1], 0, 1);
                 element->rouletteStepDelay = unk_80CF330[gLoadedRoomLevel];
                 return HUD_SCRIPT_WAIT;
             }
@@ -929,12 +930,12 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
                 if (element->rouletteStarted) {
                     sprite_set_anim(
                         (struct Sprite*)&element->sprites[element->rouletteIndex + start].sprite,
-                        word_80A8CF0[0], 0, 1);
+                        dHealthBarSprites[0], 0, 1);
                 } else {
                     element->rouletteStarted = TRUE;
                     for (i = start; i < element->spriteCount; i++) {
-                        sprite_set_anim((struct Sprite*)&element->sprites[i].sprite, word_80A8CF0[0], 0,
-                                        1);
+                        sprite_set_anim((struct Sprite*)&element->sprites[i].sprite,
+                                        dHealthBarSprites[0], 0, 1);
                     }
                 }
 
@@ -944,7 +945,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
 
                 sprite_set_anim(
                     (struct Sprite*)&element->sprites[element->rouletteIndex + start].sprite,
-                    word_80A8CF0[1], 0, 1);
+                    dHealthBarSprites[1], 0, 1);
                 element->rouletteStepDelay = unk_80CF348[gLoadedRoomLevel];
                 return HUD_SCRIPT_WAIT;
             }
@@ -969,10 +970,10 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
             element->displayValue--;
         }
 
-        v1 = byte_80A8CF6[element->displayValue];
+        v1 = dHealthBarSegments[element->displayValue];
         for (i = start; i < element->spriteCount; i++) {
-            sprite_set_anim((struct Sprite*)&element->sprites[i].sprite, word_80A8CF0[v1[i - start]], 0,
-                            1);
+            sprite_set_anim((struct Sprite*)&element->sprites[i].sprite,
+                            dHealthBarSprites[v1[i - start]], 0, 1);
             element->sprites[i].initialized = TRUE;
         }
 
@@ -1003,10 +1004,10 @@ static int hud_cmd_bar_count_oxygen(struct HudElement* element, int start, int _
             element->displayValue--;
         }
 
-        v1 = byte_80A8D92[element->displayValue];
+        v1 = dOxygenBarSegments[element->displayValue];
         for (i = start; i < element->spriteCount; i++) {
-            sprite_set_anim((struct Sprite*)&element->sprites[i].sprite, word_80A8D8E[v1[i - start]], 0,
-                            1);
+            sprite_set_anim((struct Sprite*)&element->sprites[i].sprite,
+                            dOxygenBarSprites[v1[i - start]], 0, 1);
             element->sprites[i].initialized = TRUE;
         }
 
@@ -1860,20 +1861,28 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
     if (done) {
         if (isDiving) {
             if (byte_203E127) {
-                gHudElements[HUD_ELEMENT_PAUSE_NOTES].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_PAUSE_NOTES].keepShown = gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_NOTES].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_NOTES].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedKeepShown;
             }
             if (byte_203E128) {
-                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].keepShown = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedKeepShown;
             }
             if (byte_203E12B) {
-                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].keepShown = gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedKeepShown;
             }
             if (byte_203E12A) {
-                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].keepShown = gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedKeepShown;
             }
             if (gShowMovesLearnedCounter) {
                 gHudElements[HUD_ELEMENT_MOVES_LEARNED].slideSpeed =
@@ -1888,31 +1897,43 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
                     gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown;
             }
             if (byte_203E126) {
-                gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed = gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown = gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown =
+                    gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown;
             }
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed;
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].keepShown =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedKeepShown;
-            gHudElements[HUD_ELEMENT_OXYGEN].slideSpeed = gHudElements[HUD_ELEMENT_OXYGEN].savedSlideSpeed;
-            gHudElements[HUD_ELEMENT_OXYGEN].keepShown = gHudElements[HUD_ELEMENT_OXYGEN].savedKeepShown;
+            gHudElements[HUD_ELEMENT_OXYGEN].slideSpeed =
+                gHudElements[HUD_ELEMENT_OXYGEN].savedSlideSpeed;
+            gHudElements[HUD_ELEMENT_OXYGEN].keepShown =
+                gHudElements[HUD_ELEMENT_OXYGEN].savedKeepShown;
         } else {
             if (byte_203E127) {
-                gHudElements[HUD_ELEMENT_PAUSE_NOTES].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_PAUSE_NOTES].keepShown = gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_NOTES].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_NOTES].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_NOTES].savedKeepShown;
             }
             if (byte_203E128) {
-                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].keepShown = gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_JIGGIES].savedKeepShown;
             }
             if (byte_203E12B) {
-                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].keepShown = gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_MUMBO_TOKENS].savedKeepShown;
             }
             if (byte_203E12A) {
-                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].slideSpeed = gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].keepShown = gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].keepShown =
+                    gHudElements[HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS].savedKeepShown;
             }
             if (gShowMovesLearnedCounter) {
                 gHudElements[HUD_ELEMENT_MOVES_LEARNED].slideSpeed =
@@ -1927,28 +1948,38 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
                     gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown;
             }
             if (byte_203E126) {
-                gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed = gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown = gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown =
+                    gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown;
             }
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed;
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].keepShown =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedKeepShown;
             if (byte_203E122) {
-                gHudElements[HUD_ELEMENT_BLUE_EGGS].slideSpeed = gHudElements[HUD_ELEMENT_BLUE_EGGS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_BLUE_EGGS].keepShown = gHudElements[HUD_ELEMENT_BLUE_EGGS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_BLUE_EGGS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_BLUE_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_BLUE_EGGS].keepShown =
+                    gHudElements[HUD_ELEMENT_BLUE_EGGS].savedKeepShown;
             }
             if (byte_203E123) {
-                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].slideSpeed = gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].keepShown = gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].keepShown =
+                    gHudElements[HUD_ELEMENT_ELECTRIC_EGGS].savedKeepShown;
             }
             if (byte_203E125) {
-                gHudElements[HUD_ELEMENT_FIRE_EGGS].slideSpeed = gHudElements[HUD_ELEMENT_FIRE_EGGS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_FIRE_EGGS].keepShown = gHudElements[HUD_ELEMENT_FIRE_EGGS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_FIRE_EGGS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_FIRE_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_FIRE_EGGS].keepShown =
+                    gHudElements[HUD_ELEMENT_FIRE_EGGS].savedKeepShown;
             }
             if (byte_203E124) {
-                gHudElements[HUD_ELEMENT_ICE_EGGS].slideSpeed = gHudElements[HUD_ELEMENT_ICE_EGGS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_ICE_EGGS].keepShown = gHudElements[HUD_ELEMENT_ICE_EGGS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_ICE_EGGS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_ICE_EGGS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_ICE_EGGS].keepShown =
+                    gHudElements[HUD_ELEMENT_ICE_EGGS].savedKeepShown;
             }
         }
     }
