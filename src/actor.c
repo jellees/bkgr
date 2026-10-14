@@ -2,9 +2,12 @@
 #include "common.h"
 #include "audio_b.h"
 #include "heap.h"
+#include "hud.h"
 #include "main.h"
 #include "player.h"
+#include "random.h"
 #include "room.h"
+#include "actor_defs.h"
 
 /**
  * Finds a free slot for a streamed-in actor. Types 0x97-0xA8 use pool 2,
@@ -14,7 +17,7 @@
 struct Actor* actor_alloc(struct MapActor* mapActor) {
     int i;
 
-    if ((u16)(mapActor->type - 0x97) <= 0x11) {
+    if ((u16)(mapActor->type - ACTOR_097) <= ACTOR_0A8 - ACTOR_097) {
         ASSERT(gActorPool2Count != gActorPool2Capacity);
         for (i = 0; i < gActorPool2Capacity; i++) {
             if (!gActorPool2[i].isActive) {
@@ -285,7 +288,7 @@ void setup_entities(u32 room, int mode, struct MapActorSection* section) {
     for (i = 0; i < gEntitySection->groupCount; i++) {
         mapActor = gEntitySection->groups[i].actors;
         for (j = 0; j < gEntitySection->groups[i].count; mapActor++, j++) {
-            if (mapActor->type > 0xA8 && !is_obj_disabled(mapActor->type, mapActor->param)) {
+            if (mapActor->type > ACTOR_0A8 && !is_obj_disabled(mapActor->type, mapActor->param)) {
                 count1++;
                 if (mapActor->field_8 > maxUid1) {
                     maxUid1 = mapActor->field_8;
@@ -345,7 +348,7 @@ void setup_entities(u32 room, int mode, struct MapActorSection* section) {
                 if (is_obj_disabled(mapActor->type, mapActor->param)) {
                     continue;
                 }
-                if (mapActor->type > 0xA8) {
+                if (mapActor->type > ACTOR_0A8) {
                     fx32 halfX;
                     fx32 halfZ;
 
@@ -527,7 +530,7 @@ void sub_8028E30(void) {
     for (i = 0; i < gEntitySection->groupCount; i++) {
         mapActor = gEntitySection->groups[i].actors;
         for (j = 0; j < gEntitySection->groups[i].count; mapActor++, j++) {
-            if (mapActor->type > 0xA8) {
+            if (mapActor->type > ACTOR_0A8) {
                 continue;
             }
             if (dActorTypeFlags[mapActor->type] & 4) {
@@ -587,7 +590,7 @@ void sub_8028E30(void) {
             sub_80293C0(actor);
             dword_203E010[actor->field_1E] = 1;
 
-            if ((u16)(actor->type - 0x97) <= 0x11) {
+            if ((u16)(actor->type - ACTOR_097) <= ACTOR_0A8 - ACTOR_097) {
                 continue;
             }
 
@@ -620,47 +623,47 @@ void sub_8028E30(void) {
                 }
             } else {
                 switch (actor->type) {
-                    case 0x6C:
-                        if (is_obj_disabled(0xCD, 0)) {
+                    case ACTOR_06C:
+                        if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DC, FALSE, 0, 0, x, y, 2);
                         } else {
                             SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
                         }
                         break;
-                    case 0x6D:
-                        if (is_obj_disabled(0xCD, 0)) {
+                    case ACTOR_06D:
+                        if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DB, FALSE, 0, 0, x, y, 2);
                         } else {
                             SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
                         }
                         break;
-                    case 0x14:
+                    case ACTOR_SHOCK_SPRING_PAD:
                         if (!gUnlockedMoves[MOVE_SHOCK_JUMP]) {
                             SetSprite(&actor->sprite, 0x2D8, FALSE, 0, 0, x, y, 2);
                         } else {
                             SetSprite(&actor->sprite, 0x235, FALSE, 0, 0, x, y, 2);
                         }
                         break;
-                    case 0x15:
+                    case ACTOR_015:
                         if (!gUnlockedMoves[MOVE_WONDERWING]) {
                             SetSprite(&actor->sprite, 0x2D9, FALSE, 0, 0, x, y, 2);
                         } else {
                             SetSprite(&actor->sprite, 0x236, FALSE, 0, 0, x, y, 2);
                         }
                         break;
-                    case 0x16:
-                    case 0x93:
+                    case ACTOR_016:
+                    case ACTOR_093:
                         SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
                         actor->sprite.loopFrame = 20;
                         sprite_lock_anim_on_frame(&actor->sprite, 0);
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
-                    case 0x17:
+                    case ACTOR_017:
                         SetSprite(&actor->sprite, 0x238, FALSE, 0, 0, x, y, 2);
                         actor->sprite.loopFrame = 20;
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
-                    case 0x39:
+                    case ACTOR_039:
                         SetSprite(&actor->sprite, 0x25A, FALSE, 0, 0, x, y, 2);
                         actor->sprite.loopFrame = 4;
                         sprite_set_locked_frame(&actor->sprite, 0);
@@ -790,7 +793,7 @@ void s_load_object(int x, int y) {
             if (mapActor->field_0 < minOther || mapActor->field_0 > maxOther) {
                 continue;
             }
-            if (mapActor->type > 0xA8) {
+            if (mapActor->type > ACTOR_0A8) {
                 continue;
             }
             if (dActorTypeFlags[mapActor->type] & 4) {
@@ -847,7 +850,7 @@ void s_load_object(int x, int y) {
             sub_80293C0(actor);
             dword_203E010[actor->field_1E] = 1;
 
-            if ((u16)(actor->type - 0x97) <= 0x11) {
+            if ((u16)(actor->type - ACTOR_097) <= ACTOR_0A8 - ACTOR_097) {
                 continue;
             }
 
@@ -879,54 +882,54 @@ void s_load_object(int x, int y) {
                 }
             } else {
                 switch (actor->type) {
-                    case 0x6F:
+                    case ACTOR_06F:
                         SetSprite(&actor->sprite, 0x290, FALSE, 0, 0, spriteX, spriteY, 2);
                         actor->sprite.objMode = 1;
                         break;
-                    case 0x6C:
-                        if (is_obj_disabled(0xCD, 0)) {
+                    case ACTOR_06C:
+                        if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DC, FALSE, 0, 0, spriteX, spriteY, 2);
                         } else {
                             SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX,
                                       spriteY, 2);
                         }
                         break;
-                    case 0x6D:
-                        if (is_obj_disabled(0xCD, 0)) {
+                    case ACTOR_06D:
+                        if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DB, FALSE, 0, 0, spriteX, spriteY, 2);
                         } else {
                             SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX,
                                       spriteY, 2);
                         }
                         break;
-                    case 0x14:
+                    case ACTOR_SHOCK_SPRING_PAD:
                         if (!gUnlockedMoves[MOVE_SHOCK_JUMP]) {
                             SetSprite(&actor->sprite, 0x2D8, FALSE, 0, 0, spriteX, spriteY, 2);
                         } else {
                             SetSprite(&actor->sprite, 0x235, FALSE, 0, 0, spriteX, spriteY, 2);
                         }
                         break;
-                    case 0x15:
+                    case ACTOR_015:
                         if (!gUnlockedMoves[MOVE_WONDERWING]) {
                             SetSprite(&actor->sprite, 0x2D9, FALSE, 0, 0, spriteX, spriteY, 2);
                         } else {
                             SetSprite(&actor->sprite, 0x236, FALSE, 0, 0, spriteX, spriteY, 2);
                         }
                         break;
-                    case 0x16:
-                    case 0x93:
+                    case ACTOR_016:
+                    case ACTOR_093:
                         SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX, spriteY,
                                   2);
                         actor->sprite.loopFrame = 20;
                         sprite_lock_anim_on_frame(&actor->sprite, 0);
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
-                    case 0x17:
+                    case ACTOR_017:
                         SetSprite(&actor->sprite, 0x238, FALSE, 0, 0, spriteX, spriteY, 2);
                         actor->sprite.loopFrame = 20;
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
-                    case 0x39:
+                    case ACTOR_039:
                         SetSprite(&actor->sprite, 0x25A, FALSE, 0, 0, spriteX, spriteY, 2);
                         actor->sprite.loopFrame = 4;
                         sprite_set_locked_frame(&actor->sprite, 0);
@@ -1412,13 +1415,13 @@ void sub_802A944(struct RenderListEntry** renderList, u32* spriteCount) {
         } else if (actor->field_20) {
             if (--actor->field_20 == 0) {
                 switch (actor->type) {
-                    case 0xBF:
+                    case ACTOR_0BF:
                         sub_804888C(dword_203DFB8[actor->field_1E]);
                         break;
-                    case 0xC7:
-                    case 0xCF:
-                    case 0xD0:
-                    case 0xD3:
+                    case ACTOR_0C7:
+                    case ACTOR_0CF:
+                    case ACTOR_0D0:
+                    case ACTOR_0D3:
                         sub_804888C(dword_203DFB8[actor->field_1E]);
                         actor->sprite.attr0Flag9 = 1;
                         actor->shadowSprite.attr0Flag9 = 1;
@@ -1684,7 +1687,7 @@ int sub_0802B048(struct Vec3fx* pos) {
                             touched = sub_802BF74(actor);
                         }
                         if ((hit || touched) && actor->field_46) {
-                            if (actor->type == 0xCD) {
+                            if (actor->type == ACTOR_0CD) {
                                 vulnerable = dword_203F8B8 & gPlayerAttackState.attackFlag;
                             } else {
                                 vulnerable = word_80A75A4[actor->type] & gPlayerAttackState.attackFlag;
@@ -1702,7 +1705,7 @@ int sub_0802B048(struct Vec3fx* pos) {
                                     gPlayerAttackState.field_E = 0;
                                 }
                                 if (actor->field_46 <= 0) {
-                                    if (actor->type == 0xCD) {
+                                    if (actor->type == ACTOR_0CD) {
                                         run_obj_behavior(actor->type, actor->field_1E);
                                         break;
                                     }
@@ -1749,4 +1752,169 @@ int sub_0802B048(struct Vec3fx* pos) {
         }
     }
     return 0;
+}
+
+bool32 talk_with_npc(struct Vec3fx* pos, struct Actor* actor) {
+    byte_203DFDA = FALSE;
+    byte_203DFD9 = VecFX_PointInBox(pos, &actor->field_7C, &actor->field_88);
+    if (!byte_203DFD9) {
+        byte_203DFDA = VecFX_PointInBox(pos, &actor->field_64, &actor->field_70);
+    }
+    if (byte_203DFD9 || byte_203DFDA) {
+        if (!gInInteractionArea) {
+            if (actor->field_34 && dword_203DFE0 != actor) {
+                if (start_npc_dialogue(1)) {
+                    gInInteractionArea = TRUE;
+                    dword_203DFDC = actor;
+                    dword_203DFE0 = actor;
+                    return TRUE;
+                }
+                if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) {
+                    sub_80181B8(&gPlayerPos.y);
+                }
+            } else {
+                gInInteractionArea = TRUE;
+                dword_203DFDC = actor;
+                return TRUE;
+            }
+        }
+    } else if (gInInteractionArea && dword_203DFDC == actor) {
+        gInInteractionArea = FALSE;
+        dword_203DFE0 = NULL;
+    }
+    return FALSE;
+}
+
+bool32 pick_up_collectable(struct Vec3fx* pos, struct Actor* actor) {
+    if (VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
+        sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
+        actor->field_8 = sub_800C50C();
+        sprite_set_priority(&actor->sprite, actor->field_8);
+        actor->shadowSprite.attr0Flag9 = 1;
+        actor->field_3C = 1;
+        run_obj_behavior(actor->type, (s16)actor->field_1C);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 touch_lava_jetty_platform(struct Vec3fx* pos, struct Actor* actor, struct Vec3fx* min,
+                                 struct Vec3fx* max) {
+    if (CallARM_VecFX_BoxInBox(min, max, &actor->field_64, &actor->field_70)) {
+        sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
+        sprite_set_priority(&actor->sprite, actor->field_8);
+        actor->shadowSprite.attr0Flag9 = 1;
+        actor->field_3C = 1;
+        sub_8034460(actor->type, (s16)actor->field_1C, 3, &actor->sprite);
+        if (!byte_203E136) {
+            hud_init_element_value(HUD_ELEMENT_LAVA_JETTY_PLATFORMS, sub_8039650());
+            hud_set_value(HUD_ELEMENT_LAVA_JETTY_PLATFORMS, sub_8039650());
+            hud_keep_element_shown(HUD_ELEMENT_LAVA_JETTY_PLATFORMS);
+            byte_203E136 = TRUE;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 a2) {
+    struct Vec3fx min;
+    struct Vec3fx max;
+    bool32 hit;
+    bool32 touched;
+
+    hit = FALSE;
+    touched = FALSE;
+    if (gPlayerAttackState.field_E) {
+        if (gPlayerAttackState.attackFlag == 1) {
+            min.x = attackPos->x - 0xA0000;
+            max.x = attackPos->x + 0xA0000;
+            min.y = attackPos->y;
+            max.y = attackPos->y;
+            min.z = attackPos->z - 0xA0000;
+            max.z = attackPos->z + 0xA0000;
+            hit = CallARM_VecFX_BoxInBox(&min, &max, &actor->field_64, &actor->field_70);
+        } else {
+            hit = VecFX_PointInBox(attackPos, &actor->field_64, &actor->field_70);
+        }
+    }
+    if (hit) {
+        if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_HURTING) {
+            return 0;
+        }
+    } else if (!is_obj_disabled(actor->type, (s16)actor->field_1C) && sub_8034310(actor)) {
+        touched = sub_802BF74(actor);
+    }
+
+    if (hit || touched) {
+        if (actor->field_46 && (word_80A75A4[actor->type] & gPlayerAttackState.attackFlag)) {
+            if (gPlayerAttackState.attackFlag & 0x15E0) {
+                actor->field_46 -= gPlayerAttackState.field_F;
+                gPlayerAttackState.field_F = 0;
+            } else {
+                actor->field_46 -= gPlayerAttackState.field_E;
+                gPlayerAttackState.field_E = 0;
+            }
+            if (actor->field_46 <= 0 && !is_obj_disabled(actor->type, (s16)actor->field_1C)) {
+                if (!(dActorTypeFlags[actor->type] & 1)) {
+                    sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
+                    actor->field_3C = 1;
+                    sprite_set_priority(&actor->sprite, actor->field_8);
+                    actor->shadowSprite.attr0Flag9 = 1;
+                    actor->field_46 = dActorTypeInfo[actor->type].field_2;
+                    switch (actor->type) {
+                        case ACTOR_WHIPLASH:
+                        case ACTOR_03C:
+                        case ACTOR_054:
+                        case ACTOR_055:
+                        case ACTOR_08B:
+                            run_obj_behavior(actor->type, (s16)actor->field_1C);
+                            sub_802E024(1, actor);
+                            break;
+                        case ACTOR_066:
+                            run_obj_behavior(ACTOR_066, (s16)actor->field_1C);
+                            if (!a2) {
+                                hurt_player(1, -1, 2);
+                                return 1;
+                            }
+                            break;
+                        case ACTOR_041:
+                        case ACTOR_05F:
+                            sub_8034460(actor->type, (s16)actor->field_1C, 3, &actor->sprite);
+                            break;
+                        case ACTOR_BEEHIVE:
+                            run_obj_behavior(ACTOR_BEEHIVE, (s16)actor->field_1C);
+                            sub_0802C3A4(byte_80A7762[random_range(0, 0x27)], actor, -1, 0);
+                            break;
+                        default:
+                            run_obj_behavior(actor->type, (s16)actor->field_1C);
+                            break;
+                    }
+                } else {
+                    sub_0803381C(actor->type, (s16)actor->field_1C, actor->field_C);
+                    actor->field_46 = actor->field_18;
+                    if (!sub_8033118(actor->type, (s16)actor->field_1C, actor->field_C)) {
+                        sprite_set_anim(&actor->sprite, actor->type + 0x221, FALSE, 0);
+                    } else {
+                        sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 0);
+                    }
+                    return 1;
+                }
+            }
+        }
+    } else if (actor->field_34 && !(dActorTypeFlags[actor->type] & 1)
+               && CallARM_VecFX_BoxInBox(&actor->field_64, &actor->field_70, &stru_30032E8,
+                                         &stru_30032F4)
+               && !a2 && !gPlayerAttackState.field_E && gGameStatus.health) {
+        hurt_player(byte_80CC6B0[actor->type], -1, 2);
+        if (actor->type == ACTOR_091 && gGameStatus.goldenFeathers) {
+            if (--gGameStatus.goldenFeathers < 0) {
+                gGameStatus.goldenFeathers = 0;
+            }
+            hud_set_value(HUD_ELEMENT_GOLDEN_FEATHERS, gGameStatus.goldenFeathers);
+            sub_0802C3A4(2, actor, -1, 0);
+        }
+        return 1;
+    }
+    return -1;
 }

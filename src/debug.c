@@ -2,6 +2,7 @@
 #include "common.h"
 #include "heap.h"
 #include "sprite.h"
+#include "actor_defs.h"
 #include "main.h"
 #include "audio_b.h"
 #include "menu.h"
@@ -1785,7 +1786,7 @@ bool32 sub_8011540(void) {
                         gUnlockedMoves[i] = TRUE;
                     }
                     for (i = 0; i < gTotalAmountOfLevels; i++) {
-                        run_obj_behavior(223, i);
+                        run_obj_behavior(ACTOR_0DF, i);
                     }
                     gUnlockedLevels = gTotalAmountOfLevels;
                     sub_80388E0();

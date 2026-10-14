@@ -16,6 +16,7 @@ byte_203E130 = 0x203E130;
 byte_203E131 = 0x203E131;
 byte_203E132 = 0x203E132;
 byte_203E133 = 0x203E133;
+byte_203E136 = 0x203E136;
 byte_203E137 = 0x203E137;
 byte_203E138 = 0x203E138;
 
@@ -180,6 +181,8 @@ dActorPoolSizes = 0x80A7474;
 dActorTypeFlags = 0x80CC2B0;
 dActorTypeInfo = 0x80CC938;
 word_80A75A4 = 0x80A75A4;
+byte_80A7762 = 0x80A7762;
+byte_80CC6B0 = 0x80CC6B0;
 dword_80CF080 = 0x80CF080;
 word_80CF140 = 0x80CF140;
 dActorHitboxes = 0x80CCFFC;

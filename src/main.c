@@ -1,6 +1,7 @@
 #include "global.h"
 #include "common.h"
 #include "sprite.h"
+#include "actor_defs.h"
 #include "audio_a.h"
 #include "audio_b.h"
 #include "ingame_menu.h"
@@ -1970,7 +1971,7 @@ void sub_0800C388(int a1, int a2) {
     sub_8039210();
     gPlayerSprite.attr0Flag9 = 0;
 
-    if (gLoadedRoomIndex == ROOM_UNDERCORAL && !is_obj_disabled(94, 0)) {
+    if (gLoadedRoomIndex == ROOM_UNDERCORAL && !is_obj_disabled(ACTOR_05E, 0)) {
         start_script(80);
     }
 
@@ -2092,7 +2093,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_BEACHSHOOT:
-            if (!gUnlockedMoves[MOVE_EGG_BLUE] || is_obj_disabled(217, 10)) {
+            if (!gUnlockedMoves[MOVE_EGG_BLUE] || is_obj_disabled(ACTOR_0D9, 10)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2113,7 +2114,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_GRUNTYSHOOT:
-            if (is_obj_disabled(205, 0)) {
+            if (is_obj_disabled(ACTOR_0CD, 0)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2134,7 +2135,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_SKIDOOS:
-            if (is_obj_disabled(217, 14)) {
+            if (is_obj_disabled(ACTOR_0D9, 14)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2155,7 +2156,7 @@ static int sub_0800C63C(int room, u32 warp) {
             return 1;
 
         case ROOM_BOATFIGHT:
-            if (is_obj_disabled(217, 11)) {
+            if (is_obj_disabled(ACTOR_0D9, 11)) {
                 return 2;
             }
             audio_halt_all_fx();
@@ -2178,7 +2179,7 @@ static int sub_0800C63C(int room, u32 warp) {
         case ROOM_SHEEPDIP:
             switch (gLoadedRoomIndex) {
                 case ROOM_UPPERFARM:
-                    if (is_obj_disabled(217, 15)) {
+                    if (is_obj_disabled(ACTOR_0D9, 15)) {
                         return 2;
                     }
                     audio_halt_all_fx();
@@ -2199,7 +2200,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     return 1;
 
                 case ROOM_BOARDWALK:
-                    if (is_obj_disabled(217, 17)) {
+                    if (is_obj_disabled(ACTOR_0D9, 17)) {
                         return 2;
                     }
                     pause_efx();
@@ -2221,7 +2222,7 @@ static int sub_0800C63C(int room, u32 warp) {
                     return 1;
 
                 case ROOM_FJORD:
-                    if (is_obj_disabled(217, 18)) {
+                    if (is_obj_disabled(ACTOR_0D9, 18)) {
                         return 2;
                     }
                     audio_halt_all_fx();
@@ -2491,10 +2492,10 @@ void sub_800D5FC(int a1, int a2, int a3) {
     switch (a1) {
         case 9:
             room = ROOM_LOWERFARM;
-            if (is_obj_disabled(0xD9, 0x10)) {
+            if (is_obj_disabled(ACTOR_0D9, 0x10)) {
                 script = 0;
             } else if (a2) {
-                sub_8034460(217, 16, 0, 0);
+                sub_8034460(ACTOR_0D9, 16, 0, 0);
                 script = 69;
             } else {
                 script = 70;
@@ -2503,10 +2504,10 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 0:
             room = ROOM_BEACHSTART;
-            if (is_obj_disabled(0xD9, 9)) {
+            if (is_obj_disabled(ACTOR_0D9, 9)) {
                 script = 0;
             } else if (a2) {
-                sub_8034460(0xD9, 9, 0, 0);
+                sub_8034460(ACTOR_0D9, 9, 0, 0);
                 script = 84;
             } else {
                 script = 85;
@@ -2515,10 +2516,10 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 5:
             room = ROOM_SANDAREA;
-            if (is_obj_disabled(0xD9, 0xD)) {
+            if (is_obj_disabled(ACTOR_0D9, 0xD)) {
                 script = 0;
             } else if (a2) {
-                sub_8034460(0xD9, 0xD, 0, 0);
+                sub_8034460(ACTOR_0D9, 0xD, 0, 0);
                 script = 118;
             } else {
                 script = 119;
@@ -2527,8 +2528,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 1:
             room = ROOM_BEACHSTART;
-            if (a2 && !is_obj_disabled(0xD9, 0xA)) {
-                sub_8034460(0xD9, 0xA, 0, 0);
+            if (a2 && !is_obj_disabled(ACTOR_0D9, 0xA)) {
+                sub_8034460(ACTOR_0D9, 0xA, 0, 0);
                 script = 78;
                 break;
             } else {
@@ -2538,8 +2539,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 2:
             room = ROOM_HARBOUR;
-            if (a2 && !is_obj_disabled(0xCD, 0)) {
-                sub_8034460(0xCD, 0, 0, 0);
+            if (a2 && !is_obj_disabled(ACTOR_0CD, 0)) {
+                sub_8034460(ACTOR_0CD, 0, 0, 0);
                 script = 129;
                 break;
             } else {
@@ -2549,8 +2550,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 3:
             room = ROOM_BEACHSTART;
-            if (a2 && !is_obj_disabled(0xD9, 0xB)) {
-                run_obj_behavior(0xD9, 0xB);
+            if (a2 && !is_obj_disabled(ACTOR_0D9, 0xB)) {
+                run_obj_behavior(ACTOR_0D9, 0xB);
                 script = 0;
                 break;
             } else {
@@ -2560,8 +2561,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 4:
             room = ROOM_FJORD;
-            if (a2 && !is_obj_disabled(0xD9, 0xE)) {
-                run_obj_behavior(0xD9, 0xE);
+            if (a2 && !is_obj_disabled(ACTOR_0D9, 0xE)) {
+                run_obj_behavior(ACTOR_0D9, 0xE);
                 script = 0;
                 break;
             } else {
@@ -2571,8 +2572,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 6:
             room = ROOM_UPPERFARM;
-            if (a2 && !is_obj_disabled(0xD9, 0xF)) {
-                sub_8034460(0xD9, 0xF, 0, 0);
+            if (a2 && !is_obj_disabled(ACTOR_0D9, 0xF)) {
+                sub_8034460(ACTOR_0D9, 0xF, 0, 0);
                 script = 72;
             } else {
                 script = 0;
@@ -2581,8 +2582,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 7:
             room = ROOM_BOARDWALK;
-            if (a2 && !is_obj_disabled(0xD9, 0x11)) {
-                sub_8034460(0xD9, 0x11, 0, 0);
+            if (a2 && !is_obj_disabled(ACTOR_0D9, 0x11)) {
+                sub_8034460(ACTOR_0D9, 0x11, 0, 0);
                 script = 103;
             } else {
                 script = 0;
@@ -2591,8 +2592,8 @@ void sub_800D5FC(int a1, int a2, int a3) {
 
         case 8:
             room = ROOM_FJORD;
-            if (a2 && !is_obj_disabled(0xD9, 0x12)) {
-                sub_8034460(0xD9, 0x12, 0, 0);
+            if (a2 && !is_obj_disabled(ACTOR_0D9, 0x12)) {
+                sub_8034460(ACTOR_0D9, 0x12, 0, 0);
                 script = 147;
             } else {
                 script = 0;

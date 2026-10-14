@@ -7,6 +7,7 @@
 #include "room.h"
 #include "sprite.h"
 #include "script.h"
+#include "actor_defs.h"
 #include "player_defs.h"
 #include "random.h"
 #include "hud.h"
@@ -195,10 +196,10 @@ void sub_80166A0(void) {
         } else {
             sub_0802FEDC(333);
         }
-        sub_8034460(331, 0, 4, 0);
+        sub_8034460(ACTOR_14B, 0, 4, 0);
     } else {
         sub_0802FEDC(334);
-        sub_8034460(330, 0, 4, 0);
+        sub_8034460(ACTOR_14A, 0, 4, 0);
     }
 }
 
@@ -314,16 +315,16 @@ static void set_player_in_die_state() {
 int sub_8016A5C(int a1) {
     switch (a1) {
         case 1:
-            return is_obj_disabled(219, 0);
+            return is_obj_disabled(ACTOR_0DB, 0);
 
         case 2:
-            return is_obj_disabled(220, 0);
+            return is_obj_disabled(ACTOR_0DC, 0);
 
         case 3:
-            return is_obj_disabled(221, 0);
+            return is_obj_disabled(ACTOR_0DD, 0);
 
         case 4:
-            return is_obj_disabled(222, 0);
+            return is_obj_disabled(ACTOR_0DE, 0);
     }
 
     return 0;
@@ -345,7 +346,7 @@ void finish_stop_honeycomb(void) {
 
 void sub_8016B18(void) {
     start_script(42);
-    sub_8034460(253, 0, 5, 0);
+    sub_8034460(ACTOR_0FD, 0, 5, 0);
     if (gCanChangeBgm) {
         audio_start_tune(6);
     }
@@ -495,41 +496,41 @@ static bool32 interact_with_object() {
                 sub_800386C(dword_2000FC8, 0, 0);
                 sub_8016C78(0);
                 sub_8016670();
-                if (!is_obj_disabled(328, 0)) {
-                    run_obj_behavior(328, 0);
+                if (!is_obj_disabled(ACTOR_148, 0)) {
+                    run_obj_behavior(ACTOR_148, 0);
                 } else {
-                    run_obj_behavior(329, 0);
+                    run_obj_behavior(ACTOR_149, 0);
                 }
             }
             break;
 
         case 108:
-            if (is_obj_disabled(205, 0)) {
+            if (is_obj_disabled(ACTOR_0CD, 0)) {
                 didInteract = FALSE;
                 break;
             }
             start_script(17);
-            sub_8034460(406, 0, 0, 0);
+            sub_8034460(ACTOR_196, 0, 0, 0);
             break;
 
         case 109:
-            if (!is_obj_disabled(205, 0)) {
+            if (!is_obj_disabled(ACTOR_0CD, 0)) {
                 didInteract = FALSE;
                 break;
             }
             start_script(17);
-            sub_8034460(407, 0, 0, 0);
+            sub_8034460(ACTOR_197, 0, 0, 0);
             break;
 
         case 43:
             if (byte_203E10F) {
                 byte_20020B2 = 1;
-                run_obj_behavior(223, gUnlockedLevels);
+                run_obj_behavior(ACTOR_0DF, gUnlockedLevels);
                 gInputDemoRecords = unk_80B21B4;
                 gInputDemoRecordCount = dword_80B21B8;
                 start_script(byte_80CEBC8[gUnlockedLevels++]);
-                sub_8034460(228, 0, 2, 0);
-                sub_8034460(229, 0, 0, 0);
+                sub_8034460(ACTOR_0E4, 0, 2, 0);
+                sub_8034460(ACTOR_0E5, 0, 0, 0);
                 break;
             }
             didInteract = FALSE;
