@@ -14,7 +14,7 @@ struct Timer {
     u16 framesLeft;   // Starts at startFrames; the timer finishes when it reaches 0.
     u16 seconds;      // The value shown on the HUD.
     u8 frameCounter;  // Frames until the next change of seconds.
-    u8 direction;     // enum TimerDirection
+    u8 direction;
     bool8 hudPending; // The HUD element could not be shown yet; retried every frame.
     bool8 active;
     bool8 paused;
