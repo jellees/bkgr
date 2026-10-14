@@ -2,7 +2,6 @@
 #include "common.h"
 #include "sprite.h"
 #include "heap.h"
-#include "sprite.h"
 #include "menu.h"
 #include "main.h"
 
@@ -243,16 +242,16 @@ void menu_load(int menu, int language) {
             gMenu.useSpriteBuffer = 1;
             gMenu.spriteBuffer = heap_alloc(sizeof(struct Sprite) * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
-            SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_1, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             i++;
-            SetSprite(&gMenu.spriteBuffer[i], 0x477, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_2, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             i++;
-            SetSprite(&gMenu.spriteBuffer[i], 0x478, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_3, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             i++;
-            SetSprite(&gMenu.spriteBuffer[i], 0x479, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_4, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             switch (language) {
                 case 0:
@@ -323,10 +322,10 @@ void menu_load(int menu, int language) {
             gMenu.useSpriteBuffer = 1;
             gMenu.spriteBuffer = heap_alloc(28 * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
-            SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_1, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             i++;
-            SetSprite(&gMenu.spriteBuffer[i], 0x477, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_2, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             switch (language) {
                 case 0:
@@ -387,10 +386,10 @@ void menu_load(int menu, int language) {
             gMenu.useSpriteBuffer = 1;
             gMenu.spriteBuffer = heap_alloc(28 * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
-            SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_1, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             i++;
-            SetSprite(&gMenu.spriteBuffer[i], 0x477, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_2, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             switch (language) {
                 case 0:
@@ -451,10 +450,10 @@ void menu_load(int menu, int language) {
             gMenu.useSpriteBuffer = 1;
             gMenu.spriteBuffer = heap_alloc(28 * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
-            SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_1, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             i++;
-            SetSprite(&gMenu.spriteBuffer[i], 0x477, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_2, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             switch (language) {
                 case 0:
@@ -584,17 +583,17 @@ void menu_load(int menu, int language) {
             gMenu.useSpriteBuffer = 1;
             gMenu.spriteBuffer = heap_alloc(28 * gMenu.entryCount, 15, HEAP_GENERAL);
             i = 0;
-            SetSprite(&gMenu.spriteBuffer[i], 0x476, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_1, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             i++;
-            SetSprite(&gMenu.spriteBuffer[i], 0x477, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_2, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
             i++;
-            SetSprite(&gMenu.spriteBuffer[i], 0x478, 0, 0, 0, gMenu.xPosition,
+            SetSprite(&gMenu.spriteBuffer[i], SPRITE_MENU_JIGGY_3, 0, 0, 0, gMenu.xPosition,
                       gMenu.yPosition + i * gMenu.lineHeight, 2);
-            gMenu.texts[0] = dword_203FA7C;
-            gMenu.texts[1] = dword_203FA80;
-            gMenu.texts[2] = dword_203FA84;
+            gMenu.texts[0] = gQuizAnswerText1;
+            gMenu.texts[1] = gQuizAnswerText2;
+            gMenu.texts[2] = gQuizAnswerText3;
             break;
 
         case 10:

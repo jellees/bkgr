@@ -354,9 +354,9 @@ static void init(void) {
     gLevelNameTextBox.field_11 = 6;
     gLevelNameTextBox.font = &font_80B01A8[1];
 
-    SetSprite(&gPauseMenuJiggySprite, 0x47A, 0, 0, 0, 0x48, 0x83, 2);        // Jiggy
-    SetSprite(&gPauseMenuControlsSprites[1], 0x486, 0, 0, 0, 0xA4, 0x90, 2); // A button
-    SetSprite(&gPauseMenuControlsSprites[2], 0x487, 0, 0, 0, 0x4C, 0x90, 2); // D-pad
+    SetSprite(&gPauseMenuJiggySprite, SPRITE_PAUSE_MENU_JIGGY, 0, 0, 0, 0x48, 0x83, 2); // Jiggy
+    SetSprite(&gPauseMenuControlsSprites[1], 0x486, 0, 0, 0, 0xA4, 0x90, 2);            // A button
+    SetSprite(&gPauseMenuControlsSprites[2], 0x487, 0, 0, 0, 0x4C, 0x90, 2);            // D-pad
 
     byte_203F54C = TRUE;
 }

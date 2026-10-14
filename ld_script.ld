@@ -118,9 +118,9 @@ SECTIONS
         dword_203FA5C = .; . += 4;
 
         . = 0x0003FA7C;
-        dword_203FA7C = .; . += 4;
-        dword_203FA80 = .; . += 4;
-        dword_203FA84 = .; . += 4;
+        gQuizAnswerText1 = .; . += 4;
+        gQuizAnswerText2 = .; . += 4;
+        gQuizAnswerText3 = .; . += 4;
         byte_203FA88 = .; . += 1;
 
         . = 0x0003FA8C;

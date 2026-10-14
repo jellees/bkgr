@@ -915,9 +915,9 @@ extern u8 byte_203FA35; // possibly bool8
 extern u8 byte_203FA58;
 extern struct struc_46* dword_203FA5C;
 
-extern char* dword_203FA7C;
-extern char* dword_203FA80;
-extern char* dword_203FA84;
+extern char* gQuizAnswerText1;
+extern char* gQuizAnswerText2;
+extern char* gQuizAnswerText3;
 extern u8 byte_203FA88;
 
 extern u32 dword_203FA8C;
