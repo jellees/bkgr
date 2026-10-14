@@ -415,7 +415,7 @@ struct struc_50 {
 
 struct GameStatus {
     u8 totalJiggies;
-    u8 totalHoneycombs;
+    u8 totalHollowHoneycombs;
     u8 mumboTokensCliffFarm;
     u8 mumboTokensBadMagicBayou;
     u8 mumboTokensFreezingFurnace;
@@ -454,7 +454,7 @@ struct SaveFile {
 
 struct level_struc {
     u8 jiggyCount;
-    u8 honeycombCount;
+    u8 hollowHoneycombCount;
     u8 captiveBreegulls;
     u8 shellCount;
     u8 chickCount;

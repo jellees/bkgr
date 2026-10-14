@@ -613,7 +613,8 @@ static void start_game() {
         sprite_set_priority(&gPlayerSprite, stru_3002950.playerSpritePriority);
         SetSprite(&gPlayerSprite, SPRITE_BANJO_IDLE + DIRECTION_DOWN, 0, DIRECTION_DOWN, 0,
                   gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
-        SetSprite(&gPlayerShadowSprite, SPRITE_SHADOW, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerShadowSprite, SPRITE_SHADOW, 0, 0, 1, gPlayerInitPixelPosX,
+                  gPlayerInitPixelPosY, 2);
         sprite_lock_anim_on_frame(&gPlayerShadowSprite, 0);
         gPlayerShadowSprite.objMode = ST_OAM_OBJ_BLEND;
         gPlayerShadowSprite.attr0Flag9 = 0;
@@ -644,7 +645,8 @@ static void start_game() {
         init_room_name();
         SetSprite(&gPlayerSprite, SPRITE_BANJO_IDLE + DIRECTION_DOWN, 0, DIRECTION_DOWN, 0,
                   gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
-        SetSprite(&gPlayerShadowSprite, SPRITE_SHADOW, 0, 0, 1, gPlayerInitPixelPosX, gPlayerInitPixelPosY, 2);
+        SetSprite(&gPlayerShadowSprite, SPRITE_SHADOW, 0, 0, 1, gPlayerInitPixelPosX,
+                  gPlayerInitPixelPosY, 2);
         sprite_lock_anim_on_frame(&gPlayerShadowSprite, 0);
         gPlayerShadowSprite.objMode = ST_OAM_OBJ_BLEND;
         gPlayerShadowSprite.attr0Flag9 = 0;
@@ -3911,7 +3913,7 @@ bool32 is_game_complete(void) {
     bool32 complete = FALSE;
     if (gGameStatus.totalNotes == stru_80CC8C4.totalNotes
         && gGameStatus.totalJiggies == stru_80CC8C4.totalJiggies
-        && gGameStatus.totalHoneycombs == stru_80CC8C4.totalHoneycombs) {
+        && gGameStatus.totalHollowHoneycombs == stru_80CC8C4.totalHollowHoneycombs) {
         complete = TRUE;
     }
     return complete;

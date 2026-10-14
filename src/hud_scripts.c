@@ -215,11 +215,11 @@ const HudScriptInstructions dHudScriptShells = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptHoneycombs = {
+const HudScriptInstructions dHudScriptHollowHoneycombs = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, -20, 132)
-    HudSpriteInit(0, SPRITE_ICON_HONEYCOMB, FALSE)
+    HudSpriteInit(0, SPRITE_ICON_HOLLOW_HONEYCOMB, FALSE)
     HudSpriteSetPosition(1, -60, 140)
     HudSpriteInit(1, SPRITE_TEXT_BAR_RIGHT_BIG, TRUE)
     HudSpriteSlideRight(1, 36)
@@ -933,11 +933,11 @@ const HudScriptInstructions dHudScriptTotalsMovesLearned = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptTotalsHoneycombs = {
+const HudScriptInstructions dHudScriptTotalsHollowHoneycombs = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, -20, 36)
-    HudSpriteInit(0, SPRITE_ICON_HONEYCOMB, FALSE)
+    HudSpriteInit(0, SPRITE_ICON_HOLLOW_HONEYCOMB, FALSE)
     HudSpriteSetPosition(1, -84, 44)
     HudSpriteInit(1, SPRITE_TEXT_BAR_RIGHT_SMALL, TRUE)
     HudSpriteSlideRight(1, 36)
@@ -1315,11 +1315,11 @@ const HudScriptInstructions dHudScriptBozzeyeNotes = {
     HudEnd
 };
 
-const HudScriptInstructions dHudScriptHoneyBHoneycombs = {
+const HudScriptInstructions dHudScriptHoneyBHollowHoneycombs = {
     HudAllocSprites(2, HUD_ALLOC_FIXED)
     HudSetState(HUD_STATE_SLIDE_IN)
     HudSpriteSetPosition(0, 244, 12)
-    HudSpriteInit(0, SPRITE_ICON_HONEYCOMB, FALSE)
+    HudSpriteInit(0, SPRITE_ICON_HOLLOW_HONEYCOMB, FALSE)
     HudSpriteSetPosition(1, 324, 20)
     HudSpriteInit(1, SPRITE_TEXT_BAR_LEFT_SMALL, TRUE)
     HudSpriteSlideLeft(1, 36)
@@ -1805,7 +1805,8 @@ const struct HudScript dHudScripts[HUD_ELEMENT_COUNT] = {
     [HUD_ELEMENT_GOLDEN_FEATHERS] = { ARRAY_COUNT(dHudScriptGoldenFeathers), dHudScriptGoldenFeathers },
     [HUD_ELEMENT_MOVES_LEARNED] = { ARRAY_COUNT(dHudScriptMovesLearned), dHudScriptMovesLearned },
     [HUD_ELEMENT_SHELLS] = { ARRAY_COUNT(dHudScriptShells), dHudScriptShells },
-    [HUD_ELEMENT_HONEYCOMBS] = { ARRAY_COUNT(dHudScriptHoneycombs), dHudScriptHoneycombs },
+    [HUD_ELEMENT_HOLLOW_HONEYCOMBS] = { ARRAY_COUNT(dHudScriptHollowHoneycombs),
+                                        dHudScriptHollowHoneycombs },
     [HUD_ELEMENT_LEVEL_JINJOS] = { ARRAY_COUNT(dHudScriptLevelJinjos), dHudScriptLevelJinjos },
     [HUD_ELEMENT_CHICKS] = { ARRAY_COUNT(dHudScriptChicks), dHudScriptChicks },
     [HUD_ELEMENT_BLUE_EGGS] = { ARRAY_COUNT(dHudScriptBlueEggs), dHudScriptBlueEggs },
@@ -1831,8 +1832,8 @@ const struct HudScript dHudScripts[HUD_ELEMENT_COUNT] = {
                                           dHudScriptTotalsMumboTokens },
     [HUD_ELEMENT_TOTALS_MOVES_LEARNED] = { ARRAY_COUNT(dHudScriptTotalsMovesLearned),
                                            dHudScriptTotalsMovesLearned },
-    [HUD_ELEMENT_TOTALS_HONEYCOMBS] = { ARRAY_COUNT(dHudScriptTotalsHoneycombs),
-                                        dHudScriptTotalsHoneycombs },
+    [HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS] = { ARRAY_COUNT(dHudScriptTotalsHollowHoneycombs),
+                                               dHudScriptTotalsHollowHoneycombs },
     [HUD_ELEMENT_TOTALS_CHICKS] = { ARRAY_COUNT(dHudScriptTotalsChicks), dHudScriptTotalsChicks },
     [HUD_ELEMENT_TOTALS_SHELLS] = { ARRAY_COUNT(dHudScriptTotalsShells), dHudScriptTotalsShells },
     [HUD_ELEMENT_TOTALS_SILVER_COINS] = { ARRAY_COUNT(dHudScriptTotalsSilverCoins),
@@ -1850,8 +1851,8 @@ const struct HudScript dHudScripts[HUD_ELEMENT_COUNT] = {
                                           dHudScriptMechaGruntyHealth },
     [HUD_ELEMENT_KLUNGO_HEALTH] = { ARRAY_COUNT(dHudScriptKlungoHealth), dHudScriptKlungoHealth },
     [HUD_ELEMENT_BOZZEYE_NOTES] = { ARRAY_COUNT(dHudScriptBozzeyeNotes), dHudScriptBozzeyeNotes },
-    [HUD_ELEMENT_HONEY_B_HONEYCOMBS] = { ARRAY_COUNT(dHudScriptHoneyBHoneycombs),
-                                         dHudScriptHoneyBHoneycombs },
+    [HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS] = { ARRAY_COUNT(dHudScriptHoneyBHollowHoneycombs),
+                                                dHudScriptHoneyBHollowHoneycombs },
     [HUD_ELEMENT_JIGGYWIGGY_JIGGIES] = { ARRAY_COUNT(dHudScriptJiggywiggyJiggies),
                                          dHudScriptJiggywiggyJiggies },
     [HUD_ELEMENT_PAUSE_GOLDEN_FEATHERS] = { ARRAY_COUNT(dHudScriptPauseGoldenFeathers),

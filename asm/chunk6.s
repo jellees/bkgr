@@ -35283,7 +35283,7 @@ _0803B810: .4byte 0x0203E170
 _0803B814: .4byte gLoadedRoomLevel
 
 	.thumb
-obj_disabled_extra_honeycomb_piece: @ 0x0803B818
+obj_disabled_hollow_honeycomb: @ 0x0803B818
 	ldr r3, _0803B830
 	ldr r0, _0803B834
 	ldrh r2, [r0]

@@ -1080,10 +1080,10 @@ void hud_load_counters(void) {
     gHudElements[HUD_ELEMENT_CHICKS].displayValue = byte_2000FCC[gLoadedRoomLevel].chickCount;
     gHudElements[HUD_ELEMENT_CHICKS].targetValue = gHudElements[HUD_ELEMENT_CHICKS].displayValue;
 
-    gHudElements[HUD_ELEMENT_HONEYCOMBS].maxValue = stru_80CC8C4.totalHoneycombs;
-    gHudElements[HUD_ELEMENT_HONEYCOMBS].displayValue = gGameStatus.totalHoneycombs;
-    gHudElements[HUD_ELEMENT_HONEYCOMBS].targetValue =
-        gHudElements[HUD_ELEMENT_HONEYCOMBS].displayValue;
+    gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].maxValue = stru_80CC8C4.totalHollowHoneycombs;
+    gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].displayValue = gGameStatus.totalHollowHoneycombs;
+    gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].targetValue =
+        gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].displayValue;
 
     gHudElements[HUD_ELEMENT_PAUSE_JINJOS].maxValue = stru_80CC8C4.totalJinjos;
     gHudElements[HUD_ELEMENT_PAUSE_JINJOS].displayValue = gGameStatus.totalJinjos;
@@ -1242,12 +1242,12 @@ void hud_set_value(u32 element, int value) {
             gHudElements[element].displayValue = value;
             break;
 
-        case HUD_ELEMENT_HONEYCOMBS:
+        case HUD_ELEMENT_HOLLOW_HONEYCOMBS:
             ASSERT(gHudElements[element].displayValue <= value);
             gHudElements[element].targetValue = value;
-            max = hud_get_element_max(HUD_ELEMENT_HONEY_B_HONEYCOMBS);
+            max = hud_get_element_max(HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS);
             if (max >= 0) {
-                hud_set_value(HUD_ELEMENT_HONEY_B_HONEYCOMBS, max);
+                hud_set_value(HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS, max);
             }
             break;
 
@@ -1359,10 +1359,10 @@ void hud_set_value(u32 element, int value) {
             gHudElements[element].targetValue = gGameStatus.totalNotes;
             break;
 
-        case HUD_ELEMENT_HONEY_B_HONEYCOMBS:
+        case HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS:
             gHudElements[element].maxValue = value;
-            gHudElements[element].displayValue = gGameStatus.totalHoneycombs;
-            gHudElements[element].targetValue = gGameStatus.totalHoneycombs;
+            gHudElements[element].displayValue = gGameStatus.totalHollowHoneycombs;
+            gHudElements[element].targetValue = gGameStatus.totalHollowHoneycombs;
             break;
 
         case HUD_ELEMENT_JIGGYWIGGY_JIGGIES:
@@ -1685,13 +1685,13 @@ void hud_show_pause_counters(int isDiving) {
         gHudElements[HUD_ELEMENT_PAUSE_JINJOS].keepShown = FALSE;
     }
     if (byte_203E126) {
-        gHudElements[HUD_ELEMENT_HONEYCOMBS].state = HUD_STATE_START;
-        gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed =
-            gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed;
-        gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed = FX32_CONST(4);
-        gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown =
-            gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown;
-        gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown = FALSE;
+        gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].slideSpeed;
+        gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].keepShown;
+        gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].keepShown = FALSE;
     }
 
     gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state = HUD_STATE_START;
@@ -1777,7 +1777,7 @@ bool32 hud_are_pause_counters_shown(int isDiving) {
     if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_HONEYCOMBS].state != HUD_STATE_SHOWN) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
 
@@ -1832,7 +1832,7 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
     if (gShowMovesLearnedCounter && gHudElements[HUD_ELEMENT_MOVES_LEARNED].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_HONEYCOMBS].state != HUD_STATE_HIDDEN) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
     if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_HIDDEN) {
@@ -1897,10 +1897,10 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
                     gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown;
             }
             if (byte_203E126) {
-                gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed =
-                    gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown =
-                    gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].keepShown =
+                    gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].savedKeepShown;
             }
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed;
@@ -1948,10 +1948,10 @@ bool32 hud_are_pause_counters_hidden(int isDiving) {
                     gHudElements[HUD_ELEMENT_PAUSE_JINJOS].savedKeepShown;
             }
             if (byte_203E126) {
-                gHudElements[HUD_ELEMENT_HONEYCOMBS].slideSpeed =
-                    gHudElements[HUD_ELEMENT_HONEYCOMBS].savedSlideSpeed;
-                gHudElements[HUD_ELEMENT_HONEYCOMBS].keepShown =
-                    gHudElements[HUD_ELEMENT_HONEYCOMBS].savedKeepShown;
+                gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].slideSpeed =
+                    gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].savedSlideSpeed;
+                gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].keepShown =
+                    gHudElements[HUD_ELEMENT_HOLLOW_HONEYCOMBS].savedKeepShown;
             }
             gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].slideSpeed =
                 gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].savedSlideSpeed;
@@ -2067,17 +2067,19 @@ void hud_show_totals_counters(u32 page) {
         gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].keepShown = FALSE;
     }
     if (byte_203E126) {
-        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].maxValue = stru_80CC84C[page].honeycombCount;
-        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].displayValue = byte_2000FCC[page].honeycombCount;
-        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].targetValue =
-            gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].displayValue;
-        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].state = HUD_STATE_START;
-        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].savedSlideSpeed =
-            gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].slideSpeed;
-        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].slideSpeed = FX32_CONST(4);
-        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].savedKeepShown =
-            gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].keepShown;
-        gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].keepShown = FALSE;
+        gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].maxValue =
+            stru_80CC84C[page].hollowHoneycombCount;
+        gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].displayValue =
+            byte_2000FCC[page].hollowHoneycombCount;
+        gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].targetValue =
+            gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].displayValue;
+        gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].state = HUD_STATE_START;
+        gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].savedSlideSpeed =
+            gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].slideSpeed;
+        gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].slideSpeed = FX32_CONST(4);
+        gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].savedKeepShown =
+            gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].keepShown;
+        gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].keepShown = FALSE;
     }
 
     switch (page) {
@@ -2231,10 +2233,12 @@ void hud_show_totals_counters(u32 page) {
                     gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].displayValue;
             }
             if (byte_203E126) {
-                gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].maxValue = stru_80CC8C4.totalHoneycombs;
-                gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].displayValue = gGameStatus.totalHoneycombs;
-                gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].targetValue =
-                    gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].displayValue;
+                gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].maxValue =
+                    stru_80CC8C4.totalHollowHoneycombs;
+                gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].displayValue =
+                    gGameStatus.totalHollowHoneycombs;
+                gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].targetValue =
+                    gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].displayValue;
             }
             break;
 
@@ -2269,7 +2273,7 @@ bool32 hud_are_totals_counters_shown(int page) {
         && gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].state != HUD_STATE_SHOWN) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].state != HUD_STATE_SHOWN) {
         done = FALSE;
     }
 
@@ -2342,7 +2346,7 @@ bool32 hud_are_totals_counters_hidden(int page) {
         && gHudElements[HUD_ELEMENT_TOTALS_MOVES_LEARNED].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
-    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTALS_HONEYCOMBS].state != HUD_STATE_HIDDEN) {
+    if (byte_203E126 && gHudElements[HUD_ELEMENT_TOTALS_HOLLOW_HONEYCOMBS].state != HUD_STATE_HIDDEN) {
         done = FALSE;
     }
 
@@ -2410,8 +2414,8 @@ void hud_dismiss_all(void) {
 void hud_dismiss_npc_counters(void) {
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].timer = 0;
     gHudElements[HUD_ELEMENT_BOZZEYE_NOTES].keepShown = FALSE;
-    gHudElements[HUD_ELEMENT_HONEY_B_HONEYCOMBS].timer = 0;
-    gHudElements[HUD_ELEMENT_HONEY_B_HONEYCOMBS].keepShown = FALSE;
+    gHudElements[HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS].timer = 0;
+    gHudElements[HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_JIGGYWIGGY_JIGGIES].timer = 0;
     gHudElements[HUD_ELEMENT_JIGGYWIGGY_JIGGIES].keepShown = FALSE;
     gHudElements[HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS].timer = 0;
