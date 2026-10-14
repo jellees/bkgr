@@ -14,6 +14,7 @@
 #include "menu.h"
 #include "random.h"
 #include "script.h"
+#include "script_defs.h"
 #include "hud.h"
 #include "timer.h"
 
@@ -264,12 +265,12 @@ static void update_game(void) {
     gNullsub_3();
     sub_806127C();
 
-    if (gPriorityScriptIdx == 12 && byte_20021F8
+    if (gPriorityScriptIdx == SCRIPT_012 && byte_20021F8
         && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE)) {
         if (byte_2000F55 || gKeysDown & B_BUTTON) {
             sub_80271A4(0xFFF, 1);
             end_all_scripts(2);
-            start_script(43);
+            start_script(SCRIPT_043);
         }
     }
 
@@ -626,7 +627,7 @@ static void start_game() {
         }
 
         random_init();
-        start_script(12);
+        start_script(SCRIPT_012);
         gClockEnabled = 1;
     } else {
         gLoadedRoomLevel = LEVEL_NONE;
@@ -1971,8 +1972,8 @@ void sub_0800C388(int a1, int a2) {
     sub_8039210();
     gPlayerSprite.attr0Flag9 = 0;
 
-    if (gLoadedRoomIndex == ROOM_UNDERCORAL && !is_obj_disabled(ACTOR_05E, 0)) {
-        start_script(80);
+    if (gLoadedRoomIndex == ROOM_UNDERCORAL && !is_obj_disabled(ACTOR_DOLPHIN_SHIP_ENTRANCE, 0)) {
+        start_script(SCRIPT_DOLPHIN_LEAD_TO_SHIP);
     }
 
     if (gInInteractionArea) {

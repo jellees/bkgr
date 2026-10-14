@@ -358,27 +358,27 @@ void start_script(int idx) {
     gIsPriorityScriptActive = TRUE;
 
     switch (idx) {
-        case 3:
-        case 6:
-        case 31:
-        case 41:
-        case 42:
-        case 45:
-        case 47:
-        case 50:
-        case 65:
-        case 68:
-        case 92:
-        case 93:
-        case 94:
-        case 97:
-        case 101:
-        case 114:
-        case 132:
-        case 133:
-        case 141:
-        case 178:
-        case 180:
+        case SCRIPT_003:
+        case SCRIPT_006:
+        case SCRIPT_031:
+        case SCRIPT_041:
+        case SCRIPT_042:
+        case SCRIPT_045:
+        case SCRIPT_047:
+        case SCRIPT_050:
+        case SCRIPT_065:
+        case SCRIPT_068:
+        case SCRIPT_092:
+        case SCRIPT_093:
+        case SCRIPT_094:
+        case SCRIPT_097:
+        case SCRIPT_101:
+        case SCRIPT_114:
+        case SCRIPT_132:
+        case SCRIPT_133:
+        case SCRIPT_141:
+        case SCRIPT_178:
+        case SCRIPT_180:
             update_scripts();
             break;
     }

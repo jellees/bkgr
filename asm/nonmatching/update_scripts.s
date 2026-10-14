@@ -115,7 +115,7 @@ _0805DE58: .4byte gBackgroundScriptIdx
 _0805DE5C: .4byte 0x0203F9A4
 _0805DE60: .4byte 0x0203FA16
 _0805DE64: .4byte 0x0203F9F4
-_0805DE68: .4byte 0x087DFF54
+_0805DE68: .4byte dScripts
 _0805DE6C: .4byte 0x080B2050
 _0805DE70:
 	ldr r0, [r7]
@@ -214,7 +214,7 @@ _0805DEEC:
 	.align 2, 0
 _0805DF30: .4byte gBackgroundScriptIdx
 _0805DF34: .4byte 0x0203F9F4
-_0805DF38: .4byte 0x087DFF54
+_0805DF38: .4byte dScripts
 _0805DF3C: .4byte 0x080B2050
 _0805DF40:
 	ldr r1, [r7]

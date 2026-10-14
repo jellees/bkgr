@@ -314,6 +314,8 @@ SECTIONS
         asm/data2.o(.rodata);
         asm/eeprom.o(.rodata);
         asm/data1.o(.rodata);
+        src/script_table.o(.rodata);
+        asm/data5.o(.rodata);
     }
 
     /* Discard everything not specifically mentioned above. */

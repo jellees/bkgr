@@ -8,6 +8,7 @@
 #include "audio_b.h"
 #include "heap.h"
 #include "script.h"
+#include "script_defs.h"
 #include "hud.h"
 #include "sprite.h"
 
@@ -144,7 +145,7 @@ static void sub_8062D04(void) {
     textbox.font = &font_80B01A8[2];
     objCount = sub_8025870(string, &textbox);
 
-    start_script(14);
+    start_script(SCRIPT_014);
 
     v0 = TRUE;
     v4 = FALSE;
@@ -187,7 +188,7 @@ static void sub_8062D04(void) {
                 if (sub_8062FC4(&textbox, string, &objCount)) {
                     v4 = TRUE;
                     end_all_scripts(2);
-                    start_script(15);
+                    start_script(SCRIPT_015);
                 }
             }
 

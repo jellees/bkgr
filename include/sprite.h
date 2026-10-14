@@ -79,6 +79,9 @@ enum SpriteIdx {
     SPRITE_BANJO_KAZOOIE_HIDE = 529, // Kazooie goes back into the backpack.
     SPRITE_BANJO_DIVE_HURT = 537,
 
+    // Whole body visible, used when the dolphin leads Banjo to its ship.
+    SPRITE_DOLPHIN_SWIM_UNDERWATER = 1062,
+
     SPRITE_OXYGEN_EMPTY = 1121,
     SPRITE_OXYGEN = 1122,
     SPRITE_ICON_BANJO = 1123,

@@ -103,7 +103,8 @@ enum ActorType {
     ACTOR_05B,
     ACTOR_05C,
     ACTOR_05D,
-    ACTOR_05E,
+    // Warp into the dolphin's sunken ship in undercoral, placed on the jiggy blocking the way.
+    ACTOR_DOLPHIN_SHIP_ENTRANCE,
     ACTOR_05F,
     ACTOR_060,
     ACTOR_061,

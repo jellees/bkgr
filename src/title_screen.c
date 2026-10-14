@@ -9,6 +9,7 @@
 #include "audio_b.h"
 #include "heap.h"
 #include "script.h"
+#include "script_defs.h"
 #include "hud.h"
 
 struct CreditsLine {
@@ -334,7 +335,7 @@ static int ShowPressStart(void) {
     REG_BG1CNT &= 0xFFFC;
     sub_8026D20(0x800, 0x7000, 0x20, 0x100);
     sub_8026E48(0xFFF, 0, 0);
-    start_script(10);
+    start_script(SCRIPT_010);
 
     v1.font = &font_80B01A8[0];
     v1.size = 240;
@@ -819,7 +820,7 @@ static void ShowFlashscreens(void) {
     byte_2000333 = 10;
     byte_2000334 = 0;
 
-    start_script(7);
+    start_script(SCRIPT_007);
 
     minTime = 388;
     maxTime = 670;
@@ -831,7 +832,7 @@ static void ShowFlashscreens(void) {
         if (canSkip && gKeysDown & START_BUTTON) {
             audio_halt_all_fx();
             end_all_scripts(2);
-            start_script(8);
+            start_script(SCRIPT_008);
             canSkip = FALSE;
         }
 
