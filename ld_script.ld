@@ -301,7 +301,7 @@ SECTIONS
         src/main.o(.rodata);
         asm/data_debugText.o(.rodata);
         src/player.o(.rodata);
-        asm/data_playerBehavior.o(.rodata);
+        src/oam_sizes.o(.rodata);
         asm/data_text.o(.rodata);
         asm/data.o(.rodata);
         src/hud.o(.rodata);
