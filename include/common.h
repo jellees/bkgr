@@ -561,7 +561,7 @@ extern void CheckStacks(void);
 extern void sprite_set_anim(struct Sprite* sprite, int idx, bool8 loopFrame, u32 maxAnimRepeats);
 extern void sprite_set_anim_without_reset(struct Sprite* sprite, int idx, bool8 loopFrame,
                                           u32 maxAnimRepeats);
-extern void sprite_render_ex(struct Sprite* sprite, int* a2);
+extern void sprite_render_ex(struct Sprite* sprite, struct RenderListEntry* entry);
 extern void sprite_render(struct Sprite* sprite);
 // extern void sprite_render_frame(); // This is a private function.
 extern bool32 sprite_is_anim_done_once(struct Sprite* sprite);
@@ -617,7 +617,7 @@ extern fx32 sub_80039C4(struct Vec3fx*, u32, u32, u32);
 extern void sub_80039CC(char*, struct Vec3fx*, struct Vec3fx*, int);
 extern void CallARM_SetOamMatrices(u32*, u32);
 extern void sub_8003A04(u32, u32*, u8, u8);
-extern void sub_8003A34(u32, s32, u32*);
+extern void sub_8003A34(u32, s32, struct RenderListEntry*);
 extern void sub_8003A3C(struct TileAnimQueueIndex*, u8);
 extern void sub_8003A44(struct TileAnimTable_rt*, s32, struct TileAnimQueueIndex*, u8*);
 
@@ -717,8 +717,8 @@ extern int sub_8029F3C(int, int, int, int);
 extern int sub_802A06C(int, int, int, int);
 extern void sub_802A19C(int, int, int, int);
 extern void sub_802A2A0(int, int, int, int);
-extern void sub_802A3B8(u32**, int*);
-extern void sub_802ADB0(u32**, u32*);
+extern void sub_802A3B8(struct RenderListEntry**, u32*);
+extern void sub_802ADB0(struct RenderListEntry**, u32*);
 extern bool32 handle_obj_interactions(struct Vec3fx*);
 extern void spawn_player_projectile(int, struct Vec3fx*, u8);
 extern u8 sub_0802E080(void);
@@ -763,7 +763,7 @@ extern void sub_0805BA1C(int, int);
 extern void init_script_engine(void);
 extern void start_script(int);
 extern void update_scripts(void);
-extern void render_scripts(u32**, u32*);
+extern void render_scripts(struct RenderListEntry**, u32*);
 extern void render_scripts_direct(void);
 extern void end_all_scripts(int);
 
@@ -945,7 +945,7 @@ extern void (*gNullsub_5)();
 extern struct TileAnimQueueIndex gTileAnimQueue[255];
 extern u8 gTileAnimQueueIndex;
 extern bool8 gIsSlideMiniGame;
-extern u32* dword_30032AC;
+extern struct RenderListEntry* gRenderListPtr;
 extern s32 dword_30032B0;
 extern u32 dword_30032B4[];
 extern u32 dword_30032BC[];
@@ -955,7 +955,7 @@ extern u16 gKeysPressed;
 extern u16 gKeysDown;
 extern u16 gKeyInput;
 
-extern u32 dword_30032CC;
+extern u32 gRenderListCount;
 extern struct Vec3fx gPlayerPos;
 extern struct Vec3fx gPlayerShadowPos;
 extern struct Vec3fx stru_30032E8;
@@ -1001,7 +1001,7 @@ extern u32* gOBJTileFramePtr;
 extern u32 gOBJTileCount;
 extern u32* gOBJTileFrameStart;
 extern u32 dword_3003DA0;
-extern u32 dword_3003DA4;
+extern struct RenderListEntry gRenderList[128];
 
 extern bool8 byte_3006EF3;
 

@@ -49,7 +49,7 @@ static void update_player();
 static void update_camera(struct Vec3fx* position, s32 a2, s32 a3, s32 offset);
 static void move_camera(s32 offset);
 static fx32 clamp_camera_velocity(fx32 velocity, fx32 speed);
-static void render_player(u32** a1, u32* spriteCount);
+static void render_player(struct RenderListEntry** renderList, u32* spriteCount);
 static int sub_0800C63C(int room, u32 warp);
 static void enable_poison_effect();
 static void sub_800DF34();
@@ -437,10 +437,10 @@ static void update_game(void) {
 
     if (!gIsSlideMiniGame && gPlayerState != PLAYER_STATE_NONE) {
         sub_8009D2C();
-        render_scripts(&dword_30032AC, &dword_30032CC);
-        render_player(&dword_30032AC, &dword_30032CC);
-        sub_802ADB0(&dword_30032AC, &dword_30032CC);
-        sub_8003A34(dword_30032CC, dword_30032B0, &dword_3003DA4);
+        render_scripts(&gRenderListPtr, &gRenderListCount);
+        render_player(&gRenderListPtr, &gRenderListCount);
+        sub_802ADB0(&gRenderListPtr, &gRenderListCount);
+        sub_8003A34(gRenderListCount, dword_30032B0, gRenderList);
     }
 }
 
@@ -449,8 +449,8 @@ static void sub_8009D2C() {
     gOAMBufferFramePtr = gOAMBuffer2;
     gOAMBufferEnd =
         (u32*)((u16*)gOAMBufferFramePtr - ((u32)((dword_30032B0 - (s32)gOAMBuffer1) >> 1) - 0x200));
-    dword_30032AC = &dword_3003DA4;
-    dword_30032CC = 0;
+    gRenderListPtr = gRenderList;
+    gRenderListCount = 0;
 }
 
 void sub_8009D7C(u32 a1) {
@@ -1621,8 +1621,8 @@ void sub_800B958(fx32 a1, fx32 a2, fx32 a3, fx32 a4, bool32 a5) {
     }
 }
 
-static void render_player(u32** a1, u32* spriteCount) {
-    int* v8;
+static void render_player(struct RenderListEntry** renderList, u32* spriteCount) {
+    struct RenderListEntry* entry;
     u32 priority, pos;
     int v9[2];
     int a4[2];
@@ -1655,15 +1655,15 @@ static void render_player(u32** a1, u32* spriteCount) {
     }
 
     if (byte_20010AF) {
-        sprite_render_ex(&sprite_2000FAC, *a1);
-        *a1[0] = sprite_2000FAC.priority << 30;
-        *a1 += 3;
+        sprite_render_ex(&sprite_2000FAC, *renderList);
+        (*renderList)->sortKey = sprite_2000FAC.priority << 30;
+        (*renderList)++;
         ++*spriteCount;
     }
 
-    sprite_render_ex(&gPlayerSprite, *a1);
-    *a1[0] = (gPlayerSprite.priority << 30) | ((u32)gPlayerPos.z >> 4);
-    *a1 += 3;
+    sprite_render_ex(&gPlayerSprite, *renderList);
+    (*renderList)->sortKey = (gPlayerSprite.priority << 30) | ((u32)gPlayerPos.z >> 4);
+    (*renderList)++;
     ++*spriteCount;
 
     if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_SWIMMING
@@ -1673,12 +1673,12 @@ static void render_player(u32** a1, u32* spriteCount) {
         gPlayerShadowSprite.attr0Flag9 = 0;
     }
 
-    sprite_render_ex(&gPlayerShadowSprite, *a1);
-    v8 = *a1;
+    sprite_render_ex(&gPlayerShadowSprite, *renderList);
+    entry = *renderList;
     priority = gPlayerShadowSprite.priority << 30;
     pos = ((u32)gPlayerShadowPos.z >> 4) | 0x10000000;
-    *v8 = priority | pos;
-    *a1 = v8 + 3;
+    entry->sortKey = priority | pos;
+    *renderList = entry + 1;
     ++*spriteCount;
 }
 

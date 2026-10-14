@@ -157,7 +157,7 @@ SECTIONS
         gTileAnimQueueIndex = .; . += 1;
         gIsSlideMiniGame = .; . += 1;
         . += 2; /* padding */
-        dword_30032AC = .; . += 4;
+        gRenderListPtr = .; . += 4;
         dword_30032B0 = .; . += 4;
         dword_30032B4 = .; . += 4 * 2;
         dword_30032BC = .; . += 4 * 2;
@@ -167,7 +167,7 @@ SECTIONS
         gKeysPressed = .; . += 2;
         gKeysDown = .; . += 2;
         gKeyInput = .; . += 2;
-        dword_30032CC = .; . += 4;
+        gRenderListCount = .; . += 4;
         gPlayerPos = .; . += 0xC;
         gPlayerShadowPos = .; . += 0xC;
         stru_30032E8 = .; . += 0xC;
@@ -217,7 +217,7 @@ SECTIONS
         dword_3003DA0 = .; . += 4;
 
         . = 0x00003DA4;
-        dword_3003DA4 = .; . += 4; /* unknown size */
+        gRenderList = .; . += 0x600;
 
         . = 0x000043A8;
         /* audio ram */

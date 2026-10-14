@@ -160,6 +160,16 @@ struct Sprite {
     struct SpriteFrame_d* spriteFrames;
 };
 
+// One sprite queued for depth-sorted drawing. sprite_render_ex writes the
+// sprite's OAM entries to the OAM buffer and records their range here; the
+// caller fills in sortKey (priority << 30 | depth). sub_8003A34 sorts the list
+// and copies the ranges in order.
+struct RenderListEntry {
+    u32 sortKey;
+    u32* oamStart;
+    u32* oamEnd;
+};
+
 struct Letter {
     u16 index;
     u16 size;

@@ -1204,7 +1204,7 @@ void sub_802A34C(int minX, int maxX, int minY, int maxY) {
     sub_802A2A0(minX, maxX, minY, maxY);
 }
 
-void sub_802A3B8(u32** renderList, int* spriteCount) {
+void sub_802A3B8(struct RenderListEntry** renderList, u32* spriteCount) {
     int rendered;
     int i;
     struct Actor* actor;
@@ -1263,13 +1263,14 @@ void sub_802A3B8(u32** renderList, int* spriteCount) {
                     sprite_set_priority(&actor->sprite, actor->field_8);
                     sprite_render_ex(&actor->sprite, *renderList);
                     if (actor->field_38 == 0) {
-                        **renderList = (actor->sprite.priority << 30) | ((u32)actor->field_9C >> 4);
+                        (*renderList)->sortKey =
+                            (actor->sprite.priority << 30) | ((u32)actor->field_9C >> 4);
                     } else if (actor->field_38 == 2) {
-                        **renderList = (actor->sprite.priority << 30) | 0x0FFFF000;
+                        (*renderList)->sortKey = (actor->sprite.priority << 30) | 0x0FFFF000;
                     } else {
-                        **renderList = (actor->sprite.priority << 30) | 0x3FFFF000;
+                        (*renderList)->sortKey = (actor->sprite.priority << 30) | 0x3FFFF000;
                     }
-                    *renderList += 3;
+                    (*renderList)++;
                     (*spriteCount)++;
                     rendered++;
                 }

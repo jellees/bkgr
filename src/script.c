@@ -749,7 +749,7 @@ void update_scripts(void) {
 }
 #endif
 
-void render_scripts(u32** a1, u32* a2) {
+void render_scripts(struct RenderListEntry** renderList, u32* spriteCount) {
     u8 i;
 
     if (!gIsAnyScriptActive) {
@@ -765,27 +765,27 @@ void render_scripts(u32** a1, u32* a2) {
                 if (script->actors[actorIdx].isVisible && !script->actors[actorIdx].sprite.attr0Flag9) {
                     u32 v10;
 
-                    sprite_render_ex(&script->actors[actorIdx].sprite, *a1);
+                    sprite_render_ex(&script->actors[actorIdx].sprite, *renderList);
 
                     if (script->actors[actorIdx].sprite.objMode == 1) {
-                        u32* var1 = *a1;
+                        struct RenderListEntry* entry = *renderList;
                         u32 priority = script->actors[actorIdx].sprite.priority << 30;
                         v10 = (((gMapPixelSizeY << 16) - script->actors[actorIdx].yPos
                                 - script->actors[actorIdx].ySortOffset)
                                >> 4)
                               | 0x10000000;
-                        *var1 = priority | v10;
+                        entry->sortKey = priority | v10;
                     } else {
-                        u32* var1 = *a1;
+                        struct RenderListEntry* entry = *renderList;
                         u32 priority = script->actors[actorIdx].sprite.priority << 30;
                         v10 = ((gMapPixelSizeY << 16) - script->actors[actorIdx].yPos
                                - script->actors[actorIdx].ySortOffset)
                               >> 4;
-                        *var1 = priority | v10;
+                        entry->sortKey = priority | v10;
                     }
 
-                    *a1 += 3;
-                    *a2 += 1;
+                    (*renderList)++;
+                    *spriteCount += 1;
                 }
             }
         }
