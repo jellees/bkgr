@@ -287,7 +287,9 @@ SECTIONS
         src/script.o(.text);
         asm/chunk13.o(.text);
         src/gameover.o(.text);
-        asm/chunk12.o(.text);
+        asm/timer.o(.text);
+        asm/quiz.o(.text);
+        asm/bios.o(.text);
         asm/eeprom.o(.text);
         *libgcc.a:*_call_via_rX*.o(.text*);
         asm/chunk_end.o(.text);
