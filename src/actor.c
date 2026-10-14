@@ -1,5 +1,6 @@
 #include "global.h"
 #include "common.h"
+#include "audio_b.h"
 #include "heap.h"
 #include "main.h"
 #include "player.h"
@@ -383,40 +384,42 @@ void setup_entities(u32 room, int mode, struct MapActorSection* section) {
                     actor->field_34 = mapActor->field_17;
                     actor->field_40 = mapActor->field_1A;
                     actor->field_44 = 0;
-                    actor->field_4C = dActorHitboxes[actor->type].size[0] << 16;
-                    actor->field_50 = dActorHitboxes[actor->type].size[1] << 16;
-                    actor->field_54 = dActorHitboxes[actor->type].size[2] << 16;
-                    actor->field_58 = dActorHitboxes[actor->type].size[3] << 16;
-                    actor->field_5C = dActorHitboxes[actor->type].size[4] << 16;
-                    actor->field_60 = dActorHitboxes[actor->type].size[5] << 16;
-                    actor->field_94 = actor->xPosition << 16;
-                    actor->field_98 = (actor->field_6 + actor->field_9) << 16;
-                    actor->field_9C =
-                        ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16) - actor->field_98;
-                    halfX = actor->field_4C >> 1;
-                    actor->field_64 =
-                        actor->field_94 - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
-                    actor->field_68 = actor->field_98 + (dActorHitboxes[actor->type].offset[1] << 16);
-                    halfZ = actor->field_54 >> 1;
-                    actor->field_6C =
-                        actor->field_9C - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
-                    actor->field_70 =
-                        actor->field_94 + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
-                    actor->field_74 = actor->field_98 + actor->field_50
-                                      + (dActorHitboxes[actor->type].offset[1] << 16);
-                    actor->field_78 =
-                        actor->field_9C + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
-                    actor->field_7C = actor->field_94 - (actor->field_58 >> 1)
-                                      + (dActorHitboxes[actor->type].offset[3] << 16);
-                    actor->field_80 = actor->field_98 + (dActorHitboxes[actor->type].offset[4] << 16);
-                    actor->field_84 = actor->field_9C - (actor->field_60 >> 1)
-                                      + (dActorHitboxes[actor->type].offset[5] << 16);
-                    actor->field_88 = actor->field_94 + (actor->field_58 >> 1)
-                                      + (dActorHitboxes[actor->type].offset[3] << 16);
-                    actor->field_8C = actor->field_98 + actor->field_5C
-                                      + (dActorHitboxes[actor->type].offset[4] << 16);
-                    actor->field_90 = actor->field_9C + (actor->field_60 >> 1)
-                                      + (dActorHitboxes[actor->type].offset[5] << 16);
+                    actor->field_4C.x = dActorHitboxes[actor->type].size[0] << 16;
+                    actor->field_4C.y = dActorHitboxes[actor->type].size[1] << 16;
+                    actor->field_4C.z = dActorHitboxes[actor->type].size[2] << 16;
+                    actor->field_58.x = dActorHitboxes[actor->type].size[3] << 16;
+                    actor->field_58.y = dActorHitboxes[actor->type].size[4] << 16;
+                    actor->field_58.z = dActorHitboxes[actor->type].size[5] << 16;
+                    actor->field_94.x = actor->xPosition << 16;
+                    actor->field_94.y = (actor->field_6 + actor->field_9) << 16;
+                    actor->field_94.z = ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16)
+                                        - actor->field_94.y;
+                    halfX = actor->field_4C.x >> 1;
+                    actor->field_64.x =
+                        actor->field_94.x - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+                    actor->field_64.y =
+                        actor->field_94.y + (dActorHitboxes[actor->type].offset[1] << 16);
+                    halfZ = actor->field_4C.z >> 1;
+                    actor->field_64.z =
+                        actor->field_94.z - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+                    actor->field_70.x =
+                        actor->field_94.x + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+                    actor->field_70.y = actor->field_94.y + actor->field_4C.y
+                                        + (dActorHitboxes[actor->type].offset[1] << 16);
+                    actor->field_70.z =
+                        actor->field_94.z + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+                    actor->field_7C.x = actor->field_94.x - (actor->field_58.x >> 1)
+                                        + (dActorHitboxes[actor->type].offset[3] << 16);
+                    actor->field_7C.y =
+                        actor->field_94.y + (dActorHitboxes[actor->type].offset[4] << 16);
+                    actor->field_7C.z = actor->field_94.z - (actor->field_58.z >> 1)
+                                        + (dActorHitboxes[actor->type].offset[5] << 16);
+                    actor->field_88.x = actor->field_94.x + (actor->field_58.x >> 1)
+                                        + (dActorHitboxes[actor->type].offset[3] << 16);
+                    actor->field_88.y = actor->field_94.y + actor->field_58.y
+                                        + (dActorHitboxes[actor->type].offset[4] << 16);
+                    actor->field_88.z = actor->field_94.z + (actor->field_58.z >> 1)
+                                        + (dActorHitboxes[actor->type].offset[5] << 16);
                     sub_0804835C(actor, count1, index);
                     count1++;
                     index++;
@@ -460,40 +463,42 @@ void setup_entities(u32 room, int mode, struct MapActorSection* section) {
                     actor->field_34 = mapActor->field_17;
                     actor->field_40 = mapActor->field_1A;
                     actor->field_44 = 0;
-                    actor->field_4C = dActorHitboxes[actor->type].size[0] << 16;
-                    actor->field_50 = dActorHitboxes[actor->type].size[1] << 16;
-                    actor->field_54 = dActorHitboxes[actor->type].size[2] << 16;
-                    actor->field_58 = dActorHitboxes[actor->type].size[3] << 16;
-                    actor->field_5C = dActorHitboxes[actor->type].size[4] << 16;
-                    actor->field_60 = dActorHitboxes[actor->type].size[5] << 16;
-                    actor->field_94 = actor->xPosition << 16;
-                    actor->field_98 = (actor->field_6 + actor->field_9) << 16;
-                    actor->field_9C =
-                        ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16) - actor->field_98;
-                    halfX = actor->field_4C >> 1;
-                    actor->field_64 =
-                        actor->field_94 - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
-                    actor->field_68 = actor->field_98 + (dActorHitboxes[actor->type].offset[1] << 16);
-                    halfZ = actor->field_54 >> 1;
-                    actor->field_6C =
-                        actor->field_9C - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
-                    actor->field_70 =
-                        actor->field_94 + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
-                    actor->field_74 = actor->field_98 + actor->field_50
-                                      + (dActorHitboxes[actor->type].offset[1] << 16);
-                    actor->field_78 =
-                        actor->field_9C + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
-                    actor->field_7C = actor->field_94 - (actor->field_58 >> 1)
-                                      + (dActorHitboxes[actor->type].offset[3] << 16);
-                    actor->field_80 = actor->field_98 + (dActorHitboxes[actor->type].offset[4] << 16);
-                    actor->field_84 = actor->field_9C - (actor->field_60 >> 1)
-                                      + (dActorHitboxes[actor->type].offset[5] << 16);
-                    actor->field_88 = actor->field_94 + (actor->field_58 >> 1)
-                                      + (dActorHitboxes[actor->type].offset[3] << 16);
-                    actor->field_8C = actor->field_98 + actor->field_5C
-                                      + (dActorHitboxes[actor->type].offset[4] << 16);
-                    actor->field_90 = actor->field_9C + (actor->field_60 >> 1)
-                                      + (dActorHitboxes[actor->type].offset[5] << 16);
+                    actor->field_4C.x = dActorHitboxes[actor->type].size[0] << 16;
+                    actor->field_4C.y = dActorHitboxes[actor->type].size[1] << 16;
+                    actor->field_4C.z = dActorHitboxes[actor->type].size[2] << 16;
+                    actor->field_58.x = dActorHitboxes[actor->type].size[3] << 16;
+                    actor->field_58.y = dActorHitboxes[actor->type].size[4] << 16;
+                    actor->field_58.z = dActorHitboxes[actor->type].size[5] << 16;
+                    actor->field_94.x = actor->xPosition << 16;
+                    actor->field_94.y = (actor->field_6 + actor->field_9) << 16;
+                    actor->field_94.z = ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16)
+                                        - actor->field_94.y;
+                    halfX = actor->field_4C.x >> 1;
+                    actor->field_64.x =
+                        actor->field_94.x - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+                    actor->field_64.y =
+                        actor->field_94.y + (dActorHitboxes[actor->type].offset[1] << 16);
+                    halfZ = actor->field_4C.z >> 1;
+                    actor->field_64.z =
+                        actor->field_94.z - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+                    actor->field_70.x =
+                        actor->field_94.x + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+                    actor->field_70.y = actor->field_94.y + actor->field_4C.y
+                                        + (dActorHitboxes[actor->type].offset[1] << 16);
+                    actor->field_70.z =
+                        actor->field_94.z + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+                    actor->field_7C.x = actor->field_94.x - (actor->field_58.x >> 1)
+                                        + (dActorHitboxes[actor->type].offset[3] << 16);
+                    actor->field_7C.y =
+                        actor->field_94.y + (dActorHitboxes[actor->type].offset[4] << 16);
+                    actor->field_7C.z = actor->field_94.z - (actor->field_58.z >> 1)
+                                        + (dActorHitboxes[actor->type].offset[5] << 16);
+                    actor->field_88.x = actor->field_94.x + (actor->field_58.x >> 1)
+                                        + (dActorHitboxes[actor->type].offset[3] << 16);
+                    actor->field_88.y = actor->field_94.y + actor->field_58.y
+                                        + (dActorHitboxes[actor->type].offset[4] << 16);
+                    actor->field_88.z = actor->field_94.z + (actor->field_58.z >> 1)
+                                        + (dActorHitboxes[actor->type].offset[5] << 16);
                     sub_0806220C(actor, count2, index);
                     count2++;
                     index++;
@@ -666,9 +671,9 @@ void sub_8028E30(void) {
                 }
             }
 
-            size.x = actor->field_4C >> 1;
-            size.y = actor->field_50;
-            size.z = actor->field_54 >> 1;
+            size.x = actor->field_4C.x >> 1;
+            size.y = actor->field_4C.y;
+            size.z = actor->field_4C.z >> 1;
             if (!sub_8003A74(&actor->field_94, &size, 0, gMapPixelSizeY)) {
                 actor->sprite.attr0Flag9 = 1;
             }
@@ -682,33 +687,36 @@ void sub_80293C0(struct Actor* actor) {
     fx32 halfX;
     fx32 halfZ;
 
-    actor->field_4C = dActorHitboxes[actor->type].size[0] << 16;
-    actor->field_50 = dActorHitboxes[actor->type].size[1] << 16;
-    actor->field_54 = dActorHitboxes[actor->type].size[2] << 16;
-    actor->field_58 = dActorHitboxes[actor->type].size[3] << 16;
-    actor->field_5C = dActorHitboxes[actor->type].size[4] << 16;
-    actor->field_60 = dActorHitboxes[actor->type].size[5] << 16;
-    actor->field_94 = actor->xPosition << 16;
-    actor->field_98 = (actor->field_6 + actor->field_9) << 16;
-    actor->field_9C = ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16) - actor->field_98;
-    halfX = actor->field_4C >> 1;
-    actor->field_64 = actor->field_94 - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
-    actor->field_68 = actor->field_98 + (dActorHitboxes[actor->type].offset[1] << 16);
-    halfZ = actor->field_54 >> 1;
-    actor->field_6C = actor->field_9C - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
-    actor->field_70 = actor->field_94 + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
-    actor->field_74 = actor->field_98 + actor->field_50 + (dActorHitboxes[actor->type].offset[1] << 16);
-    actor->field_78 = actor->field_9C + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
-    actor->field_7C =
-        actor->field_94 - (actor->field_58 >> 1) + (dActorHitboxes[actor->type].offset[3] << 16);
-    actor->field_80 = actor->field_98 + (dActorHitboxes[actor->type].offset[4] << 16);
-    actor->field_84 =
-        actor->field_9C - (actor->field_60 >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
-    actor->field_88 =
-        actor->field_94 + (actor->field_58 >> 1) + (dActorHitboxes[actor->type].offset[3] << 16);
-    actor->field_8C = actor->field_98 + actor->field_5C + (dActorHitboxes[actor->type].offset[4] << 16);
-    actor->field_90 =
-        actor->field_9C + (actor->field_60 >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
+    actor->field_4C.x = dActorHitboxes[actor->type].size[0] << 16;
+    actor->field_4C.y = dActorHitboxes[actor->type].size[1] << 16;
+    actor->field_4C.z = dActorHitboxes[actor->type].size[2] << 16;
+    actor->field_58.x = dActorHitboxes[actor->type].size[3] << 16;
+    actor->field_58.y = dActorHitboxes[actor->type].size[4] << 16;
+    actor->field_58.z = dActorHitboxes[actor->type].size[5] << 16;
+    actor->field_94.x = actor->xPosition << 16;
+    actor->field_94.y = (actor->field_6 + actor->field_9) << 16;
+    actor->field_94.z =
+        ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16) - actor->field_94.y;
+    halfX = actor->field_4C.x >> 1;
+    actor->field_64.x = actor->field_94.x - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+    actor->field_64.y = actor->field_94.y + (dActorHitboxes[actor->type].offset[1] << 16);
+    halfZ = actor->field_4C.z >> 1;
+    actor->field_64.z = actor->field_94.z - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+    actor->field_70.x = actor->field_94.x + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+    actor->field_70.y =
+        actor->field_94.y + actor->field_4C.y + (dActorHitboxes[actor->type].offset[1] << 16);
+    actor->field_70.z = actor->field_94.z + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+    actor->field_7C.x =
+        actor->field_94.x - (actor->field_58.x >> 1) + (dActorHitboxes[actor->type].offset[3] << 16);
+    actor->field_7C.y = actor->field_94.y + (dActorHitboxes[actor->type].offset[4] << 16);
+    actor->field_7C.z =
+        actor->field_94.z - (actor->field_58.z >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
+    actor->field_88.x =
+        actor->field_94.x + (actor->field_58.x >> 1) + (dActorHitboxes[actor->type].offset[3] << 16);
+    actor->field_88.y =
+        actor->field_94.y + actor->field_58.y + (dActorHitboxes[actor->type].offset[4] << 16);
+    actor->field_88.z =
+        actor->field_94.z + (actor->field_58.z >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
 }
 
 /**
@@ -1249,9 +1257,9 @@ void sub_802A3B8(struct RenderListEntry** renderList, u32* spriteCount) {
                     }
                 }
                 if (actor->isActive && !actor->field_20 && !actor->field_44) {
-                    size.x = actor->field_4C >> 1;
-                    size.y = actor->field_50;
-                    size.z = actor->field_54 >> 1;
+                    size.x = actor->field_4C.x >> 1;
+                    size.y = actor->field_4C.y;
+                    size.z = actor->field_4C.z >> 1;
                     if (!sub_8003A74(&actor->field_94, &size, 0, gMapPixelSizeY)) {
                         actor->sprite.attr0Flag9 = 1;
                     } else {
@@ -1264,7 +1272,7 @@ void sub_802A3B8(struct RenderListEntry** renderList, u32* spriteCount) {
                     sprite_render_ex(&actor->sprite, *renderList);
                     if (actor->field_38 == 0) {
                         (*renderList)->sortKey =
-                            (actor->sprite.priority << 30) | ((u32)actor->field_9C >> 4);
+                            (actor->sprite.priority << 30) | ((u32)actor->field_94.z >> 4);
                     } else if (actor->field_38 == 2) {
                         (*renderList)->sortKey = (actor->sprite.priority << 30) | 0x0FFFF000;
                     } else {
@@ -1280,4 +1288,465 @@ void sub_802A3B8(struct RenderListEntry** renderList, u32* spriteCount) {
             }
         }
     }
+}
+
+void sub_802A670(struct RenderListEntry** renderList, u32* spriteCount) {
+    int i;
+    int rendered;
+    struct Actor* actor;
+    int x;
+    int y;
+    struct Vec3fx size;
+
+    if (gActorPool0Count) {
+        for (rendered = 0, i = 0; i < gActorPool0Capacity; i++) {
+            actor = &gActorPool0[i];
+            if (actor->isActive) {
+                if (actor->field_3C) {
+                    if (sprite_is_anim_done_once(&actor->sprite)) {
+                        actor->field_3C = 0;
+                        if (dActorTypeInfo[actor->type].field_0 == 0) {
+                            dword_203E010[actor->field_1E] = 0;
+                            actor->isActive = FALSE;
+                            gActorPool0Count--;
+                        } else {
+                            actor->field_20 = dActorTypeInfo[actor->type].field_0;
+                            sprite_set_anim(&actor->sprite, actor->type + 0x221, FALSE, 0);
+                        }
+                    }
+                } else if (actor->field_20) {
+                    if (--actor->field_20 == 0) {
+                        actor->field_44 = 1;
+                    }
+                }
+                if (actor->isActive && !actor->field_20 && !actor->field_44) {
+                    x = actor->xPosition - gCameraPixelX + (s8)byte_30043A4;
+                    y = actor->yPosition - gCameraPixelY + (s8)byte_30043A5;
+
+                    if (!sub_8003A7C(&actor->field_94, -actor->field_9, gMapPixelSizeY)
+                        || actor->field_3C) {
+                        actor->shadowSprite.attr0Flag9 = 1;
+                    } else {
+                        actor->shadowSprite.attr0Flag9 = 0;
+                    }
+                    actor->shadowSprite.xPos = x;
+                    actor->shadowSprite.yPos = y;
+                    sprite_set_priority(&actor->shadowSprite, actor->field_8);
+                    sprite_render_ex(&actor->shadowSprite, *renderList);
+                    actor->shadowSprite.objMode = 1;
+                    if (actor->field_38 == 0) {
+                        struct RenderListEntry* entry = *renderList;
+                        u32 priority = actor->shadowSprite.priority << 30;
+                        u32 depth = ((u32)actor->field_94.z >> 4) | 0x10000000;
+                        entry->sortKey = priority | depth;
+                    } else if (actor->field_38 == 2) {
+                        (*renderList)->sortKey = (actor->shadowSprite.priority << 30) | 0x1FFFF000;
+                    } else {
+                        (*renderList)->sortKey = (actor->shadowSprite.priority << 30) | 0x3FFFF000;
+                    }
+                    (*renderList)++;
+                    (*spriteCount)++;
+
+                    size.x = actor->field_4C.x >> 1;
+                    size.y = actor->field_4C.y;
+                    size.z = actor->field_4C.z >> 1;
+                    if (!sub_8003A74(&actor->field_94, &size, 0, gMapPixelSizeY)) {
+                        actor->sprite.attr0Flag9 = 1;
+                    } else {
+                        actor->sprite.attr0Flag9 = 0;
+                    }
+                    actor->sprite.xPos = x;
+                    actor->sprite.yPos = y - actor->field_9;
+                    sprite_set_priority(&actor->sprite, actor->field_8);
+                    sprite_render_ex(&actor->sprite, *renderList);
+                    if (actor->field_38 == 0) {
+                        (*renderList)->sortKey =
+                            (actor->sprite.priority << 30) | ((u32)actor->field_94.z >> 4);
+                    } else if (actor->field_38 == 2) {
+                        (*renderList)->sortKey = (actor->sprite.priority << 30) | 0x0FFFF000;
+                    } else {
+                        (*renderList)->sortKey = (actor->sprite.priority << 30) | 0x3FFFF000;
+                    }
+                    (*renderList)++;
+                    (*spriteCount)++;
+                    rendered++;
+                }
+            }
+            if (rendered == gActorPool0Count) {
+                break;
+            }
+        }
+    }
+}
+
+void sub_802A944(struct RenderListEntry** renderList, u32* spriteCount) {
+    int i;
+    struct Actor* actor;
+    int x;
+    int y;
+    struct RenderListEntry* entry;
+    u32 priority;
+    u32 depth;
+
+    for (i = 0; i < byte_203E00D; i++) {
+        actor = &dword_203DFB4[i];
+        if (!actor->isActive) {
+            continue;
+        }
+        if (actor->field_3C) {
+            if (sprite_is_anim_done_once(&actor->sprite)) {
+                actor->field_3C = 0;
+                if (actor->field_48) {
+                    byte_203DFE4--;
+                    actor->field_48 = 0;
+                }
+                if (dActorTypeInfo[actor->type].field_0 == 0
+                    || is_obj_disabled(actor->type, (s16)actor->field_1C)) {
+                    actor->isActive = FALSE;
+                    byte_203DFD6--;
+                } else {
+                    actor->field_20 = dActorTypeInfo[actor->type].field_0;
+                    sprite_set_anim(&actor->sprite, actor->type + 0x221, FALSE, 0);
+                }
+            }
+        } else if (actor->field_20) {
+            if (--actor->field_20 == 0) {
+                switch (actor->type) {
+                    case 0xBF:
+                        sub_804888C(dword_203DFB8[actor->field_1E]);
+                        break;
+                    case 0xC7:
+                    case 0xCF:
+                    case 0xD0:
+                    case 0xD3:
+                        sub_804888C(dword_203DFB8[actor->field_1E]);
+                        actor->sprite.attr0Flag9 = 1;
+                        actor->shadowSprite.attr0Flag9 = 1;
+                        actor->field_48 = 0;
+                        byte_203DFE4--;
+                        break;
+                    default:
+                        actor->field_44 = 1;
+                        sub_804888C(dword_203DFB8[actor->field_1E]);
+                        break;
+                }
+            }
+        }
+        if (actor->isActive && actor->field_48 && !actor->field_20 && !actor->field_44) {
+            x = actor->xPosition - gCameraPixelX + (s8)byte_30043A4;
+            y = actor->yPosition - gCameraPixelY + (s8)byte_30043A5;
+
+            actor->shadowSprite.xPos = x;
+            actor->shadowSprite.yPos = y;
+            sprite_set_priority(&actor->shadowSprite, actor->field_8);
+            sprite_render_ex(&actor->shadowSprite, *renderList);
+            actor->shadowSprite.objMode = 1;
+            entry = *renderList;
+            priority = actor->shadowSprite.priority << 30;
+            depth = ((u32)actor->field_94.z >> 4) | 0x10000000;
+            entry->sortKey = priority | depth;
+            (*renderList)++;
+            (*spriteCount)++;
+
+            y -= actor->field_9;
+            actor->sprite.xPos = x;
+            actor->sprite.yPos = y;
+            sprite_set_priority(&actor->sprite, actor->field_8);
+            sprite_render_ex(&actor->sprite, *renderList);
+            (*renderList)->sortKey = (actor->sprite.priority << 30) | ((u32)actor->field_94.z >> 4);
+            (*renderList)++;
+            (*spriteCount)++;
+        }
+    }
+}
+
+void sub_802AC08(struct RenderListEntry** renderList, u32* spriteCount) {
+    int i;
+    int rendered;
+    struct Actor* actor;
+    int x;
+    int y;
+    struct RenderListEntry* entry;
+    u32 priority;
+    u32 depth;
+
+    if (byte_203DFE5) {
+        for (rendered = 0, i = 0; i < byte_203E00E; i++) {
+            actor = &dword_203DFBC[i];
+            if (actor->isActive && actor->field_48) {
+                x = actor->xPosition - gCameraPixelX + (s8)byte_30043A4;
+                y = actor->yPosition - gCameraPixelY + (s8)byte_30043A5;
+
+                actor->shadowSprite.xPos = x;
+                actor->shadowSprite.yPos = y;
+                sprite_set_priority(&actor->shadowSprite, actor->field_8);
+                sprite_render_ex(&actor->shadowSprite, *renderList);
+                actor->shadowSprite.objMode = 1;
+                if (actor->field_38 == 0) {
+                    entry = *renderList;
+                    priority = actor->shadowSprite.priority << 30;
+                    depth = ((u32)actor->field_94.z >> 4) | 0x10000000;
+                    entry->sortKey = priority | depth;
+                } else {
+                    (*renderList)->sortKey = (actor->shadowSprite.priority << 30) | 0x3FFFF000;
+                }
+                (*renderList)++;
+                (*spriteCount)++;
+
+                y -= actor->field_9;
+                actor->sprite.xPos = x;
+                actor->sprite.yPos = y;
+                sprite_set_priority(&actor->sprite, actor->field_8);
+                sprite_render_ex(&actor->sprite, *renderList);
+                if (actor->field_38 == 0) {
+                    (*renderList)->sortKey =
+                        (actor->sprite.priority << 30) | ((u32)actor->field_94.z >> 4);
+                } else {
+                    (*renderList)->sortKey = (actor->sprite.priority << 30) | 0x2FFFF000;
+                }
+                (*renderList)++;
+                (*spriteCount)++;
+                rendered++;
+            }
+            if (rendered == byte_203DFE5) {
+                break;
+            }
+        }
+    }
+}
+
+void sub_802ADB0(struct RenderListEntry** renderList, u32* spriteCount) {
+    sub_802C9F8(renderList, spriteCount);
+    update_projectiles(renderList, spriteCount);
+    sub_802A3B8(renderList, spriteCount);
+    sub_802A670(renderList, spriteCount);
+    sub_802A944(renderList, spriteCount);
+    sub_802AC08(renderList, spriteCount);
+}
+
+bool32 handle_obj_interactions(struct Vec3fx* pos) {
+    struct Vec3fx min;
+    struct Vec3fx max;
+    bool32 invulnerable;
+    bool32 result;
+
+    sub_0802BDA0(pos);
+    if ((result = sub_0802BCC4(pos))) {
+        return result;
+    }
+    sub_0802AE98(pos);
+    if ((result = sub_0802B048(pos))) {
+        return result;
+    }
+
+    invulnerable = FALSE;
+    if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_HURTING || gPlayerIsTransparent
+        || byte_200108E || gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_WONDERWING_MODE) {
+        invulnerable = TRUE;
+    }
+
+    min.x = pos->x - 16;
+    min.y = pos->y - 12;
+    min.z = pos->z - 16;
+    max.x = pos->x + 16;
+    max.y = pos->y + 12;
+    max.z = pos->z + 16;
+    if ((result = sub_0802B9E4(pos, &min, &max, invulnerable))) {
+        return result;
+    }
+    return sub_0802BB30(pos, &min, &max, invulnerable);
+}
+
+bool32 sub_0802AE98(struct Vec3fx* pos) {
+    struct Vec3fx min;
+    struct Vec3fx max;
+    int i;
+    int count;
+    bool8 wasOnTop;
+    struct Actor* actor;
+
+    min.x = pos->x - (dword_3003300 >> 1);
+    min.y = pos->y;
+    min.z = pos->z - (dword_3003304 >> 1);
+    max.x = pos->x + (dword_3003300 >> 1);
+    max.y = pos->y + dword_3003308;
+    max.z = pos->z + (dword_3003304 >> 1);
+
+    count = 0;
+    wasOnTop = byte_203DFE6;
+    byte_203DFE6 = FALSE;
+    byte_203DFE7 = FALSE;
+    if (gGameStatus.health) {
+        for (i = 0; i < byte_203E00E; i++) {
+            actor = &dword_203DFBC[i];
+            if (actor->isActive) {
+                count++;
+                if (actor->interactionKind == 6) {
+                    if (CallARM_VecFX_BoxInBox(&min, &max, &actor->field_64, &actor->field_70)
+                        && Abs(pos->y - actor->field_94.y) <= 0x40000) {
+                        if (dword_203DFC4 != actor) {
+                            dword_203DFC4 = actor;
+                            actor->field_4A = actor->field_38;
+                        }
+                        dword_203DFC4->field_38 = 1;
+                        gPlayerShadowSprite.objMode = 0;
+                        byte_203DFE6 = TRUE;
+                        return FALSE;
+                    }
+                    if (VecFX_PointInBox(pos, &actor->field_7C, &actor->field_88)) {
+                        if (dword_203DFC4 != actor) {
+                            dword_203DFC4 = actor;
+                            actor->field_4A = actor->field_38;
+                        }
+                        dword_203DFC4->field_38 = 1;
+                        gPlayerShadowSprite.objMode = 0;
+                        byte_203DFE7 = TRUE;
+                        return FALSE;
+                    }
+                } else {
+                    ASSERT(0);
+                }
+            }
+            if (count == byte_203E008) {
+                break;
+            }
+        }
+    }
+
+    if (dword_203DFC4) {
+        if (wasOnTop) {
+            byte_203DFE8 = TRUE;
+        }
+        dword_203DFC4->field_38 = dword_203DFC4->field_4A;
+        dword_203DFC4 = NULL;
+        gPlayerShadowSprite.objMode = 1;
+    }
+    return FALSE;
+}
+
+int sub_0802B048(struct Vec3fx* pos) {
+    int i;
+    int count;
+    struct Actor* actor;
+    struct Vec3fx attackPos;
+    struct Vec3fx min;
+    struct Vec3fx max;
+    bool32 hit;
+    bool32 touched;
+    u32 vulnerable;
+
+    for (count = 0, i = 0; i < byte_203E00D; i++) {
+        actor = &dword_203DFB4[i];
+        if (actor->isActive) {
+            count++;
+            attackPos.x = pos->x + gPlayerAttackState.offset.x;
+            attackPos.y = pos->y + gPlayerAttackState.offset.y;
+            attackPos.z = pos->z + gPlayerAttackState.offset.z;
+            switch (actor->interactionKind) {
+                case 1:
+                    if (VecFX_PointInBox(pos, &actor->field_64, &actor->field_70) && !actor->field_20
+                        && !actor->field_3C) {
+                        actor->field_B = 0;
+                        actor->sprite.direction = 0;
+                        sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
+                        sprite_set_priority(&actor->sprite, actor->field_8);
+                        actor->shadowSprite.attr0Flag9 = 1;
+                        actor->field_3C = 1;
+                        run_obj_behavior(actor->type, (s16)actor->field_1C);
+                        return 0;
+                    }
+                    break;
+                case 0:
+                    if (!actor->field_20 && !actor->field_3C && !actor->field_44
+                        && !is_obj_disabled(actor->type, (s16)actor->field_1C) && sub_8034310(actor)
+                        && actor->field_48) {
+                        hit = FALSE;
+                        touched = FALSE;
+                        if (gPlayerAttackState.field_E) {
+                            if (gPlayerAttackState.attackFlag == 1) {
+                                min.x = attackPos.x - 0xA0000;
+                                max.x = attackPos.x + 0xA0000;
+                                min.y = attackPos.y;
+                                max.y = attackPos.y;
+                                min.z = attackPos.z - 0xA0000;
+                                max.z = attackPos.z + 0xA0000;
+                                hit = CallARM_VecFX_BoxInBox(&min, &max, &actor->field_64,
+                                                             &actor->field_70);
+                            } else {
+                                hit = VecFX_PointInBox(&attackPos, &actor->field_64, &actor->field_70);
+                            }
+                        }
+                        if (hit) {
+                            if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_HURTING) {
+                                return 0;
+                            }
+                        } else {
+                            touched = sub_802BF74(actor);
+                        }
+                        if ((hit || touched) && actor->field_46) {
+                            if (actor->type == 0xCD) {
+                                vulnerable = dword_203F8B8 & gPlayerAttackState.attackFlag;
+                            } else {
+                                vulnerable = word_80A75A4[actor->type] & gPlayerAttackState.attackFlag;
+                            }
+                            if (vulnerable) {
+                                if (gPlayerAttackState.attackFlag & 0x15E0) {
+                                    sub_80499A8(dword_203DFB8[actor->field_1E],
+                                                gPlayerAttackState.field_F,
+                                                gPlayerAttackState.attackFlag == word_80CB964[8]);
+                                    gPlayerAttackState.field_F = 0;
+                                } else {
+                                    sub_80499A8(dword_203DFB8[actor->field_1E],
+                                                gPlayerAttackState.field_E,
+                                                gPlayerAttackState.attackFlag == word_80CB964[8]);
+                                    gPlayerAttackState.field_E = 0;
+                                }
+                                if (actor->field_46 <= 0) {
+                                    if (actor->type == 0xCD) {
+                                        run_obj_behavior(actor->type, actor->field_1E);
+                                        break;
+                                    }
+                                    sub_802E024(sub_80490A4(dword_203DFB8[actor->field_1E]), actor);
+                                    actor->field_B = 0;
+                                    actor->sprite.direction = 0;
+                                    sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim,
+                                                    FALSE, 1);
+                                    actor->field_3C = 1;
+                                    PLAY_SFX(dword_80CF080[word_80CF140[actor->type]]);
+                                    sprite_set_priority(&actor->sprite, actor->field_8);
+                                    actor->shadowSprite.attr0Flag9 = 1;
+                                    run_obj_behavior(actor->type, (s16)actor->field_1C);
+                                    actor->field_46 = dActorTypeInfo[actor->type].field_2;
+                                    break;
+                                }
+                                sub_800E9EC(&actor->sprite, 15, 0x1FFF);
+                            }
+                            if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_PACK_WACK)
+                                && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE)
+                                && gTransformation != 3 && gTransformation != 4) {
+                                sub_801990C();
+                                return 2;
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    ASSERT(0);
+                    break;
+                case 3:
+                    ASSERT(0);
+                    break;
+                case 4:
+                    ASSERT(0);
+                    break;
+                default:
+                    ASSERT(0);
+                    break;
+            }
+        }
+        if (count == byte_203DFD6) {
+            break;
+        }
+    }
+    return 0;
 }

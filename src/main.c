@@ -835,7 +835,7 @@ static void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
 
     if (byte_203DFE6) {
         if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_BIT11) {
-            u32 y = dword_203DFC4->field_98;
+            u32 y = dword_203DFC4->field_94.y;
             a1->y = y;
             a2->y = y;
         } else {
@@ -848,12 +848,12 @@ static void sub_800A740(struct Vec3fx* a1, struct Vec3fx* a2) {
             a2->x = a1->x;
             a2->z = a1->z;
 
-            y = dword_203DFC4->field_98;
+            y = dword_203DFC4->field_94.y;
             a1->y = y;
             a2->y = y;
         }
     } else if (byte_203DFE7) {
-        a2->y = dword_203DFC4->field_98;
+        a2->y = dword_203DFC4->field_94.y;
     }
 }
 
@@ -1985,7 +1985,7 @@ int sub_800C50C() {
 
     if (dword_203DFC4) {
         u8 a = dword_203DFC0[dword_203DFC4->field_1E];
-        pos = gPlayerPos.y - dword_203DFC4->field_98;
+        pos = gPlayerPos.y - dword_203DFC4->field_94.y;
 
         if (pos >> 16 >= dword_203FA5C[a].field_28) {
             return dword_203FA5C[a].field_27;
