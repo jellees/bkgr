@@ -715,7 +715,7 @@ extern void sub_8029DA8(u32);
 extern int sub_8029F3C(int, int, int, int);
 extern int sub_802A06C(int, int, int, int);
 extern void sub_802A19C(int, int, int, int);
-extern void sub_802A2A0(void);
+extern void sub_802A2A0(int, int, int, int);
 extern void sub_802ADB0(u32**, u32*);
 extern bool32 handle_obj_interactions(struct Vec3fx*);
 extern void spawn_player_projectile(int, struct Vec3fx*, u8);

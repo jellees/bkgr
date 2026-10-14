@@ -1162,7 +1162,7 @@ void sub_802A19C(int left, int right, int top, int bottom) {
     }
 }
 
-void sub_802A2A0(void) {
+void sub_802A2A0(int left, int right, int top, int bottom) {
     int found;
     int i;
     struct Actor* actor;
@@ -1188,4 +1188,18 @@ void sub_802A2A0(void) {
             }
         }
     }
+}
+
+void sub_802A34C(int minX, int maxX, int minY, int maxY) {
+    int result;
+
+    result = sub_8029F3C(minX, maxX, minY, maxY);
+    result |= sub_802A06C(minX, maxX, minY, maxY);
+    if (result && !byte_203E014) {
+        byte_203E015 = 120;
+        byte_203E016 = 250;
+    }
+    byte_203E014 = result;
+    sub_802A19C(minX, maxX, minY, maxY);
+    sub_802A2A0(minX, maxX, minY, maxY);
 }

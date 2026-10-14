@@ -4,59 +4,6 @@
     .text
 
     .thumb
-    .global sub_802A34C
-sub_802A34C: @ 0x0802A34C
-	push {r4, r5, r6, r7, lr}
-	mov r7, r8
-	push {r7}
-	adds r5, r0, #0
-	adds r6, r1, #0
-	adds r7, r2, #0
-	mov r8, r3
-	bl sub_8029F3C
-	adds r4, r0, #0
-	adds r0, r5, #0
-	adds r1, r6, #0
-	adds r2, r7, #0
-	mov r3, r8
-	bl sub_802A06C
-	orrs r4, r0
-	cmp r4, #0
-	beq _0802A386
-	ldr r0, _0802A3AC
-	ldrb r0, [r0]
-	cmp r0, #0
-	bne _0802A386
-	ldr r1, _0802A3B0
-	movs r0, #0x78
-	strb r0, [r1]
-	ldr r1, _0802A3B4
-	movs r0, #0xfa
-	strb r0, [r1]
-_0802A386:
-	ldr r0, _0802A3AC
-	strb r4, [r0]
-	adds r0, r5, #0
-	adds r1, r6, #0
-	adds r2, r7, #0
-	mov r3, r8
-	bl sub_802A19C
-	adds r0, r5, #0
-	adds r1, r6, #0
-	adds r2, r7, #0
-	mov r3, r8
-	bl sub_802A2A0
-	pop {r3}
-	mov r8, r3
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0802A3AC: .4byte 0x0203E014
-_0802A3B0: .4byte 0x0203E015
-_0802A3B4: .4byte 0x0203E016
-
-    .thumb
 sub_802A3B8: @ 0x0802A3B8
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
