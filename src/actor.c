@@ -936,3 +936,256 @@ void s_load_object(int x, int y) {
     play_jinjo_sounds();
 }
 #endif
+
+void sub_8029C30(int type) {
+    int found;
+    int i;
+    struct Actor* actor;
+
+    if (gActorPool0Count) {
+        for (found = 0, i = 0; i < gActorPool0Capacity; i++) {
+            actor = &gActorPool0[i];
+            if (actor->isActive) {
+                if (!actor->field_30 && !actor->field_20 && !actor->field_3C) {
+                    if (actor->type == type) {
+                        gActorPool0Count--;
+                        actor->isActive = FALSE;
+                        dword_203E010[actor->field_1E] = 0;
+                        if (gInInteractionArea && dword_203DFDC == actor) {
+                            gInInteractionArea = FALSE;
+                            dword_203DFE0 = NULL;
+                        }
+                    } else {
+                        found++;
+                    }
+                } else {
+                    found++;
+                }
+            }
+            if (found == gActorPool0Count) {
+                break;
+            }
+        }
+    }
+    if (gActorPool1Count) {
+        for (found = 0, i = 0; i < gActorPool1Capacity; i++) {
+            actor = &gActorPool1[i];
+            if (actor->isActive) {
+                if (!actor->field_30 && !actor->field_20 && !actor->field_3C) {
+                    if (actor->type == type) {
+                        gActorPool1Count--;
+                        actor->isActive = FALSE;
+                        dword_203E010[actor->field_1E] = 0;
+                        if (gInInteractionArea && dword_203DFDC == actor) {
+                            gInInteractionArea = FALSE;
+                            dword_203DFE0 = NULL;
+                        }
+                    } else {
+                        found++;
+                    }
+                } else {
+                    found++;
+                }
+            }
+            if (found == gActorPool1Count) {
+                break;
+            }
+        }
+    }
+}
+
+void sub_8029DA8(u32 flags) {
+    int found;
+    int i;
+    struct Actor* actor;
+
+    if (gActorPool0Count) {
+        for (found = 0, i = 0; i < gActorPool0Capacity; i++) {
+            actor = &gActorPool0[i];
+            if (actor->isActive) {
+                if (!actor->field_30 && !actor->field_20 && !actor->field_3C) {
+                    if (dActorTypeFlags[actor->type] & flags) {
+                        gActorPool0Count--;
+                        actor->isActive = FALSE;
+                        dword_203E010[actor->field_1E] = 0;
+                        if (gInInteractionArea && dword_203DFDC == actor) {
+                            gInInteractionArea = FALSE;
+                            dword_203DFE0 = NULL;
+                        }
+                    } else {
+                        found++;
+                    }
+                } else {
+                    found++;
+                }
+            }
+            if (found == gActorPool0Count) {
+                break;
+            }
+        }
+    }
+    if (gActorPool1Count) {
+        for (found = 0, i = 0; i < gActorPool1Capacity; i++) {
+            actor = &gActorPool1[i];
+            if (actor->isActive) {
+                if (!actor->field_30 && !actor->field_20 && !actor->field_3C) {
+                    if (dActorTypeFlags[actor->type] & flags) {
+                        gActorPool1Count--;
+                        actor->isActive = FALSE;
+                        dword_203E010[actor->field_1E] = 0;
+                        if (gInInteractionArea && dword_203DFDC == actor) {
+                            gInInteractionArea = FALSE;
+                            dword_203DFE0 = NULL;
+                        }
+                    } else {
+                        found++;
+                    }
+                } else {
+                    found++;
+                }
+            }
+            if (found == gActorPool1Count) {
+                break;
+            }
+        }
+    }
+}
+
+int sub_8029F3C(int left, int right, int top, int bottom) {
+    int result;
+    int found;
+    int i;
+    struct Actor* actor;
+
+    result = 0;
+    if (gActorPool0Count) {
+        for (found = 0, i = 0; i < gActorPool0Capacity; i++) {
+            actor = &gActorPool0[i];
+            if (actor->isActive) {
+                if (actor->field_30 || actor->field_20 || actor->field_3C) {
+                    found++;
+                } else if (actor->xPosition < left || actor->xPosition > right || actor->yPosition < top
+                           || actor->yPosition > bottom
+                           || is_obj_disabled(actor->type, (s16)actor->field_1C)
+                           || !sub_8034310(actor)) {
+                    gActorPool0Count--;
+                    actor->isActive = FALSE;
+                    dword_203E010[actor->field_1E] = 0;
+                    if (gInInteractionArea && dword_203DFDC == actor) {
+                        gInInteractionArea = FALSE;
+                        dword_203DFE0 = NULL;
+                    }
+                } else {
+                    found++;
+                    if (dActorTypeFlags[actor->type] & 0x10) {
+                        result = 1;
+                    }
+                }
+            }
+            if (found == gActorPool0Count) {
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+int sub_802A06C(int left, int right, int top, int bottom) {
+    int result;
+    int found;
+    int i;
+    struct Actor* actor;
+
+    result = 0;
+    if (gActorPool1Count) {
+        for (found = 0, i = 0; i < gActorPool1Capacity; i++) {
+            actor = &gActorPool1[i];
+            if (actor->isActive) {
+                if (actor->field_30 || actor->field_20 || actor->field_3C) {
+                    found++;
+                } else if (actor->xPosition < left || actor->xPosition > right || actor->yPosition < top
+                           || actor->yPosition > bottom
+                           || is_obj_disabled(actor->type, (s16)actor->field_1C)
+                           || !sub_8034310(actor)) {
+                    gActorPool1Count--;
+                    actor->isActive = FALSE;
+                    dword_203E010[actor->field_1E] = 0;
+                    if (gInInteractionArea && dword_203DFDC == actor) {
+                        gInInteractionArea = FALSE;
+                        dword_203DFE0 = NULL;
+                    }
+                } else {
+                    found++;
+                    if (dActorTypeFlags[actor->type] & 0x10) {
+                        result = 1;
+                    }
+                }
+            }
+            if (found == gActorPool1Count) {
+                break;
+            }
+        }
+    }
+    return result;
+}
+
+void sub_802A19C(int left, int right, int top, int bottom) {
+    int found;
+    int i;
+    struct Actor* actor;
+
+    if (gActorPool2Count) {
+        for (found = 0, i = 0; i < gActorPool2Capacity; i++) {
+            actor = &gActorPool2[i];
+            if (actor->isActive) {
+                if (actor->field_30 || actor->field_20 || actor->field_3C) {
+                    found++;
+                } else if (actor->xPosition < left || actor->xPosition > right || actor->yPosition < top
+                           || actor->yPosition > bottom
+                           || is_obj_disabled(actor->type, (s16)actor->field_1C)
+                           || !sub_8034310(actor)) {
+                    gActorPool2Count--;
+                    actor->isActive = FALSE;
+                    dword_203E010[actor->field_1E] = 0;
+                    if (gInInteractionArea && dword_203DFDC == actor) {
+                        gInInteractionArea = FALSE;
+                        dword_203DFE0 = NULL;
+                    }
+                } else {
+                    found++;
+                }
+            }
+            if (found == gActorPool2Count) {
+                break;
+            }
+        }
+    }
+}
+
+void sub_802A2A0(void) {
+    int found;
+    int i;
+    struct Actor* actor;
+
+    if (byte_203DFD6) {
+        for (found = 0, i = 0; i < byte_203E00D; i++) {
+            actor = &dword_203DFB4[i];
+            if (actor->isActive) {
+                if (actor->field_20 || actor->field_3C) {
+                    found++;
+                } else if (is_obj_disabled(actor->type, (s16)actor->field_1C)) {
+                    actor->isActive = FALSE;
+                    if (actor->field_48) {
+                        byte_203DFE4--;
+                    }
+                    byte_203DFD6--;
+                } else {
+                    found++;
+                }
+            }
+            if (found == byte_203DFD6) {
+                break;
+            }
+        }
+    }
+}
