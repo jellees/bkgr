@@ -1203,3 +1203,80 @@ void sub_802A34C(int minX, int maxX, int minY, int maxY) {
     sub_802A19C(minX, maxX, minY, maxY);
     sub_802A2A0(minX, maxX, minY, maxY);
 }
+
+void sub_802A3B8(u32** renderList, int* spriteCount) {
+    int rendered;
+    int i;
+    struct Actor* actor;
+    struct Vec3fx size;
+
+    if (gActorPool1Count) {
+        for (rendered = 0, i = 0; i < gActorPool1Capacity; i++) {
+            actor = &gActorPool1[i];
+            if (actor->isActive) {
+                if (dActorTypeFlags[actor->type] & 1) {
+                    sub_08033598(actor->type, (s16)actor->field_1C, actor->field_C);
+                    if (sub_8033118(actor->type, (s16)actor->field_1C, actor->field_C)) {
+                        sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
+                    } else {
+                        sprite_set_anim(&actor->sprite, actor->type + 0x221, FALSE, 1);
+                    }
+                }
+                if (actor->interactionKind == 7) {
+                    if (!sub_8033CCC(actor)) {
+                        if (actor->sprite.index == 0x451) {
+                            sprite_set_anim(&actor->sprite, actor->type + 0x221, FALSE, 0);
+                        }
+                    } else {
+                        sprite_set_anim(&actor->sprite, 0x451, FALSE, 0);
+                    }
+                }
+                if (actor->field_3C) {
+                    if (sprite_is_anim_done_once(&actor->sprite)) {
+                        actor->field_3C = 0;
+                        if (dActorTypeInfo[actor->type].field_0 == 0) {
+                            dword_203E010[actor->field_1E] = 0;
+                            actor->isActive = FALSE;
+                            gActorPool1Count--;
+                        } else {
+                            actor->field_20 = dActorTypeInfo[actor->type].field_0;
+                            sprite_set_anim(&actor->sprite, actor->type + 0x221, FALSE, 0);
+                        }
+                    }
+                } else if (actor->field_20) {
+                    if (--actor->field_20 == 0) {
+                        actor->field_44 = 1;
+                    }
+                }
+                if (actor->isActive && !actor->field_20 && !actor->field_44) {
+                    size.x = actor->field_4C >> 1;
+                    size.y = actor->field_50;
+                    size.z = actor->field_54 >> 1;
+                    if (!sub_8003A74(&actor->field_94, &size, 0, gMapPixelSizeY)) {
+                        actor->sprite.attr0Flag9 = 1;
+                    } else {
+                        actor->sprite.attr0Flag9 = 0;
+                    }
+                    actor->sprite.xPos = actor->xPosition - gCameraPixelX + (s8)byte_30043A4;
+                    actor->sprite.yPos =
+                        actor->yPosition - gCameraPixelY - actor->field_9 + byte_30043A5;
+                    sprite_set_priority(&actor->sprite, actor->field_8);
+                    sprite_render_ex(&actor->sprite, *renderList);
+                    if (actor->field_38 == 0) {
+                        **renderList = (actor->sprite.priority << 30) | ((u32)actor->field_9C >> 4);
+                    } else if (actor->field_38 == 2) {
+                        **renderList = (actor->sprite.priority << 30) | 0x0FFFF000;
+                    } else {
+                        **renderList = (actor->sprite.priority << 30) | 0x3FFFF000;
+                    }
+                    *renderList += 3;
+                    (*spriteCount)++;
+                    rendered++;
+                }
+            }
+            if (rendered == gActorPool1Count) {
+                break;
+            }
+        }
+    }
+}
