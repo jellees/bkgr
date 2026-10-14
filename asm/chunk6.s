@@ -8578,7 +8578,7 @@ _0802E07A:
     .global sub_0802E080
 sub_0802E080: @ 0x0802E080
 	push {r4, r5, r6, lr}
-	bl sub_8063178
+	bl timer_stop
 	ldr r0, _0802E0A8
 	ldr r0, [r0]
 	ldrh r0, [r0]
@@ -19103,7 +19103,7 @@ _08033B96:
 	b _08033CC0
 _08033BAE:
 	movs r1, #0
-	bl sub_80630C0
+	bl timer_start
 	b _08033CC0
 _08033BB6:
 	ldrb r0, [r2, #1]
@@ -29860,7 +29860,7 @@ sub_8039210: @ 0x08039210
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _08039226
-	bl sub_8063178
+	bl timer_stop
 _08039226:
 	pop {r0}
 	bx r0
@@ -30377,7 +30377,7 @@ _080395CC:
 _080395F0:
 	cmp r5, #0
 	beq _08039648
-	bl sub_8063178
+	bl timer_stop
 	ldr r1, _08039630
 	movs r0, #1
 	strb r0, [r1]
@@ -36357,7 +36357,7 @@ _0803BFDE:
 	cmp r0, #0x3b
 	ble _0803BFF0
 	movs r1, #0
-	bl sub_80630C0
+	bl timer_start
 _0803BFF0:
 	pop {r0}
 	bx r0
@@ -36898,7 +36898,7 @@ sub_803C3EC: @ 0x0803C3EC
 	lsls r0, r0, #4
 	ldr r2, _0803C430
 	movs r1, #0
-	bl sub_806311C
+	bl timer_start_with_callback
 _0803C41A:
 	bl sub_80394C0
 	pop {r0}
@@ -36932,7 +36932,7 @@ sub_803C434: @ 0x0803C434
 	lsls r0, r0, #4
 	ldr r2, _0803C478
 	movs r1, #0
-	bl sub_806311C
+	bl timer_start_with_callback
 _0803C462:
 	bl sub_80394C0
 	pop {r0}
@@ -36966,7 +36966,7 @@ sub_803C47C: @ 0x0803C47C
 	lsls r0, r0, #4
 	ldr r2, _0803C4C0
 	movs r1, #0
-	bl sub_806311C
+	bl timer_start_with_callback
 _0803C4AA:
 	bl sub_80394C0
 	pop {r0}
@@ -37000,7 +37000,7 @@ sub_803C4C4: @ 0x0803C4C4
 	lsls r0, r0, #4
 	ldr r2, _0803C508
 	movs r1, #0
-	bl sub_806311C
+	bl timer_start_with_callback
 _0803C4F2:
 	bl sub_80394C0
 	pop {r0}

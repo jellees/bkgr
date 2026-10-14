@@ -4,8 +4,8 @@
     .text
 
     .thumb
-    .global sub_8064834
-sub_8064834: @ 0x08064834
+    .global CallARM_DivRemainder
+CallARM_DivRemainder: @ 0x08064834
 	bx pc
 	nop 
 	.arm

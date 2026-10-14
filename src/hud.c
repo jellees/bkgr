@@ -7,6 +7,7 @@
 #include "audio_b.h"
 #include "random.h"
 #include "hud.h"
+#include "timer.h"
 #include "hud_scripts.h"
 
 struct HudSprite {
@@ -867,7 +868,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
                 element->rouletteIndex = 0;
                 finish_stop_honeycomb();
                 gIsStopHoneycombActive = FALSE;
-                sub_8063178();
+                timer_stop();
                 byte_200108E = 0;
             } else {
                 element->rouletteTime--;
@@ -914,7 +915,7 @@ static int hud_cmd_bar_count_health(struct HudElement* element, int start, int _
                 element->rouletteIndex = 0;
                 finish_stop_honeycomb();
                 gIsStopHoneycombActive = FALSE;
-                sub_8063178();
+                timer_stop();
                 byte_200108E = 0;
             } else {
                 int v10;
@@ -1211,7 +1212,7 @@ void hud_set_value(u32 element, int value) {
                 gHudElements[element].rouletteTime = 600;
                 gHudElements[element].rouletteStepDelay = 0;
                 gHudElements[element].rouletteStarted = FALSE;
-                sub_80630C0(600, 0);
+                timer_start(600, 0);
                 gHudElements[element].displayValue = value;
                 gHudElements[element].rouletteIndex = -1;
                 gHudStopRoulette = FALSE;
@@ -1219,7 +1220,7 @@ void hud_set_value(u32 element, int value) {
                 gHudElements[element].rouletteTime = 600;
                 gHudElements[element].rouletteStepDelay = 0;
                 gHudElements[element].rouletteStarted = FALSE;
-                sub_80630C0(600, 0);
+                timer_start(600, 0);
                 gHudElements[element].displayValue = value;
                 gHudStopRoulette = FALSE;
             }
@@ -2635,7 +2636,7 @@ bool32 hud_show_timer(int value) {
 void hud_stop_health_roulette(void) {
     if (gHudElements[HUD_ELEMENT_HEALTH_WITH_ICON].state != HUD_STATE_UPDATE) {
         gIsStopHoneycombActive = FALSE;
-        sub_8063178();
+        timer_stop();
         byte_200108E = 0;
     }
 

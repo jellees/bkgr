@@ -14,6 +14,7 @@
 #include "random.h"
 #include "script.h"
 #include "hud.h"
+#include "timer.h"
 
 enum EnvironmentEffect { EFX_NONE, EFX_LAVA, EFX_THUNDER };
 
@@ -240,7 +241,7 @@ static void update_game(void) {
     }
 
     update_scripts();
-    sub_80631AC();
+    timer_update();
     sub_800EACC();
     sub_800ECB4();
 
@@ -2635,7 +2636,7 @@ void sub_800D5FC(int a1, int a2, int a3) {
         sub_8016C78(byte_20010A5);
         word_20010AC = gKeysPressed & KEYS_MASK;
     }
-    sub_8063178();
+    timer_stop();
 
     if (script != 0) {
         start_script(script);
@@ -2664,7 +2665,7 @@ void sub_800D8E8(int a1, char a2, char a3) {
     hud_load_counters();
     hud_load_level_counters();
     hud_hide_all();
-    sub_8063178();
+    timer_stop();
     dword_2001110 = 136 - gCameraPixelX;
     dword_2001114 = gCameraPixelY;
 }
@@ -2689,7 +2690,7 @@ void sub_800DA04(int a1, int a2, int a3) {
     hud_load_counters();
     hud_load_level_counters();
     hud_hide_all();
-    sub_8063178();
+    timer_stop();
     sub_8047000(a3);
 }
 

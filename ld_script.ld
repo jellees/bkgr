@@ -117,6 +117,9 @@ SECTIONS
         . = 0x0003FA5C;
         dword_203FA5C = .; . += 4;
 
+        . = 0x0003FA68;
+        src/timer.o(.bss);
+
         . = 0x0003FA7C;
         gQuizAnswerText1 = .; . += 4;
         gQuizAnswerText2 = .; . += 4;
@@ -287,7 +290,7 @@ SECTIONS
         src/script.o(.text);
         asm/chunk13.o(.text);
         src/gameover.o(.text);
-        asm/timer.o(.text);
+        src/timer.o(.text);
         asm/quiz.o(.text);
         asm/bios.o(.text);
         asm/eeprom.o(.text);

@@ -10,6 +10,7 @@
 #include "script_defs.h"
 #include "random.h"
 #include "hud.h"
+#include "timer.h"
 
 #define MAX_SCRIPTS 2
 
@@ -1028,9 +1029,9 @@ static bool32 script_cmd_load_and_store_room(int room, int warp, int a3, int cha
     init_efx();
     init_room_name();
 
-    if (sub_80631A0()) {
+    if (timer_is_active()) {
         byte_203E137 = 1;
-        sub_8063188();
+        timer_pause();
     }
 
     gPlayerSprite.attr0Flag9 = 0;
@@ -1081,9 +1082,9 @@ static bool32 script_cmd_load_room(int room, int warp, int a3, int changeMusic) 
     init_efx();
     init_room_name();
 
-    if (sub_80631A0()) {
+    if (timer_is_active()) {
         byte_203E137 = 1;
-        sub_8063188();
+        timer_pause();
     }
 
     gPlayerSprite.attr0Flag9 = 0;
@@ -1115,9 +1116,9 @@ static bool32 script_cmd_restore_room(int a1, int _, int __, int ___) {
     sub_800C1E8(gCurrentScript->loadedRoomIdx, gCurrentScript->playerPos.x, gCurrentScript->playerPos.y,
                 gCurrentScript->playerPos.z, 0, ROOM_LOAD_RESTORE);
 
-    if (sub_80631A0()) {
+    if (timer_is_active()) {
         byte_203E137 = 0;
-        sub_8063194();
+        timer_resume();
     }
 
     sub_8029DA8(256);

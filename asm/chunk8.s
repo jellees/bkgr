@@ -21578,7 +21578,7 @@ _080525B8:
 _080525BA:
 	bl hud_release_element
 	bl hud_dismiss_all
-	bl sub_8063178
+	bl timer_stop
 	b _0805278E
 	.align 2, 0
 _080525C8: .4byte 0x0203F93D
@@ -22008,16 +22008,16 @@ _08052940: .4byte 0x0203F944
 _08052944:
 	cmp r2, #0
 	bne _08052952
-	bl sub_8063194
+	bl timer_resume
 	b _0805295C
 _0805294E:
 	cmp r2, #0
 	beq _08052958
 _08052952:
-	bl sub_8063188
+	bl timer_pause
 	b _0805295C
 _08052958:
-	bl sub_8063194
+	bl timer_resume
 _0805295C:
 	pop {r0}
 	bx r0
@@ -23148,7 +23148,7 @@ _08053292:
 	bl sub_80540E8
 _080532F0:
 	bl hud_hide_all
-	bl sub_8063178
+	bl timer_stop
 	bl sub_80552CC
 	ldr r0, _08053384
 	ldrb r6, [r0]
@@ -28722,7 +28722,7 @@ _08055FEC:
 _08055FF6:
 	bl sub_8058F9C
 	bl hud_hide_all
-	bl sub_8063178
+	bl timer_stop
 	ldr r4, _08056060
 	ldrb r0, [r4]
 	cmp r0, #2
@@ -29149,7 +29149,7 @@ _08056374:
 	bne _08056398
 	ldr r0, _08056394
 	movs r1, #0
-	bl sub_80630C0
+	bl timer_start
 	movs r0, #3
 	strb r0, [r5]
 	b _080564D6
@@ -29385,7 +29385,7 @@ _08056560: @ jump table
 	.4byte _08056A60 @ case 5
 _08056578:
 	bl hud_dismiss_all
-	bl sub_8063178
+	bl timer_stop
 	ldr r0, _08056594
 	ldr r0, [r0]
 	adds r0, #0x78
@@ -35068,7 +35068,7 @@ _08059230:
 	cmp r4, #3
 	bls _080591F4
 	bl hud_dismiss_all
-	bl sub_8063178
+	bl timer_stop
 	b _080593C8
 	.align 2, 0
 _08059244: .4byte 0x0203F93F
@@ -36012,7 +36012,7 @@ _08059A32:
 	movs r0, #0
 	str r0, [r1]
 	bl hud_hide_all
-	bl sub_8063178
+	bl timer_stop
 	ldr r0, _08059A78
 	ldrb r0, [r0]
 	cmp r0, #2
@@ -40741,7 +40741,7 @@ _0805C094:
 	bl heap_alloc
 	str r0, [r4]
 	bl hud_hide_all
-	bl sub_8063178
+	bl timer_stop
 	ldr r6, _0805C118
 	ldrb r0, [r6]
 	cmp r0, #2
@@ -42359,7 +42359,7 @@ _0805CCEC:
 	lsls r0, r0, #4
 _0805CCF0:
 	movs r1, #0
-	bl sub_80630C0
+	bl timer_start
 	b _0805CCFC
 _0805CCF8:
 	.2byte 0xEE00, 0xEE00
@@ -42598,7 +42598,7 @@ _0805CEE8:
 	.2byte 0xEE00, 0xEE00
 _0805CEEC:
 	bl hud_dismiss_all
-	bl sub_8063178
+	bl timer_stop
 	bl sub_80524D8
 	b _0805D150
 _0805CEFA:
@@ -42752,7 +42752,7 @@ _0805D01E:
 	b _0805D150
 _0805D028:
 	bl hud_dismiss_all
-	bl sub_8063178
+	bl timer_stop
 	ldr r0, _0805D0A0
 	ldr r0, [r0]
 	movs r1, #3
