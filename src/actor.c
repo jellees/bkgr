@@ -5,6 +5,7 @@
 #include "hud.h"
 #include "main.h"
 #include "player.h"
+#include "player_defs.h"
 #include "random.h"
 #include "room.h"
 #include "actor_defs.h"
@@ -270,7 +271,7 @@ void setup_entities(u32 room, int mode, struct MapActorSection* section) {
         gActorPool2[i].isActive = FALSE;
     }
     for (i = 0; i < byte_203E00C; i++) {
-        dword_203E000[i].isActive = FALSE;
+        dword_203E000[i].actor.isActive = FALSE;
     }
     for (i = 0; i < gMaxProjectileCount; i++) {
         gProjectiles[i].isActive = FALSE;
@@ -1726,7 +1727,8 @@ int sub_0802B048(struct Vec3fx* pos) {
                             }
                             if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_PACK_WACK)
                                 && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_SHOOTER_MODE)
-                                && gTransformation != 3 && gTransformation != 4) {
+                                && gTransformation != TRANSFORMATION_TANK
+                                && gTransformation != TRANSFORMATION_OCTOPUS) {
                                 sub_801990C();
                                 return 2;
                             }
@@ -1785,7 +1787,8 @@ bool32 talk_with_npc(struct Vec3fx* pos, struct Actor* actor) {
     return FALSE;
 }
 
-bool32 pick_up_collectable(struct Vec3fx* pos, struct Actor* actor) {
+bool32 pick_up_collectable(struct Vec3fx* pos, struct Actor* actor, struct Vec3fx* min,
+                           struct Vec3fx* max) {
     if (VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
         sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
         actor->field_8 = sub_800C50C();
@@ -1917,4 +1920,227 @@ int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 in
         return 1;
     }
     return -1;
+}
+
+void sub_802B980(struct Vec3fx* pos, struct Actor* actor) {
+    if (!actor->field_10) {
+        if (VecFX_PointInBox(pos, &actor->field_7C, &actor->field_88)) {
+            sub_8033FA8(actor->type, actor->field_C, TRUE, &actor->field_49);
+        } else {
+            sub_8033FA8(actor->type, actor->field_C, FALSE, &actor->field_49);
+        }
+    } else if (VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
+        sub_8033FA8(actor->type, actor->field_C, TRUE, &actor->field_49);
+    } else {
+        sub_8033FA8(actor->type, actor->field_C, FALSE, &actor->field_49);
+    }
+}
+
+int sub_0802B9E4(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max, bool32 invulnerable) {
+    struct Vec3fx attackPos;
+    int count;
+    int i;
+    struct Actor* actor;
+    int result;
+
+    attackPos.x = pos->x + gPlayerAttackState.offset.x;
+    attackPos.y = pos->y + gPlayerAttackState.offset.y;
+    attackPos.z = pos->z + gPlayerAttackState.offset.z;
+    for (count = 0, i = 0; i < gActorPool0Capacity; i++) {
+        actor = &gActorPool0[i];
+        if (actor->isActive && !actor->field_20 && !actor->field_3C && !actor->field_44) {
+            count++;
+            switch (actor->interactionKind) {
+                case 2:
+                    if (talk_with_npc(pos, actor)) {
+                        return 0;
+                    }
+                    break;
+                case 4:
+                    if (gTransformation != TRANSFORMATION_OCTOPUS
+                        && CallARM_VecFX_BoxInBox(&actor->field_64, &actor->field_70, &stru_30032E8,
+                                                  &stru_30032F4)) {
+                        run_obj_behavior(actor->type, (s16)actor->field_1C);
+                        return 0;
+                    }
+                    break;
+                case 1:
+                    if (pick_up_collectable(pos, actor, min, max)) {
+                        return 0;
+                    }
+                    break;
+                case 0:
+                    result = handle_static_enemy(actor, &attackPos, invulnerable);
+                    if (result >= 0) {
+                        return result;
+                    }
+                    break;
+                case 3:
+                    ASSERT(0);
+                    break;
+                case 5:
+                    ASSERT(0);
+                    break;
+                case 7:
+                    ASSERT(0);
+                    break;
+                case 6:
+                default:
+                    ASSERT(0);
+                    break;
+            }
+        }
+        if (count == gActorPool0Count) {
+            break;
+        }
+    }
+    return 0;
+}
+
+int sub_0802BB30(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max, bool32 invulnerable) {
+    struct Vec3fx attackPos;
+    struct Vec3fx platformMin;
+    struct Vec3fx platformMax;
+    int count;
+    int i;
+    struct Actor* actor;
+    int result;
+
+    attackPos.x = pos->x + gPlayerAttackState.offset.x;
+    attackPos.y = pos->y + gPlayerAttackState.offset.y;
+    attackPos.z = pos->z + gPlayerAttackState.offset.z;
+    platformMin.x = pos->x - 0x40000;
+    platformMin.y = pos->y - 0x40000;
+    platformMin.z = pos->z - 0x40000;
+    platformMax.x = pos->x + 0x40000;
+    platformMax.y = pos->y + 0x40000;
+    platformMax.z = pos->z + 0x40000;
+    if (!byte_203E018) {
+        byte_203DFC8 = FALSE;
+    }
+    for (count = 0, i = 0; i < gActorPool1Capacity; i++) {
+        actor = &gActorPool1[i];
+        if (actor->isActive && !actor->field_20 && !actor->field_3C && !actor->field_44) {
+            count++;
+            switch (actor->interactionKind) {
+                case 7:
+                    sub_802B980(pos, actor);
+                    break;
+                case 2:
+                    if (talk_with_npc(pos, actor)) {
+                        return 0;
+                    }
+                    break;
+                case 3:
+                    if (!byte_203E018 && VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
+                        byte_203DFC8 = TRUE;
+                        word_203DFCA = actor->type;
+                        return 0;
+                    }
+                    break;
+                case 1:
+                    if (pick_up_collectable(pos, actor, min, max)) {
+                        return 0;
+                    }
+                    break;
+                case 5:
+                    // The original passes max instead of platformMax, which is never used.
+                    if (touch_lava_jetty_platform(pos, actor, &platformMin, max)) {
+                        return 0;
+                    }
+                    break;
+                case 0:
+                    result = handle_static_enemy(actor, &attackPos, invulnerable);
+                    if (result >= 0) {
+                        return result;
+                    }
+                    break;
+                case 4:
+                    ASSERT(0);
+                    break;
+                case 6:
+                default:
+                    ASSERT(0);
+                    break;
+            }
+        }
+        if (count == gActorPool1Count) {
+            break;
+        }
+    }
+    return 0;
+}
+
+int sub_0802BCC4(struct Vec3fx* pos) {
+    int count;
+    int i;
+    struct Actor* actor;
+
+    byte_203DFC8 = FALSE;
+    byte_203E018 = FALSE;
+    for (count = 0, i = 0; i < gActorPool2Capacity; i++) {
+        actor = &gActorPool2[i];
+        if (actor->isActive) {
+            count++;
+            switch (actor->interactionKind) {
+                case 0:
+                    break;
+                case 2:
+                    if (talk_with_npc(pos, actor)) {
+                        return 0;
+                    }
+                    break;
+                case 3:
+                    if (VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
+                        byte_203DFC8 = TRUE;
+                        word_203DFCA = actor->type;
+                        byte_203E018 = TRUE;
+                        return 0;
+                    }
+                    break;
+                case 1:
+                    ASSERT(0);
+                    break;
+                default:
+                    ASSERT(0);
+                    break;
+            }
+        }
+        if (count == gActorPool2Count) {
+            break;
+        }
+    }
+    return 0;
+}
+
+void sub_0802BDA0(struct Vec3fx* pos) {
+    int count;
+    int i;
+    struct Actor* actor;
+
+    if (byte_203DFD3) {
+        for (count = 0, i = 0; i < byte_203E00C; i++) {
+            actor = &dword_203E000[i].actor;
+            if (actor->isActive) {
+                count++;
+                if (!actor->field_3C) {
+                    if (actor->interactionKind == 1) {
+                        if (VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
+                            sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
+                            actor->shadowSprite.attr0Flag9 = 1;
+                            actor->field_3C = 1;
+                            sub_8003864(dword_203E000[i].field_E4);
+                            run_obj_behavior(actor->type, (s16)actor->field_1C);
+                            return;
+                        }
+                    } else {
+                        ASSERT(0);
+                    }
+                }
+            }
+            if (count == byte_203DFD3) {
+                break;
+            }
+        }
+    }
 }

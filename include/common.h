@@ -269,9 +269,10 @@ struct Projectile {
 };
 
 struct struc_203E000 {
-    u8 field_0[0x2E];
-    bool8 isActive;
-    u8 field_2F[0xB9];
+    struct Actor actor;
+    u8 field_D8[0xC];
+    u16 field_E4;
+    u8 field_E6[2];
 };
 
 // Per-type collision data: offsets and sizes of two boxes, in pixels.
@@ -717,15 +718,20 @@ extern bool32 sub_802BF74(struct Actor*);
 extern void sub_802E024(int, struct Actor*);
 extern void sub_80499A8(int, int, bool32);
 extern int sub_80490A4(int);
-extern bool32 sub_0802B9E4(struct Vec3fx*, struct Vec3fx*, struct Vec3fx*, bool32);
-extern bool32 sub_0802BB30(struct Vec3fx*, struct Vec3fx*, struct Vec3fx*, bool32);
-extern bool32 sub_0802BCC4(struct Vec3fx*);
-extern void sub_0802BDA0(struct Vec3fx*);
+extern int sub_0802B9E4(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max,
+                        bool32 invulnerable);
+extern int sub_0802BB30(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max,
+                        bool32 invulnerable);
+extern int sub_0802BCC4(struct Vec3fx* pos);
+extern void sub_0802BDA0(struct Vec3fx* pos);
 extern bool32 talk_with_npc(struct Vec3fx* pos, struct Actor* actor);
-extern bool32 pick_up_collectable(struct Vec3fx* pos, struct Actor* actor);
+extern bool32 pick_up_collectable(struct Vec3fx* pos, struct Actor* actor, struct Vec3fx* min,
+                                  struct Vec3fx* max);
 extern bool32 touch_lava_jetty_platform(struct Vec3fx* pos, struct Actor* actor, struct Vec3fx* min,
                                         struct Vec3fx* max);
 extern int sub_8039650(void);
+extern void sub_802B980(struct Vec3fx* pos, struct Actor* actor);
+extern void sub_8033FA8(int type, u8 a1, bool32 inRange, u8* a3);
 extern int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 invulnerable);
 extern void sub_0802C3A4(int, struct Actor*, int, int);
 extern void sub_0803381C(int type, int param, u8 a3);
@@ -867,6 +873,7 @@ extern u8 byte_203E014;
 extern u8 byte_203E015;
 extern u8 byte_203E016;
 extern u8 byte_203E017;
+extern u8 byte_203E018;
 extern struct Actor stru_203E01C;
 extern u8 byte_30043A4;
 extern u8 byte_30043A5;
