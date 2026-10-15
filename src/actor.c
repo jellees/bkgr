@@ -2476,3 +2476,32 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
         actor->sprite.attr0Flag9 = 1;
     }
 }
+
+void sub_802C968(void) {
+    int count;
+    int i;
+    struct Actor* actor;
+
+    if (byte_203DFD3) {
+        for (count = 0, i = 0; i < byte_203E00C; i++) {
+            actor = &dword_203E000[i].actor;
+            if (actor->isActive) {
+                if (!actor->field_3C) {
+                    if (actor->field_2C == 0) {
+                        actor->isActive = FALSE;
+                        sub_8003864(dword_203E000[i].field_E4);
+                        byte_203DFD3--;
+                    } else {
+                        actor->field_2C--;
+                        count++;
+                    }
+                } else {
+                    count++;
+                }
+                if (count == byte_203DFD3) {
+                    break;
+                }
+            }
+        }
+    }
+}
