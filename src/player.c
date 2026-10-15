@@ -3764,7 +3764,7 @@ static void state_dialogue_end(s32 keyPressed, s32 keyDown) {
             return;
         }
 
-        sub_080161CC(*((u8*)dword_203DFDC + 16));
+        sub_080161CC(dword_203DFDC->field_10);
         sub_8013DD4(21, 32);
         byte_20021CA = 0;
     }
@@ -3782,9 +3782,9 @@ static void state_dialogue_start(s32 keyPressed, s32 keyDown) {
         return;
     }
 
-    if (*((u8*)dword_203DFDC + 52) != 0) {
-        v4 = sub_8003A6C(gPlayerPos.x, gPlayerPos.z, *((u32*)((u8*)dword_203DFDC + 148)),
-                         *((u32*)((u8*)dword_203DFDC + 156)));
+    if (dword_203DFDC->field_34 != 0) {
+        v4 = sub_8003A6C(gPlayerPos.x, gPlayerPos.z, dword_203DFDC->field_94.x,
+                         dword_203DFDC->field_94.z);
         if (v4 == 0xFF) {
             v4 = 0;
         }

@@ -274,7 +274,7 @@ void setup_entities(u32 room, int mode, struct MapActorSection* section) {
         dword_203E000[i].actor.isActive = FALSE;
     }
     for (i = 0; i < gMaxProjectileCount; i++) {
-        gProjectiles[i].isActive = FALSE;
+        gProjectiles[i].actor.isActive = FALSE;
     }
 
     dword_203E010 = heap_alloc(gEntitySection->uidCount, 6, 0);
@@ -1636,7 +1636,7 @@ int sub_0802B048(struct Vec3fx* pos) {
     struct Vec3fx min;
     struct Vec3fx max;
     bool32 hit;
-    bool32 touched;
+    bool32 hitByProjectile;
     u32 vulnerable;
 
     for (count = 0, i = 0; i < byte_203E00D; i++) {
@@ -1665,7 +1665,7 @@ int sub_0802B048(struct Vec3fx* pos) {
                         && !is_obj_disabled(actor->type, (s16)actor->field_1C) && sub_8034310(actor)
                         && actor->field_48) {
                         hit = FALSE;
-                        touched = FALSE;
+                        hitByProjectile = FALSE;
                         if (gPlayerAttackState.field_E) {
                             if (gPlayerAttackState.attackFlag == 1) {
                                 min.x = attackPos.x - 0xA0000;
@@ -1685,9 +1685,9 @@ int sub_0802B048(struct Vec3fx* pos) {
                                 return 0;
                             }
                         } else {
-                            touched = sub_802BF74(actor);
+                            hitByProjectile = sub_802BF74(actor);
                         }
-                        if ((hit || touched) && actor->field_46) {
+                        if ((hit || hitByProjectile) && actor->field_46) {
                             if (actor->type == ACTOR_0CD) {
                                 vulnerable = dword_203F8B8 & gPlayerAttackState.attackFlag;
                             } else {
@@ -1824,10 +1824,10 @@ int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 in
     struct Vec3fx min;
     struct Vec3fx max;
     bool32 hit;
-    bool32 touched;
+    bool32 hitByProjectile;
 
     hit = FALSE;
-    touched = FALSE;
+    hitByProjectile = FALSE;
     if (gPlayerAttackState.field_E) {
         if (gPlayerAttackState.attackFlag == 1) {
             min.x = attackPos->x - 0xA0000;
@@ -1846,10 +1846,10 @@ int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 in
             return 0;
         }
     } else if (!is_obj_disabled(actor->type, (s16)actor->field_1C) && sub_8034310(actor)) {
-        touched = sub_802BF74(actor);
+        hitByProjectile = sub_802BF74(actor);
     }
 
-    if (hit || touched) {
+    if (hit || hitByProjectile) {
         if (actor->field_46 && (word_80A75A4[actor->type] & gPlayerAttackState.attackFlag)) {
             if (gPlayerAttackState.attackFlag & 0x15E0) {
                 actor->field_46 -= gPlayerAttackState.field_F;
@@ -2143,4 +2143,128 @@ void sub_0802BDA0(struct Vec3fx* pos) {
             }
         }
     }
+}
+
+bool32 sub_802BE84(struct Vec3fx* pos) {
+    int count;
+    int i;
+    struct Actor* actor;
+
+    if (!byte_203DFD3) {
+        return FALSE;
+    }
+    for (count = 0, i = 0; i < byte_203E00C; i++) {
+        actor = &dword_203E000[i].actor;
+        if (actor->isActive) {
+            count++;
+            if (!actor->field_3C && actor->interactionKind == 1
+                && (u16)(actor->type - ACTOR_009) <= ACTOR_00A - ACTOR_009
+                && VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
+                sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
+                sprite_set_priority(&actor->sprite, actor->field_8);
+                actor->shadowSprite.attr0Flag9 = 1;
+                actor->field_3C = 1;
+                sub_8003864(dword_203E000[i].field_E4);
+                return TRUE;
+            }
+        }
+        if (count == byte_203DFD3) {
+            break;
+        }
+    }
+    return FALSE;
+}
+
+bool32 sub_802BF74(struct Actor* actor) {
+    int count;
+    int i;
+    struct Projectile* projectile;
+    struct Vec3fx* min;
+    struct Vec3fx* max;
+
+    if (!gCurrentProjectileCount) {
+        return FALSE;
+    }
+    if (gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING) {
+        return FALSE;
+    }
+    min = &actor->field_64;
+    max = &actor->field_70;
+    for (count = 0, i = 0; i < gMaxProjectileCount; i++) {
+        projectile = &gProjectiles[i];
+        if (projectile->actor.isActive && (dActorTypeFlags[projectile->actor.type] & 0x20)) {
+            if (!projectile->actor.field_3C) {
+                if (VecFX_PointInBox(&projectile->actor.field_94, min, max)) {
+                    gPlayerAttackState.field_F = gProjectiles[i].field_104;
+                    gPlayerAttackState.attackFlag = gProjectiles[i].field_FC;
+                    if (!(dActorTypeFlags[actor->type] & 2)) {
+                        sprite_set_anim(&projectile->actor.sprite,
+                                        dActorTypeInfo[projectile->actor.type].anim, FALSE, 1);
+                        PLAY_SFX(gProjectiles[i].field_102);
+                    } else {
+                        sprite_set_anim(&projectile->actor.sprite, 0x451, FALSE, 1);
+                        if (word_80A75A4[actor->type] & gPlayerAttackState.attackFlag) {
+                            PLAY_SFX(190);
+                        } else {
+                            PLAY_SFX(198);
+                        }
+                    }
+                    projectile->actor.field_3C = 1;
+                    sub_8003884(gProjectiles[i].field_FE, 0, dword_80CC290[gPlayerSprite.direction], 0);
+                    gProjectiles[i].field_105 = 1;
+                    gProjectiles[i].field_106 = 0;
+                    return TRUE;
+                }
+            } else {
+                count++;
+            }
+            if (count == gCurrentProjectileCount) {
+                break;
+            }
+        }
+    }
+    return FALSE;
+}
+
+bool32 sub_802C1DC(int type, u8* direction) {
+    struct Vec3fx min;
+    struct Vec3fx max;
+    struct Vec3fx target;
+    int count;
+    int i;
+    struct Projectile* projectile;
+
+    if (!gCurrentProjectileCount) {
+        return FALSE;
+    }
+    min.x = gPlayerPos.x - (dword_3003300 >> 1);
+    min.y = gPlayerPos.y;
+    min.z = gPlayerPos.z - (dword_3003304 >> 1);
+    max.x = gPlayerPos.x + (dword_3003300 >> 1);
+    max.y = gPlayerPos.y + dword_3003308;
+    max.z = gPlayerPos.z + (dword_3003304 >> 1);
+    for (count = 0, i = 0; i < gMaxProjectileCount; i++) {
+        projectile = &gProjectiles[i];
+        if (projectile->actor.isActive && projectile->actor.type == type) {
+            if (!projectile->actor.field_3C) {
+                if (VecFX_PointInBox(&projectile->actor.field_94, &min, &max)) {
+                    CallARM_VecFX_Mul16_2(&gProjectiles[i].field_D8, 0x50000, &target);
+                    VecFX_Add(&gPlayerPos, &target, &target);
+                    *direction = sub_8003A6C(gPlayerPos.x, gPlayerPos.z, target.x, target.z);
+                    sprite_set_anim(&projectile->actor.sprite,
+                                    dActorTypeInfo[projectile->actor.type].anim, FALSE, 1);
+                    projectile->actor.field_3C = 1;
+                    sub_8003884(gProjectiles[i].field_FE, 0, dword_80CC290[gPlayerSprite.direction], 0);
+                    gProjectiles[i].field_105 = 1;
+                    return TRUE;
+                }
+            } else {
+                count++;
+            }
+            if (count == gCurrentProjectileCount) {
+                break;
+            }
+        }
+    }
+    return FALSE;
 }

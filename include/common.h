@@ -263,9 +263,17 @@ struct Actor {
 };
 
 struct Projectile {
-    u8 field_0[0x2E];
-    bool8 isActive;
-    u8 field_2F[0xD9];
+    struct Actor actor;
+    struct Vec3fx field_D8;
+    u8 field_E4[0x18];
+    u16 field_FC;
+    u16 field_FE;
+    u16 field_100;
+    u16 field_102;
+    u8 field_104;
+    u8 field_105;
+    u8 field_106;
+    u8 field_107;
 };
 
 struct struc_203E000 {
@@ -714,7 +722,8 @@ extern void sub_802ADB0(struct RenderListEntry**, u32*);
 extern bool32 handle_obj_interactions(struct Vec3fx*);
 extern bool32 sub_0802AE98(struct Vec3fx*);
 extern int sub_0802B048(struct Vec3fx*);
-extern bool32 sub_802BF74(struct Actor*);
+extern bool32 sub_802BF74(struct Actor* actor);
+extern bool32 sub_802C1DC(int type, u8* direction);
 extern void sub_802E024(int, struct Actor*);
 extern void sub_80499A8(int, int, bool32);
 extern int sub_80490A4(int);
@@ -724,6 +733,7 @@ extern int sub_0802BB30(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* m
                         bool32 invulnerable);
 extern int sub_0802BCC4(struct Vec3fx* pos);
 extern void sub_0802BDA0(struct Vec3fx* pos);
+extern bool32 sub_802BE84(struct Vec3fx* pos);
 extern bool32 talk_with_npc(struct Vec3fx* pos, struct Actor* actor);
 extern bool32 pick_up_collectable(struct Vec3fx* pos, struct Actor* actor, struct Vec3fx* min,
                                   struct Vec3fx* max);
@@ -1040,6 +1050,8 @@ extern u32 Abs(u32); // return type is u32, can tell by the branch instruction
 extern bool32 CallARM_VecFX_BoxInBox(struct Vec3fx* minA, struct Vec3fx* maxA, struct Vec3fx* minB,
                                      struct Vec3fx* maxB);
 extern bool32 VecFX_PointInBox(struct Vec3fx* point, struct Vec3fx* min, struct Vec3fx* max);
+extern void VecFX_Add(struct Vec3fx* a, struct Vec3fx* b, struct Vec3fx* out);
+extern void CallARM_VecFX_Mul16_2(struct Vec3fx* v, fx32 scale, struct Vec3fx* out);
 
 extern u32 dword_80CC290[8];
 extern struct Font font_80B01A8[3];
