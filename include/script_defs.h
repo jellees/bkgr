@@ -1,4 +1,3 @@
-
 #ifndef GUARD_SCRIPT_DEFS_H
 #define GUARD_SCRIPT_DEFS_H
 
