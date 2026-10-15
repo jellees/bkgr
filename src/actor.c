@@ -1817,7 +1817,7 @@ bool32 touch_lava_jetty_platform(struct Vec3fx* pos, struct Actor* actor, struct
     return FALSE;
 }
 
-int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 a2) {
+int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 invulnerable) {
     struct Vec3fx min;
     struct Vec3fx max;
     bool32 hit;
@@ -1864,22 +1864,22 @@ int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 a2
                     actor->field_46 = dActorTypeInfo[actor->type].field_2;
                     switch (actor->type) {
                         case ACTOR_WHIPLASH:
-                        case ACTOR_03C:
-                        case ACTOR_054:
-                        case ACTOR_055:
-                        case ACTOR_08B:
+                        case ACTOR_LIVEWIRE_DOWN:
+                        case ACTOR_LIVEWIRE_LEFT:
+                        case ACTOR_LIVEWIRE_RIGHT:
+                        case ACTOR_STINGLASH:
                             run_obj_behavior(actor->type, (s16)actor->field_1C);
                             sub_802E024(1, actor);
                             break;
-                        case ACTOR_066:
-                            run_obj_behavior(ACTOR_066, (s16)actor->field_1C);
-                            if (!a2) {
+                        case ACTOR_CANDLE_BAD:
+                            run_obj_behavior(ACTOR_CANDLE_BAD, (s16)actor->field_1C);
+                            if (!invulnerable) {
                                 hurt_player(1, -1, 2);
                                 return 1;
                             }
                             break;
-                        case ACTOR_041:
-                        case ACTOR_05F:
+                        case ACTOR_MANHOLE_COVER:
+                        case ACTOR_CONCRETE_COVER:
                             sub_8034460(actor->type, (s16)actor->field_1C, 3, &actor->sprite);
                             break;
                         case ACTOR_BEEHIVE:
@@ -1905,9 +1905,9 @@ int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 a2
     } else if (actor->field_34 && !(dActorTypeFlags[actor->type] & 1)
                && CallARM_VecFX_BoxInBox(&actor->field_64, &actor->field_70, &stru_30032E8,
                                          &stru_30032F4)
-               && !a2 && !gPlayerAttackState.field_E && gGameStatus.health) {
+               && !invulnerable && !gPlayerAttackState.field_E && gGameStatus.health) {
         hurt_player(byte_80CC6B0[actor->type], -1, 2);
-        if (actor->type == ACTOR_091 && gGameStatus.goldenFeathers) {
+        if (actor->type == ACTOR_WHIRLWIND && gGameStatus.goldenFeathers) {
             if (--gGameStatus.goldenFeathers < 0) {
                 gGameStatus.goldenFeathers = 0;
             }

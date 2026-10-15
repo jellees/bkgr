@@ -726,7 +726,7 @@ extern bool32 pick_up_collectable(struct Vec3fx* pos, struct Actor* actor);
 extern bool32 touch_lava_jetty_platform(struct Vec3fx* pos, struct Actor* actor, struct Vec3fx* min,
                                         struct Vec3fx* max);
 extern int sub_8039650(void);
-extern int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 a2);
+extern int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 invulnerable);
 extern void sub_0802C3A4(int, struct Actor*, int, int);
 extern void sub_0803381C(int type, int param, u8 a3);
 extern void spawn_player_projectile(int, struct Vec3fx*, u8);
