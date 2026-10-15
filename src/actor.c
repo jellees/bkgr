@@ -2158,7 +2158,7 @@ bool32 sub_802BE84(struct Vec3fx* pos) {
         if (actor->isActive) {
             count++;
             if (!actor->field_3C && actor->interactionKind == 1
-                && (u16)(actor->type - ACTOR_009) <= ACTOR_00A - ACTOR_009
+                && (u16)(actor->type - ACTOR_GOLDEN_FEATHER) <= ACTOR_00A - ACTOR_GOLDEN_FEATHER
                 && VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
                 sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
                 sprite_set_priority(&actor->sprite, actor->field_8);
@@ -2267,4 +2267,212 @@ bool32 sub_802C1DC(int type, u8* direction) {
         }
     }
     return FALSE;
+}
+
+struct MapActor* sub_0802C350(int group, int coord) {
+    struct MapActor* mapActor;
+    int i;
+
+    mapActor = gEntitySection->groups[group].actors;
+    for (i = 0; i < gEntitySection->groups[group].count; mapActor++, i++) {
+        if (mapActor->field_0 == coord && (dActorTypeFlags[mapActor->type] & 8)) {
+            return mapActor;
+        }
+    }
+    ASSERT(0);
+    return NULL;
+}
+
+void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
+    int i;
+    struct Vec3fx* velocity;
+    struct struc_203E000* item;
+    struct Actor* actor;
+    fx32 halfX;
+    fx32 halfZ;
+    int x;
+    int y;
+    struct Vec3fx size;
+    struct Vec3fx* pos;
+
+    if (byte_203DFD3 == byte_203E00C) {
+        ASSERT(0);
+        return;
+    }
+    for (i = 0; i < byte_203E00C; i++) {
+        if (!dword_203E000[i].actor.isActive) {
+            byte_203DFD3++;
+            break;
+        }
+    }
+    if (i == byte_203E00C) {
+        ASSERT(0);
+        return;
+    }
+
+    item = &dword_203E000[i];
+    actor = &item->actor;
+    pos = &actor->field_94;
+    velocity = &item->field_D8;
+    actor->isActive = TRUE;
+    actor->field_6 = source->field_6;
+    actor->field_8 = source->field_8;
+    actor->xPosition = source->xPosition;
+    actor->yPosition = source->yPosition;
+    actor->field_9 = source->field_9;
+    pos->x = source->field_94.x;
+    pos->y = source->field_94.y;
+    pos->z = source->field_94.z;
+
+    switch (drop) {
+        case 1:
+            actor->type = ACTOR_HONEYCOMB;
+            actor->field_A = 0;
+            actor->interactionKind = 1;
+            actor->field_2F = 0;
+            actor->field_30 = 1;
+            actor->field_1C = -1;
+            actor->field_2C = 450;
+            break;
+        case 2:
+            actor->type = ACTOR_GOLDEN_FEATHER;
+            actor->field_A = 0;
+            actor->interactionKind = 1;
+            actor->field_2F = 0;
+            actor->field_30 = 1;
+            actor->field_1C = -1;
+            actor->field_2C = 450;
+            break;
+        case 4:
+            actor->type = ACTOR_00A;
+            actor->field_A = 0;
+            actor->interactionKind = 1;
+            actor->field_2F = 0;
+            actor->field_30 = 1;
+            actor->field_1C = -1;
+            actor->field_2C = 450;
+            break;
+        case 8:
+            actor->type = ACTOR_058;
+            actor->field_A = 0;
+            actor->interactionKind = 1;
+            actor->field_2F = 0;
+            actor->field_30 = 1;
+            actor->field_1C = -1;
+            actor->field_2C = 450;
+            break;
+        case 16:
+            actor->type = ACTOR_059;
+            actor->field_A = 0;
+            actor->interactionKind = 1;
+            actor->field_2F = 0;
+            actor->field_30 = 1;
+            actor->field_1C = -1;
+            actor->field_2C = 450;
+            break;
+        case 32:
+            actor->type = ACTOR_05A;
+            actor->field_A = 0;
+            actor->interactionKind = 1;
+            actor->field_2F = 0;
+            actor->field_30 = 1;
+            actor->field_1C = -1;
+            actor->field_2C = 450;
+            break;
+        default:
+            ASSERT(0);
+            break;
+    }
+
+    actor->field_24 = 0;
+    actor->field_3C = 0;
+    actor->field_B = 0;
+    actor->field_28 = 0;
+    actor->field_46 = 0;
+    actor->field_1E = 0;
+    actor->field_18 = 0;
+    actor->field_14 = 0;
+    actor->field_20 = 0;
+    actor->field_C = 0;
+    actor->field_34 = 0;
+    actor->field_10 = 0;
+    actor->field_38 = 0;
+
+    actor->field_4C.x = dActorHitboxes[actor->type].size[0] << 16;
+    actor->field_4C.y = dActorHitboxes[actor->type].size[1] << 16;
+    actor->field_4C.z = dActorHitboxes[actor->type].size[2] << 16;
+    actor->field_58.x = dActorHitboxes[actor->type].size[3] << 16;
+    actor->field_58.y = dActorHitboxes[actor->type].size[4] << 16;
+    actor->field_58.z = dActorHitboxes[actor->type].size[5] << 16;
+    actor->field_94.x = actor->xPosition << 16;
+    actor->field_94.y = (actor->field_6 + actor->field_9) << 16;
+    actor->field_94.z =
+        ((gMapPixelSizeY - actor->yPosition + actor->field_9) << 16) - actor->field_94.y;
+    halfX = actor->field_4C.x >> 1;
+    actor->field_64.x = actor->field_94.x - halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+    actor->field_64.y = actor->field_94.y + (dActorHitboxes[actor->type].offset[1] << 16);
+    halfZ = actor->field_4C.z >> 1;
+    actor->field_64.z = actor->field_94.z - halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+    actor->field_70.x = actor->field_94.x + halfX + (dActorHitboxes[actor->type].offset[0] << 16);
+    actor->field_70.y =
+        actor->field_94.y + actor->field_4C.y + (dActorHitboxes[actor->type].offset[1] << 16);
+    actor->field_70.z = actor->field_94.z + halfZ + (dActorHitboxes[actor->type].offset[2] << 16);
+    actor->field_7C.x =
+        actor->field_94.x - (actor->field_58.x >> 1) + (dActorHitboxes[actor->type].offset[3] << 16);
+    actor->field_7C.y = actor->field_94.y + (dActorHitboxes[actor->type].offset[4] << 16);
+    actor->field_7C.z =
+        actor->field_94.z - (actor->field_58.z >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
+    actor->field_88.x =
+        actor->field_94.x + (actor->field_58.x >> 1) + (dActorHitboxes[actor->type].offset[3] << 16);
+    actor->field_88.y =
+        actor->field_94.y + actor->field_58.y + (dActorHitboxes[actor->type].offset[4] << 16);
+    actor->field_88.z =
+        actor->field_94.z + (actor->field_58.z >> 1) + (dActorHitboxes[actor->type].offset[5] << 16);
+
+    if (direction < 0) {
+        i = random_range(0, 7);
+        velocity->x = stru_80CC78C[i].x;
+        velocity->y = 0x10000;
+        velocity->z = stru_80CC78C[i].z;
+    } else {
+        velocity->x = stru_80CC78C[direction].x;
+        velocity->y = 0x10000;
+        velocity->z = stru_80CC78C[direction].z;
+    }
+    item->field_E6 = 1;
+    item->field_E4 = sub_8003854(0x4B0000);
+    sub_800389C(item->field_E4, dword_80CC844[gRoomHeader.unknown1]);
+    sub_8003894(item->field_E4, dword_80CC818[0]);
+    switch (mode) {
+        case 0:
+            sub_8003884(item->field_E4, 0x18000, dword_80CC290[i], 0);
+            CallARM_store_jump_and_other_value(item->field_E4, 0x40000, 0);
+            break;
+        case 2:
+            sub_8003884(item->field_E4, 0x18000, dword_80CC290[i], 0);
+            break;
+        case 1:
+            CallARM_store_jump_and_other_value(item->field_E4, 0x40000, 0);
+            break;
+    }
+
+    x = actor->xPosition - gCameraPixelX;
+    y = actor->yPosition - gCameraPixelY;
+    SetSprite(&actor->shadowSprite, SPRITE_SHADOW, FALSE, 0, 1, x, y, 2);
+    sprite_set_priority(&actor->shadowSprite, actor->field_8);
+    sprite_set_locked_frame(&actor->shadowSprite,
+                            actor->field_9 < dword_80CEBC4 ? byte_80CEB84[actor->field_9] : 5);
+    sprite_lock_anim(&actor->shadowSprite);
+    if (!sub_8003A7C(&actor->field_94, -actor->field_9, gMapPixelSizeY)) {
+        actor->shadowSprite.attr0Flag9 = 1;
+    }
+    y -= actor->field_9;
+    SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
+    sprite_set_priority(&actor->sprite, actor->field_8);
+    size.x = actor->field_4C.x >> 1;
+    size.y = actor->field_4C.y;
+    size.z = actor->field_4C.z >> 1;
+    if (!sub_8003A74(&actor->field_94, &size, 0, gMapPixelSizeY)) {
+        actor->sprite.attr0Flag9 = 1;
+    }
 }

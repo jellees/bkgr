@@ -221,8 +221,7 @@ struct Actor {
     u8 field_29;
     u8 field_2A;
     u8 field_2B;
-    u8 field_2C;
-    u8 field_2D;
+    u16 field_2C;
     bool8 isActive;
     u8 field_2F;
     u8 field_30;
@@ -278,9 +277,10 @@ struct Projectile {
 
 struct struc_203E000 {
     struct Actor actor;
-    u8 field_D8[0xC];
+    struct Vec3fx field_D8;
     u16 field_E4;
-    u8 field_E6[2];
+    u8 field_E6;
+    u8 field_E7;
 };
 
 // Per-type collision data: offsets and sizes of two boxes, in pixels.
@@ -724,6 +724,7 @@ extern bool32 sub_0802AE98(struct Vec3fx*);
 extern int sub_0802B048(struct Vec3fx*);
 extern bool32 sub_802BF74(struct Actor* actor);
 extern bool32 sub_802C1DC(int type, u8* direction);
+extern struct MapActor* sub_0802C350(int group, int coord);
 extern void sub_802E024(int, struct Actor*);
 extern void sub_80499A8(int, int, bool32);
 extern int sub_80490A4(int);
@@ -743,7 +744,7 @@ extern int sub_8039650(void);
 extern void sub_802B980(struct Vec3fx* pos, struct Actor* actor);
 extern void sub_8033FA8(int type, u8 a1, bool32 inRange, u8* a3);
 extern int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 invulnerable);
-extern void sub_0802C3A4(int, struct Actor*, int, int);
+extern void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode);
 extern void sub_0803381C(int type, int param, u8 a3);
 extern void spawn_player_projectile(int, struct Vec3fx*, u8);
 extern u8 sub_0802E080(void);
@@ -1054,6 +1055,7 @@ extern void VecFX_Add(struct Vec3fx* a, struct Vec3fx* b, struct Vec3fx* out);
 extern void CallARM_VecFX_Mul16_2(struct Vec3fx* v, fx32 scale, struct Vec3fx* out);
 
 extern u32 dword_80CC290[8];
+extern const struct Vec3fx stru_80CC78C[8];
 extern struct Font font_80B01A8[3];
 
 extern struct RoomIndex dRoomIndexes[38];
