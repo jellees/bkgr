@@ -625,7 +625,7 @@ void sub_8028E30(void) {
                 }
             } else {
                 switch (actor->type) {
-                    case ACTOR_06C:
+                    case ACTOR_GRUNTY_PAD:
                         if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DC, FALSE, 0, 0, x, y, 2);
                         } else {
@@ -649,7 +649,7 @@ void sub_8028E30(void) {
                         }
                         break;
 
-                    case ACTOR_015:
+                    case ACTOR_WONDERWING_PAD:
                         if (!gUnlockedMoves[MOVE_WONDERWING]) {
                             SetSprite(&actor->sprite, 0x2D9, FALSE, 0, 0, x, y, 2);
                         } else {
@@ -896,7 +896,7 @@ void s_load_object(int x, int y) {
                         actor->sprite.objMode = 1;
                         break;
 
-                    case ACTOR_06C:
+                    case ACTOR_GRUNTY_PAD:
                         if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DC, FALSE, 0, 0, spriteX, spriteY, 2);
                         } else {
@@ -922,7 +922,7 @@ void s_load_object(int x, int y) {
                         }
                         break;
 
-                    case ACTOR_015:
+                    case ACTOR_WONDERWING_PAD:
                         if (!gUnlockedMoves[MOVE_WONDERWING]) {
                             SetSprite(&actor->sprite, 0x2D9, FALSE, 0, 0, spriteX, spriteY, 2);
                         } else {
@@ -5750,14 +5750,14 @@ void sub_08030C68(void) {
                         word_203E9A0[mapActor->field_E] = mapActor->param;
                         break;
 
-                    case ACTOR_042:
+                    case ACTOR_SHOCK_SPRING_PAD_SWITCH:
                         if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
                             stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
                         }
                         stru_203E440[dRoomIndexes[i].level].field_16++;
                         break;
 
-                    case ACTOR_043:
+                    case ACTOR_WONDERWING_SWITCH:
                         if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
                             stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
                         }
@@ -5771,14 +5771,14 @@ void sub_08030C68(void) {
                         stru_203E440[dRoomIndexes[i].level].field_18++;
                         break;
 
-                    case ACTOR_02E:
+                    case ACTOR_FLOOR_SWITCH:
                         if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
                             stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
                         }
                         stru_203E440[dRoomIndexes[i].level].field_13++;
                         break;
 
-                    case ACTOR_034:
+                    case ACTOR_BATTERY_EGG_SWITCH:
                         if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
                             stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
                         }
@@ -5806,28 +5806,28 @@ void sub_08030C68(void) {
                         stru_203E440[dRoomIndexes[i].level].field_1A++;
                         break;
 
-                    case ACTOR_057:
+                    case ACTOR_FIRE_EGG_SWITCH:
                         if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
                             stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
                         }
                         stru_203E440[dRoomIndexes[i].level].field_1B++;
                         break;
 
-                    case ACTOR_056:
+                    case ACTOR_ICE_EGG_SWITCH:
                         if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
                             stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
                         }
                         stru_203E440[dRoomIndexes[i].level].field_1C++;
                         break;
 
-                    case ACTOR_070:
+                    case ACTOR_ROLL_SWITCH:
                         if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
                             stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
                         }
                         stru_203E440[dRoomIndexes[i].level].field_1D++;
                         break;
 
-                    case ACTOR_071:
+                    case ACTOR_JIGGY_SWITCH:
                         if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
                             stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
                         }
@@ -6310,19 +6310,19 @@ void sub_08030C68(void) {
                 group->field_C[group->field_1].field_4 = mapActor->field_1A;
                 group->field_C[group->field_1].field_6 = 0;
                 switch (mapActor->type) {
-                    case ACTOR_071:
+                    case ACTOR_JIGGY_SWITCH:
                         stru_203E440[dRoomIndexes[i].level].field_C0[mapActor->param] = group->field_1;
                         break;
 
-                    case ACTOR_070:
+                    case ACTOR_ROLL_SWITCH:
                         stru_203E440[dRoomIndexes[i].level].field_BC[mapActor->param] = group->field_1;
                         break;
 
-                    case ACTOR_056:
+                    case ACTOR_ICE_EGG_SWITCH:
                         stru_203E440[dRoomIndexes[i].level].field_B8[mapActor->param] = group->field_1;
                         break;
 
-                    case ACTOR_057:
+                    case ACTOR_FIRE_EGG_SWITCH:
                         stru_203E440[dRoomIndexes[i].level].field_B4[mapActor->param] = group->field_1;
                         break;
 
@@ -6334,11 +6334,11 @@ void sub_08030C68(void) {
                         stru_203E440[dRoomIndexes[i].level].field_AC[mapActor->param] = group->field_1;
                         break;
 
-                    case ACTOR_042:
+                    case ACTOR_SHOCK_SPRING_PAD_SWITCH:
                         stru_203E440[dRoomIndexes[i].level].field_A0[mapActor->param] = group->field_1;
                         break;
 
-                    case ACTOR_043:
+                    case ACTOR_WONDERWING_SWITCH:
                         stru_203E440[dRoomIndexes[i].level].field_A4[mapActor->param] = group->field_1;
                         break;
 
@@ -6346,11 +6346,11 @@ void sub_08030C68(void) {
                         stru_203E440[dRoomIndexes[i].level].field_A8[mapActor->param] = group->field_1;
                         break;
 
-                    case ACTOR_02E:
+                    case ACTOR_FLOOR_SWITCH:
                         stru_203E440[dRoomIndexes[i].level].field_94[mapActor->param] = group->field_1;
                         break;
 
-                    case ACTOR_034:
+                    case ACTOR_BATTERY_EGG_SWITCH:
                         stru_203E440[dRoomIndexes[i].level].field_98[mapActor->param] = group->field_1;
                         break;
 
@@ -6396,3 +6396,345 @@ void sub_08030C68(void) {
     }
 }
 #endif
+
+void sub_80330F8(void) {
+    byte_203E93C |= 0x20;
+    byte_203E93B &= ~0x20;
+}
+
+bool32 sub_8033118(int type, int param, u32 group) {
+    struct struc_203E440_90* entry;
+
+    switch (type) {
+        case ACTOR_JIGGY_SWITCH:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_C0[param]].field_1;
+
+        case ACTOR_ROLL_SWITCH:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_BC[param]].field_1;
+
+        case ACTOR_ICE_EGG_SWITCH:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_B8[param]].field_1;
+
+        case ACTOR_FIRE_EGG_SWITCH:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_B4[param]].field_1;
+
+        case ACTOR_052:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_B0[param]].field_1;
+
+        case ACTOR_04F:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_AC[param]].field_1;
+
+        case ACTOR_SHOCK_SPRING_PAD_SWITCH:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_A0[param]].field_1;
+
+        case ACTOR_WONDERWING_SWITCH:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_A4[param]].field_1;
+
+        case ACTOR_044:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_A8[param]].field_1;
+
+        case ACTOR_FLOOR_SWITCH:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_94[param]].field_1;
+
+        case ACTOR_BATTERY_EGG_SWITCH:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_98[param]].field_1;
+
+        case ACTOR_03D:
+            entry = &stru_203E440[gLoadedRoomLevel].field_90[group];
+            return entry->field_C[stru_203E440[gLoadedRoomLevel].field_9C[param]].field_1;
+
+        default:
+            return FALSE;
+    }
+}
+
+bool32 sub_803340C(u32 groupIdx, bool32 activate) {
+    struct struc_203E440_90* group;
+    int i;
+    int j;
+
+    group = &stru_203E440[gLoadedRoomLevel].field_90[groupIdx];
+    if (!activate) {
+        for (i = 0; i < group->field_0; i++) {
+            if (!group->field_C[i].field_1) {
+                return FALSE;
+            }
+        }
+    } else {
+        for (i = 0; i < group->field_0; i++) {
+            if (!group->field_C[i].field_1) {
+                group->field_4 = 0;
+                return FALSE;
+            }
+        }
+        for (i = 0; i < group->field_0; i++) {
+            if (group->field_C[i].field_3 != group->field_C[i].field_2) {
+                for (j = 0; j < group->field_0; j++) {
+                    group->field_C[j].field_1 = 0;
+                }
+                group->field_4 = 0;
+                group->field_1 = 0;
+                PLAY_SFX(177);
+                return FALSE;
+            }
+        }
+        if (group->field_2 && !group->field_4 && !is_obj_disabled(group->field_6, group->field_8)) {
+            group->field_4 = 1;
+            start_script(dword_87E0228[gLoadedRoomLevel][group->field_2]);
+        }
+    }
+    return TRUE;
+}
+
+u16 sub_803352C(u32 groupIdx, bool32 activate) {
+    if (!activate) {
+        return dword_87E0228[gLoadedRoomLevel]
+                            [stru_203E440[gLoadedRoomLevel].field_90[groupIdx].field_3];
+    } else {
+        return dword_87E0228[gLoadedRoomLevel]
+                            [stru_203E440[gLoadedRoomLevel].field_90[groupIdx].field_2];
+    }
+}
+
+bool32 sub_08033598(int type, int param, u32 groupIdx) {
+    struct struc_203E440_90* group;
+    int member;
+
+    group = &stru_203E440[gLoadedRoomLevel].field_90[groupIdx];
+    member = 0xFF;
+    switch (type) {
+        case ACTOR_JIGGY_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_C0[param];
+            break;
+
+        case ACTOR_ROLL_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_BC[param];
+            break;
+
+        case ACTOR_ICE_EGG_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_B8[param];
+            break;
+
+        case ACTOR_FIRE_EGG_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_B4[param];
+            break;
+
+        case ACTOR_052:
+            member = stru_203E440[gLoadedRoomLevel].field_B0[param];
+            break;
+
+        case ACTOR_04F:
+            member = stru_203E440[gLoadedRoomLevel].field_AC[param];
+            break;
+
+        case ACTOR_SHOCK_SPRING_PAD_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_A0[param];
+            break;
+
+        case ACTOR_WONDERWING_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_A4[param];
+            break;
+
+        case ACTOR_044:
+            member = stru_203E440[gLoadedRoomLevel].field_A8[param];
+            break;
+
+        case ACTOR_FLOOR_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_94[param];
+            break;
+
+        case ACTOR_BATTERY_EGG_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_98[param];
+            break;
+
+        case ACTOR_03D:
+            member = stru_203E440[gLoadedRoomLevel].field_9C[param];
+            break;
+
+        default:
+            ASSERT(0);
+            break;
+    }
+    ASSERT(member < group->field_0);
+    if (group->field_C[member].field_0 == 1 && group->field_C[member].field_6 >= 0 && !byte_203E137) {
+        if (group->field_C[member].field_6 == 0) {
+            return TRUE;
+        }
+        group->field_C[member].field_6--;
+        if (group->field_C[member].field_6 != 0) {
+            return FALSE;
+        }
+        group->field_C[member].field_1 = 0;
+        group->field_1--;
+        group->field_4 = 0;
+        PLAY_SFX(169);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_0803381C(int type, int param, u32 groupIdx) {
+    struct struc_203E440_90* group;
+    int member;
+    int sfx;
+
+    sfx = 0;
+    group = &stru_203E440[gLoadedRoomLevel].field_90[groupIdx];
+    member = 0xFF;
+    switch (type) {
+        case ACTOR_JIGGY_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_C0[param];
+            sfx = 157;
+            break;
+
+        case ACTOR_ROLL_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_BC[param];
+            sfx = 158;
+            break;
+
+        case ACTOR_ICE_EGG_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_B8[param];
+            sfx = 159;
+            break;
+
+        case ACTOR_FIRE_EGG_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_B4[param];
+            sfx = 160;
+            break;
+
+        case ACTOR_052:
+            member = stru_203E440[gLoadedRoomLevel].field_B0[param];
+            sfx = 161;
+            break;
+
+        case ACTOR_04F:
+            member = stru_203E440[gLoadedRoomLevel].field_AC[param];
+            sfx = 162;
+            break;
+
+        case ACTOR_SHOCK_SPRING_PAD_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_A0[param];
+            sfx = 163;
+            break;
+
+        case ACTOR_WONDERWING_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_A4[param];
+            sfx = 164;
+            break;
+
+        case ACTOR_044:
+            member = stru_203E440[gLoadedRoomLevel].field_A8[param];
+            sfx = 165;
+            break;
+
+        case ACTOR_FLOOR_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_94[param];
+            sfx = 166;
+            break;
+
+        case ACTOR_BATTERY_EGG_SWITCH:
+            member = stru_203E440[gLoadedRoomLevel].field_98[param];
+            sfx = 167;
+            break;
+
+        case ACTOR_03D:
+            member = stru_203E440[gLoadedRoomLevel].field_9C[param];
+            sfx = 168;
+            break;
+
+        default:
+            ASSERT(0);
+            break;
+    }
+    ASSERT(member < group->field_0);
+    switch (group->field_C[member].field_0) {
+        case 0:
+            if (!group->field_C[member].field_1) {
+                group->field_C[member].field_1 = TRUE;
+                group->field_C[member].field_3 = group->field_1;
+                group->field_1++;
+                PLAY_SFX(sfx);
+            }
+            if (group->field_3 && sub_803340C(groupIdx, FALSE) && !group->field_4) {
+                dword_203E99C = group;
+                dword_203E998 = &group->field_C[member];
+                byte_203E138 = FALSE;
+                dword_203E13C = gLoadedRoomLevel;
+                group->field_4 = TRUE;
+                start_script(dword_87E0228[gLoadedRoomLevel][group->field_3]);
+                sub_8034460(ACTOR_1A0, sfx, 0, NULL);
+            }
+            break;
+
+        case 1:
+            if (group->field_C[member].field_1) {
+                break;
+            }
+            group->field_C[member].field_1 = TRUE;
+            group->field_C[member].field_3 = group->field_1;
+            group->field_1++;
+            PLAY_SFX(sfx);
+            if (!sub_803340C(groupIdx, FALSE)) {
+                break;
+            }
+            if (group->field_3) {
+                if (!is_obj_disabled(group->field_6, group->field_8)) {
+                    if (group->field_4) {
+                        break;
+                    }
+                    byte_203E138 = FALSE;
+                    dword_203E13C = gLoadedRoomLevel;
+                    dword_203E998 = &group->field_C[member];
+                    group->field_C[member].field_6 = -1;
+                    group->field_4 = TRUE;
+                    start_script(dword_87E0228[gLoadedRoomLevel][group->field_3]);
+                    sub_8034460(ACTOR_150, 0, 0, NULL);
+                } else {
+                    group->field_C[member].field_6 = group->field_C[member].field_4;
+                }
+            } else {
+                group->field_C[member].field_6 = group->field_C[member].field_4;
+                if (group->field_C[member].field_6 > 59) {
+                    timer_start(group->field_C[member].field_6, 0);
+                }
+            }
+            break;
+
+        case 2:
+            if (!group->field_C[member].field_1) {
+                group->field_C[member].field_1 = TRUE;
+                group->field_C[member].field_3 = group->field_1;
+                group->field_1++;
+                PLAY_SFX(sfx);
+            } else {
+                group->field_C[member].field_1 = FALSE;
+                group->field_1--;
+                PLAY_SFX(sfx);
+            }
+            if (group->field_3 && sub_803340C(groupIdx, FALSE) && !group->field_4) {
+                dword_203E99C = group;
+                dword_203E998 = &group->field_C[member];
+                byte_203E138 = FALSE;
+                dword_203E13C = gLoadedRoomLevel;
+                group->field_4 = TRUE;
+                start_script(dword_87E0228[gLoadedRoomLevel][group->field_3]);
+                sub_8034460(ACTOR_1A0, sfx, 0, NULL);
+            }
+            break;
+
+        default:
+            ASSERT(0);
+            break;
+    }
+}
