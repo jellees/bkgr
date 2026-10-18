@@ -5261,3 +5261,1138 @@ void sub_8030C54(void) {
     heap_free_by_tag(4, 14);
     sub_08030C68();
 }
+
+#ifndef NONMATCHING
+NAKED void sub_08030C68(void) {
+    asm_unified(".include \"asm/nonmatching/sub_08030C68.s\"");
+}
+#else
+void sub_08030C68(void) {
+    int i;
+    int j;
+    int k;
+    int notes;
+    int totalNotes;
+    struct MapActorSection* section;
+    struct MapActor* mapActor;
+    struct struc_203E440_90* group;
+
+    dword_203EA78 = 0;
+    for (i = 0; i < 10; i++) {
+        stru_203E9B0[i].field_0 = 0;
+    }
+    for (i = 0; i < 19; i++) {
+        byte_203E0FC[i] = 0;
+    }
+    byte_203E938 = 0;
+    byte_203E939 = 0;
+    byte_203E940 = 0;
+    byte_203E94F = 0;
+    byte_203E950 = 0;
+    byte_203E967 = 0;
+    byte_203E964 = 0;
+    byte_203E965 = 0;
+    byte_203E966 = 0;
+    byte_203E93A = 0;
+    byte_203E93E = 0;
+    byte_203E93F = 0;
+    byte_203E10F = 0;
+    byte_203E93C = 63;
+    byte_203E93B = 0;
+    byte_203E93D = 0;
+    byte_203E941 = 0;
+    byte_203E942 = 0;
+    byte_203E943 = 0;
+    byte_203E944 = 0;
+    byte_203E945 = 0;
+    byte_203E946 = 0;
+    byte_203E947 = 0;
+    byte_203E948 = 1;
+    byte_203E949 = 0;
+    byte_203E94A = 0;
+    byte_203E94E = 0;
+    byte_203E94B = 0;
+    byte_203E94C = 0;
+    byte_203E94D = 0;
+    byte_203E955 = 1;
+    byte_203E951 = 0;
+    byte_203E952 = 0;
+    byte_203E953 = 1;
+    byte_203E954 = 0;
+    byte_203E956 = 0;
+    byte_203E957 = 0;
+    byte_203E958 = 0;
+    byte_203E959 = 0;
+    byte_203E95A = 1;
+    byte_203E95B = 0;
+    byte_203E95C = 0;
+    byte_203E97B = 0;
+    byte_203E95D = 0;
+    byte_203E95E = 0;
+    byte_203E95F = 0;
+    byte_203E960 = 0;
+    byte_203E961 = 0;
+    byte_203E975 = 0;
+    byte_203E976 = 0;
+    byte_203E977 = 0;
+    byte_203E978 = 0;
+    byte_203E979 = 0;
+    byte_203E97A = 0;
+    byte_203E962 = 0;
+    byte_203E963 = 0;
+    byte_203E97C = 0;
+    byte_203E968 = 0;
+    byte_203E969 = 0;
+    byte_203E96A = 0;
+    byte_203E96B = 0;
+    byte_203E96C = 0;
+    byte_203E96D = 0;
+    byte_203E96E = 0;
+    byte_203E96F = 0;
+    byte_203E970 = 0;
+    byte_203E97D = 0;
+    byte_203E136 = 0;
+    byte_203E137 = 0;
+    byte_203E122 = 0;
+    byte_203E123 = 0;
+    byte_203E124 = 0;
+    byte_203E125 = 0;
+    byte_203E126 = 0;
+    byte_203E127 = 0;
+    byte_203E128 = 0;
+    byte_203E129 = 0;
+    byte_203E12A = 0;
+    byte_203E12B = 0;
+    gShowMovesLearnedCounter = 0;
+    byte_203E12D = 0;
+    byte_203E12E = 0;
+    byte_203E12F = 0;
+    byte_203E130 = 0;
+    byte_203E131 = 0;
+    byte_203E132 = 0;
+    byte_203E133 = 0;
+    byte_203E972 = 0;
+    byte_203E973 = 0;
+    byte_203E974 = 0;
+    dword_203E980 = 0;
+    byte_203E971 = 0;
+    gGoldenCoins = 0;
+    byte_203E16A = 0;
+    byte_203E16B = 0;
+    byte_203E142 = 0;
+    byte_203E143 = 0;
+    byte_203E144 = 0;
+    byte_203E145 = 0;
+    byte_203E146 = 0;
+    byte_203E147 = 0;
+    byte_203E148 = 0;
+    byte_203E149 = 0;
+    byte_203E14A = 0;
+    byte_203E14B = 0;
+    byte_203E14C = 0;
+    byte_203E14D = 0;
+    byte_203E14E = 0;
+    byte_203E14F = 0;
+    byte_203E150 = 0;
+    byte_203E151 = 0;
+    byte_203E152 = 0;
+    byte_203E153 = 0;
+    byte_203E154 = 0;
+    byte_203E155 = 0;
+    byte_203E156 = 0;
+    byte_203E157 = 0;
+    byte_203E158 = 0;
+    byte_203E159 = 0;
+    byte_203E15A = 0;
+    byte_203E15B = 0;
+    byte_203E15C = 0;
+    byte_203E15D = 0;
+    byte_203E15E = 0;
+    byte_203E15F = 0;
+    byte_203E160 = 0;
+    byte_203E161 = 0;
+    byte_203E162 = 0;
+    byte_203E163 = 0;
+    byte_203E164 = 0;
+    byte_203E165 = 0;
+    byte_203E166 = 0;
+    byte_203E167 = 0;
+    byte_203E168 = 0;
+    byte_203E169 = 0;
+
+    for (i = 0; i < 6; i++) {
+        byte_203E110[i] = 0;
+        byte_203E116[i] = 0;
+        byte_203E11C[i] = 1;
+    }
+    for (i = 0; i < 6; i++) {
+        stru_203E170[i].field_1 = 0;
+        stru_203E170[i].field_0 = 0;
+        stru_203E170[i].field_3 = 0;
+        stru_203E170[i].field_2 = 0;
+        stru_203E170[i].field_4 = 0;
+        stru_203E170[i].field_5 = 0;
+        stru_203E170[i].field_6 = 0;
+        stru_203E170[i].field_7 = 0;
+        stru_203E170[i].field_8 = 0;
+        stru_203E170[i].field_9 = 0;
+        stru_203E170[i].field_A = 0;
+        stru_203E170[i].field_B = 0;
+        stru_203E170[i].field_C = 0;
+        stru_203E170[i].field_D = 0;
+        stru_203E170[i].field_E = 0;
+        stru_203E170[i].field_F = 0;
+        stru_203E170[i].field_10 = 0;
+        stru_203E170[i].field_11 = 0;
+        stru_203E170[i].field_12 = 0;
+        stru_203E170[i].field_13 = 0;
+        stru_203E170[i].field_14 = 0;
+        stru_203E170[i].field_15 = 0;
+        stru_203E170[i].field_16 = 0;
+        stru_203E170[i].field_17 = 0;
+        stru_203E170[i].field_18 = 0;
+        stru_203E170[i].field_19 = 0;
+        stru_203E170[i].field_70 = 0;
+        stru_203E170[i].field_71 = 0;
+        stru_203E170[i].field_72 = 0;
+        stru_203E170[i].field_73 = 0;
+        stru_203E170[i].field_74 = 0;
+        stru_203E170[i].field_75 = 0;
+        stru_203E440[i].field_0 = 0;
+        stru_203E440[i].field_1 = 0;
+        stru_203E440[i].field_2 = 0;
+        stru_203E440[i].field_3 = 0;
+        stru_203E440[i].field_4 = 0;
+        stru_203E440[i].field_13 = 0;
+        stru_203E440[i].field_14 = 0;
+        stru_203E440[i].field_15 = 0;
+        stru_203E440[i].field_12 = 0;
+        stru_203E440[i].field_5 = 0;
+        stru_203E440[i].field_6 = 0;
+        stru_203E440[i].field_7 = 0;
+        stru_203E440[i].field_8 = 0;
+        stru_203E440[i].field_9 = 0;
+        stru_203E440[i].field_A = 0;
+        stru_203E440[i].field_B = 0;
+        stru_203E440[i].field_C = 0;
+        stru_203E440[i].field_D = 0;
+        stru_203E440[i].field_16 = 0;
+        stru_203E440[i].field_17 = 0;
+        stru_203E440[i].field_18 = 0;
+        stru_203E440[i].field_E = 0;
+        stru_203E440[i].field_F = 0;
+        stru_203E440[i].field_10 = 0;
+        stru_203E440[i].field_11 = 0;
+        stru_203E440[i].field_19 = 0;
+        stru_203E440[i].field_1A = 0;
+        stru_203E440[i].field_1B = 0;
+        stru_203E440[i].field_1C = 0;
+        stru_203E440[i].field_1F = 0;
+        stru_203E440[i].field_26 = 0;
+        stru_203E440[i].field_22 = 0;
+        stru_203E440[i].field_23 = 0;
+        stru_203E440[i].field_24 = 0;
+        stru_203E440[i].field_25 = 0;
+        stru_203E440[i].field_1D = 0;
+        stru_203E440[i].field_1E = 0;
+        stru_203E440[i].field_20 = 0;
+        stru_203E440[i].field_21 = 0;
+        stru_203E8D8[i].field_0 = 0;
+        stru_203E8D8[i].field_1 = 0;
+        stru_203E8D8[i].field_2 = 0;
+    }
+
+    // Count the placed actors of each kind per level.
+    for (i = 0; i < 38; i++) {
+        if (dRoomIndexes[i].level == 0xFF) {
+            continue;
+        }
+        section = dRoomIndexes[i].room->entities;
+        for (j = 0; j < section->groupCount; j++) {
+            mapActor = section->groups[j].actors;
+            for (k = 0; k < section->groups[j].count; mapActor++, k++) {
+                switch (mapActor->type) {
+                    case ACTOR_NOTE:
+                        stru_203E170[dRoomIndexes[i].level].field_2++;
+                        break;
+
+                    case ACTOR_NOTE_CACHE:
+                        stru_203E170[dRoomIndexes[i].level].field_3++;
+                        break;
+
+                    case ACTOR_007:
+                        stru_203E170[dRoomIndexes[i].level].field_4++;
+                        break;
+
+                    case ACTOR_JIGGY:
+                        stru_203E170[dRoomIndexes[i].level].field_0++;
+                        switch (mapActor->conditionId) {
+                            case 3:
+                                word_203E988[dRoomIndexes[i].level] = mapActor->param;
+                                break;
+
+                            case 155:
+                                word_203E994 = mapActor->param;
+                                break;
+                        }
+                        break;
+
+                    case ACTOR_HOLLOW_HONEYCOMB:
+                        stru_203E170[dRoomIndexes[i].level].field_1++;
+                        break;
+
+                    case ACTOR_HONEYCOMB:
+                        stru_203E170[dRoomIndexes[i].level].field_5++;
+                        break;
+
+                    case ACTOR_GOLDEN_FEATHER:
+                        stru_203E170[dRoomIndexes[i].level].field_6++;
+                        break;
+
+                    case ACTOR_BLUE_EGG:
+                        stru_203E170[dRoomIndexes[i].level].field_7++;
+                        break;
+
+                    case ACTOR_SHELL:
+                        stru_203E170[dRoomIndexes[i].level].field_8++;
+                        break;
+
+                    case ACTOR_CHICK:
+                        stru_203E170[dRoomIndexes[i].level].field_9++;
+                        break;
+
+                    case ACTOR_MUMBO_TOKEN_CLIFF_FARM:
+                        stru_203E170[dRoomIndexes[i].level].field_A++;
+                        break;
+
+                    case ACTOR_MUMBO_TOKEN_BAD_MAGIC_BAYOU:
+                        stru_203E170[dRoomIndexes[i].level].field_B++;
+                        break;
+
+                    case ACTOR_MUMBO_TOKEN_FREEZING_FURNACE:
+                        stru_203E170[dRoomIndexes[i].level].field_C++;
+                        break;
+
+                    case ACTOR_MUMBO_TOKEN_SPILLERS_HARBOR:
+                        stru_203E170[dRoomIndexes[i].level].field_D++;
+                        break;
+
+                    case ACTOR_035:
+                        stru_203E170[dRoomIndexes[i].level].field_E++;
+                        break;
+
+                    case ACTOR_TOY_SPACESHIP:
+                        stru_203E170[dRoomIndexes[i].level].field_F++;
+                        break;
+
+                    case ACTOR_SILVER_COIN:
+                        stru_203E170[dRoomIndexes[i].level].field_10++;
+                        break;
+
+                    case ACTOR_GOLD_NUGGET:
+                        stru_203E170[dRoomIndexes[i].level].field_11++;
+                        break;
+
+                    case ACTOR_DOUBLE_HONEYCOMB:
+                        stru_203E170[dRoomIndexes[i].level].field_12++;
+                        break;
+
+                    case ACTOR_SKILL_STOP_HONEYCOMB:
+                        stru_203E170[dRoomIndexes[i].level].field_13++;
+                        break;
+
+                    case ACTOR_RANDOM_STOP_HONEYCOMB:
+                        stru_203E170[dRoomIndexes[i].level].field_14++;
+                        break;
+
+                    case ACTOR_JINJO_0:
+                        if (!stru_203E170[dRoomIndexes[i].level].field_15) {
+                            stru_203E170[dRoomIndexes[i].level].field_15 = TRUE;
+                        } else {
+                            ASSERT(0);
+                        }
+                        break;
+
+                    case ACTOR_JINJO_1:
+                        if (!stru_203E170[dRoomIndexes[i].level].field_16) {
+                            stru_203E170[dRoomIndexes[i].level].field_16 = TRUE;
+                        } else {
+                            ASSERT(0);
+                        }
+                        break;
+
+                    case ACTOR_JINJO_2:
+                        if (!stru_203E170[dRoomIndexes[i].level].field_17) {
+                            stru_203E170[dRoomIndexes[i].level].field_17 = TRUE;
+                        } else {
+                            ASSERT(0);
+                        }
+                        break;
+
+                    case ACTOR_JINJO_3:
+                        if (!stru_203E170[dRoomIndexes[i].level].field_18) {
+                            stru_203E170[dRoomIndexes[i].level].field_18 = TRUE;
+                        } else {
+                            ASSERT(0);
+                        }
+                        break;
+
+                    case ACTOR_JINJO_4:
+                        if (!stru_203E170[dRoomIndexes[i].level].field_19) {
+                            stru_203E170[dRoomIndexes[i].level].field_19 = TRUE;
+                        } else {
+                            ASSERT(0);
+                        }
+                        break;
+
+                    case ACTOR_06F:
+                        stru_203E440[dRoomIndexes[i].level].field_20++;
+                        break;
+
+                    case ACTOR_06E:
+                        stru_203E440[dRoomIndexes[i].level].field_21++;
+                        break;
+
+                    case ACTOR_CANDLE_GOOD_1:
+                        stru_203E440[dRoomIndexes[i].level].field_22++;
+                        break;
+
+                    case ACTOR_CANDLE_GOOD_2:
+                        stru_203E440[dRoomIndexes[i].level].field_23++;
+                        break;
+
+                    case ACTOR_CANDLE_GOOD_3:
+                        stru_203E440[dRoomIndexes[i].level].field_24++;
+                        break;
+
+                    case ACTOR_CANDLE_GOOD_4:
+                        stru_203E440[dRoomIndexes[i].level].field_25++;
+                        break;
+
+                    case ACTOR_060:
+                        stru_203E440[dRoomIndexes[i].level].field_26++;
+                        break;
+
+                    case ACTOR_CONCRETE_COVER:
+                        stru_203E440[dRoomIndexes[i].level].field_1F++;
+                        break;
+
+                    case ACTOR_0C4:
+                        stru_203E440[dRoomIndexes[i].level].field_11++;
+                        break;
+
+                    case ACTOR_04E:
+                        stru_203E440[dRoomIndexes[i].level].field_10++;
+                        break;
+
+                    case ACTOR_0C6:
+                        stru_203E440[dRoomIndexes[i].level].field_F++;
+                        break;
+
+                    case ACTOR_0C2:
+                        stru_203E440[dRoomIndexes[i].level].field_E++;
+                        break;
+
+                    case ACTOR_MANHOLE_COVER:
+                        stru_203E440[dRoomIndexes[i].level].field_D++;
+                        break;
+
+                    case ACTOR_0BA:
+                        stru_203E440[dRoomIndexes[i].level].field_7++;
+                        break;
+
+                    case ACTOR_0BB:
+                        stru_203E440[dRoomIndexes[i].level].field_8++;
+                        break;
+
+                    case ACTOR_0BC:
+                        stru_203E440[dRoomIndexes[i].level].field_9++;
+                        break;
+
+                    case ACTOR_0BD:
+                        stru_203E440[dRoomIndexes[i].level].field_A++;
+                        break;
+
+                    case ACTOR_0BE:
+                        stru_203E440[dRoomIndexes[i].level].field_B++;
+                        break;
+
+                    case ACTOR_0BF:
+                        stru_203E440[dRoomIndexes[i].level].field_C++;
+                        break;
+
+                    case ACTOR_03F:
+                        stru_203E440[dRoomIndexes[i].level].field_6++;
+                        break;
+
+                    case ACTOR_BEEHIVE:
+                        stru_203E440[dRoomIndexes[i].level].field_0++;
+                        break;
+
+                    case ACTOR_00C:
+                        stru_203E440[dRoomIndexes[i].level].field_1++;
+                        break;
+
+                    case ACTOR_STICK_BUNDLE:
+                        stru_203E440[dRoomIndexes[i].level].field_2++;
+                        break;
+
+                    case ACTOR_CAPTIVE_BREEGULL:
+                        stru_203E440[dRoomIndexes[i].level].field_3++;
+                        break;
+
+                    case ACTOR_0B5:
+                        stru_203E440[dRoomIndexes[i].level].field_5++;
+                        break;
+
+                    case ACTOR_027:
+                        stru_203E440[dRoomIndexes[i].level].field_4++;
+                        word_203E9A0[mapActor->field_E] = mapActor->param;
+                        break;
+
+                    case ACTOR_042:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_16++;
+                        break;
+
+                    case ACTOR_043:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_17++;
+                        break;
+
+                    case ACTOR_044:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_18++;
+                        break;
+
+                    case ACTOR_02E:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_13++;
+                        break;
+
+                    case ACTOR_034:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_14++;
+                        break;
+
+                    case ACTOR_03D:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_15++;
+                        break;
+
+                    case ACTOR_04F:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_19++;
+                        break;
+
+                    case ACTOR_052:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_1A++;
+                        break;
+
+                    case ACTOR_057:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_1B++;
+                        break;
+
+                    case ACTOR_056:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_1C++;
+                        break;
+
+                    case ACTOR_070:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_1D++;
+                        break;
+
+                    case ACTOR_071:
+                        if (mapActor->field_E + 1 > stru_203E440[dRoomIndexes[i].level].field_12) {
+                            stru_203E440[dRoomIndexes[i].level].field_12 = mapActor->field_E + 1;
+                        }
+                        stru_203E440[dRoomIndexes[i].level].field_1E++;
+                        break;
+
+                    case ACTOR_017:
+                        stru_203E8D8[dRoomIndexes[i].level].field_0++;
+                        break;
+
+                    case ACTOR_09E:
+                        stru_203E8D8[dRoomIndexes[i].level].field_1++;
+                        break;
+
+                    case ACTOR_09F:
+                        stru_203E8D8[dRoomIndexes[i].level].field_2++;
+                        break;
+                }
+            }
+        }
+    }
+
+    totalNotes = 0;
+    for (i = 0; i < 6; i++) {
+        notes = stru_203E170[i].field_3 * 5 + stru_203E170[i].field_2 + stru_203E170[i].field_4 * 20;
+        if (notes != stru_80CC84C[i].noteCount) {
+            totalNotes += notes;
+        }
+        ASSERT(stru_203E170[i].field_0 <= stru_80CC84C[i].jiggyCount);
+        ASSERT(stru_203E170[i].field_1 <= stru_80CC84C[i].hollowHoneycombCount);
+        ASSERT(stru_203E170[i].field_15);
+        ASSERT(stru_203E170[i].field_16);
+        ASSERT(stru_203E170[i].field_17);
+        ASSERT(stru_203E170[i].field_18);
+        ASSERT(stru_203E170[i].field_16);
+    }
+    ASSERT(totalNotes <= stru_80CC8C4.totalNotes);
+
+    // Allocate a "collected" flag per counted actor.
+    for (i = 0; i < 6; i++) {
+        stru_203E170[i].field_1C = heap_alloc(stru_80CC84C[i].jiggyCount, 14, 4);
+        for (j = 0; j < stru_80CC84C[i].jiggyCount; j++) {
+            stru_203E170[i].field_1C[j] = 0;
+        }
+        stru_203E170[i].field_20 = heap_alloc(stru_80CC84C[i].hollowHoneycombCount, 14, 4);
+        for (j = 0; j < stru_80CC84C[i].hollowHoneycombCount; j++) {
+            stru_203E170[i].field_20[j] = 0;
+        }
+        if (stru_203E170[i].field_2) {
+            stru_203E170[i].field_24 = heap_alloc(stru_203E170[i].field_2, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_2; j++) {
+                stru_203E170[i].field_24[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_3) {
+            stru_203E170[i].field_28 = heap_alloc(stru_203E170[i].field_3, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_3; j++) {
+                stru_203E170[i].field_28[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_4) {
+            stru_203E170[i].field_2C = heap_alloc(stru_203E170[i].field_4, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_4; j++) {
+                stru_203E170[i].field_2C[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_5) {
+            stru_203E170[i].field_30 = heap_alloc(stru_203E170[i].field_5, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_5; j++) {
+                stru_203E170[i].field_30[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_6) {
+            stru_203E170[i].field_34 = heap_alloc(stru_203E170[i].field_6, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_6; j++) {
+                stru_203E170[i].field_34[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_7) {
+            stru_203E170[i].field_38 = heap_alloc(stru_203E170[i].field_7, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_7; j++) {
+                stru_203E170[i].field_38[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_8) {
+            stru_203E170[i].field_3C = heap_alloc(stru_203E170[i].field_8, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_8; j++) {
+                stru_203E170[i].field_3C[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_9) {
+            stru_203E170[i].field_40 = heap_alloc(stru_203E170[i].field_9, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_9; j++) {
+                stru_203E170[i].field_40[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_A) {
+            stru_203E170[i].field_44 = heap_alloc(stru_203E170[i].field_A, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_A; j++) {
+                stru_203E170[i].field_44[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_B) {
+            stru_203E170[i].field_48 = heap_alloc(stru_203E170[i].field_B, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_B; j++) {
+                stru_203E170[i].field_48[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_C) {
+            stru_203E170[i].field_4C = heap_alloc(stru_203E170[i].field_C, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_C; j++) {
+                stru_203E170[i].field_4C[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_D) {
+            stru_203E170[i].field_50 = heap_alloc(stru_203E170[i].field_D, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_D; j++) {
+                stru_203E170[i].field_50[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_E) {
+            stru_203E170[i].field_54 = heap_alloc(stru_203E170[i].field_E, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_E; j++) {
+                stru_203E170[i].field_54[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_F) {
+            stru_203E170[i].field_58 = heap_alloc(stru_203E170[i].field_F, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_F; j++) {
+                stru_203E170[i].field_58[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_10) {
+            stru_203E170[i].field_5C = heap_alloc(stru_203E170[i].field_10, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_10; j++) {
+                stru_203E170[i].field_5C[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_11) {
+            stru_203E170[i].field_60 = heap_alloc(stru_203E170[i].field_11, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_11; j++) {
+                stru_203E170[i].field_60[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_12) {
+            stru_203E170[i].field_64 = heap_alloc(stru_203E170[i].field_12, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_12; j++) {
+                stru_203E170[i].field_64[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_13) {
+            stru_203E170[i].field_68 = heap_alloc(stru_203E170[i].field_13, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_13; j++) {
+                stru_203E170[i].field_68[j] = 0;
+            }
+        }
+        if (stru_203E170[i].field_14) {
+            stru_203E170[i].field_6C = heap_alloc(stru_203E170[i].field_14, 14, 4);
+            for (j = 0; j < stru_203E170[i].field_14; j++) {
+                stru_203E170[i].field_6C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_12) {
+            stru_203E440[i].field_90 =
+                heap_alloc(stru_203E440[i].field_12 * sizeof(struct struc_203E440_90), 14, 4);
+            for (j = 0; j < stru_203E440[i].field_12; j++) {
+                stru_203E440[i].field_90[j].field_0 = 0;
+                stru_203E440[i].field_90[j].field_1 = 0;
+                stru_203E440[i].field_90[j].field_2 = 0;
+                stru_203E440[i].field_90[j].field_3 = 0;
+                stru_203E440[i].field_90[j].field_4 = 0;
+            }
+        }
+        if (stru_203E440[i].field_7) {
+            stru_203E440[i].field_44 = heap_alloc(stru_203E440[i].field_7, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_7; j++) {
+                stru_203E440[i].field_44[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_8) {
+            stru_203E440[i].field_48 = heap_alloc(stru_203E440[i].field_8, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_8; j++) {
+                stru_203E440[i].field_48[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_9) {
+            stru_203E440[i].field_4C = heap_alloc(stru_203E440[i].field_9, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_9; j++) {
+                stru_203E440[i].field_4C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_A) {
+            stru_203E440[i].field_50 = heap_alloc(stru_203E440[i].field_A, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_A; j++) {
+                stru_203E440[i].field_50[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_B) {
+            stru_203E440[i].field_54 = heap_alloc(stru_203E440[i].field_B, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_B; j++) {
+                stru_203E440[i].field_54[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_C) {
+            stru_203E440[i].field_58 = heap_alloc(stru_203E440[i].field_C, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_C; j++) {
+                stru_203E440[i].field_58[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_6) {
+            stru_203E440[i].field_40 = heap_alloc(stru_203E440[i].field_6, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_6; j++) {
+                stru_203E440[i].field_40[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_0) {
+            stru_203E440[i].field_28 = heap_alloc(stru_203E440[i].field_0, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_0; j++) {
+                stru_203E440[i].field_28[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_1) {
+            stru_203E440[i].field_2C = heap_alloc(stru_203E440[i].field_1, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_1; j++) {
+                stru_203E440[i].field_2C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_2) {
+            stru_203E440[i].field_30 = heap_alloc(stru_203E440[i].field_2, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_2; j++) {
+                stru_203E440[i].field_30[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_3) {
+            stru_203E440[i].field_34 = heap_alloc(stru_203E440[i].field_3, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_3; j++) {
+                stru_203E440[i].field_34[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_4) {
+            stru_203E440[i].field_38 = heap_alloc(stru_203E440[i].field_4, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_4; j++) {
+                stru_203E440[i].field_38[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_13) {
+            stru_203E440[i].field_94 = heap_alloc(stru_203E440[i].field_13, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_13; j++) {
+                stru_203E440[i].field_94[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_14) {
+            stru_203E440[i].field_98 = heap_alloc(stru_203E440[i].field_14, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_14; j++) {
+                stru_203E440[i].field_98[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_15) {
+            stru_203E440[i].field_9C = heap_alloc(stru_203E440[i].field_15, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_15; j++) {
+                stru_203E440[i].field_9C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_5) {
+            stru_203E440[i].field_3C = heap_alloc(stru_203E440[i].field_5, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_5; j++) {
+                stru_203E440[i].field_3C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_D) {
+            stru_203E440[i].field_5C = heap_alloc(stru_203E440[i].field_D, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_D; j++) {
+                stru_203E440[i].field_5C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_16) {
+            stru_203E440[i].field_A0 = heap_alloc(stru_203E440[i].field_16, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_16; j++) {
+                stru_203E440[i].field_A0[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_17) {
+            stru_203E440[i].field_A4 = heap_alloc(stru_203E440[i].field_17, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_17; j++) {
+                stru_203E440[i].field_A4[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_18) {
+            stru_203E440[i].field_A8 = heap_alloc(stru_203E440[i].field_18, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_18; j++) {
+                stru_203E440[i].field_A8[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_E) {
+            stru_203E440[i].field_60 = heap_alloc(stru_203E440[i].field_E, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_E; j++) {
+                stru_203E440[i].field_60[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_F) {
+            stru_203E440[i].field_64 = heap_alloc(stru_203E440[i].field_F, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_F; j++) {
+                stru_203E440[i].field_64[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_10) {
+            stru_203E440[i].field_68 = heap_alloc(stru_203E440[i].field_10, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_10; j++) {
+                stru_203E440[i].field_68[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_11) {
+            stru_203E440[i].field_6C = heap_alloc(stru_203E440[i].field_11, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_11; j++) {
+                stru_203E440[i].field_6C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_19) {
+            stru_203E440[i].field_AC = heap_alloc(stru_203E440[i].field_19, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_19; j++) {
+                stru_203E440[i].field_AC[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_1A) {
+            stru_203E440[i].field_B0 = heap_alloc(stru_203E440[i].field_1A, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_1A; j++) {
+                stru_203E440[i].field_B0[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_1B) {
+            stru_203E440[i].field_B4 = heap_alloc(stru_203E440[i].field_1B, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_1B; j++) {
+                stru_203E440[i].field_B4[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_1C) {
+            stru_203E440[i].field_B8 = heap_alloc(stru_203E440[i].field_1C, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_1C; j++) {
+                stru_203E440[i].field_B8[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_1F) {
+            stru_203E440[i].field_70 = heap_alloc(stru_203E440[i].field_1F, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_1F; j++) {
+                stru_203E440[i].field_70[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_26) {
+            stru_203E440[i].field_8C = heap_alloc(stru_203E440[i].field_26, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_26; j++) {
+                stru_203E440[i].field_8C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_22) {
+            stru_203E440[i].field_7C = heap_alloc(stru_203E440[i].field_22, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_22; j++) {
+                stru_203E440[i].field_7C[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_23) {
+            stru_203E440[i].field_80 = heap_alloc(stru_203E440[i].field_23, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_23; j++) {
+                stru_203E440[i].field_80[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_24) {
+            stru_203E440[i].field_84 = heap_alloc(stru_203E440[i].field_24, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_24; j++) {
+                stru_203E440[i].field_84[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_25) {
+            stru_203E440[i].field_88 = heap_alloc(stru_203E440[i].field_25, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_25; j++) {
+                stru_203E440[i].field_88[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_1D) {
+            stru_203E440[i].field_BC = heap_alloc(stru_203E440[i].field_1D, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_1D; j++) {
+                stru_203E440[i].field_BC[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_1E) {
+            stru_203E440[i].field_C0 = heap_alloc(stru_203E440[i].field_1E, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_1E; j++) {
+                stru_203E440[i].field_C0[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_20) {
+            stru_203E440[i].field_74 = heap_alloc(stru_203E440[i].field_20, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_20; j++) {
+                stru_203E440[i].field_74[j] = 0;
+            }
+        }
+        if (stru_203E440[i].field_21) {
+            stru_203E440[i].field_78 = heap_alloc(stru_203E440[i].field_21, 14, 4);
+            for (j = 0; j < stru_203E440[i].field_21; j++) {
+                stru_203E440[i].field_78[j] = 0;
+            }
+        }
+        if (stru_203E8D8[i].field_0) {
+            stru_203E8D8[i].field_4 = heap_alloc(stru_203E8D8[i].field_0, 14, 4);
+            for (j = 0; j < stru_203E8D8[i].field_0; j++) {
+                stru_203E8D8[i].field_4[j] = 0;
+            }
+        }
+        if (stru_203E8D8[i].field_1) {
+            stru_203E8D8[i].field_8 = heap_alloc(stru_203E8D8[i].field_1, 14, 4);
+            for (j = 0; j < stru_203E8D8[i].field_1; j++) {
+                stru_203E8D8[i].field_8[j] = 0;
+            }
+        }
+        if (stru_203E8D8[i].field_2) {
+            stru_203E8D8[i].field_C = heap_alloc(stru_203E8D8[i].field_2, 14, 4);
+            for (j = 0; j < stru_203E8D8[i].field_2; j++) {
+                stru_203E8D8[i].field_C[j] = 0;
+            }
+        }
+    }
+
+    // Count the members of each actor group.
+    for (i = 0; i < 38; i++) {
+        if (dRoomIndexes[i].level == 0xFF) {
+            continue;
+        }
+        section = dRoomIndexes[i].room->entities;
+        for (j = 0; j < section->groupCount; j++) {
+            mapActor = section->groups[j].actors;
+            for (k = 0; k < section->groups[j].count; mapActor++, k++) {
+                if (dActorTypeFlags[mapActor->type] & 1) {
+                    stru_203E440[dRoomIndexes[i].level].field_90[mapActor->field_E].field_0++;
+                }
+            }
+        }
+    }
+
+    for (i = 0; i < 6; i++) {
+        if (stru_203E440[i].field_12) {
+            for (j = 0; j < stru_203E440[i].field_12; j++) {
+                ASSERT(stru_203E440[i].field_90[j].field_0);
+                stru_203E440[i].field_90[j].field_C = heap_alloc(
+                    stru_203E440[i].field_90[j].field_0 * sizeof(struct struc_203E440_90_C), 14, 4);
+                stru_203E440[i].field_90[j].field_1 = 0;
+                stru_203E440[i].field_90[j].field_4 = 0;
+            }
+        }
+    }
+
+    // Fill in the group members.
+    for (i = 0; i < 38; i++) {
+        if (dRoomIndexes[i].level == 0xFF) {
+            continue;
+        }
+        section = dRoomIndexes[i].room->entities;
+        for (j = 0; j < section->groupCount; j++) {
+            mapActor = section->groups[j].actors;
+            for (k = 0; k < section->groups[j].count; mapActor++, k++) {
+                if (!(dActorTypeFlags[mapActor->type] & 1)) {
+                    continue;
+                }
+                group = &stru_203E440[dRoomIndexes[i].level].field_90[mapActor->field_E];
+                ASSERT(group->field_1 != group->field_0);
+                if (!group->field_2) {
+                    group->field_2 = mapActor->field_14;
+                } else {
+                    ASSERT(group->field_2 == mapActor->field_14);
+                    ASSERT(!group->field_3);
+                }
+                if (!group->field_3) {
+                    group->field_3 = mapActor->field_17;
+                } else {
+                    ASSERT(group->field_3 == mapActor->field_17);
+                    ASSERT(!group->field_2);
+                }
+                group->field_C[group->field_1].field_0 = mapActor->field_F;
+                group->field_C[group->field_1].field_1 = 0;
+                group->field_C[group->field_1].field_2 = mapActor->field_13;
+                group->field_C[group->field_1].field_3 = 0;
+                group->field_C[group->field_1].field_4 = mapActor->field_1A;
+                group->field_C[group->field_1].field_6 = 0;
+                switch (mapActor->type) {
+                    case ACTOR_071:
+                        stru_203E440[dRoomIndexes[i].level].field_C0[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_070:
+                        stru_203E440[dRoomIndexes[i].level].field_BC[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_056:
+                        stru_203E440[dRoomIndexes[i].level].field_B8[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_057:
+                        stru_203E440[dRoomIndexes[i].level].field_B4[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_052:
+                        stru_203E440[dRoomIndexes[i].level].field_B0[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_04F:
+                        stru_203E440[dRoomIndexes[i].level].field_AC[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_042:
+                        stru_203E440[dRoomIndexes[i].level].field_A0[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_043:
+                        stru_203E440[dRoomIndexes[i].level].field_A4[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_044:
+                        stru_203E440[dRoomIndexes[i].level].field_A8[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_02E:
+                        stru_203E440[dRoomIndexes[i].level].field_94[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_034:
+                        stru_203E440[dRoomIndexes[i].level].field_98[mapActor->param] = group->field_1;
+                        break;
+
+                    case ACTOR_03D:
+                        stru_203E440[dRoomIndexes[i].level].field_9C[mapActor->param] = group->field_1;
+                        break;
+
+                    default:
+                        ASSERT(0);
+                        break;
+                }
+                group->field_1++;
+            }
+        }
+    }
+
+    for (i = 0; i < 6; i++) {
+        if (stru_203E440[i].field_12) {
+            for (j = 0; j < stru_203E440[i].field_12; j++) {
+                ASSERT(stru_203E440[i].field_90[j].field_0);
+                stru_203E440[i].field_90[j].field_1 = 0;
+            }
+        }
+    }
+
+    // Link the actors that trigger a group (condition 19/20) to it.
+    for (i = 0; i < 38; i++) {
+        if (dRoomIndexes[i].level == 0xFF) {
+            continue;
+        }
+        section = dRoomIndexes[i].room->entities;
+        for (j = 0; j < section->groupCount; j++) {
+            mapActor = section->groups[j].actors;
+            for (k = 0; k < section->groups[j].count; mapActor++, k++) {
+                if ((u8)(mapActor->conditionId - 19) <= 1 && !(dActorTypeFlags[mapActor->type] & 1)) {
+                    ASSERT(mapActor->field_13 < stru_203E440[dRoomIndexes[i].level].field_12);
+                    group = &stru_203E440[dRoomIndexes[i].level].field_90[mapActor->field_13];
+                    group->field_6 = mapActor->type;
+                    group->field_8 = mapActor->param;
+                }
+            }
+        }
+    }
+}
+#endif
