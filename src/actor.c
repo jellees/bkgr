@@ -2158,7 +2158,7 @@ bool32 sub_802BE84(struct Vec3fx* pos) {
         if (actor->isActive) {
             count++;
             if (!actor->field_3C && actor->interactionKind == 1
-                && (u16)(actor->type - ACTOR_GOLDEN_FEATHER) <= ACTOR_00A - ACTOR_GOLDEN_FEATHER
+                && (u16)(actor->type - ACTOR_GOLDEN_FEATHER) <= ACTOR_BLUE_EGG - ACTOR_GOLDEN_FEATHER
                 && VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
                 sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
                 sprite_set_priority(&actor->sprite, actor->field_8);
@@ -2344,7 +2344,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_2C = 450;
             break;
         case 4:
-            actor->type = ACTOR_00A;
+            actor->type = ACTOR_BLUE_EGG;
             actor->field_A = 0;
             actor->interactionKind = 1;
             actor->field_2F = 0;
@@ -2353,7 +2353,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_2C = 450;
             break;
         case 8:
-            actor->type = ACTOR_058;
+            actor->type = ACTOR_DOUBLE_HONEYCOMB;
             actor->field_A = 0;
             actor->interactionKind = 1;
             actor->field_2F = 0;
@@ -2362,7 +2362,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_2C = 450;
             break;
         case 16:
-            actor->type = ACTOR_059;
+            actor->type = ACTOR_SKILL_STOP_HONEYCOMB;
             actor->field_A = 0;
             actor->interactionKind = 1;
             actor->field_2F = 0;
@@ -2371,7 +2371,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_2C = 450;
             break;
         case 32:
-            actor->type = ACTOR_05A;
+            actor->type = ACTOR_RANDOM_STOP_HONEYCOMB;
             actor->field_A = 0;
             actor->interactionKind = 1;
             actor->field_2F = 0;
@@ -2687,6 +2687,546 @@ void sub_802C9F8(struct RenderListEntry** renderList, u32* spriteCount) {
         }
         if (count == byte_203DFD3) {
             break;
+        }
+    }
+}
+
+bool32 sub_802CFBC(struct Vec3fx* pos, struct Vec3fx** nearest) {
+    int count;
+    fx32 best;
+    bool32 found;
+    int i;
+    struct Actor* actor;
+    struct Vec3fx* itemPos;
+    fx32 dx;
+    fx32 dz;
+    fx32 distSq;
+
+    if (!byte_203DFD3) {
+        return FALSE;
+    }
+    count = 0;
+    best = 0x7FFF0000;
+    found = FALSE;
+    for (i = 0; i < byte_203E00C; i++) {
+        actor = &dword_203E000[i].actor;
+        itemPos = &actor->field_94;
+        if (actor->isActive) {
+            count++;
+            if (actor->interactionKind == 1
+                && (u16)(actor->type - ACTOR_GOLDEN_FEATHER) <= ACTOR_BLUE_EGG - ACTOR_GOLDEN_FEATHER
+                && itemPos->y == pos->y) {
+                dx = pos->x - itemPos->x;
+                dz = pos->z - itemPos->z;
+                distSq = CallARM_FX_Mul16(dx, dx) + CallARM_FX_Mul16(0, 0) + CallARM_FX_Mul16(dz, dz);
+                if (distSq < best) {
+                    best = distSq;
+                    *nearest = itemPos;
+                    found = TRUE;
+                }
+            }
+        }
+        if (count == byte_203DFD3) {
+            break;
+        }
+    }
+    return found;
+}
+
+void spawn_player_projectile(int kind, struct Vec3fx* pos, u32 priority) {
+    int i;
+    struct Actor* actor;
+    struct Projectile* projectile;
+    struct Vec3fx* actorPos;
+    struct Vec3fx* velocity;
+    struct Vec3fx spawn;
+    int x;
+    int y;
+
+    if (gCurrentProjectileCount == gMaxProjectileCount) {
+        ASSERT(0);
+        return;
+    }
+    actor = NULL;
+    for (i = 0; i < gMaxProjectileCount; i++) {
+        actor = &gProjectiles[i].actor;
+        if (!actor->isActive) {
+            gCurrentProjectileCount++;
+            break;
+        }
+    }
+    if (i == gMaxProjectileCount) {
+        ASSERT(0);
+        return;
+    }
+
+    projectile = &gProjectiles[i];
+    actorPos = &projectile->actor.field_94;
+    velocity = &projectile->field_D8;
+    switch (kind) {
+        case EGG_BLUE:
+            actor->type = 0x1B;
+            projectile->field_FC = word_80CB964[6];
+            projectile->field_104 = byte_80CB94C[6];
+            projectile->field_100 = 60;
+            actor->field_9 = dword_80CBCD0[6][gPlayerSprite.direction];
+            spawn.x = pos->x + (dword_80CB9F0[6][gPlayerSprite.direction] << 16);
+            spawn.y = pos->y + (actor->field_9 << 16);
+            spawn.z = pos->z + (dword_80CBFB0[6][gPlayerSprite.direction] << 16);
+            projectile->field_E4.x = spawn.x - 0x30000;
+            projectile->field_E4.y = spawn.y - 0x30000;
+            projectile->field_E4.z = spawn.z - 0x30000;
+            projectile->field_F0.x = spawn.x + 0x30000;
+            projectile->field_F0.y = spawn.y + 0x30000;
+            projectile->field_F0.z = spawn.z + 0x30000;
+            actorPos->x = pos->x;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 0x19;
+            break;
+        case EGG_BATTERY:
+            actor->type = 0x1C;
+            projectile->field_FC = word_80CB964[7];
+            projectile->field_104 = byte_80CB94C[7];
+            projectile->field_100 = 60;
+            actor->field_9 = dword_80CBCD0[7][gPlayerSprite.direction];
+            spawn.x = pos->x + (dword_80CB9F0[7][gPlayerSprite.direction] << 16);
+            spawn.y = pos->y + (actor->field_9 << 16);
+            spawn.z = pos->z + (dword_80CBFB0[7][gPlayerSprite.direction] << 16);
+            projectile->field_E4.x = spawn.x - 0x30000;
+            projectile->field_E4.y = spawn.y - 0x30000;
+            projectile->field_E4.z = spawn.z - 0x30000;
+            projectile->field_F0.x = spawn.x + 0x30000;
+            projectile->field_F0.y = spawn.y + 0x30000;
+            projectile->field_F0.z = spawn.z + 0x30000;
+            actorPos->x = pos->x;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 0x1A;
+            break;
+        case EGG_FIRE:
+            actor->type = 0x1D;
+            projectile->field_FC = word_80CB964[9];
+            projectile->field_104 = byte_80CB94C[9];
+            projectile->field_100 = 60;
+            actor->field_9 = dword_80CBCD0[9][gPlayerSprite.direction];
+            spawn.x = pos->x + (dword_80CB9F0[9][gPlayerSprite.direction] << 16);
+            spawn.y = pos->y + (actor->field_9 << 16);
+            spawn.z = pos->z + (dword_80CBFB0[9][gPlayerSprite.direction] << 16);
+            projectile->field_E4.x = spawn.x - 0x30000;
+            projectile->field_E4.y = spawn.y - 0x30000;
+            projectile->field_E4.z = spawn.z - 0x30000;
+            projectile->field_F0.x = spawn.x + 0x30000;
+            projectile->field_F0.y = spawn.y + 0x30000;
+            projectile->field_F0.z = spawn.z + 0x30000;
+            actorPos->x = pos->x;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 0x1B;
+            break;
+        case EGG_ICE:
+            actor->type = 0x1E;
+            projectile->field_FC = word_80CB964[8];
+            projectile->field_104 = byte_80CB94C[8];
+            projectile->field_100 = 60;
+            actor->field_9 = dword_80CBCD0[8][gPlayerSprite.direction];
+            spawn.x = pos->x + (dword_80CB9F0[8][gPlayerSprite.direction] << 16);
+            spawn.y = pos->y + (actor->field_9 << 16);
+            spawn.z = pos->z + (dword_80CBFB0[8][gPlayerSprite.direction] << 16);
+            projectile->field_E4.x = spawn.x - 0x30000;
+            projectile->field_E4.y = spawn.y - 0x30000;
+            projectile->field_E4.z = spawn.z - 0x30000;
+            projectile->field_F0.x = spawn.x + 0x30000;
+            projectile->field_F0.y = spawn.y + 0x30000;
+            projectile->field_F0.z = spawn.z + 0x30000;
+            actorPos->x = pos->x;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 0x1C;
+            break;
+        case 5:
+            actor->type = 0x46;
+            projectile->field_FC = word_80CB964[13];
+            projectile->field_104 = byte_80CB94C[13];
+            projectile->field_100 = 60;
+            actor->field_9 = dword_80CBCD0[13][gPlayerSprite.direction];
+            spawn.x = pos->x + (dword_80CB9F0[13][gPlayerSprite.direction] << 16);
+            spawn.y = pos->y + (actor->field_9 << 16);
+            spawn.z = pos->z + (dword_80CBFB0[13][gPlayerSprite.direction] << 16);
+            projectile->field_E4.x = spawn.x - 0x30000;
+            projectile->field_E4.y = spawn.y - 0x30000;
+            projectile->field_E4.z = spawn.z - 0x30000;
+            projectile->field_F0.x = spawn.x + 0x30000;
+            projectile->field_F0.y = spawn.y + 0x30000;
+            projectile->field_F0.z = spawn.z + 0x30000;
+            actorPos->x = pos->x;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 0xCB;
+            break;
+        case 6:
+            actor->type = 0x47;
+            projectile->field_FC = word_80CB964[11];
+            projectile->field_104 = byte_80CB94C[11];
+            projectile->field_100 = 60;
+            actor->field_9 = dword_80CBCD0[11][gPlayerSprite.direction];
+            spawn.x = pos->x + (dword_80CB9F0[11][gPlayerSprite.direction] << 16);
+            spawn.y = pos->y + (actor->field_9 << 16);
+            spawn.z = pos->z + (dword_80CBFB0[11][gPlayerSprite.direction] << 16);
+            projectile->field_E4.x = spawn.x - 0x30000;
+            projectile->field_E4.y = spawn.y - 0x30000;
+            projectile->field_E4.z = spawn.z - 0x30000;
+            projectile->field_F0.x = spawn.x + 0x30000;
+            projectile->field_F0.y = spawn.y + 0x30000;
+            projectile->field_F0.z = spawn.z + 0x30000;
+            actorPos->x = pos->x;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 0xB9;
+            break;
+        default:
+            ASSERT(0);
+            break;
+    }
+
+    velocity->x = stru_80CC78C[gPlayerSprite.direction].x;
+    velocity->y = stru_80CC78C[gPlayerSprite.direction].y;
+    velocity->z = stru_80CC78C[gPlayerSprite.direction].z;
+    projectile->field_105 = 0;
+    projectile->field_106 = 1;
+    actor->xPosition = actorPos->x >> 16;
+    actor->yPosition = gMapPixelSizeY + actor->field_9 - ((actorPos->z + actorPos->y) >> 16);
+    actor->field_6 = (actorPos->y >> 16) - actor->field_9;
+    actor->isActive = TRUE;
+    actor->field_24 = 0;
+    actor->field_3C = 0;
+    actor->field_B = 0;
+    actor->field_A = 0;
+    actor->field_28 = 0;
+    actor->field_8 = priority;
+    actor->field_46 = 0;
+    actor->field_1E = 0;
+    actor->field_18 = 0;
+    actor->field_14 = 0;
+    actor->field_20 = 0;
+    actor->field_C = 0;
+    actor->field_1C = -1;
+    actor->interactionKind = 1;
+    actor->field_2C = 0;
+    actor->field_30 = 1;
+    actor->field_2F = 1;
+    actor->field_4C.x = 0;
+    actor->field_4C.y = 0;
+    actor->field_4C.z = 0;
+    actor->field_64.x = 0;
+    actor->field_64.y = 0;
+    actor->field_64.z = 0;
+    actor->field_70.x = 0;
+    actor->field_70.y = 0;
+    actor->field_70.z = 0;
+    actor->field_7C.x = 0;
+    actor->field_7C.y = 0;
+    actor->field_7C.z = 0;
+    actor->field_88.x = 0;
+    actor->field_88.y = 0;
+    actor->field_88.z = 0;
+    projectile->field_FE = sub_8003854(0x8000);
+    sub_800389C(projectile->field_FE, dword_80CC844[gRoomHeader.unknown1]);
+    sub_8003894(projectile->field_FE, dword_80CC818[0]);
+    sub_8003884(projectile->field_FE, 0x40000, dword_80CC290[gPlayerSprite.direction], 0);
+
+    x = actor->xPosition - gCameraPixelX;
+    y = actor->yPosition - gCameraPixelY - actor->field_9;
+    if (!sub_8003A7C(&actor->field_94, 0, gMapPixelSizeY) || projectile->field_106) {
+        actor->sprite.attr0Flag9 = 1;
+    } else {
+        actor->sprite.attr0Flag9 = 0;
+    }
+    SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
+    sprite_set_priority(&actor->sprite, actor->field_8);
+}
+
+bool32 spawn_projectile(int kind, struct Vec3fx* pos, u32 angle, u32 priority) {
+    int i;
+    struct Actor* actor;
+    struct Projectile* projectile;
+    struct Vec3fx* actorPos;
+    struct Vec3fx* velocity;
+    int x;
+    int y;
+
+    if (gCurrentProjectileCount == gMaxProjectileCount) {
+        return FALSE;
+    }
+    actor = NULL;
+    for (i = 0; i < gMaxProjectileCount; i++) {
+        actor = &gProjectiles[i].actor;
+        if (!actor->isActive) {
+            gCurrentProjectileCount++;
+            break;
+        }
+    }
+    ASSERT(i != gMaxProjectileCount);
+
+    projectile = &gProjectiles[i];
+    actorPos = &projectile->actor.field_94;
+    velocity = &projectile->field_D8;
+    switch (kind) {
+        case 7:
+            actor->type = 0x4D;
+            projectile->field_FC = word_80CB964[0];
+            projectile->field_104 = 2;
+            projectile->field_100 = 60;
+            actorPos->x = pos->x;
+            actor->field_9 = 25;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 0xBD;
+            projectile->field_FE = sub_8003854(0x8000);
+            sub_800389C(projectile->field_FE, dword_80CC844[gRoomHeader.unknown1]);
+            sub_8003894(projectile->field_FE, dword_80CC818[0]);
+            sub_8003884(projectile->field_FE, 0x40000, angle, 0);
+            break;
+        case 8:
+            actor->type = 0x1A;
+            projectile->field_FC = word_80CB964[0];
+            projectile->field_104 = 1;
+            projectile->field_100 = 60;
+            actorPos->x = pos->x;
+            actor->field_9 = 25;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 25;
+            projectile->field_FE = sub_8003854(0x8000);
+            sub_800389C(projectile->field_FE, dword_80CC844[gRoomHeader.unknown1]);
+            sub_8003894(projectile->field_FE, dword_80CC818[0]);
+            sub_8003884(projectile->field_FE, 0x30000, angle, 0);
+            break;
+        case 9:
+            actor->type = 0x74;
+            projectile->field_FC = word_80CB964[0];
+            projectile->field_104 = 2;
+            projectile->field_100 = 60;
+            actorPos->x = pos->x;
+            actor->field_9 = 25;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 25;
+            projectile->field_FE = sub_8003854(0x8000);
+            sub_800389C(projectile->field_FE, dword_80CC844[gRoomHeader.unknown1]);
+            sub_8003894(projectile->field_FE, dword_80CC818[0]);
+            sub_8003884(projectile->field_FE, 0x30000, angle, 0);
+            break;
+        case 10:
+            actor->type = 0x75;
+            projectile->field_FC = word_80CB964[0];
+            projectile->field_104 = 1;
+            projectile->field_100 = 60;
+            actorPos->x = pos->x;
+            actor->field_9 = 25;
+            actorPos->y = pos->y + (actor->field_9 << 16);
+            actorPos->z = pos->z;
+            projectile->field_102 = 25;
+            projectile->field_FE = sub_8003854(0x8000);
+            sub_800389C(projectile->field_FE, dword_80CC844[gRoomHeader.unknown1]);
+            sub_8003894(projectile->field_FE, dword_80CC818[0]);
+            sub_8003884(projectile->field_FE, 0x40000, angle, 0);
+            break;
+        default:
+            ASSERT(0);
+            break;
+    }
+
+    sub_80039BC(angle, velocity);
+    projectile->field_105 = 0;
+    projectile->field_106 = 0;
+    actor->xPosition = actorPos->x >> 16;
+    actor->yPosition = gMapPixelSizeY + actor->field_9 - ((actorPos->z + actorPos->y) >> 16);
+    actor->field_6 = (actorPos->y >> 16) - actor->field_9;
+    actor->isActive = TRUE;
+    actor->field_24 = 0;
+    actor->field_3C = 0;
+    actor->field_B = 0;
+    actor->field_A = 0;
+    actor->field_28 = 0;
+    actor->field_8 = priority;
+    actor->field_46 = 0;
+    actor->field_1E = 0;
+    actor->field_18 = 0;
+    actor->field_14 = 0;
+    actor->field_20 = 0;
+    actor->field_C = 0;
+    actor->field_1C = -1;
+    actor->interactionKind = 0;
+    actor->field_2C = 0;
+    actor->field_30 = 1;
+    actor->field_2F = 1;
+    actor->field_4C.x = 0;
+    actor->field_4C.y = 0;
+    actor->field_4C.z = 0;
+    actor->field_64.x = 0;
+    actor->field_64.y = 0;
+    actor->field_64.z = 0;
+    actor->field_70.x = 0;
+    actor->field_70.y = 0;
+    actor->field_70.z = 0;
+
+    x = actor->xPosition - gCameraPixelX;
+    y = actor->yPosition - gCameraPixelY - actor->field_9;
+    if (!sub_8003A7C(&actor->field_94, 0, gMapPixelSizeY)) {
+        actor->sprite.attr0Flag9 = 1;
+    } else {
+        actor->sprite.attr0Flag9 = 0;
+    }
+    SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
+    sprite_set_priority(&actor->sprite, actor->field_8);
+    return TRUE;
+}
+
+void sub_802DC34(void) {
+    int count;
+    int i;
+    struct Projectile* projectile;
+
+    if (gCurrentProjectileCount) {
+        for (count = 0, i = 0; i < gMaxProjectileCount; i++) {
+            projectile = &gProjectiles[i];
+            if (projectile->actor.isActive && (dActorTypeFlags[projectile->actor.type] & 0x20)) {
+                projectile->field_104 = 0;
+                count++;
+                if (count == gCurrentProjectileCount) {
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void despawn_aged_projectiles(void) {
+    int count;
+    int i;
+    struct Actor* actor;
+
+    if (gCurrentProjectileCount) {
+        for (count = 0, i = 0; i < gMaxProjectileCount; i++) {
+            actor = &gProjectiles[i].actor;
+            if (actor->isActive) {
+                if (!actor->field_3C) {
+                    if (gProjectiles[i].field_100 == 0) {
+                        actor->isActive = FALSE;
+                        sub_8003864(gProjectiles[i].field_FE);
+                        gCurrentProjectileCount--;
+                    } else {
+                        gProjectiles[i].field_100--;
+                        count++;
+                    }
+                } else {
+                    count++;
+                }
+                if (count == gCurrentProjectileCount) {
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void update_projectiles(struct RenderListEntry** renderList, u32* spriteCount) {
+    struct struc_44 wall;
+    struct struc_44 floor;
+    fx32 dx;
+    fx32 dy;
+    fx32 dz;
+    int i;
+    int count;
+    struct Actor* actor;
+    struct Projectile* projectile;
+    struct Vec3fx* pos;
+    int x;
+    int y;
+    struct RenderListEntry* entry;
+
+    if (!gCurrentProjectileCount) {
+        return;
+    }
+    for (count = 0, i = 0; i < gMaxProjectileCount; i++) {
+        actor = &gProjectiles[i].actor;
+        projectile = &gProjectiles[i];
+        if (actor->isActive) {
+            if (actor->field_3C) {
+                if (sprite_is_anim_done_once(&actor->sprite)) {
+                    actor->field_3C = 0;
+                    actor->isActive = FALSE;
+                    sub_8003864(gProjectiles[i].field_FE);
+                    gCurrentProjectileCount--;
+                }
+            } else {
+                pos = &actor->field_94;
+                sub_08007C20(pos, &projectile->field_D8, &wall);
+                sub_08009208(pos, &floor);
+                if (wall.isColliding || !floor.isColliding) {
+                    sprite_set_anim(&actor->sprite, dActorTypeInfo[actor->type].anim, FALSE, 1);
+                    actor->field_3C = 1;
+                    projectile->field_106 = 0;
+                    sub_8003884(projectile->field_FE, 0, dword_80CC290[gPlayerSprite.direction], 0);
+                    PLAY_SFX(projectile->field_102);
+                } else {
+                    sprite_set_priority(&actor->sprite, floor.playerSpritePriority);
+                    sub_80038A4(projectile->field_FE);
+                    sub_80038C4(projectile->field_FE, &dx, &dy, &dz);
+                    pos->x += dx;
+                    pos->y += dy;
+                    pos->z += dz;
+                    actor->xPosition = pos->x >> 16;
+                    actor->yPosition = gMapPixelSizeY + actor->field_9 - ((pos->z + pos->y) >> 16);
+                    actor->field_6 = (pos->y >> 16) - actor->field_9;
+                }
+                if (projectile->field_106
+                    && VecFX_PointInBox(pos, &projectile->field_E4, &projectile->field_F0)) {
+                    projectile->field_106 = 0;
+                }
+            }
+            if (actor->isActive) {
+                x = actor->xPosition - gCameraPixelX;
+                y = actor->yPosition - gCameraPixelY - actor->field_9;
+                if (!sub_8003A7C(&actor->field_94, 0, gMapPixelSizeY) || projectile->field_106) {
+                    actor->sprite.attr0Flag9 = 1;
+                } else {
+                    actor->sprite.attr0Flag9 = 0;
+                }
+                actor->sprite.xPos = x;
+                actor->sprite.yPos = y;
+                sprite_render_ex(&actor->sprite, *renderList);
+                if (projectile->field_105 == 0) {
+                    entry = *renderList;
+                    entry->sortKey = (actor->sprite.priority << 30) | ((u32)actor->field_94.z >> 4);
+                } else {
+                    (*renderList)->sortKey = actor->sprite.priority << 30;
+                }
+                (*renderList)++;
+                (*spriteCount)++;
+                count++;
+            }
+        }
+        if (count == gCurrentProjectileCount) {
+            break;
+        }
+    }
+}
+
+void sub_802E024(int count, struct Actor* actor) {
+    int i;
+    int drop;
+
+    i = random_range(0, 2);
+    if (i == 1) {
+        for (i = 0; i < count; i++) {
+            drop = byte_80A778A[random_range(0, 19)];
+            if (actor->type != ACTOR_0AD) {
+                sub_0802C3A4(drop, actor, -1, 1);
+            } else {
+                sub_0802C3A4(drop, actor, 0, 2);
+            }
         }
     }
 }

@@ -185,6 +185,7 @@ dActorTypeFlags = 0x80CC2B0;
 dActorTypeInfo = 0x80CC938;
 word_80A75A4 = 0x80A75A4;
 byte_80A7762 = 0x80A7762;
+byte_80A778A = 0x80A778A;
 byte_80CC6B0 = 0x80CC6B0;
 dword_80CF080 = 0x80CF080;
 word_80CF140 = 0x80CF140;

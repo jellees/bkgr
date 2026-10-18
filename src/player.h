@@ -22,7 +22,7 @@ void sub_801657C(u8* buffer, s32* a2, u32* a3);
 void set_player_state_to_none(void);
 void sub_80166A0(void);
 int sub_8016A5C(int a1);
-void sub_8016A94(int a1);
+void start_stop_honeycomb(int kind);
 void finish_stop_honeycomb(void);
 void sub_8016B18(void);
 void start_dolphin_feeding(void);

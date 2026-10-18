@@ -264,7 +264,8 @@ struct Actor {
 struct Projectile {
     struct Actor actor;
     struct Vec3fx field_D8;
-    u8 field_E4[0x18];
+    struct Vec3fx field_E4;
+    struct Vec3fx field_F0;
     u16 field_FC;
     u16 field_FE;
     u16 field_100;
@@ -623,6 +624,7 @@ extern void sub_8006FFC(char*, struct struc_44*, struct struc_44*);
 extern void sub_8007434(char*, struct struc_44*);
 extern void sub_08007890(char*, struct struc_44*);
 extern void sub_8007AC4(char*);
+extern bool32 sub_08007C20(struct Vec3fx* pos, struct Vec3fx* velocity, struct struc_44* result);
 extern int sub_08007FA0(struct Vec3fx* pos, struct Vec3fx* velocity, struct struc_44* result);
 extern void sub_08009208(struct Vec3fx*, struct struc_44*);
 extern bool32 sub_800953C(struct Vec3fx*);
@@ -718,7 +720,7 @@ extern void sub_802A670(struct RenderListEntry**, u32*);
 extern void sub_802A944(struct RenderListEntry**, u32*);
 extern void sub_802AC08(struct RenderListEntry**, u32*);
 extern void sub_802C9F8(struct RenderListEntry** renderList, u32* spriteCount);
-extern void update_projectiles(struct RenderListEntry**, u32*);
+extern void update_projectiles(struct RenderListEntry** renderList, u32* spriteCount);
 extern void sub_802ADB0(struct RenderListEntry**, u32*);
 extern bool32 handle_obj_interactions(struct Vec3fx*);
 extern bool32 sub_0802AE98(struct Vec3fx*);
@@ -726,7 +728,7 @@ extern int sub_0802B048(struct Vec3fx*);
 extern bool32 sub_802BF74(struct Actor* actor);
 extern bool32 sub_802C1DC(int type, u8* direction);
 extern struct MapActor* sub_0802C350(int group, int coord);
-extern void sub_802E024(int, struct Actor*);
+extern void sub_802E024(int count, struct Actor* actor);
 extern void sub_80499A8(int, int, bool32);
 extern int sub_80490A4(int);
 extern int sub_0802B9E4(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max,
@@ -736,6 +738,7 @@ extern int sub_0802BB30(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* m
 extern int sub_0802BCC4(struct Vec3fx* pos);
 extern void sub_0802BDA0(struct Vec3fx* pos);
 extern bool32 sub_802BE84(struct Vec3fx* pos);
+extern bool32 sub_802CFBC(struct Vec3fx* pos, struct Vec3fx** nearest);
 extern bool32 talk_with_npc(struct Vec3fx* pos, struct Actor* actor);
 extern bool32 pick_up_collectable(struct Vec3fx* pos, struct Actor* actor, struct Vec3fx* min,
                                   struct Vec3fx* max);
@@ -747,7 +750,9 @@ extern void sub_8033FA8(int type, u8 a1, bool32 inRange, u8* a3);
 extern int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 invulnerable);
 extern void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode);
 extern void sub_0803381C(int type, int param, u8 a3);
-extern void spawn_player_projectile(int, struct Vec3fx*, u8);
+extern void spawn_player_projectile(int kind, struct Vec3fx* pos, u32 priority);
+extern bool32 spawn_projectile(int kind, struct Vec3fx* pos, u32 angle, u32 priority);
+extern void sub_802DC34(void);
 extern u8 sub_0802E080(void);
 extern int sub_0802FEDC(int);
 extern bool32 sub_802FDC8(void);
@@ -897,6 +902,7 @@ extern const u32 dActorTypeFlags[];
 extern const struct ActorTypeInfo dActorTypeInfo[];
 extern const s16 word_80A75A4[];
 extern const u8 byte_80A7762[];
+extern const u8 byte_80A778A[];
 extern const u8 byte_80CC6B0[];
 extern const u32 dword_80CF080[];
 extern const u16 word_80CF140[];
@@ -1054,6 +1060,7 @@ extern bool32 CallARM_VecFX_BoxInBox(struct Vec3fx* minA, struct Vec3fx* maxA, s
                                      struct Vec3fx* maxB);
 extern bool32 VecFX_PointInBox(struct Vec3fx* point, struct Vec3fx* min, struct Vec3fx* max);
 extern void VecFX_Add(struct Vec3fx* a, struct Vec3fx* b, struct Vec3fx* out);
+extern void sub_80039BC(u32 angle, struct Vec3fx* out);
 extern void CallARM_VecFX_Mul16_2(struct Vec3fx* v, fx32 scale, struct Vec3fx* out);
 
 extern u32 dword_80CC290[8];

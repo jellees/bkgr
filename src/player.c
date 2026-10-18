@@ -330,10 +330,10 @@ int sub_8016A5C(int a1) {
     return 0;
 }
 
-void sub_8016A94(int a1) {
+void start_stop_honeycomb(int kind) {
     if (!(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_HURTING) && gGameStatus.health != 0
         && !(gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IS_DYING)) {
-        hud_set_value(HUD_METER_HEALTH, a1);
+        hud_set_value(HUD_METER_HEALTH, kind);
         gIsStopHoneycombActive = 1;
         byte_200108E = 1;
         sub_8003884(dword_2000FC8, 0, dword_80CC290[gPlayerSprite.direction], 0);
