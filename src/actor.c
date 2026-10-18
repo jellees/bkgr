@@ -19,7 +19,7 @@
 struct Actor* actor_alloc(struct MapActor* mapActor) {
     int i;
 
-    if ((u16)(mapActor->type - ACTOR_097) <= ACTOR_0A8 - ACTOR_097) {
+    if ((u16)(mapActor->type - ACTOR_JINJO_ORACLE) <= ACTOR_0A8 - ACTOR_JINJO_ORACLE) {
         ASSERT(gActorPool2Count != gActorPool2Capacity);
         for (i = 0; i < gActorPool2Capacity; i++) {
             if (!gActorPool2[i].isActive) {
@@ -592,7 +592,7 @@ void sub_8028E30(void) {
             sub_80293C0(actor);
             dword_203E010[actor->field_1E] = 1;
 
-            if ((u16)(actor->type - ACTOR_097) <= ACTOR_0A8 - ACTOR_097) {
+            if ((u16)(actor->type - ACTOR_JINJO_ORACLE) <= ACTOR_0A8 - ACTOR_JINJO_ORACLE) {
                 continue;
             }
 
@@ -657,7 +657,7 @@ void sub_8028E30(void) {
                         }
                         break;
 
-                    case ACTOR_016:
+                    case ACTOR_BOZZEYE:
                     case ACTOR_093:
                         SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
                         actor->sprite.loopFrame = 20;
@@ -859,7 +859,7 @@ void s_load_object(int x, int y) {
             sub_80293C0(actor);
             dword_203E010[actor->field_1E] = 1;
 
-            if ((u16)(actor->type - ACTOR_097) <= ACTOR_0A8 - ACTOR_097) {
+            if ((u16)(actor->type - ACTOR_JINJO_ORACLE) <= ACTOR_0A8 - ACTOR_JINJO_ORACLE) {
                 continue;
             }
 
@@ -930,7 +930,7 @@ void s_load_object(int x, int y) {
                         }
                         break;
 
-                    case ACTOR_016:
+                    case ACTOR_BOZZEYE:
                     case ACTOR_093:
                         SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX, spriteY,
                                   2);
@@ -3299,7 +3299,7 @@ u8 sub_0802E080(void) {
 
     timer_stop();
     switch (dword_203DFDC->type) {
-        case ACTOR_073:
+        case ACTOR_MOMMA_CLUCKER_EGGS:
             if (!is_obj_disabled(ACTOR_0D9, 16)) {
                 if (!is_obj_disabled(ACTOR_1A2, 0)) {
                     byte_2002E4E = byte_203E162;
@@ -3365,7 +3365,7 @@ u8 sub_0802E080(void) {
             run_obj_behavior(ACTOR_0A4, 0);
             break;
 
-        case ACTOR_05C:
+        case ACTOR_WHITE_BREEGULL:
             if (is_obj_disabled(ACTOR_10C, 0)) {
                 if (!is_obj_disabled(ACTOR_177, 0)) {
                     run_obj_behavior(ACTOR_177, 0);
@@ -3816,14 +3816,14 @@ u8 sub_0802E080(void) {
             }
             break;
 
-        case ACTOR_04C:
+        case ACTOR_MISS_BUCKET:
             if (is_obj_disabled(ACTOR_0EF, 0)) {
                 if (!is_obj_disabled(ACTOR_0F0, 0)) {
                     run_obj_behavior(ACTOR_0F0, 0);
                 }
                 byte_2002E4E = FALSE;
                 sub_8025EF4(dword_203DFDC->field_24 - 1);
-                sub_8034460(ACTOR_04C, 0, 4, 0);
+                sub_8034460(ACTOR_MISS_BUCKET, 0, 4, 0);
             } else if (!is_obj_disabled(ACTOR_0F0, 0)) {
                 byte_2002E4E = FALSE;
                 sub_8025EF4(dword_203DFDC->field_14 - 1);
@@ -3852,7 +3852,7 @@ u8 sub_0802E080(void) {
             }
             break;
 
-        case ACTOR_012:
+        case ACTOR_MR_RIPOVSKI_SILVER_COINS:
             if (!is_obj_disabled(ACTOR_0F5, 0)) {
                 if (is_obj_disabled(ACTOR_175, 0)) {
                     if (!is_obj_disabled(ACTOR_0EC, 0)) {
@@ -3940,7 +3940,7 @@ u8 sub_0802E080(void) {
             }
             break;
 
-        case ACTOR_00F:
+        case ACTOR_MUMBO_JUMBO:
             hasEggMove = FALSE;
             if (sub_8016A5C(1) || sub_8016A5C(2) || sub_8016A5C(3) || sub_8016A5C(4)) {
                 hasEggMove = TRUE;
@@ -3966,7 +3966,7 @@ u8 sub_0802E080(void) {
             }
             break;
 
-        case ACTOR_029:
+        case ACTOR_JIGGYWIGGY:
             if (is_obj_disabled(ACTOR_02A, 0)) {
                 byte_2002E4E = TRUE;
                 sub_8025EF4(dword_203DFDC->field_14 - 1);
@@ -3976,15 +3976,15 @@ u8 sub_0802E080(void) {
             } else if (gGameStatus.totalJiggies < byte_80CC8EC[gUnlockedLevels]) {
                 byte_2002E4E = TRUE;
                 sub_8025EF4(dword_203DFDC->field_18 - 1 + gUnlockedLevels);
-                sub_8034460(ACTOR_029, 0, 4, 0);
+                sub_8034460(ACTOR_JIGGYWIGGY, 0, 4, 0);
             } else {
                 byte_2002E4E = FALSE;
                 sub_8025EF4(dword_203DFDC->field_24 - 1 + gUnlockedLevels);
-                sub_8034460(ACTOR_029, 0, 4, 0);
+                sub_8034460(ACTOR_JIGGYWIGGY, 0, 4, 0);
             }
             break;
 
-        case ACTOR_010:
+        case ACTOR_HONEY_B:
             if (!is_obj_disabled(ACTOR_0EB, 0)) {
                 byte_2002E4E = FALSE;
                 sub_8025EF4(dword_203DFDC->field_28 - 1);
@@ -4007,7 +4007,7 @@ u8 sub_0802E080(void) {
             }
             break;
 
-        case ACTOR_097:
+        case ACTOR_JINJO_ORACLE:
             if (!is_obj_disabled(ACTOR_112, 0)) {
                 byte_2002E4E = FALSE;
                 if (!byte_20021BE) {
@@ -4071,7 +4071,7 @@ u8 sub_0802E080(void) {
             sub_8034460(ACTOR_10E, 0, 4, 0);
             break;
 
-        case ACTOR_020:
+        case ACTOR_MR_RIPOVSKI_SHELLS:
             if (!is_obj_disabled(ACTOR_0DA, 0)) {
                 if (!is_obj_disabled(ACTOR_17F, 0)) {
                     byte_2002E4E = byte_203E142;
@@ -4097,7 +4097,7 @@ u8 sub_0802E080(void) {
             }
             break;
 
-        case ACTOR_028:
+        case ACTOR_MOMMA_CLUCKER_CHICKS:
             if (!is_obj_disabled(ACTOR_0E1, 0)) {
                 if (!is_obj_disabled(ACTOR_0E0, 0)) {
                     byte_2002E4E = FALSE;
@@ -4149,7 +4149,7 @@ u8 sub_0802E080(void) {
             }
             break;
 
-        case ACTOR_016:
+        case ACTOR_BOZZEYE:
             if (byte_203DFDA) {
                 byte_2002E4E = TRUE;
                 byte_2002E4F = TRUE;
