@@ -6760,7 +6760,7 @@ bool32 sub_8033CCC(struct Actor* actor) {
             }
 
         case ACTOR_HONEY_B_HINT:
-        case ACTOR_08C:
+        case ACTOR_HONEY_B_HIVE_HINT:
             if (!is_obj_disabled(ACTOR_0EB, 0)) {
                 return FALSE;
             }
@@ -6827,7 +6827,7 @@ bool32 sub_8033CCC(struct Actor* actor) {
             break;
 
         case ACTOR_JIGGYWIGGY_HINT:
-        case ACTOR_08D:
+        case ACTOR_JIGGYWIGGY_TEMPLE_HINT:
             if (gUnlockedLevels == gTotalAmountOfLevels
                 || gGameStatus.totalJiggies < byte_80CC8EC[gUnlockedLevels]) {
                 return TRUE;
@@ -6911,3 +6911,223 @@ bool32 sub_8033CCC(struct Actor* actor) {
     return TRUE;
 }
 #endif
+
+void sub_8033FA8(int type, u32 param, bool32 inRange, u8* shown) {
+    int i;
+
+    switch (type) {
+        case ACTOR_HONEY_B_HINT:
+        case ACTOR_HONEY_B_HIVE_HINT:
+            if (inRange) {
+                if (*shown && hud_is_element_active(HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS)) {
+                    break;
+                }
+                if (byte_200107C == byte_200107D) {
+                    break;
+                }
+                i = byte_200107C;
+                while (gGameStatus.totalHollowHoneycombs >= byte_80CC8E4[i] && i != byte_200107D) {
+                    i++;
+                }
+                if (i > byte_200107C) {
+                    i--;
+                }
+                hud_set_value(HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS, byte_80CC8E4[i]);
+                hud_keep_element_shown(HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS);
+                *shown = TRUE;
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_HONEY_B_HOLLOW_HONEYCOMBS);
+                *shown = FALSE;
+            }
+            break;
+
+        case ACTOR_MR_RIPOVSKI_SILVER_COINS_HINT:
+            if (inRange) {
+                if (*shown && hud_is_element_active(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS)) {
+                    break;
+                }
+                if (is_obj_disabled(ACTOR_0F5, 0)) {
+                    break;
+                }
+                hud_set_value(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS, stru_80CC8C4.silverCoins);
+                hud_keep_element_shown(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS);
+                *shown = TRUE;
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_MR_RIPOVSKI_SILVER_COINS);
+                *shown = FALSE;
+            }
+            break;
+
+        case ACTOR_BOZZEYE_HINT:
+            if (inRange) {
+                if (!hud_is_element_active(HUD_ELEMENT_BOZZEYE_NOTES)) {
+                    if (*shown) {
+                        break;
+                    }
+                    if (byte_203E0FC[param]) {
+                        break;
+                    }
+                    hud_set_value(HUD_ELEMENT_BOZZEYE_NOTES, dword_80CEFA4[param]);
+                    hud_keep_element_shown(HUD_ELEMENT_BOZZEYE_NOTES);
+                    *shown = TRUE;
+                } else {
+                    hud_load_bozzeye_notes();
+                }
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_BOZZEYE_NOTES);
+                *shown = FALSE;
+            }
+            break;
+
+        case ACTOR_MR_RIPOVSKI_SHELLS_HINT:
+            if (inRange) {
+                if (*shown && hud_is_element_active(HUD_ELEMENT_MR_RIPOVSKI_SHELLS)) {
+                    break;
+                }
+                if (is_obj_disabled(ACTOR_104, 0)) {
+                    break;
+                }
+                hud_set_value(HUD_ELEMENT_MR_RIPOVSKI_SHELLS, stru_80CC8C4.shells);
+                hud_keep_element_shown(HUD_ELEMENT_MR_RIPOVSKI_SHELLS);
+                *shown = TRUE;
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_MR_RIPOVSKI_SHELLS);
+                *shown = FALSE;
+            }
+            break;
+
+        case ACTOR_WHITE_BREEGULL_HINT:
+            if (inRange) {
+                if (*shown && hud_is_element_active(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS)) {
+                    break;
+                }
+                if (is_obj_disabled(ACTOR_10A, 0)) {
+                    break;
+                }
+                hud_set_value(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS,
+                              stru_80CC8C4.captiveBreegulls);
+                hud_keep_element_shown(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS);
+                *shown = TRUE;
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_WHITE_BREEGULL_CAPTIVE_BREEGULLS);
+                *shown = FALSE;
+            }
+            break;
+
+        case ACTOR_MOMMA_CLUCKER_CHICKS_HINT:
+            if (inRange) {
+                if (*shown && hud_is_element_active(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS)) {
+                    break;
+                }
+                if (is_obj_disabled(ACTOR_106, 0)) {
+                    break;
+                }
+                hud_set_value(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS, stru_80CC8C4.chicks);
+                hud_keep_element_shown(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS);
+                *shown = TRUE;
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_MOMMA_CLUCKER_CHICKS);
+                *shown = FALSE;
+            }
+            break;
+
+        case ACTOR_JIGGYWIGGY_HINT:
+        case ACTOR_JIGGYWIGGY_TEMPLE_HINT:
+            if (inRange) {
+                if (*shown && hud_is_element_active(HUD_ELEMENT_JIGGYWIGGY_JIGGIES)) {
+                    break;
+                }
+                if (gUnlockedLevels == gTotalAmountOfLevels) {
+                    break;
+                }
+                hud_set_value(HUD_ELEMENT_JIGGYWIGGY_JIGGIES, byte_80CC8EC[gUnlockedLevels]);
+                hud_keep_element_shown(HUD_ELEMENT_JIGGYWIGGY_JIGGIES);
+                *shown = TRUE;
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_JIGGYWIGGY_JIGGIES);
+                *shown = FALSE;
+            }
+            break;
+
+        case ACTOR_MISS_BUCKET_HINT:
+            if (inRange) {
+                if (*shown && hud_is_element_active(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS)) {
+                    break;
+                }
+                if (is_obj_disabled(ACTOR_0F1, 0)) {
+                    break;
+                }
+                hud_set_value(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS, stru_80CC8C4.goldNuggets);
+                hud_keep_element_shown(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS);
+                *shown = TRUE;
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_MISS_BUCKET_GOLD_NUGGETS);
+                *shown = FALSE;
+            }
+            break;
+
+        case ACTOR_JINJO_ORACLE_HINT:
+            if (inRange) {
+                if (*shown && hud_is_element_active(HUD_ELEMENT_JINJO_ORACLE_JINJOS)) {
+                    break;
+                }
+                if (is_obj_disabled(ACTOR_110, 0)) {
+                    break;
+                }
+                hud_set_value(HUD_ELEMENT_JINJO_ORACLE_JINJOS, 5);
+                hud_keep_element_shown(HUD_ELEMENT_JINJO_ORACLE_JINJOS);
+                *shown = TRUE;
+            } else if (*shown) {
+                hud_release_element(HUD_ELEMENT_JINJO_ORACLE_JINJOS);
+                *shown = FALSE;
+            }
+            break;
+    }
+}
+
+int is_obj_disabled(int type, int param) {
+    if (param != -1) {
+        return dObjDisabledFuncs[type](type, param);
+    }
+    return FALSE;
+}
+
+void run_obj_behavior(int type, int param) {
+    dObjBehaviorFuncs[type](type, param);
+}
+
+int sub_8034310(struct Actor* actor) {
+    struct ConditionArgs args;
+
+    args.conditionId = actor->field_A;
+    args.group = actor->field_24;
+    args.activate = actor->field_28;
+    args.field_4 = -1;
+    args.field_8 = -1;
+    args.field_C = actor->field_C;
+    args.field_13 = actor->field_C;
+    if (dConditionFlags[args.conditionId] & 2) {
+        args.script = sub_803352C(args.group, args.activate);
+    } else {
+        args.script = 0;
+    }
+    return dConditionFuncs[actor->field_A](&args);
+}
+
+int sub_8034388(int conditionId, int group, int activate) {
+    struct ConditionArgs args;
+
+    args.conditionId = conditionId;
+    args.group = group;
+    args.activate = activate;
+    args.field_4 = -1;
+    args.field_8 = -1;
+    args.field_C = -1;
+    args.field_13 = 0;
+    if (dConditionFlags[args.conditionId] & 2) {
+        args.script = sub_803352C(args.group, args.activate);
+    } else {
+        args.script = 0;
+    }
+    return dConditionFuncs[conditionId](&args);
+}

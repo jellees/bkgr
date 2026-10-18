@@ -620,6 +620,18 @@ struct struc_203E8D8 {
     u8* field_C;
 };
 
+// Arguments passed to a spawn condition function (dConditionFuncs).
+struct ConditionArgs {
+    u16 conditionId;
+    u16 group;
+    s32 field_4;
+    s32 field_8;
+    s32 field_C;
+    u16 script;
+    u8 activate;
+    u8 field_13;
+};
+
 struct struc_203E9B0 {
     u32 field_0;
     u8 unk_4[0x10];
@@ -923,7 +935,7 @@ extern bool32 touch_lava_jetty_platform(struct Vec3fx* pos, struct Actor* actor,
                                         struct Vec3fx* max);
 extern int sub_8039650(void);
 extern void sub_802B980(struct Vec3fx* pos, struct Actor* actor);
-extern void sub_8033FA8(int type, u8 a1, bool32 inRange, u8* a3);
+extern void sub_8033FA8(int type, u32 param, bool32 inRange, u8* shown);
 extern int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 invulnerable);
 extern void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode);
 extern void sub_0803381C(int type, int param, u32 groupIdx);
@@ -1217,6 +1229,12 @@ extern const u8 byte_80CC6B0[];
 extern const u32 dword_80CF080[];
 extern const u16 word_80CF140[];
 extern const u32 dword_80CF378[];
+// Per condition id (MapActor.conditionId): may the actor appear/act, and its flags (2 = needs the group script).
+extern int (*const dConditionFuncs[])(struct ConditionArgs* args);
+extern const u32 dConditionFlags[];
+// Per actor type: getter for its persistent "done" flag, and the matching setter/trigger.
+extern int (*const dObjDisabledFuncs[])(int type, int param);
+extern void (*const dObjBehaviorFuncs[])(int type, int param);
 extern u16* const dword_87E0228[];
 extern const u8 byte_80CEDED[];
 extern const u32 dword_80CEDFC[];
