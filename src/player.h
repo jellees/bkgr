@@ -13,6 +13,8 @@ extern int gBillDrillSfx;
 extern int gKazooieSfx;
 extern u8 gIsStopHoneycombActive;
 extern u16 gPlayerStateFlags[PLAYER_STATE_COUNT];
+extern u8 byte_20021BE;
+extern struct Actor* dword_20021C0;
 extern u8 byte_20021C4;
 
 void sub_8016434(void);

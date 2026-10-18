@@ -8,6 +8,7 @@
 #include "player_defs.h"
 #include "random.h"
 #include "room.h"
+#include "timer.h"
 #include "actor_defs.h"
 
 /**
@@ -631,6 +632,7 @@ void sub_8028E30(void) {
                             SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
                         }
                         break;
+
                     case ACTOR_06D:
                         if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DB, FALSE, 0, 0, x, y, 2);
@@ -638,6 +640,7 @@ void sub_8028E30(void) {
                             SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
                         }
                         break;
+
                     case ACTOR_SHOCK_SPRING_PAD:
                         if (!gUnlockedMoves[MOVE_SHOCK_JUMP]) {
                             SetSprite(&actor->sprite, 0x2D8, FALSE, 0, 0, x, y, 2);
@@ -645,6 +648,7 @@ void sub_8028E30(void) {
                             SetSprite(&actor->sprite, 0x235, FALSE, 0, 0, x, y, 2);
                         }
                         break;
+
                     case ACTOR_015:
                         if (!gUnlockedMoves[MOVE_WONDERWING]) {
                             SetSprite(&actor->sprite, 0x2D9, FALSE, 0, 0, x, y, 2);
@@ -652,6 +656,7 @@ void sub_8028E30(void) {
                             SetSprite(&actor->sprite, 0x236, FALSE, 0, 0, x, y, 2);
                         }
                         break;
+
                     case ACTOR_016:
                     case ACTOR_093:
                         SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
@@ -659,16 +664,19 @@ void sub_8028E30(void) {
                         sprite_lock_anim_on_frame(&actor->sprite, 0);
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
+
                     case ACTOR_017:
                         SetSprite(&actor->sprite, 0x238, FALSE, 0, 0, x, y, 2);
                         actor->sprite.loopFrame = 20;
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
+
                     case ACTOR_039:
                         SetSprite(&actor->sprite, 0x25A, FALSE, 0, 0, x, y, 2);
                         actor->sprite.loopFrame = 4;
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
+
                     default:
                         SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, x, y, 2);
                         break;
@@ -887,6 +895,7 @@ void s_load_object(int x, int y) {
                         SetSprite(&actor->sprite, 0x290, FALSE, 0, 0, spriteX, spriteY, 2);
                         actor->sprite.objMode = 1;
                         break;
+
                     case ACTOR_06C:
                         if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DC, FALSE, 0, 0, spriteX, spriteY, 2);
@@ -895,6 +904,7 @@ void s_load_object(int x, int y) {
                                       spriteY, 2);
                         }
                         break;
+
                     case ACTOR_06D:
                         if (is_obj_disabled(ACTOR_0CD, 0)) {
                             SetSprite(&actor->sprite, 0x2DB, FALSE, 0, 0, spriteX, spriteY, 2);
@@ -903,6 +913,7 @@ void s_load_object(int x, int y) {
                                       spriteY, 2);
                         }
                         break;
+
                     case ACTOR_SHOCK_SPRING_PAD:
                         if (!gUnlockedMoves[MOVE_SHOCK_JUMP]) {
                             SetSprite(&actor->sprite, 0x2D8, FALSE, 0, 0, spriteX, spriteY, 2);
@@ -910,6 +921,7 @@ void s_load_object(int x, int y) {
                             SetSprite(&actor->sprite, 0x235, FALSE, 0, 0, spriteX, spriteY, 2);
                         }
                         break;
+
                     case ACTOR_015:
                         if (!gUnlockedMoves[MOVE_WONDERWING]) {
                             SetSprite(&actor->sprite, 0x2D9, FALSE, 0, 0, spriteX, spriteY, 2);
@@ -917,6 +929,7 @@ void s_load_object(int x, int y) {
                             SetSprite(&actor->sprite, 0x236, FALSE, 0, 0, spriteX, spriteY, 2);
                         }
                         break;
+
                     case ACTOR_016:
                     case ACTOR_093:
                         SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX, spriteY,
@@ -925,16 +938,19 @@ void s_load_object(int x, int y) {
                         sprite_lock_anim_on_frame(&actor->sprite, 0);
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
+
                     case ACTOR_017:
                         SetSprite(&actor->sprite, 0x238, FALSE, 0, 0, spriteX, spriteY, 2);
                         actor->sprite.loopFrame = 20;
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
+
                     case ACTOR_039:
                         SetSprite(&actor->sprite, 0x25A, FALSE, 0, 0, spriteX, spriteY, 2);
                         actor->sprite.loopFrame = 4;
                         sprite_set_locked_frame(&actor->sprite, 0);
                         break;
+
                     default:
                         SetSprite(&actor->sprite, actor->type + 0x221, FALSE, 0, 0, spriteX, spriteY,
                                   2);
@@ -1419,6 +1435,7 @@ void sub_802A944(struct RenderListEntry** renderList, u32* spriteCount) {
                     case ACTOR_0BF:
                         sub_804888C(dword_203DFB8[actor->field_1E]);
                         break;
+
                     case ACTOR_0C7:
                     case ACTOR_0CF:
                     case ACTOR_0D0:
@@ -1429,6 +1446,7 @@ void sub_802A944(struct RenderListEntry** renderList, u32* spriteCount) {
                         actor->field_48 = 0;
                         byte_203DFE4--;
                         break;
+
                     default:
                         actor->field_44 = 1;
                         sub_804888C(dword_203DFB8[actor->field_1E]);
@@ -1660,6 +1678,7 @@ int sub_0802B048(struct Vec3fx* pos) {
                         return 0;
                     }
                     break;
+
                 case 0:
                     if (!actor->field_20 && !actor->field_3C && !actor->field_44
                         && !is_obj_disabled(actor->type, (s16)actor->field_1C) && sub_8034310(actor)
@@ -1735,15 +1754,19 @@ int sub_0802B048(struct Vec3fx* pos) {
                         }
                     }
                     break;
+
                 case 2:
                     ASSERT(0);
                     break;
+
                 case 3:
                     ASSERT(0);
                     break;
+
                 case 4:
                     ASSERT(0);
                     break;
+
                 default:
                     ASSERT(0);
                     break;
@@ -1874,6 +1897,7 @@ int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 in
                             run_obj_behavior(actor->type, (s16)actor->field_1C);
                             sub_802E024(1, actor);
                             break;
+
                         case ACTOR_CANDLE_BAD:
                             run_obj_behavior(ACTOR_CANDLE_BAD, (s16)actor->field_1C);
                             if (!invulnerable) {
@@ -1881,14 +1905,17 @@ int handle_static_enemy(struct Actor* actor, struct Vec3fx* attackPos, bool32 in
                                 return 1;
                             }
                             break;
+
                         case ACTOR_MANHOLE_COVER:
                         case ACTOR_CONCRETE_COVER:
                             sub_8034460(actor->type, (s16)actor->field_1C, 3, &actor->sprite);
                             break;
+
                         case ACTOR_BEEHIVE:
                             run_obj_behavior(ACTOR_BEEHIVE, (s16)actor->field_1C);
                             sub_0802C3A4(byte_80A7762[random_range(0, 0x27)], actor, -1, 0);
                             break;
+
                         default:
                             run_obj_behavior(actor->type, (s16)actor->field_1C);
                             break;
@@ -1956,6 +1983,7 @@ int sub_0802B9E4(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max, boo
                         return 0;
                     }
                     break;
+
                 case 4:
                     if (gTransformation != TRANSFORMATION_OCTOPUS
                         && CallARM_VecFX_BoxInBox(&actor->field_64, &actor->field_70, &stru_30032E8,
@@ -1964,26 +1992,32 @@ int sub_0802B9E4(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max, boo
                         return 0;
                     }
                     break;
+
                 case 1:
                     if (pick_up_collectable(pos, actor, min, max)) {
                         return 0;
                     }
                     break;
+
                 case 0:
                     result = handle_static_enemy(actor, &attackPos, invulnerable);
                     if (result >= 0) {
                         return result;
                     }
                     break;
+
                 case 3:
                     ASSERT(0);
                     break;
+
                 case 5:
                     ASSERT(0);
                     break;
+
                 case 7:
                     ASSERT(0);
                     break;
+
                 case 6:
                 default:
                     ASSERT(0);
@@ -2026,11 +2060,13 @@ int sub_0802BB30(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max, boo
                 case 7:
                     sub_802B980(pos, actor);
                     break;
+
                 case 2:
                     if (talk_with_npc(pos, actor)) {
                         return 0;
                     }
                     break;
+
                 case 3:
                     if (!byte_203E018 && VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
                         byte_203DFC8 = TRUE;
@@ -2038,26 +2074,31 @@ int sub_0802BB30(struct Vec3fx* pos, struct Vec3fx* min, struct Vec3fx* max, boo
                         return 0;
                     }
                     break;
+
                 case 1:
                     if (pick_up_collectable(pos, actor, min, max)) {
                         return 0;
                     }
                     break;
+
                 case 5:
                     // The original passes max instead of platformMax, which is never used.
                     if (touch_lava_jetty_platform(pos, actor, &platformMin, max)) {
                         return 0;
                     }
                     break;
+
                 case 0:
                     result = handle_static_enemy(actor, &attackPos, invulnerable);
                     if (result >= 0) {
                         return result;
                     }
                     break;
+
                 case 4:
                     ASSERT(0);
                     break;
+
                 case 6:
                 default:
                     ASSERT(0);
@@ -2085,11 +2126,13 @@ int sub_0802BCC4(struct Vec3fx* pos) {
             switch (actor->interactionKind) {
                 case 0:
                     break;
+
                 case 2:
                     if (talk_with_npc(pos, actor)) {
                         return 0;
                     }
                     break;
+
                 case 3:
                     if (VecFX_PointInBox(pos, &actor->field_64, &actor->field_70)) {
                         byte_203DFC8 = TRUE;
@@ -2098,9 +2141,11 @@ int sub_0802BCC4(struct Vec3fx* pos) {
                         return 0;
                     }
                     break;
+
                 case 1:
                     ASSERT(0);
                     break;
+
                 default:
                     ASSERT(0);
                     break;
@@ -2334,6 +2379,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_1C = -1;
             actor->field_2C = 450;
             break;
+
         case 2:
             actor->type = ACTOR_GOLDEN_FEATHER;
             actor->field_A = 0;
@@ -2343,6 +2389,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_1C = -1;
             actor->field_2C = 450;
             break;
+
         case 4:
             actor->type = ACTOR_BLUE_EGG;
             actor->field_A = 0;
@@ -2352,6 +2399,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_1C = -1;
             actor->field_2C = 450;
             break;
+
         case 8:
             actor->type = ACTOR_DOUBLE_HONEYCOMB;
             actor->field_A = 0;
@@ -2361,6 +2409,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_1C = -1;
             actor->field_2C = 450;
             break;
+
         case 16:
             actor->type = ACTOR_SKILL_STOP_HONEYCOMB;
             actor->field_A = 0;
@@ -2370,6 +2419,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_1C = -1;
             actor->field_2C = 450;
             break;
+
         case 32:
             actor->type = ACTOR_RANDOM_STOP_HONEYCOMB;
             actor->field_A = 0;
@@ -2379,6 +2429,7 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             actor->field_1C = -1;
             actor->field_2C = 450;
             break;
+
         default:
             ASSERT(0);
             break;
@@ -2448,9 +2499,11 @@ void sub_0802C3A4(int drop, struct Actor* source, int direction, int mode) {
             sub_8003884(item->field_E4, 0x18000, dword_80CC290[i], 0);
             CallARM_store_jump_and_other_value(item->field_E4, 0x40000, 0);
             break;
+
         case 2:
             sub_8003884(item->field_E4, 0x18000, dword_80CC290[i], 0);
             break;
+
         case 1:
             CallARM_store_jump_and_other_value(item->field_E4, 0x40000, 0);
             break;
@@ -2784,6 +2837,7 @@ void spawn_player_projectile(int kind, struct Vec3fx* pos, u32 priority) {
             actorPos->z = pos->z;
             projectile->field_102 = 0x19;
             break;
+
         case EGG_BATTERY:
             actor->type = 0x1C;
             projectile->field_FC = word_80CB964[7];
@@ -2804,6 +2858,7 @@ void spawn_player_projectile(int kind, struct Vec3fx* pos, u32 priority) {
             actorPos->z = pos->z;
             projectile->field_102 = 0x1A;
             break;
+
         case EGG_FIRE:
             actor->type = 0x1D;
             projectile->field_FC = word_80CB964[9];
@@ -2824,6 +2879,7 @@ void spawn_player_projectile(int kind, struct Vec3fx* pos, u32 priority) {
             actorPos->z = pos->z;
             projectile->field_102 = 0x1B;
             break;
+
         case EGG_ICE:
             actor->type = 0x1E;
             projectile->field_FC = word_80CB964[8];
@@ -2844,6 +2900,7 @@ void spawn_player_projectile(int kind, struct Vec3fx* pos, u32 priority) {
             actorPos->z = pos->z;
             projectile->field_102 = 0x1C;
             break;
+
         case 5:
             actor->type = 0x46;
             projectile->field_FC = word_80CB964[13];
@@ -2864,6 +2921,7 @@ void spawn_player_projectile(int kind, struct Vec3fx* pos, u32 priority) {
             actorPos->z = pos->z;
             projectile->field_102 = 0xCB;
             break;
+
         case 6:
             actor->type = 0x47;
             projectile->field_FC = word_80CB964[11];
@@ -2884,6 +2942,7 @@ void spawn_player_projectile(int kind, struct Vec3fx* pos, u32 priority) {
             actorPos->z = pos->z;
             projectile->field_102 = 0xB9;
             break;
+
         default:
             ASSERT(0);
             break;
@@ -2987,6 +3046,7 @@ bool32 spawn_projectile(int kind, struct Vec3fx* pos, u32 angle, u32 priority) {
             sub_8003894(projectile->field_FE, dword_80CC818[0]);
             sub_8003884(projectile->field_FE, 0x40000, angle, 0);
             break;
+
         case 8:
             actor->type = 0x1A;
             projectile->field_FC = word_80CB964[0];
@@ -3002,6 +3062,7 @@ bool32 spawn_projectile(int kind, struct Vec3fx* pos, u32 angle, u32 priority) {
             sub_8003894(projectile->field_FE, dword_80CC818[0]);
             sub_8003884(projectile->field_FE, 0x30000, angle, 0);
             break;
+
         case 9:
             actor->type = 0x74;
             projectile->field_FC = word_80CB964[0];
@@ -3017,6 +3078,7 @@ bool32 spawn_projectile(int kind, struct Vec3fx* pos, u32 angle, u32 priority) {
             sub_8003894(projectile->field_FE, dword_80CC818[0]);
             sub_8003884(projectile->field_FE, 0x30000, angle, 0);
             break;
+
         case 10:
             actor->type = 0x75;
             projectile->field_FC = word_80CB964[0];
@@ -3032,6 +3094,7 @@ bool32 spawn_projectile(int kind, struct Vec3fx* pos, u32 angle, u32 priority) {
             sub_8003894(projectile->field_FE, dword_80CC818[0]);
             sub_8003884(projectile->field_FE, 0x40000, angle, 0);
             break;
+
         default:
             ASSERT(0);
             break;
@@ -3229,4 +3292,936 @@ void sub_802E024(int count, struct Actor* actor) {
             }
         }
     }
+}
+
+u8 sub_0802E080(void) {
+    bool32 hasEggMove;
+
+    timer_stop();
+    switch (dword_203DFDC->type) {
+        case ACTOR_073:
+            if (!is_obj_disabled(ACTOR_0D9, 16)) {
+                if (!is_obj_disabled(ACTOR_1A2, 0)) {
+                    byte_2002E4E = byte_203E162;
+                    if (!byte_203E162) {
+                        byte_203E162 = TRUE;
+                    }
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                    sub_8034460(ACTOR_1A2, 0, 4, 0);
+                } else {
+                    byte_2002E4E = TRUE;
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                }
+            } else {
+                if (!is_obj_disabled(ACTOR_1A2, 0)) {
+                    run_obj_behavior(ACTOR_1A2, 0);
+                }
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            }
+            break;
+
+        case ACTOR_0A5:
+            byte_2002E4E = TRUE;
+            sub_8025EF4(word_80CEC70[gLoadedRoomLevel]);
+            break;
+
+        case ACTOR_0A6:
+            byte_2002E4E = TRUE;
+            sub_8025EF4(word_80CEC7C[gLoadedRoomLevel]);
+            break;
+
+        case ACTOR_0A7:
+            byte_2002E4E = TRUE;
+            sub_8025EF4(word_80CEC94[gLoadedRoomLevel]);
+            break;
+
+        case ACTOR_0A8:
+            byte_2002E4E = TRUE;
+            sub_8025EF4(word_80CEC88[gLoadedRoomLevel]);
+            break;
+
+        case ACTOR_0A1:
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            run_obj_behavior(ACTOR_0A1, 0);
+            break;
+
+        case ACTOR_0A2:
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            run_obj_behavior(ACTOR_0A2, 0);
+            break;
+
+        case ACTOR_0A3:
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            run_obj_behavior(ACTOR_0A3, 0);
+            break;
+
+        case ACTOR_0A4:
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            run_obj_behavior(ACTOR_0A4, 0);
+            break;
+
+        case ACTOR_05C:
+            if (is_obj_disabled(ACTOR_10C, 0)) {
+                if (!is_obj_disabled(ACTOR_177, 0)) {
+                    run_obj_behavior(ACTOR_177, 0);
+                }
+                if (!is_obj_disabled(ACTOR_10A, 0)) {
+                    byte_2002E4E = FALSE;
+                    sub_8025EF4(dword_203DFDC->field_18 - 1);
+                    sub_8034460(ACTOR_10A, 0, 4, 0);
+                } else {
+                    byte_2002E4E = TRUE;
+                    sub_8025EF4(dword_203DFDC->field_24 - 1);
+                }
+            } else if (!is_obj_disabled(ACTOR_177, 0)) {
+                byte_2002E4E = byte_203E143;
+                if (!byte_203E143) {
+                    byte_203E143 = TRUE;
+                }
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                sub_8034460(ACTOR_177, 0, 4, 0);
+            } else {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+            }
+            break;
+
+        case ACTOR_013:
+            byte_2002E4E = byte_203E169;
+            if (!byte_203E169) {
+                byte_203E169 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            sub_8034460(ACTOR_102, 0, 4, 0);
+            break;
+
+        case ACTOR_022:
+            if (!is_obj_disabled(ACTOR_0D9, 9)) {
+                if (!is_obj_disabled(ACTOR_179, 0)) {
+                    byte_2002E4E = byte_203E15F;
+                    if (!byte_203E15F) {
+                        byte_203E15F = TRUE;
+                    }
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                    sub_8034460(ACTOR_179, 0, 4, 0);
+                } else {
+                    byte_2002E4E = TRUE;
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                }
+            } else {
+                if (!is_obj_disabled(ACTOR_179, 0)) {
+                    run_obj_behavior(ACTOR_179, 0);
+                }
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            }
+            break;
+
+        case ACTOR_0FF:
+            byte_2002E4E = byte_203E145;
+            if (!byte_203E145) {
+                byte_203E145 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_12A:
+            byte_2002E4E = byte_203E146;
+            if (!byte_203E146) {
+                byte_203E146 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_132:
+            byte_2002E4E = byte_203E147;
+            if (!byte_203E147) {
+                byte_203E147 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_12B:
+            byte_2002E4E = byte_203E148;
+            if (!byte_203E148) {
+                byte_203E148 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_12D:
+            byte_2002E4E = byte_203E149;
+            if (!byte_203E149) {
+                byte_203E149 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_12E:
+            byte_2002E4E = byte_203E14A;
+            if (!byte_203E14A) {
+                byte_203E14A = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_12C:
+            byte_2002E4E = byte_203E14B;
+            if (!byte_203E14B) {
+                byte_203E14B = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_16F:
+            byte_2002E4E = byte_203E14C;
+            if (!byte_203E14C) {
+                byte_203E14C = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_170:
+            byte_2002E4E = byte_203E14D;
+            if (!byte_203E14D) {
+                byte_203E14D = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_123:
+            byte_2002E4E = byte_203E14E;
+            if (!byte_203E14E) {
+                byte_203E14E = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_124:
+            byte_2002E4E = byte_203E14F;
+            if (!byte_203E14F) {
+                byte_203E14F = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_126:
+            byte_2002E4E = byte_203E150;
+            if (!byte_203E150) {
+                byte_203E150 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_16D:
+            byte_2002E4E = byte_203E151;
+            if (!byte_203E151) {
+                byte_203E151 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_16E:
+            byte_2002E4E = byte_203E152;
+            if (!byte_203E152) {
+                byte_203E152 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_18B:
+            byte_2002E4E = byte_203E153;
+            if (!byte_203E153) {
+                byte_203E153 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_171:
+            byte_2002E4E = byte_203E154;
+            if (!byte_203E154) {
+                byte_203E154 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_133:
+            byte_2002E4E = byte_203E155;
+            if (!byte_203E155) {
+                byte_203E155 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_135:
+            byte_2002E4E = byte_203E156;
+            if (!byte_203E156) {
+                byte_203E156 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_136:
+            byte_2002E4E = byte_203E157;
+            if (!byte_203E157) {
+                byte_203E157 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_138:
+            byte_2002E4E = byte_203E158;
+            if (!byte_203E158) {
+                byte_203E158 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_139:
+            byte_2002E4E = byte_203E159;
+            if (!byte_203E159) {
+                byte_203E159 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_13B:
+            byte_2002E4E = byte_203E15A;
+            if (!byte_203E15A) {
+                byte_203E15A = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_13C:
+            byte_2002E4E = byte_203E15D;
+            if (!byte_203E15D) {
+                byte_203E15D = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_13E:
+            byte_2002E4E = byte_203E15E;
+            if (!byte_203E15E) {
+                byte_203E15E = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_13F:
+            byte_2002E4E = byte_203E15B;
+            if (!byte_203E15B) {
+                byte_203E15B = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_141:
+            byte_2002E4E = byte_203E15C;
+            if (!byte_203E15C) {
+                byte_203E15C = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_145:
+            byte_2002E4E = byte_203E160;
+            if (!byte_203E160) {
+                byte_203E160 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_147:
+            byte_2002E4E = byte_203E161;
+            if (!byte_203E161) {
+                byte_203E161 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_143:
+            byte_2002E4E = byte_203E163;
+            if (!byte_203E163) {
+                byte_203E163 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_14C:
+            byte_2002E4E = byte_203E164;
+            if (!byte_203E164) {
+                byte_203E164 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_14D:
+            byte_2002E4E = byte_203E165;
+            if (!byte_203E165) {
+                byte_203E165 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_14E:
+            byte_2002E4E = byte_203E166;
+            if (!byte_203E166) {
+                byte_203E166 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_14F:
+            byte_2002E4E = byte_203E167;
+            if (!byte_203E167) {
+                byte_203E167 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_188:
+            byte_2002E4E = byte_203E168;
+            if (!byte_203E168) {
+                byte_203E168 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_146:
+        case ACTOR_163:
+        case ACTOR_19F:
+            byte_2002E4E = TRUE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_164:
+            byte_203E16A = 0;
+            byte_2002E4E = TRUE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_116:
+        case ACTOR_117:
+        case ACTOR_118:
+        case ACTOR_119:
+        case ACTOR_11A:
+        case ACTOR_11B:
+        case ACTOR_11C:
+        case ACTOR_16B:
+        case ACTOR_16C:
+            byte_2002E4E = byte_20021F8;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_142:
+            if (!is_obj_disabled(ACTOR_1A2, 0)) {
+                run_obj_behavior(ACTOR_1A2, 0);
+            }
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_144:
+            if (!is_obj_disabled(ACTOR_179, 0)) {
+                run_obj_behavior(ACTOR_179, 0);
+            }
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_10D:
+        case ACTOR_113:
+        case ACTOR_11D:
+        case ACTOR_122:
+        case ACTOR_125:
+        case ACTOR_12F:
+        case ACTOR_130:
+        case ACTOR_131:
+        case ACTOR_134:
+        case ACTOR_137:
+        case ACTOR_13A:
+        case ACTOR_13D:
+        case ACTOR_140:
+        case ACTOR_152:
+        case ACTOR_153:
+        case ACTOR_154:
+        case ACTOR_155:
+        case ACTOR_156:
+        case ACTOR_157:
+        case ACTOR_158:
+        case ACTOR_159:
+        case ACTOR_15A:
+        case ACTOR_15B:
+        case ACTOR_15C:
+        case ACTOR_172:
+        case ACTOR_173:
+        case ACTOR_174:
+        case ACTOR_185:
+        case ACTOR_186:
+        case ACTOR_187:
+        case ACTOR_18A:
+        case ACTOR_18C:
+        case ACTOR_18D:
+        case ACTOR_18E:
+        case ACTOR_18F:
+        case ACTOR_190:
+        case ACTOR_191:
+        case ACTOR_192:
+        case ACTOR_193:
+        case ACTOR_194:
+        case ACTOR_199:
+        case ACTOR_19A:
+        case ACTOR_19B:
+        case ACTOR_19C:
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            break;
+
+        case ACTOR_11E:
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            sub_8034460(ACTOR_11E, 0, 4, 0);
+            break;
+
+        case ACTOR_0A0:
+            dword_20021C0 = dword_203DFDC;
+            byte_2002E4B = dword_203DFDC->field_18 - 1;
+            if (!byte_2002E4C) {
+                if (!gUnlockedMoves[MOVE_EGG_BLUE]) {
+                    byte_2002E4E = TRUE;
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                } else {
+                    byte_2002E4E = FALSE;
+                    sub_8025EF4(dword_203DFDC->field_14);
+                    sub_8034460(ACTOR_161, 0, 4, 0);
+                }
+                if (!is_obj_disabled(ACTOR_1A1, 0)) {
+                    run_obj_behavior(ACTOR_1A1, 0);
+                }
+            } else if (!byte_2002E4D) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+                byte_2002E4C = FALSE;
+            } else {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_24);
+                sub_8034460(ACTOR_0A0, 0, 4, 0);
+            }
+            break;
+
+        case ACTOR_04C:
+            if (is_obj_disabled(ACTOR_0EF, 0)) {
+                if (!is_obj_disabled(ACTOR_0F0, 0)) {
+                    run_obj_behavior(ACTOR_0F0, 0);
+                }
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+                sub_8034460(ACTOR_04C, 0, 4, 0);
+            } else if (!is_obj_disabled(ACTOR_0F0, 0)) {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                sub_8034460(ACTOR_0F0, 0, 4, 0);
+            } else {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            }
+            break;
+
+        case ACTOR_09E:
+            byte_2002E4E = FALSE;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            sub_8034460(ACTOR_09E, (s16)dword_203DFDC->field_1C, 4, 0);
+            break;
+
+        case ACTOR_09F:
+            if (!is_obj_disabled(ACTOR_182, 0)) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            } else {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                sub_8034460(ACTOR_09F, (s16)dword_203DFDC->field_1C, 4, 0);
+                sub_8034460(ACTOR_0EE, 0, 4, 0);
+            }
+            break;
+
+        case ACTOR_012:
+            if (!is_obj_disabled(ACTOR_0F5, 0)) {
+                if (is_obj_disabled(ACTOR_175, 0)) {
+                    if (!is_obj_disabled(ACTOR_0EC, 0)) {
+                        run_obj_behavior(ACTOR_0EC, 0);
+                    }
+                    byte_2002E4E = FALSE;
+                    sub_8025EF4(dword_203DFDC->field_24 - 1);
+                    sub_8034460(ACTOR_0F5, 0, 4, 0);
+                } else if (!is_obj_disabled(ACTOR_0EC, 0)) {
+                    byte_2002E4E = FALSE;
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                    sub_8034460(ACTOR_0EC, 0, 4, 0);
+                } else {
+                    byte_2002E4E = TRUE;
+                    sub_8025EF4(dword_203DFDC->field_18 - 1);
+                }
+            } else {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_28 - 1);
+            }
+            break;
+
+        case ACTOR_036:
+            if (is_obj_disabled(ACTOR_037, 0) && is_obj_disabled(ACTOR_038, 0)) {
+                if (!is_obj_disabled(ACTOR_0E9, 0)) {
+                    run_obj_behavior(ACTOR_0E9, 0);
+                }
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+                sub_8034460(ACTOR_036, 0, 4, 0);
+            } else if (!is_obj_disabled(ACTOR_0E9, 0)) {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                run_obj_behavior(ACTOR_0E9, 0);
+            } else {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            }
+            break;
+
+        case ACTOR_037:
+            if (!is_obj_disabled(ACTOR_0E8, 0)) {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                run_obj_behavior(ACTOR_0E8, 0);
+                if (is_obj_disabled(ACTOR_0EA, 0)) {
+                    sub_8034460(ACTOR_17D, 0, 4, 0);
+                }
+            } else if (!is_obj_disabled(ACTOR_0EA, 0)) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            } else {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+                sub_8034460(ACTOR_037, 0, 4, 0);
+            }
+            break;
+
+        case ACTOR_038:
+            if (!is_obj_disabled(ACTOR_0E7, 0)) {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                run_obj_behavior(ACTOR_0E7, 0);
+                if (is_obj_disabled(ACTOR_0E6, 0)) {
+                    sub_8034460(ACTOR_17E, 0, 4, 0);
+                }
+            } else if (!is_obj_disabled(ACTOR_0E6, 0)) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            } else {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+                sub_8034460(ACTOR_038, 0, 4, 0);
+            }
+            break;
+
+        case ACTOR_039:
+            if (!is_obj_disabled(ACTOR_0E6, 0)) {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                sub_8034460(ACTOR_0E6, 0, 4, 0);
+            } else {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            }
+            break;
+
+        case ACTOR_00F:
+            hasEggMove = FALSE;
+            if (sub_8016A5C(1) || sub_8016A5C(2) || sub_8016A5C(3) || sub_8016A5C(4)) {
+                hasEggMove = TRUE;
+            }
+            if (!hasEggMove && !gGameStatus.mumboTokens) {
+                if (!is_obj_disabled(ACTOR_115, 0)) {
+                    byte_2002E4E = FALSE;
+                    sub_8025EF4(dword_80CF378[gLoadedRoomLevel]);
+                    run_obj_behavior(ACTOR_115, 0);
+                } else {
+                    byte_2002E4E = TRUE;
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                }
+            } else if (!gGameStatus.mumboTokens) {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+                sub_8034460(ACTOR_15F, 0, 4, 0);
+            } else {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_18);
+                sub_8034460(ACTOR_1A3, 0, 4, 0);
+                sub_8034460(ACTOR_15F, 0, 4, 0);
+            }
+            break;
+
+        case ACTOR_029:
+            if (is_obj_disabled(ACTOR_02A, 0)) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+            } else if (gUnlockedLevels == gTotalAmountOfLevels) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_28 - 1);
+            } else if (gGameStatus.totalJiggies < byte_80CC8EC[gUnlockedLevels]) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1 + gUnlockedLevels);
+                sub_8034460(ACTOR_029, 0, 4, 0);
+            } else {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1 + gUnlockedLevels);
+                sub_8034460(ACTOR_029, 0, 4, 0);
+            }
+            break;
+
+        case ACTOR_010:
+            if (!is_obj_disabled(ACTOR_0EB, 0)) {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_28 - 1);
+                sub_8034460(ACTOR_0EB, 0, 4, 0);
+                if (byte_200107C != byte_200107D
+                    && gGameStatus.totalHollowHoneycombs >= byte_80CC8E4[byte_200107C]) {
+                    sub_8034460(ACTOR_151, 0, 4, 0);
+                }
+            } else if (byte_200107C == byte_200107D) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+                restore_full_health();
+            } else if (gGameStatus.totalHollowHoneycombs < byte_80CC8E4[byte_200107C]) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1 + byte_200107C);
+            } else {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                sub_8034460(ACTOR_184, 0, 4, 0);
+            }
+            break;
+
+        case ACTOR_097:
+            if (!is_obj_disabled(ACTOR_112, 0)) {
+                byte_2002E4E = FALSE;
+                if (!byte_20021BE) {
+                    sub_8025EF4(byte_80CEDC3[gLoadedRoomLevel]);
+                } else {
+                    sub_8025EF4(dword_80CF3D0[gLoadedRoomLevel]);
+                }
+                sub_8034460(ACTOR_112, 0, 4, 0);
+                if (byte_203E110[gLoadedRoomLevel]) {
+                    sub_8034460(ACTOR_176, 0, 4, 0);
+                }
+            } else if (!byte_203E110[gLoadedRoomLevel]) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(byte_80CEDC9[gLoadedRoomLevel]);
+            } else if (byte_203E116[gLoadedRoomLevel] == stru_80CC84C[gLoadedRoomLevel].jinjoCount) {
+                byte_2002E4E = TRUE;
+                byte_203E11C[gLoadedRoomLevel] = TRUE;
+                sub_8025EF4(byte_80CEDF3[gLoadedRoomLevel]);
+                sub_8034460(ACTOR_114, 0, 4, 0);
+            } else {
+                byte_2002E4E = TRUE;
+                switch (byte_203E110[gLoadedRoomLevel]) {
+                    case 1:
+                        sub_8025EF4(byte_80CEDCF[gLoadedRoomLevel]);
+                        byte_203E11C[gLoadedRoomLevel] = TRUE;
+                        break;
+
+                    case 2:
+                        sub_8025EF4(byte_80CEDD5[gLoadedRoomLevel]);
+                        byte_203E11C[gLoadedRoomLevel] = TRUE;
+                        break;
+
+                    case 3:
+                        sub_8025EF4(byte_80CEDDB[gLoadedRoomLevel]);
+                        byte_203E11C[gLoadedRoomLevel] = TRUE;
+                        break;
+
+                    case 4:
+                        sub_8025EF4(byte_80CEDE1[gLoadedRoomLevel]);
+                        byte_203E11C[gLoadedRoomLevel] = TRUE;
+                        break;
+
+                    case 5:
+                        sub_8025EF4(byte_80CEDE7[gLoadedRoomLevel]);
+                        byte_203E11C[gLoadedRoomLevel] = TRUE;
+                        break;
+
+                    default:
+                        ASSERT(0);
+                        break;
+                }
+            }
+            break;
+
+        case ACTOR_021:
+            byte_2002E4E = byte_203E144;
+            if (!byte_203E144) {
+                byte_203E144 = TRUE;
+            }
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            sub_8034460(ACTOR_10E, 0, 4, 0);
+            break;
+
+        case ACTOR_020:
+            if (!is_obj_disabled(ACTOR_0DA, 0)) {
+                if (!is_obj_disabled(ACTOR_17F, 0)) {
+                    byte_2002E4E = byte_203E142;
+                    if (!byte_203E142) {
+                        byte_203E142 = TRUE;
+                    }
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                    sub_8034460(ACTOR_17F, 0, 4, 0);
+                } else {
+                    byte_2002E4E = TRUE;
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                }
+            } else if (!is_obj_disabled(ACTOR_104, 0)) {
+                if (!is_obj_disabled(ACTOR_17F, 0)) {
+                    run_obj_behavior(ACTOR_17F, 0);
+                }
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+                sub_8034460(ACTOR_104, 0, 4, 0);
+            } else {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+            }
+            break;
+
+        case ACTOR_028:
+            if (!is_obj_disabled(ACTOR_0E1, 0)) {
+                if (!is_obj_disabled(ACTOR_0E0, 0)) {
+                    byte_2002E4E = FALSE;
+                    sub_8025EF4(dword_203DFDC->field_14 - 1);
+                    run_obj_behavior(ACTOR_0E0, 0);
+                } else {
+                    byte_2002E4E = TRUE;
+                    sub_8025EF4(dword_203DFDC->field_18 - 1);
+                }
+            } else if (!is_obj_disabled(ACTOR_106, 0)) {
+                if (!is_obj_disabled(ACTOR_0E0, 0)) {
+                    run_obj_behavior(ACTOR_0E0, 0);
+                }
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+                sub_8034460(ACTOR_106, 0, 4, 0);
+            } else {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_28 - 1);
+            }
+            break;
+
+        case ACTOR_017:
+            byte_2002E4E = byte_20021F8;
+            sub_8025EF4(dword_203DFDC->field_14 - 1);
+            sub_8034460(ACTOR_0FB, dword_203DFDC->field_C, 4, 0);
+            sub_8034460(ACTOR_017, 0, 4, 0);
+            break;
+
+        case ACTOR_093:
+            if (byte_203DFDA) {
+                byte_2002E4E = TRUE;
+                byte_2002E4F = TRUE;
+                sub_8025EF4(dword_80CEF8C[gLoadedRoomLevel]);
+                break;
+            }
+            sprite_unlock_anim(&dword_203DFDC->sprite);
+            if (!sub_80037A8(&dword_203DFDC->sprite)) {
+                return FALSE;
+            }
+            byte_2002E4F = FALSE;
+            restore_full_health();
+            if (!gGameStatus.totalJiggies) {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+            } else {
+                byte_2002E4E = TRUE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            }
+            break;
+
+        case ACTOR_016:
+            if (byte_203DFDA) {
+                byte_2002E4E = TRUE;
+                byte_2002E4F = TRUE;
+                sub_8025EF4(dword_80CEF8C[gLoadedRoomLevel]);
+                break;
+            }
+            sprite_unlock_anim(&dword_203DFDC->sprite);
+            if (!sub_80037A8(&dword_203DFDC->sprite)) {
+                return FALSE;
+            }
+            byte_2002E4F = FALSE;
+            if (dword_203DFDC->field_C == 7) {
+                byte_2002E50 = TRUE;
+            } else {
+                byte_2002E50 = FALSE;
+            }
+            restore_full_health();
+            if (byte_203E0FC[dword_203DFDC->field_C]) {
+                byte_2002E4E = TRUE;
+                byte_2002E50 = FALSE;
+                sub_8025EF4(dword_203DFDC->field_24 - 1);
+                switch (dword_203DFDC->field_C) {
+                    case 14:
+                        if (gGameStatus.eggs[EGG_BLUE] < stru_80CC8C4.eggs[EGG_BLUE]) {
+                            sub_8034460(ACTOR_1A4, 0, 4, 0);
+                        }
+                        break;
+
+                    case 15:
+                        if (gGameStatus.eggs[EGG_BATTERY] < stru_80CC8C4.eggs[EGG_BATTERY]) {
+                            sub_8034460(ACTOR_1A5, 0, 4, 0);
+                        }
+                        break;
+
+                    case 17:
+                        if (gGameStatus.eggs[EGG_FIRE] < stru_80CC8C4.eggs[EGG_FIRE]) {
+                            sub_8034460(ACTOR_1A7, 0, 4, 0);
+                        }
+                        break;
+
+                    case 16:
+                        if (gGameStatus.eggs[EGG_ICE] < stru_80CC8C4.eggs[EGG_ICE]) {
+                            sub_8034460(ACTOR_1A6, 0, 4, 0);
+                        }
+                        break;
+
+                    case 6:
+                        if (gGameStatus.goldenFeathers < stru_80CC8C4.goldenFeathers) {
+                            sub_8034460(ACTOR_1A9, 0, 4, 0);
+                        }
+                        break;
+                }
+            } else if (!byte_20021BE && byte_80CEC50[dword_203DFDC->field_C]) {
+                byte_2002E4E = TRUE;
+                byte_2002E50 = FALSE;
+                sub_8025EF4(word_80CEC64[gLoadedRoomLevel]);
+            } else if (gGameStatus.totalNotes < dword_80CEFA4[dword_203DFDC->field_C]) {
+                byte_2002E4E = TRUE;
+                byte_2002E50 = FALSE;
+                sub_8025EF4(dword_203DFDC->field_18 - 1);
+            } else {
+                byte_2002E4E = FALSE;
+                sub_8025EF4(dword_203DFDC->field_14 - 1);
+                sub_8034460(ACTOR_0FB, dword_203DFDC->field_C, 4, 0);
+            }
+            break;
+
+        default:
+            ASSERT(0);
+            break;
+    }
+    sub_08015CC0(dword_203DFDC->field_10);
+    byte_203DFD8 = FALSE;
+    return TRUE;
 }

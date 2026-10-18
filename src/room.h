@@ -14,6 +14,7 @@ extern u32 dword_2001470;
 extern struct TileAnimTable_rt gTileAnimTable[255];
 extern s32 gLoadedTileAnimCount;
 
+void sub_08015CC0(s32 bg);
 void ResetTileAnimCount(void);
 void EnableBGAlphaBlending(void);
 void DisableBackgrounds(void);

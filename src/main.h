@@ -40,6 +40,8 @@ extern s32 dword_2000FC8;
 extern struct level_struc byte_2000FCC[6];
 extern struct GameStatus gGameStatus;
 extern struct SaveFile gSaveFiles[3];
+extern u8 byte_200107C;
+extern u8 byte_200107D;
 extern u8 gUnlockedLevels;
 extern u8 gTotalAmountOfLevels;
 extern u16 gLoadedRoomIndex;
