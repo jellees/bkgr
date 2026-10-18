@@ -6738,3 +6738,176 @@ void sub_0803381C(int type, int param, u32 groupIdx) {
             break;
     }
 }
+
+#ifndef NONMATCHING
+NAKED bool32 sub_8033CCC(struct Actor* actor) {
+    asm_unified(".include \"asm/nonmatching/sub_8033CCC.s\"");
+}
+#else
+bool32 sub_8033CCC(struct Actor* actor) {
+    int flag;
+
+    switch (actor->type) {
+        case ACTOR_DOLPHIN_HINT:
+            flag = ACTOR_1A1;
+            break;
+
+        case ACTOR_MUMBO_JUMBO_HINT:
+            if (!gGameStatus.mumboTokens) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+        case ACTOR_HONEY_B_HINT:
+        case ACTOR_08C:
+            if (!is_obj_disabled(ACTOR_0EB, 0)) {
+                return FALSE;
+            }
+            if (byte_200107C != byte_200107D
+                && gGameStatus.totalHollowHoneycombs >= byte_80CC8E4[byte_200107C]) {
+                return FALSE;
+            }
+            return TRUE;
+
+        case ACTOR_MR_RIPOVSKI_SILVER_COINS_HINT:
+            if (!is_obj_disabled(ACTOR_0EC, 0)) {
+                return FALSE;
+            }
+            if (is_obj_disabled(ACTOR_0F5, 0)) {
+                return TRUE;
+            }
+            if (!is_obj_disabled(ACTOR_175, 0)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+        case ACTOR_BOZZEYE_HINT:
+            if (byte_203E0FC[actor->field_C]) {
+                return TRUE;
+            }
+            if (gGameStatus.totalNotes >= dword_80CEFA4[actor->field_C]) {
+                return FALSE;
+            }
+            return TRUE;
+
+        case ACTOR_MR_RIPOVSKI_SHELLS_HINT:
+            if (!is_obj_disabled(ACTOR_17F, 0)) {
+                return FALSE;
+            }
+            if (!is_obj_disabled(ACTOR_0DA, 0)) {
+                return TRUE;
+            }
+            flag = ACTOR_104;
+            break;
+
+        case ACTOR_07E:
+            flag = ACTOR_179;
+            break;
+
+        case ACTOR_WHITE_BREEGULL_HINT:
+            if (!is_obj_disabled(ACTOR_177, 0)) {
+                return FALSE;
+            }
+            if (!is_obj_disabled(ACTOR_10C, 0)) {
+                return TRUE;
+            }
+            flag = ACTOR_10A;
+            break;
+
+        case ACTOR_MOMMA_CLUCKER_CHICKS_HINT:
+            if (!is_obj_disabled(ACTOR_0E0, 0)) {
+                return FALSE;
+            }
+            if (!is_obj_disabled(ACTOR_0E1, 0)) {
+                return TRUE;
+            }
+            flag = ACTOR_106;
+            break;
+
+        case ACTOR_JIGGYWIGGY_HINT:
+        case ACTOR_08D:
+            if (gUnlockedLevels == gTotalAmountOfLevels
+                || gGameStatus.totalJiggies < byte_80CC8EC[gUnlockedLevels]) {
+                return TRUE;
+            }
+            flag = ACTOR_02A;
+            break;
+
+        case ACTOR_083:
+            if (!is_obj_disabled(ACTOR_0E9, 0)) {
+                return FALSE;
+            }
+            if (!is_obj_disabled(ACTOR_037, 0)) {
+                return TRUE;
+            }
+            if (!is_obj_disabled(ACTOR_038, 0)) {
+                return TRUE;
+            }
+            flag = ACTOR_0F6;
+            break;
+
+        case ACTOR_084:
+            if (!is_obj_disabled(ACTOR_0E8, 0)) {
+                return FALSE;
+            }
+            if (!is_obj_disabled(ACTOR_0EA, 0)) {
+                return TRUE;
+            }
+            flag = ACTOR_037;
+            break;
+
+        case ACTOR_085:
+            if (!is_obj_disabled(ACTOR_0E7, 0)) {
+                return FALSE;
+            }
+            if (!is_obj_disabled(ACTOR_0E6, 0)) {
+                return TRUE;
+            }
+            flag = ACTOR_038;
+            break;
+
+        case ACTOR_086:
+            flag = ACTOR_0E6;
+            break;
+
+        case ACTOR_MISS_BUCKET_HINT:
+            if (!is_obj_disabled(ACTOR_0F0, 0)) {
+                return FALSE;
+            }
+            if (!is_obj_disabled(ACTOR_0EF, 0)) {
+                return TRUE;
+            }
+            if (!is_obj_disabled(ACTOR_0F2, 0)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+        case ACTOR_JINJO_ORACLE_HINT:
+            if (!is_obj_disabled(ACTOR_112, 0)) {
+                return FALSE;
+            }
+            if (!byte_203E11C[gLoadedRoomLevel]) {
+                return FALSE;
+            }
+            if (byte_203E116[gLoadedRoomLevel] != stru_80CC84C[gLoadedRoomLevel].jinjoCount) {
+                return TRUE;
+            }
+            flag = ACTOR_110;
+            break;
+
+        case ACTOR_MOMMA_CLUCKER_EGGS_HINT:
+            flag = ACTOR_1A2;
+            break;
+
+        default:
+            return FALSE;
+    }
+    if (!is_obj_disabled(flag, 0)) {
+        return FALSE;
+    }
+    return TRUE;
+}
+#endif
