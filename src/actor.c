@@ -8,6 +8,8 @@
 #include "player_defs.h"
 #include "random.h"
 #include "room.h"
+#include "script.h"
+#include "script_defs.h"
 #include "timer.h"
 #include "actor_defs.h"
 
@@ -5279,7 +5281,7 @@ void sub_08030C68(void) {
 
     dword_203EA78 = 0;
     for (i = 0; i < 10; i++) {
-        stru_203E9B0[i].field_0 = 0;
+        stru_203E9B0[i].isUsed = 0;
     }
     for (i = 0; i < 19; i++) {
         byte_203E0FC[i] = 0;
@@ -7130,4 +7132,272 @@ int sub_8034388(int conditionId, int group, int activate) {
         args.script = 0;
     }
     return dConditionFuncs[conditionId](&args);
+}
+
+bool32 sub_80343F0(struct MapActor* mapActor, int index) {
+    struct ConditionArgs args;
+
+    args.conditionId = mapActor->conditionId;
+    args.group = mapActor->field_13;
+    args.activate = mapActor->field_14;
+    args.field_4 = index;
+    args.field_8 = mapActor->field_0;
+    args.field_C = mapActor->field_E;
+    args.field_13 = mapActor->field_E;
+    if (dConditionFlags[args.conditionId] & 2) {
+        args.script = sub_803352C(args.group, args.activate);
+    } else {
+        args.script = 0;
+    }
+    return dConditionFuncs[mapActor->conditionId](&args);
+}
+
+void sub_8034460(int type, int param, int a2, struct Sprite* a3) {
+    int i;
+
+    ASSERT(dword_203EA78 != 10);
+    for (i = 0; i < 10; i++) {
+        if (!stru_203E9B0[i].isUsed) {
+            break;
+        }
+    }
+    ASSERT(i != 10);
+    stru_203E9B0[i].isUsed = TRUE;
+    stru_203E9B0[i].type = type;
+    stru_203E9B0[i].param = param;
+    stru_203E9B0[i].field_C = a2;
+    stru_203E9B0[i].field_10 = a3;
+    dword_203EA78++;
+}
+
+void sub_80344DC(void) {
+    int i;
+    int skipped;
+    u16 busy;
+
+    if (!dword_203EA78) {
+        return;
+    }
+    skipped = 0;
+    for (i = 0; i < 10; i++) {
+        if (stru_203E9B0[i].isUsed) {
+            switch (stru_203E9B0[i].field_C) {
+                case 7:
+                    busy = sub_80038AC(dword_2000FC8);
+                    if (!busy) {
+                        run_obj_behavior(stru_203E9B0[i].type, stru_203E9B0[i].param);
+                        stru_203E9B0[i].isUsed = FALSE;
+                        dword_203EA78--;
+                    } else {
+                        skipped++;
+                    }
+                    break;
+
+                case 6:
+                    busy = byte_200110C;
+                    if (!busy) {
+                        run_obj_behavior(stru_203E9B0[i].type, stru_203E9B0[i].param);
+                        stru_203E9B0[i].isUsed = FALSE;
+                        dword_203EA78--;
+                    } else {
+                        skipped++;
+                    }
+                    break;
+
+                case 0:
+                    busy = gIsAnyScriptActive;
+                    if (!busy) {
+                        run_obj_behavior(stru_203E9B0[i].type, stru_203E9B0[i].param);
+                        stru_203E9B0[i].isUsed = FALSE;
+                        dword_203EA78--;
+                    } else {
+                        skipped++;
+                    }
+                    break;
+
+                case 5:
+                    busy = gIsPriorityScriptActive;
+                    if (!busy) {
+                        run_obj_behavior(stru_203E9B0[i].type, stru_203E9B0[i].param);
+                        stru_203E9B0[i].isUsed = FALSE;
+                        dword_203EA78--;
+                    } else {
+                        skipped++;
+                    }
+                    break;
+
+                case 1:
+                    busy = gReadKeysFromDemoInput;
+                    if (!busy) {
+                        run_obj_behavior(stru_203E9B0[i].type, stru_203E9B0[i].param);
+                        stru_203E9B0[i].isUsed = FALSE;
+                        dword_203EA78--;
+                    } else {
+                        skipped++;
+                    }
+                    break;
+
+                case 2:
+                    if (!gReadKeysFromDemoInput) {
+                        busy = gIsAnyScriptActive;
+                        if (!busy) {
+                            run_obj_behavior(stru_203E9B0[i].type, stru_203E9B0[i].param);
+                            stru_203E9B0[i].isUsed = FALSE;
+                            dword_203EA78--;
+                        } else {
+                            skipped++;
+                        }
+                    } else {
+                        skipped++;
+                    }
+                    break;
+
+                case 3:
+                    if (sprite_is_anim_done_once(stru_203E9B0[i].field_10)) {
+                        run_obj_behavior(stru_203E9B0[i].type, stru_203E9B0[i].param);
+                        stru_203E9B0[i].isUsed = FALSE;
+                        dword_203EA78--;
+                    } else {
+                        skipped++;
+                    }
+                    break;
+
+                case 4:
+                    busy = gPlayerStateFlags[gPlayerState] & PLAYER_FLAGS_IN_DIALOGUE;
+                    if (!busy) {
+                        run_obj_behavior(stru_203E9B0[i].type, stru_203E9B0[i].param);
+                        stru_203E9B0[i].isUsed = FALSE;
+                        dword_203EA78--;
+                    } else {
+                        skipped++;
+                    }
+                    break;
+
+                default:
+                    ASSERT(0);
+                    break;
+            }
+        }
+        if (skipped == dword_203EA78) {
+            break;
+        }
+    }
+}
+
+void sub_8034650(int lesson) {
+    if (!lesson) {
+        return;
+    }
+    byte_203E0FC[lesson] = TRUE;
+    switch (lesson) {
+        case 1:
+            gUnlockedMoves[MOVE_DEFAULT_16] = TRUE;
+            break;
+
+        case 2:
+            gUnlockedMoves[MOVE_CLIMB] = TRUE;
+            break;
+
+        case 3:
+            gUnlockedMoves[MOVE_DIVE] = TRUE;
+            break;
+
+        case 5:
+            gUnlockedMoves[MOVE_SHOCK_JUMP] = TRUE;
+            sub_8029C30(ACTOR_SHOCK_SPRING_PAD);
+            break;
+
+        case 6:
+            byte_203E96C = TRUE;
+            byte_203E12A = TRUE;
+            gUnlockedMoves[MOVE_WONDERWING] = TRUE;
+            sub_8029C30(ACTOR_WONDERWING_PAD);
+            if (gGameStatus.goldenFeathers < stru_80CC8C4.goldenFeathers) {
+                sub_8034460(ACTOR_1A9, 0, 4, NULL);
+            }
+            break;
+
+        case 7:
+            gUnlockedMoves[MOVE_PACK_WACK] = TRUE;
+            byte_2000FCC[gLoadedRoomLevel].movesLearned++;
+            gGameStatus.movesLearned++;
+            start_script(SCRIPT_058);
+            sub_8034460(ACTOR_189, 0, 0, NULL);
+            gShowMovesLearnedCounter = TRUE;
+            byte_2002E50 = FALSE;
+            return;
+
+        case 8:
+            gUnlockedMoves[MOVE_TALON_TROT] = TRUE;
+            break;
+
+        case 9:
+            gUnlockedMoves[MOVE_FORWARD_ROLL] = TRUE;
+            break;
+
+        case 10:
+            gUnlockedMoves[MOVE_FEATHERY_FLAP] = TRUE;
+            break;
+
+        case 11:
+            gUnlockedMoves[MOVE_FLAP_FLIP] = TRUE;
+            break;
+
+        case 12:
+            gUnlockedMoves[MOVE_BILL_DRILL] = TRUE;
+            break;
+
+        case 13:
+            gUnlockedMoves[MOVE_AIR_ATTACK] = TRUE;
+            break;
+
+        case 14:
+            byte_203E96A = TRUE;
+            byte_203E122 = TRUE;
+            gUnlockedMoves[MOVE_EGG_BLUE] = TRUE;
+            if (gGameStatus.eggs[EGG_BLUE] < stru_80CC8C4.eggs[EGG_BLUE]) {
+                sub_8034460(ACTOR_1A4, 0, 4, NULL);
+            }
+            break;
+
+        case 15:
+            byte_203E96A = TRUE;
+            byte_203E123 = TRUE;
+            gUnlockedMoves[MOVE_EGG_BATTERY] = TRUE;
+            if (gGameStatus.eggs[EGG_BATTERY] < stru_80CC8C4.eggs[EGG_BATTERY]) {
+                sub_8034460(ACTOR_1A5, 0, 4, NULL);
+            }
+            break;
+
+        case 17:
+            byte_203E96A = TRUE;
+            byte_203E125 = TRUE;
+            gUnlockedMoves[MOVE_EGG_FIRE] = TRUE;
+            if (gGameStatus.eggs[EGG_FIRE] < stru_80CC8C4.eggs[EGG_FIRE]) {
+                sub_8034460(ACTOR_1A7, 0, 4, NULL);
+            }
+            break;
+
+        case 16:
+            byte_203E96A = TRUE;
+            byte_203E124 = TRUE;
+            gUnlockedMoves[MOVE_EGG_ICE] = TRUE;
+            if (gGameStatus.eggs[EGG_ICE] < stru_80CC8C4.eggs[EGG_ICE]) {
+                sub_8034460(ACTOR_1A6, 0, 4, NULL);
+            }
+            break;
+
+        default:
+            ASSERT(0);
+            break;
+    }
+    gShowMovesLearnedCounter = TRUE;
+    byte_2000FCC[gLoadedRoomLevel].movesLearned++;
+    gGameStatus.movesLearned++;
+    hud_set_value(HUD_ELEMENT_MOVES_LEARNED, gGameStatus.movesLearned);
+    PLAY_SFX(42);
+    if (gGameStatus.health < gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1)) {
+        gGameStatus.health = gGameStatus.maxHealth * (gGameStatus.enableExtraHealth + 1);
+        hud_set_value(HUD_METER_HEALTH, gGameStatus.health);
+    }
 }

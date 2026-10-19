@@ -633,8 +633,11 @@ struct ConditionArgs {
 };
 
 struct struc_203E9B0 {
-    u32 field_0;
-    u8 unk_4[0x10];
+    u32 isUsed;
+    int type;
+    int param;
+    int field_C;
+    struct Sprite* field_10;
 };
 
 struct level_struc {
@@ -886,7 +889,7 @@ extern void sub_8047878(u32, u32);
 extern void sub_8062064(u32, u32);
 extern void sub_0804835C(struct Actor*, u32, u32);
 extern void sub_0806220C(struct Actor*, u32, u32);
-extern bool32 sub_80343F0(struct MapActor* mapActor, int group);
+extern bool32 sub_80343F0(struct MapActor* mapActor, int index);
 extern void sub_80293C0(struct Actor* actor);
 extern bool32 sub_08033598(int type, int param, u32 groupIdx);
 extern bool32 sub_8033118(int type, int param, u32 group);
@@ -955,7 +958,7 @@ extern void sub_80330F8(void);
 extern int is_obj_disabled(int, int);
 extern void run_obj_behavior(int, int);
 extern int sub_8034310(struct Actor*);
-extern void sub_8034460(int, int, int, struct Sprite*);
+extern void sub_8034460(int type, int param, int a2, struct Sprite* a3);
 extern void sub_80344DC(void);
 extern void sub_8034970(u8*, s32*, u32*);
 extern void sub_8036138(u8*, s32*, u32*);
