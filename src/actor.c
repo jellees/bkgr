@@ -8540,3 +8540,367 @@ void sub_8036138(u8* buffer, s32* pOffset, u32* pChecksum) {
     *pOffset = offset;
     *pChecksum = checksum;
 }
+
+bool32 sub_8037C08(u8* buffer, u32* pOffset) {
+    u8 bits;
+    u32 offset;
+    int bitCount;
+    int i;
+    int j;
+    int k;
+
+    offset = *pOffset;
+    i = buffer[offset++];
+    if (i != 0x11) {
+        return FALSE;
+    }
+    offset += 17;
+    for (i = 0; i < 6; i++) {
+        if (stru_203E170[i].field_0 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_1 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_2 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_3 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_4 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_5 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_6 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_7 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_8 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_9 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_A != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_B != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_C != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_D != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_E != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_F != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_10 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_11 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_12 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_13 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E170[i].field_14 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_0 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_1 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_2 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_3 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_4 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_5 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_6 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_7 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_8 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_9 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_A != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_B != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_C != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_D != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_E != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_F != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_10 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_11 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_1F != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_12 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_13 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_14 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_15 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_16 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_17 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_18 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_19 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_1A != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_1B != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_1C != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_22 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_23 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_24 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_25 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_1D != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_1E != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_20 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E440[i].field_21 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E8D8[i].field_0 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E8D8[i].field_1 != buffer[offset++]) {
+            return FALSE;
+        }
+        if (stru_203E8D8[i].field_2 != buffer[offset++]) {
+            return FALSE;
+        }
+    }
+    bitCount = 0;
+    bits = buffer[offset];
+    offset++;
+    for (i = 0; i < 6; i++) {
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_0);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_2);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_3);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_4);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_5);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_6);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_7);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_8);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_9);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_A);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_B);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_C);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_D);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_E);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_F);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_10);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_11);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_12);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_13);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_14);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, 1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, 1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, 1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, 1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, 1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, 1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, 6);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_0);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_2);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_3);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_4);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_5);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_6);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_7);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_8);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_9);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_A);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_B);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_C);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_D);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_E);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_F);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_10);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_11);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_1F);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_22);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_23);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_24);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_25);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_20);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_21);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E8D8[i].field_0);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E8D8[i].field_1);
+        sub_80389FC(buffer, &offset, &bits, &bitCount, stru_203E8D8[i].field_2);
+    }
+    sub_80389FC(buffer, &offset, &bits, &bitCount, 19);
+    for (i = 0; i < 6; i++) {
+        for (j = 0; j < stru_203E440[i].field_12; j++) {
+            offset++;
+            if (stru_203E440[i].field_90[j].field_2 != buffer[offset++]) {
+                return FALSE;
+            }
+            if (stru_203E440[i].field_90[j].field_3 != buffer[offset++]) {
+                return FALSE;
+            }
+            offset++;
+            for (k = 0; k < stru_203E440[i].field_90[j].field_0; k++) {
+                if (stru_203E440[i].field_90[j].field_C[k].field_0 != buffer[offset++]) {
+                    return FALSE;
+                }
+                offset++;
+                if (stru_203E440[i].field_90[j].field_C[k].field_2 != buffer[offset++]) {
+                    return FALSE;
+                }
+                offset++;
+                if ((s16)stru_203E440[i].field_90[j].field_C[k].field_4
+                    != (buffer[offset] | (buffer[offset + 1] << 8))) {
+                    return FALSE;
+                }
+                offset++;
+                offset++;
+                offset++;
+                offset++;
+            }
+        }
+    }
+    for (i = 0; i < 6; i++) {
+        for (j = 0; j < stru_203E440[i].field_13; j++) {
+            if (stru_203E440[i].field_94[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_14; j++) {
+            if (stru_203E440[i].field_98[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_15; j++) {
+            if (stru_203E440[i].field_9C[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_16; j++) {
+            if (stru_203E440[i].field_A0[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_17; j++) {
+            if (stru_203E440[i].field_A4[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_18; j++) {
+            if (stru_203E440[i].field_A8[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_19; j++) {
+            if (stru_203E440[i].field_AC[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_1A; j++) {
+            if (stru_203E440[i].field_B0[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_1B; j++) {
+            if (stru_203E440[i].field_B4[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_1C; j++) {
+            if (stru_203E440[i].field_B8[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_1D; j++) {
+            if (stru_203E440[i].field_BC[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+        for (j = 0; j < stru_203E440[i].field_1E; j++) {
+            if (stru_203E440[i].field_C0[j] != buffer[offset++]) {
+                return FALSE;
+            }
+        }
+    }
+    i = buffer[offset++];
+    if (i != 0x75) {
+        return FALSE;
+    }
+    offset += 15;
+    *pOffset = offset;
+}
