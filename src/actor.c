@@ -7401,3 +7401,538 @@ void sub_8034650(int lesson) {
         hud_set_value(HUD_METER_HEALTH, gGameStatus.health);
     }
 }
+
+void sub_8034970(u8* buffer, s32* pOffset, u32* pChecksum) {
+    u8 bits;
+    s32 offset;
+    int bitCount;
+    u32 checksum;
+    int i;
+    int j;
+    int k;
+
+    offset = *pOffset;
+    checksum = *pChecksum;
+    buffer[offset] = 0x11;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = byte_203E93A;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = byte_203E93C;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = byte_203E93B;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = word_203E140;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = gGoldenCoins;
+    checksum += buffer[offset];
+    offset++;
+    for (i = 0; i < 6; i++) {
+        buffer[offset] = byte_203E110[i];
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = byte_203E116[i];
+        checksum += buffer[offset];
+        offset++;
+    }
+    for (i = 0; i < 6; i++) {
+        buffer[offset] = stru_203E170[i].field_0;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_1;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_2;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_3;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_4;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_5;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_6;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_7;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_8;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_9;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_A;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_B;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_C;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_D;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_E;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_F;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_10;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_11;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_12;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_13;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E170[i].field_14;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_0;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_1;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_2;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_3;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_4;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_5;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_6;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_7;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_8;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_9;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_A;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_B;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_C;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_D;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_E;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_F;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_10;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_11;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_1F;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_12;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_13;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_14;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_15;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_16;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_17;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_18;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_19;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_1A;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_1B;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_1C;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_22;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_23;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_24;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_25;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_1D;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_1E;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_20;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E440[i].field_21;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E8D8[i].field_0;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E8D8[i].field_1;
+        checksum += buffer[offset];
+        offset++;
+        buffer[offset] = stru_203E8D8[i].field_2;
+        checksum += buffer[offset];
+        offset++;
+    }
+    bitCount = 0;
+    bits = 0;
+    for (i = 0; i < 6; i++) {
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_1C,
+                    stru_203E170[i].field_0, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_20,
+                    stru_203E170[i].field_1, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_24,
+                    stru_203E170[i].field_2, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_28,
+                    stru_203E170[i].field_3, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_2C,
+                    stru_203E170[i].field_4, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_30,
+                    stru_203E170[i].field_5, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_34,
+                    stru_203E170[i].field_6, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_38,
+                    stru_203E170[i].field_7, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_3C,
+                    stru_203E170[i].field_8, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_40,
+                    stru_203E170[i].field_9, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_44,
+                    stru_203E170[i].field_A, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_48,
+                    stru_203E170[i].field_B, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_4C,
+                    stru_203E170[i].field_C, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_50,
+                    stru_203E170[i].field_D, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_54,
+                    stru_203E170[i].field_E, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_58,
+                    stru_203E170[i].field_F, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_5C,
+                    stru_203E170[i].field_10, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_60,
+                    stru_203E170[i].field_11, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_64,
+                    stru_203E170[i].field_12, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_68,
+                    stru_203E170[i].field_13, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E170[i].field_6C,
+                    stru_203E170[i].field_14, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, &stru_203E170[i].field_70, 1, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, &stru_203E170[i].field_71, 1, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, &stru_203E170[i].field_72, 1, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, &stru_203E170[i].field_73, 1, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, &stru_203E170[i].field_74, 1, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, &stru_203E170[i].field_75, 1, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, byte_203E11C, 6, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_28,
+                    stru_203E440[i].field_0, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_2C,
+                    stru_203E440[i].field_1, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_30,
+                    stru_203E440[i].field_2, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_34,
+                    stru_203E440[i].field_3, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_38,
+                    stru_203E440[i].field_4, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_3C,
+                    stru_203E440[i].field_5, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_40,
+                    stru_203E440[i].field_6, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_44,
+                    stru_203E440[i].field_7, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_48,
+                    stru_203E440[i].field_8, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_4C,
+                    stru_203E440[i].field_9, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_50,
+                    stru_203E440[i].field_A, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_54,
+                    stru_203E440[i].field_B, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_58,
+                    stru_203E440[i].field_C, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_5C,
+                    stru_203E440[i].field_D, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_60,
+                    stru_203E440[i].field_E, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_64,
+                    stru_203E440[i].field_F, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_68,
+                    stru_203E440[i].field_10, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_6C,
+                    stru_203E440[i].field_11, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_70,
+                    stru_203E440[i].field_1F, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_7C,
+                    stru_203E440[i].field_22, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_80,
+                    stru_203E440[i].field_23, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_84,
+                    stru_203E440[i].field_24, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_88,
+                    stru_203E440[i].field_25, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_74,
+                    stru_203E440[i].field_20, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E440[i].field_78,
+                    stru_203E440[i].field_21, &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E8D8[i].field_4, stru_203E8D8[i].field_0,
+                    &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E8D8[i].field_8, stru_203E8D8[i].field_1,
+                    &checksum);
+        sub_8038914(buffer, &offset, &bits, &bitCount, stru_203E8D8[i].field_C, stru_203E8D8[i].field_2,
+                    &checksum);
+    }
+    sub_8038914(buffer, &offset, &bits, &bitCount, byte_203E0FC, 19, &checksum);
+    if (bitCount) {
+        bits <<= 7 - bitCount;
+        buffer[offset] = bits;
+        checksum += buffer[offset];
+        offset++;
+    }
+    for (i = 0; i < 6; i++) {
+        for (j = 0; j < stru_203E440[i].field_12; j++) {
+            buffer[offset] = stru_203E440[i].field_90[j].field_1;
+            checksum += buffer[offset];
+            offset++;
+            buffer[offset] = stru_203E440[i].field_90[j].field_2;
+            checksum += buffer[offset];
+            offset++;
+            buffer[offset] = stru_203E440[i].field_90[j].field_3;
+            checksum += buffer[offset];
+            offset++;
+            buffer[offset] = stru_203E440[i].field_90[j].field_4;
+            checksum += buffer[offset];
+            offset++;
+            for (k = 0; k < stru_203E440[i].field_90[j].field_0; k++) {
+                buffer[offset] = stru_203E440[i].field_90[j].field_C[k].field_0;
+                checksum += buffer[offset];
+                offset++;
+                buffer[offset] = stru_203E440[i].field_90[j].field_C[k].field_1;
+                checksum += buffer[offset];
+                offset++;
+                buffer[offset] = stru_203E440[i].field_90[j].field_C[k].field_2;
+                checksum += buffer[offset];
+                offset++;
+                buffer[offset] = stru_203E440[i].field_90[j].field_C[k].field_3;
+                checksum += buffer[offset];
+                offset++;
+                buffer[offset] = stru_203E440[i].field_90[j].field_C[k].field_4;
+                checksum += buffer[offset];
+                offset++;
+                buffer[offset] = stru_203E440[i].field_90[j].field_C[k].field_4 >> 8;
+                checksum += buffer[offset];
+                offset++;
+                if (*(u16*)&stru_203E440[i].field_90[j].field_C[k] == 0x101) {
+                    buffer[offset] = 1;
+                    checksum += buffer[offset];
+                    offset++;
+                    buffer[offset] = 0;
+                    checksum += buffer[offset];
+                    offset++;
+                } else {
+                    buffer[offset] = stru_203E440[i].field_90[j].field_C[k].field_6;
+                    checksum += buffer[offset];
+                    offset++;
+                    buffer[offset] = (u16)stru_203E440[i].field_90[j].field_C[k].field_6 >> 8;
+                    checksum += buffer[offset];
+                    offset++;
+                }
+            }
+        }
+    }
+    for (i = 0; i < 6; i++) {
+        for (j = 0; j < stru_203E440[i].field_13; j++) {
+            buffer[offset] = stru_203E440[i].field_94[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_14; j++) {
+            buffer[offset] = stru_203E440[i].field_98[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_15; j++) {
+            buffer[offset] = stru_203E440[i].field_9C[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_16; j++) {
+            buffer[offset] = stru_203E440[i].field_A0[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_17; j++) {
+            buffer[offset] = stru_203E440[i].field_A4[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_18; j++) {
+            buffer[offset] = stru_203E440[i].field_A8[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_19; j++) {
+            buffer[offset] = stru_203E440[i].field_AC[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_1A; j++) {
+            buffer[offset] = stru_203E440[i].field_B0[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_1B; j++) {
+            buffer[offset] = stru_203E440[i].field_B4[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_1C; j++) {
+            buffer[offset] = stru_203E440[i].field_B8[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_1D; j++) {
+            buffer[offset] = stru_203E440[i].field_BC[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+        for (j = 0; j < stru_203E440[i].field_1E; j++) {
+            buffer[offset] = stru_203E440[i].field_C0[j];
+            checksum += buffer[offset];
+            offset++;
+        }
+    }
+    buffer[offset] = 0x75;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E938 << 7) | (byte_203E939 << 6) | (byte_203E133 << 5)
+                     | (byte_203E93D << 4) | (byte_203E93E << 3) | (byte_203E93F << 2)
+                     | (byte_203E940 << 1) | byte_203E10F;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E941 << 7) | (byte_203E942 << 6) | (byte_203E943 << 5)
+                     | (byte_203E944 << 4) | (byte_203E945 << 3) | (byte_203E946 << 2)
+                     | (byte_203E947 << 1) | byte_203E949;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E94A << 7) | (byte_203E94B << 6) | (byte_203E94C << 5)
+                     | (byte_203E94D << 4) | (byte_203E94E << 3) | (byte_203E960 << 2)
+                     | (byte_203E961 << 1) | byte_203E94F;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E950 << 7) | (byte_203E951 << 6) | (byte_203E952 << 5)
+                     | (byte_203E954 << 4) | (byte_203E955 << 3) | (byte_203E956 << 2)
+                     | (byte_203E957 << 1) | byte_203E958;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E959 << 7) | (byte_203E95A << 6) | (byte_203E95B << 5)
+                     | (byte_203E953 << 4) | (byte_203E95C << 3) | (byte_203E95D << 2)
+                     | (byte_203E95E << 1) | byte_203E95F;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E962 << 7) | (byte_203E963 << 6) | (byte_203E964 << 5)
+                     | (byte_203E967 << 4) | (byte_203E965 << 3) | (byte_203E966 << 2)
+                     | (byte_203E968 << 1) | byte_203E969;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E96A << 7) | (byte_203E96B << 6) | (byte_203E96C << 5)
+                     | (byte_203E96D << 4) | (byte_203E96E << 3) | (byte_203E96F << 2)
+                     | (byte_203E970 << 1) | byte_203E948;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E122 << 7) | (byte_203E123 << 6) | (byte_203E124 << 5)
+                     | (byte_203E125 << 4) | (byte_203E126 << 3) | (byte_203E127 << 2)
+                     | (byte_203E128 << 1) | byte_203E129;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E12A << 7) | (byte_203E12B << 6) | (gShowMovesLearnedCounter << 5)
+                     | (byte_203E12D << 4) | (byte_203E12E << 3) | (byte_203E12F << 2)
+                     | (byte_203E130 << 1) | byte_203E131;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E132 << 7) | (byte_203E972 << 6) | (byte_203E973 << 5)
+                     | (byte_203E974 << 4) | (byte_203E142 << 3) | (byte_203E143 << 2)
+                     | (byte_203E144 << 1) | byte_203E145;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E146 << 7) | (byte_203E147 << 6) | (byte_203E148 << 5)
+                     | (byte_203E149 << 4) | (byte_203E14A << 3) | (byte_203E14B << 2)
+                     | (byte_203E14C << 1) | byte_203E14D;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E14E << 7) | (byte_203E14F << 6) | (byte_203E150 << 5)
+                     | (byte_203E151 << 4) | (byte_203E152 << 3) | (byte_203E153 << 2)
+                     | (byte_203E154 << 1) | byte_203E155;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E156 << 7) | (byte_203E157 << 6) | (byte_203E158 << 5)
+                     | (byte_203E159 << 4) | (byte_203E15A << 3) | (byte_203E15B << 2)
+                     | (byte_203E15C << 1) | byte_203E15D;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E15E << 7) | (byte_203E15F << 6) | (byte_203E160 << 5)
+                     | (byte_203E161 << 4) | (byte_203E162 << 3) | (byte_203E163 << 2)
+                     | (byte_203E164 << 1) | byte_203E165;
+    checksum += buffer[offset];
+    offset++;
+    buffer[offset] = (byte_203E166 << 7) | (byte_203E167 << 6) | (byte_203E168 << 5)
+                     | (byte_203E971 << 4) | (byte_203E169 << 3);
+    checksum += buffer[offset];
+    offset++;
+    *pOffset = offset;
+    *pChecksum = checksum;
+}
